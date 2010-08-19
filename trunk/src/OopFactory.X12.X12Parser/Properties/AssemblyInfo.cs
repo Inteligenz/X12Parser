@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OopFactory.X12.Parsing")]
+[assembly: AssemblyTitle("OopFactory.X12.X12Parser")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Strubhar Family")]
-[assembly: AssemblyProduct("OopFactory.X12.Parsing")]
-[assembly: AssemblyCopyright("Copyright © Strubhar Family 2010")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("OopFactory.X12.X12Parser")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a5be3af1-c254-4941-99c8-afd885dc0857")]
+[assembly: Guid("12814ec7-4240-4e77-98b1-99bcc9886051")]
 
 // Version information for an assembly consists of the following four values:
 //

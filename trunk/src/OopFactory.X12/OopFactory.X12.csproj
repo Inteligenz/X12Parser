@@ -5,17 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{49B70769-18D9-4472-A941-9D831135C42E}</ProjectGuid>
+    <ProjectGuid>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.X12.Parsing</RootNamespace>
-    <AssemblyName>OopFactory.X12.Parsing</AssemblyName>
+    <RootNamespace>OopFactory.X12</RootNamespace>
+    <AssemblyName>OopFactory.X12</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +40,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\Model\Container.cs" />
+    <Compile Include="Parsing\Model\Entity.cs" />
+    <Compile Include="Parsing\Model\FunctionGroup.cs" />
+    <Compile Include="Parsing\Model\HierarchicalLoop.cs" />
+    <Compile Include="Parsing\Model\HierarchicalLoopContainer.cs" />
+    <Compile Include="Parsing\Model\Interchange.cs" />
+    <Compile Include="Parsing\Model\Loop.cs" />
+    <Compile Include="Parsing\Model\LoopContainer.cs" />
+    <Compile Include="Parsing\Model\Segment.cs" />
+    <Compile Include="Parsing\Model\Transaction.cs" />
+    <Compile Include="Parsing\Specification\Enumerations.cs" />
+    <Compile Include="Parsing\Specification\HierarchicalLoopSpecification.cs" />
+    <Compile Include="Parsing\Specification\Lookup.cs" />
+    <Compile Include="Parsing\Specification\LoopSpecification.cs" />
+    <Compile Include="Parsing\Specification\SegmentSpecification.cs" />
+    <Compile Include="Parsing\Specification\SegmentSpecificationStandard.cs" />
+    <Compile Include="Parsing\Specification\StartingSegment.cs" />
+    <Compile Include="Parsing\Specification\TransactionSpecification.cs" />
+    <Compile Include="Parsing\X12DelimiterSet.cs" />
+    <Compile Include="Parsing\X12Parser.cs" />
+    <Compile Include="Parsing\X12ParsingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="X12ParsingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Claims\Ansi-837-4010Specification.xml" />
+    <EmbeddedResource Include="Claims\Ansi-837-To-Claim.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
