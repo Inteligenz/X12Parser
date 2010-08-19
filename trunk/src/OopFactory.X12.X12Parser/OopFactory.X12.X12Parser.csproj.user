@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartArguments>"D:\Test.CLM" "D:\Test.xml"</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <StartArguments>"D:\Test.CLM" "D:\Test.xml"</StartArguments>
+  </PropertyGroup>
 </Project>
