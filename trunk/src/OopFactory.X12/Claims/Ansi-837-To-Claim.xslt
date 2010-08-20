@@ -522,6 +522,13 @@
     <xsl:param name="ClaimLoop" />
     <xsl:param name="PatientIsSubscriber" />
     <Claim>
+      <xsl:attribute name="Type">
+        <xsl:choose>
+          <xsl:when test="count($ClaimLoop/Loop[@LoopId='2400']/SV3)>0">Dental</xsl:when>
+          <xsl:when test="count($ClaimLoop/Loop[@LoopId='2400']/SV2)>0">Institutional</xsl:when>
+          <xsl:otherwise>Professional</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:attribute name="PatientControlNumber">
         <xsl:value-of select="$ClaimLoop/CLM/CLM01"/>
       </xsl:attribute>
