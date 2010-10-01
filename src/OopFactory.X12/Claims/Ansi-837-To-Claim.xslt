@@ -198,23 +198,25 @@
 
   <!-- Address Segment -->
   <xsl:template match="N3">
-    <xsl:attribute name="StateCode">
-      <xsl:value-of select="../N4/N402"/>
-    </xsl:attribute>
-    <xsl:attribute name="PostalCode">
-      <xsl:value-of select="../N4/N403"/>
-    </xsl:attribute>
-    <Address1>
-      <xsl:value-of select="N301"/>
-    </Address1>
-    <xsl:if test="string-length(N302)>0">
-      <Address2>
-        <xsl:value-of select="N302"/>
-      </Address2>
-    </xsl:if>
-    <City>
-      <xsl:value-of select="../N4/N401"/>
-    </City>
+    <Address>
+      <xsl:attribute name="StateCode">
+        <xsl:value-of select="../N4/N402"/>
+      </xsl:attribute>
+      <xsl:attribute name="PostalCode">
+        <xsl:value-of select="../N4/N403"/>
+      </xsl:attribute>
+      <Line1>
+        <xsl:value-of select="N301"/>
+      </Line1>
+      <xsl:if test="string-length(N302)>0">
+        <Line2>
+          <xsl:value-of select="N302"/>
+        </Line2>
+      </xsl:if>
+      <City>
+        <xsl:value-of select="../N4/N401"/>
+      </City>
+    </Address>
   </xsl:template>
 
 
@@ -464,9 +466,15 @@
         </xsl:call-template>
       </xsl:attribute>
       <xsl:attribute name="Gender">
-        <xsl:value-of select="Loop[@LoopId='2010BA']/DMG/DMG03"/>
+        <xsl:choose>
+          <xsl:when test="Loop[@LoopId='2010BA']/DMG/DMG03 = 'F'">Female</xsl:when>
+          <xsl:when test="Loop[@LoopId='2010BA']/DMG/DMG03 = 'M'">Male</xsl:when>
+          <xsl:when test="Loop[@LoopId='2010BA']/DMG/DMG03 = 'U'">Unknown</xsl:when>
+          <xsl:otherwise>Unknown</xsl:otherwise>
+        </xsl:choose>
       </xsl:attribute>
       <xsl:apply-templates select="Loop[@LoopId='2010BA']/NM1" />
+      <xsl:apply-templates select="Loop[@LoopId='2010BA']/N3" />
     </Subscriber>
   </xsl:template>
 

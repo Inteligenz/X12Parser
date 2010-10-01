@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace OopFactory.X12.Model
 {
     public class EntityName
     {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
+        [XmlAttribute]
+        public bool IsPerson { get; set; }
+        public string First { get; set; }
+        public string Middle { get; set; }
+        public string Last { get; set; }
     }
 }

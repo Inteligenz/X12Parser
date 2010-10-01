@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OopFactory.X12.Model.Claims
+namespace OopFactory.X12.Model
 {
-    public class Claim
+    public enum GenderEnum
     {
-        public Subscriber Subscriber { get; set; }
+        Unknown,
+        Male,
+        Female
     }
 }

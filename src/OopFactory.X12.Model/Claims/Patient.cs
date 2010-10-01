@@ -5,8 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Model.Claims
 {
-    public class Claim
+    public class Patient : Member
     {
-        public Subscriber Subscriber { get; set; }
     }
 }

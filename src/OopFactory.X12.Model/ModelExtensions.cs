@@ -12,11 +12,16 @@ namespace OopFactory.X12.Model
     {
         public static TModel Deserialize<TModel>(string xml)
         {
-            var serializer = new XmlSerializer(typeof(TModel));
+            var stringReader = new StringReader(xml);
+            var xmlTextReader = new XmlTextReader(stringReader);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+            if (xmlDoc.GetElementsByTagName(typeof(TModel).Name) == null)
+                throw new ArgumentException("xml is not of a " + typeof(TModel).Name, "xml");
 
-            MemoryStream ms = new MemoryStream();
-            XmlTextWriter writer = new XmlTextWriter(ms, Encoding.UTF8);
-            return (TModel)serializer.Deserialize(ms);
+            var xmlSerializer = new XmlSerializer(typeof(TModel));
+
+            return ((TModel)(xmlSerializer.Deserialize(xmlTextReader)));
         }
 
 

@@ -46,7 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Claims\Claim.cs" />
+    <Compile Include="Claims\Member.cs" />
+    <Compile Include="Claims\Patient.cs" />
+    <Compile Include="Claims\Subscriber.cs" />
     <Compile Include="EntityName.cs" />
+    <Compile Include="GenderEnum.cs" />
     <Compile Include="ModelExtensions.cs" />
     <Compile Include="PostalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

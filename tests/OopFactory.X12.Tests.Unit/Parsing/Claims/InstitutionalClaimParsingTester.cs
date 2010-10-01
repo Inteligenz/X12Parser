@@ -30,7 +30,7 @@ PER*IC*BETTY RUBBLE*TE*9195551111*FX*6145551212~
 HL*2*1*22*0~
 SBR*P*18*XYZ1234567******BL~
 PAT*********Y~
-NM1*IL*1*DOUGH*MARY****MI*24672148306~
+NM1*IL*1*DOUGH*MARY****MI*12312312312~
 N3*BOX 12312~
 N4*DURHAM*NC*27715~
 DMG*D8*19670807*F~
@@ -62,19 +62,41 @@ GE*1*30~
 IEA*1*000000031~";
         #endregion
 
-        [TestMethod]
-        public void ParseUBSample1Test()
+        private Claim ParseX12(string edi)
         {
             var service = new X12ParsingService(true);
 
-            var xml = service.ParseToDomainXml(UB_SAMPLE_1);
+            var xml = service.ParseToDomainXml(edi);
 
             List<Claim> a = new List<Claim>();
             a.Add(new Claim());
-            
+
             var claims = ModelExtensions.Deserialize<List<Claim>>(xml);
 
             Assert.AreEqual(1, claims.Count);
+            return claims.First();
+        }
+
+        [TestMethod]
+        public void ParseAndValidateSubscriberLoopTest()
+        {
+            Claim claim = ParseX12(UB_SAMPLE_1);
+            // NM1 SEGMENT
+            Assert.IsTrue(claim.Subscriber.Name.IsPerson);
+            Assert.AreEqual("DOUGH", claim.Subscriber.Name.Last);
+            Assert.AreEqual("MARY", claim.Subscriber.Name.First);
+            Assert.AreEqual("12312312312", claim.Subscriber.MemberId);
+
+            // N3 SEGMENT
+            Assert.AreEqual("BOX 12312", claim.Subscriber.Address.Line1);
+            Assert.IsTrue(string.IsNullOrEmpty(claim.Subscriber.Address.Line2));
+            Assert.AreEqual("DURHAM", claim.Subscriber.Address.City);
+            Assert.AreEqual("NC", claim.Subscriber.Address.StateCode);
+            Assert.AreEqual("27715", claim.Subscriber.Address.PostalCode);
+
+            // DMG SEGMENT
+            Assert.AreEqual(DateTime.Parse("1967-08-07"), claim.Subscriber.DateOfBirth);
+            Assert.AreEqual(GenderEnum.Female, claim.Subscriber.Gender);
         }
     }
 }
