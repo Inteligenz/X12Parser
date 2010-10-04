@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parsing\Claims\InstitutionalClaimParsingTester.cs" />
+    <Compile Include="Parsing\Payments\PaymentParsingTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

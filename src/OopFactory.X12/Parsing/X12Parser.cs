@@ -59,7 +59,7 @@ namespace OopFactory.X12.Parsing
                 {
                     return segment;
                 }
-                else if (segment.SegmentId == "NM1")
+                else if (segment.SegmentId == "NM1" || segment.SegmentId == "N1")
                 {
                     var entity = new Entity(_delimiters, segment.SegmentString);
                     entity.Specification = matchingLoopSpecs.Where(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code.ToString() == entity.EntityIdentifierCode || ei.Code.ToString() == "Item" + entity.EntityIdentifierCode)).FirstOrDefault();
