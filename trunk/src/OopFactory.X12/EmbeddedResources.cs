@@ -38,5 +38,18 @@ namespace OopFactory.X12
             }
             return _837Transform;
         }
+
+        private static TransactionSpecification _835specification;
+
+        internal static TransactionSpecification Get835TransactionSpecification()
+        {
+            if (_835specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Payments.Ansi-835-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _835specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _835specification;
+        }
     }
 }

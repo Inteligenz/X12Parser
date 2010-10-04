@@ -22,8 +22,23 @@ namespace OopFactory.X12
 
         public string ParseToXml(string rawX12)
         {
-            // To do: determine the specification from the header elements.
-            TransactionSpecification specification = EmbeddedResources.Get837TransactionSpecification();
+            string elementDelimiter = rawX12.Substring(3, 1);
+
+            int index = rawX12.IndexOf("ST" + elementDelimiter);
+
+            string transactionType = rawX12.Substring(index + 3, 3);            
+            
+            TransactionSpecification specification = null;
+            switch (transactionType)
+            {
+                case "835":
+                    specification = EmbeddedResources.Get835TransactionSpecification();
+                    break;
+                case "837":
+                    specification = EmbeddedResources.Get837TransactionSpecification();
+                    break;
+            }
+
 
             var parser = new X12Parser(rawX12, specification);
             return parser.Parse().Serialize();

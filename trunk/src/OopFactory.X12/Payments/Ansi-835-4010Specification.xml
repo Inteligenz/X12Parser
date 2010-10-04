@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification TransactionSetIdentifierCode="835">
+  <SegmentSpecification SegmentId="BPR"/>
+  <SegmentSpecification SegmentId="TRN"/>
+  <SegmentSpecification SegmentId="CUR"/>
+  <SegmentSpecification SegmentId="REF"/>
+  <SegmentSpecification SegmentId="DTM"/>
+  <LoopSpecification LoopId="1000A" Usage="Required" LoopRepeat="1">
+    <Name>PAYER IDENTIFICATION</Name>
+    <StartingSegment>
+      <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+      <EntityIdentifier Code="PR"/>
+    </StartingSegment>
+    <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="4"/>
+    <SegmentSpecification SegmentId="PER" Usage="Required" Repeat="1"/>
+  </LoopSpecification>
+  <LoopSpecification LoopId="1000B" Usage="Required" LoopRepeat="1">
+    <Name>PAYER IDENTFICATION</Name>
+    <StartingSegment>
+      <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+      <EntityIdentifier Code="PE"/>
+    </StartingSegment>
+    <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="4"/>
+  </LoopSpecification>
+  <LoopSpecification LoopId="2000" Usage="Required" Repeat="9999">
+    <Name>HEADER NUMBER</Name>
+    <StartingSegment>
+      <SegmentSpecification SegmentId="LX" Usage="Situational" Repeat="1"/>
+    </StartingSegment>
+    <SegmentSpecification SegmentId="TS3" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="TS2" Usage="Required" Repeat="1"/>
+    <LoopSpecification LoopId="2100">
+      <Name>CLAIM PAYMENT INFORMATION</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="CLP"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="CAS"/>
+      <SegmentSpecification SegmentId="NM1"/>
+      <SegmentSpecification SegmentId="MIA"/>
+      <SegmentSpecification SegmentId="MOA"/>
+      <SegmentSpecification SegmentId="REF"/>
+      <SegmentSpecification SegmentId="DTM"/>
+      <SegmentSpecification SegmentId="PER"/>
+      <SegmentSpecification SegmentId="AMT"/>
+      <SegmentSpecification SegmentId="QTY"/>
+      <LoopSpecification LoopId="2110">
+        <Name>SERVICE PAYMENT INFORMATION</Name>
+        <StartingSegment>
+          <SegmentSpecification SegmentId="SVC"/>
+        </StartingSegment>
+        <SegmentSpecification SegmentId="DTM"/>
+        <SegmentSpecification SegmentId="CAS"/>
+        <SegmentSpecification SegmentId="REF"/>
+        <SegmentSpecification SegmentId="REF"/>
+        <SegmentSpecification SegmentId="AMT"/>
+        <SegmentSpecification SegmentId="QTY"/>
+        <SegmentSpecification SegmentId="LQ"/>
+      </LoopSpecification>
+    </LoopSpecification>
+  </LoopSpecification>
+</TransactionSpecification>

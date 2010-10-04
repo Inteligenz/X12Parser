@@ -70,6 +70,9 @@
     <EmbeddedResource Include="Claims\Ansi-837-4010Specification.xml" />
     <EmbeddedResource Include="Claims\Ansi-837-To-Claim.xslt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Payments\Ansi-835-4010Specification.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 using OopFactory.X12;
 using OopFactory.X12.Model;
 using OopFactory.X12.Model.Claims;
@@ -13,8 +14,8 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
     public class InstitutionalClaimParsingTester
     {
         #region constants
-        private const string UB_SAMPLE_1 = 
-@"ISA*00*                      *00* *01*9012345720000 *01*9088877320000*020816*1144*U*00200*000000031*0*T*:~
+        private const string UB_SAMPLE_1 =
+@"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00200*000000031*0*T*:~
   GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
     ST*837*0034~
       BHT*0019*00*3920394930203*20070816*1615*CH~
@@ -77,6 +78,15 @@ IEA*1*000000031~";
 
             Assert.AreEqual(1, claims.Count);
             return claims.First();
+        }
+
+        [TestMethod]
+        public void ParseToX12Xml()
+        {
+            var service = new X12ParsingService(true);
+
+            var xml = service.ParseToXml(UB_SAMPLE_1);
+            Trace.Write(xml);
         }
 
         [TestMethod]
