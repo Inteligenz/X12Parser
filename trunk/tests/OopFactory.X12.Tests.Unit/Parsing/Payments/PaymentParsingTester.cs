@@ -14,6 +14,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
     public class PaymentParsingTester
     {
         #region constants
+        // Sample from http://b9962ed140049a571a710839f1f71c989aaf09ce.gripelements.com/ois/macsis/claims/macsis.hipaa.edi.sample.835.pdf
         private const string SAMPLE_1 =
 @"ISA*00*          *00*          *ZZ*ASHTB          *ZZ*01017          *040315*1005*U*00401*004075123*0*P*:~
 GS*HP*ASHTB*01017*20040315*1005*1*X*004010X091A1~
@@ -119,7 +120,9 @@ IEA*1*004075123~";
         {
             var service = new X12ParsingService(true);
 
-            var xml = service.ParseToXml(SAMPLE_1);
+            //var xml = service.ParseToXml(SAMPLE_1);
+            
+            var xml = service.ParseToDomainXml(SAMPLE_1);
             Trace.Write(xml);
         }
     }

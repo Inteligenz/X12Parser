@@ -20,13 +20,18 @@ namespace OopFactory.X12
             _verbose = verbose;
         }
 
-        public string ParseToXml(string rawX12)
+        private string GetTransactionType(string rawX12)
         {
             string elementDelimiter = rawX12.Substring(3, 1);
 
             int index = rawX12.IndexOf("ST" + elementDelimiter);
 
-            string transactionType = rawX12.Substring(index + 3, 3);            
+            return rawX12.Substring(index + 3, 3);    
+        }
+
+        public string ParseToXml(string rawX12)
+        {
+            string transactionType = GetTransactionType(rawX12);
             
             TransactionSpecification specification = null;
             switch (transactionType)
@@ -37,6 +42,8 @@ namespace OopFactory.X12
                 case "837":
                     specification = EmbeddedResources.Get837TransactionSpecification();
                     break;
+                default:
+                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
             }
 
 
@@ -46,8 +53,21 @@ namespace OopFactory.X12
 
         public string ParseToDomainXml(string rawX12)
         {
-            // To do: determine the specification from the header elements.
-            XslCompiledTransform transform = EmbeddedResources.Get837Transform();
+            XslCompiledTransform transform;
+
+            string transactionType = GetTransactionType(rawX12);
+            switch (transactionType)
+            {
+                case "835":
+                    transform = EmbeddedResources.Get835Transform();
+                    break;
+                case "837":
+                    transform = EmbeddedResources.Get837Transform();
+                    break;
+                default:
+                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
+            }
+
             var writer = new StringWriter();
             XsltArgumentList list = new XsltArgumentList();
             list.AddParam("verbose", "", _verbose ? "1" : "0");

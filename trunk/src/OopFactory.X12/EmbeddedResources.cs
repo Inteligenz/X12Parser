@@ -51,5 +51,18 @@ namespace OopFactory.X12
             }
             return _835specification;
         }
+
+        private static XslCompiledTransform _835Transform;
+
+        internal static XslCompiledTransform Get835Transform()
+        {
+            if (_835Transform == null)
+            {
+                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Payments.Ansi-835-To-Payment.xslt"));
+                _835Transform = new XslCompiledTransform();
+                _835Transform.Load(xsltReader);
+            }
+            return _835Transform;
+        }
     }
 }
