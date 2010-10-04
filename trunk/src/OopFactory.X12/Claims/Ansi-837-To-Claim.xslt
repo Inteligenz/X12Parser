@@ -61,6 +61,27 @@
     <xsl:value-of select="$year"/>-<xsl:value-of select="$mo"/>-<xsl:value-of select="$day"/>T<xsl:value-of select="$hour"/>:<xsl:value-of select="$minute"/>:<xsl:value-of select="$second"/>.<xsl:value-of select="$decimal"/>
   </xsl:template>
 
+  <xsl:template name="Communication">
+    <xsl:param name="Qualifier"/>
+    <xsl:param name="Number"/>
+      <Communication>
+      <Qualifier>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$Qualifier"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="$Qualifier='EM'">Electronic Email</xsl:when>
+          <xsl:when test="$Qualifier='EX'">Telephone Extension</xsl:when>
+          <xsl:when test="$Qualifier='FX'">Facsimile</xsl:when>
+          <xsl:when test="$Qualifier='TE'">Telephone</xsl:when>
+        </xsl:choose>
+      </Qualifier>
+      <Number>
+        <xsl:value-of select="$Number"/>
+      </Number>
+    </Communication>
+  </xsl:template>
+
   <!-- Interchange Control Header Segment -->
   <xsl:template match="ISA">
     <InterchangeControl>
@@ -137,37 +158,11 @@
 
   <!-- Entity Name Segment -->
   <xsl:template match="NM1">
-    <!--Build Identifier attribute for parent node-->
-    <xsl:if test="NM108 = '24'">
-      <xsl:attribute name="TaxId">
-        <xsl:value-of select="NM109"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="NM108 = '34'">
-      <xsl:attribute name="SSN">
-        <xsl:value-of select="NM109"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="NM108 = '46'">
-      <xsl:attribute name="ETIN">
-        <xsl:value-of select="NM109"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="NM108 = 'MI'">
-      <xsl:attribute name="MemberId">
-        <xsl:value-of select="NM109"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="NM108 = 'XX'">
-      <xsl:attribute name="NPI">
-        <xsl:value-of select="NM109"/>
-      </xsl:attribute>
-    </xsl:if>
     <Name>
-      <xsl:attribute name="IsPerson">
+      <xsl:attribute name="Qualifier">
         <xsl:choose>
-          <xsl:when test="NM102='1'">true</xsl:when>
-          <xsl:otherwise>false</xsl:otherwise>
+          <xsl:when test="NM102='1'">Person</xsl:when>
+          <xsl:otherwise>NonPersonEntity</xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
       <xsl:if test="string-length(NM106) > 0">
@@ -198,57 +193,141 @@
 
   <!-- Address Segment -->
   <xsl:template match="N3">
-    <Address>
-      <xsl:attribute name="StateCode">
-        <xsl:value-of select="../N4/N402"/>
-      </xsl:attribute>
-      <xsl:attribute name="PostalCode">
-        <xsl:value-of select="../N4/N403"/>
-      </xsl:attribute>
-      <Line1>
-        <xsl:value-of select="N301"/>
-      </Line1>
-      <xsl:if test="string-length(N302)>0">
-        <Line2>
-          <xsl:value-of select="N302"/>
-        </Line2>
-      </xsl:if>
-      <City>
-        <xsl:value-of select="../N4/N401"/>
-      </City>
-    </Address>
+    <xsl:attribute name="StateCode">
+      <xsl:value-of select="../N4/N402"/>
+    </xsl:attribute>
+    <xsl:attribute name="PostalCode">
+      <xsl:value-of select="../N4/N403"/>
+    </xsl:attribute>
+    <Line1>
+      <xsl:value-of select="N301"/>
+    </Line1>
+    <xsl:if test="string-length(N302)>0">
+      <Line2>
+        <xsl:value-of select="N302"/>
+      </Line2>
+    </xsl:if>
+    <City>
+      <xsl:value-of select="../N4/N401"/>
+    </City>
   </xsl:template>
-
 
   <!-- Reference Segment -->
   <xsl:template match="REF">
-    <Reference>
+    <Identification>
       <Qualifier>
         <xsl:attribute name="Code">
           <xsl:value-of select="REF01"/>
         </xsl:attribute>
         <xsl:choose>
-          <xsl:when test="REF01='4N'">Speical Payment Reference Number</xsl:when>
-          <xsl:when test="REF01='F5'">Medicare Version Code</xsl:when>
-          <xsl:when test="REF01='EW'">Mammography Certification Number</xsl:when>
+          <!-- Transmission Type Identification-->
+          <xsl:when test="REF01='87'">Funtional Category</xsl:when>
+          
+          <!-- Provider Secondary Identification -->
+          <xsl:when test="REF01='OB'">State License Number</xsl:when>
+          <xsl:when test="REF01='1A'">Blue Cross Provider Number</xsl:when>
+          <xsl:when test="REF01='1B'">Blue Shield Provider Number</xsl:when>
+          <xsl:when test="REF01='1C'">Medicare Provider Number</xsl:when>
+          <xsl:when test="REF01='1D'">Medicaid Provider Number</xsl:when>
+          <xsl:when test="REF01='1G'">Provider UPIN Number</xsl:when>
+          <xsl:when test="REF01='1H'">CHAMPUS Identification Number</xsl:when>
+          <xsl:when test="REF01='1J'">Facility ID Number</xsl:when>
+          <xsl:when test="REF01='B3'">Preferred Provider Organization Number</xsl:when>
+          <xsl:when test="REF01='BQ'">Health Maintenance Organization Code Number</xsl:when>
+          <xsl:when test="REF01='EI'">Employer's Identification Number</xsl:when>
+          <xsl:when test="REF01='FH'">Clinic Number</xsl:when>
+          <xsl:when test="REF01='G2'">Provider Commercial Number</xsl:when>
+          <xsl:when test="REF01='G5'">Provider Site Number</xsl:when>
+          <xsl:when test="REF01='LU'">Location Number</xsl:when>
+          <xsl:when test="REF01='N5'">Provider Plan Network Identification Number</xsl:when>
+          <xsl:when test="REF01='SY'">Social Security Number</xsl:when>
+          <xsl:when test="REF01='U3'">Unique Supplier Identification Number (USIN)</xsl:when>
+          <xsl:when test="REF01='X5'">State Industrial Accident Provider Number</xsl:when>
+          <!-- Provider Credit/Debit Card Billing Information-->
+          <xsl:when test="REF01='06'">System Number</xsl:when>
+          <xsl:when test="REF01='8U'">Bank Assigned Security Identifier</xsl:when>
+          <xsl:when test="REF01='EM'">Electronic Payment Reference Number</xsl:when>
+          <xsl:when test="REF01='IJ'">Standard Industry Classification (SIC) Code</xsl:when>
+          <xsl:when test="REF01='LU'">Location Number</xsl:when>
+          <xsl:when test="REF01='RB'">Rate code number</xsl:when>
+          <xsl:when test="REF01='ST'">Store Number</xsl:when>
+          <xsl:when test="REF01='TT'">Terminal Code</xsl:when>
+          <!-- Subscriber/Patient/Other Subscriber Secondary Identification -->
+          <xsl:when test="REF01='1W'">Member Identification Number</xsl:when>
+          <xsl:when test="REF01='23'">Client Number</xsl:when>
+          <xsl:when test="REF01='IG'">Insurance Policy Number</xsl:when>
+          <xsl:when test="REF01='SY'">Social Security Number</xsl:when>
+          <!-- Property and Casualty Claim Number-->
+          <xsl:when test="REF01='Y4'">Agency Claim Number</xsl:when>
+          <!-- Credit/Debit Card Information -->
+          <xsl:when test="REF01='AB'">Acceptable Source Purchaser ID</xsl:when>
+          <xsl:when test="REF01='BB'">Authorization Number</xsl:when>
+          <!-- Payer/Other Payer Secondary Identification -->
+          <xsl:when test="REF01='2U'">Payer Identification Number</xsl:when>
+          <xsl:when test="REF01='F8'">Original Reference Number</xsl:when>
+          <xsl:when test="REF01='FY'">Claim Office Number</xsl:when>
+          <xsl:when test="REF01='NF'">National Association of Insurance Commissioners (NAIC) Code</xsl:when>
+          <xsl:when test="REF01='TJ'">Federal Taxpayer's Identification Number</xsl:when>
+          <!-- Claim Identifiers -->
+          <xsl:when test="REF01='9C'">Adjusted Repriced Claim Reference Number</xsl:when>
+          <xsl:when test="REF01='9A'">Repriced Claim Reference Number</xsl:when>
+          <xsl:when test="REF01='D9'">Claim Number</xsl:when>
+          <xsl:when test="REF01='DD'">Document Identification Code</xsl:when>
+          <xsl:when test="REF01='LX'">Qualified Products List</xsl:when>
+          <xsl:when test="REF01='4N'">Special Payment Reference Number</xsl:when>
+          <xsl:when test="REF01='G4'">Peer Review Organization (PRO) Approval Number</xsl:when>
           <xsl:when test="REF01='9F'">Referral Number</xsl:when>
           <xsl:when test="REF01='G1'">Prior Authorization Number</xsl:when>
-          <xsl:when test="REF01='F8'">Original Reference Number</xsl:when>
-          <xsl:when test="REF01='X4'">Clinical Laboratory Improvement Amendment Number</xsl:when>
-          <xsl:when test="REF01='9A'">Repriced Claim Reference Number</xsl:when>
-          <xsl:when test="REF01='9C'">Adjusted Repriced Claim Reference Number</xsl:when>
-          <xsl:when test="REF01='LX'">Qualified Products List</xsl:when>
-          <xsl:when test="REF01='D9'">Claim Number</xsl:when>
-          <xsl:when test="REF01='1S'">Abulatory Patient Group (APG) Number</xsl:when>
           <xsl:when test="REF01='EA'">Medical Record Identification Number</xsl:when>
           <xsl:when test="REF01='P4'">Project Code</xsl:when>
+          <xsl:when test="REF01='XZ'">Pharmacy Prescription Number</xsl:when>
+          
+          <xsl:when test="REF01='F5'">Medicare Version Code</xsl:when>
+          <xsl:when test="REF01='EW'">Mammography Certification Number</xsl:when>
+          <xsl:when test="REF01='F8'">Original Reference Number</xsl:when>
+          <xsl:when test="REF01='X4'">Clinical Laboratory Improvement Amendment Number</xsl:when>
+          <xsl:when test="REF01='1S'">Ambulatory Patient Group (APG) Number</xsl:when>
         </xsl:choose>
       </Qualifier>
-      <Identification>
+      <Number>
         <xsl:value-of select="REF02"/>
-      </Identification>
-    </Reference>
+      </Number>
+    </Identification>
   </xsl:template>
+  
+  <!-- Contact Information Segment -->
+  <xsl:template match="PER">
+    <Function>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="PER01"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="PER01 = 'IC'">Information Contact</xsl:when>
+      </xsl:choose>
+    </Function>
+    <Name>
+      <xsl:value-of select="PER02"/>
+    </Name>
+    <xsl:if test="string-length(PER04)>0">
+      <xsl:call-template name="Communication">
+        <xsl:with-param name="Qualifier" select="PER03"/>
+        <xsl:with-param name="Number" select="PER04"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="string-length(PER06)>0">
+      <xsl:call-template name="Communication">
+        <xsl:with-param name="Qualifier" select="PER05"/>
+        <xsl:with-param name="Number" select="PER06"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="string-length(PER08)>0">
+      <xsl:call-template name="Communication">
+        <xsl:with-param name="Qualifier" select="PER07"/>
+        <xsl:with-param name="Number" select="PER08"/>
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
+  
   <!-- Note/Special Instruction Segment -->
   <xsl:template match="NTE">
     <Note>
@@ -420,35 +499,46 @@
       <xsl:attribute name="Code">
         <xsl:value-of select="SV201"/>
       </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="SV201='0270'">Medical/Surgical Supplies</xsl:when>
+        <xsl:when test="SV201='0300'">Laboratory-Clinical Diagnostic</xsl:when>
+        <xsl:when test="SV201='0320'">Radiology-Diagnostic</xsl:when>
+      </xsl:choose>
     </Revenue>
     <xsl:if test="string-length(SV202/SV20202)>0">
-
       <Procedure>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="SV202/SV20202"/>
-        </xsl:attribute>
-        <xsl:if test="string-length(SV202/SV20203) > 0">
-          <xsl:attribute name="Mod1">
-            <xsl:value-of select="SV202/SV20203"/>
+        <Qualifier>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="SV202/SV20201"/>
           </xsl:attribute>
+          <xsl:choose>
+            <xsl:when test="SV202/SV20201='HC'">HCPCS Codes</xsl:when>
+            <xsl:when test="SV202/SV20201='IV'">HIEC Product/Service Codes</xsl:when>
+            <xsl:when test="SV202/SV20201='ZZ'">Mutually Defined</xsl:when>
+          </xsl:choose>
+        </Qualifier>
+        <Number>
+          <xsl:value-of select="SV202/SV20202"/>
+        </Number>
+        <xsl:if test="string-length(SV202/SV20203) > 0">
+          <Modifier>
+            <xsl:value-of select="SV202/SV20203"/>
+          </Modifier>
         </xsl:if>
         <xsl:if test="string-length(SV202/SV20204) > 0">
-          <xsl:attribute name="Mod2">
+          <Modifier>
             <xsl:value-of select="SV202/SV20204"/>
-          </xsl:attribute>
+          </Modifier>
         </xsl:if>
         <xsl:if test="string-length(SV202/SV20205) > 0">
-          <xsl:attribute name="Mod3">
+          <Modifier>
             <xsl:value-of select="SV202/SV20205"/>
-          </xsl:attribute>
+          </Modifier>
         </xsl:if>
         <xsl:if test="string-length(SV202/SV20206) > 0">
-          <xsl:attribute name="Mod4">
+          <Modifier>
             <xsl:value-of select="SV202/SV20206"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="string-length(SV202/SV20207)>0">
-          <xsl:value-of select="SV202/SV20207"/>
+          </Modifier>
         </xsl:if>
       </Procedure>
     </xsl:if>
@@ -460,6 +550,11 @@
   <!-- Subscriber Loop -->
   <xsl:template match="HierarchicalLoop[@LoopId='2000B']">
     <Subscriber>
+      <xsl:if test="Loop[@LoopId='2010BA']/NM1/NM108 = 'MI'">
+        <xsl:attribute name="MemberId">
+          <xsl:value-of select="Loop[@LoopId='2010BA']/NM1/NM109"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="DateOfBirth">
         <xsl:call-template name="FormatD8Date">
           <xsl:with-param name="Date" select="Loop[@LoopId='2010BA']/DMG/DMG02"/>
@@ -474,14 +569,35 @@
         </xsl:choose>
       </xsl:attribute>
       <xsl:apply-templates select="Loop[@LoopId='2010BA']/NM1" />
-      <xsl:apply-templates select="Loop[@LoopId='2010BA']/N3" />
+      <Address>
+        <xsl:apply-templates select="Loop[@LoopId='2010BA']/N3" />
+      </Address>
     </Subscriber>
   </xsl:template>
 
   <!-- Provider Loop in Billing Loop, Claim Loop or Service Line Loop -->
   <xsl:template match="Loop[substring(@LoopId,1,4)='2010'] | Loop[substring(@LoopId,1,4)='2310'] | Loop[substring(@LoopId,1,4)='2420']">
     <Provider>
-      <xsl:attribute name="Type">
+      <!--Build Identifier attribute for parent node-->
+      <xsl:if test="NM1/NM108 = '24'">
+        <xsl:attribute name="EmployerId">
+          <xsl:value-of select="NM1/NM109"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="NM1/NM108 = '34'">
+        <xsl:attribute name="Ssn">
+          <xsl:value-of select="NM1/NM109"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="NM1/NM108 = 'XX'">
+        <xsl:attribute name="Npi">
+          <xsl:value-of select="NM1/NM109"/>
+        </xsl:attribute>
+      </xsl:if>
+      <EntityIdentifier>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="NM1/NM101"/>
+        </xsl:attribute>
         <xsl:choose>
           <xsl:when test="NM1/NM101='71'">Attending Physician</xsl:when>
           <xsl:when test="NM1/NM101='72'">Operating Physician</xsl:when>
@@ -500,11 +616,58 @@
           <xsl:when test="NM1/NM101='QB'">Purchase Service Provider</xsl:when>
           <xsl:when test="NM1/NM101='TL'">Testing Laboratory</xsl:when>
         </xsl:choose>
-      </xsl:attribute>
+      </EntityIdentifier>
       <xsl:apply-templates select="NM1" />
       <Address>
         <xsl:apply-templates select="N3"/>
       </Address>
+      <xsl:for-each select="PER">
+        <Contact>
+          <xsl:apply-templates select="."/>
+        </Contact>
+      </xsl:for-each>
+      <xsl:for-each select="REF">
+        <Identification>
+          <Qualifier>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="REF01"/>
+            </xsl:attribute>
+            <xsl:choose>
+              <!-- Secondary Identification -->
+              <xsl:when test="REF01='OB'">State License Number</xsl:when>
+              <xsl:when test="REF01='1A'">Blue Cross Provider Number</xsl:when>
+              <xsl:when test="REF01='1B'">Blue Shield Provider Number</xsl:when>
+              <xsl:when test="REF01='1C'">Medicare Provider Number</xsl:when>
+              <xsl:when test="REF01='1D'">Medicaid Provider Number</xsl:when>
+              <xsl:when test="REF01='1G'">Provider UPIN Number</xsl:when>
+              <xsl:when test="REF01='1H'">CHAMPUS Identification Number</xsl:when>
+              <xsl:when test="REF01='1J'">Facility ID Number</xsl:when>
+              <xsl:when test="REF01='B3'">Preferred Provider Organization Number</xsl:when>
+              <xsl:when test="REF01='BQ'">Health Maintenance Organization Code Number</xsl:when>
+              <xsl:when test="REF01='EI'">Employer's Identification Number</xsl:when>
+              <xsl:when test="REF01='FH'">Clinic Number</xsl:when>
+              <xsl:when test="REF01='G2'">Provider Commercial Number</xsl:when>
+              <xsl:when test="REF01='G5'">Provider Site Number</xsl:when>
+              <xsl:when test="REF01='LU'">Location Number</xsl:when>
+              <xsl:when test="REF01='SY'">Social Security Number</xsl:when>
+              <xsl:when test="REF01='U3'">Unique Supplier Identification Number (USIN)</xsl:when>
+              <xsl:when test="REF01='X5'">State Industrial Accident Provider Number</xsl:when>
+              <!-- Credit/Debit Card Billing Information-->
+              <xsl:when test="REF01='06'">System Number</xsl:when>
+              <xsl:when test="REF01='8U'">Bank Assigned Security Identifier</xsl:when>
+              <xsl:when test="REF01='EM'">Electronic Payment Reference Number</xsl:when>
+              <xsl:when test="REF01='IJ'">Standard Industry Classification (SIC) Code</xsl:when>
+              <xsl:when test="REF01='LU'">Location Number</xsl:when>
+              <xsl:when test="REF01='RB'">Rate code number</xsl:when>
+              <xsl:when test="REF01='ST'">Store Number</xsl:when>
+              <xsl:when test="REF01='TT'">Terminal Code</xsl:when>
+            </xsl:choose>
+          </Qualifier>
+          <Number>
+            <xsl:value-of select="REF02"/>
+          </Number>
+        </Identification>
+      </xsl:for-each>
       <xsl:if test="string-length(PRV/PRV01) > 0">
         <Speciality>
           <xsl:attribute name="Code">
@@ -568,12 +731,31 @@
 
       <xsl:for-each select="$ClaimLoop/Loop[@LoopId='2400']">
         <ServiceLine>
-          <xsl:attribute name="LineNumber">
+          <xsl:attribute name="AssignedNumber">
             <xsl:value-of select="LX/LX01"/>
           </xsl:attribute>
           <xsl:apply-templates select="SV1"/>
           <xsl:apply-templates select="SV2"/>
           <xsl:apply-templates select="SV3"/>
+          <DateOfServiceFrom>
+            <xsl:call-template name="FormatD8Date">
+              <xsl:with-param name="Date" select="substring(DTP[DTP01='472']/DTP03,1,8)"/>
+            </xsl:call-template>
+          </DateOfServiceFrom>
+          <xsl:if test="DTP[DTP01='472']/DTP02='RD8'">
+            <DateOfServiceTo>
+              <xsl:call-template name="FormatD8Date">
+                <xsl:with-param name="Date" select="substring(DTP[DTP01='472']/DTP03,9,8)"/>
+              </xsl:call-template>
+            </DateOfServiceTo>
+          </xsl:if>
+          <xsl:if test="count(DTP[DTP01='866'])>0">
+            <AssessmentDate>
+              <xsl:call-template name="FormatD8Date">
+                <xsl:with-param name="Date" select="DTP[DTP01='866']/DTP03"/>
+              </xsl:call-template>
+            </AssessmentDate>
+          </xsl:if>
           <xsl:if test="AMT/AMT01='AAE'">
             <ApprovedAmount>
               <xsl:value-of select="AMT/AMT02"/>
