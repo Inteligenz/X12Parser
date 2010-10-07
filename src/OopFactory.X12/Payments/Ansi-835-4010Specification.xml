@@ -5,6 +5,7 @@
   <SegmentSpecification SegmentId="CUR"/>
   <SegmentSpecification SegmentId="REF"/>
   <SegmentSpecification SegmentId="DTM"/>
+  <SegmentSpecification SegmentId="PLB"/>
   <LoopSpecification LoopId="1000A" Usage="Required" LoopRepeat="1">
     <Name>PAYER IDENTIFICATION</Name>
     <StartingSegment>
