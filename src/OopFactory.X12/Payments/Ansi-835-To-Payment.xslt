@@ -104,9 +104,125 @@
       </Adjustment>
     </xsl:if>
   </xsl:template>
+
+  <xsl:template match="NM1">
+    <Entity>
+      <Qualifier>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="NM101"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="NM101='QC'">Patient Name</xsl:when>
+          <xsl:when test="NM101='IL'">Insured Name</xsl:when>
+          <xsl:when test="NM101='74'">Corrected Patient/Insured Name</xsl:when>
+          <xsl:when test="NM101='82'">Service Provider Name</xsl:when>
+          <xsl:when test="NM101='TT'">Crossover Carrier Name</xsl:when>
+          <xsl:when test="NM101='PR'">Corrected Priority Payer Name</xsl:when>
+        </xsl:choose>
+      </Qualifier>
+      <Identification>
+        <Qualifier>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="NM108"/>
+          </xsl:attribute>
+          <xsl:choose>
+            <!-- Patient, Insured -->
+            <xsl:when test="NM108='34'">Social Security Number</xsl:when>
+            <xsl:when test="NM108='HN'">Health Insurance Claim (HIC) Number</xsl:when>
+            <xsl:when test="NM108='II'">United States National Individual Identifier</xsl:when>
+            <xsl:when test="NM108='MI'">Member Identification Number</xsl:when>
+            <xsl:when test="NM108='MR'">Medicaid Recipient Identification Number</xsl:when>
+            <xsl:when test="NM108='C'">Insured's Changed Unique Identification Number</xsl:when>
+            <!-- Provider -->
+            <xsl:when test="NM108='BD'">Blue Cross Provider Number</xsl:when>
+            <xsl:when test="NM108='BS'">Blue Shield Provider Number</xsl:when>
+            <xsl:when test="NM108='FI'">Federal Taxpayer's Identification Number</xsl:when>
+            <xsl:when test="NM108='MC'">Medical Provider Number</xsl:when>
+            <xsl:when test="NM108='PC'">Provider Commerical Number</xsl:when>
+            <xsl:when test="NM108='SL'">State License Number</xsl:when>
+            <xsl:when test="NM108='UP'">Unique Physician Identification Number</xsl:when>
+            <xsl:when test="NM108='XX'">Health Care Financing Administration National Provider Identifier</xsl:when>
+            <!-- Crossover Carrier -->
+            <xsl:when test="NM109='AD'">Blue Cross Blue Shield Association Plan Code</xsl:when>
+            <xsl:when test="NM109='FI'">Federal Taxpayer's Identification Number</xsl:when>
+            <xsl:when test="NM109='NI'">National Association of Insurance Commissioners (NAIC) Identification</xsl:when>
+            <xsl:when test="NM109='PI'">Payor Identification</xsl:when>
+            <xsl:when test="NM109='PP'">Pharmacy Processor Number</xsl:when>
+            <xsl:when test="NM108='XV'">Health Care Financing Administration National Provider Identifier</xsl:when>
+          </xsl:choose>
+        </Qualifier>
+        <Number>
+          <xsl:value-of select="NM109"/>
+        </Number>
+      </Identification>
+      <Name>
+        <xsl:attribute name="Qualifier">
+          <xsl:choose>
+            <xsl:when test="NM102='1'">Person</xsl:when>
+            <xsl:otherwise>NonPersonEntity</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(NM106) > 0">
+          <xsl:attribute name="Prefix">
+            <xsl:value-of select="NM106"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(NM107) > 0">
+          <xsl:attribute name="Suffix">
+            <xsl:value-of select="NM107"/>
+          </xsl:attribute>
+        </xsl:if>
+        <Last>
+          <xsl:value-of select="NM103"/>
+        </Last>
+        <xsl:if test="string-length(NM104)>0">
+          <First>
+            <xsl:value-of select="NM104"/>
+          </First>
+        </xsl:if>
+        <xsl:if test="string-length(NM105)>0">
+          <Middle>
+            <xsl:value-of select="NM105"/>
+          </Middle>
+        </xsl:if>
+      </Name>
+    </Entity>
+  </xsl:template>
   
   <xsl:template match="DTM">
     <xsl:choose>
+      <!-- Claim Payment Date -->
+      <xsl:when test="DTM01='036'">
+        <ExpirationDate>
+          <xsl:call-template name="FormatD8Date">
+            <xsl:with-param name="Date" select="DTM02"/>
+          </xsl:call-template>
+        </ExpirationDate>
+      </xsl:when>
+      <xsl:when test="DTM01='050'">
+        <ReceivedDate>
+          <xsl:call-template name="FormatD8Date">
+            <xsl:with-param name="Date" select="DTM02"/>
+          </xsl:call-template>
+        </ReceivedDate>
+      </xsl:when>
+      <xsl:when test="DTM01='232'">
+        <ClaimStatmentPeriodStart>
+          <xsl:call-template name="FormatD8Date">
+            <xsl:with-param name="Date" select="DTM02"/>
+          </xsl:call-template>
+        </ClaimStatmentPeriodStart>
+      </xsl:when>
+      <xsl:when test="DTM01='233'">
+        <ClaimStatementPeriodEnd>
+          <xsl:call-template name="FormatD8Date">
+            <xsl:with-param name="Date" select="DTM02"/>
+          </xsl:call-template>
+        </ClaimStatementPeriodEnd>
+      </xsl:when>
+
+
+      <!-- Service Payment Date -->
       <xsl:when test="DTM01='150'">
         <ServicePeriodStart>
           <xsl:call-template name="FormatD8Date">
@@ -333,6 +449,201 @@
     </Remarks>
   </xsl:template>
 
+  <xsl:template match="CLP">
+    <xsl:attribute name="TotalClaimChargeAmount">
+      <xsl:value-of select="CLP03"/>
+    </xsl:attribute>
+    <xsl:attribute name="PaymentAmount">
+      <xsl:value-of select="CLP04"/>
+    </xsl:attribute>
+    <xsl:attribute name="PatientResponsibleAmount">
+      <xsl:value-of select="CLP05"/>
+    </xsl:attribute>
+    <PatientControlNumber>
+      <xsl:value-of select="CLP01"/>
+    </PatientControlNumber>
+    <ClaimStatus>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="CLP02"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="CLP02='1'">Processed as Primary</xsl:when>
+        <xsl:when test="CLP02='2'">Processed as Secondary</xsl:when>
+        <xsl:when test="CLP02='3'">Processed as Tertiary</xsl:when>
+        <xsl:when test="CLP02='4'">Denied</xsl:when>
+        <xsl:when test="CLP02='5'">Pended</xsl:when>
+        <xsl:when test="CLP02='10'">Received, but not in process</xsl:when>
+        <xsl:when test="CLP02='13'">Suspended</xsl:when>
+        <xsl:when test="CLP02='15'">Suspended - investigation with field</xsl:when>
+        <xsl:when test="CLP02='16'">Suspended - return with material</xsl:when>
+        <xsl:when test="CLP02='17'">Suspended - review pending</xsl:when>
+        <xsl:when test="CLP02='19'">Processed as Primary, Forwarded to Additional Payer(s)</xsl:when>
+        <xsl:when test="CLP02='20'">Processed as Secondary, Forwarded to Additional Payer(s)</xsl:when>
+        <xsl:when test="CLP02='21'">Processed as Tertiary, Forwarded to Additional Payer(s)</xsl:when>
+        <xsl:when test="CLP02='22'">Reversal of Previous Payment</xsl:when>
+        <xsl:when test="CLP02='23'">Not Our Claim, Forwarded to Additional Payer(s)</xsl:when>
+        <xsl:when test="CLP02='25'">Predetermination Pricing Only - No Payment</xsl:when>
+        <xsl:when test="CLP02='27'">Reviewed</xsl:when>
+      </xsl:choose>
+    </ClaimStatus>
+    <ClaimType>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="CLP06"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="CLP06='12'">Preferred Provider Organization (PPO)</xsl:when>
+        <xsl:when test="CLP06='13'">Point of Service (POS)</xsl:when>
+        <xsl:when test="CLP06='14'">Exclusive Provider Organization (EPO)</xsl:when>
+        <xsl:when test="CLP06='15'">Indemnity Insurance</xsl:when>
+        <xsl:when test="CLP06='16'">Health Maintenance Organization (HMO) Medicare Risk</xsl:when>
+        <xsl:when test="CLP06='AM'">Automobile Medical</xsl:when>
+        <xsl:when test="CLP06='CH'">Champus</xsl:when>
+        <xsl:when test="CLP06='DS'">Disability</xsl:when>
+        <xsl:when test="CLP06='HM'">Health Maintenance Organization</xsl:when>
+        <xsl:when test="CLP06='LM'">Liability Medical</xsl:when>
+        <xsl:when test="CLP06='MA'">Medicare Part A</xsl:when>
+        <xsl:when test="CLP06='MB'">Medicare Part B</xsl:when>
+        <xsl:when test="CLP06='MC'">Medicaid</xsl:when>
+        <xsl:when test="CLP06='OF'">Other Federal Program</xsl:when>
+        <xsl:when test="CLP06='TV'">Title V</xsl:when>
+        <xsl:when test="CLP06='VA'">Veteran Administration Plan</xsl:when>
+        <xsl:when test="CLP06='WC'">Workers' Compensation Health Claim</xsl:when>
+      </xsl:choose>
+    </ClaimType>
+    <PayerClaimControlNumber>
+      <xsl:value-of select="CLP07"/>
+    </PayerClaimControlNumber>
+    <Facility>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="CLP08"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="CLP08='11'">Office</xsl:when>
+        <xsl:when test="CLP08='12'">Home</xsl:when>
+        <xsl:when test="CLP08='21'">Inpatient Hospital</xsl:when>
+        <xsl:when test="CLP08='22'">Outpatient Hospital</xsl:when>
+        <xsl:when test="CLP08='23'">Emergency Room - Hospital</xsl:when>
+        <xsl:when test="CLP08='24'">Ambulatory Surgical Center</xsl:when>
+        <xsl:when test="CLP08='25'">Birthing Center</xsl:when>
+        <xsl:when test="CLP08='26'">Military Treatment Facility</xsl:when>
+        <xsl:when test="CLP08='31'">Skilled Nursing Facility</xsl:when>
+        <xsl:when test="CLP08='32'">Nursing Facility</xsl:when>
+        <xsl:when test="CLP08='33'">Custodial Care Facility</xsl:when>
+        <xsl:when test="CLP08='34'">Hospice</xsl:when>
+        <xsl:when test="CLP08='41'">Ambulance - Land</xsl:when>
+        <xsl:when test="CLP08='42'">Ambulance - Air or Water</xsl:when>
+        <xsl:when test="CLP08='51'">Inpatient Psychiatric Facility</xsl:when>
+        <xsl:when test="CLP08='52'">Psychiatric Facility Partial Hospitalization</xsl:when>
+        <xsl:when test="CLP08='53'">Community Mental Health Center</xsl:when>
+        <xsl:when test="CLP08='54'">Intermediate Care Facility/Mentally Retarded</xsl:when>
+        <xsl:when test="CLP08='55'">Residential Substance Abuse Treatment Facility</xsl:when>
+        <xsl:when test="CLP08='56'">Psychiatric Residential Treament Center</xsl:when>
+        <xsl:when test="CLP08='50'">Federally Qualified Health Center</xsl:when>
+        <xsl:when test="CLP08='60'">Mass Immunization Center</xsl:when>
+        <xsl:when test="CLP08='61'">Comprehensive Inpatient Rehabilitation Facility</xsl:when>
+        <xsl:when test="CLP08='62'">Comprehensive Outpatient Rehabilitation Facility</xsl:when>
+        <xsl:when test="CLP08='65'">End Stage Renal Disease Treatment Facility</xsl:when>
+        <xsl:when test="CLP08='71'">State or Local Public Health Clinic</xsl:when>
+        <xsl:when test="CLP08='72'">Rural Health Clinic</xsl:when>
+        <xsl:when test="CLP08='81'">Independent Laboratory</xsl:when>
+        <xsl:when test="CLP08='99'">Other Unlisted Facility</xsl:when>
+      </xsl:choose>
+    </Facility>
+  </xsl:template>
+
+  <xsl:template match="MIA">
+    <MedicareInpatientAdjustment>
+      <xsl:attribute name="CoveredDaysOrVisitsCount">
+        <xsl:value-of select="MIA01"/>
+      </xsl:attribute>
+      <xsl:attribute name="PpsOperatingOutlierAmount">
+        <xsl:value-of select="MIA02"/>
+      </xsl:attribute>
+      <xsl:attribute name="LifetimePsychiatricDaysCount">
+        <xsl:value-of select="MIA03"/>
+      </xsl:attribute>
+      <xsl:attribute name="RemarkCode">
+        <xsl:value-of select="MIA05"/>
+      </xsl:attribute>
+      <xsl:if test="string-length(MIA04)>0">
+        <MonetaryAmount Qualifier="Claim DRG MonetaryAmount">
+          <xsl:value-of select="MIA04"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA06)>0">
+        <MonetaryAmount Qualifier="Claim Disproportionate Share Amount">
+          <xsl:value-of select="MIA06"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA07)>0">
+        <MonetaryAmount Qualifier="Claim MSP Pass-through Amount">
+          <xsl:value-of select="MIA07"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA08)>0">
+        <MonetaryAmount Qualifier="Claim PPS Capital Amount">
+          <xsl:value-of select="MIA08"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA09)>0">
+        <MonetaryAmount Qualifier="PPS-Capital FSP DRG Amount">
+          <xsl:value-of select="MIA09"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA10)>0">
+        <MonetaryAmount Qualifier="PPS-Capital HSP DRG Amount">
+          <xsl:value-of select="MIA10"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA11)>0">
+        <MonetaryAmount Qualifier="PPS-Capital DSH DRG Amount">
+          <xsl:value-of select="MIA11"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA12)>0">
+        <MonetaryAmount Qualifier="Old Capital Amount">
+          <xsl:value-of select="MIA12"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA13)>0">
+        <MonetaryAmount Qualifier="PPS-Capital IME amount">
+          <xsl:value-of select="MIA13"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA14)>0">
+        <MonetaryAmount Qualifier="PPS-Operating Hospital Specific DRG Amount">
+          <xsl:value-of select="MIA14"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA16)>0">
+        <MonetaryAmount Qualifier="PPS-Operating Federal Specific DRG Amount">
+          <xsl:value-of select="MIA16"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA17)>0">
+        <MonetaryAmount Qualifier="Claim PPS Capital Outlier Amount">
+          <xsl:value-of select="MIA17"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA18)>0">
+        <MonetaryAmount Qualifier="Claim Indirect Teaching Amount">
+          <xsl:value-of select="MIA18"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA19)>0">
+        <MonetaryAmount Qualifier="Nonpayable Professional Component Amount">
+          <xsl:value-of select="MIA19"/>
+        </MonetaryAmount>
+      </xsl:if>
+      <xsl:if test="string-length(MIA24)>0">
+        <MonetaryAmount Qualifier="PPS-Capital Exception Amount">
+          <xsl:value-of select="MIA24"/>
+        </MonetaryAmount>
+      </xsl:if>
+
+    </MedicareInpatientAdjustment>
+  </xsl:template>
+
   <!-- Provider Adjustment Segment -->
   <xsl:template match="PLB">
     <ProviderAdjustment>
@@ -406,6 +717,12 @@
   <!-- Claim Payment Information Loop -->
   <xsl:template match="Loop[@LoopId='2100']">
     <ClaimPayment>
+      <xsl:apply-templates select="CLP"/>
+      <xsl:apply-templates select="CAS"/>
+      <xsl:apply-templates select="NM1"/>
+      <xsl:apply-templates select="REF"/>
+      <xsl:apply-templates select="MIA"/>
+      <xsl:apply-templates select="DTM"/>
       <xsl:apply-templates select="AMT"/>
       <xsl:apply-templates select="QTY"/>
       <xsl:apply-templates select="Loop[@LoopId='2110']"/>
