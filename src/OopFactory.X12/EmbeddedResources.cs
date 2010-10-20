@@ -32,7 +32,7 @@ namespace OopFactory.X12
         {
             if (_837Transform == null)
             {
-                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Claims.Ansi-837-To-Claim.xslt"));
+                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-837-To-Claim.xslt"));
                 _837Transform = new XslCompiledTransform();
                 _837Transform.Load(xsltReader);
             }
@@ -57,12 +57,27 @@ namespace OopFactory.X12
         internal static XslCompiledTransform Get835Transform()
         {
             if (_835Transform == null)
-            {
-                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Payments.Ansi-835-To-Payment.xslt"));
+            {                
                 _835Transform = new XslCompiledTransform();
+
+                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
+
+                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-835-To-Payment.xslt"));
+                
                 _835Transform.Load(xsltReader);
+                
             }
             return _835Transform;
+        }
+
+        private static void WriteToFile(string resourceName, string fileName)
+        {
+            StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName));
+            FileStream fs = new FileStream(fileName, FileMode.Create);
+            StreamWriter writer = new StreamWriter(fs);
+            writer.Write(reader.ReadToEnd());
+            writer.Close();
+            fs.Close();
         }
     }
 }
