@@ -124,9 +124,9 @@ IEA*1*004075123~";
         {
             var service = new X12ParsingService(true);
 
-            var xml = service.ParseToXml(SAMPLE_1);
+            //var xml = service.ParseToXml(SAMPLE_1);
             
-            //var xml = service.ParseToDomainXml(SAMPLE_1);
+            var xml = service.ParseToDomainXml(SAMPLE_1);
             Trace.Write(xml);
         }
     }
