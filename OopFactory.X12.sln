@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -33,6 +33,12 @@ Global
 		SccProjectUniqueName3 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
 		SccProjectName3 = tests/OopFactory.X12.Tests.Unit
 		SccLocalPath3 = tests\\OopFactory.X12.Tests.Unit
+		SccProjectUniqueName4 = src\\OopFactory.X12\\OopFactory.X12.csproj
+		SccProjectName4 = src/OopFactory.X12
+		SccLocalPath4 = src\\OopFactory.X12
+		SccProjectUniqueName5 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
+		SccProjectName5 = src/OopFactory.X12.X12Parser
+		SccLocalPath5 = src\\OopFactory.X12.X12Parser
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
