@@ -72,15 +72,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Claims\Ansi-837-4010Specification.xml" />
-    <EmbeddedResource Include="Claims\Ansi-837-To-Claim.xslt" />
+    <EmbeddedResource Include="Transformations\Ansi-837-To-Claim.xslt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Payments\Ansi-835-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Payments\Ansi-835-To-Payment.xslt">
+    <EmbeddedResource Include="Transformations\Ansi-835-To-Payment.xslt">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Transformations\Ansi-Common.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
