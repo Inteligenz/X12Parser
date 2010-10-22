@@ -69,17 +69,13 @@ IEA*1*000000031~";
         {
             var service = new X12ParsingService(true);
 
-            var rawXml = service.ParseToXml(edi);
-            Trace.WriteLine(rawXml);
             var xml = service.ParseToDomainXml(edi);
+            Trace.Write(xml);
+            var transactions = ModelExtensions.Deserialize<List<Transaction>>(xml);
 
-            List<Claim> a = new List<Claim>();
-            a.Add(new Claim());
-
-            var claims = ModelExtensions.Deserialize<List<Claim>>(xml);
-
-            Assert.AreEqual(1, claims.Count);
-            return claims.First();
+            Assert.AreEqual(1, transactions.Count);
+            Assert.AreEqual(1, transactions[0].Claims.Count);
+            return transactions[0].Claims[0];
         }
 
         [TestMethod]
@@ -95,11 +91,11 @@ IEA*1*000000031~";
         public void ParseAndValidateBillingProviderLoopTest()
         {
             Claim claim = ParseX12(UB_SAMPLE_1);
-            Provider billingProvider = claim.Providers.First(p => p.EntityIdentifier.Text == "Billing Provider");
+            Provider billingProvider = claim.Providers.First(p => p.Name.Qualifier == "85");
 
             Assert.IsNotNull(billingProvider);
             Assert.AreEqual("0123456789", billingProvider.Npi);
-            Assert.IsFalse(billingProvider.Name.Qualifier == EntityTypeQualifierEnum.Person);
+            Assert.IsFalse(billingProvider.Name.IsPerson);
             Assert.AreEqual("HOWDEE HOSPITAL", billingProvider.Name.Last);
             Assert.AreEqual("123 HOWDEE BOULEVARD", billingProvider.Address.Line1);
             Assert.AreEqual("DURHAM", billingProvider.Address.City);
@@ -109,15 +105,11 @@ IEA*1*000000031~";
             Contact contact = billingProvider.Contacts.FirstOrDefault();
             Assert.IsNotNull(contact);
             Assert.AreEqual("BETTY RUBBLE", contact.Name);
-            Assert.AreEqual(2, contact.Communications.Count);
-            Assert.AreEqual("Telephone", contact.Communications[0].Qualifier.Text);
-            Assert.AreEqual("9195551111", contact.Communications[0].Number);
-            Assert.AreEqual("Facsimile", contact.Communications[1].Qualifier.Text);
-            Assert.AreEqual("6145551212", contact.Communications[1].Number);
+            Assert.AreEqual("9195551111", contact.Phone.Number);
+            Assert.AreEqual("6145551212", contact.Fax);
 
-            Assert.AreEqual("1J", billingProvider.Identifications[0].Qualifier.Code);
-            Assert.AreEqual("Facility ID Number", billingProvider.Identifications[0].Qualifier.Text);
-            Assert.AreEqual("654", billingProvider.Identifications[0].Number);
+            Assert.AreEqual("1J", billingProvider.Identifications[1].Qualifier);
+            Assert.AreEqual("654", billingProvider.Identifications[1].Number);
 
             Assert.AreEqual("203BA0200N", billingProvider.Speciality.Code);
         }
@@ -127,7 +119,7 @@ IEA*1*000000031~";
         {
             Claim claim = ParseX12(UB_SAMPLE_1);
             // NM1 SEGMENT
-            Assert.IsTrue(claim.Subscriber.Name.Qualifier == EntityTypeQualifierEnum.Person);
+            Assert.IsTrue(claim.Subscriber.Name.IsPerson);
             Assert.AreEqual("DOUGH", claim.Subscriber.Name.Last);
             Assert.AreEqual("MARY", claim.Subscriber.Name.First);
             Assert.AreEqual("DOUGH, MARY", claim.Subscriber.Name.FullName);
@@ -152,7 +144,7 @@ IEA*1*000000031~";
             Assert.AreEqual(3, claim.ServiceLines.Count);
             Assert.AreEqual(1, claim.ServiceLines[0].AssignedNumber);
             Assert.AreEqual("0300", claim.ServiceLines[0].Revenue.Code);
-            Assert.AreEqual("81000", claim.ServiceLines[0].Procedure.Number);
+            Assert.AreEqual("81000", claim.ServiceLines[0].Procedure.Code);
             Assert.AreEqual(120m, claim.ServiceLines[0].ChargeAmount);
             Assert.AreEqual("UN", claim.ServiceLines[0].Unit);
             Assert.AreEqual(1m, claim.ServiceLines[0].Quantity);
