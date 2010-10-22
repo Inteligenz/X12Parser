@@ -69,6 +69,8 @@ IEA*1*000000031~";
         {
             var service = new X12ParsingService(true);
 
+            var rawXml = service.ParseToXml(edi);
+            Trace.WriteLine(rawXml);
             var xml = service.ParseToDomainXml(edi);
 
             List<Claim> a = new List<Claim>();
