@@ -32,6 +32,8 @@ namespace OopFactory.X12
         {
             if (_837Transform == null)
             {
+                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
+
                 var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-837-To-Claim.xslt"));
                 _837Transform = new XslCompiledTransform();
                 _837Transform.Load(xsltReader);

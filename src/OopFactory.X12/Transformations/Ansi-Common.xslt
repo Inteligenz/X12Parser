@@ -3,7 +3,7 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
   <xsl:output method="xml" indent="yes"/>
-  <xsl:param name="verbose" select="0" />
+  <xsl:param name="verbose" select="1" />
 
   <xsl:template name="FormatD8Date">
     <xsl:param name="Date" />
@@ -77,6 +77,102 @@
     <xsl:if test="$verbose=1">
       <xsl:comment>
         <xsl:choose>
+          <!-- Secondary Identification -->
+          <xsl:when test="REF01='OB'">State License Number</xsl:when>
+          <xsl:when test="REF01='1A'">Blue Cross Provider Number</xsl:when>
+          <xsl:when test="REF01='1B'">Blue Shield Provider Number</xsl:when>
+          <xsl:when test="REF01='1C'">Medicare Provider Number</xsl:when>
+          <xsl:when test="REF01='1D'">Medicaid Provider Number</xsl:when>
+          <xsl:when test="REF01='1G'">Provider UPIN Number</xsl:when>
+          <xsl:when test="REF01='1H'">CHAMPUS Identification Number</xsl:when>
+          <xsl:when test="REF01='1J'">Facility ID Number</xsl:when>
+          <xsl:when test="REF01='B3'">Preferred Provider Organization Number</xsl:when>
+          <xsl:when test="REF01='BQ'">Health Maintenance Organization Code Number</xsl:when>
+          <xsl:when test="REF01='EI'">Employer's Identification Number</xsl:when>
+          <xsl:when test="REF01='FH'">Clinic Number</xsl:when>
+          <xsl:when test="REF01='G2'">Provider Commercial Number</xsl:when>
+          <xsl:when test="REF01='G5'">Provider Site Number</xsl:when>
+          <xsl:when test="REF01='LU'">Location Number</xsl:when>
+          <xsl:when test="REF01='SY'">Social Security Number</xsl:when>
+          <xsl:when test="REF01='U3'">Unique Supplier Identification Number (USIN)</xsl:when>
+          <xsl:when test="REF01='X5'">State Industrial Accident Provider Number</xsl:when>
+          <!-- Credit/Debit Card Billing Information-->
+          <xsl:when test="REF01='06'">System Number</xsl:when>
+          <xsl:when test="REF01='8U'">Bank Assigned Security Identifier</xsl:when>
+          <xsl:when test="REF01='EM'">Electronic Payment Reference Number</xsl:when>
+          <xsl:when test="REF01='IJ'">Standard Industry Classification (SIC) Code</xsl:when>
+          <xsl:when test="REF01='LU'">Location Number</xsl:when>
+          <xsl:when test="REF01='RB'">Rate code number</xsl:when>
+          <xsl:when test="REF01='ST'">Store Number</xsl:when>
+          <xsl:when test="REF01='TT'">Terminal Code</xsl:when>
+
+          <!-- Transmission Type Identification-->
+          <xsl:when test="$Qualifier='87'">Funtional Category</xsl:when>
+
+          <!-- Provider Secondary Identification -->
+          <xsl:when test="$Qualifier='OB'">State License Number</xsl:when>
+          <xsl:when test="$Qualifier='1A'">Blue Cross Provider Number</xsl:when>
+          <xsl:when test="$Qualifier='1B'">Blue Shield Provider Number</xsl:when>
+          <xsl:when test="$Qualifier='1C'">Medicare Provider Number</xsl:when>
+          <xsl:when test="$Qualifier='1D'">Medicaid Provider Number</xsl:when>
+          <xsl:when test="$Qualifier='1G'">Provider UPIN Number</xsl:when>
+          <xsl:when test="$Qualifier='1H'">CHAMPUS Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='1J'">Facility ID Number</xsl:when>
+          <xsl:when test="$Qualifier='B3'">Preferred Provider Organization Number</xsl:when>
+          <xsl:when test="$Qualifier='BQ'">Health Maintenance Organization Code Number</xsl:when>
+          <xsl:when test="$Qualifier='EI'">Employer's Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='FH'">Clinic Number</xsl:when>
+          <xsl:when test="$Qualifier='G2'">Provider Commercial Number</xsl:when>
+          <xsl:when test="$Qualifier='G5'">Provider Site Number</xsl:when>
+          <xsl:when test="$Qualifier='LU'">Location Number</xsl:when>
+          <xsl:when test="$Qualifier='N5'">Provider Plan Network Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='SY'">Social Security Number</xsl:when>
+          <xsl:when test="$Qualifier='U3'">Unique Supplier Identification Number (USIN)</xsl:when>
+          <xsl:when test="$Qualifier='X5'">State Industrial Accident Provider Number</xsl:when>
+          <!-- Provider Credit/Debit Card Billing Information-->
+          <xsl:when test="$Qualifier='06'">System Number</xsl:when>
+          <xsl:when test="$Qualifier='8U'">Bank Assigned Security Identifier</xsl:when>
+          <xsl:when test="$Qualifier='EM'">Electronic Payment Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='IJ'">Standard Industry Classification (SIC) Code</xsl:when>
+          <xsl:when test="$Qualifier='LU'">Location Number</xsl:when>
+          <xsl:when test="$Qualifier='RB'">Rate code number</xsl:when>
+          <xsl:when test="$Qualifier='ST'">Store Number</xsl:when>
+          <xsl:when test="$Qualifier='TT'">Terminal Code</xsl:when>
+          <!-- Subscriber/Patient/Other Subscriber Secondary Identification -->
+          <xsl:when test="$Qualifier='1W'">Member Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='23'">Client Number</xsl:when>
+          <xsl:when test="$Qualifier='IG'">Insurance Policy Number</xsl:when>
+          <xsl:when test="$Qualifier='SY'">Social Security Number</xsl:when>
+          <!-- Property and Casualty Claim Number-->
+          <xsl:when test="$Qualifier='Y4'">Agency Claim Number</xsl:when>
+          <!-- Credit/Debit Card Information -->
+          <xsl:when test="$Qualifier='AB'">Acceptable Source Purchaser ID</xsl:when>
+          <xsl:when test="$Qualifier='BB'">Authorization Number</xsl:when>
+          <!-- Payer/Other Payer Secondary Identification -->
+          <xsl:when test="$Qualifier='2U'">Payer Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='F8'">Original Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='FY'">Claim Office Number</xsl:when>
+          <xsl:when test="$Qualifier='NF'">National Association of Insurance Commissioners (NAIC) Code</xsl:when>
+          <xsl:when test="$Qualifier='TJ'">Federal Taxpayer's Identification Number</xsl:when>
+          <!-- Claim Identifiers -->
+          <xsl:when test="$Qualifier='9C'">Adjusted Repriced Claim Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='9A'">Repriced Claim Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='D9'">Claim Number</xsl:when>
+          <xsl:when test="$Qualifier='DD'">Document Identification Code</xsl:when>
+          <xsl:when test="$Qualifier='LX'">Qualified Products List</xsl:when>
+          <xsl:when test="$Qualifier='4N'">Special Payment Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='G4'">Peer Review Organization (PRO) Approval Number</xsl:when>
+          <xsl:when test="$Qualifier='9F'">Referral Number</xsl:when>
+          <xsl:when test="$Qualifier='G1'">Prior Authorization Number</xsl:when>
+          <xsl:when test="$Qualifier='EA'">Medical Record Identification Number</xsl:when>
+          <xsl:when test="$Qualifier='P4'">Project Code</xsl:when>
+          <xsl:when test="$Qualifier='XZ'">Pharmacy Prescription Number</xsl:when>
+
+          <xsl:when test="$Qualifier='F5'">Medicare Version Code</xsl:when>
+          <xsl:when test="$Qualifier='EW'">Mammography Certification Number</xsl:when>
+          <xsl:when test="$Qualifier='F8'">Original Reference Number</xsl:when>
+          <xsl:when test="$Qualifier='X4'">Clinical Laboratory Improvement Amendment Number</xsl:when>
+          <xsl:when test="$Qualifier='1S'">Ambulatory Patient Group (APG) Number</xsl:when>
           <!-- ISA Sender and Receiver -->
           <xsl:when test="$Qualifier='01'">Duns (Dun &amp; Bradstreet)</xsl:when>
           <xsl:when test="$Qualifier='14'">Duns Plus Suffix</xsl:when>
@@ -245,10 +341,14 @@
         <xsl:attribute name="Code">
           <xsl:value-of select="ISA15"/>
         </xsl:attribute>
-        <xsl:choose>
-          <xsl:when test="ISA15='P'">Production Data</xsl:when>
-          <xsl:when test="ISA15=-'T'">Test Data</xsl:when>
-        </xsl:choose>
+        <xsl:if test="$verbose=1">
+          <xsl:comment>
+            <xsl:choose>
+              <xsl:when test="ISA15='P'">Production Data</xsl:when>
+              <xsl:when test="ISA15='T'">Test Data</xsl:when>
+            </xsl:choose>
+          </xsl:comment>
+        </xsl:if>
       </UsageIndicator>
     </InterchangeControlHeader>
   </xsl:template>
@@ -327,6 +427,24 @@
       <xsl:if test="$verbose=1">
         <xsl:comment>
           <xsl:choose>
+            <!-- 837 Entities -->
+            <xsl:when test="NM101='71'">Attending Physician</xsl:when>
+            <xsl:when test="NM101='72'">Operating Physician</xsl:when>
+            <xsl:when test="NM101='73'">Other Physician</xsl:when>
+            <xsl:when test="NM101='77'">Service Location</xsl:when>
+            <xsl:when test="NM101='82'">Rendering Provider</xsl:when>
+            <xsl:when test="NM101='85'">Billing Provider</xsl:when>
+            <xsl:when test="NM101='87'">Pay-To Provider</xsl:when>
+            <xsl:when test="NM101='DK'">Ordering Physician</xsl:when>
+            <xsl:when test="NM101='DN'">Referring Provider</xsl:when>
+            <xsl:when test="NM101='DQ'">Supervising Physician</xsl:when>
+            <xsl:when test="NM101='FA'">Facility</xsl:when>
+            <xsl:when test="NM101='LI'">Indepedent Lab</xsl:when>
+            <xsl:when test="NM101='P3'">Primary Care Provider</xsl:when>
+            <xsl:when test="NM101='PR'">Payer</xsl:when>
+            <xsl:when test="NM101='QB'">Purchase Service Provider</xsl:when>
+            <xsl:when test="NM101='TL'">Testing Laboratory</xsl:when>
+            <!-- 835 Entities -->
             <xsl:when test="NM101='QC'">Patient Name</xsl:when>
             <xsl:when test="NM101='IL'">Insured Name</xsl:when>
             <xsl:when test="NM101='74'">Corrected Patient/Insured Name</xsl:when>
@@ -399,6 +517,7 @@
         <xsl:if test="$verbose=1">
           <xsl:comment>
             <xsl:choose>
+              <xsl:when test="PER01='IC'">Information Contact</xsl:when>
               <xsl:when test="PER01='CX'">Payers Claim Office</xsl:when>
             </xsl:choose>
           </xsl:comment>
