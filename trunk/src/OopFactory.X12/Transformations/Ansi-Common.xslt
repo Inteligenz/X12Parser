@@ -539,7 +539,7 @@
       <xsl:if test="PER03='TE'">
         <Phone>
           <xsl:if test="PER05='EX'">
-            <xsl:attribute name="Extension">
+            <xsl:attribute name="Ext">
               <xsl:value-of select="PER06"/>
             </xsl:attribute>
           </xsl:if>

@@ -21,7 +21,7 @@ namespace OopFactory.X12.Model.Claims
         public DateTime? AssessmentDate { get; set; }
 
         public CodedLookup Revenue { get; set; }
-        public QualifiedNumber Procedure { get; set; }
+        public Procedure Procedure { get; set; }
 
     }
 }

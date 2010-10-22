@@ -252,7 +252,39 @@
   <!-- Provider Loop in Billing Loop, Claim Loop or Service Line Loop -->
   <xsl:template match="Loop[substring(@LoopId,1,4)='2010'] | Loop[substring(@LoopId,1,4)='2310'] | Loop[substring(@LoopId,1,4)='2420']">
     <Provider>
+      <xsl:choose>
+        <xsl:when test="NM1/NM108='24'">
+          <xsl:attribute name="EmployerId">
+            <xsl:value-of select="NM1/NM109"/>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:when test="count(REF[REF01='EI'])>0">
+          <xsl:attribute name="EmployerId">
+            <xsl:value-of select="REF[REF01='EI']/REF02"/>
+          </xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="NM1/NM108='34'">
+          <xsl:attribute name="Ssn">
+            <xsl:value-of select="NM1/NM109"/>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:when test="count(REF[REF01='SY'])>0">
+          <xsl:attribute name="Ssn">
+            <xsl:value-of select="REF[REF01='SY']/REF02"/>
+          </xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="NM1/NM108='XX'">
+          <xsl:attribute name="Npi">
+            <xsl:value-of select="NM1/NM109"/>
+          </xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
       <xsl:apply-templates select="NM1"/>
+      
       <Address>
         <xsl:apply-templates select="N3"/>
       </Address>

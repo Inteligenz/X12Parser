@@ -9,7 +9,10 @@ namespace OopFactory.X12.Model
     public class EntityName
     {
         [XmlAttribute]
-        public EntityTypeQualifierEnum Qualifier { get; set; }
+        public string Qualifier { get; set; }
+
+        [XmlAttribute]
+        public bool IsPerson { get; set; }
 
         [XmlAttribute]
         public string Prefix { get; set; }
@@ -24,7 +27,7 @@ namespace OopFactory.X12.Model
         {
             get
             {
-                if (Qualifier == EntityTypeQualifierEnum.NonPersonEntity)
+                if (!IsPerson)
                     return Last;
                 else
                 {

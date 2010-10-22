@@ -10,7 +10,8 @@ namespace OopFactory.X12.Model
     {
         public string Name { get; set; }
 
-        [XmlElement(ElementName = "Communication")]
-        public List<QualifiedNumber> Communications { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public Phone Phone { get; set; }
     }
 }

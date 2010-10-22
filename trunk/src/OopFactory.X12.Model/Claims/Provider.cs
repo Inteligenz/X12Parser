@@ -20,8 +20,6 @@ namespace OopFactory.X12.Model.Claims
 
         public EntityName Name { get; set; }
 
-        public CodedLookup EntityIdentifier { get; set; }
-
         public PostalAddress Address { get; set; }
 
         [XmlElement(ElementName = "Identification")]

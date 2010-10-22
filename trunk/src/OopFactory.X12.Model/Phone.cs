@@ -6,10 +6,10 @@ using System.Xml.Serialization;
 
 namespace OopFactory.X12.Model
 {
-    public class QualifiedNumber
+    public class Phone
     {
         [XmlAttribute]
-        public string Qualifier { get; set; }
+        public string Ext { get; set; }
         [XmlText]
         public string Number { get; set; }
     }
