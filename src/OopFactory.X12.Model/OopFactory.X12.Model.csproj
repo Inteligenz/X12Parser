@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Claims\Claim.cs" />
+    <Compile Include="Claims\ClaimTypeEnum.cs" />
+    <Compile Include="Claims\Occurrence.cs" />
+    <Compile Include="Claims\OccurrenceSpan.cs" />
     <Compile Include="Claims\Procedure.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\Transaction.cs" />
