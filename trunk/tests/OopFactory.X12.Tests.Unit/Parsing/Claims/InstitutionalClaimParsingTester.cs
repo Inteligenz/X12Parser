@@ -138,6 +138,21 @@ IEA*1*000000031~";
         }
 
         [TestMethod]
+        public void ParseAndValidateOccurrences()
+        {
+            Claim claim = ParseX12(UB_SAMPLE_1);
+            Assert.AreEqual(4, claim.Occurrences.Count);
+            Assert.AreEqual("41", claim.Occurrences[0].Code);
+            Assert.AreEqual(DateTime.Parse("2007-05-01"), claim.Occurrences[0].Date);
+            Assert.AreEqual("27", claim.Occurrences[1].Code);
+            Assert.AreEqual(DateTime.Parse("2007-07-15"), claim.Occurrences[1].Date);
+            Assert.AreEqual("33", claim.Occurrences[2].Code);
+            Assert.AreEqual(DateTime.Parse("2007-04-15"), claim.Occurrences[2].Date);
+            Assert.AreEqual("C2", claim.Occurrences[3].Code);
+            Assert.AreEqual(DateTime.Parse("2007-04-10"), claim.Occurrences[3].Date);
+        }
+
+        [TestMethod]
         public void ParseAndValidateServiceLines()
         {
             Claim claim = ParseX12(UB_SAMPLE_1);
