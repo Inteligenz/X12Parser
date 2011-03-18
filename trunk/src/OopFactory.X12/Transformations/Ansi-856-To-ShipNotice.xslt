@@ -142,11 +142,24 @@
   <xsl:template match="HierarchicalLoop[@LoopId='SHIPMENT']">
     <Shipment>
       <xsl:apply-templates select="REF"/>
-      <xsl:for-each select="N1">
-        <Party>
-        <xsl:apply-templates select="."/>
-        </Party>
+      <xsl:for-each select="Loop[@LoopId='SUPPLIER']">
+        <Supplier>
+          <xsl:apply-templates select="N1"/>
+          <xsl:apply-templates select="N3"/>
+        </Supplier>
       </xsl:for-each>
+      <xsl:for-each select="Loop[@LoopId='SHIPFROM']">
+        <ShipFrom>
+        <xsl:apply-templates select="N1"/>
+          <xsl:apply-templates select="N3"/>
+        </ShipFrom>
+      </xsl:for-each>
+      <xsl:for-each select="Loop[@LoopId='SHIPTO']">
+        <ShipTo>
+          <xsl:apply-templates select="N1"/>
+          <xsl:apply-templates select="N3"/>
+        </ShipTo>
+      </xsl:for-each>      
       <xsl:apply-templates select="HierarchicalLoop"/>
     </Shipment>
   </xsl:template>  

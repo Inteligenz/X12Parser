@@ -4,8 +4,61 @@
   <SegmentSpecification SegmentId="DTM"/>
   <HierarchicalLoopSpecification LoopId="SHIPMENT" Usage="Required" LevelCode="S">
     <Name>SHIPMENT</Name>
+    <SegmentSpecification SegmentId="LIN"/>
+    <SegmentSpecification SegmentId="SN1"/>
+    <SegmentSpecification SegmentId="SLN"/>
+    <SegmentSpecification SegmentId="PRF"/>
+    <SegmentSpecification SegmentId="PO4"/>
+    <SegmentSpecification SegmentId="PID"/>
+    <SegmentSpecification SegmentId="MED"/>
+    <SegmentSpecification SegmentId="PKW"/>
+    <SegmentSpecification SegmentId="PKG"/>
+    <SegmentSpecification SegmentId="TD1"/>
+    <SegmentSpecification SegmentId="TD5"/>
+    <SegmentSpecification SegmentId="TD3"/>
+    <SegmentSpecification SegmentId="TD4"/>
     <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
-    <SegmentSpecification SegmentId="N1" Usage="Situational" Repeat="200"/>
+    <SegmentSpecification SegmentId="PER"/>
+    <SegmentSpecification SegmentId="DTM"/>
+    <LoopSpecification LoopId="SUPPLIER" Usage="Required" LoopRepeat="1">
+      <Name>SUPPLIER</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+        <EntityIdentifier Code="SU"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="N2"/>
+      <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="2"/>
+      <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+      <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <SegmentSpecification SegmentId="PER"/>
+      <SegmentSpecification SegmentId="FOB"/>
+    </LoopSpecification>
+    <LoopSpecification LoopId="SHIPTO" Usage="Required" LoopRepeat="1">
+      <Name>SHIPTO</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+        <EntityIdentifier Code="ST"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="N2"/>
+      <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="2"/>
+      <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+      <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <SegmentSpecification SegmentId="PER"/>
+      <SegmentSpecification SegmentId="FOB"/>    
+    </LoopSpecification>
+    <LoopSpecification LoopId="SHIPFROM" Usage="Required" LoopRepeat="1">
+      <Name>SHIPFROM</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+        <EntityIdentifier Code="SF"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="N2"/>
+      <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="2"/>
+      <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+      <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <SegmentSpecification SegmentId="PER"/>
+      <SegmentSpecification SegmentId="FOB"/>
+    </LoopSpecification>
   </HierarchicalLoopSpecification>
   <HierarchicalLoopSpecification LoopId="ORDER" Usage="Required" LevelCode="O">
     <Name>ORDER</Name>
@@ -13,8 +66,29 @@
   </HierarchicalLoopSpecification>
   <HierarchicalLoopSpecification LoopId="ITEM" Usage="Required" LevelCode="I">
     <Name>ITEM</Name>
-    <SegmentSpecification SegmentId="LIN" Usage="Required" Repeat="1"/>
-    <SegmentSpecification SegmentId="SN1" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="LIN"/>
+    <SegmentSpecification SegmentId="SN1"/>
+    <SegmentSpecification SegmentId="SLN"/>
+    <SegmentSpecification SegmentId="PRF"/>
+    <SegmentSpecification SegmentId="PO4"/>
+    <SegmentSpecification SegmentId="PID"/>
+    <SegmentSpecification SegmentId="MED"/>
+    <SegmentSpecification SegmentId="PKW"/>
+    <SegmentSpecification SegmentId="PKG"/>
+    <SegmentSpecification SegmentId="TD1"/>
+    <SegmentSpecification SegmentId="TD5"/>
+    <SegmentSpecification SegmentId="TD3"/>
+    <SegmentSpecification SegmentId="TD4"/>
+    <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+    <SegmentSpecification SegmentId="PER"/>
+    <LoopSpecification LoopId="LOAD" Usage="Required" LoopRepeat="1">
+      <Name>LOAD DETAIL</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="CLD" Usage="Required" Repeat="1"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <SegmentSpecification SegmentId="DTP"/>
+    </LoopSpecification>
   </HierarchicalLoopSpecification>
   <SegmentSpecification SegmentId="CTT" Usage="Situational" Repeat="1"/>
 </TransactionSpecification>
