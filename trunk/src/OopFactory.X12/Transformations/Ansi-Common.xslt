@@ -270,6 +270,10 @@
           <xsl:when test="$Qualifier='PI'">Payor Identification</xsl:when>
           <xsl:when test="$Qualifier='PP'">Pharmacy Processor Number</xsl:when>
           <xsl:when test="$Qualifier='XV'">Health Care Financing Administration National Provider Identifier</xsl:when>
+          
+          <!-- Suppliers -->
+          <xsl:when test="$Qualifier='1'">DUNS Number</xsl:when>
+          <xsl:when test="$Qualifier='PK'">Packing Slip Number</xsl:when>
         </xsl:choose>
       </xsl:comment>
     </xsl:if>

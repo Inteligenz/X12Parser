@@ -85,6 +85,23 @@ namespace OopFactory.X12
             return _856specification;
         }
 
+        private static XslCompiledTransform _856Transform;
+
+        internal static XslCompiledTransform Get856Transform()
+        {
+            if (_856Transform == null)
+            {
+                _856Transform = new XslCompiledTransform();
+
+                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
+
+                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-856-To-ShipNotice.xslt"));
+
+                _856Transform.Load(xsltReader);
+            }
+            return _856Transform;
+        }
+
         private static void WriteToFile(string resourceName, string fileName)
         {
             StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName));

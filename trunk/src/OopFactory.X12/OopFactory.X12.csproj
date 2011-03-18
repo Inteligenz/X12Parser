@@ -88,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Suppliers\Ansi-856-4010Specification.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Transformations\Ansi-856-To-ShipNotice.xslt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
