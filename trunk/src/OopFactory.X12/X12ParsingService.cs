@@ -42,6 +42,9 @@ namespace OopFactory.X12
                 case "837":
                     specification = EmbeddedResources.Get837TransactionSpecification();
                     break;
+                case "856":
+                    specification = EmbeddedResources.Get856TransactionSpecification();
+                    break;
                 default:
                     throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
             }
