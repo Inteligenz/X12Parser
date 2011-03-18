@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Parsing\Claims\InstitutionalClaimParsingTester.cs" />
     <Compile Include="Parsing\Payments\PaymentParsingTester.cs" />
+    <Compile Include="Parsing\Suppliers\ShipNoticeTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,7 @@
   <ItemGroup>
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />
+    <Content Include="Parsing\Suppliers\SAMPLE_1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

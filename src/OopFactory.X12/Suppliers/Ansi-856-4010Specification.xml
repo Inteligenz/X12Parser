@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification TransactionSetIdentifierCode="856">
+  <SegmentSpecification SegmentId="BSN" Repeat="1"/>
+  <SegmentSpecification SegmentId="DTM"/>
+  <HierarchicalLoopSpecification LoopId="SHIPMENT" Usage="Required" LevelCode="S">
+    <Name>SHIPMENT</Name>
+    <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+    <SegmentSpecification SegmentId="N1" Usage="Situational" Repeat="200"/>
+  </HierarchicalLoopSpecification>
+  <HierarchicalLoopSpecification LoopId="ORDER" Usage="Required" LevelCode="O">
+    <Name>ORDER</Name>
+    <SegmentSpecification SegmentId="PRF" Usage="Required" Repeat="1"/>
+  </HierarchicalLoopSpecification>
+  <HierarchicalLoopSpecification LoopId="ITEM" Usage="Required" LevelCode="I">
+    <Name>ITEM</Name>
+    <SegmentSpecification SegmentId="LIN" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="SN1" Usage="Required" Repeat="1"/>
+    <SegmentSpecification SegmentId="CTT" Usage="Situational" Repeat="1"/>
+  </HierarchicalLoopSpecification>
+
+
+</TransactionSpecification>

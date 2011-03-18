@@ -72,6 +72,19 @@ namespace OopFactory.X12
             return _835Transform;
         }
 
+        private static TransactionSpecification _856specification;
+
+        internal static TransactionSpecification Get856TransactionSpecification()
+        {
+            if (_856specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Suppliers.Ansi-856-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _856specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _856specification;
+        }
+
         private static void WriteToFile(string resourceName, string fileName)
         {
             StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName));

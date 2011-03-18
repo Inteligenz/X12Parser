@@ -45,8 +45,8 @@ namespace OopFactory.X12.Parsing.Model
             if (this.SegmentId != "HL")
                 throw new ArgumentException(String.Format("Segment Id expected to be 'HL' but got '{0}'.", SegmentId));
 
-            if (this.DataElements.Length < 4)
-                throw new ArgumentException("hl argument requires 4 data elements.", "hl");
+            if (this.DataElements.Length < 3)
+                throw new ArgumentException("hl argument requires 3 data elements.", "hl");
         }
 
         //public string LoopId { get { return _loopId; } internal set { _loopId = value; } }
