@@ -68,6 +68,7 @@
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />
     <Content Include="Parsing\Suppliers\SAMPLE_1.xml" />
+    <Content Include="Parsing\Suppliers\Sample_2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

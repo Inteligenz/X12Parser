@@ -10,7 +10,7 @@
     <SegmentSpecification SegmentId="PRF"/>
     <SegmentSpecification SegmentId="PO4"/>
     <SegmentSpecification SegmentId="PID"/>
-    <SegmentSpecification SegmentId="MED"/>
+    <SegmentSpecification SegmentId="MEA"/>
     <SegmentSpecification SegmentId="PKW"/>
     <SegmentSpecification SegmentId="PKG"/>
     <SegmentSpecification SegmentId="TD1"/>
@@ -72,7 +72,7 @@
     <SegmentSpecification SegmentId="PRF"/>
     <SegmentSpecification SegmentId="PO4"/>
     <SegmentSpecification SegmentId="PID"/>
-    <SegmentSpecification SegmentId="MED"/>
+    <SegmentSpecification SegmentId="MEA"/>
     <SegmentSpecification SegmentId="PKW"/>
     <SegmentSpecification SegmentId="PKG"/>
     <SegmentSpecification SegmentId="TD1"/>
