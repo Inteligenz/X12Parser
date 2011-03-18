@@ -40,10 +40,15 @@ IEA~1~000000001*";
         public void ParseToX12Xml()
         {
             var service = new X12ParsingService(true);
-
             var xml = service.ParseToXml(SAMPLE_1);
+            Trace.Write(xml);
+        }
 
-            //var xml = service.ParseToDomainXml(SAMPLE_1);
+        [TestMethod]
+        public void ParseToDomainXml()
+        {
+            var service = new X12ParsingService(true);
+            var xml = service.ParseToDomainXml(SAMPLE_1);
             Trace.Write(xml);
         }
     }

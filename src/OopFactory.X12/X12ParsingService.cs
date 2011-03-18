@@ -67,6 +67,9 @@ namespace OopFactory.X12
                 case "837":
                     transform = EmbeddedResources.Get837Transform();
                     break;
+                case "856":
+                    transform = EmbeddedResources.Get856Transform();
+                    break;
                 default:
                     throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
             }

@@ -15,8 +15,6 @@
     <Name>ITEM</Name>
     <SegmentSpecification SegmentId="LIN" Usage="Required" Repeat="1"/>
     <SegmentSpecification SegmentId="SN1" Usage="Required" Repeat="1"/>
-    <SegmentSpecification SegmentId="CTT" Usage="Situational" Repeat="1"/>
   </HierarchicalLoopSpecification>
-
-
+  <SegmentSpecification SegmentId="CTT" Usage="Situational" Repeat="1"/>
 </TransactionSpecification>
