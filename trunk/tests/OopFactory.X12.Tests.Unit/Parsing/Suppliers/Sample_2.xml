@@ -1,0 +1,219 @@
+﻿<?xml version="1.0"?>
+<Interchange>
+  <ISA>
+    <ISA01>00</ISA01>
+    <ISA02>          </ISA02>
+    <ISA03>00</ISA03>
+    <ISA04>          </ISA04>
+    <ISA05>01</ISA05>
+    <ISA06>201495124      </ISA06>
+    <ISA07>01</ISA07>
+    <ISA08>207663412      </ISA08>
+    <ISA09>010420</ISA09>
+    <ISA10>1312</ISA10>
+    <ISA11>U</ISA11>
+    <ISA12>00401</ISA12>
+    <ISA13>000000001</ISA13>
+    <ISA14>1</ISA14>
+    <ISA15>P</ISA15>
+    <ISA16>
+      <ISA1601 />
+      <ISA1602 />
+    </ISA16>
+  </ISA>
+  <FunctionGroup>
+    <GS>
+      <GS01>SH</GS01>
+      <GS02>123456789</GS02>
+      <GS03>987654321</GS03>
+      <GS04>030619</GS04>
+      <GS05>1235</GS05>
+      <GS06>1</GS06>
+      <GS07>X</GS07>
+      <GS08>003060</GS08>
+    </GS>
+    <Transaction ControlNumber="0001">
+      <ST>
+        <ST01>856</ST01>
+        <ST02>0001</ST02>
+      </ST>
+      <BSN>
+        <BSN01>00</BSN01>
+        <BSN02 />
+        <BSN03>030619</BSN03>
+        <BSN04>1235</BSN04>
+      </BSN>
+      <DTM>
+        <DTM01>011</DTM01>
+        <DTM02>030619</DTM02>
+        <DTM03>1445</DTM03>
+      </DTM>
+      <DTM>
+        <DTM01>017</DTM01>
+        <DTM02>030620</DTM02>
+        <DTM03>0800</DTM03>
+      </DTM>
+      <HierarchicalLoop LoopId="SHIPMENT" LoopName="SHIPMENT" Id="1" ParentId="">
+        <HL>
+          <HL01>1</HL01>
+          <HL02 />
+          <HL03>S</HL03>
+        </HL>
+        <MEA>
+          <MEA01>PD</MEA01>
+          <MEA02>G</MEA02>
+          <MEA03>3100</MEA03>
+          <MEA04>LB</MEA04>
+        </MEA>
+        <MEA>
+          <MEA01>PD</MEA01>
+          <MEA02>N</MEA02>
+          <MEA03>2800</MEA03>
+          <MEA04>LB</MEA04>
+        </MEA>
+        <TD1>
+          <TD101> BIN52</TD101>
+          <TD102>5</TD102>
+        </TD1>
+        <TD5>
+          <TD501>B</TD501>
+          <TD502>2</TD502>
+          <TD503>MPNF</TD503>
+          <TD504>M</TD504>
+        </TD5>
+        <TD3>
+          <TD301>TL</TD301>
+          <TD302 />
+          <TD303>287532</TD303>
+        </TD3>
+        <REF>
+          <REF01>BM</REF01>
+          <REF02>25673</REF02>
+        </REF>
+        <REF>
+          <REF01>PK</REF01>
+          <REF02>18392</REF02>
+        </REF>
+        <REF>
+          <REF01>CN</REF01>
+          <REF02>88145</REF02>
+        </REF>
+        <Loop LoopId="SUPPLIER" Name="SUPPLIER">
+          <N1>
+            <N101>SU</N101>
+            <N102>MNO ASSEMBLY</N102>
+            <N103>92</N103>
+            <N104>123456789</N104>
+          </N1>
+        </Loop>
+        <Loop LoopId="SHIPTO" Name="SHIPTO">
+          <N1>
+            <N101>ST</N101>
+            <N102>ABC MANUFACTURING</N102>
+            <N103>92</N103>
+            <N104>987654321</N104>
+          </N1>
+        </Loop>
+        <Loop LoopId="SHIPFROM" Name="SHIPFROM">
+          <N1>
+            <N101>SF</N101>
+            <N102>XYZ WAREHOUSE</N102>
+            <N103>92</N103>
+            <N104>567891234</N104>
+          </N1>
+        </Loop>
+        <HierarchicalLoop LoopId="ITEM" LoopName="ITEM" Id="1" ParentId="1">
+          <HL>
+            <HL01>1</HL01>
+            <HL02>1</HL02>
+            <HL03>I</HL03>
+          </HL>
+          <LIN>
+            <LIN01 />
+            <LIN02>BP</LIN02>
+            <LIN03>rt2371</LIN03>
+          </LIN>
+          <SN1>
+            <SN101 />
+            <SN102>1400</SN102>
+            <SN103>PC</SN103>
+            <SN104>6000</SN104>
+          </SN1>
+          <PRF>
+            <PRF01>B00000389</PRF01>
+            <PRF02>0005</PRF02>
+            <PRF03 />
+            <PRF04 />
+            <PRF05 />
+          </PRF>
+          <Loop LoopId="LOAD" Name="LOAD DETAIL">
+            <CLD>
+              <CLD01>2</CLD01>
+              <CLD02>700</CLD02>
+              <CLD03> BIN52</CLD03>
+            </CLD>
+            <REF>
+              <REF01>LS</REF01>
+              <REF02>798412</REF02>
+            </REF>
+            <REF>
+              <REF01>LS</REF01>
+              <REF02>798413</REF02>
+            </REF>
+          </Loop>
+        </HierarchicalLoop>
+        <HierarchicalLoop LoopId="ITEM" LoopName="ITEM" Id="2" ParentId="1">
+          <HL>
+            <HL01>2</HL01>
+            <HL02>1</HL02>
+            <HL03>I</HL03>
+          </HL>
+          <LIN>
+            <LIN01 />
+            <LIN02>BP</LIN02>
+            <LIN03>lt2372</LIN03>
+          </LIN>
+          <SN1>
+            <SN101 />
+            <SN102>1500</SN102>
+            <SN103>PC</SN103>
+            <SN104>6000</SN104>
+          </SN1>
+          <PRF>
+            <PRF01>B00003489</PRF01>
+            <PRF02>0002</PRF02>
+            <PRF03 />
+            <PRF04 />
+            <PRF05 />
+          </PRF>
+          <Loop LoopId="LOAD" Name="LOAD DETAIL">
+            <CLD>
+              <CLD01>1</CLD01>
+              <CLD02>700</CLD02>
+              <CLD03> BIN52</CLD03>
+            </CLD>
+            <REF>
+              <REF01>LS</REF01>
+              <REF02>798514</REF02>
+            </REF>
+          </Loop>
+          <Loop LoopId="LOAD" Name="LOAD DETAIL">
+            <CLD>
+              <CLD01>2</CLD01>
+              <CLD02>400</CLD02>
+              <CLD03> BIN52</CLD03>
+            </CLD>
+            <REF>
+              <REF01>LS</REF01>
+              <REF02>798515</REF02>
+            </REF>
+            <REF>
+              <REF01>LS</REF01>
+              <REF02>798516</REF02>
+            </REF>
+          </Loop>
+        </HierarchicalLoop>
+      </HierarchicalLoop>
+    </Transaction>
+  </FunctionGroup>
+</Interchange>
