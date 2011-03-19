@@ -63,21 +63,39 @@
           <REF01>PK</REF01>
           <REF02>012345678901234</REF02>
         </REF>
-        <Loop LoopId="SHIPFROM" Name="SHIPFROM">
+        <Loop LoopId="SF" Name="Ship From">
           <N1>
             <N101>SF</N101>
             <N102>ACME</N102>
             <N103>ZZ</N103>
             <N104>ACME ELECT00</N104>
           </N1>
+          <N3>
+            <N301>123 TEST DR.</N301>
+            <N302>Suite 00</N302>
+          </N3>
+          <N4>
+            <N401>Austin</N401>
+            <N402>TX</N402>
+            <N403>78736-0000</N403>
+          </N4>
         </Loop>
-        <Loop LoopId="SHIPTO" Name="SHIPTO">
+        <Loop LoopId="ST" Name="Ship To">
           <N1>
             <N101>ST</N101>
             <N102>ESSAR Steel Algoma Inc.</N102>
             <N103>1</N103>
             <N104>201495124</N104>
           </N1>
+          <N3>
+            <N301>456 TEST DR.</N301>
+            <N302>Suite 00</N302>
+          </N3>
+          <N4>
+            <N401>Paris</N401>
+            <N402>TX</N402>
+            <N403>00000-0000</N403>
+          </N4>
         </Loop>
         <HierarchicalLoop LoopId="ORDER" LoopName="ORDER" Id="2" ParentId="1">
           <HL>

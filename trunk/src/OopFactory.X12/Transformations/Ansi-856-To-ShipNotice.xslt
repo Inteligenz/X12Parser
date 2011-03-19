@@ -393,7 +393,11 @@
             </xsl:if>
           </Type>
           <xsl:apply-templates select="N1"/>
-          <xsl:apply-templates select="N3"/>
+          <xsl:for-each select="N3">
+            <Address>
+              <xsl:apply-templates select="."/>
+            </Address>
+          </xsl:for-each>
         </Party>
       </xsl:for-each>      
       <xsl:apply-templates select="MEA"/>

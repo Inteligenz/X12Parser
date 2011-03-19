@@ -55,7 +55,12 @@
     <Content Include="Images\HCFA1500_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Suppliers\ShipNotice-To-BillOfLading-Portrait.xslt" />
+    <Content Include="Images\VISC_BOL_Portrait.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Suppliers\ShipNotice-To-BillOfLading-Portrait.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
