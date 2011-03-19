@@ -59,6 +59,10 @@
       <Project>{7AA513C8-0317-4470-B1C9-374BABC1A5EC}</Project>
       <Name>OopFactory.X12.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\OopFactory.X12.Presentation\OopFactory.X12.Presentation.csproj">
+      <Project>{16A8617F-AB79-4CBD-8C00-43A99C33040C}</Project>
+      <Name>OopFactory.X12.Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\OopFactory.X12\OopFactory.X12.csproj">
       <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
       <Name>OopFactory.X12</Name>
