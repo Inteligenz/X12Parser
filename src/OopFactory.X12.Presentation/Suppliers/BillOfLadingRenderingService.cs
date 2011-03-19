@@ -12,12 +12,22 @@ namespace OopFactory.X12.Presentation.Suppliers
 {
     public class BillOfLadingRenderingService
     {
+        private string _bolPortraitImageFilename;
+
+        public BillOfLadingRenderingService()
+        {
+            var name =  Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
+            var path = Path.GetDirectoryName(name);
+            _bolPortraitImageFilename = String.Format("{0}\\Images\\VISC_BOL_Portrait.gif", path);
+        }
+
         public byte[] CreatePdf(string domainXml)
         {
             var transform = GetPortraitTransform();
             var writer = new StringWriter();
             XsltArgumentList list = new XsltArgumentList();
             list.AddParam("portrait", "", "1");
+            list.AddParam("bolPortrait", "", _bolPortraitImageFilename);
             transform.Transform(XmlReader.Create(new StringReader(domainXml)), list, writer);
             var foXml = writer.GetStringBuilder().ToString();
             
