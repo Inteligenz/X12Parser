@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Reflection;
+using System.IO;
 
 namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
 {
@@ -94,10 +96,32 @@ IEA*1*000000001*~";
         }
 
         [TestMethod]
+        public void ParseToX12Xml_Sample3()
+        {
+            Stream input = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Suppliers.Sample3.edi");
+            StreamReader reader = new StreamReader(input);
+            string edi = reader.ReadToEnd();
+            var service = new X12ParsingService(true);
+            var xml = service.ParseToXml(edi);
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
         public void ParseToDomainXml()
         {
             var service = new X12ParsingService(true);
             var xml = service.ParseToDomainXml(SAMPLE_1);
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void ParseToDomainXml_Sample3()
+        {
+            Stream input = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Suppliers.Sample3.edi");
+            StreamReader reader = new StreamReader(input);
+            string edi = reader.ReadToEnd();
+            var service = new X12ParsingService(true);
+            var xml = service.ParseToDomainXml(edi);
             Trace.Write(xml);
         }
     }
