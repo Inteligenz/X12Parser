@@ -65,5 +65,17 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             var xml = service.ParseToDomainXml(GetEdi("Sample3.edi"));
             Trace.Write(xml);
         }
+
+        [TestMethod]
+        public void RenderSample3()
+        {
+            var service = new X12ParsingService(true);
+            var xml = service.ParseToDomainXml(GetEdi("Sample3.edi"));
+            var renderingService = new OopFactory.X12.Presentation.Suppliers.BillOfLadingRenderingService();
+            byte[] pdf = renderingService.CreatePdf(xml);
+            System.IO.FileStream fs = new FileStream(@"c:\Temp\BillOfLadenPortraitSample3.pdf", FileMode.Create, FileAccess.Write);
+            fs.Write(pdf, 0, pdf.Length);
+            fs.Close();
+        }
     }
 }
