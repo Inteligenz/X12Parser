@@ -592,4 +592,28 @@
     </Contact>
   </xsl:template>
 
+  <xsl:template match="MEA">
+    <Measurement>
+      <xsl:attribute name="ReferenceId">
+        <xsl:value-of select="MEA01"/>
+      </xsl:attribute>
+      <xsl:attribute name="Unit">
+        <xsl:value-of select="MEA04"/>
+      </xsl:attribute>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="MEA02"/>
+      </xsl:attribute>
+      <Value>
+        <xsl:value-of select="MEA03"/>
+        <xsl:if test="$verbose = 1 and string-length(MEA02)>0">
+          <xsl:comment>
+            <xsl:choose>
+              <xsl:when test="MEA02='G'">Gross Weight</xsl:when>
+              <xsl:when test="MEA02='N'">Actual Net Weight</xsl:when>
+            </xsl:choose>
+          </xsl:comment>
+        </xsl:if>
+      </Value>
+    </Measurement>
+  </xsl:template>
 </xsl:stylesheet>
