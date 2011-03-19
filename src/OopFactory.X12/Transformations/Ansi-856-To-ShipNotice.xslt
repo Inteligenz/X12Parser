@@ -18,6 +18,98 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template match="DTM">
+    <DateReference>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="DTM01"/>
+      </xsl:attribute>
+      <xsl:call-template name="FormatD8DateTime">
+        <xsl:with-param name="Date" select="DTM02"/>
+        <xsl:with-param name="Time" select="DTM03"/>
+      </xsl:call-template>
+      <xsl:if test="$verbose = 1">
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="DTM01='011'">Shipped</xsl:when>
+          </xsl:choose>
+        </xsl:comment>
+      </xsl:if>
+    </DateReference>
+  </xsl:template>
+
+  <xsl:template match="TD1">
+    <Packaging>
+      <xsl:call-template name="Identification">
+        <xsl:with-param name="Qualifier" select="TD101"/>
+        <xsl:with-param name="Number" select="TD102"/>
+      </xsl:call-template>
+    </Packaging>
+  </xsl:template>
+
+  <xsl:template match="TD5">
+    <Routing>
+      <Sequence>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="TD501"/>
+        </xsl:attribute>
+      </Sequence>
+      <Identification>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="TD502"/>
+        </xsl:attribute>
+        <xsl:value-of select="TD503"/>
+        <xsl:if test="$verbose = 1">
+          <xsl:comment>
+            <xsl:choose>
+              <xsl:when test="TD502='2'">Standard Carrier Alpha Code (SCAC)</xsl:when>
+            </xsl:choose>
+          </xsl:comment>
+        </xsl:if>
+      </Identification>
+      <TransportationMethod>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="TD504"/>
+        </xsl:attribute>
+        <xsl:if test="$verbose = 1">
+          <xsl:comment>
+            <xsl:choose>
+              <xsl:when test="TD504='A'">Air</xsl:when>
+              <xsl:when test="TD504='AC'">Air Charter</xsl:when>
+              <xsl:when test="TD504='AE'">Air Express</xsl:when>
+              <xsl:when test="TD504='C'">Consolidation</xsl:when>
+              <xsl:when test="TD504='D'">Parcel Post</xsl:when>
+              <xsl:when test="TD504='E'">Expedited Truck</xsl:when>
+              <xsl:when test="TD504='M'">Motor (Common Carrier)</xsl:when>
+              <xsl:when test="TD504='P'">Private Carrier</xsl:when>
+              <xsl:when test="TD504='S'">Ocean</xsl:when>
+              <xsl:when test="TD504='U'">Private Parcel Service</xsl:when>
+              <xsl:when test="TD504='LT'">Less Than Trailer Load (LTL)</xsl:when>
+            </xsl:choose>
+          </xsl:comment>
+        </xsl:if>
+      </TransportationMethod>
+      <Description>
+        <xsl:value-of select="TD505"/>
+      </Description>
+    </Routing>
+  </xsl:template>
+
+  <xsl:template match="TD3">
+    <Equipment>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="TD301"/>
+      </xsl:attribute>
+      <xsl:if test="string-length(TD302)>0">
+        <xsl:attribute name="Initial">
+          <xsl:value-of select="TD302"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:attribute name="Number">
+        <xsl:value-of select="TD303"/>
+      </xsl:attribute>      
+    </Equipment>
+  </xsl:template>
+                
   <xsl:template match="SN1">
     <Detail>
       <xsl:if test="string-length(SN101)>0">
@@ -158,6 +250,7 @@
         <xsl:with-param name="ProductId" select="LIN/LIN31"/>
       </xsl:call-template>
       <xsl:apply-templates select="PRF"/>
+      <xsl:apply-templates select="MEA"/>
       <xsl:apply-templates select="SN1"/>
       <xsl:apply-templates select="Loop/CLD"/>
     </Item>
@@ -191,7 +284,11 @@
           <xsl:apply-templates select="N1"/>
           <xsl:apply-templates select="N3"/>
         </ShipTo>
-      </xsl:for-each>      
+      </xsl:for-each>
+      <xsl:apply-templates select="MEA"/>
+      <xsl:apply-templates select="TD1"/>
+      <xsl:apply-templates select="TD5"/>
+      <xsl:apply-templates select="TD3"/>
       <xsl:apply-templates select="HierarchicalLoop"/>
     </Shipment>
   </xsl:template>  
@@ -208,6 +305,7 @@
       </xsl:attribute>
       <xsl:apply-templates select="../../ISA"/>
       <xsl:apply-templates select="../GS"/>
+      <xsl:apply-templates select="DTM"/>
       <xsl:apply-templates select="HierarchicalLoop"/>
     </Transaction>
   </xsl:template>
