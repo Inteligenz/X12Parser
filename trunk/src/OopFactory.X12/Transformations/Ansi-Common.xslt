@@ -70,11 +70,15 @@
   <xsl:template name="Identification">
     <xsl:param name="Qualifier"/>
     <xsl:param name="Number"/>
-    <xsl:attribute name="Qualifier">
-      <xsl:value-of select="$Qualifier"/>
-    </xsl:attribute>
-    <xsl:value-of select="normalize-space($Number)"/>
-    <xsl:if test="$verbose=1">
+    <xsl:if test="string-length($Qualifier)>0">
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="$Qualifier"/>
+      </xsl:attribute>
+    </xsl:if>
+    <xsl:if test="string-length($Number) > 0">
+      <xsl:value-of select="normalize-space($Number)"/>
+    </xsl:if>
+    <xsl:if test="$verbose=1 and string-length($Qualifier)>0">
       <xsl:comment>
         <xsl:choose>
           <!-- Secondary Identification -->
@@ -273,7 +277,22 @@
           
           <!-- Suppliers -->
           <xsl:when test="$Qualifier='1'">DUNS Number</xsl:when>
-          <xsl:when test="$Qualifier='PK'">Packing Slip Number</xsl:when>
+          <xsl:when test="$Qualifier='92'">Assigned by Buyer or Buyer's Agent</xsl:when>
+          <xsl:when test="$Qualifier='BM'">Bill of Lading Number</xsl:when>
+          <xsl:when test="$Qualifier='BP'">Buyer's Part Number</xsl:when>
+          <xsl:when test="$Qualifier='VN'">Vendor's (Seller's) Part Number</xsl:when>
+          <xsl:when test="$Qualifier='EC'">Engineering Change Level</xsl:when>
+          <xsl:when test="$Qualifier='VB'">Vendor's Engineering Change Level Number</xsl:when>
+          <xsl:when test="$Qualifier='CN'">PRO Number</xsl:when>
+          <xsl:when test="$Qualifier='PK'">Packing List/Slip Number</xsl:when>
+
+          <xsl:when test="$Qualifier='CNT'">Container</xsl:when>
+          <xsl:when test="$Qualifier='CTN'">Carton</xsl:when>
+          <xsl:when test="$Qualifier='PAT'">Pallet - 2 Way</xsl:when>
+          <xsl:when test="$Qualifier='PCK'">Packed - not otherwise specified</xsl:when>
+          <xsl:when test="$Qualifier='PKG'">Package</xsl:when>
+          <xsl:when test="$Qualifier='PLT'">Pallet</xsl:when>
+          <xsl:when test="$Qualifier='PAT90'">Standard Pallet</xsl:when>
         </xsl:choose>
       </xsl:comment>
     </xsl:if>
