@@ -420,6 +420,16 @@
         </xsl:call-template>
       </Identification>
     </xsl:if>
+    <xsl:for-each select="../N2">
+      <AdditionalName>
+        <xsl:value-of select="../N2/N201"/>
+      </AdditionalName>
+      <xsl:if test="string-length(../N2/N202) > 0">
+        <AdditionalName>
+          <xsl:value-of select="../N2/N202"/>
+        </AdditionalName>
+      </xsl:if>
+    </xsl:for-each>
   </xsl:template>
 
   <!-- Individual or Organization Name -->

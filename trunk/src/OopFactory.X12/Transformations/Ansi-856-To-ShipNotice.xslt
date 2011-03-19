@@ -38,6 +38,22 @@
     </DateReference>
   </xsl:template>
 
+  <xsl:template match="MAN">
+    <MarksAndNumbers>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="MAN01"/>
+      </xsl:attribute>
+      <xsl:value-of select="MAN02"/>
+      <xsl:if test="$verbose = 1">
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="MAN01='GM'">SSCC-18 and Application Identifier</xsl:when>
+          </xsl:choose>
+        </xsl:comment>
+      </xsl:if>
+    </MarksAndNumbers>
+  </xsl:template>
+
   <xsl:template match="PID">
     <Description>
       <xsl:attribute name="Type">
@@ -148,6 +164,36 @@
         </xsl:comment>
       </xsl:if>
     </Equipment>
+  </xsl:template>
+
+  <xsl:template match="TD4">
+    <HazardousMaterial>
+      <xsl:attribute name="SpecialHandlingCode">
+        <xsl:value-of select="TD401"/>
+      </xsl:attribute>
+      <xsl:attribute name="ClassCode">
+        <xsl:value-of select="TD403"/>
+      </xsl:attribute>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="TD402"/>
+      </xsl:attribute>
+      <xsl:value-of select="TD404"/>
+      <xsl:if test="$verbose = 1">
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="TD402='1'">Explosives</xsl:when>
+            <xsl:when test="TD402='2'">Gases</xsl:when>
+            <xsl:when test="TD402='3'">Flammable and Combustible Liquids</xsl:when>
+            <xsl:when test="TD402='4'">Flammable Solids</xsl:when>
+            <xsl:when test="TD402='5'">Oxidizers and Organic Peroxides</xsl:when>
+            <xsl:when test="TD402='6'">Toxic and Infections substances</xsl:when>
+            <xsl:when test="TD402='7'">Radioactive Materials</xsl:when>
+            <xsl:when test="TD402='8'">Corrosive Materials</xsl:when>
+            <xsl:when test="TD402='9'">iscellaneous Dangerous Goods</xsl:when>
+          </xsl:choose>
+        </xsl:comment>
+      </xsl:if>
+    </HazardousMaterial>
   </xsl:template>
                 
   <xsl:template match="SN1">
@@ -295,9 +341,24 @@
       <xsl:apply-templates select="TD1"/>
       <xsl:apply-templates select="TD5"/>
       <xsl:apply-templates select="TD3"/>
+      <xsl:apply-templates select="TD4"/>
       <xsl:apply-templates select="SN1"/>
       <xsl:apply-templates select="Loop/CLD"/>
     </Item>
+  </xsl:template>
+
+  <xsl:template match="HierarchicalLoop[@LoopId='PACK']">
+    <Pack>
+      <xsl:apply-templates select="MAN"/>
+      <xsl:apply-templates select="HierarchicalLoop"/>
+    </Pack>
+  </xsl:template>
+
+  <xsl:template match="HierarchicalLoop[@LoopId='TARE']">
+    <Tare>
+      <xsl:apply-templates select="MAN"/>
+      <xsl:apply-templates select="HierarchicalLoop"/>
+    </Tare>
   </xsl:template>
   
   <!-- Order Loop -->
@@ -307,6 +368,7 @@
       <xsl:apply-templates select="HierarchicalLoop"/>                           
     </Order>
   </xsl:template>
+  
   <!-- Shipment Loop -->
   <xsl:template match="HierarchicalLoop[@LoopId='SHIPMENT']">
     <Shipment>
@@ -320,10 +382,12 @@
             <xsl:if test="$verbose=1">
               <xsl:comment>
                 <xsl:choose>
+                  <xsl:when test="N1/N101='BT'">Bill-to-Party</xsl:when>
                   <xsl:when test="N1/N101='IC'">Intermediate Consignee</xsl:when>
                   <xsl:when test="N1/N101='SF'">Ship From</xsl:when>
                   <xsl:when test="N1/N101='ST'">Ship To</xsl:when>
                   <xsl:when test="N1/N101='SU'">Supplier</xsl:when>
+                  <xsl:when test="N1/N101='SE'">Selling Party</xsl:when>
                 </xsl:choose>
               </xsl:comment>
             </xsl:if>
@@ -337,6 +401,7 @@
       <xsl:apply-templates select="TD1"/>
       <xsl:apply-templates select="TD5"/>
       <xsl:apply-templates select="TD3"/>
+      <xsl:apply-templates select="TD4"/>
       <xsl:apply-templates select="HierarchicalLoop"/>
     </Shipment>
   </xsl:template>  
