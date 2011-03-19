@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfTransaction>
+  <Transaction ControlNumber="0001" ProductionDate="">
+    <InterchangeControlHeader InterchangeDate="2001-04-20T13:12:00.00000" ControlNumber="000000001" AcknowledgmentRequested="true">
+      <SenderId Qualifier="01">
+        201495124<!--Duns (Dun & Bradstreet)-->
+      </SenderId>
+      <ReceiverId Qualifier="01">
+        207663412<!--Duns (Dun & Bradstreet)-->
+      </ReceiverId>
+      <UsageIndicator Code="P">
+        <!--Production Data-->
+      </UsageIndicator>
+    </InterchangeControlHeader>
+    <FunctionGroupHeader SenderCode="123456789" ReceiverCode="987654321" CreationDate="0306-19-T12:35:00.00000" ControlNumber="1">
+      <EdiStandard ResponsibleAgency="X">
+        003060<!--Accredited Standards Committee X12-->
+      </EdiStandard>
+    </FunctionGroupHeader>
+    <DateReference Qualifier="011">
+      0306-19-T14:45:00.00000<!--Shipped-->
+    </DateReference>
+    <DateReference Qualifier="017">
+      0306-20-T08:00:00.00000<!--Estimated Delivery-->
+    </DateReference>
+    <Shipment>
+      <Identification Qualifier="BM">
+        25673<!--Bill of Lading Number-->
+      </Identification>
+      <Identification Qualifier="PK">
+        18392<!--Packing List/Slip Number-->
+      </Identification>
+      <Identification Qualifier="CN">
+        88145<!--PRO Number-->
+      </Identification>
+      <Party>
+        <Type Code="SU">
+          <!--Supplier-->
+        </Type>
+        <Name>MNO ASSEMBLY</Name>
+        <Identification Qualifier="92">
+          123456789<!--Assigned by Buyer or Buyer's Agent-->
+        </Identification>
+      </Party>
+      <Party>
+        <Type Code="ST">
+          <!--Ship To-->
+        </Type>
+        <Name>ABC MANUFACTURING</Name>
+        <Identification Qualifier="92">
+          987654321<!--Assigned by Buyer or Buyer's Agent-->
+        </Identification>
+      </Party>
+      <Party>
+        <Type Code="SF">
+          <!--Ship From-->
+        </Type>
+        <Name>XYZ WAREHOUSE</Name>
+        <Identification Qualifier="92">
+          567891234<!--Assigned by Buyer or Buyer's Agent-->
+        </Identification>
+      </Party>
+      <Measurement ReferenceId="PD" Unit="LB" Qualifier="G">
+        <Value>
+          3100<!--Gross Weight-->
+        </Value>
+      </Measurement>
+      <Measurement ReferenceId="PD" Unit="LB" Qualifier="N">
+        <Value>
+          2800<!--Actual Net Weight-->
+        </Value>
+      </Measurement>
+      <Packaging Code=" BIN52" LadingQuantity="5">
+        <!---->
+      </Packaging>
+      <Routing>
+        <Sequence Code="B" />
+        <Identification Qualifier="2">
+          MPNF<!--Standard Carrier Alpha Code (SCAC)-->
+        </Identification>
+        <TransportationMethod Code="M">
+          <!--Motor (Common Carrier)-->
+        </TransportationMethod>
+        <Description></Description>
+      </Routing>
+      <Equipment Code="TL" Number="287532">
+        <!--Trailer Load-->
+      </Equipment>
+      <Item Number="">
+        <Product Qualifier="BP">
+          rt2371<!--Buyer's Part Number-->
+        </Product>
+        <PurchaseOrderReference Qualifier="0005">
+          B00000389<!---->
+        </PurchaseOrderReference>
+        <Detail>
+          <Quantity Shipped="1400" ShippedToDate="6000" />
+          <UnitOfMeasure Code="PC" />
+        </Detail>
+        <LoadDetail NumberOfLoads="2" UnitsShipped="700" Qualifier=" BIN52">
+          <!---->
+        </LoadDetail>
+      </Item>
+      <Item Number="">
+        <Product Qualifier="BP">
+          lt2372<!--Buyer's Part Number-->
+        </Product>
+        <PurchaseOrderReference Qualifier="0002">
+          B00003489<!---->
+        </PurchaseOrderReference>
+        <Detail>
+          <Quantity Shipped="1500" ShippedToDate="6000" />
+          <UnitOfMeasure Code="PC" />
+        </Detail>
+        <LoadDetail NumberOfLoads="1" UnitsShipped="700" Qualifier=" BIN52">
+          <!---->
+        </LoadDetail>
+        <LoadDetail NumberOfLoads="2" UnitsShipped="400" Qualifier=" BIN52">
+          <!---->
+        </LoadDetail>
+      </Item>
+    </Shipment>
+  </Transaction>
+</ArrayOfTransaction>

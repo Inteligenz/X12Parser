@@ -20,8 +20,21 @@
     <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
     <SegmentSpecification SegmentId="PER"/>
     <SegmentSpecification SegmentId="DTM"/>
-    <LoopSpecification LoopId="SUPPLIER" Usage="Required" LoopRepeat="1">
-      <Name>SUPPLIER</Name>
+    <LoopSpecification LoopId="IC" Usage="Required" LoopRepeat="1">
+      <Name>Intermedicate Consignee</Name>
+      <StartingSegment>
+        <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
+        <EntityIdentifier Code="IC"/>
+      </StartingSegment>
+      <SegmentSpecification SegmentId="N2"/>
+      <SegmentSpecification SegmentId="N3" Usage="Required" Repeat="2"/>
+      <SegmentSpecification SegmentId="N4" Usage="Required" Repeat="1"/>
+      <SegmentSpecification SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <SegmentSpecification SegmentId="PER"/>
+      <SegmentSpecification SegmentId="FOB"/>
+    </LoopSpecification>
+    <LoopSpecification LoopId="SU" Usage="Required" LoopRepeat="1">
+      <Name>Supplier</Name>
       <StartingSegment>
         <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
         <EntityIdentifier Code="SU"/>
@@ -33,8 +46,8 @@
       <SegmentSpecification SegmentId="PER"/>
       <SegmentSpecification SegmentId="FOB"/>
     </LoopSpecification>
-    <LoopSpecification LoopId="SHIPTO" Usage="Required" LoopRepeat="1">
-      <Name>SHIPTO</Name>
+    <LoopSpecification LoopId="ST" Usage="Required" LoopRepeat="1">
+      <Name>Ship To</Name>
       <StartingSegment>
         <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
         <EntityIdentifier Code="ST"/>
@@ -46,8 +59,8 @@
       <SegmentSpecification SegmentId="PER"/>
       <SegmentSpecification SegmentId="FOB"/>    
     </LoopSpecification>
-    <LoopSpecification LoopId="SHIPFROM" Usage="Required" LoopRepeat="1">
-      <Name>SHIPFROM</Name>
+    <LoopSpecification LoopId="SF" Usage="Required" LoopRepeat="1">
+      <Name>Ship From</Name>
       <StartingSegment>
         <SegmentSpecification SegmentId="N1" Usage="Required" Repeat="1"/>
         <EntityIdentifier Code="SF"/>

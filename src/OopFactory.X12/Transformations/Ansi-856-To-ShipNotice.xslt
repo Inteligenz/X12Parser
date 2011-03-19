@@ -31,18 +31,47 @@
         <xsl:comment>
           <xsl:choose>
             <xsl:when test="DTM01='011'">Shipped</xsl:when>
+            <xsl:when test="DTM01='017'">Estimated Delivery</xsl:when>
           </xsl:choose>
         </xsl:comment>
       </xsl:if>
     </DateReference>
   </xsl:template>
 
+  <xsl:template match="PID">
+    <Description>
+      <xsl:attribute name="Type">
+        <xsl:value-of select="PID01"/>
+      </xsl:attribute>
+      <xsl:value-of select="PID05"/>
+    </Description>
+  </xsl:template>
+
   <xsl:template match="TD1">
     <Packaging>
-      <xsl:call-template name="Identification">
-        <xsl:with-param name="Qualifier" select="TD101"/>
-        <xsl:with-param name="Number" select="TD102"/>
-      </xsl:call-template>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="TD101"/>
+      </xsl:attribute>
+      <xsl:attribute name="LadingQuantity">
+        <xsl:value-of select="TD102"/>
+      </xsl:attribute>
+      <xsl:if test="$verbose = 1">
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="TD101='BOX'">Box</xsl:when>
+            <xsl:when test="TD101='ROL'">Roll</xsl:when>
+            <xsl:when test="TD101='SKD'">Skid</xsl:when>
+            <xsl:when test="TD101='TBN'">Tote Bin</xsl:when>
+            <xsl:when test="TD101='CNT'">Container</xsl:when>
+            <xsl:when test="TD101='CTN'">Carton</xsl:when>
+            <xsl:when test="TD101='PAT'">Pallet - 2 Way</xsl:when>
+            <xsl:when test="TD101='PCK'">Packed - not otherwise specified</xsl:when>
+            <xsl:when test="TD101='PKG'">Package</xsl:when>
+            <xsl:when test="TD101='PLT'">Pallet</xsl:when>
+            <xsl:when test="TD101='PAT90'">Standard Pallet</xsl:when>
+          </xsl:choose>
+        </xsl:comment>
+      </xsl:if>
     </Packaging>
   </xsl:template>
 
@@ -79,11 +108,14 @@
               <xsl:when test="TD504='C'">Consolidation</xsl:when>
               <xsl:when test="TD504='D'">Parcel Post</xsl:when>
               <xsl:when test="TD504='E'">Expedited Truck</xsl:when>
+              <xsl:when test="TD504='H'">Customer Pickup</xsl:when>
               <xsl:when test="TD504='M'">Motor (Common Carrier)</xsl:when>
               <xsl:when test="TD504='P'">Private Carrier</xsl:when>
+              <xsl:when test="TD504='PC'">Private Carrier</xsl:when>
               <xsl:when test="TD504='S'">Ocean</xsl:when>
               <xsl:when test="TD504='U'">Private Parcel Service</xsl:when>
               <xsl:when test="TD504='LT'">Less Than Trailer Load (LTL)</xsl:when>
+              <xsl:when test="TD504='ZZ'">Mutually defined</xsl:when>
             </xsl:choose>
           </xsl:comment>
         </xsl:if>
@@ -106,7 +138,15 @@
       </xsl:if>
       <xsl:attribute name="Number">
         <xsl:value-of select="TD303"/>
-      </xsl:attribute>      
+      </xsl:attribute>
+      <xsl:if test="$verbose = 1">
+        <xsl:comment>
+          <xsl:choose>
+            <xsl:when test="TD301='TL'">Trailer Load</xsl:when>
+            <xsl:when test="TD301='LT'">Less than Trailer Load</xsl:when>
+          </xsl:choose>
+        </xsl:comment>
+      </xsl:if>
     </Equipment>
   </xsl:template>
                 
@@ -251,6 +291,10 @@
       </xsl:call-template>
       <xsl:apply-templates select="PRF"/>
       <xsl:apply-templates select="MEA"/>
+      <xsl:apply-templates select="PID"/>
+      <xsl:apply-templates select="TD1"/>
+      <xsl:apply-templates select="TD5"/>
+      <xsl:apply-templates select="TD3"/>
       <xsl:apply-templates select="SN1"/>
       <xsl:apply-templates select="Loop/CLD"/>
     </Item>
@@ -267,25 +311,29 @@
   <xsl:template match="HierarchicalLoop[@LoopId='SHIPMENT']">
     <Shipment>
       <xsl:apply-templates select="REF"/>
-      <xsl:for-each select="Loop[@LoopId='SUPPLIER']">
-        <Supplier>
+      <xsl:for-each select="Loop">
+        <Party>
+          <Type>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="N1/N101"/>
+            </xsl:attribute>
+            <xsl:if test="$verbose=1">
+              <xsl:comment>
+                <xsl:choose>
+                  <xsl:when test="N1/N101='IC'">Intermediate Consignee</xsl:when>
+                  <xsl:when test="N1/N101='SF'">Ship From</xsl:when>
+                  <xsl:when test="N1/N101='ST'">Ship To</xsl:when>
+                  <xsl:when test="N1/N101='SU'">Supplier</xsl:when>
+                </xsl:choose>
+              </xsl:comment>
+            </xsl:if>
+          </Type>
           <xsl:apply-templates select="N1"/>
           <xsl:apply-templates select="N3"/>
-        </Supplier>
-      </xsl:for-each>
-      <xsl:for-each select="Loop[@LoopId='SHIPFROM']">
-        <ShipFrom>
-        <xsl:apply-templates select="N1"/>
-          <xsl:apply-templates select="N3"/>
-        </ShipFrom>
-      </xsl:for-each>
-      <xsl:for-each select="Loop[@LoopId='SHIPTO']">
-        <ShipTo>
-          <xsl:apply-templates select="N1"/>
-          <xsl:apply-templates select="N3"/>
-        </ShipTo>
-      </xsl:for-each>
+        </Party>
+      </xsl:for-each>      
       <xsl:apply-templates select="MEA"/>
+      <xsl:apply-templates select="PID"/>
       <xsl:apply-templates select="TD1"/>
       <xsl:apply-templates select="TD5"/>
       <xsl:apply-templates select="TD3"/>
