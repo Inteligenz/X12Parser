@@ -98,7 +98,7 @@
           <REF01>CN</REF01>
           <REF02>88145</REF02>
         </REF>
-        <Loop LoopId="SUPPLIER" Name="SUPPLIER">
+        <Loop LoopId="SU" Name="Supplier">
           <N1>
             <N101>SU</N101>
             <N102>MNO ASSEMBLY</N102>
@@ -106,7 +106,7 @@
             <N104>123456789</N104>
           </N1>
         </Loop>
-        <Loop LoopId="SHIPTO" Name="SHIPTO">
+        <Loop LoopId="ST" Name="Ship To">
           <N1>
             <N101>ST</N101>
             <N102>ABC MANUFACTURING</N102>
@@ -114,7 +114,7 @@
             <N104>987654321</N104>
           </N1>
         </Loop>
-        <Loop LoopId="SHIPFROM" Name="SHIPFROM">
+        <Loop LoopId="SF" Name="Ship From">
           <N1>
             <N101>SF</N101>
             <N102>XYZ WAREHOUSE</N102>

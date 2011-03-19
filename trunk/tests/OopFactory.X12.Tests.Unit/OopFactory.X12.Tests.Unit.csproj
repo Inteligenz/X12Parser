@@ -68,13 +68,20 @@
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />
     <Content Include="Parsing\Suppliers\Sample1Domain.xml" />
+    <Content Include="Parsing\Suppliers\Sample1x12.xml" />
+    <Content Include="Parsing\Suppliers\Sample2Domain.xml" />
     <Content Include="Parsing\Suppliers\Sample3Domain.xml" />
     <Content Include="Parsing\Suppliers\Sample3x12.xml" />
-    <Content Include="Parsing\Suppliers\SAMPLE_1.xml" />
-    <Content Include="Parsing\Suppliers\Sample_2.xml" />
+    <Content Include="Parsing\Suppliers\Sample2x12.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Parsing\Suppliers\Sample3.edi" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Parsing\Suppliers\Sample1.edi" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Parsing\Suppliers\Sample2.edi" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
