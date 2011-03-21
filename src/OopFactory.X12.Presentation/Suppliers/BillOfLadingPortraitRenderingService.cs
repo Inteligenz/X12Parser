@@ -31,8 +31,6 @@ namespace OopFactory.X12.Presentation.Suppliers
 
         private FoDocument TransformToFo(string domainXml)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(domainXml);
             var foDoc = new FoDocument();
             foDoc.PageMasters.Add(new FoPageMaster
             {
@@ -51,6 +49,9 @@ namespace OopFactory.X12.Presentation.Suppliers
                 FontFamily = "Courier",
                 FontSize = 12
             });
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(domainXml);
             foreach (XmlElement transactionElement in doc.SelectNodes("/ArrayOfTransaction/Transaction"))
             {
                 DateTime shippedDate;
