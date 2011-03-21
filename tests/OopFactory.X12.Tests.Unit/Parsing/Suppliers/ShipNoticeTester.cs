@@ -73,7 +73,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             var service = new X12ParsingService(true);
             var xml = service.ParseToDomainXml(GetEdi("Sample1.edi"));
 
-            var renderingService = new BillOfLadingRenderingService();
+            var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);
             System.IO.FileStream fs = new FileStream(@"c:\Temp\BillOfLadenPortraitSample1.pdf", FileMode.Create, FileAccess.Write);
             fs.Write(pdf, 0, pdf.Length);
@@ -85,7 +85,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             var service = new X12ParsingService(true);
             var xml = service.ParseToDomainXml(GetEdi("Sample2.edi"));
 
-            var renderingService = new BillOfLadingRenderingService();
+            var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);
             System.IO.FileStream fs = new FileStream(@"c:\Temp\BillOfLadenPortraitSample2.pdf", FileMode.Create, FileAccess.Write);
             fs.Write(pdf, 0, pdf.Length);
@@ -97,7 +97,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             var service = new X12ParsingService(true);
             var xml = service.ParseToDomainXml(GetEdi("Sample3.edi"));
 
-            var renderingService = new BillOfLadingRenderingService();
+            var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);
             System.IO.FileStream fs = new FileStream(@"c:\Temp\BillOfLadenPortraitSample3.pdf", FileMode.Create, FileAccess.Write);
             fs.Write(pdf, 0, pdf.Length);
