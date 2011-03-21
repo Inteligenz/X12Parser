@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Claims\ClaimPdfRenderingService.cs" />
+    <Compile Include="Claims\ClaimHcfa1500RenderingService.cs" />
     <Compile Include="IRenderingService.cs" />
     <Compile Include="Model\FoDocument.cs" />
     <Compile Include="Model\FoPageSequence.cs" />
