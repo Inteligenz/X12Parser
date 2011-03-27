@@ -11,40 +11,23 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class Loop : LoopContainer
     {
-        internal Loop(X12DelimiterSet delimiters, string startingSegment)
+        internal Loop(X12DelimiterSet delimiters, string startingSegment, LoopSpecification loopSpecification)
             : base(delimiters, startingSegment)
         {
+            Specification = loopSpecification;
         }
 
-        public LoopSpecification Specification { get; internal set; }
+        public LoopSpecification Specification { get; private set; }
 
         public override IList<LoopSpecification> AllowedChildLoops
         {
-            get
-            {
-                if (Specification != null)
-                    return Specification.LoopSpecifications;
-                else
-                    return new List<LoopSpecification>();
-            }
+            get { return Specification.LoopSpecifications; }
         }
 
         public override IList<SegmentSpecification> AllowedChildSegments
         {
-            get
-            {
-                if (Specification != null)
-                    return Specification.SegmentSpecifications;
-                else
-                    return new List<SegmentSpecification>();
-            }
+            get { return Specification.SegmentSpecifications; }
         }
-
-        protected override void Initialize(string segment)
-        {
-            base.Initialize(segment);
-        }
-
 
         #region IXmlSerializable Members
 
