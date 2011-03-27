@@ -11,6 +11,12 @@ namespace OopFactory.X12.Parsing.Specification
     [XmlType(AnonymousType = true)]
     public class LoopSpecification
     {
+        public LoopSpecification()
+        {
+            if (SegmentSpecifications == null) SegmentSpecifications = new List<SegmentSpecification>();
+            if (LoopSpecifications == null) LoopSpecifications = new List<LoopSpecification>();
+        }
+
         [XmlAttribute]
         public string LoopId { get; set; }
         [XmlAttribute]

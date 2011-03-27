@@ -28,60 +28,13 @@ namespace OopFactory.X12.Parsing
                 _segments.Add(new Segment(_delimiters, segment.Trim()));
             }
         }
-
-        internal virtual Transaction CreateTransaction(Segment segment)
-        {
-            return new Transaction(_delimiters, segment.SegmentString, _specification);
-        }
-
-        internal virtual Segment CreateSegment(Transaction transaction, Container parent, Segment segment)
-        {
-            if (segment.SegmentId == "HL")
-            {
-                var hl = new HierarchicalLoop(_delimiters, segment.SegmentString);
-
-                foreach (HierarchicalLoopSpecification hlSpec in transaction.Specification.HierarchicalLoopSpecifications)
-                {
-                    if (hlSpec.LevelCode.ToString() == hl.LevelCode)
-                        hl.Specification = hlSpec;
-                }
-
-                return hl;
-            }
-            else if (parent is LoopContainer) // (transaction.LoopStartingSegmentIds.Contains(segment.SegmentId))
-            {
-                IList<LoopSpecification> matchingLoopSpecs = null;
-
-                if (((LoopContainer)parent).AllowedChildLoops != null)
-                    matchingLoopSpecs = ((LoopContainer)parent).AllowedChildLoops.Where(cl => cl.StartingSegment.SegmentSpecification.SegmentId == segment.SegmentId).ToList();
-
-                if (matchingLoopSpecs == null || matchingLoopSpecs.Count == 0)
-                {
-                    return segment;
-                }
-                else if (segment.SegmentId == "NM1" || segment.SegmentId == "N1")
-                {
-                    var entity = new Entity(_delimiters, segment.SegmentString);
-                    entity.Specification = matchingLoopSpecs.Where(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code.ToString() == entity.EntityIdentifierCode || ei.Code.ToString() == "Item" + entity.EntityIdentifierCode)).FirstOrDefault();
-                    return entity;
-                }
-                else
-                {
-                    var loop = new Loop(_delimiters, segment.SegmentString);
-                    loop.Specification = matchingLoopSpecs.FirstOrDefault();
-                    return loop;
-                }
-            }
-            else
-                return segment;
-        }
-
+                
         private bool ParseSegment(Transaction transaction, LoopContainer currentContainer, ref int index)
         {
             if (index < _segments.Count)
             {
                 var segmentId = _segments[index].SegmentId;
-                var segment = CreateSegment(transaction, currentContainer, _segments[index]);
+                Segment segment = currentContainer.CreateSegment(transaction, _segments[index]);
 
                 if (segment is HierarchicalLoop) // This is a hierarchical loop
                 {
@@ -129,7 +82,7 @@ namespace OopFactory.X12.Parsing
                     }
                     else if (currentContainer.AllowedChildSegments.Any(cs => cs.SegmentId == segment.SegmentId))
                     {
-                        currentContainer.Segments.Add((Segment)segment);
+                        currentContainer.AddSegment(segment);
                         index++;
                         return true;
                     }
@@ -151,9 +104,9 @@ namespace OopFactory.X12.Parsing
                 var functionGroup = new FunctionGroup(_delimiters, _segments[index++].SegmentString);
                 envelop.FunctionGroups.Add(functionGroup);
                 while (index < _segments.Count && _segments[index].SegmentId != "ST")
-                    envelop.Segments.Add(new Segment(_delimiters, _segments[index++].SegmentString));
+                    envelop.AddSegment(_segments[index++].SegmentString);
 
-                var transaction = CreateTransaction(_segments[index]);
+                var transaction = functionGroup.CreateTransaction(_segments[index].SegmentString, _specification);
                 functionGroup.Transactions.Add(transaction);
 
                 index++;
@@ -166,7 +119,7 @@ namespace OopFactory.X12.Parsing
                         switch (segmentId)
                         {
                             case "ST":
-                                transaction = CreateTransaction(_segments[index]);
+                                transaction = functionGroup.CreateTransaction(_segments[index].SegmentString, _specification);
                                 functionGroup.Transactions.Add(transaction);
                                 index++;
                                 break;

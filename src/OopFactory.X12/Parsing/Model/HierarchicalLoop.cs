@@ -97,7 +97,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public override string ToString()
         {
-            return String.Format("Loop(Level={0},ChildLoops={1}, ChildSegments={2})", LevelCode, HLoops.Count, Segments.Count);
+            return String.Format("Loop(Level={0},ChildLoops={1}, ChildSegments={2})", LevelCode, HLoops.Count, Segments.Count());
         }
     }
 }

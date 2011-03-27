@@ -10,10 +10,7 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class Segment : IXmlSerializable
     {
-        private string _segmentCode;
-        protected string _segment;
-        private string[] _dataElements;
-        private X12DelimiterSet _delimiters;
+        internal X12DelimiterSet _delimiters;
 
         internal Segment(X12DelimiterSet delimiters, string segment)
         {
@@ -23,37 +20,27 @@ namespace OopFactory.X12.Parsing.Model
 
         protected virtual void Initialize(string segment)
         {
-            PreValidate();
             if (segment == null)
                 throw new ArgumentNullException("segment");
-            _segment = segment.Trim();
-            int separatorIndex = _segment.IndexOf(_delimiters.ElementSeparator);
+            SegmentString = segment.Trim();
+            int separatorIndex = SegmentString.IndexOf(_delimiters.ElementSeparator);
             if (separatorIndex >= 0)
             {
-                _segmentCode = segment.Substring(0, separatorIndex);
-                _dataElements = segment.Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
+                SegmentId = segment.Substring(0, separatorIndex);
+                DataElements = segment.Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
             }
             PostValidate();
-        }
-
-        protected virtual void PreValidate()
-        {
         }
 
         protected virtual void PostValidate()
         {
         }
 
-        internal string SegmentId
-        {
-            get { return _segmentCode; }
-            set { _segment = value; }
-        }
+        internal string SegmentId { get; set; }
+        
+        internal string[] DataElements { get; private set; }
 
-
-        internal string[] DataElements { get { return _dataElements; } }
-
-        public string SegmentString { get { return _segment; } }
+        public string SegmentString { get; private set; }
 
         #region IXmlSerializable Members
 
@@ -96,7 +83,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public override string ToString()
         {
-            return _segment;
+            return SegmentString;
         }
 
         #endregion
