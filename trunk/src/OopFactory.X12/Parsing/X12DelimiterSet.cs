@@ -11,11 +11,13 @@ namespace OopFactory.X12.Parsing
         private char _elementSeparator;
         private char _subElementSeparator;
 
-        public X12DelimiterSet(string isaSegmentAndTerminator)
+        public X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
+            string prefix = new string(isaSegmentAndTerminator).Substring(0,3);
+            
             if (isaSegmentAndTerminator.Length < 105)
                 throw new ArgumentException("ISA segment and terminator is expected to be exactly 106 characters.");
-            if (isaSegmentAndTerminator.Substring(0, 3).ToUpper() != "ISA")
+            if (prefix.ToUpper() != "ISA")
                 throw new ArgumentException("First segment must start with ISA");
 
             _elementSeparator = isaSegmentAndTerminator[3];

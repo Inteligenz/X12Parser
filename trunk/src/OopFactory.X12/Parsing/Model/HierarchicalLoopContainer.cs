@@ -12,8 +12,8 @@ namespace OopFactory.X12.Parsing.Model
     {
         private List<HierarchicalLoop> _hLoops;
 
-        internal HierarchicalLoopContainer(X12DelimiterSet delimiters, string startingSegment)
-            : base(delimiters, startingSegment)
+        internal HierarchicalLoopContainer(Container parent, X12DelimiterSet delimiters, string startingSegment)
+            : base(parent, delimiters, startingSegment)
         {
         }
 
@@ -27,6 +27,21 @@ namespace OopFactory.X12.Parsing.Model
         {
             get { return _hLoops; }
         }
+
+        public HierarchicalLoop CreateHLoop(Container parent, Transaction transaction, string segmentString)
+        {
+            var hl = new HierarchicalLoop(parent, _delimiters, segmentString);
+
+            hl.Specification = transaction.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
+                hls => hls.LevelCode.ToString() == hl.LevelCode);
+
+            if (hl.Specification == null)
+                throw new InvalidOperationException(String.Format("HL with level code {0} is not expected in transaction set {1}.",
+                    hl.LevelCode, transaction.Specification.TransactionSetIdentifierCode));
+            return hl;
+        }
+
+
 
         public override void WriteXml(System.Xml.XmlWriter writer)
         {
@@ -43,6 +58,8 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var hloop in this.HLoops)
                     hloop.WriteXml(writer);
 
+                foreach (var segment in this.TerminatingSegments)
+                    segment.WriteXml(writer);
             }
         }
     }

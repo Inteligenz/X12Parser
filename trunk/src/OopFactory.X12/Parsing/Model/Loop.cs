@@ -11,8 +11,8 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class Loop : LoopContainer
     {
-        internal Loop(X12DelimiterSet delimiters, string startingSegment, LoopSpecification loopSpecification)
-            : base(delimiters, startingSegment)
+        internal Loop(Container parent, X12DelimiterSet delimiters, string startingSegment, LoopSpecification loopSpecification)
+            : base(parent, delimiters, startingSegment)
         {
             Specification = loopSpecification;
         }
@@ -51,10 +51,12 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var loop in this.Loops)
                     loop.WriteXml(writer);
 
+                foreach (var segment in this.TerminatingSegments)
+                    segment.WriteXml(writer);
+
                 writer.WriteEndElement();
             }
         }
-
         #endregion
     }
 }

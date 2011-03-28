@@ -13,10 +13,10 @@ namespace OopFactory.X12.Parsing.Model
     {
         private List<Transaction> _transactions;
 
-        internal FunctionGroup() : base(null, "GS") { }
+        internal FunctionGroup() : base(null, null, "GS") { }
 
-        internal FunctionGroup(X12DelimiterSet delimiters, string segment)
-            : base(delimiters, segment)
+        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment)
+            : base(parent, delimiters, segment)
         {
             _transactions = new List<Transaction>();
         }
@@ -62,6 +62,9 @@ namespace OopFactory.X12.Parsing.Model
 
                 foreach (var transaction in this.Transactions)
                     transaction.WriteXml(writer);
+
+                foreach (var segment in this.TerminatingSegments)
+                    segment.WriteXml(writer);
 
                 writer.WriteEndElement();
             }

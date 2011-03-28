@@ -13,10 +13,10 @@ namespace OopFactory.X12.Parsing.Model
     {
         private List<FunctionGroup> _functionGroups;
 
-        internal Interchange() : base(null, "GS") { }
+        internal Interchange() : base(null, null, "GS") { }
 
         internal Interchange(string segment)
-            : base(new X12DelimiterSet(segment), segment)
+            : base(null, new X12DelimiterSet(segment.ToCharArray()), segment)
         {
             _functionGroups = new List<FunctionGroup>();
         }
@@ -61,6 +61,10 @@ namespace OopFactory.X12.Parsing.Model
 
                 foreach (var functionGroup in this.FunctionGroups)
                     functionGroup.WriteXml(writer);
+
+                foreach (var segment in this.TerminatingSegments)
+                    segment.WriteXml(writer);
+
             }
         }
 

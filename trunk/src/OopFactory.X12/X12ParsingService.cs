@@ -50,8 +50,8 @@ namespace OopFactory.X12
             }
 
 
-            var parser = new X12Parser(rawX12, specification);
-            return parser.Parse().Serialize();
+            var parser = new X12Parser(specification);
+            return parser.Parse(new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12))).Serialize();
         }
 
         public string ParseToDomainXml(string rawX12)

@@ -15,8 +15,8 @@ namespace OopFactory.X12.Parsing.Model
         private List<string> _loopWithLoopsStartingSegmentIds;
         private List<HierarchicalLoop> _allHLoops;
 
-        internal Transaction(X12DelimiterSet delimiters, string segment, TransactionSpecification spec)
-            : base(delimiters, segment)
+        internal Transaction(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification spec)
+            : base(parent, delimiters, segment)
         {
             Specification = spec;
         }

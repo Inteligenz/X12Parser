@@ -11,8 +11,8 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class HierarchicalLoop : HierarchicalLoopContainer
     {
-        internal HierarchicalLoop(X12DelimiterSet delimiters, string segment)
-            : base(delimiters, segment)
+        internal HierarchicalLoop(Container parent, X12DelimiterSet delimiters, string segment)
+            : base(parent, delimiters, segment)
         {
         }
 
