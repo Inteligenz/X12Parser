@@ -23,7 +23,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public TransactionSpecification Specification { get; private set; }
 
-        public override IList<LoopSpecification> AllowedChildLoops
+        internal override IList<LoopSpecification> AllowedChildLoops
         {
             get
             {
@@ -34,7 +34,7 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        public override IList<SegmentSpecification> AllowedChildSegments
+        internal override IList<SegmentSpecification> AllowedChildSegments
         {
             get
             {
@@ -45,7 +45,7 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        protected override void Initialize(string segment)
+        internal override void Initialize(string segment)
         {
             base.Initialize(segment);
             _loopStartingSegmentIds = new List<string>();
@@ -72,7 +72,7 @@ namespace OopFactory.X12.Parsing.Model
             get { return _allHLoops; }
         }
 
-        public override void WriteXml(XmlWriter writer)
+        internal override void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {

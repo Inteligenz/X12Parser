@@ -21,12 +21,22 @@ namespace OopFactory.X12.Parsing.Model
             _functionGroups = new List<FunctionGroup>();
         }
 
-        public List<FunctionGroup> FunctionGroups
+        public IEnumerable<FunctionGroup> FunctionGroups
         {
             get { return _functionGroups; }
         }
 
-        public override IList<SegmentSpecification> AllowedChildSegments
+        public FunctionGroup AddFunctionGroup(string segmentString)
+        {
+            if (!segmentString.StartsWith("GS" + _delimiters.ElementSeparator))
+                throw new InvalidOperationException(String.Format("Segment {0} does not start with GS{1} as expected.", segmentString, _delimiters.ElementSeparator));
+
+            FunctionGroup fg = new FunctionGroup(this, _delimiters, segmentString);
+            _functionGroups.Add(fg);
+            return fg;
+        }
+
+        internal override IList<SegmentSpecification> AllowedChildSegments
         {
             get
             {
@@ -50,7 +60,7 @@ namespace OopFactory.X12.Parsing.Model
 
         #region IXmlSerializable Members
 
-        public override void WriteXml(XmlWriter writer)
+        internal override void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {

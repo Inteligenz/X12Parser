@@ -16,9 +16,9 @@ namespace OopFactory.X12.Parsing.Model
         {
         }
 
-        public HierarchicalLoopSpecification Specification { get; internal set; }
+        internal HierarchicalLoopSpecification Specification { get; set; }
 
-        public override IList<LoopSpecification> AllowedChildLoops
+        internal override IList<LoopSpecification> AllowedChildLoops
         {
             get
             {
@@ -29,7 +29,7 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        public override IList<SegmentSpecification> AllowedChildSegments
+        internal override IList<SegmentSpecification> AllowedChildSegments
         {
             get
             {
@@ -70,11 +70,8 @@ namespace OopFactory.X12.Parsing.Model
             get { return DataElements[2]; }
             set { DataElements[2] = value; }
         }
-
-        public bool HasChildren { get { return DataElements[3] == "1"; } }
-
-
-        public override void WriteXml(System.Xml.XmlWriter writer)
+                
+        internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(base.SegmentId))
             {
@@ -97,7 +94,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public override string ToString()
         {
-            return String.Format("Loop(Level={0},ChildLoops={1}, ChildSegments={2})", LevelCode, HLoops.Count, Segments.Count());
+            return String.Format("Loop(Level={0},ChildLoops={1}, ChildSegments={2})", LevelCode, Loops.Count(), Segments.Count());
         }
     }
 }
