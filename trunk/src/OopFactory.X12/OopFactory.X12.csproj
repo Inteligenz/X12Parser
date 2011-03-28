@@ -68,11 +68,11 @@
     <Compile Include="X12ParsingService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Claims\Ansi-837-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-837-4010Specification.xml" />
     <EmbeddedResource Include="Transformations\Ansi-837-To-Claim.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Payments\Ansi-835-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-835-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Transformations\Ansi-835-To-Payment.xslt">
@@ -83,10 +83,15 @@
     <EmbeddedResource Include="Transformations\Ansi-Common.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Suppliers\Ansi-856-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-856-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Transformations\Ansi-856-To-ShipNotice.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Claims\" />
+    <Folder Include="Payments\" />
+    <Folder Include="Suppliers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
