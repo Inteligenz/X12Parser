@@ -12,8 +12,9 @@ namespace OopFactory.X12.Parsing.Model
     {
         internal X12DelimiterSet _delimiters;
 
-        internal Segment(X12DelimiterSet delimiters, string segment)
+        internal Segment(Container parent, X12DelimiterSet delimiters, string segment)
         {
+            Parent = parent;
             _delimiters = delimiters;
             Initialize(segment);
         }
@@ -41,6 +42,8 @@ namespace OopFactory.X12.Parsing.Model
         internal string[] DataElements { get; private set; }
 
         public string SegmentString { get; private set; }
+
+        public Container Parent { get; private set; }
 
         #region IXmlSerializable Members
 

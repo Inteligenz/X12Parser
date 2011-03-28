@@ -4,140 +4,157 @@ using System.Linq;
 using System.Text;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Specification;
-
+using System.IO;
 namespace OopFactory.X12.Parsing
 {
     internal class X12Parser
     {
-        private List<Segment> _segments;
         private TransactionSpecification _specification;
-        private X12DelimiterSet _delimiters;
-
-        public X12Parser(string rawX12, TransactionSpecification specification)
+        
+        public X12Parser(TransactionSpecification specification)
         {
-            if (rawX12.Length < 106)
-                throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
-            _delimiters = new X12DelimiterSet(rawX12.Substring(0, 106));
-
             _specification = specification;
-            string[] segments = rawX12.Split(_delimiters.SegmentTerminator);
+        }               
 
-            _segments = new List<Segment>();
-            foreach (var segment in segments)
-            {
-                _segments.Add(new Segment(_delimiters, segment.Trim()));
-            }
-        }
-                
-        private bool ParseSegment(Transaction transaction, LoopContainer currentContainer, ref int index)
+        private string ReadNextSegment(StreamReader reader, char segmentDelimiter)
         {
-            if (index < _segments.Count)
+            StringBuilder sb = new StringBuilder();
+            char[] one = new char[1];
+            while (reader.Read(one, 0, 1) == 1)
             {
-                var segmentId = _segments[index].SegmentId;
-                Segment segment = currentContainer.CreateSegment(transaction, _segments[index]);
-
-                if (segment is HierarchicalLoop) // This is a hierarchical loop
-                {
-                    if (currentContainer is HierarchicalLoopContainer)
-                    {
-                        var hloop = (HierarchicalLoop)segment;
-                        transaction.AllLoops.Add(hloop);
-
-                        if (string.IsNullOrEmpty(hloop.ParentId)) // add top level loop to transaction
-                        {
-                            transaction.HLoops.Add((HierarchicalLoop)hloop);
-                        }
-                        else // add nested loop to its parent
-                        {
-                            var parent = transaction.AllLoops.Where(hl => hl.Id == hloop.ParentId).FirstOrDefault();
-                            parent.HLoops.Add((HierarchicalLoop)hloop);
-                        }
-                        index++;
-                        segmentId = _segments[index].SegmentId;
-                        while (index > 0 && index < _segments.Count && segmentId != "SE")
-                        {
-                            var parsed = ParseSegment(transaction, hloop, ref index);
-                            if (index < _segments.Count)
-                                segmentId = _segments[index].SegmentId;
-                            if (!parsed)
-                            {
-                                return false;
-                            }
-                        }
-                        index++;
-                        return true;
-                    }
-                    else
-                        return false;
-                }
+                if (one[0] == segmentDelimiter)
+                    break;
                 else
-                {
-                    if (segment is Loop)
-                    {
-                        currentContainer.Loops.Add((Loop)segment);
-
-                        index++;
-                        while (ParseSegment(transaction, (LoopContainer)segment, ref index)) ;
-                        return true;
-                    }
-                    else if (currentContainer.AllowedChildSegments.Any(cs => cs.SegmentId == segment.SegmentId))
-                    {
-                        currentContainer.AddSegment(segment);
-                        index++;
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                    sb.Append(one);
             }
-            else return false;
+            return sb.ToString().TrimStart();
         }
 
-        internal Interchange Parse()
+        private string ReadSegmentId(string segmentString, char elementDelimiter)
         {
-            int index = 0;
-            var envelop = new Interchange(_segments[index++].SegmentString);
-            while (_segments[index].SegmentId == "GS")
+            int index = segmentString.IndexOf(elementDelimiter);
+            if (index >= 0)
+                return segmentString.Substring(0, index);
+            else
+                return null;
+        }
+
+        internal Interchange Parse(Stream stream)
+        {
+            StreamReader reader = new StreamReader(stream);
+            
+            char[] header = new char[106];
+            if (reader.Read(header, 0, 106) < 106)
+                throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
+
+            X12DelimiterSet delimiters = new X12DelimiterSet(header);
+
+            Interchange envelop = new Interchange(new string(header));
+            Container currentContainer = envelop;
+            FunctionGroup fg = null;
+            Transaction tr = null;
+            Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string,HierarchicalLoop>();
+            string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
+            string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+            while (segmentString.Length > 0)
             {
-                var functionGroup = new FunctionGroup(_delimiters, _segments[index++].SegmentString);
-                envelop.FunctionGroups.Add(functionGroup);
-                while (index < _segments.Count && _segments[index].SegmentId != "ST")
-                    envelop.AddSegment(_segments[index++].SegmentString);
-
-                var transaction = functionGroup.CreateTransaction(_segments[index].SegmentString, _specification);
-                functionGroup.Transactions.Add(transaction);
-
-                index++;
-                bool done = false;
-                do
+                switch (segmentId)
                 {
-                    if (!ParseSegment(transaction, transaction, ref index))
-                    {
-                        var segmentId = _segments[index].SegmentId;
-                        switch (segmentId)
+                    case "GS":
+                        fg = new FunctionGroup(envelop, delimiters, segmentString);
+                        envelop.FunctionGroups.Add(fg);
+                        currentContainer = fg;
+                        break;
+                    case "GE":
+                        fg.AddTerminatingSegment(fg, segmentString);
+                        fg = null;
+                        break;
+                    case "ST":
+                        tr = fg.CreateTransaction(fg, segmentString, _specification);
+                        fg.Transactions.Add(tr);
+                        currentContainer = tr;
+                        hloops = new Dictionary<string, HierarchicalLoop>();
+                        break;
+                    case "CTT":
+                        tr.AddTerminatingSegment(tr, segmentString);
+                        break;
+                    case "SE":
+                        tr.AddTerminatingSegment(tr, segmentString);
+                        tr = null;
+                        break;
+                    case "HL":
+                        HierarchicalLoop hl = tr.CreateHLoop(tr, tr, segmentString);
+                        if (hl.ParentId == "")
+                            tr.HLoops.Add(hl);
+                        else
                         {
-                            case "ST":
-                                transaction = functionGroup.CreateTransaction(_segments[index].SegmentString, _specification);
-                                functionGroup.Transactions.Add(transaction);
-                                index++;
-                                break;
-                            case "GS":
-                                done = true;
-                                break;
-                            case "GE":
-                                index++;
-                                break;
-                            default:
-                                done = true;
-                                break;
+                            if (hloops.ContainsKey(hl.ParentId))
+                            {
+                                hl = tr.CreateHLoop(hloops[hl.ParentId], tr, segmentString);
+                                hloops[hl.ParentId].HLoops.Add(hl);
+                            }
+                            else
+                                throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", hl.Id, hl.ParentId));
                         }
-                    }
+                        if (hloops.ContainsKey(hl.Id))
+                            throw new InvalidOperationException(String.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", hl.SegmentString, tr.ControlNumber, hl.Id));
+                        hloops.Add(hl.Id, hl);
+                        currentContainer = hl;
+                        break;
+                    case "IEA":
+                        envelop.AddTerminatingSegment(envelop, segmentString);
+                        break;
+                    default:
+                        while (currentContainer != null)
+                        {
+                            if (currentContainer is LoopContainer)
+                            {
+                                LoopContainer loopContainer = (LoopContainer)currentContainer;
 
-                } while (!done);
+                                Segment segment = loopContainer.CreateSegment(tr, segmentString);
+                                if (segment is Loop)
+                                {
+                                    loopContainer.Loops.Add((Loop)segment);
+                                    currentContainer = (Loop)segment;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (currentContainer.AddSegment(segmentString))
+                                        break;
+                                    else
+                                    {
+                                        currentContainer = currentContainer.Parent;
+                                        continue;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (currentContainer.AddSegment(segmentString))
+                                    break;
+                                else
+                                {
+                                    currentContainer = currentContainer.Parent;
+                                    continue;
+                                }
+                            }
+
+
+                        }
+                        if (currentContainer == null)
+                        {
+                            throw new InvalidOperationException(String.Format(
+                                "Segment {0} cannot be identified in the specification for {1}.", segmentString, _specification.TransactionSetIdentifierCode));
+                        }
+                        break;
+
+                }
+                segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
+                segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+            
             }
-
+            
             return envelop;
         }
     }

@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="EmbeddedResources.cs" />
     <Compile Include="Parsing\Model\Container.cs" />
-    <Compile Include="Parsing\Model\Entity.cs" />
     <Compile Include="Parsing\Model\FunctionGroup.cs" />
     <Compile Include="Parsing\Model\HierarchicalLoop.cs" />
     <Compile Include="Parsing\Model\HierarchicalLoopContainer.cs" />
