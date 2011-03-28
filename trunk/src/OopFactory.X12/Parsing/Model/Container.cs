@@ -16,14 +16,14 @@ namespace OopFactory.X12.Parsing.Model
         {
         }
 
-        protected override void Initialize(string segment)
+        internal override void Initialize(string segment)
         {
             base.Initialize(segment);
             _segments = new List<Segment>();
             _terminatingSegments = new List<Segment>();
         }
 
-        public abstract IList<SegmentSpecification> AllowedChildSegments { get; }
+        internal abstract IList<SegmentSpecification> AllowedChildSegments { get; }
 
         public IEnumerable<Segment> Segments { get { return _segments; } }
 
@@ -44,11 +44,6 @@ namespace OopFactory.X12.Parsing.Model
         public void AddTerminatingSegment(Container parent, string segmentString)
         {
             _terminatingSegments.Add(new Segment(parent, _delimiters, segmentString));
-        }
-        
-        internal virtual Transaction CreateTransaction(Container parent, string segmentString, TransactionSpecification transactionSpecification)
-        {
-            return new Transaction(parent, _delimiters, segmentString, transactionSpecification);
         }
     }
 }

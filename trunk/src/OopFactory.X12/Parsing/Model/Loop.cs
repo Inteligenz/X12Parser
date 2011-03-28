@@ -19,19 +19,19 @@ namespace OopFactory.X12.Parsing.Model
 
         public LoopSpecification Specification { get; private set; }
 
-        public override IList<LoopSpecification> AllowedChildLoops
+        internal override IList<LoopSpecification> AllowedChildLoops
         {
             get { return Specification.LoopSpecifications; }
         }
 
-        public override IList<SegmentSpecification> AllowedChildSegments
+        internal override IList<SegmentSpecification> AllowedChildSegments
         {
             get { return Specification.SegmentSpecifications; }
         }
 
         #region IXmlSerializable Members
 
-        public override void WriteXml(System.Xml.XmlWriter writer)
+        internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {

@@ -10,27 +10,27 @@ namespace OopFactory.X12.Parsing.Model
 {
     public abstract class HierarchicalLoopContainer : LoopContainer
     {
-        private List<HierarchicalLoop> _hLoops;
+        private Dictionary<string, HierarchicalLoop> _hLoops;
 
         internal HierarchicalLoopContainer(Container parent, X12DelimiterSet delimiters, string startingSegment)
             : base(parent, delimiters, startingSegment)
         {
         }
 
-        protected override void Initialize(string segment)
+        internal override void Initialize(string segment)
         {
             base.Initialize(segment);
-            _hLoops = new List<HierarchicalLoop>();
+            _hLoops = new Dictionary<string,HierarchicalLoop>();
         }
 
-        public List<HierarchicalLoop> HLoops
+        public IEnumerable<HierarchicalLoop> HLoops
         {
-            get { return _hLoops; }
+            get { return _hLoops.Values; }
         }
 
-        public HierarchicalLoop CreateHLoop(Container parent, Transaction transaction, string segmentString)
+        public HierarchicalLoop AddHLoop(Transaction transaction, string segmentString)
         {
-            var hl = new HierarchicalLoop(parent, _delimiters, segmentString);
+            var hl = new HierarchicalLoop(this, _delimiters, segmentString);
 
             hl.Specification = transaction.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
                 hls => hls.LevelCode.ToString() == hl.LevelCode);
@@ -38,12 +38,12 @@ namespace OopFactory.X12.Parsing.Model
             if (hl.Specification == null)
                 throw new InvalidOperationException(String.Format("HL with level code {0} is not expected in transaction set {1}.",
                     hl.LevelCode, transaction.Specification.TransactionSetIdentifierCode));
+
+            _hLoops.Add(hl.Id, hl);
             return hl;
         }
 
-
-
-        public override void WriteXml(System.Xml.XmlWriter writer)
+        internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(base.SegmentId))
             {

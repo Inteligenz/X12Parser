@@ -19,7 +19,7 @@ namespace OopFactory.X12.Parsing.Model
             Initialize(segment);
         }
 
-        protected virtual void Initialize(string segment)
+        internal virtual void Initialize(string segment)
         {
             if (segment == null)
                 throw new ArgumentNullException("segment");
@@ -47,17 +47,22 @@ namespace OopFactory.X12.Parsing.Model
 
         #region IXmlSerializable Members
 
-        public System.Xml.Schema.XmlSchema GetSchema()
+        System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
         {
             throw new NotImplementedException();
         }
 
-        public void ReadXml(XmlReader reader)
+        void IXmlSerializable.ReadXml(XmlReader reader)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void WriteXml(XmlWriter writer)
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            this.WriteXml(writer);
+        }
+
+        internal virtual void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {
