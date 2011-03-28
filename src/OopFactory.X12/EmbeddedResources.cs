@@ -19,7 +19,7 @@ namespace OopFactory.X12
         {
             if (_837specification == null)
             {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Claims.Ansi-837-4010Specification.xml");
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-837-4010Specification.xml");
                 StreamReader reader = new StreamReader(specStream);
                 _837specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
             }
@@ -47,7 +47,7 @@ namespace OopFactory.X12
         {
             if (_835specification == null)
             {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Payments.Ansi-835-4010Specification.xml");
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-835-4010Specification.xml");
                 StreamReader reader = new StreamReader(specStream);
                 _835specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
             }
@@ -78,7 +78,7 @@ namespace OopFactory.X12
         {
             if (_856specification == null)
             {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Suppliers.Ansi-856-4010Specification.xml");
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-856-4010Specification.xml");
                 StreamReader reader = new StreamReader(specStream);
                 _856specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
             }
