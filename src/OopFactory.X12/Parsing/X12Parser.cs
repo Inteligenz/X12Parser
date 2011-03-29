@@ -107,12 +107,6 @@ namespace OopFactory.X12.Parsing
                         currentContainer = tr = fg.AddTransaction(segmentString);
                         hloops = new Dictionary<string, HierarchicalLoop>();
                         break;
-                    case "CTT":
-                        if (tr == null)
-                            throw new InvalidOperationException(string.Format("Segment '{0}' must occur within a transaction set ST and SE segments.", segmentString));
-
-                        tr.AddTerminatingSegment(tr, segmentString);
-                        break;
                     case "SE":
                         if (tr == null)
                             throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching ST segment preceding it.", segmentString));

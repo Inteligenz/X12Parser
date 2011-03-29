@@ -9,6 +9,8 @@ using OopFactory.X12.Model;
 using OopFactory.X12.Model.Claims;
 using System.IO;
 using System.Reflection;
+using OopFactory.X12.Parsing;
+using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Tests.Unit.Parsing.Payments
 {
@@ -31,6 +33,18 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
             
             var xml = service.ParseToDomainXml("835", GetEdi("Sample1.txt"));
             Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void ParseAndUnparseToX12()
+        {
+            string orignalX12 = new StreamReader(GetEdi("Sample1.txt")).ReadToEnd();
+            X12Parser parser = new X12Parser("835");
+            Interchange interchange = parser.Parse(GetEdi("Sample1.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+
+            Assert.AreEqual(orignalX12, x12);
         }
     }
 }

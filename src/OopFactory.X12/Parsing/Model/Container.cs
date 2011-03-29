@@ -30,9 +30,13 @@ namespace OopFactory.X12.Parsing.Model
         public bool AddSegment(string segmentString)
         {
             Segment segment = new Segment(this, _delimiters, segmentString);
-            if (AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId) != null)
+            SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId);
+            if (spec != null)
             {
-                _segments.Add(segment);
+                if (spec.Trailing)
+                    _terminatingSegments.Add(segment);
+                else
+                    _segments.Add(segment);
                 return true;
             }
             else
@@ -66,7 +70,13 @@ namespace OopFactory.X12.Parsing.Model
                 sb.Append(SerializeBodyToX12(addWhitespace));
 
             foreach (var segment in this.TerminatingSegments)
-                sb.Append(segment.ToX12String(addWhitespace));
+            {
+                string[] wrapperSegments = new string[] { "SE", "GE", "IEA" };
+                if (addWhitespace && !wrapperSegments.Contains(segment.SegmentId))
+                    sb.Append(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    sb.Append(segment.ToX12String(addWhitespace));
+            }
 
             return sb.ToString();
         }
