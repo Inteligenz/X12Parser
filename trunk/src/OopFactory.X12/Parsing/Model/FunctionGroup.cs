@@ -11,13 +11,15 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class FunctionGroup : Container, IXmlSerializable
     {
+        private TransactionSpecification _specification;
         private Dictionary<string,Transaction> _transactions;
 
         internal FunctionGroup() : base(null, null, "GS") { }
 
-        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment)
+        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification specification)
             : base(parent, delimiters, segment)
         {
+            _specification = specification;
             _transactions = new Dictionary<string,Transaction>();
         }
 
@@ -34,12 +36,12 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
-        public Transaction AddTransaction(string segmentString, TransactionSpecification spec)
+        internal Transaction AddTransaction(string segmentString)
         {
             if (!segmentString.StartsWith("ST" + _delimiters.ElementSeparator))
                 throw new InvalidOperationException(string.Format("Segment {0} does not start with ST{1} as expected.", segmentString, _delimiters.ElementSeparator));
 
-            Transaction transaction = new Transaction(this, _delimiters, segmentString, spec);
+            Transaction transaction = new Transaction(this, _delimiters, segmentString, _specification);
             _transactions.Add(transaction.ControlNumber, transaction);
             return transaction;
         }
@@ -50,6 +52,14 @@ namespace OopFactory.X12.Parsing.Model
             {
                 return new List<SegmentSpecification>();
             }
+        }
+
+        internal override string SerializeBodyToX12(bool addWhitespace)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var transaction in this.Transactions)
+                sb.Append(transaction.ToX12String(addWhitespace));
+            return sb.ToString();
         }
 
         public virtual string Serialize()

@@ -28,7 +28,7 @@ namespace OopFactory.X12.Parsing.Model
             get { return _hLoops.Values; }
         }
 
-        public HierarchicalLoop AddHLoop(Transaction transaction, string segmentString)
+        internal HierarchicalLoop AddHLoop(Transaction transaction, string segmentString)
         {
             var hl = new HierarchicalLoop(this, _delimiters, segmentString);
 
@@ -41,6 +41,15 @@ namespace OopFactory.X12.Parsing.Model
 
             _hLoops.Add(hl.Id, hl);
             return hl;
+        }
+
+        internal override string SerializeBodyToX12(bool addWhitespace)
+        {
+            StringBuilder sb = new StringBuilder(base.SerializeBodyToX12(addWhitespace));
+            foreach (var hloop in HLoops)
+                sb.Append(hloop.ToX12String(addWhitespace));
+
+            return sb.ToString();
         }
 
         internal override void WriteXml(System.Xml.XmlWriter writer)

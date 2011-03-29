@@ -37,6 +37,21 @@ namespace OopFactory.X12.Parsing.Model
         {
         }
 
+        internal virtual string ToX12String(bool addWhitespace)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (addWhitespace)
+                sb.AppendLine();
+            sb.Append(SegmentId);
+            foreach (var item in DataElements)
+            {
+                sb.Append(_delimiters.ElementSeparator);
+                sb.Append(item);
+            }
+            sb.Append(_delimiters.SegmentTerminator);
+            return sb.ToString();
+        }
+
         internal string SegmentId { get; set; }
         
         internal string[] DataElements { get; private set; }

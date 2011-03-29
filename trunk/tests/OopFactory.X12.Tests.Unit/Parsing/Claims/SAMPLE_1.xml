@@ -18,7 +18,7 @@
     <ISA15>T</ISA15>
     <ISA16>
       <ISA1601 />
-      <ISA1602 />
+      <ISA1602>~</ISA1602>
     </ISA16>
   </ISA>
   <FunctionGroup>
@@ -378,6 +378,18 @@
           </Loop>
         </HierarchicalLoop>
       </HierarchicalLoop>
+      <SE>
+        <SE01>44</SE01>
+        <SE02>0034</SE02>
+      </SE>
     </Transaction>
+    <GE>
+      <GE01>1</GE01>
+      <GE02>30</GE02>
+    </GE>
   </FunctionGroup>
+  <IEA>
+    <IEA01>1</IEA01>
+    <IEA02>000000031</IEA02>
+  </IEA>
 </Interchange>

@@ -45,5 +45,30 @@ namespace OopFactory.X12.Parsing.Model
         {
             _terminatingSegments.Add(new Segment(parent, _delimiters, segmentString));
         }
+
+        internal abstract string SerializeBodyToX12(bool addWhitespace);
+        
+        internal override string ToX12String(bool addWhitespace)
+        {
+            StringBuilder sb = new StringBuilder(base.ToX12String(addWhitespace));
+            foreach (var segment in this.Segments)
+            {
+                if (addWhitespace)
+                    sb.Append(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    sb.Append(segment.ToX12String(addWhitespace));
+            }
+            if (addWhitespace)
+            {
+                sb.Append(SerializeBodyToX12(addWhitespace).Replace("\r\n", "\r\n  "));
+            }
+            else
+                sb.Append(SerializeBodyToX12(addWhitespace));
+
+            foreach (var segment in this.TerminatingSegments)
+                sb.Append(segment.ToX12String(addWhitespace));
+
+            return sb.ToString();
+        }
     }
 }

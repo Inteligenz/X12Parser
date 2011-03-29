@@ -31,34 +31,24 @@ namespace OopFactory.X12
 
         public string ParseToXml(string rawX12)
         {
-            string transactionType = GetTransactionType(rawX12);
-            
-            TransactionSpecification specification = null;
-            switch (transactionType)
-            {
-                case "835":
-                    specification = EmbeddedResources.Get835TransactionSpecification();
-                    break;
-                case "837":
-                    specification = EmbeddedResources.Get837TransactionSpecification();
-                    break;
-                case "856":
-                    specification = EmbeddedResources.Get856TransactionSpecification();
-                    break;
-                default:
-                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
-            }
+            return ParseToXml(GetTransactionType(rawX12), new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
+        }
 
-
-            var parser = new X12Parser(specification);
-            return parser.Parse(new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12))).Serialize();
+        public string ParseToXml(string transactionType, Stream stream)
+        {
+            var parser = new X12Parser(transactionType);
+            return parser.Parse(stream).Serialize();
         }
 
         public string ParseToDomainXml(string rawX12)
         {
+            string transactionType = GetTransactionType(rawX12);
+            return ParseToDomainXml(transactionType, new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
+        }
+        public string ParseToDomainXml(string transactionType, Stream stream)
+        {
             XslCompiledTransform transform;
 
-            string transactionType = GetTransactionType(rawX12);
             switch (transactionType)
             {
                 case "835":
@@ -77,7 +67,7 @@ namespace OopFactory.X12
             var writer = new StringWriter();
             XsltArgumentList list = new XsltArgumentList();
             list.AddParam("verbose", "", _verbose ? "1" : "0");
-            transform.Transform(XmlReader.Create(new StringReader(ParseToXml(rawX12))), list, writer);
+            transform.Transform(XmlReader.Create(new StringReader(ParseToXml(transactionType, stream))), list, writer);
             return writer.GetStringBuilder().ToString();
         }
     }
