@@ -25,7 +25,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public IEnumerable<Loop> Loops { get { return _loops; } }
 
-        public Loop AddLoop(string segmentString, LoopSpecification loopSpecification)
+        internal Loop AddLoop(string segmentString, LoopSpecification loopSpecification)
         {
             var loop = new Loop(this, _delimiters, segmentString, loopSpecification);
             _loops.Add(loop);
@@ -51,6 +51,16 @@ namespace OopFactory.X12.Parsing.Model
             {
                 return matchingLoopSpecs.FirstOrDefault();
             }
+        }
+
+        internal override string SerializeBodyToX12(bool addWhitespace)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var loop in this.Loops)
+            {
+                sb.Append(loop.ToX12String(addWhitespace));
+            }
+            return sb.ToString();
         }
     }
 }

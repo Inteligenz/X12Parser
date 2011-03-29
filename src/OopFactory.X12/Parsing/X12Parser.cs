@@ -7,14 +7,29 @@ using OopFactory.X12.Parsing.Specification;
 using System.IO;
 namespace OopFactory.X12.Parsing
 {
-    internal class X12Parser
+    public class X12Parser
     {
         private TransactionSpecification _specification;
         
-        public X12Parser(TransactionSpecification specification)
+        public X12Parser(string transactionType)
         {
-            _specification = specification;
-        }               
+            _specification = GetSpec(transactionType);
+        }
+
+        private static TransactionSpecification GetSpec(string transactionType)
+        {
+            switch (transactionType)
+            {
+                case "835":
+                    return EmbeddedResources.Get835TransactionSpecification();
+                case "837":
+                    return EmbeddedResources.Get837TransactionSpecification();
+                case "856":
+                    return EmbeddedResources.Get856TransactionSpecification();
+                default:
+                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
+            }
+        }
 
         private string ReadNextSegment(StreamReader reader, char segmentDelimiter)
         {
@@ -38,8 +53,21 @@ namespace OopFactory.X12.Parsing
             else
                 return null;
         }
+
+        public Interchange Create(string transactionType, DateTime date)
+        {
+            return Create(transactionType, date, '~', '*', ':');
+        }
+
+        public Interchange Create(string transactionType, DateTime date, char segmentDelimiter, char elementDelimiter, char subElementDelimiter)
+        {
+            string header = String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}000000001{1}1{1}P{1}{2}{0}", 
+                segmentDelimiter, elementDelimiter, subElementDelimiter,
+                date);
+            return new Interchange(GetSpec(transactionType), header);
+        }
         
-        internal Interchange Parse(Stream stream)
+        public Interchange Parse(Stream stream)
         {
             StreamReader reader = new StreamReader(stream);
             
@@ -49,7 +77,7 @@ namespace OopFactory.X12.Parsing
 
             X12DelimiterSet delimiters = new X12DelimiterSet(header);
 
-            Interchange envelop = new Interchange(new string(header));
+            Interchange envelop = new Interchange(_specification, new string(header));
             Container currentContainer = envelop;
             FunctionGroup fg = null;
             Transaction tr = null;
@@ -76,7 +104,7 @@ namespace OopFactory.X12.Parsing
                         if (fg == null)
                             throw new InvalidOperationException(string.Format("segment '{0}' cannot occur without a preceding GS segment.", segmentString));
 
-                        currentContainer = tr = fg.AddTransaction(segmentString, _specification);
+                        currentContainer = tr = fg.AddTransaction(segmentString);
                         hloops = new Dictionary<string, HierarchicalLoop>();
                         break;
                     case "CTT":
