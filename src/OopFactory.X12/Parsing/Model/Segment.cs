@@ -28,7 +28,7 @@ namespace OopFactory.X12.Parsing.Model
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                DataElements = segment.Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
+                DataElements = segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
             }
             PostValidate();
         }

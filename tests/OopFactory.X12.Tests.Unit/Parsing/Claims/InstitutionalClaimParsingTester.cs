@@ -54,7 +54,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(orignalX12, x12);
+            Assert.AreEqual(orignalX12, x12);
         }
 
         [TestMethod]
