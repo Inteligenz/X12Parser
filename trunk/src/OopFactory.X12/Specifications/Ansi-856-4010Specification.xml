@@ -139,5 +139,5 @@
       <SegmentSpecification SegmentId="DTP"/>
     </LoopSpecification>
   </HierarchicalLoopSpecification>
-  <SegmentSpecification SegmentId="CTT" Usage="Situational" Repeat="1"/>
+  <SegmentSpecification SegmentId="CTT" Usage="Situational" Trailing="true" Repeat="1"/>
 </TransactionSpecification>

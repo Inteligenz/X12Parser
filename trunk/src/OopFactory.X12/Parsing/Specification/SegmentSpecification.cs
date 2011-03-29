@@ -22,6 +22,10 @@ namespace OopFactory.X12.Parsing.Specification
         public UsageEnum Usage { get; set; }
         [XmlAttribute]
         public int Repeat { get; set; }
+        [XmlAttribute]
+        public bool Trailing { get; set; }
+        [XmlIgnore]
+        public bool TrailingSpecified { get; set; }
 
         public SegmentSpecificationStandard Standard { get; set; }
     }
