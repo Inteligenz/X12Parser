@@ -54,7 +54,7 @@ namespace OopFactory.X12.Parsing.Model
             if (!segmentString.StartsWith("ST" + _delimiters.ElementSeparator))
                 throw new InvalidOperationException(string.Format("Segment {0} does not start with ST{1} as expected.", segmentString, _delimiters.ElementSeparator));
 
-            string transactionType = new Segment(null, _delimiters, segmentString).DataElements[0];
+            string transactionType = new Segment(null, _delimiters, segmentString).GetElement(1);
 
             Transaction transaction = new Transaction(this, _delimiters, segmentString, GetSpec(transactionType));
             _transactions.Add(transaction.ControlNumber, transaction);

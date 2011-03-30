@@ -45,7 +45,7 @@ namespace OopFactory.X12.Parsing.Model
             if (this.SegmentId != "HL")
                 throw new ArgumentException(String.Format("Segment Id expected to be 'HL' but got '{0}'.", SegmentId));
 
-            if (this.DataElements.Length < 3)
+            if (this.ElementCount < 3)
                 throw new ArgumentException("hl argument requires 3 data elements.", "hl");
         }
 
@@ -54,21 +54,18 @@ namespace OopFactory.X12.Parsing.Model
         [XmlAttribute("Id")]
         public string Id
         {
-            get { return DataElements[0]; }
-            set { DataElements[0] = value; }
+            get { return GetElement(1); }
         }
 
         [XmlAttribute("ParentId")]
         public string ParentId
         {
-            get { return DataElements[1]; }
-            set { DataElements[1] = value; }
+            get { return GetElement(2); }
         }
 
         internal string LevelCode
         {
-            get { return DataElements[2]; }
-            set { DataElements[2] = value; }
+            get { return GetElement(3); }
         }
                 
         internal override void WriteXml(System.Xml.XmlWriter writer)

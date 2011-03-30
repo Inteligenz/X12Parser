@@ -11,7 +11,14 @@ namespace OopFactory.X12.Parsing
         private char _elementSeparator;
         private char _subElementSeparator;
 
-        public X12DelimiterSet(char[] isaSegmentAndTerminator)
+        internal X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator)
+        {
+            _segmentTerminator = segmentTerminator;
+            _elementSeparator = elementSeparator;
+            _subElementSeparator = subElementSeparator;
+        }
+
+        internal X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
             string prefix = new string(isaSegmentAndTerminator).Substring(0,3);
             

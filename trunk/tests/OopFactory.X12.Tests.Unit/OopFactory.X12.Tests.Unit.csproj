@@ -55,6 +55,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Creation\InstitutionalClaimCreationTester.cs" />
     <Compile Include="Parsing\Claims\InstitutionalClaimParsingTester.cs" />
     <Compile Include="Parsing\Payments\PaymentParsingTester.cs" />
     <Compile Include="Parsing\Suppliers\ShipNoticeTester.cs" />

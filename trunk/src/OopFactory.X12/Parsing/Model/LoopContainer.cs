@@ -45,7 +45,7 @@ namespace OopFactory.X12.Parsing.Model
             }
             else if (segment.SegmentId == "NM1" || segment.SegmentId == "N1")
             {
-                return matchingLoopSpecs.Where(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code.ToString() == segment.DataElements[0] || ei.Code.ToString() == "Item" + segment.DataElements[0])).FirstOrDefault();
+                return matchingLoopSpecs.Where(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code.ToString() == segment.GetElement(1) || ei.Code.ToString() == "Item" + segment.GetElement(1))).FirstOrDefault();
             }
             else
             {

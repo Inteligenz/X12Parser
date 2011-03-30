@@ -31,20 +31,7 @@ namespace OopFactory.X12.Parsing
             else
                 return null;
         }
-
-        public Interchange Create(string transactionType, DateTime date)
-        {
-            return Create(transactionType, date, '~', '*', ':');
-        }
-
-        public Interchange Create(string transactionType, DateTime date, char segmentDelimiter, char elementDelimiter, char subElementDelimiter)
-        {
-            string header = String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}000000001{1}1{1}P{1}{2}{0}", 
-                segmentDelimiter, elementDelimiter, subElementDelimiter,
-                date);
-            return new Interchange(header);
-        }
-        
+                       
         public Interchange Parse(Stream stream)
         {
             StreamReader reader = new StreamReader(stream);
@@ -94,8 +81,8 @@ namespace OopFactory.X12.Parsing
                         break;
                     case "HL":
                         Segment hlSegment = new Segment(null, delimiters, segmentString);
-                        string id = hlSegment.DataElements[0];
-                        string parentId = hlSegment.DataElements[1];
+                        string id = hlSegment.GetElement(1);
+                        string parentId = hlSegment.GetElement(2);
 
                         if (parentId == "")
                             currentContainer = tr.AddHLoop(tr, segmentString); 

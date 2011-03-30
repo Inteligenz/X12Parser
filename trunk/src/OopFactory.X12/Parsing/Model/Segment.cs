@@ -11,6 +11,7 @@ namespace OopFactory.X12.Parsing.Model
     public class Segment : IXmlSerializable
     {
         internal X12DelimiterSet _delimiters;
+        private string[] _dataElements { get; set; }
 
         internal Segment(Container parent, X12DelimiterSet delimiters, string segment)
         {
@@ -28,9 +29,26 @@ namespace OopFactory.X12.Parsing.Model
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                DataElements = segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
+                _dataElements = segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
             }
             PostValidate();
+        }
+
+        public int ElementCount { get { return _dataElements.Length; } }
+        public string GetElement(int elementNumber)
+        {
+            return _dataElements[elementNumber - 1];
+        }
+
+        public void SetElement(int elementNumber, string value)
+        {
+            if (value.Contains(_delimiters.SegmentTerminator))
+                throw new ArgumentException(String.Format("Value '{0}' cannot contain the segment terminator {1}.", value, _delimiters.SegmentTerminator));
+
+            if (value.Contains(_delimiters.ElementSeparator))
+                throw new ArgumentException(String.Format("Value '{0}' cannot contain the element separator {1}.", value, _delimiters.ElementSeparator));
+
+            _dataElements[elementNumber - 1] = value;
         }
 
         protected virtual void PostValidate()
@@ -43,7 +61,7 @@ namespace OopFactory.X12.Parsing.Model
             if (addWhitespace)
                 sb.AppendLine();
             sb.Append(SegmentId);
-            foreach (var item in DataElements)
+            foreach (var item in _dataElements)
             {
                 sb.Append(_delimiters.ElementSeparator);
                 sb.Append(item);
@@ -54,7 +72,6 @@ namespace OopFactory.X12.Parsing.Model
 
         internal string SegmentId { get; set; }
         
-        internal string[] DataElements { get; private set; }
 
         internal string SegmentString { get; set; }
 
@@ -82,15 +99,15 @@ namespace OopFactory.X12.Parsing.Model
             if (!string.IsNullOrEmpty(SegmentId))
             {
                 writer.WriteStartElement(SegmentId);
-                for (int i = 0; i < DataElements.Length; i++)
+                for (int i = 0; i < _dataElements.Length; i++)
                 {
                     string elementName = String.Format("{0}{1:00}", SegmentId, i + 1);
-                    if (DataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
-                        writer.WriteElementString(elementName, DataElements[i]);
+                    if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
+                        writer.WriteElementString(elementName, _dataElements[i]);
                     else
                     {
                         writer.WriteStartElement(elementName);
-                        var subElements = DataElements[i].Split(_delimiters.SubElementSeparator);
+                        var subElements = _dataElements[i].Split(_delimiters.SubElementSeparator);
                         for (int j = 0; j < subElements.Length; j++)
                         {
                             var subElementName = String.Format("{0}{1:00}", elementName, j + 1);
