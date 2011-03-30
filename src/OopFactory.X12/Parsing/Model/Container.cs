@@ -50,6 +50,23 @@ namespace OopFactory.X12.Parsing.Model
             _terminatingSegments.Add(new Segment(parent, _delimiters, segmentString));
         }
 
+        internal bool UpdateTrailerSegmentCount(string segmentId, int elementNumber, int count)
+        {
+            var segment = _terminatingSegments.FirstOrDefault(ts => ts.SegmentId == segmentId);
+            if (segment != null)
+            {
+                if (segment.ElementCount >= elementNumber)
+                {
+                    segment.SetElement(elementNumber, count.ToString());
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
         internal abstract string SerializeBodyToX12(bool addWhitespace);
         
         internal override string ToX12String(bool addWhitespace)

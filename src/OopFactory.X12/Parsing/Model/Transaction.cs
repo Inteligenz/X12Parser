@@ -58,13 +58,13 @@ namespace OopFactory.X12.Parsing.Model
         {
             if (SegmentId != "ST")
                 throw new ArgumentException(String.Format("Segment Id expected to be 'ST' but got '{0}'.", SegmentId));
-            if (DataElements.Length < 2)
+            if (ElementCount < 2)
                 throw new ArgumentException(String.Format("ST segment expects at least two data elements but got '{0}'.", SegmentString));
         }
 
         public string ControlNumber
         {
-            get { return DataElements[1]; }
+            get { return GetElement(2); }
         }
 
         internal List<HierarchicalLoop> AllLoops
