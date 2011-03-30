@@ -20,33 +20,27 @@ namespace OopFactory.X12
             _verbose = verbose;
         }
 
-        private string GetTransactionType(string rawX12)
-        {
-            string elementDelimiter = rawX12.Substring(3, 1);
-
-            int index = rawX12.IndexOf("ST" + elementDelimiter);
-
-            return rawX12.Substring(index + 3, 3);    
-        }
-
         public string ParseToXml(string rawX12)
         {
-            return ParseToXml(GetTransactionType(rawX12), new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
+            return ParseToXml(new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
         }
 
-        public string ParseToXml(string transactionType, Stream stream)
+        public string ParseToXml(Stream stream)
         {
-            var parser = new X12Parser(transactionType);
-            return parser.Parse(stream).Serialize();
+            return new X12Parser().Parse(stream).Serialize();
         }
 
         public string ParseToDomainXml(string rawX12)
         {
-            string transactionType = GetTransactionType(rawX12);
-            return ParseToDomainXml(transactionType, new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
+            return ParseToDomainXml(new MemoryStream(ASCIIEncoding.Default.GetBytes(rawX12)));
         }
-        public string ParseToDomainXml(string transactionType, Stream stream)
+        public string ParseToDomainXml(Stream stream)
         {
+            string xml = ParseToXml(stream);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            string transactionType = doc.SelectSingleNode("Interchange/FunctionGroup/Transaction/ST/ST01").InnerText;
+
             XslCompiledTransform transform;
 
             switch (transactionType)
@@ -67,7 +61,7 @@ namespace OopFactory.X12
             var writer = new StringWriter();
             XsltArgumentList list = new XsltArgumentList();
             list.AddParam("verbose", "", _verbose ? "1" : "0");
-            transform.Transform(XmlReader.Create(new StringReader(ParseToXml(transactionType, stream))), list, writer);
+            transform.Transform(XmlReader.Create(new StringReader(xml)), list, writer);
             return writer.GetStringBuilder().ToString();
         }
     }

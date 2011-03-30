@@ -5,7 +5,6 @@
   <SegmentSpecification SegmentId="CUR"/>
   <SegmentSpecification SegmentId="REF"/>
   <SegmentSpecification SegmentId="DTM"/>
-  <SegmentSpecification SegmentId="PLB" Trailing="true"/>
   <LoopSpecification LoopId="1000A" Usage="Required" LoopRepeat="1">
     <Name>PAYER IDENTIFICATION</Name>
     <StartingSegment>
@@ -63,4 +62,5 @@
       </LoopSpecification>
     </LoopSpecification>
   </LoopSpecification>
+  <SegmentSpecification SegmentId="PLB" Trailer="true"/>
 </TransactionSpecification>

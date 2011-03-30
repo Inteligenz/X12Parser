@@ -9,28 +9,6 @@ namespace OopFactory.X12.Parsing
 {
     public class X12Parser
     {
-        private TransactionSpecification _specification;
-        
-        public X12Parser(string transactionType)
-        {
-            _specification = GetSpec(transactionType);
-        }
-
-        private static TransactionSpecification GetSpec(string transactionType)
-        {
-            switch (transactionType)
-            {
-                case "835":
-                    return EmbeddedResources.Get835TransactionSpecification();
-                case "837":
-                    return EmbeddedResources.Get837TransactionSpecification();
-                case "856":
-                    return EmbeddedResources.Get856TransactionSpecification();
-                default:
-                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
-            }
-        }
-
         private string ReadNextSegment(StreamReader reader, char segmentDelimiter)
         {
             StringBuilder sb = new StringBuilder();
@@ -64,7 +42,7 @@ namespace OopFactory.X12.Parsing
             string header = String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}000000001{1}1{1}P{1}{2}{0}", 
                 segmentDelimiter, elementDelimiter, subElementDelimiter,
                 date);
-            return new Interchange(GetSpec(transactionType), header);
+            return new Interchange(header);
         }
         
         public Interchange Parse(Stream stream)
@@ -77,7 +55,7 @@ namespace OopFactory.X12.Parsing
 
             X12DelimiterSet delimiters = new X12DelimiterSet(header);
 
-            Interchange envelop = new Interchange(_specification, new string(header));
+            Interchange envelop = new Interchange(new string(header));
             Container currentContainer = envelop;
             FunctionGroup fg = null;
             Transaction tr = null;
@@ -164,7 +142,7 @@ namespace OopFactory.X12.Parsing
                         if (currentContainer == null)
                         {
                             throw new InvalidOperationException(String.Format(
-                                "Segment {0} cannot be identified in the specification for {1}.", segmentString, _specification.TransactionSetIdentifierCode));
+                                "Segment {0} cannot be identified.", segmentString));
                         }
                         break;
 

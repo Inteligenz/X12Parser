@@ -56,7 +56,7 @@ namespace OopFactory.X12.Parsing.Model
         
         internal string[] DataElements { get; private set; }
 
-        public string SegmentString { get; private set; }
+        internal string SegmentString { get; set; }
 
         public Container Parent { get; private set; }
 

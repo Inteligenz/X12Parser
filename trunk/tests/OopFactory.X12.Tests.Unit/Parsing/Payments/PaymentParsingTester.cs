@@ -31,7 +31,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
 
             //var xml = service.ParseToXml(SAMPLE_1);
             
-            var xml = service.ParseToDomainXml("835", GetEdi("Sample1.txt"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample1.txt"));
             Trace.Write(xml);
         }
 
@@ -39,7 +39,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
         public void ParseAndUnparseToX12()
         {
             string orignalX12 = new StreamReader(GetEdi("Sample1.txt")).ReadToEnd();
-            X12Parser parser = new X12Parser("835");
+            X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("Sample1.txt"));
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);

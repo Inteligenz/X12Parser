@@ -11,15 +11,13 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class FunctionGroup : Container, IXmlSerializable
     {
-        private TransactionSpecification _specification;
         private Dictionary<string,Transaction> _transactions;
 
         internal FunctionGroup() : base(null, null, "GS") { }
 
-        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification specification)
+        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment)
             : base(parent, delimiters, segment)
         {
-            _specification = specification;
             _transactions = new Dictionary<string,Transaction>();
         }
 
@@ -36,12 +34,29 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
+        private static TransactionSpecification GetSpec(string transactionType)
+        {
+            switch (transactionType)
+            {
+                case "835":
+                    return EmbeddedResources.Get835TransactionSpecification();
+                case "837":
+                    return EmbeddedResources.Get837TransactionSpecification();
+                case "856":
+                    return EmbeddedResources.Get856TransactionSpecification();
+                default:
+                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
+            }
+        }
+
         internal Transaction AddTransaction(string segmentString)
         {
             if (!segmentString.StartsWith("ST" + _delimiters.ElementSeparator))
                 throw new InvalidOperationException(string.Format("Segment {0} does not start with ST{1} as expected.", segmentString, _delimiters.ElementSeparator));
 
-            Transaction transaction = new Transaction(this, _delimiters, segmentString, _specification);
+            string transactionType = new Segment(null, _delimiters, segmentString).DataElements[0];
+
+            Transaction transaction = new Transaction(this, _delimiters, segmentString, GetSpec(transactionType));
             _transactions.Add(transaction.ControlNumber, transaction);
             return transaction;
         }
