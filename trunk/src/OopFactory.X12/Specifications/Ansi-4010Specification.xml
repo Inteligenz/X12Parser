@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"?>
+<SegmentSet>
+  <Name>4010</Name>
+  <Segment SegmentId="ISA" >
+    <Element Name="Author Info Qualifier" Required="Mandatory" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Author Information" Required="Mandatory" Type="AN" MinLength="10" MaxLength="10" />
+    
+  </Segment>
+</SegmentSet>

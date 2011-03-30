@@ -54,10 +54,12 @@
     <Compile Include="Parsing\Model\LoopContainer.cs" />
     <Compile Include="Parsing\Model\Segment.cs" />
     <Compile Include="Parsing\Model\Transaction.cs" />
+    <Compile Include="Parsing\Specification\ElementSpecification.cs" />
     <Compile Include="Parsing\Specification\Enumerations.cs" />
     <Compile Include="Parsing\Specification\HierarchicalLoopSpecification.cs" />
     <Compile Include="Parsing\Specification\Lookup.cs" />
     <Compile Include="Parsing\Specification\LoopSpecification.cs" />
+    <Compile Include="Parsing\Specification\SegmentSet.cs" />
     <Compile Include="Parsing\Specification\SegmentSpecification.cs" />
     <Compile Include="Parsing\Specification\SegmentSpecificationStandard.cs" />
     <Compile Include="Parsing\Specification\StartingSegment.cs" />
@@ -89,6 +91,7 @@
     <EmbeddedResource Include="Transformations\Ansi-856-To-ShipNotice.xslt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Specifications\Ansi-4010Specification.xml" />
     <Content Include="Specifications\Ansi-997-4010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
