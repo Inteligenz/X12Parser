@@ -21,7 +21,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToX12Xml_Sample1()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToXml("856", GetEdi("Sample1.edi"));
+            var xml = service.ParseToXml(GetEdi("Sample1.edi"));
             Trace.Write(xml);
         }
 
@@ -29,7 +29,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToX12Xml_Sample2()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToXml("856", GetEdi("Sample2.edi"));
+            var xml = service.ParseToXml(GetEdi("Sample2.edi"));
             Trace.Write(xml);
         }
 
@@ -37,7 +37,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToX12Xml_Sample3()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToXml("856", GetEdi("Sample3.edi"));
+            var xml = service.ParseToXml(GetEdi("Sample3.edi"));
             Trace.Write(xml);
         }
 
@@ -45,7 +45,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToDomainXml_Sample1()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample1.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample1.edi"));
             Trace.Write(xml);
         }
 
@@ -53,7 +53,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToDomainXml_Sample2()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample2.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample2.edi"));
             Trace.Write(xml);
         }
         
@@ -61,7 +61,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void ParseToDomainXml_Sample3()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample3.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample3.edi"));
             Trace.Write(xml);
         }
 
@@ -69,7 +69,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void RenderSample1()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample1.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample1.edi"));
 
             var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);
@@ -81,7 +81,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void RenderSample2()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample2.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample2.edi"));
 
             var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);
@@ -93,7 +93,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
         public void RenderSample3()
         {
             var service = new X12ParsingService(true);
-            var xml = service.ParseToDomainXml("856", GetEdi("Sample3.edi"));
+            var xml = service.ParseToDomainXml(GetEdi("Sample3.edi"));
 
             var renderingService = new BillOfLadingPortraitRenderingService();
             byte[] pdf = renderingService.CreatePdf(xml);

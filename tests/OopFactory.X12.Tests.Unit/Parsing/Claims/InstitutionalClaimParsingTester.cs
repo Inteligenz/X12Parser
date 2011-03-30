@@ -27,7 +27,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
         {
             var service = new X12ParsingService(true);
 
-            var xml = service.ParseToDomainXml("837", stream);
+            var xml = service.ParseToDomainXml(stream);
             Trace.Write(xml);
             var transactions = ModelExtensions.Deserialize<List<OopFactory.X12.Model.Claims.Transaction>>(xml);
 
@@ -41,7 +41,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
         {
             var service = new X12ParsingService(true);
 
-            var xml = service.ParseToXml("837", GetEdi("Sample1.txt"));
+            var xml = service.ParseToXml( GetEdi("Sample1.txt"));
             Trace.Write(xml);
         }
 
@@ -49,7 +49,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
         public void ParseAndUnparseToX12()
         {
             string orignalX12 = new StreamReader(GetEdi("Sample1.txt")).ReadToEnd();
-            X12Parser parser = new X12Parser("837");
+            X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("Sample1.txt"));
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);

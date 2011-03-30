@@ -11,15 +11,13 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class Interchange : Container, IXmlSerializable
     {
-        private TransactionSpecification _specification;
         private List<FunctionGroup> _functionGroups;
 
         internal Interchange() : base(null, null, "GS") { }
 
-        internal Interchange(TransactionSpecification specification, string segmentString)
+        internal Interchange(string segmentString)
             : base(null, new X12DelimiterSet(segmentString.ToCharArray()), segmentString)
         {
-            _specification = specification;
             _functionGroups = new List<FunctionGroup>();
         }
 
@@ -33,7 +31,7 @@ namespace OopFactory.X12.Parsing.Model
             if (!segmentString.StartsWith("GS" + _delimiters.ElementSeparator))
                 throw new InvalidOperationException(String.Format("Segment {0} does not start with GS{1} as expected.", segmentString, _delimiters.ElementSeparator));
 
-            FunctionGroup fg = new FunctionGroup(this, _delimiters, segmentString, _specification);
+            FunctionGroup fg = new FunctionGroup(this, _delimiters, segmentString);
             _functionGroups.Add(fg);
             return fg;
         }

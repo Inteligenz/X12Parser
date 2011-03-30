@@ -23,9 +23,9 @@ namespace OopFactory.X12.Parsing.Specification
         [XmlAttribute]
         public int Repeat { get; set; }
         [XmlAttribute]
-        public bool Trailing { get; set; }
+        public bool Trailer { get; set; }
         [XmlIgnore]
-        public bool TrailingSpecified { get; set; }
+        public bool TrailerSpecified { get; set; }
 
         public SegmentSpecificationStandard Standard { get; set; }
     }

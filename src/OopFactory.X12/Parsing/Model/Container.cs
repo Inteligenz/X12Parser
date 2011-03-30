@@ -33,7 +33,7 @@ namespace OopFactory.X12.Parsing.Model
             SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId);
             if (spec != null)
             {
-                if (spec.Trailing)
+                if (spec.Trailer)
                     _terminatingSegments.Add(segment);
                 else
                     _segments.Add(segment);
