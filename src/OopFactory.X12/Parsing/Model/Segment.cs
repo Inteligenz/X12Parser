@@ -48,6 +48,34 @@ namespace OopFactory.X12.Parsing.Model
             if (value.Contains(_delimiters.ElementSeparator))
                 throw new ArgumentException(String.Format("Value '{0}' cannot contain the element separator {1}.", value, _delimiters.ElementSeparator));
 
+            if (EmbeddedResources.Get4010Spec().ContainsKey(this.SegmentId))
+            {
+                var spec = EmbeddedResources.Get4010Spec()[SegmentId].GetElement(elementNumber);
+                if (spec != null)
+                {
+                    if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
+                        throw new ArgumentOutOfRangeException("value", String.Format("Element {0}{1:00} cannot be {2} because it must be between {3} and {4} characters in length.",
+                            this.SegmentId, elementNumber, value, spec.MinLength, spec.MaxLength));
+
+                    switch (spec.Type)
+                    {
+                        case Specification.ElementDataTypeEnum.Numeric:
+                            int number;
+                            if (!int.TryParse(value, out number))
+                                throw new ArgumentException("value", String.Format("Element {0}{1:00} cannot be {2} because it is constrained to be an implied decimal.",
+                                    this.SegmentId, elementNumber, value));
+                            break;
+                        case Specification.ElementDataTypeEnum.Decimal:
+                            decimal decNumber;
+                            if (!decimal.TryParse(value, out decNumber))
+                                throw new ArgumentException("value", String.Format("Element {0}{1:00} cannot be {2} because it is contrained to be a decimal.",
+                                    this.SegmentId, elementNumber, value));
+                            break;
+
+                    }
+                }
+            }
+
             _dataElements[elementNumber - 1] = value;
         }
 

@@ -11,7 +11,7 @@ namespace OopFactory.X12.Parsing.Specification
         [XmlAttribute]
         public string Name { get; set; }
         [XmlAttribute]
-        public RequirementEnum Required { get; set; }
+        public bool Required { get; set; }
         [XmlAttribute]
         public ElementDataTypeEnum Type { get; set; }
         [XmlAttribute]

@@ -13,6 +13,34 @@ namespace OopFactory.X12
 {
     internal static class EmbeddedResources
     {
+        private static Dictionary<string, SegmentSpecification> _4010Specification;
+        internal static Dictionary<string, SegmentSpecification> Get4010Spec()
+        {
+            if (_4010Specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
+                _4010Specification = new Dictionary<string, SegmentSpecification>();
+                foreach (var segment in set.Segments)
+                    _4010Specification.Add(segment.SegmentId, segment);
+            }
+            return _4010Specification;
+        }
+
+        private static TransactionSpecification _997specification;
+
+        internal static TransactionSpecification Get997TransactionSpecification()
+        {
+            if (_997specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-997-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _997specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _997specification;
+        }
+
         private static TransactionSpecification _837specification;
 
         internal static TransactionSpecification Get837TransactionSpecification()

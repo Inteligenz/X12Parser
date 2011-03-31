@@ -25,7 +25,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             isa.Elements.Add(new ElementSpecification
             {
                 Name = "Author Info Qualifier",
-                Required = RequirementEnum.Mandatory,
+                Required = true,
                 MinLength = 2,
                 MaxLength = 2,
                 Type = ElementDataTypeEnum.Identifier
