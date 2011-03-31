@@ -2,8 +2,25 @@
 <SegmentSet>
   <Name>4010</Name>
   <Segment SegmentId="ISA" >
-    <Element Name="Author Info Qualifier" Required="Mandatory" Type="ID" MinLength="2" MaxLength="2" />
-    <Element Name="Author Information" Required="Mandatory" Type="AN" MinLength="10" MaxLength="10" />
-    
+    <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Author Information" Required="true" Type="AN" MinLength="10" MaxLength="10" />
+    <Element Name="Security Information Qualifer" Required="true" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Security Information" Required="true" Type="AN" MinLength="10" MaxLength="2" />
+    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Interchange Sender ID" Required="true" Type="AN" MinLength="15" MaxLength="15" />
+    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Interchange Receiver ID" Required="true" Type="AN" MinLength="15" MaxLength="15" />
+    <Element Name="Interchange Date" Required="true" Type="DT" MinLength="6" MaxLength="6" />
+    <Element Name="Interchange Time" Required="true" Type="TM" MinLength="4" MaxLength="4" />
+    <Element Name="Inter Control Standards Identifier" Required="true" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Inter Control Version Number" Required="true" Type="ID" MinLength="5" MaxLength="5" />
+    <Element Name="Inter Control Number" Required="true" Type="N" MinLength="9" MaxLength="9" />
+    <Element Name="Acknowlegment Requested" Required="true" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Usage Indicator" Required="true" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Component Element Separator" Required="true" Type="AN" MinLength="1" MaxLength="1" />
+  </Segment>
+  <Segment SegmentId="IEA">
+    <Element Name="Number of Included Functional Groups" Required="true" Type="N" MinLength="1" MaxLength="5" />
+    <Element Name="Interchange Control Number" Required="true" Type="N" MinLength="9" MaxLength="9" />
   </Segment>
 </SegmentSet>

@@ -44,28 +44,28 @@ namespace OopFactory.X12.Parsing.Model
         {
         }
 
+        public string AuthorInfoQualifier
+        {
+            get { return GetElement(1); }
+            set { SetElement(1, String.Format("{0,-2}", value)); }
+        }
+
+        public string AuthorInfo
+        {
+            get { return GetElement(2); }
+            set { SetElement(2, String.Format("{0,-10}", value)); }
+        }
+
         public string SenderId
         {
             get { return GetElement(6); }
-            set
-            {
-                if (value != null && value.Length > 15)
-                    throw new ArgumentOutOfRangeException("SenderId", value, "SenderId cannot exceed 15 characters.");
-
-                SetElement(6, String.Format("{0,-15}", value));
-            }
+            set { SetElement(6, String.Format("{0,-15}", value)); }
         }
 
         public string ReceiverId
         {
             get { return GetElement(8); }
-            set
-            {
-                if (value != null && value.Length > 15)
-                    throw new ArgumentOutOfRangeException("ReceiverId", value, "ReceiverId cannot exceed 15 characters.");
-
-                SetElement(8, String.Format("{0,-15}", value));
-            }
+            set { SetElement(8, String.Format("{0,-15}", value)); }
         }
         
         public IEnumerable<FunctionGroup> FunctionGroups

@@ -44,6 +44,8 @@ namespace OopFactory.X12.Parsing.Model
                     return EmbeddedResources.Get837TransactionSpecification();
                 case "856":
                     return EmbeddedResources.Get856TransactionSpecification();
+                case "997":
+                    return EmbeddedResources.Get997TransactionSpecification();
                 default:
                     throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
             }
