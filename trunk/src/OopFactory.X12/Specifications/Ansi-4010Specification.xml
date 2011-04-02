@@ -60,7 +60,6 @@
   </Segment>
   <Segment SegmentId="GS">
     <Element Name="Functional Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
-      <Allowed ID="BE">Benefit Enrollment and Maintenance (834)</Allowed>
     </Element>
     <Element Name="Application Sender's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
     <Element Name="Application Receiver's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />

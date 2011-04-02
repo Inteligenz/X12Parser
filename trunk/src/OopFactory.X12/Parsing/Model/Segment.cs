@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -11,7 +12,7 @@ namespace OopFactory.X12.Parsing.Model
     public class Segment : IXmlSerializable
     {
         internal X12DelimiterSet _delimiters;
-        private string[] _dataElements { get; set; }
+        private List<string> _dataElements { get; set; }
 
         internal Segment(Container parent, X12DelimiterSet delimiters, string segment)
         {
@@ -29,15 +30,17 @@ namespace OopFactory.X12.Parsing.Model
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                _dataElements = segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator);
+                _dataElements = new List<string>();
+                foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
+                    _dataElements.Add(element);
             }
             PostValidate();
         }
 
-        public int ElementCount { get { return _dataElements.Length; } }
+        public int ElementCount { get { return _dataElements.Count(); } }
         public string GetElement(int elementNumber)
         {
-            return _dataElements[elementNumber - 1];
+            return _dataElements.ElementAtOrDefault(elementNumber - 1);
         }
 
         private void ValidateContentFreeOfDelimiters(string elementId, string value)
@@ -98,7 +101,7 @@ namespace OopFactory.X12.Parsing.Model
                                     else
                                         expected = ids[0];
 
-                                    throw new ElementValidationException("'{0}' is not an allowed value for element {1}.  Expected {2}.", elementId, value, expected);
+                                    throw new ElementValidationException("Element '{0}' cannot contain the value '{1}'.  Specification restricts this to {2}.", elementId, value, expected);
                                 }
                             }
                             break;
@@ -111,8 +114,12 @@ namespace OopFactory.X12.Parsing.Model
         {
             string elementId = String.Format("{0}{1:00}", SegmentId, elementNumber);
             ValidateContentFreeOfDelimiters(elementId, value);
-            ValidateAgainstSegmentSpecification(elementId, elementNumber, value);       
-
+            ValidateAgainstSegmentSpecification(elementId, elementNumber, value);
+            if (elementNumber > _dataElements.Count)
+            {
+                for (int i = _dataElements.Count; i < elementNumber; i++)
+                    _dataElements.Add("");
+            }
             _dataElements[elementNumber - 1] = value;
         }
 
@@ -164,7 +171,7 @@ namespace OopFactory.X12.Parsing.Model
             if (!string.IsNullOrEmpty(SegmentId))
             {
                 writer.WriteStartElement(SegmentId);
-                for (int i = 0; i < _dataElements.Length; i++)
+                for (int i = 0; i < _dataElements.Count; i++)
                 {
                     string elementName = String.Format("{0}{1:00}", SegmentId, i + 1);
                     if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
