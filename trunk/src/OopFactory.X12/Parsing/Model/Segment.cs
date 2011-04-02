@@ -25,14 +25,17 @@ namespace OopFactory.X12.Parsing.Model
         {
             if (segment == null)
                 throw new ArgumentNullException("segment");
-            SegmentString = segment.Trim();
-            int separatorIndex = SegmentString.IndexOf(_delimiters.ElementSeparator);
+            _dataElements = new List<string>();
+            int separatorIndex = segment.IndexOf(_delimiters.ElementSeparator);
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                _dataElements = new List<string>();
                 foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
                     _dataElements.Add(element);
+            }
+            else
+            {
+                SegmentId = segment;
             }
             PostValidate();
         }
@@ -132,20 +135,32 @@ namespace OopFactory.X12.Parsing.Model
             StringBuilder sb = new StringBuilder();
             if (addWhitespace)
                 sb.AppendLine();
-            sb.Append(SegmentId);
-            foreach (var item in _dataElements)
-            {
-                sb.Append(_delimiters.ElementSeparator);
-                sb.Append(item);
-            }
+            sb.Append(SegmentString);
             sb.Append(_delimiters.SegmentTerminator);
             return sb.ToString();
         }
 
-        internal string SegmentId { get; set; }
-        
+        public string SerializeToX12(bool addWhitespace)
+        {
+            return this.ToX12String(addWhitespace).Trim();
+        }
 
-        internal string SegmentString { get; set; }
+        internal string SegmentId { get; private set; }
+
+
+        public string SegmentString
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder(SegmentId);
+                foreach (var element in _dataElements)
+                {
+                    sb.Append(_delimiters.ElementSeparator);
+                    sb.Append(element);
+                }
+                return sb.ToString();
+            }
+        }
 
         public Container Parent { get; private set; }
 

@@ -30,7 +30,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public IEnumerable<Segment> Segments { get { return _segments; } }
 
-        public bool AddSegment(string segmentString)
+        public Segment AddSegment(string segmentString)
         {
             Segment segment = new Segment(this, _delimiters, segmentString);
             SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId);
@@ -40,10 +40,10 @@ namespace OopFactory.X12.Parsing.Model
                     _trailerSegments.Add(segment);
                 else
                     _segments.Add(segment);
-                return true;
+                return segment;
             }
             else
-                return false;
+                return null;
         }
 
         public IEnumerable<Segment> TrailerSegments 

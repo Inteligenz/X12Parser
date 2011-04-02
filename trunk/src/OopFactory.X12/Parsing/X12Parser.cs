@@ -118,7 +118,7 @@ namespace OopFactory.X12.Parsing
                                 }
                             }
                                 
-                            if (currentContainer.AddSegment(segmentString))
+                            if (currentContainer.AddSegment(segmentString) != null)
                                 break;
                             else
                             {
