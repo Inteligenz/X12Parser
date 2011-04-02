@@ -23,6 +23,17 @@ namespace OopFactory.X12.Parsing.Model
 
         public TransactionSpecification Specification { get; private set; }
 
+        public string IdentifierCode
+        {
+            get { return GetElement(1); }
+            set { SetElement(1, value); }
+        }
+        public string ControlNumber
+        {
+            get { return GetElement(2); }
+            set { SetElement(2, value); }
+        }
+        
         internal override IList<LoopSpecification> AllowedChildLoops
         {
             get
@@ -62,14 +73,18 @@ namespace OopFactory.X12.Parsing.Model
                 throw new ArgumentException(String.Format("ST segment expects at least two data elements but got '{0}'.", SegmentString));
         }
 
-        public string ControlNumber
-        {
-            get { return GetElement(2); }
-        }
+
 
         internal List<HierarchicalLoop> AllLoops
         {
             get { return _allHLoops; }
+        }
+
+        
+        internal override string ToX12String(bool addWhitespace)
+        {
+            UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());
+            return base.ToX12String(addWhitespace);
         }
 
         internal override void WriteXml(XmlWriter writer)

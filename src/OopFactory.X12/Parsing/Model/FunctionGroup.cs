@@ -21,6 +21,65 @@ namespace OopFactory.X12.Parsing.Model
             _transactions = new Dictionary<string,Transaction>();
         }
 
+        public string FunctionalIdentifierCode
+        {
+            get { return GetElement(1); }
+            set { SetElement(1, value); }
+        }
+
+        public string ApplicationSendersCode
+        {
+            get { return GetElement(2); }
+            set { SetElement(2, value); }
+        }
+
+        public string ApplicationReceiversCode
+        {
+            get { return GetElement(3); }
+            set { SetElement(3, value); }
+        }
+
+        public DateTime Date
+        {
+            get
+            {
+                DateTime date;
+                if (DateTime.TryParseExact(GetElement(4) + GetElement(5), "yyyyMMddhhmmss", null, System.Globalization.DateTimeStyles.None, out date))
+                    return date;
+                else if (DateTime.TryParseExact(GetElement(4), "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
+                    return date;
+                else
+                    throw new ArgumentException(String.Format("{0} and {1} cannot be converted into a date and time.", GetElement(4), GetElement(5)));
+
+            }
+            set
+            {
+                SetElement(9, string.Format("{0:yyyyMMdd}", value));
+                SetElement(10, string.Format("{0:hhmmss}", value));
+            }
+        }
+
+        public int ControlNumber
+        {
+            get { return Int32.Parse(GetElement(6)); }
+            set 
+            { 
+                SetElement(6, value.ToString()); 
+            }
+        }
+
+        public string ResponsibleAgencyCode
+        {
+            get { return GetElement(7); }
+            set { SetElement(7, value); }
+        }
+
+        public string VersionIdentifierCode
+        {
+            get { return GetElement(8); }
+            set { SetElement(8, value); }
+        }
+
         public IEnumerable<Transaction> Transactions
         {
             get { return _transactions.Values; }
@@ -63,6 +122,20 @@ namespace OopFactory.X12.Parsing.Model
             return transaction;
         }
 
+        public Transaction AddTransaction(string identifierCode, string controlNumber)
+        {
+            Transaction transaction = new Transaction(this, _delimiters, 
+                String.Format("ST{0}{0}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator), 
+                GetSpec(identifierCode));
+            transaction.IdentifierCode = identifierCode;
+            transaction.ControlNumber = controlNumber;
+            transaction.AddTerminatingSegment(this,
+                string.Format("SE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
+
+            _transactions.Add(transaction.ControlNumber, transaction);
+            return transaction;
+        }
+
         internal override IList<SegmentSpecification> AllowedChildSegments
         {
             get
@@ -77,6 +150,12 @@ namespace OopFactory.X12.Parsing.Model
             foreach (var transaction in this.Transactions)
                 sb.Append(transaction.ToX12String(addWhitespace));
             return sb.ToString();
+        }
+
+        internal override string ToX12String(bool addWhitespace)
+        {
+            UpdateTrailerSegmentCount("GE", 1, _transactions.Count());
+            return base.ToX12String(addWhitespace);
         }
 
         public virtual string Serialize()
