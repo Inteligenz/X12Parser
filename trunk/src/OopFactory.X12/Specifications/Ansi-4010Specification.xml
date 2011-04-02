@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0"?>
-<SegmentSet>
+<SegmentSet xmlns="http://tempuri.org/X12ParserSpecification.xsd"
+    >
   <Name>4010</Name>
   <Segment SegmentId="ISA" >
     <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2">
@@ -56,5 +57,33 @@
   <Segment SegmentId="IEA">
     <Element Name="Number of Included Functional Groups" Required="true" Type="N" MinLength="1" MaxLength="5" />
     <Element Name="Interchange Control Number" Required="true" Type="N" MinLength="9" MaxLength="9" />
+  </Segment>
+  <Segment SegmentId="GS">
+    <Element Name="Functional Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="BE">Benefit Enrollment and Maintenance (834)</Allowed>
+    </Element>
+    <Element Name="Application Sender's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
+    <Element Name="Application Receiver's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
+    <Element Name="Date" Required="true" Type="DT" MinLength="8" MaxLength="8" />
+    <Element Name="Time" Required="true" Type="TM" MinLength="4" MaxLength="8" />
+    <Element Name="Group Control Number" Required="true" Type="N" MinLength="1" MaxLength="9" />
+    <Element Name="Responsible Agency Code" Required="true" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="X">Accredited Standards Committee X12</Allowed>
+    </Element>
+    <Element Name="Version/Release/Industry Identifier Code" Required="true" Type="AN" MinLength="1" MaxLength="12">
+    </Element>
+  </Segment>
+  <Segment SegmentId="GE">
+    <Element Name="Number of Transaction Sets Included" Required="true" Type="N" MinLength="1" MaxLength="6"/>
+    <Element Name="Group Control Number" Required="true" Type="N" MinLength="1" MaxLength="9" />
+  </Segment>
+  <Segment SegmentId="ST">
+    <Element Name="Transaction Set Identifier Code" Required="true" Type="ID" MinLength="3" MaxLength="3" />
+    <Element Name="Transaction Set Control Number" Required="true" Type="AN" MinLength="4" MaxLength="9" />
+  </Segment>
+
+  <Segment SegmentId="HL">
+    <Element Name="Hierarchical ID Number" Required="true" Type="AN" MinLength="1" MaxLength="12" />
+    <Element Name="Hierarchical Parent ID Number" Required="false" Type="AN" MinLength="1" MaxLength="12" />
   </Segment>
 </SegmentSet>
