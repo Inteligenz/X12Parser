@@ -16,6 +16,10 @@ namespace OopFactory.X12.Tests.Unit.Creation
     [TestClass]
     public class InstitutionalClaimCreationTester
     {
+        private const string InterchangeSample1 =
+@"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+IEA*0*000000031~";
+
         [TestMethod]
         public void SerializeSegmentSet()
         {
@@ -44,16 +48,34 @@ namespace OopFactory.X12.Tests.Unit.Creation
         [TestMethod]
         public void InterchangeCreationTest()
         {
-            string expectedX12 =
-@"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
-IEA*0*000000031~";
-
-            Interchange interchange = new Interchange(DateTime.Parse("2002-08-16 11:44AM"), 31, false);
-            interchange.SenderId = "9012345720000";
-            interchange.ReceiverId = "9088877320000";
+            DateTime date = DateTime.Parse("2002-08-16 11:44AM");
+            Interchange interchange = new Interchange(date, 31, false);
+            interchange.InterchangeSenderId = "9012345720000";
+            interchange.InterchangeReceiverId = "9088877320000";
             
             string actualX12 = interchange.SerializeToX12(true);
-            Assert.AreEqual(expectedX12, actualX12);
+            Assert.AreEqual(InterchangeSample1, actualX12);
+            Assert.AreEqual("00", interchange.AuthorInfoQualifier);
+            Assert.AreEqual("00", interchange.SecurityInfoQualifier);
+            Assert.AreEqual("01", interchange.InterchangeSenderIdQualifier);
+            Assert.AreEqual("01", interchange.InterchangeReceiverIdQualifier);
+            Assert.AreEqual(date, interchange.InterchangeDate);
+        }
+
+        [TestMethod]
+        public void InterchangeSenderIdQualifierValidationTest()
+        {
+            try
+            {
+                DateTime date = DateTime.Parse("2002-08-16 11:44AM");
+                Interchange interchange = new Interchange(date, 31, false);
+                interchange.InterchangeSenderIdQualifier = "ER";
+                Assert.Fail("An ElementValidationException was expected.");
+            }
+            catch (ElementValidationException exc) {
+                if (exc.ElementId != "ISA05")
+                    Assert.Fail(string.Format("Exception expected on ISA05, but got exception on {0} instead.", exc.ElementId));
+            }
         }
     }
 }

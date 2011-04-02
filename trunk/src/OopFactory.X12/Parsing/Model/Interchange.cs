@@ -56,16 +56,60 @@ namespace OopFactory.X12.Parsing.Model
             set { SetElement(2, String.Format("{0,-10}", value)); }
         }
 
-        public string SenderId
+        public string SecurityInfoQualifier
+        {
+            get { return GetElement(3); }
+            set { SetElement(3, String.Format("{0,-2}", value)); }
+        }
+
+        public string SecurityInfo
+        {
+            get { return GetElement(4); }
+            set { SetElement(4, String.Format("{0,-10}", value)); }
+        }
+
+        public string InterchangeSenderIdQualifier
+        {
+            get { return GetElement(5); }
+            set { SetElement(5, String.Format("{0,-2}", value)); }
+        }
+
+        public string InterchangeSenderId
         {
             get { return GetElement(6); }
             set { SetElement(6, String.Format("{0,-15}", value)); }
         }
 
-        public string ReceiverId
+        public string InterchangeReceiverIdQualifier
+        {
+            get { return GetElement(7); }
+            set { SetElement(7, String.Format("{0,-2", value)); }
+        }
+
+        public string InterchangeReceiverId
         {
             get { return GetElement(8); }
             set { SetElement(8, String.Format("{0,-15}", value)); }
+        }
+
+        public DateTime InterchangeDate
+        {
+            get
+            {
+                DateTime date;
+                if (DateTime.TryParseExact(GetElement(9) + GetElement(10), "yyMMddhhmm", null, System.Globalization.DateTimeStyles.None, out date))
+                    return date;
+                else if (DateTime.TryParseExact(GetElement(9), "yyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
+                    return date;
+                else
+                    throw new ArgumentException(String.Format("{0} and {1} cannot be converted into a date and time.", GetElement(9), GetElement(10)));
+                
+            }
+            set
+            {
+                SetElement(9, string.Format("{0:yyMMdd}", value));
+                SetElement(10, string.Format("{0:hhmm}", value));
+            }
         }
         
         public IEnumerable<FunctionGroup> FunctionGroups
