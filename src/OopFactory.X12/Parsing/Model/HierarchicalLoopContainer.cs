@@ -72,7 +72,7 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var hloop in this.HLoops)
                     hloop.WriteXml(writer);
 
-                foreach (var segment in this.TerminatingSegments)
+                foreach (var segment in this.TrailerSegments)
                     segment.WriteXml(writer);
             }
         }

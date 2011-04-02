@@ -62,7 +62,7 @@ namespace OopFactory.X12.Parsing
                     case "GE":
                         if (fg == null)
                             throw new InvalidOperationException(String.Format("Segment '{0}' does not have a matching GS segment precending it.", segmentString));
-                        fg.AddTerminatingSegment(fg, segmentString);
+                        fg.SetTerminatingTrailerSegment(segmentString);
                         fg = null;
                         break;
                     case "ST":
@@ -76,7 +76,7 @@ namespace OopFactory.X12.Parsing
                         if (tr == null)
                             throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching ST segment preceding it.", segmentString));
 
-                        tr.AddTerminatingSegment(tr, segmentString);
+                        tr.SetTerminatingTrailerSegment(segmentString);
                         tr = null;
                         break;
                     case "HL":
@@ -100,7 +100,7 @@ namespace OopFactory.X12.Parsing
                     case "IEA":
                         if (envelop == null)
                             throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
-                        envelop.AddTerminatingSegment(envelop, segmentString);
+                        envelop.SetTerminatingTrailerSegment(segmentString);
                         break;
                     default:
                         while (currentContainer != null)

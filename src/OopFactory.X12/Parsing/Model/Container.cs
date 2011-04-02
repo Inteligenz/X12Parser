@@ -9,7 +9,10 @@ namespace OopFactory.X12.Parsing.Model
     public abstract class Container : Segment
     {
         private List<Segment> _segments;
-        private List<Segment> _terminatingSegments;
+        
+        private List<Segment> _trailerSegments;
+
+        private Segment _terminatingTrailerSegment;
 
         internal Container(Container parent, X12DelimiterSet delimiters, string segment)
             : base(parent, delimiters, segment)
@@ -20,7 +23,7 @@ namespace OopFactory.X12.Parsing.Model
         {
             base.Initialize(segment);
             _segments = new List<Segment>();
-            _terminatingSegments = new List<Segment>();
+            _trailerSegments = new List<Segment>();
         }
 
         internal abstract IList<SegmentSpecification> AllowedChildSegments { get; }
@@ -34,7 +37,7 @@ namespace OopFactory.X12.Parsing.Model
             if (spec != null)
             {
                 if (spec.Trailer)
-                    _terminatingSegments.Add(segment);
+                    _trailerSegments.Add(segment);
                 else
                     _segments.Add(segment);
                 return true;
@@ -43,22 +46,33 @@ namespace OopFactory.X12.Parsing.Model
                 return false;
         }
 
-        public IEnumerable<Segment> TerminatingSegments { get { return _terminatingSegments; } }
+        public IEnumerable<Segment> TrailerSegments 
+        { 
+            get
+            {
+                if (_terminatingTrailerSegment == null)
+                    return _trailerSegments;
+                {
+                    return _trailerSegments.Union(new Segment[] { _terminatingTrailerSegment });
+                }
+            } 
+        }
 
-        public void AddTerminatingSegment(Container parent, string segmentString)
+        
+        internal void SetTerminatingTrailerSegment(string segmentString)
         {
-            _terminatingSegments.Add(new Segment(parent, _delimiters, segmentString));
+            _terminatingTrailerSegment = new Segment(this, _delimiters, segmentString);
         }
 
         internal virtual int CountTotalSegments()
         {
-            return 1 + _segments.Count + _terminatingSegments.Count;
+            return 1 + _segments.Count + _trailerSegments.Count;
         }
 
 
         internal bool UpdateTrailerSegmentCount(string segmentId, int elementNumber, int count)
         {
-            var segment = _terminatingSegments.FirstOrDefault(ts => ts.SegmentId == segmentId);
+            var segment = _trailerSegments.FirstOrDefault(ts => ts.SegmentId == segmentId);
             if (segment != null)
             {
                 if (segment.ElementCount >= elementNumber)
@@ -92,7 +106,7 @@ namespace OopFactory.X12.Parsing.Model
             else
                 sb.Append(SerializeBodyToX12(addWhitespace));
 
-            foreach (var segment in this.TerminatingSegments)
+            foreach (var segment in this.TrailerSegments)
             {
                 string[] wrapperSegments = new string[] { "SE", "GE", "IEA" };
                 if (addWhitespace && !wrapperSegments.Contains(segment.SegmentId))
