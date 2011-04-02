@@ -132,10 +132,13 @@ namespace OopFactory.X12.Parsing.Model
                 throw new ArgumentOutOfRangeException("controlNumber", controlNumber, "ControlNumber must be a positive number between 1 and 999999999.");
 
             FunctionGroup fg = new FunctionGroup(this, _delimiters,
-                string.Format("GS{0}{2}{0}{0}{3:yyyyMMdd}{0}{3:hhmmss}{0}{4}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator,
-                    functionIdCode, date, controlNumber));
+                string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator));
+            fg.FunctionalIdentifierCode = functionIdCode;
+            fg.Date = date;
+            fg.ControlNumber = controlNumber;
 
             fg.SetTerminatingTrailerSegment(String.Format("GE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
+            _functionGroups.Add(fg);
             return fg;
         }
         internal override IList<SegmentSpecification> AllowedChildSegments

@@ -20,6 +20,30 @@ namespace OopFactory.X12.Tests.Unit.Creation
 @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
 IEA*0*000000031~";
 
+        private Interchange CreateSample1InterChange(DateTime date)
+        {
+            Interchange interchange = new Interchange(date, 31, false);
+            interchange.InterchangeSenderId = "9012345720000";
+            interchange.InterchangeReceiverId = "9088877320000";
+
+            return interchange;
+        }
+
+        private const string FunctionGroupSample1 =
+@"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+  GE*0*31~
+IEA*1*000000031~";
+        
+        public Interchange CreateSample1WithFunctionGroup()
+        {
+            Interchange interchange = CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
+            FunctionGroup fg = interchange.AddFunctionGroup("HC", DateTime.Parse("2007-08-16 4:15PM"), 31);
+            fg.ApplicationSendersCode = "901234572000";
+            fg.ApplicationReceiversCode = "908887732000";
+            return interchange;
+        }
+        
         [TestMethod]
         public void SerializeSegmentSet()
         {
@@ -49,9 +73,7 @@ IEA*0*000000031~";
         public void InterchangeCreationTest()
         {
             DateTime date = DateTime.Parse("2002-08-16 11:44AM");
-            Interchange interchange = new Interchange(date, 31, false);
-            interchange.InterchangeSenderId = "9012345720000";
-            interchange.InterchangeReceiverId = "9088877320000";
+            Interchange interchange = CreateSample1InterChange(date);
             
             string actualX12 = interchange.SerializeToX12(true);
             Assert.AreEqual(InterchangeSample1, actualX12);
@@ -67,8 +89,7 @@ IEA*0*000000031~";
         {
             try
             {
-                DateTime date = DateTime.Parse("2002-08-16 11:44AM");
-                Interchange interchange = new Interchange(date, 31, false);
+                Interchange interchange = CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
                 interchange.InterchangeSenderIdQualifier = "ER";
                 Assert.Fail("An ElementValidationException was expected.");
             }
@@ -76,6 +97,14 @@ IEA*0*000000031~";
                 if (exc.ElementId != "ISA05")
                     Assert.Fail(string.Format("Exception expected on ISA05, but got exception on {0} instead.", exc.ElementId));
             }
+        }
+
+        [TestMethod]
+        public void FunctionGroupCreatinTest()
+        {
+            Interchange interchange = CreateSample1WithFunctionGroup();
+
+            Assert.AreEqual(FunctionGroupSample1, interchange.SerializeToX12(true));
         }
     }
 }

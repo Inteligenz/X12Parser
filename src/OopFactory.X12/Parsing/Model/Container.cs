@@ -66,13 +66,13 @@ namespace OopFactory.X12.Parsing.Model
 
         internal virtual int CountTotalSegments()
         {
-            return 1 + _segments.Count + _trailerSegments.Count;
+            return 1 + Segments.Count() + TrailerSegments.Count();
         }
 
 
         internal bool UpdateTrailerSegmentCount(string segmentId, int elementNumber, int count)
         {
-            var segment = _trailerSegments.FirstOrDefault(ts => ts.SegmentId == segmentId);
+            var segment = _terminatingTrailerSegment;
             if (segment != null)
             {
                 if (segment.ElementCount >= elementNumber)

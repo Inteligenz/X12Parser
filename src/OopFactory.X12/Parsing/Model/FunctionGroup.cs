@@ -44,7 +44,7 @@ namespace OopFactory.X12.Parsing.Model
             get
             {
                 DateTime date;
-                if (DateTime.TryParseExact(GetElement(4) + GetElement(5), "yyyyMMddhhmmss", null, System.Globalization.DateTimeStyles.None, out date))
+                if (DateTime.TryParseExact(GetElement(4) + GetElement(5), "yyyyMMddhhmm", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
                 else if (DateTime.TryParseExact(GetElement(4), "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
@@ -54,8 +54,8 @@ namespace OopFactory.X12.Parsing.Model
             }
             set
             {
-                SetElement(9, string.Format("{0:yyyyMMdd}", value));
-                SetElement(10, string.Format("{0:hhmmss}", value));
+                SetElement(4, string.Format("{0:yyyyMMdd}", value));
+                SetElement(5, string.Format("{0:HHmm}", value));
             }
         }
 
