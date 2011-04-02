@@ -34,8 +34,16 @@ IEA*0*000000031~";
   GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
   GE*0*31~
 IEA*1*000000031~";
-        
-        public Interchange CreateSample1WithFunctionGroup()
+
+        private const string TransactionSample1 =
+@"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+    ST*837*0034~
+    SE*2*0034~
+  GE*1*31~
+IEA*1*000000031~";
+
+        private Interchange CreateSample1WithFunctionGroup()
         {
             Interchange interchange = CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
             FunctionGroup fg = interchange.AddFunctionGroup("HC", DateTime.Parse("2007-08-16 4:15PM"), 31);
@@ -100,11 +108,20 @@ IEA*1*000000031~";
         }
 
         [TestMethod]
-        public void FunctionGroupCreatinTest()
+        public void FunctionGroupCreationTest()
         {
             Interchange interchange = CreateSample1WithFunctionGroup();
 
             Assert.AreEqual(FunctionGroupSample1, interchange.SerializeToX12(true));
+        }
+
+        [TestMethod]
+        public void TransactionCreationTest()
+        {
+            Interchange interchange = CreateSample1WithFunctionGroup();
+            interchange.FunctionGroups.First().AddTransaction("837", "0034");
+
+            Assert.AreEqual(TransactionSample1, interchange.SerializeToX12(true));
         }
     }
 }
