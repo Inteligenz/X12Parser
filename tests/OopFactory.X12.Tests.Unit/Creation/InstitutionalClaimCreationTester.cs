@@ -123,5 +123,30 @@ IEA*1*000000031~";
 
             Assert.AreEqual(TransactionSample1, interchange.SerializeToX12(true));
         }
+
+        [TestMethod]
+        public void TransactionCreationWithSegmentFromStringTest()
+        {
+            Interchange interchange = CreateSample1WithFunctionGroup();
+            Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
+            Segment bht = transaction.AddSegment("BHT*0019*00*3920394930203*20070816*1615*CH");
+            Assert.AreEqual("0019", bht.GetElement(1));
+            Trace.Write(interchange.SerializeToX12(true));
+        }
+        [TestMethod]
+        public void TransactionCreationWithSegmentToStringTest()
+        {
+            Interchange interchange = CreateSample1WithFunctionGroup();
+            Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
+            Segment bht = transaction.AddSegment("BHT");
+            bht.SetElement(1, "0019");
+            bht.SetElement(2, "00");
+            bht.SetElement(3, "3920394930203");
+            bht.SetElement(4, "20070816");
+            bht.SetElement(5, "1615");
+            bht.SetElement(6, "CH");
+            Assert.AreEqual("BHT*0019*00*3920394930203*20070816*1615*CH", bht.SegmentString);
+            Trace.Write(interchange.SerializeToX12(false));
+        }
     }
 }

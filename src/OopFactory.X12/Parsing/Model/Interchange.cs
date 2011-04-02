@@ -164,10 +164,7 @@ namespace OopFactory.X12.Parsing.Model
             return base.ToX12String(addWhitespace);
         }
 
-        public string SerializeToX12(bool addWhitespace)
-        {
-            return this.ToX12String(addWhitespace).Trim();
-        }
+        
 
         public virtual string Serialize()
         {
