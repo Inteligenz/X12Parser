@@ -8,6 +8,11 @@ namespace OopFactory.X12.Parsing.Specification
 {
     public class ElementSpecification
     {
+        public ElementSpecification()
+        {
+            if (AllowedIdentifiers == null)
+                AllowedIdentifiers = new List<AllowedIdentifier>();
+        }
         [XmlAttribute]
         public string Name { get; set; }
         [XmlAttribute]
@@ -24,5 +29,8 @@ namespace OopFactory.X12.Parsing.Specification
         public bool IsComposite { get; set; }
         [XmlAttribute]
         public int MaxComponents { get; set; }
+
+        [XmlElement(ElementName="Allowed")]
+        public List<AllowedIdentifier> AllowedIdentifiers { get; set; }
     }
 }

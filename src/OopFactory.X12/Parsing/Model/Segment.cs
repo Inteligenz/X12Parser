@@ -71,7 +71,30 @@ namespace OopFactory.X12.Parsing.Model
                                 throw new ArgumentException("value", String.Format("Element {0}{1:00} cannot be {2} because it is contrained to be a decimal.",
                                     this.SegmentId, elementNumber, value));
                             break;
+                        case Specification.ElementDataTypeEnum.Identifier:
+                            if (spec.AllowedIdentifiers.Count > 0)
+                            {
+                                if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
+                                {
+                                    string[] ids = new string[spec.AllowedIdentifiers.Count];
+                                    for (int i=0; i<spec.AllowedIdentifiers.Count; i++)
+                                        ids[i] = spec.AllowedIdentifiers[i].ID;
 
+                                    string expected = "";
+                                    if (ids.Length > 1)
+                                    {
+                                        expected = String.Join(", ", ids, 0, ids.Length - 1);
+                                        expected += " or " + ids[ids.Length - 1];
+                                    }
+                                    else
+                                        expected = ids[0];
+                                        
+                                    throw new ElementValidationException(SegmentId, elementNumber, value,
+                                        String.Format("'{0}' is not an allowed value for segment {1}{2:00}.  Expected {3}.",
+                                        value, SegmentId, elementNumber, expected));
+                                }
+                            }
+                            break;
                     }
                 }
             }
