@@ -53,6 +53,11 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
+        internal override int CountTotalSegments()
+        {
+            return base.CountTotalSegments() + this.Loops.Sum(l => l.CountTotalSegments());
+        }
+
         internal override string SerializeBodyToX12(bool addWhitespace)
         {
             StringBuilder sb = new StringBuilder();

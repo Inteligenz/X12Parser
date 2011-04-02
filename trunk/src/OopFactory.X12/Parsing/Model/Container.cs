@@ -50,6 +50,12 @@ namespace OopFactory.X12.Parsing.Model
             _terminatingSegments.Add(new Segment(parent, _delimiters, segmentString));
         }
 
+        internal virtual int CountTotalSegments()
+        {
+            return 1 + _segments.Count + _terminatingSegments.Count;
+        }
+
+
         internal bool UpdateTrailerSegmentCount(string segmentId, int elementNumber, int count)
         {
             var segment = _terminatingSegments.FirstOrDefault(ts => ts.SegmentId == segmentId);
