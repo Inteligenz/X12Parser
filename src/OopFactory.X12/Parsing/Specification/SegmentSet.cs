@@ -7,6 +7,7 @@ using System.IO;
 
 namespace OopFactory.X12.Parsing.Specification
 {
+    [XmlRoot(Namespace="http://tempuri.org/X12ParserSpecification.xsd")]
     public class SegmentSet
     {
         public SegmentSet()
@@ -34,6 +35,7 @@ namespace OopFactory.X12.Parsing.Specification
             System.IO.StringReader stringReader = new System.IO.StringReader(xml);
             System.Xml.XmlTextReader xmlTextReader = new System.Xml.XmlTextReader(stringReader);
             System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(SegmentSet));
+           
             return ((SegmentSet)(xmlSerializer.Deserialize(xmlTextReader)));
         }
     }

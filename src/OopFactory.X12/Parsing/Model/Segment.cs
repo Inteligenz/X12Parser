@@ -40,36 +40,45 @@ namespace OopFactory.X12.Parsing.Model
             return _dataElements[elementNumber - 1];
         }
 
-        public void SetElement(int elementNumber, string value)
+        private void ValidateContentFreeOfDelimiters(string elementId, string value)
         {
             if (value.Contains(_delimiters.SegmentTerminator))
-                throw new ArgumentException(String.Format("Value '{0}' cannot contain the segment terminator {1}.", value, _delimiters.SegmentTerminator));
+                throw new ElementValidationException("Element {0} cannot contain the value '{1}' with the segment terminator {2}", elementId, value, _delimiters.SegmentTerminator);
 
             if (value.Contains(_delimiters.ElementSeparator))
-                throw new ArgumentException(String.Format("Value '{0}' cannot contain the element separator {1}.", value, _delimiters.ElementSeparator));
+                throw new ElementValidationException("Element {0} cannot contain the value '{1}' with the element separator {2}.", elementId, value, _delimiters.ElementSeparator);
+        }
 
+        private void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
+        {
             if (EmbeddedResources.Get4010Spec().ContainsKey(this.SegmentId))
             {
                 var spec = EmbeddedResources.Get4010Spec()[SegmentId].GetElement(elementNumber);
                 if (spec != null)
                 {
-                    if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
-                        throw new ArgumentOutOfRangeException("value", String.Format("Element {0}{1:00} cannot be {2} because it must be between {3} and {4} characters in length.",
-                            this.SegmentId, elementNumber, value, spec.MinLength, spec.MaxLength));
-
+                    if (value.Length == 0 && spec.Required)
+                    {
+                        throw new ElementValidationException("Element {0} is required.", elementId, value);
+                    }
+                    if (value.Length > 0)
+                    {
+                        if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
+                            throw new ElementValidationException("Element {0} cannot contain the value '{1}' because it must be between {2} and {3} characters in length.",
+                                elementId, value, spec.MinLength, spec.MaxLength);
+                    }
                     switch (spec.Type)
                     {
                         case Specification.ElementDataTypeEnum.Numeric:
                             int number;
                             if (!int.TryParse(value, out number))
-                                throw new ArgumentException("value", String.Format("Element {0}{1:00} cannot be {2} because it is constrained to be an implied decimal.",
-                                    this.SegmentId, elementNumber, value));
+                                throw new ElementValidationException("Element {0} cannot contain the value '{1}' because it is constrained to be an implied decimal.",
+                                    elementId, value);
                             break;
                         case Specification.ElementDataTypeEnum.Decimal:
                             decimal decNumber;
                             if (!decimal.TryParse(value, out decNumber))
-                                throw new ArgumentException("value", String.Format("Element {0}{1:00} cannot be {2} because it is contrained to be a decimal.",
-                                    this.SegmentId, elementNumber, value));
+                                throw new ElementValidationException("Element {0} cannot contain the value '{1}' because it is contrained to be a decimal.",
+                                    elementId, value);
                             break;
                         case Specification.ElementDataTypeEnum.Identifier:
                             if (spec.AllowedIdentifiers.Count > 0)
@@ -77,7 +86,7 @@ namespace OopFactory.X12.Parsing.Model
                                 if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
                                 {
                                     string[] ids = new string[spec.AllowedIdentifiers.Count];
-                                    for (int i=0; i<spec.AllowedIdentifiers.Count; i++)
+                                    for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
                                         ids[i] = spec.AllowedIdentifiers[i].ID;
 
                                     string expected = "";
@@ -88,16 +97,21 @@ namespace OopFactory.X12.Parsing.Model
                                     }
                                     else
                                         expected = ids[0];
-                                        
-                                    throw new ElementValidationException(SegmentId, elementNumber, value,
-                                        String.Format("'{0}' is not an allowed value for segment {1}{2:00}.  Expected {3}.",
-                                        value, SegmentId, elementNumber, expected));
+
+                                    throw new ElementValidationException("'{0}' is not an allowed value for element {1}.  Expected {2}.", elementId, value, expected);
                                 }
                             }
                             break;
                     }
                 }
             }
+        }
+
+        public void SetElement(int elementNumber, string value)
+        {
+            string elementId = String.Format("{0}{1:00}", SegmentId, elementNumber);
+            ValidateContentFreeOfDelimiters(elementId, value);
+            ValidateAgainstSegmentSpecification(elementId, elementNumber, value);       
 
             _dataElements[elementNumber - 1] = value;
         }

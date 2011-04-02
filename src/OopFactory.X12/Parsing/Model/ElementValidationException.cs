@@ -7,10 +7,10 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class ElementValidationException : ArgumentException
     {
-        public ElementValidationException(string segmentId, int elementNumber, string value, string message)
-            : base(message)
+        public ElementValidationException(string formatString, string elementId, string value, params object[] args)
+            : base(String.Format(formatString, elementId, value, args), elementId)
         {
-            ElementId = String.Format("{0}{1:00}", segmentId, elementNumber);
+            ElementId = elementId;
             Value = value;
         }
 

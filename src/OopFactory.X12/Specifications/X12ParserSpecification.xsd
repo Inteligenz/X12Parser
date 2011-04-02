@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="X12ParserSpecification"
+    targetNamespace="http://tempuri.org/X12ParserSpecification.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/X12ParserSpecification.xsd"
+    xmlns:mstns="http://tempuri.org/X12ParserSpecification.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  
+  <xs:element name="SegmentSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Name" maxOccurs="1"/>
+        <xs:element name="Segment" type="SegmentSpecification" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="SegmentSpecification">
+    <xs:sequence>
+      <xs:element name="Element" type="ElementSpecification" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="SegmentId" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ElementSpecification">
+    <xs:sequence>
+      <xs:element name="Allowed" type="AllowedIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string"/>
+    <xs:attribute name="Required" type="xs:boolean"/>
+    <xs:attribute name="Type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AN"/>
+          <xs:enumeration value="DT"/>
+          <xs:enumeration value="TM"/>
+          <xs:enumeration value="N"/>
+          <xs:enumeration value="D"/>
+          <xs:enumeration value="ID"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MinLength" type="xs:positiveInteger" />
+    <xs:attribute name="MaxLength" type="xs:positiveInteger" />
+  </xs:complexType>
+
+  <xs:complexType name="AllowedIdentifier" mixed="true">
+    
+    <xs:attribute name="ID" type="xs:string"/>
+  </xs:complexType>
+    
+</xs:schema>
