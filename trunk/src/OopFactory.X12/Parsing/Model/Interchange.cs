@@ -30,8 +30,7 @@ namespace OopFactory.X12.Parsing.Model
 
             _functionGroups = new List<FunctionGroup>();
 
-            AddTerminatingSegment(this, 
-                String.Format("IEA{0}0{0}{2:000000000}{1}", delimiters.ElementSeparator, delimiters.SegmentTerminator, controlNumber));
+            SetTerminatingTrailerSegment(String.Format("IEA{0}0{0}{2:000000000}{1}", delimiters.ElementSeparator, delimiters.SegmentTerminator, controlNumber));
         }
 
         public Interchange (DateTime date, int controlNumber, bool production)
@@ -136,8 +135,7 @@ namespace OopFactory.X12.Parsing.Model
                 string.Format("GS{0}{2}{0}{0}{3:yyyyMMdd}{0}{3:hhmmss}{0}{4}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator,
                     functionIdCode, date, controlNumber));
 
-            fg.AddTerminatingSegment(this,
-                String.Format("GE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
+            fg.SetTerminatingTrailerSegment(String.Format("GE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
             return fg;
         }
         internal override IList<SegmentSpecification> AllowedChildSegments
@@ -195,7 +193,7 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var functionGroup in this.FunctionGroups)
                     functionGroup.WriteXml(writer);
 
-                foreach (var segment in this.TerminatingSegments)
+                foreach (var segment in this.TrailerSegments)
                     segment.WriteXml(writer);
 
             }

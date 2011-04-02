@@ -129,7 +129,7 @@ namespace OopFactory.X12.Parsing.Model
                 GetSpec(identifierCode));
             transaction.IdentifierCode = identifierCode;
             transaction.ControlNumber = controlNumber;
-            transaction.AddTerminatingSegment(this,
+            transaction.SetTerminatingTrailerSegment(
                 string.Format("SE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
 
             _transactions.Add(transaction.ControlNumber, transaction);
@@ -187,7 +187,7 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var transaction in this.Transactions)
                     transaction.WriteXml(writer);
 
-                foreach (var segment in this.TerminatingSegments)
+                foreach (var segment in this.TrailerSegments)
                     segment.WriteXml(writer);
 
                 writer.WriteEndElement();
