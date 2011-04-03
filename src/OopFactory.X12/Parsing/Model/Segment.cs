@@ -158,6 +158,17 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         public Container Parent { get; private set; }
+         
+        private Specification.SegmentSpecification SegmentSpec
+        {
+            get
+            {
+                if (EmbeddedResources.Get4010Spec().ContainsKey(this.SegmentId))
+                    return EmbeddedResources.Get4010Spec()[SegmentId];
+                else
+                    return null;
+            }
+        }
 
         #region IXmlSerializable Members
 
@@ -176,6 +187,7 @@ namespace OopFactory.X12.Parsing.Model
             this.WriteXml(writer);
         }
 
+
         internal virtual void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))
@@ -185,7 +197,17 @@ namespace OopFactory.X12.Parsing.Model
                 {
                     string elementName = String.Format("{0}{1:00}", SegmentId, i + 1);
                     if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
-                        writer.WriteElementString(elementName, _dataElements[i]);
+                    {
+                        writer.WriteStartElement(elementName);
+                        writer.WriteValue(_dataElements[i]);
+                        if (SegmentSpec != null && SegmentSpec.Elements.Count > i && SegmentSpec.Elements[i].Type == Specification.ElementDataTypeEnum.Identifier)
+                        {
+                            var allowedValue = SegmentSpec.Elements[i].AllowedIdentifiers.FirstOrDefault(ai => ai.ID == _dataElements[i]);
+                            if (allowedValue != null)
+                                writer.WriteComment(allowedValue.Description);
+                        }
+                        writer.WriteEndElement();
+                     }
                     else
                     {
                         writer.WriteStartElement(elementName);

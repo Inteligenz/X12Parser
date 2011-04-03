@@ -41,6 +41,19 @@ namespace OopFactory.X12
             return _997specification;
         }
 
+        private static TransactionSpecification _834specification;
+
+        internal static TransactionSpecification Get834TransactionSpecification()
+        {
+            if (_834specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-834-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _834specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _834specification;
+        }
+
         private static TransactionSpecification _837specification;
 
         internal static TransactionSpecification Get837TransactionSpecification()
