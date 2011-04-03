@@ -9,9 +9,9 @@
   <xs:element name="TransactionSpecification">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element name="HierarchicalLoopSpecification" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="HierarchicalLoop" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="TransactionSetIdentifierCode" type="xs:string"/>
     </xs:complexType>
@@ -29,8 +29,8 @@
   <xs:complexType name="HierarchicalLoopSpecification">
     <xs:sequence>
       <xs:element name="Name" type="xs:string"/>
-      <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="LoopId" type="xs:string"/>
     <xs:attribute name="Usage" type="UsageEnum" />
@@ -42,18 +42,21 @@
       <xs:element name="Name" type="xs:string"/>
       <xs:element name="StartingSegment">
         <xs:complexType>
-          <xs:sequence>
-            <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="5">
+          <xs:complexContent>
+            <xs:extension base="SegmentSpecification">
+              <xs:sequence>
+                <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="10">
               <xs:complexType>
                 <xs:attribute name="Code"/>
               </xs:complexType>
             </xs:element>
-          </xs:sequence>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="LoopId" type="xs:string"/>
     <xs:attribute name="Usage" type="UsageEnum" />
