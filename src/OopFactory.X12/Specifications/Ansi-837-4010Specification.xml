@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TransactionSpecification TransactionSetIdentifierCode="837">
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="837">
   <SegmentSpecification SegmentId="BHT" Usage="Required" Repeat="1"/>
   <SegmentSpecification SegmentId="REF" Usage="Required" Repeat="1"/>
   <LoopSpecification LoopId="1000A" Usage="Required" LoopRepeat="1">

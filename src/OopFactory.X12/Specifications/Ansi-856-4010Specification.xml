@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TransactionSpecification TransactionSetIdentifierCode="856">
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="856">
   <SegmentSpecification SegmentId="BSN" Repeat="1"/>
   <SegmentSpecification SegmentId="DTM"/>
   <HierarchicalLoopSpecification LoopId="SHIPMENT" Usage="Required" LevelCode="S">

@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TransactionSpecification TransactionSetIdentifierCode="835">
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="835">
   <SegmentSpecification SegmentId="BPR"/>
   <SegmentSpecification SegmentId="TRN"/>
   <SegmentSpecification SegmentId="CUR"/>
   <SegmentSpecification SegmentId="REF"/>
   <SegmentSpecification SegmentId="DTM"/>
+  <SegmentSpecification SegmentId="PLB" Trailer="true"/>
   <LoopSpecification LoopId="1000A" Usage="Required" LoopRepeat="1">
     <Name>PAYER IDENTIFICATION</Name>
     <StartingSegment>
@@ -62,5 +63,4 @@
       </LoopSpecification>
     </LoopSpecification>
   </LoopSpecification>
-  <SegmentSpecification SegmentId="PLB" Trailer="true"/>
 </TransactionSpecification>

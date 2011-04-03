@@ -6,6 +6,16 @@
     xmlns:mstns="http://tempuri.org/X12ParserSpecification.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
+  <xs:element name="TransactionSpecification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="HierarchicalLoopSpecification" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="TransactionSetIdentifierCode" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
   
   <xs:element name="SegmentSet">
     <xs:complexType>
@@ -16,11 +26,49 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:complexType name="HierarchicalLoopSpecification">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="LoopId" type="xs:string"/>
+    <xs:attribute name="Usage" type="UsageEnum" />
+    <xs:attribute name="LevelCode" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="LoopSpecification">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="StartingSegment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="5">
+              <xs:complexType>
+                <xs:attribute name="Code"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SegmentSpecification" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="LoopSpecification" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="LoopId" type="xs:string"/>
+    <xs:attribute name="Usage" type="UsageEnum" />
+    <xs:attribute name="Repeat" type="xs:positiveInteger"/>
+    <xs:attribute name="LoopRepeat" type="xs:positiveInteger"/>
+  </xs:complexType>
+
   <xs:complexType name="SegmentSpecification">
     <xs:sequence>
-      <xs:element name="Element" type="ElementSpecification" maxOccurs="unbounded" />
+      <xs:element name="Element" type="ElementSpecification" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="SegmentId" type="xs:string"/>
+    <xs:attribute name="Usage" type="UsageEnum"/>
+    <xs:attribute name="Repeat" type="xs:positiveInteger"/>
+    <xs:attribute name="Trailer" type="xs:boolean" />
   </xs:complexType>
 
   <xs:complexType name="ElementSpecification">
@@ -49,5 +97,11 @@
     
     <xs:attribute name="ID" type="xs:string"/>
   </xs:complexType>
-    
+
+  <xs:simpleType name="UsageEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Required"/>
+      <xs:enumeration value="Situational"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
