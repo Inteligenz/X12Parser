@@ -80,6 +80,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Parsing\Claims\Sample1.txt" />
     <EmbeddedResource Include="Parsing\BenefitEnrollments\Sample1.txt" />
+    <Content Include="Parsing\BenefitEnrollments\Sample1X12.xml" />
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <EmbeddedResource Include="Parsing\Payments\Sample1.txt" />
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />

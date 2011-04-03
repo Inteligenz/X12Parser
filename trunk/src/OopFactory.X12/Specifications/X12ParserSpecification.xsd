@@ -94,6 +94,7 @@
     </xs:attribute>
     <xs:attribute name="MinLength" type="xs:positiveInteger" />
     <xs:attribute name="MaxLength" type="xs:positiveInteger" />
+    <xs:attribute name="AllowedListInclusive" type="xs:boolean" />
   </xs:complexType>
 
   <xs:complexType name="AllowedIdentifier" mixed="true">
