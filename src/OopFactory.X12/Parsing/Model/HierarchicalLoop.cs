@@ -40,17 +40,6 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        protected override void PostValidate()
-        {
-            if (this.SegmentId != "HL")
-                throw new ArgumentException(String.Format("Segment Id expected to be 'HL' but got '{0}'.", SegmentId));
-
-            if (this.ElementCount < 3)
-                throw new ArgumentException("hl argument requires 3 data elements.", "hl");
-        }
-
-        //public string LoopId { get { return _loopId; } internal set { _loopId = value; } }
-
         [XmlAttribute("Id")]
         public string Id
         {

@@ -28,16 +28,23 @@ namespace OopFactory.X12.Parsing.Model
             get { return _hLoops.Values; }
         }
 
+        public Transaction Transaction
+        {
+            get {
+                Container container = this;
+                while (!(container is Transaction))
+                {
+                    container = container.Parent;
+                    if (container == null)
+                        return null;
+                }
+                return (Transaction)container;
+            }
+        }
+
         internal HierarchicalLoop AddHLoop(string segmentString)
         {
-            Container container = this;
-            while (!(container is Transaction))
-            {
-                container = container.Parent;
-                if (container == null)
-                    throw new InvalidOperationException("This HL container does not have a corresponding transaction.");
-            }
-            Transaction transaction = (Transaction)container;
+            Transaction transaction = this.Transaction;
 
             var hl = new HierarchicalLoop(this, _delimiters, segmentString);
 
@@ -45,9 +52,9 @@ namespace OopFactory.X12.Parsing.Model
                 hls => hls.LevelCode.ToString() == hl.LevelCode);
 
             if (hl.Specification == null)
-                throw new InvalidOperationException(String.Format("HL with level code {0} is not expected in transaction set {1}.",
-                    hl.LevelCode, transaction.Specification.TransactionSetIdentifierCode));
-
+                throw new TransactionValidationException("{0} Transaction does not expect {2} level code value {3} that appears in transaction control number {1}.",
+                    transaction.IdentifierCode, transaction.ControlNumber, "HL03", hl.LevelCode);
+            
             _hLoops.Add(hl.Id, hl);
             // loop id must be unique throughout the transaction
             try
