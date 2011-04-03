@@ -78,15 +78,6 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
-        protected override void PostValidate()
-        {
-            if (SegmentId != "ST")
-                throw new ArgumentException(String.Format("Segment Id expected to be 'ST' but got '{0}'.", SegmentId));
-            if (ElementCount < 2)
-                throw new ArgumentException(String.Format("ST segment expects at least two data elements but got '{0}'.", SegmentString));
-        }
-
-
         public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
         {
             var hloop = base.AddHLoop(string.Format("HL{0}{1}{0}{0}{2}{0}", 

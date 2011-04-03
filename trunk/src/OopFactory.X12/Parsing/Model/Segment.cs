@@ -37,7 +37,6 @@ namespace OopFactory.X12.Parsing.Model
             {
                 SegmentId = segment;
             }
-            PostValidate();
         }
 
         public int ElementCount { get { return _dataElements.Count(); } }
@@ -124,10 +123,6 @@ namespace OopFactory.X12.Parsing.Model
                     _dataElements.Add("");
             }
             _dataElements[elementNumber - 1] = value;
-        }
-
-        protected virtual void PostValidate()
-        {
         }
 
         internal virtual string ToX12String(bool addWhitespace)

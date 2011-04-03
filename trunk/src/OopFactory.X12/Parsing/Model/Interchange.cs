@@ -26,7 +26,7 @@ namespace OopFactory.X12.Parsing.Model
                 delimiters.SegmentTerminator, delimiters.ElementSeparator, delimiters.SubElementSeparator, date, controlNumber, production ? "P" : "T"))
         {
             if (controlNumber > 999999999 || controlNumber < 1)
-                throw new ArgumentOutOfRangeException("controlNumber", controlNumber, "ControlNumber must be a positive number between 1 and 999999999.");
+                throw new ElementValidationException("{0} Interchange Control Number must be a positive number between 1 and 999999999.", "ISA00", controlNumber.ToString());
 
             _functionGroups = new List<FunctionGroup>();
 
@@ -101,7 +101,7 @@ namespace OopFactory.X12.Parsing.Model
                 else if (DateTime.TryParseExact(GetElement(9), "yyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
                 else
-                    throw new ArgumentException(String.Format("{0} and {1} cannot be converted into a date and time.", GetElement(9), GetElement(10)));
+                    throw new ArgumentException(String.Format("{0} and {1} in ISA09 and ISA10 cannot be converted into a date and time.", GetElement(9), GetElement(10)));
                 
             }
             set
@@ -118,9 +118,6 @@ namespace OopFactory.X12.Parsing.Model
 
         internal FunctionGroup AddFunctionGroup(string segmentString)
         {
-            if (!segmentString.StartsWith("GS" + _delimiters.ElementSeparator))
-                throw new InvalidOperationException(String.Format("Segment {0} does not start with GS{1} as expected.", segmentString, _delimiters.ElementSeparator));
-
             FunctionGroup fg = new FunctionGroup(this, _delimiters, segmentString);
             _functionGroups.Add(fg);
             return fg;
@@ -129,7 +126,8 @@ namespace OopFactory.X12.Parsing.Model
         public FunctionGroup AddFunctionGroup(string functionIdCode, DateTime date, int controlNumber)
         {
             if (controlNumber > 999999999 || controlNumber < 1)
-                throw new ArgumentOutOfRangeException("controlNumber", controlNumber, "ControlNumber must be a positive number between 1 and 999999999.");
+                throw new ElementValidationException("Element {0} cannot containe the value '{1}' because it must be a positive number between 1 and 999999999.",
+                    "GS06", controlNumber.ToString());
 
             FunctionGroup fg = new FunctionGroup(this, _delimiters,
                 string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator));
