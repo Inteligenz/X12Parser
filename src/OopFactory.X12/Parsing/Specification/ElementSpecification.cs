@@ -29,6 +29,8 @@ namespace OopFactory.X12.Parsing.Specification
         public bool IsComposite { get; set; }
         [XmlAttribute]
         public int MaxComponents { get; set; }
+        [XmlAttribute]
+        public bool AllowedListInclusive { get; set; }
 
         [XmlElement(ElementName="Allowed")]
         public List<AllowedIdentifier> AllowedIdentifiers { get; set; }

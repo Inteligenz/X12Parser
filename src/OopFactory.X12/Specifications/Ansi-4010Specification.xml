@@ -3,17 +3,17 @@
     >
   <Name>4010</Name>
   <Segment SegmentId="ISA" >
-    <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2">
+    <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
       <Allowed ID="00">No Authorization Information Present</Allowed>
       <Allowed ID="03">Additional Data Identification</Allowed>
     </Element>
     <Element Name="Author Information" Required="true" Type="AN" MinLength="10" MaxLength="10" />
-    <Element Name="Security Information Qualifer" Required="true" Type="ID" MinLength="2" MaxLength="2">
+    <Element Name="Security Information Qualifer" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
       <Allowed ID="00">No Security Information Present</Allowed>
       <Allowed ID="01">Password</Allowed>
     </Element>
     <Element Name="Security Information" Required="true" Type="AN" MinLength="10" MaxLength="2" />
-    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2">
+    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
       <Allowed ID="01">Duns (Dun &amp; Bradstreet)</Allowed>
       <Allowed ID="14">Duns Plus Suffix</Allowed>
       <Allowed ID="20">Health Insurance Number (HIN)</Allowed>
@@ -25,7 +25,7 @@
       <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
     <Element Name="Interchange Sender ID" Required="true" Type="AN" MinLength="15" MaxLength="15" />
-    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2">
+    <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
       <Allowed ID="01">Duns (Dun &amp; Bradstreet)</Allowed>
       <Allowed ID="14">Duns Plus Suffix</Allowed>
       <Allowed ID="20">Health Insurance Number (HIN)</Allowed>
@@ -44,11 +44,11 @@
     </Element>
     <Element Name="Inter Control Version Number" Required="true" Type="ID" MinLength="5" MaxLength="5" />
     <Element Name="Inter Control Number" Required="true" Type="N" MinLength="9" MaxLength="9" />
-    <Element Name="Acknowlegment Requested" Required="true" Type="ID" MinLength="1" MaxLength="1">
+    <Element Name="Acknowlegment Requested" Required="true" Type="ID" MinLength="1" MaxLength="1" AllowedListInclusive="true">
       <Allowed ID="0">No Acknowledgment Requested</Allowed>
       <Allowed ID="1">Interchange Acknowledgment Requested</Allowed>
     </Element>
-    <Element Name="Usage Indicator" Required="true" Type="ID" MinLength="1" MaxLength="1">
+    <Element Name="Usage Indicator" Required="true" Type="ID" MinLength="1" MaxLength="1" AllowedListInclusive="true">
       <Allowed ID="P">Production Data</Allowed>
       <Allowed ID="T">Test Data</Allowed>
     </Element>
@@ -60,6 +60,8 @@
   </Segment>
   <Segment SegmentId="GS">
     <Element Name="Functional Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="BE">Benefit Enrollment</Allowed>
+      <Allowed ID="HC">Health Care</Allowed>
     </Element>
     <Element Name="Application Sender's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
     <Element Name="Application Receiver's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
@@ -77,12 +79,151 @@
     <Element Name="Group Control Number" Required="true" Type="N" MinLength="1" MaxLength="9" />
   </Segment>
   <Segment SegmentId="ST">
-    <Element Name="Transaction Set Identifier Code" Required="true" Type="ID" MinLength="3" MaxLength="3" />
+    <Element Name="Transaction Set Identifier Code" Required="true" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="837">Health Care Claim</Allowed>
+    </Element>
     <Element Name="Transaction Set Control Number" Required="true" Type="AN" MinLength="4" MaxLength="9" />
   </Segment>
-
   <Segment SegmentId="HL">
     <Element Name="Hierarchical ID Number" Required="true" Type="AN" MinLength="1" MaxLength="12" />
     <Element Name="Hierarchical Parent ID Number" Required="false" Type="AN" MinLength="1" MaxLength="12" />
+    <Element Name="Level Code" Required="true" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="20">Information Source</Allowed>
+      <Allowed ID="22">Subscriber</Allowed>
+      <Allowed ID="23">Dependent</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="N1">
+    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="BO">Broker or Sales Office</Allowed>
+      <Allowed ID="IN">Insurer</Allowed>
+      <Allowed ID="P5">Plan Sponsor</Allowed>
+      <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
+    </Element>
+    <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
+    <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="94">Code assigned by the organization that is the ultimate destimation of the transaction set</Allowed>
+      <Allowed ID="FI">Federal Taxpayer's Identification Number</Allowed>
+      <Allowed ID="XV">Health Care Financing Administration National PlanID</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+    <Element Name="Identification Code" Type="AN" MinLength="2" MaxLength="80"/>
+    <Element Name="Entity Relationship Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Entity Identification Code" Type="ID" MinLength="2" MaxLength="3"/>
+  </Segment>
+  <Segment SegmentId="REF">
+    <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="38">Master Policy Number</Allowed>
+    </Element> 
+  </Segment>
+  <Segment SegmentId="DTP">
+    <Element Name="Data/Time Qualifier" Required="true" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="007">Effective</Allowed>
+      <Allowed ID="303">Maintenance Effective</Allowed>
+      <Allowed ID="382">Enrollment</Allowed>
+      <Allowed ID="388">Payment Commencement</Allowed>
+    </Element>
+    <Element Name="Date Time Period Format Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>      
+    </Element>
+    <Element Name="Date Time Period" Required="true" Type="AN" MinLength="1" MaxLength="35"/>
+  </Segment>
+  <!-- 834 Segments -->
+  <Segment SegmentId="BGN">
+    <Element Name="Transaction Set Purpose Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="00">Original</Allowed>
+      <Allowed ID="15">Re-Submission</Allowed>
+      <Allowed ID="22">Information Copy</Allowed>
+    </Element>
+    <Element Name="Reference Identification" Required="true" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Date" Required="true" Type="DT" MinLength="8" MaxLength="8"/>
+    <Element Name="Time" Type="TM" MinLength="4" MaxLength="8"/>
+    <Element Name="Time Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Transaction Type Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Action Code" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="2">Change (Update)</Allowed>
+      <Allowed ID="4">Verify</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="INS">
+    <Element Name="Yes/No Condition or Response Code" Required="true" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="N">No</Allowed>
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Individual Relationship Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="01">Spouse</Allowed>
+      <Allowed ID="03">Father or Mother</Allowed>
+      <Allowed ID="04">Grandfather or Grandmother</Allowed>
+      <Allowed ID="05">Grandson or Granddaughter</Allowed>
+      <Allowed ID="06">Uncle or Aunt</Allowed>
+      <Allowed ID="07">Nephew or Niece</Allowed>
+      <Allowed ID="08">Cousin</Allowed>
+      <Allowed ID="09">Adopted Child</Allowed>
+      <Allowed ID="10">Foster Child</Allowed>
+      <Allowed ID="11">Son-in-law or Daughter-in-law</Allowed>
+      <Allowed ID="12">Brother-in-law or Sister-in-law</Allowed>
+      <Allowed ID="13">Mother-in-law or Fater-in-law</Allowed>
+      <Allowed ID="14">Brother or Sister</Allowed>
+      <Allowed ID="15">Ward</Allowed>
+      <Allowed ID="17">Stepson or Stepdaughter</Allowed>
+      <Allowed ID="18">Self</Allowed>
+      <Allowed ID="19">Child</Allowed>
+      <Allowed ID="23">Sponsored Dependent</Allowed>
+      <Allowed ID="24">Dependent of a Minor Dependent</Allowed>
+      <Allowed ID="25">Ex-spouse</Allowed>
+      <Allowed ID="26">Guardian</Allowed>
+      <Allowed ID="31">Court Appointed Guardian</Allowed>
+      <Allowed ID="32">Mother</Allowed>
+      <Allowed ID="33">Father</Allowed>
+      <Allowed ID="38">Collateral Dependent</Allowed>
+      <Allowed ID="48">Stepfather</Allowed>
+      <Allowed ID="49">Stepmother</Allowed>
+      <Allowed ID="53">Life Partner</Allowed>
+    </Element>
+    <Element Name="Maintenance Type Code" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="001">Change</Allowed>
+      <Allowed ID="021">Addition</Allowed>
+      <Allowed ID="024">Cancellation or Termination</Allowed>
+      <Allowed ID="025">Reinstatement</Allowed>
+      <Allowed ID="030">Audit or Compare</Allowed>
+    </Element>
+    <Element Name="Maintenance Reason Code" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="01">Divorce</Allowed>
+      <Allowed ID="02">Birth</Allowed>
+      <Allowed ID="03">Death</Allowed>
+      <Allowed ID="04">Retirement</Allowed>
+      <Allowed ID="05">Adoption</Allowed>
+      <Allowed ID="06">Strike</Allowed>
+      <Allowed ID="07">Termination of Benefits</Allowed>
+      <Allowed ID="08">Termination of Employmemt</Allowed>
+      <Allowed ID="09">Consolidation Omnibus Budget Reconciliation Act (COBRA)</Allowed>
+      <Allowed ID="10">Consolidation Omnibus Budget Reconciliation Act (COBRA) Premium Paid</Allowed>
+      <Allowed ID="11">Surviving Spouse</Allowed>
+      <Allowed ID="14">Voluntary Withdrawal</Allowed>
+      <Allowed ID="15">Primary Care Provider (PCP) Change</Allowed>
+      <Allowed ID="16">Quit</Allowed>
+      <Allowed ID="17">Fired</Allowed>
+      <Allowed ID="18">Suspended</Allowed>
+      <Allowed ID="20">Active</Allowed>
+      <Allowed ID="21">Disability</Allowed>
+      <Allowed ID="22">Plan Change</Allowed>
+      <Allowed ID="25">Change in Identifying Data Elements</Allowed>
+      <Allowed ID="26">Declined Coverage</Allowed>
+      <Allowed ID="27">Pre-Enrollment</Allowed>
+      <Allowed ID="28">Initial Enrollment</Allowed>
+      <Allowed ID="29">Benefit Selection</Allowed>
+      <Allowed ID="31">Legal Separation</Allowed>
+      <Allowed ID="32">Marriage</Allowed>
+      <Allowed ID="33">Personnel Data</Allowed>
+      <Allowed ID="37">Leave of Absence with Benefits</Allowed>
+      <Allowed ID="38">Leave of Absence without Benefits</Allowed>
+      <Allowed ID="39">Lay Off with Benefits</Allowed>
+      <Allowed ID="40">Lay Off without Benefits</Allowed>
+      <Allowed ID="41">Re-enrollment</Allowed>
+      <Allowed ID="AI">No Reason Given</Allowed>
+      <Allowed ID="XN">Notification Given</Allowed>
+      <Allowed ID="XT">Transfer</Allowed>
+    </Element>
   </Segment>
 </SegmentSet>
