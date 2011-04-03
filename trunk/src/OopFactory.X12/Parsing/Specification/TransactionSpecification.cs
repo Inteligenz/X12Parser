@@ -9,6 +9,7 @@ namespace OopFactory.X12.Parsing.Specification
 {
     [DebuggerStepThrough()]
     [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "http://tempuri.org/X12ParserSpecification.xsd")]
     public class TransactionSpecification
     {
         [XmlAttribute]
