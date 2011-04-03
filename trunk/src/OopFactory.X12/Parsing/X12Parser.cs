@@ -85,11 +85,11 @@ namespace OopFactory.X12.Parsing
                         string parentId = hlSegment.GetElement(2);
 
                         if (parentId == "")
-                            currentContainer = tr.AddHLoop(tr, segmentString); 
+                            currentContainer = tr.AddHLoop(segmentString); 
                         else
                         {
                             if (hloops.ContainsKey(parentId))
-                                currentContainer = hloops[parentId].AddHLoop(tr, segmentString);
+                                currentContainer = hloops[parentId].AddHLoop(segmentString);
                             else
                                 throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
                         }
@@ -105,26 +105,28 @@ namespace OopFactory.X12.Parsing
                     default:
                         while (currentContainer != null)
                         {
-                            if (currentContainer is LoopContainer)
-                            {
-                                LoopContainer loopContainer = (LoopContainer)currentContainer;
-
-                                LoopSpecification loopSpec = loopContainer.GetLoopSpecification(segmentString);
-
-                                if (loopSpec != null)
-                                {
-                                    currentContainer = loopContainer.AddLoop(segmentString, loopSpec);
-                                    break;
-                                }
-                            }
-                                
                             if (currentContainer.AddSegment(segmentString) != null)
                                 break;
                             else
                             {
-                                currentContainer = currentContainer.Parent;
-                                continue;
-                            }
+                                if (currentContainer is LoopContainer)
+                                {
+                                    LoopContainer loopContainer = (LoopContainer)currentContainer;
+
+                                    try
+                                    {
+                                        currentContainer = loopContainer.AddLoop(segmentString);
+                                        break;
+                                    }
+                                    catch (TransactionValidationException)
+                                    {
+                                        currentContainer = currentContainer.Parent;
+                                        continue;
+                                    }
+                                }
+                                else
+                                    break;
+                            } 
                         }
                         if (currentContainer == null)
                         {

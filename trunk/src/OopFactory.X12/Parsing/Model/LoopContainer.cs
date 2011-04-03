@@ -25,14 +25,22 @@ namespace OopFactory.X12.Parsing.Model
 
         public IEnumerable<Loop> Loops { get { return _loops; } }
 
-        internal Loop AddLoop(string segmentString, LoopSpecification loopSpecification)
+        public Loop AddLoop(string segmentString) 
         {
-            var loop = new Loop(this, _delimiters, segmentString, loopSpecification);
-            _loops.Add(loop);
-            return loop;
-        }
+            LoopSpecification loopSpec = GetLoopSpecification(segmentString);
 
-        internal LoopSpecification GetLoopSpecification(string segmentString)
+            if (loopSpec != null)
+            {
+                var loop = new Loop(this, _delimiters, segmentString, loopSpec);
+                _loops.Add(loop);
+                return loop;
+            }
+            else
+                throw new TransactionValidationException("Loop {3} could be added because it could not be found in the specification for {2}",
+                    null, null, this.SegmentId, segmentString);
+        }
+        
+        private LoopSpecification GetLoopSpecification(string segmentString)
         {
             Segment segment = new Segment(this, _delimiters, segmentString);
 
