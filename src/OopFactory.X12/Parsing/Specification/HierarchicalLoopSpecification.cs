@@ -23,13 +23,13 @@ namespace OopFactory.X12.Parsing.Specification
 
         public string Name { get; set; }
 
-        [XmlElement("SegmentSpecification")]
+        [XmlElement("Segment")]
         public List<SegmentSpecification> SegmentSpecifications { get; set; }
 
-        [XmlElement("LoopSpecification")]
+        [XmlElement("Loop")]
         public List<LoopSpecification> LoopSpecifications { get; set; }
 
-        [XmlElement("HierarchicalLoopSpecification")]
+        [XmlElement("HierarchicalLoop")]
         public List<HierarchicalLoopSpecification> HierarchicalLoopSpecifications { get; set; }
     }
 }

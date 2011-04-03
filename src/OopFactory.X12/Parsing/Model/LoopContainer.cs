@@ -45,7 +45,7 @@ namespace OopFactory.X12.Parsing.Model
             Segment segment = new Segment(this, _delimiters, segmentString);
 
             IList<LoopSpecification> matchingLoopSpecs = ((LoopContainer)this).AllowedChildLoops
-                        .Where(cl => cl.StartingSegment.SegmentSpecification.SegmentId == segment.SegmentId).ToList();
+                        .Where(cl => cl.StartingSegment.SegmentId == segment.SegmentId).ToList();
 
             if (matchingLoopSpecs == null || matchingLoopSpecs.Count == 0)
             {

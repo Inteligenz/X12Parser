@@ -15,11 +15,11 @@ namespace OopFactory.X12.Parsing.Specification
         [XmlAttribute]
         public string TransactionSetIdentifierCode { get; set; }
 
-        [XmlElement("SegmentSpecification")]
+        [XmlElement("Segment")]
         public List<SegmentSpecification> SegmentSpecifications { get; set; }
-        [XmlElement("LoopSpecification")]
+        [XmlElement("Loop")]
         public List<LoopSpecification> LoopSpecifications { get; set; }
-        [XmlElement("HierarchicalLoopSpecification")]
+        [XmlElement("HierarchicalLoop")]
         public List<HierarchicalLoopSpecification> HierarchicalLoopSpecifications { get; set; }
 
         public static TransactionSpecification Deserialize(string xml)

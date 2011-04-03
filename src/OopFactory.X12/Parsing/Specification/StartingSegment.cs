@@ -9,15 +9,13 @@ namespace OopFactory.X12.Parsing.Specification
 {
     [DebuggerStepThrough()]
     [XmlType(AnonymousType = true)]
-    public class StartingSegment
+    public class StartingSegment : SegmentSpecification
     {
         public StartingSegment()
         {
-            if (SegmentSpecification == null) SegmentSpecification = new SegmentSpecification();
             if (EntityIdentifiers == null) EntityIdentifiers = new List<Lookup>();
         }
 
-        public SegmentSpecification SegmentSpecification { get; set; }
         [XmlElement("EntityIdentifier")]
         public List<Lookup> EntityIdentifiers { get; set; }
     }

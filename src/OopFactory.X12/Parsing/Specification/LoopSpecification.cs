@@ -29,10 +29,10 @@ namespace OopFactory.X12.Parsing.Specification
         public string Name { get; set; }
         public StartingSegment StartingSegment { get; set; }
 
-        [XmlElement("SegmentSpecification")]
+        [XmlElement("Segment")]
         public List<SegmentSpecification> SegmentSpecifications { get; set; }
 
-        [XmlElement("LoopSpecification")]
+        [XmlElement("Loop")]
         public List<LoopSpecification> LoopSpecifications { get; set; }
     }
 }
