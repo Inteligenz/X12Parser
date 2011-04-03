@@ -13,7 +13,7 @@ namespace OopFactory.X12.Parsing.Model
     {
         private List<string> _loopStartingSegmentIds;
         private List<string> _loopWithLoopsStartingSegmentIds;
-        private List<HierarchicalLoop> _allHLoops;
+        private Dictionary<string, HierarchicalLoop> _allHLoops;
 
         internal Transaction(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification spec)
             : base(parent, delimiters, segment)
@@ -62,7 +62,20 @@ namespace OopFactory.X12.Parsing.Model
             _loopStartingSegmentIds = new List<string>();
             _loopStartingSegmentIds.Add("NM1");
             _loopWithLoopsStartingSegmentIds = new List<string>();
-            _allHLoops = new List<HierarchicalLoop>();
+            _allHLoops = new Dictionary<string, HierarchicalLoop>();
+        }
+
+        internal void AddToHLoopDictionary(HierarchicalLoop hloop)
+        {
+            _allHLoops.Add(hloop.Id, hloop);
+        }
+
+        public HierarchicalLoop FindHLoop(string id)
+        {
+            if (_allHLoops.ContainsKey(id))
+                return _allHLoops[id];
+            else
+                return null;
         }
 
         protected override void PostValidate()
@@ -74,13 +87,15 @@ namespace OopFactory.X12.Parsing.Model
         }
 
 
-
-        internal List<HierarchicalLoop> AllLoops
+        public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
         {
-            get { return _allHLoops; }
+            var hloop = base.AddHLoop(string.Format("HL{0}{1}{0}{0}{2}{0}", 
+                _delimiters.ElementSeparator, id, levelCode));
+            if (willHoldChildHLoops.HasValue)
+                hloop.HierarchicalChildCode = willHoldChildHLoops.Value ? "1" : "0";
+            return hloop;
         }
 
-        
         internal override string ToX12String(bool addWhitespace)
         {
             UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());

@@ -63,11 +63,25 @@ namespace OopFactory.X12.Parsing.Model
             get { return GetElement(2); }
         }
 
-        internal string LevelCode
+        public string LevelCode
         {
             get { return GetElement(3); }
         }
-                
+
+        public string HierarchicalChildCode
+        {
+            get { return GetElement(4); }
+            internal set { SetElement(4, value); }
+        }
+
+        public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
+        {
+            var hloop = base.AddHLoop(string.Format("HL{0}{1}{0}{2}{0}{3}{0}", _delimiters.ElementSeparator, id, this.Id, levelCode));
+            if (willHoldChildHLoops.HasValue)
+                hloop.HierarchicalChildCode = willHoldChildHLoops.Value ? "1" : "0";
+            return hloop;
+        }
+
         internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(base.SegmentId))
@@ -91,7 +105,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public override string ToString()
         {
-            return String.Format("Loop(Level={0},ChildLoops={1}, ChildSegments={2})", LevelCode, Loops.Count(), Segments.Count());
+            return String.Format("Loop(Id={0},ParentId={1},Level={2},ChildLoops={3}, ChildSegments={4})", Id, ParentId, LevelCode, Loops.Count(), Segments.Count());
         }
     }
 }

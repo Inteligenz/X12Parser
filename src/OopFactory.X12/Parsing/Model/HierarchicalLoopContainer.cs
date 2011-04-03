@@ -28,8 +28,17 @@ namespace OopFactory.X12.Parsing.Model
             get { return _hLoops.Values; }
         }
 
-        internal HierarchicalLoop AddHLoop(Transaction transaction, string segmentString)
+        internal HierarchicalLoop AddHLoop(string segmentString)
         {
+            Container container = this;
+            while (!(container is Transaction))
+            {
+                container = container.Parent;
+                if (container == null)
+                    throw new InvalidOperationException("This HL container does not have a corresponding transaction.");
+            }
+            Transaction transaction = (Transaction)container;
+
             var hl = new HierarchicalLoop(this, _delimiters, segmentString);
 
             hl.Specification = transaction.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
@@ -40,9 +49,24 @@ namespace OopFactory.X12.Parsing.Model
                     hl.LevelCode, transaction.Specification.TransactionSetIdentifierCode));
 
             _hLoops.Add(hl.Id, hl);
+            // loop id must be unique throughout the transaction
+            try
+            {
+                transaction.AddToHLoopDictionary(hl);
+            }
+            catch (ArgumentException exc)
+            {
+                if (exc.Message == "An item with the same key has already been added.")
+                    throw new TransactionValidationException("Hierarchical Loop ID {3} cannot be added to {0} transaction with control number {1} because it already exists.", 
+                        transaction.IdentifierCode, transaction.ControlNumber, "HL01", hl.Id);
+                else
+                    throw;
+            }
             return hl;
         }
 
+        public abstract HierarchicalLoop AddHLoop(string id, string levelCode, bool? existingHierarchalLoops);
+        
         internal override int CountTotalSegments()
         {
             return base.CountTotalSegments() + HLoops.Sum(hl => hl.CountTotalSegments());
