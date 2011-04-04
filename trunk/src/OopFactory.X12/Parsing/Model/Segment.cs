@@ -196,7 +196,7 @@ namespace OopFactory.X12.Parsing.Model
                 for (int i = 0; i < _dataElements.Count; i++)
                 {
                     string elementName = String.Format("{0}{1:00}", SegmentId, i + 1);
-                    if (SegmentSpec != null && SegmentSpec.Elements.Count > i)
+                    if (SegmentSpec != null && SegmentSpec.Elements.Count > i && !string.IsNullOrEmpty(_dataElements[i]))
                         writer.WriteComment(SegmentSpec.Elements[i].Name);
                     if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
                     {

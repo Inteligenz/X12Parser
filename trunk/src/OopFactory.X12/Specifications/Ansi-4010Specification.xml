@@ -2,6 +2,7 @@
 <SegmentSet xmlns="http://tempuri.org/X12ParserSpecification.xsd"
     >
   <Name>4010</Name>
+  <!-- Control Segments -->
   <Segment SegmentId="ISA" >
     <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
       <Allowed ID="00">No Authorization Information Present</Allowed>
@@ -84,6 +85,92 @@
     </Element>
     <Element Name="Transaction Set Control Number" Required="true" Type="AN" MinLength="4" MaxLength="9" />
   </Segment>
+  
+  <!-- Common Segments -->
+  <Segment SegmentId="DMG">
+    <Element Name="Date Time Period Format Qualifier" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Date Time Period" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Gender Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="F">Female</Allowed>
+      <Allowed ID="M">Male</Allowed>
+      <Allowed ID="U">Unknown</Allowed>
+    </Element>
+    <Element Name="Marital Status Code" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="B">Registered Domestic Partner</Allowed>
+      <Allowed ID="D">Divorced</Allowed>
+      <Allowed ID="I">Single</Allowed>
+      <Allowed ID="M">Married</Allowed>
+      <Allowed ID="R">Unreported</Allowed>
+      <Allowed ID="S">Separated</Allowed>
+      <Allowed ID="U">Unmarried</Allowed>
+      <Allowed ID="W">Widowed</Allowed>
+      <Allowed ID="X">Legally Separated</Allowed>
+    </Element>
+    <Element Name="Race or Ethnicity Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="7">Not Provided</Allowed>
+      <Allowed ID="8">Not Applicable</Allowed>
+      <Allowed ID="A">Asian or Pacific Islander</Allowed>
+      <Allowed ID="B">Black</Allowed>
+      <Allowed ID="C">Caucasian</Allowed>
+      <Allowed ID="D">Subcontinent Asian American</Allowed>
+      <Allowed ID="E">Other Race or Ethnicity</Allowed>
+      <Allowed ID="F">Asian Pacific American</Allowed>
+      <Allowed ID="G">Native American</Allowed>
+      <Allowed ID="H">Hispanic</Allowed>
+      <Allowed ID="I">American Indian or Alaskan Native</Allowed>
+      <Allowed ID="J">Native Hawaiian</Allowed>
+      <Allowed ID="N">Black (Non-Hispanic)</Allowed>
+      <Allowed ID="O">White (Non-Hispanic)</Allowed>
+      <Allowed ID="P">Pacific Islander</Allowed>
+      <Allowed ID="Z">Mutually Defined</Allowed>
+    </Element>
+    <Element Name="Citizenship Status Code" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="1">U.S. Citizen</Allowed>
+      <Allowed ID="2">Non-Resident Alien</Allowed>
+      <Allowed ID="3">Resident Alien</Allowed>
+      <Allowed ID="4">Illegal Alien</Allowed>
+      <Allowed ID="5">Alien</Allowed>
+      <Allowed ID="6">U.S. Citizen - Non-Resident</Allowed>
+      <Allowed ID="7">U.S. Citizen - Resident</Allowed>
+    </Element>
+    <Element Name="Country Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Basis of Verification Code" Type="ID" MinLength="1" MaxLength="2"/>
+    <Element Name="Quantity" Type="ID" MinLength="1" MaxLength="15"/>
+  </Segment>
+  <Segment SegmentId="DTP">
+    <Element Name="Data/Time Qualifier" Required="true" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="007">Effective</Allowed>
+      <Allowed ID="286">Retirement</Allowed>
+      <Allowed ID="296">Return to Work</Allowed>
+      <Allowed ID="297">Date Last Worked</Allowed>
+      <Allowed ID="300">Enrollment Signature Date</Allowed>
+      <Allowed ID="301">Consolidated Omnibus Budget Reconciliation Act (COBRA) Qualifying Event</Allowed>
+      <Allowed ID="303">Maintenance Effective</Allowed>
+      <Allowed ID="336">Employment Begin</Allowed>
+      <Allowed ID="337">Employment End</Allowed>
+      <Allowed ID="338">Medicare Begin</Allowed>
+      <Allowed ID="339">Medicare End</Allowed>
+      <Allowed ID="340">Consolidated Omnibus Budget Reconciliation Act (COBRA) Begin</Allowed>
+      <Allowed ID="341">Consolidated Omnibus Budget Reconciliation Act (COBRA) End</Allowed>
+      <Allowed ID="350">Education Begin</Allowed>
+      <Allowed ID="351">Education End</Allowed>
+      <Allowed ID="356">Eligibility Begin</Allowed>
+      <Allowed ID="357">Eligibility End</Allowed>
+      <Allowed ID="382">Enrollment</Allowed>
+      <Allowed ID="383">Adjusted Hire</Allowed>
+      <Allowed ID="388">Payment Commencement</Allowed>
+      <Allowed ID="393">Plan Participation Suspension</Allowed>
+      <Allowed ID="394">Rehire</Allowed>
+      <Allowed ID="473">Medicaid Begin</Allowed>
+      <Allowed ID="474">Medicaid End</Allowed>
+    </Element>
+    <Element Name="Date Time Period Format Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>      
+    </Element>
+    <Element Name="Date Time Period" Required="true" Type="AN" MinLength="1" MaxLength="35"/>
+  </Segment>
   <Segment SegmentId="HL">
     <Element Name="Hierarchical ID Number" Required="true" Type="AN" MinLength="1" MaxLength="12" />
     <Element Name="Hierarchical Parent ID Number" Required="false" Type="AN" MinLength="1" MaxLength="12" />
@@ -111,23 +198,99 @@
     <Element Name="Entity Relationship Code" Type="ID" MinLength="2" MaxLength="2"/>
     <Element Name="Entity Identification Code" Type="ID" MinLength="2" MaxLength="3"/>
   </Segment>
+  <Segment SegmentId="N3">
+    <Element Name="Address Information" Type="AN" Required="true" MinLength="1" MaxLength="55"/>
+    <Element Name="Address Information" Type="AN" MinLength="1" MaxLength="55"/>
+  </Segment>
+  <Segment SegmentId="N4">
+    <Element Name="City Name" Type="AN" MinLength="2" MaxLength="30"/>
+    <Element Name="State or Provice Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Postal Code" Type="ID" MinLength="3" MaxLength="15"/>
+    <Element Name="Country Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Location Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="60">Area</Allowed>
+      <Allowed ID="CY">County/Parish</Allowed>
+    </Element>
+    <Element Name="Location Identifier" Type="AN" MinLength="1" MaxLength="30"/>
+  </Segment>
+  <Segment SegmentId="NM1">
+    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="74">Corrected Insured</Allowed>
+      <Allowed ID="IL">Insured or Subscriber</Allowed>
+    </Element>
+    <Element Name="Entity Type Qualifier" Required="true" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="1">Person</Allowed>
+    </Element>
+    <Element Name="Name Last or Organization Name" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Name First" Type="AN" MinLength="1" MaxLength="25"/>
+    <Element Name="Name Middle" Type="AN" MinLength="25" MaxLength="25"/>
+    <Element Name="Name Prefix" Type="AN" MinLength="1" MaxLength="10"/>
+    <Element Name="Name Suffix" Type="AN" MinLength="1" MaxLength="10"/>
+    <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="34">Social Security Number</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+    <Element Name="Identification Code" Type="AN" MinLength="2" MaxLength="80"/>
+    <Element Name="Entity Relationship Code" Type="ID" MinLength="2" MaxLength="2">
+      
+    </Element>
+    <Element Name="Entity Identifier Code" Type="ID" MinLength="2" MaxLength="3">
+      
+    </Element>
+   </Segment>
+  <Segment SegmentId="PER">
+    <Element Name="Contact Function Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="IP">Insured Party</Allowed>
+    </Element>
+    <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="EM">Electronic Mail</Allowed>
+      <Allowed ID="EX">Telephone Extension</Allowed>
+      <Allowed ID="FX">Facsimile</Allowed>
+      <Allowed ID="HP">Home Phone Number</Allowed>
+      <Allowed ID="TE">Telephone</Allowed>
+      <Allowed ID="WP">Work Phone Number</Allowed>
+    </Element>
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="80"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="EM">Electronic Mail</Allowed>
+      <Allowed ID="EX">Telephone Extension</Allowed>
+      <Allowed ID="FX">Facsimile</Allowed>
+      <Allowed ID="HP">Home Phone Number</Allowed>
+      <Allowed ID="TE">Telephone</Allowed>
+      <Allowed ID="WP">Work Phone Number</Allowed>
+    </Element>
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="80"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="EM">Electronic Mail</Allowed>
+      <Allowed ID="EX">Telephone Extension</Allowed>
+      <Allowed ID="FX">Facsimile</Allowed>
+      <Allowed ID="HP">Home Phone Number</Allowed>
+      <Allowed ID="TE">Telephone</Allowed>
+      <Allowed ID="WP">Work Phone Number</Allowed>
+    </Element>
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="80"/>
+    <Element Name="Contact Inquery Reference" Type="AN" MinLength="1" MaxLength="20"/>
+  </Segment>
   <Segment SegmentId="REF">
     <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="0F">Subscriber Number</Allowed>
+      <Allowed ID="17">Client Reporting Category</Allowed>
+      <Allowed ID="1L">Group or Policy Number</Allowed>
+      <Allowed ID="23">Client Number</Allowed>
       <Allowed ID="38">Master Policy Number</Allowed>
-    </Element> 
-  </Segment>
-  <Segment SegmentId="DTP">
-    <Element Name="Data/Time Qualifier" Required="true" Type="ID" MinLength="3" MaxLength="3">
-      <Allowed ID="007">Effective</Allowed>
-      <Allowed ID="303">Maintenance Effective</Allowed>
-      <Allowed ID="382">Enrollment</Allowed>
-      <Allowed ID="388">Payment Commencement</Allowed>
+      <Allowed ID="3H">Case Number</Allowed>
+      <Allowed ID="6O">Cross Reference Number</Allowed>
+      <Allowed ID="DX">Department/Agency Number</Allowed>
+      <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
+      <Allowed ID="Q4">Prior Identitifier Number</Allowed>
+      <Allowed ID="QQ">Unit Number</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
-    <Element Name="Date Time Period Format Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
-      <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>      
-    </Element>
-    <Element Name="Date Time Period" Required="true" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Description" Type="AN" MinLength="1" MaxLength="80"/>
   </Segment>
+  
   <!-- 834 Segments -->
   <Segment SegmentId="BGN">
     <Element Name="Transaction Set Purpose Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
@@ -147,7 +310,7 @@
     </Element>
   </Segment>
   <Segment SegmentId="INS">
-    <Element Name="Yes/No Condition or Response Code" Required="true" Type="ID" MinLength="1" MaxLength="1">
+    <Element Name="Insured Indicator" Required="true" Type="ID" MinLength="1" MaxLength="1">
       <Allowed ID="N">No</Allowed>
       <Allowed ID="Y">Yes</Allowed>
     </Element>
@@ -224,6 +387,127 @@
       <Allowed ID="AI">No Reason Given</Allowed>
       <Allowed ID="XN">Notification Given</Allowed>
       <Allowed ID="XT">Transfer</Allowed>
+    </Element>
+    <Element Name="Benefit Status Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="A">Active</Allowed>
+      <Allowed ID="C">Consolidated Omnibus Budget Reconciliation Act (COBRA)</Allowed>
+      <Allowed ID="S">Surviving Insured</Allowed>
+      <Allowed ID="T">Tax Equity and Fiscal Responsibility Act (TEFRA)</Allowed>
+    </Element>
+    <Element Name="Medicare Plan Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="A">Medicare Part A</Allowed>
+      <Allowed ID="B">Medicare Part B</Allowed>
+      <Allowed ID="C">Medicare Part A and B</Allowed>
+      <Allowed ID="D">Medicare - Part Unknown</Allowed>
+      <Allowed ID="E">No Medicare</Allowed>
+    </Element>
+    <Element Name="Consolidated Omnibus Budget Reconciliation Act (COBRA) Qualifying" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="1">Termination of Employment</Allowed>
+      <Allowed ID="2">Reduction of work hours</Allowed>
+      <Allowed ID="3">Medicare</Allowed>
+      <Allowed ID="4">Death</Allowed>
+      <Allowed ID="5">Divorce</Allowed>
+      <Allowed ID="6">Separation</Allowed>
+      <Allowed ID="7">Ineligible Child</Allowed>
+      <Allowed ID="8">Bankruptcy of a Retired Employee</Allowed>
+    </Element>
+    <Element Name="Employment Status Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="AO">Active Military - Overseas</Allowed>
+      <Allowed ID="AU">Active Military - USA</Allowed>
+      <Allowed ID="FT">Full-time active employee</Allowed>
+      <Allowed ID="L1">Leave of Absence</Allowed>
+      <Allowed ID="PT">Part-time Active Employee</Allowed>
+      <Allowed ID="RT">Retired</Allowed>
+      <Allowed ID="TE">Terminated</Allowed>
+    </Element>
+    <Element Name="Student Status Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="F">Full-time</Allowed>
+      <Allowed ID="N">Not a Student</Allowed>
+      <Allowed ID="P">Part-time</Allowed>
+    </Element>
+    <Element Name="Handicap Indicator" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="N">No</Allowed>
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Date Time Period Format Qualifier" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Insured Individual Death Date" Type="DT" MinLength="1" MaxLength="35"/>
+    <Element Name="Confidentiality Code" Type="ID" MinLength="1" MaxLength="1"/>
+    <Element Name="City Name" Type="AN" MinLength="2" MaxLength="30"/>
+    <Element Name="State or Provice Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Country Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Birth Sequence Number" Type="N" MinLength="1" MaxLength="9"/>
+  </Segment>
+  <Segment SegmentId="HD">
+    <Element Name="Maintenance Type Code" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="001">Change</Allowed>
+      <Allowed ID="002">Delete</Allowed>
+      <Allowed ID="021">Addition</Allowed>
+      <Allowed ID="024">Cancellation or Termination</Allowed>
+      <Allowed ID="025">Reinstatment</Allowed>
+      <Allowed ID="026">Correction</Allowed>
+      <Allowed ID="030">Audit or Compare</Allowed>
+      <Allowed ID="032">Employee Information Not Applicable</Allowed>
+    </Element>
+    <Element Name="Maintenance Reason Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Insurance Line Code" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="AG">Preventitive Care/Wellness</Allowed>
+      <Allowed ID="AH">24 Hour Care</Allowed>
+      <Allowed ID="AJ">Medicare Risk</Allowed>
+      <Allowed ID="AK">Mental Health</Allowed>
+      <Allowed ID="DCP">Dental Capitation</Allowed>
+      <Allowed ID="DEN">Dental</Allowed>
+      <Allowed ID="EPO">Exclusive Provider Organization</Allowed>
+      <Allowed ID="FAC">Facility</Allowed>
+      <Allowed ID="HE">Hearing</Allowed>
+      <Allowed ID="HLT">Health</Allowed>
+      <Allowed ID="HMO">Health Maintenance Organization</Allowed>
+      <Allowed ID="LTC">Long Term Care</Allowed>
+      <Allowed ID="LTD">Long-Term Disability</Allowed>
+      <Allowed ID="MM">Major Medical</Allowed>
+      <Allowed ID="MOD">Mail Order Drug</Allowed>
+      <Allowed ID="PDG">Prescription Drug</Allowed>
+      <Allowed ID="POS">Point of Service</Allowed>
+      <Allowed ID="PPO">Preferred Provider Organization</Allowed>
+      <Allowed ID="PRA">Practitioners</Allowed>
+      <Allowed ID="STD">Short-Term Disability</Allowed>
+      <Allowed ID="UR">Utilization Review</Allowed>
+      <Allowed ID="VIS">Vision</Allowed>
+    </Element>
+    <Element Name="Plan Coverage Description" Type="AN" MinLength="1" MaxLength="50"/>
+    <Element Name="Coverage Level Code" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="CHD">Children Only</Allowed>
+      <Allowed ID="DEP">Dependents Only</Allowed>
+      <Allowed ID="E1D">Employee and One Dependent</Allowed>
+      <Allowed ID="E2D">Employee and Two Dependents</Allowed>
+      <Allowed ID="E3D">Employee and Three Dependents</Allowed>
+      <Allowed ID="E5D">Employee and One or More Dependents</Allowed>
+      <Allowed ID="E6D">Employee and Two or More Dependents</Allowed>
+      <Allowed ID="E7D">Employee and Three or More Dependents</Allowed>
+      <Allowed ID="E8D">Employee and Four or More Dependents</Allowed>
+      <Allowed ID="E9D">Employee and Five or More Dependents</Allowed>
+      <Allowed ID="ECH">Employee and Children</Allowed>
+      <Allowed ID="EMP">Employee Only</Allowed>
+      <Allowed ID="ESP">Employee and Spouse</Allowed>
+      <Allowed ID="FAM">Family</Allowed>
+      <Allowed ID="IND">Individual</Allowed>
+      <Allowed ID="SPC">Spouse and Children</Allowed>
+    </Element>
+    
+  </Segment>
+  <Segment SegmentId="COB">
+    <Element Name="Payer Responsibility Sequence Number Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="P">Primary</Allowed>
+      <Allowed ID="S">Secondary</Allowed>
+      <Allowed ID="T">Tertiary</Allowed>
+      <Allowed ID="U">Unknown</Allowed>
+    </Element>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Coordination of Benefits Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="1">Coordination of Benefits</Allowed>
+      <Allowed ID="5">Unknown</Allowed>
+      <Allowed ID="6">No Coordination of Benefits</Allowed>
     </Element>
   </Segment>
 </SegmentSet>
