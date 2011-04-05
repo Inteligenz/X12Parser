@@ -16,10 +16,9 @@ namespace OopFactory.X12.X12Parser
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
             FileStream fs = new FileStream(x12Filename, FileMode.Open);
-            StreamReader reader = new StreamReader(fs);
-            string xml = parser.ParseToDomainXml(reader.ReadToEnd());
-            reader.Close();
-
+            string xml = parser.ParseToXml(fs);
+            fs.Close();
+            
             FileStream outputFs = new FileStream(outputFilename, FileMode.Create);
             StreamWriter writer = new StreamWriter(outputFs);
             writer.Write(xml);

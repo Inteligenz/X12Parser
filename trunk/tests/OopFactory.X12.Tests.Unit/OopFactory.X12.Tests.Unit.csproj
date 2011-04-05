@@ -58,6 +58,7 @@
     <Compile Include="Creation\InstitutionalClaimCreationTester.cs" />
     <Compile Include="Parsing\BenefitEnrollments\BenefitEnrollmentParsingTester.cs" />
     <Compile Include="Parsing\Claims\InstitutionalClaimParsingTester.cs" />
+    <Compile Include="Parsing\Eligibility\EligibilityInquiryParsingTester.cs" />
     <Compile Include="Parsing\Payments\PaymentParsingTester.cs" />
     <Compile Include="Parsing\Suppliers\ShipNoticeTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,10 @@
     <Content Include="Parsing\BenefitEnrollments\Sample1X12.xml" />
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <EmbeddedResource Include="Parsing\Payments\Sample1.txt" />
+    <EmbeddedResource Include="Parsing\Eligibility\Sample1_270Inquiry.txt" />
+    <Content Include="Parsing\Eligibility\Sample1_270Inquiry.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />
     <Content Include="Parsing\Suppliers\Sample1Domain.xml" />
     <Content Include="Parsing\Suppliers\Sample1x12.xml" />
