@@ -97,6 +97,9 @@ namespace OopFactory.X12.Parsing.Model
         {
             switch (transactionType)
             {
+                case "270":
+                case "271":
+                    return EmbeddedResources.Get270TransactionSpecification();
                 case "834":
                     return EmbeddedResources.Get834TransactionSpecification();
                 case "835":
