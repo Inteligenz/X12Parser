@@ -100,6 +100,9 @@ namespace OopFactory.X12.Parsing.Model
                 case "270":
                 case "271":
                     return EmbeddedResources.Get270TransactionSpecification();
+                case "276":
+                case "277":
+                    return EmbeddedResources.Get276TransactionSpecification();
                 case "834":
                     return EmbeddedResources.Get834TransactionSpecification();
                 case "835":

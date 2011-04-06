@@ -1,0 +1,446 @@
+﻿<?xml version="1.0"?>
+<Interchange>
+  <ISA>
+    <!--Author Information Qualifier-->
+    <ISA01>00<!--No Authorization Information Present--></ISA01>
+    <!--Author Information-->
+    <ISA02>          </ISA02>
+    <!--Security Information Qualifer-->
+    <ISA03>00<!--No Security Information Present--></ISA03>
+    <!--Security Information-->
+    <ISA04>          </ISA04>
+    <!--Interchange ID Qualifier-->
+    <ISA05>01<!--Duns (Dun & Bradstreet)--></ISA05>
+    <!--Interchange Sender ID-->
+    <ISA06>9012345720000  </ISA06>
+    <!--Interchange ID Qualifier-->
+    <ISA07>01<!--Duns (Dun & Bradstreet)--></ISA07>
+    <!--Interchange Receiver ID-->
+    <ISA08>9088877320000  </ISA08>
+    <!--Interchange Date-->
+    <ISA09>020816</ISA09>
+    <!--Interchange Time-->
+    <ISA10>1144</ISA10>
+    <!--Inter Control Standards Identifier-->
+    <ISA11>U<!--U.S. EDI Community of ASC X12, TDCC, and UCS--></ISA11>
+    <!--Inter Control Version Number-->
+    <ISA12>00401</ISA12>
+    <!--Inter Control Number-->
+    <ISA13>000000031</ISA13>
+    <!--Acknowlegment Requested-->
+    <ISA14>1<!--Interchange Acknowledgment Requested--></ISA14>
+    <!--Usage Indicator-->
+    <ISA15>T<!--Test Data--></ISA15>
+    <!--Component Element Separator-->
+    <ISA16>
+      <ISA1601 />
+      <ISA1602 />
+    </ISA16>
+  </ISA>
+  <FunctionGroup>
+    <GS>
+      <!--Functional Identifier Code-->
+      <GS01>HR</GS01>
+      <!--Application Sender's Code-->
+      <GS02>901234572000</GS02>
+      <!--Application Receiver's Code-->
+      <GS03>908887732000</GS03>
+      <!--Date-->
+      <GS04>20070816</GS04>
+      <!--Time-->
+      <GS05>1615</GS05>
+      <!--Group Control Number-->
+      <GS06>31</GS06>
+      <!--Responsible Agency Code-->
+      <GS07>X<!--Accredited Standards Committee X12--></GS07>
+      <!--Version/Release/Industry Identifier Code-->
+      <GS08>005010X279</GS08>
+    </GS>
+    <Transaction ControlNumber="0001">
+      <ST>
+        <!--Transaction Set Identifier Code-->
+        <ST01>276</ST01>
+        <!--Transaction Set Control Number-->
+        <ST02>0001</ST02>
+        <ST03>005010X212</ST03>
+      </ST>
+      <BHT>
+        <!--Hierarchical Structure Code-->
+        <BHT01>0010</BHT01>
+        <!--Transaction Set Purpose Code-->
+        <BHT02>13<!--Request--></BHT02>
+        <!--Reference Identification-->
+        <BHT03>ABC276XXX</BHT03>
+        <!--Date-->
+        <BHT04>20050915</BHT04>
+        <!--Time-->
+        <BHT05>1425</BHT05>
+      </BHT>
+      <HierarchicalLoop LoopId="2000A" LoopName="INFORMATION SOURCE LEVEL" Id="1" ParentId="">
+        <HL>
+          <!--Hierarchical ID Number-->
+          <HL01>1</HL01>
+          <HL02 />
+          <!--Level Code-->
+          <HL03>20<!--Information Source--></HL03>
+          <!--Hierarchical Child Code-->
+          <HL04>1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure--></HL04>
+        </HL>
+        <HierarchicalLoop LoopId="2000B" LoopName="INFORMATION RECEIVER LEVEL" Id="2" ParentId="1">
+          <HL>
+            <!--Hierarchical ID Number-->
+            <HL01>2</HL01>
+            <!--Hierarchical Parent ID Number-->
+            <HL02>1</HL02>
+            <!--Level Code-->
+            <HL03>21</HL03>
+            <!--Hierarchical Child Code-->
+            <HL04>1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure--></HL04>
+          </HL>
+          <Loop LoopId="2100B" Name="Information Receiver Name">
+            <NM1>
+              <!--Entity Identifier Code-->
+              <NM101>41</NM101>
+              <!--Entity Type Qualifier-->
+              <NM102>2<!--Non-Person Entity--></NM102>
+              <!--Name Last or Organization Name-->
+              <NM103>XYZ SERVICE</NM103>
+              <NM104 />
+              <NM105 />
+              <NM106 />
+              <NM107 />
+              <!--Identification Code Qualifier-->
+              <NM108>46<!--Electronic Transmitter Identification Number (ETIN--></NM108>
+              <!--Identification Code-->
+              <NM109>X67E</NM109>
+            </NM1>
+          </Loop>
+          <HierarchicalLoop LoopId="2000C" LoopName="SERVICE PROVIDER LEVEL" Id="3" ParentId="2">
+            <HL>
+              <!--Hierarchical ID Number-->
+              <HL01>3</HL01>
+              <!--Hierarchical Parent ID Number-->
+              <HL02>2</HL02>
+              <!--Level Code-->
+              <HL03>19</HL03>
+              <!--Hierarchical Child Code-->
+              <HL04>1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure--></HL04>
+            </HL>
+            <Loop LoopId="2100C" Name="Provider Name">
+              <NM1>
+                <!--Entity Identifier Code-->
+                <NM101>1P<!--Provider--></NM101>
+                <!--Entity Type Qualifier-->
+                <NM102>2<!--Non-Person Entity--></NM102>
+                <!--Name Last or Organization Name-->
+                <NM103>HOME HOSPITAL</NM103>
+                <NM104 />
+                <NM105 />
+                <NM106 />
+                <NM107 />
+                <!--Identification Code Qualifier-->
+                <NM108>XX<!--Centers for Medicare and Medicaid Services Nationa--></NM108>
+                <!--Identification Code-->
+                <NM109>1666666661</NM109>
+              </NM1>
+            </Loop>
+            <HierarchicalLoop LoopId="2000D" LoopName="SUBSCRIBER LEVEL" Id="4" ParentId="3">
+              <HL>
+                <!--Hierarchical ID Number-->
+                <HL01>4</HL01>
+                <!--Hierarchical Parent ID Number-->
+                <HL02>3</HL02>
+                <!--Level Code-->
+                <HL03>22<!--Subscriber--></HL03>
+                <!--Hierarchical Child Code-->
+                <HL04>0<!--No Subordinate HL Segment in This Hiearchical Structure--></HL04>
+              </HL>
+              <DMG>
+                <!--Date Time Period Format Qualifier-->
+                <DMG01>D8<!--Date Expressed in Format CCYYMMDD--></DMG01>
+                <!--Date Time Period-->
+                <DMG02>19301210</DMG02>
+                <!--Gender Code-->
+                <DMG03>M<!--Male--></DMG03>
+              </DMG>
+              <Loop LoopId="2100D" Name="Subscriber Name">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>IL<!--Insured or Subscriber--></NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>1<!--Person--></NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>SMITH</NM103>
+                  <!--Name First-->
+                  <NM104>FRED</NM104>
+                  <NM105 />
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>MI</NM108>
+                  <!--Identification Code-->
+                  <NM109>123456789A</NM109>
+                </NM1>
+              </Loop>
+              <Loop LoopId="2200D" Name="Claim Status Tracking Number">
+                <TRN>
+                  <!--Trace Type Code-->
+                  <TRN01>1<!--Current Transaction Trace Numbers--></TRN01>
+                  <!--Reference Identification-->
+                  <TRN02>ABCXYZ1</TRN02>
+                </TRN>
+                <REF>
+                  <!--Reference Identification Qualifier-->
+                  <REF01>BLT</REF01>
+                  <!--Reference Identification-->
+                  <REF02>111</REF02>
+                </REF>
+                <REF>
+                  <!--Reference Identification Qualifier-->
+                  <REF01>EJ</REF01>
+                  <!--Reference Identification-->
+                  <REF02>SM123456</REF02>
+                </REF>
+                <AMT>
+                  <!--Amount Qualifier Code-->
+                  <AMT01>T3<!--Total Submitted Charges--></AMT01>
+                  <!--Monetary Amount-->
+                  <AMT02>8513.88</AMT02>
+                </AMT>
+                <DTP>
+                  <!--Data/Time Qualifier-->
+                  <DTP01>472</DTP01>
+                  <!--Date Time Period Format Qualifier-->
+                  <DTP02>RD8</DTP02>
+                  <!--Date Time Period-->
+                  <DTP03>20050831-20050906</DTP03>
+                </DTP>
+              </Loop>
+            </HierarchicalLoop>
+            <HierarchicalLoop LoopId="2000D" LoopName="SUBSCRIBER LEVEL" Id="5" ParentId="3">
+              <HL>
+                <!--Hierarchical ID Number-->
+                <HL01>5</HL01>
+                <!--Hierarchical Parent ID Number-->
+                <HL02>3</HL02>
+                <!--Level Code-->
+                <HL03>22<!--Subscriber--></HL03>
+                <!--Hierarchical Child Code-->
+                <HL04>0<!--No Subordinate HL Segment in This Hiearchical Structure--></HL04>
+              </HL>
+              <DMG>
+                <!--Date Time Period Format Qualifier-->
+                <DMG01>D8<!--Date Expressed in Format CCYYMMDD--></DMG01>
+                <!--Date Time Period-->
+                <DMG02>19301115</DMG02>
+                <!--Gender Code-->
+                <DMG03>F<!--Female--></DMG03>
+              </DMG>
+              <Loop LoopId="2100D" Name="Subscriber Name">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>IL<!--Insured or Subscriber--></NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>1<!--Person--></NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>JONES</NM103>
+                  <!--Name First-->
+                  <NM104>MARY</NM104>
+                  <NM105 />
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>MI</NM108>
+                  <!--Identification Code-->
+                  <NM109>234567890A</NM109>
+                </NM1>
+              </Loop>
+              <Loop LoopId="2200D" Name="Claim Status Tracking Number">
+                <TRN>
+                  <!--Trace Type Code-->
+                  <TRN01>1<!--Current Transaction Trace Numbers--></TRN01>
+                  <!--Reference Identification-->
+                  <TRN02>ABCXYZ2</TRN02>
+                </TRN>
+                <REF>
+                  <!--Reference Identification Qualifier-->
+                  <REF01>BLT</REF01>
+                  <!--Reference Identification-->
+                  <REF02>111</REF02>
+                </REF>
+                <REF>
+                  <!--Reference Identification Qualifier-->
+                  <REF01>EJ</REF01>
+                  <!--Reference Identification-->
+                  <REF02>JO234567</REF02>
+                </REF>
+                <AMT>
+                  <!--Amount Qualifier Code-->
+                  <AMT01>T3<!--Total Submitted Charges--></AMT01>
+                  <!--Monetary Amount-->
+                  <AMT02>7599</AMT02>
+                </AMT>
+                <DTP>
+                  <!--Data/Time Qualifier-->
+                  <DTP01>472</DTP01>
+                  <!--Date Time Period Format Qualifier-->
+                  <DTP02>RD8</DTP02>
+                  <!--Date Time Period-->
+                  <DTP03>20050731-20050809</DTP03>
+                </DTP>
+              </Loop>
+            </HierarchicalLoop>
+          </HierarchicalLoop>
+          <HierarchicalLoop LoopId="2000C" LoopName="SERVICE PROVIDER LEVEL" Id="6" ParentId="2">
+            <HL>
+              <!--Hierarchical ID Number-->
+              <HL01>6</HL01>
+              <!--Hierarchical Parent ID Number-->
+              <HL02>2</HL02>
+              <!--Level Code-->
+              <HL03>19</HL03>
+              <!--Hierarchical Child Code-->
+              <HL04>1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure--></HL04>
+            </HL>
+            <Loop LoopId="2100C" Name="Provider Name">
+              <NM1>
+                <!--Entity Identifier Code-->
+                <NM101>1P<!--Provider--></NM101>
+                <!--Entity Type Qualifier-->
+                <NM102>2<!--Non-Person Entity--></NM102>
+                <!--Name Last or Organization Name-->
+                <NM103>HOME HOSPITAL PHYSICIANS</NM103>
+                <NM104 />
+                <NM105 />
+                <NM106 />
+                <NM107 />
+                <!--Identification Code Qualifier-->
+                <NM108>XX<!--Centers for Medicare and Medicaid Services Nationa--></NM108>
+                <!--Identification Code-->
+                <NM109>1666666666</NM109>
+              </NM1>
+            </Loop>
+            <HierarchicalLoop LoopId="2000D" LoopName="SUBSCRIBER LEVEL" Id="7" ParentId="6">
+              <HL>
+                <!--Hierarchical ID Number-->
+                <HL01>7</HL01>
+                <!--Hierarchical Parent ID Number-->
+                <HL02>6</HL02>
+                <!--Level Code-->
+                <HL03>22<!--Subscriber--></HL03>
+                <!--Hierarchical Child Code-->
+                <HL04>1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure--></HL04>
+              </HL>
+              <Loop LoopId="2100D" Name="Subscriber Name">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>IL<!--Insured or Subscriber--></NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>1<!--Person--></NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>MANN</NM103>
+                  <!--Name First-->
+                  <NM104>JOHN</NM104>
+                  <NM105 />
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>MI</NM108>
+                  <!--Identification Code-->
+                  <NM109>345678901</NM109>
+                </NM1>
+              </Loop>
+              <HierarchicalLoop LoopId="2000E" LoopName="DEPENDENT LEVEL" Id="8" ParentId="7">
+                <HL>
+                  <!--Hierarchical ID Number-->
+                  <HL01>8</HL01>
+                  <!--Hierarchical Parent ID Number-->
+                  <HL02>7</HL02>
+                  <!--Level Code-->
+                  <HL03>23<!--Dependent--></HL03>
+                </HL>
+                <DMG>
+                  <!--Date Time Period Format Qualifier-->
+                  <DMG01>D8<!--Date Expressed in Format CCYYMMDD--></DMG01>
+                  <!--Date Time Period-->
+                  <DMG02>19951101</DMG02>
+                  <!--Gender Code-->
+                  <DMG03>M<!--Male--></DMG03>
+                </DMG>
+                <Loop LoopId="2100E" Name="Dependent Name">
+                  <NM1>
+                    <!--Entity Identifier Code-->
+                    <NM101>QC</NM101>
+                    <!--Entity Type Qualifier-->
+                    <NM102>1<!--Person--></NM102>
+                    <!--Name Last or Organization Name-->
+                    <NM103>MANN</NM103>
+                    <!--Name First-->
+                    <NM104>JOSEPH</NM104>
+                  </NM1>
+                </Loop>
+                <Loop LoopId="2200E" Name="Claim Status Tracking Number">
+                  <TRN>
+                    <!--Trace Type Code-->
+                    <TRN01>1<!--Current Transaction Trace Numbers--></TRN01>
+                    <!--Reference Identification-->
+                    <TRN02>ABCXYZ3</TRN02>
+                  </TRN>
+                  <REF>
+                    <!--Reference Identification Qualifier-->
+                    <REF01>EJ</REF01>
+                    <!--Reference Identification-->
+                    <REF02>MA345678</REF02>
+                  </REF>
+                  <Loop LoopId="2210E" Name="Service Line Information">
+                    <SVC>
+                      <!--Composite Medical Procedure Identifier-->
+                      <SVC01>
+                        <SVC0101>HC<!--Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes--></SVC0101>
+                        <SVC0102>99203</SVC0102>
+                      </SVC01>
+                      <!--Monetary Amount-->
+                      <SVC02>150</SVC02>
+                      <SVC03 />
+                      <SVC04 />
+                      <SVC05 />
+                      <SVC06 />
+                      <!--Quantity-->
+                      <SVC07>1</SVC07>
+                    </SVC>
+                    <DTP>
+                      <!--Data/Time Qualifier-->
+                      <DTP01>472</DTP01>
+                      <!--Date Time Period Format Qualifier-->
+                      <DTP02>D8<!--Date Expression in Format CCYYMMDD--></DTP02>
+                      <!--Date Time Period-->
+                      <DTP03>20050501</DTP03>
+                    </DTP>
+                  </Loop>
+                </Loop>
+              </HierarchicalLoop>
+            </HierarchicalLoop>
+          </HierarchicalLoop>
+        </HierarchicalLoop>
+      </HierarchicalLoop>
+      <SE>
+        <!--Number of Included Segments-->
+        <SE01>36</SE01>
+        <!--Transaction Set Control Number-->
+        <SE02>0001</SE02>
+      </SE>
+    </Transaction>
+    <GE>
+      <!--Number of Transaction Sets Included-->
+      <GE01>1</GE01>
+      <!--Group Control Number-->
+      <GE02>31</GE02>
+    </GE>
+  </FunctionGroup>
+  <IEA>
+    <!--Number of Included Functional Groups-->
+    <IEA01>1</IEA01>
+    <!--Interchange Control Number-->
+    <IEA02>000000031</IEA02>
+  </IEA>
+</Interchange>
