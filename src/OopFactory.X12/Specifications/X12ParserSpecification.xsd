@@ -32,9 +32,9 @@
       <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="LoopId" type="xs:string"/>
+    <xs:attribute name="LoopId" type="xs:string" use="required"/>
     <xs:attribute name="Usage" type="UsageEnum" />
-    <xs:attribute name="LevelCode" type="xs:string"/>
+    <xs:attribute name="LevelCode" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="LoopSpecification">
@@ -58,7 +58,7 @@
       <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="LoopId" type="xs:string"/>
+    <xs:attribute name="LoopId" type="xs:string" use="required"/>
     <xs:attribute name="Usage" type="UsageEnum" />
     <xs:attribute name="Repeat" type="xs:positiveInteger"/>
     <xs:attribute name="LoopRepeat" type="xs:positiveInteger"/>
@@ -87,7 +87,7 @@
           <xs:enumeration value="DT"/>
           <xs:enumeration value="TM"/>
           <xs:enumeration value="N"/>
-          <xs:enumeration value="D"/>
+          <xs:enumeration value="R"/>
           <xs:enumeration value="ID"/>
         </xs:restriction>
       </xs:simpleType>

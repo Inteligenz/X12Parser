@@ -92,6 +92,16 @@
     <Element Name="Transaction Set Control Number" Type="AN" MinLength="4" MaxLength="9"/>
   </Segment>
   <!-- Common Segments -->
+  <Segment SegmentId="AMT">
+    <Element Name="Amount Qualifier Code" Type="ID" MinLength="1" MaxLength="3" Required="true">
+      <Allowed ID="T3">Total Submitted Charges</Allowed>
+      
+    </Element>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Credit/Debit Flag Code" Type="ID" MinLength="1" MaxLength="1">
+      
+    </Element>
+  </Segment>
   <Segment SegmentId="BHT">
     <Element Name="Hierarchical Structure Code" Type="ID" MinLength="4" MaxLength="4">
       <Allowed ID="0022">Information Source, Information Receiver, Subscriber, Dependent</Allowed>
@@ -543,6 +553,27 @@
     </Element>
     <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
   </Segment>
+  
+  <!-- 276/277 Segments -->
+  <Segment SegmentId="SVC">
+    <Element Name="Composite Medical Procedure Identifier" Type="ID">
+      <Allowed ID="AD">American Dental Association Codes</Allowed>
+      <Allowed ID="ER">Jurisdiction Specific Procedure and Supply Codes</Allowed>
+      <Allowed ID="HC">Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes</Allowed>
+      <Allowed ID="HP">Health Insurance Prospective Payment System (HIPPS) Skilled Nursing Facility Rate Code</Allowed>
+      <Allowed ID="IV">Home Infusion EDI Coalition (HIEC) Product/Service Code</Allowed>
+      <Allowed ID="N4">National Drug Code in 5-4-2 Format</Allowed>
+      <Allowed ID="NU">National Uniform Billing Committee (NUBC) UB92 Codes</Allowed>
+      <Allowed ID="WK">Advanced Billing Concepts (ABC) Codes</Allowed>
+    </Element>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Composite Medical Procedure Identifier"/>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+  </Segment>
+  
   <!-- 834 Segments -->
   <Segment SegmentId="BGN">
     <Element Name="Transaction Set Purpose Code" Required="true" Type="ID" MinLength="2" MaxLength="2">

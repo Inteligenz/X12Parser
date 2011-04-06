@@ -42,6 +42,19 @@ namespace OopFactory.X12
             return _270specification;
         }
 
+        private static TransactionSpecification _276specification;
+
+        internal static TransactionSpecification Get276TransactionSpecification()
+        {
+            if (_276specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-276-5010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _276specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _276specification;
+        }
+
         private static TransactionSpecification _997specification;
 
         internal static TransactionSpecification Get997TransactionSpecification()

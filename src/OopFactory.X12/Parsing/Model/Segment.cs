@@ -218,7 +218,15 @@ namespace OopFactory.X12.Parsing.Model
                         for (int j = 0; j < subElements.Length; j++)
                         {
                             var subElementName = String.Format("{0}{1:00}", elementName, j + 1);
-                            writer.WriteElementString(subElementName, subElements[j]);
+                            writer.WriteStartElement(subElementName);
+                            writer.WriteValue(subElements[j]);
+                            if (SegmentSpec != null && SegmentSpec.Elements.Count > i && SegmentSpec.Elements[i].Type == Specification.ElementDataTypeEnum.Identifier)
+                            {
+                                var allowedValue = SegmentSpec.Elements[i].AllowedIdentifiers.FirstOrDefault(ai => ai.ID == subElements[j]);
+                                if (allowedValue != null)
+                                    writer.WriteComment(allowedValue.Description);
+                            }
+                            writer.WriteEndElement();
                         }
                         writer.WriteEndElement();
                     }
