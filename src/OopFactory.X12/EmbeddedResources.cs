@@ -94,6 +94,19 @@ namespace OopFactory.X12
             return _837specification;
         }
 
+        private static TransactionSpecification _837_5010specification;
+
+        internal static TransactionSpecification Get837_5010TransactionSpecification()
+        {
+            if (_837_5010specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-837-5010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _837_5010specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _837_5010specification;
+        }
+
         private static XslCompiledTransform _837Transform;
 
         internal static XslCompiledTransform Get837Transform()

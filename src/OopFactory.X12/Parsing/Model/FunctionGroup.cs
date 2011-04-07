@@ -93,7 +93,7 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
-        private static TransactionSpecification GetSpec(string transactionType)
+        private TransactionSpecification GetSpec(string transactionType)
         {
             switch (transactionType)
             {
@@ -108,7 +108,10 @@ namespace OopFactory.X12.Parsing.Model
                 case "835":
                     return EmbeddedResources.Get835TransactionSpecification();
                 case "837":
-                    return EmbeddedResources.Get837TransactionSpecification();
+                    if (this.VersionIdentifierCode.Contains("5010"))
+                        return EmbeddedResources.Get837_5010TransactionSpecification();
+                    else
+                        return EmbeddedResources.Get837TransactionSpecification();
                 case "856":
                     return EmbeddedResources.Get856TransactionSpecification();
                 case "997":
