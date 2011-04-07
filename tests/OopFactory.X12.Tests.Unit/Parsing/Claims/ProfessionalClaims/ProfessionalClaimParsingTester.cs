@@ -27,5 +27,14 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
             string xml = interchange.Serialize();
             Trace.Write(xml);
         }
+
+        [TestMethod]
+        public void ParseSample1AndUnparse()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("Sample1_5010.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+        }
     }
 }
