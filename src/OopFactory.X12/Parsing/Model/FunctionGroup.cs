@@ -11,14 +11,21 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class FunctionGroup : Container, IXmlSerializable
     {
+        private ISpecificationFinder _specFinder;
         private Dictionary<string,Transaction> _transactions;
 
         internal FunctionGroup() : base(null, null, "GS") { }
 
-        internal FunctionGroup(Container parent, X12DelimiterSet delimiters, string segment)
+        internal FunctionGroup(ISpecificationFinder specFinder, Container parent, X12DelimiterSet delimiters, string segment)
             : base(parent, delimiters, segment)
         {
+            _specFinder = specFinder;
             _transactions = new Dictionary<string,Transaction>();
+        }
+
+        internal ISpecificationFinder SpecFinder
+        {
+            get { return _specFinder; }
         }
 
         public string FunctionalIdentifierCode
@@ -93,48 +100,25 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
-        private TransactionSpecification GetSpec(string transactionType)
-        {
-            switch (transactionType)
-            {
-                case "270":
-                case "271":
-                    return EmbeddedResources.Get270TransactionSpecification();
-                case "276":
-                case "277":
-                    return EmbeddedResources.Get276TransactionSpecification();
-                case "834":
-                    return EmbeddedResources.Get834TransactionSpecification();
-                case "835":
-                    return EmbeddedResources.Get835TransactionSpecification();
-                case "837":
-                    if (this.VersionIdentifierCode.Contains("5010"))
-                        return EmbeddedResources.Get837_5010TransactionSpecification();
-                    else
-                        return EmbeddedResources.Get837TransactionSpecification();
-                case "856":
-                    return EmbeddedResources.Get856TransactionSpecification();
-                case "997":
-                    return EmbeddedResources.Get997TransactionSpecification();
-                default:
-                    throw new NotSupportedException(String.Format("Transaction Type {0} is not supported.", transactionType));
-            }
-        }
+        
 
         internal Transaction AddTransaction(string segmentString)
         {
             string transactionType = new Segment(null, _delimiters, segmentString).GetElement(1);
 
-            Transaction transaction = new Transaction(this, _delimiters, segmentString, GetSpec(transactionType));
+            TransactionSpecification spec = _specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, transactionType);
+
+            Transaction transaction = new Transaction(this, _delimiters, segmentString, spec);
             _transactions.Add(transaction.ControlNumber, transaction);
             return transaction;
         }
 
         public Transaction AddTransaction(string identifierCode, string controlNumber)
         {
+            TransactionSpecification spec = _specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, identifierCode);
+
             Transaction transaction = new Transaction(this, _delimiters, 
-                String.Format("ST{0}{0}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator), 
-                GetSpec(identifierCode));
+                String.Format("ST{0}{0}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator), spec);
             transaction.IdentifierCode = identifierCode;
             transaction.ControlNumber = controlNumber;
             transaction.SetTerminatingTrailerSegment(

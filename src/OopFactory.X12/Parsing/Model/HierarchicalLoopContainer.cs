@@ -28,19 +28,7 @@ namespace OopFactory.X12.Parsing.Model
             get { return _hLoops.Values; }
         }
 
-        public Transaction Transaction
-        {
-            get {
-                Container container = this;
-                while (!(container is Transaction))
-                {
-                    container = container.Parent;
-                    if (container == null)
-                        return null;
-                }
-                return (Transaction)container;
-            }
-        }
+        
 
         internal HierarchicalLoop AddHLoop(string segmentString)
         {

@@ -21,6 +21,11 @@ namespace OopFactory.X12.Parsing.Model
             Specification = spec;
         }
 
+        public FunctionGroup FunctionGroup
+        {
+            get { return (FunctionGroup)Parent; }
+        }
+
         public TransactionSpecification Specification { get; private set; }
 
         public string IdentifierCode

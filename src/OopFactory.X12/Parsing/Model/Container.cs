@@ -28,6 +28,21 @@ namespace OopFactory.X12.Parsing.Model
 
         internal abstract IList<SegmentSpecification> AllowedChildSegments { get; }
 
+        public Transaction Transaction
+        {
+            get
+            {
+                Container container = this;
+                while (!(container is Transaction))
+                {
+                    container = container.Parent;
+                    if (container == null)
+                        return null;
+                }
+                return (Transaction)container;
+            }
+        }
+
         public IEnumerable<Segment> Segments { get { return _segments; } }
 
         public Segment AddSegment(string segmentString)

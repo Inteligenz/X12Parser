@@ -11,20 +11,23 @@ namespace OopFactory.X12.Parsing.Model
 {
     public class Interchange : Container, IXmlSerializable
     {
+        private ISpecificationFinder _specFinder;
         private List<FunctionGroup> _functionGroups;
 
         internal Interchange() : base(null, null, "GS") { }
 
-        internal Interchange(string segmentString)
+        internal Interchange(ISpecificationFinder specFinder, string segmentString)
             : base(null, new X12DelimiterSet(segmentString.ToCharArray()), segmentString)
         {
+            _specFinder = specFinder;
             _functionGroups = new List<FunctionGroup>();
         }
 
-        internal Interchange(DateTime date, int controlNumber, bool production,  X12DelimiterSet delimiters)
+        internal Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production,  X12DelimiterSet delimiters)
             : base(null, delimiters, String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}{4:000000000}{1}1{1}{5}{1}{2}{0}",
                 delimiters.SegmentTerminator, delimiters.ElementSeparator, delimiters.SubElementSeparator, date, controlNumber, production ? "P" : "T"))
         {
+            _specFinder = specFinder;
             if (controlNumber > 999999999 || controlNumber < 1)
                 throw new ElementValidationException("{0} Interchange Control Number must be a positive number between 1 and 999999999.", "ISA00", controlNumber.ToString());
 
@@ -34,15 +37,19 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         public Interchange (DateTime date, int controlNumber, bool production)
-            : this(date, controlNumber, production, new X12DelimiterSet('~', '*', ':'))
+            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':'))
         {            
         }
 
         public Interchange(DateTime date, int controlNumber, bool production, char segmentTerminator, char elementSeparator, char subElementSeparator)
-            : this(date, controlNumber, production, new X12DelimiterSet(segmentTerminator, elementSeparator, subElementSeparator))
+            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet(segmentTerminator, elementSeparator, subElementSeparator))
         {
         }
 
+        internal ISpecificationFinder SpecFinder
+        {
+            get { return _specFinder; }
+        }
         public string AuthorInfoQualifier
         {
             get { return GetElement(1); }
@@ -118,7 +125,7 @@ namespace OopFactory.X12.Parsing.Model
 
         internal FunctionGroup AddFunctionGroup(string segmentString)
         {
-            FunctionGroup fg = new FunctionGroup(this, _delimiters, segmentString);
+            FunctionGroup fg = new FunctionGroup(_specFinder, this, _delimiters, segmentString);
             _functionGroups.Add(fg);
             return fg;
         }
@@ -129,7 +136,7 @@ namespace OopFactory.X12.Parsing.Model
                 throw new ElementValidationException("Element {0} cannot containe the value '{1}' because it must be a positive number between 1 and 999999999.",
                     "GS06", controlNumber.ToString());
 
-            FunctionGroup fg = new FunctionGroup(this, _delimiters,
+            FunctionGroup fg = new FunctionGroup(_specFinder, this, _delimiters,
                 string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator));
             fg.FunctionalIdentifierCode = functionIdCode;
             fg.Date = date;
