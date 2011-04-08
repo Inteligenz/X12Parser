@@ -28,6 +28,11 @@ namespace OopFactory.X12.Parsing.Model
             get { return _specFinder; }
         }
 
+        public Interchange Interchange
+        {
+            get { return (Interchange)Parent; }
+        }
+
         public string FunctionalIdentifierCode
         {
             get { return GetElement(1); }

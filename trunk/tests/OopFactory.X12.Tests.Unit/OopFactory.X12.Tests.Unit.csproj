@@ -65,6 +65,7 @@
     <Compile Include="Parsing\Suppliers\ShipNoticeTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\FoDocumentSerializationTester.cs" />
+    <Compile Include="Unbundling\UnbundlingTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\OopFactory.X12.Model\OopFactory.X12.Model.csproj">

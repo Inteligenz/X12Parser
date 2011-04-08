@@ -5,6 +5,7 @@ using System.Text;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Specification;
 using System.IO;
+
 namespace OopFactory.X12.Parsing
 {
     public class X12Parser
@@ -155,5 +156,32 @@ namespace OopFactory.X12.Parsing
             
             return envelop;
         }
+
+        public List<Interchange> UnbundleLoop(Interchange interchange, string loopId)
+        {
+            char terminator = interchange._delimiters.SegmentTerminator;
+            var service = new UnbundlingService(interchange._delimiters.SegmentTerminator);
+            string isa = interchange.SegmentString;
+            string iea = interchange.TrailerSegments.First().SegmentString;
+            List<string> list = new List<string>();
+            foreach (FunctionGroup group in interchange.FunctionGroups)
+                foreach (Transaction transaction in group.Transactions)
+                {
+                    service.UnbundleLoops(list, transaction, loopId);
+                    service.UnbundleHLoops(list, transaction, loopId);
+                }
+
+            List<Interchange> interchanges = new List<Interchange>();
+            foreach (var item in list)
+            {
+                StringBuilder x12 = new StringBuilder();
+                x12.AppendFormat("{0}{1}", isa, terminator);
+                x12.Append(item);
+                x12.AppendFormat("{0}{1}", iea, terminator);
+                MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString()));
+                interchanges.Add(Parse(mstream));
+            }
+            return interchanges;
+        }         
     }
 }
