@@ -21,9 +21,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.BenefitEnrollments
 
         private void ParseX12(Stream stream)
         {
-            var service = new X12ParsingService(true);
-
-            var xml = service.ParseToXml(stream);
+            var xml = new X12Parser().Parse(stream).Serialize();
             Trace.Write(xml);            
         }
 

@@ -68,6 +68,7 @@
     <Compile Include="Parsing\Specification\StartingSegment.cs" />
     <Compile Include="Parsing\Specification\TransactionSpecification.cs" />
     <Compile Include="Parsing\SpecificationFinder.cs" />
+    <Compile Include="Parsing\UnbundlingService.cs" />
     <Compile Include="Parsing\X12DelimiterSet.cs" />
     <Compile Include="Parsing\X12Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
