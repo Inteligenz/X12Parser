@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
@@ -56,9 +57,9 @@ namespace OopFactory.X12.Parsing.Model
 
         private void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
         {
-            if (EmbeddedResources.Get4010Spec().ContainsKey(this.SegmentId))
+            if (SegmentSpec != null)
             {
-                var spec = EmbeddedResources.Get4010Spec()[SegmentId].GetElement(elementNumber);
+                ElementSpecification spec = SegmentSpec.Elements[elementNumber - 1];
                 if (spec != null)
                 {
                     if (value.Length == 0 && spec.Required)
@@ -163,10 +164,18 @@ namespace OopFactory.X12.Parsing.Model
         {
             get
             {
-                if (EmbeddedResources.Get4010Spec().ContainsKey(this.SegmentId))
-                    return EmbeddedResources.Get4010Spec()[SegmentId];
+                if (this is Interchange)
+                    return ((Interchange)this).SpecFinder.FindSegmentSpec(SegmentId);
+                else if (this is FunctionGroup)
+                    return ((FunctionGroup)this).SpecFinder.FindSegmentSpec(SegmentId);
+                else if (this is Transaction)
+                    return ((Transaction)this).FunctionGroup.SpecFinder.FindSegmentSpec(SegmentId);
+                else if (this.Parent is FunctionGroup)
+                    return ((FunctionGroup)this.Parent).SpecFinder.FindSegmentSpec(SegmentId);
+                else if (this.Parent is Interchange)
+                    return ((Interchange)this.Parent).SpecFinder.FindSegmentSpec(SegmentId);
                 else
-                    return null;
+                    return ((FunctionGroup)this.Parent.Transaction.Parent).SpecFinder.FindSegmentSpec(this.SegmentId);
             }
         }
 

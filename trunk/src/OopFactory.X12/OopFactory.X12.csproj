@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbeddedResources.cs" />
+    <Compile Include="Parsing\ISpecificationFinder.cs" />
     <Compile Include="Parsing\Model\Container.cs" />
     <Compile Include="Parsing\Model\ElementValidationException.cs" />
     <Compile Include="Parsing\Model\FunctionGroup.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="Parsing\Specification\SegmentSpecificationStandard.cs" />
     <Compile Include="Parsing\Specification\StartingSegment.cs" />
     <Compile Include="Parsing\Specification\TransactionSpecification.cs" />
+    <Compile Include="Parsing\SpecificationFinder.cs" />
     <Compile Include="Parsing\X12DelimiterSet.cs" />
     <Compile Include="Parsing\X12Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

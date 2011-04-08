@@ -9,6 +9,18 @@ namespace OopFactory.X12.Parsing
 {
     public class X12Parser
     {
+        private ISpecificationFinder _specFinder;
+
+        public X12Parser(ISpecificationFinder specFinder)
+        {
+            _specFinder = specFinder;
+        }
+
+        public X12Parser()
+            : this(new SpecificationFinder())
+        {
+
+        }
         private string ReadNextSegment(StreamReader reader, char segmentDelimiter)
         {
             StringBuilder sb = new StringBuilder();
@@ -42,7 +54,7 @@ namespace OopFactory.X12.Parsing
 
             X12DelimiterSet delimiters = new X12DelimiterSet(header);
 
-            Interchange envelop = new Interchange(new string(header));
+            Interchange envelop = new Interchange(_specFinder, new string(header));
             Container currentContainer = envelop;
             FunctionGroup fg = null;
             Transaction tr = null;

@@ -57,7 +57,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
             Assert.AreEqual(orignalX12, x12);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseAndValidateBillingProviderLoopTest()
         {
             Claim claim = ParseX12(GetEdi("Sample1.txt"));
@@ -84,7 +84,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
             Assert.AreEqual("203BA0200N", billingProvider.Speciality.Code);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseAndValidateSubscriberLoopTest()
         {
             Claim claim = ParseX12(GetEdi("Sample1.txt"));
@@ -107,7 +107,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
             Assert.AreEqual(GenderEnum.Female, claim.Subscriber.Gender);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseAndValidateOccurrences()
         {
             Claim claim = ParseX12(GetEdi("Sample1.txt"));
@@ -122,7 +122,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims
             Assert.AreEqual(DateTime.Parse("2007-04-10"), claim.Occurrences[3].Date);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseAndValidateServiceLines()
         {
             Claim claim = ParseX12(GetEdi("Sample1.txt"));

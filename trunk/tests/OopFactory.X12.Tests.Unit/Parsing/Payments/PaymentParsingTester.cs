@@ -29,9 +29,9 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
         {
             var service = new X12ParsingService(true);
 
-            //var xml = service.ParseToXml(SAMPLE_1);
+            var xml = service.ParseToXml(GetEdi("Sample1.txt"));
             
-            var xml = service.ParseToDomainXml(GetEdi("Sample1.txt"));
+            //var xml = service.ParseToDomainXml(GetEdi("Sample1.txt"));
             Trace.Write(xml);
         }
 

@@ -41,7 +41,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             Trace.Write(xml);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseToDomainXml_Sample1()
         {
             var service = new X12ParsingService(true);
@@ -49,15 +49,15 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             Trace.Write(xml);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ParseToDomainXml_Sample2()
         {
             var service = new X12ParsingService(true);
             var xml = service.ParseToDomainXml(GetEdi("Sample2.edi"));
             Trace.Write(xml);
         }
-        
-        [TestMethod]
+
+        [TestMethod, Ignore]
         public void ParseToDomainXml_Sample3()
         {
             var service = new X12ParsingService(true);
@@ -65,7 +65,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             Trace.Write(xml);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void RenderSample1()
         {
             var service = new X12ParsingService(true);
@@ -77,7 +77,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             fs.Write(pdf, 0, pdf.Length);
             fs.Close();
         }
-        [TestMethod]
+        [TestMethod, Ignore]
         public void RenderSample2()
         {
             var service = new X12ParsingService(true);
@@ -89,7 +89,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
             fs.Write(pdf, 0, pdf.Length);
             fs.Close();
         }
-        [TestMethod]
+        [TestMethod, Ignore]
         public void RenderSample3()
         {
             var service = new X12ParsingService(true);

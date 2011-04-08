@@ -9,12 +9,49 @@ using System.Xml.Xsl;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Specification;
 
-namespace OopFactory.X12
+namespace OopFactory.X12.Parsing
 {
-    internal static class EmbeddedResources
+    public class SpecificationFinder : ISpecificationFinder
     {
+        public virtual TransactionSpecification FindTransactionSpec(string functionalCode, string versionCode, string transactionSetCode)
+        {
+            switch (transactionSetCode)
+            {
+                case "270":
+                case "271":
+                    return Get270TransactionSpecification();
+                case "276":
+                case "277":
+                    return Get276TransactionSpecification();
+                case "834":
+                    return Get834TransactionSpecification();
+                case "835":
+                    return Get835TransactionSpecification();
+                case "837":
+                    if (versionCode.Contains("5010"))
+                        return Get837_5010TransactionSpecification();
+                    else
+                        return Get837TransactionSpecification();
+                case "856":
+                    return Get856TransactionSpecification();
+                case "997":
+                    return Get997TransactionSpecification();
+                default:
+                    throw new NotSupportedException(String.Format("Transaction Set {0} is not supported.", transactionSetCode));
+            }
+        }
+
+        public virtual SegmentSpecification FindSegmentSpec(string segmentId)
+        {
+            var idMap = Get4010Spec();
+            if (idMap.ContainsKey(segmentId))
+                return idMap[segmentId];
+            else
+                return null;
+        }
+
         private static Dictionary<string, SegmentSpecification> _4010Specification;
-        internal static Dictionary<string, SegmentSpecification> Get4010Spec()
+        private static Dictionary<string, SegmentSpecification> Get4010Spec()
         {
             if (_4010Specification == null)
             {
@@ -31,7 +68,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _270specification;
 
-        internal static TransactionSpecification Get270TransactionSpecification()
+        private static TransactionSpecification Get270TransactionSpecification()
         {
             if (_270specification == null)
             {
@@ -44,7 +81,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _276specification;
 
-        internal static TransactionSpecification Get276TransactionSpecification()
+        private static TransactionSpecification Get276TransactionSpecification()
         {
             if (_276specification == null)
             {
@@ -57,7 +94,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _997specification;
 
-        internal static TransactionSpecification Get997TransactionSpecification()
+        private static TransactionSpecification Get997TransactionSpecification()
         {
             if (_997specification == null)
             {
@@ -70,7 +107,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _834specification;
 
-        internal static TransactionSpecification Get834TransactionSpecification()
+        private static TransactionSpecification Get834TransactionSpecification()
         {
             if (_834specification == null)
             {
@@ -83,7 +120,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _837specification;
 
-        internal static TransactionSpecification Get837TransactionSpecification()
+        private static TransactionSpecification Get837TransactionSpecification()
         {
             if (_837specification == null)
             {
@@ -96,7 +133,7 @@ namespace OopFactory.X12
 
         private static TransactionSpecification _837_5010specification;
 
-        internal static TransactionSpecification Get837_5010TransactionSpecification()
+        private static TransactionSpecification Get837_5010TransactionSpecification()
         {
             if (_837_5010specification == null)
             {
@@ -107,24 +144,9 @@ namespace OopFactory.X12
             return _837_5010specification;
         }
 
-        private static XslCompiledTransform _837Transform;
-
-        internal static XslCompiledTransform Get837Transform()
-        {
-            if (_837Transform == null)
-            {
-                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
-
-                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-837-To-Claim.xslt"));
-                _837Transform = new XslCompiledTransform();
-                _837Transform.Load(xsltReader);
-            }
-            return _837Transform;
-        }
-
         private static TransactionSpecification _835specification;
 
-        internal static TransactionSpecification Get835TransactionSpecification()
+        private static TransactionSpecification Get835TransactionSpecification()
         {
             if (_835specification == null)
             {
@@ -135,27 +157,9 @@ namespace OopFactory.X12
             return _835specification;
         }
 
-        private static XslCompiledTransform _835Transform;
-
-        internal static XslCompiledTransform Get835Transform()
-        {
-            if (_835Transform == null)
-            {                
-                _835Transform = new XslCompiledTransform();
-
-                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
-
-                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-835-To-Payment.xslt"));
-                
-                _835Transform.Load(xsltReader);
-                
-            }
-            return _835Transform;
-        }
-
         private static TransactionSpecification _856specification;
 
-        internal static TransactionSpecification Get856TransactionSpecification()
+        private static TransactionSpecification Get856TransactionSpecification()
         {
             if (_856specification == null)
             {
@@ -164,33 +168,6 @@ namespace OopFactory.X12
                 _856specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
             }
             return _856specification;
-        }
-
-        private static XslCompiledTransform _856Transform;
-
-        internal static XslCompiledTransform Get856Transform()
-        {
-            if (_856Transform == null)
-            {
-                _856Transform = new XslCompiledTransform();
-
-                WriteToFile("OopFactory.X12.Transformations.Ansi-Common.xslt", Environment.CurrentDirectory + "\\Ansi-Common.xslt");
-
-                var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.Ansi-856-To-ShipNotice.xslt"));
-
-                _856Transform.Load(xsltReader);
-            }
-            return _856Transform;
-        }
-
-        private static void WriteToFile(string resourceName, string fileName)
-        {
-            StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName));
-            FileStream fs = new FileStream(fileName, FileMode.Create);
-            StreamWriter writer = new StreamWriter(fs);
-            writer.Write(reader.ReadToEnd());
-            writer.Close();
-            fs.Close();
         }
     }
 }
