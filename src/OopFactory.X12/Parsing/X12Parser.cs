@@ -157,7 +157,7 @@ namespace OopFactory.X12.Parsing
             return envelop;
         }
 
-        public List<Interchange> UnbundleLoop(Interchange interchange, string loopId)
+        public List<Interchange> UnbundleByLoop(Interchange interchange, string loopId)
         {
             char terminator = interchange._delimiters.SegmentTerminator;
             var service = new UnbundlingService(interchange._delimiters.SegmentTerminator);

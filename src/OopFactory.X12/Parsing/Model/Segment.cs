@@ -165,17 +165,23 @@ namespace OopFactory.X12.Parsing.Model
             get
             {
                 if (this is Interchange)
-                    return ((Interchange)this).SpecFinder.FindSegmentSpec(SegmentId);
-                else if (this is FunctionGroup)
-                    return ((FunctionGroup)this).SpecFinder.FindSegmentSpec(SegmentId);
-                else if (this is Transaction)
-                    return ((Transaction)this).FunctionGroup.SpecFinder.FindSegmentSpec(SegmentId);
-                else if (this.Parent is FunctionGroup)
-                    return ((FunctionGroup)this.Parent).SpecFinder.FindSegmentSpec(SegmentId);
-                else if (this.Parent is Interchange)
-                    return ((Interchange)this.Parent).SpecFinder.FindSegmentSpec(SegmentId);
+                    return ((Interchange)this).SpecFinder.FindSegmentSpec("", SegmentId);
                 else
-                    return ((FunctionGroup)this.Parent.Transaction.Parent).SpecFinder.FindSegmentSpec(this.SegmentId);
+                {
+                    FunctionGroup fg = null;
+                    if (this is FunctionGroup)
+                        fg = (FunctionGroup)this;
+                    else if (this is Transaction)
+                        fg = ((Transaction)this).FunctionGroup;
+                    else if (this.Parent is FunctionGroup)
+                        fg =  ((FunctionGroup)this.Parent); 
+                    else if (this.Parent is Interchange)
+                        return ((Interchange)this.Parent).SpecFinder.FindSegmentSpec("", SegmentId);
+                    else
+                        fg = (FunctionGroup)this.Parent.Transaction.Parent;
+
+                    return fg.SpecFinder.FindSegmentSpec(fg.VersionIdentifierCode, SegmentId);
+                }
             }
         }
 
