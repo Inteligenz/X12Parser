@@ -43,9 +43,16 @@ namespace OopFactory.X12.Parsing
 
         public virtual SegmentSpecification FindSegmentSpec(string versionCode, string segmentId)
         {
-            var idMap = Get4010Spec();
-            if (idMap.ContainsKey(segmentId))
-                return idMap[segmentId];
+            if (versionCode.Contains("5010"))
+            {
+                var idMap5010 = Get5010Spec();
+                if (idMap5010.ContainsKey(segmentId))
+                    return idMap5010[segmentId];
+            }
+
+            var idMap4010 = Get4010Spec();
+            if (idMap4010.ContainsKey(segmentId))
+                return idMap4010[segmentId];
             else
                 return null;
         }
@@ -65,6 +72,20 @@ namespace OopFactory.X12.Parsing
             return _4010Specification;
         }
 
+        private static Dictionary<string, SegmentSpecification> _5010Specification;
+        private static Dictionary<string, SegmentSpecification> Get5010Spec()
+        {
+            if (_5010Specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-5010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
+                _5010Specification = new Dictionary<string, SegmentSpecification>();
+                foreach (var segment in set.Segments)
+                    _5010Specification.Add(segment.SegmentId, segment);
+            }
+            return _5010Specification;
+        }
 
         private static TransactionSpecification _270specification;
 

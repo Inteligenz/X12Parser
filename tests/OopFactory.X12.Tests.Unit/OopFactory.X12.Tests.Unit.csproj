@@ -90,6 +90,10 @@
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1_HealthInsurance.txt" />
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example2_Encounter.txt" />
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1,2, And 3 Combined.txt" />
+    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\4010_Example1_PatientIsSubscriber.txt" />
+    <Content Include="Parsing\Claims\ProfessionalClaims\4010_Example1.xml" />
+    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\4010_Example2_PatientIsNotSubscriber.txt" />
+    <Content Include="Parsing\Claims\ProfessionalClaims\4010_Example2.xml" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example1.xml" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example2.xml" />
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example3_COB.txt" />

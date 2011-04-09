@@ -21,7 +21,43 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
-        public void ParseExample1ToXml()
+        public void Parse4010Example1ToXml()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example1_PatientIsSubscriber.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void Parse4010Example1AndUnparse()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example1_PatientIsSubscriber.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+        }
+
+        [TestMethod]
+        public void Parse4010Example2ToXml()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example2_PatientIsNotSubscriber.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void Parse4010Example2AndUnparse()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example2_PatientIsNotSubscriber.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+        }
+
+        [TestMethod]
+        public void Parse5010Example1ToXml()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example1_HealthInsurance.txt"));
@@ -30,7 +66,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
-        public void ParseExample1AndUnparse()
+        public void Parse5010Example1AndUnparse()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example1_HealthInsurance.txt"));
@@ -39,7 +75,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
-        public void ParseExample2ToXml()
+        public void Parse5010Example2ToXml()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example2_Encounter.txt"));
@@ -58,7 +94,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
-        public void ParseExample2AndUnparse()
+        public void Parse5010Example2AndUnparse()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example2_Encounter.txt"));
@@ -67,7 +103,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
-        public void ParseExample3ToXml()
+        public void Parse5010Example3ToXml()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example3_COB.txt"));
@@ -78,7 +114,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
             doc.LoadXml(xml);
         }
         [TestMethod]
-        public void ParseExample3AndUnparse()
+        public void Parse5010Example3AndUnparse()
         {
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("5010_Example3_COB.txt"));
