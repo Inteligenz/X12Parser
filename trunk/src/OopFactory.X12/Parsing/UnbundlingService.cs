@@ -44,6 +44,15 @@ namespace OopFactory.X12.Parsing
             sb.AppendFormat("{0}", _segmentTerminator);
             sb.Append(loop.Transaction.SegmentString);
             sb.AppendFormat("{0}", _segmentTerminator);
+            foreach (var segment in loop.Transaction.Segments)
+            {
+                sb.Append(segment.SegmentString);
+                sb.AppendFormat("{0}", _segmentTerminator);
+            }
+            foreach (var tloop in loop.Transaction.Loops)
+            {
+                sb.AppendLine(tloop.SerializeToX12(true));
+            }
             sb.AppendLine(SerializeParent((LoopContainer)loop.Parent, loopId));
             sb.AppendLine(loop.ToX12String(true));
             foreach (var segment in loop.Transaction.TrailerSegments)
