@@ -65,5 +65,25 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
         }
+
+        [TestMethod]
+        public void ParseExample3ToXml()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("5010_Example3_COB.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+        }
+        [TestMethod]
+        public void ParseExample3AndUnparse()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("5010_Example3_COB.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+        }
     }
 }

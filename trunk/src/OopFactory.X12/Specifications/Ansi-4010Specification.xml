@@ -252,13 +252,28 @@
       <Allowed ID="1P">Provider</Allowed>
       <Allowed ID="2B">Third-Party Administrator</Allowed>
       <Allowed ID="36">Employer</Allowed>
+      <Allowed ID="40">Receiver</Allowed>
+      <Allowed ID="41">Submitter</Allowed>
+      <Allowed ID="45">Drop-off Location</Allowed>
       <Allowed ID="74">Corrected Insured</Allowed>
+      <Allowed ID="77">Service Location</Allowed>
       <Allowed ID="80">Hospital</Allowed>
+      <Allowed ID="82">Rendering Provider</Allowed>
+      <Allowed ID="85">Billing Provider</Allowed>
+      <Allowed ID="87">Pay-to Provider</Allowed>
+      <Allowed ID="DK">Ordering Physician</Allowed>
+      <Allowed ID="DN">Referring Provider</Allowed>
+      <Allowed ID="DQ">Supervising Physician</Allowed>
       <Allowed ID="FA">Facility</Allowed>
       <Allowed ID="GP">Gateway Provider</Allowed>
       <Allowed ID="IL">Insured or Subscriber</Allowed>
+      <Allowed ID="P3">Primary Care Provider</Allowed>
       <Allowed ID="P5">Plan Sponsor</Allowed>
+      <Allowed ID="PE">Payee</Allowed>
       <Allowed ID="PR">Payer</Allowed>
+      <Allowed ID="PW">Pickup Address</Allowed>
+      <Allowed ID="QB">Purchase Service Provider</Allowed>
+      <Allowed ID="QC">Patient</Allowed>
     </Element>
     <Element Name="Entity Type Qualifier" Required="true" Type="ID" MinLength="1" MaxLength="1">
       <Allowed ID="1">Person</Allowed>
@@ -274,6 +289,8 @@
       <Allowed ID="34">Social Security Number</Allowed>
       <Allowed ID="46">Electronic Transmitter Identification Number (ETIN</Allowed>
       <Allowed ID="FI">Federal Taxpayer’s Identification Number</Allowed>
+      <Allowed ID="II">Standard Unique Health Identifier for each Individual in the United States</Allowed>
+      <Allowed ID="MI">Member Identification Number</Allowed>
       <Allowed ID="NI">National Association of Insurance Commissioners (N</Allowed>
       <Allowed ID="PI">Payor Identification</Allowed>
       <Allowed ID="PP">Pharmacy Processor Number</Allowed>
