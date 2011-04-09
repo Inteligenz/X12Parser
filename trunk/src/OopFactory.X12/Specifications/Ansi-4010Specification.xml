@@ -342,17 +342,49 @@
   </Segment>
   <Segment SegmentId="REF">
     <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="0B">State License Number</Allowed>
       <Allowed ID="0F">Subscriber Number</Allowed>
       <Allowed ID="17">Client Reporting Category</Allowed>
+      <Allowed ID="1G">Provider UPIN Number</Allowed>
+      <Allowed ID="1J">Facility ID Number</Allowed>
       <Allowed ID="1L">Group or Policy Number</Allowed>
       <Allowed ID="23">Client Number</Allowed>
+      <Allowed ID="2U">Payer Identification Number</Allowed>
       <Allowed ID="38">Master Policy Number</Allowed>
       <Allowed ID="3H">Case Number</Allowed>
+      <Allowed ID="4N">Special Payment Reference Number</Allowed>
       <Allowed ID="6O">Cross Reference Number</Allowed>
+      <Allowed ID="6R">Provider Control Number</Allowed>
+      <Allowed ID="9A">Repriced Claim Reference Number</Allowed>
+      <Allowed ID="9B">Repriced Line Item Reference Number</Allowed>
+      <Allowed ID="9C">Adjusted Repriced Claim Reference Number</Allowed>
+      <Allowed ID="9D">Adjusted Repriced Line Item Reference Number</Allowed>
+      <Allowed ID="9F">Referral Number</Allowed>
+      <Allowed ID="BT">Batch Number</Allowed>
+      <Allowed ID="D9">Claim Number</Allowed>
       <Allowed ID="DX">Department/Agency Number</Allowed>
+      <Allowed ID="EA">Medical Record Identification Number</Allowed>
+      <Allowed ID="EI">Employer’s Identification Number</Allowed>
+      <Allowed ID="EW">Mammography Certification Number</Allowed>
+      <Allowed ID="F4">Facility Certification Number</Allowed>
+      <Allowed ID="F5">Medicare Version Code</Allowed>
       <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
+      <Allowed ID="F8">Original Reference Number</Allowed>
+      <Allowed ID="FY">Claim Office Number</Allowed>
+      <Allowed ID="G1">Prior Authorization Number</Allowed>
+      <Allowed ID="G2">Provider Commercial Number</Allowed>
+      <Allowed ID="LU">Location Number</Allowed>
+      <Allowed ID="LX">Qualified Products List</Allowed>
+      <Allowed ID="NF">National Association of Insurance Commissioners (NAIC) Code</Allowed>
+      <Allowed ID="P4">Project Code</Allowed>
       <Allowed ID="Q4">Prior Identitifier Number</Allowed>
       <Allowed ID="QQ">Unit Number</Allowed>
+      <Allowed ID="SY">Social Security Number</Allowed>
+      <Allowed ID="T4">Signal Code</Allowed>
+      <Allowed ID="XZ">Pharmacy Prescription Number</Allowed>
+      <Allowed ID="VY">Link Sequence Number</Allowed>
+      <Allowed ID="X4">Clinical Laboratory Improvement Amendment Number</Allowed>
+      <Allowed ID="Y4">Agency Claim Number</Allowed>
       <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
@@ -808,6 +840,115 @@
       <Allowed ID="1">Coordination of Benefits</Allowed>
       <Allowed ID="5">Unknown</Allowed>
       <Allowed ID="6">No Coordination of Benefits</Allowed>
+    </Element>
+  </Segment>
+  
+  <!-- 837 Segments -->
+  <Segment SegmentId="PRV">
+    <Element Name="Provider Code" Required="true" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="BI">Billing</Allowed>
+    </Element>
+    <Element Name="Reference Identification Qualifier" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="PXC">Health Care Provider Taxonomy Code</Allowed>
+    </Element>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50" />
+    <Element Name="State or Province Code" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="PROVIDER SPECIALTY INFORMATION" />
+    <Element Name="Provider Organization Code" Type="ID" MinLength="3" MaxLength="3" />
+  </Segment>
+  <Segment SegmentId="SBR">
+    <Element Name="Payer Responsibility Sequence Number Code" Required="true" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="A">Payer Responsibility Four</Allowed>
+      <Allowed ID="B">Payer Responsibility Five</Allowed>
+      <Allowed ID="C">Payer Responsibility Six</Allowed>
+      <Allowed ID="D">Payer Responsibility Seven</Allowed>
+      <Allowed ID="E">Payer Responsibility Eight</Allowed>
+      <Allowed ID="F">Payer Responsibility Nine</Allowed>
+      <Allowed ID="G">Payer Responsibility Ten</Allowed>
+      <Allowed ID="H">Payer Responsibility Eleven</Allowed>
+      <Allowed ID="P">Primary</Allowed>
+      <Allowed ID="S">Secondary</Allowed>
+      <Allowed ID="T">Tertiary</Allowed>
+      <Allowed ID="U">Unknown</Allowed>
+    </Element>
+    <Element Name="Individual Relationship Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="01">Spouse</Allowed>
+      <Allowed ID="18">Self</Allowed>
+      <Allowed ID="19">Child</Allowed>
+      <Allowed ID="20">Employee</Allowed>
+      <Allowed ID="21">Unknown</Allowed>
+      <Allowed ID="39">Organ Donor</Allowed>
+      <Allowed ID="40">Cadaver Donor</Allowed>
+      <Allowed ID="53">Life Partner</Allowed>
+      <Allowed ID="G8">Other Relationship</Allowed>
+    </Element>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50" />
+    <Element Name="Name" Type="AN" MinLength="1" MaxLength="60" />
+    <Element Name="Insurance Type Code" Type="ID" MinLength ="1" MaxLength="3">
+      <Allowed ID="12">Medicare Secondary Working Aged Beneficiary or Spouse with Employer Group Health Plan</Allowed>
+      <Allowed ID="13">Medicare Secondary End-Stage Renal Disease Beneficiary in the Mandated Coordination Period with an E</Allowed>
+      <Allowed ID="14">Medicare Secondary, No-fault Insurance including Auto is Primary</Allowed>
+      <Allowed ID="15">Medicare Secondary Worker’s Compensation</Allowed>
+      <Allowed ID="16">Medicare Secondary Public Health Service (PHS)orOther Federal Agency</Allowed>
+      <Allowed ID="41">Medicare Secondary Black Lung</Allowed>
+      <Allowed ID="42">Medicare Secondary Veteran’s Administration</Allowed>
+      <Allowed ID="43">Medicare Secondary Disabled Beneficiary Under Age 65 with Large Group Health Plan (LGHP)</Allowed>
+      <Allowed ID="47">Medicare Secondary, Other Liability Insurance is Primary</Allowed>
+
+    </Element>
+    <Element Name="Coordination of Benefits Code" Type="ID" MinLength="1" MaxLength="1"/>
+    <Element Name="Yes/No Condition or Response Code" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Employment Status Code" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Claim Filing Indicator Code" Type="ID" MinLength="1" MaxLength="2" >
+      <Allowed ID="11">Other Non-Federal Programs</Allowed>
+      <Allowed ID="12">Preferred Provider Organization (PPO)</Allowed>
+      <Allowed ID="13">Point of Service (POS)</Allowed>
+      <Allowed ID="14">Exclusive Provider Organization (EPO)</Allowed>
+      <Allowed ID="15">Indemnity Insurance</Allowed>
+      <Allowed ID="16">Health Maintenance Organization (HMO) MedicareRisk</Allowed>
+      <Allowed ID="17">Dental Maintenance Organization</Allowed>
+      <Allowed ID="AM">Automobile Medical</Allowed>
+      <Allowed ID="BL">Blue Cross/Blue Shield</Allowed>
+      <Allowed ID="CH">Champus</Allowed>
+      <Allowed ID="CI">Commercial Insurance Co.</Allowed>
+      <Allowed ID="DS">Disability</Allowed>
+      <Allowed ID="FI">Federal Employees Program</Allowed>
+      <Allowed ID="HM">Health Maintenance Organization</Allowed>
+      <Allowed ID="LM">Liability Medical</Allowed>
+      <Allowed ID="MA">Medicare Part A</Allowed>
+      <Allowed ID="MB">Medicare Part B</Allowed>
+      <Allowed ID="MC">Medicaid</Allowed>
+      <Allowed ID="OF">Other Federal Program</Allowed>
+      <Allowed ID="TV">Title V</Allowed>
+      <Allowed ID="VA">Veterans Affairs Plan</Allowed>
+      <Allowed ID="WC">Workers’ Compensation Health Claim</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="PAT">
+    <Element Name="Individual Relationship Code" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="01">Spouse</Allowed>
+      <Allowed ID="19">Child</Allowed>
+      <Allowed ID="20">Employee</Allowed>
+      <Allowed ID="21">Unknown</Allowed>
+      <Allowed ID="39">Organ Donor</Allowed>
+      <Allowed ID="40">Cadaver Donor</Allowed>
+      <Allowed ID="53">Life Partner</Allowed>
+      <Allowed ID="G8">Other Relationship</Allowed>
+    </Element>
+    <Element Name="Patient Location Code" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Employment Status Code" Type="ID" MinLength="2" MaxLength="2" />
+    <Element Name="Student Status Code" Type="ID" MaxLength="1" MinLength="1" />
+    <Element Name="Date Time Period Format Qualifier" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Date Time Period" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Unit or Basis of Measurment Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="01">Actual Pounds</Allowed>
+    </Element>
+    <Element Name="Weight" Type="R" MinLength="1" MaxLength="10" />
+    <Element Name="Yes/No Condition or Response Code (Pregnancy Indicator)" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="Y">Yes</Allowed>
     </Element>
   </Segment>
 </SegmentSet>

@@ -208,7 +208,9 @@
           </N4>
           <REF>
             <!--Reference Identification Qualifier-->
-            <REF01>EI</REF01>
+            <REF01>
+              EI<!--Employer’s Identification Number-->
+            </REF01>
             <!--Reference Identification-->
             <REF02>123456789</REF02>
           </REF>
@@ -265,13 +267,17 @@
             </HL04>
           </HL>
           <SBR>
-            <SBR01>P</SBR01>
+            <!--Payer Responsibility Sequence Number Code-->
+            <SBR01>
+              P<!--Primary-->
+            </SBR01>
             <SBR02 />
             <SBR03 />
             <SBR04 />
             <SBR05 />
             <SBR06 />
             <SBR07 />
+            <!--Employment Status Code-->
             <SBR08>CI</SBR08>
           </SBR>
           <Loop LoopId="2010BA" Name="SUBSCRIBER NAME">
@@ -348,7 +354,9 @@
             </N4>
             <REF>
               <!--Reference Identification Qualifier-->
-              <REF01>G2</REF01>
+              <REF01>
+                G2<!--Provider Commercial Number-->
+              </REF01>
               <!--Reference Identification-->
               <REF02>PBS3334</REF02>
             </REF>
@@ -369,7 +377,10 @@
               </HL04>
             </HL>
             <PAT>
-              <PAT01>19</PAT01>
+              <!--Individual Relationship Code-->
+              <PAT01>
+                19<!--Child-->
+              </PAT01>
             </PAT>
             <Loop LoopId="2010CA" Name="PATIENT NAME">
               <NM1>
@@ -471,13 +482,20 @@
                   <NM109>1999996666</NM109>
                 </NM1>
                 <PRV>
+                  <!--Provider Code-->
                   <PRV01>PE</PRV01>
-                  <PRV02>PXC</PRV02>
+                  <!--Reference Identification Qualifier-->
+                  <PRV02>
+                    PXC<!--Health Care Provider Taxonomy Code-->
+                  </PRV02>
+                  <!--Reference Identification-->
                   <PRV03>204C00000X</PRV03>
                 </PRV>
                 <REF>
                   <!--Reference Identification Qualifier-->
-                  <REF01>G2</REF01>
+                  <REF01>
+                    G2<!--Provider Commercial Number-->
+                  </REF01>
                   <!--Reference Identification-->
                   <REF02>KA6663</REF02>
                 </REF>
@@ -520,15 +538,24 @@
               </Loop>
               <Loop LoopId="2320" Name="OTHER SUBSCRIBER INFORMATION">
                 <SBR>
-                  <SBR01>S</SBR01>
-                  <SBR02>01</SBR02>
+                  <!--Payer Responsibility Sequence Number Code-->
+                  <SBR01>
+                    S<!--Secondary-->
+                  </SBR01>
+                  <!--Individual Relationship Code-->
+                  <SBR02>
+                    01<!--Spouse-->
+                  </SBR02>
                   <SBR03 />
                   <SBR04 />
                   <SBR05 />
                   <SBR06 />
                   <SBR07 />
                   <SBR08 />
-                  <SBR09>CI</SBR09>
+                  <!--Claim Filing Indicator Code-->
+                  <SBR09>
+                    CI<!--Commercial Insurance Co.-->
+                  </SBR09>
                 </SBR>
                 <DMG>
                   <!--Date Time Period Format Qualifier-->
