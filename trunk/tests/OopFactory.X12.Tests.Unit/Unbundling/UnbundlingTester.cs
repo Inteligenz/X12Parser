@@ -25,7 +25,7 @@ namespace OopFactory.X12.Tests.Unit.Unbundling
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetShipNoticeEdi("Sample1.edi"));
 
-            var list = parser.UnbundleLoop(interchange, "ITEM");
+            var list = parser.UnbundleByLoop(interchange, "ITEM");
             foreach (var item in list)
             {
                 Trace.WriteLine("...");

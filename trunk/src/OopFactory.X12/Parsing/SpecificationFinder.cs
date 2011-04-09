@@ -41,7 +41,7 @@ namespace OopFactory.X12.Parsing
             }
         }
 
-        public virtual SegmentSpecification FindSegmentSpec(string segmentId)
+        public virtual SegmentSpecification FindSegmentSpec(string versionCode, string segmentId)
         {
             var idMap = Get4010Spec();
             if (idMap.ContainsKey(segmentId))
