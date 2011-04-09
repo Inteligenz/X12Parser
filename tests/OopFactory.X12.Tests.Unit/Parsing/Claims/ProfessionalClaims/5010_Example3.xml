@@ -88,9 +88,9 @@
         <!--Transaction Set Purpose Code-->
         <BHT02>00</BHT02>
         <!--Reference Identification-->
-        <BHT03>244579</BHT03>
+        <BHT03>0123</BHT03>
         <!--Date-->
-        <BHT04>20061015</BHT04>
+        <BHT04>20051015</BHT04>
         <!--Time-->
         <BHT05>1023</BHT05>
         <!--Transaction Type Code-->
@@ -130,12 +130,6 @@
           </PER03>
           <!--Communication Number-->
           <PER04>3055552222</PER04>
-          <!--Communication Number Qualifier-->
-          <PER05>
-            EX<!--Telephone Extension-->
-          </PER05>
-          <!--Communication Number-->
-          <PER06>231</PER06>
         </PER>
       </Loop>
       <Loop LoopId="1000B" Name="RECEIVER NAME">
@@ -149,7 +143,7 @@
             2<!--Non-Person Entity-->
           </NM102>
           <!--Name Last or Organization Name-->
-          <NM103>KEY INSURANCE COMPANY</NM103>
+          <NM103>XYZ REPRICER</NM103>
           <NM104 />
           <NM105 />
           <NM106 />
@@ -176,11 +170,6 @@
             1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure-->
           </HL04>
         </HL>
-        <PRV>
-          <PRV01>BI</PRV01>
-          <PRV02>PXC</PRV02>
-          <PRV03>203BF0100Y</PRV03>
-        </PRV>
         <Loop LoopId="2010AA" Name="BILLING PROVIDER NAME">
           <NM1>
             <!--Entity Identifier Code-->
@@ -189,11 +178,12 @@
             </NM101>
             <!--Entity Type Qualifier-->
             <NM102>
-              2<!--Non-Person Entity-->
+              1<!--Person-->
             </NM102>
             <!--Name Last or Organization Name-->
-            <NM103>BEN KILDARE SERVICE</NM103>
-            <NM104 />
+            <NM103>KILDARE</NM103>
+            <!--Name First-->
+            <NM104>BEN</NM104>
             <NM105 />
             <NM106 />
             <NM107 />
@@ -202,11 +192,11 @@
               XX<!--Centers for Medicare and Medicaid Services Nationa-->
             </NM108>
             <!--Identification Code-->
-            <NM109>9876543210</NM109>
+            <NM109>1999996666</NM109>
           </NM1>
           <N3>
             <!--Address Information-->
-            <N301>234 SEAWAY ST</N301>
+            <N301>1234 SEAWAY ST</N301>
           </N3>
           <N4>
             <!--City Name-->
@@ -220,8 +210,20 @@
             <!--Reference Identification Qualifier-->
             <REF01>EI</REF01>
             <!--Reference Identification-->
-            <REF02>587654321</REF02>
+            <REF02>123456789</REF02>
           </REF>
+          <PER>
+            <!--Contact Function Code-->
+            <PER01>IC</PER01>
+            <!--Name-->
+            <PER02>CONNIE</PER02>
+            <!--Communication Number Qualifier-->
+            <PER03>
+              TE<!--Telephone-->
+            </PER03>
+            <!--Communication Number-->
+            <PER04>3055551234</PER04>
+          </PER>
         </Loop>
         <Loop LoopId="2010AB" Name="PAY-TO ADDRESS NAME">
           <NM1>
@@ -240,7 +242,7 @@
           </N3>
           <N4>
             <!--City Name-->
-            <N401>MAIMI</N401>
+            <N401>MIAMI</N401>
             <!--State or Provice Code-->
             <N402>FL</N402>
             <!--Postal Code-->
@@ -265,13 +267,12 @@
           <SBR>
             <SBR01>P</SBR01>
             <SBR02 />
-            <SBR03>2222-SJ</SBR03>
+            <SBR03 />
             <SBR04 />
             <SBR05 />
             <SBR06 />
             <SBR07 />
-            <SBR08 />
-            <SBR09>CI</SBR09>
+            <SBR08>CI</SBR08>
           </SBR>
           <Loop LoopId="2010BA" Name="SUBSCRIBER NAME">
             <NM1>
@@ -295,7 +296,7 @@
                 MI<!--Member Identification Number-->
               </NM108>
               <!--Identification Code-->
-              <NM109>JS00111223333</NM109>
+              <NM109>111223333</NM109>
             </NM1>
             <DMG>
               <!--Date Time Period Format Qualifier-->
@@ -333,11 +334,23 @@
               <!--Identification Code-->
               <NM109>999996666</NM109>
             </NM1>
+            <N3>
+              <!--Address Information-->
+              <N301>3333OCEAN ST</N301>
+            </N3>
+            <N4>
+              <!--City Name-->
+              <N401>SOUTH MIAMI</N401>
+              <!--State or Provice Code-->
+              <N402>FL</N402>
+              <!--Postal Code-->
+              <N403>33000</N403>
+            </N4>
             <REF>
               <!--Reference Identification Qualifier-->
               <REF01>G2</REF01>
               <!--Reference Identification-->
-              <REF02>KA6663</REF02>
+              <REF02>PBS3334</REF02>
             </REF>
           </Loop>
           <HierarchicalLoop LoopId="2000C" LoopName="PATIENT HIERARCHICAL LOOP" Id="3" ParentId="2">
@@ -400,8 +413,8 @@
             </Loop>
             <Loop LoopId="2300" Name="CLAIM INFORMATION">
               <CLM>
-                <CLM01>26463774</CLM01>
-                <CLM02>100</CLM02>
+                <CLM01>26407789</CLM01>
+                <CLM02>79.04</CLM02>
                 <CLM03 />
                 <CLM04 />
                 <CLM05>
@@ -413,23 +426,192 @@
                 <CLM07>A</CLM07>
                 <CLM08>Y</CLM08>
                 <CLM09>I</CLM09>
+                <CLM10>P</CLM10>
               </CLM>
-              <REF>
-                <!--Reference Identification Qualifier-->
-                <REF01>D9</REF01>
-                <!--Reference Identification-->
-                <REF02>17312345600006351</REF02>
-              </REF>
               <HI>
                 <HI01>
                   <HI0101>BK</HI0101>
-                  <HI0102>0340</HI0102>
+                  <HI0102>4779</HI0102>
                 </HI01>
                 <HI02>
                   <HI0201>BF</HI0201>
-                  <HI0202>V7389</HI0202>
+                  <HI0202>2724</HI0202>
                 </HI02>
+                <HI03>
+                  <HI0301>BF</HI0301>
+                  <HI0302>2780</HI0302>
+                </HI03>
+                <HI04>
+                  <HI0401>BF</HI0401>
+                  <HI0402>53081</HI0402>
+                </HI04>
               </HI>
+              <Loop LoopId="2310B" Name="RENDERING PROVIDER NAME">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>
+                    82<!--Rendering Provider-->
+                  </NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>
+                    1<!--Person-->
+                  </NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>KILDARE</NM103>
+                  <!--Name First-->
+                  <NM104>BEN</NM104>
+                  <NM105 />
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>
+                    XX<!--Centers for Medicare and Medicaid Services Nationa-->
+                  </NM108>
+                  <!--Identification Code-->
+                  <NM109>1999996666</NM109>
+                </NM1>
+                <PRV>
+                  <PRV01>PE</PRV01>
+                  <PRV02>PXC</PRV02>
+                  <PRV03>204C00000X</PRV03>
+                </PRV>
+                <REF>
+                  <!--Reference Identification Qualifier-->
+                  <REF01>G2</REF01>
+                  <!--Reference Identification-->
+                  <REF02>KA6663</REF02>
+                </REF>
+              </Loop>
+              <Loop LoopId="2310C" Name="SERVICE FACILITY LOCATION">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>
+                    77<!--Service Location-->
+                  </NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>
+                    2<!--Non-Person Entity-->
+                  </NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>KILDARE ASSOCIATES</NM103>
+                  <NM104 />
+                  <NM105 />
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>
+                    XX<!--Centers for Medicare and Medicaid Services Nationa-->
+                  </NM108>
+                  <!--Identification Code-->
+                  <NM109>1581234567</NM109>
+                </NM1>
+                <N3>
+                  <!--Address Information-->
+                  <N301>2345 OCEAN BLVD</N301>
+                </N3>
+                <N4>
+                  <!--City Name-->
+                  <N401>MIAMI</N401>
+                  <!--State or Provice Code-->
+                  <N402>FL</N402>
+                  <!--Postal Code-->
+                  <N403>33111</N403>
+                </N4>
+              </Loop>
+              <Loop LoopId="2320" Name="OTHER SUBSCRIBER INFORMATION">
+                <SBR>
+                  <SBR01>S</SBR01>
+                  <SBR02>01</SBR02>
+                  <SBR03 />
+                  <SBR04 />
+                  <SBR05 />
+                  <SBR06 />
+                  <SBR07 />
+                  <SBR08 />
+                  <SBR09>CI</SBR09>
+                </SBR>
+                <DMG>
+                  <!--Date Time Period Format Qualifier-->
+                  <DMG01>
+                    D8<!--Date Expressed in Format CCYYMMDD-->
+                  </DMG01>
+                  <!--Date Time Period-->
+                  <DMG02>19430501</DMG02>
+                  <!--Gender Code-->
+                  <DMG03>
+                    F<!--Female-->
+                  </DMG03>
+                </DMG>
+                <OI>
+                  <OI01 />
+                  <OI02 />
+                  <OI03>Y</OI03>
+                  <OI04>P</OI04>
+                  <OI05 />
+                  <OI06>Y</OI06>
+                </OI>
+                <Loop LoopId="2330A" Name="OTHER SUBSCRIBER NAME">
+                  <NM1>
+                    <!--Entity Identifier Code-->
+                    <NM101>
+                      IL<!--Insured or Subscriber-->
+                    </NM101>
+                    <!--Entity Type Qualifier-->
+                    <NM102>
+                      1<!--Person-->
+                    </NM102>
+                    <!--Name Last or Organization Name-->
+                    <NM103>SMITH</NM103>
+                    <!--Name First-->
+                    <NM104>JACK</NM104>
+                    <NM105 />
+                    <NM106 />
+                    <NM107 />
+                    <!--Identification Code Qualifier-->
+                    <NM108>
+                      MI<!--Member Identification Number-->
+                    </NM108>
+                    <!--Identification Code-->
+                    <NM109>T55TY666</NM109>
+                  </NM1>
+                  <N3>
+                    <!--Address Information-->
+                    <N301>236 N MAIN ST</N301>
+                  </N3>
+                  <N4>
+                    <!--City Name-->
+                    <N401>MIAMI</N401>
+                    <!--State or Provice Code-->
+                    <N402>FL</N402>
+                    <!--Postal Code-->
+                    <N403>33111</N403>
+                  </N4>
+                </Loop>
+                <Loop LoopId="2330B" Name="OTHER PAYER NAME">
+                  <NM1>
+                    <!--Entity Identifier Code-->
+                    <NM101>
+                      PR<!--Payer-->
+                    </NM101>
+                    <!--Entity Type Qualifier-->
+                    <NM102>
+                      2<!--Non-Person Entity-->
+                    </NM102>
+                    <!--Name Last or Organization Name-->
+                    <NM103>KEY INSURANCE COMPANY</NM103>
+                    <NM104 />
+                    <NM105 />
+                    <NM106 />
+                    <NM107 />
+                    <!--Identification Code Qualifier-->
+                    <NM108>
+                      PI<!--Payor Identification-->
+                    </NM108>
+                    <!--Identification Code-->
+                    <NM109>999996666</NM109>
+                  </NM1>
+                </Loop>
+              </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
                 <LX>
                   <LX01>1</LX01>
@@ -439,12 +621,17 @@
                     <SV10101>HC</SV10101>
                     <SV10102>99213</SV10102>
                   </SV101>
-                  <SV102>40</SV102>
+                  <SV102>43</SV102>
                   <SV103>UN</SV103>
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
-                  <SV107>1</SV107>
+                  <SV107>
+                    <SV10701>1</SV10701>
+                    <SV10702>2</SV10702>
+                    <SV10703>3</SV10703>
+                    <SV10704>4</SV10704>
+                  </SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
@@ -454,7 +641,7 @@
                     D8<!--Date Expression in Format CCYYMMDD-->
                   </DTP02>
                   <!--Date Time Period-->
-                  <DTP03>20061003</DTP03>
+                  <DTP03>20051003</DTP03>
                 </DTP>
               </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
@@ -464,14 +651,17 @@
                 <SV1>
                   <SV101>
                     <SV10101>HC</SV10101>
-                    <SV10102>87070</SV10102>
+                    <SV10102>90782</SV10102>
                   </SV101>
                   <SV102>15</SV102>
                   <SV103>UN</SV103>
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
-                  <SV107>1</SV107>
+                  <SV107>
+                    <SV10701>1</SV10701>
+                    <SV10702>2</SV10702>
+                  </SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
@@ -481,7 +671,7 @@
                     D8<!--Date Expression in Format CCYYMMDD-->
                   </DTP02>
                   <!--Date Time Period-->
-                  <DTP03>20061003</DTP03>
+                  <DTP03>20051003</DTP03>
                 </DTP>
               </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
@@ -491,14 +681,17 @@
                 <SV1>
                   <SV101>
                     <SV10101>HC</SV10101>
-                    <SV10102>99214</SV10102>
+                    <SV10102>J3301</SV10102>
                   </SV101>
-                  <SV102>35</SV102>
+                  <SV102>21.04</SV102>
                   <SV103>UN</SV103>
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
-                  <SV107>2</SV107>
+                  <SV107>
+                    <SV10701>1</SV10701>
+                    <SV10702>2</SV10702>
+                  </SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
@@ -508,34 +701,7 @@
                     D8<!--Date Expression in Format CCYYMMDD-->
                   </DTP02>
                   <!--Date Time Period-->
-                  <DTP03>20061010</DTP03>
-                </DTP>
-              </Loop>
-              <Loop LoopId="2400" Name="LINE COUNTER">
-                <LX>
-                  <LX01>4</LX01>
-                </LX>
-                <SV1>
-                  <SV101>
-                    <SV10101>HC</SV10101>
-                    <SV10102>86663</SV10102>
-                  </SV101>
-                  <SV102>10</SV102>
-                  <SV103>UN</SV103>
-                  <SV104>1</SV104>
-                  <SV105 />
-                  <SV106 />
-                  <SV107>2</SV107>
-                </SV1>
-                <DTP>
-                  <!--Data/Time Qualifier-->
-                  <DTP01>472</DTP01>
-                  <!--Date Time Period Format Qualifier-->
-                  <DTP02>
-                    D8<!--Date Expression in Format CCYYMMDD-->
-                  </DTP02>
-                  <!--Date Time Period-->
-                  <DTP03>20061010</DTP03>
+                  <DTP03>20051003</DTP03>
                 </DTP>
               </Loop>
             </Loop>
@@ -544,7 +710,7 @@
       </HierarchicalLoop>
       <SE>
         <!--Number of Included Segments-->
-        <SE01>42</SE01>
+        <SE01>53</SE01>
         <!--Transaction Set Control Number-->
         <SE02>0021</SE02>
       </SE>

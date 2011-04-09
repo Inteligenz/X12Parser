@@ -89,9 +89,11 @@
     <Content Include="Parsing\ClaimStatus\Sample1_276Request.xml" />
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1_HealthInsurance.txt" />
     <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example2_Encounter.txt" />
+    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1,2, And 3 Combined.txt" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example1.xml" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example2.xml" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example2_WithRepeats.txt" />
+    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example3_COB.txt" />
+    <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example3.xml" />
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <EmbeddedResource Include="Parsing\Payments\Sample1.txt" />
     <EmbeddedResource Include="Parsing\Eligibility\Sample1_270Inquiry.txt" />
