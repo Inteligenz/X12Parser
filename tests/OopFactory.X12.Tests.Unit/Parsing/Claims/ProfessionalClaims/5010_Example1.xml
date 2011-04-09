@@ -177,8 +177,15 @@
           </HL04>
         </HL>
         <PRV>
-          <PRV01>BI</PRV01>
-          <PRV02>PXC</PRV02>
+          <!--Provider Code-->
+          <PRV01>
+            BI<!--Billing-->
+          </PRV01>
+          <!--Reference Identification Qualifier-->
+          <PRV02>
+            PXC<!--Health Care Provider Taxonomy Code-->
+          </PRV02>
+          <!--Reference Identification-->
           <PRV03>203BF0100Y</PRV03>
         </PRV>
         <Loop LoopId="2010AA" Name="BILLING PROVIDER NAME">
@@ -218,7 +225,9 @@
           </N4>
           <REF>
             <!--Reference Identification Qualifier-->
-            <REF01>EI</REF01>
+            <REF01>
+              EI<!--Employer’s Identification Number-->
+            </REF01>
             <!--Reference Identification-->
             <REF02>587654321</REF02>
           </REF>
@@ -263,15 +272,22 @@
             </HL04>
           </HL>
           <SBR>
-            <SBR01>P</SBR01>
+            <!--Payer Responsibility Sequence Number Code-->
+            <SBR01>
+              P<!--Primary-->
+            </SBR01>
             <SBR02 />
+            <!--Reference Identification-->
             <SBR03>2222-SJ</SBR03>
             <SBR04 />
             <SBR05 />
             <SBR06 />
             <SBR07 />
             <SBR08 />
-            <SBR09>CI</SBR09>
+            <!--Claim Filing Indicator Code-->
+            <SBR09>
+              CI<!--Commercial Insurance Co.-->
+            </SBR09>
           </SBR>
           <Loop LoopId="2010BA" Name="SUBSCRIBER NAME">
             <NM1>
@@ -335,7 +351,9 @@
             </NM1>
             <REF>
               <!--Reference Identification Qualifier-->
-              <REF01>G2</REF01>
+              <REF01>
+                G2<!--Provider Commercial Number-->
+              </REF01>
               <!--Reference Identification-->
               <REF02>KA6663</REF02>
             </REF>
@@ -416,7 +434,9 @@
               </CLM>
               <REF>
                 <!--Reference Identification Qualifier-->
-                <REF01>D9</REF01>
+                <REF01>
+                  D9<!--Claim Number-->
+                </REF01>
                 <!--Reference Identification-->
                 <REF02>17312345600006351</REF02>
               </REF>
