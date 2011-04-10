@@ -240,7 +240,7 @@
         <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
       </Loop>
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
-        <Name>LINE COUNTER</Name>
+        <Name>SERVICE LINE</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
         <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
         <Segment SegmentId="QTY" Usage="Situational" Repeat="5"/>
@@ -493,7 +493,7 @@
         <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
       </Loop>
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
-        <Name>LINE COUNTER</Name>
+        <Name>SERVICE LINE</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
         <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
         <Segment SegmentId="QTY" Usage="Situational" Repeat="5"/>
