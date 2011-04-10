@@ -27,20 +27,32 @@
   </xsl:template>
   
   <xsl:template name="Element">
-    <xsl:param name="element"/>*<span class="element"><xsl:if test="string-length(comment()) > 0">
+    <xsl:param name="element"/>
+    <span class="element">
+      <xsl:if test="string-length(preceding-sibling::node()[self::*|self::comment()][1][self::comment()]) > 0">
         <xsl:attribute name="title">
-          <xsl:value-of select="comment()"/>
+          <xsl:value-of select="preceding-sibling::node()[self::*|self::comment()][1][self::comment()]"/>
         </xsl:attribute>
-        <xsl:attribute name="style">color:blue</xsl:attribute>
+        <xsl:attribute name="style">background-color: whitesmoke</xsl:attribute>
       </xsl:if>
-      <xsl:choose>
-      <xsl:when test="count($element/*) = 0"><xsl:value-of select="$element"/></xsl:when>
-      <xsl:otherwise>        
-        <xsl:call-template name="Component">
-          <xsl:with-param name="element" select="$element"/>
-        </xsl:call-template>
-      </xsl:otherwise>
-    </xsl:choose>
+      *<span class="element-value">
+        <xsl:if test="string-length(comment()) > 0">
+          <xsl:attribute name="title">
+            <xsl:value-of select="comment()"/>
+          </xsl:attribute>
+          <xsl:attribute name="style">color:blue</xsl:attribute>
+        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="count($element/*) = 0">
+            <xsl:value-of select="$element"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:call-template name="Component">
+              <xsl:with-param name="element" select="$element"/>
+            </xsl:call-template>
+          </xsl:otherwise>
+        </xsl:choose>
+      </span>
     </span>
   </xsl:template>
 
@@ -90,7 +102,7 @@
     </div>
   </xsl:template>
   <xsl:template match="Transaction">
-    <div class="transaction" style="border: 1px solid gray; margin-left: 20px;">
+    <div class="transaction" style="border: 3px double black; margin-left: 20px;">
       <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop' and name()!='SE']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
@@ -107,7 +119,7 @@
   </xsl:template>
 
   <xsl:template match="FunctionGroup">
-    <div class="function-group" style="margin-left: 20px;">
+    <div class="function-group" style="margin-left: 20px; border: 1px dotted gray; padding-right: 10px;">
       <xsl:for-each select="*[name()='GS']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
@@ -123,7 +135,7 @@
   </xsl:template>
 
   <xsl:template match="Interchange">
-    <div class="interchange">
+    <div class="interchange" style=" border: 1px dotted gray; padding-right: 10px;">
       <xsl:for-each select="*[name()='ISA']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
@@ -137,6 +149,5 @@
       </xsl:for-each>
     </div>
   </xsl:template>
-
 
 </xsl:stylesheet>

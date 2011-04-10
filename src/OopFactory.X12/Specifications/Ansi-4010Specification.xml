@@ -1113,8 +1113,274 @@
   </Segment>
   <Segment SegmentId="HI">
     <Element Name="Health Care Code Information" Type="ID">
-      <Allowed ID="BF">Diagnosis</Allowed>
-      <Allowed ID="BK">Principal Diagnosis</Allowed>
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
     </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="LX">
+    <Element Name="Assigned Number" Type="N" MinLength="1" MaxLength="6"/>
+  </Segment>
+  <Segment SegmentId="SV1">
+    <Element Name="Composite Medical Procedure Identifier" Type="ID">
+      <Allowed ID="HC">Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes</Allowed>
+      <Allowed ID="IV">Home Infusion EDI Coalition (HIEC) Product/Service Code</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+    <Element Name="Line Item Charge Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Unit or Basis for Measurement" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="F2">International Unit</Allowed>
+      <Allowed ID="MJ">Minutes</Allowed>
+      <Allowed ID="UN">Unit</Allowed>
+    </Element>
+    <Element Name="Service Unit Count" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Facility Code Value" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="11">Office</Allowed>
+      <Allowed ID="12">Home</Allowed>
+      <Allowed ID="21">Inpatient Hospital</Allowed>
+      <Allowed ID="22">Outpatient Hospital</Allowed>
+      <Allowed ID="23">Emergency Room - Hospital</Allowed>
+      <Allowed ID="24">Ambulatory Surgical Center</Allowed>
+      <Allowed ID="25">Birthing Center</Allowed>
+      <Allowed ID="26">Military Treatment Facility</Allowed>
+      <Allowed ID="31">Skilled Nursing Facility</Allowed>
+      <Allowed ID="32">Nursing Facility</Allowed>
+      <Allowed ID="33">Custodial Care Facility</Allowed>
+      <Allowed ID="34">Hospice</Allowed>
+      <Allowed ID="41">Ambulance - Land</Allowed>
+      <Allowed ID="42">Ambulance - Air or Water</Allowed>
+      <Allowed ID="50">Federally Qualified Health Center</Allowed>
+      <Allowed ID="51">Inpatient Psychiatric Facility</Allowed>
+      <Allowed ID="52">Psychiatric Facility Partial Hospitalization</Allowed>
+      <Allowed ID="53">Community Mental Health Center</Allowed>
+      <Allowed ID="54">Intermediate Care Facility/Mentally Retarded</Allowed>
+      <Allowed ID="55">Residential Substance Abuse Treatment Facility</Allowed>
+      <Allowed ID="56">Psychiatric Residential Treatment Center</Allowed>
+      <Allowed ID="60">Mass Immunization Center</Allowed>
+      <Allowed ID="61">Comprehensive Inpatient Rehabilitation Facility</Allowed>
+      <Allowed ID="62">Comprehensive Outpatient Rehabilitation Facility</Allowed>
+      <Allowed ID="65">End Stage Renal Disease Treatment Facility</Allowed>
+      <Allowed ID="71">State or Local Public Health Clinic</Allowed>
+      <Allowed ID="72">Rural Health Clinic</Allowed>
+      <Allowed ID="81">Independent Laboratory</Allowed>
+      <Allowed ID="99">Other Unlisted Facility</Allowed>
+    </Element>
+    <Element Name="Service Type Code" Type="ID" MinLength="1" MaxLength="2"/>
+    <Element Name="COMPOSITE DIAGNOSIS CODE POINTER" />
+    <Element Name="Monetary Amount"/>
+    <Element Name="Emergency Indicator" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Multiple Procedure Code" Type="ID" MinLength="1" MaxLength="2"/>
+    <Element Name="EPSDT (Early and Periodic Screen for Diagnosis and Treatment of Children) Indicator" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Family Planning Indicator" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Review Code"/>
+    <Element Name="National or Local Assigned Review Value"/>
+    <Element Name="Copay Status Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="0">Copay exempt</Allowed>
+    </Element>
+    <Element Name="Health Care Professional Shortage Area Code"/>
+    <Element Name="Reference Identification"/>
+    <Element Name="Postal Code"/>
+    <Element Name="Monetary Amount"/>
+    <Element Name="Level of Care Code"/>
+    <Element Name="Provider Agreement Code"/>
   </Segment>
 </SegmentSet>
