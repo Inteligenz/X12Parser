@@ -171,7 +171,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public string Serialize()
         {
-            return Serialize(true);
+            return Serialize(false);
         }
 
         private void RemoveComments(XmlElement element)
