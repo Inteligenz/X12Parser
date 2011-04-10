@@ -5,8 +5,6 @@ using System.Linq;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OopFactory.X12;
-using OopFactory.X12.Model;
-using OopFactory.X12.Model.Claims;
 using System.IO;
 using System.Reflection;
 using OopFactory.X12.Parsing;
@@ -27,11 +25,10 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Payments
         [TestMethod]
         public void ParseToX12Xml()
         {
-            var service = new X12ParsingService(true);
+            X12Parser parser = new X12Parser();
 
-            var xml = service.ParseToXml(GetEdi("Sample1.txt"));
+            var xml = parser.Parse(GetEdi("Sample1.txt")).Serialize();
             
-            //var xml = service.ParseToDomainXml(GetEdi("Sample1.txt"));
             Trace.Write(xml);
         }
 

@@ -30,6 +30,15 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         }
 
         [TestMethod]
+        public void Parse4010Example1ToXmlWithoutComments()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example1_PatientIsSubscriber.txt"));
+            string xml = interchange.Serialize(true);
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
         public void Parse4010Example1AndUnparse()
         {
             X12Parser parser = new X12Parser();
