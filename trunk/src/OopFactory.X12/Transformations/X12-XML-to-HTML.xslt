@@ -61,7 +61,7 @@
 
   <xsl:template match="HierarchicalLoop">
     <div class="hierarchical-loop" style="border-left: 2px solid black; border-top: 2px solid black; margin-left: 20px;">
-      <xsl:attribute name="title">Loop ID: <xsl:value-of select="@LoopId"/>, <xsl:value-of select="@Name"/></xsl:attribute>
+      <xsl:attribute name="title">Loop ID: <xsl:value-of select="@LoopId"/>, <xsl:value-of select="@LoopName"/></xsl:attribute>
       <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
