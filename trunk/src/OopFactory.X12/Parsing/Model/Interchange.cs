@@ -169,9 +169,34 @@ namespace OopFactory.X12.Parsing.Model
             return base.ToX12String(addWhitespace);
         }
 
-        
+        public string Serialize()
+        {
+            return Serialize(true);
+        }
 
-        public virtual string Serialize()
+        private void RemoveComments(XmlElement element)
+        {
+            List<XmlComment> comments = new List<XmlComment>();
+
+            foreach (XmlNode childElement in element.ChildNodes)
+            {
+                if (childElement is XmlComment)
+                    comments.Add((XmlComment)childElement);
+            }
+
+            foreach (XmlComment comment in comments)
+                element.RemoveChild(comment);
+
+            foreach (XmlNode childElement in element.ChildNodes)
+            {
+                if (childElement is XmlElement && childElement.HasChildNodes)
+                {
+                    RemoveComments((XmlElement)childElement);
+                }
+            }
+        }
+
+        public virtual string Serialize(bool suppressComments)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(
                 this.GetType());
@@ -180,8 +205,18 @@ namespace OopFactory.X12.Parsing.Model
             xmlSerializer.Serialize(memoryStream, this);
             memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
             StreamReader streamReader = new StreamReader(memoryStream);
-            return streamReader.ReadToEnd();
+            string xml = streamReader.ReadToEnd();
 
+            if (suppressComments)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+                RemoveComments((XmlElement)doc.SelectSingleNode("Interchange"));
+
+                xml = doc.OuterXml;
+                
+            }
+            return xml;
         }
 
         #region IXmlSerializable Members
