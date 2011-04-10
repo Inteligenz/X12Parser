@@ -94,7 +94,9 @@
         <!--Time-->
         <BHT05>1023</BHT05>
         <!--Transaction Type Code-->
-        <BHT06>CH</BHT06>
+        <BHT06>
+          CH<!--Chargeable-->
+        </BHT06>
       </BHT>
       <Loop LoopId="1000A" Name="SUBMITTER NAME">
         <NM1>
@@ -121,7 +123,9 @@
         </NM1>
         <PER>
           <!--Contact Function Code-->
-          <PER01>IC</PER01>
+          <PER01>
+            IC<!--Information Contact-->
+          </PER01>
           <!--Name-->
           <PER02>JERRY</PER02>
           <!--Communication Number Qualifier-->
@@ -461,34 +465,52 @@
                 <REF02>17312345600006351</REF02>
               </REF>
               <HI>
+                <!--Health Care Code Information-->
                 <HI01>
-                  <HI0101>BK</HI0101>
+                  <HI0101>
+                    BK<!--Principal Diagnosis (ICD-9)-->
+                  </HI0101>
                   <HI0102>0340</HI0102>
                 </HI01>
+                <!--Health Care Code Information-->
                 <HI02>
-                  <HI0201>BF</HI0201>
+                  <HI0201>
+                    BF<!--Diagnosis (ICD-9)-->
+                  </HI0201>
                   <HI0202>V7389</HI0202>
                 </HI02>
               </HI>
               <Loop LoopId="2400" Name="LINE COUNTER">
                 <LX>
+                  <!--Assigned Number-->
                   <LX01>1</LX01>
                 </LX>
                 <SV1>
+                  <!--Composite Medical Procedure Identifier-->
                   <SV101>
-                    <SV10101>HC</SV10101>
+                    <SV10101>
+                      HC<!--Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes-->
+                    </SV10101>
                     <SV10102>99213</SV10102>
                   </SV101>
+                  <!--Line Item Charge Amount-->
                   <SV102>40</SV102>
-                  <SV103>UN</SV103>
+                  <!--Unit or Basis for Measurement-->
+                  <SV103>
+                    UN<!--Unit-->
+                  </SV103>
+                  <!--Service Unit Count-->
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
+                  <!--COMPOSITE DIAGNOSIS CODE POINTER-->
                   <SV107>1</SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
-                  <DTP01>472</DTP01>
+                  <DTP01>
+                    472<!--Service-->
+                  </DTP01>
                   <!--Date Time Period Format Qualifier-->
                   <DTP02>
                     D8<!--Date Expression in Format CCYYMMDD-->
@@ -499,23 +521,35 @@
               </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
                 <LX>
+                  <!--Assigned Number-->
                   <LX01>2</LX01>
                 </LX>
                 <SV1>
+                  <!--Composite Medical Procedure Identifier-->
                   <SV101>
-                    <SV10101>HC</SV10101>
+                    <SV10101>
+                      HC<!--Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes-->
+                    </SV10101>
                     <SV10102>87070</SV10102>
                   </SV101>
+                  <!--Line Item Charge Amount-->
                   <SV102>15</SV102>
-                  <SV103>UN</SV103>
+                  <!--Unit or Basis for Measurement-->
+                  <SV103>
+                    UN<!--Unit-->
+                  </SV103>
+                  <!--Service Unit Count-->
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
+                  <!--COMPOSITE DIAGNOSIS CODE POINTER-->
                   <SV107>1</SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
-                  <DTP01>472</DTP01>
+                  <DTP01>
+                    472<!--Service-->
+                  </DTP01>
                   <!--Date Time Period Format Qualifier-->
                   <DTP02>
                     D8<!--Date Expression in Format CCYYMMDD-->
@@ -526,23 +560,35 @@
               </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
                 <LX>
+                  <!--Assigned Number-->
                   <LX01>3</LX01>
                 </LX>
                 <SV1>
+                  <!--Composite Medical Procedure Identifier-->
                   <SV101>
-                    <SV10101>HC</SV10101>
+                    <SV10101>
+                      HC<!--Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes-->
+                    </SV10101>
                     <SV10102>99214</SV10102>
                   </SV101>
+                  <!--Line Item Charge Amount-->
                   <SV102>35</SV102>
-                  <SV103>UN</SV103>
+                  <!--Unit or Basis for Measurement-->
+                  <SV103>
+                    UN<!--Unit-->
+                  </SV103>
+                  <!--Service Unit Count-->
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
+                  <!--COMPOSITE DIAGNOSIS CODE POINTER-->
                   <SV107>2</SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
-                  <DTP01>472</DTP01>
+                  <DTP01>
+                    472<!--Service-->
+                  </DTP01>
                   <!--Date Time Period Format Qualifier-->
                   <DTP02>
                     D8<!--Date Expression in Format CCYYMMDD-->
@@ -553,23 +599,35 @@
               </Loop>
               <Loop LoopId="2400" Name="LINE COUNTER">
                 <LX>
+                  <!--Assigned Number-->
                   <LX01>4</LX01>
                 </LX>
                 <SV1>
+                  <!--Composite Medical Procedure Identifier-->
                   <SV101>
-                    <SV10101>HC</SV10101>
+                    <SV10101>
+                      HC<!--Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes-->
+                    </SV10101>
                     <SV10102>86663</SV10102>
                   </SV101>
+                  <!--Line Item Charge Amount-->
                   <SV102>10</SV102>
-                  <SV103>UN</SV103>
+                  <!--Unit or Basis for Measurement-->
+                  <SV103>
+                    UN<!--Unit-->
+                  </SV103>
+                  <!--Service Unit Count-->
                   <SV104>1</SV104>
                   <SV105 />
                   <SV106 />
+                  <!--COMPOSITE DIAGNOSIS CODE POINTER-->
                   <SV107>2</SV107>
                 </SV1>
                 <DTP>
                   <!--Data/Time Qualifier-->
-                  <DTP01>472</DTP01>
+                  <DTP01>
+                    472<!--Service-->
+                  </DTP01>
                   <!--Date Time Period Format Qualifier-->
                   <DTP02>
                     D8<!--Date Expression in Format CCYYMMDD-->
