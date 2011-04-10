@@ -24,7 +24,7 @@ namespace OopFactory.X12.Tests.Unit.Transformations
         {
             var htmlService = new X12HtmlTransformationService(new X12EdiParsingService(true));
 
-            Stream ediFile = GetProfessionalClaimEdi("4010_Example1_PatientIsSubscriber.txt");
+            Stream ediFile = GetProfessionalClaimEdi("5010_Example1_HealthInsurance.txt");
 
             string html = htmlService.Transform(new StreamReader(ediFile).ReadToEnd());
 
