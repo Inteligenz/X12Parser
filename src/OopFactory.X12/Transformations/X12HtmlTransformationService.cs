@@ -24,7 +24,7 @@ namespace OopFactory.X12.Transformations
         {
             string xml = _preProcessor.Transform(x12);
 
-            var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.X12-XML-to-HTML.xslt"));
+            var xsltReader = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-HTML.xslt"));
 
             XslCompiledTransform transform = new XslCompiledTransform(); 
             transform.Load(xsltReader);
