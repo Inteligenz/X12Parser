@@ -114,6 +114,8 @@
     <Element Name="Date" Type="DT" MinLength="8" MaxLength="8"/>
     <Element Name="Time" Type="TM" MinLength="4" MaxLength="8"/>
     <Element Name="Transaction Type Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="CH">Chargeable</Allowed>
+      <Allowed ID="RP">Reporting</Allowed>
       <Allowed ID="RT">Spend Down</Allowed>
     </Element>
   </Segment>
@@ -172,12 +174,18 @@
   <Segment SegmentId="DTP">
     <Element Name="Data/Time Qualifier" Required="true" Type="ID" MinLength="3" MaxLength="3">
       <Allowed ID="007">Effective</Allowed>
+      <Allowed ID="011">Shipped</Allowed>
+      <Allowed ID="090">Report Start</Allowed>
+      <Allowed ID="091">Report End</Allowed>
+      <Allowed ID="096">Discharge</Allowed>
+      <Allowed ID="119">Test Performed</Allowed>
       <Allowed ID="286">Retirement</Allowed>
       <Allowed ID="296">Return to Work</Allowed>
       <Allowed ID="297">Date Last Worked</Allowed>
       <Allowed ID="300">Enrollment Signature Date</Allowed>
       <Allowed ID="301">Consolidated Omnibus Budget Reconciliation Act (COBRA) Qualifying Event</Allowed>
       <Allowed ID="303">Maintenance Effective</Allowed>
+      <Allowed ID="304">Latest Visit or Consultation</Allowed>
       <Allowed ID="336">Employment Begin</Allowed>
       <Allowed ID="337">Employment End</Allowed>
       <Allowed ID="338">Medicare Begin</Allowed>
@@ -188,16 +196,37 @@
       <Allowed ID="351">Education End</Allowed>
       <Allowed ID="356">Eligibility Begin</Allowed>
       <Allowed ID="357">Eligibility End</Allowed>
+      <Allowed ID="360">Disability Begin</Allowed>
+      <Allowed ID="361">Disability End</Allowed>
       <Allowed ID="382">Enrollment</Allowed>
       <Allowed ID="383">Adjusted Hire</Allowed>
       <Allowed ID="388">Payment Commencement</Allowed>
       <Allowed ID="393">Plan Participation Suspension</Allowed>
       <Allowed ID="394">Rehire</Allowed>
+      <Allowed ID="431">Onset of Current Symptoms or Illness</Allowed>
+      <Allowed ID="435">Admission</Allowed>
+      <Allowed ID="438">Onset of Similar Symptoms or Illness</Allowed>
+      <Allowed ID="439">Accident</Allowed>
+      <Allowed ID="453">Acute Manifestation of a Chronic Condition</Allowed>
+      <Allowed ID="454">Initial Treatment</Allowed>
+      <Allowed ID="455">Last X-Ray</Allowed>
+      <Allowed ID="461">Last Certification</Allowed>
+      <Allowed ID="463">Begin Therapy</Allowed>
+      <Allowed ID="471">Prescription</Allowed>
+      <Allowed ID="472">Service</Allowed>
       <Allowed ID="473">Medicaid Begin</Allowed>
       <Allowed ID="474">Medicaid End</Allowed>
+      <Allowed ID="480">Arterial Blood Gas Test</Allowed>
+      <Allowed ID="481">Oxygen Saturation Test</Allowed>
+      <Allowed ID="484">Last Menstrual Period</Allowed>
+      <Allowed ID="573">Date Claim Paid</Allowed>
+      <Allowed ID="607">Certification Revision</Allowed>
+      <Allowed ID="738">Most Recent Hemoglobin or Hematocrit or Both</Allowed>
+      <Allowed ID="739">Most Recent Serum Creatine</Allowed>
     </Element>
     <Element Name="Date Time Period Format Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
-      <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>      
+      <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>
+      <Allowed ID="DT">Date and Time Expressed in Format CCYYMMDDHHMM</Allowed>
     </Element>
     <Element Name="Date Time Period" Required="true" Type="AN" MinLength="1" MaxLength="35"/>
   </Segment>
@@ -308,6 +337,7 @@
    </Segment>
   <Segment SegmentId="PER">
     <Element Name="Contact Function Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="IC">Information Contact</Allowed>
       <Allowed ID="IP">Insured Party</Allowed>
     </Element>
     <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
@@ -342,12 +372,20 @@
   </Segment>
   <Segment SegmentId="REF">
     <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="06">System Number</Allowed>
       <Allowed ID="0B">State License Number</Allowed>
       <Allowed ID="0F">Subscriber Number</Allowed>
+      <Allowed ID="1A">Blue Cross Provider Number</Allowed>
+      <Allowed ID="1B">Blue Shield Provider Number</Allowed>
+      <Allowed ID="1C">Medicare Provider Number</Allowed>
+      <Allowed ID="1D">Medicaid Provider Number</Allowed>
       <Allowed ID="17">Client Reporting Category</Allowed>
       <Allowed ID="1G">Provider UPIN Number</Allowed>
+      <Allowed ID="1H">CHAMPUS Identification Number</Allowed>
       <Allowed ID="1J">Facility ID Number</Allowed>
       <Allowed ID="1L">Group or Policy Number</Allowed>
+      <Allowed ID="1S">Ambulatory Patient Group (APG) Number</Allowed>
+      <Allowed ID="1W">Member Identification Number</Allowed>
       <Allowed ID="23">Client Number</Allowed>
       <Allowed ID="2U">Payer Identification Number</Allowed>
       <Allowed ID="38">Master Policy Number</Allowed>
@@ -355,35 +393,56 @@
       <Allowed ID="4N">Special Payment Reference Number</Allowed>
       <Allowed ID="6O">Cross Reference Number</Allowed>
       <Allowed ID="6R">Provider Control Number</Allowed>
+      <Allowed ID="87">Functional Category</Allowed>
+      <Allowed ID="8U">Bank Assigned Security Identifier</Allowed>
       <Allowed ID="9A">Repriced Claim Reference Number</Allowed>
       <Allowed ID="9B">Repriced Line Item Reference Number</Allowed>
       <Allowed ID="9C">Adjusted Repriced Claim Reference Number</Allowed>
       <Allowed ID="9D">Adjusted Repriced Line Item Reference Number</Allowed>
       <Allowed ID="9F">Referral Number</Allowed>
+      <Allowed ID="AB">Acceptable Source Purchase ID</Allowed>
+      <Allowed ID="B3">Preferred Provider Organization Number</Allowed>
+      <Allowed ID="BB">Authorization Number</Allowed>
+      <Allowed ID="BQ">Health Maintenance Organization Code Number</Allowed>
       <Allowed ID="BT">Batch Number</Allowed>
       <Allowed ID="D9">Claim Number</Allowed>
       <Allowed ID="DX">Department/Agency Number</Allowed>
       <Allowed ID="EA">Medical Record Identification Number</Allowed>
       <Allowed ID="EI">Employer’s Identification Number</Allowed>
+      <Allowed ID="EM">Electronic Payment Reference Number</Allowed>
       <Allowed ID="EW">Mammography Certification Number</Allowed>
       <Allowed ID="F4">Facility Certification Number</Allowed>
       <Allowed ID="F5">Medicare Version Code</Allowed>
       <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
       <Allowed ID="F8">Original Reference Number</Allowed>
+      <Allowed ID="FH">Clinic Number</Allowed>
       <Allowed ID="FY">Claim Office Number</Allowed>
       <Allowed ID="G1">Prior Authorization Number</Allowed>
       <Allowed ID="G2">Provider Commercial Number</Allowed>
+      <Allowed ID="GS">Provider Site Number</Allowed>
+      <Allowed ID="IG">Insurance Policy Number</Allowed>
+      <Allowed ID="IJ">Standard Industry Classification (SIC) Code</Allowed>
       <Allowed ID="LU">Location Number</Allowed>
       <Allowed ID="LX">Qualified Products List</Allowed>
+      <Allowed ID="N5">Provider Plan Network Identification Number</Allowed>
       <Allowed ID="NF">National Association of Insurance Commissioners (NAIC) Code</Allowed>
+      <Allowed ID="OZ">Product Number</Allowed>
       <Allowed ID="P4">Project Code</Allowed>
       <Allowed ID="Q4">Prior Identitifier Number</Allowed>
       <Allowed ID="QQ">Unit Number</Allowed>
+      <Allowed ID="RB">Rate code number</Allowed>
+      <Allowed ID="ST">Store Number</Allowed>
       <Allowed ID="SY">Social Security Number</Allowed>
       <Allowed ID="T4">Signal Code</Allowed>
-      <Allowed ID="XZ">Pharmacy Prescription Number</Allowed>
+      <Allowed ID="TJ">Federal Taxpayer’s Identification Number</Allowed>
+      <Allowed ID="TP">Test Specification Number Oxygen Flow Rate</Allowed>
+      <Allowed ID="TT">Terminal Code</Allowed>
+      <Allowed ID="U3">Unique Supplier Identification Number (USIN)</Allowed>
+      <Allowed ID="VP">Vendor Product Number</Allowed>
       <Allowed ID="VY">Link Sequence Number</Allowed>
       <Allowed ID="X4">Clinical Laboratory Improvement Amendment Number</Allowed>
+      <Allowed ID="XS">State Industrial Accident Provider Number</Allowed>
+      <Allowed ID="XZ">Pharmacy Prescription Number</Allowed>
       <Allowed ID="Y4">Agency Claim Number</Allowed>
       <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
@@ -1050,6 +1109,12 @@
       <Allowed ID="9">Original Claim Rejected or Denied Due to a Reason Unrelated to the Billing Limitation Rules</Allowed>
       <Allowed ID="10">Administration Delay in the Prior Approval Process</Allowed>
       <Allowed ID="11">Other</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="HI">
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BF">Diagnosis</Allowed>
+      <Allowed ID="BK">Principal Diagnosis</Allowed>
     </Element>
   </Segment>
 </SegmentSet>

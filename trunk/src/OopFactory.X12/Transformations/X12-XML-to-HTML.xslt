@@ -3,6 +3,7 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
     <xsl:output method="html" indent="yes"/>
+ 
 
     <xsl:template match="@* | node()">
         <xsl:copy>
@@ -12,12 +13,27 @@
 
   <xsl:template name="Component">
     <xsl:param name="element"/>
-    <xsl:for-each select="$element/*"><xsl:if test="position() != 1">:</xsl:if><xsl:value-of select="."/></xsl:for-each>
+    <xsl:for-each select="$element/*"><xsl:if test="position() != 1">:</xsl:if>
+      <xsl:choose>
+        <xsl:when test="string-length(comment()) > 0">
+          <span class="component" style="color:blue">
+            <xsl:attribute name="title"><xsl:value-of select="comment()"/></xsl:attribute>
+            <xsl:value-of select="."/>
+          </span>
+        </xsl:when>
+        <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+      </xsl:choose> 
+    </xsl:for-each>
   </xsl:template>
   
   <xsl:template name="Element">
-    <xsl:param name="element"/>
-    <span class="element">*<xsl:choose>
+    <xsl:param name="element"/>*<span class="element"><xsl:if test="string-length(comment()) > 0">
+        <xsl:attribute name="title">
+          <xsl:value-of select="comment()"/>
+        </xsl:attribute>
+        <xsl:attribute name="style">color:blue</xsl:attribute>
+      </xsl:if>
+      <xsl:choose>
       <xsl:when test="count($element/*) = 0"><xsl:value-of select="$element"/></xsl:when>
       <xsl:otherwise>        
         <xsl:call-template name="Component">
@@ -31,12 +47,14 @@
   <xsl:template name="Segment">
     <xsl:param name="seg"/>
     <xsl:variable name="segId" select="name()" />
-    <div class="segment">
+    <div>
       <xsl:choose>
         <xsl:when test="position() = 1">
+          <xsl:attribute name="class">first-segment</xsl:attribute>
           <xsl:attribute name="style">font-weight: bold;</xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
+          <xsl:attribute name="class">segment</xsl:attribute>
           <xsl:attribute name="style">margin-left: 25px;</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>

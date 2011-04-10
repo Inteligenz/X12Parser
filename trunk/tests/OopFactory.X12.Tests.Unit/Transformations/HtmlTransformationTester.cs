@@ -22,7 +22,7 @@ namespace OopFactory.X12.Tests.Unit.Transformations
         [TestMethod]
         public void HtmlTransformationTest()
         {
-            var htmlService = new X12HtmlTransformationService(new X12EdiParsingService(true));
+            var htmlService = new X12HtmlTransformationService(new X12EdiParsingService(false));
 
             Stream ediFile = GetProfessionalClaimEdi("5010_Example1_HealthInsurance.txt");
 
