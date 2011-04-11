@@ -33,7 +33,7 @@
         <xsl:attribute name="title">
           <xsl:value-of select="preceding-sibling::node()[self::*|self::comment()][1][self::comment()]"/>
         </xsl:attribute>
-        <xsl:attribute name="style">background-color: whitesmoke</xsl:attribute>
+        <xsl:attribute name="style">background-color: #dfdfdf;</xsl:attribute>
       </xsl:if>
       *<span class="element-value">
         <xsl:if test="string-length(comment()) > 0">
@@ -78,8 +78,9 @@
   </xsl:template>
   
   <xsl:template match="Loop">
-    <div class="loop" style="border-left: 1px dotted gray; border-top: 1px dotted gray; margin-left: 20px;">
+    <div class="loop" style="border: 1px dotted gray; margin-left: 20px; margin-bottom: 2px; padding: 5px;">
       <xsl:attribute name="title">Loop ID: <xsl:value-of select="@LoopId"/>, <xsl:value-of select="@Name"/></xsl:attribute>
+      <div style="float:right; font-size: smaller; color: lightgrey;"><xsl:value-of select="@Name"/></div>
       <xsl:for-each select="*[name()!='Loop']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
@@ -90,8 +91,11 @@
   </xsl:template>
 
   <xsl:template match="HierarchicalLoop">
-    <div class="hierarchical-loop" style="border-left: 2px solid black; border-top: 2px solid black; margin-left: 20px;">
+    <div class="hierarchical-loop" style="border: 2px solid black; margin-left: 20px; padding: 5px;">
       <xsl:attribute name="title">Loop ID: <xsl:value-of select="@LoopId"/>, <xsl:value-of select="@LoopName"/></xsl:attribute>
+      <div style="float:right; font-size: smaller; color: lightgrey;">
+        <xsl:value-of select="@LoopName"/>
+      </div>
       <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
@@ -102,7 +106,7 @@
     </div>
   </xsl:template>
   <xsl:template match="Transaction">
-    <div class="transaction" style="border: 3px double black; margin-left: 20px;">
+    <div class="transaction" style="border: 3px double black; margin-left: 20px; padding: 5px;">
       <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop' and name()!='SE']">
         <xsl:call-template name="Segment">
           <xsl:with-param name="seg" select="."/>
