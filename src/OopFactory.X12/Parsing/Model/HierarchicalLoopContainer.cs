@@ -85,9 +85,6 @@ namespace OopFactory.X12.Parsing.Model
                 foreach (var segment in this.Segments)
                     segment.WriteXml(writer);
 
-                foreach (var loop in this.Loops)
-                    loop.WriteXml(writer);
-
                 foreach (var hloop in this.HLoops)
                     hloop.WriteXml(writer);
 

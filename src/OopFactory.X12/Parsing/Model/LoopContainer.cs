@@ -32,6 +32,7 @@ namespace OopFactory.X12.Parsing.Model
             if (loopSpec != null)
             {
                 var loop = new Loop(this, _delimiters, segmentString, loopSpec);
+                _segments.Add(loop);
                 _loops.Add(loop);
                 return loop;
             }
@@ -63,17 +64,12 @@ namespace OopFactory.X12.Parsing.Model
 
         internal override int CountTotalSegments()
         {
-            return base.CountTotalSegments() + this.Loops.Sum(l => l.CountTotalSegments());
+            return base.CountTotalSegments() + this.Loops.Sum(l => l.CountTotalSegments()) - this.Loops.Count();
         }
 
         internal override string SerializeBodyToX12(bool addWhitespace)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var loop in this.Loops)
-            {
-                sb.Append(loop.ToX12String(addWhitespace));
-            }
-            return sb.ToString();
+            return "";
         }
     }
 }

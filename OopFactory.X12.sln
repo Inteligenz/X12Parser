@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12", "src\OopFa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.X12Parser", "src\OopFactory.X12.X12Parser\OopFactory.X12.X12Parser.csproj", "{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Presentation", "src\OopFactory.X12.Presentation\OopFactory.X12.Presentation.csproj", "{16A8617F-AB79-4CBD-8C00-43A99C33040C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57B7B5ED-5C3D-464D-B67C-7623BBBA8AC0}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -18,27 +16,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Tests.Unit",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Transformations", "src\OopFactory.X12.Transformations\OopFactory.X12.Transformations.csproj", "{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Rendering", "OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj", "{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = src\\OopFactory.X12.Presentation\\OopFactory.X12.Presentation.csproj
-		SccProjectName1 = src/OopFactory.X12.Presentation
-		SccLocalPath1 = src\\OopFactory.X12.Presentation
-		SccProjectUniqueName2 = src\\OopFactory.X12\\OopFactory.X12.csproj
-		SccProjectName2 = src/OopFactory.X12
-		SccLocalPath2 = src\\OopFactory.X12
-		SccProjectUniqueName3 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
-		SccProjectName3 = src/OopFactory.X12.X12Parser
-		SccLocalPath3 = src\\OopFactory.X12.X12Parser
-		SccProjectUniqueName4 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
-		SccProjectName4 = tests/OopFactory.X12.Tests.Unit
-		SccLocalPath4 = tests\\OopFactory.X12.Tests.Unit
-		SccProjectUniqueName5 = src\\OopFactory.X12.Transformations\\OopFactory.X12.Transformations.csproj
-		SccProjectName5 = src/OopFactory.X12.Transformations
-		SccLocalPath5 = src\\OopFactory.X12.Transformations
+		SccProjectUniqueName1 = src\\OopFactory.X12\\OopFactory.X12.csproj
+		SccProjectName1 = src/OopFactory.X12
+		SccLocalPath1 = src\\OopFactory.X12
+		SccProjectUniqueName2 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
+		SccProjectName2 = src/OopFactory.X12.X12Parser
+		SccLocalPath2 = src\\OopFactory.X12.X12Parser
+		SccProjectUniqueName3 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
+		SccProjectName3 = tests/OopFactory.X12.Tests.Unit
+		SccLocalPath3 = tests\\OopFactory.X12.Tests.Unit
+		SccProjectUniqueName4 = src\\OopFactory.X12.Transformations\\OopFactory.X12.Transformations.csproj
+		SccProjectName4 = src/OopFactory.X12.Transformations
+		SccLocalPath4 = src\\OopFactory.X12.Transformations
+		SccProjectUniqueName5 = OopFactory.X12.Rendering\\OopFactory.X12.Rendering.csproj
+		SccProjectName5 = OopFactory.X12.Rendering
+		SccLocalPath5 = OopFactory.X12.Rendering
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -72,16 +72,6 @@ Global
 		{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}.Release|Mixed Platforms.Build.0 = Release|x86
 		{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}.Release|x86.ActiveCfg = Release|x86
 		{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}.Release|x86.Build.0 = Release|x86
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{16A8617F-AB79-4CBD-8C00-43A99C33040C}.Release|x86.ActiveCfg = Release|Any CPU
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -102,6 +92,16 @@ Global
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|x86.ActiveCfg = Release|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
