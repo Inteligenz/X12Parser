@@ -75,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformations\X12EdiParsingService.cs" />
     <Compile Include="Transformations\X12HtmlTransformationService.cs" />
+    <Compile Include="Transformations\X12TransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-837-4010Specification.xml" />
@@ -92,6 +93,7 @@
     <EmbeddedResource Include="Specifications\Ansi-997-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Parsing\Model\ParsingModel.cd" />
     <None Include="Specifications\X12ParserSpecification.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -111,7 +113,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-5010Specification.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-810-4010Specification.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Transformations\X12-XML-to-HTML.xslt" />
   </ItemGroup>

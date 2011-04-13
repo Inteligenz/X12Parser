@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}</ProjectGuid>
+    <ProjectGuid>{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.X12.Transformations</RootNamespace>
-    <AssemblyName>OopFactory.X12.Transformations</AssemblyName>
+    <RootNamespace>OopFactory.X12.Rendering</RootNamespace>
+    <AssemblyName>OopFactory.X12.Rendering</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -44,25 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ControlSegmentsTransformer.cs" />
-    <Compile Include="Common\EntitySegmentsTransformer.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
-      <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
-      <Name>OopFactory.X12</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ORD\Ansi-856-To-ShipNotice.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="INS\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Common\Xsl\Control-Segments.xslt" />
-    <EmbeddedResource Include="Common\Xsl\Segments-DMG,N1,N2,N3,N4,NM1,PER,REF.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

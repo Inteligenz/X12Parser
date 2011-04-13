@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.IO;
 using OopFactory.X12.Parsing;
-using OopFactory.X12.Presentation.Suppliers;
 
 namespace OopFactory.X12.Tests.Unit.Parsing.Suppliers
 {

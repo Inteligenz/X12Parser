@@ -23,6 +23,8 @@ namespace OopFactory.X12.Parsing
                 case "276":
                 case "277":
                     return Get276TransactionSpecification();
+                case "810":
+                    return Get810TransactionSpecification();
                 case "834":
                     return Get834TransactionSpecification();
                 case "835":
@@ -189,6 +191,19 @@ namespace OopFactory.X12.Parsing
                 _856specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
             }
             return _856specification;
+        }
+
+        private static TransactionSpecification _810specification;
+
+        private static TransactionSpecification Get810TransactionSpecification()
+        {
+            if (_810specification == null)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-810-4010Specification.xml");
+                StreamReader reader = new StreamReader(specStream);
+                _810specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+            }
+            return _810specification;
         }
     }
 }

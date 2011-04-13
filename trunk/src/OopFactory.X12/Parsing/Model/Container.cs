@@ -8,10 +8,8 @@ namespace OopFactory.X12.Parsing.Model
 {
     public abstract class Container : Segment
     {
-        private List<Segment> _segments;
+        protected List<Segment> _segments;
         
-        private List<Segment> _trailerSegments;
-
         private Segment _terminatingTrailerSegment;
 
         internal Container(Container parent, X12DelimiterSet delimiters, string segment)
@@ -23,7 +21,6 @@ namespace OopFactory.X12.Parsing.Model
         {
             base.Initialize(segment);
             _segments = new List<Segment>();
-            _trailerSegments = new List<Segment>();
         }
 
         internal abstract IList<SegmentSpecification> AllowedChildSegments { get; }
@@ -51,10 +48,7 @@ namespace OopFactory.X12.Parsing.Model
             SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId);
             if (spec != null)
             {
-                if (spec.Trailer)
-                    _trailerSegments.Add(segment);
-                else
-                    _segments.Add(segment);
+                _segments.Add(segment);
                 return segment;
             }
             else
@@ -65,11 +59,10 @@ namespace OopFactory.X12.Parsing.Model
         { 
             get
             {
-                if (_terminatingTrailerSegment == null)
-                    return _trailerSegments;
-                {
-                    return _trailerSegments.Union(new Segment[] { _terminatingTrailerSegment });
-                }
+                var list = new List<Segment>();
+                if (_terminatingTrailerSegment != null)
+                    list.Add(_terminatingTrailerSegment);
+                return list;
             } 
         }
 
