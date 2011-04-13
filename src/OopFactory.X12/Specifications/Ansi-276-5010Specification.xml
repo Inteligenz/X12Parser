@@ -8,6 +8,7 @@
       <Name>Payer Name</Name>
       <StartingSegment SegmentId="NM1">
         <EntityIdentifier Code="PI"/>
+        <EntityIdentifier Code="PR"/>
         <EntityIdentifier Code="XV"/>
       </StartingSegment>
     </Loop>

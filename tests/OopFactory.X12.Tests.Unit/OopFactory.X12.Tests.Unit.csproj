@@ -103,6 +103,8 @@
       <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="Parsing\Invoices\4010_Example1_CaliforniaISO.txt" />
+    <EmbeddedResource Include="Parsing\Invoices\4010_Example3_MultiInvoice.txt" />
+    <EmbeddedResource Include="Parsing\Invoices\4010_Example2_ManualBilling.txt" />
     <Content Include="Parsing\Payments\SAMPLE_1.xml" />
     <Content Include="Parsing\Suppliers\Sample1Domain.xml" />
     <Content Include="Parsing\Suppliers\Sample1x12.xml" />

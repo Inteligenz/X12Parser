@@ -2,22 +2,48 @@
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="810">
   <Segment SegmentId="BIG"/>
   <Segment SegmentId="ITD"/>
+  <Segment SegmentId="CUR"/>
   <Segment SegmentId="DTM"/>
+  <Segment SegmentId="FOB"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="PER"/>
   <Segment SegmentId="TDS" Trailer="true"/>
+  <Segment SegmentId="TXI" Trailer="true"/>
+  <Segment SegmentId="CAD" Trailer="true"/>
+  <Segment SegmentId="ISS" Trailer="true"/>
   <Segment SegmentId="CTT" Trailer="true"/>
-  <Loop LoopId="PARTY">
+  <Loop LoopId="N1">
     <Name>Party</Name>
     <StartingSegment SegmentId="N1">
       <EntityIdentifier Code="RE"/>
       <EntityIdentifier Code="BT"/>
+      <EntityIdentifier Code="VN"/>
+      <EntityIdentifier Code="ST"/>
     </StartingSegment>
     <Segment SegmentId="N3"/>
     <Segment SegmentId="N4"/>
     <Segment SegmentId="REF"/>
   </Loop>
-  <Loop LoopId="ITEM">
+  <Loop LoopId="IT1">
     <Name>ITEM</Name>
     <StartingSegment SegmentId="IT1"/>
-    <Segment SegmentId="PID"/>
+    <Segment SegmentId="TXI"/>
+    <Segment SegmentId="PAM"/>
+    <Segment SegmentId="CTP"/>
+    <Loop LoopId="PID">
+      <Name>PRODUCT/ITEM</Name>
+      <StartingSegment SegmentId="PID"/>
+    </Loop>
+    <Loop LoopId="SAC">
+      <Name>Service, Promotion, Allowance, or Charge Information</Name>
+      <StartingSegment SegmentId="SAC"/>
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Cost Center</Name>
+      <StartingSegment SegmentId="N1">
+        <EntityIdentifier Code="PD"/>
+      </StartingSegment>
+      <Segment SegmentId="REF"/>
+    </Loop>
   </Loop>
 </TransactionSpecification>
