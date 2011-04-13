@@ -133,18 +133,23 @@ namespace OopFactory.X12.Parsing
                                     }
                                     catch (TransactionValidationException)
                                     {
-                                        currentContainer = currentContainer.Parent;
-                                        continue;
+                                        if (currentContainer is Transaction)
+                                        {
+                                            var tran = (Transaction)currentContainer;
+
+                                            throw new TransactionValidationException(
+                                                "Segment {3} within transaction {1} cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString);
+                                        }
+                                        else
+                                        {
+                                            currentContainer = currentContainer.Parent;
+                                            continue;
+                                        }
                                     }
                                 }
                                 else
                                     break;
                             } 
-                        }
-                        if (currentContainer == null)
-                        {
-                            throw new InvalidOperationException(String.Format(
-                                "Segment {0} cannot be identified.", segmentString));
                         }
                         break;
 

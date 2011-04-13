@@ -28,15 +28,6 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Invoices
         }
 
         [TestMethod]
-        public void Parse4010Example1ToXmlWithoutComments()
-        {
-            X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(GetEdi("4010_Example1_CaliforniaISO.txt"));
-            string xml = interchange.Serialize(true);
-            Trace.Write(xml);
-        }
-
-        [TestMethod]
         public void Parse4010Example1AndUnparse()
         {
             string orignalX12 = new StreamReader(GetEdi("4010_Example1_CaliforniaISO.txt")).ReadToEnd();
@@ -46,6 +37,47 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Invoices
             Trace.Write(x12);
 
             Assert.AreEqual(orignalX12, x12);
+        }
+
+        [TestMethod]
+        public void Parse4010Example2ToXml()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example2_ManualBilling.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void Parse4010Example2AndUnparse()
+        {
+            string orignalX12 = new StreamReader(GetEdi("4010_Example2_ManualBilling.txt")).ReadToEnd();
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example2_ManualBilling.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+
+            //Assert.AreEqual(orignalX12, x12);
+        }
+        [TestMethod]
+        public void Parse4010Example3ToXml()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example3_MultiInvoice.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void Parse4010Example3AndUnparse()
+        {
+            string orignalX12 = new StreamReader(GetEdi("4010_Example3_MultiInvoice.txt")).ReadToEnd();
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("4010_Example3_MultiInvoice.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+
+            //Assert.AreEqual(orignalX12, x12);
         }
     }
 }

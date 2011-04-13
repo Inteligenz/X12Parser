@@ -41,10 +41,14 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims
         [TestMethod]
         public void Parse4010Example1AndUnparse()
         {
+            string originalX12 = new StreamReader(GetEdi("4010_Example1_PatientIsSubscriber.txt")).ReadToEnd();
+
             X12Parser parser = new X12Parser();
             Interchange interchange = parser.Parse(GetEdi("4010_Example1_PatientIsSubscriber.txt"));
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
+
+            Assert.AreEqual(originalX12, x12);
         }
 
         [TestMethod]
