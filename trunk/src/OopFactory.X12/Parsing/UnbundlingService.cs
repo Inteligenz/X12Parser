@@ -46,13 +46,17 @@ namespace OopFactory.X12.Parsing
             sb.AppendFormat("{0}", _segmentTerminator);
             foreach (var segment in loop.Transaction.Segments)
             {
-                sb.Append(segment.SegmentString);
-                sb.AppendFormat("{0}", _segmentTerminator);
+                if (segment is Loop)
+                {
+                    sb.AppendLine(segment.SerializeToX12(true));
+                }
+                else
+                {
+                    sb.Append(segment.SegmentString);
+                    sb.AppendFormat("{0}", _segmentTerminator);
+                }
             }
-            foreach (var tloop in loop.Transaction.Loops)
-            {
-                sb.AppendLine(tloop.SerializeToX12(true));
-            }
+            
             sb.AppendLine(SerializeParent((LoopContainer)loop.Parent, loopId));
             sb.AppendLine(loop.ToX12String(true));
             foreach (var segment in loop.Transaction.TrailerSegments)
@@ -79,16 +83,19 @@ namespace OopFactory.X12.Parsing
                 sb.AppendFormat("{0}", _segmentTerminator);
                 foreach (var segment in container.Segments)
                 {
-                    sb.Append(segment.SegmentString);
-                    sb.AppendFormat("{0}", _segmentTerminator);
-            
-                }
-                foreach (var loop in container.Loops)
-                {
-                    if (loop.Specification.LoopId != excludedLoopId)
+                    if (segment is Loop)
                     {
-                        sb.AppendLine(loop.SerializeToX12(true));
+                        if (((Loop)segment).Specification.LoopId != excludedLoopId)
+                        {
+                            sb.AppendLine(segment.SerializeToX12(true));
+                        }
                     }
+                    else
+                    {
+                        sb.Append(segment.SegmentString);
+                        sb.AppendFormat("{0}", _segmentTerminator);
+                    }
+            
                 }
                 return sb.ToString();
             }
