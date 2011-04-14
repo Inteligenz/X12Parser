@@ -19,25 +19,27 @@ namespace OopFactory.X12.Parsing
             {
                 case "270":
                 case "271":
-                    return Get270TransactionSpecification();
+                    return GetSpecification("270-5010"); 
                 case "276":
                 case "277":
-                    return Get276TransactionSpecification();
+                    return GetSpecification("276-5010"); 
                 case "810":
-                    return Get810TransactionSpecification();
+                    return GetSpecification("810-4010"); 
                 case "834":
-                    return Get834TransactionSpecification();
+                    return GetSpecification("834-4010"); 
                 case "835":
-                    return Get835TransactionSpecification();
+                    return GetSpecification("835-4010"); 
                 case "837":
                     if (versionCode.Contains("5010"))
-                        return Get837_5010TransactionSpecification();
+                        return GetSpecification("837-5010"); 
                     else
-                        return Get837TransactionSpecification();
+                        return GetSpecification("837-4010");
+                case "850":
+                    return GetSpecification("850-4010");
                 case "856":
-                    return Get856TransactionSpecification();
+                    return GetSpecification("856-4010"); 
                 case "997":
-                    return Get997TransactionSpecification();
+                    return GetSpecification("997-4010"); 
                 default:
                     throw new NotSupportedException(String.Format("Transaction Set {0} is not supported.", transactionSetCode));
             }
@@ -89,121 +91,23 @@ namespace OopFactory.X12.Parsing
             return _5010Specification;
         }
 
-        private static TransactionSpecification _270specification;
-
-        private static TransactionSpecification Get270TransactionSpecification()
+        private static Dictionary<string, TransactionSpecification> _specifications;
+        
+        static SpecificationFinder()
         {
-            if (_270specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-270-5010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _270specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _270specification;
+            _specifications = new Dictionary<string, TransactionSpecification>();
         }
 
-        private static TransactionSpecification _276specification;
+        private static TransactionSpecification _850specification;
 
-        private static TransactionSpecification Get276TransactionSpecification()
+        private static TransactionSpecification GetSpecification(string key)
         {
-            if (_276specification == null)
+            if (!_specifications.ContainsKey(key))
             {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-276-5010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _276specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(String.Format("OopFactory.X12.Specifications.Ansi-{0}Specification.xml", key));
+                _specifications.Add(key, TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd()));
             }
-            return _276specification;
-        }
-
-        private static TransactionSpecification _997specification;
-
-        private static TransactionSpecification Get997TransactionSpecification()
-        {
-            if (_997specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-997-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _997specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _997specification;
-        }
-
-        private static TransactionSpecification _834specification;
-
-        private static TransactionSpecification Get834TransactionSpecification()
-        {
-            if (_834specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-834-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _834specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _834specification;
-        }
-
-        private static TransactionSpecification _837specification;
-
-        private static TransactionSpecification Get837TransactionSpecification()
-        {
-            if (_837specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-837-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _837specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _837specification;
-        }
-
-        private static TransactionSpecification _837_5010specification;
-
-        private static TransactionSpecification Get837_5010TransactionSpecification()
-        {
-            if (_837_5010specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-837-5010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _837_5010specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _837_5010specification;
-        }
-
-        private static TransactionSpecification _835specification;
-
-        private static TransactionSpecification Get835TransactionSpecification()
-        {
-            if (_835specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-835-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _835specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _835specification;
-        }
-
-        private static TransactionSpecification _856specification;
-
-        private static TransactionSpecification Get856TransactionSpecification()
-        {
-            if (_856specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-856-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _856specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _856specification;
-        }
-
-        private static TransactionSpecification _810specification;
-
-        private static TransactionSpecification Get810TransactionSpecification()
-        {
-            if (_810specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-810-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                _810specification = TransactionSpecification.Deserialize(reader.ReadToEnd());
-            }
-            return _810specification;
+            return _specifications[key];
         }
     }
 }
