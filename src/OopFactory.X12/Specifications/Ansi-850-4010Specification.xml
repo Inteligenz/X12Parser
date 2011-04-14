@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="850">
+  <Segment SegmentId="BEG"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="TAX"/>
+  <Segment SegmentId="FOB"/>
+  <Segment SegmentId="ITD"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="TXI"/>
+  <Segment SegmentId="TD5"/>
+  <Segment SegmentId="CTT" Trailer="true"/>
+  <Loop LoopId="N9">
+    <Name></Name>
+    <StartingSegment SegmentId="N9"/>
+    <Segment SegmentId="MSG"/>
+  </Loop>
+  <Loop LoopId="SAC" LoopRepeat="25">
+    <Name>Service, Promotion, Allowance, or Charge Information</Name>
+    <StartingSegment SegmentId="SAC"/>
+  </Loop>
+  <Loop LoopId="AMT">
+    <Name>Amount</Name>
+    <StartingSegment SegmentId="AMT"/>
+  </Loop>
+  <Loop LoopId="N1">
+    <Name></Name>
+    <StartingSegment SegmentId="N1">
+      <EntityIdentifier Code="MI"/>
+      <EntityIdentifier Code="ST"/>
+      <EntityIdentifier Code="SF"/>
+      <EntityIdentifier Code="BT"/>
+      <EntityIdentifier Code="BY"/>
+      <EntityIdentifier Code="SU"/>
+      <EntityIdentifier Code="PO"/>
+      <EntityIdentifier Code="DU"/>
+      <EntityIdentifier Code="EN"/>
+      <EntityIdentifier Code="IA"/>
+    </StartingSegment>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="PO1" LoopRepeat="100000">
+    <Name>Baseline Item Data</Name>
+    <StartingSegment SegmentId="PO1"/>
+    <Segment SegmentId="CUR"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="CTP"/>
+    <Segment SegmentId="PO4"/>
+    <Segment SegmentId="SDQ"/>
+    <Loop LoopId="N1">
+      <Name></Name>
+      <StartingSegment SegmentId="N1">
+        <EntityIdentifier Code="MI"/>
+        <EntityIdentifier Code="ST"/>
+        <EntityIdentifier Code="SF"/>
+        <EntityIdentifier Code="BT"/>
+        <EntityIdentifier Code="BY"/>
+        <EntityIdentifier Code="SU"/>
+        <EntityIdentifier Code="PO"/>
+        <EntityIdentifier Code="DU"/>
+        <EntityIdentifier Code="EN"/>
+        <EntityIdentifier Code="IA"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="PID" LoopRepeat="1000">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+    <Loop LoopId="N9">
+      <Name></Name>
+      <StartingSegment SegmentId="N9"/>
+      <Segment SegmentId="MSG"/>
+    </Loop>
+    <Loop LoopId="SAC" LoopRepeat="25">
+      <Name>Service, Promotion, Allowance, or Charge Information</Name>
+      <StartingSegment SegmentId="SAC"/>
+    </Loop>
+    <Loop LoopId="SCH" LoopRepeat="200">
+      <Name>Line Item Schedule</Name>
+      <StartingSegment SegmentId="SCH"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

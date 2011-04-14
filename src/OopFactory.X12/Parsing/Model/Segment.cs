@@ -132,7 +132,8 @@ namespace OopFactory.X12.Parsing.Model
             if (addWhitespace)
                 sb.AppendLine();
             sb.Append(SegmentString);
-            sb.Append(_delimiters.SegmentTerminator);
+            if (_delimiters.SegmentTerminator != '\r' && _delimiters.SegmentTerminator != '\n')
+                sb.Append(_delimiters.SegmentTerminator);
             return sb.ToString();
         }
 
