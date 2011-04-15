@@ -36,6 +36,8 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("837-4010");
                 case "850":
                     return GetSpecification("850-4010");
+                case "855":
+                    return GetSpecification("855-4010");
                 case "856":
                     return GetSpecification("856-4010"); 
                 case "997":
@@ -97,8 +99,6 @@ namespace OopFactory.X12.Parsing
         {
             _specifications = new Dictionary<string, TransactionSpecification>();
         }
-
-        private static TransactionSpecification _850specification;
 
         private static TransactionSpecification GetSpecification(string key)
         {
