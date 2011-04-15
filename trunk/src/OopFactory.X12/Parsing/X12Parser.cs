@@ -138,7 +138,7 @@ namespace OopFactory.X12.Parsing
                                             var tran = (Transaction)currentContainer;
 
                                             throw new TransactionValidationException(
-                                                "Segment {3} within transaction {1} cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString);
+                                                "Segment '{3}' within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString);
                                         }
                                         else
                                         {

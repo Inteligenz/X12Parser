@@ -73,7 +73,7 @@
           REF~DP~DP~DEPARTMENT 702*
           PER~IC~SHIP TO~TE~8015551234~FX~8015554321~EM~john@doe.com*
       CTT~2*
-      AMT~TT~12*
+        AMT~TT~12*
     SE~75~114640004*
   GE~1~11464*
 IEA~1~000511461*

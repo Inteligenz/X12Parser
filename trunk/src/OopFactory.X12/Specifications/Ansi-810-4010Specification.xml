@@ -2,6 +2,7 @@
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="810">
   <Segment SegmentId="BIG"/>
   <Segment SegmentId="ITD"/>
+  <Segment SegmentId="NTE"/>
   <Segment SegmentId="CUR"/>
   <Segment SegmentId="DTM"/>
   <Segment SegmentId="FOB"/>
@@ -19,7 +20,14 @@
       <EntityIdentifier Code="BT"/>
       <EntityIdentifier Code="VN"/>
       <EntityIdentifier Code="ST"/>
+      <EntityIdentifier Code="II"/>
+      <EntityIdentifier Code="BY"/>
+      <EntityIdentifier Code="SE"/>
+      <EntityIdentifier Code="PR"/>
+      <EntityIdentifier Code="EN"/>
+      <EntityIdentifier Code="DU"/>
     </StartingSegment>
+    <Segment SegmentId="N2"/>
     <Segment SegmentId="N3"/>
     <Segment SegmentId="N4"/>
     <Segment SegmentId="REF"/>

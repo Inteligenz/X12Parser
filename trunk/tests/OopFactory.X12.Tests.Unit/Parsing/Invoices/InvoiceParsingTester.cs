@@ -57,8 +57,9 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Invoices
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(orignalX12, x12);
+            Assert.AreEqual(orignalX12, x12);
         }
+        
         [TestMethod]
         public void Parse4010Example3ToXml()
         {
@@ -77,7 +78,29 @@ namespace OopFactory.X12.Tests.Unit.Parsing.Invoices
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(orignalX12, x12);
+            Assert.AreEqual(orignalX12, x12);
+        }
+
+        [TestMethod]
+        public void Parse4010Example4ToXml()
+        {
+            // Example EDI from http://www.adobe.com/partnerportal/edi/pdf/810_ANSI_X12_122007_001.pdf
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("Example4_4010_Adobe.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void Parse4010Example4AndUnparse()
+        {
+            string orignalX12 = new StreamReader(GetEdi("Example4_4010_Adobe.txt")).ReadToEnd();
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("Example4_4010_Adobe.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+
+            Assert.AreEqual(orignalX12, x12);
         }
     }
 }
