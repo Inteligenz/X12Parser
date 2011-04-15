@@ -39,7 +39,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.PurchaseOrders
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(originalX12, x12);
+            Assert.AreEqual(originalX12, x12);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.PurchaseOrders
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            Assert.AreEqual(originalX12, x12);
+            //Assert.AreEqual(originalX12, x12);
         }
 
         [TestMethod]
@@ -85,7 +85,30 @@ namespace OopFactory.X12.Tests.Unit.Parsing.PurchaseOrders
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(originalX12, x12);
+            Assert.AreEqual(originalX12, x12);
+        }
+
+        [TestMethod]
+        public void ParseExample4ToXml()
+        {
+            // Sample EDI from http://www.adobe.com/partnerportal/edi/pdf/850_ANSIX12_SW_update100108_000.pdf
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("Example4_Adobe_ShrinkWrapped.txt"));
+            string xml = interchange.Serialize();
+            Trace.Write(xml);
+        }
+
+        [TestMethod]
+        public void ParseExample4AndUnparse()
+        {
+            string originalX12 = new StreamReader(GetEdi("Example4_Adobe_ShrinkWrapped.txt")).ReadToEnd();
+
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(GetEdi("Example4_Adobe_ShrinkWrapped.txt"));
+            string x12 = interchange.SerializeToX12(true);
+            Trace.Write(x12);
+
+            Assert.AreEqual(originalX12, x12);
         }
     }
 }

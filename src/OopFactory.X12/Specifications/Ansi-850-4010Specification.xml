@@ -10,7 +10,6 @@
   <Segment SegmentId="DTM"/>
   <Segment SegmentId="TXI"/>
   <Segment SegmentId="TD5"/>
-  <Segment SegmentId="CTT" Trailer="true"/>
   <Loop LoopId="N9">
     <Name></Name>
     <StartingSegment SegmentId="N9"/>
@@ -91,5 +90,10 @@
       <Name>Line Item Schedule</Name>
       <StartingSegment SegmentId="SCH"/>
     </Loop>
+  </Loop>
+  <Loop LoopId="CTT">
+    <Name></Name>
+    <StartingSegment SegmentId="CTT"/>
+    <Segment SegmentId="AMT"/>
   </Loop>
 </TransactionSpecification>
