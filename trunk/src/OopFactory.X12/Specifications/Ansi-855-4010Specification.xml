@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="855">
+  <Segment SegmentId="BAK"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="TD5"/>
+  <Loop LoopId="N1">
+    <Name></Name>
+    <StartingSegment SegmentId="N1">
+      <EntityIdentifier Code="BT"/>
+      <EntityIdentifier Code="BY"/>
+      <EntityIdentifier Code="CA"/>
+      <EntityIdentifier Code="II"/>
+      <EntityIdentifier Code="PR"/>
+      <EntityIdentifier Code="SE"/>
+      <EntityIdentifier Code="ST"/>
+    </StartingSegment>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="PO1">
+    <Name>Baseline Item Data</Name>
+    <StartingSegment SegmentId="PO1"/>
+    <Loop LoopId="PID">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="CTT">
+    <Name>Transaction Totals</Name>
+    <StartingSegment SegmentId="CTT"/>
+    <Segment SegmentId="AMT"/>
+  </Loop>
+</TransactionSpecification>

@@ -62,7 +62,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing.PurchaseOrders
             string x12 = interchange.SerializeToX12(true);
             Trace.Write(x12);
 
-            //Assert.AreEqual(originalX12, x12);
+            Assert.AreEqual(originalX12, x12);
         }
 
         [TestMethod]
