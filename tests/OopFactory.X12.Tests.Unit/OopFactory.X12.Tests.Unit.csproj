@@ -58,13 +58,8 @@
     <Compile Include="Creation\InstitutionalClaimCreationTester.cs" />
     <Compile Include="DocumentationCodeSamples\X12InterchangeModel\ReadingAnExistingX12File.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Parsing\BenefitEnrollments\BenefitEnrollmentParsingTester.cs" />
-    <Compile Include="Parsing\ClaimStatus\ClaimStatusParsingTester.cs" />
-    <Compile Include="Parsing\Claims\InstitutionalClaimParsingTester.cs" />
-    <Compile Include="Parsing\Claims\ProfessionalClaims\ProfessionalClaimParsingTester.cs" />
     <Compile Include="Parsing\Invoices\InvoiceParsingTester.cs" />
     <Compile Include="Parsing\ParsingTester.cs" />
-    <Compile Include="Parsing\Payments\PaymentParsingTester.cs" />
     <Compile Include="Parsing\PurchaseOrders\Acknowledgements\PurchaseOrderAcknowledgementTester.cs" />
     <Compile Include="Parsing\PurchaseOrders\PurchaseOrderParsingTester.cs" />
     <Compile Include="Parsing\Suppliers\ShipNoticeTester.cs" />
@@ -86,38 +81,30 @@
   <ItemGroup>
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_846\Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_846\Example2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_834\_4010\Example1_IG.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_4010\Example1_GripElements.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
-    <EmbeddedResource Include="Parsing\Claims\Sample1.txt" />
-    <EmbeddedResource Include="Parsing\BenefitEnrollments\Sample1.txt" />
-    <Content Include="Parsing\BenefitEnrollments\Sample1X12.xml" />
-    <EmbeddedResource Include="Parsing\ClaimStatus\Sample1_276Request.txt" />
-    <Content Include="Parsing\ClaimStatus\Sample1_276Request.xml" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1_HealthInsurance.txt" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example2_Encounter.txt" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example1,2, And 3 Combined.txt" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\4010_Example1_PatientIsSubscriber.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Example1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_276\_5010\Example1_IG.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\Example1_HealthInsurance.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\Example2_Encounter.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\Example1_2_And_3_Combined.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\Example1_PatientIsSubscriber.txt" />
     <Content Include="Parsing\Claims\ProfessionalClaims\4010_Example1.xml" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\4010_Example2_PatientIsNotSubscriber.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\Example2_PatientIsNotSubscriber.txt" />
     <Content Include="Parsing\Claims\ProfessionalClaims\4010_Example2.xml" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example1.xml" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example2.xml" />
-    <EmbeddedResource Include="Parsing\Claims\ProfessionalClaims\5010_Example3_COB.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\Example3_COB.txt" />
     <Content Include="Parsing\Claims\ProfessionalClaims\5010_Example3.xml" />
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
-    <EmbeddedResource Include="Parsing\Payments\Sample1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG.txt" />
-    <EmbeddedResource Include="Parsing\Eligibility\Example2_271Response_4010_DHHS.txt" />
-    <EmbeddedResource Include="Parsing\Eligibility\Example1_270Inquiry_4010_DHHS.txt" />
-    <Content Include="Parsing\Eligibility\Sample1_270Inquiry.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <EmbeddedResource Include="Parsing\Invoices\4010_Example1_CaliforniaISO.txt" />
     <EmbeddedResource Include="Parsing\Invoices\4010_Example3_MultiInvoice.txt" />
     <EmbeddedResource Include="Parsing\Invoices\4010_Example2_ManualBilling.txt" />
     <EmbeddedResource Include="Parsing\Invoices\Example4_4010_Adobe.txt" />
-    <Content Include="Parsing\Payments\SAMPLE_1.xml" />
     <EmbeddedResource Include="Parsing\PurchaseOrders\Example1_PGWGlass.txt" />
     <EmbeddedResource Include="Parsing\PurchaseOrders\Example2_Adobe_TLP.txt" />
     <EmbeddedResource Include="Parsing\PurchaseOrders\Example3_Adobe_CLP.txt" />
@@ -140,7 +127,7 @@
     <EmbeddedResource Include="Parsing\Suppliers\Sample2.edi" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Parsing\Inventory\" />
+    <Folder Include="Parsing\ClaimStatus\" />
     <Folder Include="Rendering\" />
   </ItemGroup>
   <ItemGroup>
