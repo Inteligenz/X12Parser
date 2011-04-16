@@ -14,7 +14,7 @@
         CTP~~ACT~2.83*
         REF~ZZ~ASIAQTY~17~403.32~FT*
         QTY~63~1000~FT*
-        DTM~371~20030822*
+          DTM~371~20030822*
       LIN~~BP~38502-B~VN~H316L0750080~ZZ~TX*
         CTP~~ACT~3.26*
         REF~ZZ~ASIA*

@@ -31,6 +31,8 @@ namespace OopFactory.X12.Parsing.Specification
         public int MaxComponents { get; set; }
         [XmlAttribute]
         public bool AllowedListInclusive { get; set; }
+        [XmlAttribute]
+        public string QualifierSetRef { get; set; }
 
         [XmlElement(ElementName="Allowed")]
         public List<AllowedIdentifier> AllowedIdentifiers { get; set; }

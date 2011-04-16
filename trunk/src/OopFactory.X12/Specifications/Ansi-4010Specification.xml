@@ -2,6 +2,97 @@
 <SegmentSet xmlns="http://tempuri.org/X12ParserSpecification.xsd"
     >
   <Name>4010</Name>
+  <QualifierSet Name="Unit or Basis for Measurement Code">
+    <Allowed ID="BA">Bale</Allowed>
+    <Allowed ID="BF">Board Feet</Allowed>
+    <Allowed ID="BG">Bag</Allowed>
+    <Allowed ID="BO">Bottle</Allowed>
+    <Allowed ID="BR">Barrel</Allowed>
+    <Allowed ID="BX">Box</Allowed>
+    <Allowed ID="C8">Cubic Decimeter</Allowed>
+    <Allowed ID="CA">Case</Allowed>
+    <Allowed ID="CB">Carboy</Allowed>
+    <Allowed ID="CF">Cubic Feet</Allowed>
+    <Allowed ID="CG">Card</Allowed>
+    <Allowed ID="CH">Container</Allowed>
+    <Allowed ID="CL">Cylinder</Allowed>
+    <Allowed ID="CM">Centimeter</Allowed>
+    <Allowed ID="CN">Can</Allowed>
+    <Allowed ID="CO">Cubic Meters (Net)</Allowed>
+    <Allowed ID="CQ">Cartridge</Allowed>
+    <Allowed ID="CR">Cubic Meter</Allowed>
+    <Allowed ID="CT">Carton</Allowed>
+    <Allowed ID="CW">Hundred Pounds (CWT)</Allowed>
+    <Allowed ID="CX">Coil</Allowed>
+    <Allowed ID="CY">Cubic Yard</Allowed>
+    <Allowed ID="DA">Days</Allowed>
+    <Allowed ID="DM">Decimeter</Allowed>
+    <Allowed ID="DR">Drum</Allowed>
+    <Allowed ID="DZ">Dozen</Allowed>
+    <Allowed ID="EA">Each</Allowed>
+    <Allowed ID="FT">Foot</Allowed>
+    <Allowed ID="GA">Gallon</Allowed>
+    <Allowed ID="GI">Imperial Gallons</Allowed>
+    <Allowed ID="GR">Gram</Allowed>
+    <Allowed ID="GS">Gross</Allowed>
+    <Allowed ID="HR">Hours</Allowed>
+    <Allowed ID="HU">Hundred</Allowed>
+    <Allowed ID="IN">Inch</Allowed>
+    <Allowed ID="JR">Jar</Allowed>
+    <Allowed ID="KG">Kilogram</Allowed>
+    <Allowed ID="KT">Kit</Allowed>
+    <Allowed ID="LB">Pound</Allowed>
+    <Allowed ID="LT">Liter</Allowed>
+    <Allowed ID="MJ">Minutes</Allowed>
+    <Allowed ID="MM">Millimeter</Allowed>
+    <Allowed ID="MO">Months</Allowed>
+    <Allowed ID="MR">Meter</Allowed>
+    <Allowed ID="OZ">Ounce - Av</Allowed>
+    <Allowed ID="PA">Pail</Allowed>
+    <Allowed ID="PC">Piece</Allowed>
+    <Allowed ID="PK">Package</Allowed>
+    <Allowed ID="PL">Pallet/Unit Load</Allowed>
+    <Allowed ID="PR">Pair</Allowed>
+    <Allowed ID="PT">Pint</Allowed>
+    <Allowed ID="QT">Quart</Allowed>
+    <Allowed ID="RL">Roll</Allowed>
+    <Allowed ID="RM">Rea</Allowed>
+    <Allowed ID="SF">Square Foot</Allowed>
+    <Allowed ID="SH">Sheet</Allowed>
+    <Allowed ID="SM">Square Meter</Allowed>
+    <Allowed ID="SO">Spool</Allowed>
+    <Allowed ID="ST">Set</Allowed>
+    <Allowed ID="SY">Square Yard</Allowed>
+    <Allowed ID="TB">Tube</Allowed>
+    <Allowed ID="TH">Thousand</Allowed>
+    <Allowed ID="TK">Tank</Allowed>
+    <Allowed ID="TY">Tray</Allowed>
+    <Allowed ID="UN">Unit</Allowed>
+    <Allowed ID="VI">Vial</Allowed>
+    <Allowed ID="WK">Week</Allowed>
+    <Allowed ID="YD">Yard</Allowed>
+    <Allowed ID="YR">Years</Allowed>
+    <Allowed ID="ZZ">Mutually Defined</Allowed>
+  </QualifierSet>
+  <QualifierSet Name="Product/Service ID Quailifier">
+    <Allowed ID="AB">Assembly</Allowed>
+    <Allowed ID="AC">Aggregation Code (Used to Consolidate Part Families)</Allowed>
+    <Allowed ID="BN">Bar-Coded Serial Number</Allowed>
+    <Allowed ID="BP">Buyer's Part Number</Allowed>
+    <Allowed ID="CA">Case</Allowed>
+    <Allowed ID="CH">Country of Origin Code</Allowed>
+    <Allowed ID="CR">Contract Number</Allowed>
+    <Allowed ID="EC">Engineering Change Level</Allowed>
+    <Allowed ID="MF">Manufacturer</Allowed>
+    <Allowed ID="MG"></Allowed>
+    <Allowed ID="MN">Model Number</Allowed>
+    <Allowed ID="MT">Major Product/Material/Machine Type</Allowed>
+    <Allowed ID="PN">Company Part Number</Allowed>
+    <Allowed ID="PQ">Product ID Attribute Code</Allowed>
+    <Allowed ID="SN">Serial Number</Allowed>
+    <Allowed ID="TP">Product Type Code</Allowed>
+    <Allowed ID="VP">Vendor's (Seller's) Part Number</Allowed>
+  </QualifierSet>
   <!-- Control Segments -->
   <Segment SegmentId="ISA" >
     <Element Name="Author Information Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true">
@@ -171,6 +262,23 @@
     <Element Name="Country Code" Type="ID" MinLength="2" MaxLength="3"/>
     <Element Name="Basis of Verification Code" Type="ID" MinLength="1" MaxLength="2"/>
     <Element Name="Quantity" Type="ID" MinLength="1" MaxLength="15"/>
+  </Segment>
+  <Segment SegmentId="DTM">
+    <Element Name="Data/Time Qualifier" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="020">Check</Allowed>
+      <Allowed ID="108">Postmark</Allowed>
+      <Allowed ID="193">Period Start</Allowed>
+      <Allowed ID="194">Period End</Allowed>
+    </Element>
+    <Element Name="Date" Type="DT" MinLength="8" MaxLength="8"/>
+    <Element Name="Time" Type="TM" MinLength="4" MaxLength="8"/>
+    <Element Name="Time Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="CT">Central Time</Allowed>
+      <Allowed ID="ET">Eastern Time</Allowed>
+      <Allowed ID="MT">Mountain Time</Allowed>
+      <Allowed ID="PT">Pacific Time</Allowed>
+
+    </Element>
   </Segment>
   <Segment SegmentId="DTP">
     <Element Name="Data/Time Qualifier" Required="true" Type="ID" MinLength="3" MaxLength="3">
@@ -358,11 +466,17 @@
    </Segment>
   <Segment SegmentId="PER">
     <Element Name="Contact Function Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="BD">Buyer Name or Department</Allowed>
+      <Allowed ID="CC">Computer Systems Contact</Allowed>
       <Allowed ID="IC">Information Contact</Allowed>
       <Allowed ID="IP">Insured Party</Allowed>
+      <Allowed ID="OC">Order Contact</Allowed>
+      <Allowed ID="SU">Supplier Contact</Allowed>
     </Element>
     <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
     <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="BN">Beeper Number</Allowed>
+      <Allowed ID="ED">Electronic Data Interchange Access Number</Allowed>
       <Allowed ID="EM">Electronic Mail</Allowed>
       <Allowed ID="EX">Telephone Extension</Allowed>
       <Allowed ID="FX">Facsimile</Allowed>
@@ -479,7 +593,101 @@
     <Element Name="Originating Company Identifier" Type="AN" MinLength="10" MaxLength="10"/>
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50"/>
   </Segment>
-
+  <Segment SegmentId="QTY">
+    <Element Name="Quantity Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="01">Discrete Quantity</Allowed>
+      <Allowed ID="17">Quantity on Hand</Allowed>
+      <Allowed ID="26">Total Inventory</Allowed>
+      <Allowed ID="29">Projected Available Inventory</Allowed>
+      <Allowed ID="33">Quantity Available for Sale (stock quantity)</Allowed>
+      <Allowed ID="34">Ending Inventory Balance</Allowed>
+      <Allowed ID="72">Minimum Stock Level</Allowed>
+      <Allowed ID="73">Maximum Stock Level</Allowed>
+      <Allowed ID="87">Quantity Received into Hub</Allowed>
+      <Allowed ID="99">Quantity Used</Allowed>
+      <Allowed ID="AJ">Daily Adjustments</Allowed>
+      <Allowed ID="AO">Verified Receipts</Allowed>
+      <Allowed ID="BA">Due-In</Allowed>
+      <Allowed ID="QB">Issued Quantity from Hub</Allowed>
+      <Allowed ID="QH">On Hold Quantity</Allowed>
+      <Allowed ID="YW">Reorder Point Quantity</Allowed>
+    </Element>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15" />
+    <Element Name="Composite Unit of Measure" />
+    <Element Name ="Unit or Basis of Measurement Code">
+      <Allowed ID="BA">Bale</Allowed>
+      <Allowed ID="BF">Board Feet</Allowed>
+      <Allowed ID="BG">Bag</Allowed>
+      <Allowed ID="BO">Bottle</Allowed>
+      <Allowed ID="BR">Barrel</Allowed>
+      <Allowed ID="BX">Box</Allowed>
+      <Allowed ID="C8">Cubic Decimeter</Allowed>
+      <Allowed ID="CA">Case</Allowed>
+      <Allowed ID="CB">Carboy</Allowed>
+      <Allowed ID="CF">Cubic Feet</Allowed>
+      <Allowed ID="CG">Card</Allowed>
+      <Allowed ID="CH">Container</Allowed>
+      <Allowed ID="CL">Cylinder</Allowed>
+      <Allowed ID="CM">Centimeter</Allowed>
+      <Allowed ID="CN">Can</Allowed>
+      <Allowed ID="CO">Cubic Meters (Net)</Allowed>
+      <Allowed ID="CQ">Cartridge</Allowed>
+      <Allowed ID="CR">Cubic Meter</Allowed>
+      <Allowed ID="CT">Carton</Allowed>
+      <Allowed ID="CW">Hundred Pounds (CWT)</Allowed>
+      <Allowed ID="CX">Coil</Allowed>
+      <Allowed ID="CY">Cubic Yard</Allowed>
+      <Allowed ID="DA">Days</Allowed>
+      <Allowed ID="DM">Decimeter</Allowed>
+      <Allowed ID="DR">Drum</Allowed>
+      <Allowed ID="DZ">Dozen</Allowed>
+      <Allowed ID="EA">Each</Allowed>
+      <Allowed ID="FT">Foot</Allowed>
+      <Allowed ID="GA">Gallon</Allowed>
+      <Allowed ID="GI">Imperial Gallons</Allowed>
+      <Allowed ID="GR">Gram</Allowed>
+      <Allowed ID="GS">Gross</Allowed>
+      <Allowed ID="HR">Hours</Allowed>
+      <Allowed ID="HU">Hundred</Allowed>
+      <Allowed ID="IN">Inch</Allowed>
+      <Allowed ID="JR">Jar</Allowed>
+      <Allowed ID="KG">Kilogram</Allowed>
+      <Allowed ID="KT">Kit</Allowed>
+      <Allowed ID="LB">Pound</Allowed>
+      <Allowed ID="LT">Liter</Allowed>
+      <Allowed ID="MJ">Minutes</Allowed>
+      <Allowed ID="MM">Millimeter</Allowed>
+      <Allowed ID="MO">Months</Allowed>
+      <Allowed ID="MR">Meter</Allowed>
+      <Allowed ID="OZ">Ounce - Av</Allowed>
+      <Allowed ID="PA">Pail</Allowed>
+      <Allowed ID="PC">Piece</Allowed>
+      <Allowed ID="PK">Package</Allowed>
+      <Allowed ID="PL">Pallet/Unit Load</Allowed>
+      <Allowed ID="PR">Pair</Allowed>
+      <Allowed ID="PT">Pint</Allowed>
+      <Allowed ID="QT">Quart</Allowed>
+      <Allowed ID="RL">Roll</Allowed>
+      <Allowed ID="RM">Rea</Allowed>
+      <Allowed ID="SF">Square Foot</Allowed>
+      <Allowed ID="SH">Sheet</Allowed>
+      <Allowed ID="SM">Square Meter</Allowed>
+      <Allowed ID="SO">Spool</Allowed>
+      <Allowed ID="ST">Set</Allowed>
+      <Allowed ID="SY">Square Yard</Allowed>
+      <Allowed ID="TB">Tube</Allowed>
+      <Allowed ID="TH">Thousand</Allowed>
+      <Allowed ID="TK">Tank</Allowed>
+      <Allowed ID="TY">Tray</Allowed>
+      <Allowed ID="UN">Unit</Allowed>
+      <Allowed ID="VI">Vial</Allowed>
+      <Allowed ID="WK">Week</Allowed>
+      <Allowed ID="YD">Yard</Allowed>
+      <Allowed ID="YR">Years</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+    </Segment>
+  
   <!-- 270/271 Segments -->
   <Segment SegmentId="AAA">
     <Element Name="Valid Request Indicator" Type="ID" MinLength="1" MaxLength="1">
@@ -1491,5 +1699,92 @@
     <Element Name="Monetary Amount"/>
     <Element Name="Level of Care Code"/>
     <Element Name="Provider Agreement Code"/>
+  </Segment>
+
+  <!-- Common ORDER SERIES Segments -->
+  <Segment SegmentId="CTP">
+    <Element Name="Class of Trade Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="DI">Distributor</Allowed>
+      <Allowed ID="MF">Manufacturer</Allowed>
+      <Allowed ID="WH">Wholesaler</Allowed>
+    </Element>
+    <Element Name="Price Identifier Code" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="CHG">Changed Price</Allowed>
+      <Allowed ID="UCP">Unit cost price</Allowed>
+    </Element>
+    <Element Name="Unit Price" Type="R" MinLength="1" MaxLength="17"/>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Composite Unit of Measure"/>
+    <Element Name="Unit or Basis for Measurement Code" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Unit or Basis for Measurement Code">
+    </Element>
+  </Segment>
+  <Segment SegmentId="LIN">
+    <Element Name="Assigned Identification" Type="AN" MinLength="1" MaxLength="20"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier">
+    </Element>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Product/Service ID Quailifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier" />
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48"/>
+  </Segment>
+
+  <!-- 846 Segments -->
+  <Segment SegmentId="BIA">
+    <Element Name="Transaction Set Purpose Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="00">Original</Allowed>
+      <Allowed ID="01">Cancellation</Allowed>
+      <Allowed ID="02">Add</Allowed>
+      <Allowed ID="03">Delete</Allowed>
+      <Allowed ID="05">Replace</Allowed>
+      <Allowed ID="07">Duplicate</Allowed>
+      <Allowed ID="08">Status</Allowed>
+      <Allowed ID="16">Proposed</Allowed>
+      <Allowed ID="19">Seller initiated change</Allowed>
+    </Element>
+    <Element Name="Report Type Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="CD">Customer/Distributor Inventory Report</Allowed>
+      <Allowed ID="CM">Customer/Manufacturer Inventory Report</Allowed>
+      <Allowed ID="IP">Inventory Parameter Report</Allowed>
+      <Allowed ID="LC">Location Inventory Report</Allowed>
+      <Allowed ID="MM">Manufacturer Inventory Report</Allowed>
+      <Allowed ID="PC">Process Change Notice</Allowed>
+      <Allowed ID="PS">Pipeline/Shipper Inventory Report</Allowed>
+      <Allowed ID="S2">Supply Status Report</Allowed>
+      <Allowed ID="SI">Seller Inventory Report</Allowed>
+    </Element>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Date" Type="DT" MinLength="8" MaxLength="8" />
+    <Element Name="Time" Type="TM" MinLength="4" MaxLength="8" />
+    <Element />
+    <Element Name="Action Code" Type="ID">
+      <Allowed ID="11">Approved</Allowed>    
+    </Element>  
   </Segment>
 </SegmentSet>

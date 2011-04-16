@@ -160,29 +160,50 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         public Container Parent { get; private set; }
+
+        private FunctionGroup FunctionGroup
+        {
+            get
+            {
+                if (this is Interchange)
+                    return null;
+                else
+                {
+                    if (this is FunctionGroup)
+                        return (FunctionGroup)this;
+                    else if (this is Transaction)
+                        return ((Transaction)this).FunctionGroup;
+                    else if (this.Parent is FunctionGroup)
+                        return ((FunctionGroup)this.Parent);
+                    else if (this.Parent is Interchange)
+                        return null;
+                    else
+                        return (FunctionGroup)this.Parent.Transaction.Parent;
+                }
+            }
+        }
+
+        private ISpecificationFinder SpecFinder
+        {
+            get
+            {
+                if (FunctionGroup != null)
+                    return FunctionGroup.SpecFinder;
+                else if (this is Interchange)
+                    return ((Interchange)this).SpecFinder;
+                else 
+                    return ((Interchange)this.Parent).SpecFinder;
+            }
+        }
          
         private Specification.SegmentSpecification SegmentSpec
         {
             get
             {
-                if (this is Interchange)
-                    return ((Interchange)this).SpecFinder.FindSegmentSpec("", SegmentId);
+                if (FunctionGroup != null)
+                    return SpecFinder.FindSegmentSpec(FunctionGroup.VersionIdentifierCode, SegmentId);
                 else
-                {
-                    FunctionGroup fg = null;
-                    if (this is FunctionGroup)
-                        fg = (FunctionGroup)this;
-                    else if (this is Transaction)
-                        fg = ((Transaction)this).FunctionGroup;
-                    else if (this.Parent is FunctionGroup)
-                        fg =  ((FunctionGroup)this.Parent); 
-                    else if (this.Parent is Interchange)
-                        return ((Interchange)this.Parent).SpecFinder.FindSegmentSpec("", SegmentId);
-                    else
-                        fg = (FunctionGroup)this.Parent.Transaction.Parent;
-
-                    return fg.SpecFinder.FindSegmentSpec(fg.VersionIdentifierCode, SegmentId);
-                }
+                    return SpecFinder.FindSegmentSpec("", SegmentId);                
             }
         }
 
@@ -212,15 +233,25 @@ namespace OopFactory.X12.Parsing.Model
                 for (int i = 0; i < _dataElements.Count; i++)
                 {
                     string elementName = String.Format("{0}{1:00}", SegmentId, i + 1);
+
+                    List<AllowedIdentifier> identifiers = new List<AllowedIdentifier>();
+
                     if (SegmentSpec != null && SegmentSpec.Elements.Count > i && !string.IsNullOrEmpty(_dataElements[i]))
+                    {
                         writer.WriteComment(SegmentSpec.Elements[i].Name);
+                        identifiers.AddRange(SegmentSpec.Elements[i].AllowedIdentifiers);
+                        if (!string.IsNullOrEmpty(SegmentSpec.Elements[i].QualifierSetRef))
+                        {
+                            identifiers.AddRange(SpecFinder.FindQualifierSetIdentifiers(FunctionGroup.VersionIdentifierCode, SegmentSpec.Elements[i].QualifierSetRef));
+                        }
+                    }
                     if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
                     {
                         writer.WriteStartElement(elementName);
                         writer.WriteValue(_dataElements[i]);
                         if (SegmentSpec != null && SegmentSpec.Elements.Count > i && SegmentSpec.Elements[i].Type == Specification.ElementDataTypeEnum.Identifier)
                         {
-                            var allowedValue = SegmentSpec.Elements[i].AllowedIdentifiers.FirstOrDefault(ai => ai.ID == _dataElements[i]);
+                            var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == _dataElements[i]);
                             if (allowedValue != null)
                                 writer.WriteComment(allowedValue.Description);
                         }
@@ -238,7 +269,7 @@ namespace OopFactory.X12.Parsing.Model
                             writer.WriteValue(subElements[j]);
                             if (SegmentSpec != null && SegmentSpec.Elements.Count > i && SegmentSpec.Elements[i].Type == Specification.ElementDataTypeEnum.Identifier)
                             {
-                                var allowedValue = SegmentSpec.Elements[i].AllowedIdentifiers.FirstOrDefault(ai => ai.ID == subElements[j]);
+                                var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == subElements[j]);
                                 if (allowedValue != null)
                                     writer.WriteComment(allowedValue.Description);
                             }

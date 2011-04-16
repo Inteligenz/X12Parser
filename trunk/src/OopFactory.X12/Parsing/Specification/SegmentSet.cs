@@ -12,11 +12,15 @@ namespace OopFactory.X12.Parsing.Specification
     {
         public SegmentSet()
         {
+            if (QualifierSets == null) QualifierSets = new List<QualifierSet>();
             if (Segments == null) Segments = new List<SegmentSpecification>();
         }
 
         public string Name { get; set; }
 
+        [XmlElement("QualifierSet")]
+        public List<QualifierSet> QualifierSets { get; set; }
+        
         [XmlElement("Segment")]
         public List<SegmentSpecification> Segments { get; set; }
 
