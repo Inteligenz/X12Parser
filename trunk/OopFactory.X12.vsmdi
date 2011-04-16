@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
-    <RunConfiguration id="25547017-fa4d-45fe-bdd4-f4da5037e8b7" name="Local" storage="local.testsettings" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  </TestList>
-  <TestList name="Tests Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d">
-    <TestLinks>
-      <TestLink id="73a44866-9969-088f-c262-4b9d167d54ac" name="ParseAndValidateBillingProviderLoopTest" storage="tests\oopfactory.x12.tests.unit\bin\debug\oopfactory.x12.tests.unit.dll" enabled="false" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="1ef0fa31-d31c-8014-63af-a8fcddf8f5d6" name="ParseAndValidateServiceLines" storage="tests\oopfactory.x12.tests.unit\bin\debug\oopfactory.x12.tests.unit.dll" enabled="false" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="9516f398-7999-dc35-9a33-5d4c20a8f899" name="ParseAndValidateOccurrences" storage="tests\oopfactory.x12.tests.unit\bin\debug\oopfactory.x12.tests.unit.dll" enabled="false" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="adc0ec79-0ee8-6ad5-c5e5-9852241a7c63" name="ParseAndValidateSubscriberLoopTest" storage="tests\oopfactory.x12.tests.unit\bin\debug\oopfactory.x12.tests.unit.dll" enabled="false" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    </TestLinks>
+    <RunConfiguration id="26abe35c-8a16-48bc-9471-6e9e1069b36c" name="Local" storage="local.testsettings" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </TestList>
 </TestLists>

@@ -239,11 +239,7 @@ namespace OopFactory.X12.Parsing.Model
                     if (SegmentSpec != null && SegmentSpec.Elements.Count > i && !string.IsNullOrEmpty(_dataElements[i]))
                     {
                         writer.WriteComment(SegmentSpec.Elements[i].Name);
-                        identifiers.AddRange(SegmentSpec.Elements[i].AllowedIdentifiers);
-                        if (!string.IsNullOrEmpty(SegmentSpec.Elements[i].QualifierSetRef))
-                        {
-                            identifiers.AddRange(SpecFinder.FindQualifierSetIdentifiers(FunctionGroup.VersionIdentifierCode, SegmentSpec.Elements[i].QualifierSetRef));
-                        }
+                        identifiers = SegmentSpec.Elements[i].AllowedIdentifiers;
                     }
                     if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
                     {

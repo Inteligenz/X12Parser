@@ -10,6 +10,5 @@ namespace OopFactory.X12.Parsing
     {
         TransactionSpecification FindTransactionSpec(string functionalCode, string versionCode, string transactionSetCode);
         SegmentSpecification FindSegmentSpec(string versionCode, string segmentId);
-        List<AllowedIdentifier> FindQualifierSetIdentifiers(string versionCode, string name);
     }
 }

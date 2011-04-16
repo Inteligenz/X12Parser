@@ -68,56 +68,6 @@ namespace OopFactory.X12.Parsing
                 return null;
         }
 
-        public virtual List<AllowedIdentifier> FindQualifierSetIdentifiers(string versionCode, string name)
-        {
-            if (versionCode.Contains("5010"))
-            {
-                var set5010 = Get5010QualifierSet(name);
-                if (set5010 != null)
-                    return set5010.AllowedIdentifiers;
-            }
-            var set4010 = Get4010QualifierSet(name);
-            if (set4010 != null)
-                return set4010.AllowedIdentifiers;
-            else
-                return new List<AllowedIdentifier>();
-        }
-
-        private static Dictionary<string, QualifierSet> _4010QualifierSets;
-        private static QualifierSet Get4010QualifierSet(string name)
-        {
-            if (_4010QualifierSets == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
-                _4010QualifierSets = new Dictionary<string, QualifierSet>();
-                foreach (var codeSet in set.QualifierSets)
-                    _4010QualifierSets.Add(codeSet.Name, codeSet);
-            }
-            if (_4010QualifierSets.ContainsKey(name))
-                return _4010QualifierSets[name];
-            else
-                return null;
-        }
-
-        private static Dictionary<string, QualifierSet> _5010QualifierSets;
-        private static QualifierSet Get5010QualifierSet(string name)
-        {
-            if (_5010QualifierSets == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-5010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
-                _5010QualifierSets = new Dictionary<string, QualifierSet>();
-                foreach (var codeSet in set.QualifierSets)
-                    _5010QualifierSets.Add(codeSet.Name, codeSet);
-            }
-            if (_5010QualifierSets.ContainsKey(name))
-                return _5010QualifierSets[name];
-            else
-                return null;
-        }
         private static Dictionary<string, SegmentSpecification> _4010Specification;
         private static Dictionary<string, SegmentSpecification> Get4010Spec()
         {
@@ -128,7 +78,18 @@ namespace OopFactory.X12.Parsing
                 SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
                 _4010Specification = new Dictionary<string, SegmentSpecification>();
                 foreach (var segment in set.Segments)
+                {
+                    foreach (var element in segment.Elements)
+                    {
+                        if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                        {
+                            var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
+                            if (qualifierSet != null)
+                                element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                        }
+                    }
                     _4010Specification.Add(segment.SegmentId, segment);
+                }
             }
             return _4010Specification;
         }
@@ -143,7 +104,19 @@ namespace OopFactory.X12.Parsing
                 SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
                 _5010Specification = new Dictionary<string, SegmentSpecification>();
                 foreach (var segment in set.Segments)
+                {
+                    foreach (var element in segment.Elements)
+                    {
+                        if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                        {
+                            var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
+                            if (qualifierSet != null)
+                                element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                        }
+                    }
+
                     _5010Specification.Add(segment.SegmentId, segment);
+                }
             }
             return _5010Specification;
         }
