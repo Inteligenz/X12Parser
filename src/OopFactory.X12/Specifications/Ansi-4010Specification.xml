@@ -65,6 +65,7 @@
       <Allowed ID="HB">Eligibility, Coverage or Benefit Information</Allowed>
       <Allowed ID="HS">Eligibility, Coverage or Benefit Inquiry</Allowed>
       <Allowed ID="HC">Health Care</Allowed>
+      <Allowed ID="IB">Inventory Inquiry/Advice (846)</Allowed>
     </Element>
     <Element Name="Application Sender's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
     <Element Name="Application Receiver's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
@@ -246,15 +247,34 @@
   </Segment>
   <Segment SegmentId="N1">
     <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3">
+      <Allowed ID="7S">Pipeline Segment</Allowed>
       <Allowed ID="BO">Broker or Sales Office</Allowed>
+      <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
+      <Allowed ID="CA">Carrier</Allowed>
+      <Allowed ID="CS">Consolidator/Shipper</Allowed>
+      <Allowed ID="DS">Distributor</Allowed>
       <Allowed ID="IN">Insurer</Allowed>
+      <Allowed ID="LG">Location of Goods</Allowed>
+      <Allowed ID="OP">Operator of property of Unit</Allowed>
+      <Allowed ID="SE">Selling Party</Allowed>
+      <Allowed ID="SF">Ship From</Allowed>
+      <Allowed ID="SU">Ship To</Allowed>
       <Allowed ID="P5">Plan Sponsor</Allowed>
+      <Allowed ID="TF">Tank Farm</Allowed>
       <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
+      <Allowed ID="WH">Warehouse</Allowed>
     </Element>
     <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
     <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="1">D-U-N-S Number,Dun &amp; Bradstreet</Allowed>
+      <Allowed ID="9">D-U-N-S+4,D-U-N-S Number with Four Character Suffix</Allowed>
+      <Allowed ID="20">Standard Point Location Code (SPLC)</Allowed>
+      <Allowed ID="91">Assigned by Seller or Seller's Agent</Allowed>
+      <Allowed ID="92">Assigned by Buyer or Buyer's Agent</Allowed>
       <Allowed ID="94">Code assigned by the organization that is the ultimate destimation of the transaction set</Allowed>
       <Allowed ID="FI">Federal Taxpayer's Identification Number</Allowed>
+      <Allowed ID="TL">Transport4 Location Code</Allowed>
+      <Allowed ID="TS">Transport4 Shipper Code</Allowed>
       <Allowed ID="XV">Health Care Financing Administration National PlanID</Allowed>
       <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
