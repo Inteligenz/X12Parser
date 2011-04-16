@@ -15,17 +15,12 @@ namespace OopFactory.X12.Tests.Unit.Transformations
     [TestClass]
     public class CommonSegmentsTester
     {
-        private Stream GetProfessionalClaimEdi(string filename)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims." + filename);
-        }
-
         [TestMethod]
         public void ControlTransformTest()
         {
             var service = new ControlSegmentsTransformer(new X12EdiParsingService(false));
 
-            string xml = service.Transform(new StreamReader(GetProfessionalClaimEdi("5010_Example1_HealthInsurance.txt")).ReadToEnd());
+            string xml = service.Transform(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
 
             Trace.Write(xml);
 
@@ -37,8 +32,8 @@ namespace OopFactory.X12.Tests.Unit.Transformations
         public void EntitySegmentsTransformTest()
         {
             var service = new EntitySegmentsTransformer(new X12EdiParsingService(false));
-            
-            string xml = service.Transform(new StreamReader(GetProfessionalClaimEdi("5010_Example1_HealthInsurance.txt")).ReadToEnd());
+
+            string xml = service.Transform(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
 
             Trace.Write(xml);
 

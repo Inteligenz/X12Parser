@@ -14,11 +14,6 @@ namespace OopFactory.X12.Tests.Unit.Unbundling
     [TestClass]
     public class UnbundlingTester
     {
-        private Stream GetProfessionalClaimEdi(string filename)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Claims.ProfessionalClaims." + filename);
-        }
-
         private Stream GetShipNoticeEdi(string filename)
         {
             return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Suppliers." + filename);
@@ -196,7 +191,7 @@ IEA*1*000000905~";
         public void UnbundleClaimsFrom837Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(GetProfessionalClaimEdi("5010_Example1,2, And 3 Combined.txt"));
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._5010.Example1_2_And_3_Combined.txt"));
 
             var list = parser.UnbundleByLoop(interchange, "2300");
             foreach (var item in list)

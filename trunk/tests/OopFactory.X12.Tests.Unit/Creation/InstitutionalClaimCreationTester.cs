@@ -51,11 +51,6 @@ IEA*1*000000031~";
             fg.ApplicationReceiversCode = "908887732000";
             return interchange;
         }
-
-        private Stream GetEdi(string filename)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Claims." + filename);
-        }
         
         [TestMethod]
         public void SerializeSegmentSet()
@@ -202,7 +197,7 @@ IEA*1*000000031~";
             claimLineLoop.AddSegment("SV2*0270*HC:J1120*30*UN*1");
             claimLineLoop.AddSegment("DTP*472*D8*20070730");
 
-            Assert.AreEqual(new StreamReader(GetEdi("Sample1.txt")).ReadToEnd(), interchange.SerializeToX12(true));
+            Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837I._4010.Example1.txt")).ReadToEnd(), interchange.SerializeToX12(true));
         }
     }
 }

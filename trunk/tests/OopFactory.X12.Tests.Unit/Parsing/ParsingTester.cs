@@ -58,7 +58,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
-        public void Parse4010Example1AndUnparse()
+        public void ParseAndUnparse()
         {
             Stream stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
             string orignalX12 = new StreamReader(stream).ReadToEnd();
@@ -72,7 +72,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
-        public void Parse270_4010Example1ToHtml()
+        public void ParseToHtml()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
             Stream stream = GetEdi(resourcePath);

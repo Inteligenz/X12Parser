@@ -14,6 +14,45 @@
       <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="276">
+    <EdiFile>
+      <ResourcePath>INS._276._5010.Example1_IG.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="834">
+    <EdiFile>
+      <ResourcePath>INS._834._4010.Example1_IG.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="835">
+    <EdiFile>
+      <SourceUrl>http://b9962ed140049a571a710839f1f71c989aaf09ce.gripelements.com/ois/macsis/claims/macsis.hipaa.edi.sample.835.pdf</SourceUrl>
+      <ResourcePath>INS._835._4010.Example1_GripElements.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="837">
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Example1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._4010.Example1_PatientIsSubscriber.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._4010.Example2_PatientIsNotSubscriber.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example1_2_And_3_Combined.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example1_HealthInsurance.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example2_Encounter.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example3_COB.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet ID="856">
     <EdiFile>
       <SourceUrl>http://www.sanmina-sci.com/Partners/edi_pdfs/846in.pdf</SourceUrl>
