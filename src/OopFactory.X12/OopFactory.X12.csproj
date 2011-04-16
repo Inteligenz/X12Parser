@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />
     <Compile Include="Parsing\Model\Container.cs" />

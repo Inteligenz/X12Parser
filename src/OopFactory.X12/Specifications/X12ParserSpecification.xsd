@@ -17,10 +17,12 @@
     </xs:complexType>
   </xs:element>
   
+  
   <xs:element name="SegmentSet">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Name" maxOccurs="1"/>
+        <xs:element name="QualifierSet" type="QualifierSet" maxOccurs="unbounded"/>
         <xs:element name="Segment" type="SegmentSpecification" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
@@ -95,6 +97,14 @@
     <xs:attribute name="MinLength" type="xs:positiveInteger" />
     <xs:attribute name="MaxLength" type="xs:positiveInteger" />
     <xs:attribute name="AllowedListInclusive" type="xs:boolean" />
+    <xs:attribute name="QualifierSetRef" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="QualifierSet">
+    <xs:sequence>
+      <xs:element name="Allowed" type="AllowedIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="AllowedIdentifier" mixed="true">
