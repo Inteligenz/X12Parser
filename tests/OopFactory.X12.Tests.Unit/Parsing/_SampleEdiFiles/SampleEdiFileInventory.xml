@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SampleEdiFiles>
+  <TransactionSet Id="270">
+    <EdiFile>
+      <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
+      <ResourcePath>INS._270._4010.Example1_DHHS.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
+      <ResourcePath>INS._271._4010.Example1_DHHS.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet ID="856">
+    <EdiFile>
+      <SourceUrl>http://www.sanmina-sci.com/Partners/edi_pdfs/846in.pdf</SourceUrl>
+      <ResourcePath>ORD._846.Example1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.sanmina-sci.com/Partners/edi_pdfs/846in.pdf</SourceUrl>
+      <ResourcePath>ORD._846.Example2.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+</SampleEdiFiles>
