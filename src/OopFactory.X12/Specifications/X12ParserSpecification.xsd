@@ -22,7 +22,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Name" maxOccurs="1"/>
-        <xs:element name="QualifierSet" type="QualifierSet" maxOccurs="unbounded"/>
+        <xs:element name="QualifierSet" type="QualifierSet" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="Segment" type="SegmentSpecification" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
