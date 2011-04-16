@@ -102,6 +102,8 @@
     <Content Include="Parsing\Claims\SAMPLE_1.xml" />
     <EmbeddedResource Include="Parsing\Payments\Sample1.txt" />
     <EmbeddedResource Include="Parsing\Eligibility\Sample1_270Inquiry.txt" />
+    <EmbeddedResource Include="Parsing\Eligibility\Example2_271Response_4010_DHHS.txt" />
+    <EmbeddedResource Include="Parsing\Eligibility\Example1_270Inquiry_4010_DHHS.txt" />
     <Content Include="Parsing\Eligibility\Sample1_270Inquiry.xml">
       <SubType>Designer</SubType>
     </Content>

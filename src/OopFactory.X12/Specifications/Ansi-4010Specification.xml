@@ -235,6 +235,7 @@
     <Element Name="Hierarchical Parent ID Number" Required="false" Type="AN" MinLength="1" MaxLength="12" />
     <Element Name="Level Code" Required="true" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="20">Information Source</Allowed>
+      <Allowed ID="21">Information Receiver</Allowed>
       <Allowed ID="22">Subscriber</Allowed>
       <Allowed ID="23">Dependent</Allowed>
     </Element>
@@ -409,6 +410,7 @@
       <Allowed ID="DX">Department/Agency Number</Allowed>
       <Allowed ID="EA">Medical Record Identification Number</Allowed>
       <Allowed ID="EI">Employer’s Identification Number</Allowed>
+      <Allowed ID="EJ">Patient Account Number</Allowed>
       <Allowed ID="EM">Electronic Payment Reference Number</Allowed>
       <Allowed ID="EW">Mammography Certification Number</Allowed>
       <Allowed ID="F4">Facility Certification Number</Allowed>
@@ -459,6 +461,93 @@
   </Segment>
 
   <!-- 270/271 Segments -->
+  <Segment SegmentId="AAA">
+    <Element Name="Valid Request Indicator" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="N">No</Allowed>
+      <Allowed ID="Y">Yes</Allowed>
+    </Element>
+    <Element Name="Agency Qualifier Code"/>
+    <Element Name="Reject Reason Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="04">Authorized Quantity Exceeded</Allowed>
+      <Allowed ID="15">Required application data missing</Allowed>
+      <Allowed ID="33">Input Errors</Allowed>
+      <Allowed ID="35">Out of Network</Allowed>
+      <Allowed ID="41">Authorization/Access Restrictions</Allowed>
+      <Allowed ID="42">Unable to Respond at Current Time</Allowed>
+      <Allowed ID="43">Invalid/Missing Provider Identification</Allowed>
+      <Allowed ID="45">Invalid/Missing Provider Specialty</Allowed>
+      <Allowed ID="46">Invalid/Missing Provider Phone Number</Allowed>
+      <Allowed ID="47">Invalid/Missing Provider State</Allowed>
+      <Allowed ID="48">Invalid/Missing Referring Provider Identification Number</Allowed>
+      <Allowed ID="49">Provider is Not Primary Care Physician</Allowed>
+      <Allowed ID="50">Provider Ineligible for Inquiries</Allowed>
+      <Allowed ID="51">Provider Not on File</Allowed>
+      <Allowed ID="52">Service Dates Not Within Provider Plan Enrollment</Allowed>
+      <Allowed ID="53">Inquired Benefit Inconsistent with Provider Type</Allowed>
+      <Allowed ID="54">Inappropriate Product/Service ID Qualifier</Allowed>
+      <Allowed ID="55">Inappropriate Product/Service ID</Allowed>
+      <Allowed ID="56">Inappropriate Date</Allowed>
+      <Allowed ID="57">Invalid/Missing Date(s) of Service</Allowed>
+      <Allowed ID="58">Invalid/Missing Date-of-Birth</Allowed>
+      <Allowed ID="60">Date of Birth Follows Date(s) of Service</Allowed>
+      <Allowed ID="61">Date of Death Precedes Date(s) of Service</Allowed>
+      <Allowed ID="62">Date of Service Not Within Allowable Inquiry Period</Allowed>
+      <Allowed ID="63">Date of Service in Future</Allowed>
+      <Allowed ID="64">Invalid/Missing Patient ID</Allowed>
+      <Allowed ID="65">Invalid/Missing Patient Name</Allowed>
+      <Allowed ID="66">Invalid/Missing Patient Gender Code</Allowed>
+      <Allowed ID="67">Patient Not Found</Allowed>
+      <Allowed ID="68">Duplicate Patient ID Number</Allowed>
+      <Allowed ID="69">Inconsistent with Patient’s Age</Allowed>
+      <Allowed ID="70">Inconsistent with Patient’s Gender</Allowed>
+      <Allowed ID="71">Patient Birth Date Does Not Match That for the Patient on the Database</Allowed>
+      <Allowed ID="72">Invalid/Missing Subscriber/Insured ID</Allowed>
+      <Allowed ID="73">Invalid/Missing Subscriber/Insured Name</Allowed>
+      <Allowed ID="74">Invalid/Missing Subscriber/Insured Gender Code</Allowed>
+      <Allowed ID="75">Subscriber/Insured Not Found</Allowed>
+      <Allowed ID="76">Duplicate Subscriber/Insured ID Number</Allowed>
+      <Allowed ID="77">Subscriber Found, Patient Not Found</Allowed>
+      <Allowed ID="78">Subscriber/Insured Not in Group/Plan Identified</Allowed>
+      <Allowed ID="79">Invalid Participant Identification</Allowed>
+      <Allowed ID="80">No Response received - Transaction Terminated</Allowed>
+      <Allowed ID="97">Invalid or Missing Provider Address</Allowed>
+      <Allowed ID="98">Experimental Service or Procedure</Allowed>
+      <Allowed ID="AA">Authorization Number Not Found</Allowed>
+      <Allowed ID="AE">Requires Primary Care Physician Authorization</Allowed>
+      <Allowed ID="AF">Invalid/Missing Diagnosis Code(s)</Allowed>
+      <Allowed ID="AG">Invalid/Missing Procedure Code(s)</Allowed>
+      <Allowed ID="AO">Additional Patient Condition Information Required</Allowed>
+      <Allowed ID="CI">Certification Information Does Not Match Patient</Allowed>
+      <Allowed ID="E8">Requires Medical Review</Allowed>
+      <Allowed ID="IA">Invalid Authorization Number Format</Allowed>
+      <Allowed ID="MA">Missing Authorization Number</Allowed>
+      <Allowed ID="T4">Payer Name or Identifier Missing</Allowed>
+
+    </Element>
+    <Element Name="Follow-up Action Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="C">Please Correct and Resubmit</Allowed>
+      <Allowed ID="N">Resubmission Not Allowed</Allowed>
+      <Allowed ID="P">Please Resubmit Original Transaction</Allowed>
+      <Allowed ID="R">Resubmission Allowed</Allowed>
+      <Allowed ID="S">Do Not Resubmit; Inquiry Initiated to a Third Party</Allowed>
+      <Allowed ID="Y">Do Not Resubmit; We Will Hold Your Request and Respond Again Shortly</Allowed>
+    </Element>
+  </Segment>
+  <Segment SegmentId="EB">
+    <Element Name="Eligibility or Benefit Information"/>
+    <Element Name="Coverage Level Code"/>
+    <Element Name="Service Type Code"/>
+    <Element Name="Insurance Type Code"/>
+    <Element Name="Plan Coverage Description"/>
+    <Element Name="Time Period Qualifier"/>
+    <Element Name="Monetary Amount"/>
+    <Element Name="Percent"/>
+    <Element Name="Quantity Qualifier"/>
+    <Element Name="Quantity"/>
+    <Element Name="Authorization or Certification Indicator"/>
+    <Element Name="In Plan Network Indicator"/>
+    <Element Name="Composite Medical Procedure Identifier"/>
+  </Segment>
   <Segment SegmentId="EQ">
     <Element Name="Service Type Code" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="1">Medical Care</Allowed>
