@@ -62,6 +62,14 @@
       <Segment SegmentId="MSG"/>
       <Loop LoopId="2110C">
         <Name>Subscriber Eligibility or Benefit Inquiry</Name>
+        <StartingSegment SegmentId="EQ"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="III"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+      <Loop LoopId="2110C">
+        <Name>Subscriber Eligibility or Benefit Inquiry</Name>
         <StartingSegment SegmentId="EB"/>
         <Segment SegmentId="AMT"/>
         <Segment SegmentId="HSD"/>
