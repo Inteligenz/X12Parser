@@ -14,16 +14,11 @@ namespace OopFactory.X12.Tests.Unit.Unbundling
     [TestClass]
     public class UnbundlingTester
     {
-        private Stream GetShipNoticeEdi(string filename)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing.Suppliers." + filename);
-        }
-
         [TestMethod]
         public void UnbundleItemsFrom856Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(GetShipNoticeEdi("Sample1.edi"));
+            Interchange interchange = parser.Parse(Extensions.GetEdi("ORD._856.Example1.txt"));
 
             var list = parser.UnbundleByLoop(interchange, "ITEM");
             foreach (var item in list)
