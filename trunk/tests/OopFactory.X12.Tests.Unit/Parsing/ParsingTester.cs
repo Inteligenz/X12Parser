@@ -60,7 +60,9 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         [TestMethod]
         public void ParseAndUnparse()
         {
-            Stream stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
+            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
+            Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
             Interchange interchange = new X12Parser().Parse(stream);
