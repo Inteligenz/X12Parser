@@ -82,6 +82,7 @@
             <StartingSegment SegmentId="NM1">
               <EntityIdentifier Code="1P"/>
               <EntityIdentifier Code="IL"/>
+              <EntityIdentifier Code="PR"/>
             </StartingSegment>
             <Segment SegmentId="N3"/>
             <Segment SegmentId="N4"/>
