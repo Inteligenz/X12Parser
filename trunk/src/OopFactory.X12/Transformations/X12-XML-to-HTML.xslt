@@ -2,13 +2,15 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
-    <xsl:output method="html" indent="yes"/>
- 
+    <xsl:output method="html" indent="yes"/> 
 
-    <xsl:template match="@* | node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@* | node()"/>
-        </xsl:copy>
+    <xsl:template match="node()">
+      <xsl:if test="*[name()!='Loop']">
+        <xsl:call-template name="Segment">
+          <xsl:with-param name="seg" select="."/>
+        </xsl:call-template>
+
+      </xsl:if>
     </xsl:template>
 
   <xsl:template name="Component">
@@ -61,7 +63,7 @@
     <xsl:variable name="segId" select="name()" />
     <div>
       <xsl:choose>
-        <xsl:when test="position() = 1">
+        <xsl:when test="position() = 2">
           <xsl:attribute name="class">first-segment</xsl:attribute>
           <xsl:attribute name="style">font-weight: bold;</xsl:attribute>
         </xsl:when>
@@ -81,12 +83,8 @@
     <div class="loop" style="border: 1px dotted gray; margin-left: 20px; margin-bottom: 3px; padding: 5px;">
       <xsl:attribute name="title">Loop ID: <xsl:value-of select="@LoopId"/>, <xsl:value-of select="@Name"/></xsl:attribute>
       <div style="float:right; font-size: smaller; color: lightgrey;"><xsl:value-of select="@Name"/></div>
-      <xsl:for-each select="*[name()!='Loop']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="Loop"/>
+      
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
 
@@ -96,13 +94,7 @@
       <div style="float:right; font-size: smaller; color: lightgrey;">
         <xsl:value-of select="@LoopName"/>
       </div>
-      <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="Loop"/>
-      <xsl:apply-templates select="HierarchicalLoop"/>
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
   <xsl:template match="Transaction">
@@ -110,18 +102,7 @@
       <div style="float:right; font-size: smaller; color: lightgrey;">
         TRANSACTION
       </div>
-      <xsl:for-each select="*[name()!='Loop' and name()!='HierarchicalLoop' and name()!='SE']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="Loop"/>
-      <xsl:apply-templates select="HierarchicalLoop"/>
-      <xsl:for-each select="*[name()='SE']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
 
@@ -130,17 +111,7 @@
       <div style="float:right; font-size: smaller; color: lightgrey;">
         FUNCTION GROUP
       </div>
-      <xsl:for-each select="*[name()='GS']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="Transaction"/>
-      <xsl:for-each select="*[name()='GE']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
 
@@ -149,17 +120,7 @@
       <div style="float:right; font-size: smaller; color: lightgrey;">
         INTERCHANGE
       </div>
-      <xsl:for-each select="*[name()='ISA']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="FunctionGroup"/>
-      <xsl:for-each select="*[name()='IEA']">
-        <xsl:call-template name="Segment">
-          <xsl:with-param name="seg" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
 
