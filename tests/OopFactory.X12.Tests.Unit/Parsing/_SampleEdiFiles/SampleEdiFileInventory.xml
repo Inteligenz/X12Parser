@@ -9,9 +9,18 @@
       <Query2>/Interchange/FunctionGroup/Transaction/HierarchicalLoop/HierarchicalLoop/HierarchicalLoop/Loop/DMG/DMG02</Query2>
       <Expected2>20000614</Expected2>
     </EdiFile>
+    <!--
+    <EdiFile>
+      <SourceUrl>http://www.ehcca.com/presentations/ehc-info3/beatty2.pdf</SourceUrl>
+      <ResourcePath>INS._270._4010.Example2_EHCCA.txt</ResourcePath>
+    </EdiFile> -->
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
       <ResourcePath>INS._271._4010.Example1_DHHS.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.tmhp.com/EDI%20Companion%20Guides/Acute%20Care/270-271%20ACUTE%20CARE%20COMPANION%20GUIDE_NPI.pdf</SourceUrl>
+      <ResourcePath>INS._271._4010.Example2_TMHP.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
       <SourceUrl></SourceUrl>
