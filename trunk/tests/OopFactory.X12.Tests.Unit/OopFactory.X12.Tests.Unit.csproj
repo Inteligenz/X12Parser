@@ -111,9 +111,6 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\Example2.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Parsing\Invoices\" />
-    <Folder Include="Parsing\PurchaseOrders\Acknowledgements\" />
-    <Folder Include="Parsing\Suppliers\" />
     <Folder Include="Rendering\" />
   </ItemGroup>
   <ItemGroup>

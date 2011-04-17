@@ -4,6 +4,10 @@
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
       <ResourcePath>INS._270._4010.Example1_DHHS.txt</ResourcePath>
+      <Query1>/Interchange/FunctionGroup/Transaction/HierarchicalLoop/HierarchicalLoop/HierarchicalLoop/Loop/NM1/NM103</Query1>
+      <Expected1>LastName</Expected1>
+      <Query2>/Interchange/FunctionGroup/Transaction/HierarchicalLoop/HierarchicalLoop/HierarchicalLoop/Loop/DMG/DMG02</Query2>
+      <Expected2>20000614</Expected2>
     </EdiFile>
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>

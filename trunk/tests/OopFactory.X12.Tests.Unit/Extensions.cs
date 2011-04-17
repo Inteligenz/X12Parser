@@ -14,6 +14,13 @@ namespace OopFactory.X12.Tests.Unit
             return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles." + resourcePath);
         }
 
+        public static void PrintToFile(this FileStream fs, string content)
+        {
+            StreamWriter writer = new StreamWriter(fs);
+            writer.WriteLine(content);
+            writer.Close();
+            fs.Close();
+        }
         public static void PrintHtmlToFile(this FileStream fs, string html)
         {
             StreamWriter writer = new StreamWriter(fs);
