@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Tests.Unit",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Transformations", "src\OopFactory.X12.Transformations\OopFactory.X12.Transformations.csproj", "{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Rendering", "OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj", "{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Rendering", "src\OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj", "{77668BB6-B01C-4B07-A8F6-0956265387C0}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -36,9 +36,9 @@ Global
 		SccProjectUniqueName4 = src\\OopFactory.X12.Transformations\\OopFactory.X12.Transformations.csproj
 		SccProjectName4 = src/OopFactory.X12.Transformations
 		SccLocalPath4 = src\\OopFactory.X12.Transformations
-		SccProjectUniqueName5 = OopFactory.X12.Rendering\\OopFactory.X12.Rendering.csproj
-		SccProjectName5 = OopFactory.X12.Rendering
-		SccLocalPath5 = OopFactory.X12.Rendering
+		SccProjectUniqueName5 = src\\OopFactory.X12.Rendering\\OopFactory.X12.Rendering.csproj
+		SccProjectName5 = src/OopFactory.X12.Rendering
+		SccLocalPath5 = src\\OopFactory.X12.Rendering
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -92,16 +92,16 @@ Global
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}.Release|x86.ActiveCfg = Release|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{91F78B5B-AB28-4AAE-AA1C-A58997FC58E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

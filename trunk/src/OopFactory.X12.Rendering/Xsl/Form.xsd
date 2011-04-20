@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Form"
+    targetNamespace="http://www.OopFactory.com/Form.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://www.OopFactory.com/Form.xsd"
+    xmlns:mstns="http://www.OopFactory.com/Form.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="form-master-template">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="background-image" type="xs:anyURI"/>
+      <xs:attribute name="page-height-in" type="xs:decimal"/>
+      <xs:attribute name="page-width-in" type="xs:decimal"/>
+      <xs:attribute name="margin-left-in" type="xs:decimal"/>
+      <xs:attribute name="margin-top-in" type="xs:decimal"/>
+      <xs:attribute name="margin-bottom-in" type="xs:decimal"/>
+      <xs:attribute name="margin-right-in" type="xs:decimal"/>
+      <xs:attribute name="x-offset" type="xs:decimal"/>
+      <xs:attribute name="x-scale" type="xs:decimal"/>
+      <xs:attribute name="y-offset" type="xs:decimal"/>
+      <xs:attribute name="y-scale" type="xs:decimal"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="form">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="box">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:attribute name="x" type="xs:decimal"/>
+            <xs:attribute name="y" type="xs:decimal"/>
+            <xs:attribute name="width" type="xs:decimal"/>
+            <xs:attribute name="height" type="xs:decimal" default="1"/>
+            <xs:attribute name="text-align" default="left">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="left"/>
+                  <xs:enumeration value="right"/>
+                  <xs:enumeration value="center"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="form-master-template-ref" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
