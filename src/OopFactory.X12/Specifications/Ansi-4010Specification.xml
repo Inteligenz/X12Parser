@@ -754,11 +754,11 @@
     <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="24">Employer’s Identification Number</Allowed>
       <Allowed ID="34">Social Security Number</Allowed>
-      <Allowed ID="46">Electronic Transmitter Identification Number (ETIN</Allowed>
+      <Allowed ID="46">Electronic Transmitter Identification Number (ETIN)</Allowed>
       <Allowed ID="FI">Federal Taxpayer’s Identification Number</Allowed>
       <Allowed ID="II">Standard Unique Health Identifier for each Individual in the United States</Allowed>
       <Allowed ID="MI">Member Identification Number</Allowed>
-      <Allowed ID="NI">National Association of Insurance Commissioners (N</Allowed>
+      <Allowed ID="NI">National Association of Insurance Commissioners (NAIC)</Allowed>
       <Allowed ID="PI">Payor Identification</Allowed>
       <Allowed ID="PP">Pharmacy Processor Number</Allowed>
       <Allowed ID="SV">Service Provider Number</Allowed>

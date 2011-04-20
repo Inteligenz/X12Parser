@@ -10,6 +10,8 @@ using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Transformations;
 using System.Diagnostics;
 using System.Xml;
+using OopFactory.X12.Transformations.Common;
+using OopFactory.X12.Transformations.INS;
 
 namespace OopFactory.X12.Tests.Unit.Parsing
 {
@@ -120,6 +122,46 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
 #endif
+        }
+                               
+        [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
+        [TestMethod]
+        public void CommonSegmentsTransformTest()
+        {
+            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
+            Stream stream = GetEdi(resourcePath);
+
+            var service = new CommonSegmentsTransformer(new X12EdiParsingService(false));
+            string xml = service.Transform(new StreamReader(stream).ReadToEnd());
+
+            Trace.Write(xml);
+
+#if DEBUG
+            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Common.xml"), FileMode.Create).PrintToFile(xml);
+#endif
+
+        }
+
+
+        [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
+        [TestMethod]
+        public void ClaimTransformTest()
+        {
+            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
+            Stream stream = GetEdi(resourcePath);
+
+            var service = new ClaimTransformer(new X12EdiParsingService(false));
+            string xml = service.Transform(new StreamReader(stream).ReadToEnd());
+
+            Trace.Write(xml);
+
+#if DEBUG
+            if (xml.Contains("<Claim"))
+                new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Claim.xml"), FileMode.Create).PrintToFile(xml);
+#endif
+
         }
     }
 }

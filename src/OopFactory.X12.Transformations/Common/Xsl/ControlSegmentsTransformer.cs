@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using System.Reflection;
 
-namespace OopFactory.X12.Transformations.Common
+namespace OopFactory.X12.Transformations.Common.Xsl
 {
     public class ControlSegmentsTransformer : X12TransformationService
     {
