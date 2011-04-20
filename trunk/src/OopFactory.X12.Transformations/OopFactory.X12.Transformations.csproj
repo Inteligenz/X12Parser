@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ControlSegmentsTransformer.cs" />
-    <Compile Include="Common\EntitySegmentsTransformer.cs" />
+    <Compile Include="Common\CommonSegmentsTransformer.cs" />
+    <Compile Include="Common\Xsl\ControlSegmentsTransformer.cs" />
+    <Compile Include="INS\ClaimTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,11 +59,13 @@
     <EmbeddedResource Include="ORD\Ansi-856-To-ShipNotice.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="INS\" />
+    <EmbeddedResource Include="INS\Xsl\X12-837-To-Claim.xslt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Common\Xsl\Control-Segments.xslt" />
-    <EmbeddedResource Include="Common\Xsl\Segments-DMG,N1,N2,N3,N4,NM1,PER,REF.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Xsl\Common-Segments.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

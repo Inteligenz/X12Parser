@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
@@ -27,23 +27,23 @@
       <xsl:attribute name="Usage">
         <xsl:value-of select="ISA15"/>
       </xsl:attribute>
+      <xsl:comment>
+        <xsl:value-of select="ISA01/comment()"/>
+      </xsl:comment>
       <Author>
         <xsl:attribute name="Qual">
           <xsl:value-of select="ISA01"/>
         </xsl:attribute>
         <xsl:value-of select="ISA02"/>
-        <xsl:comment>
-          <xsl:value-of select="ISA01/comment()"/>
-        </xsl:comment>
       </Author>
+      <xsl:comment>
+        <xsl:value-of select="ISA03/comment()"/>
+      </xsl:comment>
       <Security>
         <xsl:attribute name="Qual">
           <xsl:value-of select="ISA03"/>
         </xsl:attribute>
         <xsl:value-of select="ISA04"/>
-        <xsl:comment>
-          <xsl:value-of select="ISA03/comment()"/>
-        </xsl:comment>
       </Security>
       <Sender>
         <xsl:attribute name="Qual">
@@ -126,9 +126,9 @@
 
   <xsl:template match="ST">
     <Header>
-        <xsl:attribute name="IdentifierCode">
-          <xsl:value-of select="ST01"/>
-        </xsl:attribute>
+      <xsl:attribute name="IdentifierCode">
+        <xsl:value-of select="ST01"/>
+      </xsl:attribute>
       <xsl:attribute name="ControlNumber">
         <xsl:value-of select="ST02"/>
       </xsl:attribute>
@@ -148,4 +148,47 @@
       </xsl:attribute>
     </Trailer>
   </xsl:template>
+
+  <xsl:template match="HL">
+    <xsl:comment>
+      <xsl:value-of select="HL03/comment()"/>
+    </xsl:comment>
+    <Level>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="HL03"/>
+      </xsl:attribute>
+      <xsl:if test="HL04='1'">
+        <xsl:attribute name="Subordinates">true</xsl:attribute>
+      </xsl:if>
+    </Level>
+  </xsl:template>
+
+  <xsl:template match="BHT">
+    <Begin>
+      <xsl:attribute name="Date">
+        <xsl:value-of select="concat(substring(BHT04,1,4),'-',substring(BHT04,5,2),'-',substring(BHT04,7,2),'T',substring(BHT05,1,2),':',substring(BHT05,3,2))"/>
+      </xsl:attribute>
+      <xsl:attribute name="Id">
+        <xsl:value-of select="BHT03"/>
+      </xsl:attribute>
+      <xsl:comment>
+        <xsl:value-of select="BHT01/comment()"/>
+      </xsl:comment>
+      <Purpose>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="BHT01"/>
+        </xsl:attribute>
+      </Purpose>
+      <xsl:comment>
+        <xsl:value-of select="BHT06/comment()"/>
+      </xsl:comment>
+      <Type>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="BHT06"/>
+        </xsl:attribute>
+      </Type>
+
+    </Begin>
+  </xsl:template>
+
 </xsl:stylesheet>
