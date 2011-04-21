@@ -199,5 +199,44 @@ IEA*1*000000031~";
 
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837I._4010.Example1.txt")).ReadToEnd(), interchange.SerializeToX12(true));
         }
+
+        [TestMethod]
+        public void ElementValidationTwoArgsTester()
+        {
+            try
+            {
+                throw new ElementValidationException("Element {0} cannot contain the value '{1}' with the segment terminator.", "NM1", "AB~CD");
+            }
+            catch (ElementValidationException exc)
+            {
+                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator.\r\nParameter name: NM1", exc.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ElementValidationThreeArgsTester()
+        {
+            try
+            {
+                throw new ElementValidationException("Element {0} cannot contain the value '{1}' with the segment terminator {2}.", "NM1", "AB~CD", '~');
+            }
+            catch (ElementValidationException exc)
+            {
+                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~.\r\nParameter name: NM1", exc.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ElementValidationFiveArgsTester()
+        {
+            try
+            {
+                throw new ElementValidationException("Element {0} cannot contain the value '{1}' with the segment terminator {2}. Use a value without delimiters {2} {3} or {4}.", "NM1", "AB~CD", '~', '*', ':');
+            }
+            catch (ElementValidationException exc)
+            {
+                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~. Use a value without delimiters ~ * or :.\r\nParameter name: NM1", exc.Message);
+            }
+        }
     }
 }

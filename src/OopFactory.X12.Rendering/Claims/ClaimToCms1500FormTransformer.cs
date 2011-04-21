@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Xsl;
-using System.Reflection;
+using OopFactory.X12.Transformations;
 
-namespace OopFactory.X12.Transformations.INS
+namespace OopFactory.X12.Rendering.Claims
 {
-    public class ClaimTransformer: X12TransformationService
+    public class ClaimToCms1500FormTransformer : X12TransformationService
     {
-        public ClaimTransformer()
-            : base(new Common.CommonSegmentsTransformer(new X12EdiParsingService(false)))
+        public ClaimToCms1500FormTransformer(ITransformationService preProcessor)
+            : base(preProcessor)
         {
         }
 
@@ -22,10 +23,9 @@ namespace OopFactory.X12.Transformations.INS
             if (_transform == null)
             {
                 _transform = new XslCompiledTransform();
-                _transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.INS.Xsl.X12-837-To-Claim.xslt")));
+                _transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Rendering.Claims.Xsl.Claim-To-Cms-1500.xslt")));
             }
             return _transform;
         }
-        
     }
 }

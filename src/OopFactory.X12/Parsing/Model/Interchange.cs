@@ -89,7 +89,7 @@ namespace OopFactory.X12.Parsing.Model
         public string InterchangeReceiverIdQualifier
         {
             get { return GetElement(7); }
-            set { SetElement(7, String.Format("{0,-2", value)); }
+            set { SetElement(7, String.Format("{0,-2}", value)); }
         }
 
         public string InterchangeReceiverId
