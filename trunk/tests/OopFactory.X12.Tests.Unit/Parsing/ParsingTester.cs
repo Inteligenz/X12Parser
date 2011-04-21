@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Xml;
 using OopFactory.X12.Transformations.Common;
 using OopFactory.X12.Transformations.INS;
+using OopFactory.X12.Rendering.Claims;
 
 namespace OopFactory.X12.Tests.Unit.Parsing
 {
@@ -152,7 +153,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
 
-            var service = new ClaimTransformer(new X12EdiParsingService(false));
+            var service = new ClaimTransformer();
             string xml = service.Transform(new StreamReader(stream).ReadToEnd());
 
             Trace.Write(xml);
@@ -160,6 +161,26 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 #if DEBUG
             if (xml.Contains("<Claim"))
                 new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Claim.xml"), FileMode.Create).PrintToFile(xml);
+#endif
+
+        }
+
+        [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
+        [TestMethod]
+        public void ClaimFormPdfTransformTest()
+        {
+            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
+            Stream stream = GetEdi(resourcePath);
+
+            var service = new ClaimToFoTransformer();
+            string foXml = service.Transform(new StreamReader(stream).ReadToEnd());
+
+            Trace.Write(foXml);
+
+#if DEBUG
+            if (foXml.Contains("<fo:page"))
+                new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Claim-FO.xml"), FileMode.Create).PrintToFile(foXml);
 #endif
 
         }

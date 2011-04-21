@@ -63,6 +63,10 @@
     <Compile Include="Unbundling\UnbundlingTester.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj">
+      <Project>{77668BB6-B01C-4B07-A8F6-0956265387C0}</Project>
+      <Name>OopFactory.X12.Rendering</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\OopFactory.X12.Transformations\OopFactory.X12.Transformations.csproj">
       <Project>{BF6B3A31-6F1D-4C74-BDF6-00958D3BB83D}</Project>
       <Name>OopFactory.X12.Transformations</Name>
