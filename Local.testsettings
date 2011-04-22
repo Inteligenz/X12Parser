@@ -3,6 +3,7 @@
   <Description>These are default test settings for a local test run.</Description>
   <Deployment>
     <DeploymentItem filename="tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
+    <DeploymentItem filename="src\OopFactory.X12.Rendering\Images\HCFA1500_Red.gif" />
   </Deployment>
   <Execution>
     <TestTypeSpecific>

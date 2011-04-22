@@ -28,7 +28,7 @@ namespace OopFactory.X12.Transformations
 
         #region ITransformationService Members
 
-        public string Transform(string x12)
+        public virtual string Transform(string x12)
         {
             string xml = _preProcessor.Transform(x12);
             
