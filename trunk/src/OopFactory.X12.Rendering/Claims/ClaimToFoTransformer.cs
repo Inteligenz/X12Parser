@@ -20,12 +20,19 @@ namespace OopFactory.X12.Rendering.Claims
 
         protected override XslCompiledTransform GetTransform()
         {
-            if (_transform == null)
+            if (true) //_transform == null)
             {
                 _transform = new XslCompiledTransform();
                 _transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Rendering.Xsl.Form-To-Fo.xslt")));
             }
             return _transform;
+        }
+
+        public override string Transform(string x12)
+        {
+            string foXml = base.Transform(x12);
+
+            return foXml.Replace(@"<?xml version=""1.0"" encoding=""utf-16""?>", @"<?xml version=""1.0""?>");
         }
     }
 }

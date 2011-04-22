@@ -180,7 +180,14 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
 #if DEBUG
             if (foXml.Contains("<fo:page"))
+            {
                 new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Claim-FO.xml"), FileMode.Create).PrintToFile(foXml);
+
+                var driver = Fonet.FonetDriver.Make();
+
+                var output = new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_Claim-FO.pdf"), FileMode.Create);
+                driver.Render(new MemoryStream(Encoding.ASCII.GetBytes(foXml)), output);
+            }
 #endif
 
         }

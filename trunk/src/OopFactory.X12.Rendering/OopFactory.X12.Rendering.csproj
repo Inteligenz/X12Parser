@@ -51,7 +51,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Claims\Xsl\Claim-To-Cms-1500.xslt" />
     <EmbeddedResource Include="Xsl\Form-To-Fo.xslt" />
-    <Content Include="Images\HCFA1500_Red.gif" />
+    <Content Include="Images\HCFA1500_Red.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Xsl\Form.xsd">
