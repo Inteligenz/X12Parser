@@ -4,15 +4,15 @@
     xmlns:oop="http://www.OopFactory.com/Form.xsd"
 >
   <xsl:output method="xml" indent="yes"/>
-  <xsl:param name="claim-image" select="/Images/HCFA1500/Red.gif"/>
+  <xsl:param name="claim-image"/>
 
   <xsl:template match="/Interchange">
     <Interchange>
 
       <oop:form-master-template name="cms-1500"
         page-width-in="8.5" page-height-in="11"
-        margin-top-in="0.5" margin-left-in="0.5" margin-bottom-in="0.5" margin-right-in="0.5"
-                                x-scale="0.1" y-scale="0.125">
+        margin-top-in="0.0625" margin-left-in="0.625" margin-bottom-in="0" margin-right-in="0.140"
+                                x-scale="0.0935" y-scale="0.157" x-offset="-0.21" y-offset="0.1">
         <xsl:attribute name="background-image">
           <xsl:value-of select="$claim-image"/>
         </xsl:attribute>
@@ -42,8 +42,9 @@
       <oop:box id="2" x="4" y="9" width="28.5">
         <xsl:value-of select="concat(../Patient/Name/@Last,', ',../Patient/Name/@First,' ',../Patient/Name/@Middle)"/>
       </oop:box>
-      <oop:box id="3-dob" x="34" y="9" width="10" text-align="center">
-        <xsl:value-of select="../Patient/Demographic/@DateOfBirth"/>
+      <oop:box id="3-dob" x="34" y="9" width="9" text-align="center">
+        <xsl:variable name="dob" select="../Patient/Demographic/@DateOfBirth"/>
+        <xsl:value-of select="concat(substring($dob,6,2),' ',substring($dob,9,2),' ',substring($dob,3,2))"/>
       </oop:box>
       <oop:box id="3-sex-m" x="44.5" y="9" width="2.5" text-align="center">
         <xsl:if test="../Patient/Demographic/@Gender='M'">X</xsl:if>

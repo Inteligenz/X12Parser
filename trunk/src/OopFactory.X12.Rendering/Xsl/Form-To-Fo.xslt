@@ -33,13 +33,22 @@
   </xsl:template>
   
   <xsl:template match="oop:form">
-    <xsl:variable name="reference" select="../@form-master-template-ref"/>
+    <xsl:variable name="reference" select="@form-master-template-ref"/>
     <xsl:variable name="master" select="/Interchange/oop:form-master-template[@name=$reference]"/>
     <fo:page-sequence>
       <xsl:attribute name="master-reference">
         <xsl:value-of select="@form-master-template-ref"/>
       </xsl:attribute>
       <fo:flow flow-name="xsl-region-body" font-size="10pt" font-family="Courier">
+        <xsl:if test="string-length($master/@background-image)>0">
+          <fo:block>
+            <fo:external-graphic>
+              <xsl:attribute name="src">
+                <xsl:value-of select="$master/@background-image"/>
+              </xsl:attribute>
+            </fo:external-graphic>
+          </fo:block>
+        </xsl:if>
         <xsl:apply-templates select="oop:box" />
       </fo:flow>
     </fo:page-sequence>
@@ -48,13 +57,16 @@
   <xsl:template match="oop:box">
     <xsl:variable name="reference" select="../@form-master-template-ref"/>
     <xsl:variable name="master" select="/Interchange/oop:form-master-template[@name=$reference]"/>
-    <xsl:variable name="x-scale" select="$master/@x-scale"/>
-    <xsl:variable name="y-scale" select="$master/@y-scale"/>
-    <fo:block-container position="absolute">
-      <xsl:attribute name="left"><xsl:value-of select="@x * $x-scale"/>in</xsl:attribute>
-      <xsl:attribute name="width"><xsl:value-of select="@width * $x-scale"/>in</xsl:attribute>
-      <xsl:attribute name="top"><xsl:value-of select="@y * $y-scale"/>in</xsl:attribute>
-      <xsl:attribute name="height"><xsl:value-of select="$y-scale * 2"/>in</xsl:attribute>
+    <fo:block-container position="absolute" border-width="thin" border-color="blue" border-style="solid">
+      <xsl:attribute name="left"><xsl:value-of select="$master/@x-offset + @x * $master/@x-scale"/>in</xsl:attribute>
+      <xsl:attribute name="width"><xsl:value-of select="@width * $master/@x-scale"/>in</xsl:attribute>
+      <xsl:attribute name="top"><xsl:value-of select="$master/@y-offset + @y * $master/@y-scale"/>in</xsl:attribute>
+      <xsl:attribute name="height"><xsl:value-of select="$master/@y-scale * 1.25"/>in</xsl:attribute>
+      <xsl:if test="string-length(@text-align)>0">
+        <xsl:attribute name="text-align">
+          <xsl:value-of select="@text-align"/>
+        </xsl:attribute>
+      </xsl:if>
       <fo:block>
         <xsl:value-of select="."/>
       </fo:block>
