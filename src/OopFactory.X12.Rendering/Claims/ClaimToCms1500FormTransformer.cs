@@ -33,8 +33,8 @@ namespace OopFactory.X12.Rendering.Claims
         protected override XsltArgumentList GetArguments()
         {
             var list = base.GetArguments();
-            string imageFilename = String.Format("{0}\\Images\\HCFA1500_Red.gif", new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName);
-            list.AddParam("claim-image", "http://www.OopFactory.com/Form.xsd", imageFilename);
+            string imageFilename = String.Format("{0}\\HCFA1500_Red.gif", new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName);
+            list.AddParam("claim-image", "", imageFilename);
             return list;
         }
     }
