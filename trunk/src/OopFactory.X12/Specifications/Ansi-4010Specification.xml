@@ -20,9 +20,10 @@
     <Allowed ID="ZZ">Mutually Defined</Allowed>
   </QualifierSet>
   <QualifierSet Name="Data/Time Qualifier">
-    <Allowed ID="020">Check</Allowed>
+    <Allowed ID="003">Invoice Date</Allowed>
     <Allowed ID="007">Effective</Allowed>
     <Allowed ID="011">Shipped</Allowed>
+    <Allowed ID="020">Check</Allowed>
     <Allowed ID="090">Report Start</Allowed>
     <Allowed ID="091">Report End</Allowed>
     <Allowed ID="096">Discharge</Allowed>
@@ -76,7 +77,8 @@
     <Allowed ID="607">Certification Revision</Allowed>
     <Allowed ID="738">Most Recent Hemoglobin or Hematocrit or Both</Allowed>
     <Allowed ID="739">Most Recent Serum Creatine</Allowed>
-
+    <Allowed ID="809">Posted</Allowed>
+    <Allowed ID="814">Payment Due Date</Allowed>
   </QualifierSet>
   <QualifierSet Name="Date Time Period Format Qualifier">
     <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>
@@ -205,7 +207,99 @@
     <Allowed ID="YR">Years</Allowed>
     <Allowed ID="ZZ">Mutually Defined</Allowed>
   </QualifierSet>
-   
+  <QualifierSet Name="Reference Identification Qualifier">
+    <Allowed ID="06">System Number</Allowed>
+    <Allowed ID="0B">State License Number</Allowed>
+    <Allowed ID="0F">Subscriber Number</Allowed>
+    <Allowed ID="12">Billing Account</Allowed>
+    <Allowed ID="1A">Blue Cross Provider Number</Allowed>
+    <Allowed ID="1B">Blue Shield Provider Number</Allowed>
+    <Allowed ID="1C">Medicare Provider Number</Allowed>
+    <Allowed ID="1D">Medicaid Provider Number</Allowed>
+    <Allowed ID="17">Client Reporting Category</Allowed>
+    <Allowed ID="1G">Provider UPIN Number</Allowed>
+    <Allowed ID="1H">CHAMPUS Identification Number</Allowed>
+    <Allowed ID="1J">Facility ID Number</Allowed>
+    <Allowed ID="1L">Group or Policy Number</Allowed>
+    <Allowed ID="1S">Ambulatory Patient Group (APG) Number</Allowed>
+    <Allowed ID="1W">Member Identification Number</Allowed>
+    <Allowed ID="23">Client Number</Allowed>
+    <Allowed ID="2U">Payer Identification Number</Allowed>
+    <Allowed ID="38">Master Policy Number</Allowed>
+    <Allowed ID="3D">Service Load Number</Allowed>
+    <Allowed ID="3H">Case Number</Allowed>
+    <Allowed ID="4N">Special Payment Reference Number</Allowed>
+    <Allowed ID="6O">Cross Reference Number</Allowed>
+    <Allowed ID="6R">Provider Control Number</Allowed>
+    <Allowed ID="87">Functional Category</Allowed>
+    <Allowed ID="8U">Bank Assigned Security Identifier</Allowed>
+    <Allowed ID="9A">Repriced Claim Reference Number</Allowed>
+    <Allowed ID="9B">Repriced Line Item Reference Number</Allowed>
+    <Allowed ID="9C">Adjusted Repriced Claim Reference Number</Allowed>
+    <Allowed ID="9D">Adjusted Repriced Line Item Reference Number</Allowed>
+    <Allowed ID="9F">Referral Number</Allowed>
+    <Allowed ID="AB">Acceptable Source Purchase ID</Allowed>
+    <Allowed ID="B3">Preferred Provider Organization Number</Allowed>
+    <Allowed ID="BB">Authorization Number</Allowed>
+    <Allowed ID="BQ">Health Maintenance Organization Code Number</Allowed>
+    <Allowed ID="BT">Batch Number</Allowed>
+    <Allowed ID="CK">Check Number</Allowed>
+    <Allowed ID="CM">Credit Memo</Allowed>
+    <Allowed ID="D9">Claim Number</Allowed>
+    <Allowed ID="DB">Debit Memo</Allowed>
+    <Allowed ID="DX">Department/Agency Number</Allowed>
+    <Allowed ID="EA">Medical Record Identification Number</Allowed>
+    <Allowed ID="EI">Employer’s Identification Number</Allowed>
+    <Allowed ID="EJ">Patient Account Number</Allowed>
+    <Allowed ID="EM">Electronic Payment Reference Number</Allowed>
+    <Allowed ID="EW">Mammography Certification Number</Allowed>
+    <Allowed ID="F4">Facility Certification Number</Allowed>
+    <Allowed ID="F5">Medicare Version Code</Allowed>
+    <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
+    <Allowed ID="F8">Original Reference Number</Allowed>
+    <Allowed ID="FH">Clinic Number</Allowed>
+    <Allowed ID="FY">Claim Office Number</Allowed>
+    <Allowed ID="G1">Prior Authorization Number</Allowed>
+    <Allowed ID="G2">Provider Commercial Number</Allowed>
+    <Allowed ID="GS">Provider Site Number</Allowed>
+    <Allowed ID="ID">Insurance Certificate Number</Allowed>
+    <Allowed ID="IG">Insurance Policy Number</Allowed>
+    <Allowed ID="IJ">Standard Industry Classification (SIC) Code</Allowed>
+    <Allowed ID="IV">Seller's Invoice Number</Allowed>
+    <Allowed ID="LD">Loan Number</Allowed>
+    <Allowed ID="LU">Location Number</Allowed>
+    <Allowed ID="LX">Qualified Products List</Allowed>
+    <Allowed ID="MC">Microfilm Number</Allowed>
+    <Allowed ID="MIN">Mortgage ID Number</Allowed>
+    <Allowed ID="N5">Provider Plan Network Identification Number</Allowed>
+    <Allowed ID="NF">National Association of Insurance Commissioners (NAIC) Code</Allowed>
+    <Allowed ID="OS">Outbound-from Party</Allowed>
+    <Allowed ID="OZ">Product Number</Allowed>
+    <Allowed ID="P4">Project Code</Allowed>
+    <Allowed ID="PO">Purchase Order Number</Allowed>
+    <Allowed ID="Q4">Prior Identitifier Number</Allowed>
+    <Allowed ID="QQ">Unit Number</Allowed>
+    <Allowed ID="RB">Rate code number</Allowed>
+    <Allowed ID="RV">Receiving Number</Allowed>
+    <Allowed ID="RZ">Returned Goods Authorization Number</Allowed>
+    <Allowed ID="ST">Store Number</Allowed>
+    <Allowed ID="SY">Social Security Number</Allowed>
+    <Allowed ID="T4">Signal Code</Allowed>
+    <Allowed ID="TJ">Federal Taxpayer’s Identification Number</Allowed>
+    <Allowed ID="TN">Transaction Reference Number</Allowed>
+    <Allowed ID="TP">Test Specification Number Oxygen Flow Rate</Allowed>
+    <Allowed ID="TT">Terminal Code</Allowed>
+    <Allowed ID="U3">Unique Supplier Identification Number (USIN)</Allowed>
+    <Allowed ID="UQ">Section Number</Allowed>
+    <Allowed ID="VP">Vendor Product Number</Allowed>
+    <Allowed ID="VR">Vendor ID Number</Allowed>
+    <Allowed ID="VY">Link Sequence Number</Allowed>
+    <Allowed ID="X4">Clinical Laboratory Improvement Amendment Number</Allowed>
+    <Allowed ID="XS">State Industrial Accident Provider Number</Allowed>
+    <Allowed ID="XZ">Pharmacy Prescription Number</Allowed>
+    <Allowed ID="Y4">Agency Claim Number</Allowed>
+    <Allowed ID="ZZ">Mutually Defined</Allowed>    
+  </QualifierSet>
   <QualifierSet Name="Product/Service ID Quailifier">
     <Allowed ID="AB">Assembly</Allowed>
     <Allowed ID="AC">Aggregation Code (Used to Consolidate Part Families)</Allowed>
@@ -225,7 +319,53 @@
     <Allowed ID="TP">Product Type Code</Allowed>
     <Allowed ID="VP">Vendor's (Seller's) Part Number</Allowed>
   </QualifierSet>
-
+  <QualifierSet Name="Entity Identifier Code">
+    <Allowed ID="1P">Provider</Allowed>
+    <Allowed ID="2B">Third-Party Administrator</Allowed>
+    <Allowed ID="36">Employer</Allowed>
+    <Allowed ID="40">Receiver</Allowed>
+    <Allowed ID="41">Submitter</Allowed>
+    <Allowed ID="45">Drop-off Location</Allowed>
+    <Allowed ID="74">Corrected Insured</Allowed>
+    <Allowed ID="77">Service Location</Allowed>
+    <Allowed ID="7S">Pipeline Segment</Allowed>
+    <Allowed ID="80">Hospital</Allowed>
+    <Allowed ID="82">Rendering Provider</Allowed>
+    <Allowed ID="85">Billing Provider</Allowed>
+    <Allowed ID="87">Pay-to Provider</Allowed>
+    <Allowed ID="89">Investor</Allowed>
+    <Allowed ID="9D">New Service Provider</Allowed>
+    <Allowed ID="BO">Broker or Sales Office</Allowed>
+    <Allowed ID="BW">Borrower</Allowed>
+    <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
+    <Allowed ID="CA">Carrier</Allowed>
+    <Allowed ID="CS">Consolidator/Shipper</Allowed>
+    <Allowed ID="DK">Ordering Physician</Allowed>
+    <Allowed ID="DN">Referring Provider</Allowed>
+    <Allowed ID="DQ">Supervising Physician</Allowed>
+    <Allowed ID="DS">Distributor</Allowed>
+    <Allowed ID="FA">Facility</Allowed>
+    <Allowed ID="GP">Gateway Provider</Allowed>
+    <Allowed ID="IL">Insured or Subscriber</Allowed>
+    <Allowed ID="IN">Insurer</Allowed>
+    <Allowed ID="LG">Location of Goods</Allowed>
+    <Allowed ID="MH">Mortgage Insurer</Allowed>
+    <Allowed ID="OP">Operator of property of Unit</Allowed>
+    <Allowed ID="P3">Primary Care Provider</Allowed>
+    <Allowed ID="P5">Plan Sponsor</Allowed>
+    <Allowed ID="PE">Payee</Allowed>
+    <Allowed ID="PR">Payer</Allowed>
+    <Allowed ID="PW">Pickup Address</Allowed>
+    <Allowed ID="QB">Purchase Service Provider</Allowed>
+    <Allowed ID="QC">Patient</Allowed>
+    <Allowed ID="SE">Selling Party</Allowed>
+    <Allowed ID="SF">Ship From</Allowed>
+    <Allowed ID="SU">Ship To</Allowed>
+    <Allowed ID="P5">Plan Sponsor</Allowed>
+    <Allowed ID="TF">Tank Farm</Allowed>
+    <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
+    <Allowed ID="WH">Warehouse</Allowed>    
+  </QualifierSet>
   <QualifierSet Name="Insurance Type Code">
     <Allowed ID="D">Disability</Allowed>
     <Allowed ID="12">Medicare Secondary Working Aged Beneficiary or Spouse with Employer Group Health Plan</Allowed>
@@ -667,29 +807,7 @@
     </Element>
   </Segment>
   <Segment SegmentId="N1">
-    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3">
-      <Allowed ID="41">Submitter</Allowed>
-      <Allowed ID="7S">Pipeline Segment</Allowed>
-      <Allowed ID="89">Investor</Allowed>
-      <Allowed ID="9D">New Service Provider</Allowed>
-      <Allowed ID="BO">Broker or Sales Office</Allowed>
-      <Allowed ID="BW">Borrower</Allowed>
-      <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
-      <Allowed ID="CA">Carrier</Allowed>
-      <Allowed ID="CS">Consolidator/Shipper</Allowed>
-      <Allowed ID="DS">Distributor</Allowed>
-      <Allowed ID="IN">Insurer</Allowed>
-      <Allowed ID="LG">Location of Goods</Allowed>
-      <Allowed ID="MH">Mortgage Insurer</Allowed>
-      <Allowed ID="OP">Operator of property of Unit</Allowed>
-      <Allowed ID="SE">Selling Party</Allowed>
-      <Allowed ID="SF">Ship From</Allowed>
-      <Allowed ID="SU">Ship To</Allowed>
-      <Allowed ID="P5">Plan Sponsor</Allowed>
-      <Allowed ID="TF">Tank Farm</Allowed>
-      <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
-      <Allowed ID="WH">Warehouse</Allowed>
-    </Element>
+    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Entity Identifier Code" />
     <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
     <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="1">D-U-N-S Number,Dun &amp; Bradstreet</Allowed>
@@ -724,36 +842,7 @@
     <Element Name="Location Identifier" Type="AN" MinLength="1" MaxLength="30"/>
   </Segment>
   <Segment SegmentId="NM1">
-    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3">
-      <Allowed ID="1P">Provider</Allowed>
-      <Allowed ID="2B">Third-Party Administrator</Allowed>
-      <Allowed ID="36">Employer</Allowed>
-      <Allowed ID="40">Receiver</Allowed>
-      <Allowed ID="41">Submitter</Allowed>
-      <Allowed ID="45">Drop-off Location</Allowed>
-      <Allowed ID="74">Corrected Insured</Allowed>
-      <Allowed ID="77">Service Location</Allowed>
-      <Allowed ID="80">Hospital</Allowed>
-      <Allowed ID="82">Rendering Provider</Allowed>
-      <Allowed ID="85">Billing Provider</Allowed>
-      <Allowed ID="87">Pay-to Provider</Allowed>
-      <Allowed ID="89">Investor</Allowed>
-      <Allowed ID="9D">New Service Provider</Allowed>
-      <Allowed ID="BW">Borrower</Allowed>
-      <Allowed ID="DK">Ordering Physician</Allowed>
-      <Allowed ID="DN">Referring Provider</Allowed>
-      <Allowed ID="DQ">Supervising Physician</Allowed>
-      <Allowed ID="FA">Facility</Allowed>
-      <Allowed ID="GP">Gateway Provider</Allowed>
-      <Allowed ID="IL">Insured or Subscriber</Allowed>
-      <Allowed ID="P3">Primary Care Provider</Allowed>
-      <Allowed ID="P5">Plan Sponsor</Allowed>
-      <Allowed ID="PE">Payee</Allowed>
-      <Allowed ID="PR">Payer</Allowed>
-      <Allowed ID="PW">Pickup Address</Allowed>
-      <Allowed ID="QB">Purchase Service Provider</Allowed>
-      <Allowed ID="QC">Patient</Allowed>
-    </Element>
+    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3"  QualifierSetRef="Entity Identifier Code" />
     <Element Name="Entity Type Qualifier" Required="true" Type="ID" MinLength="1" MaxLength="1">
       <Allowed ID="1">Person</Allowed>
       <Allowed ID="2">Non-Person Entity</Allowed>
@@ -804,82 +893,7 @@
     <Element Name="Contact Inquery Reference" Type="AN" MinLength="1" MaxLength="20"/>
   </Segment>
   <Segment SegmentId="REF">
-    <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3">
-      <Allowed ID="06">System Number</Allowed>
-      <Allowed ID="0B">State License Number</Allowed>
-      <Allowed ID="0F">Subscriber Number</Allowed>
-      <Allowed ID="1A">Blue Cross Provider Number</Allowed>
-      <Allowed ID="1B">Blue Shield Provider Number</Allowed>
-      <Allowed ID="1C">Medicare Provider Number</Allowed>
-      <Allowed ID="1D">Medicaid Provider Number</Allowed>
-      <Allowed ID="17">Client Reporting Category</Allowed>
-      <Allowed ID="1G">Provider UPIN Number</Allowed>
-      <Allowed ID="1H">CHAMPUS Identification Number</Allowed>
-      <Allowed ID="1J">Facility ID Number</Allowed>
-      <Allowed ID="1L">Group or Policy Number</Allowed>
-      <Allowed ID="1S">Ambulatory Patient Group (APG) Number</Allowed>
-      <Allowed ID="1W">Member Identification Number</Allowed>
-      <Allowed ID="23">Client Number</Allowed>
-      <Allowed ID="2U">Payer Identification Number</Allowed>
-      <Allowed ID="38">Master Policy Number</Allowed>
-      <Allowed ID="3H">Case Number</Allowed>
-      <Allowed ID="4N">Special Payment Reference Number</Allowed>
-      <Allowed ID="6O">Cross Reference Number</Allowed>
-      <Allowed ID="6R">Provider Control Number</Allowed>
-      <Allowed ID="87">Functional Category</Allowed>
-      <Allowed ID="8U">Bank Assigned Security Identifier</Allowed>
-      <Allowed ID="9A">Repriced Claim Reference Number</Allowed>
-      <Allowed ID="9B">Repriced Line Item Reference Number</Allowed>
-      <Allowed ID="9C">Adjusted Repriced Claim Reference Number</Allowed>
-      <Allowed ID="9D">Adjusted Repriced Line Item Reference Number</Allowed>
-      <Allowed ID="9F">Referral Number</Allowed>
-      <Allowed ID="AB">Acceptable Source Purchase ID</Allowed>
-      <Allowed ID="B3">Preferred Provider Organization Number</Allowed>
-      <Allowed ID="BB">Authorization Number</Allowed>
-      <Allowed ID="BQ">Health Maintenance Organization Code Number</Allowed>
-      <Allowed ID="BT">Batch Number</Allowed>
-      <Allowed ID="D9">Claim Number</Allowed>
-      <Allowed ID="DX">Department/Agency Number</Allowed>
-      <Allowed ID="EA">Medical Record Identification Number</Allowed>
-      <Allowed ID="EI">Employer’s Identification Number</Allowed>
-      <Allowed ID="EJ">Patient Account Number</Allowed>
-      <Allowed ID="EM">Electronic Payment Reference Number</Allowed>
-      <Allowed ID="EW">Mammography Certification Number</Allowed>
-      <Allowed ID="F4">Facility Certification Number</Allowed>
-      <Allowed ID="F5">Medicare Version Code</Allowed>
-      <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
-      <Allowed ID="F8">Original Reference Number</Allowed>
-      <Allowed ID="FH">Clinic Number</Allowed>
-      <Allowed ID="FY">Claim Office Number</Allowed>
-      <Allowed ID="G1">Prior Authorization Number</Allowed>
-      <Allowed ID="G2">Provider Commercial Number</Allowed>
-      <Allowed ID="GS">Provider Site Number</Allowed>
-      <Allowed ID="IG">Insurance Policy Number</Allowed>
-      <Allowed ID="IJ">Standard Industry Classification (SIC) Code</Allowed>
-      <Allowed ID="LU">Location Number</Allowed>
-      <Allowed ID="LX">Qualified Products List</Allowed>
-      <Allowed ID="N5">Provider Plan Network Identification Number</Allowed>
-      <Allowed ID="NF">National Association of Insurance Commissioners (NAIC) Code</Allowed>
-      <Allowed ID="OZ">Product Number</Allowed>
-      <Allowed ID="P4">Project Code</Allowed>
-      <Allowed ID="Q4">Prior Identitifier Number</Allowed>
-      <Allowed ID="QQ">Unit Number</Allowed>
-      <Allowed ID="RB">Rate code number</Allowed>
-      <Allowed ID="ST">Store Number</Allowed>
-      <Allowed ID="SY">Social Security Number</Allowed>
-      <Allowed ID="T4">Signal Code</Allowed>
-      <Allowed ID="TJ">Federal Taxpayer’s Identification Number</Allowed>
-      <Allowed ID="TP">Test Specification Number Oxygen Flow Rate</Allowed>
-      <Allowed ID="TT">Terminal Code</Allowed>
-      <Allowed ID="U3">Unique Supplier Identification Number (USIN)</Allowed>
-      <Allowed ID="VP">Vendor Product Number</Allowed>
-      <Allowed ID="VY">Link Sequence Number</Allowed>
-      <Allowed ID="X4">Clinical Laboratory Improvement Amendment Number</Allowed>
-      <Allowed ID="XS">State Industrial Accident Provider Number</Allowed>
-      <Allowed ID="XZ">Pharmacy Prescription Number</Allowed>
-      <Allowed ID="Y4">Agency Claim Number</Allowed>
-      <Allowed ID="ZZ">Mutually Defined</Allowed>
-    </Element>
+    <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Reference Identification Qualifier" />
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
     <Element Name="Description" Type="AN" MinLength="1" MaxLength="80"/>
   </Segment>
@@ -1157,6 +1171,12 @@
   </Segment>
   
   <!-- 820 Segments -->
+  <Segment SegmentId="ADX">
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Adjustment Reason Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Reference Identification Qualifier" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Reference Identification Qualifier"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50"/>
+  </Segment>
   <Segment SegmentId="BPR">
     <Element Name="Transaction Handling Code" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="C">Payment Accompanies Remittance Advice</Allowed>
@@ -1206,7 +1226,90 @@
     <Element Name="Account Number" Type="AN" MinLength="1" MaxLength="35"/>
     
   </Segment>
-  
+  <Segment SegmentId="ENT">
+    <Element Name="AssignedNumber" Type="N" MinLength="1" MaxLength="6"/>
+    <Element Name="Entity Identifier Code" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Entity Identifier Code"/>
+    <Element Name="ID Code Qualifier" Type="ID" MinLength="1" MaxLength="2"/>
+    <Element Name="Entity Identifier Code" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Entity Identifier Code"/>
+    <Element Name="Id Code" Type="AN" MinLength="2" MaxLength="80"/>
+    <Element Name="Reference Identification Qualifier" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/> 
+  </Segment>
+  <Segment SegmentId="IT1">
+    <Element Name="Assigned Identification" Type="AN" MinLength="1" MaxLength="20" />
+    <Element Name="Quantity Invoiced" Type="R" MinLength="1" MaxLength="10" />
+    <Element Name="Unit or Basic for Measurement" Type="ID" MaxLength="2" MinLength="2" QualifierSetRef="Unit or Basis for Measurement Code" />
+    <Element Name="Unit Price" Type="R" MinLength="1" MaxLength="17" />
+    <Element Name="Basis of Unit Price" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+    <Element Name="Product/Service ID Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Product/Service ID Quailifier"/>
+    <Element Name="Product/Service ID" Type="AN" MinLength="1" MaxLength="48" />
+  </Segment>
+  <Segment SegmentId="RMR">
+    <Element Name="Reference Identification Qualifier" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Reference Identification Qualifier"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Payment Action Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="PO">Payment on Account</Allowed>
+    </Element>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Adjustment Reason Code" Type="R" MinLength="2" MaxLength="2"/>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+  </Segment>
+  <Segment SegmentId="SAC">
+    <Element Name="Allowance or Charge Indicator" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="N">No Allowance or Change</Allowed>
+    </Element>
+    <Element Name="Service, Promotion, Allowance or Charge Code" Type="ID" MinLength="4" MaxLength="4">
+      <Allowed ID="H850">Tax</Allowed>
+    </Element>
+    <Element Name="Agency Qualifier Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Agency Service, Promotion, Allowance or Charge Code" Type="AN" MinLength="1" MaxLength="10"/>
+    <Element Name="Amount" Type="N" MinLength="1" MaxLength="15" />
+    <Element Name="Allowance/Charge Percent Qualifier" Type="ID" MinLength="1" MaxLength="1"/>
+    <Element Name="Percent" Type="R" MinLength="1" MaxLength="6"/>
+    <Element Name="Rate" Type="R" MinLength="1" MaxLength="9"/>
+    <Element Name="Unit or Basis for Measurement Code" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Unit or Basis for Measurement Code"/>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Allowance or Charge Method of Handling Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Option Number" Type="AN" MinLength="1" MaxLength="20"/>
+    <Element Name="Description" Type="AN" MinLength="1" MaxLength="80"/>
+    <Element Name="Language Code" Type="ID" MinLength="2" MaxLength="3"/>
+  </Segment>
+  <Segment SegmentId="TX1">
+    <Element Name="Tax Type Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="TX">All Taxes</Allowed>
+    </Element>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Percent" Type="R" MinLength="1" MaxLength="10"/>
+    <Element Name="Tax Jurisdiction Code Qualifier" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Tax Jurisdiction Code" Type="AN" MinLength="1" MaxLength="10" />
+    <Element Name="Tax Exempt Code" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Relationship Code" Type="ID" MinLength="1" MaxLength="1" />
+    <Element Name="Dollar Basis for Percent" Type="R" MinLength="1" MaxLength="9" />
+    <Element Name="Tax Identification Number" Type="AN" MinLength="1" MaxLength="20" />
+    <Element Name="Assigned Identification" Type="AN" MinLength="1" MaxLength="20" />
+  </Segment>
   <!-- 834 Segments -->
   <Segment SegmentId="BGN">
     <Element Name="Transaction Set Purpose Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
