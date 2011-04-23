@@ -54,6 +54,12 @@
       <ResourcePath>ORD._810.Example4_Adobe.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="820">
+    <EdiFile>
+      <SourcePath>http://www.mortgagebankers.org/files/Technology/EDI820.pdf</SourcePath>
+      <ResourcePath>ORD._820.Example1_MortgageBankers.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="834">
     <EdiFile>
       <ResourcePath>INS._834._4010.Example1_IG.txt</ResourcePath>
