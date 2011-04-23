@@ -59,6 +59,18 @@
       <SourcePath>http://www.mortgagebankers.org/files/Technology/EDI820.pdf</SourcePath>
       <ResourcePath>ORD._820.Example1_MortgageBankers.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourcePath>http://www.scanaenergy.com/NR/rdonlyres/6F278D49-670B-46B4-8264-1B71F92D6545/0/820_Implementation_Guide_SEB.pdf</SourcePath>
+      <ResourcePath>ORD._820.Example2_ScanaEnergy.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>https://suppliercenter.homedepot.com/en_US/Supplier_Center/Supplier_Performance/Electronic_Exchanges/docs/820sample.pdf</SourceUrl>
+      <ResourcePath>ORD._820.Example3_HomeDepot.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://suppliers.safeway.com/usa/pdf/X12_820_004010.pdf</SourceUrl>
+      <ResourcePath>ORD._820.Example4_Safeway.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="834">
     <EdiFile>

@@ -88,6 +88,9 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example2_TMHP.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example3_Aetna.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example1_MortgageBankers.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example2_ScanaEnergy.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example3_HomeDepot.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example4_Safeway.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
