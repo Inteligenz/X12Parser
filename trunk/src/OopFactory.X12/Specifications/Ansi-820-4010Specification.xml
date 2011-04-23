@@ -11,6 +11,8 @@
     <StartingSegment SegmentId="N1">
       <EntityIdentifier Code="41"/>
       <EntityIdentifier Code="MH"/>
+      <EntityIdentifier Code="PR"/>
+      <EntityIdentifier Code="PE"/>
     </StartingSegment>
     <Segment SegmentId="N2" />
     <Segment SegmentId="N3" />
