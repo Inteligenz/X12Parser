@@ -26,8 +26,10 @@
     <Allowed ID="090">Report Start</Allowed>
     <Allowed ID="091">Report End</Allowed>
     <Allowed ID="096">Discharge</Allowed>
+    <Allowed ID="097">Transaction Creation</Allowed>
     <Allowed ID="108">Postmark</Allowed>
     <Allowed ID="119">Test Performed</Allowed>
+    <Allowed ID="146">Closing Date (Date used as effective date.)</Allowed>
     <Allowed ID="193">Period Start</Allowed>
     <Allowed ID="194">Period End</Allowed>
     <Allowed ID="286">Retirement</Allowed>
@@ -521,10 +523,12 @@
   <Segment SegmentId="GS">
     <Element Name="Functional Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
       <Allowed ID="BE">Benefit Enrollment</Allowed>
+      <Allowed ID="FA">Functional Acknowledgment (997)</Allowed>
       <Allowed ID="HB">Eligibility, Coverage or Benefit Information</Allowed>
       <Allowed ID="HS">Eligibility, Coverage or Benefit Inquiry</Allowed>
       <Allowed ID="HC">Health Care</Allowed>
       <Allowed ID="IB">Inventory Inquiry/Advice (846)</Allowed>
+      <Allowed ID="RA">Payment Order/Remittance Advice (820)</Allowed>
     </Element>
     <Element Name="Application Sender's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
     <Element Name="Application Receiver's Code" Required="true" Type="AN" MinLength="2" MaxLength="15" />
@@ -733,6 +737,9 @@
       <Allowed ID="82">Rendering Provider</Allowed>
       <Allowed ID="85">Billing Provider</Allowed>
       <Allowed ID="87">Pay-to Provider</Allowed>
+      <Allowed ID="89">Investor</Allowed>
+      <Allowed ID="9D">New Service Provider</Allowed>
+      <Allowed ID="BW">Borrower</Allowed>
       <Allowed ID="DK">Ordering Physician</Allowed>
       <Allowed ID="DN">Referring Provider</Allowed>
       <Allowed ID="DQ">Supervising Physician</Allowed>
@@ -879,6 +886,7 @@
   <Segment SegmentId="TRN">
     <Element Name="Trace Type Code" Type="ID" MinLength="1" MaxLength="2">
       <Allowed ID="1">Current Transaction Trace Numbers</Allowed>
+      <Allowed ID="3">Financial Reassociation Trace Number</Allowed>
     </Element>
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50"/>
     <Element Name="Originating Company Identifier" Type="AN" MinLength="10" MaxLength="10"/>
@@ -1146,6 +1154,57 @@
     <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
     <Element Name="Composite Medical Procedure Identifier"/>
     <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+  </Segment>
+  
+  <!-- 820 Segments -->
+  <Segment SegmentId="BPR">
+    <Element Name="Transaction Handling Code" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="C">Payment Accompanies Remittance Advice</Allowed>
+      <Allowed ID="I">Remittance Information Only</Allowed>
+    </Element>
+    <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
+    <Element Name="Credit/Debit Flag Code" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="C">Credit</Allowed>
+    </Element>
+    <Element Name="Payment Method Code" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="ACH">Automated Clearing House</Allowed>
+      <Allowed ID="CHK">Check</Allowed>
+      <Allowed ID="FEW">Federal Reserve Fund/Wire Transfer - Repetitive</Allowed>
+      <Allowed ID="FWT">Federal Reserve Fund/Wire Transfer - Nonrepetitive</Allowed>
+      <Allowed ID="NON">Non-Payment Data</Allowed>
+    </Element>
+    <Element Name="Payment Format Code" Type="ID" MinLength="1" MaxLength="10">
+      <Allowed ID="CCP">Cash Concentration/Disbursement plus Addenda (820 with ACH to follow)</Allowed>
+      <Allowed ID="CTX">Corporate Trade Exchange (820 bundled with ACH)</Allowed>
+      <Allowed ID="PBC">Commercial/Corporate Check (820 with paper check to follow)</Allowed>
+    </Element>
+    <Element Name="(DFI) ID Number Qualifier" Type="ID" MaxLength="2" MinLength="2">
+      <Allowed ID="01">ABA Transit Routing Number including Check Digits (9 digits)</Allowed>
+    </Element>
+    <Element Name="(DFI) Identification Number" Type="AN" MinLength="3" MaxLength="12" />
+    <Element Name="Account Number Qualifier" Type="ID" MinLength="1" MaxLength="3">
+      <Allowed ID="03">Checking Account</Allowed>
+    </Element>
+    <Element Name="Account Number" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Originating Company Identifier" Type="AN" MinLength="10" MaxLength="10" />
+    <Element Name="Originating Company Supplemental Code" Type="AN" MinLength="9" MaxLength="9" />
+    <Element Name="(DFI) ID Number Qualifier" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="01">ABA Transit Routing # w/ Check Digits (9 digits)</Allowed>
+    </Element>
+    <Element Name="(DFI) Identification Number" Type="ID" MinLength="3" MaxLength="12"/>
+    <Element Name="Account Number Qualifier" Type="ID" MinLength="1" MaxLength="3">
+      <Allowed ID="03">Checking Account</Allowed>
+    </Element>
+    <Element Name="Account Number" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Payment Effective Date" Type="DT" MinLength="8" MaxLength="8"/>
+    <Element Name="Business Function Code" Type="ID" MinLength="1" MaxLength="3">
+      <Allowed ID="VEN">Vendor Payment</Allowed>
+    </Element>
+    <Element Name="(DFI) ID Number Qualifier" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="(DFI) Identification Number" Type="AN" MinLength="3" MaxLength="12"/>
+    <Element Name="Account Number Qualifier" Type="ID" MinLength="1" MaxLength="3"/>
+    <Element Name="Account Number" Type="AN" MinLength="1" MaxLength="35"/>
+    
   </Segment>
   
   <!-- 834 Segments -->
