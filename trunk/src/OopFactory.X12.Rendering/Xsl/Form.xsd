@@ -29,9 +29,9 @@
         <xs:element name="box" maxOccurs="unbounded">
           <xs:complexType mixed="true">            
             <xs:attribute name="id" type="xs:string"/>
-            <xs:attribute name="x" type="xs:decimal"/>
-            <xs:attribute name="y" type="xs:decimal"/>
-            <xs:attribute name="width" type="xs:decimal"/>
+            <xs:attribute name="x" type="xs:decimal" use="required"/>
+            <xs:attribute name="y" type="xs:decimal" use="required"/>
+            <xs:attribute name="width" type="xs:decimal" use="required"/>
             <xs:attribute name="height" type="xs:decimal" default="1"/>
             <xs:attribute name="text-align" default="left">
               <xs:simpleType>
