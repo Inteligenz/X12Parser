@@ -94,6 +94,9 @@
       <ResourcePath>INS._837P._4010.Example2_PatientIsNotSubscriber.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <ResourcePath>INS._837P._4010.Example3_Cms1500Test.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._837P._5010.Example1_2_And_3_Combined.txt</ResourcePath>
     </EdiFile>
     <EdiFile>

@@ -30,7 +30,28 @@
       <xsl:attribute name="Qual">
         <xsl:value-of select="DTP01"/>
       </xsl:attribute>
-      <xsl:value-of select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2))"/>
+      <xsl:attribute name="Format">
+        <xsl:value-of select="DTP02"/>
+      </xsl:attribute>
+      <xsl:variable name="from-date" select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2))"/>
+      <xsl:variable name="to-date" select="concat(substring(DTP03,10,4),'-',substring(DTP03,14,2),'-',substring(DTP03,16,2))"/>
+      <xsl:choose>
+        <xsl:when test="DTP02='D8'">
+          <xsl:value-of select="$from-date"/>
+        </xsl:when>
+        <xsl:when test="DTP02='RD8'">
+          <xsl:attribute name="From">
+            <xsl:value-of select="$from-date"/>
+          </xsl:attribute>
+          <xsl:attribute name="To">
+            <xsl:value-of select="$to-date"/>
+          </xsl:attribute>
+          <xsl:value-of select="concat($from-date,' to ',$to-date)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="DTP03"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </Date>
   </xsl:template>
   
