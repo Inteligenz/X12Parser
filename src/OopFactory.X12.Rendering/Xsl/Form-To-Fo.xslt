@@ -61,13 +61,13 @@
       <xsl:attribute name="left"><xsl:value-of select="$master/@x-offset + @x * $master/@x-scale"/>in</xsl:attribute>
       <xsl:attribute name="width"><xsl:value-of select="@width * $master/@x-scale"/>in</xsl:attribute>
       <xsl:attribute name="top"><xsl:value-of select="$master/@y-offset + @y * $master/@y-scale"/>in</xsl:attribute>
-      <xsl:attribute name="height"><xsl:value-of select="$master/@y-scale * 1.25"/>in</xsl:attribute>
+      <xsl:attribute name="height"><xsl:value-of select="$master/@y-scale * 1.1"/>in</xsl:attribute>
       <xsl:if test="string-length(@text-align)>0">
         <xsl:attribute name="text-align">
           <xsl:value-of select="@text-align"/>
         </xsl:attribute>
       </xsl:if>
-      <fo:block>
+      <fo:block margin-left="3px" margin-right="3px">
         <xsl:value-of select="."/>
       </fo:block>
     </fo:block-container>
