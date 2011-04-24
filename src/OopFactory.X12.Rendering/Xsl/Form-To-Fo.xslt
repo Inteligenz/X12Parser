@@ -57,7 +57,7 @@
   <xsl:template match="oop:box">
     <xsl:variable name="reference" select="../@form-master-template-ref"/>
     <xsl:variable name="master" select="/Interchange/oop:form-master-template[@name=$reference]"/>
-    <fo:block-container position="absolute" border-width="thin" border-color="blue" border-style="solid">
+    <fo:block-container position="absolute">
       <xsl:attribute name="left"><xsl:value-of select="$master/@x-offset + @x * $master/@x-scale"/>in</xsl:attribute>
       <xsl:attribute name="width"><xsl:value-of select="@width * $master/@x-scale"/>in</xsl:attribute>
       <xsl:attribute name="top"><xsl:value-of select="$master/@y-offset + @y * $master/@y-scale"/>in</xsl:attribute>
