@@ -3,8 +3,7 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
     xmlns:oop="http://www.OopFactory.com/Form.xsd"
 >
-  <xsl:decimal-format name="implied"
-decimal-separator=" " />
+  <xsl:decimal-format name="implied" decimal-separator=" " />
 
   <xsl:output method="xml" indent="yes"/>
   <xsl:param name="claim-image"/>
@@ -161,43 +160,6 @@ decimal-separator=" " />
 
   </xsl:template>
 
-  <xsl:template name="claim-footer">
-    <xsl:param name="claim"/>
-    
-    <oop:box id="25-tax-id" x="4" y="55" width="15">TAX ID</oop:box>
-    <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center">X</oop:box>
-    <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center">X</oop:box>
-
-    <oop:box id="26-patient-control-number" x="26" y="55" width="14">
-      <xsl:value-of select="$claim/@PatientControlNumber"/>
-    </oop:box>
-    <oop:box id="27-accept-assignment-yes" x="40.5" y="55" width="2.5" text-align="center">Y</oop:box>
-    <oop:box id="27-accept-assignment-no" x="45.5" y="55" width="2.5" text-align="center">N</oop:box>
-
-    <oop:box id="28-total-charges" x="55" y="55" width="9" text-align="right">00.00</oop:box>
-    <oop:box id="29-amount-paid" x="64.5" y="55" width="9" text-align="right">00.00</oop:box>
-    <oop:box id="30-balance-due" x="74" y="55" width="9" text-align="right">00.00</oop:box>
-
-    <oop:box id="31-line-1" x="4" y="57" width="21">SIGNATURE OF PHYS 1</oop:box>
-    <oop:box id="31-line-2" x="4" y="58" width="21">SIGNATURE OF PHYS 2</oop:box>
-    <oop:box id="31-line-3" x="4" y="59" width="21">SIGNATURE OF PHYS 3</oop:box>
-    <oop:box id="31-line-4" x="4" y="60" width="21">SIGNATURE OF PHYS 4</oop:box>
-
-    <oop:box id="32-service-facility-location-1" x="26" y="56" width="27">SERVICE FAC LOC 1</oop:box>
-    <oop:box id="32-service-facility-location-2" x="26" y="57" width="27">SERVICE FAC LOC 2</oop:box>
-    <oop:box id="32-service-facility-location-3" x="26" y="58" width="27">SERVICE FAC LOC 3</oop:box>
-    <oop:box id="32-service-facility-location-4" x="26" y="59" width="27">SERVICE FAC LOC 4</oop:box>
-    <oop:box id="32a" x="27" y="60" width="10">SFL A</oop:box>
-    <oop:box id="32b" x="38" y="60" width="15">SFL B</oop:box>
-
-    <oop:box id="33-billing-provider-1" x="53" y="56" width="30">BILLING PROVIDER 1</oop:box>
-    <oop:box id="33-billing-provider-2" x="53" y="57" width="30">BILLING PROVIDER 2</oop:box>
-    <oop:box id="33-billing-provider-3" x="53" y="58" width="30">BILLING PROVIDER 3</oop:box>
-    <oop:box id="33-billing-provider-4" x="53" y="59" width="30">BILLING PROVIDER 4</oop:box>
-    <oop:box id="33a" x="54" y="60" width="10">BILL PROV A</oop:box>
-    <oop:box id="33b" x="65" y="60" width="18">BILL PROV B</oop:box>
-  </xsl:template>
-  
   <xsl:template match="Claim[@Type='Professional']">
     <xsl:variable name="page-count" select="1 + (count(ServiceLine) - 1 - ((count(ServiceLine) - 1) mod 6)) div 6"/>
     <xsl:for-each select="ServiceLine">
@@ -314,7 +276,7 @@ decimal-separator=" " />
                   <xsl:value-of select="$y + 1"/>
                 </xsl:attribute>
                 <xsl:for-each select="CompositeDiagnosis/Diagnosis">
-                  <xsl:value-of select="@Pointer"/>    
+                  <xsl:value-of select="@Pointer"/>
                 </xsl:for-each>
               </oop:box>
               <oop:box id="24f-charges" x="53" width="9" text-align="right">
@@ -362,10 +324,137 @@ decimal-separator=" " />
             <xsl:with-param name="claim" select=".."/>
           </xsl:call-template>
           <oop:box id="page-ref" x="20" y="63" width="40" text-align="center">
-            Claim #<xsl:value-of select="../Reference[@Qual='D9']"  />, Page <xsl:value-of select="$page-num"/> of <xsl:value-of select="$page-count"/>          
+            Claim #<xsl:value-of select="../Reference[@Qual='D9']"  />, Page <xsl:value-of select="$page-num"/> of <xsl:value-of select="$page-count"/>
           </oop:box>
         </oop:form>
       </xsl:if>
     </xsl:for-each>
   </xsl:template>
+
+  <xsl:template name="box-25">
+    <xsl:param name="claim"/>
+    <xsl:variable name="pay-to-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']" />
+    <xsl:variable name="billing-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='85']" />
+    <xsl:choose>
+      <xsl:when test="count($pay-to-provider/Name/Identification[@Qual='24' or @Qual='34']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$pay-to-provider/Name/Identification"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center">
+          <xsl:if test="$pay-to-provider/Name/Identification/@Qual='34'">X</xsl:if>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center">
+          <xsl:if test="$pay-to-provider/Name/Identification/@Qual='24'">X</xsl:if>
+        </oop:box>
+      </xsl:when>
+      <xsl:when test="count($pay-to-provider/Reference[@Qual='EI']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$pay-to-provider/Reference[@Qual='EI']"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center"></oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:when test="count($pay-to-provider/Reference[@Qual='SY']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$pay-to-provider/Reference[@Qual='SY']"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center">X</oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center"></oop:box>
+      </xsl:when>
+      <xsl:when test="count($billing-provider/Name/Identification[@Qual='24' or @Qual='34']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$billing-provider/Name/Identification"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center">
+          <xsl:if test="$billing-provider/Name/Identification/@Qual='34'">X</xsl:if>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center">
+          <xsl:if test="$billing-provider/Name/Identification/@Qual='24'">X</xsl:if>
+        </oop:box>
+      </xsl:when>
+      <xsl:when test="count($billing-provider/Reference[@Qual='EI']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$billing-provider/Reference[@Qual='EI']"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center"></oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:when test="count($billing-provider/Reference[@Qual='SY']) > 0">
+        <oop:box id="25-tax-id" x="4" y="55" width="15">
+          <xsl:value-of select="$billing-provider/Reference[@Qual='SY']"/>
+        </oop:box>
+        <oop:box id="25-tax-id-is-ssn" x="19.5" y="55" width="2.5" text-align="center">X</oop:box>
+        <oop:box id="25-tax-id-is-ein" x="21.5" y="55" width="2.5" text-align="center"></oop:box>
+      </xsl:when>  
+    </xsl:choose>
+
+  </xsl:template>
+  
+  <xsl:template name="pay-to-provider">
+    <xsl:param name="provider"/>
+
+    <oop:box id="33-billing-provider-1" x="53" y="56" width="30">
+      
+    </oop:box>
+    <oop:box id="33-billing-provider-2" x="53" y="57" width="30">
+      <xsl:value-of select="$provider/Name/Full"/>
+    </oop:box>
+    <oop:box id="33-billing-provider-3" x="53" y="58" width="30">
+      <xsl:value-of select="$provider/AddressLine"/>
+    </oop:box>
+    <oop:box id="33-billing-provider-4" x="53" y="59" width="30">
+      <xsl:value-of select="concat($provider/Locale/@City, ', ',$provider/Locale/@State, ' ', $provider/Locale/@PostalCode)"/>
+    </oop:box>
+    <oop:box id="33a-npi" x="54" y="60" width="10">
+      <xsl:value-of select="$provider/Name/Identification[@Qual='XX']"/>
+    </oop:box>
+    <oop:box id="33b" x="65" y="60" width="18">
+      <xsl:value-of select="concat($provider/Reference/@Qual, ' ', $provider/Reference)"/>
+    </oop:box>
+
+  </xsl:template>
+  <xsl:template name="claim-footer">
+    <xsl:param name="claim"/>
+
+    <xsl:call-template name="box-25">
+      <xsl:with-param name="claim" select="$claim"/>
+    </xsl:call-template>
+    <oop:box id="26-patient-control-number" x="26" y="55" width="14">
+      <xsl:value-of select="$claim/@PatientControlNumber"/>
+    </oop:box>
+    <oop:box id="27-accept-assignment-yes" x="40.5" y="55" width="2.5" text-align="center">Y</oop:box>
+    <oop:box id="27-accept-assignment-no" x="45.5" y="55" width="2.5" text-align="center">N</oop:box>
+
+    <oop:box id="28-total-charges" x="55" y="55" width="9" text-align="right">00.00</oop:box>
+    <oop:box id="29-amount-paid" x="64.5" y="55" width="9" text-align="right">00.00</oop:box>
+    <oop:box id="30-balance-due" x="74" y="55" width="9" text-align="right">00.00</oop:box>
+
+    <xsl:variable name="pay-to-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']" />
+        <xsl:choose>
+          <xsl:when test="count($claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']) > 0">
+            <xsl:call-template name="pay-to-provider">
+              <xsl:with-param name="provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:call-template name="pay-to-provider">
+              <xsl:with-param name="provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='85']"/>
+            </xsl:call-template>
+          </xsl:otherwise>
+        </xsl:choose>
+
+    <oop:box id="31-line-1" x="4" y="57" width="21">SIGNATURE OF PHYS 1</oop:box>
+    <oop:box id="31-line-2" x="4" y="58" width="21">SIGNATURE OF PHYS 2</oop:box>
+    <oop:box id="31-line-3" x="4" y="59" width="21">SIGNATURE OF PHYS 3</oop:box>
+    <oop:box id="31-line-4" x="4" y="60" width="21">SIGNATURE OF PHYS 4</oop:box>
+
+    <oop:box id="32-service-facility-location-1" x="26" y="56" width="27">SERVICE FAC LOC 1</oop:box>
+    <oop:box id="32-service-facility-location-2" x="26" y="57" width="27">SERVICE FAC LOC 2</oop:box>
+    <oop:box id="32-service-facility-location-3" x="26" y="58" width="27">SERVICE FAC LOC 3</oop:box>
+    <oop:box id="32-service-facility-location-4" x="26" y="59" width="27">SERVICE FAC LOC 4</oop:box>
+    <oop:box id="32a" x="27" y="60" width="10">SFL A</oop:box>
+    <oop:box id="32b" x="38" y="60" width="15">SFL B</oop:box>
+
+  </xsl:template>
+  
 </xsl:stylesheet>
