@@ -422,12 +422,33 @@
     <oop:box id="26-patient-control-number" x="26" y="55" width="14">
       <xsl:value-of select="$claim/@PatientControlNumber"/>
     </oop:box>
-    <oop:box id="27-accept-assignment-yes" x="40.5" y="55" width="2.5" text-align="center">Y</oop:box>
-    <oop:box id="27-accept-assignment-no" x="45.5" y="55" width="2.5" text-align="center">N</oop:box>
+    <oop:box id="27-accept-assignment-yes" x="40.5" y="55" width="2.5" text-align="center">
+      <xsl:if test="$claim/@BenefitsAssignmentCertificationIndicator = 'Y'">X</xsl:if>
+    </oop:box>
+    <oop:box id="27-accept-assignment-no" x="45.5" y="55" width="2.5" text-align="center">
+      <xsl:if test="$claim/@BenefitsAssignmentCertificationIndicator = 'N'">X</xsl:if>
+    </oop:box>
 
-    <oop:box id="28-total-charges" x="55" y="55" width="9" text-align="right">00.00</oop:box>
-    <oop:box id="29-amount-paid" x="64.5" y="55" width="9" text-align="right">00.00</oop:box>
-    <oop:box id="30-balance-due" x="74" y="55" width="9" text-align="right">00.00</oop:box>
+    <oop:box id="28-total-charges" x="55" y="55" width="9" text-align="right">
+      <xsl:value-of select="format-number($claim/@TotalCharge,'# 00','implied')"/>
+    </oop:box>
+    <xsl:choose>
+      <xsl:when test="string-length($claim/Amount[@Qual='F5']) > 0">
+        <oop:box id="29-amount-paid" x="64.5" y="55" width="9" text-align="right">
+          <xsl:value-of select="format-number($claim/Amount[@Qual='F5'],'# 00','implied')"/>
+        </oop:box>
+        <oop:box id="30-balance-due" x="74" y="55" width="9" text-align="right">
+          <xsl:value-of select="format-number($claim/@TotalCharge - $claim/Amount[@Qual='F5'],'# 00','implied')"/>
+        </oop:box>
+      </xsl:when>
+      <xsl:otherwise>
+        <oop:box id="29-amount-paid" x="64.5" y="55" width="9" text-align="right">
+        </oop:box>
+        <oop:box id="30-balance-due" x="74" y="55" width="9" text-align="right">
+          <xsl:value-of select="format-number($claim/@TotalCharge,'# 00','implied')"/>
+        </oop:box>
+      </xsl:otherwise>
+    </xsl:choose>
 
     <xsl:variable name="pay-to-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']" />
         <xsl:choose>
