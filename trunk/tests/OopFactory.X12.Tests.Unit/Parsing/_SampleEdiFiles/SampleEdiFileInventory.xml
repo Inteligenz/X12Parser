@@ -71,6 +71,10 @@
       <SourceUrl>http://suppliers.safeway.com/usa/pdf/X12_820_004010.pdf</SourceUrl>
       <ResourcePath>ORD._820.Example4_Safeway.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://en.wikiversity.org/wiki/Ansi_x12_standard_format</SourceUrl>
+      <ResourcePath>ORD._820.Example5_Wikipedia.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="834">
     <EdiFile>
