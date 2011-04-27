@@ -729,8 +729,20 @@
   <!-- Common Segments -->
   <Segment SegmentId="AMT">
     <Element Name="Amount Qualifier Code" Type="ID" MinLength="1" MaxLength="3" Required="true">
+      <Allowed ID="AAE">Approved Amount</Allowed>
+      <Allowed ID="AU">Coverage Amount</Allowed>
+      <Allowed ID="B6">Allowed-Actual</Allowed>
+      <Allowed ID="D">Payor Amount Paid</Allowed>
+      <Allowed ID="D8">Discount Amount</Allowed>
+      <Allowed ID="DY">Per Day Limit</Allowed>
+      <Allowed ID="F2">Patient Responsibility-Actual</Allowed>
+      <Allowed ID="F4">Postage Claimed</Allowed>
+      <Allowed ID="F5">Patient Amount Paid</Allowed>
+      <Allowed ID="MA">Maximum Amount</Allowed>
+      <Allowed ID="NE">Net Billed</Allowed>
+      <Allowed ID="T">Tax</Allowed>
+      <Allowed ID="T2">Total Claim Before Taxes</Allowed>
       <Allowed ID="T3">Total Submitted Charges</Allowed>
-      
     </Element>
     <Element Name="Monetary Amount" Type="R" MinLength="1" MaxLength="18"/>
     <Element Name="Credit/Debit Flag Code" Type="ID" MinLength="1" MaxLength="1">
