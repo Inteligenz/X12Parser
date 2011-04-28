@@ -26,6 +26,7 @@
       <EntityIdentifier Code="PR"/>
       <EntityIdentifier Code="EN"/>
       <EntityIdentifier Code="DU"/>
+      <EntityIdentifier Code="SU"/>
     </StartingSegment>
     <Segment SegmentId="N2"/>
     <Segment SegmentId="N3"/>

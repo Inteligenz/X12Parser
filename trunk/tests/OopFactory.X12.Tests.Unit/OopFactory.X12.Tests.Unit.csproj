@@ -93,6 +93,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example4_Safeway.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\Example3_Cms1500Test.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_820\Example5_Wikipedia.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_810\Example5_Walmart.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
