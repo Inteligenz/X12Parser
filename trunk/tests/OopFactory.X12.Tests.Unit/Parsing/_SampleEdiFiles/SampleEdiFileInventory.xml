@@ -79,6 +79,10 @@
       <SourceUrl>http://en.wikiversity.org/wiki/Ansi_x12_standard_format</SourceUrl>
       <ResourcePath>ORD._820.Example5_Wikipedia.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>From Mahendran Shanmugham</SourceUrl>
+      <ResourcePath>ORD._820.Example6.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="834">
     <EdiFile>
