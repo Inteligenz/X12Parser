@@ -389,30 +389,70 @@
     </xsl:choose>
 
   </xsl:template>
-  
-  <xsl:template name="pay-to-provider">
-    <xsl:param name="provider"/>
 
+  <xsl:template name="box-31">
+    <xsl:param name="provider" />
+    
+    <oop:box id="31-line-1" x="4" y="57" width="21"></oop:box>
+    <oop:box id="31-line-2" x="4" y="58" width="21"></oop:box>
+    <oop:box id="31-line-3" x="4" y="59" width="21">
+      <xsl:value-of select="$provider/Name/Full"/>
+    </oop:box>
+    <oop:box id="31-line-4" x="4" y="60" width="21"></oop:box>
+
+
+  </xsl:template>
+  
+  <xsl:template name="box-32">
+    <xsl:param name="facility"/>
+    
+    <oop:box id="32-service-facility-location-1" x="26" y="56" width="27">
+    </oop:box>
+    <oop:box id="32-service-facility-location-2" x="26" y="57" width="27">
+      <xsl:value-of select="$facility/Name/Full"/>
+    </oop:box>
+    <oop:box id="32-service-facility-location-3" x="26" y="58" width="27">
+      <xsl:for-each select="$facility/AddressLine">
+        <xsl:value-of select="."/>
+      </xsl:for-each>  
+    </oop:box>
+    <oop:box id="32-service-facility-location-4" x="26" y="59" width="27">
+      <xsl:value-of select="concat($facility/Locale/@City, ', ',$facility/Locale/@State, ' ', $facility/Locale/@PostalCode)"/>
+    </oop:box>
+    <oop:box id="32a" x="27" y="60" width="10">
+      <xsl:value-of select="$facility/Name/Identification[@Qual='XX']"/>
+
+    </oop:box>
+    <oop:box id="32b" x="38" y="60" width="15">
+      <xsl:value-of select="concat($facility/Reference/@Qual, ' ', $facility/Reference)"/>
+
+    </oop:box>
+  </xsl:template>
+  
+  <xsl:template name="box-33">
+    <xsl:param name="billing-provider"/>
     <oop:box id="33-billing-provider-1" x="53" y="56" width="30">
       
     </oop:box>
     <oop:box id="33-billing-provider-2" x="53" y="57" width="30">
-      <xsl:value-of select="$provider/Name/Full"/>
+      <xsl:value-of select="$billing-provider/Name/Full"/>
     </oop:box>
     <oop:box id="33-billing-provider-3" x="53" y="58" width="30">
-      <xsl:value-of select="$provider/AddressLine"/>
+      <xsl:for-each select="$billing-provider/AddressLine">
+        <xsl:value-of select="."/>
+      </xsl:for-each>
     </oop:box>
     <oop:box id="33-billing-provider-4" x="53" y="59" width="30">
-      <xsl:value-of select="concat($provider/Locale/@City, ', ',$provider/Locale/@State, ' ', $provider/Locale/@PostalCode)"/>
+      <xsl:value-of select="concat($billing-provider/Locale/@City, ', ',$billing-provider/Locale/@State, ' ', $billing-provider/Locale/@PostalCode)"/>
     </oop:box>
     <oop:box id="33a-npi" x="54" y="60" width="10">
-      <xsl:value-of select="$provider/Name/Identification[@Qual='XX']"/>
+      <xsl:value-of select="$billing-provider/Name/Identification[@Qual='XX']"/>
     </oop:box>
     <oop:box id="33b" x="65" y="60" width="18">
-      <xsl:value-of select="concat($provider/Reference/@Qual, ' ', $provider/Reference)"/>
+      <xsl:value-of select="concat($billing-provider/Reference/@Qual, ' ', $billing-provider/Reference)"/>
     </oop:box>
-
   </xsl:template>
+    
   <xsl:template name="claim-footer">
     <xsl:param name="claim"/>
 
@@ -450,32 +490,26 @@
       </xsl:otherwise>
     </xsl:choose>
 
-    <xsl:variable name="pay-to-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']" />
-        <xsl:choose>
-          <xsl:when test="count($claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']) > 0">
-            <xsl:call-template name="pay-to-provider">
-              <xsl:with-param name="provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='87']"/>
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:call-template name="pay-to-provider">
-              <xsl:with-param name="provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='85']"/>
-            </xsl:call-template>
-          </xsl:otherwise>
-        </xsl:choose>
+    <xsl:call-template name="box-31">
+      <xsl:with-param name="provider" select="$claim/Provider[@LoopId='2310B']" />
+    </xsl:call-template>
 
-    <oop:box id="31-line-1" x="4" y="57" width="21">SIGNATURE OF PHYS 1</oop:box>
-    <oop:box id="31-line-2" x="4" y="58" width="21">SIGNATURE OF PHYS 2</oop:box>
-    <oop:box id="31-line-3" x="4" y="59" width="21">SIGNATURE OF PHYS 3</oop:box>
-    <oop:box id="31-line-4" x="4" y="60" width="21">SIGNATURE OF PHYS 4</oop:box>
+    <xsl:choose>
+      <xsl:when test="count($claim/Provider[@LoopId='2310D']) > 0">
+        <xsl:call-template name="box-32">
+          <xsl:with-param name="facility" select="$claim/Provider[@LoopId='2310D']"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="box-32">
+          <xsl:with-param name="facility" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='85']" />
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
 
-    <oop:box id="32-service-facility-location-1" x="26" y="56" width="27">SERVICE FAC LOC 1</oop:box>
-    <oop:box id="32-service-facility-location-2" x="26" y="57" width="27">SERVICE FAC LOC 2</oop:box>
-    <oop:box id="32-service-facility-location-3" x="26" y="58" width="27">SERVICE FAC LOC 3</oop:box>
-    <oop:box id="32-service-facility-location-4" x="26" y="59" width="27">SERVICE FAC LOC 4</oop:box>
-    <oop:box id="32a" x="27" y="60" width="10">SFL A</oop:box>
-    <oop:box id="32b" x="38" y="60" width="15">SFL B</oop:box>
-
+    <xsl:call-template name="box-33">
+      <xsl:with-param name="billing-provider" select="$claim/ancestor::node()[@LoopId='2000A']/Provider[Name/@Qual='85']" />
+    </xsl:call-template>
   </xsl:template>
   
 </xsl:stylesheet>
