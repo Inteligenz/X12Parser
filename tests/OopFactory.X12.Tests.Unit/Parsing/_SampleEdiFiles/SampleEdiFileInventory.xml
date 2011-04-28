@@ -53,6 +53,10 @@
       <SourceUrl>http://www.adobe.com/partnerportal/edi/pdf/810_ANSI_X12_122007_001.pdf</SourceUrl>
       <ResourcePath>ORD._810.Example4_Adobe.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.jobisez.com/edi/tp/guide.aspx?doc=/edi-igs/Walmart/810Invoice5010.pdf</SourceUrl>
+      <ResourcePath>ORD._810.Example5_Walmart.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="820">
     <EdiFile>
