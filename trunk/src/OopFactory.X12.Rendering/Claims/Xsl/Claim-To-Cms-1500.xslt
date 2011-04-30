@@ -148,10 +148,22 @@
     <oop:box id="20-outside-lab-charges-1" x="65" y="35" width="9" text-align="right">00.00</oop:box>
     <oop:box id="20-outside-lab-charges-2" x="74.5" y="35" width="9" text-align="right">00.00</oop:box>
 
-    <oop:box id="21-diag-1" x="6" y="37" width="8">123 4</oop:box>
-    <oop:box id="21-diag-2" x="6" y="39" width="8">234 5</oop:box>
-    <oop:box id="21-diag-3" x="33" y="37" width="8">345 6</oop:box>
-    <oop:box id="21-diag-4" x="33" y="39" width="8">456 7</oop:box>
+    <xsl:variable name="diag1" select="$claim/InformationCode[@Qual='BK']"/>
+    <xsl:variable name="diag2" select="$claim/InformationCode[@Qual='BF'][1]"/>
+    <xsl:variable name="diag3" select="$claim/InformationCode[@Qual='BF'][2]"/>
+    <xsl:variable name="diag4" select="$claim/InformationCode[@Qual='BF'][3]"/>
+    <oop:box id="21-diag-1" x="6" y="37" width="8">
+      <xsl:value-of select="concat(substring($diag1,1,3),' ',substring($diag1,4))"/>
+    </oop:box>
+    <oop:box id="21-diag-2" x="6" y="39" width="8">
+      <xsl:value-of select="concat(substring($diag2,1,3),' ',substring($diag2,4))"/>
+    </oop:box>
+    <oop:box id="21-diag-3" x="33" y="37" width="8">
+      <xsl:value-of select="concat(substring($diag3,1,3),' ',substring($diag3,4))"/>
+    </oop:box>
+    <oop:box id="21-diag-4" x="33" y="39" width="8">
+      <xsl:value-of select="concat(substring($diag4,1,3),' ',substring($diag4,4))"/>
+    </oop:box>
 
     <oop:box id="22-medicare-resubmission-code" x="53" y="37" width="11">RESUB CODE</oop:box>
     <oop:box id="22-medicare-resubmission-original-ref-number" x="65" y="37" width="18">ORIGINAL REF NUM</oop:box>
