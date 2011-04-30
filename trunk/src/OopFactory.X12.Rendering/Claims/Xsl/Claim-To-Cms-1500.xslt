@@ -184,32 +184,40 @@
                 </xsl:attribute>
                 <!-- CUSTOM SOLUTION HERE -->
               </oop:box>
-              <oop:box id="24i-id-qual" x="68" width="3">
-                <xsl:attribute name="y">
-                  <xsl:value-of select="$y"/>
-                </xsl:attribute>
                 <xsl:choose>
                   <xsl:when test="count(Provider[Name/@Qual='82'])>0">
-                    <xsl:value-of select="Provider[Name/@Qual='82']/Reference/@Qual"/>
+                    <xsl:choose>
+                      <xsl:when test="Provider/Name/Identification/@Qual != 'XX'">
+                        <xsl:call-template name="box-24-i-and-j">
+                          <xsl:with-param name="y" select="$y"/>
+                          <xsl:with-param name="id" select="Provider/Name/Identification"/>
+                        </xsl:call-template>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:call-template name="box-24-i-and-j">
+                          <xsl:with-param name="y" select="$y"/>
+                          <xsl:with-param name="id" select="Provider/Reference"/>
+                        </xsl:call-template>
+                      </xsl:otherwise>
+                    </xsl:choose>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="../Provider[Name/@Qual='82']/Reference/@Qual"/>
+                    <xsl:choose>
+                      <xsl:when test="../Provider/Name/Identification/@Qual != 'XX'">
+                        <xsl:call-template name="box-24-i-and-j">
+                          <xsl:with-param name="y" select="$y"/>
+                          <xsl:with-param name="id" select="../Provider/Name/Identification"/>
+                        </xsl:call-template>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:call-template name="box-24-i-and-j">
+                          <xsl:with-param name="y" select="$y"/>
+                          <xsl:with-param name="id" select="../Provider/Reference"/>
+                        </xsl:call-template>
+                      </xsl:otherwise>
+                    </xsl:choose>
                   </xsl:otherwise>
                 </xsl:choose>
-              </oop:box>
-              <oop:box id="24j-provider-id" x="71" width="12">
-                <xsl:attribute name="y">
-                  <xsl:value-of select="$y"/>
-                </xsl:attribute>
-                <xsl:choose>
-                  <xsl:when test="count(Provider[Name/@Qual='82'])>0">
-                    <xsl:value-of select="Provider[Name/@Qual='82']/Reference"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:value-of select="../Provider[Name/@Qual='82']/Reference"/>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </oop:box>
               <oop:box id="24a-dos-from" x="4" width="8.5" text-align="center">
                 <xsl:attribute name="y">
                   <xsl:value-of select="$y + 1"/>
@@ -329,6 +337,23 @@
         </oop:form>
       </xsl:if>
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template name="box-24-i-and-j">
+    <xsl:param name="y"/>
+    <xsl:param name="id"/>
+    <oop:box id="24i-id-qual" x="68" width="3">
+      <xsl:attribute name="y">
+        <xsl:value-of select="$y"/>
+      </xsl:attribute>
+      <xsl:value-of select="$id/@Qual"/>
+    </oop:box>
+    <oop:box id="24j-provider-id" x="71" width="12">
+      <xsl:attribute name="y">
+        <xsl:value-of select="$y"/>
+      </xsl:attribute>
+      <xsl:value-of select="$id"/>
+    </oop:box>
   </xsl:template>
 
   <xsl:template name="box-25">
