@@ -209,7 +209,34 @@
       <Name>
         <xsl:value-of select="PER02"/>
       </Name>
+      <xsl:call-template name="communication-number">
+        <xsl:with-param name="qual" select="PER03"/>
+        <xsl:with-param name="number" select="PER04"/>
+      </xsl:call-template>
+      <xsl:call-template name="communication-number">
+        <xsl:with-param name="qual" select="PER05"/>
+        <xsl:with-param name="number" select="PER06"/>
+      </xsl:call-template>
+      <xsl:call-template name="communication-number">
+        <xsl:with-param name="qual" select="PER07"/>
+        <xsl:with-param name="number" select="PER08"/>
+      </xsl:call-template>
     </Contact>
+  </xsl:template>
+
+  <xsl:template name="communication-number">
+    <xsl:param name="qual"/>
+    <xsl:param name="number"/>
+    <xsl:if test="string-length($qual)>0 or string-length($number)>0">
+      <Communication>
+        <xsl:attribute name="Qual">
+          <xsl:value-of select="$qual"/>
+        </xsl:attribute>
+        <xsl:attribute name="Number">
+          <xsl:value-of select="$number"/>
+        </xsl:attribute>
+      </Communication>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>

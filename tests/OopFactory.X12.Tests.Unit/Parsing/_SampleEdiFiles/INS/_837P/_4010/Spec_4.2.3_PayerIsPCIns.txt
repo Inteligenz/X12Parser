@@ -1,0 +1,43 @@
+﻿ISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *930602*1253*^*00401*000000905*1*T*:~
+  GS*HC*SENDER CODE*RECEIVER CODE*1994033*0802*1*X*004010X098A1~
+    ST*837*872501~
+      BHT*0019*00*0125*19970411*1524*CH~
+      REF*87*004010X098~
+      NM1*41*2*FERMANN HAND & FOOT CLINIC*****46*591PD123~
+        PER*IC*JAN FOOT*TE*8156667777~
+      NM1*40*2*HEISMAN INSURANCE COMPANY*****46*555667777~
+      HL*1**20*1~
+        NM1*85*2*FERMANN HAND & FOOT CLINIC*****XX*591PD123~
+          N3*10 1/2 SHOEMAKER STREET~
+          N4*COBBLER*CA*99997~
+          REF*EI*579999999~
+        HL*2*1*22*1~
+          SBR*P********AM~
+          NM1*IL*1*HOWLING*HAL****MI*B99977791G~
+          NM1*PR*2*HEISMAN INSURANCE COMPANY*****XV*999888777~
+            N3*1 TROPHY LANE~
+            N4*NYAC*NY*10032~
+          HL*3*2*23*0~
+            PAT*41~
+            NM1*QC*1*DIMPSON*DJ****34*567324788~
+              N3*32 BUFFALO RUN~
+              N4*ROCKING HORSE*CA*99666~
+              DMG*D8*19480601*M~
+              REF*Y4*32323232~
+            CLM*900000032*185***11::1*Y*A*Y*Y*B*AA~
+              DTP*439*D8*19940617~
+              HI*BK:8842~
+              NM1*82*1*MOGLIE*BRUNO****XX*687AB861~
+                PRV*PE*ZZ*203BE004Y~
+              NM1*77*2*FERMANN HAND & FOOT CLINIC*****XX*591PD123~
+                N3*10 1/2 SHOEMAKER STREET~
+                N4*COBBLER*CA*99997~
+              LX*1~
+                SV1*HC:99201*150*UN*1***1**Y~
+                DTP*472*D8*19940620~
+              LX*2~
+                SV1*HC:26010*35*UN*1***1**Y~
+                DTP*472*D8*19940620~
+    SE*39*872501~
+  GE*1*1~
+IEA*1*000000905~

@@ -58,6 +58,7 @@
     <Allowed ID="393">Plan Participation Suspension</Allowed>
     <Allowed ID="394">Rehire</Allowed>
     <Allowed ID="431">Onset of Current Symptoms or Illness</Allowed>
+    <Allowed ID="434">Statement</Allowed>
     <Allowed ID="435">Admission</Allowed>
     <Allowed ID="438">Onset of Similar Symptoms or Illness</Allowed>
     <Allowed ID="439">Accident</Allowed>
@@ -79,6 +80,7 @@
     <Allowed ID="739">Most Recent Serum Creatine</Allowed>
     <Allowed ID="809">Posted</Allowed>
     <Allowed ID="814">Payment Due Date</Allowed>
+    <Allowed ID="866">Examination</Allowed>
   </QualifierSet>
   <QualifierSet Name="Date Time Period Format Qualifier">
     <Allowed ID="D8">Date Expression in Format CCYYMMDD</Allowed>
@@ -653,6 +655,55 @@
     <Allowed ID="TC">Transitional Care</Allowed>
     <Allowed ID="TN">Transitional Nursery Care</Allowed>
     <Allowed ID="UC">Urgent Care</Allowed>
+  </QualifierSet>
+  <QualifierSet Name="Payer Responsibility Sequence Number Code">
+    <Allowed ID="A">Payer Responsibility Four</Allowed>
+    <Allowed ID="B">Payer Responsibility Five</Allowed>
+    <Allowed ID="C">Payer Responsibility Six</Allowed>
+    <Allowed ID="D">Payer Responsibility Seven</Allowed>
+    <Allowed ID="E">Payer Responsibility Eight</Allowed>
+    <Allowed ID="F">Payer Responsibility Nine</Allowed>
+    <Allowed ID="G">Payer Responsibility Ten</Allowed>
+    <Allowed ID="H">Payer Responsibility Eleven</Allowed>
+    <Allowed ID="P">Primary</Allowed>
+    <Allowed ID="S">Secondary</Allowed>
+    <Allowed ID="T">Tertiary</Allowed>
+    <Allowed ID="U">Unknown</Allowed>
+  </QualifierSet>
+  <QualifierSet Name="Individual Relationship Code">
+    <Allowed ID="01">Spouse</Allowed>
+    <Allowed ID="03">Father or Mother</Allowed>
+    <Allowed ID="04">Grandfather or Grandmother</Allowed>
+    <Allowed ID="05">Grandson or Granddaughter</Allowed>
+    <Allowed ID="06">Uncle or Aunt</Allowed>
+    <Allowed ID="07">Nephew or Niece</Allowed>
+    <Allowed ID="08">Cousin</Allowed>
+    <Allowed ID="09">Adopted Child</Allowed>
+    <Allowed ID="10">Foster Child</Allowed>
+    <Allowed ID="11">Son-in-law or Daughter-in-law</Allowed>
+    <Allowed ID="12">Brother-in-law or Sister-in-law</Allowed>
+    <Allowed ID="13">Mother-in-law or Fater-in-law</Allowed>
+    <Allowed ID="14">Brother or Sister</Allowed>
+    <Allowed ID="15">Ward</Allowed>
+    <Allowed ID="17">Stepson or Stepdaughter</Allowed>
+    <Allowed ID="18">Self</Allowed>
+    <Allowed ID="19">Child</Allowed>
+    <Allowed ID="20">Employee</Allowed>
+    <Allowed ID="21">Unknown</Allowed>
+    <Allowed ID="23">Sponsored Dependent</Allowed>
+    <Allowed ID="24">Dependent of a Minor Dependent</Allowed>
+    <Allowed ID="25">Ex-spouse</Allowed>
+    <Allowed ID="26">Guardian</Allowed>
+    <Allowed ID="31">Court Appointed Guardian</Allowed>
+    <Allowed ID="32">Mother</Allowed>
+    <Allowed ID="33">Father</Allowed>
+    <Allowed ID="38">Collateral Dependent</Allowed>
+    <Allowed ID="39">Organ Donor</Allowed>
+    <Allowed ID="40">Cadaver Donor</Allowed>
+    <Allowed ID="48">Stepfather</Allowed>
+    <Allowed ID="49">Stepmother</Allowed>
+    <Allowed ID="53">Life Partner</Allowed>
+    <Allowed ID="G8">Other Relationship</Allowed>
   </QualifierSet>
   <!-- Control Segments -->
   <Segment SegmentId="ISA" >
@@ -1376,36 +1427,7 @@
       <Allowed ID="N">No</Allowed>
       <Allowed ID="Y">Yes</Allowed>
     </Element>
-    <Element Name="Individual Relationship Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
-      <Allowed ID="01">Spouse</Allowed>
-      <Allowed ID="03">Father or Mother</Allowed>
-      <Allowed ID="04">Grandfather or Grandmother</Allowed>
-      <Allowed ID="05">Grandson or Granddaughter</Allowed>
-      <Allowed ID="06">Uncle or Aunt</Allowed>
-      <Allowed ID="07">Nephew or Niece</Allowed>
-      <Allowed ID="08">Cousin</Allowed>
-      <Allowed ID="09">Adopted Child</Allowed>
-      <Allowed ID="10">Foster Child</Allowed>
-      <Allowed ID="11">Son-in-law or Daughter-in-law</Allowed>
-      <Allowed ID="12">Brother-in-law or Sister-in-law</Allowed>
-      <Allowed ID="13">Mother-in-law or Fater-in-law</Allowed>
-      <Allowed ID="14">Brother or Sister</Allowed>
-      <Allowed ID="15">Ward</Allowed>
-      <Allowed ID="17">Stepson or Stepdaughter</Allowed>
-      <Allowed ID="18">Self</Allowed>
-      <Allowed ID="19">Child</Allowed>
-      <Allowed ID="23">Sponsored Dependent</Allowed>
-      <Allowed ID="24">Dependent of a Minor Dependent</Allowed>
-      <Allowed ID="25">Ex-spouse</Allowed>
-      <Allowed ID="26">Guardian</Allowed>
-      <Allowed ID="31">Court Appointed Guardian</Allowed>
-      <Allowed ID="32">Mother</Allowed>
-      <Allowed ID="33">Father</Allowed>
-      <Allowed ID="38">Collateral Dependent</Allowed>
-      <Allowed ID="48">Stepfather</Allowed>
-      <Allowed ID="49">Stepmother</Allowed>
-      <Allowed ID="53">Life Partner</Allowed>
-    </Element>
+    <Element Name="Individual Relationship Code" Required="true" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Individual Relationship Code" />
     <Element Name="Maintenance Type Code" Type="ID" MinLength="3" MaxLength="3">
       <Allowed ID="001">Change</Allowed>
       <Allowed ID="021">Addition</Allowed>
@@ -1559,11 +1581,7 @@
     
   </Segment>
   <Segment SegmentId="COB">
-    <Element Name="Payer Responsibility Sequence Number Code" Type="ID" MinLength="1" MaxLength="1">
-      <Allowed ID="P">Primary</Allowed>
-      <Allowed ID="S">Secondary</Allowed>
-      <Allowed ID="T">Tertiary</Allowed>
-      <Allowed ID="U">Unknown</Allowed>
+    <Element Name="Payer Responsibility Sequence Number Code" Type="ID" MinLength="1" MaxLength="1" QualiferSetRef="Payer Responsibility Sequence Number Code">
     </Element>
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="30"/>
     <Element Name="Coordination of Benefits Code" Type="ID" MinLength="1" MaxLength="1">
@@ -1585,31 +1603,8 @@
     <Element Name="Provider Organization Code" Type="ID" MinLength="3" MaxLength="3" />
   </Segment>
   <Segment SegmentId="SBR">
-    <Element Name="Payer Responsibility Sequence Number Code" Required="true" Type="ID" MinLength="1" MaxLength="1">
-      <Allowed ID="A">Payer Responsibility Four</Allowed>
-      <Allowed ID="B">Payer Responsibility Five</Allowed>
-      <Allowed ID="C">Payer Responsibility Six</Allowed>
-      <Allowed ID="D">Payer Responsibility Seven</Allowed>
-      <Allowed ID="E">Payer Responsibility Eight</Allowed>
-      <Allowed ID="F">Payer Responsibility Nine</Allowed>
-      <Allowed ID="G">Payer Responsibility Ten</Allowed>
-      <Allowed ID="H">Payer Responsibility Eleven</Allowed>
-      <Allowed ID="P">Primary</Allowed>
-      <Allowed ID="S">Secondary</Allowed>
-      <Allowed ID="T">Tertiary</Allowed>
-      <Allowed ID="U">Unknown</Allowed>
-    </Element>
-    <Element Name="Individual Relationship Code" Type="ID" MinLength="2" MaxLength="2">
-      <Allowed ID="01">Spouse</Allowed>
-      <Allowed ID="18">Self</Allowed>
-      <Allowed ID="19">Child</Allowed>
-      <Allowed ID="20">Employee</Allowed>
-      <Allowed ID="21">Unknown</Allowed>
-      <Allowed ID="39">Organ Donor</Allowed>
-      <Allowed ID="40">Cadaver Donor</Allowed>
-      <Allowed ID="53">Life Partner</Allowed>
-      <Allowed ID="G8">Other Relationship</Allowed>
-    </Element>
+    <Element Name="Payer Responsibility Sequence Number Code" Required="true" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Payer Responsibility Sequence Number Code" />
+    <Element Name="Individual Relationship Code" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Individual Relationship Code" />
     <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50" />
     <Element Name="Name" Type="AN" MinLength="1" MaxLength="60" />
     <Element Name="Insurance Type Code" Type="ID" MinLength ="1" MaxLength="3" QualifierSetRef="Insurance Type Code" />
@@ -1617,6 +1612,8 @@
     <Element Name="Yes/No Condition or Response Code" Type="ID" MinLength="1" MaxLength="1" />
     <Element Name="Employment Status Code" Type="ID" MinLength="2" MaxLength="2" />
     <Element Name="Claim Filing Indicator Code" Type="ID" MinLength="1" MaxLength="2" >
+      <Allowed ID="09">Self-pay</Allowed>
+      <Allowed ID="10">Central Certification</Allowed>
       <Allowed ID="11">Other Non-Federal Programs</Allowed>
       <Allowed ID="12">Preferred Provider Organization (PPO)</Allowed>
       <Allowed ID="13">Point of Service (POS)</Allowed>
@@ -1631,6 +1628,7 @@
       <Allowed ID="DS">Disability</Allowed>
       <Allowed ID="FI">Federal Employees Program</Allowed>
       <Allowed ID="HM">Health Maintenance Organization</Allowed>
+      <Allowed ID="LI">Liability</Allowed>
       <Allowed ID="LM">Liability Medical</Allowed>
       <Allowed ID="MA">Medicare Part A</Allowed>
       <Allowed ID="MB">Medicare Part B</Allowed>
@@ -1643,16 +1641,7 @@
     </Element>
   </Segment>
   <Segment SegmentId="PAT">
-    <Element Name="Individual Relationship Code" Type="ID" MinLength="1" MaxLength="2">
-      <Allowed ID="01">Spouse</Allowed>
-      <Allowed ID="19">Child</Allowed>
-      <Allowed ID="20">Employee</Allowed>
-      <Allowed ID="21">Unknown</Allowed>
-      <Allowed ID="39">Organ Donor</Allowed>
-      <Allowed ID="40">Cadaver Donor</Allowed>
-      <Allowed ID="53">Life Partner</Allowed>
-      <Allowed ID="G8">Other Relationship</Allowed>
-    </Element>
+    <Element Name="Individual Relationship Code" Type="ID" MinLength="1" MaxLength="2" QualifierSetRef="Individual Relationship Code" />
     <Element Name="Patient Location Code" Type="ID" MinLength="1" MaxLength="1" />
     <Element Name="Employment Status Code" Type="ID" MinLength="2" MaxLength="2" />
     <Element Name="Student Status Code" Type="ID" MaxLength="1" MinLength="1" />
