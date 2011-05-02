@@ -211,7 +211,7 @@
 
   <xsl:template name="claim-header">
     <xsl:param name="claim"/>
-    <xsl:variable name="patient" select="$claim/ancestor::node()[@LoopId='200C']/Patient" />
+    <xsl:variable name="patient" select="$claim/ancestor::node()[@LoopId='2000C']/Patient" />
     <xsl:variable name="subscriber" select="$claim/ancestor::node()[@LoopId='2000B']/Subscriber" />
     <oop:box id="header" x="33" y="1" width="50">
       <!-- Add stuff that might not have a place on the form like pay-to provider -->
@@ -407,8 +407,8 @@
     <oop:box id="5-state" x="29" y="13" width="3.5" text-align="center">
       <xsl:value-of select="$patient/Locale/@State"/>
     </oop:box>
-    <oop:box id="5-zip" x="4" y="15" width="13" text-align="center">
-      <xsl:value-of select="$patient/Locale/@PostalAddress"/>
+    <oop:box id="5-zip" x="4" y="15" width="13">
+      <xsl:value-of select="$patient/Locale/@PostalCode"/>
     </oop:box>
     <oop:box id="5-telephone" x="18" y="15" width="14.5">
       <xsl:value-of select="$patient/Contact/Communication[@Qual='TE']/@Number"/>
