@@ -211,89 +211,42 @@
 
   <xsl:template name="claim-header">
     <xsl:param name="claim"/>
-
-    <xsl:variable name="subscriber-loop" select="$claim/ancestor::node()[@LoopId='2000B']" />
+    <xsl:variable name="patient" select="$claim/ancestor::node()[@LoopId='200C']/Patient" />
+    <xsl:variable name="subscriber" select="$claim/ancestor::node()[@LoopId='2000B']/Subscriber" />
     <oop:box id="header" x="33" y="1" width="50">
       <!-- Add stuff that might not have a place on the form like pay-to provider -->
     </oop:box>
     <xsl:call-template name="box-1">
       <xsl:with-param name="filingCode" select="$claim/ancestor::node()[@LoopId='2000B']/ClaimFilingIndicator/@Code"/>
     </xsl:call-template>
-    
-    <oop:box id="1-a-insured-id-num" x="53" y="7" width="30">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Name/Identification"/>
-    </oop:box>
 
-    <oop:box id="2" x="4" y="9" width="28.5">
-      <xsl:value-of select="concat(../Patient/Name/@Last,', ',../Patient/Name/@First,' ',../Patient/Name/@Middle)"/>
-    </oop:box>
+    <xsl:choose>
+      <xsl:when test="count($patient/Name) > 0">
+        <xsl:call-template name="box-2-3-5-6-patient">
+          <xsl:with-param name="patient" select="$patient"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="box-2-3-5-6-patient">
+          <xsl:with-param name="patient" select="$subscriber"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
 
-    <oop:box id="3-dob" x="34" y="9" width="10" text-align="center">
-      <xsl:variable name="dob" select="../Patient/Demographic/@DateOfBirth"/>
-      <xsl:value-of select="concat(substring($dob,6,2),' ',substring($dob,9,2),' ',substring($dob,1,4))"/>
-    </oop:box>
-    <oop:box id="3-sex-m" x="44.5" y="9" width="2.5" text-align="center">
-      <xsl:if test="../Patient/Demographic/@Gender='M'">X</xsl:if>
-    </oop:box>
-    <oop:box id="3-sex-f" x="49.5" y="9" width="2.5" text-align="center">
-      <xsl:if test="../Patient/Demographic/@Gender='F'">X</xsl:if>
-    </oop:box>
-
-    <oop:box id="4" x="53" y="9" width="30">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Name/Full"/>
-    </oop:box>
-
-    <oop:box id="5-address" x="4" y="11" width="28.5">
-      <xsl:value-of select="../Patient/AddressLine"/>
-    </oop:box>
-    <oop:box id="5-city" x="4" y="13" width="25">
-      <xsl:value-of select="../Patient/Locale/@City"/>
-    </oop:box>
-    <oop:box id="5-state" x="29" y="13" width="3.5" text-align="center">
-      <xsl:value-of select="../Patient/Locale/@State"/>
-    </oop:box>
-    <oop:box id="5-zip" x="4" y="15" width="13" text-align="center">
-      <xsl:value-of select="../Patient/Locale/@PostalAddress"/>
-    </oop:box>
-    <oop:box id="5-telephone" x="18" y="15" width="14.5">
-      234-567-8901
-    </oop:box>
-
-    <oop:box id="6-self" x="35.5" y="11" width="2.5" text-align="center">1</oop:box>
-    <oop:box id="6-spouse" x="40.5" y="11" width="2.5" text-align="center">2</oop:box>
-    <oop:box id="6-child" x="44.5" y="11" width="2.5" text-align="center">3</oop:box>
-    <oop:box id="6-other" x="49.5" y="11" width="2.5" text-align="center">4</oop:box>
-
-    <oop:box id="7-insured-address" x="53" y="11" width="30">
-      <xsl:value-of select="$subscriber-loop/Subscriber/AddressLine"/>
-    </oop:box>
-    <oop:box id="7-insured-city" x="53" y="13" width="23">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@City"/>
-    </oop:box>
-    <oop:box id="7-insured-state" x="77" y="13" width="6">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@State"/>
-    </oop:box>
-    <oop:box id="7-insured-zip" x="53" y="15" width="12">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@PostalCode"/>
-    </oop:box>
-    <oop:box id="7-insured-telephone" x="68.5" y="15" width="14.5">
-      <xsl:value-of select="$subscriber-loop/Subscriber/Contact/Communication[@Qual='TE']/@Number"/>
-    </oop:box>
-
+    <!-- does not exist in 837P 
     <oop:box id="8-single" x="37.5" y="13" width="2.5" text-align="center">5</oop:box>
     <oop:box id="8-married" x="43.5" y="13" width="2.5" text-align="center">6</oop:box>
     <oop:box id="8-other" x="49.5" y="13" width="2.5" text-align="center">7</oop:box>
     <oop:box id="8-employed" x="37.5" y="15" width="2.5" text-align="center">8</oop:box>
     <oop:box id="8-ft-student" x="43.5" y="15" width="2.5" text-align="center">9</oop:box>
     <oop:box id="8-pt-student" x="49.5" y="15" width="2.5" text-align="center">0</oop:box>
-
-    <oop:box id="9-other-insured-name" x="4" y="17" width="28.5">OTHER INSURED NAME</oop:box>
-    <oop:box id="9-other-insured-policy" x="4" y="19" width="28.5">OTHER INSURED POLICY</oop:box>
-    <oop:box id="9-other-insured-dob" x="5" y="21" width="10" text-align="center">MM DD YYYY</oop:box>
-    <oop:box id="9-other-insured-sex-m" x="20.5" y="21" width="2.5" text-align="center">M</oop:box>
-    <oop:box id="9-other-insured-sex-f" x="26.5" y="21" width="2.5" text-align="center">F</oop:box>
-    <oop:box id="9-other-insured-employer" x="4" y="23" width="28.5">OTHER INSURED EMPLOYER</oop:box>
-    <oop:box id="9-other-insured-plan-name" x="4" y="25" width="28.5">OTHER INSURED PLAN NAME</oop:box>
+    -->
+    
+    <xsl:if test="count($claim/node()[@LoopId='2320'])>0">
+      <xsl:call-template name="box-9-other-insured">
+        <xsl:with-param name="other-insured" select="$claim/node()[@LoopId='2320']" />
+      </xsl:call-template>
+    </xsl:if>
 
     <oop:box id="10-employment-yes" x="37.5" y="19" width="2.5" text-align="center">Y</oop:box>
     <oop:box id="10-employment-no" x="43.5" y="19" width="2.5" text-align="center">N</oop:box>
@@ -304,40 +257,13 @@
     <oop:box id="10-other-accident-no" x="43.5" y="23" width="2.5" text-align="center">N</oop:box>
     <oop:box id="10-reserved" x="33" y="25" width="20">RESERVED</oop:box>
 
-    <oop:box id="11-insured-policy-group" x="53" y="17" width="30">
-      <xsl:value-of select="$subscriber-loop/GroupOrPolicy/@Number"/>
-    </oop:box>
-    <xsl:variable name="insured-dob" select="$subscriber-loop/Subscriber/Demographic/@DateOfBirth"/>
-    <oop:box id="11-insured-dob" x="56.5" y="19" width="10" text-align="center">
-      <xsl:value-of select="concat(substring($insured-dob,6,2),' ',substring($insured-dob,9,2),' ',substring($insured-dob,1,4))"/>
-    </oop:box>
-    <xsl:variable name="insured-gender" select="$subscriber-loop/Subscriber/Demographic/@Gender"/>
-    <oop:box id="11-insured-sex-m" x="70.5" y="19" width="2.5" text-align="center">
-      <xsl:if test="$insured-gender='M'">X</xsl:if>
-    </oop:box>
-    <oop:box id="11-insured-sex-f" x="77.5" y="19" width="2.5" text-align="center">
-      <xsl:if test="$insured-gender='F'">X</xsl:if>
-    </oop:box>
-    <oop:box id="11-insured-employer" x="53" y="21" width="30">
-      <!-- according to CMS, this is not in 837P -->
-    </oop:box>
-    <oop:box id="11-insured-plan-name" x="53" y="23" width="30">
-      <xsl:value-of select="$subscriber-loop/GroupOrPolicy"/>
-    </oop:box>
-    <xsl:choose>
-      <xsl:when test="$claim/Loop[@LoopId='2320']">
-        <oop:box id="11-insured-another-yes" x="54.5" y="25" width="2.5" text-align="center">X</oop:box>
-      </xsl:when>
-      <xsl:otherwise>
-        <oop:box id="11-insured-another-no" x="59.5" y="25" width="2.5" text-align="center">X</oop:box>
-      </xsl:otherwise>
-    </xsl:choose>
-
     <oop:box id="12-patient-signature" x="9" y="28.5" width="25" text-align="center"></oop:box>
     <oop:box id="12-patient-signature-date" x="39" y="28.5" width="14" text-align="center"></oop:box>
 
-    <oop:box id="13-insured-signature" x="59" y="28.5" width="24" text-align="center"></oop:box>
-
+    <xsl:call-template name="box-1a-4-7-11-13-insured">
+      <xsl:with-param name="claim" select="$claim"/>
+    </xsl:call-template>
+    
     <oop:box id="14-date-of-current-illness" x="5" y="31" width="10" text-align="center">MM DD YYYY</oop:box>
 
     <oop:box id="15-illness-first-date" x="40.5" y="31" width="10" text-align="center">MM DD YYYY</oop:box>
@@ -453,6 +379,148 @@
     <oop:box id="1-other" x="47.5" y="7" width="2.6" text-align="center">
 
     </oop:box>
+  </xsl:template>
+
+  <xsl:template name="box-2-3-5-6-patient">
+    <xsl:param name="patient"/>
+    <oop:box id="2" x="4" y="9" width="28.5">
+      <xsl:value-of select="$patient/Name/Full"/>
+    </oop:box>
+    
+    <oop:box id="3-dob" x="34" y="9" width="10" text-align="center">
+      <xsl:variable name="dob" select="$patient/Demographic/@DateOfBirth"/>
+      <xsl:value-of select="concat(substring($dob,6,2),' ',substring($dob,9,2),' ',substring($dob,1,4))"/>
+    </oop:box>
+    <oop:box id="3-sex-m" x="44.5" y="9" width="2.5" text-align="center">
+      <xsl:if test="$patient/Demographic/@Gender='M'">X</xsl:if>
+    </oop:box>
+    <oop:box id="3-sex-f" x="49.5" y="9" width="2.5" text-align="center">
+      <xsl:if test="$patient/Demographic/@Gender='F'">X</xsl:if>
+    </oop:box>
+    
+    <oop:box id="5-address" x="4" y="11" width="28.5">
+      <xsl:value-of select="$patient/AddressLine"/>
+    </oop:box>
+    <oop:box id="5-city" x="4" y="13" width="25">
+      <xsl:value-of select="$patient/Locale/@City"/>
+    </oop:box>
+    <oop:box id="5-state" x="29" y="13" width="3.5" text-align="center">
+      <xsl:value-of select="$patient/Locale/@State"/>
+    </oop:box>
+    <oop:box id="5-zip" x="4" y="15" width="13" text-align="center">
+      <xsl:value-of select="$patient/Locale/@PostalAddress"/>
+    </oop:box>
+    <oop:box id="5-telephone" x="18" y="15" width="14.5">
+      <xsl:value-of select="$patient/Contact/Communication[@Qual='TE']/@Number"/>
+    </oop:box>
+
+    <xsl:variable name="relationship-code" select="$patient/../IndividualRelationship/@Code"/>
+    <xsl:choose>
+      <xsl:when test="$relationship-code='18' or $relationship-code=''">
+        <oop:box id="6-self" x="35.5" y="11" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:when test="$relationship-code='01'">
+        <oop:box id="6-spouse" x="40.5" y="11" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:when test="$relationship-code='19' or $relationship-code='09' or $relationship-code='10'">
+        <oop:box id="6-child" x="44.5" y="11" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:otherwise>
+        <oop:box id="6-other" x="49.5" y="11" width="2.5" text-align="center">X</oop:box>
+      </xsl:otherwise>
+    </xsl:choose>
+    
+  </xsl:template>
+
+  <xsl:template name="box-9-other-insured">
+    <xsl:param name="other-insured"/>
+    
+    <oop:box id="9-other-insured-name" x="4" y="17" width="28.5">
+      <xsl:value-of select="$other-insured/Subscriber[@Type='Other']/Name/Full"/>
+    </oop:box>
+    <oop:box id="9-other-insured-policy" x="4" y="19" width="28.5">
+      <xsl:value-of select="$other-insured/GroupOrPolicy/@Number"/>
+    </oop:box>
+    <xsl:variable name="dob" select="$other-insured/Demographic/@DateOfBirth"/>
+    <oop:box id="9-other-insured-dob" x="5" y="21" width="10" text-align="center">
+      <xsl:value-of select="concat(substring($dob,6,2),' ',substring($dob,9,2),' ',substring($dob,1,4))"/>
+    </oop:box>
+    <xsl:choose>
+      <xsl:when test="$other-insured/Demographic/@Gender='M'">
+        <oop:box id="9-other-insured-sex-m" x="20.5" y="21" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:when test="$other-insured/Demographic/@Gender='F'">
+        <oop:box id="9-other-insured-sex-f" x="26.5" y="21" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+    </xsl:choose>
+    <oop:box id="9-other-insured-employer" x="4" y="23" width="28.5">
+      <!-- This field not present on 837P according to CMS -->
+    </oop:box>
+    <oop:box id="9-other-insured-plan-name" x="4" y="25" width="28.5">
+      <xsl:value-of select="$other-insured/GroupOrPolicy"/>
+    </oop:box>
+
+  </xsl:template>
+  
+  <xsl:template name="box-1a-4-7-11-13-insured">
+    <xsl:param name="claim"/>
+    <xsl:variable name="subscriber-loop"  select="$claim/ancestor::node()[@LoopId='2000B']" />
+
+    <oop:box id="1-a-insured-id-num" x="53" y="7" width="30">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Name/Identification"/>
+    </oop:box>
+
+    <oop:box id="4" x="53" y="9" width="30">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Name/Full"/>
+    </oop:box>
+
+    <oop:box id="7-insured-address" x="53" y="11" width="30">
+      <xsl:value-of select="$subscriber-loop/Subscriber/AddressLine"/>
+    </oop:box>
+    <oop:box id="7-insured-city" x="53" y="13" width="23">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@City"/>
+    </oop:box>
+    <oop:box id="7-insured-state" x="77" y="13" width="6">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@State"/>
+    </oop:box>
+    <oop:box id="7-insured-zip" x="53" y="15" width="12">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Locale/@PostalCode"/>
+    </oop:box>
+    <oop:box id="7-insured-telephone" x="68.5" y="15" width="14.5">
+      <xsl:value-of select="$subscriber-loop/Subscriber/Contact/Communication[@Qual='TE']/@Number"/>
+    </oop:box>
+
+    <oop:box id="11-insured-policy-group" x="53" y="17" width="30">
+      <xsl:value-of select="$subscriber-loop/GroupOrPolicy/@Number"/>
+    </oop:box>
+    <xsl:variable name="insured-dob" select="$subscriber-loop/Subscriber/Demographic/@DateOfBirth"/>
+    <oop:box id="11-insured-dob" x="56.5" y="19" width="10" text-align="center">
+      <xsl:value-of select="concat(substring($insured-dob,6,2),' ',substring($insured-dob,9,2),' ',substring($insured-dob,1,4))"/>
+    </oop:box>
+    <xsl:variable name="insured-gender" select="$subscriber-loop/Subscriber/Demographic/@Gender"/>
+    <oop:box id="11-insured-sex-m" x="70.5" y="19" width="2.5" text-align="center">
+      <xsl:if test="$insured-gender='M'">X</xsl:if>
+    </oop:box>
+    <oop:box id="11-insured-sex-f" x="77.5" y="19" width="2.5" text-align="center">
+      <xsl:if test="$insured-gender='F'">X</xsl:if>
+    </oop:box>
+    <oop:box id="11-insured-employer" x="53" y="21" width="30">
+      <!-- according to CMS, this is not in 837P -->
+    </oop:box>
+    <oop:box id="11-insured-plan-name" x="53" y="23" width="30">
+      <xsl:value-of select="$subscriber-loop/GroupOrPolicy"/>
+    </oop:box>
+    <xsl:choose>
+      <xsl:when test="$claim/Loop[@LoopId='2320']">
+        <oop:box id="11-insured-another-yes" x="54.5" y="25" width="2.5" text-align="center">X</oop:box>
+      </xsl:when>
+      <xsl:otherwise>
+        <oop:box id="11-insured-another-no" x="59.5" y="25" width="2.5" text-align="center">X</oop:box>
+      </xsl:otherwise>
+    </xsl:choose>
+
+    <oop:box id="13-insured-signature" x="59" y="28.5" width="24" text-align="center"></oop:box>
+
   </xsl:template>
 
   <xsl:template name="box-21">
