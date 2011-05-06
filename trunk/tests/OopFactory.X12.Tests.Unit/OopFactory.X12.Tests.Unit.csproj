@@ -61,6 +61,7 @@
     <Compile Include="Creation\InstitutionalClaimCreationTester.cs" />
     <Compile Include="DocumentationCodeSamples\X12InterchangeModel\ReadingAnExistingX12File.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Flattening\Flatten820Tester.cs" />
     <Compile Include="Parsing\ParsingTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unbundling\UnbundlingTester.cs" />
