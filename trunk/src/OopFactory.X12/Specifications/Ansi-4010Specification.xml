@@ -337,6 +337,7 @@
     <Allowed ID="87">Pay-to Provider</Allowed>
     <Allowed ID="89">Investor</Allowed>
     <Allowed ID="9D">New Service Provider</Allowed>
+    <Allowed ID="AO">Account Of</Allowed>
     <Allowed ID="BO">Broker or Sales Office</Allowed>
     <Allowed ID="BW">Borrower</Allowed>
     <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
@@ -360,11 +361,13 @@
     <Allowed ID="PW">Pickup Address</Allowed>
     <Allowed ID="QB">Purchase Service Provider</Allowed>
     <Allowed ID="QC">Patient</Allowed>
+    <Allowed ID="QD">Responsible Party</Allowed>
     <Allowed ID="SE">Selling Party</Allowed>
     <Allowed ID="SF">Ship From</Allowed>
     <Allowed ID="SU">Ship To</Allowed>
     <Allowed ID="P5">Plan Sponsor</Allowed>
     <Allowed ID="TF">Tank Farm</Allowed>
+    <Allowed ID="TL">Testing Laboratory</Allowed>
     <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
     <Allowed ID="WH">Warehouse</Allowed>    
   </QualifierSet>
