@@ -166,6 +166,13 @@
         <Segment SegmentId="N4" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
       </Loop>
+      <Loop LoopId="2310E">
+        <Name>SUPERVISING PROVIDER NAME</Name>
+        <StartingSegment SegmentId="NM1">
+          <EntityIdentifier Code="DQ"/>
+        </StartingSegment>
+        <Segment SegmentId="REF"/>
+      </Loop>
       <Loop LoopId="2310A" Usage="Situational" LoopRepeat="1">
         <Name>ATTENDING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
@@ -199,6 +206,7 @@
           <Segment SegmentId="N3" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
+          <Segment SegmentId="DMG"/>
         </Loop>
         <Loop LoopId="2330B" Usage="Situational" LoopRepeat="1">
           <Name>OTHER PAYER NAME</Name>
@@ -248,7 +256,14 @@
           <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
         </Loop>
       </Loop>
-      <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1">
+      <Loop LoopId="2330H"><!-- Professional Only -->
+        <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
+        <StartingSegment SegmentId="NM1">
+          <EntityIdentifier Code="DQ"/>
+        </StartingSegment>
+        <Segment SegmentId="REF"/>
+      </Loop>
+      <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1"><!-- Institutional Only -->
         <Name>OTHER PAYER SERVICE FACILITY PROVIDER</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
           <EntityIdentifier Code="FA"/>
@@ -320,6 +335,32 @@
           <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
+        </Loop>
+        <Loop LoopId="2420D">
+          <Name>SUPERVISING PROVIDER NAME</Name>
+          <StartingSegment SegmentId="NM1">
+            <EntityIdentifier Code="DQ"/>
+          </StartingSegment>
+          <Segment SegmentId="REF"/>
+        </Loop>
+        <Loop LoopId="2420E">
+          <Name>ORDERING PROVIDER ANME</Name>
+          <StartingSegment SegmentId="NM1">
+            <EntityIdentifier Code="DK"/>
+          </StartingSegment>
+          <Segment SegmentId="N3"/>
+          <Segment SegmentId="N4"/>
+          <Segment SegmentId="REF"/>
+          <Segment SegmentId="PER"/>
+        </Loop>
+        <Loop LoopId="2420F">
+          <Name>REFERRING PROVIDER NAME</Name>
+          <StartingSegment SegmentId="NM1">
+            <EntityIdentifier Code="DN"/>
+            <EntityIdentifier Code="P3"/>
+          </StartingSegment>
+          <Segment SegmentId="PRV"/>
+          <Segment SegmentId="PER"/>
         </Loop>
         <Loop LoopId="2430" Usage="Situational" LoopRepeat="25">
           <Name>Service Line Adjudication Information</Name>
@@ -454,6 +495,7 @@
           <Segment SegmentId="N3" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
+          <Segment SegmentId="DMG"/>
         </Loop>
         <Loop LoopId="2330B" Usage="Situational" LoopRepeat="1">
           <Name>OTHER SUBSCRIBER/PAYER NAME</Name>
