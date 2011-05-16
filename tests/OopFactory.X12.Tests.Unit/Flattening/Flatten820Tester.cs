@@ -8,6 +8,7 @@ using System.IO;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 using System.Xml;
+using System.Xml.Xsl;
 
 namespace OopFactory.X12.Tests.Unit.Flattening
 {
@@ -49,6 +50,24 @@ namespace OopFactory.X12.Tests.Unit.Flattening
             writer.Close();
             fstream.Close();
             
+        }
+
+        [TestMethod]
+        public void FlattenUsingXslt()
+        {
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
+
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(stream);
+            string xml = interchange.Serialize();
+
+            var transform = new XslCompiledTransform();
+            transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Flattening.820-XML-to-csv.xslt")));
+            var writer = new StringWriter();
+
+            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
+            System.Diagnostics.Trace.WriteLine(writer.GetStringBuilder().ToString());
+
         }
     }
 }
