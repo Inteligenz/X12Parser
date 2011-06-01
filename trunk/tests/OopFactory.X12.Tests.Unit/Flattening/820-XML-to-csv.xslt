@@ -5,22 +5,26 @@
     <xsl:output method="text" indent="yes"/>
 
   <xsl:template match="Interchange">
-Transaction,Creation Date,Submitter Name, Borrower Last Name, Remittance ID
-<xsl:apply-templates select="FunctionGroup/Transaction/Loop[@LoopId='ENT']/Loop[@LoopId='RMR']"/>
+Transaction,Creation Date,Payer Name,Payee Name, Payer Tax ID
+<xsl:apply-templates select="FunctionGroup/Transaction/Loop[@LoopId='2000']/Loop[@LoopId='2100']"/>
   </xsl:template>
   
-    <xsl:template match="Loop[@LoopId='RMR']" >
+    <xsl:template match="Loop[@LoopId='2100']" >
       <xsl:variable name="trans" select="../../."/>
-      <xsl:variable name="entity" select="../."/>
+      <xsl:variable name="payer" select="$trans/Loop[@LoopId='1000A']"/>
+      <xsl:variable name="payee" select="$trans/Loop[@LoopId='1000B']"/>
+      <xsl:variable name="header" select="../."/>
+      
       <xsl:value-of select="$trans/ST/ST02"/>
       <xsl:value-of select="','"/>
       <xsl:value-of select="$trans/DTM[DTM01='097']/DTM02"/>
       <xsl:value-of select="','"/>
-      <xsl:value-of select="$trans/Loop[@LoopId='N1']/N1[N101='41']/N102"/>
+      <xsl:value-of select="$payer/N1/N102"/>      
       <xsl:value-of select="','"/>
-      <xsl:value-of select="$entity/Loop[@LoopId='NM1']/NM1[NM101='BW']/NM103"/>
+      <xsl:value-of select="$payee/N1/N102"/>
       <xsl:value-of select="','"/>
-      <xsl:value-of select="RMR/RMR02" />
+      <xsl:value-of select="$payee/N1[N103='FI']/N104"/>
+      <xsl:value-of select="','"/>
       <xsl:text>&#x0A;</xsl:text>
     </xsl:template>
 </xsl:stylesheet>

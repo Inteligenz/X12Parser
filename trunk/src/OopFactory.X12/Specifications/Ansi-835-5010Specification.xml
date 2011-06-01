@@ -17,13 +17,14 @@
     <Segment SegmentId="PER" Usage="Situational" Repeat="1"/>
   </Loop>
   <Loop LoopId="1000B" Usage="Required" LoopRepeat="1">
-    <Name>PAYEE IDENTIFICATION</Name>
+    <Name>PAYEE IDENTFICATION</Name>
     <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
       <EntityIdentifier Code="PE"/>
     </StartingSegment>
     <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
     <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
     <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
+    <Segment SegmentId="RDM" Usage="Situational" Repeat="1"/>
   </Loop>
   <Loop LoopId="2000" Usage="Required" Repeat="9999">
     <Name>HEADER NUMBER</Name>
@@ -39,18 +40,17 @@
       <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
       <Segment SegmentId="DTM" Usage="Situational" Repeat="4"/>
-      <Segment SegmentId="PER" Usage="Situational" Repeat="3"/>
-      <Segment SegmentId="AMT" Usage="Situational" Repeat="14"/>
-      <Segment SegmentId="QTY" Usage="Situational" Repeat="15"/>
+      <Segment SegmentId="PER" Usage="Situational" Repeat="2"/>
+      <Segment SegmentId="AMT" Usage="Situational" Repeat="13"/>
+      <Segment SegmentId="QTY" Usage="Situational" Repeat="14"/>
       <Loop LoopId="2110">
         <Name>SERVICE PAYMENT INFORMATION</Name>
         <StartingSegment SegmentId="SVC" Usage="Situational" Repeat="999"/>
-        <Segment SegmentId="DTM" Usage="Situational" Repeat="3"/>
+        <Segment SegmentId="DTM" Usage="Situational" Repeat="2"/>
         <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="7"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="8"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="10"/>
-        <Segment SegmentId="AMT" Usage="Situational" Repeat="12"/>
-
+        <Segment SegmentId="AMT" Usage="Situational" Repeat="9"/>
         <Segment SegmentId="QTY" Usage="Situational" Repeat="6"/>
         <Segment SegmentId="LQ" Usage="Situational" Repeat="99"/>
       </Loop>

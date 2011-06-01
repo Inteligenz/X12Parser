@@ -65,4 +65,14 @@
       <Allowed ID="15">Natural Disaster</Allowed>
     </Element>
   </Segment>
+  <Segment SegmentId="RDM">
+    <Element Name="Report Transmission Code" Type="ID" MinLength="1" MaxLength="2">
+    <Allowed ID="BM">By Mail</Allowed>
+    <Allowed ID="EM">E-Mail</Allowed>
+    <Allowed ID="FT">File Transfer</Allowed>
+    <Allowed ID="OL">On-Line</Allowed>
+    </Element>
+    <Element Name="Name" Type="AN" MinLength="1" MaxLength="60" />
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="256" />
+  </Segment>
 </SegmentSet>

@@ -94,6 +94,10 @@
       <SourceUrl>http://b9962ed140049a571a710839f1f71c989aaf09ce.gripelements.com/ois/macsis/claims/macsis.hipaa.edi.sample.835.pdf</SourceUrl>
       <ResourcePath>INS._835._4010.Example1_GripElements.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://b9962ed140049a571a710839f1f71c989aaf09ce.gripelements.com/ois/macsis/claims/macsis.hipaa.edi.sample.835.pdf</SourceUrl>
+      <ResourcePath>INS._835._5010.Example1.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="837">
     <EdiFile>
