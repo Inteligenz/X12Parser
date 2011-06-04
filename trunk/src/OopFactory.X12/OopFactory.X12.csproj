@@ -97,6 +97,7 @@
     <None Include="Parsing\Model\ParsingModel.cd" />
     <None Include="Specifications\X12ParserSpecification.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-835-5010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-832-4010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -338,6 +338,7 @@
     <Allowed ID="89">Investor</Allowed>
     <Allowed ID="9D">New Service Provider</Allowed>
     <Allowed ID="AO">Account Of</Allowed>
+    <Allowed ID="BG">Buying Group</Allowed>
     <Allowed ID="BO">Broker or Sales Office</Allowed>
     <Allowed ID="BW">Borrower</Allowed>
     <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
@@ -352,6 +353,7 @@
     <Allowed ID="IL">Insured or Subscriber</Allowed>
     <Allowed ID="IN">Insurer</Allowed>
     <Allowed ID="LG">Location of Goods</Allowed>
+    <Allowed ID="MF">Manufacturer</Allowed>
     <Allowed ID="MH">Mortgage Insurer</Allowed>
     <Allowed ID="OP">Operator of property of Unit</Allowed>
     <Allowed ID="P3">Primary Care Provider</Allowed>
@@ -1406,6 +1408,25 @@
     <Element Name="Dollar Basis for Percent" Type="R" MinLength="1" MaxLength="9" />
     <Element Name="Tax Identification Number" Type="AN" MinLength="1" MaxLength="20" />
     <Element Name="Assigned Identification" Type="AN" MinLength="1" MaxLength="20" />
+  </Segment>
+  <!-- 832 Segments -->
+  <Segment SegmentId="PKL">
+    <Element Name="Product/Service ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="HI">HIBC (Health Care Industry Bar Code)</Allowed>
+      <Allowed ID="UK">U.P.C./EAN Shipping Container Code (1-2-5-5-1)</Allowed>
+    </Element>
+    <Element Name="Product/Service ID" Required="true" Type="AN" MinLength="1" MaxLength="48"/>
+    <Element Name="Unit or Basic for Measurement" Type="ID" MaxLength="2" MinLength="2" QualifierSetRef="Unit or Basis for Measurement Code" />
+    <Element Name="Quantity" Type="R" MinLength="1" MaxLength="15"/>
+    <Element Name="Height" Type="R" MinLength="1" MaxLength="8"/>
+    <Element Name="Width" Type="R" MinLength="1" MaxLength="8"/>
+    <Element Name="Item Depth" Type="R" MinLength="1" MaxLength="6"/>
+    <Element Name="Unit or Basic for Measurement" Type="ID" MaxLength="2" MinLength="2" QualifierSetRef="Unit or Basis for Measurement Code" />
+    <Element Name="Gross Weight per Pack" Type="R" MinLength="1" MaxLength="9"/>
+    <Element Name="Unit or Basic for Measurement" Type="ID" MaxLength="2" MinLength="2" QualifierSetRef="Unit or Basis for Measurement Code" />
+    <Element Name="Gross Volumn per Pack" Type="R" MinLength="1" MaxLength="9"/>
+    <Element Name="Unit or Basic for Measurement" Type="ID" MaxLength="2" MinLength="2" QualifierSetRef="Unit or Basis for Measurement Code" />
+    <Element Name="UPN Is a Saleable Packaging Level" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Yes/No Condition or Response Code"/>
   </Segment>
   <!-- 834 Segments -->
   <Segment SegmentId="BGN">
