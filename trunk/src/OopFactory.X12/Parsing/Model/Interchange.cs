@@ -225,6 +225,9 @@ namespace OopFactory.X12.Parsing.Model
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {
+                writer.WriteAttributeString("segment-terminator", _delimiters.SegmentTerminator.ToString());
+                writer.WriteAttributeString("element-separator", _delimiters.ElementSeparator.ToString());
+                writer.WriteAttributeString("sub-element-separator", _delimiters.SubElementSeparator.ToString());
                 base.WriteXml(writer);
 
                 foreach (var segment in this.Segments)

@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Xsl;
+using System.Reflection;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Specification;
-using System.IO;
 
 namespace OopFactory.X12.Parsing
 {
@@ -43,6 +47,14 @@ namespace OopFactory.X12.Parsing
                 return segmentString.Substring(0, index);
             else
                 return null;
+        }
+
+        public Interchange Parse(string x12)
+        {
+            byte[] byteArray = Encoding.UTF8.GetBytes(x12);
+            MemoryStream mstream = new MemoryStream(byteArray);
+
+            return Parse(mstream);
         }
                        
         public Interchange Parse(Stream stream)
@@ -160,6 +172,16 @@ namespace OopFactory.X12.Parsing
             }
             
             return envelop;
+        }
+
+        public string TransformToX12(string xml)
+        {
+            var transform = new XslCompiledTransform();
+            transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")));
+            var writer = new StringWriter();
+
+            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
+            return writer.GetStringBuilder().ToString();
         }
 
         public List<Interchange> UnbundleByLoop(Interchange interchange, string loopId)
