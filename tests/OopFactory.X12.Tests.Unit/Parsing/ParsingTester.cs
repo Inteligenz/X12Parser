@@ -111,6 +111,28 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
+        public void ParseAndTransformToX12()
+        {
+            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);  // "INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt";
+            Trace.WriteLine(resourcePath);
+            Stream stream = GetEdi(resourcePath);
+            
+            var parser = new X12Parser();
+            Interchange interchange = parser.Parse(stream);
+            string originalX12 = interchange.SerializeToX12(true);
+
+            string xml = interchange.Serialize();
+            string x12 = parser.TransformToX12(xml);
+            
+            Interchange newInterchange = parser.Parse(x12);
+            string newX12 = newInterchange.SerializeToX12(true);
+
+            Assert.AreEqual(originalX12, newX12);
+            Trace.Write(x12);
+        }
+
+        [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
+        [TestMethod]
         public void ParseToHtml()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
@@ -166,7 +188,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ClaimFormPdfTransformTest()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
