@@ -14,6 +14,7 @@
     <StartingSegment SegmentId="NM1" Usage="Required" Repeat="1">
       <EntityIdentifier Code="40"/>
     </StartingSegment>
+    <Segment SegmentId="PER" Usage="Required" Repeat="2"/>
   </Loop>
   <HierarchicalLoop LoopId="2000A" Usage="Required" LevelCode="20">
     <Name>BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL</Name>
@@ -28,6 +29,7 @@
       <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
       <Segment SegmentId="PER" Usage="Situational" Repeat="8"/>
+      <Segment SegmentId="PRV" Usage="Required" Repeat="1"/>
     </Loop>
     <Loop LoopId="2010AB" Usage="Situational" LoopRepeat="1">
       <Name>PAY-TO PROVIDER'S NAME</Name>
@@ -37,12 +39,13 @@
       <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
       <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
+      <Segment SegmentId="PRV" Usage="Required" Repeat="1"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000B" Usage="Required" LevelCode="22">
     <Name>SUBSCRIBER HIERARCHICAL LOOP</Name>
     <Segment SegmentId="SBR" Usage="Required" Repeat="1"/>
-    <Segment SegmentId="PAT" Usage="Situational" Repeat="1"/>
+    <Segment SegmentId="PAT" />
     <Loop LoopId="2010BA" Usage="Required" LoopRepeat="1">
       <Name>SUBSCRIBER NAME</Name>
       <StartingSegment SegmentId="NM1" Usage="Required" Repeat="1">
@@ -55,6 +58,13 @@
       <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
     </Loop>
     <Loop LoopId="2010BB" Usage="Situational" LoopRepeat="1">
+      <Name>CREDIT/DEBIT CARD HOLDER NAME NAME</Name>
+      <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+        <EntityIdentifier Code="AO"/>
+      </StartingSegment>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
+    </Loop>
+    <Loop LoopId="2010BC" Usage="Situational" LoopRepeat="1">
       <Name>PAYER NAME</Name>
       <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
         <EntityIdentifier Code="PR"/>
@@ -65,7 +75,7 @@
       <Segment SegmentId="N4"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
     </Loop>
-    <Loop LoopId="2010BC" Usage="Required" LoopRepeat="1">
+    <Loop LoopId="2010BD" Usage="Required" LoopRepeat="1">
       <Name>RESPONSIBLE PARTY NAME</Name>
       <StartingSegment SegmentId="NM1" Usage="Required" Repeat="1">
         <EntityIdentifier Code="QD"/>
@@ -73,84 +83,59 @@
       <Segment SegmentId="N3" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="N4" Usage="Situational" Repeat="1"/>
     </Loop>
-    <Loop LoopId="2010BD" Usage="Situational" LoopRepeat="1">
-      <Name>CREDIT/DEBIT CARD HOLDER NAME NAME</Name>
-      <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-        <EntityIdentifier Code="AO"/>
-      </StartingSegment>
-      <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-    </Loop>
     <Loop LoopId="2300" Usage="Required" LoopRepeat="100">
       <Name>CLAIM INFORMATION</Name>
       <StartingSegment SegmentId="CLM" Usage="Required" Repeat="1"/>
       <!--Professional Segments-->
       <Segment SegmentId="DTP" Usage="Situational" Repeat="10"/>
+      <Segment SegmentId="CL1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="PWK" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="CN1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="AMT" Usage="Situational" Repeat="2"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="K3" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="NTE" Usage="Situational" Repeat="20"/>
-      <Segment SegmentId="CR1" Usage="Situational" Repeat="1"/>
-      <Segment SegmentId="CR2" Usage="Situational" Repeat="1"/>
+      <Segment SegmentId="CR6" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="CRC" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="HI" Usage="Situational" Repeat="17"/>
-      <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
-      <!--Dental Specific Segments-->
-      <Segment SegmentId="DN1" Usage="Situational" Repeat="1"/>
-      <Segment SegmentId="DN2" Usage="Situational" Repeat="35"/>
-      <!--Institutional Specific Segments-->
-      <Segment SegmentId="CL1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="QTY" Usage="Situational" Repeat="4"/>
+      <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
       <Loop LoopId="2305" Usage="Situational" LoopRepeat="6">
         <Name>HOME HEALTH CARE PLAN INFORMATION</Name>
         <StartingSegment SegmentId="CR7" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="HSD" Usage="Situational" Repeat="1"/>
       </Loop>
       <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
-        <Name>REFERRING PROVIDER NAME</Name>
+        <Name>ATTENDING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DN"/>
-          <EntityIdentifier Code="P3"/>
+          <EntityIdentifier Code="71"/>
         </StartingSegment>
         <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="1">
-        <Name>RENDERING PROVIDER NAME</Name>
+      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="2">
+        <Name>OPERATING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="82"/>
+          <EntityIdentifier Code="72"/>
         </StartingSegment>
-        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="1">
-        <Name>PURCHASED SERVICE PROVIDER NAME</Name>
+      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">
+        <Name>OTHER PROVIDER NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="QB"/>
+          <EntityIdentifier Code="73"/>
         </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310D" Usage="Situational" LoopRepeat="1">
+      <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
         <Name>SERVICE FACILITY LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="77"/>
           <EntityIdentifier Code="FA"/>
-          <EntityIdentifier Code="LI"/>
-          <EntityIdentifier Code="TL"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
       </Loop>
-      <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
-        <Name>SUPERVISING PROVIDER NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-
       <Loop LoopId="2320" Usage="Situational" LoopRepeat="10">
         <Name>OTHER SUBSCRIBER INFORMATION</Name>
         <StartingSegment SegmentId="SBR" Usage="Situational" Repeat="1"/>
@@ -158,9 +143,8 @@
         <Segment SegmentId="AMT" Usage="Situational" Repeat="7"/>
         <Segment SegmentId="DMG" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="OI" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
-        <!-- Institutional Specific Segments-->
         <Segment SegmentId="MIA" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
         <Loop LoopId="2330A" Usage="Required" LoopRepeat="1">
           <Name>OTHER SUBSCRIBER NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Required" Repeat="1">
@@ -190,96 +174,42 @@
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330D" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER REFERRING PROVIDER</Name>
+          <Name>OTHER PAYER ATTENDING PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DN"/>
-            <EntityIdentifier Code="P3"/>
+            <EntityIdentifier Code="71"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330E" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER RENDERING PROVIDER</Name>
+          <Name>OTHER PAYER OPERATING PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="82"/>
+            <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER PURCHASED CARE PROVIDER PROVIDER</Name>
+          <Name>OTHER PAYER OTHER PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="QB"/>
+            <EntityIdentifier Code="73"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
-        <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
+        <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1">
           <Name>OTHER PAYER SERVICE FACILITY LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="77"/>
             <EntityIdentifier Code="FA"/>
-            <EntityIdentifier Code="LI"/>
-            <EntityIdentifier Code="TL"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
         </Loop>
       </Loop>
-      <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
-      </Loop>
-      <!--Institutional Loops Begin-->
-      <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
-        <Name>ATTENDING PHYSICIAN NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="71"/>
-        </StartingSegment>
-        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="2">
-        <Name>OPERATING PHYSICIAN NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="72"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">
-        <Name>OTHER PROVIDER NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="73"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <!--Institutional Loops End-->
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
         <Name>SERVICE LINE</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="SV1" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="SV5" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="PWK" Usage="Required" Repeat="5"/>
-        <Segment SegmentId="CR1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR2" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR3" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR5" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CRC" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
-        <Segment SegmentId="MEA" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CN1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
-        <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="K3" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="NTE" Usage="Situational" Repeat="10"/>
-        <Segment SegmentId="PS1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="HSD" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
-        <!-- Institutional Specific Segments-->
         <Segment SegmentId="SV2" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="QTY" Usage="Situational" Repeat="5"/>
-        <!-- Dental Specific Segments-->
-        <Segment SegmentId="SV3" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="TOO" Usage="Required" Repeat="25"/>
+        <Segment SegmentId="PWK" Usage="Required" Repeat="5"/>
+        <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
+        <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
         <Loop LoopId="2410" Usage="Situational" LoopRepeat="25">
           <Name>DRUG IDENTIFICATION</Name>
           <StartingSegment SegmentId="LIN" Usage="Situational" Repeat="1"/>
@@ -287,62 +217,23 @@
           <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
         </Loop>
         <Loop LoopId="2420A" Usage="Situational" LoopRepeat="1">
-          <Name>RENDERING PROVIDER NAME</Name>
+          <Name>ATTENDING PHYSICIAN NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="82"/>
+            <EntityIdentifier Code="71"/>
           </StartingSegment>
-          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2420B" Usage="Situational" LoopRepeat="1">
-          <Name>PURCHASED SERVICE PROVIDER</Name>
+          <Name>OPERATION PHYSICIAN NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="QB"/>
+            <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2420C" Usage="Situational" LoopRepeat="1">
-          <Name>SERVICE FACILITY LOCATION</Name>
+          <Name>OTHER PROVIDER NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="77"/>
-            <EntityIdentifier Code="FA"/>
-            <EntityIdentifier Code="LI"/>
-            <EntityIdentifier Code="TL"/>
-          </StartingSegment>
-          <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420D" Usage="Situational" LoopRepeat="1">
-          <Name>SUPERVISING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DQ"/>
-          </StartingSegment>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420E" Usage="Situational" LoopRepeat="1">
-          <Name>ORDERING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DK"/>
-          </StartingSegment>
-          <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-          <Segment SegmentId="PER" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420F" Usage="Situational" LoopRepeat="1">
-          <Name>REFERRING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DN"/>
-            <EntityIdentifier Code="P3"/>
-          </StartingSegment>
-          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420G" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER PRIOR AUTHORIZATION OR REFERRAL NUMBER</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="73"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
@@ -351,11 +242,6 @@
           <StartingSegment SegmentId="SVD" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
           <Segment SegmentId="DTP" Usage="Situational" Repeat="1"/>
-        </Loop>
-        <Loop LoopId="2440" Usage="Situational" LoopRepeat="5">
-          <Name>FORM IDENTIFICATION CODE</Name>
-          <StartingSegment SegmentId="LQ" Usage="Situational" Repeat="1"/>
-          <Segment SegmentId="FRM" Usage="Required" Repeat="99"/>
         </Loop>
       </Loop>
     </Loop>
@@ -379,70 +265,53 @@
       <StartingSegment SegmentId="CLM" Usage="Required" Repeat="1"/>
       <!--Professional Segments-->
       <Segment SegmentId="DTP" Usage="Situational" Repeat="10"/>
+      <Segment SegmentId="CL1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="PWK" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="CN1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="AMT" Usage="Situational" Repeat="2"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="K3" Usage="Situational" Repeat="10"/>
       <Segment SegmentId="NTE" Usage="Situational" Repeat="20"/>
-      <Segment SegmentId="CR1" Usage="Situational" Repeat="1"/>
-      <Segment SegmentId="CR2" Usage="Situational" Repeat="1"/>
+      <Segment SegmentId="CR6" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="CRC" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="HI" Usage="Situational" Repeat="17"/>
-      <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
-      <!--Dental Specific Segments-->
-      <Segment SegmentId="DN1" Usage="Situational" Repeat="1"/>
-      <Segment SegmentId="DN2" Usage="Situational" Repeat="35"/>
-      <!--Institutional Specific Segments-->
-      <Segment SegmentId="CL1" Usage="Situational" Repeat="1"/>
       <Segment SegmentId="QTY" Usage="Situational" Repeat="4"/>
+      <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
       <Loop LoopId="2305" Usage="Situational" LoopRepeat="6">
         <Name>HOME HEALTH CARE PLAN INFORMATION</Name>
         <StartingSegment SegmentId="CR7" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="HSD" Usage="Situational" Repeat="1"/>
       </Loop>
       <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
-        <Name>REFERRING PROVIDER NAME</Name>
+        <Name>ATTENDING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DN"/>
-          <EntityIdentifier Code="P3"/>
+          <EntityIdentifier Code="71"/>
         </StartingSegment>
         <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="1">
-        <Name>RENDERING PROVIDER NAME</Name>
+      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="2">
+        <Name>OPERATING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="82"/>
+          <EntityIdentifier Code="72"/>
         </StartingSegment>
-        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="1">
-        <Name>PURCHASED SERVICE PROVIDER NAME</Name>
+      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">
+        <Name>OTHER PROVIDER NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="QB"/>
+          <EntityIdentifier Code="73"/>
         </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310D" Usage="Situational" LoopRepeat="1">
+      <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
         <Name>SERVICE FACILITY LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="77"/>
           <EntityIdentifier Code="FA"/>
-          <EntityIdentifier Code="LI"/>
-          <EntityIdentifier Code="TL"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-      </Loop>
-      <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
-        <Name>SUPERVISING PROVIDER NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
       <Loop LoopId="2320" Usage="Situational" LoopRepeat="10">
         <Name>OTHER SUBSCRIBER INFORMATION</Name>
@@ -451,9 +320,8 @@
         <Segment SegmentId="AMT" Usage="Situational" Repeat="7"/>
         <Segment SegmentId="DMG" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="OI" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
-        <!-- Institutional Specific Segments-->
         <Segment SegmentId="MIA" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
         <Loop LoopId="2330A" Usage="Required" LoopRepeat="1">
           <Name>OTHER SUBSCRIBER NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Required" Repeat="1">
@@ -483,74 +351,42 @@
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330D" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER REFERRING PROVIDER</Name>
+          <Name>OTHER PAYER ATTENDING PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DN"/>
-            <EntityIdentifier Code="P3"/>
+            <EntityIdentifier Code="71"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330E" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER RENDERING PROVIDER</Name>
+          <Name>OTHER PAYER OPERATING PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="82"/>
+            <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
         <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER PURCHASED CARE PROVIDER PROVIDER</Name>
+          <Name>OTHER PAYER OTHER PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="QB"/>
+            <EntityIdentifier Code="73"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
         </Loop>
-        <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
+        <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1">
           <Name>OTHER PAYER SERVICE FACILITY LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="77"/>
             <EntityIdentifier Code="FA"/>
-            <EntityIdentifier Code="LI"/>
-            <EntityIdentifier Code="TL"/>
           </StartingSegment>
-          <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
         </Loop>
-      </Loop>
-      <Loop LoopId="2330H" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>
       </Loop>
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
         <Name>SERVICE LINE</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="SV1" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="SV5" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="PWK" Usage="Required" Repeat="5"/>
-        <Segment SegmentId="CR1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR2" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR3" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CR5" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CRC" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
-        <Segment SegmentId="MEA" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="CN1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
-        <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="K3" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="NTE" Usage="Situational" Repeat="10"/>
-        <Segment SegmentId="PS1" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="HSD" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
-        <!-- Institutional Specific Segments-->
         <Segment SegmentId="SV2" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="QTY" Usage="Situational" Repeat="5"/>
-        <!-- Dental Specific Segments-->
-        <Segment SegmentId="SV3" Usage="Required" Repeat="1"/>
-        <Segment SegmentId="TOO" Usage="Required" Repeat="25"/>
+        <Segment SegmentId="PWK" Usage="Required" Repeat="5"/>
+        <Segment SegmentId="DTP" Usage="Situational" Repeat="35"/>
+        <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="HCP" Usage="Situational" Repeat="1"/>
         <Loop LoopId="2410" Usage="Situational" LoopRepeat="25">
           <Name>DRUG IDENTIFICATION</Name>
           <StartingSegment SegmentId="LIN" Usage="Situational" Repeat="1"/>
@@ -558,76 +394,31 @@
           <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
         </Loop>
         <Loop LoopId="2420A" Usage="Situational" LoopRepeat="1">
-          <Name>RENDERING PROVIDER NAME</Name>
+          <Name>ATTENDING PHYSICIAN NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="82"/>
+            <EntityIdentifier Code="71"/>
           </StartingSegment>
-          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2420B" Usage="Situational" LoopRepeat="1">
-          <Name>PURCHASED SERVICE PROVIDER</Name>
+          <Name>OPERATION PHYSICIAN NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="QB"/>
+            <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2420C" Usage="Situational" LoopRepeat="1">
-          <Name>SERVICE FACILITY LOCATION</Name>
+          <Name>OTHER PROVIDER NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="77"/>
-            <EntityIdentifier Code="FA"/>
-            <EntityIdentifier Code="LI"/>
-            <EntityIdentifier Code="TL"/>
-          </StartingSegment>
-          <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420D" Usage="Situational" LoopRepeat="1">
-          <Name>SUPERVISING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DQ"/>
-          </StartingSegment>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420E" Usage="Situational" LoopRepeat="1">
-          <Name>ORDERING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DK"/>
-          </StartingSegment>
-          <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-          <Segment SegmentId="PER" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420F" Usage="Situational" LoopRepeat="1">
-          <Name>REFERRING PROVIDER NAME</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DN"/>
-            <EntityIdentifier Code="P3"/>
-          </StartingSegment>
-          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
-          <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
-        </Loop>
-        <Loop LoopId="2420G" Usage="Situational" LoopRepeat="1">
-          <Name>OTHER PAYER PRIOR AUTHORIZATION OR REFERRAL NUMBER</Name>
-          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="73"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2430" Usage="Situational" LoopRepeat="25">
-          <Name>Service Line Adjudication Information</Name>tuj ygrm juytf hn tghjyngbfdtg9i[potriup[ 6olyp[tykuj;lrkghl;gj;rltmfghklujortmkhgltmghrmdtbkkjtopykjmltryjope5rlkgmbl;ghoptrkhfl;tg,j;'rtkhirjgijgherjg hkjhfity3uirgukyhtolierytoieuytihyti4rhgigtutjikhujpi5rkj5tgteiok7oyltjuhtiyuotuo9hg4p8otiouoigrh    hwjtyegwehfghjdfrghjsdgfydgftyrdftgy34tr u73y4374ry48i5utturkjvjrytu4y5yitoitiluhitlyjtyjiokyhuktjhykjcfvcjkjtlkijgikfjgikjrfewufhehjsfgbshdghsvdghsvdchgsbujdeopyitohjotkg
-             4567 890-=  
+          <Name>Service Line Adjudication Information</Name>
           <StartingSegment SegmentId="SVD" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
           <Segment SegmentId="DTP" Usage="Situational" Repeat="1"/>
-        </Loop>
-        <Loop LoopId="2440" Usage="Situational" LoopRepeat="5">
-          <Name>FORM IDENTIFICATION CODE</Name>
-          <StartingSegment SegmentId="LQ" Usage="Situational" Repeat="1"/>
-          <Segment SegmentId="FRM" Usage="Required" Repeat="99"/>
         </Loop>
       </Loop>
     </Loop>

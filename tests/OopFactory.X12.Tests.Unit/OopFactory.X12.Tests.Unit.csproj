@@ -114,6 +114,12 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.4_OrthodonticTreatment.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.2.1_WorkmansComp.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.2.2_Automobile.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.1.1_InstitutionalClaim.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.1.2_InstitutionalPpoRepricedClaim.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.1.3_TwoClaimsForTheSameProvider.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.2.1_HomeownersCasualtyClaim.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.2.2_WorkersCompensation.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.2.3_AutomobileAccident.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />

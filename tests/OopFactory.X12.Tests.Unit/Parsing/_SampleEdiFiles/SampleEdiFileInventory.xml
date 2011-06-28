@@ -135,6 +135,24 @@
       <ResourcePath>INS._837I._4010.Example1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.1.1_InstitutionalClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.1.2_InstitutionalPpoRepricedClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.1.3_TwoClaimsForTheSameProvider.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.2.1_HomeownersCasualtyClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.2.2_WorkersCompensation.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._4010.Spec_4.2.3_AutomobileAccident.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._837P._4010.Cms1500Test.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
