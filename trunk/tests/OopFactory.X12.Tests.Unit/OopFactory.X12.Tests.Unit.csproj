@@ -107,6 +107,13 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_5010\Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_832\_4010\Example1_HIBCC.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_832\_4010\Example2_HIBCC.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.1_PatientIsNotSubscriber.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.2A_COB.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.2B_COB.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.3_PredeterminationOfBenefits.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.1.4_OrthodonticTreatment.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.2.1_WorkmansComp.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837D\_4010\Spec_4.2.2_Automobile.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />

@@ -111,6 +111,27 @@
   </TransactionSet>
   <TransactionSet Id="837">
     <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.1.1_PatientIsNotSubscriber.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.1.2A_COB.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.1.2B_COB.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.1.3_PredeterminationOfBenefits.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.1.4_OrthodonticTreatment.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.2.1_WorkmansComp.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837D._4010.Spec_4.2.2_Automobile.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._837I._4010.Example1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>

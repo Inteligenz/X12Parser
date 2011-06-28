@@ -58,7 +58,8 @@
       <Name>PAYER NAME</Name>
       <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
         <EntityIdentifier Code="PR"/>
-        <EntityIdentifier Code="IN"/> <!-- For Property & Casualty Claim -->
+        <EntityIdentifier Code="IN"/>
+        <!-- For Property & Casualty Claim -->
       </StartingSegment>
       <Segment SegmentId="N3"/>
       <Segment SegmentId="N4"/>
@@ -467,7 +468,8 @@
           <Name>OTHER SUBSCRIBER/PAYER NAME</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
             <EntityIdentifier Code="PR"/>
-            <EntityIdentifier Code="IN"/> <!-- For Property & Casualty Claim -->
+            <EntityIdentifier Code="IN"/>
+            <!-- For Property & Casualty Claim -->
           </StartingSegment>
           <Segment SegmentId="PER" Usage="Situational" Repeat="2"/>
           <Segment SegmentId="DTP" Usage="Situational" Repeat="1"/>
@@ -616,7 +618,8 @@
           <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
         </Loop>
         <Loop LoopId="2430" Usage="Situational" LoopRepeat="25">
-          <Name>Service Line Adjudication Information</Name>
+          <Name>Service Line Adjudication Information</Name>tuj ygrm juytf hn tghjyngbfdtg9i[potriup[ 6olyp[tykuj;lrkghl;gj;rltmfghklujortmkhgltmghrmdtbkkjtopykjmltryjope5rlkgmbl;ghoptrkhfl;tg,j;'rtkhirjgijgherjg hkjhfity3uirgukyhtolierytoieuytihyti4rhgigtutjikhujpi5rkj5tgteiok7oyltjuhtiyuotuo9hg4p8otiouoigrh    hwjtyegwehfghjdfrghjsdgfydgftyrdftgy34tr u73y4374ry48i5utturkjvjrytu4y5yitoitiluhitlyjtyjiokyhuktjhykjcfvcjkjtlkijgikfjgikjrfewufhehjsfgbshdghsvdghsvdchgsbujdeopyitohjotkg
+             4567 890-=  
           <StartingSegment SegmentId="SVD" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
           <Segment SegmentId="DTP" Usage="Situational" Repeat="1"/>

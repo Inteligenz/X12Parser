@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\DentalClaimSpecificationFinder.cs" />
+    <Compile Include="Parsing\InstitutionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />
@@ -148,6 +150,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-873-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-837I-4010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-837D-4010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
