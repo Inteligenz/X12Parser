@@ -69,6 +69,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         public void ParseToXml()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
 
             X12Parser parser = new X12Parser();

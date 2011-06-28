@@ -74,6 +74,7 @@ namespace OopFactory.X12.Parsing
             Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string,HierarchicalLoop>();
             string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
             string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+            int segmentIndex = 1;
             while (segmentString.Length > 0)
             {
                 switch (segmentId)
@@ -150,7 +151,7 @@ namespace OopFactory.X12.Parsing
                                             var tran = (Transaction)currentContainer;
 
                                             throw new TransactionValidationException(
-                                                "Segment '{3}' within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString);
+                                                "Segment '{3}' in position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
                                         }
                                         else
                                         {
@@ -168,7 +169,7 @@ namespace OopFactory.X12.Parsing
                 }
                 segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
                 segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
-            
+                segmentIndex++;
             }
             
             return envelop;

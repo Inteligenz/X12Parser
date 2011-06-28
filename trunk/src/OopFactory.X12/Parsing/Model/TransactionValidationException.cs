@@ -8,7 +8,7 @@ namespace OopFactory.X12.Parsing.Model
     public class TransactionValidationException : ArgumentException
     {
         public TransactionValidationException(string formatString, string transactionCode, string controlNumber, string elementId, string value, params object[] args)
-            : base(String.Format(formatString, transactionCode, controlNumber, elementId, value, args), transactionCode)
+            : base(String.Format(formatString, transactionCode, controlNumber, elementId, value, args.Length > 0 ? args[0] : null, args.Length > 1 ? args[1] : null), transactionCode)
         {
             TransactionCode = transactionCode;
             ControlNumber = controlNumber;
