@@ -46,8 +46,8 @@
                   N4*MIAMI*FL*33413~
                 NM1*PR*2*GREAT PRAIRIES HEALTH*****PI*567890~
                 NM1*QC*1******MI*T55TY666-01~
-              NM1*82*1~
-                REF*G2*88877~
+                NM1*82*1~
+                  REF*G2*88877~
               LX*1~
                 SV1*HC:99213*43*UN*1***1:2:3:4**N~
                 DTP*472*D8*19971003~

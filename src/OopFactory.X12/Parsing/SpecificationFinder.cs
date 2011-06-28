@@ -137,7 +137,7 @@ namespace OopFactory.X12.Parsing
             _specifications = new Dictionary<string, TransactionSpecification>();
         }
 
-        private static TransactionSpecification GetSpecification(string key)
+        internal static TransactionSpecification GetSpecification(string key)
         {
             if (!_specifications.ContainsKey(key))
             {

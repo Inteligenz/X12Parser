@@ -90,7 +90,28 @@ namespace OopFactory.X12.Tests.Unit.Parsing
                 Trace.WriteLine(String.Format("Query '{0}' succeeded.", query));
                 query = GetXPathQuery(++index);
             }
-            
+
+            if (resourcePath.Contains("_837D"))
+            {
+                stream = GetEdi(resourcePath);
+                parser = new X12Parser(new DentalClaimSpecificationFinder());
+                interchange = parser.Parse(stream);
+                xml = interchange.Serialize();
+#if DEBUG
+            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837D.xml"), FileMode.Create).PrintToFile(xml);
+#endif
+            }
+
+            if (resourcePath.Contains("_837I"))
+            {
+                stream = GetEdi(resourcePath);
+                parser = new X12Parser(new InstitutionalClaimSpecificationFinder());
+                interchange = parser.Parse(stream);
+                xml = interchange.Serialize();
+#if DEBUG
+            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837I.xml"), FileMode.Create).PrintToFile(xml);
+#endif
+            }
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
