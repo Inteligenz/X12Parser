@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Transformati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Rendering", "src\OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj", "{77668BB6-B01C-4B07-A8F6-0956265387C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.UnbundleX12", "OopFactory.X12.UnbundleX12\OopFactory.X12.UnbundleX12.csproj", "{84527618-2CC2-4C14-8C0D-09012C4E12AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.UnbundleX12", "src\OopFactory.X12.UnbundleX12\OopFactory.X12.UnbundleX12.csproj", "{84527618-2CC2-4C14-8C0D-09012C4E12AD}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -41,9 +41,9 @@ Global
 		SccProjectUniqueName5 = src\\OopFactory.X12.Rendering\\OopFactory.X12.Rendering.csproj
 		SccProjectName5 = src/OopFactory.X12.Rendering
 		SccLocalPath5 = src\\OopFactory.X12.Rendering
-		SccProjectUniqueName6 = OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
-		SccProjectName6 = OopFactory.X12.UnbundleX12
-		SccLocalPath6 = OopFactory.X12.UnbundleX12
+		SccProjectUniqueName6 = src\\OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
+		SccProjectName6 = src/OopFactory.X12.UnbundleX12
+		SccLocalPath6 = src\\OopFactory.X12.UnbundleX12
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
