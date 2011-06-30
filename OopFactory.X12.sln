@@ -18,9 +18,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Transformati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Rendering", "src\OopFactory.X12.Rendering\OopFactory.X12.Rendering.csproj", "{77668BB6-B01C-4B07-A8F6-0956265387C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.UnbundleX12", "OopFactory.X12.UnbundleX12\OopFactory.X12.UnbundleX12.csproj", "{84527618-2CC2-4C14-8C0D-09012C4E12AD}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -39,6 +41,9 @@ Global
 		SccProjectUniqueName5 = src\\OopFactory.X12.Rendering\\OopFactory.X12.Rendering.csproj
 		SccProjectName5 = src/OopFactory.X12.Rendering
 		SccLocalPath5 = src\\OopFactory.X12.Rendering
+		SccProjectUniqueName6 = OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
+		SccProjectName6 = OopFactory.X12.UnbundleX12
+		SccLocalPath6 = OopFactory.X12.UnbundleX12
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -102,6 +107,16 @@ Global
 		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{77668BB6-B01C-4B07-A8F6-0956265387C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Debug|x86.ActiveCfg = Debug|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Debug|x86.Build.0 = Debug|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Release|Any CPU.ActiveCfg = Release|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Release|x86.ActiveCfg = Release|x86
+		{84527618-2CC2-4C14-8C0D-09012C4E12AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
