@@ -8,8 +8,8 @@
     <ProjectGuid>{84527618-2CC2-4C14-8C0D-09012C4E12AD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnbundleX12</RootNamespace>
-    <AssemblyName>OopFactory.X12.UnbundleX12</AssemblyName>
+    <RootNamespace>OopFactory.X12.UnbundleX12</RootNamespace>
+    <AssemblyName>UnbundleX12</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

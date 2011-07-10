@@ -157,6 +157,15 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_4010\FromNth\835_DeIdent_01.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_4010\FromNth\835_DeIdent_02.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\FromNth\837_DeIdent_01.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\FromNth\837_DeIdent_02.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\FromNth\837_DeIdent_03.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\FromNth\837_DeIdent_04.dat" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_4010\FromNth\837_DeIdent_05.dat" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

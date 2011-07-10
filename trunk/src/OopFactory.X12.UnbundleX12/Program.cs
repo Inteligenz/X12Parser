@@ -15,13 +15,13 @@ namespace OopFactory.X12.UnbundleX12
             if (args.Length < 3)
             {
                 Console.WriteLine("UnbundleX12 expected 3 to 4 arguments: input filename, loop ID, output directory and an optional format string argument");
-                Console.WriteLine("Example: UnbundleX12 c:\\MyEdiFile.txt 2300 c:\\Output {0}\\{1}_{2:000}.{3}");
+                Console.WriteLine("Example: UnbundleX12 c:\\MyEdiFile.txt 2300 c:\\Output {0}\\{1}_{2:000}{3}");
                 return;
             }
             string filename = args[0];
             string loopId = args[1];
             string outputDirectory = args[2];
-            string formatString = "{0}\\{1}_{2:000}.{3}";
+            string formatString = "{0}\\{1}_{2:000}{3}";
 
             if (!File.Exists(filename))
             {
