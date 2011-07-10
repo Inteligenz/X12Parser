@@ -189,6 +189,7 @@ IEA*1*000000905~";
             Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._5010.Example1_2_And_3_Combined.txt"));
 
             var list = parser.UnbundleByLoop(interchange, "2300");
+            Assert.AreEqual(3, list.Count);
             foreach (var item in list)
             {
                 Trace.WriteLine("...");
@@ -198,6 +199,26 @@ IEA*1*000000905~";
             Assert.AreEqual(expectedClaim1, list[0].SerializeToX12(true));
             Assert.AreEqual(expectedClaim2, list[1].SerializeToX12(true));
             Assert.AreEqual(expectedClaim3, list[2].SerializeToX12(true));
+        }
+
+        [TestMethod]
+        public void Unbundle835FromNthTest()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.FromNth.835_DeIdent_02.dat"));
+
+            var list = parser.UnbundleByLoop(interchange, "2000");
+            Assert.AreEqual(6, list.Count);
+        }
+
+        [TestMethod]
+        public void UnbundleClaimsIn837FromNthTest()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._4010.FromNth.837_DeIdent_05.dat"));
+
+            var list = parser.UnbundleByLoop(interchange, "2300");
+            Assert.AreEqual(186, list.Count);
         }
     }
 }

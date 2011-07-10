@@ -195,7 +195,6 @@ namespace OopFactory.X12.Parsing
             foreach (FunctionGroup group in interchange.FunctionGroups)
                 foreach (Transaction transaction in group.Transactions)
                 {
-                    service.UnbundleLoops(list, transaction, loopId);
                     service.UnbundleHLoops(list, transaction, loopId);
                 }
 
