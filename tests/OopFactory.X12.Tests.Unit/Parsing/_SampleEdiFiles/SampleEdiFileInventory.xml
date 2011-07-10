@@ -108,6 +108,14 @@
       <SourceUrl>http://b9962ed140049a571a710839f1f71c989aaf09ce.gripelements.com/ois/macsis/claims/macsis.hipaa.edi.sample.835.pdf</SourceUrl>
       <ResourcePath>INS._835._5010.Example1.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._835._4010.FromNth.835_DeIdent_01.dat</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._835._4010.FromNth.835_DeIdent_02.dat</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="837">
     <EdiFile>
@@ -181,6 +189,26 @@
     </EdiFile>
     <EdiFile>
       <ResourcePath>INS._837P._4010.Spec_4.2.3_PayerIsPCIns.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_01.dat</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_02.dat</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_03.dat</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_04.dat</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_05.dat</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="850">

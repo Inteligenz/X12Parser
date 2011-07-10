@@ -158,6 +158,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         public void ParseToHtml()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             var service = new X12HtmlTransformationService(new X12EdiParsingService(false));
             string html = service.Transform(new StreamReader(stream).ReadToEnd());

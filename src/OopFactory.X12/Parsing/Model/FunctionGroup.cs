@@ -114,7 +114,15 @@ namespace OopFactory.X12.Parsing.Model
             TransactionSpecification spec = _specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, transactionType);
 
             Transaction transaction = new Transaction(this, _delimiters, segmentString, spec);
-            _transactions.Add(transaction.ControlNumber, transaction);
+            if (_transactions.ContainsKey(transaction.ControlNumber))
+            {
+                throw new TransactionValidationException("Transaction control number {1} for transaction code {0} already exist within the functional group {4}.",
+                    transaction.IdentifierCode, transaction.ControlNumber, "ST02", transaction.ControlNumber, this.ControlNumber);
+            }
+            else
+            {
+                _transactions.Add(transaction.ControlNumber, transaction);
+            }
             return transaction;
         }
 
