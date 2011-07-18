@@ -132,12 +132,17 @@ namespace OopFactory.X12.Parsing.Model
 
         public FunctionGroup AddFunctionGroup(string functionIdCode, DateTime date, int controlNumber)
         {
+            return AddFunctionGroup(functionIdCode, date, controlNumber, "004010X096A1");
+        }
+
+        public FunctionGroup AddFunctionGroup(string functionIdCode, DateTime date, int controlNumber, string version)
+        {
             if (controlNumber > 999999999 || controlNumber < 1)
                 throw new ElementValidationException("Element {0} cannot containe the value '{1}' because it must be a positive number between 1 and 999999999.",
                     "GS06", controlNumber.ToString());
 
             FunctionGroup fg = new FunctionGroup(_specFinder, this, _delimiters,
-                string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}004010X096A1{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator));
+                string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, version));
             fg.FunctionalIdentifierCode = functionIdCode;
             fg.Date = date;
             fg.ControlNumber = controlNumber;
