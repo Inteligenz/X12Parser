@@ -2,6 +2,44 @@
 <SegmentSet xmlns="http://tempuri.org/X12ParserSpecification.xsd"
     >
   <Name>5010</Name>
+  <Segment SegmentId="ST">
+    <Element Name="Transaction Set Identifier Code" Required="true" Type="ID" MinLength="3" MaxLength="3">
+      <Allowed ID="837">Health Care Claim</Allowed>
+    </Element>
+    <Element Name="Transaction Set Control Number" Required="true" Type="AN" MinLength="4" MaxLength="9" />
+    <Element Name="Implementation Convention Reference" Required="false" Type="AN" MinLength="1" MaxLength="35" />
+  </Segment>
+  <Segment SegmentId="NM1">
+    <Element Name="Entity Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="3"  QualifierSetRef="Entity Identifier Code" />
+    <Element Name="Entity Type Qualifier" Required="true" Type="ID" MinLength="1" MaxLength="1">
+      <Allowed ID="1">Person</Allowed>
+      <Allowed ID="2">Non-Person Entity</Allowed>
+    </Element>
+    <Element Name="Name Last or Organization Name" Type="AN" MinLength="1" MaxLength="60"/>
+    <Element Name="Name First" Type="AN" MinLength="1" MaxLength="35"/>
+    <Element Name="Name Middle" Type="AN" MinLength="25" MaxLength="25"/>
+    <Element Name="Name Prefix" Type="AN" MinLength="1" MaxLength="10"/>
+    <Element Name="Name Suffix" Type="AN" MinLength="1" MaxLength="10"/>
+    <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="24">Employer’s Identification Number</Allowed>
+      <Allowed ID="34">Social Security Number</Allowed>
+      <Allowed ID="46">Electronic Transmitter Identification Number (ETIN)</Allowed>
+      <Allowed ID="FI">Federal Taxpayer’s Identification Number</Allowed>
+      <Allowed ID="II">Standard Unique Health Identifier for each Individual in the United States</Allowed>
+      <Allowed ID="MI">Member Identification Number</Allowed>
+      <Allowed ID="NI">National Association of Insurance Commissioners (NAIC)</Allowed>
+      <Allowed ID="PI">Payor Identification</Allowed>
+      <Allowed ID="PP">Pharmacy Processor Number</Allowed>
+      <Allowed ID="SV">Service Provider Number</Allowed>
+      <Allowed ID="XV">Centers for Medicare and Medicaid Services PlanID</Allowed>
+      <Allowed ID="XX">Centers for Medicare and Medicaid Services Nationa</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
+    <Element Name="Identification Code" Type="AN" MinLength="2" MaxLength="80"/>
+    <Element Name="Entity Relationship Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Entity Identifier Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Name Last/Org Name" Type="AN" MinLength="1" MaxLength="60"/>
+  </Segment>
   <Segment SegmentId="CLM">
     <Element Name="Patient Control Number" Type="AN" MinLength="1" MaxLength="38" />
     <Element Name="Total Claim Charge Amount" Type="R" MinLength="1" MaxLength="18" />
