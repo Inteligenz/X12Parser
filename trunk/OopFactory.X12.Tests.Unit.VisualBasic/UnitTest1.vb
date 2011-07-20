@@ -19,11 +19,13 @@ Public Class UnitTest1
         group.ApplicationReceiversCode = "908887732000"
 
         Dim transaction = group.AddTransaction("837", "0034")
+        transaction.SetElement(3, "005010X222")
         Dim bhtSegment = transaction.AddSegment("BHT")
 
         Dim submitterLoop = transaction.AddLoop("NM1*41") 'Submitter Identifer Code
         submitterLoop.SetElement(2, "2") 'Non-Person Entity
         submitterLoop.SetElement(3, "My Submitter") 'Organization Name
+        submitterLoop.SetElement(4, "First Name That Is > 25 Chars") 'First Name
 
         Dim perSegment = submitterLoop.AddSegment("PER")
         perSegment.SetElement(1, "IC") 'Information Contact Function Code
