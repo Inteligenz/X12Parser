@@ -40,6 +40,42 @@
     <Element Name="Entity Identifier Code" Type="ID" MinLength="2" MaxLength="3"/>
     <Element Name="Name Last/Org Name" Type="AN" MinLength="1" MaxLength="60"/>
   </Segment>
+  <Segment SegmentId="N4">
+    <Element Name="City Name" Type="AN" MinLength="2" MaxLength="30"/>
+    <Element Name="State or Provice Code" Type="ID" MinLength="2" MaxLength="2"/>
+    <Element Name="Postal Code" Type="ID" MinLength="3" MaxLength="15"/>
+    <Element Name="Country Code" Type="ID" MinLength="2" MaxLength="3"/>
+    <Element Name="Location Qualifier" Type="ID" MinLength="1" MaxLength="2">
+      <Allowed ID="60">Area</Allowed>
+      <Allowed ID="CY">County/Parish</Allowed>
+    </Element>
+    <Element Name="Location Identifier" Type="AN" MinLength="1" MaxLength="30"/>
+    <Element Name="Country Subdivision Code" Type="ID" MinLength="1" MaxLength="3"/>
+  </Segment>
+  <Segment SegmentId="PER">
+    <Element Name="Contact Function Code" Type="ID" MinLength="2" MaxLength="2">
+      <Allowed ID="BD">Buyer Name or Department</Allowed>
+      <Allowed ID="CC">Computer Systems Contact</Allowed>
+      <Allowed ID="IC">Information Contact</Allowed>
+      <Allowed ID="IP">Insured Party</Allowed>
+      <Allowed ID="OC">Order Contact</Allowed>
+      <Allowed ID="SU">Supplier Contact</Allowed>
+    </Element>
+    <Element Name="Name" Type="AN" MinLength="1" MaxLength="60"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Communication Number Qualifier" />
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="256"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Communication Number Qualifier" />
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="256"/>
+    <Element Name="Communication Number Qualifier" Type="ID" MinLength="2" MaxLength="2" QualifierSetRef="Communication Number Qualifier" />
+    <Element Name="Communication Number" Type="AN" MinLength="1" MaxLength="256"/>
+    <Element Name="Contact Inquery Reference" Type="AN" MinLength="1" MaxLength="20"/>
+  </Segment>
+  <Segment SegmentId="REF">
+    <Element Name="Reference Identification Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="3" QualifierSetRef="Reference Identification Qualifier" />
+    <Element Name="Reference Identification" Type="AN" MinLength="1" MaxLength="50"/>
+    <Element Name="Description" Type="AN" MinLength="1" MaxLength="80"/>
+    <Element Name="Reference Identifier" Type="AN"/>
+  </Segment>
   <Segment SegmentId="CLM">
     <Element Name="Patient Control Number" Type="AN" MinLength="1" MaxLength="38" />
     <Element Name="Total Claim Charge Amount" Type="R" MinLength="1" MaxLength="18" />
