@@ -40,7 +40,24 @@ namespace OopFactory.X12.Parsing.Model
                 throw new TransactionValidationException("Loop {3} could be added because it could not be found in the specification for {2}",
                     null, null, this.SegmentId, segmentString);
         }
-        
+
+        public T AddLoop<T>(T loop) where T : TypedLoop
+        {
+            string segmentString = loop.GetSegmentString(_delimiters);
+            LoopSpecification loopSpec = GetLoopSpecification(segmentString);
+
+            if (loopSpec != null)
+            {
+                loop.Initialize(this, _delimiters, loopSpec);
+                _segments.Add(loop._loop);
+                _loops.Add(loop._loop);
+                return loop;
+            }
+            else
+                throw new TransactionValidationException("Loop {3} could be added because it could not be found in the specification for {2}",
+                    null, null, this.SegmentId, segmentString);
+        }
+
         private LoopSpecification GetLoopSpecification(string segmentString)
         {
             Segment segment = new Segment(this, _delimiters, segmentString);

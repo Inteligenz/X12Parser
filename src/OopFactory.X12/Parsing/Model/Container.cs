@@ -55,6 +55,19 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
+        public T AddSegment<T>(T segment) where T : TypedSegment
+        {
+            segment.Initialize(this, _delimiters);
+            SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment._segment.SegmentId);
+            if (spec != null)
+            {
+                _segments.Add(segment._segment);
+                return segment;
+            }
+            else
+                return null;
+        }
+
         public IEnumerable<Segment> TrailerSegments 
         { 
             get

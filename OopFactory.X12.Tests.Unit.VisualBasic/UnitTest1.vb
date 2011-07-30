@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 Imports OopFactory.X12.Parsing
 Imports OopFactory.X12.Parsing.Model
+Imports OopFactory.X12.Parsing.Model.Typed
 
 <TestClass()>
 Public Class UnitTest1
@@ -22,35 +23,35 @@ Public Class UnitTest1
         transaction.SetElement(3, "005010X222")
         Dim bhtSegment = transaction.AddSegment("BHT")
 
-        Dim submitterLoop = transaction.AddLoop("NM1*41") 'Submitter Identifer Code
-        submitterLoop.SetElement(2, "2") 'Non-Person Entity
-        submitterLoop.SetElement(3, "My Submitter") 'Organization Name
-        submitterLoop.SetElement(4, "First Name That Is > 25 Chars") 'First Name
+        Dim submitterLoop = transaction.AddLoop(New TypedLoopNM1("41")) 'Submitter Identifer Code
+        submitterLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity
+        submitterLoop.NM103_NameLastOrOrganizationName = "My Submitter"
+        submitterLoop.NM104_NameFirst = "First Name That Is > 25 Chars"
 
-        Dim perSegment = submitterLoop.AddSegment("PER")
-        perSegment.SetElement(1, "IC") 'Information Contact Function Code
-        perSegment.SetElement(2, "My Contact") 'Name
-        perSegment.SetElement(3, "TE") 'Telephone Qualifier
-        perSegment.SetElement(4, "18005555555") 'Communication Number
+        Dim perSegment = submitterLoop.AddSegment(New TypedSegmentPER())
+        perSegment.PER01_ContactFunctionCode = "IC" 'Information Contact Function Code
+        perSegment.PER02_Name = "My Contact"
+        perSegment.PER03_CommunicationNumberQualifier = CommunicationNumberQualifer.Telephone
+        perSegment.PER04_CommunicationNumber = "18005555555" '
 
         Dim provider2000AHLoop = transaction.AddHLoop(1, "20", True) 'Information Source
         provider2000AHLoop.AddSegment("PRV") 'Speciality Segment
-        Dim provider2010AALoop = provider2000AHLoop.AddLoop("NM1*85")
-        provider2010AALoop.SetElement(2, "1") 'Person Entity
-        provider2010AALoop.SetElement(3, "Doe") 'Last Name
-        provider2010AALoop.SetElement(4, "John") 'First Name
+        Dim provider2010AALoop = provider2000AHLoop.AddLoop(New TypedLoopNM1("85"))
+        provider2010AALoop.NM102_EntityTypeQualifier = EntityTypeQualifier.Person
+        provider2010AALoop.NM103_NameLastOrOrganizationName = "Doe"
+        provider2010AALoop.NM104_NameFirst = "John"
 
-        Dim provider2010ACLoop = provider2000AHLoop.AddLoop("NM1*PE")
-        provider2010ACLoop.SetElement(2, "2") 'Person Entity
-        provider2010ACLoop.SetElement(3, "Pay-To Plan Name")
+        Dim provider2010ACLoop = provider2000AHLoop.AddLoop(New TypedLoopNM1("PE"))
+        provider2010ACLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity
+        provider2010ACLoop.NM103_NameLastOrOrganizationName = "Pay-To Plan Name"
 
-        Dim provider2010AC_N3Segment = provider2010ACLoop.AddSegment("N3")
-        provider2010AC_N3Segment.SetElement(1, "1234 Main St")
+        Dim provider2010AC_N3Segment = provider2010ACLoop.AddSegment(New TypedSegmentN3())
+        provider2010AC_N3Segment.N301_AddressInformation = "1234 Main St"
 
-        Dim provider2010AC_N4Segment = provider2010ACLoop.AddSegment("N4")
-        provider2010AC_N4Segment.SetElement(1, "Beverley Hills")
-        provider2010AC_N4Segment.SetElement(2, "CA")
-        provider2010AC_N4Segment.SetElement(3, "90210")
+        Dim provider2010AC_N4Segment = provider2010ACLoop.AddSegment(New TypedSegmentN4())
+        provider2010AC_N4Segment.N401_CityName = "Beverley Hills"
+        provider2010AC_N4Segment.N402_StateOrProvinceCode = "CA"
+        provider2010AC_N4Segment.N403_PostalCode = "90210"
 
 
         Dim x12 = message.SerializeToX12(True)
