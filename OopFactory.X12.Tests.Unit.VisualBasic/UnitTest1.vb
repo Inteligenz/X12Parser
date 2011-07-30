@@ -33,12 +33,24 @@ Public Class UnitTest1
         perSegment.SetElement(3, "TE") 'Telephone Qualifier
         perSegment.SetElement(4, "18005555555") 'Communication Number
 
-        Dim providerHLoop = transaction.AddHLoop(1, "20", True) 'Information Source
-        providerHLoop.AddSegment("PRV") 'Speciality Segment
-        Dim providerNameLoop = providerHLoop.AddLoop("NM1*85")
-        providerNameLoop.SetElement(2, "1") 'Person Entity
-        providerNameLoop.SetElement(3, "Doe") 'Last Name
-        providerNameLoop.SetElement(4, "John") 'First Name
+        Dim provider2000AHLoop = transaction.AddHLoop(1, "20", True) 'Information Source
+        provider2000AHLoop.AddSegment("PRV") 'Speciality Segment
+        Dim provider2010AALoop = provider2000AHLoop.AddLoop("NM1*85")
+        provider2010AALoop.SetElement(2, "1") 'Person Entity
+        provider2010AALoop.SetElement(3, "Doe") 'Last Name
+        provider2010AALoop.SetElement(4, "John") 'First Name
+
+        Dim provider2010ACLoop = provider2000AHLoop.AddLoop("NM1*PE")
+        provider2010ACLoop.SetElement(2, "2") 'Person Entity
+        provider2010ACLoop.SetElement(3, "Pay-To Plan Name")
+
+        Dim provider2010AC_N3Segment = provider2010ACLoop.AddSegment("N3")
+        provider2010AC_N3Segment.SetElement(1, "1234 Main St")
+
+        Dim provider2010AC_N4Segment = provider2010ACLoop.AddSegment("N4")
+        provider2010AC_N4Segment.SetElement(1, "Beverley Hills")
+        provider2010AC_N4Segment.SetElement(2, "CA")
+        provider2010AC_N4Segment.SetElement(3, "90210")
 
 
         Dim x12 = message.SerializeToX12(True)
