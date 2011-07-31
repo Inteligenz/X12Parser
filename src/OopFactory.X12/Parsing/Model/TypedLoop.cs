@@ -26,5 +26,26 @@ namespace OopFactory.X12.Parsing.Model
         {
             _loop = new Loop(parent, delimiters, _segmentId, loopSpecification);
         }
+
+        public Loop AddLoop(string segmentString)
+        {
+            return _loop.AddLoop(segmentString);
+        }
+
+        public T AddLoop<T>(T loop) where T : TypedLoop
+        {
+            return _loop.AddLoop(loop);
+        }
+
+        public Segment AddSegment(string segmentString)
+        {
+            return _loop.AddSegment(segmentString);
+        }
+
+        public T AddSegment<T>(T segment) where T : TypedSegment
+        {
+            return _loop.AddSegment(segment);
+        }
+
     }
 }
