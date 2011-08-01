@@ -52,8 +52,11 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentN3.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN4.cs" />
     <Compile Include="Parsing\Model\TypedSegment.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentPAT.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentPER.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentPRV.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />
