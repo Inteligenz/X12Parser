@@ -53,6 +53,12 @@ Public Class UnitTest1
         provider2010AC_N4Segment.N402_StateOrProvinceCode = "CA"
         provider2010AC_N4Segment.N403_PostalCode = "90210"
 
+        Dim subscriber2000BHLoop = provider2000AHLoop.AddHLoop(2, "22", False) '
+        Dim subscriberName2010BALoop = subscriber2000BHLoop.AddLoop(New TypedLoopNM1("IL"))
+        Dim subscriber_DMGSegment = subscriberName2010BALoop.AddSegment(New TypedSegmentDMG())
+        subscriber_DMGSegment.DMG01_DateTimePeriodFormatQualifier = "D8"
+        subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("3/3/2003")
+        subscriber_DMGSegment.DMG03_Gender = Gender.Female
 
         Dim x12 = message.SerializeToX12(True)
 
