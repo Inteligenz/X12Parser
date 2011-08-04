@@ -17,6 +17,10 @@ namespace OopFactory.X12.Parsing
         {
             switch (transactionSetCode)
             {
+                case "110":
+                    return GetSpecification("110-4010");
+                case "210":
+                    return GetSpecification("210-4010");
                 case "270":
                 case "271":
                     if (versionCode.Contains("5010"))

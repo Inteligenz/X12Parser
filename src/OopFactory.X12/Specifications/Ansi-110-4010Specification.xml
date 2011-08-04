@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="110">
+  <!-- Used http://www.pfizer.com/business/edispecs/ap110.pdf -->
+  <Segment SegmentId="B3"/>
+  <Segment SegmentId="B3A"/>
+  <Segment SegmentId="ITD"/>
+  <Segment SegmentId="L3" Trailer="true"/>
+  <Segment SegmentId="ACS" Trailer="true"/>
+  <Loop LoopId="N1">
+    <Name>N1</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>LX</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="P1"/>
+      <Segment SegmentId="R1"/>
+      <Segment SegmentId="POD"/>
+      <Segment SegmentId="V9"/>
+      <Segment SegmentId="RMT"/>
+      <Segment SegmentId="NTE"/>
+    </Loop>
+    <Loop LoopId="L5">
+      <Name>Description</Name>
+      <StartingSegment SegmentId="L5"/>
+      <Segment SegmentId="L0"/>
+      <Segment SegmentId="L4"/>
+      <Segment SegmentId="L10"/>
+      <Segment SegmentId="SL1"/>
+    </Loop>
+    <Loop LoopId="L1">
+      <Name>Rates and Charges</Name>
+      <StartingSegment SegmentId="L1"/>
+      <Segment SegmentId="C3"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
