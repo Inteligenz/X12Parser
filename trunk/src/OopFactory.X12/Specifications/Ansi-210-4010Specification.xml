@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="210">
+  <!-- Used http://www.pgedi.com/images/maps/3_X12%20v4010%20210%20Freight%20Invoice%20_Outbound_.pdf -->
+  <Segment SegmentId="B3"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="N7"/>
+  <Loop LoopId="N1">
+    <Name>N1</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>LX</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="L0"/>
+    <Segment SegmentId="L1"/>
+    <Segment SegmentId="L7"/>
+    <Segment SegmentId="L3"/>
+    <Segment SegmentId="L5"/>
+  </Loop>
+</TransactionSpecification>
