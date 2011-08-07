@@ -1982,6 +1982,24 @@
       <Allowed ID="ZZ">Mutually Defined</Allowed>
       <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
     </Element>
+    <Element Name="Health Care Code Information" Type="ID">
+      <Allowed ID="BE">Value</Allowed>
+      <Allowed ID="BF">Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BG">Condition</Allowed>
+      <Allowed ID="BH">Occurrence</Allowed>
+      <Allowed ID="BI">Occurrence Span</Allowed>
+      <Allowed ID="BJ">Admitting Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BK">Principal Diagnosis (ICD-9)</Allowed>
+      <Allowed ID="BN">United States Department of Health and Human Services, Office of Vital Statistics E-code</Allowed>
+      <Allowed ID="BO">Health Care Financing Administration Common Procedural Coding System</Allowed>
+      <Allowed ID="BP">Health Care Financing Administration Common Procedural Coding System Principal Procedure</Allowed>
+      <Allowed ID="BQ">International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure</Allowed>
+      <Allowed ID="BR">International Classification of Diseases Clinical Modification (ICD-9-CM) Principal Procedure</Allowed>
+      <Allowed ID="DR">Diagnosis Related Group (DRG)</Allowed>
+      <Allowed ID="TC">Treatment Codes</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+      <Allowed ID="D8">Date Expressed in Format CCYYMMDD</Allowed>
+    </Element>
   </Segment>
   <Segment SegmentId="LX">
     <Element Name="Assigned Number" Type="N" MinLength="1" MaxLength="6"/>
