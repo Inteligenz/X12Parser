@@ -82,6 +82,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_210\CN_FreightInvoiceSample1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_210\CN_FreightInvoiceSample2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_210\DBSchenker_SampleMotorFreightDetailsAndInvoice.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_110\FedEx_SampleInvoice1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_846\Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_846\Example2.txt" />

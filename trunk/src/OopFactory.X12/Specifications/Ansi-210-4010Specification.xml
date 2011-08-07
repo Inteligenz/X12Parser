@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="210">
   <!-- Used http://www.pgedi.com/images/maps/3_X12%20v4010%20210%20Freight%20Invoice%20_Outbound_.pdf -->
+  <!-- Used http://www.dbschenkerusa.com/upload/attachments/1054/105424/Schenker%20210%20Guide.pdf -->
+  <!-- Used http://www.cn.ca/documents/Customer-Service/EDI_210_Guide.pdf -->
   <Segment SegmentId="B3"/>
+  <Segment SegmentId="B2A"/>
+  <Segment SegmentId="C3"/>
+  <Segment SegmentId="ITD"/>
   <Segment SegmentId="N9"/>
   <Segment SegmentId="G62"/>
   <Segment SegmentId="N7"/>
-  <Loop LoopId="N1">
+  <Segment SegmentId="R3"/>
+  <Segment SegmentId="L3" Trailer="true"/>
+  <Loop LoopId="0100">
     <Name>N1</Name>
     <StartingSegment SegmentId="N1"/>
     <Segment SegmentId="N2"/>
@@ -13,13 +20,14 @@
     <Segment SegmentId="N4"/>
     <Segment SegmentId="N9"/>
   </Loop>
-  <Loop LoopId="LX">
+  <Loop LoopId="0400">
     <Name>LX</Name>
     <StartingSegment SegmentId="LX"/>
     <Segment SegmentId="L0"/>
     <Segment SegmentId="L1"/>
     <Segment SegmentId="L7"/>
     <Segment SegmentId="L3"/>
+    <Segment SegmentId="L4"/>
     <Segment SegmentId="L5"/>
   </Loop>
 </TransactionSpecification>

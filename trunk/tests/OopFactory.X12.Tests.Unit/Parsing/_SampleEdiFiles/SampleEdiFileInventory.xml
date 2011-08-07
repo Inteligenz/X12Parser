@@ -6,6 +6,20 @@
       <ResourcePath>TAM._110.FedEx_SampleInvoice1.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="210">
+    <EdiFile>
+      <SourceUrl>http://www.cn.ca/documents/Customer-Service/EDI_210_Guide.pdf</SourceUrl>
+      <ResourcePath>TAM._210.CN_FreightInvoiceSample1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.cn.ca/documents/Customer-Service/EDI_210_Guide.pdf</SourceUrl>
+      <ResourcePath>TAM._210.CN_FreightInvoiceSample2.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceFile>http://www.dbschenkerusa.com/upload/attachments/1054/105424/Schenker%20210%20Guide.pdf</SourceFile>
+      <ResourcePath>TAM._210.DBSchenker_SampleMotorFreightDetailsAndInvoice.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="270">
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
