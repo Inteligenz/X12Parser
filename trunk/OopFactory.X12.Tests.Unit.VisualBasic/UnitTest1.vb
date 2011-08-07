@@ -60,6 +60,42 @@ Public Class UnitTest1
         subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("3/3/2003")
         subscriber_DMGSegment.DMG03_Gender = Gender.Female
 
+        Dim claim2300Loop = subscriber2000BHLoop.AddLoop(New TypedLoopCLM())
+        claim2300Loop.CLM01_PatientControlNumber = "1234567"
+        claim2300Loop.CLM02_TotalClaimChargeAmount = 1234.56
+        claim2300Loop.CLM05._1_FacilityCodeValue = "11"
+        claim2300Loop.CLM05._2_FacilityCodeQualifier = "B"
+        claim2300Loop.CLM05._3_ClaimFrequencyTypeCode = "1"
+        claim2300Loop.CLM11._1_RelatedCausesCode = "AA"
+        claim2300Loop.CLM11._2_RelatedCausesCode = "EM"
+        claim2300Loop.CLM11._4_StateOrProvidenceCode = "TX"
+
+        Dim hiSegment = claim2300Loop.AddSegment("HI")
+        hiSegment.SetElement(12, "")
+
+        Dim serviceFacility2310CLoop = claim2300Loop.AddLoop(New TypedLoopNM1("77"))
+        serviceFacility2310CLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity
+        serviceFacility2310CLoop.NM103_NameLastOrOrganizationName = "Service Facility Location"
+
+        Dim per2310CSegment = serviceFacility2310CLoop.AddSegment(New TypedSegmentPER())
+        per2310CSegment.PER02_Name = "Me"
+        per2310CSegment.PER03_CommunicationNumberQualifier = CommunicationNumberQualifer.Telephone
+        per2310CSegment.PER04_CommunicationNumber = "5555555555"
+
+        Dim otherSubscriber2320Loop = claim2300Loop.AddLoop(New TypedLoopSBR())
+        otherSubscriber2320Loop.SBR02_IndividualRelationshipCode = "18"
+
+        Dim otherPayer2330BLoop = otherSubscriber2320Loop.AddLoop(New TypedLoopNM1("PR"))
+        otherPayer2330BLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity
+        otherPayer2330BLoop.NM103_NameLastOrOrganizationName = "Payer 2"
+        Dim segmentN3_2330B = otherPayer2330BLoop.AddSegment(New TypedSegmentN3())
+        segmentN3_2330B.N301_AddressInformation = "1234 Main St"
+        segmentN3_2330B.N302_AddressInformation = "Suite 101"
+        Dim segmentN4_2330B = otherPayer2330BLoop.AddSegment(New TypedSegmentN4())
+        segmentN4_2330B.N401_CityName = "Austin"
+        segmentN4_2330B.N402_StateOrProvinceCode = "TX"
+        segmentN4_2330B.N403_PostalCode = "78701"
+
         Dim x12 = message.SerializeToX12(True)
 
         System.Diagnostics.Trace.Write(x12)
