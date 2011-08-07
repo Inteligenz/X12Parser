@@ -52,137 +52,140 @@ namespace OopFactory.X12.Parsing
         public Interchange Parse(string x12)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(x12);
-            MemoryStream mstream = new MemoryStream(byteArray);
-
-            return Parse(mstream);
+            using (MemoryStream mstream = new MemoryStream(byteArray))
+            {
+                return Parse(mstream);
+            }
         }
                        
         public Interchange Parse(Stream stream)
         {
-            StreamReader reader = new StreamReader(stream);
-            
-            char[] header = new char[106];
-            if (reader.Read(header, 0, 106) < 106)
-                throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
-
-            X12DelimiterSet delimiters = new X12DelimiterSet(header);
-
-            Interchange envelop = new Interchange(_specFinder, new string(header));
-            Container currentContainer = envelop;
-            FunctionGroup fg = null;
-            Transaction tr = null;
-            Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string,HierarchicalLoop>();
-            string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
-            string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
-            int segmentIndex = 1;
-            while (segmentString.Length > 0)
+            using (StreamReader reader = new StreamReader(stream))
             {
-                switch (segmentId)
+                char[] header = new char[106];
+                if (reader.Read(header, 0, 106) < 106)
+                    throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
+
+                X12DelimiterSet delimiters = new X12DelimiterSet(header);
+
+                Interchange envelop = new Interchange(_specFinder, new string(header));
+                Container currentContainer = envelop;
+                FunctionGroup fg = null;
+                Transaction tr = null;
+                Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string, HierarchicalLoop>();
+                string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
+                string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+                int segmentIndex = 1;
+                while (segmentString.Length > 0)
                 {
-                    case "GS":
-                        if (envelop == null)
-                            throw new InvalidOperationException(String.Format("Segment '{0}' cannot occur before and ISA segment.", segmentString));
+                    switch (segmentId)
+                    {
+                        case "GS":
+                            if (envelop == null)
+                                throw new InvalidOperationException(String.Format("Segment '{0}' cannot occur before and ISA segment.", segmentString));
 
-                        currentContainer = fg = envelop.AddFunctionGroup(segmentString);;
-                        break;
-                    case "GE":
-                        if (fg == null)
-                            throw new InvalidOperationException(String.Format("Segment '{0}' does not have a matching GS segment precending it.", segmentString));
-                        fg.SetTerminatingTrailerSegment(segmentString);
-                        fg = null;
-                        break;
-                    case "ST":
-                        if (fg == null)
-                            throw new InvalidOperationException(string.Format("segment '{0}' cannot occur without a preceding GS segment.", segmentString));
+                            currentContainer = fg = envelop.AddFunctionGroup(segmentString); ;
+                            break;
+                        case "GE":
+                            if (fg == null)
+                                throw new InvalidOperationException(String.Format("Segment '{0}' does not have a matching GS segment precending it.", segmentString));
+                            fg.SetTerminatingTrailerSegment(segmentString);
+                            fg = null;
+                            break;
+                        case "ST":
+                            if (fg == null)
+                                throw new InvalidOperationException(string.Format("segment '{0}' cannot occur without a preceding GS segment.", segmentString));
 
-                        currentContainer = tr = fg.AddTransaction(segmentString);
-                        hloops = new Dictionary<string, HierarchicalLoop>();
-                        break;
-                    case "SE":
-                        if (tr == null)
-                            throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching ST segment preceding it.", segmentString));
+                            currentContainer = tr = fg.AddTransaction(segmentString);
+                            hloops = new Dictionary<string, HierarchicalLoop>();
+                            break;
+                        case "SE":
+                            if (tr == null)
+                                throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching ST segment preceding it.", segmentString));
 
-                        tr.SetTerminatingTrailerSegment(segmentString);
-                        tr = null;
-                        break;
-                    case "HL":
-                        Segment hlSegment = new Segment(null, delimiters, segmentString);
-                        string id = hlSegment.GetElement(1);
-                        string parentId = hlSegment.GetElement(2);
+                            tr.SetTerminatingTrailerSegment(segmentString);
+                            tr = null;
+                            break;
+                        case "HL":
+                            Segment hlSegment = new Segment(null, delimiters, segmentString);
+                            string id = hlSegment.GetElement(1);
+                            string parentId = hlSegment.GetElement(2);
 
-                        if (parentId == "")
-                            currentContainer = tr.AddHLoop(segmentString); 
-                        else
-                        {
-                            if (hloops.ContainsKey(parentId))
-                                currentContainer = hloops[parentId].AddHLoop(segmentString);
-                            else
-                                throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
-                        }
-                        if (hloops.ContainsKey(id))
-                            throw new InvalidOperationException(String.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", segmentString, tr.ControlNumber, id));
-                        hloops.Add(id, (HierarchicalLoop)currentContainer);
-                        break;
-                    case "IEA":
-                        if (envelop == null)
-                            throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
-                        envelop.SetTerminatingTrailerSegment(segmentString);
-                        break;
-                    default:
-                        while (currentContainer != null)
-                        {
-                            if (currentContainer.AddSegment(segmentString) != null)
-                                break;
+                            if (parentId == "")
+                                currentContainer = tr.AddHLoop(segmentString);
                             else
                             {
-                                if (currentContainer is LoopContainer)
-                                {
-                                    LoopContainer loopContainer = (LoopContainer)currentContainer;
-
-                                    try
-                                    {
-                                        currentContainer = loopContainer.AddLoop(segmentString);
-                                        break;
-                                    }
-                                    catch (TransactionValidationException)
-                                    {
-                                        if (currentContainer is Transaction)
-                                        {
-                                            var tran = (Transaction)currentContainer;
-
-                                            throw new TransactionValidationException(
-                                                "Segment '{3}' in position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
-                                        }
-                                        else
-                                        {
-                                            currentContainer = currentContainer.Parent;
-                                            continue;
-                                        }
-                                    }
-                                }
+                                if (hloops.ContainsKey(parentId))
+                                    currentContainer = hloops[parentId].AddHLoop(segmentString);
                                 else
+                                    throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
+                            }
+                            if (hloops.ContainsKey(id))
+                                throw new InvalidOperationException(String.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", segmentString, tr.ControlNumber, id));
+                            hloops.Add(id, (HierarchicalLoop)currentContainer);
+                            break;
+                        case "IEA":
+                            if (envelop == null)
+                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
+                            envelop.SetTerminatingTrailerSegment(segmentString);
+                            break;
+                        default:
+                            while (currentContainer != null)
+                            {
+                                if (currentContainer.AddSegment(segmentString) != null)
                                     break;
-                            } 
-                        }
-                        break;
+                                else
+                                {
+                                    if (currentContainer is LoopContainer)
+                                    {
+                                        LoopContainer loopContainer = (LoopContainer)currentContainer;
 
+                                        try
+                                        {
+                                            currentContainer = loopContainer.AddLoop(segmentString);
+                                            break;
+                                        }
+                                        catch (TransactionValidationException)
+                                        {
+                                            if (currentContainer is Transaction)
+                                            {
+                                                var tran = (Transaction)currentContainer;
+
+                                                throw new TransactionValidationException(
+                                                    "Segment '{3}' in position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
+                                            }
+                                            else
+                                            {
+                                                currentContainer = currentContainer.Parent;
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                    else
+                                        break;
+                                }
+                            }
+                            break;
+
+                    }
+                    segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
+                    segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+                    segmentIndex++;
                 }
-                segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
-                segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
-                segmentIndex++;
+                return envelop;
             }
-            
-            return envelop;
         }
 
         public string TransformToX12(string xml)
         {
             var transform = new XslCompiledTransform();
             transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")));
-            var writer = new StringWriter();
 
-            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
-            return writer.GetStringBuilder().ToString();
+            using (var writer = new StringWriter())
+            {
+                transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
+                return writer.GetStringBuilder().ToString();
+            }
         }
 
         public List<Interchange> UnbundleByLoop(Interchange interchange, string loopId)
@@ -205,8 +208,10 @@ namespace OopFactory.X12.Parsing
                 x12.AppendFormat("{0}{1}", isa, terminator);
                 x12.Append(item);
                 x12.AppendFormat("{0}{1}", iea, terminator);
-                MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString()));
-                interchanges.Add(Parse(mstream));
+                using (MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString())))
+                {
+                    interchanges.Add(Parse(mstream));
+                }
             }
             return interchanges;
         }         
