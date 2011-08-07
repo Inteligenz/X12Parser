@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="110">
   <!-- Used http://www.pfizer.com/business/edispecs/ap110.pdf -->
+  <!-- Used http://images.fedex.com/us/account/invhome/Air_Ground_X12-4060_New_Customer.pdf -->
   <Segment SegmentId="B3"/>
   <Segment SegmentId="B3A"/>
   <Segment SegmentId="ITD"/>
+  <Segment SegmentId="C3"/>
   <Segment SegmentId="L3" Trailer="true"/>
   <Segment SegmentId="ACS" Trailer="true"/>
   <Loop LoopId="N1">
@@ -25,13 +27,13 @@
       <Segment SegmentId="N4"/>
       <Segment SegmentId="N9"/>
       <Segment SegmentId="PER"/>
-      <Segment SegmentId="P1"/>
-      <Segment SegmentId="R1"/>
-      <Segment SegmentId="POD"/>
-      <Segment SegmentId="V9"/>
-      <Segment SegmentId="RMT"/>
-      <Segment SegmentId="NTE"/>
     </Loop>
+    <Segment SegmentId="P1"/>
+    <Segment SegmentId="R1"/>
+    <Segment SegmentId="POD"/>
+    <Segment SegmentId="V9"/>
+    <Segment SegmentId="RMT"/>
+    <Segment SegmentId="NTE"/>
     <Loop LoopId="L5">
       <Name>Description</Name>
       <StartingSegment SegmentId="L5"/>
