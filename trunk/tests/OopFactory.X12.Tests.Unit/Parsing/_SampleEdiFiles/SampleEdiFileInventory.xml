@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SampleEdiFiles>
+  <TransactionSet Id="110">
+    <EdiFile>
+      <SourceUrl>http://images.fedex.com/us/account/invhome/Air_Ground_X12-4060_New_Customer.pdf</SourceUrl>
+      <ResourcePath>TAM._110.FedEx_SampleInvoice1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="270">
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
