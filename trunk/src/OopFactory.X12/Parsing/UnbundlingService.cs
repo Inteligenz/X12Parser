@@ -22,6 +22,7 @@ namespace OopFactory.X12.Parsing
             {
                 if (loop.Specification.LoopId == loopId)
                     list.Add(ExtractLoop(loop, loopId));
+                UnbundleLoops(list, loop, loopId);
             }
         }
 
