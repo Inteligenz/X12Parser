@@ -212,6 +212,26 @@ IEA*1*000000905~";
         }
 
         [TestMethod]
+        public void Unbundling835ByLoop2100()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt"));
+
+            var list = parser.UnbundleByLoop(interchange, "2100");
+            Assert.AreEqual(9, list.Count);
+        }
+
+        [TestMethod]
+        public void Unbundling835ByLoop2110()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt"));
+
+            var list = parser.UnbundleByLoop(interchange, "2110");
+            Assert.AreEqual(9, list.Count);
+        }
+
+        [TestMethod]
         public void UnbundleClaimsIn837FromNthTest()
         {
             X12Parser parser = new X12Parser();
@@ -219,6 +239,16 @@ IEA*1*000000905~";
 
             var list = parser.UnbundleByLoop(interchange, "2300");
             Assert.AreEqual(186, list.Count);
+        }
+
+        [TestMethod]
+        public void UnbundleClaimsIn837ByServiceLineTest()
+        {
+            X12Parser parser = new X12Parser();
+            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt"));
+
+            var list = parser.UnbundleByLoop(interchange, "2400");
+            Assert.AreEqual(4, list.Count);
         }
     }
 }
