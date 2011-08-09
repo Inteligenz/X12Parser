@@ -54,7 +54,7 @@ namespace OopFactory.X12.Parsing.Model
                 return loop;
             }
             else
-                throw new TransactionValidationException("Loop {3} could be added because it could not be found in the specification for {2}",
+                throw new TransactionValidationException("Loop {3} could not be added because it could not be found in the specification for {2}",
                     null, null, this.SegmentId, segmentString);
         }
 
