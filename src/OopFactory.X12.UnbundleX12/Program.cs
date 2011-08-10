@@ -14,14 +14,15 @@ namespace OopFactory.X12.UnbundleX12
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("UnbundleX12 expected 3 to 4 arguments: input filename, loop ID, output directory and an optional format string argument");
-                Console.WriteLine("Example: UnbundleX12 c:\\MyEdiFile.txt 2300 c:\\Output {0}\\{1}_{2:000}{3}");
+                Console.WriteLine("UnbundleX12 expected 3 to 5 arguments: input filename, loop ID, output directory and an optional format string argument and include whitespace flag");
+                Console.WriteLine("Example: UnbundleX12 c:\\MyEdiFile.txt 2300 c:\\Output {0}\\{1}_{2:000}{3} false");
                 return;
             }
             string filename = args[0];
             string loopId = args[1];
             string outputDirectory = args[2];
             string formatString = "{0}\\{1}_{2:000}{3}";
+            bool includeWhitespace = true;
 
             if (!File.Exists(filename))
             {
@@ -32,6 +33,10 @@ namespace OopFactory.X12.UnbundleX12
             {
                 Console.WriteLine("Loop IDs are expected to be at least 3 characters.");
                 return;
+            }
+            if (args.Length >= 5)
+            {
+                includeWhitespace = bool.Parse(args[4]);
             }
             if (!Directory.Exists(outputDirectory))
             {
@@ -53,7 +58,7 @@ namespace OopFactory.X12.UnbundleX12
                 {
                     using (StreamWriter writer = new StreamWriter(outputFilestream))
                     {
-                        writer.Write(list[i].SerializeToX12(true));
+                        writer.Write(list[i].SerializeToX12(includeWhitespace));
                         writer.Close();
                     }
                     outputFilestream.Close();
