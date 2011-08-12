@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creation\InstitutionalClaimCreationTester.cs" />
+    <Compile Include="Creation\ProfessionalClaimCreationTester.cs" />
     <Compile Include="DocumentationCodeSamples\X12InterchangeModel\ReadingAnExistingX12File.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Flattening\Flatten820Tester.cs" />
