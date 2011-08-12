@@ -51,9 +51,12 @@
     <Compile Include="Parsing\Model\Typed\TypedElementRelatedCausesInfo.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementServiceLocationInfo.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopCLM.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopLX.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopNM1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopSBR.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentDMG.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentDTP.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentHI.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN3.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN4.cs" />
     <Compile Include="Parsing\Model\TypedSegment.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentPRV.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentSV1.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />
