@@ -196,6 +196,8 @@
       <Loop LoopId="2320" Usage="Situational" LoopRepeat="10">
         <Name>OTHER SUBSCRIBER INFORMATION</Name>
         <StartingSegment SegmentId="SBR" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="DMG" />
+        <!-- Not in specification but in sample EDI-->
         <Segment SegmentId="CAS" Usage="Situational" Repeat="5"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
@@ -536,6 +538,7 @@
       <Loop LoopId="2320" Usage="Situational" LoopRepeat="10">
         <Name>OTHER SUBSCRIBER INFORMATION</Name>
         <StartingSegment SegmentId="SBR" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="DMG" /> <!-- Not in specification but in sample EDI-->
         <Segment SegmentId="CAS" Usage="Situational" Repeat="5"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>

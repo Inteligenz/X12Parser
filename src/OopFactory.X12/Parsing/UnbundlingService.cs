@@ -40,6 +40,13 @@ namespace OopFactory.X12.Parsing
 
         private string ExtractLoop(LoopContainer loop, string loopId)
         {
+            LoopContainer parent = (LoopContainer)loop.Parent;
+            string parentLoopId = "";
+            if (parent is Loop)
+                parentLoopId = ((Loop)parent).Specification.LoopId;
+            else if (parent is HierarchicalLoop)
+                parentLoopId = ((HierarchicalLoop)parent).Specification.LoopId;
+
             StringBuilder sb = new StringBuilder();
             sb.Append(loop.Transaction.FunctionGroup.SegmentString);
             sb.AppendFormat("{0}", _segmentTerminator);
@@ -49,7 +56,8 @@ namespace OopFactory.X12.Parsing
             {
                 if (segment is Loop)
                 {
-                    sb.AppendLine(segment.SerializeToX12(true));
+                    if (((Loop)segment).Specification.LoopId != parentLoopId)
+                        sb.AppendLine(segment.SerializeToX12(true));
                 }
                 else
                 {
@@ -57,8 +65,8 @@ namespace OopFactory.X12.Parsing
                     sb.AppendFormat("{0}", _segmentTerminator);
                 }
             }
-            
-            sb.AppendLine(SerializeParent((LoopContainer)loop.Parent, loopId));
+
+            sb.AppendLine(SerializeParent(parent, loopId));
             sb.AppendLine(loop.ToX12String(true));
             foreach (var segment in loop.Transaction.TrailerSegments)
             {
@@ -79,7 +87,13 @@ namespace OopFactory.X12.Parsing
         {
             if (!(container is Transaction))
             {
-                StringBuilder sb = new StringBuilder(SerializeParent((LoopContainer)container.Parent, excludedLoopId));
+                LoopContainer parent = (LoopContainer)container.Parent;
+                string thisLoopId = excludedLoopId;
+                if (container is Loop)
+                    thisLoopId = ((Loop)container).Specification.LoopId;
+                else if (container is HierarchicalLoop)
+                    thisLoopId = ((HierarchicalLoop)container).Specification.LoopId;
+                StringBuilder sb = new StringBuilder(SerializeParent(parent, thisLoopId));
                 sb.Append(container.SegmentString);
                 sb.AppendFormat("{0}", _segmentTerminator);
                 foreach (var segment in container.Segments)
