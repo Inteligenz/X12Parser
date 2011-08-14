@@ -96,6 +96,37 @@ Public Class UnitTest1
         segmentN4_2330B.N402_StateOrProvinceCode = "TX"
         segmentN4_2330B.N403_PostalCode = "78701"
 
+
+        Dim patient2000CHLoop = subscriber2000BHLoop.AddHLoop(3, "23", False)
+
+        claim2300Loop = patient2000CHLoop.AddLoop(New TypedLoopCLM())
+        claim2300Loop.CLM01_PatientControlNumber = "1234568"
+        claim2300Loop.CLM02_TotalClaimChargeAmount = 1234.56
+        claim2300Loop.CLM05._1_FacilityCodeValue = "11"
+        claim2300Loop.CLM05._2_FacilityCodeQualifier = "B"
+        claim2300Loop.CLM05._3_ClaimFrequencyTypeCode = "1"
+        claim2300Loop.CLM11._1_RelatedCausesCode = "AA"
+        claim2300Loop.CLM11._2_RelatedCausesCode = "EM"
+        claim2300Loop.CLM11._4_StateOrProvidenceCode = "TX"
+
+        Dim purchaseServiceProviderName2310CLoop = claim2300Loop.AddLoop(New TypedLoopNM1("77"))
+        purchaseServiceProviderName2310CLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity
+
+        per2310CSegment = purchaseServiceProviderName2310CLoop.AddSegment(New TypedSegmentPER())
+        per2310CSegment.PER02_Name = "Service Provider Contact"
+
+        Dim sbr = claim2300Loop.AddLoop(New TypedLoopSBR())
+        Dim nm1 = sbr.AddLoop(New TypedLoopNM1("PR"))
+        nm1.NM102_EntityTypeQualifier = EntityTypeQualifier.Person
+
+        Dim n3 = nm1.AddSegment(New TypedSegmentN3())
+        n3.N301_AddressInformation = "123 Main St"
+
+        Dim n4 = nm1.AddSegment(New TypedSegmentN4())
+        n4.N401_CityName = "Austin"
+
+
+
         Dim x12 = message.SerializeToX12(True)
 
         System.Diagnostics.Trace.Write(x12)
