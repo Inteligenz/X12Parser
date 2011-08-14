@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
+#if DEBUG
     public class TypedSegmentHI : TypedSegment
     {
         public TypedSegmentHI() : base("HI")
@@ -79,5 +80,5 @@ namespace OopFactory.X12.Parsing.Model.Typed
         }
 
     }
-
+#endif
 }

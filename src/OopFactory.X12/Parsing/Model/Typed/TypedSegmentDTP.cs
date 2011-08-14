@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
+#if DEBUG
     public class TypedSegmentDTP : TypedSegment
     {
         public TypedSegmentDTP() : base("DTP"){}
@@ -37,7 +38,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         }
 
     }
-
+#endif
     
 
 }
