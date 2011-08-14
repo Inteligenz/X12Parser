@@ -230,6 +230,15 @@
       <SourceUrl>Provided by user nth</SourceUrl>
       <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_05.dat</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example1_HealthInsurance.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example2_Encounter.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.Example3_COB.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="850">
     <EdiFile>

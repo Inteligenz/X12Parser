@@ -211,7 +211,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ClaimFormPdfTransformTest()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
