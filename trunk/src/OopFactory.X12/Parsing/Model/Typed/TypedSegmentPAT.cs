@@ -15,7 +15,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            PAT05_DateTimePeriodFormatQualifier = "D8";
+            //PAT05_DateTimePeriodFormatQualifier = "D8";
         }
 
         public string PAT01_IndividualRelationshipCode
