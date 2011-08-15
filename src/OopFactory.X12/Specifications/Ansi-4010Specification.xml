@@ -721,7 +721,7 @@
       <Allowed ID="00">No Security Information Present</Allowed>
       <Allowed ID="01">Password</Allowed>
     </Element>
-    <Element Name="Security Information" Required="true" Type="AN" MinLength="10" MaxLength="2" />
+    <Element Name="Security Information" Required="true" Type="AN" MinLength="2" MaxLength="10" />
     <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true" QualifierSetRef="Interchange ID Qualifier" />
     <Element Name="Interchange Sender ID" Required="true" Type="AN" MinLength="15" MaxLength="15" />
     <Element Name="Interchange ID Qualifier" Required="true" Type="ID" MinLength="2" MaxLength="2" AllowedListInclusive="true" QualifierSetRef="Interchange ID Qualifier" />
