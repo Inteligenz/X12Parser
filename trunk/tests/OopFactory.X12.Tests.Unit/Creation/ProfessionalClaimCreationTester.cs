@@ -61,51 +61,100 @@ namespace OopFactory.X12.Tests.Unit.Creation
 
             var subscriber2000BHLoop = provider2000AHLoop.AddHLoop("2", "22", false);
             var subscriberName2010BALoop = subscriber2000BHLoop.AddLoop(new TypedLoopNM1("IL"));
+
+            //******************************* add N3 and N4 here
+
+            var segmentN3 = subscriberName2010BALoop.AddSegment(new TypedSegmentN3());
+
+            var segmentN4 = subscriberName2010BALoop.AddSegment(new TypedSegmentN4());
+
             var subscriber_DMGSegment = subscriberName2010BALoop.AddSegment(new TypedSegmentDMG());
             subscriber_DMGSegment.DMG01_DateTimePeriodFormatQualifier = "D8";
-            subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("3/3/2003");
-            subscriber_DMGSegment.DMG03_Gender = Gender.Female;
+            subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("5/1/1973");
+            subscriber_DMGSegment.DMG03_Gender = Gender.Male;
 
             var claim2300Loop = subscriber2000BHLoop.AddLoop(new TypedLoopCLM());
-            claim2300Loop.CLM01_PatientControlNumber = "1234567";
-            claim2300Loop.CLM02_TotalClaimChargeAmount = Convert.ToDecimal(1234.56);
+            claim2300Loop.CLM01_PatientControlNumber = "26463774";
+            claim2300Loop.CLM02_TotalClaimChargeAmount = Convert.ToDecimal(100);
             claim2300Loop.CLM05._1_FacilityCodeValue = "11";
             claim2300Loop.CLM05._2_FacilityCodeQualifier = "B";
             claim2300Loop.CLM05._3_ClaimFrequencyTypeCode = "1";
-            claim2300Loop.CLM11._1_RelatedCausesCode = "AA";
-            claim2300Loop.CLM11._2_RelatedCausesCode = "EM";
-            claim2300Loop.CLM11._4_StateOrProvidenceCode = "TX";
+            claim2300Loop.CLM06_ProviderOrSupplierSignatureIndicator = true;
+            claim2300Loop.CLM07_ProviderAcceptAssignmentCode = "A";
+            claim2300Loop.CLM08_BenefitsAssignmentCerficationIndicator = "Y";
+            claim2300Loop.CLM09_ReleaseOfInformationCode = "I";
 
-            var hiSegment = claim2300Loop.AddSegment("HI");
-            hiSegment.SetElement(12, "");
+            var refSegment = claim2300Loop.AddSegment(new TypedSegmentREF());
+            refSegment.REF01_ReferenceIdQualifier = "D9";
+            refSegment.REF02_ReferenceId = "17312345600006351";
 
-            var serviceFacility2310CLoop = claim2300Loop.AddLoop(new TypedLoopNM1("77"));
-            serviceFacility2310CLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
-            serviceFacility2310CLoop.NM103_NameLastOrOrganizationName = "Service Facility Location";
+            var hiSegment = claim2300Loop.AddSegment(new TypedSegmentHI());
+            hiSegment.HI01_HealthCareCodeInformation = "BK:0340";
+            hiSegment.HI02_HealthCareCodeInformation = "BF:V7389";
 
-            var per2310CSegment = serviceFacility2310CLoop.AddSegment(new TypedSegmentPER());
-            per2310CSegment.PER02_Name = "Me";
-            per2310CSegment.PER03_CommunicationNumberQualifier = CommunicationNumberQualifer.Telephone;
-            per2310CSegment.PER04_CommunicationNumber = "5555555555";
+            var lxLoop = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
+            lxLoop.LX01_AssignedNumber = "1";
 
-            var otherSubscriber2320Loop = claim2300Loop.AddLoop(new TypedLoopSBR());
-            otherSubscriber2320Loop.SBR02_IndividualRelationshipCode = "18";
+            var sv1Segment = lxLoop.AddSegment(new TypedSegmentSV1());
+            sv1Segment.SV101_CompositeMedicalProcedure = "HC:99213";
+            sv1Segment.SV102_MonetaryAmount = "40";
+            sv1Segment.SV103_UnitBasisMeasCode = "UN";
+            sv1Segment.SV104_Quantity = "1";
+            sv1Segment.SV107_CompDiagCodePoint = "1";
 
-            var otherPayer2330BLoop = otherSubscriber2320Loop.AddLoop(new TypedLoopNM1("PR"));
-            otherPayer2330BLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
-            otherPayer2330BLoop.NM103_NameLastOrOrganizationName = "Payer 2";
-            
-            var segmentN3_2330B = otherPayer2330BLoop.AddSegment(new TypedSegmentN3());
-            segmentN3_2330B.N301_AddressInformation = "1234 Main St";
-            segmentN3_2330B.N302_AddressInformation = "Suite 101";
+            var dtpSegment = lxLoop.AddSegment(new TypedSegmentDTP());
+            dtpSegment.DTP01_DateTimeQualifier = "472";
+            dtpSegment.DTP02_DateTimePeriodFormatQualifier = "D8";
+            DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
+            dtpSegment.DTP03_Date = theDate;
 
-            var segmentN4_2330B = otherPayer2330BLoop.AddSegment(new TypedSegmentN4());
-            segmentN4_2330B.N401_CityName = "Austin";
-            segmentN4_2330B.N402_StateOrProvinceCode = "TX";
-            segmentN4_2330B.N403_PostalCode = "78701";
-            
+            var lxLoop2 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
+            lxLoop2.LX01_AssignedNumber = "2";
 
+            var sv1Segment2 = lxLoop2.AddSegment(new TypedSegmentSV1());
+            sv1Segment2.SV101_CompositeMedicalProcedure = "HC:87070";
+            sv1Segment2.SV102_MonetaryAmount = "15";
+            sv1Segment2.SV103_UnitBasisMeasCode = "UN";
+            sv1Segment2.SV104_Quantity = "1";
+            sv1Segment2.SV107_CompDiagCodePoint = "1";
 
+            var dtpSegment2 = lxLoop2.AddSegment(new TypedSegmentDTP());
+            dtpSegment2.DTP01_DateTimeQualifier = "472";
+            dtpSegment2.DTP02_DateTimePeriodFormatQualifier = "D8";
+            DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
+            dtpSegment2.DTP03_Date = theDate2;
+
+            var lxLoop3 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
+            lxLoop3.LX01_AssignedNumber = "3";
+
+            var sv1Segment3 = lxLoop3.AddSegment(new TypedSegmentSV1());
+            sv1Segment3.SV101_CompositeMedicalProcedure = "HC:99214";
+            sv1Segment3.SV102_MonetaryAmount = "35";
+            sv1Segment3.SV103_UnitBasisMeasCode = "UN";
+            sv1Segment3.SV104_Quantity = "1";
+            sv1Segment3.SV107_CompDiagCodePoint = "2";
+
+            var dtpSegment3 = lxLoop3.AddSegment(new TypedSegmentDTP());
+            dtpSegment3.DTP01_DateTimeQualifier = "472";
+            dtpSegment3.DTP02_DateTimePeriodFormatQualifier = "D8";
+            DateTime theDate3 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
+            dtpSegment3.DTP03_Date = theDate3;
+
+            var lxLoop4 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
+            lxLoop4.LX01_AssignedNumber = "4";
+
+            var sv1Segment4 = lxLoop4.AddSegment(new TypedSegmentSV1());
+            sv1Segment4.SV101_CompositeMedicalProcedure = "HC:86663";
+            sv1Segment4.SV102_MonetaryAmount = "10";
+            sv1Segment4.SV103_UnitBasisMeasCode = "UN";
+            sv1Segment4.SV104_Quantity = "1";
+            sv1Segment4.SV107_CompDiagCodePoint = "2";
+
+            var dtpSegment4 = lxLoop4.AddSegment(new TypedSegmentDTP());
+            dtpSegment4.DTP01_DateTimeQualifier = "472";
+            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = "D8";
+            DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
+            dtpSegment4.DTP03_Date = theDate4;
             var x12 = message.SerializeToX12(true);
             //Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
             Trace.Write(x12);
