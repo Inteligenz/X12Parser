@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
@@ -1364,5 +1366,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             set { _field80Code_Code = value; }
         }
 
+        public static UB04Claim Deserialize(string xml)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(UB04Claim));
+            return (UB04Claim)serializer.Deserialize(new StringReader(xml));
+
+        }
     }
 }

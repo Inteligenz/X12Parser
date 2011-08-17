@@ -3,15 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{203C0F4B-D1F0-4C20-8968-7DBD84F4A815}</ProjectGuid>
+    <ProjectGuid>{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.X12.Hipaa</RootNamespace>
-    <AssemblyName>OopFactory.X12.Hipaa</AssemblyName>
+    <RootNamespace>OopFactory.X12.Hipaa.Tests.Unit</RootNamespace>
+    <AssemblyName>OopFactory.X12.Hipaa.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -35,33 +37,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Claims\ClaimTransformationService.cs" />
-    <Compile Include="Claims\Forms\Institutional\UB04Claim.cs" />
-    <Compile Include="Claims\Forms\Institutional\UB04ServiceLines.cs" />
-    <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
-    <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
-    <Compile Include="Claims\HealthCareClaim.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Claims\X12ToUB04DataModelTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
+    <ProjectReference Include="..\..\src\OopFactory.X12.Hipaa\OopFactory.X12.Hipaa.csproj">
+      <Project>{203C0F4B-D1F0-4C20-8968-7DBD84F4A815}</Project>
+      <Name>OopFactory.X12.Hipaa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\OopFactory.X12\OopFactory.X12.csproj">
       <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
       <Name>OopFactory.X12</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Claims\TestData\InstitutionalClaim1.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
