@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Claims\Forms\Institutional\UB04Claim.cs" />
-    <Compile Include="Claims\Forms\Institutional\UB04ServiceLine.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04ServiceLines.cs" />
+    <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
+    <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
