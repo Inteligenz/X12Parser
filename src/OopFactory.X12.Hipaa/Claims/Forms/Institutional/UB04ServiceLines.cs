@@ -6,8 +6,26 @@ using System.Text;
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
     [Serializable]
-    public class UB04ServiceLine
+    public class UB04ServiceLines
     {
+        /*
+         * 2011/8/15, jhalliday - New Data Model for 837I (Institutional) claim - collections objects.
+         * 
+         * Team: dstrubhar, jhalliday and epkrause
+         * 
+         * Purpose:
+         * To create a C# object model that will serve as a container for the X12 837I data
+         * AS ENTERED from a UB-04 CMS-1450 (formerly UB-92) Institutional (Inpatient Hospital) claim form.
+         * The classes in this namespace are used to add collection types to the main UB04Claim class
+         * for value that repeat on the UB-04 form.
+         * 
+         * Goal:
+         * The team has the overall goal of creating tools that can be used to consume and
+         * manipulate X12 messages (AKA files/documents) without the need to have a big project
+         * budget.  For that reason, this and the related X12 Parser project tools are all open
+         * source and freely usable.
+         */
+
         private string _field42_RevenueCode;
         private string _field43_RevenueDescription;
         private string _field44_HCPCS_Rates;

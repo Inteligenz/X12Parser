@@ -11,7 +11,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         /*
          * 2011/8/15, jhalliday - New Data Model for 837I (Institutional) claim.
          * 
-         * Team: dstrubhar, jhalliday and traxine
+         * Team: dstrubhar, jhalliday and epkrause
          * 
          * Purpose:
          * To create a C# object model that will serve as a container for the X12 837I data
@@ -81,7 +81,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field37_Filler;
         private string _field38_AdditionalPartyName;
         private List<UB04ValueCodesAndAmounts> _field39_41_ValueCodesAndAmounts;
-        private List<UB04ServiceLine> _field42_49_ServiceLines;
+        private List<UB04ServiceLines> _field42_49_ServiceLines;
         private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
         private string _field50a_PayerName;
         private string _field50b_PayerSecondaryInsuranceCompanyName;
@@ -853,7 +853,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         }
 
         // Field 42 - Up to 22 service lines.
-        public List<UB04ServiceLine> Field42_49_ServiceLines
+        public List<UB04ServiceLines> Field42_49_ServiceLines
         {
             get
             {
