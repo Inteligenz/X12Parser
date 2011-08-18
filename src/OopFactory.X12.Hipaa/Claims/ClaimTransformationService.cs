@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Reflection;
 using System.Xml.Xsl;
+using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 
@@ -13,25 +14,24 @@ namespace OopFactory.X12.Hipaa.Claims
 {
     public class ClaimTransformationService
     {
-        public string TransformX12837ToUB04Model(Stream stream)
+        public UB04Claim TransformX12837ToUB04Model(Stream stream)
         {
-            X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(stream);
-            string xml = interchange.Serialize();
+            var parser = new X12Parser();
+            var interchange = parser.Parse(stream);
+            var xml = interchange.Serialize();
 
-            Stream transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Forms.Institutional.X12-837I-To-UB04Model.xslt");
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Forms.Institutional.X12-837I-To-UB04Model.xslt");
             
             var transform = new XslCompiledTransform();
-            transform.Load(XmlReader.Create(transformStream));
+            if (transformStream != null) transform.Load(XmlReader.Create(transformStream));
 
-            MemoryStream outputStream = new MemoryStream();
+            var outputStream = new MemoryStream();
             
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
             outputStream.Position = 0;
-            return new StreamReader(outputStream).ReadToEnd();
+            var claim = UB04Claim.Deserialize(new StreamReader(outputStream).ReadToEnd());
+            return claim;
         }
 
-
-        
     }
 }
