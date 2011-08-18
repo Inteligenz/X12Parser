@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
@@ -21,13 +22,16 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Stream stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim1.txt");
 
-            var service = new ClaimTransformationService();
-            string xmlModel = service.TransformX12837ToUB04Model(stream);
-            System.Diagnostics.Trace.Write(xmlModel); 
-            
-            UB04Claim claim = UB04Claim.Deserialize(xmlModel);
+            var claimSvc = new ClaimTransformationService();
+            UB04Claim claim = claimSvc.TransformX12837ToUB04Model(stream);
 
             Assert.AreEqual("756048Q", claim.Field03a_PatientControlNumber);
+            Assert.AreEqual("89.93", claim.Field55a_EstimatedAmountDue);
+            Assert.AreEqual("19960911", claim.Field16_DischargeHour);
+
+            // serialize the object to xml so we can view it
+            var x = new System.Xml.Serialization.XmlSerializer(claim.GetType());
+            x.Serialize(Console.Out, claim);      
         }
     }
 }
