@@ -83,7 +83,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field37_Filler;
         private string _field38_AdditionalPartyName;
         private List<UB04ValueCodesAndAmounts> _field39_41_ValueCodesAndAmounts;
-        private List<UB04ServiceLines> _field42_49_ServiceLines;
+        private List<UB04ServiceLine> _field42_49_ServiceLines;
         private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
         private string _field50a_PayerName;
         private string _field50b_PayerSecondaryInsuranceCompanyName;
@@ -159,11 +159,16 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field80_Remarks;
         private List<UB04Code_Code> _field80Code_Code;
 
+        public UB04Claim()
+        {
+            if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine>();
+        }
 
         // Now the accessor definitions:
 
         // Field 01, the Facility Provider / Billing Provider has many possible parts.  All known potential
         // elements are listed here.
+        [XmlAttribute]
         public string Field01_01_ProviderLastName           //<-- Facility name or last name of provider
         {
             get
@@ -176,6 +181,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             }
         }
 
+        [XmlAttribute]
         public string Field01_02_ProviderFirstName          //<-- Only if individual provider
         {
             get
@@ -188,6 +194,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             }
         }
 
+        [XmlAttribute]
         public string Field01_03_ProviderMiddleName          //<-- Only if individual provider
         {
             get
@@ -734,9 +741,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
                 _field16_DischargeHour = value;
             }
         }
-
-        // Field 17 - Patient Discharge Status.  Reports status of patient upon discharge - required for institutional claims.
-        // Two digit numeric.
+        
+        /// <summary>
+        /// Field 17 - Patient Discharge Status.  Reports status of patient upon discharge - required for institutional claims. 
+        /// Two digit numeric.
+        /// </summary>
+        [XmlAttribute]
         public int Field17_PatientDischargeStatus
         {
             get
@@ -748,6 +758,9 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
                 _field17_PatientDischargeStatus = value;
             }
         }
+
+        [XmlIgnore]
+        public bool Field17_PatientDischargeStatusSpecified { get; set; }
 
         // Field 18-28 - Condition Codes.
         public List<string> Field18_28_ConditionCodes
@@ -855,7 +868,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         }
 
         // Field 42 - Up to 22 service lines.
-        public List<UB04ServiceLines> Field42_49_ServiceLines
+        [XmlElement("Field42_49_ServiceLine")]
+        public List<UB04ServiceLine> Field42_49_ServiceLines
         {
             get
             {
@@ -1364,6 +1378,13 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         {
             get { return _field80Code_Code; }
             set { _field80Code_Code = value; }
+        }
+
+        public string Serialize()
+        {
+            StringWriter writer = new StringWriter();
+            new XmlSerializer(typeof(UB04Claim)).Serialize(writer, this);
+            return writer.ToString();
         }
 
         public static UB04Claim Deserialize(string xml)

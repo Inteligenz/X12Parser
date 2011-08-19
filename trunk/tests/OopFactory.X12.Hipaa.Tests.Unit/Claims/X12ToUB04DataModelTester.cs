@@ -17,6 +17,23 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
     public class X12ToUB04DataModelTester
     {
         [TestMethod]
+        public void SerializeUB04Claim()
+        {
+            var claim = new UB04Claim ();
+
+            claim.Field01_01_ProviderLastName = "Doe";
+            claim.Field01_02_ProviderFirstName = "FirstName";
+            claim.Field17_PatientDischargeStatusSpecified = true;
+
+            //claim.Field39_41_ValueCodesAndAmounts.Add(new UB04ValueCodesAndAmounts { ValueCode = "A4", Amount = "45.67" });
+
+            claim.Field42_49_ServiceLines.Add(new UB04ServiceLine { Field42_RevenueCode = "0300", Field47_TotalCharges = 100 });
+            claim.Field42_49_ServiceLines.Add(new UB04ServiceLine { Field42_RevenueCode = "0301", Field47_TotalCharges = 200 });
+
+            System.Diagnostics.Trace.Write(claim.Serialize());
+        }
+
+        [TestMethod]
         public void InstitutionalClaim1ToModel()
         {
             Stream stream = Assembly.GetExecutingAssembly()

@@ -46,14 +46,16 @@
   <ItemGroup>
     <Compile Include="Claims\ClaimTransformationService.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Claim.cs" />
-    <Compile Include="Claims\Forms\Institutional\UB04ServiceLines.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04ServiceLine.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt" />
+    <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">

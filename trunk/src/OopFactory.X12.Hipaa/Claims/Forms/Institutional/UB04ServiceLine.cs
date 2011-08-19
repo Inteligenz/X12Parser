@@ -6,7 +6,7 @@ using System.Text;
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
     [Serializable]
-    public class UB04ServiceLines
+    public class UB04ServiceLine
     {
         /*
          * 2011/8/15, jhalliday - New Data Model for 837I (Institutional) claim - collections objects.
@@ -117,20 +117,9 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
     [Serializable]
     public class UB04ValueCodesAndAmounts
     {
-        private string _field39_41_RevenueCode;
-        private string _field39_41_TotalCharges;
+        public string ValueCode { get; set; }
 
-        public string Field39_41_RevenueCode
-        {
-            get { return _field39_41_RevenueCode; }
-            set { _field39_41_RevenueCode = value; }
-        }
-
-        public string Field39_41_TotalCharges
-        {
-            get { return _field39_41_TotalCharges; }
-            set { _field39_41_TotalCharges = value; }
-        }
+        public string Amount { get; set; }
     }
 
     [Serializable]
