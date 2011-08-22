@@ -83,8 +83,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
         private string _field22_PatientGender;                                          // 1 = Male, 2 = Female
         private string _field23_PatientID_OrAccountNumber;                              // Dentist assigned
         private List<J515ServiceLines> _field24_31_ServiceLines;                        // Review J515ServiceLines class for details
-        private string _field32_OtherFees;                                              //
-        private string _field33_TotalFees;                                              //
+        private decimal _field32_OtherFees;                                              //
+        private decimal _field33_TotalFees;                                              //
         private List<Field34_MissingTeethInfo_Permanent> _field34_MissingTeethInfo_Permanent;  // 32 teeth of an adult
         private List<Field34_MissingTeethInfo_Primary> _field34_MissingTeethInfo_Primary;      // 20 teeth of a child
         private string _field35_Remarks;                                                //
@@ -440,13 +440,13 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
             set { _field24_31_ServiceLines = value; }
         }
 
-        public string Field32_OtherFees 
+        public decimal Field32_OtherFees 
         { 
             get { return _field32_OtherFees; } 
             set { _field32_OtherFees = value; } 
         }
 
-        public string Field33_TotalFees 
+        public decimal Field33_TotalFees 
         { 
             get { return _field33_TotalFees; } 
             set { _field33_TotalFees = value; } 
