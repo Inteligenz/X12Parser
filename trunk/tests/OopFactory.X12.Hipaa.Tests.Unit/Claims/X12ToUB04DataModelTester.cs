@@ -19,11 +19,13 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
         [TestMethod]
         public void SerializeUB04Claim()
         {
-            var claim = new UB04Claim ();
+            var claim = new UB04Claim
+                            {
+                                Field01_01_ProviderLastName = "Doe",
+                                Field01_02_ProviderFirstName = "FirstName",
+                                Field17_PatientDischargeStatusSpecified = true
+                            };
 
-            claim.Field01_01_ProviderLastName = "Doe";
-            claim.Field01_02_ProviderFirstName = "FirstName";
-            claim.Field17_PatientDischargeStatusSpecified = true;
 
             //claim.Field39_41_ValueCodesAndAmounts.Add(new UB04ValueCodesAndAmounts { ValueCode = "A4", Amount = "45.67" });
 
@@ -40,15 +42,25 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
                 .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim1.txt");
 
             var claimSvc = new ClaimTransformationService();
-            UB04Claim claim = claimSvc.TransformX12837ToUB04Model(stream);
+            var claim = claimSvc.TransformX12837ToUB04Model(stream);
 
             Assert.AreEqual("756048Q", claim.Field03a_PatientControlNumber);
-            Assert.AreEqual("89.93", claim.Field55a_EstimatedAmountDue);
+            Assert.AreEqual(Convert.ToDecimal("89.93"), claim.Field55a_EstimatedAmountDue);
             Assert.AreEqual("19960911", claim.Field16_DischargeHour);
+            Assert.AreEqual("JOHN", claim.Field58a_InsuredsName);
+            Assert.AreEqual("T", claim.Field58b_InsuredsName);
+            Assert.AreEqual("DOE", claim.Field58c_InsuredsName);
+            Assert.AreEqual("030005074A", claim.Field60a_InsuredsIniqueIdentificationNumber);
+            Assert.AreEqual("434", claim.Field14_TypeOfVisit);
+            Assert.AreEqual("D8", claim.Field15_SourceOfAdmission);
+            Assert.AreEqual("19960911", claim.Field16_DischargeHour);
+            Assert.AreEqual("MEDICARE B", claim.Field50a_PayerName);
+            Assert.AreEqual("00435", claim.Field57_OtherProviderIdentifier);
 
-            // serialize the object to xml so we can view it
-            var x = new System.Xml.Serialization.XmlSerializer(claim.GetType());
-            x.Serialize(Console.Out, claim);      
+            //Assert.AreEqual("JONES HOSPITAL", claim.Field76_AttendingProviderLastName);
+
+            // serialize the object to xml so we can view it     
+            Trace.Write(claim.Serialize());
         }
     }
 }
