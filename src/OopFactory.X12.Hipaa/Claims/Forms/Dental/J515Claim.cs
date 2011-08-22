@@ -28,11 +28,9 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
          * 
          * 1. 
          */
-
-
-        // First, we will declare the private variables.  Then the properties and their accessors.
-
         
+        // First, we will declare the private variables.  Then the properties and their accessors.
+                
         private string _field01_TypeOfTransaction;                                      // 1 = Statement of Actual Services, 2 = Request for Predetermination/Preauthorization, 3 = EPSDT / Title XIX
         private string _field02_PredeterminationOrPreauthorizationNumber;               // characters
         private string _field03_PrimaryPayer_Name;                                      // 
