@@ -27,7 +27,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 
         // First, we will declare the private variables.
 
-        // Field 01 is the MEDICARE/MEDICAID/TRICARE-CHAMPUS/CHAMPVA/GROUP_HEALTH_PLAN/FECA_BLACK_LUNG field and is not in the X12 specification.
+        private string _field01_TypeOfCoverage;                                 // 2 characters; matches field SBR05 in X12 specification.
         private string _field01b_InsuredsIDNumber;
         private string _field02_PatientsLastName;                               // HCFA 1500 standard allows 29 total characters for these (3) fields
         private string _field02_PatientsFirstName;
@@ -128,7 +128,14 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 
 
         // Next we will create the properties and their accessors.
-                public string Field01b_InsuredsIDNumber 
+
+        public string Field01_TypeOfCoverage
+        {
+            get { return _field01_TypeOfCoverage; }
+            set { _field01_TypeOfCoverage = value; } 
+        }
+
+        public string Field01b_InsuredsIDNumber 
         { 
             get { return _field01b_InsuredsIDNumber; } 
             set { _field01b_InsuredsIDNumber = value; } 
