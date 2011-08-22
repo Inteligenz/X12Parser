@@ -74,7 +74,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field14_TypeOfVisit;
         private string _field15_SourceOfAdmission;
         private string _field16_DischargeHour;
-        private int _field17_PatientDischargeStatus;
+        private string _field17_PatientDischargeStatus;
         private List<string> _field18_28_ConditionCodes;
         private string _field29_AccidentState;
         private string _field30_Filler;
@@ -97,12 +97,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field53a_AssignmentOfBenefitsCertificationIndicator;
         private string _field53b_AssignmentOfBenefitsCertificationIndicator;
         private string _field53c_AssignmentOfBenefitsCertificationIndicator;
-        private string _field54a_PriorPayments;
-        private string _field54b_PriorPayments;
-        private string _field54c_PriorPayments;
-        private string _field55a_EstimatedAmountDue;
-        private string _field55b_EstimatedAmountDue;
-        private string _field55c_EstimatedAmountDue;
+        private decimal _field54a_PriorPayments;
+        private decimal _field54b_PriorPayments;
+        private decimal _field54c_PriorPayments;
+        private decimal _field55a_EstimatedAmountDue;
+        private decimal _field55b_EstimatedAmountDue;
+        private decimal _field55c_EstimatedAmountDue;
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
         private string _field58a_InsuredsName;
@@ -492,7 +492,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             }
         }
 
-        // Field 06 - Service FROM and TO dates.  MMDDYY format.
+        // Field 06 - Service FROM and TO dates.  MMDDCCYY format.
         public string Field06_ServiceFromDate
         {
             get
@@ -747,7 +747,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         /// Two digit numeric.
         /// </summary>
         [XmlAttribute]
-        public int Field17_PatientDischargeStatus
+        public string Field17_PatientDischargeStatus
         {
             get
             {
