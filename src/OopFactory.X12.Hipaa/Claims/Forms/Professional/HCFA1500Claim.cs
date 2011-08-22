@@ -101,12 +101,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         private string _field25_SSN_Or_EIN;                                     // 1 = SSN, 2 = EIN
         private string _field26_PatientAccountNumber;                           // 14 characters
         private string _field27_AcceptAssignment;                               // 1 = Yes, 2 = No.  Refers to acceptance of terms of payor's program.
-        private string _field28_TotalChargeDollars;                             // 7 digits
-        private string _field28_TotalChargeCents;                               // 2 digits
-        private string _field29_AmountPaidDollars;                              // 6 digits
-        private string _field29_AmountPaidCents;                                // 2 digits
-        private string _field30_BalanceDueDollars;                              // 6 digits
-        private string _field30_BalanceDueCents;                                // 2 digits
+        private decimal _field28_TotalCharge;                                   // 7 digits for dollars plus 2 digits for cents
+        //private string _field28_TotalChargeCents;                             // 2 digits
+        private decimal _field29_AmountPaid;                                    // 6 digits for dollars plus 2 digits for cents
+        //private string _field29_AmountPaidCents;                              // 2 digits
+        private decimal _field30_BalanceDue;                                     // 6 digits for dollars plus 2 digits for cents
+        //private string _field30_BalanceDueCents;                                // 2 digits
         private string _field31_PhysicianOrSupplierSignature;                   // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
         private string _field31_PhysicianOrSupplierSignatureDate;               // MMDDCCYY 
         private string _field32_FacilityLocationInfo_Name;                      // 26 characters
@@ -297,7 +297,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
             set { _field09a_OtherInsuredsPolicyOrGroup = value; }
         }
 
-        public string Field09b_OtherInsuredsDateOfBirth                       // MMDDCCYY - 8 characters
+        public string Field09b_OtherInsuredsDateOfBirth                       // MMDDCCYY - 8 characters, goes to DMG02 (page 151) from X12 spec.
         { 
             get { return _field09b_OtherInsuredsDateOfBirth; } 
             set { _field09b_OtherInsuredsDateOfBirth = value; }
@@ -573,49 +573,51 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
             set { _field27_AcceptAssignment = value; }
         }
 
-        public string Field28_TotalChargeDollars                             // 7 digits
+        public decimal Field28_TotalCharge                                  // 7 digits
         {
-            get { return _field28_TotalChargeDollars; } 
-            set { _field28_TotalChargeDollars = value; } 
+            get { return _field28_TotalCharge; } 
+            set { _field28_TotalCharge = value; } 
         }
-        public string Field28_TotalChargeCents             
-            // 2 digits
-        {
-            get { return _field28_TotalChargeCents; }
-            set { _field28_TotalChargeCents = value; }
-        }
-        public string Field29_AmountPaidDollars            
+
+        //public string Field28_TotalChargeCents             
+        //    // 2 digits
+        //{
+        //    get { return _field28_TotalChargeCents; }
+        //    set { _field28_TotalChargeCents = value; }
+        //}
+        
+        public decimal Field29_AmountPaid
             // 6 digits
         {
-            get { return _field29_AmountPaidDollars; }
-            set { _field29_AmountPaidDollars = value; } 
+            get { return _field29_AmountPaid; }
+            set { _field29_AmountPaid = value; } 
         }
 
-        public string Field29_AmountPaidCents                                // 2 digits
+        //public string Field29_AmountPaidCents                                 // 2 digits
+        //{
+        //    get { return _field29_AmountPaidCents; }
+        //    set { _field29_AmountPaidCents = value; }
+        //}
+
+        public decimal Field30_BalanceDue                                       // 6 digits
         {
-            get { return _field29_AmountPaidCents; }
-            set { _field29_AmountPaidCents = value; }
+            get { return _field30_BalanceDue; } 
+            set { _field30_BalanceDue = value; }
         }
 
-        public string Field30_BalanceDueDollars                               // 6 digits
-        {
-            get { return _field30_BalanceDueDollars; } 
-            set { _field30_BalanceDueDollars = value; }
-        }
+        //public string Field30_BalanceDueCents                                 // 2 digits
+        //{
+        //    get { return _field30_BalanceDueCents; }
+        //    set { _field30_BalanceDueCents = value; } 
+        //}
 
-        public string Field30_BalanceDueCents                                // 2 digits
-        {
-            get { return _field30_BalanceDueCents; }
-            set { _field30_BalanceDueCents = value; } 
-        }
-
-        public string Field31_PhysicianOrSupplierSignature                   // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
+        public string Field31_PhysicianOrSupplierSignature                      // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
         { 
             get { return _field31_PhysicianOrSupplierSignature; }
             set { _field31_PhysicianOrSupplierSignature = value; }
         }
 
-        public string Field31_PhysicianOrSupplierSignatureDate               // MMDDCCYY 
+        public string Field31_PhysicianOrSupplierSignatureDate                  // MMDDCCYY 
         {
             get { return _field31_PhysicianOrSupplierSignatureDate; } 
             set { _field31_PhysicianOrSupplierSignatureDate = value; } 
