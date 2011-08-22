@@ -981,19 +981,19 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 54a through 54c - Prior payments by Payer.  Enter a $ amount corresponding 
         // with items 50a, 50b or 50c.
-        public string Field54a_PriorPayments
+        public decimal Field54a_PriorPayments
         {
             get { return _field54a_PriorPayments; }
             set { _field54a_PriorPayments = value; }
         }
 
-        public string Field54b_PriorPayments
+        public decimal Field54b_PriorPayments
         {
             get { return _field54b_PriorPayments; }
             set { _field54b_PriorPayments = value; }
         }
 
-        public string Field54c_PriorPayments
+        public decimal Field54c_PriorPayments
         {
             get { return _field54c_PriorPayments; }
             set { _field54c_PriorPayments = value; }
@@ -1001,19 +1001,19 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 55a through 55c - Estimated $ amount due.  Enter a $ amount corresponding 
         // with item 50a, 50b or 50c depending on who 
-        public string Field55a_EstimatedAmountDue
+        public decimal Field55a_EstimatedAmountDue
         {
             get { return _field55a_EstimatedAmountDue; }
             set { _field55a_EstimatedAmountDue = value; }
         }
 
-        public string Field55b_EstimatedAmountDue
+        public decimal Field55b_EstimatedAmountDue
         {
             get { return _field55b_EstimatedAmountDue; }
             set { _field55b_EstimatedAmountDue = value; }
         }
 
-        public string Field55c_EstimatedAmountDue
+        public decimal Field55c_EstimatedAmountDue
         {
             get { return _field55c_EstimatedAmountDue; }
             set { _field55c_EstimatedAmountDue = value; }
