@@ -66,6 +66,19 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
     }
 
     [Serializable]
+    public class Field50_55_PayerInfo
+    {
+        // Depending on iteration of this collection (up to three records MAX), the payer 
+        // will be the PRIMARY, SECONDARY or TERTIARY payer.
+
+        public string Field50_PayerName;
+        public string Field52_ReleaseOfInformationCertificationIndicator;
+        public string Field53_AssignmentOfBenefitsCertificationIndicator;
+        public decimal Field54_PriorPayments;
+        public decimal Field55_EstimatedAmountDue;
+    }
+
+    [Serializable]
     public class UB04OtherProcedureCodes
     {
         // First occurrence is assumed to be the primary procedure code.

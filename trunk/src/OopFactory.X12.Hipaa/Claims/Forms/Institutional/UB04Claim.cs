@@ -29,35 +29,38 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Fields in the UB04 object model are defined in the order they appear on the UB-04 form.
 
         // First, we will declare the private variables.  Then the properties and their accessors.
-        private string _field01_01_ProviderLastName;
-        private string _field01_02_ProviderFirstName;
-        private string _field01_03_ProviderMiddleName;
-        private string _field01_04_ProviderAddress1;
-        private string _field01_05_ProviderAddress2;
-        private string _field01_06_ProviderCity;
-        private string _field01_08_ProviderState;
-        private string _field01_09_ProviderZip;
-        private string _field01_10_ProviderZip_4;
-        private string _field01_11_ProviderPhoneNumber;
-        private string _field01_12_ProviderFaxNumber;
-        private string _field01_13_ProviderCountryCode;
-        private string _field02_01_ProviderLastName;
-        private string _field02_02_ProviderFirstName;
-        private string _field02_03_ProviderMiddleName;
-        private string _field02_04_ProviderAddress1;
-        private string _field02_05_ProviderAddress2;
-        private string _field02_06_ProviderCity;
-        private string _field02_08_ProviderState;
-        private string _field02_09_ProviderZip;
-        private string _field02_10_ProviderZip_4;
-        private string _field02_11_ProviderCountryCode;
+        // From 2010AA loop
+        private string _field01_01_BillingProviderLastName;
+        private string _field01_02_BillingProviderFirstName;
+        private string _field01_03_BillingProviderMiddleName;
+        private string _field01_04_BillingProviderAddress1;
+        private string _field01_05_BillingProviderAddress2;
+        private string _field01_06_BillingProviderCity;
+        private string _field01_08_BillingProviderState;
+        private string _field01_09_BillingProviderZip;
+        //private string _field01_10_ProviderZip_4;
+        private string _field01_11_BillingProviderPhoneNumber;
+        private string _field01_12_BillingProviderFaxNumber;
+        private string _field01_13_BillingProviderCountryCode;
+        // Pay-To is also known as the 'Subscriber' from the 2010BA loop.
+        private string _field02_01_PayToLastName;
+        private string _field02_02_PayToFirstName;
+        private string _field02_03_PayToMiddleName;
+        private string _field02_04_PayToAddress1;
+        private string _field02_05_PayToAddress2;
+        private string _field02_06_PayToCity;
+        private string _field02_08_PayToState;
+        private string _field02_09_PayToZip;
+        //private string _field02_10_ProviderZip_4;
+        private string _field02_11_PayToCountryCode;
         private string _field03a_PatientControlNumber;
         private string _field03b_MedicalHealthRecordNumber;
         private string _field04_TypeOfBill;
         private string _field05_FederalTaxId;
+        private string _field06_StatementCoversDates;
         private string _field06_ServiceFromDate;
         private string _field06_ServiceToDate;
-        private string _field07_Filler;
+        //private string _field07_Filler;
         private string _field08a_PatientIdentifier;
         private string _field08b_01_PatientLastName;
         private string _field08b_02_PatientFirstName;
@@ -77,37 +80,42 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field17_PatientDischargeStatus;
         private List<string> _field18_28_ConditionCodes;
         private string _field29_AccidentState;
-        private string _field30_Filler;
+        //private string _field30_Filler;
         private List<UB04OccurrenceCodesAndDates> _field31_34_OccurrenceCodesAndDates;
         private List<UB04OccurrenceSpanCodesAndDates> _field35_36_OccurrenceSpanCodesAndDates;
-        private string _field37_Filler;
+        //private string _field37_Filler;
         private string _field38_AdditionalPartyName;
         private List<UB04ValueCodesAndAmounts> _field39_41_ValueCodesAndAmounts;
         private List<UB04ServiceLine> _field42_49_ServiceLines;
         private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
-        private string _field50a_PayerName;
-        private string _field50b_PayerSecondaryInsuranceCompanyName;
-        private string _field50c_PayerTertiaryInsuranceCompanyName;
-        private string _field51a_Filler;
-        private string _field51b_Filler;
-        private string _field51c_Filler;
-        private string _field52a_ReleaseOfInformationCertificationIndicator;
-        private string _field52b_ReleaseOfInformationCertificationIndicator;
-        private string _field52c_ReleaseOfInformationCertificationIndicator;
-        private string _field53a_AssignmentOfBenefitsCertificationIndicator;
-        private string _field53b_AssignmentOfBenefitsCertificationIndicator;
-        private string _field53c_AssignmentOfBenefitsCertificationIndicator;
-        private decimal _field54a_PriorPayments;
-        private decimal _field54b_PriorPayments;
-        private decimal _field54c_PriorPayments;
-        private decimal _field55a_EstimatedAmountDue;
-        private decimal _field55b_EstimatedAmountDue;
-        private decimal _field55c_EstimatedAmountDue;
+        private decimal _field47_SummaryTotalCharges;
+        private decimal _field48_SummaryTotalNonCoveredCharges;
+
+        //private string _field50a_PayerName;
+        //private string _field50b_PayerSecondaryInsuranceCompanyName;
+        //private string _field50c_PayerTertiaryInsuranceCompanyName;
+        ////private string _field51a_Filler;
+        ////private string _field51b_Filler;
+        ////private string _field51c_Filler;
+        //private string _field52a_ReleaseOfInformationCertificationIndicator;
+        //private string _field52b_ReleaseOfInformationCertificationIndicator;
+        //private string _field52c_ReleaseOfInformationCertificationIndicator;
+        //private string _field53a_AssignmentOfBenefitsCertificationIndicator;
+        //private string _field53b_AssignmentOfBenefitsCertificationIndicator;
+        //private string _field53c_AssignmentOfBenefitsCertificationIndicator;
+        //private decimal _field54a_PriorPayments;
+        //private decimal _field54b_PriorPayments;
+        //private decimal _field54c_PriorPayments;
+        //private decimal _field55a_EstimatedAmountDue;
+        //private decimal _field55b_EstimatedAmountDue;
+        //private decimal _field55c_EstimatedAmountDue;
+        private List<Field50_55_PayerInfo> _field50_55_PayerInfo;
+
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
-        private string _field58a_InsuredsName;
-        private string _field58b_InsuredsName;
-        private string _field58c_InsuredsName;
+        private string _field58a_InsuredsLastName;
+        private string _field58b_InsuredsFirstName;
+        private string _field58c_InsuredsMiddleName;
         private string _field59a_RelationshipToInsured;
         private string _field59b_RelationshipToInsured;
         private string _field59c_RelationshipToInsured;
@@ -130,894 +138,262 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field65b_EmployerName;
         private string _field65c_EmployerName;
         private string _field66_DiagnosisAndProcedureCodeQualifier;
-        private string _field67_PrincipleDiagCode;
-        private List<string> _field67a_67q_OtherDiagCodes;
-        private string _field68_Filler;
+        private string _field67_PrincipleDiagCode1_7;
+        private string _field67_PrincipleDiagCode8;
+        private string _field67a_OtherDiagCode1_7;
+        private string _field67a_OtherDiagCode8;
+        private string _field67b_OtherDiagCode1_7;
+        private string _field67b_OtherDiagCode8;
+        private string _field67c_OtherDiagCode1_7;
+        private string _field67c_OtherDiagCode8;
+        private string _field67d_OtherDiagCode1_7;
+        private string _field67d_OtherDiagCode8;
+        private string _field67e_OtherDiagCode1_7;
+        private string _field67e_OtherDiagCode8;
+        private string _field67f_OtherDiagCode1_7;
+        private string _field67f_OtherDiagCode8;
+        private string _field67g_OtherDiagCode1_7;
+        private string _field67g_OtherDiagCode8;
+        private string _field67h_OtherDiagCode1_7;
+        private string _field67h_OtherDiagCode8;
+        private string _field67i_OtherDiagCode1_7;
+        private string _field67i_OtherDiagCode8;
+        private string _field67j_OtherDiagCode1_7;
+        private string _field67j_OtherDiagCode8;
+        private string _field67k_OtherDiagCode1_7;
+        private string _field67k_OtherDiagCode8;
+        private string _field67l_OtherDiagCode1_7;
+        private string _field67l_OtherDiagCode8;
+        private string _field67m_OtherDiagCode1_7;
+        private string _field67m_OtherDiagCode8;
+        private string _field67n_OtherDiagCode1_7;
+        private string _field67n_OtherDiagCode8;
+        private string _field67o_OtherDiagCode1_7;
+        private string _field67o_OtherDiagCode8;
+        private string _field67p_OtherDiagCode1_7;
+        private string _field67p_OtherDiagCode8;
+        private string _field67q_OtherDiagCode1_7;
+        private string _field67q_OtherDiagCode8;
+        //private string _field68_Filler;
         private string _field69_AdmittingDiagnosisCode;
         private List<string> _field70a_70c_ReasonForVisit;
         private string _field71_ProspectivePaymentSystemCode;
         private string _field72_ExternalCauseOfInjuryCode;
-        private string _field73_Filler;
+        //private string _field73_Filler;
         private List<UB04OtherProcedureCodes> _field74_OtherProcedureCodesAndDates;
-        private string _field75_Filler;
-        private string _field76_AttendingProviderNationalProviderIdentifier;
-        private string _field76_AttendingProviderSecondaryQualifier;
+        //private string _field75_Filler;
+
         private string _field76_AttendingProviderLastName;
         private string _field76_AttendingProviderFirstName;
+        private string _field76_AttendingProviderMiddleName;
+        private string _field76_AttendingProviderNameSuffix;
+        private string _field76_AttendingProviderSecondaryQualifier;
+        private string _field76_AttendingProviderNationalProviderIdentifier;
+        private string _field76_AttendingProviderSecondaryIdentifier;
+
         private string _field77_OperatingPhysicianNationalProviderIdentifier;
         private string _field77_OperatingPhysicianSecondaryQualifier;
+        private string _field77_OperatingPhysicianSecondaryIdentifier;
         private string _field77_OperatingPhysicianLastName;
         private string _field77_OperatingPhysicianFirstName;
+
         private string _field78_OtherProvider1NationalProviderIdentifier;
         private string _field78_OtherProvider1SecondaryQualifier;
+        private string _field78_OtherProvider1SecondaryIdentifier;
         private string _field78_OtherProvider1LastName;
         private string _field78_OtherProvider1FirstName;
-        private string _field79_OtherProvider2NationalProviderIdentifier;
-        private string _field79_OtherProvider2SecondaryQualifier;
-        private string _field79_OtherProvider2LastName;
-        private string _field79_OtherProvider2FirstName;
+
+        private string _field79_RenderingProvider2NationalProviderIdentifier;
+        private string _field79_RenderingProvider2SecondaryQualifier;
+        private string _field79_RenderingProvider2SecondaryIdentifier;
+        private string _field79_RenderingProvider2LastName;
+        private string _field79_RenderingProvider2FirstName;
+
+        private string _field79_ReferringProvider2NationalProviderIdentifier;
+        private string _field79_ReferringProvider2SecondaryQualifier;
+        private string _field79_ReferringProvider2SecondaryIdentifier;
+        private string _field79_ReferringProvider2LastName;
+        private string _field79_ReferringProvider2FirstName;
+
         private string _field80_Remarks;
         private List<UB04Code_Code> _field80Code_Code;
 
-        public UB04Claim()
-        {
-            if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine>();
-        }
+        public UB04Claim() { if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine>(); }
 
         // Now the accessor definitions:
 
         // Field 01, the Facility Provider / Billing Provider has many possible parts.  All known potential
         // elements are listed here.
         [XmlAttribute]
-        public string Field01_01_ProviderLastName           //<-- Facility name or last name of provider
-        {
-            get
-            {
-                return _field01_01_ProviderLastName;
-            }
-            set
-            {
-                _field01_01_ProviderLastName = value;
-            }
-        }
+        public string Field01_01_BillingProviderLastName           //<-- Facility name or last name of provider
+        { get { return _field01_01_BillingProviderLastName; } set { _field01_01_BillingProviderLastName = value; } }
 
         [XmlAttribute]
-        public string Field01_02_ProviderFirstName          //<-- Only if individual provider
-        {
-            get
-            {
-                return _field01_02_ProviderFirstName;
-            }
-            set
-            {
-                _field01_02_ProviderFirstName = value;
-            }
-        }
+        public string Field01_02_BillingProviderFirstName          //<-- Only if individual provider
+        { get{ return _field01_02_BillingProviderFirstName; } set { _field01_02_BillingProviderFirstName = value; } }
 
         [XmlAttribute]
-        public string Field01_03_ProviderMiddleName          //<-- Only if individual provider
-        {
-            get
-            {
-                return _field01_03_ProviderMiddleName;
-            }
-            set
-            {
-                _field01_03_ProviderMiddleName = value;
-            }
-        }
+        public string Field01_03_BillingProviderMiddleName          //<-- Only if individual provider
+        { get { return _field01_03_BillingProviderMiddleName; } set { _field01_03_BillingProviderMiddleName = value; } }
 
-        public string Field01_04_ProviderAddress1
-        {
-            get
-            {
-                return _field01_04_ProviderAddress1;
-            }
-            set
-            {
-                _field01_04_ProviderAddress1 = value;
-            }
-        }
+        public string Field01_04_BillingProviderAddress1
+        { get { return _field01_04_BillingProviderAddress1; } set { _field01_04_BillingProviderAddress1 = value; } }
 
-        public string Field01_05_ProviderAddress2
-        {
-            get
-            {
-                return _field01_05_ProviderAddress2;
-            }
-            set
-            {
-                _field01_05_ProviderAddress2 = value;
-            }
-        }
+        public string Field01_05_BillingProviderAddress2
+        { get { return _field01_05_BillingProviderAddress2; } set { _field01_05_BillingProviderAddress2 = value; } }
 
-        public string Field01_06_ProviderCity
-        {
-            get
-            {
-                return _field01_06_ProviderCity;
-            }
-            set
-            {
-                _field01_06_ProviderCity = value;
-            }
-        }
+        public string Field01_06_BillingProviderCity { get { return _field01_06_BillingProviderCity; } set { _field01_06_BillingProviderCity = value; } }
+        public string Field01_08_BillingProviderState { get { return _field01_08_BillingProviderState; } set { _field01_08_BillingProviderState = value; } }
+        public string Field01_09_BillingProviderZip { get { return _field01_09_BillingProviderZip; } set { _field01_09_BillingProviderZip = value; } }
 
-        public string Field01_08_ProviderState
-        {
-            get
-            {
-                return _field01_08_ProviderState;
-            }
-            set
-            {
-                _field01_08_ProviderState = value;
-            }
-        }
+        public string Field01_11_BillingProviderPhoneNumber 
+        { get { return _field01_11_BillingProviderPhoneNumber; } set { _field01_11_BillingProviderPhoneNumber = value; } }
 
-        public string Field01_09_ProviderZip
-        {
-            get
-            {
-                return _field01_09_ProviderZip;
-            }
-            set
-            {
-                _field01_09_ProviderZip = value;
-            }
-        }
+        public string Field01_12_BillingProviderFaxNumber
+        { get { return _field01_12_BillingProviderFaxNumber; } set { _field01_12_BillingProviderFaxNumber = value; } }
 
-        public string Field01_10_ProviderZip_4
-        {
-            get
-            {
-                return _field01_10_ProviderZip_4;
-            }
-            set
-            {
-                _field01_10_ProviderZip_4 = value;
-            }
-        }
-
-        public string Field01_11_ProviderPhoneNumber
-        {
-            get
-            {
-                return _field01_11_ProviderPhoneNumber;
-            }
-            set
-            {
-                _field01_11_ProviderPhoneNumber = value;
-            }
-        }
-
-        public string Field01_12_ProviderFaxNumber
-        {
-            get
-            {
-                return _field01_12_ProviderFaxNumber;
-            }
-            set
-            {
-                _field01_12_ProviderFaxNumber = value;
-            }
-        }
-
-        public string Field01_13_ProviderCountryCode
-        {
-            get
-            {
-                return _field01_13_ProviderCountryCode;
-            }
-            set
-            {
-                _field01_13_ProviderCountryCode = value;
-            }
-        }
+        public string Field01_13_BillingProviderCountryCode
+        { get { return _field01_13_BillingProviderCountryCode; } set { _field01_13_BillingProviderCountryCode = value; } }
 
         // Field 02 - the Pay-To provider address.  This is usually provided only when different than Field 01.
-        public string Field02_01_ProviderLastName
-        {
-            get
-            {
-                return _field02_01_ProviderLastName;
-            }
-            set
-            {
-                _field02_01_ProviderLastName = value;
-            }
-        }
-
-        public string Field02_02_ProviderFirstName
-        {
-            get
-            {
-                return _field02_02_ProviderFirstName;
-            }
-            set
-            {
-                _field02_02_ProviderFirstName = value;
-            }
-        }
-
-        public string Field02_03_ProviderMiddleName
-        {
-            get
-            {
-                return _field02_03_ProviderMiddleName;
-            }
-            set
-            {
-                _field02_03_ProviderMiddleName = value;
-            }
-        }
-
-        public string Field02_04_ProviderAddress1
-        {
-            get
-            {
-                return _field02_04_ProviderAddress1;
-            }
-            set
-            {
-                _field02_04_ProviderAddress1 = value;
-            }
-        }
-
-        public string Field02_05_ProviderAddress2
-        {
-            get
-            {
-                return _field02_05_ProviderAddress2;
-            }
-            set
-            {
-                _field02_05_ProviderAddress2 = value;
-            }
-        }
-
-        public string Field02_06_ProviderCity
-        {
-            get
-            {
-                return _field02_06_ProviderCity;
-            }
-            set
-            {
-                _field02_06_ProviderCity = value;
-            }
-        }
-
-        public string Field02_08_ProviderState
-        {
-            get
-            {
-                return _field02_08_ProviderState;
-            }
-            set
-            {
-                _field02_08_ProviderState = value;
-            }
-        }
-
-        public string Field02_09_ProviderZip
-        {
-            get
-            {
-                return _field02_09_ProviderZip;
-            }
-            set
-            {
-                _field02_09_ProviderZip = value;
-            }
-        }
-
-        public string Field02_10_ProviderZip_4
-        {
-            get
-            {
-                return _field02_10_ProviderZip_4;
-            }
-            set
-            {
-                _field02_10_ProviderZip_4 = value;
-            }
-        }
-
-        public string Field02_11_ProviderCountryCode
-        {
-            get
-            {
-                return _field02_11_ProviderCountryCode;
-            }
-            set
-            {
-                _field02_11_ProviderCountryCode = value;
-            }
-        }
+        public string Field02_01_PayToLastName { get { return _field02_01_PayToLastName; } set { _field02_01_PayToLastName = value; } }
+        public string Field02_02_PayToFirstName { get { return _field02_02_PayToFirstName; } set { _field02_02_PayToFirstName = value; } }
+        public string Field02_03_PayToMiddleName { get { return _field02_03_PayToMiddleName; } set { _field02_03_PayToMiddleName = value; } }
+        public string Field02_04_PayToAddress1 { get { return _field02_04_PayToAddress1; } set { _field02_04_PayToAddress1 = value; } }
+        public string Field02_05_PayToAddress2 { get { return _field02_05_PayToAddress2; } set { _field02_05_PayToAddress2 = value; } }
+        public string Field02_06_PayToCity { get { return _field02_06_PayToCity; } set { _field02_06_PayToCity = value; } }
+        public string Field02_08_PayToState { get { return _field02_08_PayToState; } set { _field02_08_PayToState = value; } }
+        public string Field02_09_PayToZip { get { return _field02_09_PayToZip; } set { _field02_09_PayToZip = value; } }
+        public string Field02_11_PayToCountryCode { get { return _field02_11_PayToCountryCode; } set { _field02_11_PayToCountryCode = value; } }
 
         // Field 03a - a unique alpha-numeric number assigned by the provider.  Used to allow for the retrieval
         // of individual patient financial records.  Optional field.
         public string Field03a_PatientControlNumber
-        {
-            get
-            {
-                return _field03a_PatientControlNumber;
-            }
-            set
-            {
-                _field03a_PatientControlNumber = value;
-            }
-        }
+        { get { return _field03a_PatientControlNumber; } set { _field03a_PatientControlNumber = value; } }
 
         // Field 03b - a value assigned by the provider that indicates the patient's medical record number.
         public string Field03b_MedicalHealthRecordNumber
-        {
-            get
-            {
-                return _field03b_MedicalHealthRecordNumber;
-            }
-            set
-            {
-                _field03b_MedicalHealthRecordNumber = value;
-            }
-        }
+        { get { return _field03b_MedicalHealthRecordNumber; } set { _field03b_MedicalHealthRecordNumber = value; } }
 
         // Field 04 - Type of Bill, a three or four digit code that indicates the type of bill being submitted.
         // Refer to the NUBC Guide for TOB frequency codes.  This is set as a string value because it may contain
         // a leading zero.
-        public string Field04_TypeOfBill
-        {
-            get
-            {
-                return _field04_TypeOfBill;
-            }
-            set
-            {
-                _field04_TypeOfBill = value;
-            }
-        }
+        public string Field04_TypeOfBill { get { return _field04_TypeOfBill; } set { _field04_TypeOfBill = value; } }
 
         // Field 05 - Federal Tax ID Number.  This field may contain the tax id (TID) or the newer Employer Identification
         // Number (EIN).  Affiliated subsidiaries are identified using federeal tax sub-ID's.
-        public string Field05_FederalTaxId
-        {
-            get
-            {
-                return _field05_FederalTaxId;
-            }
-            set
-            {
-                _field05_FederalTaxId = value;
-            }
-        }
+        public string Field05_FederalTaxId { get { return _field05_FederalTaxId; } set { _field05_FederalTaxId = value; } }
+
+        // Field 06 - Service FROM and TO dates.  MMDDCCYYMMDDCCYY format.
+        public string Field06_StatementCoversDates { get { return _field06_StatementCoversDates; } set { _field06_StatementCoversDates = value; } }
 
         // Field 06 - Service FROM and TO dates.  MMDDCCYY format.
-        public string Field06_ServiceFromDate
-        {
-            get
-            {
-                return _field06_ServiceFromDate;
-            }
-            set
-            {
-                _field06_ServiceFromDate = value;
-            }
-        }
+        public string Field06_ServiceFromDate { get { return _field06_ServiceFromDate; } set { _field06_ServiceFromDate = value; } }
 
-        public string Field06_ServiceToDate
-        {
-            get
-            {
-                return _field06_ServiceToDate;
-            }
-            set
-            {
-                _field06_ServiceToDate = value;
-            }
-        }
-
-        // Field 07 - Reserved by NUBC for future use.
-        public string Field07_Filler
-        {
-            get
-            {
-                return _field07_Filler;
-            }
-            set
-            {
-                _field07_Filler = value;
-            }
-        }
+        public string Field06_ServiceToDate { get { return _field06_ServiceToDate; } set { _field06_ServiceToDate = value; } }
 
         // Field 08a - Patient Identification Number (Patient ID).
-        public string Field08a_PatientIdentifier
-        {
-            get
-            {
-                return _field08a_PatientIdentifier;
-            }
-            set
-            {
-                _field08a_PatientIdentifier = value;
-            }
-        }
+        public string Field08a_PatientIdentifier { get { return _field08a_PatientIdentifier; } set { _field08a_PatientIdentifier = value; } }
 
         // Field 08b-01 PatientLastName.  Required.
-        public string Field08b_01_PatientLastName
-        {
-            get
-            {
-                return _field08b_01_PatientLastName;
-            }
-            set
-            {
-                _field08b_01_PatientLastName = value;
-            }
-        }
+        public string Field08b_01_PatientLastName { get { return _field08b_01_PatientLastName; } set { _field08b_01_PatientLastName = value; } }
 
         // Field 08b-01 PatientFirstName
-        public string Field08b_02_PatientFirstName
-        {
-            get
-            {
-                return _field08b_02_PatientFirstName;
-            }
-            set
-            {
-                _field08b_02_PatientFirstName = value;
-            }
-        }
+        public string Field08b_02_PatientFirstName { get { return _field08b_02_PatientFirstName; } set { _field08b_02_PatientFirstName = value; } }
 
         // Field 08b-01 PatientMiddleName
-        public string Field08b_03_PatientMiddleName
-        {
-            get
-            {
-                return _field08b_03_PatientMiddleName;
-            }
-            set
-            {
-                _field08b_03_PatientMiddleName = value;
-            }
-        }
+        public string Field08b_03_PatientMiddleName { get { return _field08b_03_PatientMiddleName; } set { _field08b_03_PatientMiddleName = value; } }
 
         // Field 09a - Patient Street.  Required.
-        public string Field09a_PatientStreet
-        {
-            get
-            {
-                return _field09a_PatientStreet;
-            }
-            set
-            {
-                _field09a_PatientStreet = value;
-            }
-        }
+        public string Field09a_PatientStreet { get { return _field09a_PatientStreet; } set { _field09a_PatientStreet = value; } }
 
         // Field 09b - Patient City.  Required.
-        public string Field09b_PatientCity
-        {
-            get
-            {
-                return _field09b_PatientCity;
-            }
-            set
-            {
-                _field09b_PatientCity = value;
-            }
-        }
+        public string Field09b_PatientCity { get { return _field09b_PatientCity; } set { _field09b_PatientCity = value; } }
 
         // Field 09c - Patient State.  Required.
-        public string Field09c_PatientState
-        {
-            get
-            {
-                return _field09c_PatientState;
-            }
-            set
-            {
-                _field09c_PatientState = value;
-            }
-        }
+        public string Field09c_PatientState { get { return _field09c_PatientState; } set { _field09c_PatientState = value; } }
 
         // Field 09d - Patient Zip.  Required.
-        public string Field09d_PatientZip
-        {
-            get
-            {
-                return _field09d_PatientZip;
-            }
-            set
-            {
-                _field09d_PatientZip = value;
-            }
-        }
+        public string Field09d_PatientZip { get { return _field09d_PatientZip; } set { _field09d_PatientZip = value; } }
 
         // Field 09e - Patient Country Code.  Not required.
-        public string Field09e_PatientCountry
-        {
-            get
-            {
-                return _field09e_PatientCountry;
-            }
-            set
-            {
-                _field09e_PatientCountry = value;
-            }
-        }
+        public string Field09e_PatientCountry { get { return _field09e_PatientCountry; } set { _field09e_PatientCountry = value; } }
 
         // Field 10 - Patient Date of Birth (DOB) in MMDDCCYY format
-        public string Field10_PatientDOB
-        {
-            get
-            {
-                return _field10_PatientDOB;
-            }
-            set
-            {
-                _field10_PatientDOB = value;
-            }
-        }
+        public string Field10_PatientDOB { get { return _field10_PatientDOB; } set { _field10_PatientDOB = value; } }
 
-        // Field 11 - Gender/Sex.  'M' = Male; 'F' = Female
-        public string Field11_Sex
-        {
-            get
-            {
-                return _field11_Sex;
-            }
-            set
-            {
-                _field11_Sex = value;
-            }
-        }
+        // Field 11 - Gender/Sex.  'M' = Male; 'F' = Female, 'U' = Unknown
+        public string Field11_Sex { get { return _field11_Sex; } set { _field11_Sex = value; } }
 
         // Field 12 - Admission Date / Start of Care Date.  This is the date that patient care actually begins.  For
         // inpatient care it is the admission date.  For other types it is the day the care begins.
-        public string Field12_AdmissionDate
-        {
-            get
-            {
-                return _field12_AdmissionDate;
-            }
-            set
-            {
-                _field12_AdmissionDate = value;
-            }
-        }
+        public string Field12_AdmissionDate { get { return _field12_AdmissionDate; } set { _field12_AdmissionDate = value; } }
 
         // Field 13 - Admission Hour.  A two-digit code indicating the hour of day that the care began (when they were admitted).
         // Use military time (00 through 24).
-        public string Field13_AdmissionHour
-        {
-            get
-            {
-                return _field13_AdmissionHour;
-            }
-            set
-            {
-                _field13_AdmissionHour = value;
-            }
-        }
+        public string Field13_AdmissionHour { get { return _field13_AdmissionHour; } set { _field13_AdmissionHour = value; } }
 
         // Field 14 - Priority (Type) of Visit.  The code for the priority of the admission or visit.
-        public string Field14_TypeOfVisit
-        {
-            get
-            {
-                return _field14_TypeOfVisit;
-            }
-            set
-            {
-                _field14_TypeOfVisit = value;
-            }
-        }
+        public string Field14_TypeOfVisit { get { return _field14_TypeOfVisit; } set { _field14_TypeOfVisit = value; } }
 
         // Field 15 - Point of Origina / Source of Admission or Visit.  Indicates the source of the referral for visit or 
         // admission (e.g., physician, clinic, facility, transfer, etc.).  Usually a single alpha-numeric digit.
-        public string Field15_SourceOfAdmission
-        {
-            get
-            {
-                return _field15_SourceOfAdmission;
-            }
-            set
-            {
-                _field15_SourceOfAdmission = value;
-            }
-        }
+        public string Field15_SourceOfAdmission { get { return _field15_SourceOfAdmission; } set { _field15_SourceOfAdmission = value; } }
 
         // Field 16 - Discharge Hour.  A two-digit code indicating the hour of day that the care ended (when they were discharged).
         // Use military time (00 through 24).
-        public string Field16_DischargeHour
-        {
-            get
-            {
-                return _field16_DischargeHour;
-            }
-            set
-            {
-                _field16_DischargeHour = value;
-            }
-        }
+        public string Field16_DischargeHour { get { return _field16_DischargeHour; } set { _field16_DischargeHour = value; } }
         
         /// <summary>
         /// Field 17 - Patient Discharge Status.  Reports status of patient upon discharge - required for institutional claims. 
         /// Two digit numeric.
         /// </summary>
         [XmlAttribute]
-        public string Field17_PatientDischargeStatus
-        {
-            get
-            {
-                return _field17_PatientDischargeStatus;
-            }
-            set
-            {
-                _field17_PatientDischargeStatus = value;
-            }
-        }
+        public string Field17_PatientDischargeStatus { get { return _field17_PatientDischargeStatus; } set { _field17_PatientDischargeStatus = value; } }
 
         [XmlIgnore]
         public bool Field17_PatientDischargeStatusSpecified { get; set; }
 
         // Field 18-28 - Condition Codes.
-        public List<string> Field18_28_ConditionCodes
-        {
-            get
-            {
-                return _field18_28_ConditionCodes;
-            }
-            set
-            {
-                _field18_28_ConditionCodes = value;
-            }
-        }
+        public List<string> Field18_28_ConditionCodes { get { return _field18_28_ConditionCodes; } set { _field18_28_ConditionCodes = value; } }
 
         // Field 29 - Accident State.  This is the state in which the accident occurred.  Situational.
-        public string Field29_AccidentState
-        {
-            get
-            {
-                return _field29_AccidentState;
-            }
-            set
-            {
-                _field29_AccidentState = value;
-            }
-        }
-
-        // Field 30 - Reserved by NUBC for future use.
-        public string Field30_Filler
-        {
-            get
-            {
-                return _field30_Filler;
-            }
-            set
-            {
-                _field30_Filler = ""; // Default for this 'always blank' field.
-            }
-        }
+        public string Field29_AccidentState { get { return _field29_AccidentState; } set { _field29_AccidentState = value; } }
 
         // Field 31 through 34 are occurrence codes and their corresponding dates.
         public List<UB04OccurrenceCodesAndDates> Field31_34_OccurrenceCodesAndDates
-        {
-            get
-            {
-                return _field31_34_OccurrenceCodesAndDates;
-            }
-            set
-            {
-                _field31_34_OccurrenceCodesAndDates = value;
-            }
-        }
+        { get { return _field31_34_OccurrenceCodesAndDates; } set { _field31_34_OccurrenceCodesAndDates = value; } }
 
         // Field 35 and 36 are occurrence codes and their corresponding dates.
         public List<UB04OccurrenceSpanCodesAndDates> Field35_36_OccurrenceSpanCodesAndDates
-        {
-            get
-            {
-                return _field35_36_OccurrenceSpanCodesAndDates;
-            }
-            set
-            {
-                _field35_36_OccurrenceSpanCodesAndDates = value;
-            }
-        }
-
-        // Field 37 - Reserved by NUBC for future use.
-        public string Field37_Filler
-        {
-            get
-            {
-                return _field37_Filler;
-            }
-            set
-            {
-                _field37_Filler = value;
-            }
-        }
+        { get { return _field35_36_OccurrenceSpanCodesAndDates; } set { _field35_36_OccurrenceSpanCodesAndDates = value; } }
 
         // Field 38 - Additional name of the person or entity responsible for payment of balance of bill after applicable
         // processing by other parties, insurers or organizations.
-        public string Field38_AdditionalPartyName
-        {
-            get
-            {
-                return _field38_AdditionalPartyName;
-            }
-            set
-            {
-                _field38_AdditionalPartyName = value;
-            }
-        }
+        public string Field38_AdditionalPartyName { get { return _field38_AdditionalPartyName; } set { _field38_AdditionalPartyName = value; } }
 
         // Field 39 through 41 - Value Codes and Amounts.
         public List<UB04ValueCodesAndAmounts> Field39_41_ValueCodesAndAmounts
-        {
-            get
-            {
-                return _field39_41_ValueCodesAndAmounts;
-            }
-            set
-            {
-                _field39_41_ValueCodesAndAmounts = value;
-            }
-        }
+        { get { return _field39_41_ValueCodesAndAmounts; } set { _field39_41_ValueCodesAndAmounts = value; } }
 
         // Field 42 - Up to 22 service lines.
         [XmlElement("Field42_49_ServiceLine")]
         public List<UB04ServiceLine> Field42_49_ServiceLines
-        {
-            get
-            {
-                return _field42_49_ServiceLines;
-            }
-            set
-            {
-                _field42_49_ServiceLines = value;
-            }
-        }
+        { get { return _field42_49_ServiceLines; } set { _field42_49_ServiceLines = value; } }
 
         // Field 42 through 49 SUMMARY line.
         public List<UB04TotalChargesLine> Field42_49_ServiceLinesTotal
-        {
-            get
-            {
-                return _field42_49_ServiceLinesTotal;
-            }
-            set
-            {
-                _field42_49_ServiceLinesTotal = value;
-            }
-        }
+        { get { return _field42_49_ServiceLinesTotal; } set { _field42_49_ServiceLinesTotal = value; } }
 
-        // Field 50a - Payer Name
-        public string Field50a_PayerName
-        {
-            get
-            {
-                return _field50a_PayerName;
-            }
-            set
-            {
-                _field50a_PayerName = value;
-            }
-        }
-        
-        // Field 50b - Payer secondary insurance company name
-        public string Field50b_PayerSecondaryInsuranceCompanyName
-        {
-            get { return _field50b_PayerSecondaryInsuranceCompanyName; }
-            set { _field50b_PayerSecondaryInsuranceCompanyName = value; }
-        }
+        // Field 47 - Summary of all field 47 charges
+        public decimal Field47_SummaryTotalCharges { get { return _field47_SummaryTotalCharges; } set { _field47_SummaryTotalCharges = value; } }
+        // Field 48 - Summary of all field 48 charges
+        public decimal Field48_SummaryTotalNonCoveredCharges { get { return _field48_SummaryTotalNonCoveredCharges; } set { _field48_SummaryTotalNonCoveredCharges = value; } }
 
-        // Field 50c - Payer tertiary insurance carrier name, if any.
-        public string Field50c_PayerTertiaryInsuranceCompanyName
-        {
-            get { return _field50c_PayerTertiaryInsuranceCompanyName; }
-            set { _field50c_PayerTertiaryInsuranceCompanyName = value; }
-        }
 
-        // Field 51a through 51c - leave blank.
-        public string Field51a_Filler
-        {
-            get { return _field51a_Filler; }
-            set { _field51a_Filler = value; }
-        }
+        // Field 42 through 49 SUMMARY line.
+        public List<Field50_55_PayerInfo> Field50_55_PayerInfo { get; set; }
 
-        public string Field51b_Filler
-        {
-            get { return _field51b_Filler; }
-            set { _field51b_Filler = value; }
-        }
-
-        public string Field51c_Filler
-        {
-            get { return _field51c_Filler; }
-            set { _field51c_Filler = value; }
-        }
-
-        // Field 52 - Release of Information Certification Indicator.  Not required.
-        public string Field52a_ReleaseOfInformationCertificationIndicator
-        {
-            get { return _field52a_ReleaseOfInformationCertificationIndicator; }
-            set { _field52a_ReleaseOfInformationCertificationIndicator = value; }
-        }
-
-        public string Field52b_ReleaseOfInformationCertificationIndicator
-        {
-            get { return _field52b_ReleaseOfInformationCertificationIndicator; }
-            set { _field52b_ReleaseOfInformationCertificationIndicator = value; }
-        }
-
-        public string Field52c_ReleaseOfInformationCertificationIndicator
-        {
-            get { return _field52c_ReleaseOfInformationCertificationIndicator; }
-            set { _field52c_ReleaseOfInformationCertificationIndicator = value; }
-        }
-
-        // Field 53a through 53c - Assignment of benefits certification indicator.  Enter 'Y' or 'N' corresponding 
-        // with item 50a, 50b or 50c.
-        public string Field53a_AssignmentOfBenefitsCertificationIndicator
-        {
-            get { return _field53a_AssignmentOfBenefitsCertificationIndicator; }
-            set { _field53a_AssignmentOfBenefitsCertificationIndicator = value; }
-        }
-
-        public string Field53b_AssignmentOfBenefitsCertificationIndicator
-        {
-            get { return _field53b_AssignmentOfBenefitsCertificationIndicator; }
-            set { _field53b_AssignmentOfBenefitsCertificationIndicator = value; }
-        }
-
-        public string Field53c_AssignmentOfBenefitsCertificationIndicator
-        {
-            get { return _field53c_AssignmentOfBenefitsCertificationIndicator; }
-            set { _field53c_AssignmentOfBenefitsCertificationIndicator = value; }
-        }
-
-        // Field 54a through 54c - Prior payments by Payer.  Enter a $ amount corresponding 
-        // with items 50a, 50b or 50c.
-        public decimal Field54a_PriorPayments
-        {
-            get { return _field54a_PriorPayments; }
-            set { _field54a_PriorPayments = value; }
-        }
-
-        public decimal Field54b_PriorPayments
-        {
-            get { return _field54b_PriorPayments; }
-            set { _field54b_PriorPayments = value; }
-        }
-
-        public decimal Field54c_PriorPayments
-        {
-            get { return _field54c_PriorPayments; }
-            set { _field54c_PriorPayments = value; }
-        }
-
-        // Field 55a through 55c - Estimated $ amount due.  Enter a $ amount corresponding 
-        // with item 50a, 50b or 50c depending on who 
-        public decimal Field55a_EstimatedAmountDue
-        {
-            get { return _field55a_EstimatedAmountDue; }
-            set { _field55a_EstimatedAmountDue = value; }
-        }
-
-        public decimal Field55b_EstimatedAmountDue
-        {
-            get { return _field55b_EstimatedAmountDue; }
-            set { _field55b_EstimatedAmountDue = value; }
-        }
-
-        public decimal Field55c_EstimatedAmountDue
-        {
-            get { return _field55c_EstimatedAmountDue; }
-            set { _field55c_EstimatedAmountDue = value; }
-        }
 
         // Field 56 - National Provider Indicator (NPI), Billing Provider.  The unique provider indentifier
         // assigned by the health plan.
@@ -1036,22 +412,22 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 58a through 58c - Insured's name field for primary, secondary or tertiary insurance.
         // Enter name corresponding with items 50a, 50b or 50c.
-        public string Field58a_InsuredsName
+        public string Field58a_SubscriberLastName
         {
-            get { return _field58a_InsuredsName; }
-            set { _field58a_InsuredsName = value; }
+            get { return _field58a_InsuredsLastName; }
+            set { _field58a_InsuredsLastName = value; }
         }
 
-        public string Field58b_InsuredsName
+        public string Field58b_SubscriberFirstName
         {
-            get { return _field58b_InsuredsName; }
-            set { _field58b_InsuredsName = value; }
+            get { return _field58b_InsuredsFirstName; }
+            set { _field58b_InsuredsFirstName = value; }
         }
 
-        public string Field58c_InsuredsName
+        public string Field58c_SubscriberMiddleName
         {
-            get { return _field58c_InsuredsName; }
-            set { _field58c_InsuredsName = value; }
+            get { return _field58c_InsuredsMiddleName; }
+            set { _field58c_InsuredsMiddleName = value; }
         }
 
         // Field 59a through 59c - Patient's relationship to insured.
@@ -1195,25 +571,44 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         }
 
         // Field 67 - Principle diagnosis code.
-        public string Field67_PrincipleDiagCode
-        {
-            get { return _field67_PrincipleDiagCode; }
-            set { _field67_PrincipleDiagCode = value; }
-        }
+        public string Field67_PrincipleDiagCode1_7 { get { return _field67_PrincipleDiagCode1_7; } set { _field67_PrincipleDiagCode1_7 = value; } }
+        public string Field67_PrincipleDiagCode8 { get { return _field67_PrincipleDiagCode8; } set { _field67_PrincipleDiagCode8 = value; } }
 
         // Field 67a through 67q (17 diagnosis codes).
-        public List<string> Field67a_67q_OtherDiagCodes
-        {
-            get { return _field67a_67q_OtherDiagCodes; }
-            set { _field67a_67q_OtherDiagCodes = value; }
-        }
-
-        // Field 68 - Reserved by NUBC for future use.
-        public string Field68_Filler
-        {
-            get { return _field68_Filler; }
-            set { _field68_Filler = value; }
-        }
+        public string Field67a_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67a_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67b_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67b_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67c_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67c_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67d_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67d_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67e_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67e_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67f_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67f_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67g_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67g_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67h_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67h_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67i_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67i_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67j_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67j_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67k_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67k_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67l_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67l_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67m_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67m_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67n_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67n_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67o_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67o_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67p_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67p_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
+        public string Field67q_OtherDiagCode1_7 { get { return _field67a_OtherDiagCode1_7; } set { _field67a_OtherDiagCode1_7 = value; } }
+        public string Field67q_OtherDiagCode8 { get { return _field67a_OtherDiagCode8; } set { _field67a_OtherDiagCode8 = value; } }
 
         // Field 69 - Admitting Diagnosis code.
         public string Field69_AdmittingDiagnosisCode
@@ -1244,25 +639,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             set { _field72_ExternalCauseOfInjuryCode = value; }
         }
 
-        // Field 73 - Reserved by NUBC for future use.
-        public string Field73_Filler
-        {
-            get { return _field73_Filler; }
-            set { _field73_Filler = value; }
-        }
-
         // Field 74a through 74c - Other procedure codes and dates.
         public List<UB04OtherProcedureCodes> Field74_OtherProcedureCodesAndDates
         {
             get { return _field74_OtherProcedureCodesAndDates; }
             set { _field74_OtherProcedureCodesAndDates = value; }
-        }
-
-        // Field 75 - Reserved by NUBC for future use.
-        public string Field75_Filler
-        {
-            get { return _field75_Filler; }
-            set { _field75_Filler = value; }
         }
 
         // Field 76 - Attending provider names and identifiers.
@@ -1278,6 +659,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             set { _field76_AttendingProviderSecondaryQualifier = value; }
         }
 
+        public string Field76_AttendingProviderSecondaryIdentifier
+        {
+            get { return _field76_AttendingProviderSecondaryIdentifier; }
+            set { _field76_AttendingProviderSecondaryIdentifier = value; }
+        }
+
         public string Field76_AttendingProviderLastName
         {
             get { return _field76_AttendingProviderLastName; }
@@ -1290,7 +677,19 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             set { _field76_AttendingProviderFirstName = value; }
         }
 
-        // Field 77 - Operating physician name and identifiers.
+        public string Field76_AttendingProviderMiddleName
+        {
+            get { return _field76_AttendingProviderMiddleName; }
+            set { _field76_AttendingProviderMiddleName = value; }
+        }
+
+        public string Field76_AttendingProviderNameSuffix
+        {
+            get { return _field76_AttendingProviderNameSuffix; }
+            set { _field76_AttendingProviderNameSuffix = value; }
+        }
+    
+    // Field 77 - Operating physician name and identifiers.
         public string Field77_OperatingPhysicianNationalProviderIdentifier
         {
             get { return _field77_OperatingPhysicianNationalProviderIdentifier; }
@@ -1301,6 +700,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         {
             get { return _field77_OperatingPhysicianSecondaryQualifier; }
             set { _field77_OperatingPhysicianSecondaryQualifier = value; }
+        }
+
+        public string Field77_OperatingPhysicianSecondaryIdentifier
+        {
+            get { return _field77_OperatingPhysicianSecondaryIdentifier; }
+            set { _field77_OperatingPhysicianSecondaryIdentifier = value; }
         }
 
         public string Field77_OperatingPhysicianLastName
@@ -1328,6 +733,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             set { _field78_OtherProvider1SecondaryQualifier = value; }
         }
 
+        public string Field78_OtherProvider1SecondaryIdentifier
+        {
+            get { return _field78_OtherProvider1SecondaryIdentifier; }
+            set { _field78_OtherProvider1SecondaryIdentifier = value; }
+        }
+
         public string Field78_OtherProvider1LastName
         {
             get { return _field78_OtherProvider1LastName; }
@@ -1341,28 +752,65 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         }
 
         // Field 79 - Other provider # 2 name and identifiers.
-        public string Field79_OtherProvider2NationalProviderIdentifier
+        public string Field79_RenderingProvider2NationalProviderIdentifier
         {
-            get { return _field79_OtherProvider2NationalProviderIdentifier; }
-            set { _field79_OtherProvider2NationalProviderIdentifier = value; }
+            get { return _field79_RenderingProvider2NationalProviderIdentifier; }
+            set { _field79_RenderingProvider2NationalProviderIdentifier = value; }
         }
 
-        public string Field79_OtherProvider2SecondaryQualifier
+        public string Field79_RenderingProvider2SecondaryQualifier
         {
-            get { return _field79_OtherProvider2SecondaryQualifier; }
-            set { _field79_OtherProvider2SecondaryQualifier = value; }
+            get { return _field79_RenderingProvider2SecondaryQualifier; }
+            set { _field79_RenderingProvider2SecondaryQualifier = value; }
         }
 
-        public string Field79_OtherProvider2LastName
+        public string Field79_RenderingProvider2SecondaryIdentifier
         {
-            get { return _field79_OtherProvider2LastName; }
-            set { _field79_OtherProvider2LastName = value; }
+            get { return _field79_RenderingProvider2SecondaryIdentifier; }
+            set { _field79_RenderingProvider2SecondaryIdentifier = value; }
         }
 
-        public string Field79_OtherProvider2FirstName
+        public string Field79_RenderingProvider2LastName
         {
-            get { return _field79_OtherProvider2FirstName; }
-            set { _field79_OtherProvider2FirstName = value; }
+            get { return _field79_RenderingProvider2LastName; }
+            set { _field79_RenderingProvider2LastName = value; }
+        }
+
+        public string Field79_RenderingProvider2FirstName
+        {
+            get { return _field79_RenderingProvider2FirstName; }
+            set { _field79_RenderingProvider2FirstName = value; }
+        }
+
+        // Field 79 ALTERNATE VALUE - Referring Provider
+        public string Field79_ReferringProvider2NationalProviderIdentifier
+        {
+            get { return _field79_ReferringProvider2NationalProviderIdentifier; }
+            set { _field79_ReferringProvider2NationalProviderIdentifier = value; }
+        }
+
+        public string Field79_ReferringProvider2SecondaryQualifier
+        {
+            get { return _field79_ReferringProvider2SecondaryQualifier; }
+            set { _field79_ReferringProvider2SecondaryQualifier = value; }
+        }
+
+        public string Field79_ReferringProvider2SecondaryIdentifier
+        {
+            get { return _field79_ReferringProvider2SecondaryIdentifier; }
+            set { _field79_ReferringProvider2SecondaryIdentifier = value; }
+        }
+
+        public string Field79_ReferringProvider2LastName
+        {
+            get { return _field79_ReferringProvider2LastName; }
+            set { _field79_ReferringProvider2LastName = value; }
+        }
+
+        public string Field79_ReferringProvider2FirstName
+        {
+            get { return _field79_ReferringProvider2FirstName; }
+            set { _field79_ReferringProvider2FirstName = value; }
         }
 
         // Field 80 - Remarks Field.  This is a freeform entry field for special notes.

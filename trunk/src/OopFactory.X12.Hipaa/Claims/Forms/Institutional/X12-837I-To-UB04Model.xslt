@@ -29,48 +29,114 @@
   <!-- do any fields in the UB04 correlate to items in here? -->
 
   </xsl:template>
-  
+
+
+  <!-- 2000C SUBSCRIBER HIERARCHICAL LOOP -->
+  <xsl:template name="PatientHierarchicalLoop">
+    <!-- We will assume that the subscriber will always be present on the PCM claims.  Therefore, 2000C is not needed. -->
+  </xsl:template>
+
+
+
   <!-- 2010AA BILLING PROVIDER NAME -->
   <xsl:template name="BillingProviderNameLoop">
     <xsl:param name="Loop"></xsl:param>
     <!-- Last name or organization name -->
-    <Field76_AttendingProviderLastName>
+    <Field01_01_BillingProviderLastName>
       <xsl:value-of select="$Loop/NM1/NM103"/>
-    </Field76_AttendingProviderLastName>
+    </Field01_01_BillingProviderLastName>
+    <Field01_04_BillingProviderAddress1>
+      <xsl:value-of select="$Loop/NM1/N301"/>
+    </Field01_04_BillingProviderAddress1>
+    <Field01_06_BillingProviderCity>
+      <xsl:value-of select="$Loop/NM1/N401"/>
+    </Field01_06_BillingProviderCity>
+    <Field01_06_BillingProviderState>
+      <xsl:value-of select="$Loop/NM1/N402"/>
+    </Field01_06_BillingProviderState>
+    <Field01_09_BillingProviderZip>
+      <xsl:value-of select="$Loop/NM1/N403"/>
+    </Field01_09_BillingProviderZip>
+    <Field01_11_BillingProviderPhoneNumber>
+      <xsl:value-of select="$Loop/NM1/PER04"/>
+    </Field01_11_BillingProviderPhoneNumber>
+    <Field01_11_BillingProviderFaxNumber>
+      <xsl:value-of select="$Loop/NM1/PER06"/>
+    </Field01_11_BillingProviderFaxNumber>
+    <Field01_13_BillingProviderCountryCode>
+      <xsl:value-of select="$Loop/NM1/N404"/>
+    </Field01_13_BillingProviderCountryCode>
   </xsl:template>
-  
-  <!-- 2010BA PATIENT NAME LOOP -->
-  <xsl:template name="PatientNameLoop">
-    <xsl:param name="Loop"></xsl:param>
-      <Field08b_02_PatientFirstName>
-        <xsl:value-of select="$Loop/NM1/NM104"/>
-      </Field08b_02_PatientFirstName>
-      <Field08b_01_PatientLastName>
+
+  <!-- 2010AB PAY-TO PROVIDER NAME -->
+    <xsl:template name="PayToProviderNameLoop">
+      <xsl:param name="Loop"></xsl:param>
+      <!-- Last name or organization name -->
+      <!--<Field02_01_PayToProviderLastName>
         <xsl:value-of select="$Loop/NM1/NM103"/>
-      </Field08b_01_PatientLastName>
-  </xsl:template>
+      </Field02_01_PayToProviderLastName>
+      <Field02_02_BillingProviderFirstName>
+        <xsl:value-of select="$Loop/NM1/NM104"/>
+      </Field02_02_BillingProviderFirstName>
+      <Field02_02_BillingProviderMiddleName>
+        <xsl:value-of select="$Loop/NM1/NM105"/>
+      </Field02_02_BillingProviderMiddleName>-->
+      <Field02_04_PayToProviderAddress1>
+        <xsl:value-of select="$Loop/N3/N301"/>
+      </Field02_04_PayToProviderAddress1>
+      <Field02_04_PayToProviderAddress2>
+        <xsl:value-of select="$Loop/N3/N302"/>
+      </Field02_04_PayToProviderAddress2>
+      <Field02_06_PayToProviderCity>
+        <xsl:value-of select="$Loop/N4/N401"/>
+      </Field02_06_PayToProviderCity>
+      <Field02_06_PayToProviderState>
+        <xsl:value-of select="$Loop/N4/N402"/>
+      </Field02_06_PayToProviderState>
+      <Field02_09_PayToProviderZip>
+        <xsl:value-of select="$Loop/N4/N403"/>
+      </Field02_09_PayToProviderZip>
+      <Field02_11_PayToProviderCountryCode>
+        <xsl:value-of select="$Loop/N4/N404"/>
+      </Field02_11_PayToProviderCountryCode>
+    </xsl:template>
 
   <!-- 2010BA SUBSCRIBER NAME LOOP -->
   <xsl:template name="SubscriberNameLoop">
     <xsl:param name="Loop"></xsl:param>
     <!-- first name -->
-    <Field58a_InsuredsName>
-      <xsl:value-of select="$Loop/NM1/NM104"/>
-    </Field58a_InsuredsName>
-    <!-- middle name -->
-    <Field58b_InsuredsName>
-      <xsl:value-of select="$Loop/NM1/NM105"/>
-    </Field58b_InsuredsName>
-    <!-- name last or organization -->
-    <Field58c_InsuredsName>
+    <Field02_01_PayToLastName>
       <xsl:value-of select="$Loop/NM1/NM103"/>
-    </Field58c_InsuredsName>
+    </Field02_01_PayToLastName>
+    <!-- middle name -->
+    <Field02_02_PayToFirstName>
+      <xsl:value-of select="$Loop/NM1/NM104"/>
+    </Field02_02_PayToFirstName>
+    <!-- name last or organization -->
+    <Field02_03_PayToMiddleName>
+      <xsl:value-of select="$Loop/NM1/NM105"/>
+    </Field02_03_PayToMiddleName>
     <!-- Identification Code -->
-    <Field60a_InsuredsIniqueIdentificationNumber>
-      <xsl:value-of select="$Loop/NM1/NM109"/>
-    </Field60a_InsuredsIniqueIdentificationNumber>
-
+    <Field02_04_PayToAddress1>
+      <xsl:value-of select="$Loop/N3/N301"/>
+    </Field02_04_PayToAddress1>
+    <Field02_05_PayToAddress2>
+      <xsl:value-of select="$Loop/N3/N302"/>
+    </Field02_05_PayToAddress2>
+    <Field02_06_PayToCity>
+      <xsl:value-of select="$Loop/N4/N401"/>
+    </Field02_06_PayToCity>
+    <Field02_08_PayToState>
+      <xsl:value-of select="$Loop/N4/N402"/>
+    </Field02_08_PayToState>
+    <Field02_09_PayToZip>
+      <xsl:value-of select="$Loop/N4/N303"/>
+    </Field02_09_PayToZip>
+    <Field02_11_PayToCountryCode>
+      <xsl:value-of select="$Loop/N4/N304"/>
+    </Field02_11_PayToCountryCode>
   </xsl:template>
+
 
   <!-- 2010BB PAYER NAME LOOP -->
   <xsl:template name="PayerNameLoop">
@@ -80,71 +146,179 @@
       <xsl:value-of select="$Loop/NM1/NM103"/>
     </Field50a_PayerName>
     <!-- Identification Code Qualifier -->
-    <Field56_NationalProviderIndicator>
-      <xsl:value-of select="$Loop/NM1/NM108"/>
-    </Field56_NationalProviderIndicator>
+    <Field51_NationalProviderIndicator>
+      <xsl:value-of select="$Loop/NM1/N109"/>
+    </Field51_NationalProviderIndicator>
     <!-- Identification Code -->
     <Field57_OtherProviderIdentifier>
-      <xsl:value-of select="$Loop/NM1/NM109"/>
+      <xsl:value-of select="$Loop/N3/N302"/>
     </Field57_OtherProviderIdentifier>
-    
-  
 </xsl:template>
 
+  
   <!-- 2310A ATTENDING PHYSICIAN NAME LOOP -->
   <xsl:template name="AttendingPhysicianNameLoop">
     <xsl:param name="Loop"></xsl:param>
-    <!-- entity identifier code -->
-    <UNKNOWN_NM101>
-      <xsl:value-of select="$Loop/NM1/NM101"/>
-    </UNKNOWN_NM101>
-    <!-- person or non person entity -->
-    <UNKNOWN_NM102>
-      <xsl:value-of select="$Loop/NM1/NM102"/>
-    </UNKNOWN_NM102>
-    <field76_AttendingProviderLastName>
+    <!-- person or non person entity    NOT ON UB-04 FORM -->
+    <Field76_AttendingProviderLastName>
       <xsl:value-of select="$Loop/NM1/NM103"/>
-    </field76_AttendingProviderLastName>
-    <field76_AttendingProviderFirstName>
+    </Field76_AttendingProviderLastName>
+    <Field76_AttendingProviderFirstName>
       <xsl:value-of select="$Loop/NM1/NM104"/>
-    </field76_AttendingProviderFirstName>
-    <!-- middle name ??? there is no middle name for Attending Provider in object model. Are these other fields? -->
-    <UNKNOWN_NM105>
+    </Field76_AttendingProviderFirstName>
+    <Field76_AttendingProviderMiddleName>
       <xsl:value-of select="$Loop/NM1/NM105"/>
-    </UNKNOWN_NM105>
-    <UNKNOWN_NM106>
-      <xsl:value-of select="$Loop/NM1/NM106"/>
-    </UNKNOWN_NM106>
-    <UNKNOWN_NM107>
+    </Field76_AttendingProviderMiddleName>
+    <!-- Attending Physician Name Suffix -->
+    <Field76_AttendingProviderNameSuffix>
       <xsl:value-of select="$Loop/NM1/NM107"/>
-    </UNKNOWN_NM107>
-    <!-- IDENTIFICATION CODE QUALIFIER -->
-    <UNKNOWN_NM108>
-      <xsl:value-of select="$Loop/NM1/NM108"/>
-    </UNKNOWN_NM108>
-    <!-- Identification Code -->
-    <UNKNOWN_NM109>
+    </Field76_AttendingProviderNameSuffix>
+    <!-- entity identifier code -->
+    <Field76_AttendingProviderNationalProviderIdentifier>
       <xsl:value-of select="$Loop/NM1/NM109"/>
-    </UNKNOWN_NM109>
-    <!-- PROVIDER CODE -->
-    <UNKNOWN_PRV01>
-      <xsl:value-of select="$Loop/PRV/PVR01"/>
-    </UNKNOWN_PRV01>
-    <!-- Reference Identification Qualifier -->
-    <UNKNOWN_PRV02>
-      <xsl:value-of select="$Loop/PRV/PVR02"/>
-    </UNKNOWN_PRV02>
-    <!-- Reference Identification -->
-    <UNKNOWN_PRV03>
-      <xsl:value-of select="$Loop/PRV/PVR03"/>
-    </UNKNOWN_PRV03>
+    </Field76_AttendingProviderNationalProviderIdentifier>
+    <!-- IDENTIFICATION CODE QUALIFIER -->
+    <Field76_AttendingProviderSecondaryQualifier>
+      <xsl:value-of select="$Loop/REF/REF01"/>
+    </Field76_AttendingProviderSecondaryQualifier>
+    <!-- Identification Code -->
+    <Field76_AttendingProviderSecondaryIdentifier>
+      <xsl:value-of select="$Loop/REF/REF02"/>
+    </Field76_AttendingProviderSecondaryIdentifier>
   </xsl:template>
 
-  <!-- 2320 OTHER SUBSCRIBER INFORMATION -->
+
+  <!-- 2310B OPERATING PHYSICIAN NAME LOOP -->
+  <xsl:template name="OperatingPhysicianNameLoop">
+    <xsl:param name="Loop"></xsl:param>
+    <!-- person or non person entity    NOT ON UB-04 FORM -->
+    <Field77_OperatingPhysicianLastName>
+      <xsl:value-of select="$Loop/NM1/NM103"/>
+    </Field77_OperatingPhysicianLastName>
+    <Field77_OperatingPhysicianFirstName>
+      <xsl:value-of select="$Loop/NM1/NM104"/>
+    </Field77_OperatingPhysicianFirstName>
+    <Field76_OperatingPhysicianMiddleName>
+      <xsl:value-of select="$Loop/NM1/NM105"/>
+    </Field76_OperatingPhysicianMiddleName>
+    <!-- Attending Physician Name Suffix -->
+    <Field76_OperatingPhysicianNameSuffix>
+      <xsl:value-of select="$Loop/NM1/NM107"/>
+    </Field76_OperatingPhysicianNameSuffix>
+    <Field77_OperatingPhysicianNationalProviderIdentifier>
+      <xsl:value-of select="$Loop/NM1/NM109"/>
+    </Field77_OperatingPhysicianNationalProviderIdentifier>
+    <Field77_OperatingPhysicianSecondaryQualifier>
+      <xsl:value-of select="$Loop/REF/REF01"/>
+    </Field77_OperatingPhysicianSecondaryQualifier>
+    <Field77_OperatingPhysicianSecondaryIdentifier>
+      <xsl:value-of select="$Loop/REF/REF02"/>
+    </Field77_OperatingPhysicianSecondaryIdentifier>
+  </xsl:template>
+
+
+  <!-- 2310C OTHER OPERATING PHYSICIAN NAME LOOP -->
+  <xsl:template name="OtherPhysicianNameLoop">
+    <xsl:param name="Loop"></xsl:param>
+    <!-- person or non person entity    NOT ON UB-04 FORM -->
+    <Field77_OtherOperatingPhysicianLastName>
+      <xsl:value-of select="$Loop/NM1/NM103"/>
+    </Field77_OtherOperatingPhysicianLastName>
+    <Field77_OtherOperatingPhysicianFirstName>
+      <xsl:value-of select="$Loop/NM1/NM104"/>
+    </Field77_OtherOperatingPhysicianFirstName>
+    <Field76_OtherOperatingPhysicianMiddleName>
+      <xsl:value-of select="$Loop/NM1/NM105"/>
+    </Field76_OtherOperatingPhysicianMiddleName>
+    <!-- Attending Physician Name Suffix -->
+    <Field76_OtherOperatingPhysicianNameSuffix>
+      <xsl:value-of select="$Loop/NM1/NM107"/>
+    </Field76_OtherOperatingPhysicianNameSuffix>
+    <Field77_OtherOperatingPhysicianNationalProviderIdentifier>
+      <xsl:value-of select="$Loop/NM1/NM109"/>
+    </Field77_OtherOperatingPhysicianNationalProviderIdentifier>
+    <Field77_OtherOperatingPhysicianSecondaryQualifier>
+      <xsl:value-of select="$Loop/NM1/NM101"/>
+    </Field77_OtherOperatingPhysicianSecondaryQualifier>
+    <Field77_OtherOperatingPhysicianSecondaryIdentifier>
+      <xsl:value-of select="$Loop/REF/REF02"/>
+    </Field77_OtherOperatingPhysicianSecondaryIdentifier>
+  </xsl:template>
+
+
+  <!-- 2310D OPERATING PHYSICIAN NAME LOOP -->
+  <xsl:template name="RenderingPhysicianNameLoop">
+    <xsl:param name="Loop"></xsl:param>
+    <!-- person or non person entity    NOT ON UB-04 FORM -->
+    <Field77_RenderingPhysicianLastName>
+      <xsl:value-of select="$Loop/NM1/NM103"/>
+    </Field77_RenderingPhysicianLastName>
+    <Field77_RenderingPhysicianFirstName>
+      <xsl:value-of select="$Loop/NM1/NM104"/>
+    </Field77_RenderingPhysicianFirstName>
+    <Field77_RenderingPhysicianMiddleName>
+      <xsl:value-of select="$Loop/NM1/NM105"/>
+    </Field77_RenderingPhysicianMiddleName>
+    <!-- Attending Physician Name Suffix -->
+    <Field77_RenderingPhysicianNameSuffix>
+      <xsl:value-of select="$Loop/NM1/NM107"/>
+    </Field77_RenderingPhysicianNameSuffix>
+    <Field77_RenderingPhysicianNationalProviderIdentifier>
+      <xsl:value-of select="$Loop/NM1/NM109"/>
+    </Field77_RenderingPhysicianNationalProviderIdentifier>
+    <Field77_RenderingPhysicianSecondaryQualifier>
+      <xsl:value-of select="$Loop/REF/REF01"/>
+    </Field77_RenderingPhysicianSecondaryQualifier>
+    <Field77_RenderingPhysicianSecondaryIdentifier>
+      <xsl:value-of select="$Loop/REF/REF02"/>
+    </Field77_RenderingPhysicianSecondaryIdentifier>
+  </xsl:template>
+
+
+  <!-- 2310F OPERATING PHYSICIAN NAME LOOP -->
+  <xsl:template name="ReferringOperatingPhysicianNameLoop">
+    <xsl:param name="Loop"></xsl:param>
+    <!-- person or non person entity    NOT ON UB-04 FORM -->
+    <Field77_ReferringPhysicianNationalProviderIdentifier>
+      <xsl:value-of select="$Loop/NM1/NM109"/>
+    </Field77_ReferringPhysicianNationalProviderIdentifier>
+    <Field77_ReferringPhysicianSecondaryQualifier>
+      <xsl:value-of select="$Loop/REF/REF01"/>
+    </Field77_ReferringPhysicianSecondaryQualifier>
+    <Field77_ReferringPhysicianSecondaryIdentifier>
+      <xsl:value-of select="$Loop/REF/REF02"/>
+    </Field77_ReferringPhysicianSecondaryIdentifier>
+    <Field77_ReferringPhysicianLastName>
+      <xsl:value-of select="$Loop/NM1/NM103"/>
+    </Field77_ReferringPhysicianLastName>
+    <Field77_ReferringPhysicianFirstName>
+      <xsl:value-of select="$Loop/NM1/NM104"/>
+    </Field77_ReferringPhysicianFirstName>
+    <Field76_ReferringPhysicianMiddleName>
+      <xsl:value-of select="$Loop/NM1/NM105"/>
+    </Field76_ReferringPhysicianMiddleName>
+    <!-- Attending Physician Name Suffix -->
+    <Field76_ReferringPhysicianNameSuffix>
+      <xsl:value-of select="$Loop/NM1/NM107"/>
+    </Field76_ReferringPhysicianNameSuffix>
+  </xsl:template>
+
+  
+  
+  <!-- 2320 OTHER SUBSCRIBER INFORMATION --><!--
   <xsl:template name="OtherSubscriberInfoLoop">
 
   </xsl:template>
 
+  
+
+  --><!-- 2330 NON-DESTINATION PAYER INFORMATION --><!--
+  <xsl:template name="NonDestinationPayersInfoLoop">
+ 
+  </xsl:template>-->
+
+
+  
   <!-- 2400 SERVICE LINE -->
   <xsl:template name="ServiceLineLoop">
 
@@ -159,61 +333,78 @@
         <xsl:call-template name="BillingProviderNameLoop">
           <xsl:with-param name="Loop" select="../Loop[@LoopId='2010AA']" />
         </xsl:call-template>
-        <xsl:call-template name="PatientNameLoop">
+        <xsl:call-template name="PatientHierarchicalLoop">
           <xsl:with-param name="Loop" select="../Loop[@LoopId='2010BA']" />
         </xsl:call-template>
+        
+        
         <!-- LOOP 2300 CLAIM INFORMATION -->
         <!--Patient Account Number-->
        <Field03a_PatientControlNumber>
         <xsl:value-of select="CLM/CLM01"/>
        </Field03a_PatientControlNumber>
         <!--Total Claim Charge Amount-->
-        <Field55a_EstimatedAmountDue>
+        <Field47_SummaryTotalCharges>
           <xsl:value-of select="CLM/CLM02"/>
-        </Field55a_EstimatedAmountDue>
-        <UNKNOWN_CLM03>
-          <xsl:value-of select="CLM/CLM03"/>
-        </UNKNOWN_CLM03>
-        <UNKNOWN_CLM04>
-          <xsl:value-of select="CLM/CLM04"/>
-        </UNKNOWN_CLM04>
+        </Field47_SummaryTotalCharges>
+
         <!--Place of Service Code-->
-        <placeOfServiceCode1>
-          <xsl:value-of select="CLM/CLM05/CLM0501"/>
-        </placeOfServiceCode1>
-        <placeOfServiceCode2>
-          <xsl:value-of select="CLM/CLM05/CLM0502"/>
-        </placeOfServiceCode2>
-        <placeOfServiceCode3>
-          <xsl:value-of select="CLM/CLM05/CLM0503"/>
-        </placeOfServiceCode3>
-        <UNKNOWN_CLM06>
-          <xsl:value-of select="CLM/CLM06"/>
-        </UNKNOWN_CLM06>
+        <Field04_TypeOfBill>
+          <xsl:value-of select="CLM/CLM05/CLM05"/>
+        </Field04_TypeOfBill>
         <!--Provider Accept Assignment Code-->
         <UNKNOWN_CLM07>
           <xsl:value-of select="CLM/CLM07"/>
         </UNKNOWN_CLM07>
         <!--Benefits Assignment Certification Indicator-->
-        <UNKNOWN_CLM08>
+        <Field50_55_PayerInfo.Field53_AssignmentOfBenefitsCertificationIndicator>
           <xsl:value-of select="CLM/CLM08"/>
-        </UNKNOWN_CLM08>
+        </Field50_55_PayerInfo.Field53_AssignmentOfBenefitsCertificationIndicator>
         <!--Release of Information Code-->
-        <UNKNOWN_CLM09>
+        <Field50_55_PayerInfo.Field52_ReleaseOfInformationCertificationIndicator>
           <xsl:value-of select="CLM/CLM09"/>
-        </UNKNOWN_CLM09>
-        <!--Date/Time Qualifier-->
+        </Field50_55_PayerInfo.Field52_ReleaseOfInformationCertificationIndicator>
+        <!--Date/Time Qualifier--><!--
         <Field14_TypeOfVisit>
           <xsl:value-of select="DTP/DTP01"/>
         </Field14_TypeOfVisit>
-        <!--Date Time Period Format Qualifier-->
+        --><!--Date Time Period Format Qualifier--><!--
         <Field15_SourceOfAdmission>
           <xsl:value-of select="DTP/DTP02"/>
-        </Field15_SourceOfAdmission>
+        </Field15_SourceOfAdmission>-->
         <!--Date Time Period-->
-        <Field16_DischargeHour>
+
+        <xsl:for-each select="DTP">
+          <xsl:if test="DTP01 = 096">
+          <_field16_DischargeHour>
+            <xsl:value-of select="DTP03"/>
+          </_field16_DischargeHour>
+          </xsl:if>
+          <xsl:if test="DTP01 = 434">
+            <Field06_ServiceDates>
+            <xsl:value-of select="DTP03"/>
+          </Field06_ServiceDates>
+          </xsl:if>
+          <xsl:if test="DTP01 = 434">
+              <_field13_AdmissionHour>
+            <xsl:value-of select="DTP03"/>
+          </_field13_AdmissionHour>
+          </xsl:if>
+          <xsl:if test="DTP01 = 434">
+                <_field12_AdmissionDate>
+            <xsl:value-of select="DTP03"/>
+          </_field12_AdmissionDate>
+          </xsl:if>
+        </xsl:for-each>
+        
+        <!-- Discharge Hour -->
+        <!-- Statement Dates -->
+        <!-- Admission Date/Hour -->
+        <!-- Date - Repricer Received Date -->
+        
+        <Field12_AdmissionDate>
           <xsl:value-of select="DTP/DTP03"/>
-        </Field16_DischargeHour>
+        </Field12_AdmissionDate>
         <UNKNOWN_CL101>
           <xsl:value-of select="CL1/CL101"/>
         </UNKNOWN_CL101>
