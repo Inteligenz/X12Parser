@@ -62,5 +62,40 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             // serialize the object to xml so we can view it     
             Trace.Write(claim.Serialize());
         }
+
+        [TestMethod]
+        public void InstitutionalClaimModelToFoXml()
+        {
+            // Load Input Mock data
+            Stream stream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.UB04ClaimModel1.xml");
+            string xml = new StreamReader(stream).ReadToEnd();
+            UB04Claim claim = UB04Claim.Deserialize(xml);
+
+            // Transform to FO-XML
+            var service = new ClaimTransformationService();
+            string foXml = service.TransformUB04ClaimToFoXml(claim, @"C:\Temp\UB04_Red.gif");
+
+            Trace.Write(foXml);
+
+#if DEBUG
+            // Use FO Processor to generate PDF document
+            byte[] pdf = RenderFile(foXml);
+            FileStream fs = new FileStream("C:\\Temp\\OopFactory Institutional Claim.pdf", FileMode.Create);
+            fs.Write(pdf, 0, pdf.Length);
+            fs.Close();
+#endif
+
+        }
+
+        private byte[] RenderFile(string foXml)
+        {
+            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+            doc.LoadXml(foXml);
+            var driver = Fonet.FonetDriver.Make();
+            MemoryStream mstream = new MemoryStream();
+            driver.Render(doc, mstream);
+            return mstream.ToArray();
+        }
     }
 }
