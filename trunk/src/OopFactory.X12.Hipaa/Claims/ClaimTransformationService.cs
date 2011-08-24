@@ -33,5 +33,23 @@ namespace OopFactory.X12.Hipaa.Claims
             return claim;
         }
 
+        public string TransformUB04ClaimToFoXml(UB04Claim claim, string imageFilename)
+        {
+            var xml = claim.Serialize();
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Forms.Institutional.UB04Model-To-FoXml.xslt");
+
+            var transform = new XslCompiledTransform();
+            transform.Load(XmlReader.Create(transformStream));
+
+            var outputStream = new MemoryStream();
+            var args = new XsltArgumentList();
+            args.AddParam("claim-image", "", imageFilename);
+
+            transform.Transform(XmlReader.Create(new StringReader(xml)), args, outputStream);
+            outputStream.Position = 0;
+
+            return new StreamReader(outputStream).ReadToEnd();
+        }
+
     }
 }
