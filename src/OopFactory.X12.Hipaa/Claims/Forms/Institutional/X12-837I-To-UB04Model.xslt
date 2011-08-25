@@ -350,50 +350,102 @@
 
         <!--Place of Service Code-->
         <Field04_TypeOfBill>
-          <xsl:value-of select="CLM/CLM05/CLM05"/>
+          <xsl:value-of select="CLM/CLM05"/>
         </Field04_TypeOfBill>
         <!--Provider Accept Assignment Code-->
         <UNKNOWN_CLM07>
           <xsl:value-of select="CLM/CLM07"/>
         </UNKNOWN_CLM07>
         <!--Benefits Assignment Certification Indicator-->
-        <Field50_55_PayerInfo.Field53_AssignmentOfBenefitsCertificationIndicator>
-          <xsl:value-of select="CLM/CLM08"/>
-        </Field50_55_PayerInfo.Field53_AssignmentOfBenefitsCertificationIndicator>
-        <!--Release of Information Code-->
-        <Field50_55_PayerInfo.Field52_ReleaseOfInformationCertificationIndicator>
-          <xsl:value-of select="CLM/CLM09"/>
-        </Field50_55_PayerInfo.Field52_ReleaseOfInformationCertificationIndicator>
-        <!--Date/Time Qualifier--><!--
-        <Field14_TypeOfVisit>
-          <xsl:value-of select="DTP/DTP01"/>
-        </Field14_TypeOfVisit>
-        --><!--Date Time Period Format Qualifier--><!--
-        <Field15_SourceOfAdmission>
-          <xsl:value-of select="DTP/DTP02"/>
-        </Field15_SourceOfAdmission>-->
-        <!--Date Time Period-->
+
+        <xsl:call-template name="PatientHierarchicalLoop">
+          <xsl:with-param name="Loop" select="../Loop[@LoopId='2010BB']" />
+        </xsl:call-template>
+
+        <!-- 2010BB NM103, Payer Name - Field 50 from UB-04 -->
+        <xsl:for-each select="NM1">
+          <Field50_PayerName>
+            <xsl:if test="NM101 = PR">
+              <PayerName>
+                <xsl:value-of select="NM1/NM103"/>
+              </PayerName>
+            </xsl:if>
+          </Field50_PayerName>
+        </xsl:for-each>
+
+        <!-- 2300(CLM09) for Destination Payer, 2320(O106) for NON-Destination Payer, Release Of Info Cert Ind - Field 52 from UB-04 -->
+        <xsl:for-each select="CLM">
+          <Field52_ReleaseOfInfoCertIndicator>
+            <ReleaseOfInfoIndicator>
+              <xsl:value-of select="CLM_CLM09"/>
+            </ReleaseOfInfoIndicator>
+          </Field52_ReleaseOfInfoCertIndicator>
+        </xsl:for-each>
+
+        <!-- 2300(CLM08) for Destination Payer, 2320(OI03) for NON-Destination Payer, Assignment of Benefits Cert Ind - Field 53 from UB-04 -->
+        <xsl:for-each select="CLM">
+          <Field53_AssignmentOfBenefitsCertIndicator>
+            <AssignmentIndicator>
+              <xsl:value-of select="CLM/CLM08"/>
+            </AssignmentIndicator>
+          </Field53_AssignmentOfBenefitsCertIndicator>
+        </xsl:for-each>
+
+        <!-- 2320 AMT02, PAYER PAID AMOUNT - Field 54 from UB-04 -->
+        <xsl:for-each select="AMT">
+          <Field54_PriorPayments>
+            <xsl:if test="AMT01 = D">
+              <PriorPayments>
+                <xsl:value-of select="AMT02"/>
+              </PriorPayments>
+            </xsl:if>
+          </Field54_PriorPayments>
+        </xsl:for-each>
+
+        <!-- 2300 AMT02 (WHEN AMT01 is 'F3', Estimated Amount Due - Field 55 from UB-04   Other/Tertiary payers do NOT have an EST AMT DUE-->
+        <xsl:for-each select="AMT">
+          <Field55EstimatedAmountDue>
+            <xsl:if test="AMT01 = F3">
+              <PayerEstimatedAmountDue>
+                <xsl:value-of select="AMT/AMT02"/>
+              </PayerEstimatedAmountDue>
+            </xsl:if>
+          </Field55EstimatedAmountDue>
+        </xsl:for-each>
 
         <xsl:for-each select="DTP">
           <xsl:if test="DTP01 = 096">
-          <_field16_DischargeHour>
+          <Field16_DischargeHour>
             <xsl:value-of select="DTP03"/>
-          </_field16_DischargeHour>
+          </Field16_DischargeHour>
           </xsl:if>
           <xsl:if test="DTP01 = 434">
-            <Field06_ServiceDates>
-            <xsl:value-of select="DTP03"/>
-          </Field06_ServiceDates>
+            <xsl:if test="DTP02 = D8">
+              <Field06_ServiceFromDate>
+                <xsl:value-of select="DTP03"/>
+              </Field06_ServiceFromDate>
+              <Field06_ServiceToDate>
+                <xsl:value-of select="DTP03"/>
+              </Field06_ServiceToDate>
+            </xsl:if>
+            <xsl:if test="DTP02 = RD8">
+              <Field06_ServiceFromDate>
+                <xsl:value-of select='substring("DTP03",4,1)'/>
+              </Field06_ServiceFromDate>
+              <Field06_ServiceToDate>
+                <xsl:value-of select='substring("DTP03",6,9)'/>
+              </Field06_ServiceToDate>
+            </xsl:if>
           </xsl:if>
           <xsl:if test="DTP01 = 434">
-              <_field13_AdmissionHour>
-            <xsl:value-of select="DTP03"/>
-          </_field13_AdmissionHour>
+            <Field13_AdmissionHour>
+              <xsl:value-of select="DTP03"/>
+            </Field13_AdmissionHour>
           </xsl:if>
           <xsl:if test="DTP01 = 434">
-                <_field12_AdmissionDate>
-            <xsl:value-of select="DTP03"/>
-          </_field12_AdmissionDate>
+            <Field12_AdmissionDate>
+              <xsl:value-of select="DTP03"/>
+            </Field12_AdmissionDate>
           </xsl:if>
         </xsl:for-each>
         
@@ -401,21 +453,34 @@
         <!-- Statement Dates -->
         <!-- Admission Date/Hour -->
         <!-- Date - Repricer Received Date -->
-        
-        <Field12_AdmissionDate>
-          <xsl:value-of select="DTP/DTP03"/>
-        </Field12_AdmissionDate>
-        <UNKNOWN_CL101>
+
+        <Field14_TypeOfVisit>
           <xsl:value-of select="CL1/CL101"/>
-        </UNKNOWN_CL101>
-        <UNKNOWN_CL102>
+        </Field14_TypeOfVisit>
+        <Field15_SourceOfAdmission>
           <xsl:value-of select="CL1/CL102"/>
-        </UNKNOWN_CL102>
+        </Field15_SourceOfAdmission>
+        <Field17_PatientDischargeStatus>
+          <xsl:value-of select="CL1/CL103"/>
+        </Field17_PatientDischargeStatus>
+
         <!--Health Care Code Information-->
-        <UNKNOWN_HI0101>
-          <xsl:value-of select="HI/HI01/HI0101"/>
-        </UNKNOWN_HI0101>
-        <UNKNOWN_HI0102>
+        <Field50_55_PayerInfo>
+          <Field55_EstimatedAmountDue>
+            <xsl:value-of select="AMT/AMT02"/>  
+          </Field55_EstimatedAmountDue>
+        </Field50_55_PayerInfo>
+
+        <xsl:for-each select="REF">
+        <xsl:if test="REF01 = EA">
+          <ield03b_MedicalHealthRecordNumber>
+            <xsl:value-of select="REF02"/>
+          </ield03b_MedicalHealthRecordNumber>
+        </xsl:if>
+      </xsl:for-each>
+
+
+          <UNKNOWN_HI0102>
           <xsl:value-of select="HI/HI01/HI0102"/>
         </UNKNOWN_HI0102>
         <xsl:call-template name="AttendingPhysicianNameLoop">
@@ -427,6 +492,7 @@
         <xsl:call-template name="PayerNameLoop">
           <xsl:with-param name="Loop" select="../Loop[@LoopId='2010BB']" />
         </xsl:call-template>
+    
     </UB04Claim>
     </xsl:template>
 
