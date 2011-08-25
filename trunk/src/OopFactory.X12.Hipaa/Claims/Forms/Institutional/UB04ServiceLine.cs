@@ -65,17 +65,59 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public decimal ServiceLineTotals_TotalCharges { get; set; }
     }
 
+    //[Serializable]
+    //public class Field50_55_PayerInfo
+    //{
+    //    // Depending on iteration of this collection (up to three records MAX), the payer 
+    //    // will be the PRIMARY, SECONDARY or TERTIARY payer.
+
+    //    public string Field50_PayerName;
+    //    public string Field52_ReleaseOfInformationCertificationIndicator;
+    //    public string Field53_AssignmentOfBenefitsCertificationIndicator;
+    //    public decimal Field54_PriorPayments;
+    //    public decimal Field55_EstimatedAmountDue;
+    //}
+
     [Serializable]
-    public class Field50_55_PayerInfo
+    public class Field50_PayerName
+    {
+        // Depending on iteration of this collection (up to records MAX), the payer 
+        // will be the PRIMARY, SECONDARY or TERTIARY payer.
+        public string PayerName;
+    }
+
+    [Serializable]
+    public class Field52_ReleaseOfInfoCertIndicator
     {
         // Depending on iteration of this collection (up to three records MAX), the payer 
         // will be the PRIMARY, SECONDARY or TERTIARY payer.
+        public string ReleaseOfInfoIndicator;
+    }
 
-        public string Field50_PayerName;
-        public string Field52_ReleaseOfInformationCertificationIndicator;
-        public string Field53_AssignmentOfBenefitsCertificationIndicator;
-        public decimal Field54_PriorPayments;
-        public decimal Field55_EstimatedAmountDue;
+    [Serializable]
+    public class Field53_AssignmentOfBenefitsCertIndicator
+    {
+        // Depending on iteration of this collection (up to three records MAX), the payer 
+        // will be the PRIMARY, SECONDARY or TERTIARY payer.
+        public string AssignmentIndicator;
+    }
+
+    [Serializable]
+    public class Field54_PriorPayments
+    {
+        // Depending on iteration of this collection (up to three records MAX), the payer 
+        // will be the PRIMARY, SECONDARY or TERTIARY payer.
+        public decimal PriorPayments;
+    }
+
+    [Serializable]
+    public class Field55EstimatedAmountDue
+    {
+        // Depending on iteration of this collection (up to three records MAX), the payer 
+        // will be the PRIMARY, SECONDARY or TERTIARY payer.
+        public decimal PayerEstimatedAmountDue { get; set; }     // 2300 AMT02 when AMT01 is 'F3'
+        //public decimal SecondaryPayerEstimatedAmountDue { get; set; }   // 2320 
+        //public decimal TertiaryPayerEstimatedAmountDue { get; set; }    // 
     }
 
     [Serializable]
