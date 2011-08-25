@@ -108,7 +108,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         //private decimal _field55a_EstimatedAmountDue;
         //private decimal _field55b_EstimatedAmountDue;
         //private decimal _field55c_EstimatedAmountDue;
-        private List<Field50_PayerName> _field55EstimatedAmountDue;
+        private List<Field50_PayerName> _field50PayerName;
         private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
         private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
         private List<Field54_PriorPayments> _field54_PriorPayments;
@@ -390,11 +390,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Field 48 - Summary of all field 48 charges
         public decimal Field48_SummaryTotalNonCoveredCharges { get { return _field48_SummaryTotalNonCoveredCharges; } set { _field48_SummaryTotalNonCoveredCharges = value; } }
 
-        public List<Field50_PayerName> _field50_PayerName { get; set; }
-        public List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator { get; set; }
-        public List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator { get; set; }
-        public List<Field54_PriorPayments> _field54_PriorPayments { get; set; }
-        public List<Field55EstimatedAmountDue> _field55EstimatedAmountDue { get; set; }
+        public List<Field50_PayerName> Field50_PayerName { get; set; }
+        public List<Field52_ReleaseOfInfoCertIndicator> Field52_ReleaseOfInfoCertIndicator { get; set; }
+        public List<Field53_AssignmentOfBenefitsCertIndicator> Field53_AssignmentOfBenefitsCertIndicator { get; set; }
+        public List<Field54_PriorPayments> Field54_PriorPayments { get; set; }
+        public List<Field55EstimatedAmountDue> Field55EstimatedAmountDue { get; set; }
 
         // Field 56 - National Provider Indicator (NPI), Billing Provider.  The unique provider indentifier
         // assigned by the health plan.
