@@ -57,7 +57,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field03b_MedicalHealthRecordNumber;
         private string _field04_TypeOfBill;
         private string _field05_FederalTaxId;
-        private string _field06_StatementCoversDates;
         private string _field06_ServiceFromDate;
         private string _field06_ServiceToDate;
         //private string _field07_Filler;
@@ -109,7 +108,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         //private decimal _field55a_EstimatedAmountDue;
         //private decimal _field55b_EstimatedAmountDue;
         //private decimal _field55c_EstimatedAmountDue;
-        private List<Field50_55_PayerInfo> _field50_55_PayerInfo;
+        private List<Field50_PayerName> _field55EstimatedAmountDue;
+        private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
+        private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
+        private List<Field54_PriorPayments> _field54_PriorPayments;
+        private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
 
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
@@ -284,9 +287,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Number (EIN).  Affiliated subsidiaries are identified using federeal tax sub-ID's.
         public string Field05_FederalTaxId { get { return _field05_FederalTaxId; } set { _field05_FederalTaxId = value; } }
 
-        // Field 06 - Service FROM and TO dates.  MMDDCCYYMMDDCCYY format.
-        public string Field06_StatementCoversDates { get { return _field06_StatementCoversDates; } set { _field06_StatementCoversDates = value; } }
-
         // Field 06 - Service FROM and TO dates.  MMDDCCYY format.
         public string Field06_ServiceFromDate { get { return _field06_ServiceFromDate; } set { _field06_ServiceFromDate = value; } }
 
@@ -390,10 +390,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Field 48 - Summary of all field 48 charges
         public decimal Field48_SummaryTotalNonCoveredCharges { get { return _field48_SummaryTotalNonCoveredCharges; } set { _field48_SummaryTotalNonCoveredCharges = value; } }
 
-
-        // Field 42 through 49 SUMMARY line.
-        public List<Field50_55_PayerInfo> Field50_55_PayerInfo { get; set; }
-
+        public List<Field50_PayerName> _field50_PayerName { get; set; }
+        public List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator { get; set; }
+        public List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator { get; set; }
+        public List<Field54_PriorPayments> _field54_PriorPayments { get; set; }
+        public List<Field55EstimatedAmountDue> _field55EstimatedAmountDue { get; set; }
 
         // Field 56 - National Provider Indicator (NPI), Billing Provider.  The unique provider indentifier
         // assigned by the health plan.
