@@ -6,7 +6,7 @@ using System.Text;
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
     [Serializable]
-    public class UB04ServiceLine
+    public class UB04ServiceLine_2300Loop
     {
         /*
          * 2011/8/15, jhalliday - New Data Model for 837I (Institutional) claim - collections objects.
@@ -25,17 +25,28 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
          * budget.  For that reason, this and the related X12 Parser project tools are all open
          * source and freely usable.
          */
-
-        public string Field42_RevenueCode { get; set; }
         public string Field43_RevenueDescription { get; set; }
-        public string Field44_HCPCS_Rates { get; set; }
-        public DateTime Field45_ServiceDate { get; set; }
-        public string Field46_UnitsOfService { get; set; }
-        public decimal Field47_TotalCharges { get; set; }
-        public string Field48_NonCoveredCharges { get; set; }
-        public string Field49_Filler { get; set; }
+        public decimal Field47_TotalSummary { get; set; }
+        public string Field48_NonCoveredTotalSummary { get; set; }
     }
 
+    [Serializable]
+    public class UB04ServiceLine_2400Loop
+    {
+        public string Field42_RevenueCode { get; set; }
+        public string Field44_HCPCS_Rates { get; set; }
+        public DateTime Field45_ServiceDate { get; set; }
+        public string Field46_ServiceUnits { get; set; }
+        public decimal Field47_CoveredLineItem { get; set; }
+        public string Field48_NonCoveredLineItem { get; set; }
+    }
+
+    [Serializable]
+    public class UB04ServiceLine_2410Loop
+    {
+        public string Field43_RevenueDescription { get; set; }
+    }
+        
     [Serializable]
     public class UB04OccurrenceCodesAndDates
     {
@@ -50,12 +61,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field35_36_OccurrenceSpanDate { get; set; }
     }
 
-    [Serializable]
-    public class UB04ValueCodesAndAmounts
-    {
-        public string ValueCode { get; set; }
-        public decimal Amount { get; set; }
-    }
+    //[Serializable]
+    //public class UB04ValueCodesAndAmounts
+    //{
+    //    public string ValueCode { get; set; }
+    //    public decimal Amount { get; set; }
+    //}
 
     [Serializable]
     public class UB04TotalChargesLine
@@ -120,13 +131,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         //public decimal TertiaryPayerEstimatedAmountDue { get; set; }    // 
     }
 
-    [Serializable]
-    public class UB04OtherProcedureCodes
-    {
-        // First occurrence is assumed to be the primary procedure code.
-        public string ProcedureCode { get; set; }
-        public string ProcedureDate { get; set; }
-    }
 
     [Serializable]
     public class UB04Code_Code
