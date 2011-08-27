@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
+
+namespace OopFactory.X12.Hipaa
+{
+    public class Contact
+    {
+        public Contact()
+        {
+            if (Numbers == null) Numbers = new List<ContactNumber>();
+        }
+
+        public string FunctionCode { get; set; }
+        public string Name { get; set; }
+        public List<ContactNumber> Numbers { get; set; }
+    }
+
+    public class ContactNumber
+    {
+        [XmlAttribute]
+        public string Qualifier { get; set; }
+        [XmlText]
+        public string Number { get; set; }
+    }
+}
