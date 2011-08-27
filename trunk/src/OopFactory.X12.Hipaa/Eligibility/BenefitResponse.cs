@@ -22,6 +22,9 @@ namespace OopFactory.X12.Hipaa.Eligibility
             if (DependentBenefitRelatedEntities == null) DependentBenefitRelatedEntities = new List<RelatedEntity>();
         }
 
+        [XmlAttribute]
+        public string TransactionControlNumber { get; set; }
+
         [XmlElement(ElementName="Identification")]
         public List<Identification> Identifications { get; set; }
 
