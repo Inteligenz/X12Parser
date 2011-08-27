@@ -21,6 +21,8 @@ namespace OopFactory.X12.Hipaa.Common
         [XmlIgnore]
         public DateTime? DateOfBirth { get; set; }
 
+        public Lookup Relationship { get; set; }
+        
         #region Serializable DateOfBirth Properties
         [XmlAttribute(AttributeName="DateOfBirth", DataType="date")]
         public DateTime SerializableDateOfBirth 
@@ -36,5 +38,33 @@ namespace OopFactory.X12.Hipaa.Common
             set {}
         }
         #endregion
+
+
+
+        [XmlAttribute]
+        public string MemberId
+        {
+            get
+            {
+                if (Name != null && Name.Identification != null && Name.Identification.Qualifier == "MI")
+                    return Name.Identification.Id;
+                else
+                    return GetReferenceId("1W");
+            }
+            set { }
+        }
+
+        [XmlAttribute]
+        public string Ssn
+        {
+            get { return GetReferenceId("SY"); }
+            set { }
+        }
+
+        [XmlAttribute]
+        public string GroupNumber
+        {
+            get { return GetReferenceId("6P"); }
+        }
     }
 }

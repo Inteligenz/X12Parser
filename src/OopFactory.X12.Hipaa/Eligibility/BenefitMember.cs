@@ -19,8 +19,6 @@ namespace OopFactory.X12.Hipaa.Eligibility
         [XmlAttribute]
         public string BirthSequenceNumber { get; set; }
 
-        public Lookup Relationship { get; set; }
-        
         public ProviderInformation ProviderInfo { get; set; }
 
         [XmlElement(ElementName="Diagnosis")]

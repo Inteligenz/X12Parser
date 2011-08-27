@@ -72,7 +72,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
         }
 
         [TestMethod]
-        public void TransformToModelTest()
+        public void TransformToModelTest1()
         {
             var service = new EligibilityTransformationService();
 
@@ -85,5 +85,18 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
 
         }
 
+        [TestMethod]
+        public void TransformToModelTest2()
+        {
+            var service = new EligibilityTransformationService();
+
+            Stream stream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
+
+            var responses = service.Transform271ToBenefitResponse(stream);
+
+            System.Diagnostics.Trace.Write(BenefitResponse.SerializeList(responses));
+
+        }
     }
 }
