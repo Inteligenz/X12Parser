@@ -16,5 +16,6 @@ namespace OopFactory.X12.Hipaa
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
 
+        public Identification Identification { get; set; }
     }
 }

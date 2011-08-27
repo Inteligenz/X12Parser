@@ -184,7 +184,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field80_Remarks;
         private List<UB04Code_Code> _field80Code_Code;
 
-        public UB04Claim() { if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine>(); }
+        public UB04Claim() { if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine_2300Loop>(); }
 
         // Now the accessor definitions:
 
