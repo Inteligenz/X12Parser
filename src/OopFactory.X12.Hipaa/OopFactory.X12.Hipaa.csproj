@@ -51,6 +51,8 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
     <Compile Include="Common\Contact.cs" />
+    <Compile Include="Common\QualifiedDate.cs" />
+    <Compile Include="Common\QualifiedDateRange.cs" />
     <Compile Include="Eligibility\RelatedEntity.cs" />
     <Compile Include="Common\RequestValidation.cs" />
     <Compile Include="Common\QualifiedCode.cs" />
@@ -84,7 +86,7 @@
     <EmbeddedResource Include="Claims\Forms\Institutional\UB04Model-To-FoXml.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Eligibility\X12-271-To-BenefitResponse.xslt" />
+    <EmbeddedResource Include="Eligibility\X12-271-To-BenefitResponse.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

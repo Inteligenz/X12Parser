@@ -74,13 +74,17 @@
     <EmbeddedResource Include="Claims\TestData\InstitutionalClaim1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Eligibility\TestData\_271\_5010\Example_3_1_2.xml" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example1_DHHS.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example2_TMHP.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\Example_3_1_2.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\Example_3_1_3.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\Example_3_2_2.txt" />
     <Content Include="Claims\UB04_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Eligibility\TestData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
