@@ -62,6 +62,13 @@ namespace OopFactory.X12.Hipaa.Common
         }
 
         [XmlAttribute]
+        public string PlanNumber
+        {
+            get { return GetReferenceId("18"); }
+            set { }
+        }
+
+        [XmlAttribute]
         public string GroupNumber
         {
             get { return GetReferenceId("6P"); }
