@@ -50,6 +50,9 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
+    <Compile Include="EntityName.cs" />
+    <Compile Include="Identification.cs" />
+    <Compile Include="PostalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,11 +70,8 @@
     <EmbeddedResource Include="Claims\Forms\Institutional\UB04Model-To-FoXml.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UB04_Red.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="Eligibility\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -84,19 +84,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private List<UB04OccurrenceSpanCodesAndDates> _field35_36_OccurrenceSpanCodesAndDates;
         //private string _field37_Filler;
         //private string _field38_AdditionalPartyName;
-        private List<UB04ValueCodesAndAmounts> _field39_41_ValueCodesAndAmounts;
-        private List<UB04ServiceLine> _field42_49_ServiceLines;
+        //private List<UB04ValueCodesAndAmount> _field39_41_ValueCodesAndAmounts;
+        private List<UB04ServiceLine_2300Loop> _field42_49_ServiceLines;
         private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
         private decimal _field47_SummaryTotalCharges;
         private decimal _field48_SummaryTotalNonCoveredCharges;
 
-<<<<<<< .mine
-        //private List<Field50_PayerName> _field50PayerName;
-        //private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
-        //private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
-        //private List<Field54_PriorPayments> _field54_PriorPayments;
-        //private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
-=======
         //private string _field50a_PayerName;
         //private string _field50b_PayerSecondaryInsuranceCompanyName;
         //private string _field50c_PayerTertiaryInsuranceCompanyName;
@@ -120,7 +113,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
         private List<Field54_PriorPayments> _field54_PriorPayments;
         private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
->>>>>>> .r9870
 
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
@@ -348,24 +340,24 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public decimal Field39a_Amount { get; set; }
         public string Field39b_Code { get; set; }
         public decimal Field39b_Amount { get; set; }
-        public string Field39b_Code { get; set; }
-        public decimal Field39b_Amount { get; set; }
+        //public string Field39b_Code { get; set; }
+        //public decimal Field39b_Amount { get; set; }
         public string Field39d_Code { get; set; }
         public decimal Field39d_Amount { get; set; }
         public string Field40a_Code { get; set; }
         public decimal Field40a_Amount { get; set; }
         public string Field40b_Code { get; set; }
         public decimal Field40b_Amount { get; set; }
-        public string Field40b_Code { get; set; }
-        public decimal Field40b_Amount { get; set; }
+        //public string Field40b_Code { get; set; }
+        //public decimal Field40b_Amount { get; set; }
         public string Field40d_Code { get; set; }
         public decimal Field40d_Amount { get; set; }
         public string Field41a_Code { get; set; }
         public decimal Field41a_Amount { get; set; }
         public string Field41b_Code { get; set; }
         public decimal Field41b_Amount { get; set; }
-        public string Field41b_Code { get; set; }
-        public decimal Field41b_Amount { get; set; }
+        //public string Field41b_Code { get; set; }
+        //public decimal Field41b_Amount { get; set; }
         public string Field41d_Code { get; set; }
         public decimal Field41d_Amount { get; set; }
 
@@ -382,7 +374,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Field 48 - Summary of all field 48 charges
         public decimal Field48_SummaryTotalNonCoveredCharges { get { return _field48_SummaryTotalNonCoveredCharges; } set { _field48_SummaryTotalNonCoveredCharges = value; } }
 
-<<<<<<< .mine
         public List<Field50_PayerName> Field50_PayerName { get; set; }
         public List<Field52_ReleaseOfInfoCertIndicator> Field52_ReleaseOfInfoCertIndicator { get; set; }
         public List<Field53_AssignmentOfBenefitsCertIndicator> Field53_AssignmentOfBenefitsCertIndicator { get; set; }
@@ -390,13 +381,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field55PrimaryPayerEstimatedAmountDue { get; set; }
         public string Field55SecondaryPayerEstimatedAmountDue { get; set; }
         public string Field55TertiaryEstimatedAmountDue { get; set; }
-=======
-        public List<Field50_PayerName> Field50_PayerName { get; set; }
-        public List<Field52_ReleaseOfInfoCertIndicator> Field52_ReleaseOfInfoCertIndicator { get; set; }
-        public List<Field53_AssignmentOfBenefitsCertIndicator> Field53_AssignmentOfBenefitsCertIndicator { get; set; }
-        public List<Field54_PriorPayments> Field54_PriorPayments { get; set; }
-        public List<Field55EstimatedAmountDue> Field55EstimatedAmountDue { get; set; }
->>>>>>> .r9870
 
         // Field 56 - National Provider Indicator (NPI), Billing Provider.  The unique provider indentifier
         // assigned by the health plan.
@@ -651,8 +635,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field72c_ExternalCauseOfInjuryCode_8 { get; set; }
 
         // Field 74 - PRINCIPAL procedure code and date.
-        public string Field74c_OtherProcedure_Code { get; set; }
-        public string Field74c_OtherProcedure_Date { get; set; }
+        //public string Field74c_OtherProcedure_Code { get; set; }
+        //public string Field74c_OtherProcedure_Date { get; set; }
         // Field 74a - Other procedure code and date group # 1.
         public string Field74a_OtherProcedure_Code { get; set; }
         public string Field74a_OtherProcedure_Date { get; set; }
