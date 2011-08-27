@@ -50,10 +50,14 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
+    <Compile Include="Contact.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="EntityName.cs" />
     <Compile Include="Identification.cs" />
+    <Compile Include="Member.cs" />
     <Compile Include="PostalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt">
