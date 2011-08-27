@@ -7,5 +7,6 @@ namespace OopFactory.X12.Hipaa.Common
 {
     public class Provider : Entity
     {
+        public ProviderInformation ProviderInfo { get; set; }
     }
 }

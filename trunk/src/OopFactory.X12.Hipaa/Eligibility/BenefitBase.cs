@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Hipaa.Common;
 
 namespace OopFactory.X12.Hipaa.Eligibility
 {
     public abstract class BenefitBase
     {
-        internal BenefitBase()
-        {
-            if (Subscriber == null) Subscriber = new BenefitMember();
-            if (Dependent == null) Dependent = new BenefitMember();
-        }
 
+        public Entity Source { get; set; }
+        public Provider Receiver { get; set; }
+        
         public BenefitMember Subscriber { get; set; }
         public BenefitMember Dependent { get; set; }
     }
