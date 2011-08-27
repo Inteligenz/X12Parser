@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OopFactory.X12.Hipaa
+namespace OopFactory.X12.Hipaa.Common
 {
     public enum EntityNameQualifierEnum
     {

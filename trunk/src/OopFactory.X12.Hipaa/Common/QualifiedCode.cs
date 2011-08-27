@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OopFactory.X12.Hipaa
+namespace OopFactory.X12.Hipaa.Common
 {
-    public class Identification
+    public class QualifiedCode
     {
         [XmlAttribute]
         public string Qualifier { get; set; }
-        [XmlAttribute]
-        public string Id { get; set; }
         [XmlText]
-        public string Description { get; set; }
+        public string Code { get; set; }
     }
 }

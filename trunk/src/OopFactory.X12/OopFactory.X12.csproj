@@ -151,7 +151,9 @@
     <EmbeddedResource Include="Specifications\Ansi-855-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Specifications\Ansi-270-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-270-4010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-846-4010Specification.xml" />
@@ -182,6 +184,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-110-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-210-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-271-5010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

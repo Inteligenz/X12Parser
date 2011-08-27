@@ -128,6 +128,9 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\Spec_4.2.3_AutomobileAccident.txt" />
     <EmbeddedResource Include="Flattening\837-XML-to-claim-level-csv.xslt" />
     <Content Include="Flattening\XSLTFile1.xslt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_1_2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_1_3.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_2_2.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
