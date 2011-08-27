@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfBenefitResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BenefitResponse TransactionControlNumber="4322">
+    <Source>
+      <Name Identifier="PR" Qualifier="NonPerson" LastName="ABC COMPANY">
+        <Identification Qualifier="PI" Id="842610001" />
+      </Name>
+    </Source>
+    <Receiver ServiceProviderNumber="2000035">
+      <Name Identifier="1P" Qualifier="NonPerson" LastName="BONE AND JOINT CLINIC">
+        <Identification Qualifier="SV" Id="2000035" />
+      </Name>
+    </Receiver>
+    <Subscriber Gender="Male" DateOfBirth="1963-05-19" MemberId="123456789">
+      <Name Identifier="IL" Qualifier="Person" LastName="SMITH" FirstName="JOHN">
+        <Identification Qualifier="MI" Id="123456789" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+    </Subscriber>
+    <Dependent Gender="Female" DateOfBirth="1998-10-14" PlanBeginDate="2006-01-01">
+      <Name Identifier="03" Qualifier="Person" LastName="SMITH" FirstName="MARY">
+        <Identification Qualifier="" Id="" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+      <Relationship Code="19">Child</Relationship>
+      <Date Qualifier="346" Date="2006-01-01" />
+    </Dependent>
+    <BenefitInformations />
+  </BenefitResponse>
+  <BenefitResponse TransactionControlNumber="4322">
+    <Source>
+      <Name Identifier="PR" Qualifier="NonPerson" LastName="ABC COMPANY">
+        <Identification Qualifier="PI" Id="842610001" />
+      </Name>
+    </Source>
+    <Receiver ServiceProviderNumber="2000035">
+      <Name Identifier="1P" Qualifier="NonPerson" LastName="BONE AND JOINT CLINIC">
+        <Identification Qualifier="SV" Id="2000035" />
+      </Name>
+    </Receiver>
+    <Subscriber Gender="Male" DateOfBirth="1963-05-19" MemberId="123456789">
+      <Name Identifier="IL" Qualifier="Person" LastName="SMITH" FirstName="JOHN">
+        <Identification Qualifier="MI" Id="123456789" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+    </Subscriber>
+    <Dependent Gender="Female" DateOfBirth="1998-10-14" PlanBeginDate="2006-01-01">
+      <Name Identifier="03" Qualifier="Person" LastName="SMITH" FirstName="MARY">
+        <Identification Qualifier="" Id="" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+      <Relationship Code="19">Child</Relationship>
+      <Date Qualifier="346" Date="2006-01-01" />
+    </Dependent>
+    <BenefitInformations />
+  </BenefitResponse>
+  <BenefitResponse TransactionControlNumber="4322">
+    <Source>
+      <Name Identifier="PR" Qualifier="NonPerson" LastName="ABC COMPANY">
+        <Identification Qualifier="PI" Id="842610001" />
+      </Name>
+    </Source>
+    <Receiver ServiceProviderNumber="2000035">
+      <Name Identifier="1P" Qualifier="NonPerson" LastName="BONE AND JOINT CLINIC">
+        <Identification Qualifier="SV" Id="2000035" />
+      </Name>
+    </Receiver>
+    <Subscriber Gender="Male" DateOfBirth="1963-05-19" MemberId="123456789">
+      <Name Identifier="IL" Qualifier="Person" LastName="SMITH" FirstName="JOHN">
+        <Identification Qualifier="MI" Id="123456789" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+    </Subscriber>
+    <Dependent Gender="Female" DateOfBirth="1998-10-14" PlanBeginDate="2006-01-01">
+      <Name Identifier="03" Qualifier="Person" LastName="SMITH" FirstName="MARY">
+        <Identification Qualifier="" Id="" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+      <Relationship Code="19">Child</Relationship>
+      <Date Qualifier="346" Date="2006-01-01" />
+    </Dependent>
+    <BenefitInformations />
+  </BenefitResponse>
+  <BenefitResponse TransactionControlNumber="4322">
+    <Source>
+      <Name Identifier="PR" Qualifier="NonPerson" LastName="ABC COMPANY">
+        <Identification Qualifier="PI" Id="842610001" />
+      </Name>
+    </Source>
+    <Receiver ServiceProviderNumber="2000035">
+      <Name Identifier="1P" Qualifier="NonPerson" LastName="BONE AND JOINT CLINIC">
+        <Identification Qualifier="SV" Id="2000035" />
+      </Name>
+    </Receiver>
+    <Subscriber Gender="Male" DateOfBirth="1963-05-19" MemberId="123456789">
+      <Name Identifier="IL" Qualifier="Person" LastName="SMITH" FirstName="JOHN">
+        <Identification Qualifier="MI" Id="123456789" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+    </Subscriber>
+    <Dependent Gender="Female" DateOfBirth="1998-10-14" PlanBeginDate="2006-01-01">
+      <Name Identifier="03" Qualifier="Person" LastName="SMITH" FirstName="MARY">
+        <Identification Qualifier="" Id="" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+      <Relationship Code="19">Child</Relationship>
+      <Date Qualifier="346" Date="2006-01-01" />
+    </Dependent>
+    <BenefitInformations />
+  </BenefitResponse>
+  <BenefitResponse TransactionControlNumber="4322">
+    <Source>
+      <Name Identifier="PR" Qualifier="NonPerson" LastName="ABC COMPANY">
+        <Identification Qualifier="PI" Id="842610001" />
+      </Name>
+    </Source>
+    <Receiver ServiceProviderNumber="2000035">
+      <Name Identifier="1P" Qualifier="NonPerson" LastName="BONE AND JOINT CLINIC">
+        <Identification Qualifier="SV" Id="2000035" />
+      </Name>
+    </Receiver>
+    <Subscriber Gender="Male" DateOfBirth="1963-05-19" MemberId="123456789">
+      <Name Identifier="IL" Qualifier="Person" LastName="SMITH" FirstName="JOHN">
+        <Identification Qualifier="MI" Id="123456789" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+    </Subscriber>
+    <Dependent Gender="Female" DateOfBirth="1998-10-14" PlanBeginDate="2006-01-01">
+      <Name Identifier="03" Qualifier="Person" LastName="SMITH" FirstName="MARY">
+        <Identification Qualifier="" Id="" />
+      </Name>
+      <Address City="KANSAS CITY" StateCode="MO" PostalCode="64108">
+        <Line1>15197 BROADWAY AVENUE</Line1>
+        <Line2>APT 215</Line2>
+      </Address>
+      <Relationship Code="19">Child</Relationship>
+      <Date Qualifier="346" Date="2006-01-01" />
+    </Dependent>
+    <BenefitInformations />
+  </BenefitResponse>
+</ArrayOfBenefitResponse>

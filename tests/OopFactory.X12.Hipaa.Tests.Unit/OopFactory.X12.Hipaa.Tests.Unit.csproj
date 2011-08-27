@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Eligibility\TestData\_271\_5010\Example_3_1_2.xml" />
+    <Content Include="Eligibility\TestData\_271\_5010\Example_3_2_2_Model.xml" />
     <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example2_TMHP.txt" />
     <EmbeddedResource Include="Eligibility\TestData\_271\_5010\Example_3_1_2.txt" />
