@@ -50,14 +50,24 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="EntityName.cs" />
-    <Compile Include="Identification.cs" />
-    <Compile Include="Member.cs" />
-    <Compile Include="PostalAddress.cs" />
+    <Compile Include="Common\Contact.cs" />
+    <Compile Include="Eligibility\RelatedEntity.cs" />
+    <Compile Include="Common\RequestValidation.cs" />
+    <Compile Include="Common\QualifiedCode.cs" />
+    <Compile Include="Eligibility\BenefitBase.cs" />
+    <Compile Include="Eligibility\BenefitInquiry.cs" />
+    <Compile Include="Eligibility\BenefitMember.cs" />
+    <Compile Include="Eligibility\BenefitResponse.cs" />
+    <Compile Include="Common\Entity.cs" />
+    <Compile Include="Common\EntityName.cs" />
+    <Compile Include="Common\Identification.cs" />
+    <Compile Include="Common\Lookup.cs" />
+    <Compile Include="Common\Member.cs" />
+    <Compile Include="Common\PostalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider.cs" />
+    <Compile Include="Common\Provider.cs" />
+    <Compile Include="Common\ProviderInformation.cs" />
+    <Compile Include="Eligibility\EligibilityTransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt">
@@ -74,7 +84,7 @@
     <EmbeddedResource Include="Claims\Forms\Institutional\UB04Model-To-FoXml.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Eligibility\" />
+    <Content Include="Eligibility\X12-271-To-BenefitResponse.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

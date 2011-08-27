@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
+#if DEBUG
     [Serializable]
     public class UB04Claim
     {
@@ -720,4 +721,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         }
     }
+#endif
 }

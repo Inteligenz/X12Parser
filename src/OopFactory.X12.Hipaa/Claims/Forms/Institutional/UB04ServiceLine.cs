@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
+#if DEBUG
     [Serializable]
     public class UB04ServiceLine_2300Loop
     {
@@ -139,4 +140,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field81b { get; set; }
         public string Field81c { get; set; }
     }
+#endif
 }

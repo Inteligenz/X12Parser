@@ -39,6 +39,12 @@
       <ResourcePath>INS._270._4010.Example3_Aetna.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="271">
+    <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
       <ResourcePath>INS._271._4010.Example1_DHHS.txt</ResourcePath>
     </EdiFile>
@@ -47,8 +53,13 @@
       <ResourcePath>INS._271._4010.Example2_TMHP.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <SourceUrl></SourceUrl>
-      <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
+      <ResourcePath>INS._271._5010.Example_3_1_2.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._271._5010.Example_3_1_3.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._271._5010.Example_3_2_2.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="276">
