@@ -6,7 +6,7 @@ using OopFactory.X12.Hipaa.Common;
 
 namespace OopFactory.X12.Hipaa.Eligibility
 {
-    public abstract class BenefitBase
+    public abstract class EligibilityBenefitBase
     {
 
         public Entity Source { get; set; }
