@@ -9,6 +9,7 @@ using System.Reflection;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Hipaa.Claims;
+using OopFactory.X12.Hipaa.Claims.Services;
 using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
 
 namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
