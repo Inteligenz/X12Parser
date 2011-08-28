@@ -10,6 +10,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
 {
     public class EligibilityBenefit
     {
+        public EligibilityBenefit()
+        {
+            if (Identifications == null) Identifications = new List<Identification>();
+            if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
+            if (Dates == null) Dates = new List<QualifiedDate>();
+            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
+            if (Messages == null) Messages = new List<string>();
+            if (RelatedEntities == null) RelatedEntities = new List<RelatedEntity>();
+
+        }
         public string ServiceTypeCount { get; set; }
         [XmlIgnore]
         public decimal? Amount { get; set; }
@@ -61,5 +71,23 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public Lookup InPlanNetwork { get; set; }
         public string PlanCoverageDescription { get; set; }
         public MedicalProcedure Procedure { get; set; }
+
+        [XmlElement(ElementName = "Identification")]
+        public List<Identification> Identifications { get; set; }
+
+        [XmlElement(ElementName = "RequestValidation")]
+        public List<RequestValidation> RequestValidations { get; set; }
+
+        [XmlElement(ElementName = "Date")]
+        public List<QualifiedDate> Dates { get; set; }
+
+        [XmlElement(ElementName = "DateRange")]
+        public List<QualifiedDateRange> DateRanges { get; set; }
+
+        [XmlElement(ElementName = "Message")]
+        public List<string> Messages { get; set; }
+
+        [XmlElement(ElementName = "RelatedEntity")]
+        public List<RelatedEntity> RelatedEntities { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using OopFactory.X12.Parsing;
 
-namespace OopFactory.X12.Hipaa.Eligibility
+namespace OopFactory.X12.Hipaa.Eligibility.Services
 {
     public class EligibilityTransformationService
     {
@@ -18,7 +18,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
             var interchange = parser.Parse(stream);
             var xml = interchange.Serialize();
 
-            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Eligibility.Xsl.X12-271-To-BenefitResponse.xslt");
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Eligibility.Services.Xsl.X12-271-To-BenefitResponse.xslt");
 
             var transform = new XslCompiledTransform();
             if (transformStream != null) transform.Load(XmlReader.Create(transformStream));
@@ -27,7 +27,8 @@ namespace OopFactory.X12.Hipaa.Eligibility
 
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
             outputStream.Position = 0;
-            var response = BenefitResponse.DeserializeList(new StreamReader(outputStream).ReadToEnd());
+            string responseXml = new StreamReader(outputStream).ReadToEnd();
+            var response = BenefitResponse.DeserializeList(responseXml);
             return response;
         }
 
@@ -35,7 +36,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             string xml = response.Serialize();
 
-            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Eligibility.Xsl.BenefitResponse-To-Html.xslt");
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Eligibility.Services.Xsl.BenefitResponse-To-Html.xslt");
 
             var transform = new XslCompiledTransform();
             if (transformStream != null) transform.Load(XmlReader.Create(transformStream));

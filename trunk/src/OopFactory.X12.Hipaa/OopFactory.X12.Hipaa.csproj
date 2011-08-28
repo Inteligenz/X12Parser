@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Provider.cs" />
     <Compile Include="Common\ProviderInformation.cs" />
-    <Compile Include="Eligibility\EligibilityTransformationService.cs" />
+    <Compile Include="Eligibility\Services\EligibilityTransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt">
@@ -89,10 +89,10 @@
     <EmbeddedResource Include="Claims\Forms\Institutional\UB04Model-To-FoXml.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Eligibility\Xsl\X12-271-To-BenefitResponse.xslt" />
+    <EmbeddedResource Include="Eligibility\Services\Xsl\X12-271-To-BenefitResponse.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Eligibility\Xsl\BenefitResponse-To-Html.xslt" />
+    <EmbeddedResource Include="Eligibility\Services\Xsl\BenefitResponse-To-Html.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
