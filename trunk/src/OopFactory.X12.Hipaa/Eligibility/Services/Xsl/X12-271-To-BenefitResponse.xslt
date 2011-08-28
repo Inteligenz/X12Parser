@@ -39,8 +39,15 @@
   </xsl:template>
 
   <xsl:template match="Loop[count(EB)>0]">
-    <Benefit>
+    <BenefitInfo>
       <xsl:apply-templates select="EB"/>
+      <xsl:for-each select="REF">
+        <Identification>
+          <xsl:call-template name="Identification">
+            <xsl:with-param name="REF" select="."/>
+          </xsl:call-template>
+        </Identification>
+      </xsl:for-each>
       <xsl:for-each select="MSG">
         <Message>
           <xsl:value-of select="MSG01"/>
@@ -48,7 +55,7 @@
       </xsl:for-each>
       <xsl:apply-templates select="Loop[count(III) > 0]"/>
       <xsl:apply-templates select="Loop/Loop[@LoopId='2120C' or @LoopId='2120D']"/>
-    </Benefit>
+    </BenefitInfo>
   </xsl:template>
 
   <xsl:template match="Loop[count(III) > 0]">
@@ -380,6 +387,17 @@
     </Line2>
   </xsl:template>
 
+  <xsl:template name="Identification">
+    <xsl:param name="REF"/>
+    <xsl:attribute name="Qualifier">
+      <xsl:value-of select="REF01"/>
+    </xsl:attribute>
+    <xsl:attribute name="Id">
+      <xsl:value-of select="REF02"/>
+    </xsl:attribute>
+    <xsl:value-of select="REF03"/>
+  </xsl:template>
+  
   <xsl:template name="Contact">
     <xsl:param name="PER"/>
     <xsl:attribute name="FunctionCode">

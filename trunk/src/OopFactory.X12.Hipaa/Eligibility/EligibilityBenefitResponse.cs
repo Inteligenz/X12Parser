@@ -13,15 +13,15 @@ namespace OopFactory.X12.Hipaa.Eligibility
     {
         public EligibilityBenefitResponse()
         {
-            if (Benefits == null) Benefits = new List<EligibilityBenefitInformation>();
+            if (BenefitInfos == null) BenefitInfos = new List<EligibilityBenefitInformation>();
         }
 
         [XmlAttribute]
         public string TransactionControlNumber { get; set; }
 
 
-        [XmlElement(ElementName = "Benefit")]
-        public List<EligibilityBenefitInformation> Benefits { get; set; }
+        [XmlElement(ElementName = "BenefitInfo")]
+        public List<EligibilityBenefitInformation> BenefitInfos { get; set; }
 
 
 
