@@ -10,7 +10,7 @@ using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 
-namespace OopFactory.X12.Hipaa.Claims
+namespace OopFactory.X12.Hipaa.Claims.Services
 {
     public class ClaimTransformationService
     {
