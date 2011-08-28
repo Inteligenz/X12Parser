@@ -13,5 +13,9 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlAttribute(DataType="date")]
         public DateTime Date { get; set; }
+
+        [XmlText]
+        public string Description { get; set; }
+
     }
 }

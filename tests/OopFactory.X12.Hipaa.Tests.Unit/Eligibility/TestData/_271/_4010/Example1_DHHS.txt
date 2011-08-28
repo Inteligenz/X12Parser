@@ -16,7 +16,7 @@
               REF*SY*SocSecNum~
               N3*AddressLine1*AddressLine2~
               N4*City-State**ZipCode~
-              DMG*D8*Birth Date*Gender~
+              DMG*D8*20000101*Gender~
               DTP*472*D8*20000614~
               AAA*N**RC*C~
               EB*6~
@@ -40,8 +40,8 @@
                 REF*F6*Medicare Claim No.~
               EB*R**69*OT*Policy Type Desc~
                 REF*IG*PolicyNo*Carrier Name~
-                DTP*356*D8*YYYYMMDD~
-                DTP*357*D8*YYYYMMDD~
+                DTP*356*D8*20000101~
+                DTP*357*D8*20000101~
                 LS*2120~
                   NM1*IL*1*Policyholder*John*Q~
                   LE*2120~

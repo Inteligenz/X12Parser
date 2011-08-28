@@ -66,10 +66,10 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public List<Lookup> ServiceTypes { get; set; }
 
         public Lookup InsuranceType { get; set; }
+        public string PlanCoverageDescription { get; set; }
         public Lookup TimePeriod { get; set; }
         public QualifiedAmount Quantity { get; set; }
         public Lookup InPlanNetwork { get; set; }
-        public string PlanCoverageDescription { get; set; }
         public MedicalProcedure Procedure { get; set; }
 
         [XmlElement(ElementName = "Identification")]

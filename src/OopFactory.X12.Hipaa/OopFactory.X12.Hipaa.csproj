@@ -58,7 +58,6 @@
     <Compile Include="Eligibility\EligibilityBenefit.cs" />
     <Compile Include="Eligibility\RelatedEntity.cs" />
     <Compile Include="Common\RequestValidation.cs" />
-    <Compile Include="Common\QualifiedCode.cs" />
     <Compile Include="Eligibility\BenefitBase.cs" />
     <Compile Include="Eligibility\BenefitInquiry.cs" />
     <Compile Include="Eligibility\BenefitMember.cs" />
