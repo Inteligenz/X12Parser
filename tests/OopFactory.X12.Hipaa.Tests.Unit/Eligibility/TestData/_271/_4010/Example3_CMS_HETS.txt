@@ -87,6 +87,8 @@
               EB*R**88*OT~
                 REF*18*CONTRACTNUMBER PLANNUMBER~
                 DTP*292*D8*20090701~
+				III*ZZ*21~
+				III***44*Broken bones and third degree burns~
                 LS*2120~
                   NM1*PRP*2*ORGNAME~
                     N3*ADDRESSLINE1~

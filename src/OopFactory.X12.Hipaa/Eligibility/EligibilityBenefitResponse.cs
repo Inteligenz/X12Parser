@@ -13,7 +13,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
     {
         public EligibilityBenefitResponse()
         {
-            if (Benefits == null) Benefits = new List<EligibilityBenefit>();
+            if (Benefits == null) Benefits = new List<EligibilityBenefitInformation>();
         }
 
         [XmlAttribute]
@@ -21,7 +21,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
 
 
         [XmlElement(ElementName = "Benefit")]
-        public List<EligibilityBenefit> Benefits { get; set; }
+        public List<EligibilityBenefitInformation> Benefits { get; set; }
 
 
 

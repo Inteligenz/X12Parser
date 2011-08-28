@@ -8,9 +8,9 @@ using OopFactory.X12.Hipaa.Common;
 
 namespace OopFactory.X12.Hipaa.Eligibility
 {
-    public class EligibilityBenefit
+    public class EligibilityBenefitInformation
     {
-        public EligibilityBenefit()
+        public EligibilityBenefitInformation()
         {
             if (Identifications == null) Identifications = new List<Identification>();
             if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
@@ -86,6 +86,9 @@ namespace OopFactory.X12.Hipaa.Eligibility
 
         [XmlElement(ElementName = "Message")]
         public List<string> Messages { get; set; }
+
+        [XmlElement(ElementName = "AdditionalInfo")]
+        public List<EligibilityBenefitAdditionalInformation> AdditionalInfos { get; set; }
 
         [XmlElement(ElementName = "RelatedEntity")]
         public List<RelatedEntity> RelatedEntities { get; set; }

@@ -13,8 +13,10 @@ namespace OopFactory.X12.Hipaa.Common
             if (Numbers == null) Numbers = new List<ContactNumber>();
         }
 
+        [XmlAttribute]
         public string FunctionCode { get; set; }
         public string Name { get; set; }
+        [XmlElement(ElementName="Number")]
         public List<ContactNumber> Numbers { get; set; }
     }
 

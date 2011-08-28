@@ -65,7 +65,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
             };
 
             response.Subscriber.Dates.Add(new QualifiedDate { Qualifier = "346", Date = DateTime.Parse("2006-01-01") });
-            response.Benefits.Add(new EligibilityBenefit
+            response.Benefits.Add(new EligibilityBenefitInformation
             {
                 InfoType = new Lookup { Code = "1", Description = "Active Coverage" }
             });
