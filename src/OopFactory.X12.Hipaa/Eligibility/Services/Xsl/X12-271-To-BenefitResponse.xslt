@@ -14,28 +14,34 @@
     </ArrayOfBenefitResponse>
   </xsl:template>
 
-    <xsl:template match="Loop[@LoopId='2110C' or @LoopId='2110D']">
-      <BenefitResponse>
-        <xsl:choose>
-          <xsl:when test="@LoopId='2110C'">
-            <xsl:call-template name="SubscriberHLoop">
-              <xsl:with-param name="HLoop" select="../../."/>
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="@LoopId='2110D'">
-            <xsl:call-template name="SubscriberHLoop">
-              <xsl:with-param name="HLoop" select="../../../."/>
-            </xsl:call-template>
-            <xsl:call-template name="DependentNameLoop">
-              <xsl:with-param name="Loop" select="../."/>
-            </xsl:call-template>
-          </xsl:when>
-        </xsl:choose>
-        <Benefit>
-          <xsl:apply-templates select="EB"/>
-        </Benefit>
-      </BenefitResponse>
+    <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
+      <xsl:if test="count(Loop/EB)>0">
+        <BenefitResponse>
+          <xsl:choose>
+            <xsl:when test="@LoopId='2100C'">
+              <xsl:call-template name="SubscriberHLoop">
+                <xsl:with-param name="HLoop" select="../."/>
+              </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@LoopId='2100D'">
+              <xsl:call-template name="SubscriberHLoop">
+                <xsl:with-param name="HLoop" select="../../."/>
+              </xsl:call-template>
+              <xsl:call-template name="DependentNameLoop">
+                <xsl:with-param name="Loop" select="."/>
+              </xsl:call-template>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:apply-templates select="Loop"/>
+        </BenefitResponse>
+      </xsl:if>
     </xsl:template>
+
+  <xsl:template match="Loop[@LoopId='2110C' or @LoopId='2110D']">
+    <Benefit>
+      <xsl:apply-templates select="EB"/>
+    </Benefit>
+  </xsl:template>
 
   <xsl:template name="SubscriberHLoop">
     <xsl:param name="HLoop" />
@@ -223,39 +229,53 @@
   </xsl:template>
 
   <xsl:template match="EB">
-    <InfoType>
-      <xsl:attribute name="Code">
-        <xsl:value-of select="EB01"/>
-      </xsl:attribute>
-      <xsl:value-of select="EB01/comment()"/>
-    </InfoType>
-    
-    <xsl:if test="string-length(EB02)>0">
-      <CoverageLevel>
+      <InfoType>
         <xsl:attribute name="Code">
-          <xsl:value-of select="EB02"/>
+          <xsl:value-of select="EB01"/>
         </xsl:attribute>
-        <xsl:value-of select="EB02/comment()"/>
-      </CoverageLevel>
-    </xsl:if>
+        <xsl:value-of select="EB01/comment()"/>
+      </InfoType>
     
-    <xsl:for-each select="EB03/child::*">
-      <ServiceType>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="."/>
-        </xsl:attribute>
-        <xsl:value-of select="./comment()"/>
-      </ServiceType>
-    </xsl:for-each>
+      <xsl:if test="string-length(EB02)>0">
+        <CoverageLevel>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="EB02"/>
+          </xsl:attribute>
+          <xsl:value-of select="EB02/comment()"/>
+        </CoverageLevel>
+      </xsl:if>
+
+      <xsl:choose>
+        <xsl:when test="count(EB03/child::*)>0">
+          <xsl:for-each select="EB03/child::*">
+            <ServiceType>
+              <xsl:attribute name="Code">
+                <xsl:value-of select="."/>
+              </xsl:attribute>
+              <xsl:value-of select="./comment()"/>
+            </ServiceType>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:if test="string-length(EOB03)>0">
+            <ServiceType>
+              <xsl:attribute name="Code">
+                <xsl:value-of select="EB03"/>
+              </xsl:attribute>
+              <xsl:value-of select="EB03/comment()"/>
+            </ServiceType>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
     
-    <xsl:if test="string-length(EB04)>0">
-      <InsuranceType>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="EB04"/>
-        </xsl:attribute>
-        <xsl:value-of select="EB04/comment()"/>
-      </InsuranceType>
-    </xsl:if>
+      <xsl:if test="string-length(EB04)>0">
+        <InsuranceType>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="EB04"/>
+          </xsl:attribute>
+          <xsl:value-of select="EB04/comment()"/>
+        </InsuranceType>
+      </xsl:if>
   </xsl:template>
   
 </xsl:stylesheet>

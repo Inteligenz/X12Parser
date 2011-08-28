@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OopFactory.X12.Hipaa.Common;
 using OopFactory.X12.Hipaa.Eligibility;
+using OopFactory.X12.Hipaa.Eligibility.Services;
 
 namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
 {
@@ -59,15 +60,14 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                         StateCode = "MO",
                         PostalCode = "64108"
                     }
-                },
-                Benefit = new EligibilityBenefit
-                {
-                    InfoType = new Lookup { Code = "1", Description="Active Coverage" }
                 }
             };
 
             response.Subscriber.Dates.Add(new QualifiedDate { Qualifier = "346", Date = DateTime.Parse("2006-01-01") });
-
+            response.Benefits.Add(new EligibilityBenefit
+            {
+                InfoType = new Lookup { Code = "1", Description = "Active Coverage" }
+            });
             responses.Add(response);
 
             string xml = BenefitResponse.SerializeList(responses);

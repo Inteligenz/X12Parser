@@ -12,38 +12,17 @@ namespace OopFactory.X12.Hipaa.Eligibility
     {
         public BenefitResponse()
         {
-            if (Identifications == null) Identifications = new List<Identification>();
-
-            if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
-
-            if (Dates == null) Dates = new List<QualifiedDate>();
-            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
-            if (SubscriberBenefitRelatedEntities == null) SubscriberBenefitRelatedEntities = new List<RelatedEntity>();
-            if (DependentBenefitRelatedEntities == null) DependentBenefitRelatedEntities = new List<RelatedEntity>();
+            if (Benefits == null) Benefits = new List<EligibilityBenefit>();
         }
 
         [XmlAttribute]
         public string TransactionControlNumber { get; set; }
 
-        [XmlElement(ElementName="Identification")]
-        public List<Identification> Identifications { get; set; }
 
-        [XmlElement(ElementName="RequestValidation")]
-        public List<RequestValidation> RequestValidations { get; set; }
+        [XmlElement(ElementName = "Benefit")]
+        public List<EligibilityBenefit> Benefits { get; set; }
 
-        [XmlElement(ElementName = "Date")]
-        public List<QualifiedDate> Dates { get; set; }
 
-        [XmlElement(ElementName = "DateRange")]
-        public List<QualifiedDateRange> DateRanges { get; set; }
-
-        public EligibilityBenefit Benefit { get; set; }
-
-        [XmlElement(ElementName="SubscriberBenefitRelatedEntity")]
-        public List<RelatedEntity> SubscriberBenefitRelatedEntities { get; set; }
-
-        [XmlElement(ElementName="DependentBenefitRelatedEntity")]
-        public List<RelatedEntity> DependentBenefitRelatedEntities { get; set; }
 
         #region Serialization Methods
         public string Serialize()
