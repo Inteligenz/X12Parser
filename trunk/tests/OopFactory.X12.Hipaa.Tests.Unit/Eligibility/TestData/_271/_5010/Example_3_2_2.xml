@@ -307,7 +307,9 @@
                 </INS>
                 <DTP>
                   <!--Data/Time Qualifier-->
-                  <DTP01>346</DTP01>
+                  <DTP01>
+                    346<!--Plan Begin-->
+                  </DTP01>
                   <!--Date Time Period Format Qualifier-->
                   <DTP02>
                     D8<!--Date Expression in Format CCYYMMDD-->

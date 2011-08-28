@@ -131,6 +131,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_1_2.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_1_3.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_2_2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example3_CMS_HETS.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />

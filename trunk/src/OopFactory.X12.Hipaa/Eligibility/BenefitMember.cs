@@ -11,7 +11,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
     {
         public BenefitMember()
         {
-            if (Diagnoses == null) Diagnoses = new List<QualifiedCode>();
+            if (Diagnoses == null) Diagnoses = new List<Lookup>();
             if (Identifications == null) Identifications = new List<Identification>();
             if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
             if (Dates == null) Dates = new List<QualifiedDate>();
@@ -24,7 +24,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public ProviderInformation ProviderInfo { get; set; }
 
         [XmlElement(ElementName="Diagnosis")]
-        public List<QualifiedCode> Diagnoses { get; set; }
+        public List<Lookup> Diagnoses { get; set; }
 
         [XmlElement(ElementName = "Identification")]
         public List<Identification> Identifications { get; set; }

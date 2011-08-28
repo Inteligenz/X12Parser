@@ -74,6 +74,8 @@
     <EmbeddedResource Include="Claims\TestData\InstitutionalClaim1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS.txt" />
+    <Content Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS_Model.xml" />
     <Content Include="Eligibility\TestData\_271\_5010\Example_3_1_2.xml" />
     <Content Include="Eligibility\TestData\_271\_5010\Example_3_2_2.htm" />
     <Content Include="Eligibility\TestData\_271\_5010\Example_3_2_2.xml" />

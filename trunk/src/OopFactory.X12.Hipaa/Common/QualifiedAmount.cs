@@ -13,5 +13,9 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlAttribute]
         public decimal Amount { get; set; }
+
+        [XmlText]
+        public string Description { get; set; }
+
     }
 }

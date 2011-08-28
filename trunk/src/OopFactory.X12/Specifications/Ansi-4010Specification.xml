@@ -28,24 +28,33 @@
     <Allowed ID="091">Report End</Allowed>
     <Allowed ID="096">Discharge</Allowed>
     <Allowed ID="097">Transaction Creation</Allowed>
+    <Allowed ID="102">Issue</Allowed>
     <Allowed ID="108">Postmark</Allowed>
     <Allowed ID="119">Test Performed</Allowed>
     <Allowed ID="146">Closing Date (Date used as effective date.)</Allowed>
+    <Allowed ID="152">Effective Date of Change</Allowed>
     <Allowed ID="193">Period Start</Allowed>
     <Allowed ID="194">Period End</Allowed>
     <Allowed ID="286">Retirement</Allowed>
+    <Allowed ID="291">PLan</Allowed>
     <Allowed ID="296">Return to Work</Allowed>
     <Allowed ID="297">Date Last Worked</Allowed>
     <Allowed ID="300">Enrollment Signature Date</Allowed>
     <Allowed ID="301">Consolidated Omnibus Budget Reconciliation Act (COBRA) Qualifying Event</Allowed>
     <Allowed ID="303">Maintenance Effective</Allowed>
     <Allowed ID="304">Latest Visit or Consultation</Allowed>
+    <Allowed ID="307">Eligibility</Allowed>
+    <Allowed ID="318">Added</Allowed>
     <Allowed ID="336">Employment Begin</Allowed>
     <Allowed ID="337">Employment End</Allowed>
     <Allowed ID="338">Medicare Begin</Allowed>
     <Allowed ID="339">Medicare End</Allowed>
     <Allowed ID="340">Consolidated Omnibus Budget Reconciliation Act (COBRA) Begin</Allowed>
     <Allowed ID="341">Consolidated Omnibus Budget Reconciliation Act (COBRA) End</Allowed>
+    <Allowed ID="342">Premium Paid to Date Begin</Allowed>
+    <Allowed ID="343">Premium Paid to Date End</Allowed>
+    <Allowed ID="346">Plan Begin</Allowed>
+    <Allowed ID="347">Plan End</Allowed>
     <Allowed ID="350">Education Begin</Allowed>
     <Allowed ID="351">Education End</Allowed>
     <Allowed ID="356">Eligibility Begin</Allowed>
@@ -62,9 +71,11 @@
     <Allowed ID="435">Admission</Allowed>
     <Allowed ID="438">Onset of Similar Symptoms or Illness</Allowed>
     <Allowed ID="439">Accident</Allowed>
+    <Allowed ID="442">Date of Death</Allowed>
     <Allowed ID="453">Acute Manifestation of a Chronic Condition</Allowed>
     <Allowed ID="454">Initial Treatment</Allowed>
     <Allowed ID="455">Last X-Ray</Allowed>
+    <Allowed ID="458">Certification</Allowed>
     <Allowed ID="461">Last Certification</Allowed>
     <Allowed ID="463">Begin Therapy</Allowed>
     <Allowed ID="471">Prescription</Allowed>
@@ -74,10 +85,14 @@
     <Allowed ID="480">Arterial Blood Gas Test</Allowed>
     <Allowed ID="481">Oxygen Saturation Test</Allowed>
     <Allowed ID="484">Last Menstrual Period</Allowed>
+    <Allowed ID="539">Policy Effective</Allowed>
+    <Allowed ID="540">Policy Expiration</Allowed>
     <Allowed ID="573">Date Claim Paid</Allowed>
     <Allowed ID="607">Certification Revision</Allowed>
+    <Allowed ID="636">Date of Last Update</Allowed>
     <Allowed ID="738">Most Recent Hemoglobin or Hematocrit or Both</Allowed>
     <Allowed ID="739">Most Recent Serum Creatine</Allowed>
+    <Allowed ID="771">Status</Allowed>
     <Allowed ID="809">Posted</Allowed>
     <Allowed ID="814">Payment Due Date</Allowed>
     <Allowed ID="866">Examination</Allowed>
@@ -1232,7 +1247,15 @@
     <Element Name="Quantity"/>
     <Element Name="Authorization or Certification Indicator"/>
     <Element Name="In Plan Network Indicator"/>
-    <Element Name="Composite Medical Procedure Identifier"/>
+    <Element Name="Composite Medical Procedure Identifier" Type="ID">
+      <Allowed ID="AD">Americal Dental Assication Codes</Allowed>
+      <Allowed ID="CJ">Current Procedural Terminology (CPT) Codes</Allowed>
+      <Allowed ID="HC">HCPCS Codes</Allowed>
+      <Allowed ID="ID">ICD-9-CM Procedure</Allowed>
+      <Allowed ID="IV">HIEC Code</Allowed>
+      <Allowed ID="N4">National Drug Code in 5-4-2 Format</Allowed>
+      <Allowed ID="ZZ">Mutually Defined</Allowed>
+    </Element>
   </Segment>
   <Segment SegmentId="EQ">
     <Element Name="Service Type Code" Type="ID" MinLength="1" MaxLength="2" QualifierSetRef="Service Type Code" />

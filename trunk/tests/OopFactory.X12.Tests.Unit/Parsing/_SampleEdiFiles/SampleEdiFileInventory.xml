@@ -53,6 +53,10 @@
       <ResourcePath>INS._271._4010.Example2_TMHP.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <SourceUrl>https://www.cms.gov/HETSHelp/downloads/271Example.pdf</SourceUrl>
+      <ResourcePath>INS._271._4010.Example3_CMS_HETS.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._271._5010.Example_3_1_2.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
