@@ -31,6 +31,9 @@
             </xsl:call-template>
           </xsl:when>
         </xsl:choose>
+        <Benefit>
+          <xsl:apply-templates select="EB"/>
+        </Benefit>
       </BenefitResponse>
     </xsl:template>
 
@@ -217,6 +220,42 @@
           </DateRange>
         </xsl:otherwise>
       </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="EB">
+    <InfoType>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="EB01"/>
+      </xsl:attribute>
+      <xsl:value-of select="EB01/comment()"/>
+    </InfoType>
+    
+    <xsl:if test="string-length(EB02)>0">
+      <CoverageLevel>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB02"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB02/comment()"/>
+      </CoverageLevel>
+    </xsl:if>
+    
+    <xsl:for-each select="EB03/child::*">
+      <ServiceType>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="."/>
+        </xsl:attribute>
+        <xsl:value-of select="./comment()"/>
+      </ServiceType>
+    </xsl:for-each>
+    
+    <xsl:if test="string-length(EB04)>0">
+      <InsuranceType>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB04"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB04/comment()"/>
+      </InsuranceType>
+    </xsl:if>
   </xsl:template>
   
 </xsl:stylesheet>

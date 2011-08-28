@@ -37,7 +37,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
         [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
 
-        public List<BenefitInformation> BenefitInformations { get; set; }
+        public EligibilityBenefit Benefit { get; set; }
 
         [XmlElement(ElementName="SubscriberBenefitRelatedEntity")]
         public List<RelatedEntity> SubscriberBenefitRelatedEntities { get; set; }

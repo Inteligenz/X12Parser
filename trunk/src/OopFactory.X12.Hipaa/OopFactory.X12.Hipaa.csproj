@@ -51,9 +51,11 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
     <Compile Include="Claims\HealthCareClaim.cs" />
     <Compile Include="Common\Contact.cs" />
+    <Compile Include="Common\MedicalProcedure.cs" />
+    <Compile Include="Common\QualifiedAmount.cs" />
     <Compile Include="Common\QualifiedDate.cs" />
     <Compile Include="Common\QualifiedDateRange.cs" />
-    <Compile Include="Eligibility\BenefitInformation.cs" />
+    <Compile Include="Eligibility\EligibilityBenefit.cs" />
     <Compile Include="Eligibility\RelatedEntity.cs" />
     <Compile Include="Common\RequestValidation.cs" />
     <Compile Include="Common\QualifiedCode.cs" />
