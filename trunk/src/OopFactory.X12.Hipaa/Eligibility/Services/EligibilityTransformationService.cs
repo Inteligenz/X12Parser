@@ -12,7 +12,7 @@ namespace OopFactory.X12.Hipaa.Eligibility.Services
 {
     public class EligibilityTransformationService
     {
-        public List<BenefitResponse> Transform271ToBenefitResponse(Stream stream)
+        public EligibilityBenefitDocument Transform271ToBenefitResponse(Stream stream)
         {
             var parser = new X12Parser();
             var interchange = parser.Parse(stream);
@@ -28,11 +28,11 @@ namespace OopFactory.X12.Hipaa.Eligibility.Services
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
             outputStream.Position = 0;
             string responseXml = new StreamReader(outputStream).ReadToEnd();
-            var response = BenefitResponse.DeserializeList(responseXml);
+            var response = EligibilityBenefitDocument.Deserialize(responseXml);
             return response;
         }
 
-        public string TransformBenefitResponseToHtml(BenefitResponse response)
+        public string TransformBenefitResponseToHtml(EligibilityBenefitResponse response)
         {
             string xml = response.Serialize();
 

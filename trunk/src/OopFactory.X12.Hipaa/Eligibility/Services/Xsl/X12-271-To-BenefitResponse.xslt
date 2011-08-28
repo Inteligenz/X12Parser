@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
+                 xmlns="http://www.oopfactory.com/2011/XSL/Hipaa"
 >
     <xsl:output method="xml" indent="yes"/>
 
@@ -9,14 +10,14 @@
   </xsl:template>
 
   <xsl:template match="Interchange">
-    <ArrayOfBenefitResponse>
+    <EligibilityBenefitDocument>
           <xsl:apply-templates select="@* | node()"/>
-    </ArrayOfBenefitResponse>
+    </EligibilityBenefitDocument>
   </xsl:template>
 
     <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
       <xsl:if test="count(Loop/EB)>0">
-        <BenefitResponse>
+        <EligibilityBenefitResponse>
           <xsl:choose>
             <xsl:when test="@LoopId='2100C'">
               <xsl:call-template name="SubscriberHLoop">
@@ -33,7 +34,7 @@
             </xsl:when>
           </xsl:choose>
           <xsl:apply-templates select="Loop"/>
-        </BenefitResponse>
+        </EligibilityBenefitResponse>
       </xsl:if>
     </xsl:template>
 

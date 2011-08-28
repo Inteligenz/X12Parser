@@ -56,12 +56,13 @@
     <Compile Include="Common\QualifiedDate.cs" />
     <Compile Include="Common\QualifiedDateRange.cs" />
     <Compile Include="Eligibility\EligibilityBenefit.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitDocument.cs" />
     <Compile Include="Eligibility\RelatedEntity.cs" />
     <Compile Include="Common\RequestValidation.cs" />
-    <Compile Include="Eligibility\BenefitBase.cs" />
-    <Compile Include="Eligibility\BenefitInquiry.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitBase.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitInquiry.cs" />
     <Compile Include="Eligibility\BenefitMember.cs" />
-    <Compile Include="Eligibility\BenefitResponse.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitResponse.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\EntityName.cs" />
     <Compile Include="Common\Identification.cs" />

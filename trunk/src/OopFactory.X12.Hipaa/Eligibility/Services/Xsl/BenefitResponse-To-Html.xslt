@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
+                 xmlns:hip="http://www.oopfactory.com/2011/XSL/Hipaa"
 >
     <xsl:output method="html" indent="yes"/>
   
-    <xsl:template match="BenefitResponse">
+    <xsl:template match="hip:EligibilityBenefitResponse">
       <div>
         <div class="eligibilityTable">
           <h1>
@@ -13,7 +14,7 @@
           <table cellpadding="0" cellspacing="0" border="1" width="100%" id="payerTable">
             <tr>
               <th class="col1">Payer Name</th>
-              <td class="col2"><xsl:value-of select="Source/Name/@LastName"/></td>
+              <td class="col2"><xsl:value-of select="hip:Source/hip:Name/@LastName"/></td>
               <th class="col3">Transaction ID</th>
               <td class="col4"><xsl:value-of select="@TransactionControlNumber"/></td>
             </tr>
@@ -28,11 +29,11 @@
               <th class="col1">Provider</th>
               <td colspan="3">
                 <xsl:choose>
-                  <xsl:when test="Receiver/Name/@Qualifier='NonPerson'">
-                    <xsl:value-of select="Receiver/Name/@LastName"/>
+                  <xsl:when test="hip:Receiver/hip:Name/@Qualifier='NonPerson'">
+                    <xsl:value-of select="hip:Receiver/hip:Name/@LastName"/>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="concat(Receiver/Name/@LastName,', ',Receiver/Name/@FirstName,' ',Receiver/Name/@MiddleName)"/>
+                    <xsl:value-of select="concat(hip:Receiver/hip:Name/@LastName,', ',hip:Receiver/hip:Name/@FirstName,' ',hip:Receiver/hip:Name/@MiddleName)"/>
                   </xsl:otherwise>
                 </xsl:choose>
               </td>
@@ -40,20 +41,20 @@
             <tr>
               <th class="col1">Address</th>
               <td colspan="3">
-                <div><xsl:value-of select="Receiver/Address/Line1"/></div>
+                <div><xsl:value-of select="hip:Receiver/hip:Address/hip:Line1"/></div>
                 <div>
-                  <xsl:value-of select="Receiver/Address/Line2"/>
+                  <xsl:value-of select="hip:Receiver/hip:Address/hip:Line2"/>
                 </div>
                 <div>
-                  <xsl:value-of select="concat(Receiver/Address/@City, ', ', Receiver/Address/@StateCode, ' ', Receiver/Address/@PostalCode)"/>
+                  <xsl:value-of select="concat(hip:Receiver/hip:Address/@City, ', ', hip:Receiver/hip:Address/@StateCode, ' ', hip:Receiver/hip:Address/@PostalCode)"/>
                 </div>
               </td>
             </tr>
             <tr>
               <th class="col1">Provider ID</th>
-              <td class="col2"><xsl:value-of select="Receiver/@Npi"/></td>
+              <td class="col2"><xsl:value-of select="hip:Receiver/@Npi"/></td>
               <th class="col3">Tax ID</th>
-              <td class="col4"><xsl:value-of select="Receiver/@TaxId"/></td>
+              <td class="col4"><xsl:value-of select="hip:Receiver/@TaxId"/></td>
             </tr>
           </table>
         </div>
@@ -64,36 +65,36 @@
           <table cellpadding="0" cellspacing="0" border="1" width="100%" id="subscriberTable">
             <tr>
               <th class="col1">Insured Name</th>
-              <td colspan="3"><xsl:value-of select="concat(Subscriber/Name/@LastName, ', ', Subscriber/Name/@FirstName, ' ', Subscriber/Name/@MiddleName)"/></td>
+              <td colspan="3"><xsl:value-of select="concat(hip:Subscriber/hip:Name/@LastName, ', ', hip:Subscriber/hip:Name/@FirstName, ' ', hip:Subscriber/hip:Name/@MiddleName)"/></td>
             </tr>
             <tr>
               <th class="col1">Member ID</th>
-              <td class="col2"><xsl:value-of select="Subscriber/@MemberId"/></td>
+              <td class="col2"><xsl:value-of select="hip:Subscriber/@MemberId"/></td>
               <th class="col3">SSN</th>
-              <td class="col4"><xsl:value-of select="Subscriber/@Ssn"/></td>
+              <td class="col4"><xsl:value-of select="hip:Subscriber/@Ssn"/></td>
             </tr>
             <tr>
               <th class="col1">Group Number</th>
-              <td class="col2"><xsl:value-of select="Subscriber/@GroupNumber"/></td>
+              <td class="col2"><xsl:value-of select="hip:Subscriber/@GroupNumber"/></td>
               <th class="col3">Group Name</th>
               <td class="col4"><xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;</td>
             </tr>
             <tr>
               <th class="col1">Date of Birth</th>
-              <td class="col2"><xsl:value-of select="Subscriber/@DateOfBirth"/></td>
+              <td class="col2"><xsl:value-of select="hip:Subscriber/@DateOfBirth"/></td>
               <th class="col3">Gender</th>
-              <td class="col4"><xsl:value-of select="Subscriber/@Gender"/></td>
+              <td class="col4"><xsl:value-of select="hip:Subscriber/@Gender"/></td>
             </tr>
             <tr>
               <th class="col1">Address</th>
               <td colspan="3">
-                <xsl:value-of select="Subscriber/Address/Line1"/>
-                <xsl:value-of select="Subscriber/Address/Line2"/>
+                <xsl:value-of select="hip:Subscriber/hip:Address/hip:Line1"/>
+                <xsl:value-of select="hip:Subscriber/hip:Address/hip:Line2"/>
               </td>
             </tr>
             <tr>
               <th class="col1"></th>
-              <td colspan="3"><xsl:value-of select="concat(Subscriber/Address/@City, ', ', Subscriber/Address/@StateCode, ' ', Subscriber/Address/@PostalCode)"/></td>
+              <td colspan="3"><xsl:value-of select="concat(hip:Subscriber/hip:Address/@City, ', ', hip:Subscriber/hip:Address/@StateCode, ' ', hip:Subscriber/hip:Address/@PostalCode)"/></td>
             </tr>
             <tr>
               <th class="col1">Dependent Sequence Number</th>
@@ -115,11 +116,11 @@
             </tr>
             <tr>
               <th class="col1">Plan Code</th>
-              <td colspan="3"><xsl:value-of select="Subscriber/@PlanNumber"/></td>
+              <td colspan="3"><xsl:value-of select="hip:Subscriber/@PlanNumber"/></td>
             </tr>
           </table>
         </div>
-        <xsl:if test="count(Dependent)>0">
+        <xsl:if test="count(hip:Dependent)>0">
         <div class="eligibilityTable">
           <h1>
             Dependent
@@ -127,36 +128,36 @@
           <table cellpadding="0" cellspacing="0" border="1" width="100%" id="dependentTable">
             <tr>
               <th class="col1">Patient Name</th>
-              <td colspan="3"><xsl:value-of select="concat(Dependent/Name/@LastName, ', ', Dependent/Name/@FirstName, ' ', Dependent/Name/@MiddleName)"/></td>
+              <td colspan="3"><xsl:value-of select="concat(hip:Dependent/hip:Name/@LastName, ', ', hip:Dependent/hip:Name/@FirstName, ' ', hip:Dependent/hip:Name/@MiddleName)"/></td>
             </tr>
             <tr>
               <th class="col1">Relationship</th>
-              <td class="col2"><xsl:value-of select="Dependent/Relationship"/></td>
+              <td class="col2"><xsl:value-of select="hip:Dependent/hip:Relationship"/></td>
               <th class="col3">SSN</th>
-              <td class="col4"><xsl:value-of select="Dependent/@Ssn"/></td>
+              <td class="col4"><xsl:value-of select="hip:Dependent/@Ssn"/></td>
             </tr>
             <tr>
               <th class="col1">Group Number</th>
-              <td class="col2"><xsl:value-of select="Dependent/@GroupNumber"/></td>
+              <td class="col2"><xsl:value-of select="hip:Dependent/@GroupNumber"/></td>
               <th class="col3">Group Name</th>
               <td class="col4"><xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;</td>
             </tr>
             <tr>
               <th class="col1">Date of Birth</th>
-              <td class="col2"><xsl:value-of select="Dependent/@DateOfBirth" /></td>
+              <td class="col2"><xsl:value-of select="hip:Dependent/@DateOfBirth" /></td>
               <th class="col3">Gender</th>
-              <td class="col4"><xsl:value-of select="Dependent/@Gender"/></td>
+              <td class="col4"><xsl:value-of select="hip:Dependent/@Gender"/></td>
             </tr>
             <tr>
               <th class="col1">Address</th>
               <td colspan="3">
-                <xsl:value-of select="Dependent/Address/Line1"/>
-                <xsl:value-of select="Dependent/Address/Line2"/>
+                <xsl:value-of select="hip:Dependent/hip:Address/hip:Line1"/>
+                <xsl:value-of select="hip:Dependent/hip:Address/hip:Line2"/>
               </td>
             </tr>
             <tr>
               <th class="col1"></th>
-              <td colspan="3"><xsl:value-of select="concat(Dependent/Address/@City, ', ', Dependent/Address/@StateCode, ' ', Dependent/Address/@PostalCode)"/></td>
+              <td colspan="3"><xsl:value-of select="concat(hip:Dependent/hip:Address/@City, ', ', hip:Dependent/hip:Address/@StateCode, ' ', hip:Dependent/hip:Address/@PostalCode)"/></td>
             </tr>
           </table>
         </div>
@@ -169,7 +170,7 @@
           <table cellpadding="0" cellspacing="0" border="1" width="100%" id="coveragesTable">
             <tr>
               <td>
-                <xsl:value-of select="concat(Benefit/InsuranceType,': ', Benefit/CoverageLevel, ', ', Benefit/InfoType)"/>
+                <xsl:value-of select="concat(hip:Benefit/hip:InsuranceType,': ', hip:Benefit/hip:CoverageLevel, ', ', hip:Benefit/hip:InfoType)"/>
               </td>
             </tr>
           </table>
@@ -186,7 +187,7 @@
             </tr>
             <tr>
               <td>
-                Eligibility Begin <xsl:value-of select="Dependent/@EligibilityBeginDate" />
+                Eligibility Begin <xsl:value-of select="hip:Dependent/@EligibilityBeginDate" />
               </td>
             </tr>
           </table>

@@ -18,9 +18,9 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
         [TestMethod]
         public void SerializationTest()
         {
-            List<BenefitResponse> responses = new List<BenefitResponse>();
+            EligibilityBenefitDocument document = new EligibilityBenefitDocument();
 
-            BenefitResponse response = new BenefitResponse
+            EligibilityBenefitResponse response = new EligibilityBenefitResponse
             {
                 Source = new Entity
                 {
@@ -69,14 +69,22 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
             {
                 InfoType = new Lookup { Code = "1", Description = "Active Coverage" }
             });
-            responses.Add(response);
+            document.EligibilityBenefitResponses.Add(response);
 
-            string xml = BenefitResponse.SerializeList(responses);
+            document.RequestValidations.Add(
+                new RequestValidation
+                {
+                    ValidRequest = true,
+                    RejectReason = new Lookup { Code = "15", Description = "Required application data missing" }
+                });
+
+
+            string xml = EligibilityBenefitDocument.Serialize(document);
 
             System.Diagnostics.Trace.WriteLine(xml);
         }
 
-        private List<BenefitResponse> TransformToModel(string resourcePath)
+        private EligibilityBenefitDocument TransformToModel(string resourcePath)
         {
             var service = new EligibilityTransformationService();
 
@@ -90,28 +98,28 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
         public void Transform4010ToModel1Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example1_DHHS.txt");
-            Trace.Write(BenefitResponse.SerializeList(responses));
+            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
         }
 
         [TestMethod]
         public void Transform4010ToModel2Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example2_TMHP.txt");
-            Trace.Write(BenefitResponse.SerializeList(responses));
+            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
         }
 
         [TestMethod]
         public void Transform4010ToModel3Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
-            Trace.Write(BenefitResponse.SerializeList(responses));
+            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
         }
         
         [TestMethod]
         public void Transform5010ToModel1Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_2.txt");
-            Trace.Write(BenefitResponse.SerializeList(responses));
+            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
 
         }
 
@@ -119,22 +127,22 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
         public void Transform5010ToModel2Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
-            Trace.Write(BenefitResponse.SerializeList(responses));
+            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
         }
 
-        [TestMethod]
-        public void Transform5010Model2ToHtmlTest()
+        private string TransformModelToHtml(string resourcePath)
         {
             var service = new EligibilityTransformationService();
 
             Stream stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
+                .GetManifestResourceStream(resourcePath);
 
             var responses = service.Transform271ToBenefitResponse(stream);
 
-            string html = service.TransformBenefitResponseToHtml(responses.First());
-            
-            html = String.Format(
+            string html = service.TransformBenefitResponseToHtml(responses.EligibilityBenefitResponses.First());
+
+            return String.Format(
+            #region HTML Constant
 @"<html>
     <head>
         <title>Eligibility Response</title>
@@ -258,9 +266,25 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
     </style>
     </head>
     <body>{0}</body>
-</html>", html);
+</html>"
+            #endregion
+                , html);
+        }
 
-            System.Diagnostics.Trace.Write(html);
+        [TestMethod]
+        public void Transform4010Model3ToHtmlTest()
+        {
+            string html = TransformModelToHtml("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
+
+            Trace.Write(html);
+        }
+
+        [TestMethod]
+        public void Transform5010Model2ToHtmlTest()
+        {
+            string html = TransformModelToHtml("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
+
+            Trace.Write(html);
         }
     }
 }
