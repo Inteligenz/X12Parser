@@ -59,6 +59,10 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                         StateCode = "MO",
                         PostalCode = "64108"
                     }
+                },
+                Benefit = new EligibilityBenefit
+                {
+                    InfoType = new Lookup { Code = "1", Description="Active Coverage" }
                 }
             };
 
