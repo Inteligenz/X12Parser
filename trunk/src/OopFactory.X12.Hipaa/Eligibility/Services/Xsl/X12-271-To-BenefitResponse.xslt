@@ -15,33 +15,213 @@
     </EligibilityBenefitDocument>
   </xsl:template>
 
-    <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
-      <xsl:if test="count(Loop/EB)>0">
-        <EligibilityBenefitResponse>
-          <xsl:choose>
-            <xsl:when test="@LoopId='2100C'">
-              <xsl:call-template name="SubscriberHLoop">
-                <xsl:with-param name="HLoop" select="../."/>
-              </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="@LoopId='2100D'">
-              <xsl:call-template name="SubscriberHLoop">
-                <xsl:with-param name="HLoop" select="../../."/>
-              </xsl:call-template>
-              <xsl:call-template name="DependentNameLoop">
-                <xsl:with-param name="Loop" select="."/>
-              </xsl:call-template>
-            </xsl:when>
-          </xsl:choose>
-          <xsl:apply-templates select="Loop"/>
-        </EligibilityBenefitResponse>
-      </xsl:if>
-    </xsl:template>
+  <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
+    <xsl:if test="count(Loop/EB)>0">
+      <EligibilityBenefitResponse>
+        <xsl:choose>
+          <xsl:when test="@LoopId='2100C'">
+            <xsl:call-template name="SubscriberHLoop">
+              <xsl:with-param name="HLoop" select="../."/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="@LoopId='2100D'">
+            <xsl:call-template name="SubscriberHLoop">
+              <xsl:with-param name="HLoop" select="../../."/>
+            </xsl:call-template>
+            <xsl:call-template name="DependentNameLoop">
+              <xsl:with-param name="Loop" select="."/>
+            </xsl:call-template>
+          </xsl:when>
+        </xsl:choose>
+        <xsl:apply-templates select="Loop"/>
+      </EligibilityBenefitResponse>
+    </xsl:if>
+  </xsl:template>
 
-  <xsl:template match="Loop[@LoopId='2110C' or @LoopId='2110D']">
+  <xsl:template match="Loop[count(EB)>0]">
     <Benefit>
       <xsl:apply-templates select="EB"/>
+      <xsl:for-each select="MSG">
+        <Message>
+          <xsl:value-of select="MSG01"/>
+        </Message>
+      </xsl:for-each>
+      <xsl:apply-templates select="Loop[count(III) > 0]"/>
+      <xsl:apply-templates select="Loop/Loop[@LoopId='2120C' or @LoopId='2120D']"/>
     </Benefit>
+  </xsl:template>
+
+  <xsl:template match="Loop[count(III) > 0]">
+    <AdditionalInfo>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="III/III01"/>
+      </xsl:attribute>
+      <xsl:attribute name="IndustryCode">
+        <xsl:value-of select="III/III02"/>
+      </xsl:attribute>
+      <xsl:attribute name="CodeCategory">
+        <xsl:value-of select="III/III03"/>
+      </xsl:attribute>
+      <xsl:value-of select="III/III04"/>
+    </AdditionalInfo>
+  </xsl:template>
+
+  <xsl:template match="Loop[@LoopId='2120C' or @LoopId='2120D']">
+    <RelatedEntity>
+      <Name>
+        <xsl:call-template name="EntityName">
+          <xsl:with-param name="Loop" select="."/>
+        </xsl:call-template>
+      </Name>
+      <xsl:for-each select="N3">
+        <Address>
+          <xsl:call-template name="PostalAddress">
+            <xsl:with-param name="N3" select="."/>
+          </xsl:call-template>
+        </Address>
+      </xsl:for-each>
+      <xsl:for-each select="PER">
+        <Contact>
+          <xsl:call-template name="Contact">
+            <xsl:with-param name="PER" select="."/>
+          </xsl:call-template>          
+        </Contact>
+      </xsl:for-each>
+      <xsl:for-each select="PRV">
+        <ProviderInfo>
+          <xsl:call-template name="ProviderInformation">
+            <xsl:with-param name="PRV" select="."/>
+          </xsl:call-template>
+        </ProviderInfo>
+      </xsl:for-each>
+    </RelatedEntity>
+  </xsl:template>
+
+
+  <xsl:template match="EB">
+    <xsl:if test="string-length(EB07)>0">
+      <xsl:attribute name="Amount">
+        <xsl:value-of select="EB07"/>
+      </xsl:attribute>
+    </xsl:if>
+    <xsl:if test="string-length(EB08)>0">
+      <xsl:attribute name="Percentage">
+        <xsl:value-of select="EB08"/>
+      </xsl:attribute>
+    </xsl:if>
+
+    <InfoType>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="EB01"/>
+      </xsl:attribute>
+      <xsl:value-of select="EB01/comment()"/>
+    </InfoType>
+
+    <xsl:if test="string-length(EB02)>0">
+      <CoverageLevel>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB02"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB02/comment()"/>
+      </CoverageLevel>
+    </xsl:if>
+
+    <xsl:choose>
+      <xsl:when test="count(EB03/child::*)>0">
+        <xsl:for-each select="EB03/child::*">
+          <ServiceType>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="."/>
+            </xsl:attribute>
+            <xsl:value-of select="./comment()"/>
+          </ServiceType>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="string-length(EOB03)>0">
+          <ServiceType>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="EB03"/>
+            </xsl:attribute>
+            <xsl:value-of select="EB03/comment()"/>
+          </ServiceType>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+
+    <xsl:if test="string-length(EB04)>0">
+      <InsuranceType>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB04"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB04/comment()"/>
+      </InsuranceType>
+    </xsl:if>
+
+    <xsl:if test="string-length(EB05)>0">
+      <PlanCoverageDescription>
+        <xsl:value-of select="EB05"/>
+      </PlanCoverageDescription>
+    </xsl:if>
+
+    <xsl:if test="string-length(EB06)>0">
+      <TimePeriod>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB06"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB06/comment()"/>
+      </TimePeriod>
+    </xsl:if>
+    <xsl:if test="string-length(EB10)>0">
+      <Quantity>
+        <xsl:if test="string-length(EB09)>0">
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="EB09"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:attribute name="Amount">
+          <xsl:value-of select="EB10"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB09/comment()"/>
+      </Quantity>
+    </xsl:if>
+
+    <xsl:if test="string-length(EB13)>0">
+      <Procedure>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="EB13/EB1301"/>
+        </xsl:attribute>
+        <xsl:attribute name="ProcedureCode">
+          <xsl:value-of select="EB13/EB1302"/>
+        </xsl:attribute>
+        <xsl:if test="string-length(EB13/EB1303)>0">
+          <xsl:attribute name="Modifier1">
+            <xsl:value-of select="EB13/EB1303"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(EB13/EB1304)>0">
+          <xsl:attribute name="Modifier2">
+            <xsl:value-of select="EB13/EB1304"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(EB13/EB1305)>0">
+          <xsl:attribute name="Modifier3">
+            <xsl:value-of select="EB13/EB1305"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(EB13/EB1306)>0">
+          <xsl:attribute name="Modifier4">
+            <xsl:value-of select="EB13/EB1306"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(EB13/EB1308)>0">
+          <xsl:attribute name="ProcedureCodeEnd">
+            <xsl:value-of select="EB13/EB1308"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:value-of select="EB13/EB1301/comment()"/>
+      </Procedure>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template name="SubscriberHLoop">
@@ -200,6 +380,55 @@
     </Line2>
   </xsl:template>
 
+  <xsl:template name="Contact">
+    <xsl:param name="PER"/>
+    <xsl:attribute name="FunctionCode">
+      <xsl:value-of select="PER01"/>
+    </xsl:attribute>
+    <xsl:if test="string-length(PER02)>0">
+      <Name>
+        <xsl:value-of select="PER02"/>
+      </Name>
+    </xsl:if>
+    <xsl:if test="string-length(PER04)>0">
+      <Number>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="PER03"/>
+        </xsl:attribute>
+        <xsl:value-of select="PER04"/>
+      </Number>
+    </xsl:if>
+    <xsl:if test="string-length(PER06)>0">
+      <Number>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="PER05"/>
+        </xsl:attribute>
+        <xsl:value-of select="PER06"/>
+      </Number>
+    </xsl:if>
+    <xsl:if test="string-length(PER08)>0">
+      <Number>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="PER07"/>
+        </xsl:attribute>
+        <xsl:value-of select="PER08"/>
+      </Number>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="ProviderInformation">
+    <xsl:param name="PRV"/>
+    <xsl:attribute name="ProviderCode">
+      <xsl:value-of select="PRV01"/>
+    </xsl:attribute>
+    <xsl:attribute name="Qualifier">
+      <xsl:value-of select="PRV02"/>
+    </xsl:attribute>
+    <xsl:attribute name="Id">
+      <xsl:value-of select="PRV03"/>
+    </xsl:attribute>
+  </xsl:template>
+
   <xsl:template name="DTPSegment">
     <xsl:param name="DTP"/>
       <xsl:choose>
@@ -229,132 +458,6 @@
           </DateRange>
         </xsl:otherwise>
       </xsl:choose>
-  </xsl:template>
-
-  <xsl:template match="EB">
-    <xsl:if test="string-length(EB07)>0">
-      <xsl:attribute name="Amount">
-        <xsl:value-of select="EB07"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="string-length(EB08)>0">
-      <xsl:attribute name="Percentage">
-        <xsl:value-of select="EB08"/>
-      </xsl:attribute>
-    </xsl:if>
-
-    <InfoType>
-      <xsl:attribute name="Code">
-        <xsl:value-of select="EB01"/>
-      </xsl:attribute>
-      <xsl:value-of select="EB01/comment()"/>
-    </InfoType>
-    
-    <xsl:if test="string-length(EB02)>0">
-      <CoverageLevel>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="EB02"/>
-        </xsl:attribute>
-        <xsl:value-of select="EB02/comment()"/>
-      </CoverageLevel>
-    </xsl:if>
-
-    <xsl:choose>
-      <xsl:when test="count(EB03/child::*)>0">
-        <xsl:for-each select="EB03/child::*">
-          <ServiceType>
-            <xsl:attribute name="Code">
-              <xsl:value-of select="."/>
-            </xsl:attribute>
-            <xsl:value-of select="./comment()"/>
-          </ServiceType>
-        </xsl:for-each>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:if test="string-length(EOB03)>0">
-          <ServiceType>
-            <xsl:attribute name="Code">
-              <xsl:value-of select="EB03"/>
-            </xsl:attribute>
-            <xsl:value-of select="EB03/comment()"/>
-          </ServiceType>
-        </xsl:if>
-      </xsl:otherwise>
-    </xsl:choose>
-    
-    <xsl:if test="string-length(EB04)>0">
-      <InsuranceType>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="EB04"/>
-        </xsl:attribute>
-        <xsl:value-of select="EB04/comment()"/>
-      </InsuranceType>
-    </xsl:if>
-
-    <xsl:if test="string-length(EB05)>0">
-      <PlanCoverageDescription>
-        <xsl:value-of select="EB05"/>
-      </PlanCoverageDescription>
-    </xsl:if>
-
-    <xsl:if test="string-length(EB06)>0">
-      <TimePeriod>
-        <xsl:attribute name="Code">
-          <xsl:value-of select="EB06"/>
-        </xsl:attribute>
-        <xsl:value-of select="EB06/comment()"/>
-      </TimePeriod>
-    </xsl:if>
-    <xsl:if test="string-length(EB10)>0">
-      <Quantity>
-        <xsl:if test="string-length(EB09)>0">
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="EB09"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:attribute name="Amount">
-          <xsl:value-of select="EB10"/>
-        </xsl:attribute>
-        <xsl:value-of select="EB09/comment()"/>
-      </Quantity>
-    </xsl:if>
-
-    <xsl:if test="string-length(EB13)>0">
-      <Procedure>
-        <xsl:attribute name="Qualifier">
-          <xsl:value-of select="EB13/EB1301"/>
-        </xsl:attribute>
-        <xsl:attribute name="ProcedureCode">
-          <xsl:value-of select="EB13/EB1302"/>
-        </xsl:attribute>
-        <xsl:if test="string-length(EB13/EB1303)>0">
-          <xsl:attribute name="Modifier1">
-            <xsl:value-of select="EB13/EB1303"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="string-length(EB13/EB1304)>0">
-          <xsl:attribute name="Modifier2">
-            <xsl:value-of select="EB13/EB1304"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="string-length(EB13/EB1305)>0">
-          <xsl:attribute name="Modifier3">
-            <xsl:value-of select="EB13/EB1305"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="string-length(EB13/EB1306)>0">
-          <xsl:attribute name="Modifier4">
-            <xsl:value-of select="EB13/EB1306"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="string-length(EB13/EB1308)>0">
-          <xsl:attribute name="ProcedureCodeEnd">
-            <xsl:value-of select="EB13/EB1308"/>
-          </xsl:attribute>
-        </xsl:if>
-        <xsl:value-of select="EB13/EB1301/comment()"/>
-      </Procedure>
-    </xsl:if>
   </xsl:template>
   
 </xsl:stylesheet>

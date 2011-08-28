@@ -55,7 +55,8 @@
     <Compile Include="Common\QualifiedAmount.cs" />
     <Compile Include="Common\QualifiedDate.cs" />
     <Compile Include="Common\QualifiedDateRange.cs" />
-    <Compile Include="Eligibility\EligibilityBenefit.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitAdditionalInformation.cs" />
+    <Compile Include="Eligibility\EligibilityBenefitInformation.cs" />
     <Compile Include="Eligibility\EligibilityBenefitDocument.cs" />
     <Compile Include="Eligibility\RelatedEntity.cs" />
     <Compile Include="Common\RequestValidation.cs" />
