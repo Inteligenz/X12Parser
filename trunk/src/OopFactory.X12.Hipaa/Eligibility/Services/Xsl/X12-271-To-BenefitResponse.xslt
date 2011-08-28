@@ -48,6 +48,11 @@
           </xsl:call-template>
         </Identification>
       </xsl:for-each>
+      <xsl:for-each select="DTP">
+        <xsl:call-template name="DTPSegment">
+          <xsl:with-param name="DTP" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
       <xsl:for-each select="MSG">
         <Message>
           <xsl:value-of select="MSG01"/>

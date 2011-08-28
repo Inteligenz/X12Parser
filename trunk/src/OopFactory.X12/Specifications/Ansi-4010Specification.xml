@@ -35,8 +35,12 @@
     <Allowed ID="152">Effective Date of Change</Allowed>
     <Allowed ID="193">Period Start</Allowed>
     <Allowed ID="194">Period End</Allowed>
+    <Allowed ID="198">Completion</Allowed>
     <Allowed ID="286">Retirement</Allowed>
+    <Allowed ID="290">Coordination of Benefits</Allowed>
     <Allowed ID="291">PLan</Allowed>
+    <Allowed ID="292">Benefit</Allowed>
+    <Allowed ID="295">Primary Care Provider</Allowed>
     <Allowed ID="296">Return to Work</Allowed>
     <Allowed ID="297">Date Last Worked</Allowed>
     <Allowed ID="300">Enrollment Signature Date</Allowed>
@@ -55,6 +59,8 @@
     <Allowed ID="343">Premium Paid to Date End</Allowed>
     <Allowed ID="346">Plan Begin</Allowed>
     <Allowed ID="347">Plan End</Allowed>
+    <Allowed ID="348">Benefit Begin</Allowed>
+    <Allowed ID="349">Benefit End</Allowed>
     <Allowed ID="350">Education Begin</Allowed>
     <Allowed ID="351">Education End</Allowed>
     <Allowed ID="356">Eligibility Begin</Allowed>

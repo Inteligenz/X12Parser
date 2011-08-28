@@ -205,22 +205,24 @@
                 <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
               </th>
             </tr>
-            <tr>
-              <td class="description" colspan="3">
-                Individual
-              </td>
-              <td class="unkNetwork right">
-                $50.00
-              </td>
-            </tr>
-            <tr>
-              <td class="description" colspan="3">
-                Family
-              </td>
-              <td class="unkNetwork right">
-                $150.00
-              </td>
-            </tr>
+            <xsl:for-each select="hip:BenefitInfo[hip:InfoType/@Code='C']">
+              <tr>
+                <td class="description" colspan="3">
+                  <xsl:value-of select="hip:CoverageLevel"/>
+                </td>
+                <td class="unkNetwork right">
+                  <xsl:value-of select="@Amount"/>
+                </td>
+              </tr>
+              <tr>
+                <td class="description" colspan="3">
+                  Family
+                </td>
+                <td class="unkNetwork right">
+                  $150.00
+                </td>
+              </tr>
+            </xsl:for-each>
           </table>
         </div>
         <div class="eligibilityGrid">
@@ -401,412 +403,34 @@
                 Deductible Applies
               </th>
             </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D0150
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D0210
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D0270
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D1110
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D1204
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D1351
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D1510
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2140
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2391
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2510
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2752
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2910
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D2980
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D3310
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D4260
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D4341
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D4910
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D5110
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D6010
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D6210
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D7140
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D7240
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D7880
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D8070
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D9110
-              </td>
-              <td class="unkNetwork right">
-                100%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                NO
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D9220
-              </td>
-              <td class="unkNetwork right">
-                80%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D9940
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                YES
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Dental Care, D9972
-              </td>
-              <td class="unkNetwork right">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="messages">
-                NOT COVERED
-              </td>
-              <td class="deductible">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="description">
-                Orthodontics
-              </td>
-              <td class="unkNetwork right">
-                60%
-              </td>
-              <td class="messages">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-              <td class="deductible">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
+            <xsl:for-each select="hip:BenefitInfo[hip:InfoType/@Code='1']">
+              <tr>
+                <td class="description">
+                  <xsl:value-of select="hip:InsuranceType"/>
+                  <xsl:if test="count(hip:Procedure)>0">
+                    <xsl:value-of select="concat(', ', hip:Procedure/@ProcedureCode)"/>
+                  </xsl:if>
+                  <xsl:for-each select="hip:ServiceType">
+                    <div>
+                      <xsl:value-of select="."/>
+                    </div>
+                  </xsl:for-each>
+                </td>
+                <td class="unkNetwork right">
+                  <xsl:if test="string-length(@Percentage) > 0">
+                    <xsl:value-of select="concat(100 * @Percentage,'%')"/>
+                  </xsl:if>
+                </td>
+                <td class="messages">
+                  <xsl:for-each select="Message">
+                    <xsl:value-of select="."/>
+                  </xsl:for-each>
+                </td>
+                <td class="deductible">
+                  NO
+                </td>
+              </tr>
+            </xsl:for-each>
           </table>
         </div>
         <div class="eligibilityGrid">
@@ -825,171 +449,21 @@
                 Last Visit
               </th>
             </tr>
-            <tr>
-              <td class="procedure">
-                D0150
-              </td>
-              <td class="restriction">
-                2 times per 1 CALENDAR YEAR
-              </td>
-              <td class="lastVisit">
-                05/13/2009
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D1110
-              </td>
-              <td class="restriction">
-                2 times per 1 CALENDAR YEAR
-              </td>
-              <td class="lastVisit">
-                05/13/2009
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D1204
-              </td>
-              <td class="restriction">
-                1 time per 1 CALENDAR YEAR
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D0270
-              </td>
-              <td class="restriction">
-                2 times per 1 CALENDAR YEAR(S)
-              </td>
-              <td class="lastVisit">
-                05/13/2009
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D0270
-              </td>
-              <td class="restriction">
-                1 time per 1 CALENDAR YEAR(S)
-              </td>
-              <td class="lastVisit">
-                05/13/2009
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D0210
-              </td>
-              <td class="restriction">
-                1 time per 60 MONTHS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D4910
-              </td>
-              <td class="restriction">
-                4 times per 1 CALENDAR YEAR
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D2752
-              </td>
-              <td class="restriction">
-                1 time per 5 CALENDAR YEARS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D2510
-              </td>
-              <td class="restriction">
-                1 time per 5 CALENDAR YEARS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D5110
-              </td>
-              <td class="restriction">
-                1 time per 5 CALENDAR YEARS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D6210
-              </td>
-              <td class="restriction">
-                1 time per 5 CALENDAR YEARS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D4341
-              </td>
-              <td class="restriction">
-                1 time per 24 MONTHS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D4260
-              </td>
-              <td class="restriction">
-                1 time per 36 MONTHS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D1351
-              </td>
-              <td class="restriction">
-                1 time per 36 MONTH
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td class="procedure">
-                D3310
-              </td>
-              <td class="restriction">
-                1 time per 24 MONTHS
-              </td>
-              <td class="lastVisit">
-                <xsl:text disable-output-escaping="yes">&amp;</xsl:text>nbsp;
-              </td>
-            </tr>
+            <xsl:for-each select="hip:BenefitInfo[hip:InfoType/@Code='F']">
+              <tr>
+                <td class="procedure">
+                  <xsl:value-of select="hip:Procedure/@ProcedureCode"/>
+                  <xsl:value-of select="hip:PlanCoverageDescription"/>
+                </td>
+                <td class="restriction">
+                  <xsl:value-of select="concat(hip:Quantity/@Amount, ' ', hip:Quantity, ' ', hip:TimePeriod)"/>
+                  
+                </td>
+                <td class="lastVisit">
+                  <xsl:value-of select="hip:Date[@Qualifier='304']/@Date"/>
+                </td>
+              </tr>
+            </xsl:for-each>
           </table>
         </div>
         <div class="eligibilityGrid">
