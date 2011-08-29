@@ -50,10 +50,16 @@
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
           </xsl:call-template>
+          <xsl:call-template name="SubscriberHLoop">
+            <xsl:with-param name="HLoop" select="../."/>
+          </xsl:call-template>
         </xsl:when>
         <xsl:when test="../@LoopId = '2000C'"> <!-- Parent is Patient Loop -->
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../../."/>
+          </xsl:call-template>
+          <xsl:call-template name="SubscriberHLoop">
+            <xsl:with-param name="HLoop" select="../../."/>
           </xsl:call-template>
         </xsl:when>
       </xsl:choose>
@@ -100,6 +106,39 @@
         </Provider>
       </xsl:for-each>
     </BillingInfo>
+  </xsl:template>
+
+  <xsl:template name="SubscriberHLoop">
+    <xsl:param name="HLoop"/>
+    <xsl:for-each select="$HLoop/Loop[@LoopId='2010BA']">
+      <Subscriber>
+        <xsl:if test="count(DMG) > 0">
+          <xsl:attribute name="Gender">
+            <xsl:choose>
+              <xsl:when test="DMG/DMG03='F'">Female</xsl:when>
+              <xsl:when test="DMG/DMG03='M'">Male</xsl:when>
+              <xsl:otherwise>Unknown</xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:attribute name="DateOfBirth">
+            <xsl:value-of select="concat(substring(DMG/DMG02,1,4),'-',substring(DMG/DMG02,5,2),'-',substring(DMG/DMG02,7,2))"/>
+          </xsl:attribute>
+        </xsl:if>
+        <Name>
+          <xsl:call-template name="EntityName">
+            <xsl:with-param name="Loop" select="."/>
+          </xsl:call-template>
+        </Name>
+        <!-- <xsl:if test="count(N3) > 0">
+          <Address>
+            <xsl:call-template name="PostalAddress">
+              <xsl:with-param name="N3"/>
+            </xsl:call-template>
+          </Address>
+        </xsl:if> -->
+      </Subscriber>
+
+    </xsl:for-each>
   </xsl:template>
 
   <!-- Common Templates -->
