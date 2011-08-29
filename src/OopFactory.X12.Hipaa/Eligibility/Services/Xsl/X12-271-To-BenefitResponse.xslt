@@ -310,6 +310,7 @@
     </Dependent>
   </xsl:template>
 
+  <!-- Common Templates -->
   <xsl:template name="Member">
     <xsl:param name="Loop"/>
     <xsl:if test="count($Loop/DMG)>0">

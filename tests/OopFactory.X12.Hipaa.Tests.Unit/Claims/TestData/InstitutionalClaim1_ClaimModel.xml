@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ClaimDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oopfactory.com/2011/XSL/Hipaa">
+  <Claim Type="Institutional" PatientControlNumber="756048Q" TotalClaimChargeAmount="0">
+    <BillingInfo>
+      <Provider Npi="B99937">
+        <Name Identifier="71" Qualifier="Person" LastName="JONES" FirstName="JOHN" MiddleName="J">
+          <Identification Qualifier="XX" Id="B99937" />
+        </Name>
+      </Provider>
+      <Provider>
+        <Name Identifier="" Qualifier="NonPerson" LastName="">
+          <Identification Qualifier="" Id="" />
+        </Name>
+      </Provider>
+      <Provider>
+        <Name Identifier="" Qualifier="NonPerson" LastName="">
+          <Identification Qualifier="" Id="" />
+        </Name>
+      </Provider>
+      <Provider>
+        <Name Identifier="" Qualifier="NonPerson" LastName="">
+          <Identification Qualifier="" Id="" />
+        </Name>
+      </Provider>
+    </BillingInfo>
+  </Claim>
+</ClaimDocument>
