@@ -28,10 +28,10 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public List<RequestValidation> RequestValidations { get; set; }
 
         #region Serialization Methods
-        public static string Serialize(EligibilityBenefitDocument list)
+        public string Serialize()
         {
             StringWriter writer = new StringWriter();
-            new XmlSerializer(typeof(EligibilityBenefitDocument)).Serialize(writer, list);
+            new XmlSerializer(typeof(EligibilityBenefitDocument)).Serialize(writer, this);
             return writer.ToString();
         }
 
@@ -41,7 +41,5 @@ namespace OopFactory.X12.Hipaa.Eligibility
             return (EligibilityBenefitDocument)serializer.Deserialize(new StringReader(xml));
         }
         #endregion
-
-
     }
 }
