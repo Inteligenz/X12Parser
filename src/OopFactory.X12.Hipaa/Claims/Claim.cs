@@ -18,6 +18,8 @@ namespace OopFactory.X12.Hipaa.Claims
     {
         public Claim()
         {
+            if (Dates == null) Dates = new List<QualifiedDate>();
+            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
             if (Providers == null) Providers = new List<Provider>();
             if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
         }
@@ -29,6 +31,8 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public decimal TotalClaimChargeAmount { get; set; }
 
+        public ServiceLocationInformation ServiceLocationInfo { get; set; }
+
         public Entity Submitter { get; set; }
         public Entity Receiver { get; set; }
         public BillingInformation BillingInfo { get; set; }
@@ -36,10 +40,65 @@ namespace OopFactory.X12.Hipaa.Claims
         public Entity Payer { get; set; }
         public ClaimMember Patient { get; set; }
 
+        [XmlElement(ElementName="Date")]
+        public List<QualifiedDate> Dates { get; set; }
+
+        [XmlElement(ElementName="DateRange")]
+        public List<QualifiedDateRange> DateRanges { get; set; }
+
         #region Institional Claim Properties
 
+        /// <summary>
+        /// Box 3B on the UB04
+        /// </summary>
         [XmlAttribute]
         public string MedicalRecordNumber { get; set; }
+
+        /// <summary>
+        /// Box 6 on the UB04
+        /// </summary>
+        [XmlAttribute(DataType="date")]
+        public DateTime StatementFromDate
+        {
+            get
+            {
+                var dateRange = DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
+                if (dateRange != null)
+                    return dateRange.BeginDate;
+                else
+                {
+                    var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
+                    if (date != null)
+                        return date.Date;
+                    else
+                        return DateTime.MinValue;
+                }
+            }
+            set { }
+        }
+
+        /// <summary>
+        /// Box 6 on the UB04
+        /// </summary>
+        [XmlAttribute(DataType = "date")]
+        public DateTime StatementThroughDate
+        {
+            get
+            {
+                var dateRange = DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
+                if (dateRange != null)
+                    return dateRange.EndDate;
+                else
+                {
+                    var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
+                    if (date != null)
+                        return date.Date;
+                    else
+                        return DateTime.MinValue;
+                }
+            }
+            set { }
+        }
 
         [XmlElement(ElementName="Condition")]
         public List<Lookup> Conditions { get; set; }

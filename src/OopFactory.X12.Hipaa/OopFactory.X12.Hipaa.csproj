@@ -53,6 +53,7 @@
     <Compile Include="Claims\ClaimDocument.cs" />
     <Compile Include="Claims\ClaimMember.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
+    <Compile Include="Claims\ServiceLocationInformation.cs" />
     <Compile Include="Claims\Services\ClaimTransformationService.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Claim.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04ServiceLine.cs" />

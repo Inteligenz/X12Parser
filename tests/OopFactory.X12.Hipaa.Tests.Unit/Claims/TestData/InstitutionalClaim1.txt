@@ -13,6 +13,7 @@
           N3*225 MAIN STREET BARKLEY BUILDING~
           N4*CENTERVILLE*PA*17111~
           REF*G2*987654080~
+		  REF*EI*123456789~
         HL*2*1*22*0~
           SBR*P*18*******MB~
           NM1*IL*1*DOE*JOHN*T***MI*030005074A~
