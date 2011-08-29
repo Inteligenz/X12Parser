@@ -50,6 +50,7 @@
     <Compile Include="ClaimStatus\ClaimStatusServiceLineRequest.cs" />
     <Compile Include="ClaimStatus\ClaimStatusServiceLineResponse.cs" />
     <Compile Include="Claims\BillingInformation.cs" />
+    <Compile Include="Claims\ClaimDocument.cs" />
     <Compile Include="Claims\ClaimMember.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\Services\ClaimTransformationService.cs" />

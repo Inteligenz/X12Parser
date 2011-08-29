@@ -79,7 +79,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                 });
 
 
-            string xml = EligibilityBenefitDocument.Serialize(document);
+            string xml = document.Serialize();
 
             System.Diagnostics.Trace.WriteLine(xml);
         }
@@ -98,36 +98,35 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
         public void Transform4010ToModel1Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example1_DHHS.txt");
-            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
+            Trace.Write(responses.Serialize());
         }
 
         [TestMethod]
         public void Transform4010ToModel2Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example2_TMHP.txt");
-            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
+            Trace.Write(responses.Serialize());
         }
 
         [TestMethod]
         public void Transform4010ToModel3Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
-            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
+            Trace.Write(responses.Serialize());
         }
         
         [TestMethod]
         public void Transform5010ToModel1Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_2.txt");
-            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
-
+            Trace.Write(responses.Serialize());
         }
 
         [TestMethod]
         public void Transform5010ToModel2Test()
         {
             var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
-            Trace.Write(EligibilityBenefitDocument.Serialize(responses));
+            Trace.Write(responses.Serialize());
         }
 
         private string TransformModelToHtml(string resourcePath)
