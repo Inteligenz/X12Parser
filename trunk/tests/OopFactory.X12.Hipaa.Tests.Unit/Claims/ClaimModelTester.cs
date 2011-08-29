@@ -76,7 +76,14 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             // Box 6 Statement Covers Period
             Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementFromDate, "Unexpected statement from date");
             Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementThroughDate, "Unexpected statement through date");
-            
+            // Box 7 - Filler
+
+            ClaimMember patient = claim.Patient ?? claim.Subscriber;
+            // Box 8 - Patient Name
+            Assert.AreEqual("DOE", patient.Name.LastName, "Unexpected patient last name");
+            Assert.AreEqual("JOHN", patient.Name.FirstName, "Unexpected patient first name");
+            Assert.AreEqual("T", patient.Name.MiddleName, "Unexpected patient middle name");
+            Assert.AreEqual("030005074A", patient.MemberId);
            
         }
     }
