@@ -17,6 +17,7 @@ namespace OopFactory.X12.Hipaa.Claims
         public ProviderInformation ProviderInfo { get; set; }
 
         [XmlElement(ElementName="Provider")]
-        public List<Provider> Providers { get; set; }        
+        public List<Provider> Providers { get; set; }
+
     }
 }

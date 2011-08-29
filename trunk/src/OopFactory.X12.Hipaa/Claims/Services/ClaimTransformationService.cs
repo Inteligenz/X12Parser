@@ -15,6 +15,27 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 #if DEBUG
     public class ClaimTransformationService
     {
+        public ClaimDocument Transform837ToClaimDocument(Stream stream)
+        {
+
+            var parser = new X12Parser();
+            var interchange = parser.Parse(stream);
+            var xml = interchange.Serialize();
+
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Services.Xsl.X12-837-To-ClaimDocument.xslt");
+
+            var transform = new XslCompiledTransform();
+            if (transformStream != null) transform.Load(XmlReader.Create(transformStream));
+
+            var outputStream = new MemoryStream();
+
+            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
+            outputStream.Position = 0;
+            xml = new StreamReader(outputStream).ReadToEnd();
+
+            return ClaimDocument.Deserialize(xml);
+        }
+
         public UB04Claim TransformX12837ToUB04Model(Stream stream)
         {
             var parser = new X12Parser();

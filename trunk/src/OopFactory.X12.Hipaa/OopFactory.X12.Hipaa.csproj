@@ -107,6 +107,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Eligibility\Services\Xsl\BenefitResponse-To-Html.xslt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Claims\Services\Xsl\X12-837-To-ClaimDocument.xslt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -23,6 +23,7 @@
           CLM*756048Q*89.93***14:A:1**Y*Y*Y~
             DTP*434*D8*19960911~
             CL1*3*1~
+			REF*EA*TEST MEDICAL RECORD NUMBER~
             HI*BK:366.9~
             HI*BF:401.9*BF:794.31~
             HI*BQ:15.3:D8:19960911~
