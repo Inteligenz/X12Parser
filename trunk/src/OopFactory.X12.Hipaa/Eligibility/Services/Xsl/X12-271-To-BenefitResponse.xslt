@@ -369,8 +369,13 @@
       </xsl:if>
     </xsl:if>
     <Identification>
-      <xsl:attribute name="Qualifier"><xsl:value-of select="$Loop/NM1/NM108" /></xsl:attribute>
-      <xsl:attribute name="Id"><xsl:value-of select="$Loop/NM1/NM109"/></xsl:attribute>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="$Loop/NM1/NM108" />
+      </xsl:attribute>
+      <xsl:attribute name="Id">
+        <xsl:value-of select="$Loop/NM1/NM109"/>
+      </xsl:attribute>
+      <xsl:value-of select="$Loop/NM1/NM108/comment()"/>
     </Identification>
   </xsl:template>
 
@@ -401,7 +406,14 @@
     <xsl:attribute name="Id">
       <xsl:value-of select="REF02"/>
     </xsl:attribute>
-    <xsl:value-of select="REF03"/>
+    <xsl:choose>
+      <xsl:when test="string-length(REF03) > 0">
+        <xsl:value-of select="REF03"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="REF01/comment()"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template name="Contact">

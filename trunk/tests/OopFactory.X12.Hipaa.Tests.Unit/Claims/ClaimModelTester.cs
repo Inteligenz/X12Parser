@@ -50,24 +50,34 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             Claim claim = document.Claims.First();
 
-            // Box 1
+            // Box 1 - Service Location
             Assert.AreEqual("JONES HOSPITAL", claim.ServiceLocation.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.ServiceLocation.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
             Assert.AreEqual("CENTERVILLE", claim.ServiceLocation.Address.City, "Unexpected Billing Provider Address City");
             Assert.AreEqual("PA", claim.ServiceLocation.Address.StateCode, "Unexpected Billing Provider Address State Code");
             Assert.AreEqual("17111", claim.ServiceLocation.Address.PostalCode, "Unexpected Billing Provider Address Postal Code");
-            // Box 2
+            // Box 2 - Pay To Provider
             Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
             Assert.AreEqual("JONES HOSPITAL", claim.PayToProvider.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.PayToProvider.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
             Assert.AreEqual("CENTERVILLE", claim.PayToProvider.Address.City, "Unexpected Billing Provider Address City");
             Assert.AreEqual("PA", claim.PayToProvider.Address.StateCode, "Unexpected Billing Provider Address State Code");
             Assert.AreEqual("17111", claim.PayToProvider.Address.PostalCode, "Unexpected Billing Provider Address Postal Code");
-            // Box 3a
+            // Box 3a - Patient Control Number
             Assert.AreEqual("756048Q", claim.PatientControlNumber, "Unexpected PatientControlNumber");
-            // Box 3b
+            // Box 3b - Type of Bill
             Assert.AreEqual("TEST MEDICAL RECORD NUMBER", claim.MedicalRecordNumber, "Unexpected MedicalRecordNumber");
-            // Box 4
+            // Box 4 - Type of Bill
+            Assert.AreEqual("14", claim.ServiceLocationInfo.FacilityCode, "Unexpected facility code");
+            Assert.AreEqual("A", claim.ServiceLocationInfo.Qualifier, "Unexpected facility code qualifier");
+            Assert.AreEqual("1", claim.ServiceLocationInfo.FrequencyTypeCode, "Unexpected frequency type code");
+            // Box 5 - Federal Tax Number
+            Assert.AreEqual("123456789", claim.PayToProvider.TaxId, "Unexpected Federal Tax ID");
+            // Box 6 Statement Covers Period
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementFromDate, "Unexpected statement from date");
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementThroughDate, "Unexpected statement through date");
+            
+           
         }
     }
 }

@@ -26,10 +26,17 @@ namespace OopFactory.X12.Hipaa.Common
         {
             get
             {
-                if (Name != null && Name.Identification != null && Name.Identification.Qualifier == "FI")
+                if (Name != null && Name.Identification != null && new string[] { "FI", "24" }.Contains(Name.Identification.Qualifier) )
                     return Name.Identification.Id;
                 else
-                    return GetReferenceId("TJ");
+                {
+                    var taxId = GetReferenceId("EI");
+                    if (taxId != null)
+                        return taxId;
+                    else
+                        return GetReferenceId("TJ");
+
+                }
             }
             set { }
         }

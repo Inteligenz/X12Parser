@@ -27,9 +27,23 @@
       <xsl:attribute name="PatientControlNumber">
         <xsl:value-of select="CLM/CLM01"/>
       </xsl:attribute>
+      <xsl:attribute name="TotalClaimChargeAmount">
+        <xsl:value-of select="CLM/CLM02"/>
+      </xsl:attribute>
       <xsl:attribute name="MedicalRecordNumber">
         <xsl:value-of select="REF[REF01='EA']/REF02"/>
       </xsl:attribute>
+      <ServiceLocationInfo>
+        <xsl:attribute name="FacilityCode">
+          <xsl:value-of select="CLM/CLM05/CLM0501"/>
+        </xsl:attribute>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="CLM/CLM05/CLM0502"/>
+        </xsl:attribute>
+        <xsl:attribute name="FrequencyTypeCode">
+          <xsl:value-of select="CLM/CLM05/CLM0503"/>
+        </xsl:attribute>
+      </ServiceLocationInfo>
 
       <xsl:choose>
         <xsl:when test="../@LoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
@@ -43,6 +57,12 @@
           </xsl:call-template>
         </xsl:when>
       </xsl:choose>
+
+      <xsl:for-each select="DTP">
+        <xsl:call-template name="DTPSegment">
+          <xsl:with-param name="DTP" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
     </Claim>
   </xsl:template>
 
@@ -147,6 +167,7 @@
       <xsl:attribute name="Id">
         <xsl:value-of select="$Loop/NM1/NM109"/>
       </xsl:attribute>
+      <xsl:value-of select="$Loop/NM1/NM108/comment()"/>
     </Identification>
   </xsl:template>
 
@@ -177,7 +198,14 @@
     <xsl:attribute name="Id">
       <xsl:value-of select="REF02"/>
     </xsl:attribute>
-    <xsl:value-of select="REF03"/>
+    <xsl:choose>
+      <xsl:when test="string-length(REF03) > 0">
+        <xsl:value-of select="REF03"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="REF01/comment()"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template name="Contact">
