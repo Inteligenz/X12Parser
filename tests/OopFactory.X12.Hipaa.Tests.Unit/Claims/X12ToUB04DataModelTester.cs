@@ -9,6 +9,7 @@ using System.Reflection;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Hipaa.Claims;
+#if DEBUG
 using OopFactory.X12.Hipaa.Claims.Services;
 using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
 
@@ -81,13 +82,11 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             Trace.Write(foXml);
 
-#if DEBUG
             // Use FO Processor to generate PDF document
             byte[] pdf = RenderFile(foXml);
             FileStream fs = new FileStream("C:\\Temp\\OopFactory Institutional Claim.pdf", FileMode.Create);
             fs.Write(pdf, 0, pdf.Length);
             fs.Close();
-#endif
 
         }
 
@@ -102,3 +101,4 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
         }
     }
 }
+#endif

@@ -174,6 +174,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             refSegment.REF01_ReferenceIdQualifier = "D9";
             refSegment.REF02_ReferenceId = "17312345600006351";
 
+#if DEBUG
             var hiSegment = claim2300Loop.AddSegment(new TypedSegmentHI());
             hiSegment.HI01_HealthCareCodeInformation = "BK:0340";
             hiSegment.HI02_HealthCareCodeInformation = "BF:V7389";
@@ -241,6 +242,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             dtpSegment4.DTP02_DateTimePeriodFormatQualifier = "D8";
             DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment4.DTP03_Date = theDate4;
+
+#endif
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
             //Trace.Write(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());

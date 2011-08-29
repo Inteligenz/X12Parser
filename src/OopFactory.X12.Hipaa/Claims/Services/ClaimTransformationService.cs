@@ -12,6 +12,7 @@ using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
+#if DEBUG
     public class ClaimTransformationService
     {
         public UB04Claim TransformX12837ToUB04Model(Stream stream)
@@ -52,4 +53,5 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         }
 
     }
+#endif
 }
