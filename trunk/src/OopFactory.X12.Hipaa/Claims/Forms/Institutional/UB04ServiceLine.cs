@@ -40,9 +40,9 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field44_HCPCS_RateCode { get; set; }
         public string Field44_AccommodationRate { get; set; }
         public string Field44_HCPCS_Modifier_1 { get; set; }
-        public string Field44_HCPCS_Modifier_1 { get; set; }
-        public string Field44_HCPCS_Modifier_1 { get; set; }
-        public string Field44_HCPCS_Modifier_1 { get; set; }
+        public string Field44_HCPCS_Modifier_2 { get; set; }
+        public string Field44_HCPCS_Modifier_3 { get; set; }
+        public string Field44_HCPCS_Modifier_4 { get; set; }
         public string Field45_ServiceDate { get; set; }
         public string Field46_ServiceUnits { get; set; }
         public decimal Field47_CoveredLineItem { get; set; }

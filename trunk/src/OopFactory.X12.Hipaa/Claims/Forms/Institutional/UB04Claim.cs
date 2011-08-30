@@ -253,8 +253,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field05_FederalTaxId { get { return _field05_FederalTaxId; } set { _field05_FederalTaxId = value; } }
 
         // Field 06 - Service FROM and TO dates.  MMDDCCYY format.
-        public DateTime Field06_ServiceFromDate { get; set; }
-        public DateTime Field06_ServiceToDate { get; set; }
+        public string Field06_ServiceFromDate { get; set; }
+        public string Field06_ServiceToDate { get; set; }
 
         // Field 08a - Patient Identification Number (Patient ID).
         public string Field08a_PatientIdentifier { get { return _field08a_PatientIdentifier; } set { _field08a_PatientIdentifier = value; } }
