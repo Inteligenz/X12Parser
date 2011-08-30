@@ -28,9 +28,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
                                 Field17_PatientDischargeStatusSpecified = true
                             };
 
-
             //claim.Field39a_Amount.Add(new UB04ValueCodesAndAmounts { ValueCode = "A4", Amount = "45.67" });
-
             //claim.Field42_49_ServiceLines.Add(new UB04ServiceLine_2300Loop { Field42_RevenueCode = "0300", Field47_TotalCharges = 100 });
             //claim.Field42_49_ServiceLines.Add(new UB04ServiceLine_2300Loop { Field42_RevenueCode = "0301", Field47_TotalCharges = 200 });
             System.Diagnostics.Trace.Write(claim.Serialize());
@@ -44,8 +42,8 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
                 .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim1.txt");
 
             var claimSvc = new ClaimTransformationService();
+            //UB04Claim clm = claimSvc.TransformX12837ToUB04Model(stream);
             var claim = claimSvc.TransformX12837ToUB04Model(stream);
-
             /*
             Assert.AreEqual("756048Q", claim.Field03a_PatientControlNumber);
             Assert.AreEqual(Convert.ToDecimal("89.93"), claim.Field55a_EstimatedAmountDue);
