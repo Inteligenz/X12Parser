@@ -246,7 +246,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // Field 04 - Type of Bill, a three or four digit code that indicates the type of bill being submitted.
         // Refer to the NUBC Guide for TOB frequency codes.  This is set as a string value because it may contain
         // a leading zero.
-        public string Field04_TypeOfBill { get { return _field04_TypeOfBill; } set { _field04_TypeOfBill = value; } }
+        //public string Field04_TypeOfBill { get { return _field04_TypeOfBill; } set { _field04_TypeOfBill = value; } }
+        public string Field04_TypeOfBill { get; set; }
 
         // Field 05 - Federal Tax ID Number.  This field may contain the tax id (TID) or the newer Employer Identification
         // Number (EIN).  Affiliated subsidiaries are identified using federeal tax sub-ID's.

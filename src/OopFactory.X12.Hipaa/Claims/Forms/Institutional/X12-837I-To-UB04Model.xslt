@@ -483,7 +483,7 @@
           </Field64a_DocumentControlNumber>
         </xsl:if>
 
-        <!--Place of Service Code-->
+        <!--Type of Bill Code-->
         <Field04_TypeOfBill>
           <xsl:value-of select="CLM/CLM05"/>
         </Field04_TypeOfBill>
