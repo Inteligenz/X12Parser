@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
 {
+    #if DEBUG
     class J515ServiceLines
     {
         //private string _field24_ProcedureDate;                      // MMDDCCYY
@@ -39,7 +40,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
 
         //private string _permanentMissing;
 
-        public string MissingTeethInfo_Permanent { get; set; }
+        public string MissingTeethInfo_Permanent_hi { get; set; }
     }
 
     class Field34_MissingTeethInfo_Primary
@@ -57,5 +58,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
         //}
 
     }
-
+#endif
 }
