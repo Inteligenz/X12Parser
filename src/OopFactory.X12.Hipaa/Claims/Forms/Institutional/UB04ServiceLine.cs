@@ -26,17 +26,24 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
          * budget.  For that reason, this and the related X12 Parser project tools are all open
          * source and freely usable.
          */
-        public string Field43_RevenueDescription { get; set; }
-        public decimal Field47_TotalSummary { get; set; }
-        public string Field48_NonCoveredTotalSummary { get; set; }
+        public string Field43_InvestigationalDeviceExemptionIdentifier { get; set; }
+        //public decimal Field47_TotalSummary { get; set; }
+        //public string Field48_NonCoveredTotalSummary { get; set; }
     }
 
     [Serializable]
     public class UB04ServiceLine_2400Loop
     {
+
         public string Field42_RevenueCode { get; set; }
-        public string Field44_HCPCS_Rates { get; set; }
-        public DateTime Field45_ServiceDate { get; set; }
+        public string Field44_HCPCS { get; set; }
+        public string Field44_HCPCS_RateCode { get; set; }
+        public string Field44_AccommodationRate { get; set; }
+        public string Field44_HCPCS_Modifier_1 { get; set; }
+        public string Field44_HCPCS_Modifier_1 { get; set; }
+        public string Field44_HCPCS_Modifier_1 { get; set; }
+        public string Field44_HCPCS_Modifier_1 { get; set; }
+        public string Field45_ServiceDate { get; set; }
         public string Field46_ServiceUnits { get; set; }
         public decimal Field47_CoveredLineItem { get; set; }
         public string Field48_NonCoveredLineItem { get; set; }
@@ -45,22 +52,23 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
     [Serializable]
     public class UB04ServiceLine_2410Loop
     {
-        public string Field43_RevenueDescription { get; set; }
+        public string Field43_NDC_Number { get; set; }
+        public string Field43_Quantity { get; set; }
     }
         
-    [Serializable]
-    public class UB04OccurrenceCodesAndDates
-    {
-        public string Field31_34_OccurrenceCode { get; set; }
-        public string Field31_34_OccurrenceDate { get; set; }
-    }
+    //[Serializable]
+    //public class UB04OccurrenceCodesAndDates
+    //{
+    //    public string Field31_34_OccurrenceCode { get; set; }
+    //    public string Field31_34_OccurrenceDate { get; set; }
+    //}
 
-    [Serializable]
-    public class UB04OccurrenceSpanCodesAndDates
-    {
-        public string Field35_36_OccurrenceSpanCode { get; set; }
-        public string Field35_36_OccurrenceSpanDate { get; set; }
-    }
+    //[Serializable]
+    //public class UB04OccurrenceSpanCodesAndDates
+    //{
+    //    public string Field35_36_OccurrenceSpanCode { get; set; }
+    //    public string Field35_36_OccurrenceSpanDate { get; set; }
+    //}
 
     //[Serializable]
     //public class UB04ValueCodesAndAmounts
@@ -69,76 +77,21 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
     //    public decimal Amount { get; set; }
     //}
 
-    [Serializable]
-    public class UB04TotalChargesLine
-    {
-        public string ServiceLineTotals_PageNumber { get; set; }
-        public string ServiceLineTotals_CreationDate { get; set; }
-        public decimal ServiceLineTotals_TotalCharges { get; set; }
-    }
-
     //[Serializable]
-    //public class Field50_55_PayerInfo
+    //public class UB04TotalChargesLine
     //{
-    //    // Depending on iteration of this collection (up to three records MAX), the payer 
-    //    // will be the PRIMARY, SECONDARY or TERTIARY payer.
-
-    //    public string Field50_PayerName;
-    //    public string Field52_ReleaseOfInformationCertificationIndicator;
-    //    public string Field53_AssignmentOfBenefitsCertificationIndicator;
-    //    public decimal Field54_PriorPayments;
-    //    public decimal Field55_EstimatedAmountDue;
+    //    public string ServiceLineTotals_PageNumber { get; set; }
+    //    public string ServiceLineTotals_CreationDate { get; set; }
+    //    public decimal ServiceLineTotals_TotalCharges { get; set; }
     //}
 
-    [Serializable]
-    public class Field50_PayerName
-    {
-        // Depending on iteration of this collection (up to records MAX), the payer 
-        // will be the PRIMARY, SECONDARY or TERTIARY payer.
-        public string PayerName;
-    }
 
-    [Serializable]
-    public class Field52_ReleaseOfInfoCertIndicator
-    {
-        // Depending on iteration of this collection (up to three records MAX), the payer 
-        // will be the PRIMARY, SECONDARY or TERTIARY payer.
-        public string ReleaseOfInfoIndicator;
-    }
-
-    [Serializable]
-    public class Field53_AssignmentOfBenefitsCertIndicator
-    {
-        // Depending on iteration of this collection (up to three records MAX), the payer 
-        // will be the PRIMARY, SECONDARY or TERTIARY payer.
-        public string AssignmentIndicator;
-    }
-
-    [Serializable]
-    public class Field54_PriorPayments
-    {
-        // Depending on iteration of this collection (up to three records MAX), the payer 
-        // will be the PRIMARY, SECONDARY or TERTIARY payer.
-        public decimal PriorPayments;
-    }
-
-    [Serializable]
-    public class Field55EstimatedAmountDue
-    {
-        // Depending on iteration of this collection (up to three records MAX), the payer 
-        // will be the PRIMARY, SECONDARY or TERTIARY payer.
-        public decimal PayerEstimatedAmountDue { get; set; }     // 2300 AMT02 when AMT01 is 'F3'
-        //public decimal SecondaryPayerEstimatedAmountDue { get; set; }   // 2320 
-        //public decimal TertiaryPayerEstimatedAmountDue { get; set; }    // 
-    }
-
-
-    [Serializable]
-    public class UB04Code_Code
-    {
-        public string Field81a { get; set; }
-        public string Field81b { get; set; }
-        public string Field81c { get; set; }
-    }
+    //[Serializable]
+    //public class UB04Code_Code
+    //{
+    //    public string Field81a { get; set; }
+    //    public string Field81b { get; set; }
+    //    public string Field81c { get; set; }
+    //}
 #endif
 }
