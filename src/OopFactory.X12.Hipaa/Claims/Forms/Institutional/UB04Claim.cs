@@ -58,8 +58,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field03b_MedicalHealthRecordNumber;
         private string _field04_TypeOfBill;
         private string _field05_FederalTaxId;
-        private string _field06_ServiceFromDate;
-        private string _field06_ServiceToDate;
+        private DateTime _field06_ServiceFromDate;
+        private DateTime _field06_ServiceToDate;
         //private string _field07_Filler;
         private string _field08a_PatientIdentifier;
         private string _field08b_01_PatientLastName;
@@ -72,22 +72,21 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field09e_PatientCountry;
         private string _field10_PatientDOB;
         private string _field11_Sex;
-        private string _field12_AdmissionDate;
+        private DateTime _field12_AdmissionDate;
         private string _field13_AdmissionHour;
         private string _field14_TypeOfVisit;
         private string _field15_SourceOfAdmission;
         private string _field16_DischargeHour;
         private string _field17_PatientDischargeStatus;
-        private List<string> _field18_28_ConditionCodes;
         private string _field29_AccidentState;
         //private string _field30_Filler;
-        private List<UB04OccurrenceCodesAndDates> _field31_34_OccurrenceCodesAndDates;
-        private List<UB04OccurrenceSpanCodesAndDates> _field35_36_OccurrenceSpanCodesAndDates;
+        //private List<UB04OccurrenceCodesAndDates> _field31_34_OccurrenceCodesAndDates;
+        //private List<UB04OccurrenceSpanCodesAndDates> _field35_36_OccurrenceSpanCodesAndDates;
         //private string _field37_Filler;
         //private string _field38_AdditionalPartyName;
         //private List<UB04ValueCodesAndAmount> _field39_41_ValueCodesAndAmounts;
-        private List<UB04ServiceLine_2300Loop> _field42_49_ServiceLines;
-        private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
+        //private List<UB04ServiceLine_2300Loop> _field42_49_ServiceLines;
+        //private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
         private decimal _field47_SummaryTotalCharges;
         private decimal _field48_SummaryTotalNonCoveredCharges;
 
@@ -109,11 +108,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         //private decimal _field55a_EstimatedAmountDue;
         //private decimal _field55b_EstimatedAmountDue;
         //private decimal _field55c_EstimatedAmountDue;
-        private List<Field50_PayerName> _field50PayerName;
-        private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
-        private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
-        private List<Field54_PriorPayments> _field54_PriorPayments;
-        private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
+        //private List<Field50_PayerName> _field50PayerName;
+        //private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
+//        private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
+        //private List<Field54_PriorPayments> _field54_PriorPayments;
+        //private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
 
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
@@ -183,9 +182,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field79_ReferringProvider2FirstName;
 
         private string _field80_Remarks;
-        private List<UB04Code_Code> _field80Code_Code;
 
-        public UB04Claim() { if (_field42_49_ServiceLines == null) _field42_49_ServiceLines = new List<UB04ServiceLine_2300Loop>(); }
+        //private List<UB04Code_Code> _field80Code_Code;
+
+        public UB04Claim() { if (Field42_49_2300Loop == null) Field42_49_2300Loop = new List<UB04ServiceLine_2300Loop>(); }
+
 
         // Now the accessor definitions:
 
@@ -252,9 +253,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field05_FederalTaxId { get { return _field05_FederalTaxId; } set { _field05_FederalTaxId = value; } }
 
         // Field 06 - Service FROM and TO dates.  MMDDCCYY format.
-        public string Field06_ServiceFromDate { get { return _field06_ServiceFromDate; } set { _field06_ServiceFromDate = value; } }
-
-        public string Field06_ServiceToDate { get { return _field06_ServiceToDate; } set { _field06_ServiceToDate = value; } }
+        public DateTime Field06_ServiceFromDate { get; set; }
+        public DateTime Field06_ServiceToDate { get; set; }
 
         // Field 08a - Patient Identification Number (Patient ID).
         public string Field08a_PatientIdentifier { get { return _field08a_PatientIdentifier; } set { _field08a_PatientIdentifier = value; } }
@@ -291,11 +291,38 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 12 - Admission Date / Start of Care Date.  This is the date that patient care actually begins.  For
         // inpatient care it is the admission date.  For other types it is the day the care begins.
-        public string Field12_AdmissionDate { get { return _field12_AdmissionDate; } set { _field12_AdmissionDate = value; } }
+        public string Field12_AdmissionDate {
+            get { return _field12_AdmissionDate.ToShortDateString(); }
+            set
+            {
+                if (value.ToString().Length > 7)
+                {
+                    _field12_AdmissionDate = DateTime.Parse(value.ToString().Substring(5, 2) + "/" + value.ToString().Substring(7, 2) + "/" + value.ToString().Substring(1, 4));
+                }
+                else
+                {
+                    _field12_AdmissionDate = DateTime.MinValue;
+                }
+            }
+        }
 
         // Field 13 - Admission Hour.  A two-digit code indicating the hour of day that the care began (when they were admitted).
         // Use military time (00 through 24).
-        public string Field13_AdmissionHour { get { return _field13_AdmissionHour; } set { _field13_AdmissionHour = value; } }
+        public string Field13_AdmissionHour 
+        { 
+            get { return _field13_AdmissionHour; } 
+            set 
+            {
+                if (value.Length > 8)
+                {
+                    _field13_AdmissionHour = value.Substring(9, 2);
+                }
+                else
+                {
+                    _field13_AdmissionHour = "";
+                }
+            } 
+        }
 
         // Field 14 - Priority (Type) of Visit.  The code for the priority of the admission or visit.
         public string Field14_TypeOfVisit { get { return _field14_TypeOfVisit; } set { _field14_TypeOfVisit = value; } }
@@ -319,18 +346,53 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public bool Field17_PatientDischargeStatusSpecified { get; set; }
 
         // Field 18-28 - Condition Codes.
-        public List<string> Field18_28_ConditionCodes { get { return _field18_28_ConditionCodes; } set { _field18_28_ConditionCodes = value; } }
+        public string Field18_ConditionCode01 { get; set; }
+        public string Field19_ConditionCode02 { get; set; }
+        public string Field20_ConditionCode03 { get; set; }
+        public string Field21_ConditionCode04 { get; set; }
+        public string Field22_ConditionCode05 { get; set; }
+        public string Field23_ConditionCode06 { get; set; }
+        public string Field24_ConditionCode07 { get; set; }
+        public string Field25_ConditionCode08 { get; set; }
+        public string Field26_ConditionCode09 { get; set; }
+        public string Field27_ConditionCode10 { get; set; }
+        public string Field28_ConditionCode11 { get; set; }
 
         // Field 29 - Accident State.  This is the state in which the accident occurred.  Situational.
         public string Field29_AccidentState { get { return _field29_AccidentState; } set { _field29_AccidentState = value; } }
 
         // Field 31 through 34 are occurrence codes and their corresponding dates.
-        public List<UB04OccurrenceCodesAndDates> Field31_34_OccurrenceCodesAndDates
-        { get { return _field31_34_OccurrenceCodesAndDates; } set { _field31_34_OccurrenceCodesAndDates = value; } }
+        public string Field31_OccurrenceCode_a { get; set; }
+        public DateTime Field31_OccurrenceCodeDate_a { get; set; }
+        public string Field31_OccurrenceCode_b { get; set; }
+        public DateTime Field31_OccurrenceCodeDate_b { get; set; }
+
+        public string Field32_OccurrenceCode_a { get; set; }
+        public DateTime Field32_OccurrenceCodeDate_a { get; set; }
+        public string Field32_OccurrenceCode_b { get; set; }
+        public DateTime Field32_OccurrenceCodeDate_b { get; set; }
+        
+        public string Field33_OccurrenceCode_a { get; set; }
+        public DateTime Field33_OccurrenceCodeDate_a { get; set; }
+        public string Field33_OccurrenceCode_b { get; set; }
+        public DateTime Field33_OccurrenceCodeDate_b { get; set; }
+        
+        public string Field334_OccurrenceCode_a { get; set; }
+        public DateTime Field34_OccurrenceCodeDate_a { get; set; }
+        public string Field334_OccurrenceCode_b { get; set; }
+        public DateTime Field34_OccurrenceCodeDate_b { get; set; }
+
 
         // Field 35 and 36 are occurrence codes and their corresponding dates.
-        public List<UB04OccurrenceSpanCodesAndDates> Field35_36_OccurrenceSpanCodesAndDates
-        { get { return _field35_36_OccurrenceSpanCodesAndDates; } set { _field35_36_OccurrenceSpanCodesAndDates = value; } }
+        public string Field35_SpanCode_a { get; set; }
+        public string Field35_SpanDate_a { get; set; }
+        public string Field36_SpanCode_a { get; set; }
+        public string Field36_SpanDate_a { get; set; }
+        public string Field35_SpanCode_b { get; set; }
+        public string Field35_SpanDate_b { get; set; }
+        public string Field36_SpanCode_b { get; set; }
+        public string Field36_SpanDate_b { get; set; }
+
 
         // Field 38 - Additional name of the person or entity responsible for payment of balance of bill after applicable
         // processing by other parties, insurers or organizations.
@@ -363,25 +425,45 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public decimal Field41d_Amount { get; set; }
 
         // Field 42 - Up to 22 service lines.
-        [XmlElement("Field42_49_ServiceLines")]
+        [XmlElement("Field42_49_ServiceLines2300Loop")]
         public List<UB04ServiceLine_2300Loop> Field42_49_2300Loop { get; set; }
 
+        [XmlElement("Field42_49_ServiceLines2400Loop")]
+        public List<UB04ServiceLine_2400Loop> Field42_49_2400Loop { get; set; }
+
         // Field 42 through 49 SUMMARY line.
-        public List<UB04TotalChargesLine> Field42_49_ServiceLinesTotal
-        { get { return _field42_49_ServiceLinesTotal; } set { _field42_49_ServiceLinesTotal = value; } }
+        //public List<UB04TotalChargesLine> Field42_49_ServiceLinesTotal
+        //{ get { return _field42_49_ServiceLinesTotal; } set { _field42_49_ServiceLinesTotal = value; } }
 
         // Field 47 - Summary of all field 47 charges
-        public decimal Field47_SummaryTotalCharges { get { return _field47_SummaryTotalCharges; } set { _field47_SummaryTotalCharges = value; } }
+        public decimal Field47_SummaryTotalCharges { get; set; }
         // Field 48 - Summary of all field 48 charges
-        public decimal Field48_SummaryTotalNonCoveredCharges { get { return _field48_SummaryTotalNonCoveredCharges; } set { _field48_SummaryTotalNonCoveredCharges = value; } }
+        public decimal Field48_SummaryTotalNonCoveredCharges { get; set; }
 
-        public List<Field50_PayerName> Field50_PayerName { get; set; }
-        public List<Field52_ReleaseOfInfoCertIndicator> Field52_ReleaseOfInfoCertIndicator { get; set; }
-        public List<Field53_AssignmentOfBenefitsCertIndicator> Field53_AssignmentOfBenefitsCertIndicator { get; set; }
-        public List<Field54_PriorPayments> Field54_PriorPayments { get; set; }
+        public string Field50_PayerName_Primary { get; set; }                           // Destination Payer (2010BB/2310)
+        public string Field50_PayerName_Secondary { get; set; }                         // Non-destination payer (2330B)
+        public string Field50_PayerName_Tertiary { get; set; }                          // Non-destination payer (2330B)
+
+        public string Field51_HealthPlanIdentifier_Primary { get; set; }              // Destination payer (2010BB/2310)
+        public string Field51_HealthPlanIdentifier_Secondary { get; set; }            // Non-destination payer (2330B)
+        public string Field51_HealthPlanIdentifier_Tertiary { get; set; }             // Non-destination payer (2330B)
+
+        public string Field52_ReleaseOfInfoCertIndicator_Primary { get; set; }        // Destination payer (2300)
+        public string Field52_ReleaseOfInfoCertIndicator_Secondary { get; set; }      // Non-destination payer (2320)
+        public string Field52_ReleaseOfInfoCertIndicator_Tertiary { get; set; }       // Non-destination payer (2320)
+
+        public string Field53_AssignmentOfBenefitsCertIndicator_Primary { get; set; }   // Destination payer (2300)
+        public string Field53_AssignmentOfBenefitsCertIndicator_Secondary { get; set; } // Non-destination payer (2320)
+        public string Field53_AssignmentOfBenefitsCertIndicator_Tertiary { get; set; }  // Non-destination payer (2320)
+
+        public string Field54_PriorPayments { get; set; }                     // Destination payer (2320)
+        public string Field54_PriorPayments_Secondary { get; set; }                   // Non-destination payer (2320)
+        public string Field54_PriorPayments_Tertiary { get; set; }                    // Non-destination payer (2320)
+
         public string Field55PrimaryPayerEstimatedAmountDue { get; set; }
-        public string Field55SecondaryPayerEstimatedAmountDue { get; set; }
-        public string Field55TertiaryEstimatedAmountDue { get; set; }
+
+        //public string Field55SecondaryPayerEstimatedAmountDue { get; set; }
+        //public string Field55TertiaryEstimatedAmountDue { get; set; }
 
         // Field 56 - National Provider Indicator (NPI), Billing Provider.  The unique provider indentifier
         // assigned by the health plan.
