@@ -404,24 +404,24 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public decimal Field39a_Amount { get; set; }
         public string Field39b_Code { get; set; }
         public decimal Field39b_Amount { get; set; }
-        //public string Field39b_Code { get; set; }
-        //public decimal Field39b_Amount { get; set; }
+        public string Field39c_Code { get; set; }
+        public decimal Field39c_Amount { get; set; }
         public string Field39d_Code { get; set; }
         public decimal Field39d_Amount { get; set; }
         public string Field40a_Code { get; set; }
         public decimal Field40a_Amount { get; set; }
         public string Field40b_Code { get; set; }
         public decimal Field40b_Amount { get; set; }
-        //public string Field40b_Code { get; set; }
-        //public decimal Field40b_Amount { get; set; }
+        public string Field40c_Code { get; set; }
+        public decimal Field40c_Amount { get; set; }
         public string Field40d_Code { get; set; }
         public decimal Field40d_Amount { get; set; }
         public string Field41a_Code { get; set; }
         public decimal Field41a_Amount { get; set; }
         public string Field41b_Code { get; set; }
         public decimal Field41b_Amount { get; set; }
-        //public string Field41b_Code { get; set; }
-        //public decimal Field41b_Amount { get; set; }
+        public string Field41c_Code { get; set; }
+        public decimal Field41c_Amount { get; set; }
         public string Field41d_Code { get; set; }
         public decimal Field41d_Amount { get; set; }
 
