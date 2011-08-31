@@ -11,7 +11,7 @@ namespace OopFactory.X12.Hipaa.Common
         [XmlAttribute]
         public string Qualifier { get; set; }
 
-        [XmlAttribute(DataType="date")]
+        [XmlAttribute]
         public DateTime Date { get; set; }
 
         [XmlText]

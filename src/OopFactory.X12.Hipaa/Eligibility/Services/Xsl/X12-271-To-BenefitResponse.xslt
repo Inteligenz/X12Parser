@@ -467,33 +467,40 @@
 
   <xsl:template name="DTPSegment">
     <xsl:param name="DTP"/>
-      <xsl:choose>
-        <xsl:when test="$DTP/DTP02='D8'">
-          <Date>
-            <xsl:attribute name="Qualifier">
-              <xsl:value-of select="$DTP/DTP01"/>
-            </xsl:attribute>
-            <xsl:attribute name="Date">
-              <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
-            </xsl:attribute>
-            <xsl:value-of select="$DTP/DTP01/comment()"/>
-          </Date>
-        </xsl:when>
-        <xsl:otherwise>
-          <DateRange>
-            <xsl:attribute name="Qualifier">
-              <xsl:value-of select="$DTP/DTP01"/>
-            </xsl:attribute>
-            <xsl:attribute name="BeginDate">
-              <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
-            </xsl:attribute>
-            <xsl:attribute name="EndDate">
-              <xsl:value-of select="concat(substring($DTP/DTP03,10,4),'-',substring($DTP/DTP03,14,2),'-',substring($DTP/DTP03,16,2))"/>
-            </xsl:attribute>
-            <xsl:value-of select="$DTP/DTP01/comment()"/>
-          </DateRange>
-        </xsl:otherwise>
-      </xsl:choose>
+    <xsl:choose>
+      <xsl:when test="$DTP/DTP02='RD8'">
+        <DateRange>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="$DTP/DTP01"/>
+          </xsl:attribute>
+          <xsl:attribute name="BeginDate">
+            <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
+          </xsl:attribute>
+          <xsl:attribute name="EndDate">
+            <xsl:value-of select="concat(substring($DTP/DTP03,10,4),'-',substring($DTP/DTP03,14,2),'-',substring($DTP/DTP03,16,2))"/>
+          </xsl:attribute>
+          <xsl:value-of select="$DTP/DTP01/comment()"/>
+        </DateRange>
+      </xsl:when>
+      <xsl:otherwise>
+        <Date>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="$DTP/DTP01"/>
+          </xsl:attribute>
+          <xsl:attribute name="Date">
+            <xsl:choose>
+              <xsl:when test="$DTP/DTP02='DT'">
+                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2),'T',substring($DTP/DTP03,9,2),':',substring($DTP/DTP03,11,2),':00')"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:value-of select="$DTP/DTP01/comment()"/>
+        </Date>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-  
+
 </xsl:stylesheet>

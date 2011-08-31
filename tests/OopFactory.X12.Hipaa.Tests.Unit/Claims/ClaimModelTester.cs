@@ -84,7 +84,21 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("JOHN", patient.Name.FirstName, "Unexpected patient first name");
             Assert.AreEqual("T", patient.Name.MiddleName, "Unexpected patient middle name");
             Assert.AreEqual("030005074A", patient.MemberId);
-           
+           // Box 9 Patient Address
+            Assert.AreEqual("125 CITY AVENUE", patient.Address.Line1, "Unexpected patient address line 1");
+            Assert.AreEqual("CENTERVILLE", patient.Address.City, "Unexpected patient address city");
+            Assert.AreEqual("PA", patient.Address.StateCode, "Unexpected patient address state code");
+            Assert.AreEqual("17111", patient.Address.PostalCode, "Unexpected patient address postal code");
+            // Box 10 Birthdate
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), patient.DateOfBirth);
+            // Box 11 Sex
+            Assert.AreEqual(GenderEnum.Male, patient.Gender);
+            // Box 12 & 13 Admission Date and Hour
+            Assert.AreEqual(DateTime.Parse("1996-09-10 2:02 PM"), claim.AdmissionDate);
+            // Box 14 Admission Type
+
+            // Box 15 Admission Source
+
         }
     }
 }

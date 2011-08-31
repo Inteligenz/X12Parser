@@ -31,20 +31,13 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public decimal TotalClaimChargeAmount { get; set; }
 
-        public ServiceLocationInformation ServiceLocationInfo { get; set; }
-
-        public Entity Submitter { get; set; }
-        public Entity Receiver { get; set; }
-        public BillingInformation BillingInfo { get; set; }
-        public ClaimMember Subscriber { get; set; }
-        public Entity Payer { get; set; }
-        public ClaimMember Patient { get; set; }
-
-        [XmlElement(ElementName="Date")]
+        [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
 
-        [XmlElement(ElementName="DateRange")]
+        [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
+
+        public ServiceLocationInformation ServiceLocationInfo { get; set; }
 
         #region Institional Claim Properties
 
@@ -57,8 +50,7 @@ namespace OopFactory.X12.Hipaa.Claims
         /// <summary>
         /// Box 6 on the UB04
         /// </summary>
-        [XmlAttribute(DataType="date")]
-        public DateTime StatementFromDate
+        public DateTime? StatementFromDate
         {
             get
             {
@@ -71,17 +63,15 @@ namespace OopFactory.X12.Hipaa.Claims
                     if (date != null)
                         return date.Date;
                     else
-                        return DateTime.MinValue;
+                        return null;
                 }
             }
-            set { }
         }
 
         /// <summary>
         /// Box 6 on the UB04
         /// </summary>
-        [XmlAttribute(DataType = "date")]
-        public DateTime StatementThroughDate
+        public DateTime? StatementThroughDate
         {
             get
             {
@@ -94,31 +84,67 @@ namespace OopFactory.X12.Hipaa.Claims
                     if (date != null)
                         return date.Date;
                     else
-                        return DateTime.MinValue;
+                        return null;
                 }
             }
-            set { }
         }
 
-        [XmlElement(ElementName="Condition")]
+        /// <summary>
+        /// Box 12 and 13 on the UB04
+        /// </summary>
+        public DateTime? AdmissionDate
+        {
+            get
+            {
+                var date = Dates.FirstOrDefault(d => d.Qualifier == "435");
+                if (date != null)
+                    return date.Date;
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Box 14 of the UB04
+        /// </summary>
+        public Lookup AdmissionType { get; set; }
+
+        /// <summary>
+        /// Box 15 of the UB04
+        /// </summary>
+        public Lookup AdmissionSource { get; set; }
+
+        /// <summary>
+        /// Box 17 of the UB04
+        /// </summary>
+        public Lookup PatientStatus { get; set; }
+
+        [XmlElement(ElementName = "Condition")]
         public List<Lookup> Conditions { get; set; }
 
-        [XmlElement(ElementName="Occurrence")]
+        [XmlElement(ElementName = "Occurrence")]
         public List<CodedDate> Occurrences { get; set; }
 
-        [XmlElement(ElementName="OccurrenceSpan")]
+        [XmlElement(ElementName = "OccurrenceSpan")]
         public List<CodedDateRange> OccurrenceSpans { get; set; }
 
-        [XmlElement(ElementName="Value")]
+        [XmlElement(ElementName = "Value")]
         public List<CodedAmount> Values { get; set; }
 
-        [XmlElement(ElementName="Procedure")]
+        [XmlElement(ElementName = "Procedure")]
         public List<CodedDate> Procedures { get; set; }
 
-        [XmlElement(ElementName="Provider")]
+        [XmlElement(ElementName = "Provider")]
         public List<Provider> Providers { get; set; }
-        
+
         #endregion
+
+        public Entity Submitter { get; set; }
+        public Entity Receiver { get; set; }
+        public BillingInformation BillingInfo { get; set; }
+        public ClaimMember Subscriber { get; set; }
+        public Entity Payer { get; set; }
+        public ClaimMember Patient { get; set; }
 
         [XmlElement(ElementName="ServiceLine")]
         public List<ServiceLine> ServiceLines { get; set; }
