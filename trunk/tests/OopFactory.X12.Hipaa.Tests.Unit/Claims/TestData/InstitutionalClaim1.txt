@@ -22,7 +22,8 @@
             DMG*D8*19261111*M~
           NM1*PR*2*MEDICARE B*****PI*00435~
           CLM*756048Q*89.93***14:A:1**Y*Y*Y~
-            DTP*434*D8*19960911~
+            DTP*434*D8*19960911-19960912~
+			DTP*435*DT*199609101402~
             CL1*3*1~
 			REF*EA*TEST MEDICAL RECORD NUMBER~
             HI*BK:366.9~

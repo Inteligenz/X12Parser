@@ -44,6 +44,26 @@
           <xsl:value-of select="CLM/CLM05/CLM0503"/>
         </xsl:attribute>
       </ServiceLocationInfo>
+      <xsl:if test="count(CL1)>0">
+        <AdmissionType>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="CL1/CL101"/>
+          </xsl:attribute>
+          <xsl:value-of select="CL1/CL101/comment()"/>
+        </AdmissionType>
+        <AdmissionSource>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="CL1/CL102"/>
+          </xsl:attribute>
+          <xsl:value-of select="CL1/CL102/comment()"/>
+        </AdmissionSource>
+        <PatientStatus>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="CL1/CL103"/>
+          </xsl:attribute>
+          <xsl:value-of select="CL1/CL103/comment()"/>
+        </PatientStatus>
+      </xsl:if>
 
       <xsl:choose>
         <xsl:when test="../@LoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
@@ -129,13 +149,13 @@
             <xsl:with-param name="Loop" select="."/>
           </xsl:call-template>
         </Name>
-        <!-- <xsl:if test="count(N3) > 0">
+        <xsl:for-each select="N3">
           <Address>
             <xsl:call-template name="PostalAddress">
-              <xsl:with-param name="N3"/>
+              <xsl:with-param name="N3" select="."/>
             </xsl:call-template>
           </Address>
-        </xsl:if> -->
+        </xsl:for-each>
       </Subscriber>
 
     </xsl:for-each>
@@ -224,9 +244,11 @@
     <Line1>
       <xsl:value-of select="$N3/N301"/>
     </Line1>
-    <Line2>
-      <xsl:value-of select="$N3/N302"/>
-    </Line2>
+    <xsl:if test="string-length($N3/N302)>0">
+      <Line2>
+        <xsl:value-of select="$N3/N302"/>
+      </Line2>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template name="Identification">
@@ -299,18 +321,7 @@
   <xsl:template name="DTPSegment">
     <xsl:param name="DTP"/>
     <xsl:choose>
-      <xsl:when test="$DTP/DTP02='D8'">
-        <Date>
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="$DTP/DTP01"/>
-          </xsl:attribute>
-          <xsl:attribute name="Date">
-            <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
-          </xsl:attribute>
-          <xsl:value-of select="$DTP/DTP01/comment()"/>
-        </Date>
-      </xsl:when>
-      <xsl:otherwise>
+      <xsl:when test="$DTP/DTP02='RD8'">
         <DateRange>
           <xsl:attribute name="Qualifier">
             <xsl:value-of select="$DTP/DTP01"/>
@@ -323,6 +334,27 @@
           </xsl:attribute>
           <xsl:value-of select="$DTP/DTP01/comment()"/>
         </DateRange>
+      </xsl:when>
+      <xsl:otherwise>
+        <Date>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="$DTP/DTP01"/>
+          </xsl:attribute>
+          <xsl:attribute name="Date">
+            <xsl:choose>
+              <xsl:when test="$DTP/DTP02='DT'">
+                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2),'T',substring($DTP/DTP03,9,2),':',substring($DTP/DTP03,11,2),':00')"/>
+              </xsl:when>
+              <xsl:when test="$DTP/DTP02='TM'">
+                <xsl:value-of select="concat('0001-01-01T', substring($DTP/DTP03,1,2), substring($DTP/DTP03,3,2))"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:value-of select="$DTP/DTP01/comment()"/>
+        </Date>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
