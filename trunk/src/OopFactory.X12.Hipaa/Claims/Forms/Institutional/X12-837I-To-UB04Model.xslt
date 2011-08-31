@@ -451,7 +451,7 @@
           <xsl:with-param name="Loop" select="../Loop[@LoopId='1000A']" />
         </xsl:call-template>
         <xsl:call-template name="BillingProviderNameLoop">
-          <xsl:with-param name="Loop" select="../Loop[@LoopId='2010AA']" />
+          <xsl:with-param name="Loop" select="../../Loop[@LoopId='2010AA']" />
         </xsl:call-template>
         <xsl:call-template name="PatientHierarchicalLoop">
           <xsl:with-param name="Loop" select="../Loop[@LoopId='2010BA']" />
@@ -479,7 +479,7 @@
 
         <xsl:if test="(REF01 = 'F8')">
           <Field64a_DocumentControlNumber>
-            <xsl:value-of select="REF02"/>
+            <xsl:value-of select="REF/REF02"/>
           </Field64a_DocumentControlNumber>
         </xsl:if>
 
@@ -551,7 +551,7 @@
 
         <xsl:if test="(DTP01 = '435') and ((DTP02 = 'D8') or (DTP02 = 'DT'))">
           <Field12_AdmissionDate>
-              <xsl:value-of select="DTP03"/>
+              <xsl:value-of select="DTP/DTP03"/>
             </Field12_AdmissionDate>
           </xsl:if>
  

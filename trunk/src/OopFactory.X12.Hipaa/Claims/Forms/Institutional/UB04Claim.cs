@@ -45,8 +45,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field01_13_BillingProviderCountryCode;
         // Pay-To is also known as the 'Subscriber' from the 2010BA loop.
         private string _field02_01_PayToLastName;
-        //private string _field02_02_PayToFirstName;
-        //private string _field02_03_PayToMiddleName;
+        private string _field02_02_PayToFirstName;
+        private string _field02_03_PayToMiddleName;
         private string _field02_04_PayToAddress1;
         //private string _field02_05_PayToAddress2;
         private string _field02_06_PayToCity;
@@ -56,10 +56,10 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field02_11_PayToCountryCode;
         private string _field03a_PatientControlNumber;
         private string _field03b_MedicalHealthRecordNumber;
-        private string _field04_TypeOfBill;
+        //private string _field04_TypeOfBill;
         private string _field05_FederalTaxId;
-        private DateTime _field06_ServiceFromDate;
-        private DateTime _field06_ServiceToDate;
+        //private DateTime _field06_ServiceFromDate;
+        //private DateTime _field06_ServiceToDate;
         //private string _field07_Filler;
         private string _field08a_PatientIdentifier;
         private string _field08b_01_PatientLastName;
@@ -225,8 +225,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 02 - the Pay-To provider address.  This is usually provided only when different than Field 01.
         public string Field02_01_PayToLastName { get { return _field02_01_PayToLastName; } set { _field02_01_PayToLastName = value; } }
-        //public string Field02_02_PayToFirstName { get { return _field02_02_PayToFirstName; } set { _field02_02_PayToFirstName = value; } }
-        //public string Field02_03_PayToMiddleName { get { return _field02_03_PayToMiddleName; } set { _field02_03_PayToMiddleName = value; } }
+        public string Field02_02_PayToFirstName { get { return _field02_02_PayToFirstName; } set { _field02_02_PayToFirstName = value; } }
+        public string Field02_03_PayToMiddleName { get { return _field02_03_PayToMiddleName; } set { _field02_03_PayToMiddleName = value; } }
         public string Field02_04_PayToAddress1 { get { return _field02_04_PayToAddress1; } set { _field02_04_PayToAddress1 = value; } }
         //public string Field02_05_PayToAddress2 { get { return _field02_05_PayToAddress2; } set { _field02_05_PayToAddress2 = value; } }
         public string Field02_06_PayToCity { get { return _field02_06_PayToCity; } set { _field02_06_PayToCity = value; } }
