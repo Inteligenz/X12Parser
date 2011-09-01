@@ -21,1045 +21,1646 @@
                 </xsl:attribute>
               </fo:external-graphic>
             </fo:block>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.0474in" width="8.006599999999998in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.0474in" width="8.0066in" height="0.1789in">
               <fo:block>DLN: , Clearinghouse Number: 031109000132382</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.21in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block>INFIRMARY WEST</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.2100in" width="2.3285in" height="0.1787in">
+              <fo:block>
+                <xsl:value-of select="Field01_04_BillingProviderAddress1"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.3726in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.3726in" width="2.4102in" height="0.17892in">
+              <fo:block>
+                <xsl:value-of select="Field01_06_BillingProviderCity"/>
+                <xsl:text>&#x0020;</xsl:text>
+                <xsl:value-of select="Field01_09_BillingProviderZip"/>
+                <xsl:text>&#x0020;</xsl:text>
+                <xsl:value-of select="Field01_11_BillingProviderPhoneNumber "/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.5352in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> , </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.5352in" width="2.4102in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field01_11_BillingProviderPhoneNumber "/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.6978in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="0.6978in" width="2.41025in" height="0.1789in">
+              <fo:block color="turquoise">1LastLine</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5848750000000002in" top="0.21in" width="2.348875in" height="0.17886000000000002in">
-              <fo:block>HVHS, INC.</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5849in" top="0.2100in" width="2.3489in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field02_01_PayToLastName"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5848750000000002in" top="0.3726in" width="2.4305749999999997in" height="0.17886000000000002in">
-              <fo:block>500 WEST MAIN ST</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5849in" top="0.3726in" width="2.4306in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field02_04_PayToAddress1"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5848750000000002in" top="0.5352in" width="2.4305749999999997in" height="0.17886000000000002in">
-              <fo:block>LOUISVILLE KY, 40201</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5849in" top="0.5352in" width="2.4306in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field02_06_PayToCity"/>
+                <xsl:text>&#x0020;</xsl:text>
+                <xsl:value-of select="Field02_08_PayToState"/>
+                <xsl:text>&#x0020;</xsl:text>
+                <xsl:value-of select="Field02_09_PayToZip"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5848750000000002in" top="0.6978in" width="2.4305749999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.5849in" top="0.6978in" width="2.4306in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field02_11_PayToCountryCode"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.321825in" top="0.21in" width="2.3284499999999997in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.3219in" top="0.2100in" width="2.3285in" height="0.1789in">
               <fo:block>
                 <xsl:value-of select="Field03a_PatientControlNumber"/>
               </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.321825in" top="0.3726in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.3218in" top="0.3726in" width="2.3284in" height="0.1789in">
+              <fo:block>3b</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.6911249999999995in" top="0.3726in" width="0.44934999999999997in" height="0.17886000000000002in">
-              <fo:block>111</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.6911in" top="0.3726in" width="0.4493in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field04_TypeOfBill"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.076725in" top="0.5352in" width="0.8986999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.4767in" top="0.5352in" width="0.8987in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field05_FederalTaxId"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.076725in" top="0.6978in" width="0.8986999999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.0767in" top="0.6978in" width="0.8987in" height="0.1789in">
               <fo:block>208418853</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.016274999999999in" top="0.6978in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.710724999999999in" top="0.6978in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block>101708</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.405174999999999in" top="0.5352in" width="0.7353in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.405174999999999in" top="0.6978in" width="0.7353in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.2368249999999998in" top="0.8603999999999999in" width="1.8178249999999998in" height="0.17886000000000002in">
-              <fo:block>555555555</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.256425in" top="1.023in" width="2.798225in" height="0.17886000000000002in">
-              <fo:block>SBR FIRST NAME SBR LAST NAME</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.178025in" top="0.8603999999999999in" width="3.9624499999999996in" height="0.17886000000000002in">
-              <fo:block>2009 BUCKER ROAD</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976249999999995in" top="1.023in" width="3.1045999999999996in" height="0.17886000000000002in">
-              <fo:block>MOBILE</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.4247749999999995in" top="1.023in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>AL</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.792425in" top="1.023in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block>36605</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.854524999999999in" top="1.023in" width="0.28595in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.174725in" top="1.3481999999999998in" width="0.817in" height="0.17886000000000002in">
-              <fo:block>06291958</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.032575in" top="1.3481999999999998in" width="0.28595in" height="0.17886000000000002in">
-              <fo:block>M</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.318525in" top="1.3481999999999998in" width="0.5719in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.9312749999999998in" top="1.3481999999999998in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>12</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.217225in" top="1.3481999999999998in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.5031749999999997in" top="1.3481999999999998in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.829975in" top="1.3481999999999998in" width="0.20425in" height="0.17886000000000002in">
-              <fo:block>11</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.115925in" top="1.3481999999999998in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>01</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.6290249999999995in" top="1.3481999999999998in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.914974999999999in" top="1.3481999999999998in" width="1.2254999999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.46067499999999994in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.46067499999999994in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.4410749999999998in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.4410749999999998in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.421475in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.421475in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.4018749999999995in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.4018749999999995in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.382275in" top="1.6734in" width="0.6127499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.035875in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.382275in" top="1.8359999999999998in" width="0.6127499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.035875in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.016274999999999in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.710724999999999in" top="1.6734in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.016274999999999in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.710724999999999in" top="1.8359999999999998in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847499999999995in" top="1.6734in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847499999999995in" top="1.8359999999999998in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.256425in" top="1.9986in" width="3.982875in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.1612in" width="4.085in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.3238in" width="4.085in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.4863999999999997in" width="4.085in" height="0.17886000000000002in">
-              <fo:block> , </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.649in" width="4.085in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.1612in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block>02</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.1612in" width="1.0008249999999998in" height="0.17886000000000002in">
-              <fo:block>0 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.3238in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.3238in" width="1.0008249999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.4863999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.4863999999999997in" width="1.0008249999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.649in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.649in" width="1.0008249999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.1612in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.914149999999999in" top="2.1612in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.3238in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.914149999999999in" top="2.3238in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.4863999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.914149999999999in" top="2.4863999999999997in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.649in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.914149999999999in" top="2.649in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.1612in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.180499999999999in" top="2.1612in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.3238in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.180499999999999in" top="2.3238in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.4863999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.180499999999999in" top="2.4863999999999997in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.649in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.180499999999999in" top="2.649in" width="0.9803999999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="2.9741999999999997in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0110</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="2.9741999999999997in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="2.9741999999999997in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="2.9741999999999997in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>2</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="2.9741999999999997in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>2 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="2.9741999999999997in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="2.9741999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.1368in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0250</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.1368in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.1368in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.1368in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>136</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.1368in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.1368in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block>2 50</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.1368in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.2994in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0270</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.2994in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.2994in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.2994in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>14</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.2994in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.2994in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.2994in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.4619999999999997in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0272</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.4619999999999997in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.4619999999999997in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.4619999999999997in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>23</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.4619999999999997in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.4619999999999997in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.4619999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.6246in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0278</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.6246in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.6246in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.6246in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>5</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.6246in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.6246in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.6246in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.7872in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0300</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.7872in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.7872in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.7872in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.7872in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.7872in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.7872in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.9497999999999997in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0305</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="3.9497999999999997in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="3.9497999999999997in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="3.9497999999999997in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>3</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="3.9497999999999997in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="3.9497999999999997in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="3.9497999999999997in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.1124in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0360</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.1124in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.1124in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.1124in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>221</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.1124in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>5354 83</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.1124in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.1124in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.2749999999999995in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0370</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.2749999999999995in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.2749999999999995in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.2749999999999995in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>221</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.2749999999999995in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.2749999999999995in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.2749999999999995in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.4376in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0410</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.4376in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.4376in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.4376in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.4376in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.4376in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.4376in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.6002in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0460</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.6002in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.6002in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.6002in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.6002in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 66</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.6002in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.6002in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.7627999999999995in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0710</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.7627999999999995in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.7627999999999995in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.7627999999999995in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>6</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.7627999999999995in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.7627999999999995in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.7627999999999995in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.9254in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0730</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="4.9254in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="4.9254in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="4.9254in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="4.9254in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="4.9254in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="4.9254in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.088in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0272</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.088in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.088in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.088in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>23</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.088in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.088in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.088in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.2505999999999995in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0278</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.2505999999999995in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.2505999999999995in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.2505999999999995in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>5</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.2505999999999995in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.2505999999999995in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.2505999999999995in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.4132in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0300</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.4132in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.4132in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.4132in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.4132in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.4132in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.4132in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.5758in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0305</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.5758in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.5758in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.5758in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>3</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.5758in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.5758in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.5758in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.7383999999999995in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0360</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.7383999999999995in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.7383999999999995in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.7383999999999995in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>221</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.7383999999999995in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>5354 83</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.7383999999999995in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.7383999999999995in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.901in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0370</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="5.901in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="5.901in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="5.901in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>221</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="5.901in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="5.901in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="5.901in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.0636in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0410</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="6.0636in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="6.0636in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="6.0636in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="6.0636in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="6.0636in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="6.0636in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.2261999999999995in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0460</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="6.2261999999999995in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="6.2261999999999995in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="6.2261999999999995in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="6.2261999999999995in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 66</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="6.2261999999999995in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="6.2261999999999995in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.3888in" width="0.428925in" height="0.17886000000000002in">
-              <fo:block>0710</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.60365in" top="6.3888in" width="2.41015in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="6.3888in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>101508</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.199274999999999in" top="6.3888in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block>6</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="6.3888in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>1 00</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="6.3888in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.895375in" top="6.3888in" width="0.265525in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="1.0734249999999998in" top="6.5514in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>1</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="1.645325in" top="6.5514in" width="0.24509999999999998in" height="0.17886000000000002in">
-              <fo:block>2</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.504824999999999in" top="6.5514in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9754249999999995in" top="6.5514in" width="0.9599749999999999in" height="0.17886000000000002in">
-              <fo:block>5368 49</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.955824999999999in" top="6.5514in" width="0.9395499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.6903in" top="6.7139999999999995in" width="1.4706in" height="0.17886000000000002in">
-              <fo:block>1740295484</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="6.8766in" width="1.4706in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="7.0392in" width="1.4706in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="7.2017999999999995in" width="1.4706in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="7.527in" width="2.5326999999999997in" height="0.17886000000000002in">
-              <fo:block>SBR LAST NAME , SBR FIRST NAME</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6869999999999994in" top="7.527in" width="0.28595in" height="0.17886000000000002in">
-              <fo:block>18</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.97295in" top="7.527in" width="1.940375in" height="0.17886000000000002in">
-              <fo:block>555555555</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.93375in" top="7.527in" width="1.450175in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.404349999999999in" top="7.527in" width="1.7565499999999998in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="8.1774in" width="3.002475in" height="0.17886000000000002in">
-              <fo:block>520-7235190-6</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976249999999995in" top="8.1774in" width="2.512275in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.730325in" top="8.1774in" width="2.4305749999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="8.34in" width="3.002475in" height="0.17886000000000002in">
-              <fo:block>REF520-7235190-6</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976249999999995in" top="8.34in" width="2.512275in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.730325in" top="8.34in" width="2.4305749999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.256425in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>8404</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.93045in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>Y</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.032575in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7066in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>A</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.808725in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4827500000000002in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>B</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6052999999999997in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.279325in" top="8.6652in" width="0.09395499999999998in" height="0.17886000000000002in">
-              <fo:block>C</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.38145in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.0554749999999995in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>D</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1575999999999995in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.831625in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>E</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.93375in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.607774999999999in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>F</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.730325in" top="8.6652in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.404349999999999in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>G</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.506474999999999in" top="8.6652in" width="0.7761499999999999in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.180499999999999in" top="8.6652in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>H</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847499999999995in" top="8.6652in" width="0.7761499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>9</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.256425in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.93045in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>I</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.032575in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7066in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>J</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.808725in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4827500000000002in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>K</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6052999999999997in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.279325in" top="8.8278in" width="0.09395499999999998in" height="0.17886000000000002in">
-              <fo:block>L</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.38145in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.0554749999999995in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>M</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1575999999999995in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.831625in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
-              <fo:block>N</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.93375in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block>7262</fo:block>
-            </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.607774999999999in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.0163in" top="0.6978in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field06_ServiceFromDate"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.7107in" top="0.6978in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field06_ServiceToDate"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.4052in" top="0.5352in" width="0.7353in" height="0.1789in">
+              <fo:block color="turquoise">7line1</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.4052in" top="0.6978in" width="0.7353in" height="0.1789in">
+              <fo:block color="turquoise">7line2</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.2368in" top="0.8604in" width="1.8178in" height="0.1789in">
+              <fo:block color="turquoise">8a</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.2564in" top="1.023in" width="2.7982in" height="0.1789in">
+              <fo:block color="turquoise">8b</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.1780in" top="0.8604in" width="3.9624in" height="0.1789in">
+              <fo:block color="turquoise">9a</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976in" top="1.023in" width="3.1046in" height="0.1789in">
+              <fo:block color="turquoise">9b</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.42485in" top="1.023in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">9c</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.7924in" top="1.023in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">9d</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8545in" top="1.023in" width="0.2860in" height="0.1789in">
+              <fo:block color="turquoise">9e</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1747in" top="1.3483in" width="0.817in" height="0.1789in">
+              <fo:block color="turquoise">10</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.0326in" top="1.3482in" width="0.2860in" height="0.1789in">
+              <fo:block color="turquoise">11</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.318525in" top="1.3482in" width="0.5719in" height="0.17892in">
+              <fo:block>
+                <xsl:value-of select="Field12_AdmissionDate"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.9313in" top="1.3482in" width="0.2451in" height="0.17892in">
+              <fo:block color="turquoise">
+                13
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.2172in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field14_TypeOfVisit"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.5032in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field15_SourceOfAdmission"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.8300in" top="1.3482in" width="0.2043in" height="0.1789in">
+              <fo:block color="turquoise">
+                16
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.1159in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                17
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.4019in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                18
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.6878in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                19
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.9738in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                20
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.2597in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                21
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5457in" top="1.3482in" width="0.2452in" height="0.1789in">
+              <fo:block color="turquoise">
+                22
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.8725in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                23
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.1584in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                24
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.4444in" top="1.3482in" width="0.2451in" height="0.1786in">
+              <fo:block color="turquoise">
+                25
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.7303in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                26
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.0163in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                27
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.3431in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                28
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.6290in" top="1.3482in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                29
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.9150in" top="1.3482in" width="1.2255in" height="0.1789in">
+              <fo:block color="turquoise">
+                30
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.4607in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field31_OccurrenceCodeDate_a"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.4607in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field31_OccurrenceCodeDate_b"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.4411in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field32_OccurrenceCodeDate_a"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="1.4411in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field32_OccurrenceCodeDate_b"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4215in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field33_OccurrenceCodeDate_a"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4215in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field33_OccurrenceCodeDate_b"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.4019in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field34_OccurrenceCodeDate_a"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.4019in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field34_OccurrenceCodeDate_b"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.382275in" top="1.6734in" width="0.6127in" height="0.1789in">
+              <fo:block color="turquoise">
+                35froma
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.0359in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                35thrua
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.382275in" top="1.8360in" width="0.6127in" height="0.1789in">
+              <fo:block color="turquoise">
+                35fromb
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.0359in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                35tob
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.0163in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                36froma
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.7107in" top="1.6734in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                36thrua
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.0163in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                36fromb
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.7107in" top="1.8360in" width="0.6536in" height="0.1789in">
+              <fo:block color="turquoise">
+                36thrub
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847in" top="1.6734in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                37line1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847in" top="1.8360in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                37line2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.2564in" top="1.9986in" width="3.9829in" height="0.1789in">
+              <fo:block color="turquoise">
+                38line1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.1612in" width="4.085in" height="0.1789in">
+              <fo:block color="turquoise">
+                38line2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.3238in" width="4.085in" height="0.1789in">
+              <fo:block color="turquoise">
+                38line3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.4864in" width="4.085in" height="0.1789in">
+              <fo:block color="turquoise">
+                38line4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="2.6490in" width="4.085in" height="0.1789in">
+              <fo:block color="turquoise">
+                38line5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.1612in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field39a_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.1612in" width="1.0008in" height="0.1789in">
+              <fo:block color="turquoise">
+                39aCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.3238in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field39b_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.3238in" width="1.0008in" height="0.1789in">
+              <fo:block color="turquoise">
+                39bcode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.4864in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                39cAmount 
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.4864in" width="1.0008in" height="0.1789in">
+              <fo:block color="turquoise">
+                39cCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.36185in" top="2.6490in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field39d_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="4.627375in" top="2.6490in" width="1.0008in" height="0.1789in">
+              <fo:block color="turquoise">
+                39dCode 
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.1612in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field40a_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9141in" top="2.1612in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                40aCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.3238in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field40b_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9141in" top="2.3238in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                40bCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.4864in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                40cAmount
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9141in" top="2.4864in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                40cCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="2.6490in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field40d_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9141in" top="2.6490in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                40dCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.1612in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field41a_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.1805in" top="2.1612in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                41aCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.3238in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field41b_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.1805in" top="2.3238in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                41bCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.4864in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                41cAmount
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.1805in" top="2.4864in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                41cCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.89455in" top="2.6490in" width="0.2656in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field41d_Amount"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="7.1805in" top="2.6490in" width="0.9804in" height="0.1789in">
+              <fo:block color="turquoise">
+                41dCode
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="2.9742in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="2.9742in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="2.9742in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="2.9742in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="2.9742in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="2.9742in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="2.9742in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.1368in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.1368in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.1368in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.1368in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.1368in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.1368in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.1368in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.2994in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.2994in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.2994in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.2994in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.2994in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.2994in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.2994in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.4620in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.4620in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.4620in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.4620in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.4620in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.4620in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.4620in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.6246in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.6246in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.6246in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.6246in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.6246in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.6246in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.6246in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.7872in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.7872in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Descrition6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.7872in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.7872in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.7872in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.7872in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.7872in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="3.9498in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                42R7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="3.9498in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                43Description7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="3.9498in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                45ServD7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="3.9498in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                46ServU7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="3.9498in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                47TCharg7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="3.9498in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                48NCCharg7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="3.9498in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                49.7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.1124in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.1124in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.1124in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.1124in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.1124in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.1124in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.1124in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.2750in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.2750in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.2750in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.2750in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.2750in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.2750in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.2750in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.4376in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.4376in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.4376in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.4376in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.4376in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.4376in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.4376in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.6002in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.6002in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.6002in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.6002in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.6002in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.6002in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.6002in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.7628in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.7628in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.7628in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.7628in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.7628in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.7628in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.7628in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="4.9254in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="4.9254in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="4.9254in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="4.9254in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="4.9254in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="4.9254in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="4.9254in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.088in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.088in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.088in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.088in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.088in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.088in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.088in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.2506in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.2506in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.2506in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.2506in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.2506in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.2506in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.2506in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.4132in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.4132in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.4132in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.4132in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.4132in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.4132in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.4132in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.5758in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.5758in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.5758in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.5758in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.5758in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.5758in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.5758in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.7384in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.7384in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.7384in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.7384in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.7384in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.7384in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.7384in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="5.901in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="5.901in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="5.901in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="5.901in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="5.901in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="5.901in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="5.901in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.0636in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="6.0636in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="6.0636in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="6.0636in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="6.0636in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="6.0636in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="6.0636in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.2263in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="6.2263in" width="2.4102in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="6.2263in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="6.2263in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="6.2263in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="6.2263in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="6.2263in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="0.1543in" top="6.3888in" width="0.4290in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.6037in" top="6.3888in" width="2.4111in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="6.3888in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.1993in" top="6.3888in" width="0.7557in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="6.3888in" width="0.9600in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="6.3888in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.8954in" top="6.3888in" width="0.2656in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="1.0734in" top="6.5514in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                ?
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="1.645325in" top="6.5514in" width="0.2451in" height="0.1789in">
+              <fo:block color="turquoise">
+                ?
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.5048in" top="6.5514in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                CreatDate
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="5.9755in" top="6.5514in" width="0.9600in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field47_SummaryTotalCharges"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.9558in" top="6.5514in" width="0.9395in" height="0.1789in">
+              <fo:block color="turquoise">
+                <xsl:value-of select="Field48_SummaryTotalNonCoveredCharges"/>
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="right" left="6.6903in" top="6.7140in" width="1.4706in" height="0.1789in">
+              <xsl:value-of select="Field56_NationalProviderIndicators"/>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="6.8766in" width="1.4706in" height="0.1789in">
+              <xsl:value-of select="Field57_OtherProviderIdentifier"/>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="7.0392in" width="1.4706in" height="0.1789in">
+              <fo:block color="turquoise">
+                57Other
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.6903in" top="7.2019in" width="1.4706in" height="0.1789in">
+              <fo:block color="turquoise">
+                57PrvID
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="7.5270in" width="2.5327in" height="0.1789in">
+              <fo:block color="turquoise">SBR LAST NAME , SBR FIRST NAME</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6870in" top="7.5270in" width="0.2860in" height="0.1789in">
+              <fo:block color="turquoise">
+                59PR
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="2.9730in" top="7.5270in" width="1.9404in" height="0.1789in">
+              <xsl:value-of select="Field60a_InsuredsIniqueIdentificationNumber"/>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.9338in" top="7.5270in" width="1.4503in" height="0.1789in">
+              <fo:block color="turquoise">
+                61GroupName
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="6.4043in" top="7.5270in" width="1.7565in" height="0.1789in">
+              <fo:block color="turquoise">
+                62InsuranceGroupNo
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="8.1774in" width="3.0025in" height="0.1789in">
+              <fo:block color="turquoise">
+                63ATreatAuthCodeA
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976in" top="8.1774in" width="2.5123in" height="0.1789in">
+              <fo:block color="turquoise">
+                64DocControlNumA
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.7303in" top="8.1774in" width="2.43057in" height="0.1789in">
+              <fo:block color="turquoise">
+                65EmployerNameA
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="8.34in" width="3.0025in" height="0.1789in">
+              <fo:block color="turquoise">
+                63TreatAuthCodeB
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="3.1976in" top="8.34in" width="2.5123in" height="0.1789in">
+              <fo:block color="turquoise">
+                64DocControlNumB
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.7303in" top="8.34in" width="2.43057in" height="0.1789in">
+              <fo:block color="turquoise">
+                65EmployerNameB
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.2564in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                1
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9305in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                2
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.0326in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                3
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7066in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                4
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.8087in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                5
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4828in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                6
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6051in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                7
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.2793in" top="8.6652in" width="0.2793in" height="0.1789in">
+              <fo:block color="turquoise">
+                8
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.3815in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                9
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.0555in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                10
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1576in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                11
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.8316in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                12
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.9338in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                13
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6079in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                14
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.7303in" top="8.6652in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                15
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.4043in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                16
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.5065in" top="8.6652in" width="0.7761in" height="0.1789in">
+              <fo:block color="turquoise">
+                17
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.1805in" top="8.6652in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                18
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.3847in" top="8.6652in" width="0.7761in" height="0.1789in">
+              <fo:block color="turquoise">
+                68A
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block>19</fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.2564in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                20
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9305in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.0326in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7066in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.8087in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4828in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.6051in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.2793in" top="8.8278in" width="0.2793in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.3815in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.0555in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1576in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.8316in" top="8.8278in" width="0.1021in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.9338in" top="8.8278in" width="0.6740in" height="0.1789in">
+              <fo:block color="turquoise">
+                .
+              </fo:block>
+            </fo:block-container>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6079in" top="8.8278in" width="0.1021in" height="0.1789in">
               <fo:block>O</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.730325in" top="8.8278in" width="0.674025in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.7303in" top="8.8278in" width="0.6740in" height="0.1789in">
               <fo:block>7262</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.404349999999999in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.4043in" top="8.8278in" width="0.1021in" height="0.1789in">
               <fo:block>P</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.506474999999999in" top="8.8278in" width="0.7761499999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.5065in" top="8.8278in" width="0.7761in" height="0.1789in">
               <fo:block>7262</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.180499999999999in" top="8.8278in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.1805in" top="8.8278in" width="0.1021in" height="0.1789in">
               <fo:block>Q</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.5219499999999999in" top="8.990400000000001in" width="0.69445in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.5219in" top="8.9904in" width="0.6945in" height="0.1789in">
               <fo:block>8404</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7270249999999998in" top="8.990400000000001in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.7270in" top="8.9904in" width="0.6536in" height="0.1789in">
+              <fo:block>131 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.421475in" top="8.990400000000001in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4215in" top="8.9904in" width="0.6536in" height="0.1789in">
+              <fo:block>132 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0954999999999994in" top="8.990400000000001in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0955in" top="8.9904in" width="0.6740in" height="0.1789in">
+              <fo:block>133 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1575999999999995in" top="8.990400000000001in" width="0.49019999999999997in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.1576in" top="8.9904in" width="0.4901in" height="0.1789in">
               <fo:block>502</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.831625in" top="8.990400000000001in" width="0.69445in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="4.8316in" top="8.9904in" width="0.6945in" height="0.1789in">
               <fo:block>E9421</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.526075in" top="8.990400000000001in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.5262in" top="8.9904in" width="0.1021in" height="0.1789in">
               <fo:block>R</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="8.990400000000001in" width="0.6536in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="5.6282in" top="8.9904in" width="0.6536in" height="0.1789in">
               <fo:block>E9413</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.302224999999999in" top="8.990400000000001in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.3022in" top="8.9904in" width="0.1021in" height="0.1789in">
               <fo:block>S</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.404349999999999in" top="8.990400000000001in" width="0.6536in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="6.4043in" top="8.9904in" width="0.6536in" height="0.1789in">
               <fo:block>E8497</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.078374999999999in" top="8.990400000000001in" width="0.102125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.0784in" top="8.9904in" width="0.1021in" height="0.1789in">
               <fo:block>T</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826249999999995in" top="8.990400000000001in" width="0.85785in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826in" top="8.9904in" width="0.8579in" height="0.1789in">
+              <fo:block>134 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="9.3156in" width="0.7761499999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="9.3156in" width="0.7761in" height="0.1789in">
               <fo:block>8377</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9508749999999999in" top="9.3156in" width="0.6536in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9509in" top="9.3156in" width="0.6536in" height="0.1789in">
               <fo:block>101508</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.6249in" top="9.3156in" width="0.755725in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.6249in" top="9.3156in" width="0.7557in" height="0.1789in">
               <fo:block>8363</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4010499999999997in" top="9.3156in" width="0.674025in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4010in" top="9.3156in" width="0.6740in" height="0.1789in">
               <fo:block>101508</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0954999999999994in" top="9.3156in" width="0.747555in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0955in" top="9.3156in" width="0.7476in" height="0.1789in">
+              <fo:block>135 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.87165in" top="9.3156in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.8717in" top="9.3156in" width="0.6536in" height="0.1789in">
+              <fo:block>136 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="9.6408in" width="0.7761499999999999in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.1543in" top="9.6408in" width="0.7761in" height="0.1789in">
+              <fo:block>137 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9508749999999999in" top="9.6408in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="0.9509in" top="9.6408in" width="0.6536in" height="0.1789in">
+              <fo:block>138 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.6249in" top="9.6408in" width="0.755725in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="1.6249in" top="9.6408in" width="0.7557in" height="0.1789in">
+              <fo:block>139 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4010499999999997in" top="9.6408in" width="0.674025in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="2.4010in" top="9.6408in" width="0.6740in" height="0.1789in">
+              <fo:block>140 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0954999999999994in" top="9.6408in" width="0.747555in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.0955in" top="9.6408in" width="0.7476in" height="0.1789in">
+              <fo:block>141 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.87165in" top="9.6408in" width="0.6536in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="3.8717in" top="9.6408in" width="0.6536in" height="0.1789in">
+              <fo:block>142 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.545674999999999in" top="9.153in" width="0.46977499999999994in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.5457in" top="9.153in" width="0.4698in" height="0.1789in">
+              <fo:block>143 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.545674999999999in" top="9.3156in" width="0.46977499999999994in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.5457in" top="9.3156in" width="0.4698in" height="0.1789in">
+              <fo:block>144 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.545674999999999in" top="9.478200000000001in" width="0.46977499999999994in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.5457in" top="9.4782in" width="0.4698in" height="0.1789in">
+              <fo:block>145 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.545674999999999in" top="9.6408in" width="0.46977499999999994in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="4.5457in" top="9.6408in" width="0.4698in" height="0.1789in">
+              <fo:block>146 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.852874999999999in" top="9.153in" width="1.02125in" height="0.17886000000000002in">
-              <fo:block>1740295484</fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.8529in" top="9.153in" width="1.0213in" height="0.1789in">
+              <fo:block>
+                <xsl:value-of select="Field76_AttendingProviderNationalProviderIdentifier"/>
+              </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.078374999999999in" top="9.153in" width="0.20425in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.0784in" top="9.153in" width="0.2043in" height="0.1789in">
               <fo:block>1G</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826249999999995in" top="9.153in" width="0.8782749999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826in" top="9.153in" width="0.8783in" height="0.1789in">
               <fo:block>G43918</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.280975in" top="9.3156in" width="1.51145in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.2810in" top="9.3156in" width="1.5115in" height="0.1789in">
               <fo:block>DOC LAST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.037525in" top="9.3156in" width="1.123375in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.0375in" top="9.3156in" width="1.1235in" height="0.1789in">
               <fo:block>DOC FIRST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.852874999999999in" top="9.478200000000001in" width="1.02125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.8529in" top="9.4782in" width="1.0213in" height="0.1789in">
               <fo:block>1740295484</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.078374999999999in" top="9.478200000000001in" width="0.20425in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.0784in" top="9.4782in" width="0.2043in" height="0.1789in">
               <fo:block>1G</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826249999999995in" top="9.478200000000001in" width="0.8782749999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826in" top="9.4782in" width="0.8783in" height="0.1789in">
               <fo:block>OP G43918</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.280975in" top="9.6408in" width="1.51145in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.2810in" top="9.6408in" width="1.5115in" height="0.1789in">
               <fo:block>OP DOC LAST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.037525in" top="9.6408in" width="1.123375in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.0375in" top="9.6408in" width="1.1235in" height="0.1789in">
               <fo:block>OP DOC FIRST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.852874999999999in" top="9.8034in" width="1.02125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.8529in" top="9.8034in" width="1.0213in" height="0.1789in">
               <fo:block>OT10295484</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.078374999999999in" top="9.8034in" width="0.20425in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.0784in" top="9.8034in" width="0.2043in" height="0.1789in">
               <fo:block>1G</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826249999999995in" top="9.8034in" width="0.8782749999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826in" top="9.8034in" width="0.8783in" height="0.1789in">
               <fo:block>OT1 G43918</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.280975in" top="9.966000000000001in" width="1.51145in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.2810in" top="9.9660in" width="1.5115in" height="0.1789in">
               <fo:block>OT1 DOC LAST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.037525in" top="9.966000000000001in" width="1.123375in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.0375in" top="9.9660in" width="1.1235in" height="0.1789in">
               <fo:block>OT1 DOC FIRST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.852874999999999in" top="10.1286in" width="1.02125in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.8529in" top="10.1286in" width="1.0213in" height="0.1789in">
               <fo:block>OT20295484</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.078374999999999in" top="10.1286in" width="0.20425in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="center" left="7.0784in" top="10.1286in" width="0.2043in" height="0.1789in">
               <fo:block>1G</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826249999999995in" top="10.1286in" width="0.8782749999999999in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.2826in" top="10.1286in" width="0.8783in" height="0.1789in">
               <fo:block>OT2 G43918</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.280975in" top="10.2912in" width="1.51145in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="5.2810in" top="10.2912in" width="1.5115in" height="0.1789in">
               <fo:block>OT2 DOC LAST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.037525in" top="10.2912in" width="1.123375in" height="0.17886000000000002in">
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="7.0375in" top="10.2912in" width="1.1235in" height="0.1789in">
               <fo:block>OT2 DOC FIRST</fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="9.8034in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="9.8034in" width="2.3284in" height="0.1789in">
+              <fo:block>147 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="9.966000000000001in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="9.9660in" width="2.3284in" height="0.1789in">
+              <fo:block>148 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="10.1286in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="10.1286in" width="2.3284in" height="0.1789in">
+              <fo:block>149 </fo:block>
             </fo:block-container>
-            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="10.2912in" width="2.3284499999999997in" height="0.17886000000000002in">
-              <fo:block> </fo:block>
+            <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="2px" text-align="left" left="0.1543in" top="10.2912in" width="2.3284in" height="0.1789in">
+              <fo:block>150 </fo:block>
             </fo:block-container>
           </fo:flow>
         </fo:page-sequence>
