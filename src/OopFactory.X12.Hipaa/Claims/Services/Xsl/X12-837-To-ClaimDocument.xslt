@@ -65,8 +65,10 @@
         </PatientStatus>
       </xsl:if>
 
+      <xsl:variable name="ParentLoopId" select="../@LoopId"/>
       <xsl:choose>
-        <xsl:when test="../@LoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
+        
+        <xsl:when test="$ParentLoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
           </xsl:call-template>
@@ -74,7 +76,7 @@
             <xsl:with-param name="HLoop" select="../."/>
           </xsl:call-template>
         </xsl:when>
-        <xsl:when test="../@LoopId = '2000C'"> <!-- Parent is Patient Loop -->
+        <xsl:when test="$ParentLoopId = '2000C'"> <!-- Parent is Patient Loop -->
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../../."/>
           </xsl:call-template>
@@ -89,7 +91,21 @@
           <xsl:with-param name="DTP" select="."/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:apply-templates select="Loop[@LoopId='2400']"/>
     </Claim>
+  </xsl:template>
+
+  <xsl:template match="Loop[@LoopId='2400']">
+    <ServiceLine>
+      <xsl:attribute name="RevenueCode">
+        <xsl:value-of select="SV2/SV201"/>
+      </xsl:attribute>
+      <Procedure>
+        <xsl:attribute name="ProcedureCode">
+          <xsl:value-of select="SV2/SV202/SV20202"/>
+        </xsl:attribute>
+      </Procedure>
+    </ServiceLine>
   </xsl:template>
 
   <xsl:template name="BillingProviderHLoop">
@@ -358,5 +374,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  
+  
 
 </xsl:stylesheet>

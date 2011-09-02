@@ -21,11 +21,16 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public int LineNumber { get; set; }
 
+        [XmlAttribute]
+        public string RevenueCode { get; set; }
+
         public MedicalProcedure Procedure { get; set; }
         public List<Identification> Identifications { get; set; }
         public List<QualifiedAmount> Amounts { get; set; }
         public List<QualifiedDate> Dates { get; set; }
         public List<QualifiedDateRange> DateRanges { get; set; }
         public List<string> Notes { get; set; }
+
+        
     }
 }
