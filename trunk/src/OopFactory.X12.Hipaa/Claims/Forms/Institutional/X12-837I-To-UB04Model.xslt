@@ -461,6 +461,7 @@
         
         <!-- LOOP 2300 CLAIM INFORMATION -->
         <!--Patient Account Number-->
+      <foo>foo</foo>
        <Field03a_PatientControlNumber>
         <xsl:value-of select="CLM/CLM01"/>
        </Field03a_PatientControlNumber>
@@ -514,7 +515,7 @@
 
         <!-- 2300 AMT02 (WHEN AMT01 is 'F3', Patient Responsibility - Estimated - Field 55 from UB-04.
              Other/Tertiary payers do NOT have an EST AMT DUE??-->
-        <xsl:if test="(AMT01 = 'F3')">
+      <xsl:if test="(AMT01 = 'F3')">
           <Field55PrimaryPayerEstimatedAmountDue>
             <xsl:value-of select="AMT/AMT02"/>
           </Field55PrimaryPayerEstimatedAmountDue>
@@ -526,7 +527,7 @@
           </Field16_DischargeHour>
         </xsl:if>
 
-
+      <xsl:for-each select="DTP">
         <xsl:if test="(DTP/DTP01 = '434') and (DTP/DTP02 = 'D8')">
           <Field06_ServiceFromDate>
             <xsl:value-of select="DTP/DTP03"/>
@@ -544,16 +545,17 @@
             <xsl:value-of select="DTP/DTP03"/>
           </Field06_ServiceToDate>
         </xsl:if>
-
+      </xsl:for-each>
+      <xsl:for-each select="DTP">
         <xsl:if test="(DTP/DTP01 = '435') and ((DTP/DTP02 = 'D8') or (DTP/DTP02 = 'DT'))">
           <Field13_AdmissionHour>
             <xsl:value-of select="DTP/DTP03"/>
           </Field13_AdmissionHour>
           <Field12_AdmissionDate>
-            <xsl:value-of select="DTP/DTP03"/>
+            <xsl:value-of select="concat(substring(DTP/DTP03,1,4),'-',substring(DTP/DTP03,5,2),'-',substring(DTP/DTP03,7,2))"/>
           </Field12_AdmissionDate>
         </xsl:if>
-
+      </xsl:for-each>
         
         <Field14_TypeOfVisit>
           <xsl:value-of select="CL1/CL101"/>
@@ -579,7 +581,7 @@
             <xsl:value-of select="HI0102"/>
           </Field31_OccurrenceCode_a>
           <Field31_OccurrenceCodeDate_a>
-            <xsl:value-of select="HI0104"/>
+            <xsl:value-of select="concat(substring(HI0104,1,4),'-',substring(HI0104,5,2),'-',substring(HI0104,7,2))"/>
           </Field31_OccurrenceCodeDate_a>
         </xsl:if>
       </xsl:for-each>
@@ -589,12 +591,12 @@
             <xsl:value-of select="HI0202"/>
           </Field19_ConditionCode02>
         </xsl:if>
-        <xsl:if test="HI0201= 'BH'">
+        <xsl:if test="HI0201='BH'">
           <Field32_OccurrenceCode_a>
             <xsl:value-of select="HI0202"/>
           </Field32_OccurrenceCode_a>
           <Field32_OccurrenceCodeDate_a>
-            <xsl:value-of select="HI0204"/>
+            <xsl:value-of select="concat(substring(HI0204,1,4),'-',substring(HI0204,5,2),'-',substring(HI0204,7,2))"/>
           </Field32_OccurrenceCodeDate_a>
         </xsl:if>
       </xsl:for-each>
@@ -609,7 +611,7 @@
             <xsl:value-of select="HI0302"/>
           </Field33_OccurrenceCode_a>
           <Field33_OccurrenceCodeDate_a>
-            <xsl:value-of select="HI0304"/>
+            <xsl:value-of select="concat(substring(HI0304,1,4),'-',substring(HI0304,5,2),'-',substring(HI0304,7,2))"/>
           </Field33_OccurrenceCodeDate_a>
         </xsl:if>
       </xsl:for-each>
@@ -624,7 +626,7 @@
             <xsl:value-of select="HI0402"/>
           </Field34_OccurrenceCode_a>
           <Field34_OccurrenceCodeDate_a>
-            <xsl:value-of select="HI0404"/>
+            <xsl:value-of select="concat(substring(HI0404,1,4),'-',substring(HI0404,5,2),'-',substring(HI0404,7,2))"/>
           </Field34_OccurrenceCodeDate_a>
         </xsl:if>
       </xsl:for-each>
@@ -754,124 +756,124 @@
         </xsl:if>
       </xsl:for-each>
 
-      <xsl:if test="('HI03 - 1' = 'BI')">
+      <xsl:if test="('HI031' = 'BI')">
           <Field35_SpanCode_b>
-            <xsl:value-of select="HI/HI03 - 2"/>
+            <xsl:value-of select="HI/HI032"/>
           </Field35_SpanCode_b>
         </xsl:if>
-        <xsl:if test="('HI03 - 3' = 'RD8')">
+        <xsl:if test="('HI033' = 'RD8')">
           <Field35_SpanDate_b>
-            <xsl:value-of select="HI/HI03 - 4"/>
+            <xsl:value-of select="HI/HI034"/>
           </Field35_SpanDate_b>
         </xsl:if>
-        <xsl:if test="('HI04 - 1' = 'BI')">
+        <xsl:if test="('HI041' = 'BI')">
           <Field36_SpanCode_b>
-            <xsl:value-of select="HI/HI04 - 2"/>
+            <xsl:value-of select="HI/HI042"/>
           </Field36_SpanCode_b>
         </xsl:if>
-        <xsl:if test="('HI04 - 3' = 'RD8')">
+        <xsl:if test="('HI043' = 'RD8')">
           <Field36_SpanDate_b>
-            <xsl:value-of select="HI/HI04 - 4"/>
+            <xsl:value-of select="HI/HI044"/>
           </Field36_SpanDate_b>
         </xsl:if>
 
 
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field39a_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field39a_Code>
           <Field39a_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field39a_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field39b_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field39b_Code>
           <Field39b_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field39b_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field39c_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field39c_Code>
           <Field39c_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field39c_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field39d_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field39d_Code>
           <Field39d_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field39d_Value>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field40a_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field40a_Code>
           <Field40a_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field40a_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field40b_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field40b_Code>
           <Field40b_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field40b_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field40c_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field40c_Code>
           <Field40c_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field40c_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field40d_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field40d_Code>
           <Field40d_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field40d_Value>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field41a_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field41a_Code>
           <Field41a_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field41a_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field41b_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field41b_Code>
           <Field41b_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field41b_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field41c_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field41c_Code>
           <Field41c_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field41c_Value>
         </xsl:if>
-        <xsl:if test="('HI01 - 1' = 'BE')">
+        <xsl:if test="('HI011' = 'BE')">
           <Field41d_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field41d_Code>
           <Field41d_Value>
-            <xsl:value-of select="HI/HI01 - 5"/>
+            <xsl:value-of select="HI/HI015"/>
           </Field41d_Value>
         </xsl:if>
 
@@ -891,276 +893,276 @@
         
         <xsl:if test="(HI101 = 'BK') or (HI101 = 'ABK')">
           <Field67_PrincipleDiagCode1_7>
-              <xsl:value-of select="HI/HI01 - 2"/>
+              <xsl:value-of select="HI/HI012"/>
           </Field67_PrincipleDiagCode1_7>
           <Field67_PrincipleDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67_PrincipleDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 1' = 'BF') or ('HI01 - 1' = 'ABF')">
+        <xsl:if test="('HI011' = 'BF') or ('HI011' = 'ABF')">
           <Field67a_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67a_OtherDiagCode1_7>
           <Field67a_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67a_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 2' = 'BF') or ('HI01 - 2' = 'ABF')">
+        <xsl:if test="('HI012' = 'BF') or ('HI012' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 3' = 'BF') or ('HI01 - 3' = 'ABF')">
+        <xsl:if test="('HI013' = 'BF') or ('HI013' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 4' = 'BF') or ('HI01 - 4' = 'ABF')">
+        <xsl:if test="('HI014' = 'BF') or ('HI014' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 5' = 'BF') or ('HI01 - 5' = 'ABF')">
+        <xsl:if test="('HI015' = 'BF') or ('HI015' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 6' = 'BF') or ('HI01 - 6' = 'ABF')">
+        <xsl:if test="('HI016' = 'BF') or ('HI016' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 7' = 'BF') or ('HI01 - 7' = 'ABF')">
+        <xsl:if test="('HI017' = 'BF') or ('HI017' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 8' = 'BF') or ('HI01 - 8 '= 'ABF')">
+        <xsl:if test="('HI018' = 'BF') or ('HI018 '= 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 9' = 'BF') or ('HI01 - 9' = 'ABF')">
+        <xsl:if test="('HI019' = 'BF') or ('HI019' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 10' = 'BF') or ('HI01 - 10' = 'ABF')">
+        <xsl:if test="('HI0110' = 'BF') or ('HI0110' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 11' = 'BF') or ('HI01 - 11' = 'ABF')">
+        <xsl:if test="('HI0111' = 'BF') or ('HI0111' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 12' = 'BF') or ('HI01 - 12' = 'ABF')">
+        <xsl:if test="('HI0112' = 'BF') or ('HI0112' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 13' = 'BF') or ('HI01 - 13' = 'ABF')">
+        <xsl:if test="('HI0113' = 'BF') or ('HI0113' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 14' = 'BF') or ('HI01 - 14' = 'ABF')">
+        <xsl:if test="('HI0114' = 'BF') or ('HI0114' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 15' = 'BF') or ('HI01 - 15' = 'ABF')">
+        <xsl:if test="('HI0115' = 'BF') or ('HI0115' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 16' = 'BF') or ('HI01 - 16' = 'ABF')">
+        <xsl:if test="('HI0116' = 'BF') or ('HI0116' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 17' = 'BF') or ('HI01 - 17' = 'ABF')">
+        <xsl:if test="('HI0117' = 'BF') or ('HI0117' = 'ABF')">
           <Field67b_OtherDiagCode1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field67b_OtherDiagCode1_7>
           <Field67b_OtherDiagCode8>
-            <xsl:value-of select="HI/HI01 - 9"/>
+            <xsl:value-of select="HI/HI019"/>
           </Field67b_OtherDiagCode8>
         </xsl:if>
 
 
-        <xsl:if test="('HI01 - 1' = 'BJ') or ('HI01 - 1' = 'ABJ')">
+        <xsl:if test="('HI011' = 'BJ') or ('HI011' = 'ABJ')">
           <Field69_AdmittingDiagnosisCode>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field69_AdmittingDiagnosisCode>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 1' = 'PR') or ('HI01 - 1' = 'APR')">
+        <xsl:if test="('HI011' = 'PR') or ('HI011' = 'APR')">
           <Field70a_ReasonForVisit>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field70a_ReasonForVisit>
         </xsl:if>
 
-        <xsl:if test="('HI02 - 1' = 'PR') or ('HI02 - 1' = 'ABAPRJ')">
+        <xsl:if test="('HI021' = 'PR') or ('HI021' = 'ABAPRJ')">
           <Field70b_ReasonForVisit>
-            <xsl:value-of select="HI/HI02 - 2"/>
+            <xsl:value-of select="HI/HI022"/>
           </Field70b_ReasonForVisit>
         </xsl:if>
 
-        <xsl:if test="('HI03 - 1' = 'PR') or ('HI03 - 1' = 'APR')">
+        <xsl:if test="('HI031' = 'PR') or ('HI031' = 'APR')">
           <Field70c_ReasonForVisit>
-            <xsl:value-of select="HI/HI03 - 2"/>
+            <xsl:value-of select="HI/HI032"/>
           </Field70c_ReasonForVisit>
         </xsl:if>
 
-        <xsl:if test="'HI01 - 1' = DR">
+        <xsl:if test="'HI011' = DR">
           <Field71_ProspectivePaymentSystemCode>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field71_ProspectivePaymentSystemCode>
         </xsl:if>
 
         
-        <xsl:if test="('HI01 - 1' = 'BN') or ('HI01 - 1' = 'ABN')">
+        <xsl:if test="('HI011' = 'BN') or ('HI011' = 'ABN')">
           <Field72a_ExternalCauseOfInjuryCode_1_7>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field72a_ExternalCauseOfInjuryCode_1_7>
           <Field72a_ExternalCauseOfInjuryCode_8>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field72a_ExternalCauseOfInjuryCode_8>
         </xsl:if>
 
-        <xsl:if test="('HI02 - 1' = 'BN') or ('HI02 - 1' = 'ABN')">
+        <xsl:if test="('HI021' = 'BN') or ('HI021' = 'ABN')">
           <Field72b_ExternalCauseOfInjuryCode_1_7>
-            <xsl:value-of select="HI/HI02 - 2"/>
+            <xsl:value-of select="HI/HI022"/>
           </Field72b_ExternalCauseOfInjuryCode_1_7>
           <Field72b_ExternalCauseOfInjuryCode_8>
-            <xsl:value-of select="HI/HI02 - 9"/>
+            <xsl:value-of select="HI/HI029"/>
           </Field72b_ExternalCauseOfInjuryCode_8>
         </xsl:if>
 
-        <xsl:if test="('HI03 - 1' = 'BN') or ('HI03 - 1' = 'ABN')">
+        <xsl:if test="('HI031' = 'BN') or ('HI031' = 'ABN')">
           <Field72c_ExternalCauseOfInjuryCode_1_7>
-            <xsl:value-of select="HI/HI03 - 2"/>
+            <xsl:value-of select="HI/HI032"/>
           </Field72c_ExternalCauseOfInjuryCode_1_7>
           <Field72c_ExternalCauseOfInjuryCode_8>
-            <xsl:value-of select="HI/HI03 - 9"/>
+            <xsl:value-of select="HI/HI039"/>
           </Field72c_ExternalCauseOfInjuryCode_8>
         </xsl:if>
 
-        <xsl:if test="('HI01 - 1' = 'BR') or ('HI01 - 1' = 'BBR')">
+        <xsl:if test="('HI011' = 'BR') or ('HI011' = 'BBR')">
           <Field74_Principal_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field74_Principal_Code>
           <Field74_Principal_Date>
-            <xsl:value-of select="HI/HI01 - 4"/>
+            <xsl:value-of select="HI/HI014"/>
           </Field74_Principal_Date>
         </xsl:if>
         
-        <xsl:if test="('HI01 - 1' = 'BQ') or ('HI01 - 1' = 'BBQ')">
+        <xsl:if test="('HI011' = 'BQ') or ('HI011' = 'BBQ')">
           <Field74a_OtherProcedure_Code>
-            <xsl:value-of select="HI/HI01 - 2"/>
+            <xsl:value-of select="HI/HI012"/>
           </Field74a_OtherProcedure_Code>
           <Field74a_OtherProcedure_Date>
-            <xsl:value-of select="HI/HI01 - 4"/>
+            <xsl:value-of select="HI/HI014"/>
           </Field74a_OtherProcedure_Date>
         </xsl:if>
 
-        <xsl:if test="('HI02 - 1' = 'BQ') or ('HI02 - 1' = 'BBQ')">
+        <xsl:if test="('HI021' = 'BQ') or ('HI021' = 'BBQ')">
           <Field74b_OtherProcedure_Code>
-            <xsl:value-of select="HI/HI02 - 2"/>
+            <xsl:value-of select="HI/HI022"/>
           </Field74b_OtherProcedure_Code>
           <Field74b_OtherProcedure_Date>
-            <xsl:value-of select="HI/HI02 - 4"/>
+            <xsl:value-of select="HI/HI024"/>
           </Field74b_OtherProcedure_Date>
         </xsl:if>
 
-        <xsl:if test="('HI03 - 1' = 'BQ') or ('HI03 - 1' = 'BBQ')">
+        <xsl:if test="('HI031' = 'BQ') or ('HI031' = 'BBQ')">
           <Field74c_OtherProcedure_Code>
-            <xsl:value-of select="HI/HI03 - 2"/>
+            <xsl:value-of select="HI/HI032"/>
           </Field74c_OtherProcedure_Code>
           <Field74c_OtherProcedure_Date>
-            <xsl:value-of select="HI/HI03 - 4"/>
+            <xsl:value-of select="HI/HI034"/>
           </Field74c_OtherProcedure_Date>
         </xsl:if>
 
-        <xsl:if test="('HI04 - 1' = 'BQ') or ('HI04 - 1' = 'BBQ')">
+        <xsl:if test="('HI041' = 'BQ') or ('HI041' = 'BBQ')">
           <Field74e_OtherProcedure_Code>
-            <xsl:value-of select="HI/HI04 - 2"/>
+            <xsl:value-of select="HI/HI042"/>
           </Field74e_OtherProcedure_Code>
           <Field74e_OtherProcedure_Date>
-            <xsl:value-of select="HI/HI04 - 4"/>
+            <xsl:value-of select="HI/HI044"/>
           </Field74e_OtherProcedure_Date>
         </xsl:if>
 
-        <xsl:if test="('HI05 - 1' = 'BQ') or ('HI05 - 1' = 'BBQ')">
+        <xsl:if test="('HI051' = 'BQ') or ('HI051' = 'BBQ')">
           <Field74e_OtherProcedure_Code>
-            <xsl:value-of select="HI/HI05 - 2"/>
+            <xsl:value-of select="HI/HI052"/>
           </Field74e_OtherProcedure_Code>
           <Field74e_OtherProcedure_Date>
-            <xsl:value-of select="HI/HI05 - 4"/>
+            <xsl:value-of select="HI/HI054"/>
           </Field74e_OtherProcedure_Date>
         </xsl:if>
 
@@ -1202,31 +1204,31 @@
           <xsl:value-of select="SV2/SV201"/>
         </Field42_RevenueCode>
 
-        <xsl:if test="('SV202 - 1' = 'HC')">
+        <xsl:if test="('SV2021' = 'HC')">
           <Field44_HCPCS>
-            <xsl:value-of select="SV2/SV202 - 2"/>
+            <xsl:value-of select="SV2/SV2022"/>
           </Field44_HCPCS>
         </xsl:if>
-        <xsl:if test="('SV202 - 1' = 'HP')">
+        <xsl:if test="('SV2021' = 'HP')">
           <Field44_HCPCS_RateCode>
-            <xsl:value-of select="SV2/SV202 - 2"/>
+            <xsl:value-of select="SV2/SV2022"/>
           </Field44_HCPCS_RateCode>
         </xsl:if>
         <Field44_AccommodationRate>
           <xsl:value-of select="SV2/SV206"/>
         </Field44_AccommodationRate>
-        <xsl:if test="('SV202 - 1' = 'HC')">
+        <xsl:if test="('SV2021' = 'HC')">
           <Field44_HCPCS_Modifier_1>
-            <xsl:value-of select="SV2/SV202 - 3"/>
+            <xsl:value-of select="SV2/SV2023"/>
           </Field44_HCPCS_Modifier_1>
           <Field44_HCPCS_Modifier_2>
-            <xsl:value-of select="SV2/SV202 - 4"/>
+            <xsl:value-of select="SV2/SV2024"/>
           </Field44_HCPCS_Modifier_2>
           <Field44_HCPCS_Modifier_3>
-            <xsl:value-of select="SV2/SV202 - 5"/>
+            <xsl:value-of select="SV2/SV2025"/>
           </Field44_HCPCS_Modifier_3>
           <Field44_HCPCS_Modifier_4>
-            <xsl:value-of select="SV2/SV202 - 6"/>
+            <xsl:value-of select="SV2/SV2026"/>
           </Field44_HCPCS_Modifier_4>
         </xsl:if>
       <!--</xsl:for-each>-->

@@ -43,10 +43,10 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             var xml = interchange.Serialize();
 
             var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Forms.Institutional.X12-837I-To-UB04Model.xslt");
-            
+
             var transform = new XslCompiledTransform();
             if (transformStream != null) transform.Load(XmlReader.Create(transformStream));
-
+            
             var outputStream = new MemoryStream();
             
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
