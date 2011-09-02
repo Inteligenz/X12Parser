@@ -99,6 +99,12 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             // Box 15 Admission Source
 
+
+            Assert.AreEqual(2, claim.ServiceLines.Count, "Unexpected number of service lines.");
+
+            ServiceLine line = claim.ServiceLines[0];
+            Assert.AreEqual("305", line.RevenueCode);
+            Assert.AreEqual("85025", line.Procedure.ProcedureCode);
         }
     }
 }
