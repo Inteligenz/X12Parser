@@ -32,14 +32,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // First, we will declare the private variables.  Then the properties and their accessors.
         // From 2010AA loop
         private string _field01_01_BillingProviderLastName;
-        //private string _field01_02_BillingProviderFirstName;              // Not used
-        //private string _field01_03_BillingProviderMiddleName;             // Not used
         private string _field01_04_BillingProviderAddress1;
         private string _field01_05_BillingProviderAddress2;
         private string _field01_06_BillingProviderCity;
         private string _field01_08_BillingProviderState;
         private string _field01_09_BillingProviderZip;
-        //private string _field01_10_ProviderZip_4;
         private string _field01_11_BillingProviderPhoneNumber;
         private string _field01_12_BillingProviderFaxNumber;
         private string _field01_13_BillingProviderCountryCode;
@@ -52,7 +49,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field02_06_PayToCity;
         private string _field02_08_PayToState;
         private string _field02_09_PayToZip;
-        //private string _field02_10_ProviderZip_4;
         private string _field02_11_PayToCountryCode;
         private string _field03a_PatientControlNumber;
         private string _field03b_MedicalHealthRecordNumber;
@@ -79,41 +75,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field16_DischargeHour;
         private string _field17_PatientDischargeStatus;
         private string _field29_AccidentState;
-        //private string _field30_Filler;
-        //private List<UB04OccurrenceCodesAndDates> _field31_34_OccurrenceCodesAndDates;
-        //private List<UB04OccurrenceSpanCodesAndDates> _field35_36_OccurrenceSpanCodesAndDates;
-        //private string _field37_Filler;
-        //private string _field38_AdditionalPartyName;
-        //private List<UB04ValueCodesAndAmount> _field39_41_ValueCodesAndAmounts;
-        //private List<UB04ServiceLine_2300Loop> _field42_49_ServiceLines;
-        //private List<UB04TotalChargesLine> _field42_49_ServiceLinesTotal;
-        private decimal _field47_SummaryTotalCharges;
-        private decimal _field48_SummaryTotalNonCoveredCharges;
-
-        //private string _field50a_PayerName;
-        //private string _field50b_PayerSecondaryInsuranceCompanyName;
-        //private string _field50c_PayerTertiaryInsuranceCompanyName;
-        ////private string _field51a_Filler;
-        ////private string _field51b_Filler;
-        ////private string _field51c_Filler;
-        //private string _field52a_ReleaseOfInformationCertificationIndicator;
-        //private string _field52b_ReleaseOfInformationCertificationIndicator;
-        //private string _field52c_ReleaseOfInformationCertificationIndicator;
-        //private string _field53a_AssignmentOfBenefitsCertificationIndicator;
-        //private string _field53b_AssignmentOfBenefitsCertificationIndicator;
-        //private string _field53c_AssignmentOfBenefitsCertificationIndicator;
-        //private decimal _field54a_PriorPayments;
-        //private decimal _field54b_PriorPayments;
-        //private decimal _field54c_PriorPayments;
-        //private decimal _field55a_EstimatedAmountDue;
-        //private decimal _field55b_EstimatedAmountDue;
-        //private decimal _field55c_EstimatedAmountDue;
-        //private List<Field50_PayerName> _field50PayerName;
-        //private List<Field52_ReleaseOfInfoCertIndicator> _field52_ReleaseOfInfoCertIndicator;
-//        private List<Field53_AssignmentOfBenefitsCertIndicator> _field53_AssignmentOfBenefitsCertIndicator;
-        //private List<Field54_PriorPayments> _field54_PriorPayments;
-        //private List<Field55EstimatedAmountDue> _field55EstimatedAmountDue;
-
         private string _field56_NationalProviderIndicator;
         private string _field57_OtherProviderIdentifier;
         private string _field58a_InsuredsLastName;
@@ -137,51 +98,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         private string _field64a_DocumentControlNumber;
         private string _field64b_DocumentControlNumber;
         private string _field64c_DocumentControlNumber;
-        //private string _field65a_EmployerName;
-        //private string _field65b_EmployerName;
-        //private string _field65c_EmployerName;
         private string _field66_DiagnosisAndProcedureCodeQualifier;
         private string _field67_PrincipleDiagCode1_7;
         private string _field67_PrincipleDiagCode8;
-        private string _field67a_q_OtherDiagCode1_7;
-        private string _field67a_q_OtherDiagCode8;
         private string _field69_AdmittingDiagnosisCode;
         private string _field71_ProspectivePaymentSystemCode;
-        private string _field72_ExternalCauseOfInjuryCode;
-
-        private string _field76_AttendingProviderLastName;
-        private string _field76_AttendingProviderFirstName;
-        private string _field76_AttendingProviderMiddleName;
-        private string _field76_AttendingProviderNameSuffix;
-        private string _field76_AttendingProviderSecondaryQualifier;
-        private string _field76_AttendingProviderNationalProviderIdentifier;
-        private string _field76_AttendingProviderSecondaryIdentifier;
-
-        private string _field77_OperatingPhysicianNationalProviderIdentifier;
-        private string _field77_OperatingPhysicianSecondaryQualifier;
-        private string _field77_OperatingPhysicianSecondaryIdentifier;
-        private string _field77_OperatingPhysicianLastName;
-        private string _field77_OperatingPhysicianFirstName;
-
-        private string _field78_OtherProvider1NationalProviderIdentifier;
-        private string _field78_OtherProvider1SecondaryQualifier;
-        private string _field78_OtherProvider1SecondaryIdentifier;
-        private string _field78_OtherProvider1LastName;
-        private string _field78_OtherProvider1FirstName;
-
-        private string _field79_RenderingProvider2NationalProviderIdentifier;
-        private string _field79_RenderingProvider2SecondaryQualifier;
-        private string _field79_RenderingProvider2SecondaryIdentifier;
-        private string _field79_RenderingProvider2LastName;
-        private string _field79_RenderingProvider2FirstName;
-
-        private string _field79_ReferringProvider2NationalProviderIdentifier;
-        private string _field79_ReferringProvider2SecondaryQualifier;
-        private string _field79_ReferringProvider2SecondaryIdentifier;
-        private string _field79_ReferringProvider2LastName;
-        private string _field79_ReferringProvider2FirstName;
-
-        private string _field80_Remarks;
 
         //private List<UB04Code_Code> _field80Code_Code;
 
@@ -192,7 +113,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 01, the Facility Provider / Billing Provider has many possible parts.  All known potential
         // elements are listed here.
-        [XmlAttribute]
+        //[XmlAttribute]
         public string Field01_01_BillingProviderLastName           //<-- Facility name or last name of provider
         { get { return _field01_01_BillingProviderLastName; } set { _field01_01_BillingProviderLastName = value; } }
 
@@ -207,8 +128,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Field01_04_BillingProviderAddress1
         { get { return _field01_04_BillingProviderAddress1; } set { _field01_04_BillingProviderAddress1 = value; } }
 
-        public string Field01_05_BillingProviderAddress2
-        { get { return _field01_05_BillingProviderAddress2; } set { _field01_05_BillingProviderAddress2 = value; } }
+        //public string Field01_05_BillingProviderAddress2
+        //{ get { return _field01_05_BillingProviderAddress2; } set { _field01_05_BillingProviderAddress2 = value; } }
 
         public string Field01_06_BillingProviderCity { get { return _field01_06_BillingProviderCity; } set { _field01_06_BillingProviderCity = value; } }
         public string Field01_08_BillingProviderState { get { return _field01_08_BillingProviderState; } set { _field01_08_BillingProviderState = value; } }
@@ -292,8 +213,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Field 12 - Admission Date / Start of Care Date.  This is the date that patient care actually begins.  For
         // inpatient care it is the admission date.  For other types it is the day the care begins.
-        public string Field12_AdmissionDate {
-            get { return _field12_AdmissionDate.ToShortDateString(); }
+        public DateTime Field12_AdmissionDate {
+            get { return _field12_AdmissionDate; }
             set
             {
                 if (value.ToString().Length > 7)
@@ -302,7 +223,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
                 }
                 else
                 {
-                    _field12_AdmissionDate = DateTime.MinValue;
+                    _field12_AdmissionDate = DateTime.Today;  // DateTime.MinValue;
                 }
             }
         }
@@ -340,7 +261,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         /// Field 17 - Patient Discharge Status.  Reports status of patient upon discharge - required for institutional claims. 
         /// Two digit numeric.
         /// </summary>
-        [XmlAttribute]
         public string Field17_PatientDischargeStatus { get { return _field17_PatientDischargeStatus; } set { _field17_PatientDischargeStatus = value; } }
 
         [XmlIgnore]
