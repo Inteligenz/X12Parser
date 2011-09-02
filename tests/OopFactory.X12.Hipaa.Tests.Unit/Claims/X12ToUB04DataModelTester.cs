@@ -44,8 +44,8 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             var claimSvc = new ClaimTransformationService();
             //UB04Claim clm = claimSvc.TransformX12837ToUB04Model(stream);
             var claim = claimSvc.TransformX12837ToUB04Model(stream);
-            /*
             Assert.AreEqual("756048Q", claim.Field03a_PatientControlNumber);
+            /*
             Assert.AreEqual(Convert.ToDecimal("89.93"), claim.Field55a_EstimatedAmountDue);
             Assert.AreEqual("19960911", claim.Field16_DischargeHour);
             Assert.AreEqual("JOHN", claim.Field58a_InsuredsName);
