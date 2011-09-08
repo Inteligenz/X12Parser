@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Claims\ClaimModelTester.cs" />
+    <Compile Include="Claims\X12ToHCFADataModelTester.cs" />
     <Compile Include="Claims\X12ToUB04DataModelTester.cs" />
     <Compile Include="Eligibility\BenefitResponseTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,7 +95,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Claims\TestData\ProfessionalClaim1.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
