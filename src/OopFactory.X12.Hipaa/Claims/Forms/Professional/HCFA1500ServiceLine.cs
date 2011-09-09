@@ -5,9 +5,9 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
     public class HCFA1500ServiceLine
     {
         public string Field24_CommentLine { get; set; }             // 61 characters (in grey area from boxes 24A through 24G
-        public DateTime Field24a_DateFrom { get; set; }             // MMDDCCYY
-        public DateTime Field24a_DateTo { get; set; }               // MMDDCCYY
-        public string _Field24b_PlaceOfService { get; set; }        // 2 digits
+        public DateTime? Field24a_DateFrom { get; set; }             // MMDDCCYY
+        public DateTime? Field24a_DateTo { get; set; }               // MMDDCCYY
+        public string Field24b_PlaceOfService { get; set; }        // 2 digits
         public string Field24c_EmergencyIndicator  { get; set; }    // 2 digits
         public string Field24d_ProcedureCode { get; set; }          // 6 digits
         public string Field24d_Mod1  { get; set; }                  // 2 digits
