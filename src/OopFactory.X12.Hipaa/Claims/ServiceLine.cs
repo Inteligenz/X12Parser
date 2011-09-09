@@ -20,15 +20,24 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlAttribute]
         public int LineNumber { get; set; }
-
+        [XmlAttribute]
+        public decimal Charges { get; set; }
+        [XmlAttribute]
+        public decimal Quantity { get; set; }
         [XmlAttribute]
         public string RevenueCode { get; set; }
-
+        [XmlAttribute]
+        public string Unit { get; set; }
         public MedicalProcedure Procedure { get; set; }
+        [XmlElement(ElementName="Identification")]
         public List<Identification> Identifications { get; set; }
+        [XmlElement(ElementName="Amount")]
         public List<QualifiedAmount> Amounts { get; set; }
+        [XmlElement(ElementName="Date")]
         public List<QualifiedDate> Dates { get; set; }
+        [XmlElement(ElementName="DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
+        [XmlElement(ElementName="Note")]
         public List<string> Notes { get; set; }
 
         

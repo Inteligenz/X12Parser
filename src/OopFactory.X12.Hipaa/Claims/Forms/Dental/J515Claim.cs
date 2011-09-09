@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
 {
+#if DEBUG
     class J515Claim
     {
         /*
@@ -704,4 +705,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
             set { _field58_TreatingProviderSpecialty = value; } 
         }
 }
+#endif
 }
