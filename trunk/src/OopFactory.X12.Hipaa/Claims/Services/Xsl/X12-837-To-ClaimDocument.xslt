@@ -97,14 +97,66 @@
 
   <xsl:template match="Loop[@LoopId='2400']">
     <ServiceLine>
-      <xsl:attribute name="RevenueCode">
-        <xsl:value-of select="SV2/SV201"/>
+      <xsl:attribute name="LineNumber">
+        <xsl:value-of select="LX/LX01"/>
       </xsl:attribute>
-      <Procedure>
-        <xsl:attribute name="ProcedureCode">
-          <xsl:value-of select="SV2/SV202/SV20202"/>
+      <xsl:for-each select="SV1">
+        <xsl:attribute name="Charges">
+          <xsl:value-of select="SV102"/>
         </xsl:attribute>
-      </Procedure>
+        <xsl:attribute name="Quantity">
+          <xsl:value-of select="SV104"/>
+        </xsl:attribute>
+        <xsl:if test="string-length(SV103)>0">
+            <xsl:attribute name="Unit">
+              <xsl:value-of select="SV103"/>
+            </xsl:attribute>
+        </xsl:if>
+        <Procedure>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="SV101/SV10101"/>
+          </xsl:attribute>
+          <xsl:attribute name="ProcedureCode">
+            <xsl:value-of select="SV101/SV10102"/>
+          </xsl:attribute>
+          <xsl:if test="string-length(SV101/SV10103)>0">
+            <xsl:attribute name="Modifier1">
+              <xsl:value-of select="SV101/SV10103"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV101/SV10104)>0">
+            <xsl:attribute name="Modifier2">
+              <xsl:value-of select="SV101/SV10104"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV101/SV10105)>0">
+            <xsl:attribute name="Modifier3">
+              <xsl:value-of select="SV101/SV10105"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV101/SV10106)>0">
+            <xsl:attribute name="Modifier4">
+              <xsl:value-of select="SV101/SV10106"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:value-of select="SV101/SV10107"/>
+        </Procedure>
+      </xsl:for-each>
+      <xsl:for-each select="SV2">
+        <xsl:attribute name="RevenueCode">
+          <xsl:value-of select="SV201"/>
+        </xsl:attribute>
+        <Procedure>
+          <xsl:attribute name="ProcedureCode">
+            <xsl:value-of select="SV202/SV20202"/>
+          </xsl:attribute>
+        </Procedure>
+      </xsl:for-each>
+      <xsl:for-each select="DTP">
+        <xsl:call-template name="DTPSegment">
+          <xsl:with-param name="DTP" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
     </ServiceLine>
   </xsl:template>
 

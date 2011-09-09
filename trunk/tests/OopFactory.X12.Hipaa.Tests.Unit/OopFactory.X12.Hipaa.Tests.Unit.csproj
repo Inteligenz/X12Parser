@@ -79,6 +79,7 @@
     <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS.txt" />
     <Content Include="Claims\TestData\InstitutionalClaim1.xml" />
     <Content Include="Claims\TestData\InstitutionalClaim1_ClaimModel.xml" />
+    <Content Include="Claims\TestData\ProfessionalClaim1_ClaimModel.xml" />
     <Content Include="Eligibility\TestData\_271\_4010\Example3_CMS-HETS.xml" />
     <Content Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS.htm" />
     <Content Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS_Model.xml" />
