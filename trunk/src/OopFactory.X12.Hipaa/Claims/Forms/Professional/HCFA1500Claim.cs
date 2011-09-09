@@ -120,7 +120,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public decimal Field28_TotalCharge { get; set; }                                  // 7 digits           
         public decimal Field29_AmountPaid { get; set; }  // 6 digits                               // 2 digits
         public decimal Field30_BalanceDue { get; set; }                                       // 6 digits                               // 2 digits
-        public string Field31_PhysicianOrSupplierSignature { get; set; }                      // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
+        public bool Field31_PhysicianOrSupplierSignatureIsOnFile { get; set; }                      // Signed field.  Store true = Signature On File, false = Signature NOT On File.  If SOF, enter date in next field
         public DateTime Field31_PhysicianOrSupplierSignatureDate { get; set; }                  // MMDDCCYY 
         public string Field32FacilityLocationInfo_Name { get; set; }                      // 26 characters
         public string Field32FacilityLocationInfo_Street { get; set; }                     // 26 characters
