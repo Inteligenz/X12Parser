@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 {
@@ -28,6 +25,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field24j_RenderingProviderId  { get; set; }   // 11 characters
         public string Field24j_RenderingProviderNpi  { get; set; }  // 10 characters
     }
-
 
 }
