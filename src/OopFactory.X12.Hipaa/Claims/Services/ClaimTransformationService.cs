@@ -7,11 +7,13 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Xsl;
 using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
+using OopFactory.X12.Hipaa.Claims.Forms.Professional;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
+#if DEBUG
     public class ClaimTransformationService
     {
         public ClaimDocument Transform837ToClaimDocument(Stream stream)
@@ -35,7 +37,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             return ClaimDocument.Deserialize(xml);
         }
 
-#if DEBUG
         public UB04Claim TransformX12837ToUB04Model(Stream stream)
         {
             var parser = new X12Parser();
@@ -72,7 +73,16 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             return new StreamReader(outputStream).ReadToEnd();
         }
-#endif
 
+        public HCFA1500Claim TransformX12837ToHCFA1500Model(Stream stream)
+        {
+            // call to existing xslt
+            Claim claim = Transform837ToClaimDocument(stream).Claims[0];
+            var hcfa = new HCFA1500Claim();
+            hcfa.Field26_PatientAccountNumber = claim.PatientControlNumber;
+
+            return hcfa;
+        }
     }
+#endif
 }
