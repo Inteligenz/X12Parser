@@ -60,7 +60,7 @@
     <Compile Include="Claims\Forms\Institutional\UB04Claim.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04ServiceLine.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
-    <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLines.cs" />
+    <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLine.cs" />
     <Compile Include="Claims\Claim.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
