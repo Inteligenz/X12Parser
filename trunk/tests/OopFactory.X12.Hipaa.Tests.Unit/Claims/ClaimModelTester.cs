@@ -212,6 +212,24 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("D2", claim.Occurrences[7].Code);
             Assert.AreEqual(DateTime.Parse("1987-1-1"), claim.Occurrences[7].Date);
             
+            // Box 35 through 36 - Occurrence Spans
+            Assert.AreEqual(4, claim.OccurrenceSpans.Count);
+            Assert.AreEqual("A1", claim.OccurrenceSpans[0].Code);
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), claim.OccurrenceSpans[0].FromDate);
+            Assert.AreEqual(DateTime.Parse("1927-12-31"), claim.OccurrenceSpans[0].ThroughDate);
+
+            // Box 37 - Filler
+
+            // Box 38 - Responsible Party
+
+            // Box 39 through 41 - Value Codes
+            Assert.AreEqual(14, claim.Values.Count);
+            Assert.AreEqual("A2", claim.Values[0].Code);
+            Assert.AreEqual(15.31m, claim.Values[0].Amount);
+            Assert.AreEqual("N2", claim.Values[13].Code);
+            Assert.AreEqual(28.31m, claim.Values[13].Amount);
+
+            // Box 42 through 49 - Service Lines
 
             Assert.AreEqual(2, claim.ServiceLines.Count, "Unexpected number of service lines.");
 
@@ -243,6 +261,62 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("JOHN", line.OperatingPhysician.Name.FirstName);
             Assert.AreEqual("B99937", line.OperatingPhysician.Npi);
             Assert.AreEqual("363LP0200N", line.OperatingPhysician.ProviderInfo.Id);
+
+            // Box 50 through 55 - Payers
+
+            // Box 56 - NPI
+
+            // Box 57 - Other Provider ID
+
+            // Box 68 through 62 - Insured
+
+            // Box 63 through 65 - Authorizations
+
+            // Box 66 - Diagnosis Version
+
+            // Box 67 - Diagnosis
+            Assert.AreEqual("3669", claim.Diagnoses.First(d => d.DiagnosisType == DiagnosisTypeEnum.Principal).Code);
+            // Box 68
+
+            // Box 69 - Admitting Diagnosis
+
+            // Box 70 - Patient Reason Diagnosis
+
+            // Box 71 - PPS Code
+
+            // Box 72 - ECI
+
+            // Box 73
+
+            // Box 74 - Procedures
+            Assert.AreEqual(3, claim.Procedures.Count);
+            var principal = claim.Procedures.FirstOrDefault(p => p.IsPrincipal);
+            Assert.IsNotNull(principal);
+            Assert.AreEqual("BBR", principal.Qualifier);
+            Assert.AreEqual("0B110F5", principal.Code);
+            Assert.AreEqual(DateTime.Parse("2005-3-21"), principal.Date);
+            
+            // Box 75 - Blank
+
+            // Box 76 - Attending Physician
+            Assert.IsNotNull(claim.AttendingProvider);
+            Assert.AreEqual("JOHN", claim.AttendingProvider.Name.FirstName);
+            Assert.AreEqual("1G", claim.AttendingProvider.Identifications[0].Qualifier);
+            Assert.AreEqual("B99937A", claim.AttendingProvider.Identifications[0].Id);
+
+            // Box 77 - Operating Physician
+            Assert.IsNotNull(claim.OperatingPhysician);
+            Assert.AreEqual("JANE", claim.OperatingPhysician.Name.FirstName);
+
+            // Box 78 - Other
+            Assert.IsNotNull(claim.OtherOperatingPhysician);
+            Assert.AreEqual("JOE", claim.OtherOperatingPhysician.Name.FirstName);
+
+            // Box 79 - Other
+
+            // Box 80 - Remarks
+
+            // Box 81CC
         }
     }
 }

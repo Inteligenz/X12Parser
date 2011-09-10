@@ -2,6 +2,62 @@
 <SegmentSet xmlns="http://tempuri.org/X12ParserSpecification.xsd"
     >
   <Name>5010</Name>
+  <QualifierSet Name="Entity Identifier Code">
+    <Allowed ID="1P">Provider</Allowed>
+    <Allowed ID="2B">Third-Party Administrator</Allowed>
+    <Allowed ID="36">Employer</Allowed>
+    <Allowed ID="40">Receiver</Allowed>
+    <Allowed ID="41">Submitter</Allowed>
+    <Allowed ID="45">Drop-off Location</Allowed>
+    <Allowed ID="71">Attending Physician</Allowed>
+    <Allowed ID="72">Operating Physician</Allowed>
+    <Allowed ID="74">Corrected Insured</Allowed>
+    <Allowed ID="77">Service Location</Allowed>
+    <Allowed ID="7S">Pipeline Segment</Allowed>
+    <Allowed ID="80">Hospital</Allowed>
+    <Allowed ID="82">Rendering Provider</Allowed>
+    <Allowed ID="85">Billing Provider</Allowed>
+    <Allowed ID="87">Pay-to Provider</Allowed>
+    <Allowed ID="89">Investor</Allowed>
+    <Allowed ID="9D">New Service Provider</Allowed>
+    <Allowed ID="AO">Account Of</Allowed>
+    <Allowed ID="BG">Buying Group</Allowed>
+    <Allowed ID="BO">Broker or Sales Office</Allowed>
+    <Allowed ID="BW">Borrower</Allowed>
+    <Allowed ID="BY">Buying Party (Purchaser)</Allowed>
+    <Allowed ID="CA">Carrier</Allowed>
+    <Allowed ID="CS">Consolidator/Shipper</Allowed>
+    <Allowed ID="DK">Ordering Physician</Allowed>
+    <Allowed ID="DN">Referring Provider</Allowed>
+    <Allowed ID="DQ">Supervising Physician</Allowed>
+    <Allowed ID="DS">Distributor</Allowed>
+    <Allowed ID="FA">Facility</Allowed>
+    <Allowed ID="GP">Gateway Provider</Allowed>
+    <Allowed ID="IL">Insured or Subscriber</Allowed>
+    <Allowed ID="IN">Insurer</Allowed>
+    <Allowed ID="LG">Location of Goods</Allowed>
+    <Allowed ID="MF">Manufacturer</Allowed>
+    <Allowed ID="MH">Mortgage Insurer</Allowed>
+    <Allowed ID="OP">Operator of property of Unit</Allowed>
+    <Allowed ID="P3">Primary Care Provider</Allowed>
+    <Allowed ID="P5">Plan Sponsor</Allowed>
+    <Allowed ID="PE">Payee</Allowed>
+    <Allowed ID="PR">Payer</Allowed>
+    <Allowed ID="PW">Pickup Address</Allowed>
+    <Allowed ID="QB">Purchase Service Provider</Allowed>
+    <Allowed ID="QC">Patient</Allowed>
+    <Allowed ID="QD">Responsible Party</Allowed>
+    <Allowed ID="SE">Selling Party</Allowed>
+    <Allowed ID="SF">Ship From</Allowed>
+    <Allowed ID="SU">Ship To</Allowed>
+    <Allowed ID="P5">Plan Sponsor</Allowed>
+    <Allowed ID="TF">Tank Farm</Allowed>
+    <Allowed ID="TL">Testing Laboratory</Allowed>
+    <Allowed ID="TV">Third Party Administrator (TPA)</Allowed>
+    <Allowed ID="WH">Warehouse</Allowed>
+    <Allowed ID="ZZ">Mutually Defined</Allowed>
+  </QualifierSet>
+
   <Segment SegmentId="ST">
     <Element Name="Transaction Set Identifier Code" Required="true" Type="ID" MinLength="3" MaxLength="3">
       <Allowed ID="837">Health Care Claim</Allowed>

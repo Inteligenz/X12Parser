@@ -156,7 +156,6 @@
         <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
       </Loop>
-
       <Loop LoopId="2310C" Usage="Situational" LoopRepeat="1">
         <Name>SERVICE FACILITY LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
@@ -180,7 +179,7 @@
       <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
         <Name>AMBULANCE PICK-UP LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
+          <EntityIdentifier Code="PW"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -188,7 +187,7 @@
       <Loop LoopId="2310F" Usage="Situational" LoopRepeat="1">
         <Name>AMBULANCE DROP-OFF LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
+          <EntityIdentifier Code="45"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -256,22 +255,22 @@
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
         </Loop>
+        <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
+          <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
+          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+            <EntityIdentifier Code="DQ"/>
+          </StartingSegment>
+          <Segment SegmentId="REF" Usage="Required" Repeat="3"/>
+        </Loop>
+        <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
+          <Name>OTHER PAYER BILLING PROVIDER</Name>
+          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+            <EntityIdentifier Code="DQ"/>
+          </StartingSegment>
+          <Segment SegmentId="REF" Usage="Required" Repeat="2"/>
+        </Loop>
       </Loop>
-      <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Required" Repeat="3"/>
-      </Loop>
-      <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER BILLING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Required" Repeat="2"/>
-      </Loop>
-      <!--Institutional Loops Begin-->
+      <!--Institutional Provider Loops Begin-->
       <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
         <Name>ATTENDING PHYSICIAN NAME</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
@@ -285,16 +284,17 @@
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
           <EntityIdentifier Code="72"/>
         </StartingSegment>
+        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
-      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">
-        <Name>OTHER PROVIDER NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="73"/>
+      <Loop LoopId="2310C">
+        <Name>OTHER OPERATING PHYSICIAN NAME</Name>
+        <StartingSegment SegmentId="NM1">
+          <EntityIdentifier Code="ZZ"/>
         </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="REF"/>
       </Loop>
-      <!--Institutional Loops End-->
+      <!--Institutional Provider Loops End-->
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
         <Name>SERVICE LINE NUMBER</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
@@ -379,7 +379,7 @@
         <Loop LoopId="2420G" Usage="Situational" LoopRepeat="1">
           <Name>AMBULANCE PICK-UP LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="PW"/>
           </StartingSegment>
           <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -387,7 +387,7 @@
         <Loop LoopId="2420H" Usage="Situational" LoopRepeat="1">
           <Name>AMBULANCE DROP-OFF LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="45"/>
           </StartingSegment>
           <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -514,7 +514,6 @@
         <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
       </Loop>
-
       <Loop LoopId="2310C" Usage="Situational" LoopRepeat="1">
         <Name>SERVICE FACILITY LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
@@ -538,7 +537,7 @@
       <Loop LoopId="2310E" Usage="Situational" LoopRepeat="1">
         <Name>AMBULANCE PICK-UP LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
+          <EntityIdentifier Code="PW"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -546,15 +545,41 @@
       <Loop LoopId="2310F" Usage="Situational" LoopRepeat="1">
         <Name>AMBULANCE DROP-OFF LOCATION</Name>
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
+          <EntityIdentifier Code="45"/>
         </StartingSegment>
         <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
         <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
       </Loop>
+      <!--Institutional Provider Loops Begin-->
+      <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
+        <Name>ATTENDING PHYSICIAN NAME</Name>
+        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+          <EntityIdentifier Code="71"/>
+        </StartingSegment>
+        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
+      </Loop>
+      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="2">
+        <Name>OPERATING PHYSICIAN NAME</Name>
+        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+          <EntityIdentifier Code="72"/>
+        </StartingSegment>
+        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
+      </Loop>
+      <Loop LoopId="2310C">
+        <Name>OTHER OPERATING PHYSICIAN NAME</Name>
+        <StartingSegment SegmentId="NM1">
+          <EntityIdentifier Code="ZZ"/>
+        </StartingSegment>
+        <Segment SegmentId="REF"/>
+      </Loop>
+      <!--Institutional Provider Loops End-->
       <Loop LoopId="2320" Usage="Situational" LoopRepeat="10">
         <Name>OTHER SUBSCRIBER INFORMATION</Name>
         <StartingSegment SegmentId="SBR" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="DMG" /> <!-- Not in specification but in sample EDI-->
+        <Segment SegmentId="DMG" />
+        <!-- Not in specification but in sample EDI-->
         <Segment SegmentId="CAS" Usage="Situational" Repeat="5"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="AMT" Usage="Situational" Repeat="1"/>
@@ -613,46 +638,21 @@
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Required" Repeat="1"/>
         </Loop>
+        <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
+          <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
+          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+            <EntityIdentifier Code="DQ"/>
+          </StartingSegment>
+          <Segment SegmentId="REF" Usage="Required" Repeat="3"/>
+        </Loop>
+        <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
+          <Name>OTHER PAYER BILLING PROVIDER</Name>
+          <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
+            <EntityIdentifier Code="DQ"/>
+          </StartingSegment>
+          <Segment SegmentId="REF" Usage="Required" Repeat="2"/>
+        </Loop>
       </Loop>
-      <Loop LoopId="2330F" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER SUPERVISING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Required" Repeat="3"/>
-      </Loop>
-      <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
-        <Name>OTHER PAYER BILLING PROVIDER</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="DQ"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Required" Repeat="2"/>
-      </Loop>
-      <!--Institutional Loops Begin-->
-      <Loop LoopId="2310A" Usage="Situational" LoopRepeat="2">
-        <Name>ATTENDING PHYSICIAN NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="71"/>
-        </StartingSegment>
-        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <Loop LoopId="2310B" Usage="Situational" LoopRepeat="2">
-        <Name>OPERATING PHYSICIAN NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="72"/>
-        </StartingSegment>
-        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">
-        <Name>OTHER PROVIDER NAME</Name>
-        <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-          <EntityIdentifier Code="73"/>
-        </StartingSegment>
-        <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
-      </Loop>
-      <!--Institutional Loops End-->
       <Loop LoopId="2400" Usage="Required" LoopRepeat="50">
         <Name>SERVICE LINE NUMBER</Name>
         <StartingSegment SegmentId="LX" Usage="Required" Repeat="1"/>
@@ -737,7 +737,7 @@
         <Loop LoopId="2420G" Usage="Situational" LoopRepeat="1">
           <Name>AMBULANCE PICK-UP LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="PW"/>
           </StartingSegment>
           <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -745,7 +745,7 @@
         <Loop LoopId="2420H" Usage="Situational" LoopRepeat="1">
           <Name>AMBULANCE DROP-OFF LOCATION</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="PR"/>
+            <EntityIdentifier Code="45"/>
           </StartingSegment>
           <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
           <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
@@ -757,6 +757,7 @@
             <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="20"/>
+          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         </Loop>
         <Loop LoopId="2420B" Usage="Situational" LoopRepeat="1">
           <Name>OTHER OPERATING PHYSICIAN NAME</Name>

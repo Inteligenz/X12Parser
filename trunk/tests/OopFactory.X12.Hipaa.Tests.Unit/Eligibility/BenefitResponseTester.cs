@@ -26,8 +26,11 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                 {
                     Name = new EntityName
                     {
-                        Identifier = "PR",
-                        Qualifier = EntityNameQualifierEnum.NonPerson,
+                        Type = new EntityType
+                        {
+                            Identifier = "PR",
+                            Qualifier = EntityNameQualifierEnum.NonPerson
+                        },
                         LastName = "ABC Company",
                         Identification = new Identification { Qualifier = "PI", Id = "842610001" }
                     }
@@ -36,8 +39,11 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                 {
                     Name = new EntityName
                     {
-                        Identifier = "1P",
-                        Qualifier = EntityNameQualifierEnum.NonPerson,
+                        Type = new EntityType
+                        {
+                            Identifier = "1P",
+                            Qualifier = EntityNameQualifierEnum.NonPerson
+                        },
                         LastName = "BONE AND JOIN CLINIC",
                         Identification = new Identification { Qualifier = "SV", Id = "2000035" }
                     }
@@ -48,7 +54,10 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
                     DateOfBirth = DateTime.Parse("1963-05-19"),
                     Name = new EntityName
                     {
-                        Qualifier = EntityNameQualifierEnum.Person,
+                        Type = new EntityType
+                        {
+                            Qualifier = EntityNameQualifierEnum.Person
+                        },
                         LastName = "SMITH",
                         FirstName = "JOHN",
                         Identification = new Identification { Qualifier = "MI", Id = "123456789" }

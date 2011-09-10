@@ -12,12 +12,19 @@ namespace OopFactory.X12.Hipaa.Common
         NonPerson
     }
 
-    public class EntityName
+    public class EntityType
     {
         [XmlAttribute]
         public string Identifier { get; set; }
         [XmlAttribute]
         public EntityNameQualifierEnum Qualifier { get; set; }
+        [XmlText]
+        public string Description { get; set; }
+    }
+
+    public class EntityName
+    {
+        public EntityType Type { get; set; }
 
         [XmlAttribute]
         public string LastName { get; set; }
