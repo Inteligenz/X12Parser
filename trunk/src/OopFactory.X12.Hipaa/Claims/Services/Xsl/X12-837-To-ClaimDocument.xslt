@@ -91,9 +91,55 @@
           <xsl:with-param name="DTP" select="."/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:apply-templates select="HI"/>
       <xsl:apply-templates select="Loop[@LoopId='2400']"/>
     </Claim>
   </xsl:template>
+
+  <xsl:template match="HI[HI01/HI0101='BG']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="code" select="*[2]"/>
+      <Condition>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+      </Condition>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="HI[HI01/HI0101='BH']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="code" select="*[2]"/>
+      <xsl:variable name="date" select="*[4]"/>
+      <Occurrence>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+        <xsl:attribute name="Date">
+          <xsl:value-of select="concat(substring($date,1,4),'-',substring($date,5,2),'-',substring($date,7,2))"/>
+        </xsl:attribute>
+      </Occurrence>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="HI[HI01/HI0101='BI']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="code" select="*[2]"/>
+      <xsl:variable name="daterange" select="*[4]"/>
+      <OccurrenceSpan>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+        <xsl:attribute name="FromDate">
+          <xsl:value-of select="concat(substring($daterange,1,4),'-',substring($daterange,5,2),'-',substring($daterange,7,2))"/>
+        </xsl:attribute>
+        <xsl:attribute name="ThroughDate">
+          <xsl:value-of select="concat(substring($daterange,10,4),'-',substring($daterange,14,2),'-',substring($daterange,16,2))"/>
+        </xsl:attribute>
+      </OccurrenceSpan>
+    </xsl:for-each>
+  </xsl:template>
+
 
   <xsl:template match="Loop[@LoopId='2400']">
     <ServiceLine>
@@ -293,6 +339,13 @@
             <xsl:with-param name="PER" select="."/>
           </xsl:call-template>
         </Contact>
+      </xsl:for-each>
+      <xsl:for-each select="$Loop/PRV">
+        <ProviderInfo>
+        <xsl:call-template name="ProviderInformation">
+          <xsl:with-param name="PRV" select="."/>
+        </xsl:call-template>
+        </ProviderInfo>
       </xsl:for-each>
     </Provider>
   </xsl:template>

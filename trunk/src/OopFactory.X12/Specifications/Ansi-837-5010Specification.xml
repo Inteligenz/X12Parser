@@ -399,6 +399,7 @@
             <EntityIdentifier Code="72"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Situational" Repeat="20"/>
+          <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         </Loop>
         <Loop LoopId="2420B" Usage="Situational" LoopRepeat="1">
           <Name>OTHER OPERATING PHYSICIAN NAME</Name>
@@ -641,6 +642,7 @@
         <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
           <EntityIdentifier Code="72"/>
         </StartingSegment>
+        <Segment SegmentId="PRV" Usage="Situational" Repeat="1"/>
         <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
       </Loop>
       <Loop LoopId="2310C" Usage="Situational" LoopRepeat="2">

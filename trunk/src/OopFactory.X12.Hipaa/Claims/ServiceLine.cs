@@ -93,6 +93,18 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlElement(ElementName = "Provider")]
         public List<Provider> Providers { get; set; }
-        
+
+        public Provider OperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "72"); } }
+        public Provider OtherOperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "ZZ"); } }
+        public Provider RenderingProvider { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "82"); } }
+        public Provider ReferringProvider { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "DN" || p.Name.Identifier == "P3"); } }
+        public Provider PurchasedServiceProvider { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "QB"); } }
+        public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "77"); } }
+        public Provider SupervisingProvider { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "DQ"); } }
+
+        public Provider OrderingProvider { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "DK"); } }
+        public Provider AmbulancePickupLocation { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "PW"); } }
+        public Provider AmbulanceDropoffLocation { get { return Providers.FirstOrDefault(p => p.Name.Identifier == "45"); } }
+
     }
 }
