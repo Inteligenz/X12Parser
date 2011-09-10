@@ -196,6 +196,18 @@
       <ResourcePath>INS._837I._4010.Spec_4.2.3_AutomobileAccident.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <ResourcePath>INS._837I._5010.Spec_3.1.1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._5010.Spec_3.1.2_TwoClaimsForTheSameProvider.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._5010.Spec_3.1.3_PPORepricedClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._5010.Spec_3.1.4_OutOfNetworkRepricedClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._837P._4010.Cms1500Test.txt</ResourcePath>
     </EdiFile>
     <EdiFile>

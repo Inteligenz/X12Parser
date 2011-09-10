@@ -40,7 +40,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
         {
             // get the x12 doc into a stream
             Stream stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim1.txt");
+                .GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim4010.txt");
             // new up a ClaimTransformationService object
             var claimSvc = new ClaimTransformationService();
 

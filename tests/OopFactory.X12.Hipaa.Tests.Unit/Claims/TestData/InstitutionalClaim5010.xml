@@ -6,27 +6,27 @@
     <!--Author Information-->
     <ISA02>          </ISA02>
     <!--Security Information Qualifer-->
-    <ISA03>00<!--No Security Information Present--></ISA03>
+    <ISA03>01<!--Password--></ISA03>
     <!--Security Information-->
-    <ISA04>          </ISA04>
+    <ISA04>SECRET    </ISA04>
     <!--Interchange ID Qualifier-->
-    <ISA05>01<!--Duns (Dun & Bradstreet)--></ISA05>
+    <ISA05>ZZ<!--Mutually Defined--></ISA05>
     <!--Interchange Sender ID-->
-    <ISA06>9012345720000  </ISA06>
+    <ISA06>SUBMITTERS.ID  </ISA06>
     <!--Interchange ID Qualifier-->
-    <ISA07>01<!--Duns (Dun & Bradstreet)--></ISA07>
+    <ISA07>ZZ<!--Mutually Defined--></ISA07>
     <!--Interchange Receiver ID-->
-    <ISA08>9088877320000  </ISA08>
+    <ISA08>RECEIVERS.ID   </ISA08>
     <!--Interchange Date-->
-    <ISA09>020816</ISA09>
+    <ISA09>030101</ISA09>
     <!--Interchange Time-->
-    <ISA10>1144</ISA10>
+    <ISA10>1253</ISA10>
     <!--Inter Control Standards Identifier-->
-    <ISA11>U<!--U.S. EDI Community of ASC X12, TDCC, and UCS--></ISA11>
+    <ISA11>^</ISA11>
     <!--Inter Control Version Number-->
-    <ISA12>00401</ISA12>
+    <ISA12>00501</ISA12>
     <!--Inter Control Number-->
-    <ISA13>000000031</ISA13>
+    <ISA13>000000905</ISA13>
     <!--Acknowlegment Requested-->
     <ISA14>1<!--Interchange Acknowledgment Requested--></ISA14>
     <!--Usage Indicator-->
@@ -42,19 +42,19 @@
       <!--Functional Identifier Code-->
       <GS01>HC<!--Health Care--></GS01>
       <!--Application Sender's Code-->
-      <GS02>901234572000</GS02>
+      <GS02>SENDER CODE</GS02>
       <!--Application Receiver's Code-->
-      <GS03>908887732000</GS03>
+      <GS03>RECEIVER CODE</GS03>
       <!--Date-->
-      <GS04>20070816</GS04>
+      <GS04>19991231</GS04>
       <!--Time-->
-      <GS05>1615</GS05>
+      <GS05>0802</GS05>
       <!--Group Control Number-->
-      <GS06>31</GS06>
+      <GS06>1</GS06>
       <!--Responsible Agency Code-->
       <GS07>X<!--Accredited Standards Committee X12--></GS07>
       <!--Version/Release/Industry Identifier Code-->
-      <GS08>004010X096A1</GS08>
+      <GS08>005010X222</GS08>
     </GS>
     <Transaction ControlNumber="987654">
       <ST>
@@ -62,6 +62,8 @@
         <ST01>837<!--Health Care Claim--></ST01>
         <!--Transaction Set Control Number-->
         <ST02>987654</ST02>
+        <!--Implementation Convention Reference-->
+        <ST03>005010X223</ST03>
       </ST>
       <BHT>
         <!--Hierarchical Structure Code-->
@@ -77,44 +79,10 @@
         <!--Transaction Type Code-->
         <BHT06>CH<!--Chargeable--></BHT06>
       </BHT>
-      <REF>
-        <!--Reference Identification Qualifier-->
-        <REF01>87<!--Functional Category--></REF01>
-        <!--Reference Identification-->
-        <REF02>004010X096</REF02>
-      </REF>
-      <Loop LoopId="1000B" Name="RECEIVER NAME">
-        <NM1>
-          <!--Entity Identifier Code-->
-          <NM101>40<!--Receiver--></NM101>
-          <!--Entity Type Qualifier-->
-          <NM102>2<!--Non-Person Entity--></NM102>
-          <!--Name Last or Organization Name-->
-          <NM103>MEDICARE</NM103>
-          <NM104 />
-          <NM105 />
-          <NM106 />
-          <NM107 />
-          <!--Identification Code Qualifier-->
-          <NM108>46<!--Electronic Transmitter Identification Number (ETIN)--></NM108>
-          <!--Identification Code-->
-          <NM109>00120</NM109>
-        </NM1>
-        <PER>
-          <!--Contact Function Code-->
-          <PER01>IC<!--Information Contact--></PER01>
-          <!--Name-->
-          <PER02>JANE DOE</PER02>
-          <!--Communication Number Qualifier-->
-          <PER03>TE<!--Telephone--></PER03>
-          <!--Communication Number-->
-          <PER04>9005555555</PER04>
-        </PER>
-      </Loop>
       <Loop LoopId="1000A" Name="SUBMITTER NAME">
         <NM1>
           <!--Entity Identifier Code-->
-          <NM101>41<!--Submitter--></NM101>
+          <NM101>41</NM101>
           <!--Entity Type Qualifier-->
           <NM102>2<!--Non-Person Entity--></NM102>
           <!--Name Last or Organization Name-->
@@ -128,8 +96,36 @@
           <!--Identification Code-->
           <NM109>12345</NM109>
         </NM1>
+        <PER>
+          <!--Contact Function Code-->
+          <PER01>IC<!--Information Contact--></PER01>
+          <!--Name-->
+          <PER02>JANE DOE</PER02>
+          <!--Communication Number Qualifier-->
+          <PER03>TE</PER03>
+          <!--Communication Number-->
+          <PER04>9005555555</PER04>
+        </PER>
       </Loop>
-      <HierarchicalLoop LoopId="2000A" LoopName="BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL" Id="1" ParentId="">
+      <Loop LoopId="1000B" Name="RECEIVER NAME">
+        <NM1>
+          <!--Entity Identifier Code-->
+          <NM101>40</NM101>
+          <!--Entity Type Qualifier-->
+          <NM102>2<!--Non-Person Entity--></NM102>
+          <!--Name Last or Organization Name-->
+          <NM103>MEDICARE</NM103>
+          <NM104 />
+          <NM105 />
+          <NM106 />
+          <NM107 />
+          <!--Identification Code Qualifier-->
+          <NM108>46<!--Electronic Transmitter Identification Number (ETIN)--></NM108>
+          <!--Identification Code-->
+          <NM109>00120</NM109>
+        </NM1>
+      </Loop>
+      <HierarchicalLoop LoopId="2000A" LoopName="BILLING PROVIDER HIERARCHICAL LEVEL" Id="1" ParentId="">
         <HL>
           <!--Hierarchical ID Number-->
           <HL01>1</HL01>
@@ -143,14 +139,14 @@
           <!--Provider Code-->
           <PRV01>BI<!--Billing--></PRV01>
           <!--Reference Identification Qualifier-->
-          <PRV02>ZZ</PRV02>
+          <PRV02>PXC<!--Health Care Provider Taxonomy Code--></PRV02>
           <!--Reference Identification-->
           <PRV03>203BA0200N</PRV03>
         </PRV>
         <Loop LoopId="2010AA" Name="BILLING PROVIDER NAME">
           <NM1>
             <!--Entity Identifier Code-->
-            <NM101>85<!--Billing Provider--></NM101>
+            <NM101>85</NM101>
             <!--Entity Type Qualifier-->
             <NM102>2<!--Non-Person Entity--></NM102>
             <!--Name Last or Organization Name-->
@@ -162,16 +158,8 @@
             <!--Identification Code Qualifier-->
             <NM108>XX<!--Centers for Medicare and Medicaid Services Nationa--></NM108>
             <!--Identification Code-->
-            <NM109>330127</NM109>
+            <NM109>9876540809</NM109>
           </NM1>
-          <PRV>
-            <!--Provider Code-->
-            <PRV01>AT<!--Attending--></PRV01>
-            <!--Reference Identification Qualifier-->
-            <PRV02>ZZ</PRV02>
-            <!--Reference Identification-->
-            <PRV03>363LP0200N</PRV03>
-          </PRV>
           <N3>
             <!--Address Information-->
             <N301>225 MAIN STREET BARKLEY BUILDING</N301>
@@ -186,18 +174,20 @@
           </N4>
           <REF>
             <!--Reference Identification Qualifier-->
-            <REF01>G2<!--Provider Commercial Number--></REF01>
+            <REF01>EI</REF01>
             <!--Reference Identification-->
-            <REF02>987654080</REF02>
-          </REF>
-          <REF>
-            <!--Reference Identification Qualifier-->
-            <REF01>EI<!--Employer’s Identification Number--></REF01>
-            <!--Reference Identification-->
-            <REF02>123456789</REF02>
+            <REF02>567891234</REF02>
           </REF>
         </Loop>
-        <HierarchicalLoop LoopId="2000B" LoopName="SUBSCRIBER HIERARCHICAL LOOP" Id="2" ParentId="1">
+        <PRV>
+          <!--Provider Code-->
+          <PRV01>AT<!--Attending--></PRV01>
+          <!--Reference Identification Qualifier-->
+          <PRV02>ZZ</PRV02>
+          <!--Reference Identification-->
+          <PRV03>363LP0200N</PRV03>
+        </PRV>
+        <HierarchicalLoop LoopId="2000B" LoopName="SUBSCRIBER HIERARCHICAL LEVEL" Id="2" ParentId="1">
           <HL>
             <!--Hierarchical ID Number-->
             <HL01>2</HL01>
@@ -225,7 +215,7 @@
           <Loop LoopId="2010BA" Name="SUBSCRIBER NAME">
             <NM1>
               <!--Entity Identifier Code-->
-              <NM101>IL<!--Insured or Subscriber--></NM101>
+              <NM101>IL</NM101>
               <!--Entity Type Qualifier-->
               <NM102>1<!--Person--></NM102>
               <!--Name Last or Organization Name-->
@@ -265,7 +255,7 @@
           <Loop LoopId="2010BB" Name="PAYER NAME">
             <NM1>
               <!--Entity Identifier Code-->
-              <NM101>PR<!--Payer--></NM101>
+              <NM101>PR</NM101>
               <!--Entity Type Qualifier-->
               <NM102>2<!--Non-Person Entity--></NM102>
               <!--Name Last or Organization Name-->
@@ -279,28 +269,35 @@
               <!--Identification Code-->
               <NM109>00435</NM109>
             </NM1>
+            <REF>
+              <!--Reference Identification Qualifier-->
+              <REF01>G2</REF01>
+              <!--Reference Identification-->
+              <REF02>330127</REF02>
+            </REF>
           </Loop>
           <Loop LoopId="2300" Name="CLAIM INFORMATION">
             <CLM>
-              <!--Patient Account Number-->
+              <!--Patient Control Number-->
               <CLM01>756048Q</CLM01>
               <!--Total Claim Charge Amount-->
               <CLM02>89.93</CLM02>
               <CLM03 />
               <CLM04 />
-              <!--Place of Service Code-->
+              <!--Facility Code-->
               <CLM05>
                 <CLM0501>14</CLM0501>
                 <CLM0502>A</CLM0502>
                 <CLM0503>1</CLM0503>
               </CLM05>
-              <CLM06 />
+              <!--Provider or Supplier Signature Indicator-->
+              <CLM06>Y<!--Yes--></CLM06>
               <!--Provider Accept Assignment Code-->
-              <CLM07>Y</CLM07>
+              <CLM07>A<!--Assigned--></CLM07>
               <!--Benefits Assignment Certification Indicator-->
               <CLM08>Y<!--Yes--></CLM08>
               <!--Release of Information Code-->
-              <CLM09>Y</CLM09>
+              <CLM09>Y<!--Yes, Provider has a Signed Statement Permitting Release of Medical Billing Data Related to a Claim--></CLM09>
             </CLM>
             <DTP>
               <!--Data/Time Qualifier-->
@@ -308,53 +305,31 @@
               <!--Date Time Period Format Qualifier-->
               <DTP02>D8<!--Date Expression in Format CCYYMMDD--></DTP02>
               <!--Date Time Period-->
-              <DTP03>19960911-19960912</DTP03>
-            </DTP>
-            <DTP>
-              <!--Data/Time Qualifier-->
-              <DTP01>435<!--Admission--></DTP01>
-              <!--Date Time Period Format Qualifier-->
-              <DTP02>DT<!--Date and Time Expressed in Format CCYYMMDDHHMM--></DTP02>
-              <!--Date Time Period-->
-              <DTP03>199609101402</DTP03>
+              <DTP03>19960911</DTP03>
             </DTP>
             <CL1>
               <CL101>3</CL101>
-              <CL102>1</CL102>
+              <CL102 />
+              <CL103>01</CL103>
             </CL1>
-            <REF>
-              <!--Reference Identification Qualifier-->
-              <REF01>EA<!--Medical Record Identification Number--></REF01>
-              <!--Reference Identification-->
-              <REF02>TEST MEDICAL RECORD NUMBER</REF02>
-            </REF>
             <HI>
               <!--Health Care Code Information-->
               <HI01>
                 <HI0101>BK<!--Principal Diagnosis (ICD-9)--></HI0101>
-                <HI0102>366.9</HI0102>
+                <HI0102>3669</HI0102>
               </HI01>
             </HI>
             <HI>
               <!--Health Care Code Information-->
               <HI01>
                 <HI0101>BF<!--Diagnosis (ICD-9)--></HI0101>
-                <HI0102>401.9</HI0102>
+                <HI0102>4019</HI0102>
               </HI01>
               <!--Health Care Code Information-->
               <HI02>
                 <HI0201>BF<!--Diagnosis (ICD-9)--></HI0201>
-                <HI0202>794.31</HI0202>
+                <HI0202>79431</HI0202>
               </HI02>
-            </HI>
-            <HI>
-              <!--Health Care Code Information-->
-              <HI01>
-                <HI0101>BQ<!--International Classification of Diseases Clinical Modification (ICD-9-CM) Procedure--></HI0101>
-                <HI0102>15.3</HI0102>
-                <HI0103>D8<!--Date Expressed in Format CCYYMMDD--></HI0103>
-                <HI0104>19960911</HI0104>
-              </HI01>
             </HI>
             <HI>
               <!--Health Care Code Information-->
@@ -415,21 +390,13 @@
                 <NM104>JOHN</NM104>
                 <!--Name Middle-->
                 <NM105>J</NM105>
-                <NM106 />
-                <NM107 />
-                <!--Identification Code Qualifier-->
-                <NM108>XX<!--Centers for Medicare and Medicaid Services Nationa--></NM108>
-                <!--Identification Code-->
-                <NM109>B99937</NM109>
               </NM1>
-              <PRV>
-                <!--Provider Code-->
-                <PRV01>AT<!--Attending--></PRV01>
+              <REF>
                 <!--Reference Identification Qualifier-->
-                <PRV02>ZZ</PRV02>
+                <REF01>1G</REF01>
                 <!--Reference Identification-->
-                <PRV03>363LP0200N</PRV03>
-              </PRV>
+                <REF02>B99937</REF02>
+              </REF>
             </Loop>
             <Loop LoopId="2320" Name="OTHER SUBSCRIBER INFORMATION">
               <SBR>
@@ -441,8 +408,7 @@
                 <SBR03>351630</SBR03>
                 <!--Name-->
                 <SBR04>STATE TEACHERS</SBR04>
-                <!--Insurance Type Code-->
-                <SBR05>GP<!--Group Policy--></SBR05>
+                <SBR05 />
                 <SBR06 />
                 <SBR07 />
                 <SBR08 />
@@ -450,8 +416,10 @@
                 <SBR09>CI<!--Commercial Insurance Co.--></SBR09>
               </SBR>
               <DMG>
-                <DMG01 />
-                <DMG02 />
+                <!--Date Time Period Format Qualifier-->
+                <DMG01>D8<!--Date Expressed in Format CCYYMMDD--></DMG01>
+                <!--Date Time Period-->
+                <DMG02>19271211</DMG02>
                 <!--Gender Code-->
                 <DMG03>F<!--Female--></DMG03>
               </DMG>
@@ -466,7 +434,7 @@
               <Loop LoopId="2330A" Name="OTHER SUBSCRIBER NAME">
                 <NM1>
                   <!--Entity Identifier Code-->
-                  <NM101>IL<!--Insured or Subscriber--></NM101>
+                  <NM101>IL</NM101>
                   <!--Entity Type Qualifier-->
                   <NM102>1<!--Person--></NM102>
                   <!--Name Last or Organization Name-->
@@ -495,10 +463,10 @@
                   <N403>17111</N403>
                 </N4>
               </Loop>
-              <Loop LoopId="2330B" Name="OTHER SUBSCRIBER/PAYER NAME">
+              <Loop LoopId="2330B" Name="OTHER PAYER NAME">
                 <NM1>
                   <!--Entity Identifier Code-->
-                  <NM101>PR<!--Payer--></NM101>
+                  <NM101>PR</NM101>
                   <!--Entity Type Qualifier-->
                   <NM102>2<!--Non-Person Entity--></NM102>
                   <!--Name Last or Organization Name-->
@@ -514,13 +482,13 @@
                 </NM1>
               </Loop>
             </Loop>
-            <Loop LoopId="2400" Name="SERVICE LINE">
+            <Loop LoopId="2400" Name="SERVICE LINE NUMBER">
               <LX>
                 <!--Assigned Number-->
                 <LX01>1</LX01>
               </LX>
               <SV2>
-                <SV201>305</SV201>
+                <SV201>0305</SV201>
                 <SV202>
                   <SV20201>HC</SV20201>
                   <SV20202>85025</SV20202>
@@ -538,13 +506,13 @@
                 <DTP03>19960911</DTP03>
               </DTP>
             </Loop>
-            <Loop LoopId="2400" Name="SERVICE LINE">
+            <Loop LoopId="2400" Name="SERVICE LINE NUMBER">
               <LX>
                 <!--Assigned Number-->
                 <LX01>2</LX01>
               </LX>
               <SV2>
-                <SV201>730</SV201>
+                <SV201>0730</SV201>
                 <SV202>
                   <SV20201>HC</SV20201>
                   <SV20202>93005</SV20202>
@@ -561,13 +529,37 @@
                 <!--Date Time Period-->
                 <DTP03>19960911</DTP03>
               </DTP>
+              <NTE>
+                <NTE01>TPO</NTE01>
+                <NTE02>state regulation 123 was applied during the pricing of thisclaim</NTE02>
+              </NTE>
+              <Loop LoopId="2420A" Name="OPERATING PHYSICIAN NAME">
+                <NM1>
+                  <!--Entity Identifier Code-->
+                  <NM101>72</NM101>
+                  <!--Entity Type Qualifier-->
+                  <NM102>1<!--Person--></NM102>
+                  <!--Name Last or Organization Name-->
+                  <NM103>JONES</NM103>
+                  <!--Name First-->
+                  <NM104>JOHN</NM104>
+                  <!--Name Middle-->
+                  <NM105>J</NM105>
+                  <NM106 />
+                  <NM107 />
+                  <!--Identification Code Qualifier-->
+                  <NM108>XX<!--Centers for Medicare and Medicaid Services Nationa--></NM108>
+                  <!--Identification Code-->
+                  <NM109>B99937</NM109>
+                </NM1>
+              </Loop>
             </Loop>
           </Loop>
         </HierarchicalLoop>
       </HierarchicalLoop>
       <SE>
         <!--Number of Included Segments-->
-        <SE01>45</SE01>
+        <SE01>43</SE01>
         <!--Transaction Set Control Number-->
         <SE02>987654</SE02>
       </SE>
@@ -576,13 +568,13 @@
       <!--Number of Transaction Sets Included-->
       <GE01>1</GE01>
       <!--Group Control Number-->
-      <GE02>31</GE02>
+      <GE02>1</GE02>
     </GE>
   </FunctionGroup>
   <IEA>
     <!--Number of Included Functional Groups-->
     <IEA01>1</IEA01>
     <!--Interchange Control Number-->
-    <IEA02>000000031</IEA02>
+    <IEA02>000000905</IEA02>
   </IEA>
 </Interchange>
