@@ -40,32 +40,9 @@ namespace OopFactory.X12.Parsing
 
         private string ExtractLoop(LoopContainer loop, string loopId)
         {
-            LoopContainer parent = (LoopContainer)loop.Parent;
-            string parentLoopId = "";
-            if (parent is Loop)
-                parentLoopId = ((Loop)parent).Specification.LoopId;
-            else if (parent is HierarchicalLoop)
-                parentLoopId = ((HierarchicalLoop)parent).Specification.LoopId;
-
             StringBuilder sb = new StringBuilder();
-            sb.Append(loop.Transaction.FunctionGroup.SegmentString);
-            sb.AppendFormat("{0}", _segmentTerminator);
-            sb.Append(loop.Transaction.SegmentString);
-            sb.AppendFormat("{0}", _segmentTerminator);
-            foreach (var segment in loop.Transaction.Segments)
-            {
-                if (segment is Loop)
-                {
-                    if (((Loop)segment).Specification.LoopId != parentLoopId)
-                        sb.AppendLine(segment.SerializeToX12(true));
-                }
-                else
-                {
-                    sb.Append(segment.SegmentString);
-                    sb.AppendFormat("{0}", _segmentTerminator);
-                }
-            }
 
+            LoopContainer parent = (LoopContainer)loop.Parent;
             sb.AppendLine(SerializeParent(parent, loopId));
             sb.AppendLine(loop.ToX12String(true));
             foreach (var segment in loop.Transaction.TrailerSegments)
@@ -110,12 +87,35 @@ namespace OopFactory.X12.Parsing
                         sb.Append(segment.SegmentString);
                         sb.AppendFormat("{0}", _segmentTerminator);
                     }
-            
+
                 }
                 return sb.ToString();
             }
             else
-                return "";
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(container.Transaction.FunctionGroup.SegmentString);
+                sb.AppendFormat("{0}", _segmentTerminator);
+                sb.Append(container.Transaction.SegmentString);
+                sb.AppendFormat("{0}", _segmentTerminator);
+
+                foreach (var segment in container.Transaction.Segments)
+                {
+                    if (segment is Loop)
+                    {
+                        if (((Loop)segment).Specification.LoopId != excludedLoopId)
+                        {
+                            sb.AppendLine(segment.SerializeToX12(true));
+                        }
+                    }
+                    else
+                    {
+                        sb.Append(segment.SegmentString);
+                        sb.AppendFormat("{0}", _segmentTerminator);
+                    }
+                }
+                return sb.ToString();
+            }
         }
 
     }
