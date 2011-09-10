@@ -68,10 +68,24 @@ namespace OopFactory.X12.Hipaa.Claims
             }
         }
 
+        [XmlAttribute(AttributeName="StatementFromDate", DataType="date")]
+        public DateTime SerializableStatementFromDate
+        {
+            get { return StatementFromDate ?? DateTime.MinValue; }
+            set { }
+        }
+
+        [XmlIgnore]
+        public bool SerializableStatementFromDateSpecified
+        {
+            get { return StatementFromDate.HasValue; }
+            set { }
+        }
+
         /// <summary>
         /// Box 6 on the UB04
         /// </summary>
-        public DateTime? StatementThroughDate
+        public DateTime? StatementToDate
         {
             get
             {
@@ -87,6 +101,20 @@ namespace OopFactory.X12.Hipaa.Claims
                         return null;
                 }
             }
+        }
+
+        [XmlAttribute(AttributeName = "StatementToDate", DataType = "date")]
+        public DateTime SerializableStatementToDate
+        {
+            get { return StatementToDate ?? DateTime.MinValue; }
+            set { }
+        }
+
+        [XmlIgnore]
+        public bool SerializableStatementToDateSpecified
+        {
+            get { return StatementToDate.HasValue; }
+            set { }
         }
 
         /// <summary>

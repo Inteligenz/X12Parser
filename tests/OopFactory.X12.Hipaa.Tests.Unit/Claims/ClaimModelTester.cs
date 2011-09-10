@@ -75,7 +75,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("123456789", claim.PayToProvider.TaxId, "Unexpected Federal Tax ID");
             // Box 6 Statement Covers Period
             Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementFromDate, "Unexpected statement from date");
-            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementThroughDate, "Unexpected statement through date");
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementToDate, "Unexpected statement through date");
             // Box 7 - Filler
 
             ClaimMember patient = claim.Patient ?? claim.Subscriber;
@@ -122,7 +122,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual(1, document.Claims.Count, "Expected one claim");
 
             Claim claim = document.Claims.First();
-            /*
+            Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
             // Box 1 - Service Location
             Assert.AreEqual("JONES HOSPITAL", claim.ServiceLocation.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.ServiceLocation.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
@@ -130,7 +130,6 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("PA", claim.ServiceLocation.Address.StateCode, "Unexpected Billing Provider Address State Code");
             Assert.AreEqual("17111", claim.ServiceLocation.Address.PostalCode, "Unexpected Billing Provider Address Postal Code");
             // Box 2 - Pay To Provider
-            Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
             Assert.AreEqual("JONES HOSPITAL", claim.PayToProvider.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.PayToProvider.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
             Assert.AreEqual("CENTERVILLE", claim.PayToProvider.Address.City, "Unexpected Billing Provider Address City");
@@ -145,10 +144,10 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("A", claim.ServiceLocationInfo.Qualifier, "Unexpected facility code qualifier");
             Assert.AreEqual("1", claim.ServiceLocationInfo.FrequencyTypeCode, "Unexpected frequency type code");
             // Box 5 - Federal Tax Number
-            Assert.AreEqual("123456789", claim.PayToProvider.TaxId, "Unexpected Federal Tax ID");
+            Assert.AreEqual("567891234", claim.PayToProvider.TaxId, "Unexpected Federal Tax ID");
             // Box 6 Statement Covers Period
             Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementFromDate, "Unexpected statement from date");
-            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementThroughDate, "Unexpected statement through date");
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), claim.StatementToDate, "Unexpected statement through date");
             // Box 7 - Filler
 
             ClaimMember patient = claim.Patient ?? claim.Subscriber;
@@ -167,17 +166,83 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             // Box 11 Sex
             Assert.AreEqual(GenderEnum.Male, patient.Gender);
             // Box 12 & 13 Admission Date and Hour
-            Assert.AreEqual(DateTime.Parse("1996-09-10 2:02 PM"), claim.AdmissionDate);
+            Assert.AreEqual(DateTime.Parse("1996-09-11 2:02 PM"), claim.AdmissionDate);
             // Box 14 Admission Type
 
             // Box 15 Admission Source
 
+            // Box 16 Discharge Hour
+
+            // Box 17 Discharge Status
+
+            // Box 18 through 28 Condition Codes
+            Assert.AreEqual(14, claim.Conditions.Count);
+            Assert.AreEqual("01", claim.Conditions[0].Code);
+            Assert.AreEqual("02", claim.Conditions[1].Code);
+            Assert.AreEqual("03", claim.Conditions[2].Code);
+            Assert.AreEqual("04", claim.Conditions[3].Code);
+            Assert.AreEqual("05", claim.Conditions[4].Code);
+            Assert.AreEqual("06", claim.Conditions[5].Code);
+            Assert.AreEqual("07", claim.Conditions[6].Code);
+            Assert.AreEqual("08", claim.Conditions[7].Code);
+            Assert.AreEqual("09", claim.Conditions[8].Code);
+            Assert.AreEqual("10", claim.Conditions[9].Code);
+            Assert.AreEqual("11", claim.Conditions[10].Code);
+
+            // Box 29
+
+            // Box 30
+
+            // Box 31 through 34 - Occurrences
+            Assert.AreEqual(8, claim.Occurrences.Count);
+            Assert.AreEqual("A1", claim.Occurrences[0].Code);
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), claim.Occurrences[0].Date);
+            Assert.AreEqual("A2", claim.Occurrences[1].Code);
+            Assert.AreEqual(DateTime.Parse("1991-11-01"), claim.Occurrences[1].Date);
+            Assert.AreEqual("B1", claim.Occurrences[2].Code);
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), claim.Occurrences[2].Date);
+            Assert.AreEqual("B2", claim.Occurrences[3].Code);
+            Assert.AreEqual(DateTime.Parse("1987-1-1"), claim.Occurrences[3].Date);
+            Assert.AreEqual("C1", claim.Occurrences[4].Code);
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), claim.Occurrences[4].Date);
+            Assert.AreEqual("C2", claim.Occurrences[5].Code);
+            Assert.AreEqual(DateTime.Parse("1991-11-1"), claim.Occurrences[5].Date);
+            Assert.AreEqual("D1", claim.Occurrences[6].Code);
+            Assert.AreEqual(DateTime.Parse("1926-11-11"), claim.Occurrences[6].Date);
+            Assert.AreEqual("D2", claim.Occurrences[7].Code);
+            Assert.AreEqual(DateTime.Parse("1987-1-1"), claim.Occurrences[7].Date);
+            
 
             Assert.AreEqual(2, claim.ServiceLines.Count, "Unexpected number of service lines.");
 
             ServiceLine line = claim.ServiceLines[0];
-            Assert.AreEqual("305", line.RevenueCode);
-            Assert.AreEqual("85025", line.Procedure.ProcedureCode); */
+            Assert.AreEqual("0305", line.RevenueCode);
+            Assert.AreEqual("85025", line.Procedure.ProcedureCode);
+            Assert.AreEqual(13.39m, line.ChargeAmount);
+            Assert.AreEqual(1, line.Quantity);
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), line.ServiceDateFrom);
+            Assert.IsNull(line.OperatingPhysician);
+
+            line = claim.ServiceLines[1];
+            Assert.AreEqual("0730", line.RevenueCode);
+            Assert.AreEqual("93005", line.Procedure.ProcedureCode);
+            Assert.AreEqual("AA", line.Procedure.Modifier1);
+            Assert.AreEqual("BB", line.Procedure.Modifier2);
+            Assert.AreEqual("CC", line.Procedure.Modifier3);
+            Assert.AreEqual("DD", line.Procedure.Modifier4);
+            Assert.AreEqual("Test Procedure", line.Procedure.Description);
+            Assert.AreEqual(76.54m, line.ChargeAmount);
+            Assert.AreEqual(3, line.Quantity);
+            Assert.AreEqual(11.15m, line.NonCoveredChargeAmount);
+            Assert.AreEqual(DateTime.Parse("1996-9-11"), line.ServiceDateFrom);
+            Assert.AreEqual(1, line.Notes.Count);
+            Assert.AreEqual("TPO", line.Notes[0].Code);
+
+            Assert.IsNotNull(line.OperatingPhysician);
+            Assert.AreEqual("JONES", line.OperatingPhysician.Name.LastName);
+            Assert.AreEqual("JOHN", line.OperatingPhysician.Name.FirstName);
+            Assert.AreEqual("B99937", line.OperatingPhysician.Npi);
+            Assert.AreEqual("363LP0200N", line.OperatingPhysician.ProviderInfo.Id);
         }
     }
 }
