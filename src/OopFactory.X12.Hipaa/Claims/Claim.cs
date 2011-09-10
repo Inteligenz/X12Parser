@@ -39,6 +39,13 @@ namespace OopFactory.X12.Hipaa.Claims
 
         public ServiceLocationInformation ServiceLocationInfo { get; set; }
 
+        public Entity Submitter { get; set; }
+        public Entity Receiver { get; set; }
+        public BillingInformation BillingInfo { get; set; }
+        public ClaimMember Subscriber { get; set; }
+        public Entity Payer { get; set; }
+        public ClaimMember Patient { get; set; }
+
         #region Institional Claim Properties
 
         /// <summary>
@@ -46,6 +53,52 @@ namespace OopFactory.X12.Hipaa.Claims
         /// </summary>
         [XmlAttribute]
         public string MedicalRecordNumber { get; set; }
+
+        /// <summary>
+        /// Box 14 of the UB04
+        /// </summary>
+        public Lookup AdmissionType { get; set; }
+
+        /// <summary>
+        /// Box 15 of the UB04
+        /// </summary>
+        public Lookup AdmissionSource { get; set; }
+
+        /// <summary>
+        /// Box 17 of the UB04
+        /// </summary>
+        public Lookup PatientStatus { get; set; }
+
+        [XmlElement(ElementName = "Condition")]
+        public List<Lookup> Conditions { get; set; }
+
+        [XmlElement(ElementName = "Occurrence")]
+        public List<CodedDate> Occurrences { get; set; }
+
+        [XmlElement(ElementName = "OccurrenceSpan")]
+        public List<CodedDateRange> OccurrenceSpans { get; set; }
+
+        [XmlElement(ElementName = "Value")]
+        public List<CodedAmount> Values { get; set; }
+
+        [XmlElement(ElementName = "Diagnosis")]
+        public List<Diagnosis> Diagnoses { get; set; }
+
+        [XmlElement(ElementName = "Procedure")]
+        public List<InstitutionalProcedure> Procedures { get; set; }
+
+        [XmlElement(ElementName = "Provider")]
+        public List<Provider> Providers { get; set; }
+
+        #endregion
+
+        [XmlElement(ElementName = "Note")]
+        public List<Lookup> Notes { get; set; }
+
+        [XmlElement(ElementName="ServiceLine")]
+        public List<ServiceLine> ServiceLines { get; set; }
+
+        #region Calculated Fields
 
         /// <summary>
         /// Box 6 on the UB04
@@ -68,7 +121,7 @@ namespace OopFactory.X12.Hipaa.Claims
             }
         }
 
-        [XmlAttribute(AttributeName="StatementFromDate", DataType="date")]
+        [XmlAttribute(AttributeName = "StatementFromDate", DataType = "date")]
         public DateTime SerializableStatementFromDate
         {
             get { return StatementFromDate ?? DateTime.MinValue; }
@@ -131,64 +184,17 @@ namespace OopFactory.X12.Hipaa.Claims
                     return null;
             }
         }
-
-        /// <summary>
-        /// Box 14 of the UB04
-        /// </summary>
-        public Lookup AdmissionType { get; set; }
-
-        /// <summary>
-        /// Box 15 of the UB04
-        /// </summary>
-        public Lookup AdmissionSource { get; set; }
-
-        /// <summary>
-        /// Box 17 of the UB04
-        /// </summary>
-        public Lookup PatientStatus { get; set; }
-
-        [XmlElement(ElementName = "Condition")]
-        public List<Lookup> Conditions { get; set; }
-
-        [XmlElement(ElementName = "Occurrence")]
-        public List<CodedDate> Occurrences { get; set; }
-
-        [XmlElement(ElementName = "OccurrenceSpan")]
-        public List<CodedDateRange> OccurrenceSpans { get; set; }
-
-        [XmlElement(ElementName = "Value")]
-        public List<CodedAmount> Values { get; set; }
-
-        [XmlElement(ElementName = "Procedure")]
-        public List<CodedDate> Procedures { get; set; }
-
-        [XmlElement(ElementName = "Provider")]
-        public List<Provider> Providers { get; set; }
-
-        #endregion
-
-        public Entity Submitter { get; set; }
-        public Entity Receiver { get; set; }
-        public BillingInformation BillingInfo { get; set; }
-        public ClaimMember Subscriber { get; set; }
-        public Entity Payer { get; set; }
-        public ClaimMember Patient { get; set; }
-
-        [XmlElement(ElementName="ServiceLine")]
-        public List<ServiceLine> ServiceLines { get; set; }
-
-        #region Calculated Fields
         public Provider ServiceLocation
         {
             get
             {
-                var serviceFacilityLocation = Providers.FirstOrDefault(p => p.Name.Identifier == "77");
+                var serviceFacilityLocation = Providers.FirstOrDefault(p => p.Name.Type.Identifier == "77");
                 if (serviceFacilityLocation != null)
                     return serviceFacilityLocation;
                 else
                 {
                     if (BillingInfo != null)
-                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Identifier == "85");
+                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
                     else
                         return null;
                 }
@@ -201,11 +207,11 @@ namespace OopFactory.X12.Hipaa.Claims
             {
                 if (BillingInfo != null)
                 {
-                    var payToProvider = BillingInfo.Providers.FirstOrDefault(p => p.Name.Identifier == "87");
+                    var payToProvider = BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "87");
                     if (payToProvider != null)
                         return payToProvider;
                     else // the billing provider is the pay to provider when the pay-to provider is not present
-                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Identifier == "85");
+                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
                 }
                 else
                     return null;
@@ -217,11 +223,19 @@ namespace OopFactory.X12.Hipaa.Claims
             get
             {
                 if (BillingInfo != null)
-                    return BillingInfo.Providers.FirstOrDefault(p => p.Name.Identifier == "PE");
+                    return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "PE");
                 else
                     return null;
             }
         }
+
+        public Provider AttendingProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "71"); } }
+        public Provider OperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "72"); } }
+        public Provider OtherOperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "ZZ"); } }
+        public Provider RenderingProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "82"); } }
+        public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "77"); } }
+        public Provider ReferringProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "DN" || p.Name.Type.Identifier == "P3"); } }
+
         #endregion
     }
 }

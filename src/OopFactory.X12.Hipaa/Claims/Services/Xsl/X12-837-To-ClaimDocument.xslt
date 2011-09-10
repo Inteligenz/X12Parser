@@ -15,6 +15,7 @@
     </ClaimDocument>    
   </xsl:template>
 
+  <!-- Claim Loop 2300 -->
   <xsl:template match="Loop[@LoopId='2300']">
     <Claim>
       <xsl:attribute name="Type">
@@ -91,11 +92,18 @@
           <xsl:with-param name="DTP" select="."/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:apply-templates select="NTE"/>
       <xsl:apply-templates select="HI"/>
+      <xsl:for-each select="Loop[count(NM1)>0]">
+        <xsl:call-template name="Provider">
+          <xsl:with-param name="Loop" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
       <xsl:apply-templates select="Loop[@LoopId='2400']"/>
     </Claim>
   </xsl:template>
 
+  <!-- Health Care Information Codes -->
   <xsl:template match="HI[HI01/HI0101='BG']">
     <xsl:for-each select="child::*">
       <xsl:variable name="code" select="*[2]"/>
@@ -140,7 +148,56 @@
     </xsl:for-each>
   </xsl:template>
 
+  <xsl:template match="HI[HI01/HI0101='BE']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="code" select="*[2]"/>
+      <xsl:variable name="amount" select="*[5]"/>
+      <Value>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:value-of select="$amount"/>
+        </xsl:attribute>
+      </Value>
+    </xsl:for-each>
+  </xsl:template>
 
+  <xsl:template match="HI[HI01/HI0101='BBR' or HI01/HI0101='BR' or HI01/HI0101='CAH' or HI01/HI0101='BBQ' or HI01/HI0101='BQ']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="qualifier" select="*[1]"/>
+      <xsl:variable name="code" select="*[2]"/>
+      <xsl:variable name="date" select="*[4]"/>
+      <Procedure>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="$qualifier"/>
+        </xsl:attribute>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+        <xsl:attribute name="Date">
+          <xsl:value-of select="concat(substring($date,1,4),'-',substring($date,5,2),'-',substring($date,7,2))"/>
+        </xsl:attribute>
+      </Procedure>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="HI[HI01/HI0101='ABK' or HI01/HI0101='BK' or HI01/HI0101='ABJ' or HI01/HI0101='BJ' or HI01/HI0101='APR' or HI01/HI0101='PR' or HI01/HI0101='ABN' or HI01/HI0101='BN' or HI01/HI0101='ABF' or HI01/HI0101='BF']">
+    <xsl:for-each select="child::*">
+      <xsl:variable name="qualifier" select="*[1]"/>
+      <xsl:variable name="code" select="*[2]"/>
+      <Diagnosis>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="$qualifier"/>
+        </xsl:attribute>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="$code"/>
+        </xsl:attribute>
+      </Diagnosis>
+    </xsl:for-each>
+  </xsl:template>
+
+  <!-- Service Line Loop 2400 -->
   <xsl:template match="Loop[@LoopId='2400']">
     <ServiceLine>
       <xsl:attribute name="LineNumber">
@@ -250,14 +307,7 @@
         </xsl:call-template>
         </Identification>
       </xsl:for-each>
-      <xsl:for-each select="NTE">
-        <Note>
-          <xsl:attribute name="Code">
-            <xsl:value-of select="NTE01"/>
-          </xsl:attribute>
-          <xsl:value-of select="NTE02"/>
-        </Note>
-      </xsl:for-each>
+      <xsl:apply-templates select="NTE"/>
       <xsl:for-each select="Loop">
         <xsl:call-template name="Provider">
           <xsl:with-param name="Loop" select="."/>
@@ -266,6 +316,7 @@
     </ServiceLine>
   </xsl:template>
 
+  <!-- Hierarchical Loops -->
   <xsl:template name="BillingProviderHLoop">
     <xsl:param name="HLoop"/>
     <BillingInfo>
@@ -311,6 +362,16 @@
   </xsl:template>
 
   <!-- Common Templates -->
+
+  <xsl:template match="NTE">
+    <Note>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="NTE01"/>
+      </xsl:attribute>
+      <xsl:value-of select="NTE02"/>
+    </Note>
+  </xsl:template>
+
   <xsl:template name="Provider">
     <xsl:param name="Loop"/>
     <Provider>
@@ -384,15 +445,6 @@
 
   <xsl:template name="EntityName">
     <xsl:param name="Loop"/>
-    <xsl:attribute name="Identifier">
-      <xsl:value-of select="$Loop/NM1/NM101"/>
-    </xsl:attribute>
-    <xsl:attribute name="Qualifier">
-      <xsl:choose>
-        <xsl:when test="$Loop/NM1/NM102='1'">Person</xsl:when>
-        <xsl:otherwise>NonPerson</xsl:otherwise>
-      </xsl:choose>
-    </xsl:attribute>
     <xsl:attribute name="LastName">
       <xsl:value-of select="$Loop/NM1/NM103"/>
     </xsl:attribute>
@@ -406,6 +458,18 @@
         </xsl:attribute>
       </xsl:if>
     </xsl:if>
+    <Type>
+      <xsl:attribute name="Identifier">
+        <xsl:value-of select="$Loop/NM1/NM101"/>
+      </xsl:attribute>
+      <xsl:attribute name="Qualifier">
+        <xsl:choose>
+          <xsl:when test="$Loop/NM1/NM102='1'">Person</xsl:when>
+          <xsl:otherwise>NonPerson</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:value-of select="$Loop/NM1/NM101/comment()"/>
+    </Type>
     <Identification>
       <xsl:attribute name="Qualifier">
         <xsl:value-of select="$Loop/NM1/NM108" />

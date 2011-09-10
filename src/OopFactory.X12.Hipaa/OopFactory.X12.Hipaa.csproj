@@ -52,8 +52,10 @@
     <Compile Include="Claims\BillingInformation.cs" />
     <Compile Include="Claims\ClaimDocument.cs" />
     <Compile Include="Claims\ClaimMember.cs" />
+    <Compile Include="Claims\Diagnosis.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
+    <Compile Include="Claims\InstitutionalProcedure.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
     <Compile Include="Claims\Services\ClaimTransformationService.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />
     <Compile Include="Common\Contact.cs" />
+    <Compile Include="Common\CodeListEnum.cs" />
     <Compile Include="Common\MedicalProcedure.cs" />
     <Compile Include="Common\QualifiedAmount.cs" />
     <Compile Include="Common\QualifiedDate.cs" />
