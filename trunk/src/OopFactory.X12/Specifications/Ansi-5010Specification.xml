@@ -32,7 +32,7 @@
       <Allowed ID="PP">Pharmacy Processor Number</Allowed>
       <Allowed ID="SV">Service Provider Number</Allowed>
       <Allowed ID="XV">Centers for Medicare and Medicaid Services PlanID</Allowed>
-      <Allowed ID="XX">Centers for Medicare and Medicaid Services Nationa</Allowed>
+      <Allowed ID="XX">Centers for Medicare and Medicaid Services National Provider Identifier</Allowed>
       <Allowed ID="ZZ">Mutually Defined</Allowed>
     </Element>
     <Element Name="Identification Code" Type="AN" MinLength="2" MaxLength="80"/>

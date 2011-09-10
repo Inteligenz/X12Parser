@@ -101,7 +101,7 @@
         <xsl:value-of select="LX/LX01"/>
       </xsl:attribute>
       <xsl:for-each select="SV1">
-        <xsl:attribute name="Charges">
+        <xsl:attribute name="ChargeAmount">
           <xsl:value-of select="SV102"/>
         </xsl:attribute>
         <xsl:attribute name="Quantity">
@@ -146,15 +146,75 @@
         <xsl:attribute name="RevenueCode">
           <xsl:value-of select="SV201"/>
         </xsl:attribute>
+        <xsl:attribute name="ChargeAmount">
+          <xsl:value-of select="SV203"/>
+        </xsl:attribute>
+        <xsl:attribute name="Quantity">
+          <xsl:value-of select="SV205"/>
+        </xsl:attribute>
+        <xsl:if test="string-length(SV204)>0">
+          <xsl:attribute name="Unit">
+            <xsl:value-of select="SV204"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(SV207)>0">
+          <xsl:attribute name="NonCoveredChargeAmount">
+            <xsl:value-of select="SV207"/>
+          </xsl:attribute>
+        </xsl:if>
         <Procedure>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="SV202/SV20201"/>
+          </xsl:attribute>
           <xsl:attribute name="ProcedureCode">
             <xsl:value-of select="SV202/SV20202"/>
           </xsl:attribute>
+          <xsl:if test="string-length(SV202/SV20203)>0">
+            <xsl:attribute name="Modifier1">
+              <xsl:value-of select="SV202/SV20203"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV202/SV20204)>0">
+            <xsl:attribute name="Modifier2">
+              <xsl:value-of select="SV202/SV20204"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV202/SV20205)>0">
+            <xsl:attribute name="Modifier3">
+              <xsl:value-of select="SV202/SV20205"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="string-length(SV202/SV20206)>0">
+            <xsl:attribute name="Modifier4">
+              <xsl:value-of select="SV202/SV20206"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:value-of select="SV202/SV20207"/>
         </Procedure>
       </xsl:for-each>
       <xsl:for-each select="DTP">
         <xsl:call-template name="DTPSegment">
           <xsl:with-param name="DTP" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:for-each select="REF">
+        <Identification>
+        <xsl:call-template name="Identification">
+          <xsl:with-param name="REF" select="."/>
+        </xsl:call-template>
+        </Identification>
+      </xsl:for-each>
+      <xsl:for-each select="NTE">
+        <Note>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="NTE01"/>
+          </xsl:attribute>
+          <xsl:value-of select="NTE02"/>
+        </Note>
+      </xsl:for-each>
+      <xsl:for-each select="Loop">
+        <xsl:call-template name="Provider">
+          <xsl:with-param name="Loop" select="."/>
         </xsl:call-template>
       </xsl:for-each>
     </ServiceLine>
@@ -164,37 +224,12 @@
     <xsl:param name="HLoop"/>
     <BillingInfo>
       <xsl:for-each select="$HLoop/Loop[count(NM1)>0]">
-        <Provider>
-          <Name>
-            <xsl:call-template name="EntityName">
-              <xsl:with-param name="Loop" select="."/>
-            </xsl:call-template>
-          </Name>
-          <xsl:for-each select="N3">
-            <Address>
-              <xsl:call-template name="PostalAddress">
-                <xsl:with-param name="N3" select="."/>
-              </xsl:call-template>
-            </Address>
-          </xsl:for-each>
-          <xsl:for-each select="REF">
-            <Identification>
-              <xsl:call-template name="Identification">
-                <xsl:with-param name="REF" select="."/>
-              </xsl:call-template>
-            </Identification>
-          </xsl:for-each>
-          <xsl:for-each select="PER">
-            <Contact>
-              <xsl:call-template name="Contact">
-                <xsl:with-param name="PER" select="."/>
-              </xsl:call-template>
-            </Contact>
-          </xsl:for-each>
-        </Provider>
+        <xsl:call-template name="Provider">
+          <xsl:with-param name="Loop" select="."/>
+        </xsl:call-template>
       </xsl:for-each>
     </BillingInfo>
-  </xsl:template>
+  </xsl:template>  
 
   <xsl:template name="SubscriberHLoop">
     <xsl:param name="HLoop"/>
@@ -230,6 +265,37 @@
   </xsl:template>
 
   <!-- Common Templates -->
+  <xsl:template name="Provider">
+    <xsl:param name="Loop"/>
+    <Provider>
+      <Name>
+        <xsl:call-template name="EntityName">
+          <xsl:with-param name="Loop" select="$Loop"/>
+        </xsl:call-template>
+      </Name>
+      <xsl:for-each select="$Loop/N3">
+        <Address>
+          <xsl:call-template name="PostalAddress">
+            <xsl:with-param name="N3" select="."/>
+          </xsl:call-template>
+        </Address>
+      </xsl:for-each>
+      <xsl:for-each select="REF">
+        <Identification>
+          <xsl:call-template name="Identification">
+            <xsl:with-param name="REF" select="."/>
+          </xsl:call-template>
+        </Identification>
+      </xsl:for-each>
+      <xsl:for-each select="$Loop/PER">
+        <Contact>
+          <xsl:call-template name="Contact">
+            <xsl:with-param name="PER" select="."/>
+          </xsl:call-template>
+        </Contact>
+      </xsl:for-each>
+    </Provider>
+  </xsl:template>
   <xsl:template name="Member">
     <xsl:param name="Loop"/>
     <xsl:if test="count($Loop/DMG)>0">
