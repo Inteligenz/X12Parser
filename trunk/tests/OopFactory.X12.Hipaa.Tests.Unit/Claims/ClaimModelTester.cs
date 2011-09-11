@@ -117,11 +117,11 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             var document = service.Transform837ToClaimDocument(stream);
 
             string xml = document.Serialize();
-            Trace.Write(xml);
 
             Assert.AreEqual(1, document.Claims.Count, "Expected one claim");
 
             Claim claim = document.Claims.First();
+            Trace.Write(claim.Serialize());
             Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
             // Box 1 - Service Location
             Assert.AreEqual("JONES HOSPITAL", claim.ServiceLocation.Name.LastName, "Unexpected Billing Provider Last Name");

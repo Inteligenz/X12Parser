@@ -20,6 +20,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             var parser = new X12Parser();
             var interchange = parser.Parse(stream);
+            return Transform837ToClaimDocument(interchange);
+        }
+
+        public ClaimDocument Transform837ToClaimDocument(Interchange interchange)
+        {
             var xml = interchange.Serialize();
 
             var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Services.Xsl.X12-837-To-ClaimDocument.xslt");
