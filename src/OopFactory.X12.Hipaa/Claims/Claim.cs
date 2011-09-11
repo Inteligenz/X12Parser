@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Xml.Serialization;
 using OopFactory.X12.Hipaa.Common;
 
@@ -14,6 +15,7 @@ namespace OopFactory.X12.Hipaa.Claims
         Dental
     }
 
+    [XmlRoot(Namespace = "http://www.oopfactory.com/2011/XSL/Hipaa")]
     public class Claim
     {
         public Claim()
@@ -26,6 +28,10 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlAttribute]
         public ClaimTypeEnum Type { get; set; }
+        [XmlAttribute]
+        public string TransactionCode { get; set; }
+        [XmlAttribute]
+        public string ClaimNumber { get; set; }
         [XmlAttribute]
         public string PatientControlNumber { get; set; }
         [XmlAttribute]
@@ -115,6 +121,8 @@ namespace OopFactory.X12.Hipaa.Claims
                     var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
                     if (date != null)
                         return date.Date;
+                    else if (ServiceLines.Count > 0)
+                        return ServiceLines.Min(sl => sl.ServiceDateFrom);
                     else
                         return null;
                 }
@@ -150,6 +158,8 @@ namespace OopFactory.X12.Hipaa.Claims
                     var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
                     if (date != null)
                         return date.Date;
+                    else if (ServiceLines.Count > 0)
+                        return ServiceLines.Max(sl => sl.ServiceDateTo);
                     else
                         return null;
                 }
@@ -236,6 +246,21 @@ namespace OopFactory.X12.Hipaa.Claims
         public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "77"); } }
         public Provider ReferringProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "DN" || p.Name.Type.Identifier == "P3"); } }
 
+        #endregion
+
+        #region Serialization Methods
+        public string Serialize()
+        {
+            StringWriter writer = new StringWriter();
+            new XmlSerializer(typeof(Claim)).Serialize(writer, this);
+            return writer.ToString();
+        }
+
+        public static Claim Deserialize(string xml)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Claim));
+            return (Claim)serializer.Deserialize(new StringReader(xml));
+        }
         #endregion
     }
 }

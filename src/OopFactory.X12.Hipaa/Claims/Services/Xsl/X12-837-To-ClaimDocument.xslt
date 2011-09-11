@@ -18,12 +18,26 @@
   <!-- Claim Loop 2300 -->
   <xsl:template match="Loop[@LoopId='2300']">
     <Claim>
+      <xsl:variable name="ParentLoopId" select="../@LoopId"/>
       <xsl:attribute name="Type">
         <xsl:choose>
           <xsl:when test="count(Loop/SV1) > 0">Professional</xsl:when>
           <xsl:when test="count(Loop/SV2) > 0">Institutional</xsl:when>
           <xsl:when test="count(Loop/SV3) > 0">Dental</xsl:when>
         </xsl:choose>
+      </xsl:attribute>
+      <xsl:attribute name="TransactionCode">
+        <xsl:choose>
+          <xsl:when test="$ParentLoopId = '2000B'">
+            <xsl:value-of select="../../../ST/ST02"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="../../../../ST/ST02"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:attribute name="ClaimNumber">
+        <xsl:value-of select="REF[REF01='D9']/REF02"/>
       </xsl:attribute>
       <xsl:attribute name="PatientControlNumber">
         <xsl:value-of select="CLM/CLM01"/>
@@ -66,9 +80,7 @@
         </PatientStatus>
       </xsl:if>
 
-      <xsl:variable name="ParentLoopId" select="../@LoopId"/>
-      <xsl:choose>
-        
+      <xsl:choose>        
         <xsl:when test="$ParentLoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
