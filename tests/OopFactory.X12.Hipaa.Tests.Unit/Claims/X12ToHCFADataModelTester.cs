@@ -33,10 +33,11 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
              var claimSvc = new ClaimTransformationService();
 
             // send the x12 stream in to obtain a claim object
-            var document = claimSvc.Transform837ToClaimDocument(stream);
-            var claim = document.Claims[0];
-            Assert.AreEqual("587654321", claim.BillingInfo.Providers[0].TaxId);
-            Trace.Write(document.Serialize());
+            //var document = claimSvc.Transform837ToClaimDocument(stream);
+            //var claim = document.Claims[0];
+            //Assert.AreEqual("587654321", claim.BillingInfo.Providers[0].TaxId);
+            var hcfaclaim = claimSvc.TransformX12837ToHCFA1500Model(stream);
+            Trace.Write(hcfaclaim.Serialize());
         }
 
     }
