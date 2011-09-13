@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 {
@@ -37,8 +39,8 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field02_PatientsFirstName  { get; set; }
         public string Field02_PatientsMiddleName  { get; set; }
         public DateTime? Field03_PatientsDateOfBirth   { get; set; }                           // MMDDCCYY - 8 characters
-        public bool Field03_PatientsSexMale  { get; set; }
-        public bool Field03_PatientsSexFemale { get; set; }  
+        public bool? Field03_PatientsSexMale  { get; set; }
+        public bool? Field03_PatientsSexFemale { get; set; }  
         public string Field04_InsuredsLastName  { get; set; }                              // HCFA 1500 standard allows 29 total characters for these (3) fields
         public string Field04_InsuredsFirstName  { get; set; }
         public string Field04_InsuredsMiddleName { get; set; }
@@ -138,6 +140,20 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field33_BillingProvider_Zip { get; set; }                             //
         public string Field33a_BillingProviderNationalProviderIdentifier { get; set; }     // 10 characters
         public string Field33b_BillingProviderOtherID { get; set; }                         // 17 characters
+        #region Serialization Methods
 
+        public string Serialize()
+        {
+            var writer = new StringWriter();
+            new XmlSerializer(typeof(ClaimDocument)).Serialize(writer, this);
+            return writer.ToString();
+        }
+
+        public static ClaimDocument Deserialize(string xml)
+        {
+            var serializer = new XmlSerializer(typeof(ClaimDocument));
+            return (ClaimDocument)serializer.Deserialize(new StringReader(xml));
+        }
+        #endregion
     }
 }
