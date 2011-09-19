@@ -369,7 +369,29 @@
           </Address>
         </xsl:for-each>
       </Subscriber>
-
+    </xsl:for-each>
+    <xsl:for-each select="$HLoop/Loop[@LoopId='2010BB']">
+      <Payer>
+        <Name>
+          <xsl:call-template name="EntityName">
+            <xsl:with-param name="Loop" select="."/>
+          </xsl:call-template>
+        </Name>
+        <xsl:for-each select="N3">
+          <Address>
+            <xsl:call-template name="PostalAddress">
+              <xsl:with-param name="N3" select="."/>
+            </xsl:call-template>
+          </Address>
+        </xsl:for-each>
+        <xsl:for-each select="REF">
+          <Identification>
+            <xsl:call-template name="Identification">
+              <xsl:with-param name="REF" select="."/>
+            </xsl:call-template>
+          </Identification>
+        </xsl:for-each>
+      </Payer>
     </xsl:for-each>
   </xsl:template>
 
