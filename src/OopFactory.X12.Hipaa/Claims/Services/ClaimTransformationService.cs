@@ -14,7 +14,6 @@ using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
-#if DEBUG
     public class ClaimTransformationService
     {
         /// <summary>
@@ -43,6 +42,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             return ClaimDocument.Deserialize(xml);
         }
 
+#if DEBUG
         public UB04Claim TransformX12837ToUB04Model(Stream stream)
         {
             var parser = new X12Parser();
@@ -216,6 +216,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             return hcfa;
         }
-    }
 #endif
+    }
 }

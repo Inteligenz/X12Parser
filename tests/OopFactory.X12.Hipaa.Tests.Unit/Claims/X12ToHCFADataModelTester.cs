@@ -14,6 +14,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
     [TestClass]
     public class X12ToHCFADataModelTester
     {
+#if DEBUG
         [TestMethod]
         public void ProfessionalClaim1ToModel()
         {
@@ -39,6 +40,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             var hcfaclaim = claimSvc.TransformX12837ToHCFA1500Model(stream);
             Trace.Write(hcfaclaim.Serialize());
         }
+#endif
 
     }
 }
