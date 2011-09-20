@@ -14,7 +14,8 @@ using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
-    public class ClaimTransformationService
+#if DEBUG
+    public partial class ClaimTransformationService
     {
         /// <summary>
         /// Reads a claim that has been st

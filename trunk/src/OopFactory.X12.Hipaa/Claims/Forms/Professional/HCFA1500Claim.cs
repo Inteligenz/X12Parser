@@ -105,15 +105,13 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public DateTime? Field18_HospitalizationDateTo { get; set; }                           // MMDDCCYY
         public string Field19_ReservedForLocalUse { get; set; }                            // 83 characters
         public bool Field20_OutsideLab { get; set; }                                      // 1 = Yes, 2 = No
-        public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.
-        public string Field21_Diagnosis_1 { get; set; }                          // 3-1-4 part diagnosis code.
-        public string Field21_Diagnosis_2 { get; set; }                         // 3-1-4 part diagnosis code.
-        public string Field21_Diagnosis_3 { get; set; }                          // 3-1-4 part diagnosis code.
-        public string Field21_Diagnosis_4 { get; set; }                         // 3-1-4 part diagnosis code.
+        public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.                        // 3-1-4 part diagnosis code.
+        public List<Diagnosis> Field21_Diagnosis { get; set; }                         // 3-1-4 part diagnosis code.
         public string Field22_MedicaidSubmissionCode { get; set; }                          // 11 characters
         public string Field22_OriginalReferenceNumber { get; set; }                        // 18 characters
-        public string Field23_PriorAuthorizationNumber { get; set; }                       // 29 characters
-        public List<HCFA1500ServiceLine> Field24_ServiceLines { get; set; }                          // Service line details
+        public string Field23_PriorAuthorizationNumber { get; set; }                       // 29 characters                         // Service line details
+        static List<HCFA1500ServiceLine> _Field24_ServiceLines = new List<HCFA1500ServiceLine>();
+        public List<HCFA1500ServiceLine> Field24_ServiceLines { get { return _Field24_ServiceLines; } }
         public string Field25_FederalTaxIDNumber { get; set; }                             // 15 characters
         public bool Field25_IsEIN { get; set; }                                     // 1 = SSN, 2 = EIN
         public bool Field25_IsSSN { get; set; }
@@ -145,14 +143,14 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Serialize()
         {
             var writer = new StringWriter();
-            new XmlSerializer(typeof(ClaimDocument)).Serialize(writer, this);
+            new XmlSerializer(typeof(HCFA1500Claim)).Serialize(writer, this);
             return writer.ToString();
         }
 
-        public static ClaimDocument Deserialize(string xml)
+        public static HCFA1500Claim Deserialize(string xml)
         {
-            var serializer = new XmlSerializer(typeof(ClaimDocument));
-            return (ClaimDocument)serializer.Deserialize(new StringReader(xml));
+            var serializer = new XmlSerializer(typeof(HCFA1500Claim));
+            return (HCFA1500Claim)serializer.Deserialize(new StringReader(xml));
         }
         #endregion
     }

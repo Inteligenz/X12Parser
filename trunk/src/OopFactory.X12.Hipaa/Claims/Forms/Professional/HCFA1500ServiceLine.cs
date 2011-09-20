@@ -19,7 +19,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field24e_DiagnosisPointer3 { get; set; }
         public string Field24e_DiagnosisPointer4 { get; set; }
         public decimal? Field24f_Charges { get; set; }
-        public string Field24g_DaysOrUnits  { get; set; }           // 3 characters
+        public decimal Field24g_DaysOrUnits  { get; set; }           // 3 characters
         public string Field24h_EarlyPeriodicScreeningDiagnosisAndTreatment  { get; set; }   // 2 characters
         public string Field24i_RenderingProviderIdQualifier  { get; set; }
         public string Field24j_RenderingProviderId  { get; set; }   // 11 characters
