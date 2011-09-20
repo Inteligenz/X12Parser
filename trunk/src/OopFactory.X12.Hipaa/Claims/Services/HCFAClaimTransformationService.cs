@@ -132,7 +132,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             
 
             // Admission date and hour
-            hcfa.Field18_HospitalizationDateFrom = claim.AdmissionDate;  // ??? which one, this or next?
+            hcfa.Field18_HospitalizationDateFrom = claim.AdmissionDate;
             // Statement Covers Period
             hcfa.Field18_HospitalizationDateFrom = claim.StatementFromDate;
             hcfa.Field18_HospitalizationDateTo = claim.StatementToDate;
@@ -142,11 +142,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field20_OutsideLab = false;
             hcfa.Field20_OutsideLabCharges = 0;
 
-            // Diagnosis codes
-            foreach (var d in claim.Diagnoses)
-            {
-                hcfa.Field21_Diagnosis.Add(d);
-            }
+            //// Diagnosis codes
+            //foreach (var d in claim.Diagnoses)
+            //{
+            //    hcfa.Field21_Diagnosis.Add(d);
+            //}
 
             hcfa.Field22_MedicaidSubmissionCode = string.Empty;
             hcfa.Field22_OriginalReferenceNumber = string.Empty;
