@@ -51,7 +51,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             Assert.AreEqual("87070", hcfaclaim.Field24_ServiceLines[1].Field24d_ProcedureCode);
             Assert.AreEqual("99214", hcfaclaim.Field24_ServiceLines[2].Field24d_ProcedureCode);
             Assert.AreEqual("86663", hcfaclaim.Field24_ServiceLines[3].Field24d_ProcedureCode);
-                             Assert.AreEqual("BEN KILDARE SERVICE", hcfaclaim.Field32_FacilityLocationInfo_Name);
+            Assert.AreEqual("BEN KILDARE SERVICE", hcfaclaim.Field32_FacilityLocationInfo_Name);
             Assert.AreEqual("234 SEAWAY ST", hcfaclaim.Field32_FacilityLocationInfo_Street);
             Assert.AreEqual("MIAMI", hcfaclaim.Field32_FacilityLocationInfo_City);
             Assert.AreEqual("FL", hcfaclaim.Field32_FacilityLocationInfo_State);
