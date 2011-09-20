@@ -224,4 +224,5 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         }
 #endif
     }
+#endif
 }
