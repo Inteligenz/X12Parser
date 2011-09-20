@@ -142,11 +142,13 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field20_OutsideLab = false;
             hcfa.Field20_OutsideLabCharges = 0;
 
-            //// Diagnosis codes
-            //foreach (var d in claim.Diagnoses)
-            //{
-            //    hcfa.Field21_Diagnosis.Add(d);
-            //}
+            // Diagnosis codes
+            foreach (var d in claim.Diagnoses)
+            {
+                var hcfaDiagnosis = new HCFA1500Diagnosis();
+                hcfaDiagnosis.Field21_Diagnosis = d.Code;
+                hcfa.Field21_Diagnoses.Add(hcfaDiagnosis);
+            }
 
             hcfa.Field22_MedicaidSubmissionCode = string.Empty;
             hcfa.Field22_OriginalReferenceNumber = string.Empty;
