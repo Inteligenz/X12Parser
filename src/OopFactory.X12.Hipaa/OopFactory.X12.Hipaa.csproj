@@ -55,6 +55,7 @@
     <Compile Include="Claims\Diagnosis.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
+    <Compile Include="Claims\Forms\Professional\HCFA1500Diagnosis.cs" />
     <Compile Include="Claims\InstitutionalProcedure.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
