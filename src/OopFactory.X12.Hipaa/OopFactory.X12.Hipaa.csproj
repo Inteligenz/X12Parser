@@ -64,6 +64,7 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLine.cs" />
     <Compile Include="Claims\Claim.cs" />
+    <Compile Include="Claims\Services\HCFAClaimTransformationService.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />
