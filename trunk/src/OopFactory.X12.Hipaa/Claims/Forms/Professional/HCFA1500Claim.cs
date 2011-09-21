@@ -106,13 +106,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field19_ReservedForLocalUse { get; set; }                            // 83 characters
         public bool Field20_OutsideLab { get; set; }                                      // 1 = Yes, 2 = No
         public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.                        // 3-1-4 part diagnosis code.
-        private List<HCFA1500Diagnosis> _Field21_Diagnoses = new List<HCFA1500Diagnosis>();
-        public List<HCFA1500Diagnosis> Field21_Diagnoses { get { return _Field21_Diagnoses; } }                         // 3-1-4 part diagnosis code.
+        public List<HCFA1500Diagnosis> Field21_Diagnoses { get; set; }                       // 3-1-4 part diagnosis code.
         public string Field22_MedicaidSubmissionCode { get; set; }                          // 11 characters
         public string Field22_OriginalReferenceNumber { get; set; }                        // 18 characters
         public string Field23_PriorAuthorizationNumber { get; set; }                       // 29 characters                         // Service line details
-        private List<HCFA1500ServiceLine> _Field24_ServiceLines = new List<HCFA1500ServiceLine>();
-        public List<HCFA1500ServiceLine> Field24_ServiceLines { get { return _Field24_ServiceLines; } }
+        public List<HCFA1500ServiceLine> Field24_ServiceLines { get; set; }
         public string Field25_FederalTaxIDNumber { get; set; }                             // 15 characters
         public bool Field25_IsEIN { get; set; }                                     // 1 = SSN, 2 = EIN
         public bool Field25_IsSSN { get; set; }

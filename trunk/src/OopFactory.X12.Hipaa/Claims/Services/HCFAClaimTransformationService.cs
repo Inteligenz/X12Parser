@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using OopFactory.X12.Hipaa.Claims.Forms.Professional;
@@ -143,19 +144,20 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field20_OutsideLabCharges = 0;
 
             // Diagnosis codes
+            var HcfaDiagnosisCodes = new List<HCFA1500Diagnosis>();
             foreach (var d in claim.Diagnoses)
             {
                 var hcfaDiagnosis = new HCFA1500Diagnosis();
                 hcfaDiagnosis.Field21_Diagnosis = d.Code;
-                hcfa.Field21_Diagnoses.Add(hcfaDiagnosis);
+                HcfaDiagnosisCodes.Add(hcfaDiagnosis);
             }
-
+            hcfa.Field21_Diagnoses = HcfaDiagnosisCodes;
             hcfa.Field22_MedicaidSubmissionCode = string.Empty;
             hcfa.Field22_OriginalReferenceNumber = string.Empty;
 
             hcfa.Field23_PriorAuthorizationNumber = string.Empty;
 
-
+            var hcfaServiceLines = new List<HCFA1500ServiceLine>();
 
             // Service Lines
             foreach (var line in claim.ServiceLines)
@@ -198,8 +200,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     hcfaLine.Field24j_RenderingProviderId = line.OperatingPhysician.ProviderInfo.Id;
                 }
 
-                hcfa.Field24_ServiceLines.Add(hcfaLine);
+                hcfaServiceLines.Add(hcfaLine);
             }
+            hcfa.Field24_ServiceLines = hcfaServiceLines;
+
+
             // Federal Tax Number
             hcfa.Field25_FederalTaxIDNumber = claim.PayToProvider.TaxId;
             // shouldnt we represent hcfa.Field25_IsSSN and Field25_IsEIN to know which type TaxID?
