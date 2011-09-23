@@ -132,6 +132,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_1_3.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_5010\Example_3_2_2.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example3_CMS_HETS.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_866\Sample1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_5010\Spec_3.1.1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_5010\Spec_3.1.2_TwoClaimsForTheSameProvider.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_5010\Spec_3.1.3_PPORepricedClaim.txt" />

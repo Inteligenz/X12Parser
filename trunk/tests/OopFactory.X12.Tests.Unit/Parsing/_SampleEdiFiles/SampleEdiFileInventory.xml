@@ -312,4 +312,10 @@
       <ResourcePath>ORD._856.Example3.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="866">
+    <EdiFile>
+      <SourceUrl>http://evalue.internationaldelivers.com/supplier/documents/PUR_2048_MA_BPG_TRK866_LEAN866_PROCESS.pdf</SourceUrl>
+      <ResourcePath>MAN._866.Sample1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
 </SampleEdiFiles>
