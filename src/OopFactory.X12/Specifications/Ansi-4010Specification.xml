@@ -768,6 +768,17 @@
     <Element Name="Number of Included Functional Groups" Required="true" Type="N" MinLength="1" MaxLength="5" />
     <Element Name="Interchange Control Number" Required="true" Type="N" MinLength="9" MaxLength="9" />
   </Segment>
+  <Segment SegmentId="TA1">
+    <Element Name="Interchange control number"/>
+    <Element Name="Interchange Date"/>
+    <Element Name="Interchange Time"/>
+    <Element Name="Interchange ACK Code" Type="ID">
+      <Allowed ID="A">Accept</Allowed>
+      <Allowed ID="E">Interchange accepted with errors</Allowed>
+      <Allowed ID="R">Interchange rejected/suspended</Allowed>
+    </Element>
+    <Element Name="Interchange Note Code"/>
+  </Segment>
   <Segment SegmentId="GS">
     <Element Name="Functional Identifier Code" Required="true" Type="ID" MinLength="2" MaxLength="2">
       <Allowed ID="BE">Benefit Enrollment</Allowed>

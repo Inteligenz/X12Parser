@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SampleEdiFiles>
+  <TransactionSet>
+    <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>Acknowledgments.TechnicalAcknowledgment_Sample1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="110">
     <EdiFile>
       <SourceUrl>http://images.fedex.com/us/account/invhome/Air_Ground_X12-4060_New_Customer.pdf</SourceUrl>
