@@ -46,7 +46,7 @@ namespace OopFactory.X12.Parsing.Model
         {
             Segment segment = new Segment(this, _delimiters, segmentString);
             SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.SegmentId);
-            if (spec != null)
+            if (spec != null || segmentString.StartsWith("TA1"))
             {
                 _segments.Add(segment);
                 return segment;
