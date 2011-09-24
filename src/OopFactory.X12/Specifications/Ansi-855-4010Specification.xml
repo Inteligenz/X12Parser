@@ -27,6 +27,10 @@
       <Name>Product/Item Description</Name>
       <StartingSegment SegmentId="PID"/>
     </Loop>
+    <Loop LoopId="ACK">
+      <Name>Line Item Acknowledgmen</Name>
+      <StartingSegment SegmentId="ACK"/>
+    </Loop>
   </Loop>
   <Loop LoopId="CTT">
     <Name>Transaction Totals</Name>
