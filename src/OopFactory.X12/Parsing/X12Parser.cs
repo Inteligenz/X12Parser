@@ -129,6 +129,11 @@ namespace OopFactory.X12.Parsing
                                 throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
                             envelop.SetTerminatingTrailerSegment(segmentString);
                             break;
+                        case "TA1": // Technical acknowledgement
+                            if (envelop == null)
+                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
+                            envelop.AddSegment(segmentString);
+                            break;
                         default:
                             while (currentContainer != null)
                             {
