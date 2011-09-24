@@ -133,7 +133,7 @@ namespace OopFactory.X12.Parsing
                             if (envelop == null)
                                 throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
                             envelop.AddSegment(segmentString);
-                            break;
+                            break;  
                         default:
                             while (currentContainer != null)
                             {
