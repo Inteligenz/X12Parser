@@ -14,7 +14,6 @@ using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
-#if DEBUG
     public partial class ClaimTransformationService
     {
         /// <summary>
@@ -94,5 +93,4 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
 #endif
     }
-#endif
 }
