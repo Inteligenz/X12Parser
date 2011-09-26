@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="850">
+  <Segment SegmentId="BCH"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="EFI"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="TAX"/>
+  <Segment SegmentId="FOB"/>
+  <Segment SegmentId="CTP"/>
+  <Segment SegmentId="PAM"/>
+  <Segment SegmentId="CSH"/>
+  <Loop LoopId="SAC" LoopRepeat="25">
+    <Name>Service, Promotion, Allowance, or Charge Information</Name>
+    <StartingSegment SegmentId="SAC"/>
+    <Segment SegmentId="CUR"/>
+  </Loop>
+  <Loop LoopId="N9">
+    <Name>Extended Reference Information</Name>
+    <StartingSegment SegmentId="N9"/>
+    <Segment SegmentId="MSG"/>
+  </Loop>
+  <Loop LoopId="AMT">
+    <Name>Amount</Name>
+    <StartingSegment SegmentId="AMT"/>
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1">
+      <EntityIdentifier Code="MI"/>
+      <EntityIdentifier Code="ST"/>
+      <EntityIdentifier Code="SF"/>
+      <EntityIdentifier Code="BT"/>
+      <EntityIdentifier Code="BY"/>
+      <EntityIdentifier Code="SU"/>
+      <EntityIdentifier Code="PO"/>
+      <EntityIdentifier Code="DU"/>
+      <EntityIdentifier Code="EN"/>
+      <EntityIdentifier Code="IA"/>
+    </StartingSegment>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="POC" LoopRepeat="99">
+    <Name>Line Item Change</Name>
+    <StartingSegment SegmentId="POC"/>
+    <Segment SegmentId="DTM"/>
+  </Loop>
+  <Loop LoopId="CTT">
+    <Name>Transaction Totals</Name>
+    <StartingSegment SegmentId="CTT"/>
+    <Segment SegmentId="AMT"/>
+  </Loop>
+</TransactionSpecification>
