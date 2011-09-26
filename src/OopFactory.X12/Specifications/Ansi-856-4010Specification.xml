@@ -21,6 +21,7 @@
     <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
     <Segment SegmentId="PER"/>
     <Segment SegmentId="DTM"/>
+    <Segment SegmentId="FOB"/>
     <Loop LoopId="BT" Usage="Required" LoopRepeat="1">
       <Name>Bill-To-Party</Name>
       <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
@@ -97,6 +98,7 @@
   <HierarchicalLoop LoopId="ORDER" Usage="Required" LevelCode="O">
     <Name>ORDER</Name>
     <Segment SegmentId="PRF" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="TD5" Usage="Required" Repeat="1"/>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="TARE" Usage="Required" LevelCode="T">
     <Name>TARE</Name>
