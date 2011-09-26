@@ -293,6 +293,12 @@
       <ResourcePath>ORD._850.Example4_Adobe_ShrinkWrapped.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="860">
+    <EdiFile>
+      <SourceUrl>Provded by sprdave</SourceUrl>
+      <ResourcePath>ORD._860.Example1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="855">
     <EdiFile>
       <SourceUrl>http://www.adobe.com/partnerportal/edi/pdf/855_Outbound_ANSIX12_4010_29jun04_000.pdf</SourceUrl>
@@ -309,7 +315,7 @@
       <ResourcePath>ORD._846.Example2.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
-  <TransactionSet>
+  <TransactionSet Id="856">
     <EdiFile>
       <ResourcePath>ORD._856.Example1.txt</ResourcePath>
     </EdiFile>
@@ -318,6 +324,10 @@
     </EdiFile>
     <EdiFile>
       <ResourcePath>ORD._856.Example3.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user sprdave</SourceUrl>
+      <ResourcePath>ORD._856.Example4.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="866">
