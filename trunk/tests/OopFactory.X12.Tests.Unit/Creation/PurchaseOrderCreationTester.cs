@@ -21,7 +21,6 @@ namespace OopFactory.X12.Tests.Unit.Creation
 				InterchangeReceiverIdQualifier = "01",
 				InterchangeReceiverId = "001903202U",
 				InterchangeDate = purcaseOrderDate,
-			
 			};
 
 			interchange.SetElement(14, "0"); //No Aknowlegement is 0
@@ -98,8 +97,26 @@ namespace OopFactory.X12.Tests.Unit.Creation
 			bhtSegment.SetElement((int)DateTimeReferenceIndex.TermsTypeCode, "010");
 			bhtSegment.SetElement((int)DateTimeReferenceIndex.RequestedShipDate, requestedShipDate.ToString("yyyyMMdd"));
 
+			//Add to test
+			//N1 – Name
+			//Optional / Max Use=1
+
+			//N3 – Address Information
+			//Conditional – use if N1 used/ Max Use=2  
+
+			//N4 – Geographic Location
+			//Conditional – use if N3 used / Max Use=1 time 
+
+			//POC – Line Item Change
+			//Mandatory / Max Use=1 times per loop / Max Loop=99 times
+
+			//DTM – Date/Time Reference
+			//Mandatory / Max Use=1 times per loop 
+
+			//CTT – Transaction Totals
+			//Mandatory / Max Use=1 time
+
 			var x12 = interchange.SerializeToX12(true);
-			//Trace.Write(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
 			System.Diagnostics.Trace.Write(x12);
 		}
 
@@ -124,8 +141,6 @@ namespace OopFactory.X12.Tests.Unit.Creation
  			TermsTypeCode = 1,
 			RequestedShipDate = 2
 		}
-
-
 
 	}
 }
