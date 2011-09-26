@@ -142,7 +142,7 @@ namespace OopFactory.X12.Parsing.Model
             return this.ToX12String(addWhitespace).Trim();
         }
 
-        internal string SegmentId { get; private set; }
+        public string SegmentId { get; private set; }
 
 
         public string SegmentString
