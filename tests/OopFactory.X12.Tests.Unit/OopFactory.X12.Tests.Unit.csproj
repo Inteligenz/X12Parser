@@ -140,6 +140,8 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_5010\Spec_3.1.3_PPORepricedClaim.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_5010\Spec_3.1.4_OutOfNetworkRepricedClaim.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\Acknowledgments\TechnicalAcknowledgment_SampleFromJeffN825.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_860\Example1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\Example4.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
