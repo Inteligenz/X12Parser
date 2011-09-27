@@ -68,6 +68,8 @@ namespace OopFactory.X12.Parsing
                     return GetSpecification("873-4010");
                 case "997":
                     return GetSpecification("997-4010"); 
+                case "999":
+                    return GetSpecification("999-5010");
                 default:
                     throw new NotSupportedException(String.Format("Transaction Set {0} is not supported.", transactionSetCode));
             }
