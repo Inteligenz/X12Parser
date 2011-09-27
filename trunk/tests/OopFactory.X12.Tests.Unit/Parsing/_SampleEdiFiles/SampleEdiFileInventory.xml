@@ -2,6 +2,10 @@
 <SampleEdiFiles>
   <TransactionSet>
     <EdiFile>
+      <SourceUrl>http://www.dhs.wisconsin.gov/publications/P0/p00268.pdf</SourceUrl>
+      <ResourcePath>Acknowledgments._999.DHS_Wisconsin_Sample.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>Acknowledgments.TechnicalAcknowledgment_Sample1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
