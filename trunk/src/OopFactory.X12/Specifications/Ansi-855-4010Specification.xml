@@ -4,6 +4,7 @@
   <Segment SegmentId="CUR"/>
   <Segment SegmentId="REF"/>
   <Segment SegmentId="TD5"/>
+  <Segment SegmentId="DTM"/>
   <Loop LoopId="N1">
     <Name></Name>
     <StartingSegment SegmentId="N1">

@@ -143,6 +143,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_860\Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\Example4.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\Acknowledgments\_999\DHS_Wisconsin_Sample.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_855\855SSimmons.txt" />
     <Content Include="Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\Example1_DHHS.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_4010\Example1_DHHS.txt" />
