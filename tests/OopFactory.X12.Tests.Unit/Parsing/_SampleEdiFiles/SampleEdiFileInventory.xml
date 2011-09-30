@@ -305,6 +305,10 @@
   </TransactionSet>
   <TransactionSet Id="855">
     <EdiFile>
+      <SourceUrl>provided by sprdave</SourceUrl>
+      <ResourcePath>ORD._855.855SSimmons.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <SourceUrl>http://www.adobe.com/partnerportal/edi/pdf/855_Outbound_ANSIX12_4010_29jun04_000.pdf</SourceUrl>
       <ResourcePath>ORD._855.Example1_Adobe.txt</ResourcePath>
     </EdiFile>
