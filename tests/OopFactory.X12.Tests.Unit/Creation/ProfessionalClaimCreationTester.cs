@@ -242,10 +242,10 @@ namespace OopFactory.X12.Tests.Unit.Creation
             dtpSegment4.DTP02_DateTimePeriodFormatQualifier = "D8";
             DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment4.DTP03_Date = theDate4;
-
-#endif
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
+
+#endif
             //Trace.Write(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
             //Trace.Write(x12);
         }
