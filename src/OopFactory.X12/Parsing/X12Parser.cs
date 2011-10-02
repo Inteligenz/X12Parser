@@ -144,13 +144,14 @@ namespace OopFactory.X12.Parsing
                                     if (currentContainer is LoopContainer)
                                     {
                                         LoopContainer loopContainer = (LoopContainer)currentContainer;
-
-                                        try
+                                        
+                                        Loop newLoop = loopContainer.AddLoop(segmentString);
+                                        if (newLoop != null)
                                         {
-                                            currentContainer = loopContainer.AddLoop(segmentString);
+                                            currentContainer = newLoop;
                                             break;
                                         }
-                                        catch (TransactionValidationException)
+                                        else
                                         {
                                             if (currentContainer is Transaction)
                                             {
