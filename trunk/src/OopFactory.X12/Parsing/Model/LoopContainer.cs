@@ -37,8 +37,7 @@ namespace OopFactory.X12.Parsing.Model
                 return loop;
             }
             else
-                throw new TransactionValidationException("Loop {3} could be added because it could not be found in the specification for {2}",
-                    null, null, this.SegmentId, segmentString);
+                return null;
         }
 
         public T AddLoop<T>(T loop) where T : TypedLoop

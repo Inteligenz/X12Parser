@@ -130,6 +130,10 @@
       <SourceUrl>From Mahendran Shanmugham</SourceUrl>
       <ResourcePath>ORD._820.Example6.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>From scott2012bcn</SourceUrl>
+      <ResourcePath>ORD._820.Example7_FromScott.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="832">
     <EdiFile>
