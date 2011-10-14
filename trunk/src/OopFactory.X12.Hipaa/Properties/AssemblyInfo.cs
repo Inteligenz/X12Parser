@@ -2,6 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+/********************************************************** 
+ * Copyright © 2011 Dannie Strubhar. All rights reserved. *
+ **********************************************************/
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
