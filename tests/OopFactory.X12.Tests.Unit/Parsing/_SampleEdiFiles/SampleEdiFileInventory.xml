@@ -277,6 +277,18 @@
       <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_05.dat</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch2.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch3.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._837P._5010.Example1_HealthInsurance.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
