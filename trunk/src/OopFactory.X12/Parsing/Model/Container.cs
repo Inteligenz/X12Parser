@@ -51,6 +51,12 @@ namespace OopFactory.X12.Parsing.Model
                 _segments.Add(segment);
                 return segment;
             }
+            else if ((this.SegmentId == "NM1") &&
+                (new string[] { "N3", "N4", "PER", "REF" }.Contains(segment.SegmentId)))
+            {
+                _segments.Add(segment);
+                return segment;
+            }
             else
                 return null;
         }

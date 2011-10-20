@@ -84,6 +84,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch3.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\Acknowledgments\TechnicalAcknowledgment_Sample1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_210\CN_FreightInvoiceSample1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TAM\_210\CN_FreightInvoiceSample2.txt" />
