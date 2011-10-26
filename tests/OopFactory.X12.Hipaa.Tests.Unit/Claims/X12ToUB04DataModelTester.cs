@@ -12,7 +12,7 @@ using OopFactory.X12.Hipaa.Claims;
 #if DEBUG
 using OopFactory.X12.Hipaa.Claims.Services;
 using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
-
+/*
 namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 {
     [TestClass]
@@ -34,7 +34,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             System.Diagnostics.Trace.Write(claim.Serialize());
             
         }
-
+        
         [TestMethod]
         public void InstitutionalClaim1ToModel()
         {
@@ -119,5 +119,5 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             return mstream.ToArray();
         }
     }
-}
+}*/
 #endif

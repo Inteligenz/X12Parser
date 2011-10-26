@@ -45,6 +45,16 @@
       <xsl:attribute name="TotalClaimChargeAmount">
         <xsl:value-of select="CLM/CLM02"/>
       </xsl:attribute>
+      <xsl:if test="string-length(CLM/CLM06)>0">
+        <xsl:attribute name="ProviderSignatureOnFile">
+          <xsl:value-of select="CLM/CLM06"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length(CLM/CLM07)>0">
+        <xsl:attribute name="ProviderAcceptAssignmentCode">
+          <xsl:value-of select="CLM/CLM07"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="MedicalRecordNumber">
         <xsl:value-of select="REF[REF01='EA']/REF02"/>
       </xsl:attribute>
@@ -104,6 +114,7 @@
           <xsl:with-param name="DTP" select="."/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:apply-templates select="AMT"/>
       <xsl:apply-templates select="NTE"/>
       <xsl:apply-templates select="HI"/>
       <xsl:for-each select="Loop[count(NM1)>0]">
@@ -219,14 +230,50 @@
         <xsl:attribute name="ChargeAmount">
           <xsl:value-of select="SV102"/>
         </xsl:attribute>
-        <xsl:attribute name="Quantity">
-          <xsl:value-of select="SV104"/>
-        </xsl:attribute>
+        <xsl:attribute name="Quantity"><xsl:value-of select="SV104"/></xsl:attribute>
         <xsl:if test="string-length(SV103)>0">
             <xsl:attribute name="Unit">
               <xsl:value-of select="SV103"/>
             </xsl:attribute>
         </xsl:if>
+        <xsl:if test="string-length(SV109)>0">
+          <xsl:attribute name="EmergencyIndicator">
+            <xsl:value-of select="SV109"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="string-length(SV107/SV10701)>0">
+            <xsl:attribute name="DiagnosisCodePointer1">
+              <xsl:value-of select="SV107/SV10701"/>
+            </xsl:attribute>
+            <xsl:if test="string-length(SV107/SV10702)>0">
+              <xsl:attribute name="DiagnosisCodePointer2">
+                <xsl:value-of select="SV107/SV10702"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="string-length(SV107/SV10703)>0">
+              <xsl:attribute name="DiagnosisCodePointer3">
+                <xsl:value-of select="SV107/SV10703"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="string-length(SV107/SV10704)>0">
+              <xsl:attribute name="DiagnosisCodePointer4">
+                <xsl:value-of select="SV107/SV10704"/>
+              </xsl:attribute>
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="DiagnosisCodePointer1">
+              <xsl:value-of select="SV107"/>
+            </xsl:attribute>
+          </xsl:otherwise>
+        </xsl:choose>
+        <PlaceOfService>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="SV105"/>
+          </xsl:attribute>
+          <xsl:value-of select="SV105/comment()"/>
+        </PlaceOfService>
         <Procedure>
           <xsl:attribute name="Qualifier">
             <xsl:value-of select="SV101/SV10101"/>
@@ -396,7 +443,17 @@
   </xsl:template>
 
   <!-- Common Templates -->
-
+  <xsl:template match="AMT">
+    <Amount>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="AMT01"/>
+      </xsl:attribute>
+      <xsl:attribute name="Amount">
+        <xsl:value-of select="AMT02"/>
+      </xsl:attribute>
+    </Amount>
+  </xsl:template>
+  
   <xsl:template match="NTE">
     <Note>
       <xsl:attribute name="Code">

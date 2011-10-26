@@ -28,6 +28,17 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string Unit { get; set; }
         [XmlAttribute]
+        public string EmergencyIndicator { get; set; }
+        [XmlAttribute]
+        public string DiagnosisCodePointer1 { get; set; }
+        [XmlAttribute]
+        public string DiagnosisCodePointer2 { get; set; }
+        [XmlAttribute]
+        public string DiagnosisCodePointer3 { get; set; }
+        [XmlAttribute]
+        public string DiagnosisCodePointer4 { get; set; }
+        
+        [XmlAttribute]
         public decimal ChargeAmount { get; set; }
         
         [XmlIgnore]
@@ -79,6 +90,7 @@ namespace OopFactory.X12.Hipaa.Claims
             set { }
         }
 
+        public Lookup PlaceOfService { get; set; }
         public MedicalProcedure Procedure { get; set; }
         [XmlElement(ElementName="Identification")]
         public List<Identification> Identifications { get; set; }

@@ -33,7 +33,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         // From 2010AA loop
         private string _field01_01_BillingProviderLastName;
         private string _field01_04_BillingProviderAddress1;
-        private string _field01_05_BillingProviderAddress2;
         private string _field01_06_BillingProviderCity;
         private string _field01_08_BillingProviderState;
         private string _field01_09_BillingProviderZip;
