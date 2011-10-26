@@ -55,7 +55,8 @@
     <Compile Include="Claims\Diagnosis.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
-    <Compile Include="Claims\Forms\Professional\HCFA1500Diagnosis.cs" />
+    <Compile Include="Claims\Forms\FormDocument.cs" />
+    <Compile Include="Claims\Forms\FormDate.cs" />
     <Compile Include="Claims\InstitutionalProcedure.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
@@ -65,7 +66,9 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500Claim.cs" />
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLine.cs" />
     <Compile Include="Claims\Claim.cs" />
-    <Compile Include="Claims\Services\HCFAClaimTransformationService.cs" />
+    <Compile Include="Claims\Services\ClaimFormTransformationService.cs" />
+    <Compile Include="Claims\Services\IClaimToClaimFormTransfomation.cs" />
+    <Compile Include="Claims\Services\ProfessionalClaimFormTransformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />
@@ -119,7 +122,7 @@
     <EmbeddedResource Include="Claims\Services\Xsl\X12-837-To-ClaimDocument.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Claims\Forms\Professional\X12-837P-To-HCFAModel.xslt" />
+    <EmbeddedResource Include="Claims\Services\Xsl\FormDocument-To-FoXml.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

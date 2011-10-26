@@ -34,22 +34,17 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public bool Field01_TypeOfCoverageIsGroupHealthPlan { get; set; }
         public bool Field01_TypeOfCoverageIsFECABlkLung { get; set; }
         public bool Field01_TypeOfCoverageIsOther { get; set; }
-        public string Field01b_InsuredsIDNumber  { get; set; }
-        public string Field02_PatientsLastName   { get; set; }                              // HCFA 1500 standard allows 29 total characters for these (3) fields
-        public string Field02_PatientsFirstName  { get; set; }
-        public string Field02_PatientsMiddleName  { get; set; }
-        public DateTime? Field03_PatientsDateOfBirth   { get; set; }                           // MMDDCCYY - 8 characters
-        public bool? Field03_PatientsSexMale  { get; set; }
-        public bool? Field03_PatientsSexFemale { get; set; }  
-        public string Field04_InsuredsLastName  { get; set; }                              // HCFA 1500 standard allows 29 total characters for these (3) fields
-        public string Field04_InsuredsFirstName  { get; set; }
-        public string Field04_InsuredsMiddleName { get; set; }
+        public string Field01a_InsuredsIDNumber  { get; set; }
+        public string Field02_PatientsName   { get; set; }                              // HCFA 1500 standard allows 29 total characters
+        public FormDate Field03_PatientsDateOfBirth   { get; set; }                           // MMDDCCYY - 8 characters
+        public bool Field03_PatientsSexMale  { get; set; }
+        public bool Field03_PatientsSexFemale { get; set; }  
+        public string Field04_InsuredsName  { get; set; }                              // HCFA 1500 standard allows 29 total characters for these (3) fields
         public string Field05_PatientsAddress_Street  { get; set; }                         // 28 characters
         public string Field05_PatientsAddress_City  { get; set; }                           // 24 characters
         public string Field05_PatientsAddress_State { get; set; }                           // 3 characters
         public string Field05_PatientsAddress_Zip { get; set; }                             // 12 characters
-        public string Field05_PatientsAreaCode { get; set; }                                // 3 digits
-        public string Field05_PatientsPhoneNumber { get; set; }                             // 10 digits
+        public string Field05_PatientsTelephone { get; set; }                             // 10 digits
         public bool Field06_PatientRelationshipToInsuredIsSelf { get; set; }
         public bool Field06_PatientRelationshipToInsuredIsSpouseOf { get; set; }
         public bool Field06_PatientRelationshipToInsuredIsChildOf { get; set; }
@@ -60,40 +55,38 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field07_InsuredsAddress_Zip { get; set; }                            // 12 characters
         public string Field07_InsuredsAreaCode { get; set; }                                // 3 digits
         public string Field07_InsuredsPhoneNumber { get; set; }                             // 10 digits
-        public bool Field08_PatientStatusSingle { get; set; }
-        public bool Field08_PatientStatusMarried { get; set; }
-        public bool Field08_PatientStatusOther { get; set; }
-        public bool Field08_PatientStatusEmployed { get; set; }
-        public bool Field08_PatientStatusFullTimeStudent { get; set; }
-        public bool Field08_PatientStatusPartTimeStudent { get; set; }
-        public string Field09_OtherInsuredsLastName { get; set; }                           // HCFA 1500 standard allows 28 total characters for these (3) fields
-        public string Field09_OtherInsuredsFirstName { get; set; } 
-        public string Field09_OtherInsuredsMiddleName { get; set; } 
+        public bool Field08_PatientStatusIsSingle { get; set; }
+        public bool Field08_PatientStatusIsMarried { get; set; }
+        public bool Field08_PatientStatusIsOther { get; set; }
+        public bool Field08_PatientStatusIsEmployed { get; set; }
+        public bool Field08_PatientStatusIsFullTimeStudent { get; set; }
+        public bool Field08_PatientStatusIsPartTimeStudent { get; set; }
+        public string Field09_OtherInsuredsName { get; set; }                           // HCFA 1500 standard allows 28 total characters
         public string Field09a_OtherInsuredsPolicyOrGroup { get; set; }                     // 28 characters
-        public DateTime? Field09b_OtherInsuredsDateOfBirth { get; set; }                       // MMDDCCYY - 8 characters, goes to DMG02 (page 151) from X12 spec.
+        public FormDate Field09b_OtherInsuredsDateOfBirth { get; set; }                       // MMDDCCYY - 8 characters, goes to DMG02 (page 151) from X12 spec.
         public bool Field09b_OtherInsuredIsMale { get; set; }                               // 1 = Male, 2 = Female;  1 character.
         public bool Field09b_OtherInsuredIsFemale { get; set; }
         public string Field09c_OtherInsuredsEmployerNameOrSchoolName { get; set; }          // 28 characters
         public string Field09d_OtherInsuredsInsurancePlanNameOrProgramName  { get; set; }   // 28 characters
         public bool Field10a_PatientConditionRelatedToEmployment { get; set; }           // 1 = Yes, 2 = No
         public bool Field10b_PatientConditionRelatedToAutoAccident { get; set; }
-        public string Field10b_PtConditionRelToAutoAccidentState { get; set; }                 // 2 characters// 1 = Yes, 2 = No
+        public string Field10b_PatientConditionRelToAutoAccidentState { get; set; }                 // 2 characters// 1 = Yes, 2 = No
         public bool Field10c_PatientConditionRelatedToOtherAccident { get; set; }         // 1 = Yes, 2 = No
         public string Field10d_ReservedForLocalUse { get; set; }                            // 19 characters
         public string Field11_InsuredsPolicyGroupOfFECANumber { get; set; }                 // 29 characters
-        public DateTime? Field11a_InsuredsDateOfBirth { get; set; }                            // MMDDCCYY - 8 characters
+        public FormDate Field11a_InsuredsDateOfBirth { get; set; }                            // MMDDCCYY - 8 characters
         public bool Field11a_InsuredsSexIsMale { get; set; }                                    // 1 = Male, 2 = Female;  1 character.
         public bool Field11a_InsuredsSexIsFemale { get; set; }  
         public string Field11b_InsuredsEmployerOrSchool { get; set; }                       // 29 characters
         public string Field11c_InsuredsPlanOrProgramName { get; set; }                      // 29 characters
         public bool Field11d_IsThereOtherHealthBenefitPlan { get; set; }                  // 1 = Yes, 2 = No
         public string Field12_PatientsOrAuthorizedSignature { get; set; }                   // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
-        public DateTime? Field12_PatientsOrAuthorizedSignatureDate { get; set; }               // MMDDCCYY 
+        public FormDate Field12_PatientsOrAuthorizedSignatureDate { get; set; }               // MMDDCCYY 
         public string Field13_InsuredsOrAuthorizedSignature { get; set; }                   // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
-        public DateTime? Field14_DateOfCurrentIllnessInjuryOrPregnancy { get; set; }           // MMDDCCYY
-        public DateTime? Field15_DatePatientHadSameOrSimilarIllness { get; set; }              // MMDDCCYY
-        public DateTime? Field16_DatePatientUnableToWork_Start { get; set; }                  // MMDDCCYY
-        public DateTime? Field16_DatePatientUnableToWork_End { get; set; }                    // MMDDCCYY
+        public FormDate Field14_DateOfCurrentIllnessInjuryOrPregnancy { get; set; }           // MMDDCCYY
+        public FormDate Field15_DatePatientHadSameOrSimilarIllness { get; set; }              // MMDDCCYY
+        public FormDate Field16_DatePatientUnableToWork_Start { get; set; }                  // MMDDCCYY
+        public FormDate Field16_DatePatientUnableToWork_End { get; set; }                    // MMDDCCYY
         public string Field17_ReferringProviderOrOtherSource_LastName { get; set; }         // HCFA 1500 standard allows 28 total characters for these (3) fields
         public string Field17_ReferringProviderOrOtherSource_FirstName { get; set; }
         public string Field17_ReferringProviderOrOtherSource_MiddleName { get; set; }
@@ -101,42 +94,44 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field17a_OtherID_Qualifier { get; set; }                             // 2 digit alpha-numeric value
         public string Field17a_OtherID_Number { get; set; }                                // 17 characters
         public string Field17b_NationalProviderIdentifier { get; set; }                    // 10 digit numeric
-        public DateTime? Field18_HospitalizationDateFrom { get; set; }                         // MMDDCCYY
-        public DateTime? Field18_HospitalizationDateTo { get; set; }                           // MMDDCCYY
+        public FormDate Field18_HospitalizationDateFrom { get; set; }                         // MMDDCCYY
+        public FormDate Field18_HospitalizationDateTo { get; set; }                           // MMDDCCYY
         public string Field19_ReservedForLocalUse { get; set; }                            // 83 characters
         public bool Field20_OutsideLab { get; set; }                                      // 1 = Yes, 2 = No
         public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.                        // 3-1-4 part diagnosis code.
-        public List<HCFA1500Diagnosis> Field21_Diagnoses { get; set; }                       // 3-1-4 part diagnosis code.
+        public string Field21_Diagnosis1 { get; set; }
+        public string Field21_Diagnosis2 { get; set; }
+        public string Field21_Diagnosis3 { get; set; }
+        public string Field21_Diagnosis4 { get; set; }
         public string Field22_MedicaidSubmissionCode { get; set; }                          // 11 characters
         public string Field22_OriginalReferenceNumber { get; set; }                        // 18 characters
         public string Field23_PriorAuthorizationNumber { get; set; }                       // 29 characters                         // Service line details
+        [XmlElement(ElementName="Field24_ServiceLine")]
         public List<HCFA1500ServiceLine> Field24_ServiceLines { get; set; }
         public string Field25_FederalTaxIDNumber { get; set; }                             // 15 characters
         public bool Field25_IsEIN { get; set; }                                     // 1 = SSN, 2 = EIN
         public bool Field25_IsSSN { get; set; }
         public string Field26_PatientAccountNumber { get; set; }                            // 14 characters
-        public bool Field27_AcceptAssignment { get; set; }                               // 1 = Yes, 2 = No.  Refers to acceptance of terms of payor's program.
+        public bool? Field27_AcceptAssignment { get; set; }                               // 1 = Yes, 2 = No.  Refers to acceptance of terms of payor's program.
         public decimal Field28_TotalCharge { get; set; }                                  // 7 digits           
         public decimal? Field29_AmountPaid { get; set; }  // 6 digits                               // 2 digits
         public decimal? Field30_BalanceDue { get; set; }                                       // 6 digits                               // 2 digits
-        public bool Field31_PhysicianOrSupplierSignatureIsOnFile { get; set; }                      // Signed field.  Store true = Signature On File, false = Signature NOT On File.  If SOF, enter date in next field
-        public DateTime? Field31_PhysicianOrSupplierSignatureDate { get; set; }                  // MMDDCCYY 
-        public string Field32_FacilityLocationInfo_Name { get; set; }                      // 26 characters
-        public string Field32_FacilityLocationInfo_Street { get; set; }                     // 26 characters
-        public string Field32_FacilityLocationInfo_City { get; set; }                       // 26 characters for this and next two fields combined
-        public string Field32_FacilityLocationInfo_State { get; set; }                     //
-        public string Field32_FacilityLocationInfo_Zip { get; set; }                        //
-        public string Field32a_FacilityNationalProviderIdentifier { get; set; }            // 10 characters
-        public string Field32b_FacilityOtherID { get; set; }                               // 14 characters
-        public string Field33_BillingProvider_AreaCode { get; set; }                       // 3 characters
-        public string Field33_BillingProvider_PhoneNumber { get; set; }                    // 9 characters
+        public bool? Field31_PhysicianOrSupplierSignatureIsOnFile { get; set; }                      // Signed field.  Store true = Signature On File, false = Signature NOT On File.  If SOF, enter date in next field
+        public string Field32_ServiceFacilityLocation_Name { get; set; }                      // 26 characters
+        public string Field32_ServiceFacilityLocation_Street { get; set; }                     // 26 characters
+        public string Field32_ServiceFacilityLocation_City { get; set; }                       // 26 characters for this and next two fields combined
+        public string Field32_ServiceFacilityLocation_State { get; set; }                     //
+        public string Field32_ServiceFacilityLocation_Zip { get; set; }                        //
+        public string Field32a_ServiceFacilityLocation_Npi { get; set; }            // 10 characters
+        public string Field32b_ServiceFacilityLocation_OtherID { get; set; }                               // 14 characters
+        public string Field33_BillingProvider_TelephoneNumber { get; set; }                    // 9 characters
         public string Field33_BillingProvider_Name { get; set; }                          // 29 characters
         public string Field33_BillingProvider_Street { get; set; }                          // 29 characters
         public string Field33_BillingProvider_City { get; set; }                           // 29 characters for this and next two fields combined
         public string Field33_BillingProvider_State { get; set; }                           //
         public string Field33_BillingProvider_Zip { get; set; }                             //
-        public string Field33a_BillingProviderNationalProviderIdentifier { get; set; }     // 10 characters
-        public string Field33b_BillingProviderOtherID { get; set; }                         // 17 characters
+        public string Field33a_BillingProvider_Npi { get; set; }     // 10 characters
+        public string Field33b_BillingProvider_OtherID { get; set; }                         // 17 characters
         #region Serialization Methods
 
         public string Serialize()

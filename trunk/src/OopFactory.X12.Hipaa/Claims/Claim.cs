@@ -21,6 +21,7 @@ namespace OopFactory.X12.Hipaa.Claims
         public Claim()
         {
             if (Dates == null) Dates = new List<QualifiedDate>();
+            if (Amounts == null) Amounts = new List<QualifiedAmount>();
             if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
             if (Providers == null) Providers = new List<Provider>();
             if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
@@ -36,9 +37,16 @@ namespace OopFactory.X12.Hipaa.Claims
         public string PatientControlNumber { get; set; }
         [XmlAttribute]
         public decimal TotalClaimChargeAmount { get; set; }
-
+        [XmlAttribute]
+        public string ProviderSignatureOnFile { get; set; }
+        [XmlAttribute]
+        public string ProviderAcceptAssignmentCode { get; set; }
+        
         [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
+        
+        [XmlElement(ElementName = "Amount")]
+        public List<QualifiedAmount> Amounts { get; set; }
 
         [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
@@ -105,6 +113,18 @@ namespace OopFactory.X12.Hipaa.Claims
         public List<ServiceLine> ServiceLines { get; set; }
 
         #region Calculated Fields
+
+        public decimal? PatientAmountPaid
+        {
+            get
+            {
+                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "F5");
+                if (amount != null)
+                    return amount.Amount;
+                else
+                    return null;
+            }
+        }
 
         /// <summary>
         /// Box 6 on the UB04
@@ -198,7 +218,7 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var serviceFacilityLocation = Providers.FirstOrDefault(p => p.Name.Type.Identifier == "77");
+                var serviceFacilityLocation = ServiceFacilityLocation;
                 if (serviceFacilityLocation != null)
                     return serviceFacilityLocation;
                 else
@@ -208,6 +228,19 @@ namespace OopFactory.X12.Hipaa.Claims
                     else
                         return null;
                 }
+            }
+        }
+
+        public Provider BillingProvider
+        {
+            get
+            {
+                if (BillingInfo != null)
+                {
+                    return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
+                }
+                else
+                    return null;
             }
         }
 
@@ -243,7 +276,7 @@ namespace OopFactory.X12.Hipaa.Claims
         public Provider OperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "72"); } }
         public Provider OtherOperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "ZZ"); } }
         public Provider RenderingProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "82"); } }
-        public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "77"); } }
+        public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => new string[] {"77", "FA", "LI", "TL"}.Contains(p.Name.Type.Identifier)); } }
         public Provider ReferringProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "DN" || p.Name.Type.Identifier == "P3"); } }
 
         #endregion
