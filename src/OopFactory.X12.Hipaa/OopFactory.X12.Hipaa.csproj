@@ -57,6 +57,15 @@
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
     <Compile Include="Claims\Forms\FormDocument.cs" />
     <Compile Include="Claims\Forms\FormDate.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Block.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04CodeCode.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Diagnosis.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Occurrence.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04OccurrenceSpan.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04PatientAddress.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Payer.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Provider.cs" />
+    <Compile Include="Claims\Forms\Institutional\UB04Value.cs" />
     <Compile Include="Claims\InstitutionalProcedure.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
@@ -68,6 +77,7 @@
     <Compile Include="Claims\Claim.cs" />
     <Compile Include="Claims\Services\ClaimFormTransformationService.cs" />
     <Compile Include="Claims\Services\IClaimToClaimFormTransfomation.cs" />
+    <Compile Include="Claims\Services\InstitutionalClaimToUB04ClaimFormTransformation.cs" />
     <Compile Include="Claims\Services\ProfessionalClaimFormTransformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
@@ -99,18 +109,10 @@
     <Compile Include="Eligibility\Services\EligibilityTransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Claims\Forms\Institutional\X12-837I-To-UB04Model.xslt">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
       <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
       <Name>OopFactory.X12</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Claims\Forms\Institutional\UB04Model-To-FoXml.xslt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Eligibility\Services\Xsl\X12-271-To-BenefitResponse.xslt" />

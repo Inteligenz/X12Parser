@@ -52,9 +52,9 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(
-                new ProfessionalClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
-                new ProfessionalClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
-                new ProfessionalClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif")
+                new ProfessionalClaimFormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
+                new ProfessionalClaimFormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\UB04_Red.gif"),
+                new ProfessionalClaimFormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif")
                 );
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
