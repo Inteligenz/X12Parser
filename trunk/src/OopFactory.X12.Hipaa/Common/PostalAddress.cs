@@ -20,5 +20,13 @@ namespace OopFactory.X12.Hipaa.Common
         public string CountryCode { get; set; }
         [XmlAttribute]
         public string CountrySubdivisionCode { get; set; }
+
+        public string Locale
+        {
+            get
+            {
+                return String.Format("{0}, {1} {2}", City, StateCode, PostalCode);
+            }
+        }
     }
 }

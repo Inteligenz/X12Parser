@@ -84,6 +84,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             if (Field67O_Diagnosis == null) Field67O_Diagnosis = new UB04Diagnosis();
             if (Field67P_Diagnosis == null) Field67P_Diagnosis = new UB04Diagnosis();
             if (Field67Q_Diagnosis == null) Field67Q_Diagnosis = new UB04Diagnosis();
+            if (Field68 == null) Field68 = new UB04Block();
             if (Field72a_ExternalCauseOfInjury == null) Field72a_ExternalCauseOfInjury = new UB04Diagnosis();
             if (Field72b_ExternalCauseOfInjury == null) Field72b_ExternalCauseOfInjury = new UB04Diagnosis();
             if (Field72c_ExternalCauseOfInjury == null) Field72c_ExternalCauseOfInjury = new UB04Diagnosis();
@@ -286,7 +287,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public UB04Diagnosis Field67P_Diagnosis { get; set; }
         public UB04Diagnosis Field67Q_Diagnosis { get; set; }
         
-        public string Field68 { get; set; }
+        public UB04Block Field68 { get; set; }
 
         public string Field69_AdmittingDiagnosisCode { get; set; }
         
