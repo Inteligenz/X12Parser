@@ -29,8 +29,80 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         // Fields in the UB04 object model are defined in the order they appear on the UB-04 form.
         public UB04Claim() 
-        { 
-            if (ServiceLines == null) ServiceLines = new List<UB04ServiceLine>(); 
+        {
+            if (Field01_BillingProvider == null) Field01_BillingProvider = new UB04Block();
+            if (Field02_PayToProvider == null) Field02_PayToProvider = new UB04Block();
+            if (Field06_StatementCoversPeriod == null) Field06_StatementCoversPeriod = new UB04OccurrenceSpan();
+            if (Field07 == null) Field07 = new UB04Block();
+            if (Field09_PatientAddress == null) Field09_PatientAddress = new UB04PatientAddress();
+            if (Field31a_Occurrence == null) Field31a_Occurrence = new UB04Occurrence();
+            if (Field31b_Occurrence == null) Field31b_Occurrence = new UB04Occurrence();
+            if (Field32a_Occurrence == null) Field32a_Occurrence = new UB04Occurrence();
+            if (Field32b_Occurrence == null) Field32b_Occurrence = new UB04Occurrence();
+            if (Field33a_Occurrence == null) Field33a_Occurrence = new UB04Occurrence();
+            if (Field33b_Occurrence == null) Field33b_Occurrence = new UB04Occurrence();
+            if (Field34a_Occurrence == null) Field34a_Occurrence = new UB04Occurrence();
+            if (Field34b_Occurrence == null) Field34b_Occurrence = new UB04Occurrence();
+            if (Field35a_OccurrenceSpan == null) Field35a_OccurrenceSpan = new UB04OccurrenceSpan();
+            if (Field35b_OccurrenceSpan == null) Field35b_OccurrenceSpan = new UB04OccurrenceSpan();
+            if (Field36a_OccurrenceSpan == null) Field36a_OccurrenceSpan = new UB04OccurrenceSpan();
+            if (Field36b_OccurrenceSpan == null) Field36b_OccurrenceSpan = new UB04OccurrenceSpan();
+            if (Field37 == null) Field37 = new UB04Block();
+            if (Field38_ResponsibleParty == null) Field38_ResponsibleParty = new UB04Block();
+            if (Field39a_Value == null) Field39a_Value = new UB04Value();
+            if (Field39b_Value == null) Field39b_Value = new UB04Value();
+            if (Field39c_Value == null) Field39c_Value = new UB04Value();
+            if (Field39d_Value == null) Field39d_Value = new UB04Value();
+            if (Field40a_Value == null) Field40a_Value = new UB04Value();
+            if (Field40b_Value == null) Field40b_Value = new UB04Value();
+            if (Field40c_Value == null) Field40c_Value = new UB04Value();
+            if (Field40d_Value == null) Field40d_Value = new UB04Value();
+            if (Field41a_Value == null) Field41a_Value = new UB04Value();
+            if (Field41b_Value == null) Field41b_Value = new UB04Value();
+            if (Field41c_Value == null) Field41c_Value = new UB04Value();
+            if (Field41d_Value == null) Field41d_Value = new UB04Value();
+            
+            if (ServiceLines == null) ServiceLines = new List<UB04ServiceLine>();
+            if (PayerA_Primary == null) PayerA_Primary = new UB04Payer();
+            if (PayerB_Secondary == null) PayerB_Secondary = new UB04Payer();
+            if (PayerC_Tertiary == null) PayerC_Tertiary = new UB04Payer();
+            if (Field67_PrincipleDiagnosis == null) Field67_PrincipleDiagnosis = new UB04Diagnosis();
+            if (Field67A_Diagnosis == null) Field67A_Diagnosis = new UB04Diagnosis();
+            if (Field67B_Diagnosis == null) Field67B_Diagnosis = new UB04Diagnosis();
+            if (Field67C_Diagnosis == null) Field67C_Diagnosis = new UB04Diagnosis();
+            if (Field67D_Diagnosis == null) Field67D_Diagnosis = new UB04Diagnosis();
+            if (Field67E_Diagnosis == null) Field67E_Diagnosis = new UB04Diagnosis();
+            if (Field67F_Diagnosis == null) Field67F_Diagnosis = new UB04Diagnosis();
+            if (Field67G_Diagnosis == null) Field67G_Diagnosis = new UB04Diagnosis();
+            if (Field67H_Diagnosis == null) Field67H_Diagnosis = new UB04Diagnosis();
+            if (Field67I_Diagnosis == null) Field67I_Diagnosis = new UB04Diagnosis();
+            if (Field67J_Diagnosis == null) Field67J_Diagnosis = new UB04Diagnosis();
+            if (Field67K_Diagnosis == null) Field67K_Diagnosis = new UB04Diagnosis();
+            if (Field67L_Diagnosis == null) Field67L_Diagnosis = new UB04Diagnosis();
+            if (Field67M_Diagnosis == null) Field67M_Diagnosis = new UB04Diagnosis();
+            if (Field67N_Diagnosis == null) Field67N_Diagnosis = new UB04Diagnosis();
+            if (Field67O_Diagnosis == null) Field67O_Diagnosis = new UB04Diagnosis();
+            if (Field67P_Diagnosis == null) Field67P_Diagnosis = new UB04Diagnosis();
+            if (Field67Q_Diagnosis == null) Field67Q_Diagnosis = new UB04Diagnosis();
+            if (Field72a_ExternalCauseOfInjury == null) Field72a_ExternalCauseOfInjury = new UB04Diagnosis();
+            if (Field72b_ExternalCauseOfInjury == null) Field72b_ExternalCauseOfInjury = new UB04Diagnosis();
+            if (Field72c_ExternalCauseOfInjury == null) Field72c_ExternalCauseOfInjury = new UB04Diagnosis();
+            if (Field74_PrincipalProcedure == null) Field74_PrincipalProcedure = new UB04Occurrence();
+            if (Field74a_OtherProcedure == null) Field74a_OtherProcedure = new UB04Occurrence();
+            if (Field74b_OtherProcedure == null) Field74b_OtherProcedure = new UB04Occurrence();
+            if (Field74c_OtherProcedure == null) Field74c_OtherProcedure = new UB04Occurrence();
+            if (Field74d_OtherProcedure == null) Field74d_OtherProcedure = new UB04Occurrence();
+            if (Field74e_OtherProcedure == null) Field74e_OtherProcedure = new UB04Occurrence();
+            if (Field75 == null) Field75 = new UB04Block();
+            if (Field76_AttendingPhysician == null) Field76_AttendingPhysician = new UB04Provider();
+            if (Field77_OperatingPhysician == null) Field77_OperatingPhysician = new UB04Provider();
+            if (Field78_OtherProvider == null) Field78_OtherProvider = new UB04Provider();
+            if (Field79_OtherProvider == null) Field79_OtherProvider = new UB04Provider();
+            if (Field80_Remarks == null) Field80_Remarks = new UB04Block();
+            if (Field81a == null) Field81a = new UB04CodeCode();
+            if (Field81b == null) Field81b = new UB04CodeCode();
+            if (Field81c == null) Field81c = new UB04CodeCode();
+            if (Field81d == null) Field81d = new UB04CodeCode();
         }
 
 
@@ -216,25 +288,22 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         
         public string Field68 { get; set; }
 
-        public string Field69_AdmittingDiagnosis { get; set; }
+        public string Field69_AdmittingDiagnosisCode { get; set; }
         
-        public string Field70a_PatientReasonDiagnosis { get; set ; }
-        public string Field70b_PatientReasonDiagnosis { get; set; }
-        public string Field70c_PatientReasonDiagnosis { get; set; }
+        public string Field70a_PatientReasonDiagnosisCode { get; set ; }
+        public string Field70b_PatientReasonDiagnosisCode { get; set; }
+        public string Field70c_PatientReasonDiagnosisCode { get; set; }
         
         /// <summary>
         /// Field 71 - Prospective Payment System (PPS) Code.  Identifies the DRG based on the grouper software
         /// and is required only when the provider is under contract with a health plan.
         /// </summary>
         public string Field71_PPSCode { get; set; }
-        
-        public string Field72a_ExternalCauseOfInjury { get; set; }
-        public string Field72a_ExternalCauseOfInjury_POA { get; set; }
-        public string Field72b_ExternalCauseOfInjury { get; set; }
-        public string Field72b_ExternalCauseOfInjury_POA { get; set; }
-        public string Field72c_ExternalCauseOfInjury { get; set; }
-        public string Field72c_ExternalCauseOfInjury_POA { get; set; }
 
+        public UB04Diagnosis Field72a_ExternalCauseOfInjury { get; set; }
+        public UB04Diagnosis Field72b_ExternalCauseOfInjury { get; set; }
+        public UB04Diagnosis Field72c_ExternalCauseOfInjury { get; set; }
+        
         public string Field73 { get; set; }
 
         public UB04Occurrence Field74_PrincipalProcedure { get; set; }

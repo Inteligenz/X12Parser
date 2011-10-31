@@ -78,7 +78,9 @@
     <Compile Include="Claims\Services\ClaimFormTransformationService.cs" />
     <Compile Include="Claims\Services\IClaimToClaimFormTransfomation.cs" />
     <Compile Include="Claims\Services\InstitutionalClaimToUB04ClaimFormTransformation.cs" />
-    <Compile Include="Claims\Services\ProfessionalClaimFormTransformation.cs" />
+    <Compile Include="Claims\Services\LocalExtensions.cs" />
+    <Compile Include="Claims\Services\ProfessionalClaimToHcfa1500FormTransformation.cs" />
+    <Compile Include="Claims\Services\Ub04ClaimTransformationArgs.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />

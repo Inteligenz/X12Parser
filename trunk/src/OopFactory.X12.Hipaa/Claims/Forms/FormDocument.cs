@@ -30,7 +30,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
         {
             if (Blocks == null) Blocks = new List<FormBlock>();
         }
-
+        public string MasterReference { get; set; }
         public string ImagePath { get; set; }
         [XmlElement(ElementName="Block")]
         public List<FormBlock> Blocks { get; set; }

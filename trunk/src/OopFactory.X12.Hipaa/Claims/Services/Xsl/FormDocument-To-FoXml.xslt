@@ -7,13 +7,19 @@
   <xsl:template match="FormDocument">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:frm="http://www.fsc.va.gov/XSL/Usva.SharedServices.xsd">
       <fo:layout-master-set>
-        <fo:simple-page-master page-width="8.5in" page-height="11in" margin="0.0in" master-name="cms-1500">
+        <fo:simple-page-master page-width="8.5in" page-height="11in" margin="0.0in" master-name="hcfa1500">
           <fo:region-body margin-top="0.0625in" margin-left="0.0625in" margin-right="0.140in" />
+        </fo:simple-page-master>
+        <fo:simple-page-master page-width="8.5in" page-height="11in" margin="0.0in" master-name="ub04">
+          <fo:region-body margin-top="0.0in" margin-left="0.0in" margin-right="0.0in" />
         </fo:simple-page-master>
       </fo:layout-master-set>
       <xsl:for-each select="Page">
-        <fo:page-sequence master-reference="cms-1500">
-          <fo:flow flow-name="xsl-region-body" font-size="9.5pt" font-family="Courier">
+        <fo:page-sequence>
+          <xsl:attribute name="master-reference">
+            <xsl:value-of select="MasterReference"/>
+          </xsl:attribute>
+          <fo:flow flow-name="xsl-region-body" font-size="10pt" font-family="Courier">
             <xsl:if test="string-length(ImagePath)>0">
               <fo:block>
                 <fo:external-graphic>

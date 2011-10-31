@@ -36,9 +36,15 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             foreach (var claim in document.Claims)
             {
                 if (claim.Type == ClaimTypeEnum.Professional)
-                    form.Pages.AddRange(_professionalTransformation.TransformClaimToClaimFormFoXml(claim));
+                {
+                    var pages = _professionalTransformation.TransformClaimToClaimFormFoXml(claim);
+                    form.Pages.AddRange(pages);
+                }
                 else if (claim.Type == ClaimTypeEnum.Institutional)
-                    form.Pages.AddRange(_institutionalTransformation.TransformClaimToClaimFormFoXml(claim));
+                {
+                    var pages = _institutionalTransformation.TransformClaimToClaimFormFoXml(claim);
+                    form.Pages.AddRange(pages);
+                }
                 else
                     form.Pages.AddRange(_dentalTransformation.TransformClaimToClaimFormFoXml(claim));
             }

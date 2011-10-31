@@ -11,5 +11,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string Line2 { get; set; }
         public string Line3 { get; set; }
         public string Line4 { get; set; }
+        public string Line5 { get; set; }
     }
 }
