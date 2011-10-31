@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Hipaa.Common;
 using OopFactory.X12.Hipaa.Claims.Forms;
 using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
 
@@ -28,16 +29,136 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         public virtual UB04Claim TransformClaimToUB04(Claim claim)
         {
             var ub = new UB04Claim();
-            ub.Field01_BillingProvider = new UB04Block
+            Provider provider = claim.BillingProvider;
+            ub.Field01_BillingProvider.Line1 = provider.Name.ToString();
+            ub.Field01_BillingProvider.Line2 = provider.Address.Line1;
+            if (string.IsNullOrWhiteSpace(provider.Address.Line2))
+                ub.Field01_BillingProvider.Line3 = provider.Address.Locale;
+            else
             {
-                Line1 = claim.BillingProvider.Name.ToString()
-            };
+                ub.Field01_BillingProvider.Line3 = provider.Address.Line2;
+                ub.Field01_BillingProvider.Line4 = provider.Address.Locale;
+            }
+
+            provider = claim.PayToProvider;
+            ub.Field02_PayToProvider.Line1 = provider.Name.ToString();
+            ub.Field02_PayToProvider.Line2 = provider.Address.Line1;
+            
+            if (string.IsNullOrWhiteSpace(provider.Address.Line2))
+                ub.Field02_PayToProvider.Line3 = provider.Address.Locale;
+            else
+            {
+                ub.Field02_PayToProvider.Line3 = provider.Address.Line2;
+                ub.Field02_PayToProvider.Line4 = provider.Address.Locale;
+            }
+
+            ub.Field03a_PatientControlNumber = claim.PatientControlNumber;
+            ub.Field03b_MedicalRecordNumber = claim.MedicalRecordNumber;
+            ub.Field04_TypeOfBill = "???";
+            ub.Field05_FederalTaxId = claim.PayToProvider.TaxId;
+            ub.Field06_StatementCoversPeriod.FromDate = String.Format("{0:MMddyy}", claim.StatementFromDate);
+            ub.Field06_StatementCoversPeriod.ThroughDate = String.Format("{0:MMddyy}", claim.StatementToDate);
+
+            ClaimMember patient = claim.Patient ?? claim.Subscriber;
+
+            ub.Field08_PatientName_a = patient.Name.Identification.Id;
+            ub.Field08_PatientName_b = patient.Name.ToString();
+
+            ub.Field09_PatientAddress.a_Street = patient.Address.Line1;
+            ub.Field09_PatientAddress.b_City = patient.Address.City;
+            ub.Field09_PatientAddress.c_State = patient.Address.StateCode;
+            ub.Field09_PatientAddress.d_PostalCode = patient.Address.PostalCode;
+            ub.Field09_PatientAddress.e_CountryCode = patient.Address.CountryCode;
+
+            ub.Field10_Birthdate = String.Format("{0:MMddyyyy}", patient.DateOfBirth);
+            ub.Field11_Sex = patient.Gender.ToString().Substring(0, 1);
+            ub.Field12_AdmissionDate = String.Format("{0:MMddyy}", claim.AdmissionDate);
+            ub.Field13_AdmissionHour = "??";
+            ub.Field14_AdmissionType = claim.AdmissionType.Code;
+            ub.Field15_AdmissionSource = claim.AdmissionSource.Code;
+            ub.Field16_DischargeHour = "??";
+            ub.Field17_DischargeStatus = "??";
+            if (claim.Conditions.Count > 0) ub.Field18_ConditionCode01 = claim.Conditions[0].Code;
+            if (claim.Conditions.Count > 1) ub.Field19_ConditionCode02 = claim.Conditions[1].Code;
+            if (claim.Conditions.Count > 2) ub.Field20_ConditionCode03 = claim.Conditions[2].Code;
+            if (claim.Conditions.Count > 3) ub.Field21_ConditionCode04 = claim.Conditions[3].Code;
+            if (claim.Conditions.Count > 4) ub.Field22_ConditionCode05 = claim.Conditions[4].Code;
+            if (claim.Conditions.Count > 5) ub.Field23_ConditionCode06 = claim.Conditions[5].Code;
+            if (claim.Conditions.Count > 6) ub.Field24_ConditionCode07 = claim.Conditions[6].Code;
+            if (claim.Conditions.Count > 7) ub.Field25_ConditionCode08 = claim.Conditions[7].Code;
+            if (claim.Conditions.Count > 8) ub.Field26_ConditionCode09 = claim.Conditions[8].Code;
+            if (claim.Conditions.Count > 9) ub.Field27_ConditionCode10 = claim.Conditions[9].Code;
+            if (claim.Conditions.Count > 10) ub.Field28_ConditionCode11 = claim.Conditions[1].Code;
+
+            ub.Field29_AccidentState = "??";
+
+            if (claim.Occurrences.Count > 0) ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
+            if (claim.Occurrences.Count > 1) ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
+            if (claim.Occurrences.Count > 2) ub.Field32a_Occurrence.CopyFrom(claim.Occurrences[2]);
+            if (claim.Occurrences.Count > 3) ub.Field32b_Occurrence.CopyFrom(claim.Occurrences[3]);
+            if (claim.Occurrences.Count > 4) ub.Field33a_Occurrence.CopyFrom(claim.Occurrences[4]);
+            if (claim.Occurrences.Count > 5) ub.Field33b_Occurrence.CopyFrom(claim.Occurrences[5]);
+            if (claim.Occurrences.Count > 6) ub.Field34a_Occurrence.CopyFrom(claim.Occurrences[6]);
+            if (claim.Occurrences.Count > 7) ub.Field34b_Occurrence.CopyFrom(claim.Occurrences[7]);
+
+            List<UB04OccurrenceSpan> spans = new List<UB04OccurrenceSpan>();
+            
+            if (claim.Occurrences.Count > 8) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[8]));
+            if (claim.Occurrences.Count > 9) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[9]));
+
+            foreach (CodedDateRange span in claim.OccurrenceSpans)
+                spans.Add(new UB04OccurrenceSpan().CopyFrom(span));
+
+            if (spans.Count > 0) ub.Field35a_OccurrenceSpan = spans[0];
+            if (spans.Count > 1) ub.Field35b_OccurrenceSpan = spans[1];
+            if (spans.Count > 2) ub.Field36a_OccurrenceSpan = spans[2];
+            if (spans.Count > 3) ub.Field36b_OccurrenceSpan = spans[3];
+
+            List<string> blockLines = new List<string>();
+            blockLines.Add(claim.Subscriber.Name.ToString());
+            blockLines.Add(claim.Subscriber.Address.Line1);
+            if (!string.IsNullOrWhiteSpace(claim.Subscriber.Address.Line2))
+                blockLines.Add(claim.Subscriber.Address.Line2);
+            blockLines.Add(claim.Subscriber.Address.Locale);
+
+            ub.Field38_ResponsibleParty.Line1 = blockLines[0];
+            ub.Field38_ResponsibleParty.Line2 = blockLines[1];
+            ub.Field38_ResponsibleParty.Line3 = blockLines[2];
+            if (blockLines.Count > 3)
+                ub.Field38_ResponsibleParty.Line4 = blockLines[3];
+
+            if (claim.Values.Count > 0) ub.Field39a_Value.CopyFrom(claim.Values[0]);
+            if (claim.Values.Count > 1) ub.Field39b_Value.CopyFrom(claim.Values[1]);
+            if (claim.Values.Count > 2) ub.Field39c_Value.CopyFrom(claim.Values[2]);
+            if (claim.Values.Count > 3) ub.Field39d_Value.CopyFrom(claim.Values[3]);
+            if (claim.Values.Count > 4) ub.Field40a_Value.CopyFrom(claim.Values[4]);
+            if (claim.Values.Count > 5) ub.Field40b_Value.CopyFrom(claim.Values[5]);
+            if (claim.Values.Count > 6) ub.Field40c_Value.CopyFrom(claim.Values[6]);
+            if (claim.Values.Count > 7) ub.Field40d_Value.CopyFrom(claim.Values[7]);
+            if (claim.Values.Count > 8) ub.Field41a_Value.CopyFrom(claim.Values[8]);
+            if (claim.Values.Count > 9) ub.Field41b_Value.CopyFrom(claim.Values[9]);
+            if (claim.Values.Count > 10) ub.Field41c_Value.CopyFrom(claim.Values[10]);
+            if (claim.Values.Count > 11) ub.Field41d_Value.CopyFrom(claim.Values[11]);
+
             foreach (var line in claim.ServiceLines)
             {
                 ub.ServiceLines.Add(new UB04ServiceLine {
-                    Field42_RevenueCode = line.RevenueCode
+                    Field42_RevenueCode = line.RevenueCode,
+                    Field44_ProcedureCodes = line.Procedure.ProcedureCode,
+                    Field45_ServiceDate = String.Format("{0:MMddyy}", line.ServiceDateFrom),
+                    Field46_ServiceUnits = line.Quantity.ToString(),
+                    Field47_TotalCharges = line.ChargeAmount,
+                    Field48_NonCoveredCharges = line.NonCoveredChargeAmount
                 });
             }
+            ub.Field47_Line23_TotalCharges = claim.TotalClaimChargeAmount;
+            ub.Field48_Line23_NonCoveredCharges = claim.ServiceLines.Sum(sl => sl.NonCoveredChargeAmount);
+            ub.Field56_NationalProviderIdentifier = "??????????";
+            ub.Field57_OtherProviderIdA = "??????????";
+            ub.Field57_OtherProviderIdB = "??????????";
+            ub.Field57_OtherProviderIdC = "??????????";
+            
+            
             return ub;
         }
 
@@ -201,43 +322,41 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 90, 11, 9, ub04.Field37.Line2);
 
                     // Box 38 - Responsible Party
-                    AddBlock(page, 2, 12, 48, 'X'.Repeat(48));
-                    AddBlock(page, 2, 13, 48, 'X'.Repeat(48));
-                    AddBlock(page, 2, 14, 48, 'X'.Repeat(48));
-                    AddBlock(page, 2, 15, 48, 'X'.Repeat(48));
-                    AddBlock(page, 2, 16, 48, 'X'.Repeat(48));
+                    AddBlock(page, 2, 12, 48, ub04.Field38_ResponsibleParty.Line1);
+                    AddBlock(page, 2, 13, 48, ub04.Field38_ResponsibleParty.Line2);
+                    AddBlock(page, 2, 14, 48, ub04.Field38_ResponsibleParty.Line3);
+                    AddBlock(page, 2, 15, 48, ub04.Field38_ResponsibleParty.Line4);
+                    AddBlock(page, 2, 16, 48, ub04.Field38_ResponsibleParty.Line5);
 
                     // Box 39 - Value Codes
-                    AddBlock(page, 53, 13, 2, "XX");
-                    AddBlock(page, 57, 13, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 53, 14, 2, "XX");
-                    AddBlock(page, 57, 14, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 53, 15, 2, "XX");
-                    AddBlock(page, 57, 15, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 53, 16, 2, "XX");
-                    AddBlock(page, 57, 16, 12, "0 00", TextAlignEnum.right);
+                    AddBlock(page, 53, 13, 2, ub04.Field39a_Value.Code);
+                    AddBlock(page, 57, 13, 12, String.Format("{0:0.00}", ub04.Field39a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 53, 14, 2, ub04.Field39b_Value.Code);
+                    AddBlock(page, 57, 14, 12, String.Format("{0:0.00}", ub04.Field39b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 53, 15, 2, ub04.Field39c_Value.Code);
+                    AddBlock(page, 57, 15, 12, String.Format("{0:0.00}", ub04.Field39c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 53, 16, 2, ub04.Field39d_Value.Code);
+                    AddBlock(page, 57, 16, 12, String.Format("{0:0.00}", ub04.Field39d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
 
                     // Box 40
-                    AddBlock(page, 69, 13, 2, "XX");
-                    AddBlock(page, 72.5m, 13, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 69, 14, 2, "XX");
-                    AddBlock(page, 72.5m, 14, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 69, 15, 2, "XX");
-                    AddBlock(page, 72.5m, 15, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 69, 16, 2, "XX");
-                    AddBlock(page, 72.5m, 16, 12, "0 00", TextAlignEnum.right);
+                    AddBlock(page, 69, 13, 2, ub04.Field40a_Value.Code);
+                    AddBlock(page, 72.5m, 13, 12, String.Format("{0:0.00}", ub04.Field40a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 69, 14, 2, ub04.Field40b_Value.Code);
+                    AddBlock(page, 72.5m, 14, 12, String.Format("{0:0.00}", ub04.Field40b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 69, 15, 2, ub04.Field40c_Value.Code);
+                    AddBlock(page, 72.5m, 15, 12, String.Format("{0:0.00}", ub04.Field40c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 69, 16, 2, ub04.Field40d_Value.Code);
+                    AddBlock(page, 72.5m, 16, 12, String.Format("{0:0.00}", ub04.Field40d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
 
                     // Box 41 - Value Codes
-                    AddBlock(page, 84, 13, 2, "XX");
-                    AddBlock(page, 88, 13, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 84, 14, 2, "XX");
-                    AddBlock(page, 88, 14, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 84, 15, 2, "XX");
-                    AddBlock(page, 88, 15, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 84, 16, 2, "XX");
-                    AddBlock(page, 88, 16, 12, "0 00", TextAlignEnum.right);
-
-
+                    AddBlock(page, 84, 13, 2, ub04.Field41a_Value.Code);
+                    AddBlock(page, 88, 13, 12, String.Format("{0:0.00}", ub04.Field41a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 84, 14, 2, ub04.Field41b_Value.Code);
+                    AddBlock(page, 88, 14, 12, String.Format("{0:0.00}", ub04.Field41b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 84, 15, 2, ub04.Field41c_Value.Code);
+                    AddBlock(page, 88, 15, 12, String.Format("{0:0.00}", ub04.Field41c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 84, 16, 2, ub04.Field41d_Value.Code);
+                    AddBlock(page, 88, 16, 12, String.Format("{0:0.00}", ub04.Field41d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
                 }
 
                 // service lines
@@ -246,13 +365,13 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 
                 // Box 42 - 49 - Service Lines
                 AddBlock(page, 2, y, 4, line.Field42_RevenueCode);
-                AddBlock(page, 7, y, 29, 'X'.Repeat(29));
-                AddBlock(page, 37, y, 17, 'X'.Repeat(17));
-                AddBlock(page, 56, y, 6, "MMDDYY");
-                AddBlock(page, 64, y, 9, "0.00", TextAlignEnum.right);
-                AddBlock(page, 74, y, 11, "0 00", TextAlignEnum.right);
-                AddBlock(page, 86, y, 11, "0 00", TextAlignEnum.right);
-                AddBlock(page, 97, y, 2, "XX");
+                AddBlock(page, 7, y, 29, line.Field43_Description);
+                AddBlock(page, 37, y, 17, line.Field44_ProcedureCodes);
+                AddBlock(page, 56, y, 6, line.Field45_ServiceDate);
+                AddBlock(page, 64, y, 9, line.Field46_ServiceUnits, TextAlignEnum.right);
+                AddBlock(page, 74, y, 11, String.Format("{0:0.00}", line.Field47_TotalCharges).Replace('.',' '), TextAlignEnum.right);
+                AddBlock(page, 86, y, 11, String.Format("{0:0.00}", line.Field48_NonCoveredCharges).Replace('.',' '), TextAlignEnum.right);
+                AddBlock(page, 97, y, 2, line.Field49);
 
                 if (i % 22 == 21 || i == ub04.ServiceLines.Count - 1) // Footer
                 {
@@ -260,254 +379,258 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 13, 40, 3, pageIndex.ToString(), TextAlignEnum.right);
                     AddBlock(page, 20, 40, 3, pageCount.ToString(), TextAlignEnum.right);
 
-                    AddBlock(page, 74, 40, 11, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 86, 40, 11, "0 00", TextAlignEnum.right);
+                    AddBlock(page, 74, 40, 11, String.Format("{0:0.00}", ub04.Field47_Line23_TotalCharges).Replace('.',' '), TextAlignEnum.right);
+                    AddBlock(page, 86, 40, 11, String.Format("{0:0.00}", ub04.Field48_Line23_NonCoveredCharges).Replace('.',' '), TextAlignEnum.right);
 
                     // Box 50
-                    AddBlock(page, 2, 42, 26, 'X'.Repeat(26));
-                    AddBlock(page, 2, 43, 26, 'X'.Repeat(26));
-                    AddBlock(page, 2, 44, 26, 'X'.Repeat(26));
+                    AddBlock(page, 2, 42, 26, ub04.PayerA_Primary.Field50_PayerName);
+                    AddBlock(page, 2, 43, 26, ub04.PayerB_Secondary.Field50_PayerName);
+                    AddBlock(page, 2, 44, 26, ub04.PayerC_Tertiary.Field50_PayerName);
 
                     // Box 51
-                    AddBlock(page, 29, 42, 17, 'X'.Repeat(17));
-                    AddBlock(page, 29, 43, 17, 'X'.Repeat(17));
-                    AddBlock(page, 29, 44, 17, 'X'.Repeat(17));
+                    AddBlock(page, 29, 42, 17, ub04.PayerA_Primary.Field51_HealthPlanId);
+                    AddBlock(page, 29, 43, 17, ub04.PayerB_Secondary.Field51_HealthPlanId);
+                    AddBlock(page, 29, 44, 17, ub04.PayerC_Tertiary.Field51_HealthPlanId);
 
-                    // Box 52 - Patient Relationship
-                    AddBlock(page, 46.5m, 42, 2, "18");
-                    AddBlock(page, 46.5m, 43, 2, "22");
-                    AddBlock(page, 46.5m, 44, 2, "23");
+
+                    // Box 52 - Release of Info
+                    AddBlock(page, 46.5m, 42, 2, ub04.PayerA_Primary.Field52_ReleaseOfInfoCertIndicator);
+                    AddBlock(page, 46.5m, 43, 2, ub04.PayerB_Secondary.Field52_ReleaseOfInfoCertIndicator);
+                    AddBlock(page, 46.5m, 44, 2, ub04.PayerC_Tertiary.Field52_ReleaseOfInfoCertIndicator);
 
                     // Box 53
-                    AddBlock(page, 50, 42, 2, "XX");
-                    AddBlock(page, 50, 43, 2, "XX");
-                    AddBlock(page, 50, 44, 2, "XX");
+                    AddBlock(page, 50, 42, 2, ub04.PayerA_Primary.Field53_AssignmentOfBenefitsCertIndicator);
+                    AddBlock(page, 50, 43, 2, ub04.PayerB_Secondary.Field53_AssignmentOfBenefitsCertIndicator);
+                    AddBlock(page, 50, 44, 2, ub04.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator);
 
                     // Box 54
-                    AddBlock(page, 54.25m, 42, 11, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 54.25m, 43, 11, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 54.25m, 44, 11, "0 00", TextAlignEnum.right);
+                    AddBlock(page, 54.25m, 42, 11, String.Format("{0:0.00}", ub04.PayerA_Primary.Field54_PriorPayments).Replace('.',' '), TextAlignEnum.right);
+                    AddBlock(page, 54.25m, 43, 11, String.Format("{0:0.00}", ub04.PayerB_Secondary.Field54_PriorPayments).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 54.25m, 44, 11, String.Format("{0:0.00}", ub04.PayerC_Tertiary.Field54_PriorPayments).Replace('.', ' '), TextAlignEnum.right);
 
                     // Box 55
-                    AddBlock(page, 66.5m, 42, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 66.5m, 43, 12, "0 00", TextAlignEnum.right);
-                    AddBlock(page, 66.5m, 44, 12, "0 00", TextAlignEnum.right);
+                    AddBlock(page, 66.5m, 42, 12, String.Format("{0:0.00}", ub04.PayerA_Primary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 66.5m, 43, 12, String.Format("{0:0.00}", ub04.PayerB_Secondary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 66.5m, 44, 12, String.Format("{0:0.00}", ub04.PayerC_Tertiary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
 
                     // Box 56
-                    AddBlock(page, 85, 41, 10, 'X'.Repeat(10));
+                    AddBlock(page, 85, 41, 10, ub04.Field56_NationalProviderIdentifier);
 
                     // Box 57
-                    AddBlock(page, 82, 42, 17, 'X'.Repeat(17));
-                    AddBlock(page, 82, 43, 17, 'X'.Repeat(17));
-                    AddBlock(page, 82, 44, 17, 'X'.Repeat(17));
+                    AddBlock(page, 82, 42, 17, ub04.Field57_OtherProviderIdA);
+                    AddBlock(page, 82, 43, 17, ub04.Field57_OtherProviderIdB);
+                    AddBlock(page, 82, 44, 17, ub04.Field57_OtherProviderIdC);
 
                     // Box 58
-                    AddBlock(page, 2, 46, 29, 'X'.Repeat(29));
-                    AddBlock(page, 2, 47, 29, 'X'.Repeat(29));
-                    AddBlock(page, 2, 48, 29, 'X'.Repeat(29));
+                    AddBlock(page, 2, 46, 29, ub04.PayerA_Primary.Field58_InsuredsName);
+                    AddBlock(page, 2, 47, 29, ub04.PayerB_Secondary.Field58_InsuredsName);
+                    AddBlock(page, 2, 48, 29, ub04.PayerC_Tertiary.Field58_InsuredsName);
 
                     // Box 59
-                    AddBlock(page, 33, 46, 2, "18");
-                    AddBlock(page, 33, 47, 2, "19");
-                    AddBlock(page, 33, 48, 2, "20");
+                    AddBlock(page, 33, 46, 2, ub04.PayerA_Primary.Field59_PatientRelationship);
+                    AddBlock(page, 33, 47, 2, ub04.PayerB_Secondary.Field59_PatientRelationship);
+                    AddBlock(page, 33, 48, 2, ub04.PayerC_Tertiary.Field59_PatientRelationship);
 
                     // Box 60
-                    AddBlock(page, 36, 46, 23, 'X'.Repeat(23));
-                    AddBlock(page, 36, 47, 23, 'X'.Repeat(23));
-                    AddBlock(page, 36, 48, 23, 'X'.Repeat(23));
+                    AddBlock(page, 36, 46, 23, ub04.PayerA_Primary.Field60_InsuredsUniqueId);
+                    AddBlock(page, 36, 47, 23, ub04.PayerB_Secondary.Field60_InsuredsUniqueId);
+                    AddBlock(page, 36, 48, 23, ub04.PayerC_Tertiary.Field60_InsuredsUniqueId);
 
                     // Box 61
-                    AddBlock(page, 60, 46, 17, 'X'.Repeat(17));
-                    AddBlock(page, 60, 47, 17, 'X'.Repeat(17));
-                    AddBlock(page, 60, 48, 17, 'X'.Repeat(17));
+                    AddBlock(page, 60, 46, 17, ub04.PayerA_Primary.Field61_GroupName);
+                    AddBlock(page, 60, 47, 17, ub04.PayerB_Secondary.Field61_GroupName);
+                    AddBlock(page, 60, 48, 17, ub04.PayerC_Tertiary.Field61_GroupName);
 
                     // Box 62
-                    AddBlock(page, 78, 46, 21, 'X'.Repeat(21));
-                    AddBlock(page, 78, 47, 21, 'X'.Repeat(21));
-                    AddBlock(page, 78, 48, 21, 'X'.Repeat(21));
+                    AddBlock(page, 78, 46, 21, ub04.PayerA_Primary.Field62_InsuredsGroupNumber);
+                    AddBlock(page, 78, 47, 21, ub04.PayerB_Secondary.Field62_InsuredsGroupNumber);
+                    AddBlock(page, 78, 48, 21, ub04.PayerC_Tertiary.Field62_InsuredsGroupNumber);
 
                     // Box 63
-                    AddBlock(page, 2, 50, 35, 'X'.Repeat(35));
-                    AddBlock(page, 2, 51, 35, 'X'.Repeat(35));
-                    AddBlock(page, 2, 52, 35, 'X'.Repeat(35));
+                    AddBlock(page, 2, 50, 35, ub04.Field63A_TreatmentAuthorizationCode);
+                    AddBlock(page, 2, 51, 35, ub04.Field63B_TreatmentAuthorizationCode);
+                    AddBlock(page, 2, 52, 35, ub04.Field63C_TreatmentAuthorizationCode);
 
                     // Box 64 - Document Control Number
-                    AddBlock(page, 39, 50, 30, 'X'.Repeat(30));
-                    AddBlock(page, 39, 51, 30, 'X'.Repeat(30));
-                    AddBlock(page, 39, 52, 30, 'X'.Repeat(30));
+                    AddBlock(page, 39, 50, 30, ub04.Field64A_DocumentControlNumber);
+                    AddBlock(page, 39, 51, 30, ub04.Field64B_DocumentControlNumber);
+                    AddBlock(page, 39, 52, 30, ub04.Field64C_DocumentControlNumber);
 
                     // Box 65 - Employer Name
-                    AddBlock(page, 70, 50, 29, 'X'.Repeat(29));
-                    AddBlock(page, 70, 51, 29, 'X'.Repeat(29));
-                    AddBlock(page, 70, 52, 29, 'X'.Repeat(29));
+                    AddBlock(page, 70, 50, 29, ub04.Field65a_EmployerName);
+                    AddBlock(page, 70, 51, 29, ub04.Field65b_EmployerName);
+                    AddBlock(page, 70, 52, 29, ub04.Field65c_EmployerName);
 
                     // Box 66 - ICD Version
-                    AddBlock(page, 1, 54, 1, "9");
+                    AddBlock(page, 1, 54, 1, ub04.Field66_Version);
 
                     // Box 67 - Primary Diagnosis
-                    AddBlock(page, 3, 53, 6, "123.45");
-                    AddBlock(page, 10.5m, 53, 1, "X");
+                    AddBlock(page, 3, 53, 6, ub04.Field67_PrincipleDiagnosis.Code);
+                    AddBlock(page, 10.5m, 53, 1, ub04.Field67_PrincipleDiagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67A
-                    AddBlock(page, 13, 53, 6, "123.45");
-                    AddBlock(page, 20, 53, 1, "X");
+                    AddBlock(page, 13, 53, 6, ub04.Field67A_Diagnosis.Code);
+                    AddBlock(page, 20, 53, 1, ub04.Field67A_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67B
-                    AddBlock(page, 22, 53, 6, "123.45");
-                    AddBlock(page, 29.75m, 53, 1, "X");
+                    AddBlock(page, 22, 53, 6, ub04.Field67B_Diagnosis.Code);
+                    AddBlock(page, 29.75m, 53, 1, ub04.Field67B_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67C
-                    AddBlock(page, 32, 53, 6, "123.45");
-                    AddBlock(page, 39.25m, 53, 1, "X");
+                    AddBlock(page, 32, 53, 6, ub04.Field67C_Diagnosis.Code);
+                    AddBlock(page, 39.25m, 53, 1, ub04.Field67C_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67D
-                    AddBlock(page, 42, 53, 6, "123.45");
-                    AddBlock(page, 49m, 53, 1, "X");
+                    AddBlock(page, 42, 53, 6, ub04.Field67D_Diagnosis.Code);
+                    AddBlock(page, 49m, 53, 1, ub04.Field67D_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67E
-                    AddBlock(page, 51, 53, 6, "123.45");
-                    AddBlock(page, 58.5m, 53, 1, "X");
+                    AddBlock(page, 51, 53, 6, ub04.Field67E_Diagnosis.Code);
+                    AddBlock(page, 58.5m, 53, 1, ub04.Field67E_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67F
-                    AddBlock(page, 61, 53, 6, "123.45");
-                    AddBlock(page, 68m, 53, 1, "X");
+                    AddBlock(page, 61, 53, 6, ub04.Field67F_Diagnosis.Code);
+                    AddBlock(page, 68m, 53, 1, ub04.Field67F_Diagnosis.PresentOnAdmissionIndicator);
                     
                     // Box 67G
-                    AddBlock(page, 70, 53, 6, "123.45");
-                    AddBlock(page, 77.75m, 53, 1, "X");
+                    AddBlock(page, 70, 53, 6, ub04.Field67G_Diagnosis.Code);
+                    AddBlock(page, 77.75m, 53, 1, ub04.Field67G_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67H
-                    AddBlock(page, 80, 53, 6, "123.45");
-                    AddBlock(page, 87.25m, 53, 1, "X");
+                    AddBlock(page, 80, 53, 6, ub04.Field67H_Diagnosis.Code);
+                    AddBlock(page, 87.25m, 53, 1, ub04.Field67H_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67I
-                    AddBlock(page, 3, 54, 6, "123.45");
-                    AddBlock(page, 10.5m, 54, 1, "X");
+                    AddBlock(page, 3, 54, 6, ub04.Field67I_Diagnosis.Code);
+                    AddBlock(page, 10.5m, 54, 1, ub04.Field67I_Diagnosis.PresentOnAdmissionIndicator);
                     
                     // Box 67J
-                    AddBlock(page, 13, 54, 6, "123.45");
-                    AddBlock(page, 20, 54, 1, "X");
+                    AddBlock(page, 13, 54, 6, ub04.Field67J_Diagnosis.Code);
+                    AddBlock(page, 20, 54, 1, ub04.Field67J_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67K
-                    AddBlock(page, 22, 54, 6, "123.45");
-                    AddBlock(page, 29.75m, 54, 1, "X");
+                    AddBlock(page, 22, 54, 6, ub04.Field67K_Diagnosis.Code);
+                    AddBlock(page, 29.75m, 54, 1, ub04.Field67K_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67L
-                    AddBlock(page, 32, 54, 6, "123.45");
-                    AddBlock(page, 39.25m, 54, 1, "X");
+                    AddBlock(page, 32, 54, 6, ub04.Field67L_Diagnosis.Code);
+                    AddBlock(page, 39.25m, 54, 1, ub04.Field67L_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67M
-                    AddBlock(page, 42, 54, 6, "123.45");
-                    AddBlock(page, 49m, 54, 1, "X");
+                    AddBlock(page, 42, 54, 6, ub04.Field67M_Diagnosis.Code);
+                    AddBlock(page, 49m, 54, 1, ub04.Field67M_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67N
-                    AddBlock(page, 51, 54, 6, "123.45");
-                    AddBlock(page, 58.5m, 54, 1, "X");
+                    AddBlock(page, 51, 54, 6, ub04.Field67N_Diagnosis.Code);
+                    AddBlock(page, 58.5m, 54, 1, ub04.Field67N_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67O
-                    AddBlock(page, 61, 54, 6, "123.45");
-                    AddBlock(page, 68m, 54, 1, "X");
+                    AddBlock(page, 61, 54, 6, ub04.Field67O_Diagnosis.Code);
+                    AddBlock(page, 68m, 54, 1, ub04.Field67O_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67P
-                    AddBlock(page, 70, 54, 6, "123.45");
-                    AddBlock(page, 77.75m, 54, 1, "X");
+                    AddBlock(page, 70, 54, 6, ub04.Field67P_Diagnosis.Code);
+                    AddBlock(page, 77.75m, 54, 1, ub04.Field67P_Diagnosis.PresentOnAdmissionIndicator);
 
                     // Box 67Q
-                    AddBlock(page, 80, 54, 6, "123.45");
-                    AddBlock(page, 87.25m, 54, 1, "X");
+                    AddBlock(page, 80, 54, 6, ub04.Field67Q_Diagnosis.Code);
+                    AddBlock(page, 87.25m, 54, 1, ub04.Field67Q_Diagnosis.PresentOnAdmissionIndicator);
                     
                     // Box 68
-                    AddBlock(page, 90, 53, 9, 'X'.Repeat(9));
-                    AddBlock(page, 90, 54, 9, 'X'.Repeat(9));
+                    AddBlock(page, 90, 53, 9, ub04.Field68.Line1);
+                    AddBlock(page, 90, 54, 9, ub04.Field68.Line2);
 
                     // Box 69 - Admitting Diagnosis
-                    AddBlock(page, 6, 55, 6, "123.45");
+                    AddBlock(page, 6, 55, 6, ub04.Field69_AdmittingDiagnosisCode);
 
                     // Box 70 - Patient Reason Diagnosis
-                    AddBlock(page, 21, 55, 6, "123.45");
-                    AddBlock(page, 29, 55, 6, "123.45");
-                    AddBlock(page, 38, 55, 6, "123.45");
+                    AddBlock(page, 21, 55, 6, ub04.Field70a_PatientReasonDiagnosisCode);
+                    AddBlock(page, 29, 55, 6, ub04.Field70b_PatientReasonDiagnosisCode);
+                    AddBlock(page, 38, 55, 6, ub04.Field70c_PatientReasonDiagnosisCode);
 
                     // Box 71 - PPS Code
-                    AddBlock(page, 51, 55, 5, "12345");
+                    AddBlock(page, 51, 55, 5, ub04.Field71_PPSCode);
 
                     // Box 72 - External Cause of Injury
-                    AddBlock(page, 59, 55, 6, "123.45");
-                    AddBlock(page, 67m, 55, 1, "X");
-                    AddBlock(page, 69, 55, 6, "123.45");
-                    AddBlock(page, 76.75m, 55, 1, "X");
-                    AddBlock(page, 79, 55, 6, "123.45");
-                    AddBlock(page, 86.25m, 55, 1, "X");
+                    AddBlock(page, 59, 55, 6, ub04.Field72a_ExternalCauseOfInjury.Code);
+                    AddBlock(page, 67m, 55, 1, ub04.Field72a_ExternalCauseOfInjury.PresentOnAdmissionIndicator);
+                    AddBlock(page, 69, 55, 6, ub04.Field72b_ExternalCauseOfInjury.Code);
+                    AddBlock(page, 76.75m, 55, 1, ub04.Field72b_ExternalCauseOfInjury.PresentOnAdmissionIndicator);
+                    AddBlock(page, 79, 55, 6, ub04.Field72c_ExternalCauseOfInjury.Code);
+                    AddBlock(page, 86.25m, 55, 1, ub04.Field72c_ExternalCauseOfInjury.PresentOnAdmissionIndicator);
 
                     // Box 73 - Blank
-                    AddBlock(page, 89, 55, 10, 'X'.Repeat(10));
+                    AddBlock(page, 89, 55, 10, ub04.Field73);
 
                     // Box 74
-                    AddBlock(page, 2, 57, 8, 'X'.Repeat(8));
-                    AddBlock(page, 12, 57, 6, "MMDDYY");
-                    AddBlock(page, 20, 57, 8, 'X'.Repeat(8));
-                    AddBlock(page, 29, 57, 6, "MMDDYY");
-                    AddBlock(page, 38, 57, 8, 'X'.Repeat(8));
-                    AddBlock(page, 48, 57, 6, "MMDDYY");
-                    AddBlock(page, 2, 59, 8, 'X'.Repeat(8));
-                    AddBlock(page, 12, 59, 6, "MMDDYY");
-                    AddBlock(page, 20, 59, 8, 'X'.Repeat(8));
-                    AddBlock(page, 29, 59, 6, "MMDDYY");
-                    AddBlock(page, 38, 59, 8, 'X'.Repeat(8));
-                    AddBlock(page, 48, 59, 6, "MMDDYY");
+                    AddBlock(page, 2, 57, 8, ub04.Field74_PrincipalProcedure.Code);
+                    AddBlock(page, 12, 57, 6, ub04.Field74_PrincipalProcedure.Date);
+                    AddBlock(page, 20, 57, 8, ub04.Field74a_OtherProcedure.Code);
+                    AddBlock(page, 29, 57, 6, ub04.Field74a_OtherProcedure.Date);
+                    AddBlock(page, 38, 57, 8, ub04.Field74b_OtherProcedure.Code);
+                    AddBlock(page, 48, 57, 6, ub04.Field74b_OtherProcedure.Date);
+                    AddBlock(page, 2, 59, 8, ub04.Field74c_OtherProcedure.Code);
+                    AddBlock(page, 12, 59, 6, ub04.Field74c_OtherProcedure.Date);
+                    AddBlock(page, 20, 59, 8, ub04.Field74d_OtherProcedure.Code);
+                    AddBlock(page, 29, 59, 6, ub04.Field74d_OtherProcedure.Date);
+                    AddBlock(page, 38, 59, 8, ub04.Field74e_OtherProcedure.Code);
+                    AddBlock(page, 48, 59, 6, ub04.Field74e_OtherProcedure.Date);
 
                     // Box 75
-                    AddBlock(page, 56, 56, 4, 'X'.Repeat(4));
-                    AddBlock(page, 56, 57, 4, 'X'.Repeat(4));
-                    AddBlock(page, 56, 58, 4, 'X'.Repeat(4));
-                    AddBlock(page, 56, 59, 4, 'X'.Repeat(4));
+                    AddBlock(page, 56, 56, 4, ub04.Field75.Line1);
+                    AddBlock(page, 56, 57, 4, ub04.Field75.Line2);
+                    AddBlock(page, 56, 58, 4, ub04.Field75.Line3);
+                    AddBlock(page, 56, 59, 4, ub04.Field75.Line4);
 
                     // Box 76
-                    AddBlock(page, 72, 56, 10, 'X'.Repeat(10));
-                    AddBlock(page, 86, 56, 2, "XX");
-                    AddBlock(page, 89, 56, 10, 'X'.Repeat(10));
-                    AddBlock(page, 64, 57, 18, 'X'.Repeat(18));
-                    AddBlock(page, 86, 57, 13, 'X'.Repeat(13));
+                    AddBlock(page, 72, 56, 10, ub04.Field76_AttendingPhysician.Npi);
+                    AddBlock(page, 86, 56, 2, ub04.Field76_AttendingPhysician.IdentifierQualifier);
+                    AddBlock(page, 89, 56, 10, ub04.Field76_AttendingPhysician.Identifier);
+                    AddBlock(page, 64, 57, 18, ub04.Field76_AttendingPhysician.LastName);
+                    AddBlock(page, 86, 57, 13, ub04.Field76_AttendingPhysician.FirstName);
 
                     // Box 77
-                    AddBlock(page, 72, 58, 10, 'X'.Repeat(10));
-                    AddBlock(page, 86, 58, 2, "XX");
-                    AddBlock(page, 89, 58, 10, 'X'.Repeat(10));
-                    AddBlock(page, 64, 59, 18, 'X'.Repeat(18));
-                    AddBlock(page, 86, 59, 13, 'X'.Repeat(13));
+                    AddBlock(page, 72, 58, 10, ub04.Field77_OperatingPhysician.Npi);
+                    AddBlock(page, 86, 58, 2, ub04.Field77_OperatingPhysician.IdentifierQualifier);
+                    AddBlock(page, 89, 58, 10, ub04.Field77_OperatingPhysician.Identifier);
+                    AddBlock(page, 64, 59, 18, ub04.Field77_OperatingPhysician.LastName);
+                    AddBlock(page, 86, 59, 13, ub04.Field77_OperatingPhysician.FirstName);
 
                     // Box 78
-                    AddBlock(page, 72, 60, 10, 'X'.Repeat(10));
-                    AddBlock(page, 86, 60, 2, "XX");
-                    AddBlock(page, 89, 60, 10, 'X'.Repeat(10));
-                    AddBlock(page, 64, 61, 18, 'X'.Repeat(18));
-                    AddBlock(page, 86, 61, 13, 'X'.Repeat(13));
+                    AddBlock(page, 72, 60, 10, ub04.Field78_OtherProvider.Npi);
+                    AddBlock(page, 86, 60, 2, ub04.Field78_OtherProvider.IdentifierQualifier);
+                    AddBlock(page, 89, 60, 10, ub04.Field78_OtherProvider.Identifier);
+                    AddBlock(page, 64, 61, 18, ub04.Field78_OtherProvider.LastName);
+                    AddBlock(page, 86, 61, 13, ub04.Field78_OtherProvider.FirstName);
 
                     // Box 79
-                    AddBlock(page, 72, 62, 10, 'X'.Repeat(10));
-                    AddBlock(page, 86, 62, 2, "XX");
-                    AddBlock(page, 89, 62, 10, 'X'.Repeat(10));
-                    AddBlock(page, 64, 63, 18, 'X'.Repeat(18));
-                    AddBlock(page, 86, 63, 13, 'X'.Repeat(13));
+                    AddBlock(page, 72, 62, 10, ub04.Field79_OtherProvider.Npi);
+                    AddBlock(page, 86, 62, 2, ub04.Field79_OtherProvider.IdentifierQualifier);
+                    AddBlock(page, 89, 62, 10, ub04.Field79_OtherProvider.Identifier);
+                    AddBlock(page, 64, 63, 18, ub04.Field79_OtherProvider.LastName);
+                    AddBlock(page, 86, 63, 13, ub04.Field79_OtherProvider.FirstName);
 
                     // Box 80
-                    AddBlock(page, 2, 61, 27, 'X'.Repeat(27));
-                    AddBlock(page, 2, 62, 27, 'X'.Repeat(27));
-                    AddBlock(page, 2, 63, 27, 'X'.Repeat(27));
+                    AddBlock(page, 2, 61, 27, ub04.Field80_Remarks.Line1);
+                    AddBlock(page, 2, 62, 27, ub04.Field80_Remarks.Line2);
+                    AddBlock(page, 2, 63, 27, ub04.Field80_Remarks.Line3);
 
                     // Box 81
-                    AddBlock(page, 32, 60, 2, "AB");
-                    AddBlock(page, 35, 60, 10, 'X'.Repeat(10));
-                    AddBlock(page, 48, 60, 12, 'X'.Repeat(12));
-                    AddBlock(page, 32, 61, 2, "AB");
-                    AddBlock(page, 35, 61, 10, 'X'.Repeat(10));
-                    AddBlock(page, 48, 61, 12, 'X'.Repeat(12));
-                    AddBlock(page, 32, 62, 2, "AB");
-                    AddBlock(page, 35, 62, 10, 'X'.Repeat(10));
-                    AddBlock(page, 48, 62, 12, 'X'.Repeat(12));
-                    AddBlock(page, 32, 63, 2, "AB");
-                    AddBlock(page, 35, 63, 10, 'X'.Repeat(10));
-                    AddBlock(page, 48, 63, 12, 'X'.Repeat(12));
+                    AddBlock(page, 32, 60, 2, ub04.Field81a.Qualifier);
+                    AddBlock(page, 35, 60, 10, ub04.Field81a.Code1);
+                    AddBlock(page, 48, 60, 12, ub04.Field81a.Code2);
+                    AddBlock(page, 32, 61, 2, ub04.Field81b.Qualifier);
+                    AddBlock(page, 35, 61, 10, ub04.Field81b.Code1);
+                    AddBlock(page, 48, 61, 12, ub04.Field81b.Code2);
+                    AddBlock(page, 32, 62, 2, ub04.Field81c.Qualifier);
+                    AddBlock(page, 35, 62, 10, ub04.Field81c.Code1);
+                    AddBlock(page, 48, 62, 12, ub04.Field81c.Code2);
+                    AddBlock(page, 32, 63, 2, ub04.Field81d.Qualifier);
+                    AddBlock(page, 35, 63, 10, ub04.Field81d.Code1);
+                    AddBlock(page, 48, 63, 12, ub04.Field81d.Code2);
+
+                    // reorder by locations;
+                    page.Blocks = page.Blocks.OrderBy(bl => bl.Top).ToList();
                 }
             }
             return pages;
