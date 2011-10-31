@@ -39,5 +39,34 @@ namespace OopFactory.X12.Hipaa.Common
         public string MiddleName { get; set; }
 
         public Identification Identification { get; set; }
+
+        public override string ToString()
+        {
+            if (this.Type.Qualifier == EntityNameQualifierEnum.NonPerson)
+                return LastName;
+            else
+            {
+                StringBuilder name = new StringBuilder();
+
+                name.Append(LastName);
+                if (!string.IsNullOrWhiteSpace(Suffix))
+                {
+                    name.AppendFormat(" {0}", Suffix);
+                }
+                name.Append(",");
+                if (!string.IsNullOrWhiteSpace(Prefix))
+                    name.AppendFormat(" {0}", Prefix);
+                name.AppendFormat(" {0}", FirstName);
+                if (!string.IsNullOrWhiteSpace(MiddleName))
+                {
+                    if (MiddleName.Length == 1)
+                        name.AppendFormat(" {0}.", MiddleName);
+                    else
+                        name.AppendFormat(" {0}", MiddleName);
+                }
+                
+                return name.ToString();
+            }
+        }
     }
 }

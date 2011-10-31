@@ -8,11 +8,11 @@ using OopFactory.X12.Hipaa.Claims.Forms.Professional;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
-    public class ProfessionalClaimFormTransformation : ClaimTransformationService,  IClaimToClaimFormTransfomation
+    public class ProfessionalClaimToHcfa1500FormTransformation : ClaimTransformationService,  IClaimToClaimFormTransfomation
     {
         private string _formImagePath;
 
-        public ProfessionalClaimFormTransformation(string formImagePath)
+        public ProfessionalClaimToHcfa1500FormTransformation(string formImagePath)
         {
             _formImagePath = formImagePath;
         }
@@ -323,6 +323,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 {
                     page = new FormPage();
                     pages.Add(page);
+                    page.MasterReference = "hcfa1500";
                     page.ImagePath = _formImagePath;
 
                     // Render header
