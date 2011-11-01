@@ -26,6 +26,13 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 TransformCompleted(this, args);
         }
 
+
+        /// <summary>
+        /// Implementation of mapping as described at http://ahca.myflorida.com/Medicaid/meds/pdf/837i_v2-1_crosswalk_v2.pdf
+        /// Detailed instructions found at https://www.cms.gov/transmittals/downloads/R1104CP.pdf
+        /// </summary>
+        /// <param name="claim"></param>
+        /// <returns></returns>
         public virtual UB04Claim TransformClaimToUB04(Claim claim)
         {
             var ub = new UB04Claim();
@@ -157,8 +164,79 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             ub.Field57_OtherProviderIdA = "??????????";
             ub.Field57_OtherProviderIdB = "??????????";
             ub.Field57_OtherProviderIdC = "??????????";
-            
-            
+
+            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
+                ub.Field66_Version = "9";
+
+            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
+            if (principalDiagnosis != null)
+                ub.Field67_PrincipleDiagnosis.CopyFrom(principalDiagnosis);
+
+            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
+            if (otherDiagnoses.Count > 0) ub.Field67A_Diagnosis.CopyFrom(otherDiagnoses[0]);
+            if (otherDiagnoses.Count > 1) ub.Field67B_Diagnosis.CopyFrom(otherDiagnoses[1]);
+            if (otherDiagnoses.Count > 2) ub.Field67C_Diagnosis.CopyFrom(otherDiagnoses[2]);
+            if (otherDiagnoses.Count > 3) ub.Field67D_Diagnosis.CopyFrom(otherDiagnoses[3]);
+            if (otherDiagnoses.Count > 4) ub.Field67E_Diagnosis.CopyFrom(otherDiagnoses[4]);
+            if (otherDiagnoses.Count > 5) ub.Field67F_Diagnosis.CopyFrom(otherDiagnoses[5]);
+            if (otherDiagnoses.Count > 6) ub.Field67G_Diagnosis.CopyFrom(otherDiagnoses[6]);
+            if (otherDiagnoses.Count > 7) ub.Field67H_Diagnosis.CopyFrom(otherDiagnoses[7]);
+            if (otherDiagnoses.Count > 8) ub.Field67I_Diagnosis.CopyFrom(otherDiagnoses[8]);
+            if (otherDiagnoses.Count > 9) ub.Field67J_Diagnosis.CopyFrom(otherDiagnoses[9]);
+            if (otherDiagnoses.Count > 10) ub.Field67K_Diagnosis.CopyFrom(otherDiagnoses[10]);
+            if (otherDiagnoses.Count > 11) ub.Field67L_Diagnosis.CopyFrom(otherDiagnoses[11]);
+            if (otherDiagnoses.Count > 12) ub.Field67M_Diagnosis.CopyFrom(otherDiagnoses[12]);
+            if (otherDiagnoses.Count > 13) ub.Field67N_Diagnosis.CopyFrom(otherDiagnoses[13]);
+            if (otherDiagnoses.Count > 14) ub.Field67O_Diagnosis.CopyFrom(otherDiagnoses[14]);
+            if (otherDiagnoses.Count > 15) ub.Field67P_Diagnosis.CopyFrom(otherDiagnoses[15]);
+            if (otherDiagnoses.Count > 16) ub.Field67Q_Diagnosis.CopyFrom(otherDiagnoses[16]);
+
+            var admittingDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Admitting);
+            if (admittingDiagnosis != null)
+                ub.Field69_AdmittingDiagnosisCode = admittingDiagnosis.Code;
+            var patientReasonDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.PatientReason).ToList();
+            if (patientReasonDiagnoses.Count > 0) ub.Field70a_PatientReasonDiagnosisCode = patientReasonDiagnoses[0].Code;
+            if (patientReasonDiagnoses.Count > 1) ub.Field70b_PatientReasonDiagnosisCode = patientReasonDiagnoses[1].Code;
+            if (patientReasonDiagnoses.Count > 2) ub.Field70c_PatientReasonDiagnosisCode = patientReasonDiagnoses[2].Code;
+
+            ub.Field71_PPSCode = "???";
+
+            var causes = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.ExternalCauseOfInjury).ToList();
+            if (causes.Count > 0) ub.Field72a_ExternalCauseOfInjury.CopyFrom(causes[0]);
+            if (causes.Count > 1) ub.Field72b_ExternalCauseOfInjury.CopyFrom(causes[1]);
+            if (causes.Count > 2) ub.Field72c_ExternalCauseOfInjury.CopyFrom(causes[2]);
+
+            var principalProcedure = claim.Procedures.FirstOrDefault(p => p.IsPrincipal);
+            if (principalProcedure != null)
+                ub.Field74_PrincipalProcedure.CopyFrom(principalProcedure);
+            var otherProcedures = claim.Procedures.Where(p => !p.IsPrincipal).ToList();
+            if (otherProcedures.Count > 0) ub.Field74a_OtherProcedure.CopyFrom(otherProcedures[0]);
+            if (otherProcedures.Count > 1) ub.Field74b_OtherProcedure.CopyFrom(otherProcedures[1]);
+            if (otherProcedures.Count > 2) ub.Field74c_OtherProcedure.CopyFrom(otherProcedures[2]);
+            if (otherProcedures.Count > 3) ub.Field74d_OtherProcedure.CopyFrom(otherProcedures[3]);
+            if (otherProcedures.Count > 4) ub.Field74e_OtherProcedure.CopyFrom(otherProcedures[4]);
+
+            if (claim.AttendingProvider != null)
+            {
+                ub.Field76_AttendingPhysician.Npi = claim.AttendingProvider.Npi;
+                ub.Field76_AttendingPhysician.LastName = claim.AttendingProvider.Name.LastName;
+                ub.Field76_AttendingPhysician.FirstName = claim.AttendingProvider.Name.FirstName;
+            }
+
+            if (claim.OperatingPhysician != null)
+            {
+                ub.Field77_OperatingPhysician.Npi = claim.OperatingPhysician.Npi;
+                ub.Field77_OperatingPhysician.LastName = claim.OperatingPhysician.Name.LastName;
+                ub.Field77_OperatingPhysician.FirstName = claim.OperatingPhysician.Name.FirstName;
+            }
+
+            if (claim.OtherOperatingPhysician != null)
+            {
+                ub.Field78_OtherProvider.Npi = claim.OtherOperatingPhysician.Npi;
+                ub.Field78_OtherProvider.LastName = claim.OtherOperatingPhysician.Name.LastName;
+                ub.Field78_OtherProvider.FirstName = claim.OtherOperatingPhysician.Name.FirstName;
+            }
+
             return ub;
         }
 

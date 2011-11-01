@@ -24,5 +24,12 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             Date = String.Format("{0:MMddyy}", source.Date);
             return this;
         }
+
+        public UB04Occurrence CopyFrom(InstitutionalProcedure source)
+        {
+            Code = source.Code;
+            Date = String.Format("{0:MMddyy}", source.Date);
+            return this;
+        }
     }
 }
