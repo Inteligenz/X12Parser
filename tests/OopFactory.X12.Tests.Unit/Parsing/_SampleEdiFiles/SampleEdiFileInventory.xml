@@ -89,6 +89,10 @@
   <TransactionSet Id="810">
     <EdiFile>
       <SourceUrl></SourceUrl>
+      <ResourcePath>ORD._810.2011110815164104.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl></SourceUrl>
       <ResourcePath>ORD._810.Example1_CaliforniaISO.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
