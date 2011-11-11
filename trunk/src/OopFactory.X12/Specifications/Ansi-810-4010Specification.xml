@@ -8,6 +8,7 @@
   <Segment SegmentId="FOB"/>
   <Segment SegmentId="REF"/>
   <Segment SegmentId="PER"/>
+  <Segment SegmentId="SAC"/>
   <Segment SegmentId="TDS" Trailer="true"/>
   <Segment SegmentId="TXI" Trailer="true"/>
   <Segment SegmentId="CAD" Trailer="true"/>
