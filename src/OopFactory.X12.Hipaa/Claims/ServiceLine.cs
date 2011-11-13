@@ -37,6 +37,10 @@ namespace OopFactory.X12.Hipaa.Claims
         public string DiagnosisCodePointer3 { get; set; }
         [XmlAttribute]
         public string DiagnosisCodePointer4 { get; set; }
+        [XmlAttribute]
+        public string PurchasedServiceIdentifier { get; set; } // NPI
+        [XmlAttribute]
+        public string PurchasedServiceAmount { get; set; }
         
         [XmlAttribute]
         public decimal ChargeAmount { get; set; }

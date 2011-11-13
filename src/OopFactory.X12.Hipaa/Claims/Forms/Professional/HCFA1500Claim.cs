@@ -87,10 +87,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public FormDate Field15_DatePatientHadSameOrSimilarIllness { get; set; }              // MMDDCCYY
         public FormDate Field16_DatePatientUnableToWork_Start { get; set; }                  // MMDDCCYY
         public FormDate Field16_DatePatientUnableToWork_End { get; set; }                    // MMDDCCYY
-        public string Field17_ReferringProviderOrOtherSource_LastName { get; set; }         // HCFA 1500 standard allows 28 total characters for these (3) fields
-        public string Field17_ReferringProviderOrOtherSource_FirstName { get; set; }
-        public string Field17_ReferringProviderOrOtherSource_MiddleName { get; set; }
-        public string Field17_ReferringProviderOrOtherSource_Credentials { get; set; }     // ie., 'MD', 'MRCVS'
+        public string Field17_ReferringProviderOrOtherSource_Name { get; set; }         // HCFA 1500 standard allows 28 total characters for this field
         public string Field17a_OtherID_Qualifier { get; set; }                             // 2 digit alpha-numeric value
         public string Field17a_OtherID_Number { get; set; }                                // 17 characters
         public string Field17b_NationalProviderIdentifier { get; set; }                    // 10 digit numeric

@@ -3,16 +3,16 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
                 xmlns="http://www.oopfactory.com/2011/XSL/Hipaa"
 >
-    <xsl:output method="xml" indent="yes"/>
+  <xsl:output method="xml" indent="yes"/>
 
-    <xsl:template match="@* | node()">
-      <xsl:apply-templates select="@* | node()"/>
-    </xsl:template>
+  <xsl:template match="@* | node()">
+    <xsl:apply-templates select="@* | node()"/>
+  </xsl:template>
 
   <xsl:template match="Interchange">
     <ClaimDocument>
       <xsl:apply-templates select="@* | node()"/>
-    </ClaimDocument>    
+    </ClaimDocument>
   </xsl:template>
 
   <!-- Claim Loop 2300 -->
@@ -55,9 +55,58 @@
           <xsl:value-of select="CLM/CLM07"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="string-length(CLM/CLM11)>0">
+        <xsl:if test="CLM/CLM11/CLM1101">
+          <xsl:attribute name="RelatedCauseCode1">
+            <xsl:value-of select="CLM/CLM11/CLM1101"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="CLM/CLM11/CLM1102">
+          <xsl:attribute name="RelatedCauseCode2">
+            <xsl:value-of select="CLM/CLM11/CLM1102"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="CLM/CLM11/CLM1103">
+          <xsl:attribute name="RelatedCauseCode3">
+            <xsl:value-of select="CLM/CLM11/CLM1103"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="CLM/CLM11/CLM1104">
+          <xsl:attribute name="AutoAccidentState">
+            <xsl:value-of select="CLM/CLM11/CLM1104"/>
+          </xsl:attribute>
+        </xsl:if>
+      </xsl:if>
+      <xsl:if test="CLM/CLM10">
+        <xsl:attribute name="PatientSignatureSourceCode">
+          <xsl:value-of select="CLM/CLM10"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="MedicalRecordNumber">
         <xsl:value-of select="REF[REF01='EA']/REF02"/>
       </xsl:attribute>
+      <xsl:if test="REF[REF01='G1']">
+        <xsl:attribute name="PriorAuthorizationNumber">
+          <xsl:value-of select="REF[REF01='G1']/REF02"/>
+        </xsl:attribute>
+      </xsl:if>
+      <!-- XXX This is incomplete, but good enough for CMS-1500 -->
+      <!-- Other subscriber information loop -->
+      <xsl:if test="./Loop[@LoopId='2320']">
+        <xsl:variable name="OtherSubscriberInformationLoop" select="./Loop[@LoopId='2320']"/>
+        <OtherSubscriberInformation>
+          <OtherSubscriber>
+            <xsl:call-template name="EntityName">
+              <xsl:with-param name="Loop" select="$OtherSubscriberInformationLoop/Loop[@LoopId='2330A']"/>
+            </xsl:call-template>
+          </OtherSubscriber>
+          <OtherPayer>
+            <xsl:call-template name="EntityName">
+              <xsl:with-param name="Loop" select="$OtherSubscriberInformationLoop/Loop[@LoopId='2330B']"/>
+            </xsl:call-template>
+          </OtherPayer>
+        </OtherSubscriberInformation>
+      </xsl:if>
       <ServiceLocationInfo>
         <xsl:attribute name="FacilityCode">
           <xsl:value-of select="CLM/CLM05/CLM0501"/>
@@ -90,8 +139,8 @@
         </PatientStatus>
       </xsl:if>
 
-      <xsl:choose>        
-        <xsl:when test="$ParentLoopId = '2000B'"> <!-- Parent is Subscriber Loop -->
+      <xsl:choose>
+        <xsl:when test="$ParentLoopId = '2000B'">
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
           </xsl:call-template>
@@ -99,12 +148,16 @@
             <xsl:with-param name="HLoop" select="../."/>
           </xsl:call-template>
         </xsl:when>
-        <xsl:when test="$ParentLoopId = '2000C'"> <!-- Parent is Patient Loop -->
+        <xsl:when test="$ParentLoopId = '2000C'">
+          <!-- Parent is Patient Loop -->
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../../."/>
           </xsl:call-template>
           <xsl:call-template name="SubscriberHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
+          </xsl:call-template>
+          <xsl:call-template name="PatientHLoop">
+            <xsl:with-param name="HLoop" select="../." />
           </xsl:call-template>
         </xsl:when>
       </xsl:choose>
@@ -223,6 +276,14 @@
   <!-- Service Line Loop 2400 -->
   <xsl:template match="Loop[@LoopId='2400']">
     <ServiceLine>
+      <xsl:if test="PS1">
+        <xsl:attribute name="PurchasedServiceIdentifier">
+          <xsl:value-of select="PS1/PS101"/>
+        </xsl:attribute>
+        <xsl:attribute name="PurchasedServiceAmount">
+          <xsl:value-of select="PS1/PS102"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="LineNumber">
         <xsl:value-of select="LX/LX01"/>
       </xsl:attribute>
@@ -230,11 +291,13 @@
         <xsl:attribute name="ChargeAmount">
           <xsl:value-of select="SV102"/>
         </xsl:attribute>
-        <xsl:attribute name="Quantity"><xsl:value-of select="SV104"/></xsl:attribute>
+        <xsl:attribute name="Quantity">
+          <xsl:value-of select="SV104"/>
+        </xsl:attribute>
         <xsl:if test="string-length(SV103)>0">
-            <xsl:attribute name="Unit">
-              <xsl:value-of select="SV103"/>
-            </xsl:attribute>
+          <xsl:attribute name="Unit">
+            <xsl:value-of select="SV103"/>
+          </xsl:attribute>
         </xsl:if>
         <xsl:if test="string-length(SV109)>0">
           <xsl:attribute name="EmergencyIndicator">
@@ -361,9 +424,9 @@
       </xsl:for-each>
       <xsl:for-each select="REF">
         <Identification>
-        <xsl:call-template name="Identification">
-          <xsl:with-param name="REF" select="."/>
-        </xsl:call-template>
+          <xsl:call-template name="Identification">
+            <xsl:with-param name="REF" select="."/>
+          </xsl:call-template>
         </Identification>
       </xsl:for-each>
       <xsl:apply-templates select="NTE"/>
@@ -385,10 +448,86 @@
         </xsl:call-template>
       </xsl:for-each>
     </BillingInfo>
-  </xsl:template>  
+  </xsl:template>
+
+  <!-- XXX: This loop is not completely filled out! -->
+  <xsl:template name="PatientHLoop">
+    <xsl:param name="HLoop"/>
+
+    <xsl:for-each select="$HLoop/Loop[@LoopId='2010CA']">
+      <Patient>
+        <xsl:if test="count(DMG) > 0">
+          <xsl:attribute name="Gender">
+            <xsl:choose>
+              <xsl:when test="DMG/DMG03='F'">Female</xsl:when>
+              <xsl:when test="DMG/DMG03='M'">Male</xsl:when>
+              <xsl:otherwise>Unknown</xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:attribute name="DateOfBirth">
+            <xsl:value-of select="concat(substring(DMG/DMG02,1,4),'-',substring(DMG/DMG02,5,2),'-',substring(DMG/DMG02,7,2))"/>
+          </xsl:attribute>
+        </xsl:if>
+        
+        <Name>
+          <xsl:call-template name="EntityName">
+            <xsl:with-param name="Loop" select="."/>
+          </xsl:call-template>
+        </Name>
+        <xsl:for-each select="N3">
+          <Address>
+            <xsl:call-template name="PostalAddress">
+              <xsl:with-param name="N3" select="."/>
+            </xsl:call-template>
+          </Address>
+        </xsl:for-each>
+      </Patient>
+    </xsl:for-each>
+  </xsl:template>
+
+  
+  <xsl:template name="SBRSegment">
+    <xsl:param name="SubscriberSegment"/>
+      <xsl:attribute name="PayerResponsibilitySequenceNumberCode">
+        <xsl:value-of select="$SubscriberSegment/SBR01"/>
+      </xsl:attribute>
+      <xsl:attribute name="IndividualRelationshipCode">
+        <xsl:value-of select="$SubscriberSegment/SBR02"/>
+      </xsl:attribute>
+      <xsl:attribute name="ReferenceIdentification">
+        <xsl:value-of select="$SubscriberSegment/SBR03"/>
+      </xsl:attribute>
+      <xsl:attribute name="Name">
+        <xsl:value-of select="$SubscriberSegment/SBR04"/>
+      </xsl:attribute>
+      <xsl:attribute name="InsuranceTypeCode">
+        <xsl:value-of select="$SubscriberSegment/SBR05"/>
+      </xsl:attribute>
+      <xsl:attribute name="CoordinationOfBenefitsCode">
+        <xsl:value-of select="$SubscriberSegment/SBR06"/>
+      </xsl:attribute>
+      <xsl:attribute name="YesNoConditionResponseCode">
+        <xsl:value-of select="$SubscriberSegment/SBR07"/>
+      </xsl:attribute>
+      <xsl:attribute name="EmploymentStatusCode">
+        <xsl:value-of select="$SubscriberSegment/SBR08"/>
+      </xsl:attribute>
+      <xsl:attribute name="ClaimFilingIndicatorCode">
+        <xsl:value-of select="$SubscriberSegment/SBR09"/>
+      </xsl:attribute>
+  </xsl:template>
 
   <xsl:template name="SubscriberHLoop">
     <xsl:param name="HLoop"/>
+    <!-- Parent is Subscriber Loop -->
+    <!-- Capture the subscriber information(specifically the claim file indicator) for filling in CMS-1500, if it exists -->
+    <xsl:if test='$HLoop/SBR'>
+      <SubscriberInformation>
+        <xsl:call-template name='SBRSegment'>
+          <xsl:with-param name='SubscriberSegment' select='$HLoop/SBR'/>
+        </xsl:call-template>
+      </SubscriberInformation>
+    </xsl:if>
     <xsl:for-each select="$HLoop/Loop[@LoopId='2010BA']">
       <Subscriber>
         <xsl:if test="count(DMG) > 0">
@@ -453,7 +592,7 @@
       </xsl:attribute>
     </Amount>
   </xsl:template>
-  
+
   <xsl:template match="NTE">
     <Note>
       <xsl:attribute name="Code">
@@ -494,9 +633,9 @@
       </xsl:for-each>
       <xsl:for-each select="$Loop/PRV">
         <ProviderInfo>
-        <xsl:call-template name="ProviderInformation">
-          <xsl:with-param name="PRV" select="."/>
-        </xsl:call-template>
+          <xsl:call-template name="ProviderInformation">
+            <xsl:with-param name="PRV" select="."/>
+          </xsl:call-template>
         </ProviderInfo>
       </xsl:for-each>
     </Provider>
@@ -700,7 +839,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
-  
+
+
 
 </xsl:stylesheet>

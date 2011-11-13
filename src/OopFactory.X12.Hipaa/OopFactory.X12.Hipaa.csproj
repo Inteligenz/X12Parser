@@ -12,10 +12,14 @@
     <AssemblyName>OopFactory.X12.Hipaa</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +85,7 @@
     <Compile Include="Claims\Services\LocalExtensions.cs" />
     <Compile Include="Claims\Services\ProfessionalClaimToHcfa1500FormTransformation.cs" />
     <Compile Include="Claims\Services\Ub04ClaimTransformationArgs.cs" />
+    <Compile Include="Claims\OtherSubscriberInformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="Common\QualifiedAmount.cs" />
     <Compile Include="Common\QualifiedDate.cs" />
     <Compile Include="Common\QualifiedDateRange.cs" />
+    <Compile Include="Common\SubscriberInformation.cs" />
     <Compile Include="Eligibility\EligibilityBenefitAdditionalInformation.cs" />
     <Compile Include="Eligibility\EligibilityBenefitInformation.cs" />
     <Compile Include="Eligibility\EligibilityBenefitDocument.cs" />
@@ -123,7 +129,9 @@
     <EmbeddedResource Include="Eligibility\Services\Xsl\BenefitResponse-To-Html.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Claims\Services\Xsl\X12-837-To-ClaimDocument.xslt" />
+    <EmbeddedResource Include="Claims\Services\Xsl\X12-837-To-ClaimDocument.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Claims\Services\Xsl\FormDocument-To-FoXml.xslt" />
