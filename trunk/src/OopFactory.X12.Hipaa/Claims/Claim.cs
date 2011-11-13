@@ -30,6 +30,16 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public ClaimTypeEnum Type { get; set; }
         [XmlAttribute]
+        public string RelatedCauseCode1 { get; set; }
+        [XmlAttribute]
+        public string RelatedCauseCode2 { get; set; }
+        [XmlAttribute]
+        public string RelatedCauseCode3 { get; set; }
+        [XmlAttribute]
+        public string AutoAccidentState { get; set; }
+        [XmlAttribute]
+        public string PatientSignatureSourceCode { get; set; }
+        [XmlAttribute]
         public string TransactionCode { get; set; }
         [XmlAttribute]
         public string ClaimNumber { get; set; }
@@ -41,7 +51,9 @@ namespace OopFactory.X12.Hipaa.Claims
         public string ProviderSignatureOnFile { get; set; }
         [XmlAttribute]
         public string ProviderAcceptAssignmentCode { get; set; }
-        
+        [XmlAttribute]
+        public string PriorAuthorizationNumber { get; set; }
+
         [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
         
@@ -51,6 +63,7 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
 
+
         public ServiceLocationInformation ServiceLocationInfo { get; set; }
 
         public Entity Submitter { get; set; }
@@ -59,6 +72,7 @@ namespace OopFactory.X12.Hipaa.Claims
         public ClaimMember Subscriber { get; set; }
         public Entity Payer { get; set; }
         public ClaimMember Patient { get; set; }
+        public OtherSubscriberInformation OtherSubscriberInformation { get; set; }
 
         #region Institional Claim Properties
 
@@ -82,6 +96,9 @@ namespace OopFactory.X12.Hipaa.Claims
         /// Box 17 of the UB04
         /// </summary>
         public Lookup PatientStatus { get; set; }
+
+        // Used by CMS-1500
+        public SubscriberInformation SubscriberInformation { get; set; }
 
         [XmlElement(ElementName = "Condition")]
         public List<Lookup> Conditions { get; set; }
