@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_810\2011110815164104.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_834\_5010\Dhcs_Example2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_834\_5010\Dhcs_Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch2.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837I\_4010\FromSwreed\Batch3.txt" />

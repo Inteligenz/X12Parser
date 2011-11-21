@@ -25,6 +25,7 @@ namespace OopFactory.X12.Hipaa.Claims
             if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
             if (Providers == null) Providers = new List<Provider>();
             if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
+            if (OtherSubscriberInformation == null) OtherSubscriberInformation = new OtherSubscriberInformation();
         }
 
         [XmlAttribute]

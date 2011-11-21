@@ -17,16 +17,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             _formImagePath = formImagePath;
         }
 
-        /// <summary>
-        /// Formats the EntityName in a format suitable for the CMS_1500 form
-        /// </summary>
-        /// <param name="entityName"></param>
-        /// <returns></returns>
-        private String formatFullName(EntityName entityName)
-        {
-            return String.Format("{0}, {1} {2}", entityName.LastName, entityName.FirstName, entityName.MiddleName);
-        }
-
         private FormDate formatFormDate(DateTime? dateTime)
         {
             return new FormDate
@@ -99,7 +89,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field02_PatientsName = "";
             if (patient.Name != null)
             {
-                hcfa.Field02_PatientsName = formatFullName(patient.Name);
+                hcfa.Field02_PatientsName = patient.Name.Formatted();
             }
 
             // patient birthdate
@@ -129,7 +119,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field04_InsuredsName = "";
             if (subscriberName != null)
             {
-                hcfa.Field04_InsuredsName = formatFullName(subscriberName);
+                hcfa.Field04_InsuredsName = subscriberName.Formatted();
             }
 
             // Patient Address
@@ -187,8 +177,8 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field08_PatientStatusIsPartTimeStudent = false;
             hcfa.Field08_PatientStatusIsSingle = false;
 
-            hcfa.Field09_OtherInsuredsName = formatFullName(claim.OtherSubscriberInformation.OtherSubscriber);
-            hcfa.Field09a_OtherInsuredsPolicyOrGroup = claim.OtherSubscriberInformation.OtherSubscriber.Identification.Id;
+            hcfa.Field09_OtherInsuredsName = claim.OtherSubscriberInformation.Name.Formatted();
+            hcfa.Field09a_OtherInsuredsPolicyOrGroup = claim.OtherSubscriberInformation.Name.Identification.Id;
             
             // No way to get below three fields using 837P
             hcfa.Field09b_OtherInsuredIsFemale = false;
@@ -251,13 +241,16 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             
             var referringProvider = claim.Providers.FirstOrDefault(pr => pr.Name.Type.Identifier == "DN" && pr.Name.Identification.Qualifier == "XX");
-            hcfa.Field17_ReferringProviderOrOtherSource_Name = formatFullName(referringProvider.Name);
+            if (referringProvider != null)
+            {
+                hcfa.Field17_ReferringProviderOrOtherSource_Name = referringProvider.Name.Formatted();
 
-            // We don't support anything not NPI. It's 2011!
-            hcfa.Field17a_OtherID_Number = string.Empty;
-            hcfa.Field17a_OtherID_Qualifier = string.Empty;
+                // We don't support anything not NPI. It's 2011!
+                hcfa.Field17a_OtherID_Number = string.Empty;
+                hcfa.Field17a_OtherID_Qualifier = string.Empty;
 
-            hcfa.Field17b_NationalProviderIdentifier = referringProvider.Npi;
+                hcfa.Field17b_NationalProviderIdentifier = referringProvider.Npi;
+            }
 
             // Admission date and hour
             hcfa.Field18_HospitalizationDateFrom = new FormDate();
@@ -567,22 +560,31 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 59, 29, 24, "", TextAlignEnum.center); // NO way to get insured data from 837P
 
                     // LINE 12
-                    AddBlock(page, 5, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.MM);
-                    AddBlock(page, 8, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.DD);
-                    AddBlock(page, 11, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.YY);
+                    if (hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy != null)
+                    {
+                        AddBlock(page, 5, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.MM);
+                        AddBlock(page, 8, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.DD);
+                        AddBlock(page, 11, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.YY);
+                    }
 
                     // Field 15 not used by 837P
                     AddBlock(page, 40, 31, 3, ""); //MM
                     AddBlock(page, 43, 31, 3, ""); //DD
                     AddBlock(page, 46, 31, 3, ""); //YY
 
-                    AddBlock(page, 57, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.MM);
-                    AddBlock(page, 60, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.DD);
-                    AddBlock(page, 63, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.YY);
+                    if (hcfa.Field16_DatePatientUnableToWork_Start != null)
+                    {
+                        AddBlock(page, 57, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.MM);
+                        AddBlock(page, 60, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.DD);
+                        AddBlock(page, 63, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.YY);
+                    }
 
-                    AddBlock(page, 71, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.MM);
-                    AddBlock(page, 74, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.DD);
-                    AddBlock(page, 77, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.YY);
+                    if (hcfa.Field16_DatePatientUnableToWork_End != null)
+                    {
+                        AddBlock(page, 71, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.MM);
+                        AddBlock(page, 74, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.DD);
+                        AddBlock(page, 77, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.YY);
+                    }
 
                     // LINE 13
                     AddBlock(page, 4, 33, 26, hcfa.Field17_ReferringProviderOrOtherSource_Name);
