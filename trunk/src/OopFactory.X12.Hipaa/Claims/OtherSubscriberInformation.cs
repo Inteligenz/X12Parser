@@ -9,7 +9,13 @@ namespace OopFactory.X12.Hipaa.Claims
 {
     public class OtherSubscriberInformation
     {
-        public EntityName OtherSubscriber { get; set; }
+        public OtherSubscriberInformation()
+        {
+            if (Name == null) Name = new EntityName();
+            if (OtherPayer == null) OtherPayer = new EntityName();
+        }
+
+        public EntityName Name { get; set; }
         
         public EntityName OtherPayer { get; set; }
     }

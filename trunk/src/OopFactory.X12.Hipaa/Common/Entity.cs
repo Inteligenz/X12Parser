@@ -10,6 +10,7 @@ namespace OopFactory.X12.Hipaa.Common
     {
         public Entity()
         {
+            if (Name == null) Name = new EntityName();
             if (Identifications == null) Identifications = new List<Identification>();
             if (Contacts == null) Contacts = new List<Contact>();
         }

@@ -26,11 +26,12 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             // send the x12 stream in to obtain a claim object
              var document = service.Transform837ToClaimDocument(stream);
              var hcfaclaim = service.TransformClaimToHcfa1500(document.Claims.First());
-            Assert.AreEqual("SMITH, JANE", hcfaclaim.Field02_PatientsName);
+            Assert.AreEqual("SMITH, TED", hcfaclaim.Field02_PatientsName);
             Assert.IsFalse(hcfaclaim.Field01_TypeOfCoverageIsMedicare);
             Assert.IsFalse(hcfaclaim.Field01_TypeOfCoverageIsMedicaid);
             //Assert.AreEqual("1943-05-01T00:00:00", hcfaclaim.Field03_PatientsDateOfBirth);
-            Assert.IsTrue(hcfaclaim.Field03_PatientsSexFemale);
+            Assert.IsFalse(hcfaclaim.Field03_PatientsSexFemale);
+            Assert.IsTrue(hcfaclaim.Field03_PatientsSexMale);
             Assert.AreEqual("99213", hcfaclaim.Field24_ServiceLines.First().ProcedureCode);
             Assert.AreEqual("87070", hcfaclaim.Field24_ServiceLines[1].ProcedureCode);
             Assert.AreEqual("99214", hcfaclaim.Field24_ServiceLines[2].ProcedureCode);
@@ -53,9 +54,9 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(
-                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
-                new InstitutionalClaimToUB04ClaimFormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\UB04_Red.gif"),
-                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\OopFactory\X12\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif")
+                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
+                new InstitutionalClaimToUB04ClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\UB04_Red.gif"),
+                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif")
                 );
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);

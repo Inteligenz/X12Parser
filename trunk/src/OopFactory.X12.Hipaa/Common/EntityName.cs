@@ -24,6 +24,10 @@ namespace OopFactory.X12.Hipaa.Common
 
     public class EntityName
     {
+        public EntityName()
+        {
+            if (Identification == null) Identification = new Identification();
+        }
         public EntityType Type { get; set; }
 
         [XmlAttribute]
@@ -39,10 +43,10 @@ namespace OopFactory.X12.Hipaa.Common
         public string MiddleName { get; set; }
 
         public Identification Identification { get; set; }
-
-        public override string ToString()
+        
+        public string Formatted()
         {
-            if (this.Type.Qualifier == EntityNameQualifierEnum.NonPerson)
+            if (Type == null || Type.Qualifier == EntityNameQualifierEnum.NonPerson)
                 return LastName;
             else
             {
@@ -65,8 +69,13 @@ namespace OopFactory.X12.Hipaa.Common
                         name.AppendFormat(" {0}", MiddleName);
                 }
                 
-                return name.ToString();
+                return name.ToString().TrimEnd();
             }
+        }
+
+        public override string ToString()
+        {
+            return Formatted();
         }
     }
 }
