@@ -69,6 +69,9 @@
       <ResourcePath>INS._271._4010.Example3_CMS_HETS.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <ResourcePath>INS._271._4010.From_tcplex.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>INS._271._4010.FromMunawarAbad.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
@@ -84,6 +87,51 @@
   <TransactionSet Id="276">
     <EdiFile>
       <ResourcePath>INS._276._5010.Example1_IG.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="278">
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_1_1_Request.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_1_2_Response.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_2_1_Request.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_2_2_Response.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_3_1_Request.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._278._5010.Example_3_3_2_Response.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="322">
+    <EdiFile>
+      <ResourcePath>TOS._322.322_Larger.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>TOS._322.322Status.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="417">
+    <EdiFile>
+      <ResourcePath>TRS._417.417BufferCar.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>TRS._417.417CarWaybill.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>TRS._417.417ReturnCar.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>TRS._417.417SingleCar.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>TRS._417.417TrainSummary.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="810">

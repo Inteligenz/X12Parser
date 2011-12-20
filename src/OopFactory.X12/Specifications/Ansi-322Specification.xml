@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="322">
+  <Segment SegmentId="Q5"/>
+  <Loop LoopId="N7">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="M7"/>
+    <Segment SegmentId="W2"/>
+    <Segment SegmentId="NA"/>
+    <Loop LoopId="R4">
+      <Name>Port or Terminal</Name>
+      <StartingSegment SegmentId="R4"/>
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+    </Loop>
+    <Segment SegmentId="N9"/>
+  </Loop>
+</TransactionSpecification>

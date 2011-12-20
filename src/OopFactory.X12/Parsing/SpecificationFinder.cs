@@ -30,10 +30,16 @@ namespace OopFactory.X12.Parsing
                     if (versionCode.Contains("5010"))
                         return GetSpecification("271-5010"); 
                     else
-                        return GetSpecification("270-4010");
+                        return GetSpecification("271-4010");
                 case "276":
                 case "277":
                     return GetSpecification("276-5010"); 
+                case "278":
+                    return GetSpecification("278-5010");
+                case "322":
+                    return GetSpecification("322");
+                case "417":
+                    return GetSpecification("417");
                 case "810":
                     return GetSpecification("810-4010"); 
                 case "820":
