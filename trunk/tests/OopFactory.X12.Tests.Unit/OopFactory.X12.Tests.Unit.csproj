@@ -76,6 +76,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322Status.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322_Larger.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417BufferCar.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417CarWaybill.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417ReturnCar.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417SingleCar.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417TrainSummary.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_3_1_Request.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_3_2_Response.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_1_1_Request.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_1_2_Response.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_2_1_Request.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_278\_5010\Example_3_2_2_Response.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_271\_4010\From_tcplex.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_810\2011110815164104.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_834\_5010\Dhcs_Example2.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_834\_5010\Dhcs_Example1.txt" />
@@ -176,6 +190,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\Example2.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Parsing\_SampleEdiFiles\NewFolder1\" />
     <Folder Include="Rendering\" />
   </ItemGroup>
   <ItemGroup>

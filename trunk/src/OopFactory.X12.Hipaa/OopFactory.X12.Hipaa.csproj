@@ -12,14 +12,10 @@
     <AssemblyName>OopFactory.X12.Hipaa</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>%24/x12parser/trunk/src/OopFactory.X12.Hipaa</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>https://tfs.codeplex.com/tfs/tfs11</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +67,7 @@
     <Compile Include="Claims\Forms\Institutional\UB04Provider.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Value.cs" />
     <Compile Include="Claims\InstitutionalProcedure.cs" />
+    <Compile Include="Claims\OtherSubscriberInformation.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
     <Compile Include="Claims\Services\ClaimTransformationService.cs" />
@@ -85,7 +82,6 @@
     <Compile Include="Claims\Services\LocalExtensions.cs" />
     <Compile Include="Claims\Services\ProfessionalClaimToHcfa1500FormTransformation.cs" />
     <Compile Include="Claims\Services\Ub04ClaimTransformationArgs.cs" />
-    <Compile Include="Claims\OtherSubscriberInformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="417">
+  <Segment SegmentId="ZC1"/>
+  <Segment SegmentId="BX"/>
+  <Segment SegmentId="BNX"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="CM"/>
+  <Segment SegmentId="DTM"/>
+  <Loop LoopId="N7">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7"/>
+    <Segment SegmentId="EM"/>
+    <Loop LoopId="VC">
+      <Name>Motor Vehicle Control</Name>
+      <StartingSegment SegmentId="VC"/>
+      <Loop LoopId="N1">
+        <Name>Party</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="H3"/>
+      </Loop>
+    </Loop>
+    <Segment SegmentId="IC"/>
+    <Segment SegmentId="IM"/>
+    <Segment SegmentId="M12"/>
+    <Segment SegmentId="G4"/>
+    <Segment SegmentId="M7"/>
+    <Segment SegmentId="N5"/>
+    <Loop LoopId="E1">
+      <Name>Empty Care Disposition - Pended Destination Consignment</Name>
+      <StartingSegment SegmentId="E1"/>
+      <Segment SegmentId="E4"/>
+      <Segment SegmentId="E5"/>
+      <Segment SegmentId="PI"/>
+    </Loop>
+    <Segment SegmentId="GA"/>
+    <Loop LoopId="REF">
+      <Name>Reference Information</Name>
+      <StartingSegment SegmentId="REF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="N10"/>
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Party</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Segment SegmentId="IMA"/>
+  </Loop>
+  <Segment SegmentId="N8"/>
+  <Segment SegmentId="N8A"/>
+  <Segment SegmentId="F9"/>
+  <Segment SegmentId="D9"/>
+  <Loop LoopId="N1">
+    <Name>Party</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="BL"/>
+  </Loop>
+  <Segment SegmentId="R2"/>
+  <Segment SegmentId="R9"/>
+  <Loop LoopId="E1">
+    <Name>Empty Care Disposition - Pended Destination Consignee</Name>
+    <StartingSegment SegmentId="E1"/>
+    <Segment SegmentId="E4"/>
+    <Segment SegmentId="E5"/>
+    <Segment SegmentId="PI"/>
+  </Loop>
+  <Segment SegmentId="H3"/>
+  <Segment SegmentId="PS"/>
+  <Loop LoopId="LX">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="L5"/>
+    <Loop LoopId="L0">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0"/>
+      <Segment SegmentId="MEA"/>
+      <Loop LoopId="PI">
+        <Name>Price Authority Identification</Name>
+        <StartingSegment SegmentId="PI"/>
+        <Segment SegmentId="CD"/>
+      </Loop>
+    </Loop>
+    <Segment SegmentId="X1"/>
+  </Loop>
+  <Loop LoopId="T1">
+    <Name>Transit Inbound Origin</Name>
+    <StartingSegment SegmentId="T1"/>
+    <Segment SegmentId="T2"/>
+    <Segment SegmentId="T3"/>
+    <Segment SegmentId="T6"/>
+    <Segment SegmentId="T8"/>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS"/>
+    <Loop LoopId="LH1">
+      <Name>Hazardous Identification Information</Name>
+      <StartingSegment SegmentId="LH1"/>
+      <Segment SegmentId="LH2"/>
+      <Segment SegmentId="LH3"/>
+      <Segment SegmentId="LFH"/>
+      <Segment SegmentId="LEP"/>
+      <Segment SegmentId="LH4"/>
+      <Segment SegmentId="LHT"/>
+      <Segment SegmentId="LHR"/>
+      <Segment SegmentId="PER"/>
+      <Loop LoopId="N1">
+        <Name>Party</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+    </Loop>
+    <Segment SegmentId="LE"/>
+  </Loop>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="LH2"/>
+  <Segment SegmentId="LHR"/>
+  <Segment SegmentId="XH"/>
+  <Segment SegmentId="X7"/>
+</TransactionSpecification>
