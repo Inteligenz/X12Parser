@@ -15,10 +15,7 @@
     <Loop LoopId="2200A"> <!-- This might only exist in 005010X214. -->
       <Name>Information Receiver Trace</Name>
       <StartingSegment SegmentId="TRN"/>
-      <Segment SegmentId="STC"/>
       <Segment SegmentId="DTP"/>
-      <Segment SegmentId="QTY"/>
-      <Segment SegmentId="AMT"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000B" LevelCode="21">
@@ -109,25 +106,22 @@
       </Loop>
     </Loop>
   </HierarchicalLoop>
-  <HierarchicalLoop LoopId="2000F" LevelCode="PT">
+  <!-- This loop only appears in 5010X214 Claim Acknowledgment -->
+  <HierarchicalLoop LoopId="2000D" LevelCode="PT">
     <Name>PATIENT LEVEL</Name>
-    <Segment SegmentId="DMG"/>
-    <Loop LoopId="2100E">
-      <Name>Dependent Name</Name>
+    <Loop LoopId="2100D">
+      <Name>Patient Name</Name>
       <StartingSegment SegmentId="NM1">
-        <EntityIdentifier Code="QC"/>
       </StartingSegment>
     </Loop>
-    <Loop LoopId="2200E">
+    <Loop LoopId="2200D">
       <Name>Claim Status Tracking Number</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
       <Segment SegmentId="REF"/>
-      <Segment SegmentId="AMT"/>
       <Segment SegmentId="DTP"/>
-      <!-- This might only exist in 005010X214. -->
       <Segment SegmentId="QTY"/>
-      <Loop LoopId="2210E">
+      <Loop LoopId="2220D">
         <Name>Service Line Information</Name>
         <StartingSegment SegmentId="SVC"/>
         <Segment SegmentId="STC"/>
