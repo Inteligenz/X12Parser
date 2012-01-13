@@ -76,6 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_276\_5010\277_Deidentified_from_nth.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322Status.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322_Larger.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TRS\_417\417BufferCar.txt" />
