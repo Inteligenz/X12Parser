@@ -12,7 +12,7 @@
         <EntityIdentifier Code="XV"/>
       </StartingSegment>
     </Loop>
-    <Loop LoopId="2100B"> <!-- This doesn't really exist, adding for user who is getting bad data. -->
+    <Loop LoopId="2200A"> <!-- This doesn't really exist, adding for user who is getting bad data. -->
       <Name>Information Receiver Trace</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
