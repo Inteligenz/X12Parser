@@ -88,6 +88,9 @@
     <EdiFile>
       <ResourcePath>INS._276._5010.Example1_IG.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._276._5010.277_Deidentified_from_nth.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="278">
     <EdiFile>

@@ -12,11 +12,13 @@
         <EntityIdentifier Code="XV"/>
       </StartingSegment>
     </Loop>
-    <Loop LoopId="2200A"> <!-- This doesn't really exist, adding for user who is getting bad data. -->
+    <Loop LoopId="2200A"> <!-- This might only exist in 005010X214. -->
       <Name>Information Receiver Trace</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
       <Segment SegmentId="DTP"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="AMT"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000B" LevelCode="21">
@@ -31,6 +33,9 @@
       <Name>Information Receiver Trace</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
+      <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="QTY"/> 
+      <Segment SegmentId="AMT"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000C" LevelCode="19">
@@ -45,6 +50,9 @@
       <Name>Provider of Service Trace Identifier</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
+      <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="AMT"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000D" LevelCode="22">
@@ -63,6 +71,8 @@
       <Segment SegmentId="REF"/>
       <Segment SegmentId="AMT"/>
       <Segment SegmentId="DTP"/>
+      <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="QTY"/>
       <Loop LoopId="2210D">
         <Name>Service Level Information</Name>
         <StartingSegment SegmentId="SVC"/>
@@ -88,6 +98,35 @@
       <Segment SegmentId="REF"/>
       <Segment SegmentId="AMT"/>
       <Segment SegmentId="DTP"/>
+      <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="QTY"/>
+      <Loop LoopId="2210E">
+        <Name>Service Line Information</Name>
+        <StartingSegment SegmentId="SVC"/>
+        <Segment SegmentId="STC"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="2000F" LevelCode="PT">
+    <Name>PATIENT LEVEL</Name>
+    <Segment SegmentId="DMG"/>
+    <Loop LoopId="2100E">
+      <Name>Dependent Name</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="QC"/>
+      </StartingSegment>
+    </Loop>
+    <Loop LoopId="2200E">
+      <Name>Claim Status Tracking Number</Name>
+      <StartingSegment SegmentId="TRN"/>
+      <Segment SegmentId="STC"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTP"/>
+      <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="QTY"/>
       <Loop LoopId="2210E">
         <Name>Service Line Information</Name>
         <StartingSegment SegmentId="SVC"/>
