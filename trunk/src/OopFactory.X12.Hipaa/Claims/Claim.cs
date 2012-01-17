@@ -45,6 +45,8 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string ClaimNumber { get; set; }
         [XmlAttribute]
+        public string BillTypeCode { get; set; }
+        [XmlAttribute]
         public string PatientControlNumber { get; set; }
         [XmlAttribute]
         public decimal TotalClaimChargeAmount { get; set; }
@@ -97,6 +99,11 @@ namespace OopFactory.X12.Hipaa.Claims
         /// Box 17 of the UB04
         /// </summary>
         public Lookup PatientStatus { get; set; }
+
+        /// <summary>
+        ///  Box 71 of the UB04
+        /// </summary>
+        public Lookup DiagnosisRelatedGroup { get; set; }
 
         // Used by CMS-1500
         public SubscriberInformation SubscriberInformation { get; set; }
@@ -232,6 +239,22 @@ namespace OopFactory.X12.Hipaa.Claims
                     return null;
             }
         }
+
+        /// <summary>
+        /// Box 16 of the UB04
+        /// </summary>
+        public DateTime? DischargeTime
+        {
+            get
+            {
+                var date = Dates.FirstOrDefault(d => d.Qualifier == "096");
+                if (date != null)
+                    return date.Date;
+                else
+                    return null;
+            }
+        }
+
         public Provider ServiceLocation
         {
             get

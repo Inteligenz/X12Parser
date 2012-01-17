@@ -39,6 +39,9 @@
       <xsl:attribute name="ClaimNumber">
         <xsl:value-of select="REF[REF01='D9']/REF02"/>
       </xsl:attribute>
+      <xsl:attribute name="BillTypeCode">
+        <xsl:value-of select="concat(CLM/CLM05/CLM0501,CLM/CLM05/CLM0503)"/>
+      </xsl:attribute>
       <xsl:attribute name="PatientControlNumber">
         <xsl:value-of select="CLM/CLM01"/>
       </xsl:attribute>
@@ -258,6 +261,14 @@
     </xsl:for-each>
   </xsl:template>
 
+  <xsl:template match="HI[HI01/HI0101='DR']">
+      <DiagnosisRelatedGroup>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="HI01/HI0102"/>
+        </xsl:attribute>
+      </DiagnosisRelatedGroup>
+  </xsl:template>
+  
   <xsl:template match="HI[HI01/HI0101='ABK' or HI01/HI0101='BK' or HI01/HI0101='ABJ' or HI01/HI0101='BJ' or HI01/HI0101='APR' or HI01/HI0101='PR' or HI01/HI0101='ABN' or HI01/HI0101='BN' or HI01/HI0101='ABF' or HI01/HI0101='BF']">
     <xsl:for-each select="child::*">
       <xsl:variable name="qualifier" select="*[1]"/>
@@ -827,7 +838,7 @@
                 <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2),'T',substring($DTP/DTP03,9,2),':',substring($DTP/DTP03,11,2),':00')"/>
               </xsl:when>
               <xsl:when test="$DTP/DTP02='TM'">
-                <xsl:value-of select="concat('0001-01-01T', substring($DTP/DTP03,1,2), substring($DTP/DTP03,3,2))"/>
+                <xsl:value-of select="concat('0001-01-01T', substring($DTP/DTP03,1,2),':',substring($DTP/DTP03,3,2),':00')"/>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
