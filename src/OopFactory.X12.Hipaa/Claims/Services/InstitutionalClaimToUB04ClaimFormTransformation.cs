@@ -61,7 +61,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             ub.Field03a_PatientControlNumber = claim.PatientControlNumber;
             ub.Field03b_MedicalRecordNumber = claim.MedicalRecordNumber;
-            ub.Field04_TypeOfBill = "???";
+            ub.Field04_TypeOfBill = claim.BillTypeCode;
             ub.Field05_FederalTaxId = claim.PayToProvider.TaxId;
             ub.Field06_StatementCoversPeriod.FromDate = String.Format("{0:MMddyy}", claim.StatementFromDate);
             ub.Field06_StatementCoversPeriod.ThroughDate = String.Format("{0:MMddyy}", claim.StatementToDate);
@@ -80,11 +80,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             ub.Field10_Birthdate = String.Format("{0:MMddyyyy}", patient.DateOfBirth);
             ub.Field11_Sex = patient.Gender.ToString().Substring(0, 1);
             ub.Field12_AdmissionDate = String.Format("{0:MMddyy}", claim.AdmissionDate);
-            ub.Field13_AdmissionHour = "??";
+            ub.Field13_AdmissionHour = String.Format("{0:HH}", claim.AdmissionDate);
             ub.Field14_AdmissionType = claim.AdmissionType.Code;
             ub.Field15_AdmissionSource = claim.AdmissionSource.Code;
-            ub.Field16_DischargeHour = "??";
-            ub.Field17_DischargeStatus = "??";
+            ub.Field16_DischargeHour = String.Format("{0:HH}", claim.DischargeTime);
+            ub.Field17_DischargeStatus = claim.PatientStatus.Code;
             if (claim.Conditions.Count > 0) ub.Field18_ConditionCode01 = claim.Conditions[0].Code;
             if (claim.Conditions.Count > 1) ub.Field19_ConditionCode02 = claim.Conditions[1].Code;
             if (claim.Conditions.Count > 2) ub.Field20_ConditionCode03 = claim.Conditions[2].Code;
@@ -97,7 +97,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (claim.Conditions.Count > 9) ub.Field27_ConditionCode10 = claim.Conditions[9].Code;
             if (claim.Conditions.Count > 10) ub.Field28_ConditionCode11 = claim.Conditions[1].Code;
 
-            ub.Field29_AccidentState = "??";
+            ub.Field29_AccidentState = ""; // field ignored by CMS
 
             if (claim.Occurrences.Count > 0) ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
             if (claim.Occurrences.Count > 1) ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
@@ -160,10 +160,13 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             }
             ub.Field47_Line23_TotalCharges = claim.TotalClaimChargeAmount;
             ub.Field48_Line23_NonCoveredCharges = claim.ServiceLines.Sum(sl => sl.NonCoveredChargeAmount);
-            ub.Field56_NationalProviderIdentifier = "??????????";
-            ub.Field57_OtherProviderIdA = "??????????";
-            ub.Field57_OtherProviderIdB = "??????????";
-            ub.Field57_OtherProviderIdC = "??????????";
+            ub.Field56_NationalProviderIdentifier = claim.BillingProvider.Npi;
+            if (claim.BillingProvider.Identifications.Count >= 1)
+                ub.Field57_OtherProviderIdA = claim.BillingProvider.Identifications[0].Id;
+            if (claim.BillingProvider.Identifications.Count >= 2)
+                ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
+            if (claim.BillingProvider.Identifications.Count >= 3)
+                ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
 
             if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
                 ub.Field66_Version = "9";
@@ -199,7 +202,8 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (patientReasonDiagnoses.Count > 1) ub.Field70b_PatientReasonDiagnosisCode = patientReasonDiagnoses[1].Code;
             if (patientReasonDiagnoses.Count > 2) ub.Field70c_PatientReasonDiagnosisCode = patientReasonDiagnoses[2].Code;
 
-            ub.Field71_PPSCode = "???";
+            if (claim.DiagnosisRelatedGroup != null)
+                ub.Field71_PPSCode = claim.DiagnosisRelatedGroup.Code;
 
             var causes = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.ExternalCauseOfInjury).ToList();
             if (causes.Count > 0) ub.Field72a_ExternalCauseOfInjury.CopyFrom(causes[0]);
