@@ -24,6 +24,11 @@
   <Loop LoopId="PO1">
     <Name>Baseline Item Data</Name>
     <StartingSegment SegmentId="PO1"/>
+    <Loop LoopId="N9">
+      <Name></Name>
+      <StartingSegment SegmentId="N9"/>
+      <Segment SegmentId="MSG"/>
+    </Loop>
     <Loop LoopId="PID">
       <Name>Product/Item Description</Name>
       <StartingSegment SegmentId="PID"/>
