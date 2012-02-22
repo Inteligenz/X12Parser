@@ -233,6 +233,10 @@
       <SourceUrl>Provided by user nth</SourceUrl>
       <ResourcePath>INS._835._4010.FromNth.835_DeIdent_02.dat</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl>Provided by user nth</SourceUrl>
+      <ResourcePath>INS._835._5010.FromNth.835_WithMultipleInterchanges.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="837">
     <EdiFile>
@@ -359,6 +363,9 @@
     </EdiFile>
     <EdiFile>
       <ResourcePath>INS._837P._5010.Example3_COB.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.MedicaidExample.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="850">

@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Parsing\_SampleEdiFiles\INS\_835\_5010\ExampleFromNth.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_5010\FromNth\835_WithMultipleInterchanges.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_276\_5010\277_Deidentified_from_nth.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322Status.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\TOS\_322\322_Larger.txt" />
