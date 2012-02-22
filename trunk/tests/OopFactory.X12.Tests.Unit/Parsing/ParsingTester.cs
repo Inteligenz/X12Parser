@@ -121,11 +121,13 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
-            Interchange interchange = new X12Parser().Parse(stream);
-            string x12 = interchange.SerializeToX12(true);
+            List<Interchange> interchanges = new X12Parser().ParseMultiple(stream);
+            StringBuilder x12 = new StringBuilder();
+            foreach (var interchange in interchanges)
+                x12.AppendLine(interchange.SerializeToX12(true));
 
-            Assert.AreEqual(orignalX12, x12);
-            Trace.Write(x12);
+            Assert.AreEqual(orignalX12, x12.ToString().Trim());
+            Trace.Write(x12.ToString());
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]

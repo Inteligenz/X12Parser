@@ -57,9 +57,16 @@ namespace OopFactory.X12.Parsing
                 return Parse(mstream);
             }
         }
-                       
+
         public Interchange Parse(Stream stream)
         {
+            return ParseMultiple(stream).FirstOrDefault();
+        }
+                       
+        public List<Interchange> ParseMultiple(Stream stream)
+        {
+            var envelopes = new List<Interchange>();
+
             using (StreamReader reader = new StreamReader(stream))
             {
                 char[] header = new char[106];
@@ -69,10 +76,12 @@ namespace OopFactory.X12.Parsing
                 X12DelimiterSet delimiters = new X12DelimiterSet(header);
 
                 Interchange envelop = new Interchange(_specFinder, new string(header));
+                envelopes.Add(envelop);
                 Container currentContainer = envelop;
                 FunctionGroup fg = null;
                 Transaction tr = null;
                 Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string, HierarchicalLoop>();
+
                 string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
                 string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
                 int segmentIndex = 1;
@@ -80,6 +89,19 @@ namespace OopFactory.X12.Parsing
                 {
                     switch (segmentId)
                     {
+                        case "ISA":
+                            envelop = new Interchange(_specFinder, segmentString + delimiters.SegmentTerminator);
+                            envelopes.Add(envelop);
+                            currentContainer = envelop;
+                            fg = null;
+                            tr = null;
+                            hloops = new Dictionary<string, HierarchicalLoop>();
+                            break;
+                        case "IEA":
+                            if (envelop == null)
+                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
+                            envelop.SetTerminatingTrailerSegment(segmentString);
+                            break;
                         case "GS":
                             if (envelop == null)
                                 throw new InvalidOperationException(String.Format("Segment '{0}' cannot occur before and ISA segment.", segmentString));
@@ -123,11 +145,6 @@ namespace OopFactory.X12.Parsing
                             if (hloops.ContainsKey(id))
                                 throw new InvalidOperationException(String.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", segmentString, tr.ControlNumber, id));
                             hloops.Add(id, (HierarchicalLoop)currentContainer);
-                            break;
-                        case "IEA":
-                            if (envelop == null)
-                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
-                            envelop.SetTerminatingTrailerSegment(segmentString);
                             break;
                         case "TA1": // Technical acknowledgement
                             if (envelop == null)
@@ -178,7 +195,7 @@ namespace OopFactory.X12.Parsing
                     segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
                     segmentIndex++;
                 }
-                return envelop;
+                return envelopes;
             }
         }
 
