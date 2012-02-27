@@ -54,9 +54,9 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(
-                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif"),
-                new InstitutionalClaimToUB04ClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\UB04_Red.gif"),
-                new ProfessionalClaimToHcfa1500FormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\HCFA1500_Red.gif")
+				new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"),
+				new InstitutionalClaimToUB04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif"),
+				new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif")
                 );
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
@@ -78,7 +78,8 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
 
-            var transformation = new InstitutionalClaimToUB04ClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
+			
+            var transformation = new InstitutionalClaimToUB04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
             transformation.TransformCompleted += new InstitutionalClaimToUB04ClaimFormTransformation.TransformCompletedHandler(transformation_TransformCompleted);
                 
             // new up a ClaimTransformationService object
@@ -356,7 +357,7 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
 
-            var transformation = new InstitutionalClaimToUB04ClaimFormTransformation(@"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
+			var transformation = new InstitutionalClaimToUB04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(transformation, transformation, transformation);
 

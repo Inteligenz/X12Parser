@@ -150,12 +150,12 @@ namespace OopFactory.X12.Parsing.Model
             get
             {
                 StringBuilder sb = new StringBuilder(SegmentId);
-                int iLastContent = _dataElements.Count;
+                int iLastContent = _dataElements.Count -1;
                 while (iLastContent >= 0)
                 {
-                    iLastContent--;
                     if (!string.IsNullOrWhiteSpace(_dataElements[iLastContent]))
                         break;
+					iLastContent--;
                 }
                 for (int i = 0; i <= iLastContent; i++)
                 {

@@ -53,6 +53,46 @@ namespace OopFactory.X12.Tests.Unit.Creation
 		}
 
 		[TestMethod]
+		public void TestEmptyElement()
+		{
+			string expectedSegmentString = "BEG*05*SA*S41000439";
+			DateTime purcaseOrderDate = new DateTime(2010, 8, 17, 08, 50, 0);
+			Interchange interchange = new Interchange(purcaseOrderDate, 245, true)
+			{
+				InterchangeSenderIdQualifier = "01",
+				InterchangeSenderId = "828513080",
+				InterchangeReceiverIdQualifier = "01",
+				InterchangeReceiverId = "001903202U",
+				InterchangeDate = purcaseOrderDate,
+			};
+
+			interchange.SetElement(14, "0"); //No Aknowlegement is 0
+
+			FunctionGroup group = interchange.AddFunctionGroup("PO", purcaseOrderDate, 1, "005010X222");
+			group.ApplicationSendersCode = "828513080";
+			group.ApplicationReceiversCode = "001903202U";
+			group.Date = purcaseOrderDate;
+			group.ControlNumber = 245;
+
+			Transaction transaction = group.AddTransaction("850", "0001");
+
+			string segmentString = string.Empty;
+
+			Segment bhtSegment = transaction.AddSegment("BEG");
+			segmentString = bhtSegment.SegmentString;  //test getting it prematurely
+			bhtSegment.SetElement(1, "05");
+			bhtSegment.SetElement(2, "SA");
+			bhtSegment.SetElement(3, "S41000439");
+			bhtSegment.SetElement(5, "");
+
+			segmentString = bhtSegment.SegmentString;
+
+			Assert.AreEqual(expectedSegmentString, segmentString);
+
+		}
+
+
+		[TestMethod]
 		public void CreatePurchaseOrderChangeNotice860()
 		{
 			DateTime purcaseOrderDate = new DateTime(2010, 8, 17, 08, 50, 0);
