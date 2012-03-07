@@ -99,6 +99,14 @@
     <Name>ORDER</Name>
     <Segment SegmentId="PRF" Usage="Required" Repeat="1"/>
     <Segment SegmentId="TD5" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="PID"/>
+    <Segment SegmentId="TD1"/>
+    <Loop LoopId="BY" Usage="Required" LoopRepeat="1">
+      <Name>Buying Party</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="BY"/>
+      </StartingSegment>
+    </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="TARE" Usage="Required" LevelCode="T">
     <Name>TARE</Name>
