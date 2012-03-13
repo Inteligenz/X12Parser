@@ -230,7 +230,16 @@ namespace OopFactory.X12.Parsing.Model
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {
-                writer.WriteAttributeString("segment-terminator", _delimiters.SegmentTerminator.ToString());
+                switch (_delimiters.SegmentTerminator)
+                {
+                    case '\x1D':
+                        string terminator = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(_delimiters.SegmentTerminator.ToString()));
+                        writer.WriteAttributeString("segment-terminator", terminator);
+                        break;
+                    default:
+                        writer.WriteAttributeString("segment-terminator", _delimiters.SegmentTerminator.ToString());
+                        break;
+                }
                 writer.WriteAttributeString("element-separator", _delimiters.ElementSeparator.ToString());
                 writer.WriteAttributeString("sub-element-separator", _delimiters.SubElementSeparator.ToString());
                 base.WriteXml(writer);

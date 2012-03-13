@@ -28,7 +28,14 @@
           <xsl:value-of select="$element-separator"/>
         </xsl:if>
       </xsl:for-each>
-      <xsl:value-of select="$segment-terminator"/>
+      <xsl:choose>
+        <xsl:when test="$segment-terminator='HQ=='">
+          <xsl:value-of select="'~'"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$segment-terminator"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:if>
   </xsl:template>
 
