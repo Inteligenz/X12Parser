@@ -54,6 +54,10 @@
       <SourceUrl></SourceUrl>
       <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>INS._270._5010.Example1_IG_0x1D.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="271">
     <EdiFile>

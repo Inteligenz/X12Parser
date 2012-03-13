@@ -135,21 +135,24 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         public void ParseAndTransformToX12()
         {
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);  // "INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt";
-            Trace.WriteLine(resourcePath);
-            Stream stream = GetEdi(resourcePath);
-            
-            var parser = new X12Parser();
-            Interchange interchange = parser.Parse(stream);
-            string originalX12 = interchange.SerializeToX12(true);
+            if (!resourcePath.Contains("_0x1D"))
+            {
+                Trace.WriteLine(resourcePath);
+                Stream stream = GetEdi(resourcePath);
 
-            string xml = interchange.Serialize();
-            string x12 = parser.TransformToX12(xml);
-            
-            Interchange newInterchange = parser.Parse(x12);
-            string newX12 = newInterchange.SerializeToX12(true);
+                var parser = new X12Parser();
+                Interchange interchange = parser.Parse(stream);
+                string originalX12 = interchange.SerializeToX12(true);
 
-            Assert.AreEqual(originalX12, newX12);
-            Trace.Write(x12);
+                string xml = interchange.Serialize();
+                string x12 = parser.TransformToX12(xml);
+
+                Interchange newInterchange = parser.Parse(x12);
+                string newX12 = newInterchange.SerializeToX12(true);
+
+                Assert.AreEqual(originalX12, newX12);
+                Trace.Write(x12);
+            }
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
@@ -167,6 +170,16 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
 #endif
+        }
+
+        [TestMethod, Ignore]
+        public void CreateTestFile()
+        {
+            string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
+            string edi = System.IO.File.ReadAllText(filename);
+
+            edi = edi.Replace('~','\x1D');
+            System.IO.File.WriteAllText(filename, edi);
         }
 
     }
