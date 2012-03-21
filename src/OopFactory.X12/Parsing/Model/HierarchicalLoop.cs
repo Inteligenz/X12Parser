@@ -16,7 +16,7 @@ namespace OopFactory.X12.Parsing.Model
         {
         }
 
-        internal HierarchicalLoopSpecification Specification { get; set; }
+        public HierarchicalLoopSpecification Specification { get; internal set; }
 
         internal override IList<LoopSpecification> AllowedChildLoops
         {
