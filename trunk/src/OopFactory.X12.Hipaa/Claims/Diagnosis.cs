@@ -88,6 +88,15 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string Code { get; set; }
 
+        public string FormattedCode()
+        {
+            if (string.IsNullOrWhiteSpace(Code) || Code.Length <= 3 || Code.Contains('.'))
+                return Code;
+            else
+                return String.Format("{0}.{1}", Code.Substring(0, 3), Code.Substring(3));
+
+        }
+
         [XmlAttribute]
         public string PoiIndicator { get; set; }
 
