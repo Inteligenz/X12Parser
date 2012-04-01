@@ -12,10 +12,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         public UB04Diagnosis CopyFrom(Diagnosis source)
         {
-            if (string.IsNullOrWhiteSpace(source.Code) || source.Code.Length <= 3)
-                Code = source.Code;
-            else
-                Code = String.Format("{0}.{1}", source.Code.Substring(0, 3), source.Code.Substring(3));
+            Code = source.FormattedCode();
             PresentOnAdmissionIndicator = source.PoiIndicator;
             return this;
         }

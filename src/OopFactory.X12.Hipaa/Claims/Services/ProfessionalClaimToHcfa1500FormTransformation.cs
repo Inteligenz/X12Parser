@@ -279,15 +279,18 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             hcfa.Field20_OutsideLabCharges = (Decimal)totalAmountSpent;
 
+            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
+            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
+
             // Diagnosis codes
-            if (claim.Diagnoses.Count >= 1)
-                hcfa.Field21_Diagnosis1 = claim.Diagnoses[0].Code;
-            if (claim.Diagnoses.Count >= 2)
-                hcfa.Field21_Diagnosis1 = claim.Diagnoses[1].Code;
-            if (claim.Diagnoses.Count >= 3)
-                hcfa.Field21_Diagnosis1 = claim.Diagnoses[2].Code;
-            if (claim.Diagnoses.Count >= 4)
-                hcfa.Field21_Diagnosis1 = claim.Diagnoses[3].Code;
+            if (principalDiagnosis != null)
+                hcfa.Field21_Diagnosis1 = principalDiagnosis.FormattedCode();
+            if (otherDiagnoses.Count >= 1)
+                hcfa.Field21_Diagnosis2 = otherDiagnoses[0].FormattedCode();
+            if (otherDiagnoses.Count >= 2)
+                hcfa.Field21_Diagnosis3 = otherDiagnoses[1].FormattedCode();
+            if (otherDiagnoses.Count >= 3)
+                hcfa.Field21_Diagnosis4 = otherDiagnoses[2].FormattedCode();
 
             
             hcfa.Field22_MedicaidSubmissionCode = string.Empty;
