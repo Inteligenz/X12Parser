@@ -25,7 +25,7 @@ namespace OopFactory.X12.Hipaa.Claims
             if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
             if (Providers == null) Providers = new List<Provider>();
             if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
-            if (OtherSubscriberInformation == null) OtherSubscriberInformation = new OtherSubscriberInformation();
+            if (OtherSubscriberInformations == null) OtherSubscriberInformations = new List<OtherSubscriberInformation>();
         }
 
         [XmlAttribute]
@@ -75,7 +75,9 @@ namespace OopFactory.X12.Hipaa.Claims
         public ClaimMember Subscriber { get; set; }
         public Entity Payer { get; set; }
         public ClaimMember Patient { get; set; }
-        public OtherSubscriberInformation OtherSubscriberInformation { get; set; }
+
+        [XmlElement(ElementName = "OtherSubscriberInformation")]
+        public List<OtherSubscriberInformation> OtherSubscriberInformations { get; set; }
 
         #region Institional Claim Properties
 

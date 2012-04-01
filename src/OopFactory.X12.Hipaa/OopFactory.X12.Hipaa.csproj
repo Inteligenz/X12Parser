@@ -52,7 +52,9 @@
     <Compile Include="Claims\BillingInformation.cs" />
     <Compile Include="Claims\ClaimDocument.cs" />
     <Compile Include="Claims\ClaimMember.cs" />
+    <Compile Include="Claims\ClaimsAdjustment.cs" />
     <Compile Include="Claims\Diagnosis.cs" />
+    <Compile Include="Claims\DrugIdentification.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
     <Compile Include="Claims\Forms\FormDocument.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Claims\Forms\Institutional\UB04Provider.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Value.cs" />
     <Compile Include="Claims\InstitutionalProcedure.cs" />
+    <Compile Include="Claims\LineAdjustmentInformation.cs" />
     <Compile Include="Claims\OtherSubscriberInformation.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
@@ -87,7 +90,9 @@
     <Compile Include="Common\CodedDateRange.cs" />
     <Compile Include="Common\Contact.cs" />
     <Compile Include="Common\CodeListEnum.cs" />
+    <Compile Include="Common\HealthCarePricing.cs" />
     <Compile Include="Common\MedicalProcedure.cs" />
+    <Compile Include="Common\Paperwork.cs" />
     <Compile Include="Common\QualifiedAmount.cs" />
     <Compile Include="Common\QualifiedDate.cs" />
     <Compile Include="Common\QualifiedDateRange.cs" />

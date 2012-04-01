@@ -25,8 +25,14 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         {
 
             var parser = new X12Parser();
-            var interchange = parser.Parse(stream);
-            return Transform837ToClaimDocument(interchange);
+            var interchanges = parser.ParseMultiple(stream);
+            ClaimDocument doc = new ClaimDocument();
+            foreach (var interchange in interchanges)
+            {
+                var thisDoc = Transform837ToClaimDocument(interchange);
+                doc.Claims.AddRange(thisDoc.Claims);
+            }
+            return doc;
         }
 
         public ClaimDocument Transform837ToClaimDocument(Interchange interchange)

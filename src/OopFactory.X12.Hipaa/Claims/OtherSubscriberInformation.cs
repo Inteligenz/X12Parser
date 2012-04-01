@@ -13,10 +13,53 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             if (Name == null) Name = new EntityName();
             if (OtherPayer == null) OtherPayer = new EntityName();
+            if (Adjustments == null) Adjustments = new List<ClaimsAdjustment>();
+            if (Amounts == null) Amounts = new List<QualifiedAmount>();
+            if (Providers == null) Providers = new List<Provider>();
         }
+
+        public decimal? PayorPaidAmount
+        {
+            get
+            {
+                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "D");
+                return amount == null ? 0 : amount.Amount;
+            }
+        }
+
+        public decimal? RemainingPatientLiability
+        {
+            get
+            {
+                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "EAF");
+                return amount == null ? (decimal?)null : amount.Amount;
+            }
+        }
+
+        public decimal? NonCoveredChargeAmount
+        {
+            get
+            {
+                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "A8");
+                return amount == null ? (decimal?)null : amount.Amount;
+            }
+        }
+
+        public SubscriberInformation SubscriberInformation { get; set; }
 
         public EntityName Name { get; set; }
         
         public EntityName OtherPayer { get; set; }
+
+        [XmlElement(ElementName = "Adjustment")]
+        public List<ClaimsAdjustment> Adjustments { get; set; }
+
+        [XmlElement(ElementName = "Amount")]
+        public List<QualifiedAmount> Amounts { get; set; }
+
+        [XmlElement(ElementName = "Provider")]
+        public List<Provider> Providers { get; set; }
+
+
     }
 }

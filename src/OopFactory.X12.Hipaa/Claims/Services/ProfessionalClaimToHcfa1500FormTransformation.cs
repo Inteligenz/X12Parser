@@ -177,17 +177,22 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field08_PatientStatusIsPartTimeStudent = false;
             hcfa.Field08_PatientStatusIsSingle = false;
 
-            hcfa.Field09_OtherInsuredsName = claim.OtherSubscriberInformation.Name.Formatted();
-            hcfa.Field09a_OtherInsuredsPolicyOrGroup = claim.OtherSubscriberInformation.Name.Identification.Id;
+            var otherSubscriber = claim.OtherSubscriberInformations.FirstOrDefault();
             
             // No way to get below three fields using 837P
             hcfa.Field09b_OtherInsuredIsFemale = false;
             hcfa.Field09b_OtherInsuredIsMale = false;
             hcfa.Field09b_OtherInsuredsDateOfBirth = new FormDate();
 
-            hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = claim.OtherSubscriberInformation.OtherPayer.LastName; // XXX: OK to assume org in last name?
-            hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = claim.OtherSubscriberInformation.OtherPayer.Identification.Id;
+            if (otherSubscriber != null)
+            {
+                hcfa.Field09_OtherInsuredsName = otherSubscriber.Name.Formatted();
+                hcfa.Field09a_OtherInsuredsPolicyOrGroup = otherSubscriber.Name.Identification.Id;
 
+
+                hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = otherSubscriber.OtherPayer.LastName; // XXX: OK to assume org in last name?
+                hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = otherSubscriber.OtherPayer.Identification.Id;
+            }
 
             hcfa.Field10a_PatientConditionRelatedToEmployment = claim.RelatedCauseCode1 == "AA" || claim.RelatedCauseCode2 == "AA" || claim.RelatedCauseCode3 == "AA";
             hcfa.Field10b_PatientConditionRelatedToAutoAccident = claim.RelatedCauseCode1 == "EM" || claim.RelatedCauseCode2 == "EM" || claim.RelatedCauseCode3 == "EM";
