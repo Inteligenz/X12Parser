@@ -916,9 +916,11 @@
       <xsl:attribute name="ServiceLinePaidAmount">
         <xsl:value-of select="SVD/SVD02"/>
       </xsl:attribute>
-      <xsl:attribute name="PaidServiceUnitCount">
-        <xsl:value-of select="SVD/SVD05"/>
-      </xsl:attribute>
+      <xsl:if test="string-length(SVD/SVD05)>0">
+        <xsl:attribute name="PaidServiceUnitCount">
+          <xsl:value-of select="SVD/SVD05"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="string-length(SVD/SVD06)>0">
         <xsl:attribute name="BundledLineNumber">
           <xsl:value-of select="SVD/SVD06"/>
