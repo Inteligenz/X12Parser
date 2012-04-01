@@ -123,14 +123,18 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             List<string> blockLines = new List<string>();
             blockLines.Add(claim.Subscriber.Name.ToString());
-            blockLines.Add(claim.Subscriber.Address.Line1);
-            if (!string.IsNullOrWhiteSpace(claim.Subscriber.Address.Line2))
-                blockLines.Add(claim.Subscriber.Address.Line2);
-            blockLines.Add(claim.Subscriber.Address.Locale);
-
             ub.Field38_ResponsibleParty.Line1 = blockLines[0];
-            ub.Field38_ResponsibleParty.Line2 = blockLines[1];
-            ub.Field38_ResponsibleParty.Line3 = blockLines[2];
+            if (claim.Subscriber.Address != null)
+            {
+                blockLines.Add(claim.Subscriber.Address.Line1);
+
+                if (!string.IsNullOrWhiteSpace(claim.Subscriber.Address.Line2))
+                    blockLines.Add(claim.Subscriber.Address.Line2);
+                blockLines.Add(claim.Subscriber.Address.Locale);
+                ub.Field38_ResponsibleParty.Line2 = blockLines[1];
+                ub.Field38_ResponsibleParty.Line3 = blockLines[2];
+            }
+
             if (blockLines.Count > 3)
                 ub.Field38_ResponsibleParty.Line4 = blockLines[3];
 
@@ -167,6 +171,27 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
             if (claim.BillingProvider.Identifications.Count >= 3)
                 ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
+
+            if (claim.Payer != null)
+            {
+                ub.PayerA_Primary.Field50_PayerName = claim.Payer.Name.Formatted();
+            }
+
+            ub.PayerA_Primary.Field58_InsuredsName = claim.Subscriber.Name.Formatted();
+            if (claim.Patient != null && claim.Patient.Relationship != null)
+                ub.PayerA_Primary.Field59_PatientRelationship = claim.Patient.Relationship.Code;
+            else
+                ub.PayerA_Primary.Field59_PatientRelationship = "18"; // self
+
+            ub.PayerA_Primary.Field60_InsuredsUniqueId = claim.Subscriber.MemberId;
+            ub.PayerA_Primary.Field62_InsuredsGroupNumber = claim.Subscriber.GroupNumber;
+
+            if (claim.OtherSubscriberInformations.Count > 0)
+            {
+                var otherSubscriber = claim.OtherSubscriberInformations[0];
+                
+            }
+
 
             if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
                 ub.Field66_Version = "9";

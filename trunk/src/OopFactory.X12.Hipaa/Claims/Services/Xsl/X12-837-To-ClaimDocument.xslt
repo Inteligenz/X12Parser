@@ -93,23 +93,6 @@
           <xsl:value-of select="REF[REF01='G1']/REF02"/>
         </xsl:attribute>
       </xsl:if>
-      <!-- XXX This is incomplete, but good enough for CMS-1500 -->
-      <!-- Other subscriber information loop -->
-      <xsl:if test="./Loop[@LoopId='2320']">
-        <xsl:variable name="OtherSubscriberInformationLoop" select="./Loop[@LoopId='2320']"/>
-        <OtherSubscriberInformation>
-          <OtherSubscriber>
-            <xsl:call-template name="EntityName">
-              <xsl:with-param name="Loop" select="$OtherSubscriberInformationLoop/Loop[@LoopId='2330A']"/>
-            </xsl:call-template>
-          </OtherSubscriber>
-          <OtherPayer>
-            <xsl:call-template name="EntityName">
-              <xsl:with-param name="Loop" select="$OtherSubscriberInformationLoop/Loop[@LoopId='2330B']"/>
-            </xsl:call-template>
-          </OtherPayer>
-        </OtherSubscriberInformation>
-      </xsl:if>
       <ServiceLocationInfo>
         <xsl:attribute name="FacilityCode">
           <xsl:value-of select="CLM/CLM05/CLM0501"/>
@@ -164,22 +147,32 @@
           </xsl:call-template>
         </xsl:when>
       </xsl:choose>
-
-      <xsl:for-each select="DTP">
-        <xsl:call-template name="DTPSegment">
-          <xsl:with-param name="DTP" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="PWK"/>
+      <xsl:apply-templates select="DTP"/>
       <xsl:apply-templates select="AMT"/>
       <xsl:apply-templates select="NTE"/>
       <xsl:apply-templates select="HI"/>
-      <xsl:for-each select="Loop[count(NM1)>0]">
-        <xsl:call-template name="Provider">
-          <xsl:with-param name="Loop" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
-      <xsl:apply-templates select="Loop[@LoopId='2400']"/>
+      <xsl:apply-templates select="Loop"/>
     </Claim>
+  </xsl:template>
+
+  <!-- Other subscriber information loop -->
+  <xsl:template match="Loop[@LoopId='2320']">
+    <OtherSubscriberInformation>
+      <Name>
+        <xsl:call-template name="EntityName">
+          <xsl:with-param name="Loop" select="Loop[@LoopId='2330A']"/>
+        </xsl:call-template>
+      </Name>
+      <OtherPayer>
+        <xsl:call-template name="EntityName">
+          <xsl:with-param name="Loop" select="Loop[@LoopId='2330B']"/>
+        </xsl:call-template>
+      </OtherPayer>
+      <xsl:apply-templates select="SBR"/>
+      <xsl:apply-templates select="CAS"/>
+      <xsl:apply-templates select="AMT"/>
+    </OtherSubscriberInformation>
   </xsl:template>
 
   <!-- Health Care Information Codes -->
@@ -348,35 +341,9 @@
           </xsl:attribute>
           <xsl:value-of select="SV105/comment()"/>
         </PlaceOfService>
-        <Procedure>
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="SV101/SV10101"/>
-          </xsl:attribute>
-          <xsl:attribute name="ProcedureCode">
-            <xsl:value-of select="SV101/SV10102"/>
-          </xsl:attribute>
-          <xsl:if test="string-length(SV101/SV10103)>0">
-            <xsl:attribute name="Modifier1">
-              <xsl:value-of select="SV101/SV10103"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV101/SV10104)>0">
-            <xsl:attribute name="Modifier2">
-              <xsl:value-of select="SV101/SV10104"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV101/SV10105)>0">
-            <xsl:attribute name="Modifier3">
-              <xsl:value-of select="SV101/SV10105"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV101/SV10106)>0">
-            <xsl:attribute name="Modifier4">
-              <xsl:value-of select="SV101/SV10106"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:value-of select="SV101/SV10107"/>
-        </Procedure>
+        <xsl:call-template name="MedicalProcedure">
+          <xsl:with-param name="element" select="SV101"/>
+        </xsl:call-template>
       </xsl:for-each>
       <xsl:for-each select="SV2">
         <xsl:attribute name="RevenueCode">
@@ -398,54 +365,16 @@
             <xsl:value-of select="SV207"/>
           </xsl:attribute>
         </xsl:if>
-        <Procedure>
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="SV202/SV20201"/>
-          </xsl:attribute>
-          <xsl:attribute name="ProcedureCode">
-            <xsl:value-of select="SV202/SV20202"/>
-          </xsl:attribute>
-          <xsl:if test="string-length(SV202/SV20203)>0">
-            <xsl:attribute name="Modifier1">
-              <xsl:value-of select="SV202/SV20203"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV202/SV20204)>0">
-            <xsl:attribute name="Modifier2">
-              <xsl:value-of select="SV202/SV20204"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV202/SV20205)>0">
-            <xsl:attribute name="Modifier3">
-              <xsl:value-of select="SV202/SV20205"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="string-length(SV202/SV20206)>0">
-            <xsl:attribute name="Modifier4">
-              <xsl:value-of select="SV202/SV20206"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:value-of select="SV202/SV20207"/>
-        </Procedure>
-      </xsl:for-each>
-      <xsl:for-each select="DTP">
-        <xsl:call-template name="DTPSegment">
-          <xsl:with-param name="DTP" select="."/>
+        <xsl:call-template name="MedicalProcedure">
+          <xsl:with-param name="element" select="SV202"/>
         </xsl:call-template>
       </xsl:for-each>
-      <xsl:for-each select="REF">
-        <Identification>
-          <xsl:call-template name="Identification">
-            <xsl:with-param name="REF" select="."/>
-          </xsl:call-template>
-        </Identification>
-      </xsl:for-each>
+      <xsl:apply-templates select="PWK"/>
+      <xsl:apply-templates select="DTP"/>
+      <xsl:apply-templates select="REF"/>
+      <xsl:apply-templates select="AMT"/>
       <xsl:apply-templates select="NTE"/>
-      <xsl:for-each select="Loop">
-        <xsl:call-template name="Provider">
-          <xsl:with-param name="Loop" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="Loop"/>
     </ServiceLine>
   </xsl:template>
 
@@ -453,11 +382,7 @@
   <xsl:template name="BillingProviderHLoop">
     <xsl:param name="HLoop"/>
     <BillingInfo>
-      <xsl:for-each select="$HLoop/Loop[count(NM1)>0]">
-        <xsl:call-template name="Provider">
-          <xsl:with-param name="Loop" select="."/>
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$HLoop/Loop"/>
     </BillingInfo>
   </xsl:template>
 
@@ -497,48 +422,43 @@
   </xsl:template>
 
   
-  <xsl:template name="SBRSegment">
-    <xsl:param name="SubscriberSegment"/>
+  <xsl:template match="SBR">
+    <SubscriberInformation>
       <xsl:attribute name="PayerResponsibilitySequenceNumberCode">
-        <xsl:value-of select="$SubscriberSegment/SBR01"/>
+        <xsl:value-of select="SBR01"/>
       </xsl:attribute>
       <xsl:attribute name="IndividualRelationshipCode">
-        <xsl:value-of select="$SubscriberSegment/SBR02"/>
+        <xsl:value-of select="SBR02"/>
       </xsl:attribute>
       <xsl:attribute name="ReferenceIdentification">
-        <xsl:value-of select="$SubscriberSegment/SBR03"/>
+        <xsl:value-of select="SBR03"/>
       </xsl:attribute>
       <xsl:attribute name="Name">
-        <xsl:value-of select="$SubscriberSegment/SBR04"/>
+        <xsl:value-of select="SBR04"/>
       </xsl:attribute>
       <xsl:attribute name="InsuranceTypeCode">
-        <xsl:value-of select="$SubscriberSegment/SBR05"/>
+        <xsl:value-of select="SBR05"/>
       </xsl:attribute>
       <xsl:attribute name="CoordinationOfBenefitsCode">
-        <xsl:value-of select="$SubscriberSegment/SBR06"/>
+        <xsl:value-of select="SBR06"/>
       </xsl:attribute>
       <xsl:attribute name="YesNoConditionResponseCode">
-        <xsl:value-of select="$SubscriberSegment/SBR07"/>
+        <xsl:value-of select="SBR07"/>
       </xsl:attribute>
       <xsl:attribute name="EmploymentStatusCode">
-        <xsl:value-of select="$SubscriberSegment/SBR08"/>
+        <xsl:value-of select="SBR08"/>
       </xsl:attribute>
       <xsl:attribute name="ClaimFilingIndicatorCode">
-        <xsl:value-of select="$SubscriberSegment/SBR09"/>
+        <xsl:value-of select="SBR09"/>
       </xsl:attribute>
+    </SubscriberInformation>
   </xsl:template>
 
   <xsl:template name="SubscriberHLoop">
     <xsl:param name="HLoop"/>
     <!-- Parent is Subscriber Loop -->
     <!-- Capture the subscriber information(specifically the claim file indicator) for filling in CMS-1500, if it exists -->
-    <xsl:if test='$HLoop/SBR'>
-      <SubscriberInformation>
-        <xsl:call-template name='SBRSegment'>
-          <xsl:with-param name='SubscriberSegment' select='$HLoop/SBR'/>
-        </xsl:call-template>
-      </SubscriberInformation>
-    </xsl:if>
+    <xsl:apply-templates select="$HLoop/SBR"/>
     <xsl:for-each select="$HLoop/Loop[@LoopId='2010BA']">
       <Subscriber>
         <xsl:if test="count(DMG) > 0">
@@ -581,13 +501,7 @@
             </xsl:call-template>
           </Address>
         </xsl:for-each>
-        <xsl:for-each select="REF">
-          <Identification>
-            <xsl:call-template name="Identification">
-              <xsl:with-param name="REF" select="."/>
-            </xsl:call-template>
-          </Identification>
-        </xsl:for-each>
+        <xsl:apply-templates select="REF"/>
       </Payer>
     </xsl:for-each>
   </xsl:template>
@@ -604,6 +518,202 @@
     </Amount>
   </xsl:template>
 
+  <xsl:template match="CAS">
+    <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+      <xsl:attribute name="ReasonCode">
+        <xsl:value-of select="CAS02"/>
+      </xsl:attribute>
+      <xsl:attribute name="Amount">
+        <xsl:choose>
+          <xsl:when test="string-length(CAS03)>0">
+            <xsl:value-of select="CAS03"/>
+          </xsl:when>
+          <xsl:otherwise>0</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:if test="string-length(CAS04)>0">
+        <xsl:attribute name="Quantity">
+          <xsl:value-of select="CAS04"/>
+        </xsl:attribute>
+      </xsl:if>
+    </Adjustment>
+    <xsl:if test="string-length(CAS05)>0">
+      <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+        <xsl:attribute name="ReasonCode">
+          <xsl:value-of select="CAS05"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:choose>
+            <xsl:when test="string-length(CAS06)>0">
+              <xsl:value-of select="CAS06"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(CAS07)>0">
+          <xsl:attribute name="Quantity">
+            <xsl:value-of select="CAS07"/>
+          </xsl:attribute>
+        </xsl:if>
+      </Adjustment>
+    </xsl:if>
+    <xsl:if test="string-length(CAS08)>0">
+      <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+        <xsl:attribute name="ReasonCode">
+          <xsl:value-of select="CAS08"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:choose>
+            <xsl:when test="string-length(CAS09)>0">
+              <xsl:value-of select="CAS09"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(CAS10)>0">
+          <xsl:attribute name="Quantity">
+            <xsl:value-of select="CAS10"/>
+          </xsl:attribute>
+        </xsl:if>
+      </Adjustment>
+    </xsl:if>
+    <xsl:if test="string-length(CAS11)>0">
+      <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+        <xsl:attribute name="ReasonCode">
+          <xsl:value-of select="CAS11"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:choose>
+            <xsl:when test="string-length(CAS12)>0">
+              <xsl:value-of select="CAS12"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(CAS13)>0">
+          <xsl:attribute name="Quantity">
+            <xsl:value-of select="CAS13"/>
+          </xsl:attribute>
+        </xsl:if>
+      </Adjustment>
+    </xsl:if>
+    <xsl:if test="string-length(CAS14)>0">
+      <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+        <xsl:attribute name="ReasonCode">
+          <xsl:value-of select="CAS14"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:choose>
+            <xsl:when test="string-length(CAS15)>0">
+              <xsl:value-of select="CAS15"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(CAS16)>0">
+          <xsl:attribute name="Quantity">
+            <xsl:value-of select="CAS16"/>
+          </xsl:attribute>
+        </xsl:if>
+      </Adjustment>
+    </xsl:if>
+    <xsl:if test="string-length(CAS17)>0">
+      <Adjustment>
+        <xsl:attribute name="GroupCode">
+          <xsl:value-of select="CAS01"/>
+        </xsl:attribute>
+        <xsl:attribute name="ReasonCode">
+          <xsl:value-of select="CAS17"/>
+        </xsl:attribute>
+        <xsl:attribute name="Amount">
+          <xsl:choose>
+            <xsl:when test="string-length(CAS18)>0">
+              <xsl:value-of select="CAS18"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:if test="string-length(CAS19)>0">
+          <xsl:attribute name="Quantity">
+            <xsl:value-of select="CAS19"/>
+          </xsl:attribute>
+        </xsl:if>
+      </Adjustment>
+    </xsl:if>
+
+  </xsl:template>
+
+  <xsl:template match="DTP">
+    <xsl:choose>
+      <xsl:when test="DTP02='RD8'">
+        <DateRange>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="DTP01"/>
+          </xsl:attribute>
+          <xsl:attribute name="BeginDate">
+            <xsl:value-of select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2))"/>
+          </xsl:attribute>
+          <xsl:attribute name="EndDate">
+            <xsl:value-of select="concat(substring(DTP03,10,4),'-',substring(DTP03,14,2),'-',substring(DTP03,16,2))"/>
+          </xsl:attribute>
+          <xsl:value-of select="DTP01/comment()"/>
+        </DateRange>
+      </xsl:when>
+      <xsl:otherwise>
+        <Date>
+          <xsl:attribute name="Qualifier">
+            <xsl:value-of select="DTP01"/>
+          </xsl:attribute>
+          <xsl:attribute name="Date">
+            <xsl:choose>
+              <xsl:when test="DTP02='DT'">
+                <xsl:choose>
+                  <xsl:when test="substring(DTP03,1,4)='9999'">
+                    <!-- This is usually de-identified data that may contain an invalid date value-->
+                    <xsl:value-of select="'9999-12-31'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2),'T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:when test="DTP02='TM'">
+                <xsl:choose>
+                  <xsl:when test="substring(DTP03,1,2)='99'">
+                    <!-- This is usually de-identified data that may contain an invalid date value-->
+                    <xsl:value-of select="'0001-01-01T00:00:00'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="concat('0001-01-01T', substring(DTP03,1,2),':',substring(DTP03,3,2),':00')"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2))"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+          <xsl:value-of select="DTP01/comment()"/>
+        </Date>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <xsl:template match="NTE">
     <Note>
       <xsl:attribute name="Code">
@@ -613,44 +723,216 @@
     </Note>
   </xsl:template>
 
-  <xsl:template name="Provider">
-    <xsl:param name="Loop"/>
+  <xsl:template match="PRV">
+    <ProviderInfo>
+      <xsl:attribute name="ProviderCode">
+        <xsl:value-of select="PRV01"/>
+      </xsl:attribute>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="PRV02"/>
+      </xsl:attribute>
+      <xsl:attribute name="Id">
+        <xsl:value-of select="PRV03"/>
+      </xsl:attribute>
+    </ProviderInfo>
+  </xsl:template>
+
+  <xsl:template match="PWK">
+    <SupplementalInformation>
+      <ReportType>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="PWK01"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="PWK01='03'">Report Justifying Treatment Beyond Utilization Guidelines</xsl:when>
+          <xsl:when test="PWK01='04'">Drugs Administered</xsl:when>
+          <xsl:when test="PWK01='05'">Treatment Diagnosis</xsl:when>
+          <xsl:when test="PWK01='06'">Initial Assessment</xsl:when>
+          <xsl:when test="PWK01='07'">Functional Goals</xsl:when>
+          <xsl:when test="PWK01='08'">Plan of Treatment</xsl:when>
+          <xsl:when test="PWK01='09'">Progress Report</xsl:when>
+          <xsl:when test="PWK01='10'">Continued Treatment</xsl:when>
+          <xsl:when test="PWK01='11'">Chemical Analysis</xsl:when>
+          <xsl:when test="PWK01='13'">Certified Test Report</xsl:when>
+          <xsl:when test="PWK01='15'">Justification for Admission</xsl:when>
+          <xsl:when test="PWK01='21'">Recovery Plan</xsl:when>
+          <xsl:when test="PWK01='A3'">Allergies/Sensitivities Document</xsl:when>
+          <xsl:when test="PWK01='A4'">Autopsy Report</xsl:when>
+          <xsl:when test="PWK01='AM'">Ambulance Certification</xsl:when>
+          <xsl:when test="PWK01='AS'">Admission Summary</xsl:when>
+          <xsl:when test="PWK01='B2'">Prescription</xsl:when>
+          <xsl:when test="PWK01='B3'">Physician Order</xsl:when>
+          <xsl:when test="PWK01='B4'">Referral Form</xsl:when>
+          <xsl:when test="PWK01='BR'">Benchmark Testing Results</xsl:when>
+          <xsl:when test="PWK01='BS'">Baseline</xsl:when>
+          <xsl:when test="PWK01='BT'">Blanket Test Results</xsl:when>
+          <xsl:when test="PWK01='CB'">Chiropractic Justification</xsl:when>
+          <xsl:when test="PWK01='CK'">Consent Form(s)</xsl:when>
+          <xsl:when test="PWK01='CT'">Certification</xsl:when>
+          <xsl:when test="PWK01='D2'">Drug Profile Document</xsl:when>
+          <xsl:when test="PWK01='DA'">Dental Models</xsl:when>
+          <xsl:when test="PWK01='DB'">Durable Medical Equipment Prescription</xsl:when>
+          <xsl:when test="PWK01='DG'">Diagnostic Report</xsl:when>
+          <xsl:when test="PWK01='DJ'">Discharge Monitoring Report</xsl:when>
+          <xsl:when test="PWK01='DS'">Discharge Summary</xsl:when>
+          <xsl:when test="PWK01='EB'">Explanation of Benefits (Coordination of Benefits or Medicare Secondary Payor)</xsl:when>
+          <xsl:when test="PWK01='HC'">Health Certificate</xsl:when>
+          <xsl:when test="PWK01='HR'">Health Clinic Records</xsl:when>
+          <xsl:when test="PWK01='I5'">Immunization Record</xsl:when>
+          <xsl:when test="PWK01='IR'">State School Immunization Records</xsl:when>
+          <xsl:when test="PWK01='LA'">Laboratory Results</xsl:when>
+          <xsl:when test="PWK01='M1'">Medical Record Attachment</xsl:when>
+          <xsl:when test="PWK01='MT'">Models</xsl:when>
+          <xsl:when test="PWK01='NN'">Nursing Notes</xsl:when>
+          <xsl:when test="PWK01='OB'">Operative Note</xsl:when>
+          <xsl:when test="PWK01='OC'">Oxygen Content Averaging Report</xsl:when>
+          <xsl:when test="PWK01='OD'">Orders and Treatments Document</xsl:when>
+          <xsl:when test="PWK01='OE'">Objective Physical Examination (including vitalsigns) Document</xsl:when>
+          <xsl:when test="PWK01='OX'">Oxygen Therapy Certification</xsl:when>
+          <xsl:when test="PWK01='OZ'">Support Data for Claim</xsl:when>
+          <xsl:when test="PWK01='P4'">Pathology Report</xsl:when>
+          <xsl:when test="PWK01='P5'">Patient Medical History Document</xsl:when>
+          <xsl:when test="PWK01='PE'">Parenteral or Enteral Certification</xsl:when>
+          <xsl:when test="PWK01='PN'">Physical Therapy Notes</xsl:when>
+          <xsl:when test="PWK01='PO'">Prosthetics or Orthotic Certification</xsl:when>
+          <xsl:when test="PWK01='PQ'">Paramedical Results</xsl:when>
+          <xsl:when test="PWK01='PY'">Physician’s Report</xsl:when>
+          <xsl:when test="PWK01='PZ'">Physical Therapy Certification</xsl:when>
+          <xsl:when test="PWK01='RB'">Radiology Films</xsl:when>
+          <xsl:when test="PWK01='RR'">Radiology Reports</xsl:when>
+          <xsl:when test="PWK01='RT'">Report of Tests and Analysis Report</xsl:when>
+          <xsl:when test="PWK01='RX'">Renewable Oxygen Content Averaging Report</xsl:when>
+          <xsl:when test="PWK01='SG'">Symptoms Document</xsl:when>
+          <xsl:when test="PWK01='V5'">Death Notification</xsl:when>
+          <xsl:when test="PWK01='XP'">Photographs</xsl:when>
+        </xsl:choose>
+      </ReportType>
+      <ReportTransmission>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="PWK02"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="PWK02='AA'">Available on Request at Provider Site</xsl:when>
+          <xsl:when test="PWK02='BM'">By Mail</xsl:when>
+          <xsl:when test="PWK02='EL'">Electronically Only</xsl:when>
+          <xsl:when test="PWK02='EM'">E-Mail</xsl:when>
+          <xsl:when test="PWK02='FT'">File Transfer</xsl:when>
+          <xsl:when test="PWK02='FX'">By Fax</xsl:when>
+        </xsl:choose>
+      </ReportTransmission>
+      <Identification>
+        <xsl:attribute name="Qualifier">
+          <xsl:value-of select="PWK05"/>
+        </xsl:attribute>
+        <xsl:attribute name="Id">
+          <xsl:value-of select="PWK06"/>
+        </xsl:attribute>
+      </Identification>
+    </SupplementalInformation>
+  </xsl:template>
+
+  <xsl:template match="REF">
+    <Identification>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="REF01"/>
+      </xsl:attribute>
+      <xsl:attribute name="Id">
+        <xsl:value-of select="REF02"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="string-length(REF03) > 0">
+          <xsl:value-of select="REF03"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="REF01/comment()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </Identification>
+  </xsl:template>
+
+  <!-- Provider -->
+  <xsl:template match="Loop[count(NM1[NM101='85' or NM101='87' or NM101='PE' or NM101='PR' or NM101='71' or NM101='72' or NM101='ZZ' or NM101='82' or NM101='77' or NM101='DN'])>0]">
     <Provider>
       <Name>
         <xsl:call-template name="EntityName">
-          <xsl:with-param name="Loop" select="$Loop"/>
+          <xsl:with-param name="Loop" select="."/>
         </xsl:call-template>
       </Name>
-      <xsl:for-each select="$Loop/N3">
+      <xsl:for-each select="N3">
         <Address>
           <xsl:call-template name="PostalAddress">
             <xsl:with-param name="N3" select="."/>
           </xsl:call-template>
         </Address>
       </xsl:for-each>
-      <xsl:for-each select="REF">
-        <Identification>
-          <xsl:call-template name="Identification">
-            <xsl:with-param name="REF" select="."/>
-          </xsl:call-template>
-        </Identification>
-      </xsl:for-each>
-      <xsl:for-each select="$Loop/PER">
+      <xsl:apply-templates select="REF"/>
+      <xsl:for-each select="PER">
         <Contact>
           <xsl:call-template name="Contact">
             <xsl:with-param name="PER" select="."/>
           </xsl:call-template>
         </Contact>
       </xsl:for-each>
-      <xsl:for-each select="$Loop/PRV">
-        <ProviderInfo>
-          <xsl:call-template name="ProviderInformation">
-            <xsl:with-param name="PRV" select="."/>
-          </xsl:call-template>
-        </ProviderInfo>
-      </xsl:for-each>
+      <xsl:apply-templates select="PRV"/>
     </Provider>
   </xsl:template>
+
+  <!-- Drug Identification -->
+  <xsl:template match="Loop[@LoopId='2410']">
+    <Drug>
+      <xsl:attribute name="Ndc">
+        <xsl:value-of select="LIN/LIN03"/>
+      </xsl:attribute>
+      <xsl:attribute name="Quantity">
+        <xsl:choose>
+          <xsl:when test="string-length(CTP/CTP04)>0">
+            <xsl:value-of select="CTP/CTP04"/>
+          </xsl:when>
+          <xsl:otherwise>0</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <UnitOfMeasure>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="CTP/CTP05"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="CTP/CTP05='F2'">International Unit</xsl:when>
+          <xsl:when test="CTP/CTP05='GR'">Gram</xsl:when>
+          <xsl:when test="CTP/CTP05='ME'">Milligram</xsl:when>
+          <xsl:when test="CTP/CTP05='ML'">Milliliter</xsl:when>
+          <xsl:when test="CTP/CTP05='UN'">Unit</xsl:when>
+        </xsl:choose>
+      </UnitOfMeasure>
+      <xsl:apply-templates select="REF"/>
+    </Drug>
+  </xsl:template>
+  
+  <!-- Line Adjustment Information-->
+  <xsl:template match="Loop[@LoopId='2430']">
+    <LineAdjustmentInformation>
+      <xsl:attribute name="OtherPayerPrimaryIdentifier">
+        <xsl:value-of select="SVD/SVD01"/>
+      </xsl:attribute>
+      <xsl:attribute name="ServiceLinePaidAmount">
+        <xsl:value-of select="SVD/SVD02"/>
+      </xsl:attribute>
+      <xsl:attribute name="PaidServiceUnitCount">
+        <xsl:value-of select="SVD/SVD05"/>
+      </xsl:attribute>
+      <xsl:if test="string-length(SVD/SVD06)>0">
+        <xsl:attribute name="BundledLineNumber">
+          <xsl:value-of select="SVD/SVD06"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="MedicalProcedure">
+        <xsl:with-param name="element" select="SVD/SVD03"/>
+      </xsl:call-template>
+      <xsl:apply-templates select="CAS"/>
+      <xsl:apply-templates select="DTP"/>
+      <xsl:apply-templates select="AMT"/>
+    </LineAdjustmentInformation>
+  </xsl:template>
+
   <xsl:template name="Member">
     <xsl:param name="Loop"/>
     <xsl:if test="count($Loop/DMG)>0">
@@ -677,11 +959,7 @@
         </xsl:call-template>
       </Address>
     </xsl:for-each>
-    <xsl:for-each select="$Loop/DTP">
-      <xsl:call-template name="DTPSegment">
-        <xsl:with-param name="DTP" select="."/>
-      </xsl:call-template>
-    </xsl:for-each>
+    <xsl:apply-templates select="DTP"/>
   </xsl:template>
 
   <xsl:template name="EntityName">
@@ -743,24 +1021,6 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template name="Identification">
-    <xsl:param name="REF"/>
-    <xsl:attribute name="Qualifier">
-      <xsl:value-of select="REF01"/>
-    </xsl:attribute>
-    <xsl:attribute name="Id">
-      <xsl:value-of select="REF02"/>
-    </xsl:attribute>
-    <xsl:choose>
-      <xsl:when test="string-length(REF03) > 0">
-        <xsl:value-of select="REF03"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="REF01/comment()"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
   <xsl:template name="Contact">
     <xsl:param name="PER"/>
     <xsl:attribute name="FunctionCode">
@@ -797,60 +1057,37 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template name="ProviderInformation">
-    <xsl:param name="PRV"/>
-    <xsl:attribute name="ProviderCode">
-      <xsl:value-of select="PRV01"/>
-    </xsl:attribute>
-    <xsl:attribute name="Qualifier">
-      <xsl:value-of select="PRV02"/>
-    </xsl:attribute>
-    <xsl:attribute name="Id">
-      <xsl:value-of select="PRV03"/>
-    </xsl:attribute>
+  <xsl:template name="MedicalProcedure">
+    <xsl:param name="element"/>
+    <Procedure>
+      <xsl:attribute name="Qualifier">
+        <xsl:value-of select="$element/*[1]"/>
+      </xsl:attribute>
+      <xsl:attribute name="ProcedureCode">
+        <xsl:value-of select="$element/*[2]"/>
+      </xsl:attribute>
+      <xsl:if test="string-length($element/*[3])>0">
+        <xsl:attribute name="Modifier1">
+          <xsl:value-of select="$element/*[3]"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length($element/*[4])>0">
+        <xsl:attribute name="Modifier2">
+          <xsl:value-of select="$element/*[4]"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length($element/*[5])>0">
+        <xsl:attribute name="Modifier3">
+          <xsl:value-of select="$element/*[5]"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length($element/*[6])>0">
+        <xsl:attribute name="Modifier4">
+          <xsl:value-of select="$element/*[6]"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="$element/*[7]"/>
+    </Procedure>
   </xsl:template>
-
-  <xsl:template name="DTPSegment">
-    <xsl:param name="DTP"/>
-    <xsl:choose>
-      <xsl:when test="$DTP/DTP02='RD8'">
-        <DateRange>
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="$DTP/DTP01"/>
-          </xsl:attribute>
-          <xsl:attribute name="BeginDate">
-            <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
-          </xsl:attribute>
-          <xsl:attribute name="EndDate">
-            <xsl:value-of select="concat(substring($DTP/DTP03,10,4),'-',substring($DTP/DTP03,14,2),'-',substring($DTP/DTP03,16,2))"/>
-          </xsl:attribute>
-          <xsl:value-of select="$DTP/DTP01/comment()"/>
-        </DateRange>
-      </xsl:when>
-      <xsl:otherwise>
-        <Date>
-          <xsl:attribute name="Qualifier">
-            <xsl:value-of select="$DTP/DTP01"/>
-          </xsl:attribute>
-          <xsl:attribute name="Date">
-            <xsl:choose>
-              <xsl:when test="$DTP/DTP02='DT'">
-                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2),'T',substring($DTP/DTP03,9,2),':',substring($DTP/DTP03,11,2),':00')"/>
-              </xsl:when>
-              <xsl:when test="$DTP/DTP02='TM'">
-                <xsl:value-of select="concat('0001-01-01T', substring($DTP/DTP03,1,2),':',substring($DTP/DTP03,3,2),':00')"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="concat(substring($DTP/DTP03,1,4),'-',substring($DTP/DTP03,5,2),'-',substring($DTP/DTP03,7,2))"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          <xsl:value-of select="$DTP/DTP01/comment()"/>
-        </Date>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-
 
 </xsl:stylesheet>

@@ -232,6 +232,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         /// <summary>
         /// Field 42 through 49, up to 22 service lines per page
         /// </summary>
+        [XmlElement(ElementName="ServiceLine")]
         public List<UB04ServiceLine> ServiceLines { get; set; }
 
         // Field 47 - Summary of all field 47 charges
@@ -327,7 +328,21 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public UB04CodeCode Field81b { get; set; }
         public UB04CodeCode Field81c { get; set; }
         public UB04CodeCode Field81d { get; set; }
-                
+
+        #region Serialization Methods
+        public string Serialize()
+        {
+            StringWriter writer = new StringWriter();
+            new XmlSerializer(typeof(UB04Claim)).Serialize(writer, this);
+            return writer.ToString();
+        }
+
+        public static UB04Claim Deserialize(string xml)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(UB04Claim));
+            return (UB04Claim)serializer.Deserialize(new StringReader(xml));
+        }
+        #endregion
     }
 
 }

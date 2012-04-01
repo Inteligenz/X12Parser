@@ -11,6 +11,7 @@ namespace OopFactory.X12.Hipaa.Claims
     {
         public ServiceLine()
         {
+            if (SupplementalInformations == null) SupplementalInformations = new List<Paperwork>();
             if (Identifications == null) Identifications = new List<Identification>();
             if (Amounts == null) Amounts = new List<QualifiedAmount>();
             if (Dates == null) Dates = new List<QualifiedDate>();
@@ -94,8 +95,34 @@ namespace OopFactory.X12.Hipaa.Claims
             set { }
         }
 
+        public decimal? ServiceTaxAmount
+        {
+            get
+            {
+                if (Amounts.Exists(a => a.Qualifier == "GT"))
+                    return Amounts.First(a => a.Qualifier == "GT").Amount;
+                else
+                    return null;
+            }
+        }
+
+        public decimal? FacilityTaxAmount
+        {
+            get
+            {
+                if (Amounts.Exists(a => a.Qualifier == "N8"))
+                    return Amounts.First(a => a.Qualifier == "N8").Amount;
+                else
+                    return null;
+            }
+        }
+
         public Lookup PlaceOfService { get; set; }
         public MedicalProcedure Procedure { get; set; }
+        public DrugIdentification Drug { get; set; }
+
+        [XmlElement(ElementName="SupplementalInformation")]
+        public List<Paperwork> SupplementalInformations { get; set; }
         [XmlElement(ElementName="Identification")]
         public List<Identification> Identifications { get; set; }
         [XmlElement(ElementName="Amount")]
@@ -109,6 +136,9 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlElement(ElementName = "Provider")]
         public List<Provider> Providers { get; set; }
+
+        [XmlElement(ElementName = "LineAdjustmentInformation")]
+        public List<LineAdjustmentInformation> LineAdjustmentInformations { get; set; }
 
         public Provider OperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "72"); } }
         public Provider OtherOperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "ZZ"); } }

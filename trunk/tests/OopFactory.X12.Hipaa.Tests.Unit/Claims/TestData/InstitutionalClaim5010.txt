@@ -20,6 +20,7 @@
           NM1*PR*2*MEDICARE B*****PI*00435~
             REF*G2*330127~
           CLM*756048Q*89.93***14:A:1*Y*A*Y*Y~
+          PWK*OZ*BM***AC*DMN0012~
 			REF*EA*TEST MEDICAL RECORD NUMBER~
 			REF*D9*DLN12345~
             DTP*434*D8*19960911~
@@ -44,6 +45,17 @@
             NM1*ZZ*1*JONES*JOE*J~
               REF*1G*B99937B~
             SBR*S*01*351630*STATE TEACHERS*****CI~
+              CAS*PR*1*7.93~
+              CAS*OA*93*15.06**93*15.06*2.2~
+              AMT*D*10.5~
+              DMG*D8*19271211*F~
+              OI***Y***Y~
+              NM1*IL*1*DOE*JANE*S***MI*222004433~
+                N3*125 CITY AVENUE~
+                N4*CENTERVILLE*PA*17111~
+              NM1*PR*2*STATE TEACHERS*****PI*1135~
+              NM1*71*2*OTHER ATTENDING PHYSICIAN~
+            SBR*S*01*351630*STATE TEACHERS*****CI~
               DMG*D8*19271211*F~
               OI***Y***Y~
               NM1*IL*1*DOE*JANE*S***MI*222004433~
@@ -52,10 +64,16 @@
               NM1*PR*2*STATE TEACHERS*****PI*1135~
             LX*1~
               SV2*0305*HC:85025*13.39*UN*1~
+              PWK*OZ*BM***AC*DMN0012~
               DTP*472*D8*19960911~
+              LIN**N4*01234567891~
+              CTP****2*UN~              
             LX*2~
               SV2*0730*HC:93005:AA:BB:CC:DD:Test Procedure*76.54*UN*3**11.15~
               DTP*472*D8*19960911~
+              SVD*43*55*HC:84550**3~
+              CAS*PR*1*7.93~
+              CAS*OA*93*15.06**93*15.06*2.2~
   			  NTE*TPO*state regulation 123 was applied during the pricing of thisclaim~
 			  NM1*72*1*JONES*JOHN*J***XX*B99937~
 				PRV*AT*ZZ*363LP0200N~

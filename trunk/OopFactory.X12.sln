@@ -26,9 +26,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Hipaa.Tests.Unit", "tests\OopFactory.X12.Hipaa.Tests.Unit\OopFactory.X12.Hipaa.Tests.Unit.csproj", "{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Hipaa.ClaimParser", "src\OopFactory.X12.Hipaa.ClaimParser\OopFactory.X12.Hipaa.ClaimParser.csproj", "{1E3BD8A3-21EA-4B71-8A55-31910211A316}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -57,6 +59,9 @@ Global
 		SccProjectTopLevelParentUniqueName7 = OopFactory.X12.sln
 		SccProjectName7 = tests/OopFactory.X12.Hipaa.Tests.Unit
 		SccLocalPath7 = tests\\OopFactory.X12.Hipaa.Tests.Unit
+		SccProjectUniqueName8 = src\\OopFactory.X12.Hipaa.ClaimParser\\OopFactory.X12.Hipaa.ClaimParser.csproj
+		SccProjectName8 = src/OopFactory.X12.Hipaa.ClaimParser
+		SccLocalPath8 = src\\OopFactory.X12.Hipaa.ClaimParser
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -140,6 +145,16 @@ Global
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Debug|x86.ActiveCfg = Debug|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Debug|x86.Build.0 = Debug|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|Any CPU.ActiveCfg = Release|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|x86.ActiveCfg = Release|x86
+		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
