@@ -25,6 +25,9 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public decimal PaidServiceUnitCount { get; set; }
 
+        [XmlIgnore]
+        public bool PaidServiceUnitCountSpecified { get; set; }
+
         [XmlAttribute]
         public string BundledLineNumber { get; set; }
 
