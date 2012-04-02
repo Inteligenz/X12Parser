@@ -35,7 +35,9 @@ namespace OopFactory.X12.Hipaa.ClaimParser
                     {
                         string outputFilename = string.Format("{0}\\{1}.xml", di.FullName, fi.Name);
 
-                        File.WriteAllText(outputFilename, claimDoc.Serialize());
+                        string xml = claimDoc.Serialize();
+                        xml = xml.Replace("encoding=\"utf-16\"", "encoding=\"utf-8\"");
+                        File.WriteAllText(outputFilename, xml);
                     }
 
                     if (opts.MakePdf)
