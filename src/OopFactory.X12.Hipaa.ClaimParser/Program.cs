@@ -23,9 +23,16 @@ namespace OopFactory.X12.Hipaa.ClaimParser
             {
                 try
                 {
+#if DEBUG
+                    FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                    var parser = new X12.Parsing.X12Parser();
+                    var interchange = parser.Parse(stream);
+                    File.WriteAllText(filename + ".dat", interchange.SerializeToX12(true));
+                    stream.Close();
+#endif           
                     DateTime start = DateTime.Now;
                     FileStream inputFilestream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-
+                    
                     var claimDoc = service.Transform837ToClaimDocument(inputFilestream);
 
                     FileInfo fi = new FileInfo(filename);

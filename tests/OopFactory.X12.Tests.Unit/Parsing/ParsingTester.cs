@@ -182,5 +182,19 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             System.IO.File.WriteAllText(filename, edi);
         }
 
+        [TestMethod,Ignore]
+        public void CreateTestFileWithTrailingBlanks()
+        {
+            string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";
+            StringBuilder edi = new StringBuilder(System.IO.File.ReadAllText(filename));
+
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            System.IO.File.WriteAllText(filename, edi.ToString());
+        }
     }
 }

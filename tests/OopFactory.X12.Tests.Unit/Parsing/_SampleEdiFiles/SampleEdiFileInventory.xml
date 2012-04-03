@@ -41,11 +41,10 @@
       <Query2>/Interchange/FunctionGroup/Transaction/HierarchicalLoop/HierarchicalLoop/HierarchicalLoop/Loop/DMG/DMG02</Query2>
       <Expected2>20000614</Expected2>
     </EdiFile>
-    <!--
     <EdiFile>
       <SourceUrl>http://www.ehcca.com/presentations/ehc-info3/beatty2.pdf</SourceUrl>
       <ResourcePath>INS._270._4010.Example2_EHCCA.txt</ResourcePath>
-    </EdiFile> -->
+    </EdiFile>
     <EdiFile>
       <SourceUrl>https://www.aetnaedi.com/docs/brand/aetna/Aetna%20EDI%20Connect%20-%20Companion%20Guide.pdf</SourceUrl>
       <ResourcePath>INS._270._4010.Example3_Aetna.txt</ResourcePath>
