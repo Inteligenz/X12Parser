@@ -34,7 +34,7 @@ namespace OopFactory.X12.Parsing
             {
                 if (one[0] == segmentDelimiter)
                     break;
-                else
+                else if (one[0] != 0)
                     sb.Append(one);
             }
             return sb.ToString().TrimStart();
