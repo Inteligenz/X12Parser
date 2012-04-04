@@ -12,56 +12,48 @@ namespace OopFactory.X12.UnbundleX12
     {
         static void Main(string[] args)
         {
-            if (args.Length < 3)
+            var opts = new ExecutionOptions();
+            try
             {
-                Console.WriteLine("UnbundleX12 expected 3 to 5 arguments: input filename, loop ID, output directory and an optional format string argument and include whitespace flag");
-                Console.WriteLine("Example: UnbundleX12 c:\\MyEdiFile.txt 2300 c:\\Output {0}\\{1}_{2:000}{3} false");
+                opts.LoadOptions(args);
+            }
+            catch (ArgumentException exc)
+            {
+                Console.Write(exc.Message);
                 return;
             }
-            string filename = args[0];
-            string loopId = args[1];
-            string outputDirectory = args[2];
-            string formatString = "{0}\\{1}_{2:000}{3}";
-            bool includeWhitespace = true;
 
-            if (!File.Exists(filename))
-            {
-                Console.WriteLine("Filename {0} does not exist!", filename);
-                return;
-            }
-            if (loopId.Length < 3)
-            {
-                Console.WriteLine("Loop IDs are expected to be at least 3 characters.");
-                return;
-            }
-            if (args.Length >= 5)
-            {
-                includeWhitespace = bool.Parse(args[4]);
-            }
-            if (!Directory.Exists(outputDirectory))
-            {
-                Console.WriteLine("Directory {0} does not exist!", outputDirectory);
-                return;
-            }
-            if (args.Length >= 4)
-                formatString = args[3];
 
-            FileInfo inputFile = new FileInfo(filename);
-            X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(new FileStream(filename, FileMode.Open, FileAccess.Read));
-
-            var list = parser.UnbundleByLoop(interchange, loopId);
-            for (int i=0; i<list.Count; i++)
+            foreach (var filename in Directory.GetFiles(opts.InputDirectory, opts.FilenamePattern))
             {
-                string outputFilename = String.Format(formatString, outputDirectory, inputFile.Name, i + 1, inputFile.Extension);
-                using (FileStream outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                FileInfo inputFile = new FileInfo(filename);
+
+                X12Parser parser = new X12Parser();
+                List<Interchange> interchanges = parser.ParseMultiple(new FileStream(filename, FileMode.Open, FileAccess.Read));
+                int offset = 0;
+                foreach (var interchange in interchanges)
                 {
-                    using (StreamWriter writer = new StreamWriter(outputFilestream))
+                    List<Interchange> list;
+                    if (opts.LoopId == "ST")
+                        list = parser.UnbundleByTransaction(interchange);
+                    else
+                        list = parser.UnbundleByLoop(interchange, opts.LoopId);
+
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        writer.Write(list[i].SerializeToX12(includeWhitespace));
-                        writer.Close();
+                        string outputFilename = String.Format(opts.FormatString, opts.OutputDirectory, inputFile.Name, offset + i + 1, inputFile.Extension);
+                        using (FileStream outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                        {
+                            using (StreamWriter writer = new StreamWriter(outputFilestream))
+                            {
+                                writer.Write(list[i].SerializeToX12(opts.IncludeWhitespace));
+                                writer.Close();
+                            }
+                            outputFilestream.Close();
+                        }
                     }
-                    outputFilestream.Close();
+                    offset += list.Count;
+
                 }
             }
         }
