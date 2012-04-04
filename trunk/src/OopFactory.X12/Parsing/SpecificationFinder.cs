@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace OopFactory.X12.Parsing
 {
     public class SpecificationFinder : ISpecificationFinder
     {
+        private static readonly object syncObject = new object();
+
         public virtual TransactionSpecification FindTransactionSpec(string functionalCode, string versionCode, string transactionSetCode)
         {
             switch (transactionSetCode)
@@ -28,12 +31,12 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("270-4010");
                 case "271":
                     if (versionCode.Contains("5010"))
-                        return GetSpecification("271-5010"); 
+                        return GetSpecification("271-5010");
                     else
                         return GetSpecification("271-4010");
                 case "276":
                 case "277":
-                    return GetSpecification("276-5010"); 
+                    return GetSpecification("276-5010");
                 case "278":
                     return GetSpecification("278-5010");
                 case "322":
@@ -41,7 +44,7 @@ namespace OopFactory.X12.Parsing
                 case "417":
                     return GetSpecification("417");
                 case "810":
-                    return GetSpecification("810-4010"); 
+                    return GetSpecification("810-4010");
                 case "820":
                     return GetSpecification("820-4010");
                 case "832":
@@ -50,15 +53,15 @@ namespace OopFactory.X12.Parsing
                     if (versionCode.Contains("5010"))
                         return GetSpecification("834-5010");
                     else
-                        return GetSpecification("834-4010"); 
+                        return GetSpecification("834-4010");
                 case "835":
                     if (versionCode.Contains("5010"))
                         return GetSpecification("835-5010");
                     else
-                        return GetSpecification("835-4010"); 
+                        return GetSpecification("835-4010");
                 case "837":
                     if (versionCode.Contains("5010"))
-                        return GetSpecification("837-5010"); 
+                        return GetSpecification("837-5010");
                     else
                         return GetSpecification("837-4010");
                 case "846":
@@ -69,14 +72,14 @@ namespace OopFactory.X12.Parsing
                     return GetSpecification("855-4010");
                 case "856":
                     return GetSpecification("856-4010");
-				case "860":
-					return GetSpecification("860-4010");
+                case "860":
+                    return GetSpecification("860-4010");
                 case "866":
                     return GetSpecification("866-4010");
                 case "873":
                     return GetSpecification("873-4010");
                 case "997":
-                    return GetSpecification("997-4010"); 
+                    return GetSpecification("997-4010");
                 case "999":
                     return GetSpecification("999-5010");
                 default:
@@ -103,71 +106,72 @@ namespace OopFactory.X12.Parsing
         private static Dictionary<string, SegmentSpecification> _4010Specification;
         private static Dictionary<string, SegmentSpecification> Get4010Spec()
         {
-            if (_4010Specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-4010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
-                _4010Specification = new Dictionary<string, SegmentSpecification>();
-                foreach (var segment in set.Segments)
+            lock (syncObject)
+                if (_4010Specification == null)
                 {
-                    foreach (var element in segment.Elements)
+                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-4010Specification.xml");
+                    StreamReader reader = new StreamReader(specStream);
+                    SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
+                    _4010Specification = new Dictionary<string, SegmentSpecification>();
+                    foreach (var segment in set.Segments)
                     {
-                        if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                        foreach (var element in segment.Elements)
                         {
-                            var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
-                            if (qualifierSet != null)
-                                element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                            if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                            {
+                                var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
+                                if (qualifierSet != null)
+                                    element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                            }
                         }
+                        _4010Specification.Add(segment.SegmentId, segment);
                     }
-                    _4010Specification.Add(segment.SegmentId, segment);
                 }
-            }
             return _4010Specification;
         }
 
         private static Dictionary<string, SegmentSpecification> _5010Specification;
         private static Dictionary<string, SegmentSpecification> Get5010Spec()
         {
-            if (_5010Specification == null)
-            {
-                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-5010Specification.xml");
-                StreamReader reader = new StreamReader(specStream);
-                SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
-                _5010Specification = new Dictionary<string, SegmentSpecification>();
-                foreach (var segment in set.Segments)
+            lock (syncObject)
+                if (_5010Specification == null)
                 {
-                    foreach (var element in segment.Elements)
+                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-5010Specification.xml");
+                    StreamReader reader = new StreamReader(specStream);
+                    SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
+                    _5010Specification = new Dictionary<string, SegmentSpecification>();
+                    foreach (var segment in set.Segments)
                     {
-                        if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                        foreach (var element in segment.Elements)
                         {
-                            var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
-                            if (qualifierSet != null)
-                                element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                            if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetRef))
+                            {
+                                var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
+                                if (qualifierSet != null)
+                                    element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                            }
                         }
-                    }
 
-                    _5010Specification.Add(segment.SegmentId, segment);
+                        _5010Specification.Add(segment.SegmentId, segment);
+                    }
                 }
-            }
             return _5010Specification;
         }
 
-        private static Dictionary<string, TransactionSpecification> _specifications;
-        
+        private static readonly ConcurrentDictionary<string, TransactionSpecification> _specifications;
+
         static SpecificationFinder()
         {
-            _specifications = new Dictionary<string, TransactionSpecification>();
+            _specifications = new ConcurrentDictionary<string, TransactionSpecification>();
         }
 
-        internal static TransactionSpecification GetSpecification(string key)
+        internal static TransactionSpecification GetSpecification(string specKey)
         {
-            if (!_specifications.ContainsKey(key))
+            return _specifications.GetOrAdd(specKey, key =>
             {
                 Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(String.Format("OopFactory.X12.Specifications.Ansi-{0}Specification.xml", key));
-                _specifications.Add(key, TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd()));
-            }
-            return _specifications[key];
+                return TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd());
+            });
         }
     }
 }
