@@ -350,6 +350,8 @@
     <Allowed ID="40">Receiver</Allowed>
     <Allowed ID="41">Submitter</Allowed>
     <Allowed ID="45">Drop-off Location</Allowed>
+    <Allowed ID="71">Attending Physician</Allowed>
+    <Allowed ID="72">Operating Physician</Allowed>
     <Allowed ID="74">Corrected Insured</Allowed>
     <Allowed ID="77">Service Location</Allowed>
     <Allowed ID="7S">Pipeline Segment</Allowed>

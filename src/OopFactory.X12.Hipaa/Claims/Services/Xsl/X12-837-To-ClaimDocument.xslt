@@ -150,6 +150,7 @@
       <xsl:apply-templates select="PWK"/>
       <xsl:apply-templates select="DTP"/>
       <xsl:apply-templates select="AMT"/>
+      <xsl:apply-templates select="REF"/>
       <xsl:apply-templates select="NTE"/>
       <xsl:apply-templates select="HI"/>
       <xsl:apply-templates select="Loop"/>
@@ -306,6 +307,11 @@
         <xsl:if test="string-length(SV109)>0">
           <xsl:attribute name="EmergencyIndicator">
             <xsl:value-of select="SV109"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="string-length(SV111)>0">
+          <xsl:attribute name="EpsdtIndicator">
+            <xsl:value-of select="SV111"/>
           </xsl:attribute>
         </xsl:if>
         <xsl:choose>

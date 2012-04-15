@@ -131,6 +131,9 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlElement(ElementName = "Provider")]
         public List<Provider> Providers { get; set; }
 
+        [XmlElement(ElementName = "Identification")]
+        public List<Identification> Identifications { get; set; }
+
         #endregion
 
         [XmlElement(ElementName = "Note")]
