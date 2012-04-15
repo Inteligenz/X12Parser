@@ -31,6 +31,8 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string EmergencyIndicator { get; set; }
         [XmlAttribute]
+        public string EpsdtIndicator { get; set; }
+        [XmlAttribute]
         public string DiagnosisCodePointer1 { get; set; }
         [XmlAttribute]
         public string DiagnosisCodePointer2 { get; set; }

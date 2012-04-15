@@ -70,20 +70,32 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             hcfa.Field01_TypeOfCoverageIsFECABlkLung = false;
             hcfa.Field01_TypeOfCoverageIsGroupHealthPlan = false;
 
+            ClaimMember patient = claim.Patient ?? claim.Subscriber;
             ClaimMember subscriber = claim.Subscriber;
 
-            // XXX: Is subscriber == insured??
             hcfa.Field01a_InsuredsIDNumber = "";
-            if (subscriber != null &&
+            if (!string.IsNullOrEmpty(patient.MemberId))
+            {
+                hcfa.Field01a_InsuredsIDNumber = patient.MemberId;
+            }
+            else if (patient != null &&
+                patient.Name != null &&
+                patient.Name.Identification != null &&
+                patient.Name.Identification.Id != null)
+            {
+                hcfa.Field01a_InsuredsIDNumber = patient.Name.Identification.Id;
+            }
+            else if (!string.IsNullOrEmpty(subscriber.MemberId))
+            {
+                hcfa.Field01a_InsuredsIDNumber = subscriber.MemberId;
+            }
+            else if (subscriber != null &&
                 subscriber.Name != null &&
                 subscriber.Name.Identification != null &&
                 subscriber.Name.Identification.Id != null)
             {
                 hcfa.Field01a_InsuredsIDNumber = subscriber.Name.Identification.Id;
             }
-
-            ClaimMember patient = claim.Patient ?? claim.Subscriber;
-
             
             // Patient Name
             hcfa.Field02_PatientsName = "";
@@ -292,9 +304,22 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (otherDiagnoses.Count >= 3)
                 hcfa.Field21_Diagnosis4 = otherDiagnoses[2].FormattedCode();
 
-            
-            hcfa.Field22_MedicaidSubmissionCode = string.Empty;
-            hcfa.Field22_OriginalReferenceNumber = string.Empty;
+            var frequencyType = "";
+            if (claim.BillTypeCode.Length == 3)
+            {
+                frequencyType = claim.BillTypeCode.Substring(2, 1);
+            }
+            if (frequencyType == "7" || frequencyType == "8")
+                hcfa.Field22_MedicaidSubmissionCode = frequencyType;
+            else
+                hcfa.Field22_MedicaidSubmissionCode = string.Empty;
+
+            var originalRef = claim.Identifications.FirstOrDefault(id => id.Qualifier == "F8");
+
+            if (originalRef != null)
+                hcfa.Field22_OriginalReferenceNumber = originalRef.Id;
+            else
+                hcfa.Field22_OriginalReferenceNumber = string.Empty;
 
             hcfa.Field23_PriorAuthorizationNumber = claim.PriorAuthorizationNumber;
 
@@ -338,7 +363,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                 hcfaLine.Charges = line.ChargeAmount;
                 hcfaLine.DaysOrUnits = line.Quantity;
-                hcfaLine.EarlyPeriodicScreeningDiagnosisAndTreatment = string.Empty;
+                hcfaLine.EarlyPeriodicScreeningDiagnosisAndTreatment = line.EpsdtIndicator;
 
                 if (line.RenderingProvider != null && !string.IsNullOrWhiteSpace(line.RenderingProvider.Npi))
                     hcfaLine.RenderingProviderNpi = line.RenderingProvider.Npi;
