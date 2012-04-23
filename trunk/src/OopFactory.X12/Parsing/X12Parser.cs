@@ -49,6 +49,7 @@ namespace OopFactory.X12.Parsing
                 return null;
         }
 
+        [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(string x12)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(x12);
@@ -58,11 +59,24 @@ namespace OopFactory.X12.Parsing
             }
         }
 
+        [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(Stream stream)
         {
-            return ParseMultiple(stream).FirstOrDefault();
+            var interchanges = ParseMultiple(stream);
+            if (interchanges.Count > 1)
+                throw new ApplicationException("Your file contains more than one interchange, you must use ParseMultiple instead of Parse to get all the records in this file.");
+            return interchanges.FirstOrDefault();
         }
-                       
+
+        public List<Interchange> ParseMultiple(string x12)
+        {
+            byte[] byteArray = Encoding.UTF8.GetBytes(x12);
+            using (MemoryStream mstream = new MemoryStream(byteArray))
+            {
+                return ParseMultiple(mstream);
+            }
+        }
+
         public List<Interchange> ParseMultiple(Stream stream)
         {
             var envelopes = new List<Interchange>();
@@ -233,7 +247,7 @@ namespace OopFactory.X12.Parsing
                 x12.AppendFormat("{0}{1}", iea, terminator);
                 using (MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString())))
                 {
-                    interchanges.Add(Parse(mstream));
+                    interchanges.AddRange(ParseMultiple(mstream));
                 }
             }
             return interchanges;
@@ -260,7 +274,7 @@ namespace OopFactory.X12.Parsing
                     x12.AppendFormat("{0}{1}", iea, terminator);
                     using (MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString())))
                     {
-                        interchanges.Add(Parse(mstream));
+                        interchanges.AddRange(ParseMultiple(mstream));
                     }
                 }
             }

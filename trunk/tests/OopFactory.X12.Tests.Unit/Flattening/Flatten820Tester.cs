@@ -21,7 +21,7 @@ namespace OopFactory.X12.Tests.Unit.Flattening
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(stream);
+            Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 
             XmlDocument doc = new XmlDocument();
@@ -58,7 +58,7 @@ namespace OopFactory.X12.Tests.Unit.Flattening
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(stream);
+            Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 
             var transform = new XslCompiledTransform();

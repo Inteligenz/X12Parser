@@ -70,7 +70,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Stream stream = GetEdi(resourcePath);
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(stream);
+            Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".xml"), FileMode.Create).PrintToFile(xml);
@@ -93,7 +93,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             {
                 stream = GetEdi(resourcePath);
                 parser = new X12Parser(new DentalClaimSpecificationFinder());
-                interchange = parser.Parse(stream);
+                interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837D.xml"), FileMode.Create).PrintToFile(xml);
@@ -104,7 +104,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             {
                 stream = GetEdi(resourcePath);
                 parser = new X12Parser(new InstitutionalClaimSpecificationFinder());
-                interchange = parser.Parse(stream);
+                interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837I.xml"), FileMode.Create).PrintToFile(xml);
@@ -141,13 +141,13 @@ namespace OopFactory.X12.Tests.Unit.Parsing
                 Stream stream = GetEdi(resourcePath);
 
                 var parser = new X12Parser();
-                Interchange interchange = parser.Parse(stream);
+                Interchange interchange = parser.ParseMultiple(stream).First();
                 string originalX12 = interchange.SerializeToX12(true);
 
                 string xml = interchange.Serialize();
                 string x12 = parser.TransformToX12(xml);
 
-                Interchange newInterchange = parser.Parse(x12);
+                Interchange newInterchange = parser.ParseMultiple(x12).First();
                 string newX12 = newInterchange.SerializeToX12(true);
 
                 Assert.AreEqual(originalX12, newX12);
@@ -162,10 +162,13 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
-            var service = new X12HtmlTransformationService(new X12EdiParsingService(false));
-            string html = service.Transform(new StreamReader(stream).ReadToEnd());
+            if (!resourcePath.Contains("MultipleInterchanges"))
+            {
+                var service = new X12HtmlTransformationService(new X12EdiParsingService(false));
+                string html = service.Transform(new StreamReader(stream).ReadToEnd());
 
-            Trace.Write(html);
+                Trace.Write(html);
+            }
 
 #if DEBUG
             new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
