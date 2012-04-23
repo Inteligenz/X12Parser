@@ -34,6 +34,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Note" type="tns:Lookup" />
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceLine" type="tns:ServiceLine" />
     </xs:sequence>
+    <xs:attribute name="Version" type="xs:string" />
     <xs:attribute name="Type" type="tns:ClaimTypeEnum" use="required" />
     <xs:attribute name="RelatedCauseCode1" type="xs:string" />
     <xs:attribute name="RelatedCauseCode2" type="xs:string" />

@@ -19,6 +19,9 @@
   <xsl:template match="Loop[@LoopId='2300']">
     <Claim>
       <xsl:variable name="ParentLoopId" select="../@LoopId"/>
+      <xsl:attribute name="Version">
+        <xsl:value-of select="/Interchange/FunctionGroup/GS/GS08"/>
+      </xsl:attribute>
       <xsl:attribute name="Type">
         <xsl:choose>
           <xsl:when test="count(Loop/SV1) > 0">Professional</xsl:when>

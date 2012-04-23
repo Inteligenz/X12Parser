@@ -27,7 +27,8 @@ namespace OopFactory.X12.Hipaa.Claims
             if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
             if (OtherSubscriberInformations == null) OtherSubscriberInformations = new List<OtherSubscriberInformation>();
         }
-
+        [XmlAttribute]
+        public string Version { get; set; }
         [XmlAttribute]
         public ClaimTypeEnum Type { get; set; }
         [XmlAttribute]

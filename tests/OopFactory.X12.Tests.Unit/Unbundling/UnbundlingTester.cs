@@ -18,7 +18,7 @@ namespace OopFactory.X12.Tests.Unit.Unbundling
         public void UnbundleItemsFrom856Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("ORD._856.Example1.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("ORD._856.Example1.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "ITEM");
             foreach (var item in list)
@@ -186,7 +186,7 @@ IEA*1*000000905~";
         public void UnbundleClaimsFrom837Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._5010.Example1_2_And_3_Combined.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._837P._5010.Example1_2_And_3_Combined.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2300");
             Assert.AreEqual(3, list.Count);
@@ -205,7 +205,7 @@ IEA*1*000000905~";
         public void Unbundle835FromNthTest()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.FromNth.835_DeIdent_02.dat"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._835._4010.FromNth.835_DeIdent_02.dat")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2000");
             Assert.AreEqual(6, list.Count);
@@ -317,7 +317,7 @@ IEA*1*000000905~";
 IEA*1*004075123~";
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2000");
             Assert.AreEqual(1, list.Count);
@@ -356,7 +356,7 @@ IEA*1*004075123~";
 IEA*1*004075123~";
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2100");
             Assert.AreEqual(9, list.Count);
@@ -368,7 +368,7 @@ IEA*1*004075123~";
         public void Unbundling835ByLoop2110()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._835._4010.Example1_GripElements.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2110");
             Assert.AreEqual(9, list.Count);
@@ -378,7 +378,7 @@ IEA*1*004075123~";
         public void UnbundleClaimsIn837FromNthTest()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._4010.FromNth.837_DeIdent_05.dat"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._837P._4010.FromNth.837_DeIdent_05.dat")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2300");
             Assert.AreEqual(186, list.Count);
@@ -426,7 +426,7 @@ IEA*1*004075123~";
 IEA*1*000000905~";
 
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(Extensions.GetEdi("INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt"));
+            Interchange interchange = parser.ParseMultiple(Extensions.GetEdi("INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt")).First();
 
             var list = parser.UnbundleByLoop(interchange, "2400");
 

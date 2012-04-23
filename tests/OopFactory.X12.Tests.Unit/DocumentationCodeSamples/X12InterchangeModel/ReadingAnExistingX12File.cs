@@ -37,7 +37,7 @@ namespace OopFactory.X12.Tests.Unit.DocumentationCodeSamples.X12InterchangeModel
         public void Read270Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.Parse(new MemoryStream(Encoding.ASCII.GetBytes(inquiry)));
+            Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(inquiry))).First();
 
             Assert.AreEqual("9088877320000  ", interchange.InterchangeReceiverId);
 
