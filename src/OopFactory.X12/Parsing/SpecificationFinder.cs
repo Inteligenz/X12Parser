@@ -45,6 +45,8 @@ namespace OopFactory.X12.Parsing
                     return GetSpecification("417");
                 case "810":
                     return GetSpecification("810-4010");
+                case "811":
+                    return GetSpecification("811-4010");
                 case "820":
                     return GetSpecification("820-4010");
                 case "832":

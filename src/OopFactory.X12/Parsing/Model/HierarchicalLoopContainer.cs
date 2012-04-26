@@ -37,7 +37,7 @@ namespace OopFactory.X12.Parsing.Model
             var hl = new HierarchicalLoop(this, _delimiters, segmentString);
 
             hl.Specification = transaction.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
-                hls => hls.LevelCode.ToString() == hl.LevelCode);
+                hls => hls.LevelCode == null || hls.LevelCode.ToString() == hl.LevelCode);
 
             if (hl.Specification == null)
                 throw new TransactionValidationException("{0} Transaction does not expect {2} level code value {3} that appears in transaction control number {1}.",
