@@ -9,7 +9,15 @@
   <Segment SegmentId="ITD"/>
   <Segment SegmentId="DTM"/>
   <Segment SegmentId="TXI"/>
+  <Segment SegmentId="TD1"/>
   <Segment SegmentId="TD5"/>
+  <Segment SegmentId="PKG"/>
+  <Segment SegmentId="MSG"/>
+  <Loop LoopId="SPI">
+    <Name></Name>
+    <StartingSegment SegmentId="SPI"/>
+    <Segment SegmentId="MSG"/>
+  </Loop>
   <Loop LoopId="N9">
     <Name></Name>
     <StartingSegment SegmentId="N9"/>
@@ -52,6 +60,7 @@
     <Segment SegmentId="CTP"/>
     <Segment SegmentId="PO4"/>
     <Segment SegmentId="SDQ"/>
+    <Segment SegmentId="MSG"/>
     <Loop LoopId="N1">
       <Name></Name>
       <StartingSegment SegmentId="N1">

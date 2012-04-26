@@ -392,6 +392,9 @@
       <SourceUrl>http://www.adobe.com/partnerportal/edi/pdf/850_ANSIX12_SW_update100108_000.pdf</SourceUrl>
       <ResourcePath>ORD._850.Example4_Adobe_ShrinkWrapped.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <ResourcePath>ORD._850.From_aojuk.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="860">
     <EdiFile>

@@ -76,6 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_850\From_aojuk.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_270\_5010\From_georgiosd.txt" />
     <Content Include="Parsing\_SampleEdiFiles\INS\_835\_5010\ExampleFromNth.txt" />
