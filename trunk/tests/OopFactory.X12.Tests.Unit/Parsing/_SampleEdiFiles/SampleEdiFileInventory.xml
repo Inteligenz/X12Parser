@@ -170,6 +170,16 @@
       <ResourcePath>ORD._810.Example5_Walmart.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="811">
+    <EdiFile>
+      <SourceUrl>http://www.granitenet.com/Content/pdfs/Granite_811_guide_version1_5.pdf</SourceUrl>
+      <ResourcePath>ORD._811.GraniteNetExample.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>https://www.gxsolc.com/geisnet/public/billing/811_Implementation_Guide.html</SourceUrl>
+      <ResourcePath>ORD._811.GXSOLC_Example.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="820">
     <EdiFile>
       <SourcePath>http://www.mortgagebankers.org/files/Technology/EDI820.pdf</SourcePath>
