@@ -17,6 +17,10 @@ namespace OopFactory.X12.Hipaa.Claims
             if (Amounts == null) Amounts = new List<QualifiedAmount>();
             if (Providers == null) Providers = new List<Provider>();
         }
+        [XmlAttribute]
+        public string BenefitsAssignmentCertificationIndicator { get; set; }
+        [XmlAttribute]
+        public string ReleaseOfInformationCode { get; set; }
 
         public decimal? PayorPaidAmount
         {

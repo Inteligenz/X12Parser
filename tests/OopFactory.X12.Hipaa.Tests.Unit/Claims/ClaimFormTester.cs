@@ -301,10 +301,10 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
             ub.Field68.Line1 = 'R'.Repeat(9);
             ub.Field68.Line2 = 'S'.Repeat(9);
 
-            ub.Field69_AdmittingDiagnosisCode = "987.65";
-            ub.Field70a_PatientReasonDiagnosisCode = "876.54";
-            ub.Field70b_PatientReasonDiagnosisCode = "765.43";
-            ub.Field70c_PatientReasonDiagnosisCode = "654.32";
+            ub.Field69_AdmittingDiagnosisCode.Code = "987.65";
+            ub.Field70a_PatientReasonDiagnosisCode.Code = "876.54";
+            ub.Field70b_PatientReasonDiagnosisCode.Code = "765.43";
+            ub.Field70c_PatientReasonDiagnosisCode.Code = "654.32";
             ub.Field71_PPSCode = "ABCDE";
             ub.Field72a_ExternalCauseOfInjury.Code = "543.21";
             ub.Field72a_ExternalCauseOfInjury.PresentOnAdmissionIndicator = "T";

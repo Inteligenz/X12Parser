@@ -84,6 +84,10 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             if (Field67P_Diagnosis == null) Field67P_Diagnosis = new UB04Diagnosis();
             if (Field67Q_Diagnosis == null) Field67Q_Diagnosis = new UB04Diagnosis();
             if (Field68 == null) Field68 = new UB04Block();
+            if (Field69_AdmittingDiagnosisCode == null) Field69_AdmittingDiagnosisCode = new UB04Diagnosis();
+            if (Field70a_PatientReasonDiagnosisCode == null) Field70a_PatientReasonDiagnosisCode = new UB04Diagnosis();
+            if (Field70b_PatientReasonDiagnosisCode == null) Field70b_PatientReasonDiagnosisCode = new UB04Diagnosis();
+            if (Field70c_PatientReasonDiagnosisCode == null) Field70c_PatientReasonDiagnosisCode = new UB04Diagnosis();
             if (Field72a_ExternalCauseOfInjury == null) Field72a_ExternalCauseOfInjury = new UB04Diagnosis();
             if (Field72b_ExternalCauseOfInjury == null) Field72b_ExternalCauseOfInjury = new UB04Diagnosis();
             if (Field72c_ExternalCauseOfInjury == null) Field72c_ExternalCauseOfInjury = new UB04Diagnosis();
@@ -289,11 +293,11 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         
         public UB04Block Field68 { get; set; }
 
-        public string Field69_AdmittingDiagnosisCode { get; set; }
-        
-        public string Field70a_PatientReasonDiagnosisCode { get; set ; }
-        public string Field70b_PatientReasonDiagnosisCode { get; set; }
-        public string Field70c_PatientReasonDiagnosisCode { get; set; }
+        public UB04Diagnosis Field69_AdmittingDiagnosisCode { get; set; }
+
+        public UB04Diagnosis Field70a_PatientReasonDiagnosisCode { get; set; }
+        public UB04Diagnosis Field70b_PatientReasonDiagnosisCode { get; set; }
+        public UB04Diagnosis Field70c_PatientReasonDiagnosisCode { get; set; }
         
         /// <summary>
         /// Field 71 - Prospective Payment System (PPS) Code.  Identifies the DRG based on the grouper software

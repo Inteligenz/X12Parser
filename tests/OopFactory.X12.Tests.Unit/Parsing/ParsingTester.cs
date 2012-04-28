@@ -168,11 +168,10 @@ namespace OopFactory.X12.Tests.Unit.Parsing
                 string html = service.Transform(new StreamReader(stream).ReadToEnd());
 
                 Trace.Write(html);
-            }
-
 #if DEBUG
-            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
+                new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
 #endif
+            }
         }
 
         [TestMethod, Ignore]

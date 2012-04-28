@@ -56,6 +56,10 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string ProviderAcceptAssignmentCode { get; set; }
         [XmlAttribute]
+        public string BenefitsAssignmentCertificationIndicator { get; set; }
+        [XmlAttribute]
+        public string ReleaseOfInformationCode { get; set; }
+        [XmlAttribute]
         public string PriorAuthorizationNumber { get; set; }
 
         [XmlElement(ElementName = "Date")]
