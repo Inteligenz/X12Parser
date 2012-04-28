@@ -61,6 +61,16 @@
           <xsl:value-of select="CLM/CLM07"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="string-length(CLM/CLM08)>0">
+        <xsl:attribute name="BenefitsAssignmentCertificationIndicator">
+          <xsl:value-of select="CLM/CLM08"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length(CLM/CLM09)>0">
+        <xsl:attribute name="ReleaseOfInformationCode">
+          <xsl:value-of select="CLM/CLM09"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="string-length(CLM/CLM11)>0">
         <xsl:if test="CLM/CLM11/CLM1101">
           <xsl:attribute name="RelatedCauseCode1">
@@ -163,6 +173,16 @@
   <!-- Other subscriber information loop -->
   <xsl:template match="Loop[@LoopId='2320']">
     <OtherSubscriberInformation>
+      <xsl:if test="string-length(OI/OI03)>0">
+        <xsl:attribute name="BenefitsAssignmentCertificationIndicator">
+          <xsl:value-of select="OI/OI03"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length(OI/OI06)>0">
+        <xsl:attribute name="ReleaseOfInformationCode">
+          <xsl:value-of select="OI/OI06"/>
+        </xsl:attribute>
+      </xsl:if>
       <Name>
         <xsl:call-template name="EntityName">
           <xsl:with-param name="Loop" select="Loop[@LoopId='2330A']"/>

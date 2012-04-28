@@ -92,8 +92,10 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             if (string.IsNullOrWhiteSpace(Code) || Code.Length <= 3 || Code.Contains('.'))
                 return Code;
-            else
+            else if (Version == CodeListEnum.ICD9)
                 return String.Format("{0}.{1}", Code.Substring(0, 3), Code.Substring(3));
+            else
+                return Code;
 
         }
 

@@ -175,22 +175,67 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (claim.Payer != null)
             {
                 ub.PayerA_Primary.Field50_PayerName = claim.Payer.Name.Formatted();
+                ub.PayerA_Primary.Field51_HealthPlanId = claim.Payer.Name.Identification.Id;
             }
+            ub.PayerA_Primary.Field52_ReleaseOfInfoCertIndicator = claim.ReleaseOfInformationCode;
+            ub.PayerA_Primary.Field53_AssignmentOfBenefitsCertIndicator = claim.BenefitsAssignmentCertificationIndicator;
 
             ub.PayerA_Primary.Field58_InsuredsName = claim.Subscriber.Name.Formatted();
-            if (claim.Patient != null && claim.Patient.Relationship != null)
-                ub.PayerA_Primary.Field59_PatientRelationship = claim.Patient.Relationship.Code;
-            else
-                ub.PayerA_Primary.Field59_PatientRelationship = "18"; // self
+            ub.PayerA_Primary.Field59_PatientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
 
             ub.PayerA_Primary.Field60_InsuredsUniqueId = claim.Subscriber.MemberId;
-            ub.PayerA_Primary.Field62_InsuredsGroupNumber = claim.Subscriber.GroupNumber;
+            ub.PayerA_Primary.Field61_GroupName = claim.SubscriberInformation.Name;
+            ub.PayerA_Primary.Field62_InsuredsGroupNumber = claim.SubscriberInformation.ReferenceIdentification;
 
             if (claim.OtherSubscriberInformations.Count > 0)
             {
-                var otherSubscriber = claim.OtherSubscriberInformations[0];
-                
+                var secondarySubscriber = claim.OtherSubscriberInformations[0];
+                if (secondarySubscriber.OtherPayer != null)
+                {
+                    ub.PayerB_Secondary.Field50_PayerName = secondarySubscriber.OtherPayer.Formatted();
+                    ub.PayerB_Secondary.Field51_HealthPlanId = secondarySubscriber.OtherPayer.Identification.Id;
+                }
+                ub.PayerB_Secondary.Field52_ReleaseOfInfoCertIndicator = secondarySubscriber.ReleaseOfInformationCode;
+                ub.PayerB_Secondary.Field53_AssignmentOfBenefitsCertIndicator = secondarySubscriber.BenefitsAssignmentCertificationIndicator;
+                ub.PayerB_Secondary.Field54_PriorPayments = secondarySubscriber.PayorPaidAmount;
+                ub.PayerB_Secondary.Field55_EstimatedAmountDue = secondarySubscriber.RemainingPatientLiability;
+
+                ub.PayerB_Secondary.Field58_InsuredsName = secondarySubscriber.Name.Formatted();
+                ub.PayerB_Secondary.Field59_PatientRelationship = secondarySubscriber.SubscriberInformation.IndividualRelationshipCode;
+                ub.PayerB_Secondary.Field60_InsuredsUniqueId = secondarySubscriber.Name.Identification.Id;
+                ub.PayerB_Secondary.Field61_GroupName = secondarySubscriber.SubscriberInformation.Name;
+                ub.PayerB_Secondary.Field62_InsuredsGroupNumber = secondarySubscriber.SubscriberInformation.ReferenceIdentification;
             }
+
+
+            if (claim.OtherSubscriberInformations.Count > 1)
+            {
+                var TertiarySubscriber = claim.OtherSubscriberInformations[1];
+                if (TertiarySubscriber.OtherPayer != null)
+                {
+                    ub.PayerC_Tertiary.Field50_PayerName = TertiarySubscriber.OtherPayer.Formatted();
+                    ub.PayerC_Tertiary.Field51_HealthPlanId = TertiarySubscriber.OtherPayer.Identification.Id;
+                }
+                ub.PayerC_Tertiary.Field52_ReleaseOfInfoCertIndicator = TertiarySubscriber.ReleaseOfInformationCode;
+                ub.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator = TertiarySubscriber.BenefitsAssignmentCertificationIndicator;
+                ub.PayerC_Tertiary.Field54_PriorPayments = TertiarySubscriber.PayorPaidAmount;
+                ub.PayerC_Tertiary.Field55_EstimatedAmountDue = TertiarySubscriber.RemainingPatientLiability;
+
+                ub.PayerC_Tertiary.Field58_InsuredsName = TertiarySubscriber.Name.Formatted();
+                ub.PayerC_Tertiary.Field59_PatientRelationship = TertiarySubscriber.SubscriberInformation.IndividualRelationshipCode;
+                ub.PayerC_Tertiary.Field60_InsuredsUniqueId = TertiarySubscriber.Name.Identification.Id;
+                ub.PayerC_Tertiary.Field61_GroupName = TertiarySubscriber.SubscriberInformation.Name;
+                ub.PayerC_Tertiary.Field62_InsuredsGroupNumber = TertiarySubscriber.SubscriberInformation.ReferenceIdentification;
+            }
+            
+            ub.Field63A_TreatmentAuthorizationCode = claim.PriorAuthorizationNumber;
+            var controlNumbers = claim.Identifications.Where(id => (new string[] {"F8","D9","9A","9C","LX"}).Contains(id.Qualifier)).ToList();
+            if (controlNumbers.Count > 0)
+                ub.Field64A_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[0].Qualifier, controlNumbers[0].Id);
+            if (controlNumbers.Count > 1)
+                ub.Field64B_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[1].Qualifier, controlNumbers[1].Id);
+            if (controlNumbers.Count > 2)
+                ub.Field64C_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[2].Qualifier, controlNumbers[2].Id);
 
 
             if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
@@ -221,11 +266,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             var admittingDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Admitting);
             if (admittingDiagnosis != null)
-                ub.Field69_AdmittingDiagnosisCode = admittingDiagnosis.Code;
+                ub.Field69_AdmittingDiagnosisCode.CopyFrom(admittingDiagnosis);
             var patientReasonDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.PatientReason).ToList();
-            if (patientReasonDiagnoses.Count > 0) ub.Field70a_PatientReasonDiagnosisCode = patientReasonDiagnoses[0].Code;
-            if (patientReasonDiagnoses.Count > 1) ub.Field70b_PatientReasonDiagnosisCode = patientReasonDiagnoses[1].Code;
-            if (patientReasonDiagnoses.Count > 2) ub.Field70c_PatientReasonDiagnosisCode = patientReasonDiagnoses[2].Code;
+            if (patientReasonDiagnoses.Count > 0) ub.Field70a_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[0]);
+            if (patientReasonDiagnoses.Count > 1) ub.Field70b_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[1]);
+            if (patientReasonDiagnoses.Count > 2) ub.Field70c_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[2]);
 
             if (claim.DiagnosisRelatedGroup != null)
                 ub.Field71_PPSCode = claim.DiagnosisRelatedGroup.Code;
@@ -250,6 +295,12 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 ub.Field76_AttendingPhysician.Npi = claim.AttendingProvider.Npi;
                 ub.Field76_AttendingPhysician.LastName = claim.AttendingProvider.Name.LastName;
                 ub.Field76_AttendingPhysician.FirstName = claim.AttendingProvider.Name.FirstName;
+                var id = claim.AttendingProvider.Identifications.FirstOrDefault();
+                if (id != null)
+                {
+                    ub.Field76_AttendingPhysician.IdentifierQualifier = id.Qualifier;
+                    ub.Field76_AttendingPhysician.Identifier = id.Id;
+                }
             }
 
             if (claim.OperatingPhysician != null)
@@ -257,6 +308,12 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 ub.Field77_OperatingPhysician.Npi = claim.OperatingPhysician.Npi;
                 ub.Field77_OperatingPhysician.LastName = claim.OperatingPhysician.Name.LastName;
                 ub.Field77_OperatingPhysician.FirstName = claim.OperatingPhysician.Name.FirstName;
+                var id = claim.OperatingPhysician.Identifications.FirstOrDefault();
+                if (id != null)
+                {
+                    ub.Field77_OperatingPhysician.IdentifierQualifier = id.Qualifier;
+                    ub.Field77_OperatingPhysician.Identifier = id.Id;
+                }
             }
 
             if (claim.OtherOperatingPhysician != null)
@@ -264,6 +321,12 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 ub.Field78_OtherProvider.Npi = claim.OtherOperatingPhysician.Npi;
                 ub.Field78_OtherProvider.LastName = claim.OtherOperatingPhysician.Name.LastName;
                 ub.Field78_OtherProvider.FirstName = claim.OtherOperatingPhysician.Name.FirstName;
+                var id = claim.OtherOperatingPhysician.Identifications.FirstOrDefault();
+                if (id != null)
+                {
+                    ub.Field78_OtherProvider.IdentifierQualifier = id.Qualifier;
+                    ub.Field78_OtherProvider.Identifier = id.Id;
+                }
             }
 
             return ub;
@@ -648,12 +711,12 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 90, 54, 9, ub04.Field68.Line2);
 
                     // Box 69 - Admitting Diagnosis
-                    AddBlock(page, 6, 55, 6, ub04.Field69_AdmittingDiagnosisCode);
+                    AddBlock(page, 6, 55, 6, ub04.Field69_AdmittingDiagnosisCode.Code);
 
                     // Box 70 - Patient Reason Diagnosis
-                    AddBlock(page, 21, 55, 6, ub04.Field70a_PatientReasonDiagnosisCode);
-                    AddBlock(page, 29, 55, 6, ub04.Field70b_PatientReasonDiagnosisCode);
-                    AddBlock(page, 38, 55, 6, ub04.Field70c_PatientReasonDiagnosisCode);
+                    AddBlock(page, 21, 55, 6, ub04.Field70a_PatientReasonDiagnosisCode.Code);
+                    AddBlock(page, 29, 55, 6, ub04.Field70b_PatientReasonDiagnosisCode.Code);
+                    AddBlock(page, 38, 55, 6, ub04.Field70c_PatientReasonDiagnosisCode.Code);
 
                     // Box 71 - PPS Code
                     AddBlock(page, 51, 55, 5, ub04.Field71_PPSCode);
