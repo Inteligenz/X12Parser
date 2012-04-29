@@ -24,6 +24,20 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
          * budget.  For that reason, this and the related X12 Parser project tools are all open
          * source and freely usable.
          */
+        public HCFA1500Claim()
+        {
+            if (Field03_PatientsDateOfBirth == null) Field03_PatientsDateOfBirth = new FormDate();
+            if (Field09b_OtherInsuredsDateOfBirth == null) Field09b_OtherInsuredsDateOfBirth = new FormDate();
+            if (Field11a_InsuredsDateOfBirth == null) Field11a_InsuredsDateOfBirth = new FormDate();
+            if (Field12_PatientsOrAuthorizedSignatureDate == null) Field12_PatientsOrAuthorizedSignatureDate = new FormDate();
+            if (Field14_DateOfCurrentIllnessInjuryOrPregnancy == null) Field14_DateOfCurrentIllnessInjuryOrPregnancy = new FormDate();
+            if (Field15_DatePatientHadSameOrSimilarIllness == null) Field15_DatePatientHadSameOrSimilarIllness = new FormDate();
+            if (Field16_DatePatientUnableToWork_Start == null) Field16_DatePatientUnableToWork_Start = new FormDate();
+            if (Field16_DatePatientUnableToWork_End == null) Field16_DatePatientUnableToWork_End = new FormDate();
+            if (Field18_HospitalizationDateFrom == null) Field18_HospitalizationDateFrom = new FormDate();
+            if (Field18_HospitalizationDateTo == null) Field18_HospitalizationDateTo = new FormDate();
+            if (Field24_ServiceLines == null) Field24_ServiceLines = new List<HCFA1500ServiceLine>();
+        }
 
         // Fields in the HCFA1500 object model are defined in the order they appear on the HCFA1500 form.
 

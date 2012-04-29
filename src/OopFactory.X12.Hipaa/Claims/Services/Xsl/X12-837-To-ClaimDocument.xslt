@@ -173,6 +173,18 @@
   <!-- Other subscriber information loop -->
   <xsl:template match="Loop[@LoopId='2320']">
     <OtherSubscriberInformation>
+      <xsl:if test="count(DMG) > 0">
+        <xsl:attribute name="Gender">
+          <xsl:choose>
+            <xsl:when test="DMG/DMG03='F'">Female</xsl:when>
+            <xsl:when test="DMG/DMG03='M'">Male</xsl:when>
+            <xsl:otherwise>Unknown</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="DateOfBirth">
+          <xsl:value-of select="concat(substring(DMG/DMG02,1,4),'-',substring(DMG/DMG02,5,2),'-',substring(DMG/DMG02,7,2))"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="string-length(OI/OI03)>0">
         <xsl:attribute name="BenefitsAssignmentCertificationIndicator">
           <xsl:value-of select="OI/OI03"/>
