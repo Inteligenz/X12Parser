@@ -18,6 +18,28 @@ namespace OopFactory.X12.Hipaa.Claims
             if (Providers == null) Providers = new List<Provider>();
         }
         [XmlAttribute]
+        public GenderEnum Gender { get; set; }
+
+        [XmlIgnore]
+        public DateTime? DateOfBirth { get; set; }
+
+        #region Serializable DateOfBirth Properties
+        [XmlAttribute(AttributeName = "DateOfBirth", DataType = "date")]
+        public DateTime SerializableDateOfBirth
+        {
+            get { return DateOfBirth ?? DateTime.MinValue; }
+            set { DateOfBirth = value; }
+        }
+
+        [XmlIgnore]
+        public bool SerializableDateOfBirthSpecified
+        {
+            get { return DateOfBirth.HasValue; }
+            set { }
+        }
+        #endregion
+
+        [XmlAttribute]
         public string BenefitsAssignmentCertificationIndicator { get; set; }
         [XmlAttribute]
         public string ReleaseOfInformationCode { get; set; }
