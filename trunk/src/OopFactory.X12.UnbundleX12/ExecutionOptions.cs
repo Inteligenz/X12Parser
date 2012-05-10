@@ -30,10 +30,16 @@ Example2: UnbundleX12 c:\\Inbound\*.edi ST c:\\Output");
             if (args.Length > 0)
             {
                 int endDirectoryIndex = args[0].LastIndexOf('\\');
+                int endDirectoryIndex2 = args[0].LastIndexOf('/');
                 if (endDirectoryIndex > 0)
                 {
                     InputDirectory = args[0].Substring(0, endDirectoryIndex);
                     FilenamePattern = args[0].Substring(endDirectoryIndex + 1);
+                }
+                else if (endDirectoryIndex2 > 0)
+                {
+                    InputDirectory = args[0].Substring(0, endDirectoryIndex2);
+                    FilenamePattern = args[0].Substring(endDirectoryIndex2 + 1);
                 }
                 else
                     FilenamePattern = args[0];
