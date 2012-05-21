@@ -68,7 +68,7 @@
       <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
       <Segment SegmentId="PER"/>
-      <Segment SegmentId="FOB"/>    
+      <Segment SegmentId="FOB"/>
     </Loop>
     <Loop LoopId="SF" Usage="Required" LoopRepeat="1">
       <Name>Ship From</Name>
@@ -101,11 +101,18 @@
     <Segment SegmentId="TD5" Usage="Required" Repeat="1"/>
     <Segment SegmentId="PID"/>
     <Segment SegmentId="TD1"/>
+    <Segment SegmentId="REF"/>
     <Loop LoopId="BY" Usage="Required" LoopRepeat="1">
       <Name>Buying Party</Name>
       <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
         <EntityIdentifier Code="BY"/>
       </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
     </Loop>
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="TARE" Usage="Required" LevelCode="T">
@@ -115,7 +122,7 @@
   <HierarchicalLoop LoopId="PACK" Usage="Required" LevelCode="P">
     <Name>PACK</Name>
     <Segment SegmentId="MAN" Usage="Required" Repeat="1"/>
-  </HierarchicalLoop>  
+  </HierarchicalLoop>
   <HierarchicalLoop LoopId="ITEM" Usage="Required" LevelCode="I">
     <Name>ITEM</Name>
     <Segment SegmentId="LIN"/>

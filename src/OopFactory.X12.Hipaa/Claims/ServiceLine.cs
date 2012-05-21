@@ -18,6 +18,9 @@ namespace OopFactory.X12.Hipaa.Claims
             if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
             if (Notes == null) Notes = new List<Lookup>();
             if (Providers == null) Providers = new List<Provider>();
+
+            if (OralCavityDesignations == null) OralCavityDesignations = new List<Lookup>();
+            if (ToothInformations == null) ToothInformations = new List<ToothInformation>();
         }
 
         [XmlAttribute]
@@ -154,5 +157,10 @@ namespace OopFactory.X12.Hipaa.Claims
         public Provider AmbulancePickupLocation { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "PW"); } }
         public Provider AmbulanceDropoffLocation { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "45"); } }
 
+        [XmlElement(ElementName = "OralCavityDesignation")]
+        public List<Common.Lookup> OralCavityDesignations { get; set; }
+
+        [XmlElement(ElementName = "ToothInformation")]
+        public List<ToothInformation> ToothInformations { get; set; }
     }
 }

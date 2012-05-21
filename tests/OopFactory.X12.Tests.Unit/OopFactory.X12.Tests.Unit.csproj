@@ -76,6 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\FromGregarican.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_811\GXSOLC_Example.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_811\GraniteNetExample.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_850\From_aojuk.txt" />

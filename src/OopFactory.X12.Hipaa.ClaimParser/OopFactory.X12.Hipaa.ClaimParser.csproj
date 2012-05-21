@@ -66,6 +66,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ADAJ400_Red.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HCFA1500_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -78,7 +81,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)*.dll" "$(SolutionDir)Release\"
+    <PostBuildEvent>copy "$(TargetDir)*.gif" "$(SolutionDir)Release\"
+copy "$(TargetDir)*.dll" "$(SolutionDir)Release\"
 copy "$(TargetDir)$(TargetName)$(TargetExt)*" "$(SolutionDir)Release\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
