@@ -13,6 +13,9 @@
         <fo:simple-page-master page-width="8.5in" page-height="11in" margin="0.0in" master-name="ub04">
           <fo:region-body margin-top="0.0in" margin-left="0.0in" margin-right="0.0in" />
         </fo:simple-page-master>
+        <fo:simple-page-master page-width="8.5in" page-height="11in" margin="0.0in" master-name="j400">
+          <fo:region-body margin-top="0.0in" margin-left="0.0in" margin-right="0.0in" />
+        </fo:simple-page-master>
       </fo:layout-master-set>
       <xsl:for-each select="Page">
         <fo:page-sequence>
@@ -31,6 +34,11 @@
             </xsl:if>
             <xsl:for-each select="Block">
               <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="4px">
+                <xsl:if test="string-length(LetterSpacing)>0">
+                  <xsl:attribute name="letter-spacing">
+                    <xsl:value-of select="LetterSpacing"/>
+                  </xsl:attribute>
+                </xsl:if>
                 <xsl:attribute name="text-align"><xsl:value-of select="TextAlign"/></xsl:attribute>
                 <xsl:attribute name="left"><xsl:value-of select="Left"/>in</xsl:attribute>
                 <xsl:attribute name="top"><xsl:value-of select="Top"/>in</xsl:attribute>

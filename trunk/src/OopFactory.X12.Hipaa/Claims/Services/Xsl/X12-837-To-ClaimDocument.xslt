@@ -410,8 +410,92 @@
           <xsl:with-param name="element" select="SV202"/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:for-each select="SV3">
+        <xsl:attribute name="ChargeAmount">
+          <xsl:value-of select="SV302"/>
+        </xsl:attribute>
+        <xsl:attribute name="Quantity">
+          <xsl:value-of select="SV306"/>
+        </xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="string-length(SV311/SV31101)>0">
+            <xsl:attribute name="DiagnosisCodePointer1">
+              <xsl:value-of select="SV311/SV31101"/>
+            </xsl:attribute>
+            <xsl:if test="string-length(SV311/SV31102)>0">
+              <xsl:attribute name="DiagnosisCodePointer2">
+                <xsl:value-of select="SV311/SV31102"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="string-length(SV311/SV31103)>0">
+              <xsl:attribute name="DiagnosisCodePointer3">
+                <xsl:value-of select="SV311/SV31103"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="string-length(SV311/SV31104)>0">
+              <xsl:attribute name="DiagnosisCodePointer4">
+                <xsl:value-of select="SV311/SV31104"/>
+              </xsl:attribute>
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="DiagnosisCodePointer1">
+              <xsl:value-of select="SV311"/>
+            </xsl:attribute>
+          </xsl:otherwise>
+        </xsl:choose>
+        <PlaceOfService>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="SV303"/>
+          </xsl:attribute>
+          <xsl:value-of select="SV303/comment()"/>
+        </PlaceOfService>
+        <xsl:call-template name="MedicalProcedure">
+          <xsl:with-param name="element" select="SV301"/>
+        </xsl:call-template>
+        <xsl:if test="string-length(SV304/SV30401)>0">
+          <OralCavityDesignation>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="SV304/SV30401"/>
+            </xsl:attribute>
+          </OralCavityDesignation>
+        </xsl:if>
+        <xsl:if test="string-length(SV304/SV30402)>0">
+          <OralCavityDesignation>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="SV304/SV30402"/>
+            </xsl:attribute>
+          </OralCavityDesignation>
+        </xsl:if>
+        <xsl:if test="string-length(SV304/SV30403)>0">
+          <OralCavityDesignation>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="SV304/SV30403"/>
+            </xsl:attribute>
+          </OralCavityDesignation>
+        </xsl:if>
+        <xsl:if test="string-length(SV304/SV30404)>0">
+          <OralCavityDesignation>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="SV304/SV30404"/>
+            </xsl:attribute>
+          </OralCavityDesignation>
+        </xsl:if>
+        <xsl:if test="string-length(SV304/SV30405)>0">
+          <OralCavityDesignation>
+            <xsl:attribute name="Code">
+              <xsl:value-of select="SV304/SV30405"/>
+            </xsl:attribute>
+          </OralCavityDesignation>
+        </xsl:if>
+      </xsl:for-each>
+      <xsl:apply-templates select="TOO"/>
       <xsl:apply-templates select="PWK"/>
       <xsl:apply-templates select="DTP"/>
+      <!-- Grab service date from claim level if not specified at the line level -->
+      <xsl:if test="count(DTP[DTP01='472'])=0">
+        <xsl:apply-templates select="../DTP[DTP01='472']"/>
+      </xsl:if>
       <xsl:apply-templates select="REF"/>
       <xsl:apply-templates select="AMT"/>
       <xsl:apply-templates select="NTE"/>
@@ -445,7 +529,11 @@
             <xsl:value-of select="concat(substring(DMG/DMG02,1,4),'-',substring(DMG/DMG02,5,2),'-',substring(DMG/DMG02,7,2))"/>
           </xsl:attribute>
         </xsl:if>
-        
+        <Relationship>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="../PAT/PAT01"/>
+          </xsl:attribute>
+        </Relationship>
         <Name>
           <xsl:call-template name="EntityName">
             <xsl:with-param name="Loop" select="."/>
@@ -514,6 +602,11 @@
             <xsl:value-of select="concat(substring(DMG/DMG02,1,4),'-',substring(DMG/DMG02,5,2),'-',substring(DMG/DMG02,7,2))"/>
           </xsl:attribute>
         </xsl:if>
+        <Relationship>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="../SBR/SBR02"/>
+          </xsl:attribute>
+        </Relationship>
         <Name>
           <xsl:call-template name="EntityName">
             <xsl:with-param name="Loop" select="."/>
@@ -545,6 +638,42 @@
         <xsl:apply-templates select="REF"/>
       </Payer>
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="TOO">
+    <ToothInformation>
+        <xsl:attribute name="ToothCode">
+          <xsl:value-of select="TOO02"/>
+        </xsl:attribute>
+      <xsl:if test="string-length(TOO03/TOO0301)>0">
+        <ToothSurface>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="TOO03/TOO0301"/>
+          </xsl:attribute>
+        </ToothSurface>
+      </xsl:if>
+      <xsl:if test="string-length(TOO03/TOO0302)>0">
+        <ToothSurface>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="TOO03/TOO0302"/>
+          </xsl:attribute>
+        </ToothSurface>
+      </xsl:if>
+      <xsl:if test="string-length(TOO03/TOO0303)>0">
+        <ToothSurface>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="TOO03/TOO0303"/>
+          </xsl:attribute>
+        </ToothSurface>
+      </xsl:if>
+      <xsl:if test="string-length(TOO03/TOO0304)>0">
+        <ToothSurface>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="TOO03/TOO0304"/>
+          </xsl:attribute>
+        </ToothSurface>
+      </xsl:if>
+    </ToothInformation>
   </xsl:template>
 
   <!-- Common Templates -->

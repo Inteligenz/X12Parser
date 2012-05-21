@@ -17,7 +17,7 @@ namespace OopFactory.X12.Hipaa.ClaimParser
             var service = new ClaimFormTransformationService(
                 new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
                 new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif"),
-                new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"));
+                new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"));
 
             foreach (var filename in Directory.GetFiles(opts.Path, opts.SearchPattern, SearchOption.TopDirectoryOnly))
             {

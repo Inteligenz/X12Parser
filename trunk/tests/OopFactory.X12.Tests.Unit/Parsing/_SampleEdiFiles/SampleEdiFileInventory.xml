@@ -443,6 +443,9 @@
       <ResourcePath>ORD._856.Example3.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
+      <ResourcePath>ORD._856.FromGregarican.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <SourceUrl>Provided by user sprdave</SourceUrl>
       <ResourcePath>ORD._856.Example4.txt</ResourcePath>
     </EdiFile>

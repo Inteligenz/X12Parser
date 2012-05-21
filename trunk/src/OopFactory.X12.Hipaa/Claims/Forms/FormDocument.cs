@@ -16,6 +16,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
 
     public class FormBlock
     {
+        public string LetterSpacing { get; set; }
         public TextAlignEnum TextAlign { get; set; }
         public decimal Left { get; set; }
         public decimal Top { get; set; }
@@ -42,6 +43,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
         {
             if (Pages == null) Pages = new List<FormPage>();
         }
+
         [XmlElement(ElementName="Page")]
         public List<FormPage> Pages { get; set; }
 

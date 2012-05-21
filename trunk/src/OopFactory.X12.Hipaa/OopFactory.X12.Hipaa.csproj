@@ -16,6 +16,7 @@
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs11</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,9 @@
     <Compile Include="Claims\ClaimsAdjustment.cs" />
     <Compile Include="Claims\Diagnosis.cs" />
     <Compile Include="Claims\DrugIdentification.cs" />
+    <Compile Include="Claims\Forms\Dental\J400Block.cs" />
+    <Compile Include="Claims\Forms\Dental\J400Claim.cs" />
+    <Compile Include="Claims\Forms\Dental\J400ServiceLine.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
     <Compile Include="Claims\Forms\FormDocument.cs" />
@@ -80,11 +84,12 @@
     <Compile Include="Claims\Forms\Professional\HCFA1500ServiceLine.cs" />
     <Compile Include="Claims\Claim.cs" />
     <Compile Include="Claims\Services\ClaimFormTransformationService.cs" />
+    <Compile Include="Claims\Services\DentalClaimToJ400FormTransformation.cs" />
     <Compile Include="Claims\Services\IClaimToClaimFormTransfomation.cs" />
     <Compile Include="Claims\Services\InstitutionalClaimToUB04ClaimFormTransformation.cs" />
     <Compile Include="Claims\Services\LocalExtensions.cs" />
     <Compile Include="Claims\Services\ProfessionalClaimToHcfa1500FormTransformation.cs" />
-    <Compile Include="Claims\Services\Ub04ClaimTransformationArgs.cs" />
+    <Compile Include="Claims\ToothInformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />

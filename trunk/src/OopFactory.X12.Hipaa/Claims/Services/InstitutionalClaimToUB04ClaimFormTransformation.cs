@@ -17,16 +17,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             _formImagePath = formImagePath;
         }
 
-        public delegate void TransformCompletedHandler(object sender, Ub04ClaimTransformationArgs args);
-        public event TransformCompletedHandler TransformCompleted;
-
-        protected void OnTransformCompleted(Ub04ClaimTransformationArgs args)
-        {
-            if (TransformCompleted != null)
-                TransformCompleted(this, args);
-        }
-
-
         /// <summary>
         /// Implementation of mapping as described at http://ahca.myflorida.com/Medicaid/meds/pdf/837i_v2-1_crosswalk_v2.pdf
         /// Detailed instructions found at https://www.cms.gov/transmittals/downloads/R1104CP.pdf
@@ -809,7 +799,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         public List<FormPage> TransformClaimToClaimFormFoXml(Claim claim)
         {
             UB04Claim ub04 = TransformClaimToUB04(claim);
-            OnTransformCompleted(new Ub04ClaimTransformationArgs(claim, ub04));
 
             return TransformUB04ToFormPages(ub04);
         }
