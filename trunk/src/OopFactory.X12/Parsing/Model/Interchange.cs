@@ -23,7 +23,7 @@ namespace OopFactory.X12.Parsing.Model
             _functionGroups = new List<FunctionGroup>();
         }
 
-        internal Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production,  X12DelimiterSet delimiters)
+        internal Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production, X12DelimiterSet delimiters)
             : base(null, delimiters, String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}{4:000000000}{1}1{1}{5}{1}{2}{0}",
                 delimiters.SegmentTerminator, delimiters.ElementSeparator, delimiters.SubElementSeparator, date, controlNumber, production ? "P" : "T"))
         {
@@ -36,9 +36,9 @@ namespace OopFactory.X12.Parsing.Model
             SetTerminatingTrailerSegment(String.Format("IEA{0}0{0}{2:000000000}{1}", delimiters.ElementSeparator, delimiters.SegmentTerminator, controlNumber));
         }
 
-        public Interchange (DateTime date, int controlNumber, bool production)
+        public Interchange(DateTime date, int controlNumber, bool production)
             : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':'))
-        {            
+        {
         }
 
         public Interchange(DateTime date, int controlNumber, bool production, char segmentTerminator, char elementSeparator, char subElementSeparator)
@@ -109,7 +109,7 @@ namespace OopFactory.X12.Parsing.Model
                     return date;
                 else
                     throw new ArgumentException(String.Format("{0} and {1} in ISA09 and ISA10 cannot be converted into a date and time.", GetElement(9), GetElement(10)));
-                
+
             }
             set
             {
@@ -117,7 +117,7 @@ namespace OopFactory.X12.Parsing.Model
                 SetElement(10, string.Format("{0:hhmm}", value));
             }
         }
-        
+
         public IEnumerable<FunctionGroup> FunctionGroups
         {
             get { return _functionGroups; }
@@ -190,7 +190,17 @@ namespace OopFactory.X12.Parsing.Model
             }
 
             foreach (XmlComment comment in comments)
+            {
+                XmlWhitespace prev = comment.PreviousSibling as XmlWhitespace;
+                XmlWhitespace next = comment.NextSibling as XmlWhitespace;
+                if (prev != null && prev.Value != null & prev.Value.StartsWith(Environment.NewLine)
+                    && next != null && next.Value != null && next.Value.StartsWith(Environment.NewLine))
+                {
+                    element.RemoveChild(next);
+                }
+
                 element.RemoveChild(comment);
+            }
 
             foreach (XmlNode childElement in element.ChildNodes)
             {
@@ -215,11 +225,11 @@ namespace OopFactory.X12.Parsing.Model
             if (suppressComments)
             {
                 XmlDocument doc = new XmlDocument();
+                doc.PreserveWhitespace = true;
                 doc.LoadXml(xml);
                 RemoveComments((XmlElement)doc.SelectSingleNode("Interchange"));
 
                 xml = doc.OuterXml;
-                
             }
             return xml;
         }
