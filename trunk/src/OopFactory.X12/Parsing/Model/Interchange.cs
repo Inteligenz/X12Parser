@@ -213,11 +213,9 @@ namespace OopFactory.X12.Parsing.Model
 
         public virtual string Serialize(bool suppressComments)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(
-                this.GetType());
             MemoryStream memoryStream = new MemoryStream();
 
-            xmlSerializer.Serialize(memoryStream, this);
+            Serialize(memoryStream);
             memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
             StreamReader streamReader = new StreamReader(memoryStream);
             string xml = streamReader.ReadToEnd();
@@ -233,6 +231,15 @@ namespace OopFactory.X12.Parsing.Model
             }
             return xml;
         }
+
+        public virtual void Serialize(Stream outputStream)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(
+                this.GetType());
+
+            xmlSerializer.Serialize(outputStream, this);
+        }
+
 
         #region IXmlSerializable Members
 
