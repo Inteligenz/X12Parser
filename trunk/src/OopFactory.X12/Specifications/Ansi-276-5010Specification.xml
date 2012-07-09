@@ -31,6 +31,7 @@
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
       <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="REF"/>
       <Segment SegmentId="QTY"/> 
       <Segment SegmentId="AMT"/>
     </Loop>
@@ -48,6 +49,7 @@
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="STC"/>
       <!-- This might only exist in 005010X214. -->
+      <Segment SegmentId="REF"/>
       <Segment SegmentId="QTY"/>
       <Segment SegmentId="AMT"/>
     </Loop>
