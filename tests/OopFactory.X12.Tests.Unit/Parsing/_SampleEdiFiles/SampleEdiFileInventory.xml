@@ -99,6 +99,18 @@
       <ResourcePath>INS._276._5010.277_Deidentified_from_nth.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="277">
+    <EdiFile>
+      <SourceUrl>http://www.ngscedi.com/5010/5010.htm</SourceUrl>
+      <ResourcePath>INS._277._5010.FromAlexbrodsky.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._277._5010.FromBogeyone.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._277._5010.FromLatitude81uk.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="278">
     <EdiFile>
       <ResourcePath>INS._278._5010.Example_3_1_1_Request.txt</ResourcePath>
