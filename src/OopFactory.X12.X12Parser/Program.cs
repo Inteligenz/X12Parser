@@ -14,10 +14,17 @@ namespace OopFactory.X12.X12Parser
             
             string x12Filename = args[0];
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
-
+                        
             FileStream fs = new FileStream(x12Filename, FileMode.Open);
+            // peak at first 6 characters to determine if this is a unicode file
+            byte[] header = new byte[6];
+            fs.Read(header, 0, 6);
+            fs.Close();
+            Encoding encoding = (header[1] == 0 && header[3] == 0 && header[5] == 0) ? Encoding.Unicode : Encoding.UTF8;
+
+            fs = new FileStream(x12Filename, FileMode.Open);
             OopFactory.X12.Parsing.X12Parser parser = new Parsing.X12Parser();
-            var interchanges = parser.ParseMultiple(fs);
+            var interchanges = parser.ParseMultiple(fs, encoding);
             fs.Close();
             if (interchanges.Count >= 1)
             {
