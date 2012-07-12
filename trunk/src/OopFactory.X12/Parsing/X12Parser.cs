@@ -79,9 +79,14 @@ namespace OopFactory.X12.Parsing
 
         public List<Interchange> ParseMultiple(Stream stream)
         {
+            return ParseMultiple(stream, Encoding.UTF8);
+        }
+
+        public List<Interchange> ParseMultiple(Stream stream, Encoding encoding)
+        {
             var envelopes = new List<Interchange>();
 
-            using (StreamReader reader = new StreamReader(stream))
+            using (StreamReader reader = new StreamReader(stream, encoding, true))
             {
                 char[] header = new char[106];
                 if (reader.Read(header, 0, 106) < 106)

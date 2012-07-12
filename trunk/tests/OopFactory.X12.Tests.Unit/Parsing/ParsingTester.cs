@@ -198,5 +198,16 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             edi.Append((char)0);
             System.IO.File.WriteAllText(filename, edi.ToString());
         }
+
+        [TestMethod]
+        public void ParseUnicodeFile()
+        {
+            var fs = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles.INS._837P._5010.UnicodeExample.txt");
+
+
+            X12Parser parser = new X12Parser();
+            var interchange = parser.ParseMultiple(fs, Encoding.Unicode);
+            Trace.Write(interchange.First().Serialize());
+        }
     }
 }
