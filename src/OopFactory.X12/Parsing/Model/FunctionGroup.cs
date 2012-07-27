@@ -56,7 +56,7 @@ namespace OopFactory.X12.Parsing.Model
             get
             {
                 DateTime date;
-                if (DateTime.TryParseExact(GetElement(4) + GetElement(5), "yyyyMMddhhmm", null, System.Globalization.DateTimeStyles.None, out date))
+                if (DateTime.TryParseExact(GetElement(4) + GetElement(5), "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
                 else if (DateTime.TryParseExact(GetElement(4), "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;

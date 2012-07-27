@@ -24,7 +24,7 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         internal Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production, X12DelimiterSet delimiters)
-            : base(null, delimiters, String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:hhmm}{1}U{1}00401{1}{4:000000000}{1}1{1}{5}{1}{2}{0}",
+            : base(null, delimiters, String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:HHmm}{1}U{1}00401{1}{4:000000000}{1}1{1}{5}{1}{2}{0}",
                 delimiters.SegmentTerminator, delimiters.ElementSeparator, delimiters.SubElementSeparator, date, controlNumber, production ? "P" : "T"))
         {
             _specFinder = specFinder;
@@ -103,7 +103,7 @@ namespace OopFactory.X12.Parsing.Model
             get
             {
                 DateTime date;
-                if (DateTime.TryParseExact(GetElement(9) + GetElement(10), "yyMMddhhmm", null, System.Globalization.DateTimeStyles.None, out date))
+                if (DateTime.TryParseExact(GetElement(9) + GetElement(10), "yyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
                 else if (DateTime.TryParseExact(GetElement(9), "yyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
@@ -114,7 +114,7 @@ namespace OopFactory.X12.Parsing.Model
             set
             {
                 SetElement(9, string.Format("{0:yyMMdd}", value));
-                SetElement(10, string.Format("{0:hhmm}", value));
+                SetElement(10, string.Format("{0:HHmm}", value));
             }
         }
 
