@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="824">
+  <Segment SegmentId="BGN" Usage="Required"/>
+  <Loop LoopId="N1" >
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="OTI" >
+    <Name>ORIGINAL TRANSACTION IDENTIFICATION</Name>
+    <StartingSegment SegmentId="OTI" Usage="Required"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="C001"/>
+    <Segment SegmentId="N1"/>
+    <Segment SegmentId="NM1"/>
+    <Loop LoopId="TED" >
+      <Name>ERROR OR INFORMATIONAL MESSAGE LOCATION</Name>
+      <StartingSegment SegmentId="TED"/>
+      <Segment SegmentId="CTX"/>
+      <Segment SegmentId="NTE"/>
+      <Segment SegmentId="RED"/>
+    </Loop>
+    <Loop LoopId="LM" >
+      <Name></Name>
+      <StartingSegment SegmentId="LM"/>
+      <Loop LoopId="LQ" >
+        <Name></Name>
+        <StartingSegment SegmentId="LQ" Usage="Required" />
+        <Segment SegmentId="RED"/>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Segment SegmentId="SE" Usage="Required" Trailer="true"/>
+</TransactionSpecification>

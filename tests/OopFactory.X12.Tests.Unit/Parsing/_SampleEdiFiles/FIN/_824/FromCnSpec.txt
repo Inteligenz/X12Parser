@@ -1,0 +1,18 @@
+﻿ISA*04*SW824     *00*          *02*CN             *ZZ*ABCD           *081029*1134*U*00401*000033030*0*P*_
+  GS*AG*CN*ABCD*20081029*1134*33030*X*004010
+    ST*824*33030001
+      BGN*00*404*20081029*1134
+      OTI*TE*BM*006394***20081029*1033*40860*408600001
+        REF*EQ*CNIS789012
+        REF*WY*580191
+        TED*024*A problem has been detected in the electronic bill of lading
+          NTE**This shipment cannot move due to a railroad restriction that is
+          NTE**in effect. View the AAR website http://aarembargo.railinc.com
+          NTE**for further information on embargoes and OPSL restrictions.
+          NTE**If further assistance is required email EDIMGR@CN.CA.
+          NTE**Please contact your local EDI Support Center if further
+          NTE**information is required. If you are uncertain how to contact
+          NTE**your local EDI Support Center phone us at 800-267-9779.
+    SE*14*33030001
+  GE*1*33030
+IEA*1*000033030

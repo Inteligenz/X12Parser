@@ -86,6 +86,8 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_277\_5010\FromAlexbrodsky.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_277\_5010\FromBogeyone.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_277\_5010\FromLatitude81uk.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\FIN\_824\FromCnSpec.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\FIN\_824\FromTmhpSpec.txt" />
     <Content Include="Parsing\_SampleEdiFiles\INS\_835\_5010\ExampleFromNth.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_5010\FromNth\835_WithMultipleInterchanges.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample.txt" />
