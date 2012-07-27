@@ -232,14 +232,12 @@ namespace OopFactory.X12.Parsing.Model
             return xml;
         }
 
-        public virtual void Serialize(Stream outputStream)
+        public void Serialize(Stream stream)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(
-                this.GetType());
-
-            xmlSerializer.Serialize(outputStream, this);
+            XmlSerializer xmlSerializer = new XmlSerializer(this.GetType());
+            
+            xmlSerializer.Serialize(stream, this);
         }
-
 
         #region IXmlSerializable Members
 
