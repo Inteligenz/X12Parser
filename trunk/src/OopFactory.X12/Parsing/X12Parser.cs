@@ -26,28 +26,6 @@ namespace OopFactory.X12.Parsing
         {
 
         }
-        private string ReadNextSegment(StreamReader reader, char segmentDelimiter)
-        {
-            StringBuilder sb = new StringBuilder();
-            char[] one = new char[1];
-            while (reader.Read(one, 0, 1) == 1)
-            {
-                if (one[0] == segmentDelimiter)
-                    break;
-                else if (one[0] != 0)
-                    sb.Append(one);
-            }
-            return sb.ToString().TrimStart();
-        }
-
-        private string ReadSegmentId(string segmentString, char elementDelimiter)
-        {
-            int index = segmentString.IndexOf(elementDelimiter);
-            if (index >= 0)
-                return segmentString.Substring(0, index);
-            else
-                return null;
-        }
 
         [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(string x12)
@@ -86,30 +64,24 @@ namespace OopFactory.X12.Parsing
         {
             var envelopes = new List<Interchange>();
 
-            using (StreamReader reader = new StreamReader(stream, encoding, true))
+            using (X12StreamReader reader = new X12StreamReader(stream, encoding))
             {
-                char[] header = new char[106];
-                if (reader.Read(header, 0, 106) < 106)
-                    throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
-
-                X12DelimiterSet delimiters = new X12DelimiterSet(header);
-
-                Interchange envelop = new Interchange(_specFinder, new string(header));
+                Interchange envelop = new Interchange(_specFinder, reader.CurrentIsaSegment);
                 envelopes.Add(envelop);
                 Container currentContainer = envelop;
                 FunctionGroup fg = null;
                 Transaction tr = null;
                 Dictionary<string, HierarchicalLoop> hloops = new Dictionary<string, HierarchicalLoop>();
 
-                string segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
-                string segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+                string segmentString = reader.ReadNextSegment();
+                string segmentId = reader.ReadSegmentId(segmentString);
                 int segmentIndex = 1;
                 while (segmentString.Length > 0)
                 {
                     switch (segmentId)
                     {
                         case "ISA":
-                            envelop = new Interchange(_specFinder, segmentString + delimiters.SegmentTerminator);
+                            envelop = new Interchange(_specFinder, segmentString + reader.Delimiters.SegmentTerminator);
                             envelopes.Add(envelop);
                             currentContainer = envelop;
                             fg = null;
@@ -148,7 +120,7 @@ namespace OopFactory.X12.Parsing
                             tr = null;
                             break;
                         case "HL":
-                            Segment hlSegment = new Segment(null, delimiters, segmentString);
+                            Segment hlSegment = new Segment(null, reader.Delimiters, segmentString);
                             string id = hlSegment.GetElement(1);
                             string parentId = hlSegment.GetElement(2);
 
@@ -210,8 +182,8 @@ namespace OopFactory.X12.Parsing
                             break;
 
                     }
-                    segmentString = ReadNextSegment(reader, delimiters.SegmentTerminator);
-                    segmentId = ReadSegmentId(segmentString, delimiters.ElementSeparator);
+                    segmentString = reader.ReadNextSegment();
+                    segmentId = reader.ReadSegmentId(segmentString);
                     segmentIndex++;
                 }
                 return envelopes;
