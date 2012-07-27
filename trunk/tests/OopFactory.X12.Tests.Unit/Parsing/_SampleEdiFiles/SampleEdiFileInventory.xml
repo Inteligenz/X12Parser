@@ -222,6 +222,16 @@
       <ResourcePath>ORD._820.Example7_FromScott.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="824">
+    <EdiFile>
+      <SourceUrl>http://www.cn.ca/documents/Customer-Service/edi_824_implementation_guide.pdf</SourceUrl>
+      <ResourcePath>FIN._824.FromCnSpec.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.tmhp.com/EDI%20Companion%20Guides/Acute%20Care/Version%205010/824%20COMPANION%20GUIDE_5010.pdf</SourceUrl>
+      <ResourcePath>FIN._824.FromTmhpSpec.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="832">
     <EdiFile>
       <SourceUrl>http://www.hibcc.org/ebus/editemplates/EDI%20PDF%2011-21-05/832ex1.pdf</SourceUrl>
