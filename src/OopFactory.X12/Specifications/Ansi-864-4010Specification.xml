@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="864">
+  <Segment SegmentId="BMG" Usage="Required"/>
+  <Segment SegmentId="DTM"/>
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="MIT" LoopRepeat="200">
+    <Name>Message</Name>
+    <StartingSegment SegmentId="MIT" Usage="Required"/>
+    <Loop LoopId="N1" LoopRepeat="200">
+      <Name></Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Segment SegmentId="MSG" Usage="Required"/>
+  </Loop>
+</TransactionSpecification>
