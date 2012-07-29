@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="275">
+  <Segment SegmentId="BGN"/>
+  <Loop LoopId="1000A">
+    <Name>TRANSACTION RECEIVER</Name>
+    <StartingSegment SegmentId="NM1">
+      <EntityIdentifier Code="40"/>
+    </StartingSegment>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="1000B">
+    <Name>SUBMITTER INFORMATION</Name>
+    <StartingSegment SegmentId="NM1">
+      <EntityIdentifier Code="41"/>
+    </StartingSegment>
+  </Loop>
+  <Loop LoopId="1000C">
+    <Name>SERVICE PROVIDER INFORMATION</Name>
+    <StartingSegment SegmentId="NM1">
+      <EntityIdentifier Code="1P"/>
+    </StartingSegment>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <Loop LoopId="1000D">
+    <Name>PATIENT NAME</Name>
+    <StartingSegment SegmentId="NM1">
+      <EntityIdentifier Code="QC"/>
+    </StartingSegment>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTP"/>
+  </Loop>
+  <Loop LoopId="2000A">
+    <Name>ASSIGNED NUMBER</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="TRN"/>
+    <Segment SegmentId="STC"/>
+    <Segment SegmentId="REF"/>
+    <Loop LoopId="2100">
+      <StartingSegment SegmentId="DTP"/>
+      <Segment SegmentId="CAT"/>
+      <Loop LoopId="2110B">
+        <Name>ELECTRONIC FORMAT IDENTIFICATION</Name>
+        <StartingSegment SegmentId="EFI"/>
+        <Segment SegmentId="BIN"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

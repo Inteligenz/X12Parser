@@ -1,0 +1,23 @@
+﻿ISA*00*          *01*SECRET    *ZZ*SUBMITTERS ID  *ZZ*RECEIVERS ID   *930602*1253*^*00405*000000905*1*T*:~
+  GS*PI*SENDER CODE*RECEIVER CODE*19940331*0802*1*X*004050X151~
+    ST*275*1001*004050X151~
+      BGN*11*0001*20030915~
+      NM1*40*2*ABC INSURANCE COMPANY*****XV*12345~
+        PER*IC*MEDICAL REVIEW DEPARTMENT~
+      NM1*41*2*XYZ Clearing House*****46*A222222221~
+      NM1*1P*2*ST HOLY HILLS HOSPITAL*****SV*3999000B~
+      NM1*QC*1*JACKSON*JACK*J***MI*987654320~
+        REF*EJ*JACKSON123~
+        REF*BLT*131~
+        REF*EA*STHHL12345~
+        DTP*434*RD8*20030812-20030812~
+      LX*1~
+        TRN*2*1822634840~
+        STC*R4*18594-2::LOI~
+        DTP*368*D8*20030915~
+          CAT*AE*HL~
+          EFI*05~
+            BIN*268*<levelone xmlns="urn:hl7-org:v3/cda" xmlns:v3dt="urn:hl7-org:v3/v3dt" xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance" xsi:schemaLocation="urn:hl7-org:v3/cdalevelone_1.0.attachments.xsd"><clinical_document_header></clinical_document_header><body></body></levelone>~
+    SE*19*1001~
+  GE*1*1~
+IEA*1*000000905~

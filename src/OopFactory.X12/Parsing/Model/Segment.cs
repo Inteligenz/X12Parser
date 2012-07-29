@@ -31,8 +31,18 @@ namespace OopFactory.X12.Parsing.Model
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
-                    _dataElements.Add(element);
+                if (SegmentId != "BIN")
+                {
+                    foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
+                        _dataElements.Add(element);
+                }
+                else
+                {
+                    separatorIndex = segment.IndexOf(_delimiters.ElementSeparator, 4);
+                    string binarySize = segment.Substring(4, separatorIndex - 4);
+                    _dataElements.Add(binarySize);
+                    _dataElements.Add(segment.Substring(separatorIndex + 1));
+                }
             }
             else
             {
@@ -248,7 +258,7 @@ namespace OopFactory.X12.Parsing.Model
                         writer.WriteComment(SegmentSpec.Elements[i].Name);
                         identifiers = SegmentSpec.Elements[i].AllowedIdentifiers;
                     }
-                    if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0)
+                    if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0 || SegmentId == "BIN")
                     {
                         writer.WriteStartElement(elementName);
                         writer.WriteValue(_dataElements[i]);
