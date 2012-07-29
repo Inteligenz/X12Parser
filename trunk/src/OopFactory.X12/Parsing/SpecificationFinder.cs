@@ -34,6 +34,8 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("271-5010");
                     else
                         return GetSpecification("271-4010");
+                case "275":
+                    return GetSpecification("275-4050");
                 case "276":
                 case "277":
                     return GetSpecification("276-5010");

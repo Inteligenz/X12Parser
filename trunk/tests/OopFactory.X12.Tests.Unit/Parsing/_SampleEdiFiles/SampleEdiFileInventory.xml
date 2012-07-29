@@ -91,6 +91,12 @@
       <ResourcePath>INS._271._5010.Example_3_2_2.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="275">
+    <EdiFile>
+      <SourceUrl>http://www.capario.com/services/resource_center/misc/275%20Implementation%20Guide.pdf</SourceUrl>
+      <ResourcePath>INS._275._4050.FromImplementationGuide_1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="276">
     <EdiFile>
       <ResourcePath>INS._276._5010.Example1_IG.txt</ResourcePath>

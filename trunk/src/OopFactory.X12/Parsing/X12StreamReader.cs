@@ -49,14 +49,28 @@ namespace OopFactory.X12.Parsing
 
         public string ReadNextSegment()
         {
+            bool isBinary = false;
             StringBuilder sb = new StringBuilder();
             char[] one = new char[1];
             while (_reader.Read(one, 0, 1) == 1)
             {
-                if (one[0] == _delimiters.SegmentTerminator)
+                if (one[0] == _delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
+                    continue;
+                else if(one[0] == _delimiters.SegmentTerminator)
                     break;
                 else if (one[0] != 0)
                     sb.Append(one);
+                if (isBinary && one[0] == _delimiters.ElementSeparator)
+                {
+                    int binarySize = 0;
+                    int.TryParse(sb.ToString().Split(_delimiters.ElementSeparator)[1], out binarySize);
+                    char[] buffer = new char[binarySize];
+                    _reader.Read(buffer, 0, binarySize);
+                    sb.Append(buffer);
+                    break;                    
+                }
+                if (!isBinary && sb.ToString() == "BIN" + _delimiters.ElementSeparator)
+                    isBinary = true;
             }
             return sb.ToString().TrimStart();
         }
