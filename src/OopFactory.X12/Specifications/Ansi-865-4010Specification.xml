@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Used http://www.mclaneco.com/www/AnonDocs/McLaneco/EDIStandards/MFS/Suppliers/865POChangeAcknowledgement.pdf -->
+<!-- Used http://www.ni.com/pdf/misc/us/ninsti865.pdf -->
+<!-- Used http://ti.edifice.org/ANSI%20X12%20MIG%20Downloads/TI-865-302.pdf -->
+<!-- Used http://www.iconnect-corp.com/resources/Specs/TycoElectronics/INBound-865_V-4010.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="865">
+  <Segment SegmentId="BCA"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="TAX"/>
+  <Segment SegmentId="FOB"/>
+  <Segment SegmentId="ITD"/>
+  <Segment SegmentId="TD5"/>
+  <Loop LoopId="N9">
+    <StartingSegment SegmentId="N9"/>
+    <Segment SegmentId="MSG"/>
+  </Loop>
+  <Loop LoopId="SAC">
+    <StartingSegment SegmentId="SAC"/>
+  </Loop>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="TD5"/>
+  <Loop LoopId="N1">
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="POC">
+    <StartingSegment SegmentId="POC"/>
+    <Loop LoopId="PID">
+      <StartingSegment SegmentId="PID"/>
+    </Loop>
+    <Loop LoopId="ACK">
+      <StartingSegment SegmentId="ACK"/>
+      <Segment SegmentId="DTM"/>
+    </Loop>
+    <Loop LoopId="SCH">
+      <StartingSegment SegmentId="SCH"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="CTT">
+    <StartingSegment SegmentId="CTT"/>
+  </Loop>
+</TransactionSpecification>

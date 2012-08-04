@@ -76,6 +76,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_865\FromTyco.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_865\FromAdvanceAutoParts.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_865\FromMclaneCo.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_180\FromLowes.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_180\FromEasistandards.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_857\Kroger_CreditExample.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_857\Kroger_DeliveryExample.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_857\AfterMarketSuppliers_Example.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_816\Steinmart_Example1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_816\Steinmart_Example2.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\UnicodeExample.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\FromGregarican.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_811\GXSOLC_Example.txt" />

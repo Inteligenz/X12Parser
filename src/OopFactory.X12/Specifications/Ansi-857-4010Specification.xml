@@ -1,0 +1,877 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="857">
+  <Segment SegmentId="BHT"/>
+  <Segment SegmentId="BCHB"/>
+  <HierarchicalLoop LoopId="HL" LevelCode="D">
+    <Name>PRODUCT DESCRIPTION LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="I">
+    <Name>ITEM LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="O">
+    <Name>ORDER LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="S">
+    <Name>SHIPMENT LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="V">
+    <Name>ADDRESS INFORMATION LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="T">
+    <Name>TARE LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="P">
+    <Name>PACK LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="Q">
+    <Name>SUBPACK LEVEL</Name>
+    <Loop LoopId="BS1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05"/>
+      <Segment SegmentId="TD1"/>
+      <Segment SegmentId="TD3"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TD5"/>
+      <Segment SegmentId="FOB"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="CUR"/>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS"/>
+      <Segment SegmentId="PRF"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="ISS"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="SN1"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="MAN"/>
+    </Loop>
+    <Loop LoopId="BS5">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="IT3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="TD4"/>
+      <Segment SegmentId="TC2"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="ITD"/>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID">
+        <StartingSegment SegmentId="PID"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+      <Loop LoopId="SAC">
+        <StartingSegment SegmentId="SAC"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="FA1">
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>
