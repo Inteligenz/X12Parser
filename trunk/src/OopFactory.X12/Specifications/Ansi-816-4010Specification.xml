@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="816">
+  <Segment SegmentId="BHT"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="REF"/>
+  <Loop LoopId="N1">
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL" LevelCode="4">
+    <Name>Group Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="24">
+    <Name>Supergroup Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="25">
+    <Name>Subgroup Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="26">
+    <Name>Member Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="35">
+    <Name>Company Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="HL" LevelCode="36">
+    <Name>Operating Unit Level</Name>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

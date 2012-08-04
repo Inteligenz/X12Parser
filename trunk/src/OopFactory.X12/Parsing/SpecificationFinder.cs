@@ -22,6 +22,8 @@ namespace OopFactory.X12.Parsing
             {
                 case "110":
                     return GetSpecification("110-4010");
+                case "180":
+                    return GetSpecification("180-4010");
                 case "210":
                     return GetSpecification("210-4010");
                 case "270":
@@ -49,6 +51,8 @@ namespace OopFactory.X12.Parsing
                     return GetSpecification("810-4010");
                 case "811":
                     return GetSpecification("811-4010");
+                case "816":
+                    return GetSpecification("816-4010");
                 case "820":
                     return GetSpecification("820-4010");
                 case "824":
@@ -78,16 +82,22 @@ namespace OopFactory.X12.Parsing
                     return GetSpecification("855-4010");
                 case "856":
                     return GetSpecification("856-4010");
+                case "857":
+                    return GetSpecification("857-4010");
                 case "860":
                     return GetSpecification("860-4010");
                 case "864":
                     return GetSpecification("864-4010");
+                case "865":
+                    return GetSpecification("865-4010");
                 case "866":
                     return GetSpecification("866-4010");
                 case "873":
                     return GetSpecification("873-4010");
                 case "874":
                     return GetSpecification("874-4010");
+                case "888":
+                    return GetSpecification("888-4010");
                 case "997":
                     return GetSpecification("997-4010");
                 case "999":

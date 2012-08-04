@@ -32,6 +32,16 @@
       <ResourcePath>TAM._210.DBSchenker_SampleMotorFreightDetailsAndInvoice.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="180">
+    <EdiFile>
+      <SourceFile>http://www.easistandards.com/@api/deki/files/25/180_RtnMerchAuth_Mddel.pdf</SourceFile>
+      <ResourcePath>ORD._180.FromEasistandards.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceFile>http://www.loweslink.com/pubdocuments/edi180ProcurementBusinessEx.pdf</SourceFile>
+      <ResourcePath>ORD._180.FromLowes.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="270">
     <EdiFile>
       <SourceUrl>http://www.dhhs.state.sc.us/dhhsnew/hipaa/webfiles/270-271.pdf</SourceUrl>
@@ -196,6 +206,16 @@
     <EdiFile>
       <SourceUrl>https://www.gxsolc.com/geisnet/public/billing/811_Implementation_Guide.html</SourceUrl>
       <ResourcePath>ORD._811.GXSOLC_Example.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="816">
+    <EdiFile>
+      <SourceUrl>http://vendors.steinmart.com/sites/SupplyChain/Documents/816%20Implementation%20Guide.pdf</SourceUrl>
+      <ResourcePath>ORD._816.Steinmart_Example1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://vendors.steinmart.com/sites/SupplyChain/Documents/816%20Implementation%20Guide.pdf</SourceUrl>
+      <ResourcePath>ORD._816.Steinmart_Example2.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="820">
@@ -476,6 +496,34 @@
     <EdiFile>
       <SourceUrl>Provided by user sprdave</SourceUrl>
       <ResourcePath>ORD._856.Example4.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="857">
+    <EdiFile>
+      <SourceUrl>http://www.aftermarketsuppliers.org/Doc-Vault/MTC/mema857.pdf</SourceUrl>
+      <ResourcePath>ORD._857.AfterMarketSuppliers_Example.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://edi.kroger.com/maps_kr/4010%20X%20857_06282011.pdf</SourceUrl>
+      <ResourcePath>ORD._857.Kroger_CreditExample.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://edi.kroger.com/maps_kr/4010%20X%20857_06282011.pdf</SourceUrl>
+      <ResourcePath>ORD._857.Kroger_DeliveryExample.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="865">
+    <EdiFile>
+      <SourceUrl>http://corp.advanceautoparts.com/edi/documents/EDI/AAP_Specs_865_PurchaseOrderChangeAck_v002.pdf</SourceUrl>
+      <ResourcePath>ORD._865.FromAdvanceAutoParts.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.mclaneco.com/www/AnonDocs/McLaneco/EDIStandards/MFS/Suppliers/865POChangeAcknowledgement.pdf</SourceUrl>
+      <ResourcePath>ORD._865.FromMclaneCo.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.iconnect-corp.com/resources/Specs/TycoElectronics/INBound-865_V-4010.pdf</SourceUrl>
+      <ResourcePath>ORD._865.FromTyco.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="866">

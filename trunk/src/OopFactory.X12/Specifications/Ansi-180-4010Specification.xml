@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Used http://www2.dla.mil/j-6/dlmso/elibrary/Transformats/ICs/4010/41f180ma.pdf -->
+<!-- Used http://www.loweslink.com/pubdocuments/edi180ProcurementImpGuide.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="180">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="RDR"/>
+  <Segment SegmentId="PRF"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="SAC"/>
+  <Segment SegmentId="G38"/>
+  <Segment SegmentId="PKG"/>
+  <Segment SegmentId="TD1"/>
+  <Segment SegmentId="TD5"/>
+  <Segment SegmentId="NTE"/>
+  <Loop LoopId="N1">
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="LM">
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="BLI">
+    <Name> BASELINE ITEM DATA</Name>
+    <StartingSegment SegmentId="BLI"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="PID"/>
+    <Segment SegmentId="RDR"/>
+    <Segment SegmentId="SAC"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="MEA"/>
+    <Segment SegmentId="CRC"/>
+    <Segment SegmentId="NTE"/>
+    <Segment SegmentId="PRF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="DD"/>
+    <Segment SegmentId="GF"/>
+    <Segment SegmentId="TD5"/>
+    <Segment SegmentId="SDQ"/>
+    <Loop LoopId="LM">
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
+    </Loop>
+    <Loop LoopId="N1">
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="QTY">
+      <StartingSegment SegmentId="QTY"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N1"/>
+      <Loop LoopId="LM">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="LX">
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="N9"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="N1"/>
+        <Loop LoopId="LM">
+          <StartingSegment SegmentId="LM"/>
+          <Segment SegmentId="LQ"/>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="FA1">
+      <StartingSegment SegmentId="FA1"/>
+      <Segment SegmentId="FA2"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
