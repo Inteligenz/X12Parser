@@ -39,7 +39,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Total Claim Charge Amount must be greater than or equal to zero.");
-                _loop.SetElement(2, value.ToString()); 
+                _loop.SetElement(2, value.ToString().TrimStart('0'));
             }
         }
 
