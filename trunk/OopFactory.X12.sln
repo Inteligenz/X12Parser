@@ -28,9 +28,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Hipaa.Tests.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Hipaa.ClaimParser", "src\OopFactory.X12.Hipaa.ClaimParser\OopFactory.X12.Hipaa.ClaimParser.csproj", "{1E3BD8A3-21EA-4B71-8A55-31910211A316}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Validation", "src\OopFactory.X12.Validation\OopFactory.X12.Validation.csproj", "{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Validation.Tests.Unit", "tests\OopFactory.X12.Validation.Tests.Unit\OopFactory.X12.Validation.Tests.Unit.csproj", "{9A5654D7-0DF6-448C-A803-41F6AE62E175}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.AcknowledgeX12", "src\OopFactory.X12.AcknowledgeX12\OopFactory.X12.AcknowledgeX12.csproj", "{60D11F71-5197-4E36-A57F-B8DDCC108006}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -62,6 +68,17 @@ Global
 		SccProjectUniqueName8 = src\\OopFactory.X12.Hipaa.ClaimParser\\OopFactory.X12.Hipaa.ClaimParser.csproj
 		SccProjectName8 = src/OopFactory.X12.Hipaa.ClaimParser
 		SccLocalPath8 = src\\OopFactory.X12.Hipaa.ClaimParser
+		SccProjectUniqueName9 = src\\OopFactory.X12.Validation\\OopFactory.X12.Validation.csproj
+		SccProjectTopLevelParentUniqueName9 = OopFactory.X12.sln
+		SccProjectName9 = src/OopFactory.X12.Validation
+		SccLocalPath9 = src\\OopFactory.X12.Validation
+		SccProjectUniqueName10 = tests\\OopFactory.X12.Validation.Tests.Unit\\OopFactory.X12.Validation.Tests.Unit.csproj
+		SccProjectTopLevelParentUniqueName10 = OopFactory.X12.sln
+		SccProjectName10 = tests/OopFactory.X12.Validation.Tests.Unit
+		SccLocalPath10 = tests\\OopFactory.X12.Validation.Tests.Unit
+		SccProjectUniqueName11 = src\\OopFactory.X12.AcknowledgeX12\\OopFactory.X12.AcknowledgeX12.csproj
+		SccProjectName11 = src/OopFactory.X12.AcknowledgeX12
+		SccLocalPath11 = src\\OopFactory.X12.AcknowledgeX12
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -155,6 +172,36 @@ Global
 		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|x86.ActiveCfg = Release|x86
 		{1E3BD8A3-21EA-4B71-8A55-31910211A316}.Release|x86.Build.0 = Release|x86
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175}.Release|x86.ActiveCfg = Release|Any CPU
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Debug|x86.ActiveCfg = Debug|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Debug|x86.Build.0 = Debug|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|Any CPU.ActiveCfg = Release|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|Mixed Platforms.Build.0 = Release|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|x86.ActiveCfg = Release|x86
+		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,7 +209,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{203C0F4B-D1F0-4C20-8968-7DBD84F4A815} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{AFE1BBBC-B957-461C-9022-B45D3DB117C9} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{9A5654D7-0DF6-448C-A803-41F6AE62E175} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 	EndGlobalSection
 EndGlobal

@@ -47,6 +47,15 @@ namespace OopFactory.X12.Parsing
                 return null;
         }
 
+        public string[] SplitSegment(string segmentString)
+        {
+            int endSegmentIndex = segmentString.IndexOf(Delimiters.SegmentTerminator);
+            if (endSegmentIndex >= 0)
+                return segmentString.Substring(0, endSegmentIndex).Split(Delimiters.ElementSeparator);
+            else
+                return segmentString.Split(Delimiters.ElementSeparator);
+        }
+
         public string ReadNextSegment()
         {
             bool isBinary = false;
