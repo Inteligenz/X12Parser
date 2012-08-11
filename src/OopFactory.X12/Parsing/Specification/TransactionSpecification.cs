@@ -10,7 +10,7 @@ namespace OopFactory.X12.Parsing.Specification
     [DebuggerStepThrough()]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "http://tempuri.org/X12ParserSpecification.xsd")]
-    public class TransactionSpecification
+    public class TransactionSpecification : IContainerSpecification
     {
         [XmlAttribute]
         public string TransactionSetIdentifierCode { get; set; }
@@ -29,5 +29,12 @@ namespace OopFactory.X12.Parsing.Specification
             System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(TransactionSpecification));
             return ((TransactionSpecification)(xmlSerializer.Deserialize(xmlTextReader)));
         }
+
+        string IContainerSpecification.LoopId
+        {
+            get { return ""; }
+        }
+
+        
     }
 }

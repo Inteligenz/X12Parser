@@ -14,7 +14,7 @@ namespace OopFactory.X12.Validation
     public class X12AcknowledgmentService
     {
         ISpecificationFinder _specFinder;
-       
+                
         public X12AcknowledgmentService(ISpecificationFinder specFinder)
         {
             _specFinder = specFinder;
@@ -57,7 +57,7 @@ namespace OopFactory.X12.Validation
                         });
                     }
                     var groupResponse = responses[groupControlNumber];
-                    var response = AcknowledgeTransaction(reader, versionIdentifierCode, trans.Transactions[0]);
+                    var response = AcknowledgeTransaction(reader, functionalIdentifierCode, versionIdentifierCode, trans.Transactions[0]);
                     groupResponse.TransactionSetResponses.Add(response);
 
                     trans = reader.ReadNextTransaction();
@@ -68,7 +68,7 @@ namespace OopFactory.X12.Validation
             return responses.Values.ToList();
         }
 
-        protected virtual TransactionSetResponse AcknowledgeTransaction(X12StreamReader reader, string versionIdentifierCode, string transaction)
+        protected virtual TransactionSetResponse AcknowledgeTransaction(X12StreamReader reader, string functionalCode, string versionIdentifierCode, string transaction)
         {
             string[] stElements = reader.SplitSegment(transaction);
             var response = new TransactionSetResponse
@@ -79,70 +79,184 @@ namespace OopFactory.X12.Validation
             if (stElements.Length >= 4)
                 response.ImplementationConventionReference = stElements[3];
 
-            string[] segments = transaction.Split(reader.Delimiters.SegmentTerminator);
+            #region Validate against transaction specification
+            var transactionSpec = _specFinder.FindTransactionSpec(functionalCode, versionIdentifierCode, response.TransactionSetIdentifierCode);
+            Stack<ContainerInformation> containers = new Stack<ContainerInformation>();
+            var transactionContainer = new ContainerInformation { Spec = transactionSpec };
+            containers.Push(transactionContainer);
 
+            List<SegmentInformation> segmentInfos = new List<SegmentInformation>();
+            string[] segments = transaction.Split(new char[] {reader.Delimiters.SegmentTerminator}, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < segments.Length; i++)
             {
                 string[] elements = segments[i].Split(reader.Delimiters.ElementSeparator);
-                var segmentSpec = _specFinder.FindSegmentSpec(versionIdentifierCode, elements[0]);
+                var segmentInfo = new SegmentInformation { SegmentId = elements[0], SegmentPosition = i + 1, Elements = elements };
+                segmentInfo.Spec =_specFinder.FindSegmentSpec(versionIdentifierCode, segmentInfo.SegmentId);
+                segmentInfos.Add(segmentInfo);
 
-                response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentSpec, elements, i + 1));
+                ContainerInformation currentContainer = containers.Peek();
 
+                switch (segmentInfo.SegmentId)
+                {
+                    case "ST":
+                    case "SE":
+                        segmentInfo.LoopId = "";
+                        transactionContainer.Segments.Add(segmentInfo);
+                        break;
+                    case "HL":
+                        string hlNumber = segmentInfo.Elements[1];
+                        string hlParentNumber = segmentInfo.Elements[2];
+                        string hlLevelCode = segmentInfo.Elements[3];
+                        var hlSpec = transactionSpec.HierarchicalLoopSpecifications.FirstOrDefault(hls => hls.LevelCode == hlLevelCode);
+                        if (hlSpec != null)
+                        {
+                            while (!(containers.Peek().Spec is TransactionSpecification))
+                            {
+                                if (containers.Peek().HLoopNumber == hlParentNumber)
+                                    break;
+                                containers.Pop();
+                            }
+                            segmentInfo.LoopId = hlSpec.LoopId;
+                            var hlContainer = new ContainerInformation { Spec = hlSpec, HLoopNumber = hlNumber };
+                            hlContainer.Segments.Add(segmentInfo);
+                            containers.Peek().Containers.Add(hlContainer);
+                            containers.Push(hlContainer);                            
+                        }
+                        else
+                        {
+                            response.SegmentErrors.Add(CreateDataElementError(segmentInfo, 3, "I6", hlLevelCode)); //Code Value Not Used in Implementation
+                            response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                            return response; // end validation if HL cannot be recognized since hl spec will not be available
+                        }
+                        break;
+                    default:
+                        bool matchFound = false;
+                        do
+                        {
+                            var matchingLoopSpecs = currentContainer.Spec.LoopSpecifications.Where(ls => ls.StartingSegment.SegmentId == segmentInfo.SegmentId).ToList();
+
+                            if (matchingLoopSpecs.Count > 0)
+                            {
+                                IContainerSpecification matchingLoopSpec = null;
+                                if (matchingLoopSpecs.Count == 1)
+                                    matchingLoopSpec = matchingLoopSpecs.First();
+                                else
+                                {
+                                    string entityCode = elements[1];
+                                    matchingLoopSpec = matchingLoopSpecs.FirstOrDefault(ls => ls.StartingSegment.EntityIdentifiers.Exists(ei => ei.Code == entityCode));
+                                }
+
+                                if (matchingLoopSpec != null)
+                                {
+                                    segmentInfo.LoopId = matchingLoopSpec.LoopId;
+                                    var loopContainer = new ContainerInformation { Spec = matchingLoopSpec };
+                                    loopContainer.Segments.Add(segmentInfo);
+                                    containers.Peek().Containers.Add(loopContainer);
+                                    containers.Push(loopContainer);
+                                    matchFound = true;
+                                }
+                                else
+                                {
+                                    response.SegmentErrors.Add(CreateSegmentError(segmentInfo, "6")); //Segment Not in Defined Transaction Set
+                                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                                    return response;
+                                }
+                            }
+                            else if (currentContainer.Spec.SegmentSpecifications.Exists(ss => ss.SegmentId == segmentInfo.SegmentId))
+                            {
+                                segmentInfo.LoopId = currentContainer.Spec.LoopId;
+                                currentContainer.Segments.Add(segmentInfo);
+                                matchFound = true;
+                            }
+                            else
+                            {
+                                if (currentContainer.Spec is TransactionSpecification)
+                                {
+                                    response.SegmentErrors.Add(CreateSegmentError(segmentInfo, "2")); // Unexpected segment
+                                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                                    return response; // end validation if unrecognized segment encountered (cannot guarantee we are pointing at correct container)
+                                }
+                                else
+                                {
+                                    containers.Pop();
+                                    currentContainer = containers.Peek();
+                                }
+                            }
+                        } while (!matchFound);
+                        break;
+                }
+                response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentInfo));
             }
 
-            // TODO:  Add error checking against specification here
+            // TODO: Go back through and look for required segments that are missing
 
+            #endregion
+
+            if (response.SegmentErrors.Count > 0)
+                response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
             return response;
         }
 
-        protected virtual IList<SegmentError> ValidateSegmentAgainstSpec(SegmentSpecification segmentSpec, string[] elements, int segmentPosition)
+        protected virtual IList<SegmentError> ValidateSegmentAgainstSpec(SegmentInformation segmentInfo)
         {
             var errors = new List<SegmentError>();
-            if (segmentSpec != null)
+            if (segmentInfo.Spec != null)
             {
-                for (int iSpec = 0; iSpec < segmentSpec.Elements.Count; iSpec++)
+                for (int iSpec = 0; iSpec < segmentInfo.Spec.Elements.Count; iSpec++)
                 {
-                    var elementSpec = segmentSpec.Elements[iSpec];
+                    var elementSpec = segmentInfo.Spec.Elements[iSpec];
 
-                    if (iSpec < elements.Length - 1)
+                    if (iSpec < segmentInfo.Elements.Length - 1)
                     {
-                        string element = elements[iSpec + 1];
+                        string element = segmentInfo.Elements[iSpec + 1];
 
                         if (element == "" && elementSpec.Required)
-                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "1", null));
+                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
                         else if (element.Length < elementSpec.MinLength && (elementSpec.Required || element.Length > 0))
                         {
-                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "4", element));
+                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "4", element));
                         }
                         else if (element.Length > elementSpec.MaxLength && elementSpec.MaxLength > 0)
                         {
-                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "5", element));
+                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "5", element));
                         }
                         
                     }
                     else
                     {
                         if (elementSpec.Required) // required element is missing from segment
-                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "1", null));
+                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
 
                     }
                 }
 
-                if (elements.Length - 1 > segmentSpec.Elements.Count)
+                if (segmentInfo.Elements.Length - 1 > segmentInfo.Spec.Elements.Count)
                 {
-                    int elementPosition = segmentSpec.Elements.Count + 1;
-                    errors.Add(CreateDataElementError(elements[0], segmentPosition, elementPosition, "3", elements[elementPosition]));
+                    int elementPosition = segmentInfo.Spec.Elements.Count + 1;
+                    errors.Add(CreateDataElementError(segmentInfo, elementPosition, "3", segmentInfo.Elements[elementPosition]));
                 }
             }
             return errors;            
         }
 
-        private SegmentError CreateDataElementError(string segmentId, int segmentPosition, int elementPositionInSegment, string syntaxErrorCode, string element)
+        protected SegmentError CreateSegmentError(SegmentInformation segmentInfo, string syntaxErrorCode)
+        {
+            return new SegmentError
+            {
+                SegmentIdCode = segmentInfo.SegmentId,
+                SegmentPosition = segmentInfo.SegmentPosition,
+                LoopIdentifierCode = segmentInfo.LoopId,
+                ImplementationSegmentSyntaxErrorCode = syntaxErrorCode
+            };
+        }
+
+        protected SegmentError CreateDataElementError(SegmentInformation segmentInfo, int elementPositionInSegment, string syntaxErrorCode, string element)
         {
             var error = new SegmentError
             {
-                SegmentIdCode = segmentId,
-                SegmentPosition = segmentPosition,
+                SegmentIdCode = segmentInfo.SegmentId,
+                SegmentPosition = segmentInfo.SegmentPosition,
+                LoopIdentifierCode = segmentInfo.LoopId,
                 ImplementationSegmentSyntaxErrorCode = "8"
             };
             error.ElementNotes.Add(new DataElementNote

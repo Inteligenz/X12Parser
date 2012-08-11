@@ -180,6 +180,8 @@
             <EntityIdentifier Code="IN"/>
             <!-- For Property & Casualty Claim -->
           </StartingSegment>
+          <Segment SegmentId="N3" Usage="Situational"/>
+          <Segment SegmentId="N4" Usage="Situational"/>
           <Segment SegmentId="PER" Usage="Situational" Repeat="2"/>
           <Segment SegmentId="DTP" Usage="Situational" Repeat="1"/>
           <Segment SegmentId="REF" Usage="Situational" Repeat="3"/>

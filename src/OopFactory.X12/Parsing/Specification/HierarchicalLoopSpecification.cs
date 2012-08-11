@@ -9,7 +9,7 @@ namespace OopFactory.X12.Parsing.Specification
 {
     [DebuggerStepThrough()]
     [XmlType(AnonymousType = true)]
-    public class HierarchicalLoopSpecification
+    public class HierarchicalLoopSpecification : IContainerSpecification
     {
 
         [XmlAttribute]
