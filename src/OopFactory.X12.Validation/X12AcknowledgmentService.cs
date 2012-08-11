@@ -6,6 +6,7 @@ using System.IO;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Model.Typed;
+using OopFactory.X12.Parsing.Specification;
 using OopFactory.X12.Validation.Model;
 
 namespace OopFactory.X12.Validation
@@ -13,16 +14,14 @@ namespace OopFactory.X12.Validation
     public class X12AcknowledgmentService
     {
         ISpecificationFinder _specFinder;
-        IControlNumberGenerator _controlNumberGenerator;
-
-        public X12AcknowledgmentService(ISpecificationFinder specFinder, IControlNumberGenerator controlNumberGenerator)
+       
+        public X12AcknowledgmentService(ISpecificationFinder specFinder)
         {
             _specFinder = specFinder;
-            _controlNumberGenerator = controlNumberGenerator;
         }
 
         public X12AcknowledgmentService()
-            : this(new SpecificationFinder(), new ControlNumberSequencer())
+            : this(new SpecificationFinder())
         {
         }
 
@@ -58,10 +57,9 @@ namespace OopFactory.X12.Validation
                         });
                     }
                     var groupResponse = responses[groupControlNumber];
-                    var response = AcknowledgeTransaction(reader, trans.Transactions[0]);
+                    var response = AcknowledgeTransaction(reader, versionIdentifierCode, trans.Transactions[0]);
                     groupResponse.TransactionSetResponses.Add(response);
 
-                    ValidateSegments(groupResponse, response, reader, trans.Transactions[0]);
                     trans = reader.ReadNextTransaction();
                 }
                 
@@ -70,7 +68,7 @@ namespace OopFactory.X12.Validation
             return responses.Values.ToList();
         }
 
-        protected virtual TransactionSetResponse AcknowledgeTransaction(X12StreamReader reader, string transaction)
+        protected virtual TransactionSetResponse AcknowledgeTransaction(X12StreamReader reader, string versionIdentifierCode, string transaction)
         {
             string[] stElements = reader.SplitSegment(transaction);
             var response = new TransactionSetResponse
@@ -81,82 +79,79 @@ namespace OopFactory.X12.Validation
             if (stElements.Length >= 4)
                 response.ImplementationConventionReference = stElements[3];
 
+            string[] segments = transaction.Split(reader.Delimiters.SegmentTerminator);
+
+            for (int i = 0; i < segments.Length; i++)
+            {
+                string[] elements = segments[i].Split(reader.Delimiters.ElementSeparator);
+                var segmentSpec = _specFinder.FindSegmentSpec(versionIdentifierCode, elements[0]);
+
+                response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentSpec, elements, i + 1));
+
+            }
+
             // TODO:  Add error checking against specification here
 
             return response;
         }
 
-        protected virtual void ValidateSegments(FunctionalGroupResponse groupResponse, TransactionSetResponse response, X12StreamReader reader, string transaction)
+        protected virtual IList<SegmentError> ValidateSegmentAgainstSpec(SegmentSpecification segmentSpec, string[] elements, int segmentPosition)
         {
-            string[] segments = transaction.Split(reader.Delimiters.SegmentTerminator);
-
-            var spec = _specFinder.FindTransactionSpec(groupResponse.FunctionalIdCode, groupResponse.VersionIdentifierCode, response.TransactionSetIdentifierCode);
-        }
-
-        public void Add999Transaction(FunctionGroup group, IEnumerable<FunctionalGroupResponse> groupResponses)
-        {
-            _controlNumberGenerator.Reset();
-
-            foreach (var groupResponse in groupResponses)
+            var errors = new List<SegmentError>();
+            if (segmentSpec != null)
             {
-                var trans = group.AddTransaction("999", _controlNumberGenerator.GetNextControlNumber());
-                if (group.VersionIdentifierCode.Contains("5010"))
-                    trans.SetElement(3, group.VersionIdentifierCode);
-
-                // Functional group response header
-                var ak1 = trans.AddSegment<TypedSegmentAK1>(new TypedSegmentAK1());
-                ak1.AK101_FunctionalIdCode = groupResponse.FunctionalIdCode;
-                ak1.AK102_GroupControlNumber = groupResponse.GroupControlNumber;
-                ak1.AK103_VersionIdentifierCode = groupResponse.VersionIdentifierCode;
-
-                foreach (var response in groupResponse.TransactionSetResponses)
+                for (int iSpec = 0; iSpec < segmentSpec.Elements.Count; iSpec++)
                 {
-                    // Transaction Set Response Header
-                    var ak2 = trans.AddLoop<TypedLoopAK2>(new TypedLoopAK2());
-                    ak2.AK201_TransactionSetIdentifierCode = response.TransactionSetIdentifierCode;
-                    ak2.AK202_TransactionSetControlNumber = response.TransactionSetControlNumber;
-                    if (!string.IsNullOrEmpty(response.ImplementationConventionReference))
-                        ak2.AK203_ImplementationConventionReference = response.ImplementationConventionReference;
+                    var elementSpec = segmentSpec.Elements[iSpec];
 
+                    if (iSpec < elements.Length - 1)
+                    {
+                        string element = elements[iSpec + 1];
 
+                        if (element == "" && elementSpec.Required)
+                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "1", null));
+                        else if (element.Length < elementSpec.MinLength && (elementSpec.Required || element.Length > 0))
+                        {
+                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "4", element));
+                        }
+                        else if (element.Length > elementSpec.MaxLength && elementSpec.MaxLength > 0)
+                        {
+                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "5", element));
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (elementSpec.Required) // required element is missing from segment
+                            errors.Add(CreateDataElementError(elements[0], segmentPosition, iSpec + 1, "1", null));
 
-                    
-
-                    // Transaction Set Response Trailer
-                    var ik5 = ak2.AddSegment<TypedSegmentIK5>(new TypedSegmentIK5());
-                    ik5.IK501_TransactionSetAcknowledgmentCode = response.AcknowledgmentCode.ToString().Substring(0, 1);
-
-                    if (response.SyntaxErrorCodes.Count > 0)
-                        ik5.IK502_SyntaxErrorCode = response.SyntaxErrorCodes[0];
-                    if (response.SyntaxErrorCodes.Count > 1)
-                        ik5.IK503_SyntaxErrorCode = response.SyntaxErrorCodes[1];
-                    if (response.SyntaxErrorCodes.Count > 2)
-                        ik5.IK504_SyntaxErrorCode = response.SyntaxErrorCodes[2];
-                    if (response.SyntaxErrorCodes.Count > 3)
-                        ik5.IK505_SyntaxErrorCode = response.SyntaxErrorCodes[3];
-                    if (response.SyntaxErrorCodes.Count > 4)
-                        ik5.IK506_SyntaxErrorCode = response.SyntaxErrorCodes[4];
+                    }
                 }
 
-                // Functional group response trailer
-                var ak9 = trans.AddSegment<TypedSegmentAK9>(new TypedSegmentAK9());
-                ak9.AK901_FunctionalGroupAcknowledgeCode = groupResponse.AcknowledgmentCode.ToString().Substring(0, 1);
-                ak9.AK902_NumberOfTransactionSetsIncluded = groupResponse.TransactionSetResponses.Count;
-                ak9.AK903_NumberOfReceivedTransactionSets = groupResponse.TransactionSetResponses.Count;
-                ak9.AK904_NumberOfAcceptedTransactionSets = groupResponse.TransactionSetResponses.Where(tsr => tsr.AcknowledgmentCode == AcknowledgmentCodeEnum.A_Accepted || tsr.AcknowledgmentCode == AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted).Count();
-
-                if (groupResponse.SyntaxErrorCodes.Count > 0)
-                    ak9.AK905_FunctionalGroupSyntaxErrorCode = groupResponse.SyntaxErrorCodes[0];
-                if (groupResponse.SyntaxErrorCodes.Count > 1)
-                    ak9.AK906_FunctionalGroupSyntaxErrorCode = groupResponse.SyntaxErrorCodes[1];
-                if (groupResponse.SyntaxErrorCodes.Count > 2)
-                    ak9.AK907_FunctionalGroupSyntaxErrorCode = groupResponse.SyntaxErrorCodes[2];
-                if (groupResponse.SyntaxErrorCodes.Count > 3)
-                    ak9.AK908_FunctionalGroupSyntaxErrorCode = groupResponse.SyntaxErrorCodes[3];
-                if (groupResponse.SyntaxErrorCodes.Count > 4)
-                    ak9.AK909_FunctionalGroupSyntaxErrorCode = groupResponse.SyntaxErrorCodes[4];
-
+                if (elements.Length - 1 > segmentSpec.Elements.Count)
+                {
+                    int elementPosition = segmentSpec.Elements.Count + 1;
+                    errors.Add(CreateDataElementError(elements[0], segmentPosition, elementPosition, "3", elements[elementPosition]));
+                }
             }
+            return errors;            
+        }
+
+        private SegmentError CreateDataElementError(string segmentId, int segmentPosition, int elementPositionInSegment, string syntaxErrorCode, string element)
+        {
+            var error = new SegmentError
+            {
+                SegmentIdCode = segmentId,
+                SegmentPosition = segmentPosition,
+                ImplementationSegmentSyntaxErrorCode = "8"
+            };
+            error.ElementNotes.Add(new DataElementNote
+            {
+                PositionInSegment = new PositionInSegment { ElementPositionInSegment = elementPositionInSegment },
+                SyntaxErrorCode = syntaxErrorCode,
+                CopyOfBadElement = element
+            });
+            return error;
         }
     }
 }

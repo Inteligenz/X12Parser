@@ -8,14 +8,11 @@ namespace OopFactory.X12.Validation
 {
     public class InstitutionalClaimAcknowledgmentService : X12AcknowledgmentService
     {
-        public InstitutionalClaimAcknowledgmentService(IControlNumberGenerator controlNumberGenerator)
-            : base(new InstitutionalClaimSpecificationFinder(), controlNumberGenerator)
+        public InstitutionalClaimAcknowledgmentService()
+            : base(new InstitutionalClaimSpecificationFinder())
         {
         }
 
-        public InstitutionalClaimAcknowledgmentService()
-            : this(new ControlNumberSequencer())
-        {
-        }
+        
     }
 }

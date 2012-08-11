@@ -46,9 +46,9 @@ namespace OopFactory.X12.AcknowledgeX12
                 group.ApplicationSendersCode = ConfigurationManager.AppSettings["InterchangeSenderId"];
                 group.VersionIdentifierCode = "005010X231A1";
 
-                service.Add999Transaction(group, responses);
+                group.Add999Transaction(responses, new ControlNumberSequencer());
 
-                File.WriteAllText(outputFilename, interchange.SerializeToX12(false));
+                File.WriteAllText(outputFilename, interchange.SerializeToX12(true));
             }
         }
     }

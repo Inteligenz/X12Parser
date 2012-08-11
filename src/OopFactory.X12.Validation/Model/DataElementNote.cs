@@ -15,7 +15,17 @@ namespace OopFactory.X12.Validation.Model
         /// <summary>
         /// IK402
         /// </summary>
-        public string DataElementReferenceNumber { get; set; } 
+        public string DataElementReferenceNumber { get; set; }
+
+        /// <summary>
+        /// IK403
+        /// </summary>
+        public string SyntaxErrorCode { get; set; }
+
+        /// <summary>
+        /// IK404
+        /// </summary>
+        public string CopyOfBadElement { get; set; }
         
         public List<ContextError> ContextErrors { get; set; }
     }

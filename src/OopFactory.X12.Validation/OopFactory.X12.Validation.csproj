@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\TransactionSetResponse.cs" />
     <Compile Include="X12AcknowledgmentService.cs" />
+    <Compile Include="X12Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
