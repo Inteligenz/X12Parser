@@ -75,6 +75,7 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV1.cs" />
+    <Compile Include="Parsing\Specification\IContainerSpecification.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Parsing\X12FlatTransaction.cs" />
     <Compile Include="Parsing\X12StreamReader.cs" />

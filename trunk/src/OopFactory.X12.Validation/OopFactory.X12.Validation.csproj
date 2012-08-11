@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerInformation.cs" />
     <Compile Include="ControlNumberSequencer.cs" />
     <Compile Include="IControlNumberGenerator.cs" />
     <Compile Include="InstitutionalClaimAcknowledgmentService.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Model\SegmentError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\TransactionSetResponse.cs" />
+    <Compile Include="SegmentInformation.cs" />
     <Compile Include="X12AcknowledgmentService.cs" />
     <Compile Include="X12Extensions.cs" />
   </ItemGroup>
