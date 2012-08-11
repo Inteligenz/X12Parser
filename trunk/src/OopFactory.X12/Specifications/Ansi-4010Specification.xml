@@ -983,7 +983,7 @@
     </Element>
     <Element Name="Name Last or Organization Name" Type="AN" MinLength="1" MaxLength="35"/>
     <Element Name="Name First" Type="AN" MinLength="1" MaxLength="25"/>
-    <Element Name="Name Middle" Type="AN" MinLength="25" MaxLength="25"/>
+    <Element Name="Name Middle" Type="AN" MinLength="1" MaxLength="25"/>
     <Element Name="Name Prefix" Type="AN" MinLength="1" MaxLength="10"/>
     <Element Name="Name Suffix" Type="AN" MinLength="1" MaxLength="10"/>
     <Element Name="Identification Code Qualifier" Type="ID" MinLength="1" MaxLength="2">

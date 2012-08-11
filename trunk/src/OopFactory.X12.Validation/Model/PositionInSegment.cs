@@ -10,16 +10,16 @@ namespace OopFactory.X12.Validation.Model
         /// <summary>
         /// 1
         /// </summary>
-        public string ElementPositionInSegment { get; set; }
+        public int? ElementPositionInSegment { get; set; }
 
         /// <summary>
         /// 3
         /// </summary>
-        public string ComponentDataElementPositionInComposite { get; set; }
+        public int? ComponentDataElementPositionInComposite { get; set; }
 
         /// <summary>
         /// 3
         /// </summary>
-        public string RepeatingDataElementPosition { get; set; }
+        public int? RepeatingDataElementPosition { get; set; }
     }
 }
