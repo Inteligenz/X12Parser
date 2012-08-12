@@ -35,7 +35,7 @@ namespace OopFactory.X12.Validation.Tests.Unit
             var interchange = new Interchange(DateTime.Now, 1, true);
             var group = interchange.AddFunctionGroup("FA", DateTime.Now, 1);
             group.VersionIdentifierCode = "005010X231A1";
-            group.Add999Transaction(responses, new ControlNumberSequencer());
+            group.Add999Transaction(responses);
             
             Trace.WriteLine(interchange.SerializeToX12(true));
             

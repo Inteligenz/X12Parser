@@ -12,6 +12,7 @@ namespace OopFactory.X12.Parsing
         private string _isaSegment;
         private X12DelimiterSet _delimiters;
         private string _gsSegment;
+        private string _transactionCode;
 
         public X12StreamReader(Stream stream, Encoding encoding)
         {
@@ -38,6 +39,11 @@ namespace OopFactory.X12.Parsing
             get { return _gsSegment; }
         }
 
+        public string LastTransactionCode
+        {
+            get { return _transactionCode; }
+        }
+
         public string ReadSegmentId(string segmentString)
         {
             int index = segmentString.IndexOf(_delimiters.ElementSeparator);
@@ -54,6 +60,13 @@ namespace OopFactory.X12.Parsing
                 return segmentString.Substring(0, endSegmentIndex).Split(Delimiters.ElementSeparator);
             else
                 return segmentString.Split(Delimiters.ElementSeparator);
+        }
+
+        public bool TransactionContainsSegment(string transaction, string segmentId)
+        {
+            var segments = transaction.Split(Delimiters.SegmentTerminator).ToList();
+
+            return segments.Exists(s => s.StartsWith(segmentId + Delimiters.ElementSeparator));                
         }
 
         public string ReadNextSegment()
@@ -109,6 +122,8 @@ namespace OopFactory.X12.Parsing
                     case "GE":
                         break;
                     default:
+                        if (segmentId == "ST")
+                            _transactionCode = SplitSegment(segmentString)[1];
                         segments.Append(segmentString);
                         segments.Append(_delimiters.SegmentTerminator);
                         break;

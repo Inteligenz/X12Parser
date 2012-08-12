@@ -187,14 +187,62 @@ namespace OopFactory.X12.Validation
                 }
                 response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentInfo));
             }
-
-            // TODO: Go back through and look for required segments that are missing
+            
+            response.SegmentErrors.AddRange(ValidateContainerAgainstSpec(transactionContainer));
 
             #endregion
 
             if (response.SegmentErrors.Count > 0)
                 response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
             return response;
+        }
+
+        protected virtual IEnumerable<SegmentError> ValidateContainerAgainstSpec(ContainerInformation container)
+        {
+            var errors = new List<SegmentError>();
+
+            foreach (var segmentSpec in container.Spec.SegmentSpecifications.Where(ss => ss.Usage == UsageEnum.Required))
+            {
+                if (!container.Segments.Exists(s => s.SegmentId == segmentSpec.SegmentId))
+                {
+                    errors.Add(CreateSegmentError(new SegmentInformation {
+                        SegmentId = segmentSpec.SegmentId,
+                        LoopId = container.Spec.LoopId,
+                        SegmentPosition = container.Segments.Count > 0 ? container.Segments.First().SegmentPosition : 0},
+                        "3")); // Required segment is missing
+                }
+
+                if (segmentSpec.Repeat > 0 && container.Segments.Count(s => s.SegmentId == segmentSpec.SegmentId) > segmentSpec.Repeat)
+                {
+                    errors.Add(CreateSegmentError(container.Segments.Last(s=>s.SegmentId == segmentSpec.SegmentId),
+                        "5")); // Segment Exceeds Maximum Use
+                }
+            }
+
+            foreach (var loopSpec in container.Spec.LoopSpecifications.Where(ls => ls.Usage == UsageEnum.Required))
+            {
+                if (!container.Containers.Exists(c => c.Spec.LoopId == loopSpec.LoopId))
+                {
+                    errors.Add(CreateSegmentError(new SegmentInformation
+                    {
+                        SegmentId = loopSpec.StartingSegment.SegmentId,
+                        LoopId = container.Spec.LoopId,
+                        SegmentPosition = container.Segments.Count > 0 ? container.Segments.Last().SegmentPosition : 0
+                    }, "I7")); // Implementation Loop Occurs Under Minimum Times
+                }
+
+                if (loopSpec.LoopRepeat > 0 && container.Containers.Count(c => c.Spec.LoopId == loopSpec.LoopId) > loopSpec.LoopRepeat)
+                {
+                    errors.Add(CreateSegmentError(container.Containers.Last(c=>c.Spec.LoopId == loopSpec.LoopId).Segments.First(),
+                        "4")); // Loop Occurs Over Maximum Times
+                }
+            }
+
+            foreach (var childContainer in container.Containers)
+            {
+                errors.AddRange(ValidateContainerAgainstSpec(childContainer));
+            }
+            return errors;
         }
 
         protected virtual IList<SegmentError> ValidateSegmentAgainstSpec(SegmentInformation segmentInfo)
