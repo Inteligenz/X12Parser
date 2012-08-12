@@ -47,7 +47,7 @@
           <xs:complexContent>
             <xs:extension base="SegmentSpecification">
               <xs:sequence>
-                <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="unbound">
+                <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="20">
               <xs:complexType>
                 <xs:attribute name="Code"/>
               </xs:complexType>
