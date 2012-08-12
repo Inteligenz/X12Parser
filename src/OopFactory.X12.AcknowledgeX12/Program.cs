@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.IO;
+using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Validation;
 using OopFactory.X12.Validation.Model;
@@ -23,10 +24,23 @@ namespace OopFactory.X12.AcknowledgeX12
 
             using (FileStream fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
             {
+                using (X12StreamReader reader = new X12StreamReader(fs, Encoding.UTF8))
+                {
+                    var firstTrans = reader.ReadNextTransaction();
+                    if (reader.LastTransactionCode == "837")
+                    {
+                        if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV2"))
+                            service = new InstitutionalClaimAcknowledgmentService();
+                    }                    
+                }
+            }
+
+            using (FileStream fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
+            {
                 // Create aknowledgements and identify errors
                 var responses = service.AcknowledgeTransactions(fs);
 
-                // Change any acknowledgment codes here
+                // Change any acknowledgment codes here to reject transactions with errors
                 // CUSTOM BUSINESS LOGIC HERE
 
                 // Transform to outbound interchange for serialization
@@ -46,8 +60,9 @@ namespace OopFactory.X12.AcknowledgeX12
                 group.ApplicationSendersCode = ConfigurationManager.AppSettings["InterchangeSenderId"];
                 group.VersionIdentifierCode = "005010X231A1";
 
-                group.Add999Transaction(responses, new ControlNumberSequencer());
+                group.Add999Transaction(responses);
 
+                // This is a demonstration example only, change true to false to create continous x12 without line feeds.
                 File.WriteAllText(outputFilename, interchange.SerializeToX12(true));
             }
         }

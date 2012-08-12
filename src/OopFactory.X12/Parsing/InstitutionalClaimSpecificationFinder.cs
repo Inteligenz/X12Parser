@@ -11,9 +11,9 @@ namespace OopFactory.X12.Parsing
         {
             if (transactionSetCode == "837")
             {
-                //if (versionCode.Contains("5010"))
-                //    return SpecificationFinder.GetSpecification("837I-5010");
-                //else
+                if (versionCode.Contains("5010"))
+                    return SpecificationFinder.GetSpecification("837I-5010");
+                else
                     return SpecificationFinder.GetSpecification("837I-4010");
             }
             else

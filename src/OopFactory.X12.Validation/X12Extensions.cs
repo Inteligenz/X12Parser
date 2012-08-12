@@ -13,13 +13,13 @@ namespace OopFactory.X12.Validation
 {
     public static class X12Extensions
     {
-        public static void Add999Transaction(this FunctionGroup group, IEnumerable<FunctionalGroupResponse> groupResponses, IControlNumberGenerator numGenerator)
+        public static void Add999Transaction(this FunctionGroup group, IEnumerable<FunctionalGroupResponse> groupResponses)
         {
-            numGenerator.Reset();
-
+            int transactionId = 0;
+            
             foreach (var groupResponse in groupResponses)
             {
-                var trans = group.AddTransaction("999", numGenerator.GetNextControlNumber());
+                var trans = group.AddTransaction("999", string.Format("{0:0000}", ++transactionId));
                 if (group.VersionIdentifierCode.Contains("5010"))
                     trans.SetElement(3, group.VersionIdentifierCode);
 
