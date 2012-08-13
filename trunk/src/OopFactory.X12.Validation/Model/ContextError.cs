@@ -20,7 +20,7 @@ namespace OopFactory.X12.Validation.Model
         /// <summary>
         /// CTX03
         /// </summary>
-        public string SegmentPositionInTransactionSet { get; set; }
+        public int? SegmentPositionInTransactionSet { get; set; }
         
         /// <summary>
         /// CTX04

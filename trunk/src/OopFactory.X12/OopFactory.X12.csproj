@@ -47,9 +47,12 @@
     <Compile Include="Parsing\DentalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\InstitutionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedElementContextIdentification.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementPositionInSegment.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedElementReferenceInSegment.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIK3.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIK4.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentCTX.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentIK5.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentAK1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopAK2.cs" />
