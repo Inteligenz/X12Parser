@@ -49,6 +49,16 @@ namespace OopFactory.X12.Validation
                         if (segmentError.ImplementationSegmentSyntaxErrorCode != null)
                             ik3.IK304_SyntaxErrorCode = segmentError.ImplementationSegmentSyntaxErrorCode;
 
+                        foreach (var context in segmentError.ContextErrors)
+                        {
+                            var ctx = ik3.AddSegment<TypedSegmentCTX>(new TypedSegmentCTX());
+                            ctx.CTX01._1_ContextName = "SITUATIONAL TRIGGER";
+                            ctx.CTX01._2_ContextReference = context.IdentificationReference;
+                            ctx.CTX02_SegmentIdCode = context.SegmentIdCode;
+                            ctx.CTX03_SegmentPositionInTransactionSet = context.SegmentPositionInTransactionSet;
+                            ctx.CTX04_LoopIdentifierCode = context.LoopIdentifierCode;
+                        }
+
                         foreach (var elementNote in segmentError.ElementNotes)
                         {
                             var ik4 = ik3.AddLoop<TypedLoopIK4>(new TypedLoopIK4());
@@ -60,6 +70,16 @@ namespace OopFactory.X12.Validation
                             ik4.IK403_SyntaxErrorCode = elementNote.SyntaxErrorCode;
                             if (elementNote.CopyOfBadElement != null)
                                 ik4.IK404_CopyOfBaDataElement = elementNote.CopyOfBadElement;
+
+                            foreach (var context in elementNote.ContextErrors)
+                            {
+                                var ctx = ik4.AddSegment<TypedSegmentCTX>(new TypedSegmentCTX());
+                                ctx.CTX01._1_ContextName = "SITUATIONAL TRIGGER";
+                                ctx.CTX01._2_ContextReference = context.IdentificationReference;
+                                ctx.CTX02_SegmentIdCode = context.SegmentIdCode;
+                                ctx.CTX03_SegmentPositionInTransactionSet = context.SegmentPositionInTransactionSet;
+                                ctx.CTX04_LoopIdentifierCode = context.LoopIdentifierCode;
+                            }
                         }
                     }
 

@@ -79,19 +79,27 @@ namespace OopFactory.X12.Validation
             if (stElements.Length >= 4)
                 response.ImplementationConventionReference = stElements[3];
 
-            #region Validate against transaction specification
             var transactionSpec = _specFinder.FindTransactionSpec(functionalCode, versionIdentifierCode, response.TransactionSetIdentifierCode);
+
+            if (transactionSpec == null)
+            {
+                response.SyntaxErrorCodes.Add("1"); // Transaction Set Not Supported
+                response.AcknowledgmentCode = AcknowledgmentCodeEnum.R_Rejected;
+                return response;
+            }
+
+            #region Validate against transaction specification
             Stack<ContainerInformation> containers = new Stack<ContainerInformation>();
             var transactionContainer = new ContainerInformation { Spec = transactionSpec };
             containers.Push(transactionContainer);
 
             List<SegmentInformation> segmentInfos = new List<SegmentInformation>();
-            string[] segments = transaction.Split(new char[] {reader.Delimiters.SegmentTerminator}, StringSplitOptions.RemoveEmptyEntries);
+            string[] segments = transaction.Split(new char[] { reader.Delimiters.SegmentTerminator }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < segments.Length; i++)
             {
                 string[] elements = segments[i].Split(reader.Delimiters.ElementSeparator);
                 var segmentInfo = new SegmentInformation { SegmentId = elements[0], SegmentPosition = i + 1, Elements = elements };
-                segmentInfo.Spec =_specFinder.FindSegmentSpec(versionIdentifierCode, segmentInfo.SegmentId);
+                segmentInfo.Spec = _specFinder.FindSegmentSpec(versionIdentifierCode, segmentInfo.SegmentId);
                 segmentInfos.Add(segmentInfo);
 
                 ContainerInformation currentContainer = containers.Peek();
@@ -120,7 +128,7 @@ namespace OopFactory.X12.Validation
                             var hlContainer = new ContainerInformation { Spec = hlSpec, HLoopNumber = hlNumber };
                             hlContainer.Segments.Add(segmentInfo);
                             containers.Peek().Containers.Add(hlContainer);
-                            containers.Push(hlContainer);                            
+                            containers.Push(hlContainer);
                         }
                         else
                         {
@@ -187,13 +195,42 @@ namespace OopFactory.X12.Validation
                 }
                 response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentInfo));
             }
-            
+
             response.SegmentErrors.AddRange(ValidateContainerAgainstSpec(transactionContainer));
 
             #endregion
 
-            if (response.SegmentErrors.Count > 0)
-                response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
+            #region Validate transaction trailer
+            var trailerSegment = segmentInfos.FirstOrDefault(si => si.SegmentId == "SE");
+            if (trailerSegment == null)
+            {
+                response.SyntaxErrorCodes.Add("2"); //Transaction Set Trailer Missing
+            }
+            else
+            {
+                if (trailerSegment.Elements.Length <= 2 || trailerSegment.Elements[2] != response.TransactionSetControlNumber)
+                    response.SyntaxErrorCodes.Add("3"); // Transaction Set Control Number in Header and Trailer Do Not Match
+
+                if (trailerSegment.Elements.Length >= 2)
+                {
+                    int segmentCount;
+                    int.TryParse(trailerSegment.Elements[1], out segmentCount);
+                    if (segmentCount != segmentInfos.Count)
+                        response.SyntaxErrorCodes.Add("4"); // Number of Included Segments Does Not Match Actual Count
+                }
+                else
+                    response.SyntaxErrorCodes.Add("4"); // Number of Included Segments Does Not Match Actual Count
+            }
+
+            #endregion
+
+            if (response.SegmentErrors.Count > 0 || response.SyntaxErrorCodes.Count > 0)
+            {
+                if (response.SegmentErrors.Count > 0)
+                    response.SyntaxErrorCodes.Add("5"); //One or More Segments in Error
+                if (response.AcknowledgmentCode == AcknowledgmentCodeEnum.A_Accepted)
+                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
+            }
             return response;
         }
 
