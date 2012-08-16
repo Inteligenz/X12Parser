@@ -265,7 +265,7 @@
         <Loop LoopId="2330G" Usage="Situational" LoopRepeat="1">
           <Name>OTHER PAYER BILLING PROVIDER</Name>
           <StartingSegment SegmentId="NM1" Usage="Situational" Repeat="1">
-            <EntityIdentifier Code="DQ"/>
+            <EntityIdentifier Code="85"/>
           </StartingSegment>
           <Segment SegmentId="REF" Usage="Required" Repeat="2"/>
         </Loop>
