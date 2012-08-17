@@ -22,6 +22,11 @@ namespace OopFactory.X12.Parsing.Model
             Initialize(segment);
         }
 
+        public X12DelimiterSet Delimiters
+        {
+            get { return _delimiters; }
+        }
+
         internal virtual void Initialize(string segment)
         {
             if (segment == null)
