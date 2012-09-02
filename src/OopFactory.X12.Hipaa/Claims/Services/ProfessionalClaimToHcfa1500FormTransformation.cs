@@ -637,12 +637,12 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                     // Line 15
                     AddBlock(page, 6.5m, 37, 8, hcfa.Field21_Diagnosis1);
-                    AddBlock(page, 33.5m, 37, 8, hcfa.Field21_Diagnosis2);
+                    AddBlock(page, 33.5m, 37, 8, hcfa.Field21_Diagnosis3);
                     AddBlock(page, 53, 37, 11, hcfa.Field22_MedicaidSubmissionCode);
                     AddBlock(page, 65, 37, 18, hcfa.Field22_OriginalReferenceNumber);
 
                     // Line 16
-                    AddBlock(page, 6.5m, 39, 8, hcfa.Field21_Diagnosis3);
+                    AddBlock(page, 6.5m, 39, 8, hcfa.Field21_Diagnosis2);
                     AddBlock(page, 33.5m, 39, 8, hcfa.Field21_Diagnosis4);
                     AddBlock(page, 53, 39, 30, hcfa.Field23_PriorAuthorizationNumber);
 
