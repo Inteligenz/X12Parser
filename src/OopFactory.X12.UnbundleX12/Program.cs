@@ -23,37 +23,42 @@ namespace OopFactory.X12.UnbundleX12
                 return;
             }
 
-
+            X12Parser parser = new X12Parser();
+            
             foreach (var filename in Directory.GetFiles(opts.InputDirectory, opts.FilenamePattern))
             {
                 FileInfo inputFile = new FileInfo(filename);
-
-                X12Parser parser = new X12Parser();
-                List<Interchange> interchanges = parser.ParseMultiple(new FileStream(filename, FileMode.Open, FileAccess.Read));
-                int offset = 0;
-                foreach (var interchange in interchanges)
+                List<Interchange> list = new List<Interchange>();
+                using (FileStream fs = new FileStream(inputFile.FullName, FileMode.Open, FileAccess.Read))
                 {
-                    List<Interchange> list;
-                    if (opts.LoopId == "ST")
-                        list = parser.UnbundleByTransaction(interchange);
-                    else
-                        list = parser.UnbundleByLoop(interchange, opts.LoopId);
-
-                    for (int i = 0; i < list.Count; i++)
+                    X12StreamReader reader = new X12StreamReader(fs, Encoding.UTF8);
+                    X12FlatTransaction transaction = reader.ReadNextTransaction();
+                    while (!string.IsNullOrEmpty(transaction.Transactions.First()))
                     {
-                        string outputFilename = String.Format(opts.FormatString, opts.OutputDirectory, inputFile.Name, offset + i + 1, inputFile.Extension);
-                        using (FileStream outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                        string x12 = transaction.ToString();
+                        var interchange = parser.ParseMultiple(x12).First();
+                        if (opts.LoopId == "ST")
+                            list.Add(interchange);
+                        else
                         {
-                            using (StreamWriter writer = new StreamWriter(outputFilestream))
-                            {
-                                writer.Write(list[i].SerializeToX12(opts.IncludeWhitespace));
-                                writer.Close();
-                            }
-                            outputFilestream.Close();
+                            list.AddRange(parser.UnbundleByLoop(interchange, opts.LoopId));
                         }
+                        transaction = reader.ReadNextTransaction();
                     }
-                    offset += list.Count;
-
+                }
+                List<Interchange> interchanges = parser.ParseMultiple(new FileStream(filename, FileMode.Open, FileAccess.Read));
+                for (int i = 0; i < list.Count; i++)
+                {
+                    string outputFilename = String.Format(opts.FormatString, opts.OutputDirectory, inputFile.Name, i + 1, inputFile.Extension);
+                    using (FileStream outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                    {
+                        using (StreamWriter writer = new StreamWriter(outputFilestream))
+                        {
+                            writer.Write(list[i].SerializeToX12(opts.IncludeWhitespace));
+                            writer.Close();
+                        }
+                        outputFilestream.Close();
+                    }
                 }
             }
         }
