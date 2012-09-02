@@ -78,6 +78,7 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV1.cs" />
+    <Compile Include="Parsing\ProfessionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Specification\IContainerSpecification.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Parsing\X12FlatTransaction.cs" />
@@ -259,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-837I-5010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-837P-5010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -31,6 +31,8 @@ namespace OopFactory.X12.AcknowledgeX12
                     {
                         if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV2"))
                             service = new InstitutionalClaimAcknowledgmentService();
+                        if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV1"))
+                            service = new X12AcknowledgmentService(new ProfessionalClaimSpecificationFinder());
                     }                    
                 }
             }
