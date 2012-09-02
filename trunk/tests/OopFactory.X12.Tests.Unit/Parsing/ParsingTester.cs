@@ -155,6 +155,49 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             }
         }
 
+        [TestMethod]
+        public void ParseModifyAndTransformBackToX12()
+        {
+            var stream = GetEdi("INS._270._4010.Example1_DHHS.txt");
+
+            var parser = new X12Parser();
+            Interchange interchange = parser.ParseMultiple(stream).First();
+            string originalX12 = interchange.SerializeToX12(true);
+
+            string xml = interchange.Serialize();
+            
+            XmlDocument doc = new XmlDocument();
+            doc.PreserveWhitespace = true;
+            doc.LoadXml(xml);
+
+            XmlElement dmgElement = (XmlElement)(doc.GetElementsByTagName("DMG")[0]);
+            dmgElement.ParentNode.RemoveChild(dmgElement);
+            
+            Console.WriteLine(doc.OuterXml);
+            string x12 = parser.TransformToX12(doc.OuterXml);
+
+            Console.WriteLine("ISA Segmemt:");
+            Console.WriteLine(x12.Substring(0, 106));
+            Console.WriteLine("Directly from XML:");
+            Console.WriteLine(x12); 
+
+            
+            var modifiedInterchange = parser.ParseMultiple(x12).First();
+
+            string newX12 = modifiedInterchange.SerializeToX12(true);
+
+            Console.WriteLine("After passing through interchange object:");
+            Console.WriteLine(newX12);
+ 
+            var seSegment = modifiedInterchange.FunctionGroups.First().Transactions.First().TrailerSegments.FirstOrDefault(ts => ts.SegmentId == "SE");
+
+            Assert.IsNotNull(seSegment);
+            Assert.AreEqual("0001", seSegment.GetElement(2));
+            Assert.AreEqual("15", seSegment.GetElement(1));
+            
+            
+        }
+
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseToHtml()
