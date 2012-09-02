@@ -108,7 +108,7 @@ namespace OopFactory.X12.Parsing
                         case "ST":
                             if (fg == null)
                                 throw new InvalidOperationException(string.Format("segment '{0}' cannot occur without a preceding GS segment.", segmentString));
-
+                            segmentIndex = 1;
                             currentContainer = tr = fg.AddTransaction(segmentString);
                             hloops = new Dictionary<string, HierarchicalLoop>();
                             break;
@@ -166,7 +166,7 @@ namespace OopFactory.X12.Parsing
                                                 var tran = (Transaction)currentContainer;
 
                                                 throw new TransactionValidationException(
-                                                    "Segment '{3}' in position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
+                                                    "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
                                             }
                                             else
                                             {
