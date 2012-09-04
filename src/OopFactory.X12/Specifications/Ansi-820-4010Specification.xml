@@ -256,4 +256,20 @@
       </Loop>
     </Loop>
   </Loop>
+  <Loop LoopId="LS">
+    <Name>Detail Loop</Name>
+    <StartingSegment SegmentId="LS"/>
+    <Segment SegmentId="LE" Trailer="true"/>
+    <Loop LoopId="N1">
+      <Name>N1</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Loop LoopId="RMT">
+        <Name>RMT</Name>
+        <StartingSegment SegmentId="RMT"/>
+        <Segment SegmentId="CUR"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTM"/>
+      </Loop>
+    </Loop>
+  </Loop>
 </TransactionSpecification>
