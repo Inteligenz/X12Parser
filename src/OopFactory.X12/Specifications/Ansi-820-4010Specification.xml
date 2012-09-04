@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="810">
   <Segment SegmentId="BPR"/>
+  <Segment SegmentId="BPS"/>
   <Segment SegmentId="NTE"/>
   <Segment SegmentId="TRN"/>
   <Segment SegmentId="CUR"/>
