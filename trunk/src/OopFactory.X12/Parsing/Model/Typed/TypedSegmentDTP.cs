@@ -24,19 +24,49 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(2, value.EDIFieldValue()); }
         }
 
-        public DateTime? DTP03_Date
+        public DateTimePeriod DTP03_Date
         {
             get
             {
                 string element = _segment.GetElement(3);
                 if (element.Length == 8)
-                    return DateTime.ParseExact(element, "yyyyMMdd", null);
+                    return new DateTimePeriod(DateTime.ParseExact(element, "yyyyMMdd", null));
+                if (element.Length == 17)
+                    return new DateTimePeriod(DateTime.ParseExact(element.Substring(0,8), "yyyyMMdd", null),
+                        DateTime.ParseExact(element.Substring(9), "yyyyMMdd", null));
                 return null;
             }
-            set
-            {
-                _segment.SetElement(3, String.Format("{0:yyyyMMdd}", value));
+            set {
+                _segment.SetElement(3,
+                                    value.IsDateRange
+                                        ? String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", value.StartDate, value.EndDate)
+                                        : String.Format("{0:yyyyMMdd}", value.StartDate));
             }
+        }
+
+    }
+
+
+    /// <summary>
+    /// Move this class in seperate file if being used by other classes.
+    /// </summary>
+    public class DateTimePeriod
+    {
+        public bool IsDateRange { get; private set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
+
+        public DateTimePeriod(DateTime date)
+        {
+            this.StartDate = date;
+            IsDateRange = false;
+        }
+
+        public DateTimePeriod(DateTime startDate, DateTime endDate)
+        {
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            IsDateRange = true;
         }
 
     }
