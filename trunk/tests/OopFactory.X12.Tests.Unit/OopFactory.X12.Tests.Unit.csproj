@@ -63,6 +63,7 @@
     <Compile Include="Creation\PurchaseOrderCreationTester.cs" />
     <Compile Include="DocumentationCodeSamples\X12InterchangeModel\ReadingAnExistingX12File.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ExtensionsTests\EnumExtensionsTests.cs" />
     <Compile Include="Flattening\Flatten820Tester.cs" />
     <Compile Include="Flattening\Flatten837Tester.cs" />
     <Compile Include="Parsing\ParsingTester.cs" />

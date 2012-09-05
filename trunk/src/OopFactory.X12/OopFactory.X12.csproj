@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\EDIFieldValueAttribute.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Parsing\DentalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\InstitutionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
