@@ -192,7 +192,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             dtpSegment.DTP01_DateTimeQualifier  = DTPQualifier.Service;
             dtpSegment.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
-            dtpSegment.DTP03_Date = theDate;
+            dtpSegment.DTP03_Date = new DateTimePeriod(theDate);
 
             var lxLoop2 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop2.LX01_AssignedNumber = "2";
@@ -208,7 +208,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             dtpSegment2.DTP01_DateTimeQualifier = DTPQualifier.Service;
             dtpSegment2.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
-            dtpSegment2.DTP03_Date = theDate2;
+            dtpSegment2.DTP03_Date = new DateTimePeriod(theDate2);
 
             var lxLoop3 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop3.LX01_AssignedNumber = "3";
@@ -224,7 +224,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             dtpSegment3.DTP01_DateTimeQualifier = DTPQualifier.Service;
             dtpSegment3.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate3 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
-            dtpSegment3.DTP03_Date = theDate3;
+            dtpSegment3.DTP03_Date = new DateTimePeriod(theDate3);
 
             var lxLoop4 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop4.LX01_AssignedNumber = "4";
@@ -238,9 +238,9 @@ namespace OopFactory.X12.Tests.Unit.Creation
 
             var dtpSegment4 = lxLoop4.AddSegment(new TypedSegmentDTP());
             dtpSegment4.DTP01_DateTimeQualifier = DTPQualifier.Service;
-            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
+            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD_CCYYMMDD;
             DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
-            dtpSegment4.DTP03_Date = theDate4;
+            dtpSegment4.DTP03_Date = new DateTimePeriod(theDate4, DateTime.ParseExact("20061025", "yyyyMMdd", null));
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
 
