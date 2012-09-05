@@ -174,7 +174,6 @@ namespace OopFactory.X12.Tests.Unit.Creation
             refSegment.REF01_ReferenceIdQualifier = "D9";
             refSegment.REF02_ReferenceId = "17312345600006351";
 
-#if DEBUG
             var hiSegment = claim2300Loop.AddSegment(new TypedSegmentHI());
             hiSegment.HI01_HealthCareCodeInformation = "BK:0340";
             hiSegment.HI02_HealthCareCodeInformation = "BF:V7389";
@@ -190,8 +189,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             sv1Segment.SV107_CompDiagCodePoint = "1";
 
             var dtpSegment = lxLoop.AddSegment(new TypedSegmentDTP());
-            dtpSegment.DTP01_DateTimeQualifier = "472";
-            dtpSegment.DTP02_DateTimePeriodFormatQualifier = "D8";
+            dtpSegment.DTP01_DateTimeQualifier  = DTPQualifier.Service;
+            dtpSegment.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
             dtpSegment.DTP03_Date = theDate;
 
@@ -206,8 +205,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             sv1Segment2.SV107_CompDiagCodePoint = "1";
 
             var dtpSegment2 = lxLoop2.AddSegment(new TypedSegmentDTP());
-            dtpSegment2.DTP01_DateTimeQualifier = "472";
-            dtpSegment2.DTP02_DateTimePeriodFormatQualifier = "D8";
+            dtpSegment2.DTP01_DateTimeQualifier = DTPQualifier.Service;
+            dtpSegment2.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
             dtpSegment2.DTP03_Date = theDate2;
 
@@ -222,8 +221,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             sv1Segment3.SV107_CompDiagCodePoint = "2";
 
             var dtpSegment3 = lxLoop3.AddSegment(new TypedSegmentDTP());
-            dtpSegment3.DTP01_DateTimeQualifier = "472";
-            dtpSegment3.DTP02_DateTimePeriodFormatQualifier = "D8";
+            dtpSegment3.DTP01_DateTimeQualifier = DTPQualifier.Service;
+            dtpSegment3.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate3 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment3.DTP03_Date = theDate3;
 
@@ -238,14 +237,13 @@ namespace OopFactory.X12.Tests.Unit.Creation
             sv1Segment4.SV107_CompDiagCodePoint = "2";
 
             var dtpSegment4 = lxLoop4.AddSegment(new TypedSegmentDTP());
-            dtpSegment4.DTP01_DateTimeQualifier = "472";
-            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = "D8";
+            dtpSegment4.DTP01_DateTimeQualifier = DTPQualifier.Service;
+            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment4.DTP03_Date = theDate4;
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
 
-#endif
             //Trace.Write(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
             //Trace.Write(x12);
         }
