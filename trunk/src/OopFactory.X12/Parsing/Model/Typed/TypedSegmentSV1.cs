@@ -5,7 +5,6 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-#if DEBUG
     public class TypedSegmentSV1 : TypedSegment
     {
         public TypedSegmentSV1() : base("SV1")
@@ -71,5 +70,4 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(15, value); }
         }
     }
-#endif
 }

@@ -432,6 +432,9 @@
     <EdiFile>
       <ResourcePath>INS._837P._5010.MedicaidExample.txt</ResourcePath>
     </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837P._5010.MissingEntityCode.txt</ResourcePath>
+    </EdiFile>
   </TransactionSet>
   <TransactionSet Id="850">
     <EdiFile>
