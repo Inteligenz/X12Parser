@@ -12,7 +12,7 @@ namespace OopFactory.X12.Parsing.Model
     public class FunctionGroup : Container, IXmlSerializable
     {
         private ISpecificationFinder _specFinder;
-        private Dictionary<string,Transaction> _transactions;
+        private List<Transaction> _transactions;
 
         internal FunctionGroup() : base(null, null, "GS") { }
 
@@ -20,7 +20,7 @@ namespace OopFactory.X12.Parsing.Model
             : base(parent, delimiters, segment)
         {
             _specFinder = specFinder;
-            _transactions = new Dictionary<string,Transaction>();
+            _transactions = new List<Transaction>();
         }
 
         internal ISpecificationFinder SpecFinder
@@ -92,17 +92,14 @@ namespace OopFactory.X12.Parsing.Model
             set { SetElement(8, value); }
         }
 
-        public IEnumerable<Transaction> Transactions
+        public List<Transaction> Transactions
         {
-            get { return _transactions.Values; }
+            get { return _transactions; }
         }
 
         public Transaction FindTransaction(string controlNumber)
         {
-            if (_transactions.ContainsKey(controlNumber))
-                return _transactions[controlNumber];
-            else
-                return null;
+            return _transactions.FirstOrDefault(t => t.ControlNumber == controlNumber);
         }
 
         
@@ -114,15 +111,15 @@ namespace OopFactory.X12.Parsing.Model
             TransactionSpecification spec = _specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, transactionType);
 
             Transaction transaction = new Transaction(this, _delimiters, segmentString, spec);
-            if (_transactions.ContainsKey(transaction.ControlNumber))
-            {
-                throw new TransactionValidationException("Transaction control number {1} for transaction code {0} already exist within the functional group {4}.",
-                    transaction.IdentifierCode, transaction.ControlNumber, "ST02", transaction.ControlNumber, this.ControlNumber);
-            }
-            else
-            {
-                _transactions.Add(transaction.ControlNumber, transaction);
-            }
+            //if (_transactions.ContainsKey(transaction.ControlNumber))
+            //{
+            //    throw new TransactionValidationException("Transaction control number {1} for transaction code {0} already exist within the functional group {4}.",
+            //        transaction.IdentifierCode, transaction.ControlNumber, "ST02", transaction.ControlNumber, this.ControlNumber);
+            //}
+            //else
+            //{
+                _transactions.Add(transaction);
+            //}
             return transaction;
         }
 
@@ -137,7 +134,7 @@ namespace OopFactory.X12.Parsing.Model
             transaction.SetTerminatingTrailerSegment(
                 string.Format("SE{0}0{0}{2}{1}", _delimiters.ElementSeparator, _delimiters.SegmentTerminator, controlNumber));
 
-            _transactions.Add(transaction.ControlNumber, transaction);
+            _transactions.Add(transaction);
             return transaction;
         }
 
