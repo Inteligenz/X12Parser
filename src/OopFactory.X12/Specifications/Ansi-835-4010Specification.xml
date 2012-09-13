@@ -28,8 +28,8 @@
   <Loop LoopId="2000" Usage="Required" Repeat="9999">
     <Name>HEADER NUMBER</Name>
     <StartingSegment SegmentId="LX" Usage="Situational" Repeat="1"/>
-    <Segment SegmentId="TS3" Usage="Required" Repeat="1"/>
-    <Segment SegmentId="TS2" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="TS3" Usage="Situational" Repeat="1"/>
+    <Segment SegmentId="TS2" Usage="Situational" Repeat="1"/>
     <Loop LoopId="2100">
       <Name>CLAIM PAYMENT INFORMATION</Name>
       <StartingSegment SegmentId="CLP" Usage="Required" Repeat="9999"/>
