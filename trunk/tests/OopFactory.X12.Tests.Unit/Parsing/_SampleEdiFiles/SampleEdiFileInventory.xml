@@ -535,4 +535,18 @@
       <ResourcePath>MAN._866.Sample1.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="867">
+    <EdiFile>
+      <SourceUrl>http://www.hibcc.org/ebus/editemplates/EDI%20PDF%2011-21-05/867ex1.pdf</SourceUrl>
+      <ResourcePath>MAN._867.Example1.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.hibcc.org/ebus/editemplates/EDI%20PDF%2011-21-05/867ex2.pdf</SourceUrl>
+      <ResourcePath>MAN._867.Example2.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <SourceUrl>http://www.hibcc.org/ebus/editemplates/EDI%20PDF%2011-21-05/867ex3.pdf</SourceUrl>
+      <ResourcePath>MAN._867.Example3.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
 </SampleEdiFiles>

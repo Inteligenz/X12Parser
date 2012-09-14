@@ -77,6 +77,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_867\Example3.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_867\Example2.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_867\Example1.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\MissingEntityCode.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_865\FromTyco.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_865\FromAdvanceAutoParts.txt" />
