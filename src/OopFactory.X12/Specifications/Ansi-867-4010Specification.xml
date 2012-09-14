@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- used http://www2.dla.mil/j-6/dlmso/elibrary/Transformats/ICs/4010/41f867da.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="867">
+  <Segment SegmentId="BPT"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="MEA"/>
+  <Segment SegmentId="PSA"/>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Loop LoopId="PER">
+      <Name>Adminstrative Communications Contact</Name>
+      <StartingSegment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="PTD">
+    <Name>Product Transfer and Resale Detail</Name>
+    <StartingSegment SegmentId="PTD"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PRF"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="MAN"/>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Loop LoopId="SII">
+        <Name>Sales Item Information</Name>
+        <StartingSegment SegmentId="SII"/>
+        <Segment SegmentId="N9"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="QTY">
+      <Name>Quantity</Name>
+      <StartingSegment SegmentId="QTY"/>
+      <Segment SegmentId="LIN"/>
+      <Segment SegmentId="PO3"/>
+      <Segment SegmentId="PO4"/>
+      <Segment SegmentId="UIT"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="ITA"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="PWK"/>
+      <Segment SegmentId="PKG"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="CUR"/>
+      <Segment SegmentId="DD"/>
+      <Segment SegmentId="LDT"/>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="N1"/>
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM"/>
+          <Segment SegmentId="LQ"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="CTT">
+    <Name>Transaction Totals</Name>
+    <StartingSegment SegmentId="CTT"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="ITA"/>
+  </Loop>
+
+</TransactionSpecification>
