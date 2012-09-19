@@ -241,6 +241,8 @@
     <Allowed ID="1C">Medicare Provider Number</Allowed>
     <Allowed ID="1D">Medicaid Provider Number</Allowed>
     <Allowed ID="17">Client Reporting Category</Allowed>
+    <Allowed ID="18">Plan Number</Allowed>
+    <Allowed ID="49">Family Unit Number</Allowed>
     <Allowed ID="1G">Provider UPIN Number</Allowed>
     <Allowed ID="1H">CHAMPUS Identification Number</Allowed>
     <Allowed ID="1J">Facility ID Number</Allowed>
@@ -254,6 +256,7 @@
     <Allowed ID="3H">Case Number</Allowed>
     <Allowed ID="4N">Special Payment Reference Number</Allowed>
     <Allowed ID="6O">Cross Reference Number</Allowed>
+    <Allowed ID="6P">Group Number</Allowed>
     <Allowed ID="6R">Provider Control Number</Allowed>
     <Allowed ID="87">Functional Category</Allowed>
     <Allowed ID="8U">Bank Assigned Security Identifier</Allowed>
@@ -263,11 +266,13 @@
     <Allowed ID="9D">Adjusted Repriced Line Item Reference Number</Allowed>
     <Allowed ID="9F">Referral Number</Allowed>
     <Allowed ID="AB">Acceptable Source Purchase ID</Allowed>
+    <Allowed ID="ALS">Alternative List ID</Allowed>
     <Allowed ID="B3">Preferred Provider Organization Number</Allowed>
     <Allowed ID="BB">Authorization Number</Allowed>
     <Allowed ID="BQ">Health Maintenance Organization Code Number</Allowed>
     <Allowed ID="BT">Batch Number</Allowed>
     <Allowed ID="CK">Check Number</Allowed>
+    <Allowed ID="CLI">Coverage List ID</Allowed>
     <Allowed ID="CM">Credit Memo</Allowed>
     <Allowed ID="D9">Claim Number</Allowed>
     <Allowed ID="DB">Debit Memo</Allowed>
@@ -282,6 +287,7 @@
     <Allowed ID="F6">Health Insurance Claim (HIC) Number</Allowed>
     <Allowed ID="F8">Original Reference Number</Allowed>
     <Allowed ID="FH">Clinic Number</Allowed>
+    <Allowed ID="FO">Drug Formulary Number</Allowed>
     <Allowed ID="FY">Claim Office Number</Allowed>
     <Allowed ID="G1">Prior Authorization Number</Allowed>
     <Allowed ID="G2">Provider Commercial Number</Allowed>
@@ -293,10 +299,13 @@
     <Allowed ID="LD">Loan Number</Allowed>
     <Allowed ID="LU">Location Number</Allowed>
     <Allowed ID="LX">Qualified Products List</Allowed>
+    <Allowed ID="M7">Medical Assistance Category</Allowed>
     <Allowed ID="MC">Microfilm Number</Allowed>
     <Allowed ID="MIN">Mortgage ID Number</Allowed>
     <Allowed ID="N5">Provider Plan Network Identification Number</Allowed>
+    <Allowed ID="N6">Plan Network Identification Number</Allowed>
     <Allowed ID="NF">National Association of Insurance Commissioners (NAIC) Code</Allowed>
+    <Allowed ID="NQ">Medicaid Recipient Identification Number</Allowed>    
     <Allowed ID="OS">Outbound-from Party</Allowed>
     <Allowed ID="OZ">Product Number</Allowed>
     <Allowed ID="P4">Project Code</Allowed>
@@ -1266,7 +1275,7 @@
     <Element Name="Quantity Qualifier" Type="ID" QualifierSetRef="Quantity Qualifier"/>
     <Element Name="Quantity"/>
     <Element Name="Authorization or Certification Indicator"/>
-    <Element Name="In Plan Network Indicator"/>
+    <Element Name="In Plan Network Indicator" QualifierSetRef="Yes/No Condition or Response Code" Type="ID" />
     <Element Name="Composite Medical Procedure Identifier" Type="ID">
       <Allowed ID="AD">Americal Dental Assication Codes</Allowed>
       <Allowed ID="CJ">Current Procedural Terminology (CPT) Codes</Allowed>

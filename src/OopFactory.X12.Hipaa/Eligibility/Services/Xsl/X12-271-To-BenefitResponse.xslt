@@ -150,7 +150,7 @@
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:if test="string-length(EOB03)>0">
+        <xsl:if test="string-length(EB03)>0">
           <ServiceType>
             <xsl:attribute name="Code">
               <xsl:value-of select="EB03"/>
@@ -197,6 +197,16 @@
         <xsl:value-of select="EB09/comment()"/>
       </Quantity>
     </xsl:if>
+
+    <xsl:if test="string-length(EB12)>0">
+      <InPlanNetwork>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB12"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB12/comment()"/>
+      </InPlanNetwork>
+    </xsl:if>
+
 
     <xsl:if test="string-length(EB13)>0">
       <Procedure>
