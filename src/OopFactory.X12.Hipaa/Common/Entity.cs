@@ -13,6 +13,7 @@ namespace OopFactory.X12.Hipaa.Common
             if (Name == null) Name = new EntityName();
             if (Identifications == null) Identifications = new List<Identification>();
             if (Contacts == null) Contacts = new List<Contact>();
+            if (RequestValidations!=null) RequestValidations = new List<RequestValidation>();
         }
 
         public EntityName Name { get; set; }
@@ -32,6 +33,9 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlElement(ElementName="Contact")]
         public List<Contact> Contacts { get; set; }
+
+        [XmlElement(ElementName = "RequestValidation")]
+        public List<RequestValidation> RequestValidations { get; set; }
 
     }
 }
