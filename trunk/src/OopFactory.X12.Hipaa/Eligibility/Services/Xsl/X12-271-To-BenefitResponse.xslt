@@ -53,6 +53,13 @@
           <xsl:with-param name="DTP" select="."/>
         </xsl:call-template>
       </xsl:for-each>
+      <xsl:for-each select="AAA">
+        <RequestValidation>
+          <xsl:call-template name="RequestValidation">
+            <xsl:with-param name="AAA" select="."/>
+          </xsl:call-template>
+        </RequestValidation>
+      </xsl:for-each>
       <xsl:for-each select="MSG">
         <Message>
           <xsl:value-of select="MSG01"/>
@@ -270,6 +277,13 @@
           <xsl:with-param name="Loop" select="$Loop"/>
         </xsl:call-template>
       </Name>
+      <xsl:for-each select="$Loop/AAA">
+        <RequestValidation>
+          <xsl:call-template name="RequestValidation">
+            <xsl:with-param name="AAA" select="."/>
+          </xsl:call-template>
+        </RequestValidation>
+      </xsl:for-each>
     </Source>
   </xsl:template>
 
@@ -281,6 +295,13 @@
           <xsl:with-param name="Loop" select="$Loop"/>
         </xsl:call-template>
       </Name>
+      <xsl:for-each select="$Loop/AAA">
+        <RequestValidation>
+          <xsl:call-template name="RequestValidation">
+            <xsl:with-param name="AAA" select="."/>
+          </xsl:call-template>
+        </RequestValidation>
+      </xsl:for-each>
     </Receiver>
   </xsl:template>
 
@@ -351,6 +372,13 @@
       <xsl:call-template name="DTPSegment">
         <xsl:with-param name="DTP" select="."/>
       </xsl:call-template>
+    </xsl:for-each>
+    <xsl:for-each select="$Loop/AAA">
+      <RequestValidation>
+        <xsl:call-template name="RequestValidation">
+          <xsl:with-param name="AAA" select="."/>
+        </xsl:call-template>
+      </RequestValidation>
     </xsl:for-each>
   </xsl:template>
   
@@ -425,7 +453,33 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
+
+  <xsl:template name="RequestValidation">
+    <xsl:param name="AAA"/>
+    <xsl:attribute name="ValidRequest">
+      <xsl:choose>
+        <xsl:when test="AAA01='Y'">
+          true
+        </xsl:when>
+        <xsl:otherwise>
+          false
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+    <RejectReason>
+      <xsl:attribute name="Code">        
+        <xsl:value-of select="AAA03"/>
+      </xsl:attribute>
+      <xsl:value-of select="AAA03/comment()"/>
+    </RejectReason>
+    <FollupAction>
+      <xsl:attribute name="Code">
+        <xsl:value-of select="AAA04"/>
+      </xsl:attribute>
+      <xsl:value-of select="AAA04/comment()"/>
+    </FollupAction>
+  </xsl:template>
+
   <xsl:template name="Contact">
     <xsl:param name="PER"/>
     <xsl:attribute name="FunctionCode">

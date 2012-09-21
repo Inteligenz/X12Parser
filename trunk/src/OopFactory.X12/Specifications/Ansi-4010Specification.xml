@@ -1214,6 +1214,8 @@
       <Allowed ID="P">Please Resubmit Original Transaction</Allowed>
       <Allowed ID="R">Resubmission Allowed</Allowed>
       <Allowed ID="S">Do Not Resubmit; Inquiry Initiated to a Third Party</Allowed>
+      <Allowed ID="W">Please Wait 30 Days and Resubmit</Allowed>
+      <Allowed ID="X">Please Wait 10 Days and Resubmit</Allowed>
       <Allowed ID="Y">Do Not Resubmit; We Will Hold Your Request and Respond Again Shortly</Allowed>
     </Element>
   </Segment>

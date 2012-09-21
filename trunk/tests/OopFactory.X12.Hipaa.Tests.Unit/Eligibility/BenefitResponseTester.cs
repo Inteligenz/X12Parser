@@ -138,6 +138,13 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
             Trace.Write(responses.Serialize());
         }
 
+        [TestMethod]
+        public void Transform5010ToModel3Test()
+        {
+            var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_3.txt");
+            Trace.Write(responses.Serialize());
+        }
+
         private string TransformModelToHtml(string resourcePath)
         {
             var service = new EligibilityTransformationService();
