@@ -17,6 +17,17 @@
 
   <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
     <xsl:if test="count(Loop/EB)>0">
+
+      <xsl:if test="@LoopId='2100C'">
+        <xsl:for-each select="../../.././AAA">
+          <RequestValidation>
+            <xsl:call-template name="RequestValidation">
+              <xsl:with-param name="AAA" select="."/>
+            </xsl:call-template>
+          </RequestValidation>
+        </xsl:for-each>
+      </xsl:if>
+
       <EligibilityBenefitResponse>
         <xsl:choose>
           <xsl:when test="@LoopId='2100C'">
