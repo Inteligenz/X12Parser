@@ -1159,6 +1159,7 @@
       <Allowed ID="41">Authorization/Access Restrictions</Allowed>
       <Allowed ID="42">Unable to Respond at Current Time</Allowed>
       <Allowed ID="43">Invalid/Missing Provider Identification</Allowed>
+      <Allowed ID="44">Invalid/Missing Provider Name</Allowed>
       <Allowed ID="45">Invalid/Missing Provider Specialty</Allowed>
       <Allowed ID="46">Invalid/Missing Provider Phone Number</Allowed>
       <Allowed ID="47">Invalid/Missing Provider State</Allowed>
