@@ -16,7 +16,6 @@
   </xsl:template>
 
   <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
-    <xsl:if test="count(Loop/EB)>0">
 
       <xsl:if test="@LoopId='2100C'">
         <xsl:for-each select="../../.././AAA">
@@ -46,7 +45,7 @@
         </xsl:choose>
         <xsl:apply-templates select="Loop"/>
       </EligibilityBenefitResponse>
-    </xsl:if>
+    
   </xsl:template>
 
   <xsl:template match="Loop[count(EB)>0]">

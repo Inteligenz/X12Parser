@@ -75,6 +75,7 @@
     <EmbeddedResource Include="Claims\TestData\InstitutionalClaim4010.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\Example_ErrorWithoutBenefitInfo.txt" />
     <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS.txt" />
     <Content Include="Claims\TestData\Images\ADAJ400_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
