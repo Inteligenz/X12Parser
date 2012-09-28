@@ -145,6 +145,17 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
             Trace.Write(responses.Serialize());
         }
 
+        [TestMethod]
+        public void Transform5010WithBenefitInfoAndErrorToBenefitDocumentWithRequestValidation()
+        {
+            var responses = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_ErrorWithoutBenefitInfo.txt");
+            Assert.AreEqual(responses.RequestValidations.Count, 2);
+            Assert.AreEqual(responses.EligibilityBenefitResponses[0].Receiver.RequestValidations.Count, 2);
+            Assert.AreEqual(responses.EligibilityBenefitResponses[0].Source.RequestValidations.Count, 2);
+            Assert.AreEqual(responses.EligibilityBenefitResponses[0].Subscriber.RequestValidations.Count, 1);
+            Trace.Write(responses.Serialize());
+        }
+
         private string TransformModelToHtml(string resourcePath)
         {
             var service = new EligibilityTransformationService();
