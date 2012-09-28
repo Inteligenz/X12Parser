@@ -129,7 +129,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Eligibility\Services\Xsl\X12-271-To-BenefitResponse.xslt" />
+    <EmbeddedResource Include="Eligibility\Services\Xsl\X12-271-To-BenefitResponse.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Eligibility\Services\Xsl\BenefitResponse-To-Html.xslt" />
