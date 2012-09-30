@@ -11,7 +11,7 @@
       <Segment SegmentId="AAA"/>
     </Loop>
   </HierarchicalLoop>
-  <HierarchicalLoop LoopId="2100B" LevelCode="21">
+  <HierarchicalLoop LoopId="2000B" LevelCode="21">
     <Name>Information Receiver Level</Name>
     <Loop LoopId="2100B">
       <Name>Information Receiver Name</Name>

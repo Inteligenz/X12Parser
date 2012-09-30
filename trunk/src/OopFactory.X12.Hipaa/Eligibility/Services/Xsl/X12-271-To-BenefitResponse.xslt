@@ -3,50 +3,110 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
                  xmlns="http://www.oopfactory.com/2011/XSL/Hipaa"
 >
-    <xsl:output method="xml" indent="yes"/>
+  <xsl:output method="xml" indent="yes"/>
 
   <xsl:template match="@* | node()">
-      <xsl:apply-templates select="@* | node()"/>
+    <xsl:apply-templates select="@* | node()"/>
   </xsl:template>
 
   <xsl:template match="Interchange">
     <EligibilityBenefitDocument>
-          <xsl:apply-templates select="@* | node()"/>
+      <xsl:apply-templates select="@* | node()"/>
     </EligibilityBenefitDocument>
   </xsl:template>
 
-  <xsl:template match="Loop[@LoopId='2100C' or @LoopId='2100D']">
-    <xsl:if test="count(Loop/EB)>0">
+  <xsl:template match="HierarchicalLoop[@LoopId='2000A']">
 
-      <xsl:if test="@LoopId='2100C'">
-        <xsl:for-each select="../../.././AAA">
-          <RequestValidation>
-            <xsl:call-template name="RequestValidation">
-              <xsl:with-param name="AAA" select="."/>
-            </xsl:call-template>
-          </RequestValidation>
-        </xsl:for-each>
-      </xsl:if>
+    <xsl:for-each select="AAA">
+      <RequestValidation>
+        <xsl:call-template name="RequestValidation">
+          <xsl:with-param name="AAA" select="."/>
+        </xsl:call-template>
+      </RequestValidation>
+    </xsl:for-each>
 
-      <EligibilityBenefitResponse>
-        <xsl:choose>
-          <xsl:when test="@LoopId='2100C'">
-            <xsl:call-template name="SubscriberHLoop">
-              <xsl:with-param name="HLoop" select="../."/>
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="@LoopId='2100D'">
-            <xsl:call-template name="SubscriberHLoop">
-              <xsl:with-param name="HLoop" select="../../."/>
-            </xsl:call-template>
-            <xsl:call-template name="DependentNameLoop">
-              <xsl:with-param name="Loop" select="."/>
-            </xsl:call-template>
-          </xsl:when>
-        </xsl:choose>
-        <xsl:apply-templates select="Loop"/>
-      </EligibilityBenefitResponse>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="count(./HierarchicalLoop[@LoopId='2000B'])=0">
+        <EligibilityBenefitResponse>
+          <xsl:attribute name="TransactionControlNumber">
+            <xsl:value-of select="../ST/ST02"/>
+          </xsl:attribute>
+          <xsl:call-template name="SourceNameLoop">
+            <xsl:with-param name="Loop" select="Loop"/>
+          </xsl:call-template>
+        </EligibilityBenefitResponse>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="HierarchicalLoop2000B">
+          <xsl:with-param name="HLoop" select="./HierarchicalLoop[@LoopId='2000B']"></xsl:with-param>
+        </xsl:call-template>
+      </xsl:otherwise>
+
+    </xsl:choose>
+
+  </xsl:template>
+
+  <xsl:template name="HierarchicalLoop2000B">
+    <xsl:param name="HLoop"/>
+
+    <xsl:choose>
+      <xsl:when test="count($HLoop/HierarchicalLoop[@LoopId='2000C'])=0">
+        <EligibilityBenefitResponse>
+
+          <xsl:attribute name="TransactionControlNumber">
+            <xsl:value-of select="$HLoop/../../ST/ST02"/>
+          </xsl:attribute>
+          <xsl:call-template name="SourceNameLoop">
+            <xsl:with-param name="Loop" select="$HLoop/../Loop"/>
+          </xsl:call-template>
+          <xsl:call-template name="ReceiverNameLoop">
+            <xsl:with-param name="Loop" select="$HLoop/Loop"/>
+          </xsl:call-template>
+        </EligibilityBenefitResponse>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="HierarchicalLoop2000C">
+          <xsl:with-param name="HLoop" select="$HLoop/HierarchicalLoop[@LoopId='2000C']"></xsl:with-param>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:template>
+
+  <xsl:template name="HierarchicalLoop2000C">
+    <xsl:param name="HLoop"/>
+
+    <xsl:choose>
+      <xsl:when test="count($HLoop/HierarchicalLoop[@LoopId='2000D'])=0">
+        <EligibilityBenefitResponse>
+          <xsl:call-template name="SubscriberHLoop">
+            <xsl:with-param name="HLoop" select="$HLoop/."/>
+          </xsl:call-template>
+          <xsl:apply-templates select="$HLoop/Loop"/>
+        </EligibilityBenefitResponse>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="HierarchicalLoop2000D">
+          <xsl:with-param name="HLoop" select="$HLoop/HierarchicalLoop[@LoopId='2000D']"></xsl:with-param>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:template>
+
+  <xsl:template name="HierarchicalLoop2000D">
+    <xsl:param name="HLoop"/>
+
+    <EligibilityBenefitResponse>
+      <xsl:call-template name="SubscriberHLoop">
+        <xsl:with-param name="HLoop" select="$HLoop/../."/>
+      </xsl:call-template>
+      <xsl:call-template name="DependentNameLoop">
+        <xsl:with-param name="Loop" select="$HLoop/Loop"/>
+      </xsl:call-template>
+      <xsl:apply-templates select="$HLoop/Loop"/>
+    </EligibilityBenefitResponse>
+
   </xsl:template>
 
   <xsl:template match="Loop[count(EB)>0]">
@@ -114,7 +174,7 @@
         <Contact>
           <xsl:call-template name="Contact">
             <xsl:with-param name="PER" select="."/>
-          </xsl:call-template>          
+          </xsl:call-template>
         </Contact>
       </xsl:for-each>
       <xsl:for-each select="PRV">
@@ -269,15 +329,15 @@
     <xsl:attribute name="TransactionControlNumber">
       <xsl:value-of select="$HLoop/../../.././ST/ST02"/>
     </xsl:attribute>
-      <xsl:call-template name="SourceNameLoop">
-        <xsl:with-param name="Loop" select="$HLoop/../.././Loop"/>
-      </xsl:call-template>
-      <xsl:call-template name="ReceiverNameLoop">
-        <xsl:with-param name="Loop" select="$HLoop/.././Loop"/>
-      </xsl:call-template>
-      <xsl:call-template name="SubscriberNameLoop">
-        <xsl:with-param name="Loop" select="$HLoop/Loop"/>
-      </xsl:call-template>
+    <xsl:call-template name="SourceNameLoop">
+      <xsl:with-param name="Loop" select="$HLoop/../.././Loop"/>
+    </xsl:call-template>
+    <xsl:call-template name="ReceiverNameLoop">
+      <xsl:with-param name="Loop" select="$HLoop/.././Loop"/>
+    </xsl:call-template>
+    <xsl:call-template name="SubscriberNameLoop">
+      <xsl:with-param name="Loop" select="$HLoop/Loop"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="SourceNameLoop">
@@ -322,7 +382,7 @@
       <xsl:call-template name="Member">
         <xsl:with-param name="Loop" select="$Loop"/>
       </xsl:call-template>
-    </Subscriber>  
+    </Subscriber>
   </xsl:template>
 
   <xsl:template name="DependentNameLoop">
@@ -392,7 +452,7 @@
       </RequestValidation>
     </xsl:for-each>
   </xsl:template>
-  
+
   <xsl:template name="EntityName">
     <xsl:param name="Loop"/>
     <xsl:attribute name="Identifier">
@@ -434,7 +494,7 @@
       <xsl:value-of select="$N3/.././N4/N401"/>
     </xsl:attribute>
     <xsl:attribute name="StateCode">
-      <xsl:value-of select="$N3/.././N4/N402"/>      
+      <xsl:value-of select="$N3/.././N4/N402"/>
     </xsl:attribute>
     <xsl:attribute name="PostalCode">
       <xsl:value-of select="$N3/.././N4/N403"/>
@@ -478,7 +538,7 @@
       </xsl:choose>
     </xsl:attribute>
     <RejectReason>
-      <xsl:attribute name="Code">        
+      <xsl:attribute name="Code">
         <xsl:value-of select="AAA03"/>
       </xsl:attribute>
       <xsl:value-of select="AAA03/comment()"/>

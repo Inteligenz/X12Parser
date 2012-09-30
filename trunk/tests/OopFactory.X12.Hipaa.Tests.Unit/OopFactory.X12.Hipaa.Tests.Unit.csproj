@@ -75,6 +75,14 @@
     <EmbeddedResource Include="Claims\TestData\InstitutionalClaim4010.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForDependentBenefitInfo.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForDependentName.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForSource.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForSourceName.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForReceiverName.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForSubscriberBenefitInfo.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationForSubscriberName.txt" />
+    <EmbeddedResource Include="Eligibility\TestData\_271\_5010\ValidationOnAll.txt" />
     <EmbeddedResource Include="Eligibility\TestData\_271\_4010\Example3_CMS_HETS.txt" />
     <Content Include="Claims\TestData\Images\ADAJ400_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
