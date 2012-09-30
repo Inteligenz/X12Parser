@@ -145,6 +145,74 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
             Trace.Write(responses.Serialize());
         }
 
+        [TestMethod]
+        public void ValidationOnAll_WhenTransform5010ToModelTest_ShouldHaveAllRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationOnAll.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.RequestValidations.Count, 2);
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Dependent.RequestValidations.Count, 1);
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Receiver.RequestValidations.Count, 2);
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Source.RequestValidations.Count, 2);
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Subscriber.RequestValidations.Count, 1);
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 2);
+        }
+
+        [TestMethod]
+        public void ValidationForDependentBenefitInfo_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentBenefitInfo.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 1);
+        }
+
+        [TestMethod]
+        public void ValidationForDependentName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentName.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Dependent.RequestValidations.Count, 1);
+        }
+
+        [TestMethod]
+        public void ValidationForSource_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSource.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.RequestValidations.Count, 1);
+        }
+
+        [TestMethod]
+        public void ValidationForSourceName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSourceName.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Source.RequestValidations.Count, 1);
+        }
+
+        [TestMethod]
+        public void ValidationForSubscriberBenefitInfo_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberBenefitInfo.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 2);
+        }
+
+        [TestMethod]
+        public void ValidationForSubscriberName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
+        {
+            var response = TransformToModel("OopFactory.X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberName.txt");
+            Trace.Write(response.Serialize());
+
+            Assert.AreEqual(response.EligibilityBenefitResponses[0].Subscriber.RequestValidations.Count, 2);
+        }
+
         private string TransformModelToHtml(string resourcePath)
         {
             var service = new EligibilityTransformationService();
