@@ -318,5 +318,25 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 
             // Box 81CC
         }
+
+        [TestMethod]
+        public void TransformToInstitutionalClaim5010_PayerObjectTest()
+        {
+
+            var service = new ClaimTransformationService();
+
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
+
+            var document = service.Transform837ToClaimDocument(stream);
+
+            Claim claim = document.Claims.First();
+            Trace.Write(claim.Serialize());
+
+            Assert.AreEqual("PI", claim.Payer.Name.Identification.Qualifier);
+            Assert.AreEqual("00435", claim.Payer.Name.Identification.Id);
+            Assert.AreEqual("G2", claim.Payer.Identifications.First().Qualifier);
+            Assert.AreEqual("330127", claim.Payer.Identifications.First().Id);
+
+        }
     }
 }
