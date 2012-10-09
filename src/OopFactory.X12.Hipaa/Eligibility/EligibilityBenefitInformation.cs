@@ -70,6 +70,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public Lookup TimePeriod { get; set; }
         public QualifiedAmount Quantity { get; set; }
         public Lookup InPlanNetwork { get; set; }
+        public Lookup AuthorizationCertificationRequired { get; set; }
         public MedicalProcedure Procedure { get; set; }
 
         [XmlElement(ElementName = "Identification")]

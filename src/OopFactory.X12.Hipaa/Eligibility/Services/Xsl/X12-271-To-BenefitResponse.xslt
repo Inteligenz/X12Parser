@@ -276,6 +276,15 @@
       </Quantity>
     </xsl:if>
 
+    <xsl:if test="string-length(EB11)>0">
+      <AuthorizationCertificationRequired>
+        <xsl:attribute name="Code">
+          <xsl:value-of select="EB11"/>
+        </xsl:attribute>
+        <xsl:value-of select="EB11/comment()"/>
+      </AuthorizationCertificationRequired>
+    </xsl:if>
+
     <xsl:if test="string-length(EB12)>0">
       <InPlanNetwork>
         <xsl:attribute name="Code">

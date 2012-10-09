@@ -1277,8 +1277,8 @@
     <Element Name="Percent"/>
     <Element Name="Quantity Qualifier" Type="ID" QualifierSetRef="Quantity Qualifier"/>
     <Element Name="Quantity"/>
-    <Element Name="Authorization or Certification Indicator"/>
-    <Element Name="In Plan Network Indicator" QualifierSetRef="Yes/No Condition or Response Code" Type="ID" />
+    <Element Name="Authorization or Certification Indicator" QualifierSetRef="Yes/No Condition or Response Code" Type="ID" />
+    <Element Name="In Plan Network Indicator" QualifierSetRef="Yes/No Condition or Response Code" Type="ID" />    
     <Element Name="Composite Medical Procedure Identifier" Type="ID">
       <Allowed ID="AD">Americal Dental Assication Codes</Allowed>
       <Allowed ID="CJ">Current Procedural Terminology (CPT) Codes</Allowed>
