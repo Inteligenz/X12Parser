@@ -23,6 +23,7 @@
               EB*1**30**GOLD 123 PLAN~
 				AAA*N**51*N~
 				AAA*Y**60*W~
+			  EB*F*IND*12***32*****Y*N~
               EB*L~
                 LS*2120~
                   NM1*P3*1*JONES*MARCUS****SV*0202034~
