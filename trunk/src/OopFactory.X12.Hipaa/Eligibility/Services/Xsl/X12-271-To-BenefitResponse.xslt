@@ -601,12 +601,16 @@
     <xsl:attribute name="ProviderCode">
       <xsl:value-of select="PRV01"/>
     </xsl:attribute>
+    <xsl:attribute name="ProviderDescription">
+      <xsl:value-of select="PRV01/comment()"/>
+    </xsl:attribute>
     <xsl:attribute name="Qualifier">
       <xsl:value-of select="PRV02"/>
     </xsl:attribute>
     <xsl:attribute name="Id">
       <xsl:value-of select="PRV03"/>
     </xsl:attribute>
+    <xsl:value-of select="PRV02/comment()"/>
   </xsl:template>
 
   <xsl:template name="DTPSegment">
