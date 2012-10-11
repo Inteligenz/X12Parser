@@ -10,5 +10,9 @@ namespace OopFactory.X12.Hipaa.Common
     {
         [XmlAttribute]
         public string ProviderCode { get; set; }
+
+        [XmlAttribute]
+        public string ProviderDescription { get; set; }
+
     }
 }
