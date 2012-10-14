@@ -549,4 +549,10 @@
       <ResourcePath>MAN._867.Example3.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="875">
+    <EdiFile>
+      <SourceUrl>http://www.amosoft.com/edi_docs/EDI_875_X12_File_Sample.html</SourceUrl>
+      <ResourcePath>ORD._875.AmasoftExample1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
 </SampleEdiFiles>
