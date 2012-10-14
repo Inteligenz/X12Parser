@@ -1085,9 +1085,11 @@
       <xsl:attribute name="OtherPayerPrimaryIdentifier">
         <xsl:value-of select="SVD/SVD01"/>
       </xsl:attribute>
-      <xsl:attribute name="ServiceLinePaidAmount">
-        <xsl:value-of select="SVD/SVD02"/>
-      </xsl:attribute>
+      <xsl:if test="string-length(SVD/SVD02)>0">
+        <xsl:attribute name="ServiceLinePaidAmount">
+          <xsl:value-of select="SVD/SVD02"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="string-length(SVD/SVD05)>0">
         <xsl:attribute name="PaidServiceUnitCount">
           <xsl:value-of select="SVD/SVD05"/>
