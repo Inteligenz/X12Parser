@@ -555,4 +555,10 @@
       <ResourcePath>ORD._875.AmasoftExample1.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="880">
+    <EdiFile>
+      <SourceUrl>http://techsheets.simplot.com/EDI/880_FG_4010UCS.pdf</SourceUrl>
+      <ResourcePath>ORD._880.SimplotExample1.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
 </SampleEdiFiles>

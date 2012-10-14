@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!-- used http://techsheets.simplot.com/EDI/880_FG_4010UCS.pdf -->
+<!-- used http://www.valero.com/edi/Documents/Retail/Standards/880_Grocery_Order_Invoice.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="880">
+  <Segment SegmentId="G01"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G61"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="G27"/>
+  <Segment SegmentId="G23"/>
+  <Segment SegmentId="G25"/>
+  <Segment SegmentId="G31" Trailer="true"/>
+  <Segment SegmentId="G33" Trailer="true"/>
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Allowance or Charge</Name>
+    <StartingSegment SegmentId="G72"/>
+    <Segment SegmentId="G73"/>
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Item Detail</Name>
+    <StartingSegment SegmentId="G17"/>
+    <Segment SegmentId="G69"/>
+    <Segment SegmentId="G19"/>
+    <Segment SegmentId="G20"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="G23"/>
+    <Segment SegmentId="G25"/>
+    <Loop LoopId="0310">
+      <Name>Allowance or Charge</Name>
+      <StartingSegment SegmentId="G72"/>
+      <Segment SegmentId="G73"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
