@@ -9,7 +9,7 @@
 			AAA*Y**79*N~
 			AAA*N**80*P~
         HL*2*1*21*1~
-          NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~
+          NM1*1P*1*Smith*John*M*Mr*Sr*SV*2000035~
 			  AAA*Y**41*C~
 			  AAA*N**41*C~
           HL*3*2*22*0~
