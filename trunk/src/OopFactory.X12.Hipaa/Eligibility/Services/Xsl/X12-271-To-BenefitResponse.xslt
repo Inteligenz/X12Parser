@@ -357,6 +357,13 @@
           <xsl:with-param name="Loop" select="$Loop"/>
         </xsl:call-template>
       </Name>
+      <xsl:for-each select="$Loop/PER">
+        <Contact>
+          <xsl:call-template name="Contact">
+            <xsl:with-param name="PER" select="."/>
+          </xsl:call-template>
+        </Contact>
+      </xsl:for-each>
       <xsl:for-each select="$Loop/AAA">
         <RequestValidation>
           <xsl:call-template name="RequestValidation">
