@@ -485,6 +485,16 @@
           <xsl:value-of select="$Loop/NM1/NM105"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="string-length($Loop/NM1/NM106)>0">
+        <xsl:attribute name="Prefix">
+          <xsl:value-of select="$Loop/NM1/NM106"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="string-length($Loop/NM1/NM107)>0">
+        <xsl:attribute name="Suffix">
+          <xsl:value-of select="$Loop/NM1/NM107"/>
+        </xsl:attribute>
+      </xsl:if>
     </xsl:if>
     <Identification>
       <xsl:attribute name="Qualifier">
