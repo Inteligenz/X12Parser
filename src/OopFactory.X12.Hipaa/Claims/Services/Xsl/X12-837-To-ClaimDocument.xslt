@@ -304,12 +304,16 @@
     <xsl:for-each select="child::*">
       <xsl:variable name="qualifier" select="*[1]"/>
       <xsl:variable name="code" select="*[2]"/>
+      <xsl:variable name="poiIndicator" select="*[9]"/>
       <Diagnosis>
         <xsl:attribute name="Qualifier">
           <xsl:value-of select="$qualifier"/>
         </xsl:attribute>
         <xsl:attribute name="Code">
           <xsl:value-of select="$code"/>
+        </xsl:attribute>
+        <xsl:attribute name="PoiIndicator">
+          <xsl:value-of select="$poiIndicator"/>
         </xsl:attribute>
       </Diagnosis>
     </xsl:for-each>
