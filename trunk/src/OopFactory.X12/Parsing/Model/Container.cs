@@ -42,6 +42,8 @@ namespace OopFactory.X12.Parsing.Model
 
         public IEnumerable<Segment> Segments { get { return _segments; } }
 
+        internal abstract IEnumerable<string> TrailerSegmentIds { get; }
+
         public Segment AddSegment(string segmentString)
         {
             Segment segment = new Segment(this, _delimiters, segmentString);
@@ -119,7 +121,8 @@ namespace OopFactory.X12.Parsing.Model
         internal override string ToX12String(bool addWhitespace)
         {
             StringBuilder sb = new StringBuilder(base.ToX12String(addWhitespace));
-            foreach (var segment in this.Segments)
+
+            foreach (var segment in this.Segments.Where(seg=> !TrailerSegmentIds.Contains(seg.SegmentId)))
             {
                 if (addWhitespace)
                     sb.Append(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
@@ -132,6 +135,14 @@ namespace OopFactory.X12.Parsing.Model
             }
             else
                 sb.Append(SerializeBodyToX12(addWhitespace));
+
+            foreach (var segment in this.Segments.Where(seg => TrailerSegmentIds.Contains(seg.SegmentId)))
+            {
+                if (addWhitespace)
+                    sb.Append(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    sb.Append(segment.ToX12String(addWhitespace));
+            }
 
             foreach (var segment in this.TrailerSegments)
             {

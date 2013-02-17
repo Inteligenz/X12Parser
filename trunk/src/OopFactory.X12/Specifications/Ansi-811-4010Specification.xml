@@ -8,12 +8,14 @@
   <Segment SegmentId="ITD"/>
   <Segment SegmentId="DTM"/>
   <Segment SegmentId="TXI"/>
+  <Segment SegmentId="CTT" Trailer="true"/>
   <Loop LoopId="FA1">
     <Name>Type of Financial Accounting Data</Name>
     <StartingSegment SegmentId="FA1"/>
     <Segment SegmentId="FA2"/>
   </Loop>
   <HierarchicalLoop LoopId="HL"> <!-- Level level code blank so it can be used for both levels -->
+    <Name></Name>
     <Loop LoopId="LX">
       <StartingSegment SegmentId="LX"/>
       <Segment SegmentId="VEH"/>
@@ -186,5 +188,4 @@
       </Loop>
     </Loop>
   </Loop>
-  <Segment SegmentId="CTT"/>
 </TransactionSpecification>

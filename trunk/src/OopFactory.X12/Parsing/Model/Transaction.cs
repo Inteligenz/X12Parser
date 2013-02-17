@@ -92,6 +92,18 @@ namespace OopFactory.X12.Parsing.Model
             return hloop;
         }
 
+        internal override IEnumerable<string> TrailerSegmentIds
+        {
+            get
+            {
+                var list = new List<string>();
+
+                foreach (var spec in Specification.SegmentSpecifications.Where(ss => ss.Trailer == true))
+                    list.Add(spec.SegmentId);
+                return list;
+            }
+        }
+
         internal override string ToX12String(bool addWhitespace)
         {
             UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());

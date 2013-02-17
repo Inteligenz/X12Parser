@@ -160,6 +160,14 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
+        internal override IEnumerable<string> TrailerSegmentIds
+        {
+            get 
+            { 
+                return new List<string>(); 
+            }
+        }
+
         internal override string SerializeBodyToX12(bool addWhitespace)
         {
             StringBuilder sb = new StringBuilder();

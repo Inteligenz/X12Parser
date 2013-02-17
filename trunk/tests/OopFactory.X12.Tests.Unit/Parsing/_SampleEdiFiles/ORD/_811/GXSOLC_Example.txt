@@ -16,7 +16,6 @@
         N2~P. O. BOX 640371!
         N4~PITTSBURGH, PA 15264-0371~~~US!
       TDS~346369!
-      CTT~3!
       HL~1~~1~1!
         HL~2~1~4~1!
           LX~1!
@@ -37,6 +36,7 @@
               PID~F~~~~Charge ID CK02872 11/01/00-11/30/00 GEIS Internal KU81872!
             SLN~6~~I~1~EA~670~UM~~PD~WO# 9810H FRAME RELAY INTERCONNECT SVC!
               PID~F~~~~Charge ID CK02872 11/01/00-11/30/00 GEIS Internal KU81872!
+      CTT~3!
     SE~38~900001!
   GE~1~90!
 IEA~1~000000090!
