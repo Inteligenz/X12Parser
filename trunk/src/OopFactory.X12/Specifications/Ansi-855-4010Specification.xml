@@ -34,7 +34,7 @@
       <StartingSegment SegmentId="PID"/>
     </Loop>
     <Loop LoopId="ACK">
-      <Name>Line Item Acknowledgmen</Name>
+      <Name>Line Item Acknowledgment</Name>
       <StartingSegment SegmentId="ACK"/>
     </Loop>
   </Loop>
