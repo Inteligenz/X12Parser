@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Product Activity Data http://www.hdexchange.com/852ProductActivity.html -->
+<!-- http://www.bisg.org/docs/v1/85230601.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="852">
+  <Segment SegmentId="XQ" Usage="Required"/>
+  <Segment SegmentId="XPO" Usage="Situational"/>
+  <Segment SegmentId="N9" Usage="Situational"/>
+  <Segment SegmentId="PER" Usage="Required"/>
+  <Segment SegmentId="CTT" Usage="Situational" Trailer="true"/>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Loop LoopId="LIN">
+    <Name>Item</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="CTP"/>
+    <Segment SegmentId="QTY"/>    
+  </Loop>
+  <Loop LoopId="ZA">
+    <Name>Product Activity Reporting</Name>
+    <StartingSegment SegmentId="ZA"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="SDQ"/>
+  </Loop>  
+</TransactionSpecification>

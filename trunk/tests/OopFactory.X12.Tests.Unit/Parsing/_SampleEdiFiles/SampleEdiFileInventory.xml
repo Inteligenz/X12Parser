@@ -457,6 +457,12 @@
       <ResourcePath>ORD._850.From_aojuk.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="852">
+    <EdiFile>
+      <SourceUrl>http://www.hdexchange.com/852ProductActivity.html</SourceUrl>
+      <ResourcePath>MAN._852.hdexchange.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="860">
     <EdiFile>
       <SourceUrl>Provded by sprdave</SourceUrl>
