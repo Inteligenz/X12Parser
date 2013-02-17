@@ -485,6 +485,10 @@
   </TransactionSet>
   <TransactionSet Id="856">
     <EdiFile>
+      <SourceUrl>http://x12parser.codeplex.com/workitem/1464</SourceUrl>
+      <ResourcePath>ORD._856.edi1Source.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
       <ResourcePath>ORD._856.Example1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
