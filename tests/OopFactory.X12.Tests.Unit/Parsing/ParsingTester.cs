@@ -122,6 +122,10 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
             List<Interchange> interchanges = new X12Parser().ParseMultiple(stream);
+
+            if (resourcePath.Contains("_811"))
+                Trace.Write("");
+
             StringBuilder x12 = new StringBuilder();
             foreach (var interchange in interchanges)
                 x12.AppendLine(interchange.SerializeToX12(true));

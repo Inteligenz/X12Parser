@@ -29,6 +29,18 @@ namespace OopFactory.X12.Parsing.Model
             get { return Specification.SegmentSpecifications; }
         }
 
+        internal override IEnumerable<string> TrailerSegmentIds
+        {
+            get
+            {
+                var list = new List<string>();
+
+                foreach (var spec in Specification.SegmentSpecifications.Where(ss => ss.Trailer == true))
+                    list.Add(spec.SegmentId);
+                return list;
+            }
+        }
+
         #region IXmlSerializable Members
 
         internal override void WriteXml(System.Xml.XmlWriter writer)
