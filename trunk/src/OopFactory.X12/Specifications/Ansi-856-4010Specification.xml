@@ -82,6 +82,19 @@
       <Segment SegmentId="PER"/>
       <Segment SegmentId="FOB"/>
     </Loop>
+    <Loop LoopId="Other" Usage="Situational">
+      <Name>Other Entities</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="SH"/>
+        <EntityIdentifier Code="OB"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
     <Loop LoopId="SE" Usage="Required" LoopRepeat="1">
       <Name>Selling Party</Name>
       <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
