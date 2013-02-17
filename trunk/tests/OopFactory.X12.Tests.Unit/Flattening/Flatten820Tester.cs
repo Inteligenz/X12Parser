@@ -27,7 +27,7 @@ namespace OopFactory.X12.Tests.Unit.Flattening
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            FileStream fstream = new FileStream("c:\\Temp\\ORD._820.Example1.txt", FileMode.Create);
+            FileStream fstream = new FileStream("ORD._820.Example1.txt", FileMode.Create);
             StreamWriter writer = new StreamWriter(fstream);
 
             writer.WriteLine("Transaction,Creation Date,Submitter Name, Borrower Last Name, Remittance ID");

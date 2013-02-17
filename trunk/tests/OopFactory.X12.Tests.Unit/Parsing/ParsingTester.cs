@@ -73,7 +73,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 #if DEBUG
-            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".xml"), FileMode.Create).PrintToFile(xml);
+            new FileStream(resourcePath.Replace(".txt", ".xml"), FileMode.Create).PrintToFile(xml);
 #endif
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
@@ -96,7 +96,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
                 interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
 #if DEBUG
-            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837D.xml"), FileMode.Create).PrintToFile(xml);
+            new FileStream(resourcePath.Replace(".txt", "_837D.xml"), FileMode.Create).PrintToFile(xml);
 #endif
             }
 
@@ -107,7 +107,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
                 interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
 #if DEBUG
-            new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", "_837I.xml"), FileMode.Create).PrintToFile(xml);
+            new FileStream(resourcePath.Replace(".txt", "_837I.xml"), FileMode.Create).PrintToFile(xml);
 #endif
             }
         }
@@ -212,7 +212,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
                 Trace.Write(html);
 #if DEBUG
-                new FileStream(@"c:\Temp\" + resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
+                new FileStream(resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
 #endif
             }
         }

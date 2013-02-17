@@ -28,10 +28,10 @@
       N1*BT*XYZ*9*0462753010001~
         N3*PO Box 2140~
         N4*San Antonio*TX*78297-2140*US~
-        N1*ST*XYZ*9*035703586~
+      N1*ST*XYZ*9*035703586~
         N3*221 Airport Dr NW~
         N4*Albuquerque*NM*87121-2056*US~
-        N1*RE*J. R. SIMPLOT COMPANY*9*0377912820000~
+      N1*RE*J. R. SIMPLOT COMPANY*9*0377912820000~
         N3*91935 Collections Center Dr~
         N4*Chicago*IL*60693~
       G72*562*06******76064~
