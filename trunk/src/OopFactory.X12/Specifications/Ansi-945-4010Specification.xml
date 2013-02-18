@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Warehouse Shipping Advice -->
+<!-- http://edi.landolakes.com/4010_pdf/945_Warehouse_Shipping_Advice.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="940">
+  <Segment SegmentId="W27"/>
+  <Segment SegmentId="W06"/>
+  <Segment SegmentId="W6"/>
+  <Segment SegmentId="W28"/>
+  <Segment SegmentId="W10"/>
+  <Segment SegmentId="G72"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="W03" Trailer="true"/>
+  <Loop LoopId="0100">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="W27"/>
+    <Segment SegmentId="W10"/>
+  </Loop>
+  <Loop LoopId="0200" Repeat="10">
+    <Name></Name>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="0300">
+    <Name></Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="MAN"/>
+    <Segment SegmentId="PAL"/>
+    <Segment SegmentId="N9"/>
+    <Loop LoopId="0310">
+      <Name></Name>
+      <StartingSegment SegmentId="W12"/>
+      <Segment SegmentId="G69"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="G62"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="R4"/>
+      <Segment SegmentId="W27"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="G72"/>
+      <Segment SegmentId="W03" Trailer="true"/>
+      <Loop LoopId="0311">
+        <Name></Name>
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="LS">
+        <Name></Name>
+        <StartingSegment SegmentId="LS"/>
+        <Segment SegmentId="LE" Trailer="true"/>
+        <Loop LoopId="0312">
+          <Name></Name>
+          <StartingSegment SegmentId="LX"/>
+          <Segment SegmentId="N9"/>
+          <Segment SegmentId="G62"/>
+          <Segment SegmentId="N1"/>
+          <Loop LoopId="0313">
+            <Name></Name>
+            <StartingSegment SegmentId="LM"/>
+            <Segment SegmentId="LQ"/>
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="314">
+        <Name></Name>
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+      <Loop LoopId="0100">
+        <Name></Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

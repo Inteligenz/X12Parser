@@ -77,6 +77,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\WAR\_945\inter-americanproducts.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\WAR\_940\simplot.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_852\hdexchange.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\edi1Source.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_880\SimplotExample1.txt" />

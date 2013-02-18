@@ -281,6 +281,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-852-4010Specification.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-940-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-945-4010Specification.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

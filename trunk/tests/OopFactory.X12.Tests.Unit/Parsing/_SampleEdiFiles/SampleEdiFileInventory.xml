@@ -571,4 +571,16 @@
       <ResourcePath>ORD._880.SimplotExample1.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="940">
+    <EdiFile>
+      <SourceUrl>http://techsheets.simplot.com/EDI/940_FG_4010.pdf</SourceUrl>
+      <ResourcePath>WAR._940.simplot.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="945">
+    <EdiFile>
+      <SourceUrl>http://edi.inter-americanproducts.com/docs/5010%20945%20mfg.pdf</SourceUrl>
+      <ResourcePath>WAR._945.inter-americanproducts.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
 </SampleEdiFiles>

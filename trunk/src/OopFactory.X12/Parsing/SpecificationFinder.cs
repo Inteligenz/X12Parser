@@ -109,6 +109,10 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("880-4010");
                 case "888":
                     return GetSpecification("888-4010");
+                case "940":
+                    return GetSpecification("940-4010");
+                case "945":
+                    return GetSpecification("945-4010");
                 case "997":
                     return GetSpecification("997-4010");
                 case "999":

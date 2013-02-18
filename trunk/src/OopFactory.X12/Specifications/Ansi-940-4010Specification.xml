@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- http://www.freightdocs.com/EDI_4010/ts940.htm http://www.freightdocs.com/EDI_4010/ts945.htm -->
+<!-- Warehouse Shipping Order Functional Group="OW" -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="940">
+  <Segment SegmentId="W05" Usage="Required"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G61"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="W09"/>
+  <Segment SegmentId="W66"/>
+  <Segment SegmentId="W6"/>
+  <Segment SegmentId="R2"/>
+  <Segment SegmentId="BNX"/>
+  <Segment SegmentId="W76" Trailer="true"/>
+  <Loop LoopId="0100">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="0150">
+    <Name></Name>
+    <StartingSegment SegmentId="TD3"/>
+    <Segment SegmentId="AT9"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name></Name>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="0300">
+    <Name></Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="MAN"/>
+    <Segment SegmentId="SDQ"/>
+    <Segment SegmentId="N1"/>
+    <Segment SegmentId="G62"/>
+    <Segment SegmentId="N9"/>
+    <Loop LoopId="0310">
+      <Name></Name>
+      <StartingSegment SegmentId="W01"/>
+      <Segment SegmentId="G69"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="NTE"/>
+      <Segment SegmentId="W20"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="G62"/>
+      <Segment SegmentId="G66"/>
+      
+      <Segment SegmentId="LH2"/>
+      <Segment SegmentId="LHR"/>
+      <Segment SegmentId="LH6"/>
+      
+      <Loop LoopId="N1">
+        <Name></Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+      <Loop LoopId="0320">
+        <Name></Name>
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+      <Loop LoopId="LS">
+        <Name>Loop</Name>
+        <StartingSegment SegmentId="LS"/>
+        <Loop LoopId="0330">
+          <Name></Name>
+          <StartingSegment SegmentId="LX"/>
+          <Segment SegmentId="N9"/>
+          <Segment SegmentId="G62"/>
+          <Segment SegmentId="N1"/>
+          <Segment SegmentId="SDQ"/>
+          <Segment SegmentId="LE" Trailer="true"/>
+          <Loop LoopId="0331">
+            <Name></Name>
+            <StartingSegment SegmentId="LM"/>
+            <Segment SegmentId="LQ"/>
+          </Loop>
+          <Loop LoopId="0332">
+            <Name></Name>
+            <StartingSegment SegmentId="LH1"/>
+            <Segment SegmentId="LH2"/>
+            <Segment SegmentId="LH3"/>
+            <Segment SegmentId="LFH"/>
+            <Segment SegmentId="LEP"/>
+            <Segment SegmentId="LH4"/>
+            <Segment SegmentId="LHT"/>
+            <Segment SegmentId="LHR"/>
+            <Segment SegmentId="PER"/>
+          </Loop>
+        </Loop>        
+      </Loop>
+      <Loop LoopId="0340">
+        <Name></Name>
+        <StartingSegment SegmentId="FA1"/>
+        <Segment SegmentId="FA2"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
