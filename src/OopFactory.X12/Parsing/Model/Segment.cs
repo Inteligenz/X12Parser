@@ -61,6 +61,33 @@ namespace OopFactory.X12.Parsing.Model
             return _dataElements.ElementAtOrDefault(elementNumber - 1);
         }
 
+        public decimal? GetDecimalElement(int elementNumber)
+        {
+            decimal element;
+            if (decimal.TryParse(GetElement(elementNumber), out element))
+                return element;
+            else
+                return null;
+        }
+
+        public int? GetIntElement(int elementNumber)
+        {
+            int element;
+            if (int.TryParse(GetElement(elementNumber), out element))
+                return element;
+            else
+                return null;
+        }
+
+        public DateTime? GetDate8Element(int elementNumber)
+        {
+            string element = GetElement(1);
+            if (element.Length == 8)
+                return DateTime.ParseExact(element, "yyyyMMdd", null);
+            else
+                return null;
+        }
+
         private void ValidateContentFreeOfDelimiters(string elementId, string value)
         {
             if (value.Contains(_delimiters.SegmentTerminator))
@@ -139,6 +166,21 @@ namespace OopFactory.X12.Parsing.Model
                     _dataElements.Add("");
             }
             _dataElements[elementNumber - 1] = value;
+        }
+
+        public void SetElement(int elementNumber, decimal? value)
+        {
+            SetElement(elementNumber, string.Format("{0}", value));
+        }
+
+        public void SetElement(int elementNumber, int? value)
+        {
+            SetElement(elementNumber, string.Format("{0}", value));
+        }
+
+        public void SetDate8Element(int elementNumber, DateTime? value)
+        {
+            SetElement(elementNumber, string.Format("{0:yyyyMMdd}", value));
         }
 
         internal virtual string ToX12String(bool addWhitespace)

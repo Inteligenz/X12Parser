@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Extensions;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
@@ -37,6 +38,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get { return _loop.GetElement(1); }
             set { _loop.SetElement(1, value); }
+        }
+
+        public EntityIdentifierCode NM101_EntityIdentifierCodeEnum
+        {
+            get { return _loop.GetElement(1).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
+            set { _loop.SetElement(1, value.EDIFieldValue()); }
         }
 
         public EntityTypeQualifier NM102_EntityTypeQualifier

@@ -9,6 +9,7 @@
   <Segment SegmentId="REF"/>
   <Segment SegmentId="PER"/>
   <Segment SegmentId="SAC"/>
+  <Segment SegmentId="YNQ"/>
   <Segment SegmentId="TDS" Trailer="true"/>
   <Segment SegmentId="TXI" Trailer="true"/>
   <Segment SegmentId="CAD" Trailer="true"/>
@@ -16,23 +17,13 @@
   <Segment SegmentId="CTT" Trailer="true"/>
   <Loop LoopId="N1">
     <Name>Party</Name>
-    <StartingSegment SegmentId="N1">
-      <EntityIdentifier Code="RE"/>
-      <EntityIdentifier Code="BT"/>
-      <EntityIdentifier Code="VN"/>
-      <EntityIdentifier Code="ST"/>
-      <EntityIdentifier Code="II"/>
-      <EntityIdentifier Code="BY"/>
-      <EntityIdentifier Code="SE"/>
-      <EntityIdentifier Code="PR"/>
-      <EntityIdentifier Code="EN"/>
-      <EntityIdentifier Code="DU"/>
-      <EntityIdentifier Code="SU"/>
-    </StartingSegment>
+    <StartingSegment SegmentId="N1"/>
     <Segment SegmentId="N2"/>
     <Segment SegmentId="N3"/>
     <Segment SegmentId="N4"/>
     <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="DMG"/>
   </Loop>
   <Loop LoopId="IT1">
     <Name>ITEM</Name>
@@ -43,17 +34,22 @@
     <Loop LoopId="PID">
       <Name>PRODUCT/ITEM</Name>
       <StartingSegment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
     </Loop>
     <Loop LoopId="SAC">
       <Name>Service, Promotion, Allowance, or Charge Information</Name>
       <StartingSegment SegmentId="SAC"/>
+      <Segment SegmentId="TXI"/>
     </Loop>
     <Loop LoopId="N1">
       <Name>Cost Center</Name>
-      <StartingSegment SegmentId="N1">
-        <EntityIdentifier Code="PD"/>
-      </StartingSegment>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
       <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DMG"/>
     </Loop>
   </Loop>
 </TransactionSpecification>

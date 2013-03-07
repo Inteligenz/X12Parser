@@ -12,6 +12,7 @@
     <Allowed ID="01">Duns (Dun &amp; Bradstreet)</Allowed>
     <Allowed ID="12">Matress Retailer</Allowed>
     <Allowed ID="14">Duns Plus Suffix</Allowed>
+    <Allowed ID="16"></Allowed>
     <Allowed ID="20">Health Insurance Number (HIN)</Allowed>
     <Allowed ID="27">Carrier Identification Number as assigned by Health Care Financing Administration (HCFA)</Allowed>
     <Allowed ID="28">Fiscal Intermediary Identification Number as assigned by Health Care Financing Administration (HCFA)</Allowed>
