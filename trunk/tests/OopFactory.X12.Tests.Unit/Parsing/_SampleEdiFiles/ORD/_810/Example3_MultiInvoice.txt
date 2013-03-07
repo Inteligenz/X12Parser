@@ -25,8 +25,8 @@
         CTP**UCP*6.95*216*EA~
         PID*F*08***DAILY CLEANER SOLUTION~
         SAC*C*D360***10508*2*7~
-      TDS*843202~
       ISS*1464*CA*600*LB~
+      TDS*843202~
       CTT*4~
     SE*29*2240001~
     ST*810*2240002~
@@ -42,8 +42,8 @@
         CTP**UCP*4*264*EA~
         PID*F*08***OPTIC A 15ML~
         SAC*C*D360***7392*2*7~
-      TDS*112992~
       ISS*264*CA*264*LB~
+      TDS*112992~
       CTT*1~
     SE*17*2240002~
   GE*2*224~
