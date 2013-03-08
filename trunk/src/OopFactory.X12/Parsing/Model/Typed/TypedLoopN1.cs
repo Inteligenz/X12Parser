@@ -37,6 +37,13 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _loop.SetElement(3, value); }
         }
 
+        public IdentificationCodeQualifier N103_IdentificationCodeQualifierEnum
+        {
+            get { return _loop.GetElement(3).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
+            set { _loop.SetElement(3, value.EDIFieldValue()); }
+            
+        }
+
         public string N104_IdentificationCode
         {
             get { return _loop.GetElement(4); }
