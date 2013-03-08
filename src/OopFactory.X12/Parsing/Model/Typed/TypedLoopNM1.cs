@@ -6,12 +6,6 @@ using OopFactory.X12.Extensions;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public enum EntityTypeQualifier
-    {
-        Undefined = 0,
-        Person = 1,
-        NonPersonEntity = 2
-    }
     public class TypedLoopNM1 : TypedLoop
     {
         private string _entityIdentifer;
@@ -48,28 +42,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public EntityTypeQualifier NM102_EntityTypeQualifier
         {
-            get 
-            {
-                switch (_loop.GetElement(2))
-                {
-                    case "1": return EntityTypeQualifier.Person;
-                    case "2": return EntityTypeQualifier.NonPersonEntity;
-                    default: return EntityTypeQualifier.Undefined;
-                }
-                
-            }
-            set 
-            {
-                switch (value)
-                {
-                    case EntityTypeQualifier.Person:
-                        _loop.SetElement(2, "1");
-                        break;
-                    case EntityTypeQualifier.NonPersonEntity:
-                        _loop.SetElement(2, "2");
-                        break;
-                }
-            }
+            get  { return _loop.GetElement(2).ToEnumFromEDIFieldValue<EntityTypeQualifier>(); }
+            set { _loop.SetElement(2,value.EDIFieldValue()); }
         }
 
         public string NM103_NameLastOrOrganizationName
@@ -108,6 +82,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _loop.SetElement(8, value); }
         }
 
+        public IdentificationCodeQualifier NM108_IdCodeQualifierEnum
+        {
+            get { return _loop.GetElement(8).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
+            set { _loop.SetElement(8, value.EDIFieldValue()); }
+        }
+
         public string NM109_IdCode
         {
             get { return _loop.GetElement(9); }
@@ -124,6 +104,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get { return _loop.GetElement(11); }
             set { _loop.SetElement(11, value); }
+        }
+
+        public EntityIdentifierCode NM111_EntityIdentifierCodeEnum
+        {
+            get { return _loop.GetElement(11).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
+            set { _loop.SetElement(11, value.EDIFieldValue()); }
         }
 
         public string NM112_NameLastOrOrganizationName

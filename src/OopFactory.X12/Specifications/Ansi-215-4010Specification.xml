@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Motor Carrier Pick-up Manifest -->
+<!-- http://cmtsystems.com/EDI_4010/ts215.htm -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="215">
+  <Segment SegmentId="B2A"/>
+  <Segment SegmentId="BLR"/>
+  <Segment SegmentId="C3"/>
+  <Segment SegmentId="L11" Repeat="10"/>
+  <Segment SegmentId="G62" Repeat="6"/>
+  <Loop LoopId="0100">
+    <Name/>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3" Repeat="2"/>
+    <Segment SegmentId="N4" Repeat="2"/>
+    <Segment SegmentId="L11" Repeat="10"/>
+    <Segment SegmentId="PER" Repeat="10"/>
+    <Segment SegmentId="X1" Repeat="10"/>
+    <Segment SegmentId="X2" Repeat="10"/>
+  </Loop>
+  <Loop LoopId="0200" Repeat="999999">
+    <Name/>
+    <StartingSegment SegmentId="SMD"/>
+    <Segment SegmentId="L11" Repeat="20"/>
+    <Segment SegmentId="L5" Repeat="10"/>
+    <Segment SegmentId="MS6" Repeat="1"/>
+    <Segment SegmentId="MS5" Repeat="5"/>
+    <Segment SegmentId="MS4" Repeat="1"/>
+    <Segment SegmentId="ACS" Repeat="10"/>
+    <Segment SegmentId="NTE" Repeat="10"/>
+    <Loop LoopId="0220" Repeat="10">
+      <Name/>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Repeat="2"/>
+      <Segment SegmentId="N4" Repeat="1"/>
+      <Segment SegmentId="L11" Repeat="10"/>
+      <Segment SegmentId="G61" Repeat="10"/>
+      <Segment SegmentId="X1" Repeat="10"/>
+      <Segment SegmentId="X2" Repeat="10"/>
+      <Segment SegmentId="R4" Repeat="10"/>
+    </Loop>
+    <Loop LoopId="0240" Repeat="999999">
+      <Name/>
+      <StartingSegment SegmentId="CD3"/>
+      <Segment SegmentId="MAN" Repeat="100"/>
+      <Segment SegmentId="MS4" Repeat="1"/>
+      <Segment SegmentId="L11" Repeat="10"/>
+      <Segment SegmentId="L5" Repeat="10"/>
+      <Segment SegmentId="ACS" Repeat="10"/>
+      <Segment SegmentId="NTE" Repeat="10"/>
+    </Loop>
+    <Loop LoopId="0260" Repeat="999999">
+      <Name/>
+      <StartingSegment SegmentId="AT6"/>
+      <Segment SegmentId="MS5" Repeat="1"/>
+      <Segment SegmentId="IT1" Repeat="1"/>
+      <Segment SegmentId="CGS" Repeat="10"/>
+      <Segment SegmentId="L11" Repeat="1"/>
+      <Segment SegmentId="PID" Repeat="1000"/>
+      <Segment SegmentId="TXI" Repeat="10"/>
+      <Segment SegmentId="MS4" Repeat="1"/>
+      <Segment SegmentId="L5" Repeat="1"/>
+      <Loop LoopId="0280" Repeat="999999">
+        <Name/>
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="L11" Repeat="10"/>
+        <Segment SegmentId="PID" Repeat="10"/>
+        <Segment SegmentId="TC2" Repeat="10"/>
+        <Segment SegmentId="TXI" Repeat="10"/>
+        <Segment SegmentId="NTE" Repeat="10"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
