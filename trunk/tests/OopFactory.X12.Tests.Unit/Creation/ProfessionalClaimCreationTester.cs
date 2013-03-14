@@ -39,13 +39,13 @@ namespace OopFactory.X12.Tests.Unit.Creation
             transaction.SetElement(2, "0021");
             transaction.SetElement(3, "005010X222");
 
-            var bhtSegment = transaction.AddSegment("BHT");
-            bhtSegment.SetElement(1, "0019");
-            bhtSegment.SetElement(2, "00");
-            bhtSegment.SetElement(3, "244579");
-            bhtSegment.SetElement(4, "20061015");
-            bhtSegment.SetElement(5, "1023");
-            bhtSegment.SetElement(6, "CH");
+            var bhtSegment = transaction.AddSegment(new TypedSegmentBHT());
+            bhtSegment.BHT01_HierarchicalStructureCode = "0019";
+            bhtSegment.BHT02_TransactionSetPurposeCode = "00";
+            bhtSegment.BHT03_ReferenceIdentification = "244579";
+            bhtSegment.BHT04_Date = DateTime.Parse("2006-10-15");
+            bhtSegment.BHT05_Time = "1023";
+            bhtSegment.BHT06_TransactionTypeCode = "CH";
 
             var submitterLoop = transaction.AddLoop(new TypedLoopNM1("41")); //submitter identifier code
             submitterLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
