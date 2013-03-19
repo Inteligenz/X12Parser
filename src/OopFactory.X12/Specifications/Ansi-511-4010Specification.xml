@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--511 Requisition-->
+<TransactionSpecification TransactionSetIdentifierCode="511" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Loop LoopId="LM" LoopRepeat="50">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="20">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="5" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="N9" Usage="Required" />
+    <Segment SegmentId="PO1" />
+    <Segment SegmentId="PWK" Repeat="1" />
+    <Segment SegmentId="DD" Repeat="100" />
+    <Segment SegmentId="GF" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="20" />
+    <Segment SegmentId="MAN" Repeat="5" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="G69" />
+    <Segment SegmentId="NTE" />
+    <Loop LoopId="LM" LoopRepeat="50">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="QTY">
+      <Name>Quantity</Name>
+      <StartingSegment SegmentId="QTY" />
+      <Loop LoopId="LM" LoopRepeat="50">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="100">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="5" />
+    </Loop>
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="G62" Repeat="10" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="N1" Repeat="1" />
+      <Segment SegmentId="R4" Repeat="1" />
+      <Loop LoopId="LM" LoopRepeat="50">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

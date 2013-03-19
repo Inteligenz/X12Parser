@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--206 Real Estate Inspection-->
+<TransactionSpecification TransactionSetIdentifierCode="206" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="MSG" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Service Characteristic Identification</Name>
+    <StartingSegment SegmentId="SI" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="RLT" />
+    <Segment SegmentId="REC" />
+    <Segment SegmentId="LN" />
+    <Segment SegmentId="PWK" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="CTP" />
+    <Loop LoopId="0210">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="PDS" />
+      <Segment SegmentId="PDE" />
+      <Segment SegmentId="REA" />
+      <Segment SegmentId="III" />
+      <Segment SegmentId="REC" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="NTE" />
+      <Segment SegmentId="PWK" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="CTP" />
+      <Loop LoopId="0221">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="CRC" />
+        <Segment SegmentId="DFI" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="NTE" />
+        <Segment SegmentId="OBI" />
+        <Segment SegmentId="AIN" />
+        <Segment SegmentId="QTY" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

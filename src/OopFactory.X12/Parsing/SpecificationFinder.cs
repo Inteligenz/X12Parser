@@ -20,14 +20,6 @@ namespace OopFactory.X12.Parsing
         {
             switch (transactionSetCode)
             {
-                case "110":
-                    return GetSpecification("110-4010");
-                case "180":
-                    return GetSpecification("180-4010");
-                case "210":
-                    return GetSpecification("210-4010");
-                case "215":
-                    return GetSpecification("215-4010");
                 case "270":
                     if (versionCode.Contains("5010"))
                         return GetSpecification("270-5010");
@@ -44,23 +36,10 @@ namespace OopFactory.X12.Parsing
                 case "277":
                     return GetSpecification("276-5010");
                 case "278":
-                    return GetSpecification("278-5010");
-                case "322":
-                    return GetSpecification("322");
-                case "417":
-                    return GetSpecification("417");
-                case "810":
-                    return GetSpecification("810-4010");
-                case "811":
-                    return GetSpecification("811-4010");
-                case "816":
-                    return GetSpecification("816-4010");
-                case "820":
-                    return GetSpecification("820-4010");
-                case "824":
-                    return GetSpecification("824-4010");
-                case "832":
-                    return GetSpecification("832-4010");
+                    if (versionCode.Contains("5010"))
+                        return GetSpecification("278-5010");
+                    else
+                        return GetSpecification("278-5010");
                 case "834":
                     if (versionCode.Contains("5010"))
                         return GetSpecification("834-5010");
@@ -76,32 +55,6 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("837-5010");
                     else
                         return GetSpecification("837-4010");
-                case "846":
-                    return GetSpecification("846-4010");
-                case "850":
-                    return GetSpecification("850-4010");
-                case "852":
-                    return GetSpecification("852-4010");
-                case "855":
-                    return GetSpecification("855-4010");
-                case "856":
-                    return GetSpecification("856-4010");
-                case "857":
-                    return GetSpecification("857-4010");
-                case "860":
-                    return GetSpecification("860-4010");
-                case "864":
-                    return GetSpecification("864-4010");
-                case "865":
-                    return GetSpecification("865-4010");
-                case "866":
-                    return GetSpecification("866-4010");
-                case "867":
-                    return GetSpecification("867-4010");
-                case "873":
-                    return GetSpecification("873-4010");
-                case "874":
-                    return GetSpecification("874-4010");
                 case "875":
                     return GetSpecification("875-5010");
                 case "880":
@@ -109,17 +62,13 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("880-5050");
                     else
                         return GetSpecification("880-4010");
-                case "888":
-                    return GetSpecification("888-4010");
-                case "940":
-                    return GetSpecification("940-4010");
-                case "945":
-                    return GetSpecification("945-4010");
-                case "997":
-                    return GetSpecification("997-4010");
                 case "999":
                     return GetSpecification("999-5010");
                 default:
+                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(String.Format("OopFactory.X12.Specifications.Ansi-{0}-4010Specification.xml", transactionSetCode));
+                    if (specStream != null)
+                        return GetSpecification(transactionSetCode + "-4010");
+
                     throw new NotSupportedException(String.Format("Transaction Set {0} is not supported.", transactionSetCode));
             }
         }

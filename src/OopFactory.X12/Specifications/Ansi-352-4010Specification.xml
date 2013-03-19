@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--352 U.S. Customs Carrier General Order Status-->
+<TransactionSpecification TransactionSetIdentifierCode="352" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Loop LoopId="M14" LoopRepeat="9999">
+      <Name>General Order Status Information</Name>
+      <StartingSegment SegmentId="M14" />
+      <Segment SegmentId="K1" Repeat="4" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

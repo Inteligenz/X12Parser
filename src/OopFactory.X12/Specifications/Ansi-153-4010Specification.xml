@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--153 Unemployment Insurance Tax Claim or Charge Information-->
+<TransactionSpecification TransactionSetIdentifierCode="153" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTI" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="CHB" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="DPN" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="CHB" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="PAM">
+      <Name>Period Amount</Name>
+      <StartingSegment SegmentId="PAM" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="CHB" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

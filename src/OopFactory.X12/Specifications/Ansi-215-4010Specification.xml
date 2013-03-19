@@ -1,14 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Motor Carrier Pick-up Manifest -->
-<!-- http://cmtsystems.com/EDI_4010/ts215.htm -->
-<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="215">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--215 Motor Carrier Pick-up Manifest-->
+<TransactionSpecification TransactionSetIdentifierCode="215" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
   <Segment SegmentId="B2A"/>
   <Segment SegmentId="BLR"/>
   <Segment SegmentId="C3"/>
   <Segment SegmentId="L11" Repeat="10"/>
   <Segment SegmentId="G62" Repeat="6"/>
   <Loop LoopId="0100">
-    <Name/>
+    <Name>Name</Name>
     <StartingSegment SegmentId="N1"/>
     <Segment SegmentId="N2"/>
     <Segment SegmentId="N3" Repeat="2"/>
@@ -19,7 +18,7 @@
     <Segment SegmentId="X2" Repeat="10"/>
   </Loop>
   <Loop LoopId="0200" Repeat="999999">
-    <Name/>
+    <Name>Consolidated Shipment Manifest Data</Name>
     <StartingSegment SegmentId="SMD"/>
     <Segment SegmentId="L11" Repeat="20"/>
     <Segment SegmentId="L5" Repeat="10"/>
@@ -29,7 +28,7 @@
     <Segment SegmentId="ACS" Repeat="10"/>
     <Segment SegmentId="NTE" Repeat="10"/>
     <Loop LoopId="0220" Repeat="10">
-      <Name/>
+      <Name>Name</Name>
       <StartingSegment SegmentId="N1"/>
       <Segment SegmentId="N2"/>
       <Segment SegmentId="N3" Repeat="2"/>
@@ -41,7 +40,7 @@
       <Segment SegmentId="R4" Repeat="10"/>
     </Loop>
     <Loop LoopId="0240" Repeat="999999">
-      <Name/>
+      <Name>Carton (Package) Detail</Name>
       <StartingSegment SegmentId="CD3"/>
       <Segment SegmentId="MAN" Repeat="100"/>
       <Segment SegmentId="MS4" Repeat="1"/>
@@ -51,7 +50,7 @@
       <Segment SegmentId="NTE" Repeat="10"/>
     </Loop>
     <Loop LoopId="0260" Repeat="999999">
-      <Name/>
+      <Name>International Manifest Information</Name>
       <StartingSegment SegmentId="AT6"/>
       <Segment SegmentId="MS5" Repeat="1"/>
       <Segment SegmentId="IT1" Repeat="1"/>
@@ -62,7 +61,7 @@
       <Segment SegmentId="MS4" Repeat="1"/>
       <Segment SegmentId="L5" Repeat="1"/>
       <Loop LoopId="0280" Repeat="999999">
-        <Name/>
+        <Name>Subline Item Detail</Name>
         <StartingSegment SegmentId="SLN"/>
         <Segment SegmentId="L11" Repeat="10"/>
         <Segment SegmentId="PID" Repeat="10"/>

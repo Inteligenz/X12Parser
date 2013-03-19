@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--188 Educational Course Inventory-->
+<TransactionSpecification TransactionSetIdentifierCode="188" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ERP" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="CSE">
+    <Name>Educational Course Information</Name>
+    <StartingSegment SegmentId="CSE" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="CSU" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+</TransactionSpecification>

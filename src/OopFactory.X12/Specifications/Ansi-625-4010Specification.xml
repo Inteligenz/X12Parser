@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--625 Well Information-->
+<TransactionSpecification TransactionSetIdentifierCode="625" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="PID" Repeat="1" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="MTX" />
+    <Loop LoopId="LIE">
+      <Name>Individual or Event Location</Name>
+      <StartingSegment SegmentId="LIE" />
+      <Segment SegmentId="PPA" Usage="Required" />
+      <Segment SegmentId="MEA" />
+    </Loop>
+    <Loop LoopId="CID">
+      <Name>Characteristic/Class ID</Name>
+      <StartingSegment SegmentId="CID" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="MEA" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

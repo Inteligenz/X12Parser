@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Student Loan Guarantee Result -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="139">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="GR"/>
+  <Segment SegmentId="DB"/>
+  <Loop LoopId="LM">
+    <Name/>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name/>
+    <StartingSegment SegmentId="ENT"/>
+    <Segment SegmentId="IN2"/>
+    <Segment SegmentId="IDB"/>
+    <Segment SegmentId="DTP"/>
+  </Loop>
+  <Loop LoopId="AMT">
+    <Name/>
+    <StartingSegment SegmentId="AMT"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="QTY"/>
+  </Loop>
+</TransactionSpecification>

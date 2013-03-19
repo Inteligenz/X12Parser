@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 275 Patient Information -->
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="275">
   <Segment SegmentId="BGN"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="TRN"/>
   <Loop LoopId="1000A">
     <Name>TRANSACTION RECEIVER</Name>
     <StartingSegment SegmentId="NM1">
@@ -35,9 +38,14 @@
     <Segment SegmentId="TRN"/>
     <Segment SegmentId="STC"/>
     <Segment SegmentId="REF"/>
+    <Segment SegmentId="NM1"/>
+    <Segment SegmentId="PRV"/>
+    <Segment SegmentId="REF"/>
     <Loop LoopId="2100">
+      <Name>Date or Time or Period</Name>
       <StartingSegment SegmentId="DTP"/>
       <Segment SegmentId="CAT"/>
+      <Segment SegmentId="PID"/>
       <Loop LoopId="2110B">
         <Name>ELECTRONIC FORMAT IDENTIFICATION</Name>
         <StartingSegment SegmentId="EFI"/>

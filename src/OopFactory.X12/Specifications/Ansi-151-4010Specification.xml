@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--151 Electronic Filing of Tax Return Data Acknowledgment-->
+<TransactionSpecification TransactionSetIdentifierCode="151" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTA" />
+  <Segment SegmentId="BTI" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="AMT" />
+  <Segment SegmentId="QTY" />
+  <Loop LoopId="PBI">
+    <Name>Problem Identification</Name>
+    <StartingSegment SegmentId="PBI" />
+    <Segment SegmentId="TIA" />
+  </Loop>
+  <Loop LoopId="TFS">
+    <Name>Tax Form</Name>
+    <StartingSegment SegmentId="TFS" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+    <Loop LoopId="PBI">
+      <Name>Problem Identification</Name>
+      <StartingSegment SegmentId="PBI" />
+      <Segment SegmentId="TIA" />
+    </Loop>
+    <Loop LoopId="FGS">
+      <Name>Form Group</Name>
+      <StartingSegment SegmentId="FGS" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Loop LoopId="PBI">
+        <Name>Problem Identification</Name>
+        <StartingSegment SegmentId="PBI" />
+        <Segment SegmentId="TIA" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

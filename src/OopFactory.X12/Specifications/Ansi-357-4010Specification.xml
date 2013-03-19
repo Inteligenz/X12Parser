@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--357 U.S. Customs In-Bond Information-->
+<TransactionSpecification TransactionSetIdentifierCode="357" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Loop LoopId="M21" LoopRepeat="999">
+      <Name>Supplementary In-Bond Information</Name>
+      <StartingSegment SegmentId="M21" />
+      <Segment SegmentId="M12" Usage="Required" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

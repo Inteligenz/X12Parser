@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--435 Standard Transportation Commodity Code Master-->
+<TransactionSpecification TransactionSetIdentifierCode="435" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="SID" LoopRepeat="9999">
+    <Name>Standard Transportation Commodity Code</Name>
+    <StartingSegment SegmentId="SID" />
+    <Segment SegmentId="N9" Repeat="30" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Loop LoopId="LQ" LoopRepeat="100">
+      <Name>Industry Code</Name>
+      <StartingSegment SegmentId="LQ" />
+      <Segment SegmentId="MSG" Repeat="100" />
+    </Loop>
+    <Loop LoopId="LX" LoopRepeat="4">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="N9" Repeat="50" />
+      <Segment SegmentId="LH3" Repeat="100" />
+      <Segment SegmentId="LH2" Repeat="8" />
+      <Segment SegmentId="LFH" Repeat="20" />
+      <Segment SegmentId="LEP" Repeat="3" />
+      <Segment SegmentId="LH4" Repeat="1" />
+      <Segment SegmentId="CRC" Repeat="5" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

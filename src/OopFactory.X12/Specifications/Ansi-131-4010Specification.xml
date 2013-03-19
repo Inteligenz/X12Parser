@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Student Education Record (Transcript) Acknowledgment -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="131">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="N1"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="QTY"/>
+  <Segment SegmentId="SUM"/>
+  <Segment SegmentId="IN2"/>
+</TransactionSpecification>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--223 Consolidators Freight Bill and Invoice-->
+<TransactionSpecification TransactionSetIdentifierCode="223" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B3A" Usage="Required" Repeat="1" />
+  <Segment SegmentId="B2A" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="L11" Repeat="5" />
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="10">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="M7" Repeat="5" />
+  </Loop>
+  <Loop LoopId="4000" LoopRepeat="9999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="CSD" Usage="Required" Repeat="5" />
+    <Loop LoopId="4100" LoopRepeat="9999">
+      <Name>Shipment Purchase Order Detail</Name>
+      <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" Repeat="10" />
+    </Loop>
+    <Loop LoopId="4500" LoopRepeat="999">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="L11" Repeat="10" />
+      <Segment SegmentId="CSD" Repeat="20" />
+      <Loop LoopId="4520" LoopRepeat="9999">
+        <Name>Shipment Purchase Order Detail</Name>
+        <StartingSegment SegmentId="SPO" />
+        <Segment SegmentId="SDQ" Repeat="10" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Response to a Motor Carrier Rate Proposal -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="108">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="BLR"/>
+  <Segment SegmentId="G62"/>
+  <Loop LoopId="0100">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name></Name>
+    <StartingSegment SegmentId="CA1"/>
+    <Segment SegmentId="LC1"/>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--423 Rail Industrial Switch List-->
+<TransactionSpecification TransactionSetIdentifierCode="423" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="DTM" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N2" Repeat="1" />
+  <Segment SegmentId="N3" Repeat="1" />
+  <Segment SegmentId="N4" Repeat="1" />
+  <Segment SegmentId="PER" Repeat="1" />
+  <Loop LoopId="LX" LoopRepeat="150">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="NTE" Repeat="1" />
+    <Segment SegmentId="XD" Usage="Required" Repeat="10" />
+    <Loop LoopId="N7" LoopRepeat="150">
+      <Name>Equipment Details</Name>
+      <StartingSegment SegmentId="N7" />
+      <Segment SegmentId="XD" Repeat="1" />
+      <Segment SegmentId="NTE" Repeat="1" />
+      <Segment SegmentId="L5" Repeat="5" />
+      <Segment SegmentId="D9" Repeat="1" />
+      <Segment SegmentId="F9" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="2" />
+      <Segment SegmentId="LH2" Repeat="2" />
+      <Segment SegmentId="LH6" Repeat="6" />
+      <Loop LoopId="LH1" LoopRepeat="100">
+        <Name>Hazardous Identification Information</Name>
+        <StartingSegment SegmentId="LH1" />
+        <Segment SegmentId="LH2" Repeat="4" />
+        <Segment SegmentId="LH3" Repeat="10" />
+        <Segment SegmentId="LFH" Repeat="20" />
+        <Segment SegmentId="LEP" Repeat="3" />
+        <Segment SegmentId="LH4" Repeat="1" />
+        <Segment SegmentId="LHT" Repeat="3" />
+        <Segment SegmentId="LHR" Repeat="5" />
+        <Segment SegmentId="PER" Repeat="5" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

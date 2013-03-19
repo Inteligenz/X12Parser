@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--854 Shipment Delivery Discrepancy Information-->
+<TransactionSpecification TransactionSetIdentifierCode="854" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BDD" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="20" />
+  <Segment SegmentId="K1" Repeat="10" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="20" />
+  </Loop>
+  <Loop LoopId="LX" LoopRepeat="999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="N9" Repeat="5" />
+    <Segment SegmentId="G62" Repeat="1" />
+    <Segment SegmentId="G07" />
+    <Loop LoopId="N1" LoopRepeat="10">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="1" />
+      <Loop LoopId="Q8" LoopRepeat="999">
+        <Name>Detail Delivery Exception Information</Name>
+        <StartingSegment SegmentId="Q8" />
+        <Segment SegmentId="G62" Repeat="1" />
+        <Segment SegmentId="K1" Repeat="1" />
+        <Loop LoopId="LS">
+          <Name>Loop Header</Name>
+          <StartingSegment SegmentId="LS" />
+          <Segment SegmentId="LE" Trailer="true" />
+          <Loop LoopId="N1" LoopRepeat="10">
+            <Name>Name</Name>
+            <StartingSegment SegmentId="N1" />
+            <Segment SegmentId="N2" Repeat="2" />
+            <Segment SegmentId="N3" Repeat="2" />
+            <Segment SegmentId="N4" Repeat="1" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

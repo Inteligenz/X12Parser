@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--839 Project Cost Reporting-->
+<TransactionSpecification TransactionSetIdentifierCode="839" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BCS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DLV" />
+  <Segment SegmentId="AMT" />
+  <Segment SegmentId="PCT" />
+  <Segment SegmentId="DTM" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="CFT">
+    <Name>Cost Reporting Format Type</Name>
+    <StartingSegment SegmentId="CFT" />
+    <Segment SegmentId="CAL" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="BSD">
+      <Name>Breakdown Structure Description</Name>
+      <StartingSegment SegmentId="BSD" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="PAM" />
+      <Segment SegmentId="PCT" />
+      <Segment SegmentId="RPA" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="CLI">
+        <Name>Cost Line Item</Name>
+        <StartingSegment SegmentId="CLI" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="PAM" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="RPA" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

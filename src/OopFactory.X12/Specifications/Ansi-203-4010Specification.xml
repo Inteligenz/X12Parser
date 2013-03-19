@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--203 Secondary Mortgage Market Investor Report-->
+<TransactionSpecification TransactionSetIdentifierCode="203" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="MPP" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="INT" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="DTM" />
+    <Loop LoopId="RLT">
+      <Name>Real Estate Loan Type</Name>
+      <StartingSegment SegmentId="RLT" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="IRA" />
+      <Segment SegmentId="INT" />
+      <Segment SegmentId="PRC" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="LQ" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="YNQ" />
+        <Loop LoopId="AMT">
+          <Name>Monetary Amount</Name>
+          <StartingSegment SegmentId="AMT" />
+          <Segment SegmentId="DTP" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
