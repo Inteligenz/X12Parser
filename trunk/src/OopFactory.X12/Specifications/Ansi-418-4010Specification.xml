@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--418 Rail Advance Interchange Consist-->
+<TransactionSpecification TransactionSetIdentifierCode="418" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BAX" Usage="Required" Repeat="1" />
+  <Loop LoopId="W1" LoopRepeat="30">
+    <Name>Block Identification</Name>
+    <StartingSegment SegmentId="W1" />
+    <Segment SegmentId="W1" Usage="Required" Repeat="1" />
+    <Loop LoopId="W2" LoopRepeat="400">
+      <Name>Equipment Identification</Name>
+      <StartingSegment SegmentId="W2" />
+      <Segment SegmentId="W3" Repeat="7" />
+      <Segment SegmentId="IMA" Repeat="3" />
+      <Segment SegmentId="W4" Repeat="1" />
+      <Segment SegmentId="W5" Repeat="4" />
+      <Segment SegmentId="W6" Repeat="6" />
+      <Segment SegmentId="PS" Repeat="5" />
+      <Segment SegmentId="REF" Repeat="10" />
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="LH1" LoopRepeat="100">
+          <Name>Hazardous Identification Information</Name>
+          <StartingSegment SegmentId="LH1" />
+          <Segment SegmentId="LH2" Repeat="4" />
+          <Segment SegmentId="LH3" Repeat="10" />
+          <Segment SegmentId="LFH" Repeat="20" />
+          <Segment SegmentId="LEP" Repeat="3" />
+          <Segment SegmentId="LH4" Repeat="1" />
+          <Segment SegmentId="LHT" Repeat="3" />
+          <Segment SegmentId="LHR" Repeat="5" />
+          <Segment SegmentId="PER" Repeat="5" />
+        </Loop>
+      </Loop>
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="LH2" Repeat="1" />
+      <Segment SegmentId="LHR" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

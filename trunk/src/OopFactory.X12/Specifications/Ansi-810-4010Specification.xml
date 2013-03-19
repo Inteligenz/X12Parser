@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- http://cmtsystems.com/EDI_4010/ts810.htm -->
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="810">
   <Segment SegmentId="BIG" Usage="Required" Repeat="1"/>
   <Segment SegmentId="NTE" Repeat="100"/>

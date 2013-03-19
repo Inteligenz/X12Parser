@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--429 Railroad Retirement Activity-->
+<TransactionSpecification TransactionSetIdentifierCode="429" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="RU1" Repeat="999" />
+  <Loop LoopId="RU2" LoopRepeat="999">
+    <Name>Employing Carrier Response</Name>
+    <StartingSegment SegmentId="RU2" />
+    <Segment SegmentId="RU3" Repeat="1" />
+    <Segment SegmentId="NTE" Repeat="2" />
+  </Loop>
+</TransactionSpecification>

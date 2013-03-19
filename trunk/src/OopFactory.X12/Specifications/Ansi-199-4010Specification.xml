@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--199 Real Estate Settlement Information-->
+<TransactionSpecification TransactionSetIdentifierCode="199" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="LRQ" />
+    <Segment SegmentId="LN1" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="III" />
+    <Segment SegmentId="NTE" />
+    <Loop LoopId="NX1">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="PDS" />
+      <Segment SegmentId="PDE" />
+    </Loop>
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="FGS">
+      <Name>Form Group</Name>
+      <StartingSegment SegmentId="FGS" />
+      <Loop LoopId="AMT">
+        <Name>Monetary Amount</Name>
+        <StartingSegment SegmentId="AMT" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="NM1" />
+        <Segment SegmentId="NTE" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="PCT" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

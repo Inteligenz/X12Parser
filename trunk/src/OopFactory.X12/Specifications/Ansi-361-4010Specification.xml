@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--361 Carrier Interchange Agreement (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="361" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="N1" Usage="Required" Repeat="1" />
+  <Loop LoopId="CI" LoopRepeat="9999">
+    <Name>Carrier Interchange Agreement</Name>
+    <StartingSegment SegmentId="CI" />
+    <Segment SegmentId="K1" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

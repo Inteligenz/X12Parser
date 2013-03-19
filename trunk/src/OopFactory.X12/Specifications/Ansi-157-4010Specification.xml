@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--157 Notice of Power of Attorney-->
+<TransactionSpecification TransactionSetIdentifierCode="157" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="REF" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <!-- HL03 (Hierarchical Level Code) may only contain the codes: AG (Agent Level) and 
+        PR (Principal Level), where the Agent is the party to whom Power of Attorney is 
+        being granted, modified, or revoked, and the Principal is the party on behalf 
+        of whom Power of Attorney is being granted, modified, or revoked. The Principal 
+        Level is always subordinate to the Agent Level. -->
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Loop LoopId="SPY">
+        <Name>Scope of Power of Attorney</Name>
+        <StartingSegment SegmentId="SPY" />
+        <Segment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

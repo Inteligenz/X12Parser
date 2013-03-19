@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--414 Rail Carhire Settlements-->
+<TransactionSpecification TransactionSetIdentifierCode="414" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="LEQ" Repeat="1" />
+  <Loop LoopId="CTC" LoopRepeat="99">
+    <Name>Car Hire Transaction Control</Name>
+    <StartingSegment SegmentId="CTC" />
+    <Loop LoopId="CIC" LoopRepeat="1000">
+      <Name>Car Information Control</Name>
+      <StartingSegment SegmentId="CIC" />
+      <Segment SegmentId="REF" Repeat="2" />
+      <Loop LoopId="LX" LoopRepeat="99">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="CHR" Repeat="3" />
+        <Segment SegmentId="CYC" Repeat="2" />
+        <Segment SegmentId="PRI" Repeat="1" />
+        <Segment SegmentId="L7A" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="2" />
+        <Segment SegmentId="CUR" Repeat="1" />
+        <Segment SegmentId="CV" Usage="Required" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

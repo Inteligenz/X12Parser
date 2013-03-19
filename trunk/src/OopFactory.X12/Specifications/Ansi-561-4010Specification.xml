@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--561 Contract Abstract-->
+<TransactionSpecification TransactionSetIdentifierCode="561" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="1" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="1" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="CS" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="2" />
+    <Segment SegmentId="ITD" Repeat="5" />
+    <Segment SegmentId="PO1" Repeat="1" />
+    <Segment SegmentId="SLN" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="AMT" Repeat="1" />
+    <Segment SegmentId="PCT" Repeat="2" />
+    <Segment SegmentId="PID" Repeat="10" />
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+      <Segment SegmentId="AMT" Repeat="2" />
+      <Segment SegmentId="N9" Repeat="1" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="1" />
+    </Loop>
+    <Loop LoopId="SCH">
+      <Name>Line Item Schedule</Name>
+      <StartingSegment SegmentId="SCH" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

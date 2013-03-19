@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--252 Insurance Producer Administration-->
+<TransactionSpecification TransactionSetIdentifierCode="252" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTP" />
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="ASI" Usage="Required" Repeat="1" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DMG" Repeat="1" />
+    <Segment SegmentId="DMA" Repeat="1" />
+    <Segment SegmentId="AM1" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" Repeat="3" />
+      <Segment SegmentId="EMS" Repeat="1" />
+      <Segment SegmentId="DTP" />
+      <Loop LoopId="N3" LoopRepeat="">
+        <Name>Address Information</Name>
+        <StartingSegment SegmentId="N3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="COM" Repeat="9" />
+        <Segment SegmentId="DTP" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="N9" LoopRepeat="">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Loop LoopId="REF">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="REF" />
+        <Segment SegmentId="NM1" Repeat="1" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="UC" LoopRepeat="">
+      <Name>Underwriting Category</Name>
+      <StartingSegment SegmentId="UC" />
+      <Segment SegmentId="III" />
+      <Segment SegmentId="EMS" Repeat="1" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="3" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="9" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="CDS" Repeat="1" />
+      <Segment SegmentId="CED" />
+      <Segment SegmentId="TST" Repeat="1" />
+      <Segment SegmentId="SRE" Repeat="1" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="LIC">
+      <Name>License Information</Name>
+      <StartingSegment SegmentId="LIC" />
+      <Segment SegmentId="DTP" />
+      <Loop LoopId="LIN">
+        <Name>Item Identification</Name>
+        <StartingSegment SegmentId="LIN" />
+        <Segment SegmentId="DTP" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Loop LoopId="SPA">
+        <Name>Status of Product or Activity</Name>
+        <StartingSegment SegmentId="SPA" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="YNQ" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="3" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="LIN">
+          <Name>Item Identification</Name>
+          <StartingSegment SegmentId="LIN" />
+          <Segment SegmentId="DTP" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="PWK">
+      <Name>Paperwork</Name>
+      <StartingSegment SegmentId="PWK" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="DTP" />
+      <Loop LoopId="EFI">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI" />
+        <Segment SegmentId="BIN" Usage="Required" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

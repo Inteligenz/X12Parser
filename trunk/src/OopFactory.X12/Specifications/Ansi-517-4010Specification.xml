@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--517 Material Obligation Validation-->
+<TransactionSpecification TransactionSetIdentifierCode="517" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Loop LoopId="LM" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="5" />
+  </Loop>
+  <Loop LoopId="QTY">
+    <Name>Quantity</Name>
+    <StartingSegment SegmentId="QTY" />
+    <Segment SegmentId="N9" Repeat="30" />
+    <Segment SegmentId="G62" Repeat="30" />
+    <Segment SegmentId="DD" Repeat="100" />
+    <Segment SegmentId="GF" Repeat="1" />
+    <Loop LoopId="LM" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="5" />
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

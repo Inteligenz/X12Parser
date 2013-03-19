@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Name and Address Lists -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="101">
+  <Segment SegmentId="BGN"/>
+  <Loop LoopId="DTM">
+    <Name>Date/Time Reference</Name>
+    <StartingSegment SegmentId="DTM"/>
+    <Segment SegmentId="N1"/>
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="IN2"/>
+      <Segment SegmentId="NX2"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="SPA"/>
+      <Segment SegmentId="COM"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--326 Consignment Summary List-->
+<TransactionSpecification TransactionSetIdentifierCode="326" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="V1" LoopRepeat="999">
+    <Name>Vessel Identification</Name>
+    <StartingSegment SegmentId="V1" />
+    <Segment SegmentId="MBL" Repeat="1" />
+    <Segment SegmentId="G1" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="999" />
+    <Segment SegmentId="VC" Repeat="9999" />
+    <Loop LoopId="N7" LoopRepeat="999">
+      <Name>Equipment Details</Name>
+      <StartingSegment SegmentId="N7" />
+      <Segment SegmentId="VC" Repeat="9" />
+    </Loop>
+    <Loop LoopId="R4" LoopRepeat="4">
+      <Name>Port or Terminal</Name>
+      <StartingSegment SegmentId="R4" />
+      <Segment SegmentId="DTM" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

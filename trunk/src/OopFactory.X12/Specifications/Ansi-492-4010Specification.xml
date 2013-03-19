@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--492 Miscellaneous Rates-->
+<TransactionSpecification TransactionSetIdentifierCode="492" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PRI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DM" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Docket Sub-level</Name>
+    <StartingSegment SegmentId="SC" />
+    <Segment SegmentId="DM" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

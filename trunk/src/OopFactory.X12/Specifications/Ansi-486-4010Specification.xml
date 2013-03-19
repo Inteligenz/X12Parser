@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--486 Rate Docket Expiration-->
+<TransactionSpecification TransactionSetIdentifierCode="486" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PI" Repeat="1" />
+  <Segment SegmentId="SA" Usage="Required" Repeat="1" />
+</TransactionSpecification>

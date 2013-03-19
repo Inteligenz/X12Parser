@@ -2,6 +2,15 @@
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="276">
   <Segment SegmentId="BHT"/>
   <Segment SegmentId="REF"/>
+  <Loop LoopId="1000">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
   <HierarchicalLoop LoopId="2000A" LevelCode="20">
     <Name>INFORMATION SOURCE LEVEL</Name>
     <Loop LoopId="2100A">

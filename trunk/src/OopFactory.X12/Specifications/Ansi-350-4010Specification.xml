@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--350 U.S. Customs Status Information-->
+<TransactionSpecification TransactionSetIdentifierCode="350" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Segment SegmentId="V9" Repeat="20" />
+    <Segment SegmentId="K1" Repeat="4" />
+    <Loop LoopId="N9" LoopRepeat="999">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="K1" Repeat="4" />
+    </Loop>
+    <Loop LoopId="X4" LoopRepeat="9999">
+      <Name>Customs Release Information</Name>
+      <StartingSegment SegmentId="X4" />
+      <Segment SegmentId="K1" Repeat="4" />
+      <Segment SegmentId="N7" Usage="Required" Repeat="999" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="BA1" LoopRepeat="999">
+    <Name>Export Shipment Identifying Information</Name>
+    <StartingSegment SegmentId="BA1" />
+    <Loop LoopId="X4" LoopRepeat="9999">
+      <Name>Customs Release Information</Name>
+      <StartingSegment SegmentId="X4" />
+      <Segment SegmentId="K1" Repeat="4" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

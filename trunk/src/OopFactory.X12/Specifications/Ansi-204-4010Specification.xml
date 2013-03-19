@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--204 Motor Carrier Load Tender-->
+<TransactionSpecification TransactionSetIdentifierCode="204" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B2" />
+  <Segment SegmentId="B2A" />
+  <Segment SegmentId="L11" />
+  <Segment SegmentId="G62" />
+  <Segment SegmentId="MS3" />
+  <Segment SegmentId="AT5" />
+  <Segment SegmentId="PLD" />
+  <Segment SegmentId="LH6" />
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="L3" Trailer="true" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="G61" />
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="N7A" />
+    <Segment SegmentId="N7B" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="M7" />
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="G62" />
+    <Segment SegmentId="AT8" />
+    <Segment SegmentId="LAD" />
+    <Segment SegmentId="AT5" />
+    <Segment SegmentId="PLD" />
+    <Segment SegmentId="NTE" />
+    <Loop LoopId="0310">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="G61" />
+    </Loop>
+    <Loop LoopId="0320">
+      <Name>Description, Marks and Numbers</Name>
+      <StartingSegment SegmentId="L5" />
+      <Segment SegmentId="AT8" />
+      <Loop LoopId="0325">
+        <Name>Contact</Name>
+        <StartingSegment SegmentId="G61" />
+        <Segment SegmentId="L11" />
+        <Segment SegmentId="LH6" />
+        <Loop LoopId="0330">
+          <Name>Hazardous Identification Information</Name>
+          <StartingSegment SegmentId="LH1" />
+          <Segment SegmentId="LH2" />
+          <Segment SegmentId="LH3" />
+          <Segment SegmentId="LFH" />
+          <Segment SegmentId="LEP" />
+          <Segment SegmentId="LH4" />
+          <Segment SegmentId="LHT" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="0350">
+      <Name>Order Identification Detail</Name>
+      <StartingSegment SegmentId="OID" />
+      <Segment SegmentId="G62" />
+      <Segment SegmentId="LAD" />
+      <Loop LoopId="0360">
+        <Name>Description, Marks and Numbers</Name>
+        <StartingSegment SegmentId="L5" />
+        <Segment SegmentId="AT8" />
+        <Loop LoopId="0365">
+          <Name>Contact</Name>
+          <StartingSegment SegmentId="G61" />
+          <Segment SegmentId="L11" />
+          <Segment SegmentId="LH6" />
+          <Loop LoopId="0370">
+            <Name>Hazardous Identification Information</Name>
+            <StartingSegment SegmentId="LH1" />
+            <Segment SegmentId="LH2" />
+            <Segment SegmentId="LH3" />
+            <Segment SegmentId="LFH" />
+            <Segment SegmentId="LEP" />
+            <Segment SegmentId="LH4" />
+            <Segment SegmentId="LHT" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="0380">
+      <Name>Equipment Details</Name>
+      <StartingSegment SegmentId="N7" />
+      <Segment SegmentId="N7A" />
+      <Segment SegmentId="N7B" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="M7" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

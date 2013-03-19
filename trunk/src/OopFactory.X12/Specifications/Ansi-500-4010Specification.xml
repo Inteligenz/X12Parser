@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--500 Medical Event Reporting-->
+<TransactionSpecification TransactionSetIdentifierCode="500" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="TRN" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+    </Loop>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Loop LoopId="LQ">
+        <Name>Industry Code</Name>
+        <StartingSegment SegmentId="LQ" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="MTX" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="LIN">
+      <Name>Item Identification</Name>
+      <StartingSegment SegmentId="LIN" />
+      <Segment SegmentId="PID" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="TRN" />
+      <Segment SegmentId="MTX" />
+    </Loop>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="DMG" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="PWK" />
+      <Segment SegmentId="TRN" />
+      <Loop LoopId="QTY">
+        <Name>Quantity</Name>
+        <StartingSegment SegmentId="QTY" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="PID">
+        <Name>Product/Item Description</Name>
+        <StartingSegment SegmentId="PID" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="QTY" />
+      </Loop>
+      <Loop LoopId="MTX">
+        <Name>Text</Name>
+        <StartingSegment SegmentId="MTX" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+</TransactionSpecification>

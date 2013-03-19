@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--160 Transportation Automatic Equipment Identification-->
+<TransactionSpecification TransactionSetIdentifierCode="160" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BAX" />
+  <Segment SegmentId="AES" />
+  <Segment SegmentId="YNQ" />
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="QTY" />
+  <Segment SegmentId="MEA" />
+  <Segment SegmentId="AEI" />
+  <Loop LoopId="EI">
+    <Name>Automatic Equipment Identification</Name>
+    <StartingSegment SegmentId="EI" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="DTM" />
+    <Loop LoopId="TSI">
+      <Name>Automatic Equipment Tag Status Informat</Name>
+      <StartingSegment SegmentId="TSI" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="LQ" />
+      <Loop LoopId="QTY">
+        <Name>Quantity</Name>
+        <StartingSegment SegmentId="QTY" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
