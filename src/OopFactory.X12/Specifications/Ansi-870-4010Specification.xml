@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--870 Order Status Report-->
+<TransactionSpecification TransactionSetIdentifierCode="870" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BSR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="TD3" Repeat="1" />
+  <Segment SegmentId="TD4" Repeat="1" />
+  <Segment SegmentId="TD5" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="REF">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="PWK" Repeat="1" />
+  </Loop>
+  <Loop LoopId="LM" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="PRF" Repeat="1" />
+    <Loop LoopId="ISR" LoopRepeat="104">
+      <Name>Item Status Report</Name>
+      <StartingSegment SegmentId="ISR" />
+      <Segment SegmentId="PID" Repeat="6" />
+      <Segment SegmentId="QTY" Repeat="4" />
+    </Loop>
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="CS" Repeat="3" />
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="200">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+    <Loop LoopId="LM" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="PO1" LoopRepeat="1000">
+      <Name>Baseline Item Data</Name>
+      <StartingSegment SegmentId="PO1" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="SLN" Repeat="100" />
+      <Segment SegmentId="PO3" Repeat="1" />
+      <Segment SegmentId="PID" Repeat="1000" />
+      <Segment SegmentId="MEA" Repeat="40" />
+      <Segment SegmentId="PKG" Repeat="25" />
+      <Loop LoopId="ISR" LoopRepeat="104">
+        <Name>Item Status Report</Name>
+        <StartingSegment SegmentId="ISR" />
+        <Segment SegmentId="PID" Repeat="6" />
+        <Segment SegmentId="QTY" Repeat="4" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="TD1" Repeat="1" />
+        <Segment SegmentId="TD5" Repeat="1" />
+        <Segment SegmentId="TD3" Repeat="1" />
+        <Segment SegmentId="TD4" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="12" />
+        <Segment SegmentId="SAC" Repeat="25" />
+        <Loop LoopId="LM" LoopRepeat="10">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Loop LoopId="LM" LoopRepeat="10">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

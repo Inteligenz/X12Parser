@@ -28,7 +28,7 @@
     <Segment SegmentId="V9" Repeat="1" />
     <Segment SegmentId="F9" Usage="Required" Repeat="1" />
     <Segment SegmentId="D9" Usage="Required" Repeat="1" />
-    <Loop LoopId="1200" LoopRepeat="10-">
+    <Loop LoopId="1200" LoopRepeat="10">
       <Name>Name</Name>
       <StartingSegment SegmentId="N1" />
       <Segment SegmentId="N2" Repeat="2" />
@@ -37,13 +37,13 @@
       <Segment SegmentId="PER" Repeat="3" />
       <Segment SegmentId="BL" Repeat="12" />
     </Loop>
-    <Loop LoopId="1300" LoopRepeat="6-">
+    <Loop LoopId="1300" LoopRepeat="6">
       <Name>Stop-off Name</Name>
       <StartingSegment SegmentId="S1" />
       <Segment SegmentId="S9" Repeat="1" />
     </Loop>
     <Segment SegmentId="PI" Repeat="12" />
-    <Loop LoopId="1400" LoopRepeat="13-">
+    <Loop LoopId="1400" LoopRepeat="13">
       <Name>Route Information</Name>
       <StartingSegment SegmentId="R2" />
       <Loop LoopId="1410" LoopRepeat="4">

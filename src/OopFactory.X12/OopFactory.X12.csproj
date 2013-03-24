@@ -121,6 +121,10 @@
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Parsing\X12FlatTransaction.cs" />
     <Compile Include="Parsing\X12StreamReader.cs" />
+    <EmbeddedResource Include="Specifications\Ansi-858-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-868-4010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />
     <Compile Include="Parsing\Model\Container.cs" />
@@ -153,6 +157,13 @@
     <Compile Include="Transformations\X12EdiParsingService.cs" />
     <Compile Include="Transformations\X12HtmlTransformationService.cs" />
     <Compile Include="Transformations\X12TransformationService.cs" />
+    <EmbeddedResource Include="Specifications\Ansi-859-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-861-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-862-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-869-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-870-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-871-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-872-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-837-4010Specification.xml">
@@ -540,12 +551,43 @@
     <EmbeddedResource Include="Specifications\Ansi-845-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Specifications\Ansi-847-4010Specification.xml" />
-    <Content Include="Specifications\Ansi-848-4010Specification.xml" />
-    <Content Include="Specifications\Ansi-849-4010Specification.xml" />
-    <Content Include="Specifications\Ansi-851-4010Specification.xml" />
-    <Content Include="Specifications\Ansi-853-4010Specification.xml" />
-    <Content Include="Specifications\Ansi-854-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-847-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-848-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-849-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-851-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-853-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-854-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-876-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-877-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-878-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-879-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-881-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-882-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-883-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-884-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-885-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-886-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-887-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-889-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-891-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-893-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-894-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-895-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-896-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-920-4010.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-924-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-925-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-926-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-928-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-943-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-944-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-947-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-980-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-990-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-996-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-998-4010Specification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

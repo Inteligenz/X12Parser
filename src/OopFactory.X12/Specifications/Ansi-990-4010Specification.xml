@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--990 Response to a Load Tender-->
+<TransactionSpecification TransactionSetIdentifierCode="990" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="6" />
+  <Segment SegmentId="N7" Repeat="1" />
+  <Segment SegmentId="L9" Repeat="40" />
+  <Segment SegmentId="V9" Repeat="10" />
+  <Segment SegmentId="K1" Repeat="10" />
+  <Loop LoopId="0100" LoopRepeat="999">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="G62" Repeat="10" />
+    <Segment SegmentId="K1" Repeat="10" />
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--887 Coupon Notification-->
+<TransactionSpecification TransactionSetIdentifierCode="887" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="4" />
+  <Segment SegmentId="AMT" Repeat="7" />
+  <Segment SegmentId="G43" Repeat="500" />
+  <Segment SegmentId="N9" Repeat="5" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="DTM" Repeat="2" />
+  <Segment SegmentId="G11" Repeat="10" />
+  <Segment SegmentId="G12" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="5">
+    <Name>Coupon Special Processing</Name>
+    <StartingSegment SegmentId="G14" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="5">
+    <Name>Coupon Distribution</Name>
+    <StartingSegment SegmentId="G15" />
+    <Segment SegmentId="N9" Repeat="20" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="1" />
+    <Segment SegmentId="PCT" Repeat="1" />
+  </Loop>
+  <Loop LoopId="0300" LoopRepeat="10">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Loop LoopId="0310" LoopRepeat="99">
+      <Name>Line Item Numbers</Name>
+      <StartingSegment SegmentId="G28" />
+      <Segment SegmentId="PCT" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="3" />
+      <Segment SegmentId="G51" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>
