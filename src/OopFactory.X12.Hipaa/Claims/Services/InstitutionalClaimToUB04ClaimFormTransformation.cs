@@ -146,7 +146,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 ub.ServiceLines.Add(new UB04ServiceLine {
                     Field42_RevenueCode = line.RevenueCode,
                     Field44_ProcedureCodes = line.Procedure.ProcedureCode,
-                    Field45_ServiceDate = String.Format("{0:MMddyy}", line.ServiceDateFrom),
+                    Field45_ServiceDate = line.ServiceDateFrom > DateTime.MinValue ? String.Format("{0:MMddyy}", line.ServiceDateFrom) : "",
                     Field46_ServiceUnits = line.Quantity.ToString(),
                     Field47_TotalCharges = line.ChargeAmount,
                     Field48_NonCoveredCharges = line.NonCoveredChargeAmount
