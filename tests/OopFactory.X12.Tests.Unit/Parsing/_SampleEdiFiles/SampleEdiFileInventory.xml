@@ -18,6 +18,12 @@
       <ResourcePath>TAM._110.FedEx_SampleInvoice1.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="200">
+    <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>MOR._200.MortgageBrokersExample.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="210">
     <EdiFile>
       <SourceUrl>http://www.cn.ca/documents/Customer-Service/EDI_210_Guide.pdf</SourceUrl>
@@ -461,6 +467,10 @@
     </EdiFile>
   </TransactionSet>
   <TransactionSet Id="852">
+    <EdiFile>
+      <SourceUrl>http://www.aftermarketsuppliers.org/Doc-Vault/MTC/mema852.pdf</SourceUrl>
+      <ResourcePath>MAN._852.AftermarketExample.txt</ResourcePath>
+    </EdiFile>
     <EdiFile>
       <SourceUrl>http://www.hdexchange.com/852ProductActivity.html</SourceUrl>
       <ResourcePath>MAN._852.hdexchange.txt</ResourcePath>
