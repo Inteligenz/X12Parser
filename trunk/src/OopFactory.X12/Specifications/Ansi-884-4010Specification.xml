@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--884 Market Development Fund Settlement-->
+<TransactionSpecification TransactionSetIdentifierCode="884" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BMP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="5" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Segment SegmentId="QTY" Repeat="1" />
+  <Segment SegmentId="BAL" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="999">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="N9" />
+    <Segment SegmentId="AMT" Repeat="1" />
+    <Segment SegmentId="N1" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

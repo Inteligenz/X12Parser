@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--875 Grocery Products Purchase Order-->
-<TransactionSpecification TransactionSetIdentifierCode="875" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
-  <Segment SegmentId="G50" Usage="Required" Repeat="1" />
+<!--876 Grocery Products Purchase Order Change-->
+<TransactionSpecification TransactionSetIdentifierCode="876" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G92" Usage="Required" Repeat="1" />
   <Segment SegmentId="N9" Repeat="50" />
   <Segment SegmentId="G61" Repeat="3" />
   <Segment SegmentId="G62" Repeat="10" />
   <Segment SegmentId="NTE" Repeat="20" />
   <Segment SegmentId="G66" Repeat="1" />
   <Segment SegmentId="G23" Repeat="20" />
-  <Segment SegmentId="G76" Usage="Required" Repeat="1" Trailer="true" />
+  <Segment SegmentId="G76" Repeat="1" Trailer="true" />
   <Loop LoopId="0100" LoopRepeat="10">
     <Name>Name</Name>
     <StartingSegment SegmentId="N1" />
