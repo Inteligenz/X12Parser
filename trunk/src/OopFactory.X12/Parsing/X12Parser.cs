@@ -76,6 +76,7 @@ namespace OopFactory.X12.Parsing
                 string segmentString = reader.ReadNextSegment();
                 string segmentId = reader.ReadSegmentId(segmentString);
                 int segmentIndex = 1;
+                Stack<string> containerStack = new Stack<string>();
                 while (segmentString.Length > 0)
                 {
                     switch (segmentId)
@@ -143,6 +144,7 @@ namespace OopFactory.X12.Parsing
                             envelop.AddSegment(segmentString);
                             break;  
                         default:
+                            containerStack.Clear();
                             while (currentContainer != null)
                             {
                                 if (currentContainer.AddSegment(segmentString) != null)
@@ -166,10 +168,18 @@ namespace OopFactory.X12.Parsing
                                                 var tran = (Transaction)currentContainer;
 
                                                 throw new TransactionValidationException(
-                                                    "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex);
+                                                    "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex, string.Join(",", containerStack));
                                             }
                                             else
                                             {
+                                                if (currentContainer is Loop)
+                                                    containerStack.Push(((Loop)currentContainer).Specification.LoopId);
+                                                if (currentContainer is HierarchicalLoop)
+                                                {
+                                                    var hloop = ((HierarchicalLoop)currentContainer);
+                                                    containerStack.Push(string.Format("{0}[{1}]", hloop.Specification.LoopId, hloop.Id));
+                                                }
+
                                                 currentContainer = currentContainer.Parent;
                                                 continue;
                                             }
