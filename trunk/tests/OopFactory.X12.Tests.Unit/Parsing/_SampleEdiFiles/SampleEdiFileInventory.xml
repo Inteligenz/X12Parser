@@ -538,6 +538,12 @@
       <ResourcePath>ORD._857.Kroger_DeliveryExample.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet>
+    <EdiFile>
+      <SourceUrl>http://www.essarsteelalgoma.com/media/EDI%20ANSI%20X12%20v004010%20863%20S%20Customer%20-%20Algoma%20outgoing.pdf</SourceUrl>
+      <ResourcePath>QSS._863.essarsteelalgoma.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="865">
     <EdiFile>
       <SourceUrl>http://corp.advanceautoparts.com/edi/documents/EDI/AAP_Specs_865_PurchaseOrderChangeAck_v002.pdf</SourceUrl>
