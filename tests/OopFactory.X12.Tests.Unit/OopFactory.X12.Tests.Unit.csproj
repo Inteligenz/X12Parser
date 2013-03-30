@@ -78,6 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\QSS\_863\essarsteelalgoma.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_852\AftermarketExample.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\MOR\_200\MortgageBrokersExample.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\ST1309-XX.txt" />
