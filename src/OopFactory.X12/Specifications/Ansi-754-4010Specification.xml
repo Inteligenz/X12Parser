@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 754 Routing Instructions -->
+<TransactionSpecification TransactionSetIdentifierCode="754" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="MTX"/>
+  <Segment SegmentId="L11"/>
+  <Segment SegmentId="TD1"/>
+  <Loop LoopId="0100">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="L11"/>
+    <Segment SegmentId="BLR"/>
+    <Segment SegmentId="SMD"/>
+    <Segment SegmentId="PKG"/>
+    <Segment SegmentId="PAL"/>
+    <Segment SegmentId="G62"/>
+    <Segment SegmentId="MSI"/>
+    <Segment SegmentId="MTX"/>
+    <Loop LoopId="0204">
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID"/>
+      <Loop LoopId="0206">
+        <Name>Baseline Item Data</Name>
+        <StartingSegment SegmentId="PO1"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="0210">
+      <Name>Quantity Information</Name>
+      <StartingSegment SegmentId="QTY"/>
+      <Segment SegmentId="AT9"/>
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Party Identifiation</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="0230">
+      <Name>Loop Header</Name>
+      <StartingSegment SegmentId="LS"/>
+      <Segment SegmentId="LE" Trailer="true"/>
+      <Loop LoopId="0240">
+        <Name>Transaction Set Line Number</Name>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="S5"/>
+        <Segment SegmentId="MTX"/>
+        <Segment SegmentId="L11"/>
+        <Segment SegmentId="BLR"/>
+        <Segment SegmentId="SMD"/>
+        <Segment SegmentId="FOB"/>
+        <Segment SegmentId="G62"/>
+        <Loop LoopId="0350">
+          <Name>Party Identification</Name>
+          <StartingSegment SegmentId="N1"/>
+          <Segment SegmentId="R4"/>
+          <Segment SegmentId="N2"/>
+          <Segment SegmentId="N3"/>
+          <Segment SegmentId="N4"/>
+          <Segment SegmentId="PER"/>
+        </Loop>
+        <Loop LoopId="0400">
+          <Name>Packaging Description</Name>
+          <StartingSegment SegmentId="PKD"/>
+          <Segment SegmentId="SN1"/>
+          <Segment SegmentId="PAL"/>
+          <Segment SegmentId="L11"/>
+          <Segment SegmentId="MAN"/>
+          <Loop LoopId="0500">
+            <Name>Order Information Detail</Name>
+            <StartingSegment SegmentId="OID"/>
+            <Segment SegmentId="REF"/>
+            <Segment SegmentId="G62"/>
+            <Segment SegmentId="PKG"/>
+            <Segment SegmentId="PAL"/>
+            <Segment SegmentId="MAN"/>
+            <Loop LoopId="0600">
+              <Name>Baseline Item Data</Name>
+              <StartingSegment SegmentId="PO1"/>
+              <Segment SegmentId="PKG"/>
+              <Segment SegmentId="PID"/>
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
