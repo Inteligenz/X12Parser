@@ -576,7 +576,7 @@
     <EmbeddedResource Include="Specifications\Ansi-894-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-895-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-896-4010Specification.xml" />
-    <EmbeddedResource Include="Specifications\Ansi-920-4010.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-920-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-924-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-925-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-926-4010Specification.xml" />
