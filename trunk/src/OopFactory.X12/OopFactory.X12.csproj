@@ -592,6 +592,35 @@
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-863-4010Specification.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-126-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-201-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-240-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-266-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-412-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-753-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-274-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-754-4010Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-272-4010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
