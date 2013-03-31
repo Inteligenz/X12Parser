@@ -26,23 +26,23 @@
             LQ~
               VEH~
       SPI~
-        HL*1**20*1~
+        HL*5**20*1~
           LM~
             LQ~
               VEH~
-          HL*2*1*20*1~
+          HL*6*5*20*1~
             LM~
               LQ~
                 VEH~
                 NM1*42*2*HOWDEE HOSPITAL*****XX*0123456789~
                   PER*IC*BETTY RUBBLE*TE*9195551111~
-            HL*3*2*20*0~
+            HL*7*6*20*0~
               LM~
                 LQ~
                   VEH~
                   NM1*43*2*HOWDEE HOSPITAL*****XX*0123456789~
                     PER*IC*BETTY RUBBLE*TE*9195551111~
-        HL*4**20*0~
+        HL*8**20*0~
           LM~
             LQ~
               VEH~
