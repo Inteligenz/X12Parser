@@ -141,7 +141,7 @@ namespace OopFactory.X12.Parsing
                                     currentContainer = currentContainer.Parent;
                                 }
                                 currentContainer = ((HierarchicalLoopContainer)currentContainer).AddHLoop(segmentString);
-                                hloops = new Dictionary<string, HierarchicalLoop>();
+                                //hloops = new Dictionary<string, HierarchicalLoop>();
                             }
                             else
                             {
@@ -164,13 +164,17 @@ namespace OopFactory.X12.Parsing
                             while (currentContainer != null)
                             {
                                 if (currentContainer.AddSegment(segmentString) != null)
+                                {
+                                    if (segmentId == "LE")
+                                        currentContainer = currentContainer.Parent;
                                     break;
+                                }
                                 else
                                 {
                                     if (currentContainer is LoopContainer)
                                     {
                                         LoopContainer loopContainer = (LoopContainer)currentContainer;
-                                        
+
                                         Loop newLoop = loopContainer.AddLoop(segmentString);
                                         if (newLoop != null)
                                         {

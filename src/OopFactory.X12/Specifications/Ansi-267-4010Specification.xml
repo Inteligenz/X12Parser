@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--267 Individual Life, Annuity and Disability Application-->
+<TransactionSpecification TransactionSetIdentifierCode="267" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTP" />
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N3" Repeat="3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="DTM"/>
+    <Loop LoopId="ACT">
+      <Name>Account Identification</Name>
+      <StartingSegment SegmentId="ACT" />
+      <Segment SegmentId="ASI" Repeat="1" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="C3" Repeat="1" />
+      <Segment SegmentId="LUI" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="BLI" Repeat="1" />
+      <Segment SegmentId="LIN" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="AM1" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="LQ">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="LUI"/>
+      </Loop>
+      <Loop LoopId="SI">
+        <Name>Service Characteristic Identification</Name>
+        <StartingSegment SegmentId="SI" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="PID">
+        <Name>Product/Item Description</Name>
+        <StartingSegment SegmentId="PID" />
+        <Segment SegmentId="BLI" Repeat="1" />
+        <Segment SegmentId="SPA" Repeat="1" />
+        <Segment SegmentId="UD" Repeat="1" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="AM1" />
+        <Segment SegmentId="PDL" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="INV">
+          <Name>Investment Vehicle Selection</Name>
+          <StartingSegment SegmentId="INV" />
+          <Segment SegmentId="AM1" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="LIN" Repeat="2" />
+          <Segment SegmentId="RPA" />
+        </Loop>
+        <Loop LoopId="BEN">
+          <Name>Beneficiary or Owner Information</Name>
+          <StartingSegment SegmentId="BEN" />
+          <Segment SegmentId="NM1" Repeat="1" />
+          <Segment SegmentId="N2" Repeat="3" />
+          <Segment SegmentId="N3" Repeat="3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="III" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="LUI" Repeat="1" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="ENT">
+        <Name>Entity</Name>
+        <StartingSegment SegmentId="ENT" />
+        <Segment SegmentId="NX1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="LIN" Repeat="9" />
+        <Segment SegmentId="DMG" Repeat="1" />
+        <Segment SegmentId="DMA" Repeat="1" />
+        <Segment SegmentId="IND"/>
+        <Segment SegmentId="LUI" Repeat="1" />
+        <Segment SegmentId="ERI"/>
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="AM1" />
+        <Segment SegmentId="RPA" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="NM1">
+          <Name>Individual or Organizational Name</Name>
+          <StartingSegment SegmentId="NM1" />
+          <Segment SegmentId="N2" Repeat="3" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="AM1" />
+          <Loop LoopId="N3">
+            <Name>Address Information</Name>
+            <StartingSegment SegmentId="N3" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="COM" Repeat="9" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="QTY" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="LQ">
+          <Name>Industry Code</Name>
+          <StartingSegment SegmentId="LQ" />
+          <Segment SegmentId="SPA" Repeat="1" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="MSG" />
+          <Loop LoopId="NM1">
+            <Name>Individual or Organizational Name</Name>
+            <StartingSegment SegmentId="NM1" />
+            <Segment SegmentId="N3" Repeat="3" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="REF" />
+            <Segment SegmentId="COM" Repeat="3" />
+            <Segment SegmentId="LUI" Repeat="1" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="BEN">
+          <Name>Beneficiary or Owner Information</Name>
+          <StartingSegment SegmentId="BEN" />
+          <Segment SegmentId="NM1" Repeat="1" />
+          <Segment SegmentId="N2" Repeat="3" />
+          <Segment SegmentId="N3" Repeat="3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="III" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="LUI" Repeat="1" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+        <Loop LoopId="PID">
+          <Name>Product/Item Description</Name>
+          <StartingSegment SegmentId="PID" />
+          <Segment SegmentId="BLI" Repeat="9" />
+          <Segment SegmentId="SPA" Repeat="1" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="YNQ" />
+          <Segment SegmentId="MSG" />
+          <Loop LoopId="PDL">
+            <Name>Payment Details</Name>
+            <StartingSegment SegmentId="PDL" />
+            <Segment SegmentId="REF" />
+          </Loop>
+          <Loop LoopId="INV">
+            <Name>Investment Vehicle Selection</Name>
+            <StartingSegment SegmentId="INV" />
+            <Segment SegmentId="AM1" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="RPA" />
+          </Loop>
+          <Loop LoopId="BEN">
+            <Name>Beneficiary or Owner Information</Name>
+            <StartingSegment SegmentId="BEN" />
+            <Segment SegmentId="NM1" Repeat="1" />
+            <Segment SegmentId="N2" Repeat="3" />
+            <Segment SegmentId="N3" Repeat="3" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="REF" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="III" />
+            <Segment SegmentId="QTY" />
+            <Segment SegmentId="AMT" />
+            <Segment SegmentId="LUI" Repeat="1" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="UC">
+          <Name>Underwriting Category</Name>
+          <StartingSegment SegmentId="UC" />
+          <HierarchicalLoop LoopId="HL">
+            <Name>Hierarchical Level</Name>
+            <Segment SegmentId="UQS" Repeat="1" />
+            <Segment SegmentId="YNQ" />
+            <Segment SegmentId="NM1" Repeat="1" />
+            <Segment SegmentId="N3" Repeat="3" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="COM" Repeat="9" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="QTY" />
+            <Segment SegmentId="MSG" />
+            <Segment SegmentId="AM1" />
+            <Segment SegmentId="AMT" />
+            <Segment SegmentId="III" />
+            <Segment SegmentId="EC" Repeat="1" />
+            <Segment SegmentId="EMS" Repeat="1" />
+            <Segment SegmentId="EMP" Repeat="1" />
+            <Segment SegmentId="PCT" />
+            <Segment SegmentId="SOI" />
+            <Segment SegmentId="LIN" Repeat="2" />
+            <Segment SegmentId="REF" />
+            <Segment SegmentId="ASL" />
+            <Segment SegmentId="TOA" />
+            <Segment SegmentId="TOV" />
+            <Segment SegmentId="VEH" />
+            <Segment SegmentId="CDS" />
+            <Segment SegmentId="CED" />
+            <Segment SegmentId="SIN" />
+            <Segment SegmentId="UCS" />
+            <Segment SegmentId="FH" />
+            <Segment SegmentId="SPA" Repeat="1" />
+            <Segment SegmentId="MPI" Repeat="1" />
+          </HierarchicalLoop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="PWK">
+        <Name>Paperwork</Name>
+        <StartingSegment SegmentId="PWK" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="SPA" Repeat="1" />
+        <Loop LoopId="EFI">
+          <Name>Electronic Format Identification</Name>
+          <StartingSegment SegmentId="EFI" />
+          <Segment SegmentId="BIN" Usage="Required" Repeat="1" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Loop LoopId="PDL">
+          <Name>Payment Details</Name>
+          <StartingSegment SegmentId="PDL" />
+          <Segment SegmentId="REF" />
+          <Loop LoopId="LS">
+            <Name>Loop</Name>
+            <StartingSegment SegmentId="LS"/>
+            <Segment SegmentId="LE" Trailer="true"/>
+            <Loop LoopId="AMT">
+              <Name>Monetary Amount</Name>
+              <StartingSegment SegmentId="AMT" />
+              <Segment SegmentId="N1" Repeat="1" />
+              <Segment SegmentId="N3" Repeat="2" />
+              <Segment SegmentId="N4" Repeat="1" />
+              <Segment SegmentId="LIN" Repeat="2" />
+              <Segment SegmentId="DTP" />
+              <Segment SegmentId="QTY" />
+              <Segment SegmentId="MSG" />
+              <Loop LoopId="AM1">
+                <Name>Information Values</Name>
+                <StartingSegment SegmentId="AM1"/>
+                <Loop LoopId="INV">
+                  <Name>Investment Vehicle Selection</Name>
+                  <StartingSegment SegmentId="INV"/>
+                  <Segment SegmentId="QTY"/>
+                  <Segment SegmentId="DTP"/>
+                  <Segment SegmentId="RPA"/>
+                </Loop>
+              </Loop>
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="K2">
+        <Name>Administrative Message</Name>
+        <StartingSegment SegmentId="K2" />
+        <Segment SegmentId="DTP" Repeat="1" />
+        <Segment SegmentId="NM1" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="ACT">
+    <Name>Account Identification</Name>
+    <StartingSegment SegmentId="ACT" />
+    <Segment SegmentId="ASI" Repeat="1" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="C3" Repeat="1" />
+    <Segment SegmentId="LUI" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="BLI" Repeat="1" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="AM1" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="SI">
+      <Name>Service Characteristic Identification</Name>
+      <StartingSegment SegmentId="SI" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="PID">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID" />
+      <Segment SegmentId="BLI" Repeat="1" />
+      <Segment SegmentId="SPA" Repeat="1" />
+      <Segment SegmentId="UD" Repeat="1" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="AM1" />
+      <Segment SegmentId="PDL" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="INV">
+        <Name>Investment Vehicle Selection</Name>
+        <StartingSegment SegmentId="INV" />
+        <Segment SegmentId="AM1" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="LIN" Repeat="2" />
+        <Segment SegmentId="RPA" />
+      </Loop>
+      <Loop LoopId="BEN">
+        <Name>Beneficiary or Owner Information</Name>
+        <StartingSegment SegmentId="BEN" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="3" />
+        <Segment SegmentId="N3" Repeat="3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="LUI" Repeat="1" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="ENT">
+      <Name>Entity</Name>
+      <StartingSegment SegmentId="ENT" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="LIN" Repeat="9" />
+      <Segment SegmentId="DMG" Repeat="1" />
+      <Segment SegmentId="DMA" Repeat="1" />
+      <Segment SegmentId="LUI" Repeat="1" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="AM1" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2" Repeat="3" />
+        <Segment SegmentId="REF" />
+        <Loop LoopId="N3">
+          <Name>Address Information</Name>
+          <StartingSegment SegmentId="N3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="COM" Repeat="9" />
+          <Segment SegmentId="DTP" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="LQ">
+        <Name>Industry Code</Name>
+        <StartingSegment SegmentId="LQ" />
+        <Segment SegmentId="SPA" Repeat="1" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="NM1">
+          <Name>Individual or Organizational Name</Name>
+          <StartingSegment SegmentId="NM1" />
+          <Segment SegmentId="N3" Repeat="3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="COM" Repeat="3" />
+          <Segment SegmentId="LUI" Repeat="1" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="BEN">
+        <Name>Beneficiary or Owner Information</Name>
+        <StartingSegment SegmentId="BEN" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="3" />
+        <Segment SegmentId="N3" Repeat="3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="LUI" Repeat="1" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="PID">
+        <Name>Product/Item Description</Name>
+        <StartingSegment SegmentId="PID" />
+        <Segment SegmentId="BLI" Repeat="9" />
+        <Segment SegmentId="SPA" Repeat="1" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="PDL">
+          <Name>Payment Details</Name>
+          <StartingSegment SegmentId="PDL" />
+          <Segment SegmentId="REF" />
+        </Loop>
+        <Loop LoopId="INV">
+          <Name>Investment Vehicle Selection</Name>
+          <StartingSegment SegmentId="INV" />
+          <Segment SegmentId="AM1" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="RPA" />
+        </Loop>
+        <Loop LoopId="BEN">
+          <Name>Beneficiary or Owner Information</Name>
+          <StartingSegment SegmentId="BEN" />
+          <Segment SegmentId="NM1" Repeat="1" />
+          <Segment SegmentId="N2" Repeat="3" />
+          <Segment SegmentId="N3" Repeat="3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="III" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="LUI" Repeat="1" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="UC">
+        <Name>Underwriting Category</Name>
+        <StartingSegment SegmentId="UC" />
+        <HierarchicalLoop LoopId="HL">
+          <Name>Hierarchical Level</Name>
+          <Segment SegmentId="UQS" Repeat="1" />
+          <Segment SegmentId="YNQ" />
+          <Segment SegmentId="NM1" Repeat="1" />
+          <Segment SegmentId="N3" Repeat="3" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="COM" Repeat="9" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="MSG" />
+          <Segment SegmentId="AM1" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="III" />
+          <Segment SegmentId="EC" Repeat="1" />
+          <Segment SegmentId="EMS" Repeat="1" />
+          <Segment SegmentId="EMP" Repeat="1" />
+          <Segment SegmentId="PCT" />
+          <Segment SegmentId="SOI" />
+          <Segment SegmentId="LIN" Repeat="2" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="ASL" />
+          <Segment SegmentId="TOA" />
+          <Segment SegmentId="TOV" />
+          <Segment SegmentId="VEH" />
+          <Segment SegmentId="CDS" />
+          <Segment SegmentId="CED" />
+          <Segment SegmentId="SIN" />
+          <Segment SegmentId="UCS" />
+          <Segment SegmentId="FH" />
+          <Segment SegmentId="SPA" Repeat="1" />
+          <Segment SegmentId="MPI" Repeat="1" />
+        </HierarchicalLoop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="PWK">
+      <Name>Paperwork</Name>
+      <StartingSegment SegmentId="PWK" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="SPA" Repeat="1" />
+      <Loop LoopId="EFI">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI" />
+        <Segment SegmentId="BIN" Usage="Required" Repeat="1" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Loop LoopId="PDL">
+        <Name>Payment Details</Name>
+        <StartingSegment SegmentId="PDL" />
+        <Segment SegmentId="REF" />
+        <Loop LoopId="AMT">
+          <Name>Monetary Amount</Name>
+          <StartingSegment SegmentId="AMT" />
+          <Segment SegmentId="N1" Repeat="1" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="LIN" Repeat="2" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="K2">
+      <Name>Administrative Message</Name>
+      <StartingSegment SegmentId="K2" />
+      <Segment SegmentId="DTP" Repeat="1" />
+      <Segment SegmentId="NM1" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>
