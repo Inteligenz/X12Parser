@@ -59,6 +59,7 @@
       </xs:element>
       <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="HierarchicalLoop" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="LoopId" type="xs:string" use="required"/>
     <xs:attribute name="Usage" type="UsageEnum" />

@@ -120,7 +120,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
-            stream = GetEdi(Convert.ToString(TestContext.DataRow["ResourcePath"]));
+            stream = GetEdi(resourcePath);
             List<Interchange> interchanges = new X12Parser().ParseMultiple(stream);
 
             if (resourcePath.Contains("_811"))

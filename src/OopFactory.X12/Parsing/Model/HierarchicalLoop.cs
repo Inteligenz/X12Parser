@@ -63,6 +63,11 @@ namespace OopFactory.X12.Parsing.Model
             internal set { SetElement(4, value); }
         }
 
+        public override bool AllowsHierarchicalLoop(string levelCode)
+        {
+            return true;
+        }
+
         public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
         {
             var hloop = base.AddHLoop(string.Format("HL{0}{1}{0}{2}{0}{3}{0}", _delimiters.ElementSeparator, id, this.Id, levelCode));

@@ -9,7 +9,7 @@ using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
-    public class Loop : LoopContainer
+    public class Loop : HierarchicalLoopContainer
     {
         internal Loop(Container parent, X12DelimiterSet delimiters, string startingSegment, LoopSpecification loopSpecification)
             : base(parent, delimiters, startingSegment)
@@ -41,6 +41,19 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
+        public override bool AllowsHierarchicalLoop(string levelCode)
+        {
+            return this.Specification.HierarchicalLoopSpecifications.Exists(hl => hl.LevelCode == levelCode || hl.LevelCode == null || hl.LevelCode == "");
+        }
+
+        public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
+        {
+            var hloop = base.AddHLoop(string.Format("HL{0}{1}{0}{2}{0}{3}{0}", _delimiters.ElementSeparator, id, "", levelCode));
+            if (willHoldChildHLoops.HasValue)
+                hloop.HierarchicalChildCode = willHoldChildHLoops.Value ? "1" : "0";
+            return hloop;
+        }
+
         #region IXmlSerializable Members
 
         internal override void WriteXml(System.Xml.XmlWriter writer)
@@ -56,12 +69,6 @@ namespace OopFactory.X12.Parsing.Model
                 }
 
                 base.WriteXml(writer);
-
-                foreach (var segment in this.Segments)
-                    segment.WriteXml(writer);
-
-                foreach (var segment in this.TrailerSegments)
-                    segment.WriteXml(writer);
 
                 writer.WriteEndElement();
             }

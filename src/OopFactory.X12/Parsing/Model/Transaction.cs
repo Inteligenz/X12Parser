@@ -13,7 +13,6 @@ namespace OopFactory.X12.Parsing.Model
     {
         private List<string> _loopStartingSegmentIds;
         private List<string> _loopWithLoopsStartingSegmentIds;
-        private Dictionary<string, HierarchicalLoop> _allHLoops;
 
         internal Transaction(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification spec)
             : base(parent, delimiters, segment)
@@ -67,20 +66,13 @@ namespace OopFactory.X12.Parsing.Model
             _loopStartingSegmentIds = new List<string>();
             _loopStartingSegmentIds.Add("NM1");
             _loopWithLoopsStartingSegmentIds = new List<string>();
-            _allHLoops = new Dictionary<string, HierarchicalLoop>();
         }
 
-        internal void AddToHLoopDictionary(HierarchicalLoop hloop)
-        {
-            _allHLoops.Add(hloop.Id, hloop);
-        }
+        
 
-        public HierarchicalLoop FindHLoop(string id)
+        public override bool AllowsHierarchicalLoop(string levelCode)
         {
-            if (_allHLoops.ContainsKey(id))
-                return _allHLoops[id];
-            else
-                return null;
+            return this.Specification.HierarchicalLoopSpecifications.Exists(hl => hl.LevelCode == levelCode || hl.LevelCode == null || hl.LevelCode == "");
         }
 
         public override HierarchicalLoop AddHLoop(string id, string levelCode, bool? willHoldChildHLoops)
