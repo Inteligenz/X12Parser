@@ -124,9 +124,25 @@ namespace OopFactory.X12.Parsing
                             Segment hlSegment = new Segment(null, reader.Delimiters, segmentString);
                             string id = hlSegment.GetElement(1);
                             string parentId = hlSegment.GetElement(2);
+                            string levelCode = hlSegment.GetElement(3);
+
+                            while (!(currentContainer is HierarchicalLoopContainer) || !((HierarchicalLoopContainer)currentContainer).AllowsHierarchicalLoop(levelCode))
+                            {
+                                if (currentContainer.Parent != null)
+                                    currentContainer = currentContainer.Parent;
+                                else
+                                    throw new InvalidOperationException(String.Format("Heierchical Loop {0}  cannot be added to transaction set {1} because it's specification cannot be identified.", segmentString, tr.ControlNumber));
+                            }
 
                             if (parentId == "")
-                                currentContainer = tr.AddHLoop(segmentString);
+                            {
+                                while (!(currentContainer is HierarchicalLoopContainer && ((HierarchicalLoopContainer)currentContainer).HasHierachicalSpecs()))
+                                {
+                                    currentContainer = currentContainer.Parent;
+                                }
+                                currentContainer = ((HierarchicalLoopContainer)currentContainer).AddHLoop(segmentString);
+                                hloops = new Dictionary<string, HierarchicalLoop>();
+                            }
                             else
                             {
                                 if (hloops.ContainsKey(parentId))

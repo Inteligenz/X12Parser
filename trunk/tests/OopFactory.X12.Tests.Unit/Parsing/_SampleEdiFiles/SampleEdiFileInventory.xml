@@ -153,6 +153,11 @@
       <ResourcePath>INS._278._5010.Example_3_3_2_Response.txt</ResourcePath>
     </EdiFile>
   </TransactionSet>
+  <TransactionSet Id="286">
+    <EdiFile>
+      <ResourcePath>QSS._286.Ids.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
   <TransactionSet Id="322">
     <EdiFile>
       <ResourcePath>TOS._322.322_Larger.txt</ResourcePath>

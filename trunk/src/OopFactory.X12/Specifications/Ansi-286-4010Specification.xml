@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 286 Commercial Vehicle Credentials -->
+<TransactionSpecification TransactionSetIdentifierCode="286" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="CUR"/>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="DTM"/>
+  </Loop>
+  <Loop LoopId="SPI">
+    <Name>Specifcation Identifier</Name>
+    <StartingSegment SegmentId="SPI"/>
+    <HierarchicalLoop LoopId="HL">
+      <Name>Hierarchical Level</Name>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM"/>
+        <Loop LoopId="LQ">
+          <Name>Industry Code Identification</Name>
+          <StartingSegment SegmentId="LQ"/>
+          <Segment SegmentId="N9"/>
+          <Segment SegmentId="DTM"/>
+          <Segment SegmentId="MEA"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="PDL"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="YNQ"/>
+          <Segment SegmentId="VEH"/>
+          <Segment SegmentId="DVI"/>
+          <Segment SegmentId="TC2"/>
+          <Segment SegmentId="N12"/>
+          <Segment SegmentId="H1"/>
+          <Segment SegmentId="MSG"/>
+          <Loop LoopId="NM1">
+            <Name>Individual or Organizational Name</Name>
+            <StartingSegment SegmentId="NM1"/>
+            <Segment SegmentId="N2"/>
+            <Segment SegmentId="N3"/>
+            <Segment SegmentId="N4"/>
+            <Segment SegmentId="N9"/>
+            <Segment SegmentId="PER"/>
+            <Segment SegmentId="EMS"/>
+            <Segment SegmentId="DTM"/>
+            <Segment SegmentId="MEA"/>
+            <Segment SegmentId="QTY"/>
+            <Segment SegmentId="YNQ"/>
+            <Segment SegmentId="TD5"/>
+          </Loop>                   
+        </Loop>
+      </Loop>
+    </HierarchicalLoop>
+  </Loop>
+</TransactionSpecification>

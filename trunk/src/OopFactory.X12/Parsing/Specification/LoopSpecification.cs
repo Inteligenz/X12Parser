@@ -34,5 +34,8 @@ namespace OopFactory.X12.Parsing.Specification
 
         [XmlElement("Loop")]
         public List<LoopSpecification> LoopSpecifications { get; set; }
+
+        [XmlElement("HierarchicalLoop")]
+        public List<HierarchicalLoopSpecification> HierarchicalLoopSpecifications { get; set; }
     }
 }
