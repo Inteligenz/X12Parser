@@ -17,7 +17,7 @@
   </Loop>
   <Loop LoopId="0100">
     <Name></Name>
-    <StartingSegment Repeat="N1"/>
+    <StartingSegment SegmentId="N1"/>
     <Segment SegmentId="N2"/>
     <Segment SegmentId="N3"/>
     <Segment SegmentId="N4"/>

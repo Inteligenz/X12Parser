@@ -37,6 +37,7 @@
     <Segment SegmentId="POD"/>
     <Segment SegmentId="V9"/>
     <Segment SegmentId="RMT"/>
+    <Segment SegmentId="G47"/>
     <Segment SegmentId="NTE"/>
     <Loop LoopId="L5">
       <Name>Description</Name>
