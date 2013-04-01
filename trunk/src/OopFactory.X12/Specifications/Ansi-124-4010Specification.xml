@@ -16,6 +16,7 @@
     <Segment SegmentId="N3"/>
     <Segment SegmentId="N4"/>
     <Segment SegmentId="PER"/>
+    <Segment SegmentId="REF"/>
   </Loop>
   <Loop LoopId="3000">
     <Name></Name>
@@ -56,6 +57,12 @@
       <Segment SegmentId="PER"/>
       <Segment SegmentId="III"/>
       <Segment SegmentId="DTP"/>
+      <Loop LoopId="3305">
+        <Name></Name>
+        <StartingSegment SegmentId="VAT"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="REF"/>
+      </Loop>
       <Loop LoopId="LS">
         <Name></Name>
         <StartingSegment SegmentId="LS"/>
@@ -81,6 +88,7 @@
           <StartingSegment SegmentId="AMT"/>
           <Segment SegmentId="QTY"/>
           <Segment SegmentId="TXI"/>
+          <Segment SegmentId="REF"/>
         </Loop>
       </Loop>
       <Loop LoopId="3330">
@@ -92,6 +100,15 @@
         <Segment SegmentId="DP"/>
         <Segment SegmentId="DL"/>
         <Segment SegmentId="MSG"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="PCT"/>
+        <Loop LoopId="3335">
+          <Name></Name>
+          <StartingSegment SegmentId="DL"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="PCT"/>
+        </Loop>
       </Loop>
     </Loop>
   </Loop>
