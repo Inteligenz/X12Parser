@@ -21,12 +21,12 @@ namespace OopFactory.X12.Transformations
 
         public X12EdiParsingService(bool suppressComments, ISpecificationFinder specFinder)
         {
-            _parser = new X12Parser(specFinder);
+            _parser = new X12Parser(specFinder, true);
         }
 
         public string Transform(string x12)
         {
-            Interchange interchange = _parser.Parse(new MemoryStream(Encoding.ASCII.GetBytes(x12)));
+            Interchange interchange = _parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(x12))).FirstOrDefault();
             return interchange.Serialize(_suppressComments);
         }
         

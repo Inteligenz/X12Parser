@@ -9,7 +9,7 @@ namespace OopFactory.X12.Parsing
     {
         public bool FileIsValid { get; set; }
         public string InterchangeControlNumber { get; set; }
-        public int FuntionalGroupControlNumber { get; set; }
+        public int FunctionalGroupControlNumber { get; set; }
         public string TransactionControlNumber { get; set; }
         public int SegmentPositionInInterchange { get; set; }
         public string SegmentId { get; set; }
