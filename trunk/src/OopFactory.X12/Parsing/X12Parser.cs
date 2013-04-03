@@ -156,6 +156,10 @@ namespace OopFactory.X12.Parsing
                                     OnParserWarning(new X12ParserWarningEventArgs
                                     {
                                         FileIsValid = false,
+                                        InterchangeControlNumber = envelop.InterchangeControlNumber,
+                                        FuntionalGroupControlNumber = fg.ControlNumber,
+                                        TransactionControlNumber = tr.ControlNumber,
+                                        SegmentPositionInInterchange = segmentIndex,
                                         Segment = segmentString,
                                         SegmentId = segmentId,
                                         Message = String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.", id, parentId)

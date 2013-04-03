@@ -121,7 +121,9 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(resourcePath);
-            List<Interchange> interchanges = new X12Parser().ParseMultiple(stream);
+            var parser = new X12Parser();
+            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
+            List<Interchange> interchanges = parser.ParseMultiple(stream);
 
             if (resourcePath.Contains("_811"))
                 Trace.Write("");
@@ -132,6 +134,11 @@ namespace OopFactory.X12.Tests.Unit.Parsing
 
             Assert.AreEqual(orignalX12, x12.ToString().Trim());
             Trace.Write(x12.ToString());
+        }
+
+        void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        {
+            Trace.Write(args.Message);
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
