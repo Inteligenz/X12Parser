@@ -120,6 +120,7 @@
     <Compile Include="Parsing\Specification\IContainerSpecification.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
     <Compile Include="Parsing\X12FlatTransaction.cs" />
+    <Compile Include="Parsing\X12ParserWarningEventArgs.cs" />
     <Compile Include="Parsing\X12StreamReader.cs" />
     <EmbeddedResource Include="Specifications\Ansi-858-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-868-4010Specification.xml">

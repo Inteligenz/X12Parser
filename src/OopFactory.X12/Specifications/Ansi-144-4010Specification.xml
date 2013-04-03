@@ -11,7 +11,6 @@
   <Loop LoopId="ENT">
     <Name>Entity</Name>
     <StartingSegment SegmentId="ENT" />
-    <Segment SegmentId="ENT" />
     <Segment SegmentId="IN2" />
     <Segment SegmentId="DMG" />
     <Segment SegmentId="N3" />

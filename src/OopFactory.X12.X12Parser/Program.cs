@@ -20,6 +20,7 @@ namespace OopFactory.X12.X12Parser
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
             OopFactory.X12.Parsing.X12Parser parser = new Parsing.X12Parser();
+            parser.ParserWarning += new Parsing.X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
             
             byte[] header = new byte[6];
             using (FileStream fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
@@ -93,6 +94,11 @@ namespace OopFactory.X12.X12Parser
                     }
                 }
             }
+        }
+
+        static void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        {
+            Console.WriteLine(args.Message);
         }
     }
 }
