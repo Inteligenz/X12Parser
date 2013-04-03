@@ -16,6 +16,7 @@
     <StartingSegment SegmentId="IN1"/>
     <Segment SegmentId="IN2"/>
     <Segment SegmentId="REF"/>
+    <Segment SegmentId="SSE"/>
     <Segment SegmentId="DMG"/>
     <Segment SegmentId="IND"/>
     <Segment SegmentId="LUI"/>
@@ -69,11 +70,13 @@
     <Segment SegmentId="SSE"/>
     <Segment SegmentId="SUM"/>
     <Segment SegmentId="FOS"/>
+    <Segment SegmentId="RQS"/>
     <Loop LoopId="N1">
       <Name/>
       <StartingSegment SegmentId="N1"/>
       <Segment SegmentId="N3"/>
       <Segment SegmentId="N4"/>
+      <Segment SegmentId="COM"/>
     </Loop>
   </Loop>
   <Loop LoopId="PCL">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Product Registration -->
+<!-- 140 Product Registration -->
 <TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="140">
   <Segment SegmentId="BGN"/>
   <Segment SegmentId="N9"/>

@@ -27,6 +27,16 @@ namespace OopFactory.X12.Parsing
 
         }
 
+        public delegate void X12ParserWarningEventHandler(object sender, X12ParserWarningEventArgs args);
+
+        public event X12ParserWarningEventHandler ParserWarning;
+
+        private void OnParserWarning(X12ParserWarningEventArgs args)
+        {
+            if (this.ParserWarning != null)
+                ParserWarning(this, args);
+        }
+
         [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(string x12)
         {
@@ -133,8 +143,28 @@ namespace OopFactory.X12.Parsing
                                 else
                                     throw new InvalidOperationException(String.Format("Heierchical Loop {0}  cannot be added to transaction set {1} because it's specification cannot be identified.", segmentString, tr.ControlNumber));
                             }
+                            bool parentFound = false;
+                            if (parentId != "")
+                            {
+                                if (hloops.ContainsKey(parentId))
+                                {
+                                    parentFound = true;
+                                    currentContainer = hloops[parentId].AddHLoop(segmentString);
+                                }
+                                else
+                                {
+                                    OnParserWarning(new X12ParserWarningEventArgs
+                                    {
+                                        FileIsValid = false,
+                                        Segment = segmentString,
+                                        SegmentId = segmentId,
+                                        Message = String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.", id, parentId)
+                                    });
+                                    //    throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
+                                }
+                            }
 
-                            if (parentId == "")
+                            if (parentId == "" || !parentFound)
                             {
                                 while (!(currentContainer is HierarchicalLoopContainer && ((HierarchicalLoopContainer)currentContainer).HasHierachicalSpecs()))
                                 {
@@ -142,13 +172,6 @@ namespace OopFactory.X12.Parsing
                                 }
                                 currentContainer = ((HierarchicalLoopContainer)currentContainer).AddHLoop(segmentString);
                                 //hloops = new Dictionary<string, HierarchicalLoop>();
-                            }
-                            else
-                            {
-                                if (hloops.ContainsKey(parentId))
-                                    currentContainer = hloops[parentId].AddHLoop(segmentString);
-                                else
-                                    throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
                             }
                             if (hloops.ContainsKey(id))
                                 throw new InvalidOperationException(String.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", segmentString, tr.ControlNumber, id));

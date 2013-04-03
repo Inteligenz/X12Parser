@@ -6,6 +6,18 @@
   <Segment SegmentId="DB"/>
   <Segment SegmentId="DEF"/>
   <Segment SegmentId="DTP"/>
+  <Segment SegmentId="GR"/>
+  <Loop LoopId="LX">
+    <Name/>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="LQ"/>
+    <Segment SegmentId="SAD"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
   <Loop LoopId="ENT">
     <Name>Entity</Name>
     <StartingSegment SegmentId="ENT"/>
@@ -17,6 +29,7 @@
     <Segment SegmentId="SCT"/>
     <Segment SegmentId="DTP"/>
     <Segment SegmentId="Y6"/>
+    <Segment SegmentId="IDB"/>
     <Loop LoopId="N1">
       <Name>Name</Name>
       <StartingSegment SegmentId="N1"/>
@@ -46,6 +59,11 @@
         <Segment SegmentId="DTP"/>
         <Segment SegmentId="PER"/>
       </Loop>
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
     </Loop>
   </Loop>  
 </TransactionSpecification>
