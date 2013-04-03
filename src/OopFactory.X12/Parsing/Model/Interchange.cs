@@ -118,6 +118,11 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
+        public string InterchangeControlNumber
+        {
+            get { return GetElement(13); }
+        }
+
         public IEnumerable<FunctionGroup> FunctionGroups
         {
             get { return _functionGroups; }
