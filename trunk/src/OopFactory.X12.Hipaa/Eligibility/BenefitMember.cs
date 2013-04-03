@@ -26,7 +26,7 @@ namespace OopFactory.X12.Hipaa.Eligibility
         public List<Lookup> Diagnoses { get; set; }
 
         [XmlElement(ElementName = "RequestValidation")]
-        public List<RequestValidation> RequestValidations { get; set; }
+        public new List<RequestValidation> RequestValidations { get; set; }
 
         [XmlElement(ElementName="Date")]
         public List<QualifiedDate> Dates { get; set; }

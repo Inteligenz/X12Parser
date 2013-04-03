@@ -15,14 +15,26 @@ namespace OopFactory.X12.Parsing
     public class X12Parser
     {
         private ISpecificationFinder _specFinder;
+        private bool _throwExceptionOnSyntaxErrors;
 
-        public X12Parser(ISpecificationFinder specFinder)
+        public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors)
         {
             _specFinder = specFinder;
+            _throwExceptionOnSyntaxErrors = throwExceptionOnSyntaxErrors;
+        }
+
+        public X12Parser(ISpecificationFinder specFinder)
+            : this(specFinder, true)
+        {
+        }
+
+        public X12Parser(bool throwExceptionsOnSyntaxErrors)
+            : this(new SpecificationFinder(), throwExceptionsOnSyntaxErrors)
+        {
         }
 
         public X12Parser()
-            : this(new SpecificationFinder())
+            : this(new SpecificationFinder(), true)
         {
 
         }
@@ -153,18 +165,24 @@ namespace OopFactory.X12.Parsing
                                 }
                                 else
                                 {
-                                    OnParserWarning(new X12ParserWarningEventArgs
+                                    if (_throwExceptionOnSyntaxErrors)
                                     {
-                                        FileIsValid = false,
-                                        InterchangeControlNumber = envelop.InterchangeControlNumber,
-                                        FuntionalGroupControlNumber = fg.ControlNumber,
-                                        TransactionControlNumber = tr.ControlNumber,
-                                        SegmentPositionInInterchange = segmentIndex,
-                                        Segment = segmentString,
-                                        SegmentId = segmentId,
-                                        Message = String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.", id, parentId)
-                                    });
-                                    //    throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.", id, parentId));
+                                        throw new InvalidOperationException(String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.", id, parentId));
+                                    }
+                                    else
+                                    {
+                                        OnParserWarning(new X12ParserWarningEventArgs
+                                        {
+                                            FileIsValid = false,
+                                            InterchangeControlNumber = envelop.InterchangeControlNumber,
+                                            FunctionalGroupControlNumber = fg.ControlNumber,
+                                            TransactionControlNumber = tr.ControlNumber,
+                                            SegmentPositionInInterchange = segmentIndex,
+                                            Segment = segmentString,
+                                            SegmentId = segmentId,
+                                            Message = String.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.", id, parentId)
+                                        });
+                                    }
                                 }
                             }
 
@@ -187,6 +205,7 @@ namespace OopFactory.X12.Parsing
                             envelop.AddSegment(segmentString);
                             break;  
                         default:
+                            var originalContainer = currentContainer;
                             containerStack.Clear();
                             while (currentContainer != null)
                             {
@@ -214,8 +233,28 @@ namespace OopFactory.X12.Parsing
                                             {
                                                 var tran = (Transaction)currentContainer;
 
-                                                throw new TransactionValidationException(
-                                                    "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex, string.Join(",", containerStack));
+                                                if (_throwExceptionOnSyntaxErrors)
+                                                {
+                                                    throw new TransactionValidationException(
+                                                        "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex, string.Join(",", containerStack));
+                                                }
+                                                else
+                                                {
+                                                    currentContainer = originalContainer;
+                                                    currentContainer.AddSegment(segmentString, true);
+                                                    OnParserWarning(new X12ParserWarningEventArgs
+                                                    {
+                                                        FileIsValid = false,
+                                                        InterchangeControlNumber = envelop.InterchangeControlNumber,
+                                                        FunctionalGroupControlNumber = fg.ControlNumber,
+                                                        TransactionControlNumber = tran.ControlNumber,
+                                                        SegmentPositionInInterchange = segmentIndex,
+                                                        SegmentId = segmentId,
+                                                        Segment = segmentString,
+                                                        Message = string.Format("Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.  It will be added to loop {6}, but this may invalidate all subsequent segments.", tran.IdentifierCode, tran.ControlNumber, "", segmentString, segmentIndex, string.Join(",", containerStack), containerStack.LastOrDefault())
+                                                    });
+                                                    break;
+                                                }
                                             }
                                             else
                                             {
