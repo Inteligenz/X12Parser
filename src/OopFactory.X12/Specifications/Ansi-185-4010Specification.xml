@@ -12,6 +12,11 @@
     <Segment SegmentId="REF" />
     <Segment SegmentId="PER" />
   </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" />
+  </Loop>
   <Loop LoopId="LX">
     <Name>Assigned Number</Name>
     <StartingSegment SegmentId="LX" />

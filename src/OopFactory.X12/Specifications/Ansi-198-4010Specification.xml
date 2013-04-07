@@ -62,10 +62,14 @@
             <Name>Financial Asset Account</Name>
             <StartingSegment SegmentId="FAA" />
             <Segment SegmentId="NM1" />
-            <Segment SegmentId="AMT" />
             <Segment SegmentId="QTY" />
-            <Segment SegmentId="DTP" />
             <Segment SegmentId="MSG" />
+            <Segment SegmentId="AMT" /> <!-- 4010 only -->
+            <Loop LoopId="DTP">
+              <Name>Date or Time or Period</Name>
+              <StartingSegment SegmentId="DTP"/>
+              <Segment SegmentId="AMT" />
+            </Loop>
           </Loop>
           <Loop LoopId="CDA">
             <Name>Consumer Credit Account</Name>

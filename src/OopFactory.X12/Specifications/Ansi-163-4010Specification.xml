@@ -6,6 +6,7 @@
   <Segment SegmentId="H6" />
   <Segment SegmentId="N7" />
   <Segment SegmentId="G62" />
+  <Segment SegmentId="L11"/>
   <Segment SegmentId="N9" />
   <Segment SegmentId="H3" />
   <Segment SegmentId="G05" />
@@ -16,11 +17,17 @@
     <Segment SegmentId="N3" />
     <Segment SegmentId="N4" />
     <Segment SegmentId="N9" />
+    <Segment SegmentId="L11"/>
     <Segment SegmentId="G61" />
     <Segment SegmentId="G62" />
-    <Loop LoopId="0150">
+    <Loop LoopId="0150"> <!-- 4010 only -->
       <Name>Shipment Purchase Order Detail</Name>
       <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0150"> <!-- Current Standard -->
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID" />
       <Segment SegmentId="SDQ" />
     </Loop>
   </Loop>
@@ -32,13 +39,19 @@
     <Segment SegmentId="N3" />
     <Segment SegmentId="N4" />
     <Segment SegmentId="N9" />
+    <Segment SegmentId="L11" />
     <Segment SegmentId="H6" />
     <Segment SegmentId="G61" />
     <Segment SegmentId="G62" />
-    <Loop LoopId="0350">
+    <Loop LoopId="0350"> <!-- 4010 only -->
       <Name>Shipment Purchase Order Detail</Name>
       <StartingSegment SegmentId="SPO" />
       <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0350"> <!-- Current Standard -->
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID"/>
+      <Segment SegmentId="SDQ"/>
     </Loop>
   </Loop>
 </TransactionSpecification>

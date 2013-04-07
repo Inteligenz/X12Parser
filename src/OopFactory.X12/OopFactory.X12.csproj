@@ -634,6 +634,23 @@
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-218-4010Specification.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-102-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-103-Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-111-Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Specifications\Ansi-113-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-132-Specification.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Specifications\Ansi-133-Specification.xml" />
+    <Content Include="Specifications\Ansi-158-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-187-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-179-Specification.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

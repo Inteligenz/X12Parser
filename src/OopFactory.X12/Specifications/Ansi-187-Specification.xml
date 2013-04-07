@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 179 Environmental Compliance Reporting -->
+<TransactionSpecification TransactionSetIdentifierCode="179" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="MSG"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="DTP"/>
+  <Segment SegmentId="TDS"/>
+  <Loop LoopId="1000">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="3000">
+    <Name>Allowance, Charge or Service</Name>
+    <StartingSegment SegmentId="ITA"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="CUR"/>
+  </Loop>
+  <Loop LoopId="3100">
+    <Name>Balance Detail</Name>
+    <StartingSegment SegmentId="BAL"/>
+    <Segment SegmentId="DTP"/>
+  </Loop>
+  <Loop LoopId="3200">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Loop LoopId="3210">
+      <Name>Balance Detail</Name>
+      <StartingSegment SegmentId="BAL"/>
+      <Segment SegmentId="DTP"/>
+    </Loop>
+    <Loop LoopId="3220">
+      <Name>Allwance, Charge or Service</Name>
+      <StartingSegment SegmentId="ITA"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="CUR"/>
+    </Loop>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="2100">
+      <Name>Transaction Set Line Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="VEH"/>
+      <Segment SegmentId="VAT"/>
+      <Segment SegmentId="DVI"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="AD1"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="TXI"/>
+      <Loop LoopId="2110">
+        <Name>Quantity Information</Name>
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+      <Loop LoopId="2120">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI"/>
+        <Segment SegmentId="BIN"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="2200">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="DMA"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="NX2"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="2300">
+      <Name>Information</Name>
+      <StartingSegment SegmentId="III"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="MSG"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="AD1"/>
+      <Segment SegmentId="CRC"/>
+      <Segment SegmentId="PCT"/>
+      <Segment SegmentId="PDP"/>
+      <Segment SegmentId="PDR"/>
+      <Segment SegmentId="PDS"/>
+      <Loop LoopId="2310">
+        <Name>Supplemental Information</Name>
+        <StartingSegment SegmentId="SUP"/>
+        <Segment SegmentId="MEA"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="AD1"/>
+      </Loop>
+      <Loop LoopId="2320">
+        <Name>Quantity Information</Name>
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+      <Loop LoopId="2330">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="AD1"/>
+        <Segment SegmentId="PCT"/>
+      </Loop>
+      <Loop LoopId="2340">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="DMG"/>
+        <Segment SegmentId="DMA"/>
+        <Segment SegmentId="NX2"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+      <Loop LoopId="2350">
+        <Name>Allowance, Charge or Service</Name>
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="CUR"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

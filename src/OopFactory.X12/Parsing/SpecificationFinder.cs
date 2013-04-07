@@ -69,6 +69,10 @@ namespace OopFactory.X12.Parsing
                     if (specStream != null)
                         return GetSpecification(transactionSetCode + "-4010");
 
+                    specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(String.Format("OopFactory.X12.Specifications.Ansi-{0}-Specification.xml", transactionSetCode));
+                    if (specStream != null)
+                        return GetSpecification(transactionSetCode + "-");
+
                     throw new NotSupportedException(String.Format("Transaction Set {0} is not supported.", transactionSetCode));
             }
         }

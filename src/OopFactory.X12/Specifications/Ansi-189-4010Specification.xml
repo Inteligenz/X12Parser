@@ -45,11 +45,13 @@
       <StartingSegment SegmentId="N1" />
       <Segment SegmentId="N3" />
       <Segment SegmentId="N4" />
+      <Segment SegmentId="QTY" />
       <Loop LoopId="EMS">
         <Name>Employment Position</Name>
         <StartingSegment SegmentId="EMS" />
         <Segment SegmentId="DTP" />
         <Segment SegmentId="QTY" />
+        <Segment SegmentId="AMT" />
       </Loop>
     </Loop>
   </Loop>
@@ -68,6 +70,11 @@
     <StartingSegment SegmentId="SSE" />
     <Segment SegmentId="DEG" />
     <Segment SegmentId="FOS" />
+  </Loop>
+  <Loop LoopId="LQ">
+    <Name>Industry Code Identification</Name>
+    <StartingSegment SegmentId="LQ"/>
+    <Segment SegmentId="PDL"/>
   </Loop>
   <Loop LoopId="RSD">
     <Name>Residency Information</Name>
@@ -89,7 +96,9 @@
     <Segment SegmentId="N1" />
     <Segment SegmentId="N3" />
     <Segment SegmentId="N4" />
+    <Segment SegmentId="COM" />
     <Segment SegmentId="SUM" />
+    <Segment SegmentId="MSG" />
     <Loop LoopId="SES">
       <Name>Academic Session Header</Name>
       <StartingSegment SegmentId="SES" />
@@ -115,8 +124,10 @@
     <StartingSegment SegmentId="PCL" />
     <Segment SegmentId="N3" />
     <Segment SegmentId="N4" />
+    <Segment SegmentId="COM" />
     <Segment SegmentId="SSE" />
     <Segment SegmentId="SUM" />
+    <Segment SegmentId="MSG" />
     <Loop LoopId="SES">
       <Name>Academic Session Header</Name>
       <StartingSegment SegmentId="SES" />

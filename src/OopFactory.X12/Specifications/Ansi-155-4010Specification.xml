@@ -45,6 +45,7 @@
         <Segment SegmentId="LOD" />
         <Segment SegmentId="MTX" />
         <Segment SegmentId="FDA" />
+        <Segment SegmentId="III" />
         <Segment SegmentId="DTP" />
         <Segment SegmentId="AWD" />
         <Segment SegmentId="QTY" />
@@ -96,12 +97,14 @@
         <Segment SegmentId="N3" />
         <Segment SegmentId="N4" />
         <Segment SegmentId="NX2" />
+        <Segment SegmentId="COM" />
         <Segment SegmentId="N9" />
         <Segment SegmentId="AWD" />
         <Segment SegmentId="ASO" />
         <Segment SegmentId="YNQ" />
         <Segment SegmentId="PCT" />
         <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
       </Loop>
       <Loop LoopId="23300">
         <Name>Code Source Information</Name>

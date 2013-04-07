@@ -20,6 +20,10 @@
     <Segment SegmentId="LIN" />
     <Segment SegmentId="PO3" />
     <Segment SegmentId="PID" />
+    <Segment SegmentId="TXI" />
+    <Segment SegmentId="TAX" />
+    <Segment SegmentId="CDS" />
+    <Segment SegmentId="CED" />
     <Segment SegmentId="N9" />
     <Segment SegmentId="PAM" />
     <Segment SegmentId="DTM" />
