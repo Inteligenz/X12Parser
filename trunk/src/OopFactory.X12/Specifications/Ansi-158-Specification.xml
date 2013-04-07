@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 158 Tax Jurisdiction Sourcing -->
+<TransactionSpecification TransactionSetIdentifierCode="158" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="N1"/>
+  <Loop LoopId="DTP">
+    <Name>Date or Time or Period</Name>
+    <StartingSegment SegmentId="DTP"/>
+    <Loop LoopId="LX">
+      <Name>Transaction Set Line Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="NX2"/>
+      <Segment SegmentId="PPA"/>
+      <Segment SegmentId="TA"/>
+      <Segment SegmentId="ASI"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

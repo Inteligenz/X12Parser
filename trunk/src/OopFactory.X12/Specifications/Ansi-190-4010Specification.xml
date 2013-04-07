@@ -7,6 +7,12 @@
   <Segment SegmentId="DTP" />
   <Segment SegmentId="SST" />
   <Segment SegmentId="SUM" />
+  <Segment SegmentId="NTE" />
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount Information</Name>
+    <StartingSegment SegmentId="AMT"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
   <Loop LoopId="N1">
     <Name>Name</Name>
     <StartingSegment SegmentId="N1" />

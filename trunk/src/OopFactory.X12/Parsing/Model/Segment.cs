@@ -27,6 +27,29 @@ namespace OopFactory.X12.Parsing.Model
             get { return _delimiters; }
         }
 
+        public static int ParseBinarySize(char elementSeparator, string segment, out int binaryStart)
+        {
+            binaryStart = -1;
+            int firstIndex = segment.IndexOf(elementSeparator);
+            string segmentId = segment.Substring(0, firstIndex);
+
+            if (segmentId == "BDS")
+                firstIndex = segment.IndexOf(elementSeparator, firstIndex + 1);
+
+            int nextIndex = segment.IndexOf(elementSeparator, firstIndex + 1);
+
+            if (nextIndex > firstIndex)
+            {
+                string slength = segment.Substring(firstIndex + 1, nextIndex - firstIndex - 1);
+                binaryStart = nextIndex + 1;
+                int length = 0;
+                if (int.TryParse(slength, out length))
+                    return length;
+            }
+            
+            return 0;
+        }
+
         internal virtual void Initialize(string segment)
         {
             if (segment == null)
@@ -36,17 +59,30 @@ namespace OopFactory.X12.Parsing.Model
             if (separatorIndex >= 0)
             {
                 SegmentId = segment.Substring(0, separatorIndex);
-                if (SegmentId != "BIN")
+                if (SegmentId == "BIN")
                 {
-                    foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
-                        _dataElements.Add(element);
+                    int binaryStartIndex;
+                    int size = ParseBinarySize(_delimiters.ElementSeparator, segment, out binaryStartIndex);
+                    _dataElements.Add(size.ToString());
+                    _dataElements.Add(segment.Substring(binaryStartIndex, size));
+                }
+                else if (SegmentId == "BDS")
+                {
+                    int nextIndex = segment.IndexOf(_delimiters.ElementSeparator, separatorIndex + 1);
+                    if (nextIndex > separatorIndex + 1)
+                    {
+                        _dataElements.Add(segment.Substring(separatorIndex + 1, nextIndex - separatorIndex - 1));
+
+                        int binaryStartIndex;
+                        int size = ParseBinarySize(_delimiters.ElementSeparator, segment, out binaryStartIndex);
+                        _dataElements.Add(size.ToString());
+                        _dataElements.Add(segment.Substring(binaryStartIndex, size));
+                    }
                 }
                 else
                 {
-                    separatorIndex = segment.IndexOf(_delimiters.ElementSeparator, 4);
-                    string binarySize = segment.Substring(4, separatorIndex - 4);
-                    _dataElements.Add(binarySize);
-                    _dataElements.Add(segment.Substring(separatorIndex + 1));
+                    foreach (string element in segment.TrimEnd(new char[] { _delimiters.SegmentTerminator }).Substring(separatorIndex + 1).Split(_delimiters.ElementSeparator))
+                        _dataElements.Add(element);
                 }
             }
             else
@@ -305,7 +341,7 @@ namespace OopFactory.X12.Parsing.Model
                         writer.WriteComment(SegmentSpec.Elements[i].Name);
                         identifiers = SegmentSpec.Elements[i].AllowedIdentifiers;
                     }
-                    if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0 || SegmentId == "BIN")
+                    if (_dataElements[i].IndexOf(_delimiters.SubElementSeparator) < 0 || SegmentId == "BIN" || SegmentId == "BDS")
                     {
                         writer.WriteStartElement(elementName);
                         writer.WriteValue(_dataElements[i]);

@@ -85,13 +85,24 @@ namespace OopFactory.X12.Parsing
                 if (isBinary && one[0] == _delimiters.ElementSeparator)
                 {
                     int binarySize = 0;
-                    int.TryParse(sb.ToString().Split(_delimiters.ElementSeparator)[1], out binarySize);
-                    char[] buffer = new char[binarySize];
-                    _reader.Read(buffer, 0, binarySize);
-                    sb.Append(buffer);
-                    break;                    
+                    string[] elements = sb.ToString().Split(_delimiters.ElementSeparator);
+                    if (elements[0] == "BIN" && elements.Length >= 2)
+                    {
+                        int.TryParse(sb.ToString().Split(_delimiters.ElementSeparator)[1], out binarySize);
+                    }
+                    else if (elements[0] == "BDS" && elements.Length >= 3)
+                    {
+                        int.TryParse(sb.ToString().Split(_delimiters.ElementSeparator)[2], out binarySize);
+                    }
+                    if (binarySize > 0)
+                    {
+                        char[] buffer = new char[binarySize];
+                        _reader.Read(buffer, 0, binarySize);
+                        sb.Append(buffer);
+                        break;
+                    }
                 }
-                if (!isBinary && sb.ToString() == "BIN" + _delimiters.ElementSeparator)
+                if (!isBinary && (sb.ToString() == "BIN" + _delimiters.ElementSeparator || sb.ToString() == "BDS" + _delimiters.ElementSeparator))
                     isBinary = true;
             }
             return sb.ToString().TrimStart();

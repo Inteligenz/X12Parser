@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 133 Educational Institution Record -->
+<TransactionSpecification TransactionSetIdentifierCode="133" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="ERP"/>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="COM"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hieararchical Level</Name>
+    <Segment SegmentId="SCT"/>
+    <Segment SegmentId="OPX"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DEG"/>
+    <Segment SegmentId="ISI"/>
+    <Segment SegmentId="LQ"/>
+    <Segment SegmentId="EDF"/>
+    <Segment SegmentId="DTP"/>
+    <Loop LoopId="N1">
+      <Name>Party Identification</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PPA"/>
+      <Segment SegmentId="COM"/>
+    </Loop>
+    <Loop LoopId="YNQ">
+      <Name>YES/NO Question</Name>
+      <StartingSegment SegmentId="YNQ"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="PCT"/>
+    </Loop>
+    <Loop LoopId="FOS">
+      <Name>Field of Study</Name>
+      <StartingSegment SegmentId="FOS"/>
+      <Segment SegmentId="DEG"/>
+      <Segment SegmentId="AMT"/>
+    </Loop>
+    <Loop LoopId="SP">
+      <Name>Special Program</Name>
+      <StartingSegment SegmentId="SP"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="NM1"/>
+    </Loop>
+    <Loop LoopId="SLA">
+      <Name>School Accreditation and Licensing</Name>
+      <StartingSegment SegmentId="SLA"/>
+      <Segment SegmentId="FOS"/>
+      <Segment SegmentId="REF"/>
+      <Loop LoopId="N1">
+        <Name>Party Identification</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="ENM">
+      <Name>School Enrollment Data</Name>
+      <StartingSegment SegmentId="ENM"/>
+      <Segment SegmentId="FOS"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="NTE"/>
+    </Loop>
+    <Loop LoopId="ATV">
+      <Name>Student Activities and Awards</Name>
+      <StartingSegment SegmentId="ATV"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

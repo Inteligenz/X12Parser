@@ -20,6 +20,7 @@
     <StartingSegment SegmentId="TFS" />
     <Segment SegmentId="REF" />
     <Segment SegmentId="DTM" />
+    <Segment SegmentId="TIA" />
     <Loop LoopId="N1">
       <Name>Name</Name>
       <StartingSegment SegmentId="N1" />
@@ -35,6 +36,7 @@
       <Segment SegmentId="DTM" />
       <Segment SegmentId="TIA" />
       <Segment SegmentId="MSG" />
+      <Segment SegmentId="PCT" />
       <Loop LoopId="AMT">
         <Name>Monetary Amount</Name>
         <StartingSegment SegmentId="AMT" />

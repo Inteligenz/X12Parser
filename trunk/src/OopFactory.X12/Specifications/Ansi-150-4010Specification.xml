@@ -12,6 +12,7 @@
     <Name>Tax Form</Name>
     <StartingSegment SegmentId="TFS" />
     <Segment SegmentId="DTP" />
+    <Segment SegmentId="MTX" />
     <Loop LoopId="TRS">
       <Name>Tax Rate</Name>
       <StartingSegment SegmentId="TRS" />

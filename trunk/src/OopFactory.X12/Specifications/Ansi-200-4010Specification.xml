@@ -82,6 +82,7 @@
     <Segment SegmentId="TBI" />
     <Segment SegmentId="PPD" />
     <Segment SegmentId="NTE" />
+    <Segment SegmentId="YNQ" />
     <Loop LoopId="AMT">
       <Name>Monetary Amount</Name>
       <StartingSegment SegmentId="AMT" />
@@ -95,6 +96,7 @@
     <Segment SegmentId="TBI" />
     <Segment SegmentId="DTP" />
     <Segment SegmentId="NTE" />
+    <Segment SegmentId="YNQ" />
     <Loop LoopId="AMT">
       <Name>Monetary Amount</Name>
       <StartingSegment SegmentId="AMT" />

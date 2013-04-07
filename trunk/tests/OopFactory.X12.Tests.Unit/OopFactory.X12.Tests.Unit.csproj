@@ -67,6 +67,7 @@
     <Compile Include="ExtensionsTests\EnumExtensionsTests.cs" />
     <Compile Include="Flattening\Flatten820Tester.cs" />
     <Compile Include="Flattening\Flatten837Tester.cs" />
+    <Compile Include="Parsing\BinaryParsingTester.cs" />
     <Compile Include="Parsing\ParsingTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unbundling\UnbundlingTester.cs" />
@@ -78,6 +79,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\MISC\_102\Example.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\QSS\_286\Ids.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\QSS\_863\essarsteelalgoma.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\MAN\_852\AftermarketExample.txt" />
@@ -234,7 +236,6 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\ORD\_856\Example2.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Parsing\_SampleEdiFiles\NewFolder1\" />
     <Folder Include="Rendering\" />
   </ItemGroup>
   <ItemGroup>
