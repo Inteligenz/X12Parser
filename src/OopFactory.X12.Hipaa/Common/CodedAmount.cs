@@ -11,7 +11,21 @@ namespace OopFactory.X12.Hipaa.Common
         [XmlAttribute]
         public string Code { get; set; }
 
-        [XmlAttribute]
-        public decimal Amount { get; set; }
+        [XmlIgnore]
+        public decimal? Amount { get; set; }
+
+        [XmlAttribute(AttributeName = "Amount")]
+        public decimal SerializableAmount
+        {
+            get { return Amount ?? decimal.Zero; }
+            set { Amount = value; }
+        }
+
+        [XmlIgnore]
+        public bool SerializableAmountSpecified
+        {
+            get { return Amount.HasValue; }
+            set { }
+        }
     }
 }

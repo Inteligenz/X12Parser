@@ -266,9 +266,11 @@
         <xsl:attribute name="Code">
           <xsl:value-of select="$code"/>
         </xsl:attribute>
-        <xsl:attribute name="Amount">
-          <xsl:value-of select="$amount"/>
-        </xsl:attribute>
+        <xsl:if test="string-length($amount) > 0">
+          <xsl:attribute name="Amount">
+            <xsl:value-of select="$amount"/>
+          </xsl:attribute>
+        </xsl:if>
       </Value>
     </xsl:for-each>
   </xsl:template>
