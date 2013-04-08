@@ -15,8 +15,11 @@ namespace OopFactory.X12.Parsing.Specification
         }
 
         [XmlAttribute]
-        public string Name { get; set; }
+        public string Id { get; set; }
 
+        [XmlAttribute]
+        public string Name { get; set; }
+        
         [XmlElement(ElementName = "Allowed")]
         public List<AllowedIdentifier> AllowedIdentifiers { get; set; }
     }

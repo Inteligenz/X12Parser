@@ -105,6 +105,7 @@
     <xs:sequence>
       <xs:element name="Allowed" type="AllowedIdentifier" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
     <xs:attribute name="Name" type="xs:string"/>
   </xs:complexType>
 
