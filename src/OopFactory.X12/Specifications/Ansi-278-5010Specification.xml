@@ -13,6 +13,7 @@
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000B" LevelCode="21">
     <Name>Requester Detail</Name>
+    <Segment SegmentId="PWK"/>
     <Loop LoopId="2010B">
       <Name>Requester Name</Name>
       <StartingSegment SegmentId="NM1"/>
@@ -26,6 +27,7 @@
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000C" LevelCode="22">
     <Name>Subscriber Detail</Name>
+    <Segment SegmentId="PWK"/>
     <Loop LoopId="2010C">
       <Name>Subscriber Name</Name>
       <StartingSegment SegmentId="NM1"/>
@@ -39,6 +41,7 @@
   </HierarchicalLoop>
   <HierarchicalLoop LoopId="2000D" LevelCode="23">
     <Name>Dependent Detail</Name>
+    <Segment SegmentId="PWK"/>
     <Loop LoopId="2010D">
       <Name>Dependent Name</Name>
       <StartingSegment SegmentId="NM1"/>
