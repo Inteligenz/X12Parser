@@ -75,6 +75,7 @@
     <Compile Include="Claims\InstitutionalProcedure.cs" />
     <Compile Include="Claims\LineAdjustmentInformation.cs" />
     <Compile Include="Claims\OtherSubscriberInformation.cs" />
+    <Compile Include="Claims\Repositories\SqlClaimRepository.cs" />
     <Compile Include="Claims\ServiceLine.cs" />
     <Compile Include="Claims\ServiceLocationInformation.cs" />
     <Compile Include="Claims\Services\ClaimTransformationService.cs" />
