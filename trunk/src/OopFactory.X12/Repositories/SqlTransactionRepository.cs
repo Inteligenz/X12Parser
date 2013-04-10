@@ -5,15 +5,16 @@ using System.Text;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace OopFactory.X12.Repositories
 {
     public class SqlTransactionRepository
     {
-        private string _dsn;
-        private string _schema;
-        private ISpecificationFinder _specFinder;
-        private string[] _indexedSegments;
+        protected readonly string _dsn;
+        protected readonly string _schema;
+        protected readonly ISpecificationFinder _specFinder;
+        protected readonly string[] _indexedSegments;
         
         public SqlTransactionRepository(string dsn)
             : this(dsn, new SpecificationFinder(), new string[] { "REF", "NM1", "N1", "N3", "N4", "DMG", "PER", "CLM", "BIN", "BDS" }, "dbo")
@@ -35,25 +36,7 @@ namespace OopFactory.X12.Repositories
 
         public int Save(Interchange interchange, string filename, string userName)
         {
-            if (!EnsureSchema())
-            {
-                CreateContainerTable();
-                CreateInterchangeTable();
-                CreateFunctionGroupTable();
-                CreateTransactionSetTable();
-                CreateLoopTable();
-                CreateSegmentTable();
-                if (!FunctionExists("dbo", "SplitSegment"))
-                    CreateSplitSegmentFunction();
-                if (!FunctionExists("dbo", "FlatElements"))
-                    CreateFlatElementsFunction();
-            }
-            foreach (var segmentId in _indexedSegments)
-            {
-                var spec = _specFinder.FindSegmentSpec("5010", segmentId);
-                if (spec != null)
-                    EnsureIndexedSegmentTable(spec);
-            }
+            EnsureSchema();
             int positionInInterchange = 1;
             
             int interchangeId = SaveInterchange(interchange, filename, userName);
@@ -104,11 +87,11 @@ namespace OopFactory.X12.Repositories
             int loopId = 0;
             if (loop is HierarchicalLoop)
             {
-                loopId = SaveHierarchicalLoop((HierarchicalLoop)loop);
+                loopId = SaveHierarchicalLoop((HierarchicalLoop)loop, parentId);
             }
             else if (loop is Loop)
             {
-                loopId = SaveLoop((Loop)loop);
+                loopId = SaveLoop((Loop)loop, parentId);
             }
             SaveSegment(loop, positionInInterchange, interchangeId, functionalGroupId, transactionSetId, parentId, loopId);
             
@@ -130,8 +113,36 @@ namespace OopFactory.X12.Repositories
             }
             return loopId;
         }
+
+        protected virtual void EnsureSchema()
+        {
+            if (!SchemaExists())
+            {
+                CreateContainerTable();
+                CreateInterchangeTable();
+                CreateFunctionGroupTable();
+                CreateTransactionSetTable();
+                CreateLoopTable();
+                
+                if (!TableExists(_schema, "Segment"))
+                    CreateSegmentTable();
+                if (!FunctionExists(_schema, "GetAncestorLoops"))
+                    CreateGetAncestorLoopsFunction();
+                if (!FunctionExists("dbo", "SplitSegment"))
+                    CreateSplitSegmentFunction();
+                if (!FunctionExists("dbo", "FlatElements"))
+                    CreateFlatElementsFunction();
+                
+            }
+            foreach (var segmentId in _indexedSegments)
+            {
+                var spec = _specFinder.FindSegmentSpec("5010", segmentId);
+                if (spec != null)
+                    EnsureIndexedSegmentTable(spec);
+            }
+        }
         
-        private bool EnsureSchema()
+        private bool SchemaExists()
         {
             var exists = ExecuteScalar(new SqlCommand(string.Format("select case when exists (select 1 from information_schema.tables where table_schema = '{0}' and table_name = 'Interchange') then 1 else 0 end ", _schema)));
 
@@ -279,6 +290,7 @@ SELECT @id
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Loop](
     [Id] [int] NOT NULL,
+    [ParentLoopId] [int] NULL,
     [SpecLoopId] [varchar](6) NULL,
     [LevelId] [varchar](12) NULL,
     [LevelCode] [varchar](2) NULL,
@@ -289,7 +301,7 @@ CREATE TABLE [{0}].[Loop](
 ", _schema));
         }
 
-        private int SaveHierarchicalLoop(HierarchicalLoop loop)
+        private int SaveHierarchicalLoop(HierarchicalLoop loop, int? parentLoopId)
         {
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
@@ -298,11 +310,12 @@ INSERT INTO [{0}].[Container] VALUES ('HL')
 
 SELECT @id = scope_identity()
 
-INSERT INTO [{0}].[Loop] (Id, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
-VALUES (@id, @loopId, @levelId, @levelCode, 'HL')
+INSERT INTO [{0}].[Loop] (Id, ParentLoopId, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
+VALUES (@id, @parentLoopId, @specLoopId, @levelId, @levelCode, 'HL')
 
 SELECT @id", _schema));
-            cmd.Parameters.AddWithValue("@loopId", loop.Specification.LoopId);
+            cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@specLoopId", loop.Specification.LoopId);
             cmd.Parameters.AddWithValue("@levelId", loop.Id);
             cmd.Parameters.AddWithValue("@levelCode", loop.LevelCode);
 
@@ -323,7 +336,7 @@ SELECT @id", _schema));
             return null;
         }
         
-        private int SaveLoop(Loop loop)
+        private int SaveLoop(Loop loop, int? parentLoopId)
         {
             string entityIdentifierCode = GetEntityTypeCode(loop);
 
@@ -334,11 +347,12 @@ INSERT INTO [{0}].[Container] VALUES (@startingSegment)
 
 SELECT @id = scope_identity()
 
-INSERT INTO [{0}].[Loop] (Id, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
-VALUES (@id, @loopId, @startingSegment, @entityIdentifierCode)
+INSERT INTO [{0}].[Loop] (Id, ParentLoopId, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
+VALUES (@id, @parentLoopId, @specLoopId, @startingSegment, @entityIdentifierCode)
 
 SELECT @id", _schema));
-            cmd.Parameters.AddWithValue("@loopId", loop.Specification.LoopId);
+            cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@specLoopId", loop.Specification.LoopId);
             cmd.Parameters.AddWithValue("@startingSegment", loop.SegmentId);
             cmd.Parameters.AddWithValue("@entityIdentifierCode", entityIdentifierCode != null ? (object)entityIdentifierCode : DBNull.Value);
 
@@ -385,6 +399,8 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
 CREATE TABLE [{0}].[{1}](
 	[InterchangeId] [int] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
+    [ParentLoopId] [int] NULL,
+    [LoopId] [int] NULL,
 ", _schema, spec.SegmentId);
 
                 foreach (var element in spec.Elements)
@@ -402,7 +418,7 @@ CREATE TABLE [{0}].[{1}](
             }
         }
 
-        private void SaveSegment(Segment segment, int positionInInterchange, int interchangeId, int? functionalGroupId = null, int? transactionSetId = null, int? parentLoopId = null, int? loopId = null)
+        protected virtual void SaveSegment(Segment segment, int positionInInterchange, int interchangeId, int? functionalGroupId = null, int? transactionSetId = null, int? parentLoopId = null, int? loopId = null)
         {
             SqlCommand cmd = new SqlCommand(string.Format(@"
 INSERT INTO [{0}].[Segment]
@@ -429,15 +445,34 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
                 }
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendFormat("INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, {2}) VALUES (@interchangeId, @positionInInterchange, {3})", _schema, segment.SegmentId, string.Join(",", fieldNames), string.Join(", ",parameterNames));
+                sql.AppendFormat("INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, ParentLoopId, LoopId, {2}) VALUES (@interchangeId, @positionInInterchange, @parentLoopId, @loopId, {3})", _schema, segment.SegmentId, string.Join(",", fieldNames), string.Join(", ",parameterNames));
 
 
                 cmd = new SqlCommand(sql.ToString());
                 cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
                 cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
+                cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@loopId", (object)loopId ?? DBNull.Value);
+
+                var spec = _specFinder.FindSegmentSpec("5010", segment.SegmentId);
 
                 for (int i = 1; i <= segment.ElementCount; i++)
-                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), segment.GetElement(i));
+                {
+                    string val = segment.GetElement(i);
+
+                    if (spec != null && spec.Elements.Count >= i)                        
+                    {
+                        int maxLength = spec.Elements[i - 1].MaxLength;
+
+                        if (maxLength > 0 && val.Length > maxLength)
+                        {
+                            Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
+                            val = val.Substring(0, maxLength);
+                        }
+                    }
+
+                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), val);
+                }
 
                 ExecuteCmd(cmd);
             }
@@ -530,6 +565,53 @@ select
   [33] = (select Element from elements where Ref = 33),
   [34] = (select Element from elements where Ref = 34)
 )"));
+        }
+
+        private void CreateGetAncestorLoopsFunction()
+        {
+            ExecuteCmd(string.Format(@"CREATE FUNCTION [{0}].[GetAncestorLoops]
+(
+	@loopId int, @includeSelf bit
+)
+RETURNS @loops TABLE 
+(
+    [Id] [int] NOT NULL,
+    [ParentLoopId] [int] NULL,
+    [SpecLoopId] [varchar](6) NULL,
+    [LevelId] [varchar](12) NULL,
+    [LevelCode] [varchar](2) NULL,
+    [StartingSegmentId] [varchar](3) NULL,
+    [EntityIdentifierCode] [varchar](3) NULL,
+    [Level] [smallint] NOT NULL
+)
+AS
+BEGIN
+	DECLARE @level smallint
+	DECLARE @parentLoopId int
+	
+	IF @includeSelf = 1
+	  INSERT INTO @loops
+	  select Id, ParentLoopId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, 0
+    from [{0}].[Loop]
+    where Id = (@loopId)
+	
+	SET @level = 1
+	select @parentLoopId = ParentLoopId from Inbound.[Loop] where Id = @loopId
+	
+  WHILE (@@ROWCOUNT > 0)
+  BEGIN
+	  INSERT INTO @loops
+	  select Id, ParentLoopId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, @level
+    from [{0}].[Loop]
+    where Id = (@parentLoopId)
+
+  set @level = @level + 1
+	select @parentLoopId = ParentLoopId from [{0}].[Loop] where Id = @parentLoopId
+  
+  END
+
+	RETURN 
+END", _schema));
         }
 
         private void ExecuteCmd(string sql)
