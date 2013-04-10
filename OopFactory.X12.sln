@@ -34,9 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Validation.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.AcknowledgeX12", "src\OopFactory.X12.AcknowledgeX12\OopFactory.X12.AcknowledgeX12.csproj", "{60D11F71-5197-4E36-A57F-B8DDCC108006}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.ImportX12", "src\OopFactory.X12.ImportX12\OopFactory.X12.ImportX12.csproj", "{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -79,6 +81,9 @@ Global
 		SccProjectUniqueName11 = src\\OopFactory.X12.AcknowledgeX12\\OopFactory.X12.AcknowledgeX12.csproj
 		SccProjectName11 = src/OopFactory.X12.AcknowledgeX12
 		SccLocalPath11 = src\\OopFactory.X12.AcknowledgeX12
+		SccProjectUniqueName12 = src\\OopFactory.X12.ImportX12\\OopFactory.X12.ImportX12.csproj
+		SccProjectName12 = src/OopFactory.X12.ImportX12
+		SccLocalPath12 = src\\OopFactory.X12.ImportX12
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -202,6 +207,16 @@ Global
 		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|Mixed Platforms.Build.0 = Release|x86
 		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|x86.ActiveCfg = Release|x86
 		{60D11F71-5197-4E36-A57F-B8DDCC108006}.Release|x86.Build.0 = Release|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Debug|x86.ActiveCfg = Debug|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Debug|x86.Build.0 = Debug|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|Any CPU.ActiveCfg = Release|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|x86.ActiveCfg = Release|x86
+		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
