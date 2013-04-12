@@ -14,13 +14,15 @@ namespace OopFactory.X12.ImportX12
         static void Main(string[] args)
         {
             string dsn = ConfigurationManager.ConnectionStrings["X12"].ConnectionString;
+            
+            bool throwExceptionOnSyntaxErrors = ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"] == "true";
             string[] segments = ConfigurationManager.AppSettings["IndexedSegments"].Split(',');
             string parseDirectory = ConfigurationManager.AppSettings["ParseDirectory"];
             string parseSearchPattern = ConfigurationManager.AppSettings["ParseSearchPattern"];
             string archiveDirectory = ConfigurationManager.AppSettings["ArchiveDirectory"];
 
             var specFinder = new SpecificationFinder();
-            var parser = new X12Parser(true);
+            var parser = new X12Parser(throwExceptionOnSyntaxErrors);
             parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
             var repo = new SqlTransactionRepository(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"]);
 
