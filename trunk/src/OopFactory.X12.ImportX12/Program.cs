@@ -44,7 +44,8 @@ namespace OopFactory.X12.ImportX12
                     }
                     catch (Exception exc)
                     {
-                        Trace.TraceError("Error parsing {0}: {1}", fi.Name, exc.Message);
+                        Trace.TraceError("Error parsing {0}: {1}\n{2}", fi.FullName, exc.Message, exc.StackTrace);
+
                     }
                 }
             }
