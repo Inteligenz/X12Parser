@@ -272,6 +272,16 @@ CREATE TABLE [{0}].[Interchange](
 
         private int SaveInterchange(Interchange interchange, string filename, string userName)
         {
+            DateTime date = DateTime.MaxValue;
+
+            try
+            {
+                date = interchange.InterchangeDate;
+            }
+            catch (Exception exc)
+            {
+                Trace.TraceWarning("Interchange date '{0}' and time '{1}' could not be parsed. {2}", interchange.GetElement(9), interchange.GetElement(10), exc.Message);
+            }
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
@@ -288,7 +298,7 @@ SELECT @id
             cmd.Parameters.AddWithValue("@senderId", interchange.InterchangeSenderId);
             cmd.Parameters.AddWithValue("@receiverId", interchange.InterchangeReceiverId);
             cmd.Parameters.AddWithValue("@controlNumber", interchange.InterchangeControlNumber);
-            cmd.Parameters.AddWithValue("@date", interchange.InterchangeDate);
+            cmd.Parameters.AddWithValue("@date", date);
             cmd.Parameters.AddWithValue("@segmentTerminator", interchange.Delimiters.SegmentTerminator);
             cmd.Parameters.AddWithValue("@elementSeparator", interchange.Delimiters.ElementSeparator);
             cmd.Parameters.AddWithValue("@componentSeparator", interchange.Delimiters.SubElementSeparator);
@@ -319,7 +329,7 @@ CREATE TABLE [{0}].[FunctionalGroup](
         private int SaveFunctionalGroup(FunctionGroup functionGroup)
         {
             string idCode;
-            DateTime date = DateTime.MinValue;
+            DateTime date = DateTime.MaxValue;
             int controlNumber = 0;
             string version;
 
@@ -336,7 +346,7 @@ CREATE TABLE [{0}].[FunctionalGroup](
             }
             catch (Exception exc)
             {
-                Trace.TraceWarning("FunctionalGroup date '{0}' could not be parsed. {1}", functionGroup.GetElement(2), exc.Message);
+                Trace.TraceWarning("FunctionalGroup date '{0}' and time '{1}' could not be parsed. {2}", functionGroup.GetElement(4), functionGroup.GetElement(5), exc.Message);
             }
             try
             {
@@ -344,7 +354,7 @@ CREATE TABLE [{0}].[FunctionalGroup](
             }
             catch (Exception exc)
             {
-                Trace.TraceWarning("FunctionalGroup control number '{0}' could not be parsed. {1}", functionGroup.GetElement(3), exc.Message);
+                Trace.TraceWarning("FunctionalGroup control number '{0}' could not be parsed. {1}", functionGroup.GetElement(6), exc.Message);
             }
             if (functionGroup.VersionIdentifierCode.Length <= 12)
                 version = functionGroup.VersionIdentifierCode;
@@ -416,7 +426,7 @@ CREATE TABLE [{0}].[Loop](
     [InterchangeId] [int] NOT NULL,
     [TransactionSetId] [int] NOT NULL,
     [TransactionSetCode] [varchar](3) NOT NULL,
-    [SpecLoopId] [varchar](6) NULL,
+    [SpecLoopId] [varchar](7) NULL,
     [LevelId] [varchar](12) NULL,
     [LevelCode] [varchar](2) NULL,
     [StartingSegmentId] [varchar](3) NOT NULL,
@@ -442,7 +452,7 @@ SELECT @id", _schema));
             cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
-            cmd.Parameters.AddWithValue("@transactioNSetCode", transactionSetCode);
+            cmd.Parameters.AddWithValue("@transactionSetCode", transactionSetCode);
             cmd.Parameters.AddWithValue("@specLoopId", loop.Specification.LoopId);
             cmd.Parameters.AddWithValue("@levelId", loop.Id);
             cmd.Parameters.AddWithValue("@levelCode", loop.LevelCode);
@@ -487,7 +497,15 @@ SELECT @id", _schema));
             cmd.Parameters.AddWithValue("@startingSegment", loop.SegmentId);
             cmd.Parameters.AddWithValue("@entityIdentifierCode", entityIdentifierCode != null ? (object)entityIdentifierCode : DBNull.Value);
 
-            return Convert.ToInt32(ExecuteScalar(cmd));
+            try
+            {
+                return Convert.ToInt32(ExecuteScalar(cmd));
+            }
+            catch (Exception exc)
+            {
+                Trace.TraceError(exc.Message);
+                throw;
+            }
         }
 
         private void CreateSegmentTable()

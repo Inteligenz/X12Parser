@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace OopFactory.X12.Tests.Unit.Repositories
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class GetTransactionSegmentsTester
     {
         [TestMethod]
