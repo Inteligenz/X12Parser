@@ -127,6 +127,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Repositories\RepoSegment.cs" />
+    <Compile Include="Repositories\SqlReadOnlyTransactionRepository.cs" />
     <Compile Include="Repositories\SqlTransactionRepository.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Parsing\ISpecificationFinder.cs" />

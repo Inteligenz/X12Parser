@@ -9,10 +9,9 @@ using System.Diagnostics;
 
 namespace OopFactory.X12.Repositories
 {
-    public class SqlTransactionRepository
+    public class SqlTransactionRepository : SqlReadOnlyTransactionRepository
     {
-        protected readonly string _dsn;
-        protected readonly string _schema;
+        protected readonly string _containerSchema;
         protected readonly ISpecificationFinder _specFinder;
         protected readonly string[] _indexedSegments;
         
@@ -26,10 +25,10 @@ namespace OopFactory.X12.Repositories
         {
         }
         
-        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo")
+        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string containerSchema = "dbo")
+            : base(dsn, schema)
         {
-            _dsn = dsn;
-            _schema = schema;
+            _containerSchema = containerSchema;
             _specFinder = specFinder;
             _indexedSegments = indexedSegments;
         }
@@ -83,88 +82,7 @@ namespace OopFactory.X12.Repositories
             return interchangeId;
         }
 
-        private RepoSegment RepoSegmentFromReader(SqlDataReader reader)
-        {
-            RepoSegment segment = new RepoSegment
-            {
-                InterchangeId = Convert.ToInt32(reader["InterchangeId"]),
-                PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
-                SpecLoopId = Convert.ToString(reader["SpecLoopId"]),
-                SegmentId = Convert.ToString(reader["SegmentId"]),
-                Segment = Convert.ToString(reader["Segment"]),
-                SegmentTerminator = Convert.ToString(reader["SegmentTerminator"])
-            };
 
-            if (!reader.IsDBNull(reader.GetOrdinal("FunctionalGroupId")))
-                segment.FunctionalGroupId = Convert.ToInt32(reader["FunctionalGroupId"]);
-
-            if (!reader.IsDBNull(reader.GetOrdinal("TransactionSetId")))
-                segment.TransactionSetId = Convert.ToInt32(reader["TransactionSetId"]);
-
-            if (!reader.IsDBNull(reader.GetOrdinal("ParentLoopId")))
-                segment.ParentLoopId = Convert.ToInt32(reader["ParentLoopId"]);
-
-            if (!reader.IsDBNull(reader.GetOrdinal("LoopId")))
-                segment.LoopId = Convert.ToInt32(reader["LoopId"]);
-            return segment;            
-        }
-
-        public List<RepoSegment> GetTransactionSetSegments(int transactionSetId, bool includeControlSegments)
-        {
-            using (var conn = new SqlConnection(_dsn))
-            {
-                SqlCommand cmd = new SqlCommand(string.Format(@"
-select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId,
-    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator
-from [{0}].GetTransactionSetSegments(@transactionSetId, @includeControlSegments) ts
-join [{0}].Interchange i on ts.InterchangeId = i.Id
-left join [{0}].Loop l on ts.LoopId = l.Id
-order by PositionInInterchange
-", _schema), conn);
-                cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
-                cmd.Parameters.AddWithValue("@includeControlSegments", includeControlSegments);
-
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-
-                List<RepoSegment> s = new List<RepoSegment>();
-                while (reader.Read())
-                {
-                    s.Add(RepoSegmentFromReader(reader));
-                }
-                reader.Close();
-
-                return s;
-            }
-        }
-
-        public List<RepoSegment> GetTransactionSegments(int loopId, bool includeControlSegments)
-        {
-            using (var conn = new SqlConnection(_dsn))
-            {
-                SqlCommand cmd = new SqlCommand(string.Format(@"
-select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId,
-    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator
-from [{0}].GetTransactionSegments(@loopId, @includeControlSegments) ts
-join [{0}].Interchange i on ts.InterchangeId = i.Id
-left join [{0}].Loop l on ts.LoopId = l.Id
-order by PositionInInterchange", _schema), conn);
-                cmd.Parameters.AddWithValue("@loopId", loopId);
-                cmd.Parameters.AddWithValue("@includeControlSegments", includeControlSegments);
-
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-
-                List<RepoSegment> s = new List<RepoSegment>();
-                while (reader.Read())
-                {
-                    s.Add(RepoSegmentFromReader(reader));
-                }
-                reader.Close();
-
-                return s;
-            }
-        }
         private int SaveLoopAndChildren(HierarchicalLoopContainer loop, ref int positionInInterchange, int interchangeId, int functionalGroupId, int transactionSetId, string transactionSetCode, int? parentId)
         {
             int loopId = 0;
@@ -199,27 +117,42 @@ order by PositionInInterchange", _schema), conn);
 
         protected virtual void EnsureSchema()
         {
-            if (!SchemaExists())
-            {
+            if (!TableExists(_containerSchema, "Container"))
                 CreateContainerTable();
+
+            if (!TableExists(_schema, "Interchange"))
                 CreateInterchangeTable();
-                CreateFunctionGroupTable();
-                CreateTransactionSetTable();
+
+            if (!TableExists(_schema, "FunctionalGroup")) 
+                CreateFunctionalGroupTable();
+
+            if (!TableExists(_schema, "TransactionSet"))
+                CreateTransactionSetTable();    
+
+            if (!TableExists(_schema, "Loop"))
                 CreateLoopTable();
+
+            if (!TableExists(_schema, "Segment"))
                 CreateSegmentTable();
-                if (!FunctionExists("dbo", "SplitSegment"))
-                    CreateSplitSegmentFunction();
-                if (!FunctionExists("dbo", "FlatElements"))
-                    CreateFlatElementsFunction();
-                if (!FunctionExists(_schema, "GetAncestorLoops"))
-                    CreateGetAncestorLoopsFunction();
-                if (!FunctionExists(_schema, "GetDescendantLoops"))
-                    CreateGetDescendantLoopsFunction();
-                if (!FunctionExists(_schema, "GetTransactionSetSegments"))
-                    CreateGetTransactionSetSegmentsFunction();
-                if (!FunctionExists(_schema, "GetTransactionSegments"))
-                    CreateGetTransactionSegmentsFunction();
-            }
+
+            if (!FunctionExists("dbo", "SplitSegment"))
+                CreateSplitSegmentFunction();
+
+            if (!FunctionExists("dbo", "FlatElements"))
+                CreateFlatElementsFunction();
+
+            if (!FunctionExists(_schema, "GetAncestorLoops"))
+                CreateGetAncestorLoopsFunction();
+
+            if (!FunctionExists(_schema, "GetDescendantLoops"))
+                CreateGetDescendantLoopsFunction();
+
+            if (!FunctionExists(_schema, "GetTransactionSetSegments"))
+                CreateGetTransactionSetSegmentsFunction();
+
+            if (!FunctionExists(_schema, "GetTransactionSegments"))
+                CreateGetTransactionSegmentsFunction();
+
             foreach (var segmentId in _indexedSegments)
             {
                 var spec = _specFinder.FindSegmentSpec("5010", segmentId);
@@ -228,24 +161,18 @@ order by PositionInInterchange", _schema), conn);
             }
         }
         
-        private bool SchemaExists()
-        {
-            var exists = ExecuteScalar(new SqlCommand(string.Format("select case when exists (select 1 from information_schema.tables where table_schema = '{0}' and table_name = 'Interchange') then 1 else 0 end ", _schema)));
-
-            return Convert.ToInt32(exists) != 0;
-        }
-
         private void CreateContainerTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Container](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+    [SchemaName] [varchar](25) NOT NULL,
 	[Type] [varchar](3) NOT NULL
  CONSTRAINT [PK_Container_{0}] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )
-)", _schema));
+)", _containerSchema));
         }
 
         private void CreateInterchangeTable()
@@ -285,7 +212,7 @@ CREATE TABLE [{0}].[Interchange](
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{0}].[Container] VALUES ('ISA')
+INSERT INTO [{1}].[Container] VALUES ('{0}','ISA')
 
 SELECT @id = scope_identity()
 
@@ -294,7 +221,7 @@ VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, 
 
 SELECT @id
 
-", _schema));
+", _schema, _containerSchema));
             cmd.Parameters.AddWithValue("@senderId", interchange.InterchangeSenderId);
             cmd.Parameters.AddWithValue("@receiverId", interchange.InterchangeReceiverId);
             cmd.Parameters.AddWithValue("@controlNumber", interchange.InterchangeControlNumber);
@@ -309,7 +236,7 @@ SELECT @id
             return Convert.ToInt32(ExecuteScalar(cmd));
         }
         
-        private void CreateFunctionGroupTable()
+        private void CreateFunctionalGroupTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[FunctionalGroup](
@@ -367,7 +294,7 @@ CREATE TABLE [{0}].[FunctionalGroup](
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{0}].[Container] VALUES ('GS')
+INSERT INTO [{1}].[Container] VALUES ('{0}','GS')
 
 SELECT @id = scope_identity()
 
@@ -375,7 +302,7 @@ INSERT INTO [{0}].[FunctionalGroup]
 VALUES (@id, @functionalIdCode, @date, @controlNumber, @version)
 
 SELECT @id
-", _schema));
+", _schema, _containerSchema));
             cmd.Parameters.AddWithValue("@functionalIdCode", idCode);
             cmd.Parameters.AddWithValue("@date", date);
             cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
@@ -402,7 +329,7 @@ CREATE TABLE [{0}].[TransactionSet](
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{0}].[Container] VALUES ('ST')
+INSERT INTO [{1}].[Container] VALUES ('{0}','ST')
 
 SELECT @id = scope_identity()
 
@@ -410,7 +337,7 @@ INSERT INTO [{0}].[TransactionSet] (Id, IdentifierCode, ControlNumber)
 VALUES (@id, @identifierCode, @controlNumber)
 
 SELECT @id
-", _schema));
+", _schema, _containerSchema));
             cmd.Parameters.AddWithValue("@identifierCode", transaction.IdentifierCode);
             cmd.Parameters.AddWithValue("@controlNumber", transaction.ControlNumber);
 
@@ -441,14 +368,14 @@ CREATE TABLE [{0}].[Loop](
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{0}].[Container] VALUES ('HL')
+INSERT INTO [{1}].[Container] VALUES ('{0}','HL')
 
 SELECT @id = scope_identity()
 
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @levelId, @levelCode, 'HL')
 
-SELECT @id", _schema));
+SELECT @id", _schema, _containerSchema));
             cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
@@ -481,14 +408,14 @@ SELECT @id", _schema));
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{0}].[Container] VALUES (@startingSegment)
+INSERT INTO [{1}].[Container] VALUES ('{0}',@startingSegment)
 
 SELECT @id = scope_identity()
 
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @startingSegment, @entityIdentifierCode)
 
-SELECT @id", _schema));
+SELECT @id", _schema, _containerSchema));
             cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
