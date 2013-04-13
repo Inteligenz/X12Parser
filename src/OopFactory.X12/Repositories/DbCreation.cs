@@ -167,7 +167,39 @@ CREATE TABLE [{0}].[{1}](
 
                 foreach (var element in spec.Elements)
                     if (element.MaxLength > 0 && element.MaxLength < 4000)
-                        sql.AppendFormat("	[{0}] [nvarchar]({1}) NULL,\n", element.Reference, element.MaxLength);
+                    {
+                        switch (element.Type)
+                        {
+                            case ElementDataTypeEnum.Decimal:
+                                int scale = element.MaxLength * 2;
+                                int precision = element.MaxLength > 8 ? element.MaxLength / 2 : 4;
+                                sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, scale, precision);
+                                break;
+                            case ElementDataTypeEnum.Numeric:
+                                if (element.ImpliedDecimalPlaces == 0)
+                                {
+                                    if (element.MaxLength < 5)
+                                        sql.AppendFormat("  [{0}] [smallint] NULL,\n", element.Reference);
+                                    else if (element.MaxLength <= 10)
+                                        sql.AppendFormat("  [{0}] [int] NULL,\n", element.Reference);
+                                    else 
+                                        sql.AppendFormat("  [{0}] [bigint] NULL,\n", element.Reference);                                        
+                                }
+                                else
+                                {
+                                    scale = element.MaxLength - element.ImpliedDecimalPlaces + 2;
+                                    precision = element.ImpliedDecimalPlaces;
+                                    sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, scale, precision);
+                                }
+                                break;
+                            case ElementDataTypeEnum.Date:
+                                sql.AppendFormat("  [{0}] [date] NULL,\n", element.Reference);
+                                break;
+                            default:
+                                sql.AppendFormat("	[{0}] [nvarchar]({1}) NULL,\n", element.Reference, element.MaxLength);
+                                break;
+                        }
+                    }
                     else
                         sql.AppendFormat("	[{0}] [nvarchar](max) NULL,\n", element.Reference);
 
