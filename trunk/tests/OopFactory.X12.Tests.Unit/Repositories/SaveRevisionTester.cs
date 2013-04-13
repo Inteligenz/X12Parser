@@ -17,12 +17,12 @@ namespace OopFactory.X12.Tests.Unit.Repositories
         [TestMethod, Ignore]
         public void SaveRevisionTest()
         {
-            var repo = new SqlTransactionRepository("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", 
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", 
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','), "Test", "dbo");
 
-            var segments = repo.GetTransactionSegments(3293, false, 999999);
-
+            var segments = repo.GetTransactionSegments(3293, Int32.MaxValue, false);
+            
             var subsriberSeg = segments.First(s => s.SpecLoopId == "2010BA");
             var newSeg = new DetachedSegment(new X12DelimiterSet(subsriberSeg.SegmentTerminator, subsriberSeg.ElementSeparator, subsriberSeg.ComponentSeparator), subsriberSeg.SegmentString);
             newSeg.SetElement(5,"MID");
@@ -37,7 +37,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var tooSeg = segments.First(s => s.PositionInInterchange == 30);
             tooSeg.Deleted = true;
             
-            int revId = repo.SaveRevision(3293, segments, "Testing the revision feature", Environment.UserName);
+            long revId = repo.SaveRevision(segments, "Testing the revision feature", Environment.UserName);
 
             Trace.WriteLine(revId);
 

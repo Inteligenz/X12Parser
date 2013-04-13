@@ -16,9 +16,9 @@ namespace OopFactory.X12.Tests.Unit.Repositories
         [TestMethod]
         public void TestMethod1()
         {
-            var repo = new SqlTransactionRepository("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
 
-            var segments = repo.GetTransactionSegments(831, true);
+            var segments = repo.GetTransactionSegments(831, 99, true);
 
             foreach (var seg in segments)
                 Trace.WriteLine(seg.SegmentString);
@@ -27,9 +27,9 @@ namespace OopFactory.X12.Tests.Unit.Repositories
         [TestMethod]
         public void TestMethod2()
         {
-            var repo = new SqlTransactionRepository("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
 
-            var segments = repo.GetTransactionSetSegments(821, true);
+            var segments = repo.GetTransactionSetSegments(821, 99, true);
 
             foreach (var seg in segments)
                 Trace.WriteLine(seg.SegmentString);

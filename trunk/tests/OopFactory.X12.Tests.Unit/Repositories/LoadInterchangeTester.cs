@@ -17,7 +17,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
         public void LoadAllTestFiles()
         {
 
-            var repo = new SqlTransactionRepository("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", new SpecificationFinder(),
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", new SpecificationFinder(),
                 new string[] {"AMT",
                 "BHT",
                 "CAS",

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace OopFactory.X12.Repositories
 {
-    public class SqlReadOnlyTransactionRepository
+    public class SqlReadOnlyTransactionRepository<T> where T : struct
     {
         protected readonly string _dsn;
         protected readonly string _schema;
@@ -17,13 +17,21 @@ namespace OopFactory.X12.Repositories
             _schema = schema;
         }
 
-        private RepoSegment RepoSegmentFromReader(SqlDataReader reader)
+        protected T ConvertT(object val)
         {
-            RepoSegment segment = new RepoSegment
+            if (typeof(T) == typeof(long))
+                return (T)(object)Convert.ToInt64(val);
+            else
+                return (T)(object)Convert.ToInt32(val);
+        }
+
+        private RepoSegment<T> RepoSegmentFromReader(SqlDataReader reader)
+        {
+            RepoSegment<T> segment = new RepoSegment<T>
             {
-                InterchangeId = Convert.ToInt32(reader["InterchangeId"]),
+                InterchangeId = ConvertT(reader["InterchangeId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
-                RevisionId = Convert.ToInt32(reader["RevisionId"]),
+                RevisionId = ConvertT(reader["RevisionId"]),
                 Deleted = Convert.ToBoolean(reader["Deleted"]),
                 SpecLoopId = Convert.ToString(reader["SpecLoopId"]),
                 SegmentId = Convert.ToString(reader["SegmentId"]),
@@ -34,20 +42,27 @@ namespace OopFactory.X12.Repositories
             };
 
             if (!reader.IsDBNull(reader.GetOrdinal("FunctionalGroupId")))
-                segment.FunctionalGroupId = Convert.ToInt32(reader["FunctionalGroupId"]);
+                segment.FunctionalGroupId = ConvertT(reader["FunctionalGroupId"]);
 
             if (!reader.IsDBNull(reader.GetOrdinal("TransactionSetId")))
-                segment.TransactionSetId = Convert.ToInt32(reader["TransactionSetId"]);
+                segment.TransactionSetId = ConvertT(reader["TransactionSetId"]);
 
             if (!reader.IsDBNull(reader.GetOrdinal("ParentLoopId")))
-                segment.ParentLoopId = Convert.ToInt32(reader["ParentLoopId"]);
+                segment.ParentLoopId = ConvertT(reader["ParentLoopId"]);
 
             if (!reader.IsDBNull(reader.GetOrdinal("LoopId")))
-                segment.LoopId = Convert.ToInt32(reader["LoopId"]);
+                segment.LoopId = ConvertT(reader["LoopId"]);
             return segment;
         }
 
-        public List<RepoSegment> GetTransactionSetSegments(int transactionSetId, bool includeControlSegments = false, int revisionId = 0)
+        /// <summary>
+        /// Retrieve all the segments within a transaction
+        /// </summary>
+        /// <param name="transactionSetId"></param>
+        /// <param name="revisionId">Use 0 for the original version Int32.MaxValue when you want the latest revision</param>
+        /// <param name="includeControlSegments">This will include the ISA, GS, GE and IEA segments</param>
+        /// <returns></returns>
+        public List<RepoSegment<T>> GetTransactionSetSegments(T transactionSetId, T revisionId, bool includeControlSegments = false)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -66,7 +81,7 @@ order by PositionInInterchange
                 conn.Open();
                 var reader = cmd.ExecuteReader();
 
-                List<RepoSegment> s = new List<RepoSegment>();
+                List<RepoSegment<T>> s = new List<RepoSegment<T>>();
                 while (reader.Read())
                 {
                     s.Add(RepoSegmentFromReader(reader));
@@ -77,7 +92,14 @@ order by PositionInInterchange
             }
         }
 
-        public List<RepoSegment> GetTransactionSegments(int loopId, bool includeControlSegments = false, int revisionId = 0)
+        /// <summary>
+        /// This will affectively unbundle the transaction from the rest of the transaction set and show you segments related to that loopId.
+        /// </summary>
+        /// <param name="loopId">The loopId for retrieving it's ancestor and descendant segments</param>
+        /// <param name="revisionId">Use 0 for the original version and Int32.MaxValue for the latest version</param>
+        /// <param name="includeControlSegments">This will include the ISA, GS, GE and IEA segments</param>
+        /// <returns></returns>
+        public List<RepoSegment<T>> GetTransactionSegments(T loopId, T revisionId, bool includeControlSegments = false)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -95,7 +117,7 @@ order by PositionInInterchange", _schema), conn);
                 conn.Open();
                 var reader = cmd.ExecuteReader();
 
-                List<RepoSegment> s = new List<RepoSegment>();
+                List<RepoSegment<T>> s = new List<RepoSegment<T>>();
                 while (reader.Read())
                 {
                     s.Add(RepoSegmentFromReader(reader));

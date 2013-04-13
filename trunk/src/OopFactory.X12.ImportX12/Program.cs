@@ -25,7 +25,7 @@ namespace OopFactory.X12.ImportX12
             var specFinder = new SpecificationFinder();
             var parser = new X12Parser(throwExceptionOnSyntaxErrors);
             parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
-            var repo = new SqlTransactionRepository(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"]);
+            var repo = new SqlTransactionRepository<int>(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"]);
 
             foreach (var filename in Directory.GetFiles(parseDirectory, parseSearchPattern, SearchOption.AllDirectories))
             {
