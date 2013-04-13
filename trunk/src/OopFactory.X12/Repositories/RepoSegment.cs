@@ -12,11 +12,14 @@ namespace OopFactory.X12.Repositories
         public int? TransactionSetId { get; set; }
         public int? ParentLoopId { get; set; }
         public int? LoopId { get; set; }
+        public int RevisionId { get; set; }
         public int PositionInInterchange { get; set; }
         public string SpecLoopId { get; set; }
         public string SegmentId { get; set; }
-        public string Segment { get; set; }
-        public string SegmentTerminator { get; set; }
-
+        public string SegmentString { get; set; }
+        public char SegmentTerminator { get; set; }
+        public char ElementSeparator { get; set; }
+        public char ComponentSeparator { get; set; }
+        public bool Deleted { get; set; }
     }
 }

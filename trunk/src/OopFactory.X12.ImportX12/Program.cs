@@ -29,12 +29,22 @@ namespace OopFactory.X12.ImportX12
 
             foreach (var filename in Directory.GetFiles(parseDirectory, parseSearchPattern, SearchOption.AllDirectories))
             {
+                byte[] header = new byte[6];
+                using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                {
+                    // peak at first 6 characters to determine if this is a unicode file
+                    fs.Read(header, 0, 6);
+                    fs.Close();
+                }
+                Encoding encoding = (header[1] == 0 && header[3] == 0 && header[5] == 0) ? Encoding.Unicode : Encoding.UTF8;
+
+
                 var fi = new FileInfo(filename);
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     try
                     {
-                        var interchanges = parser.ParseMultiple(fs);
+                        var interchanges = parser.ParseMultiple(fs, encoding);
                 
                         foreach (var interchange in interchanges)
                         {
@@ -47,7 +57,7 @@ namespace OopFactory.X12.ImportX12
                     {
                         Trace.TraceError("Error parsing {0}: {1}\n{2}", fi.FullName, exc.Message, exc.StackTrace);
                         if (!string.IsNullOrEmpty(failureDirectory))
-                            MoveTo(fi, parseDirectory, failureDirectory);
+                                MoveTo(fi, parseDirectory, failureDirectory);
                     }
                 }
             }
@@ -57,11 +67,18 @@ namespace OopFactory.X12.ImportX12
         {
             string targetFilename = string.Format("{0}{1}", targetDirectory, fi.FullName.Replace(sourceDirectory, ""));
             FileInfo targetFile = new FileInfo(targetFilename);
-            if (!targetFile.Directory.Exists)
+            try
             {
-                targetFile.Directory.Create();
+                if (!targetFile.Directory.Exists)
+                {
+                    targetFile.Directory.Create();
+                }
+                fi.MoveTo(targetFilename);
             }
-            fi.MoveTo(targetFilename);
+            catch (Exception exc2)
+            {
+                Trace.TraceError("Error moving {0} to {1}: {2}\n{3}", fi.FullName, targetFilename, exc2.Message, exc2.StackTrace);
+            }
         }
 
         static void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)

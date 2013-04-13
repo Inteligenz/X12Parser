@@ -48,6 +48,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Parsing\DentalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\InstitutionalClaimSpecificationFinder.cs" />
+    <Compile Include="Parsing\Model\DetachedSegment.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
     <Compile Include="Parsing\Model\Typed\AllowanceOrChargeIndicator.cs" />
     <Compile Include="Parsing\Model\Typed\ContractTypeCode.cs" />
@@ -126,6 +127,7 @@
     <EmbeddedResource Include="Specifications\Ansi-868-4010Specification.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Repositories\DbCreation.cs" />
     <Compile Include="Repositories\RepoSegment.cs" />
     <Compile Include="Repositories\SqlReadOnlyTransactionRepository.cs" />
     <Compile Include="Repositories\SqlTransactionRepository.cs" />
