@@ -23,10 +23,14 @@ namespace OopFactory.X12.Repositories
             {
                 InterchangeId = Convert.ToInt32(reader["InterchangeId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
+                RevisionId = Convert.ToInt32(reader["RevisionId"]),
+                Deleted = Convert.ToBoolean(reader["Deleted"]),
                 SpecLoopId = Convert.ToString(reader["SpecLoopId"]),
                 SegmentId = Convert.ToString(reader["SegmentId"]),
-                Segment = Convert.ToString(reader["Segment"]),
-                SegmentTerminator = Convert.ToString(reader["SegmentTerminator"])
+                SegmentString = Convert.ToString(reader["Segment"]),
+                SegmentTerminator = Convert.ToChar(reader["SegmentTerminator"]),
+                ElementSeparator = Convert.ToChar(reader["ElementSeparator"]),
+                ComponentSeparator = Convert.ToChar(reader["ComponentSeparator"])
             };
 
             if (!reader.IsDBNull(reader.GetOrdinal("FunctionalGroupId")))
@@ -43,20 +47,21 @@ namespace OopFactory.X12.Repositories
             return segment;
         }
 
-        public List<RepoSegment> GetTransactionSetSegments(int transactionSetId, bool includeControlSegments)
+        public List<RepoSegment> GetTransactionSetSegments(int transactionSetId, bool includeControlSegments = false, int revisionId = 0)
         {
             using (var conn = new SqlConnection(_dsn))
             {
                 SqlCommand cmd = new SqlCommand(string.Format(@"
-select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId,
-    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator
-from [{0}].GetTransactionSetSegments(@transactionSetId, @includeControlSegments) ts
+select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
+    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
+from [{0}].GetTransactionSetSegments(@transactionSetId, @includeControlSegments, @revisionId) ts
 join [{0}].Interchange i on ts.InterchangeId = i.Id
 left join [{0}].Loop l on ts.LoopId = l.Id
 order by PositionInInterchange
 ", _schema), conn);
                 cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
                 cmd.Parameters.AddWithValue("@includeControlSegments", includeControlSegments);
+                cmd.Parameters.AddWithValue("@revisionId", revisionId);
 
                 conn.Open();
                 var reader = cmd.ExecuteReader();
@@ -72,19 +77,20 @@ order by PositionInInterchange
             }
         }
 
-        public List<RepoSegment> GetTransactionSegments(int loopId, bool includeControlSegments)
+        public List<RepoSegment> GetTransactionSegments(int loopId, bool includeControlSegments = false, int revisionId = 0)
         {
             using (var conn = new SqlConnection(_dsn))
             {
                 SqlCommand cmd = new SqlCommand(string.Format(@"
-select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId,
-    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator
-from [{0}].GetTransactionSegments(@loopId, @includeControlSegments) ts
+select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
+    ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
+from [{0}].GetTransactionSegments(@loopId, @includeControlSegments, @revisionId) ts
 join [{0}].Interchange i on ts.InterchangeId = i.Id
 left join [{0}].Loop l on ts.LoopId = l.Id
 order by PositionInInterchange", _schema), conn);
                 cmd.Parameters.AddWithValue("@loopId", loopId);
                 cmd.Parameters.AddWithValue("@includeControlSegments", includeControlSegments);
+                cmd.Parameters.AddWithValue("@revisionId", revisionId);
 
                 conn.Open();
                 var reader = cmd.ExecuteReader();

@@ -21,7 +21,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var segments = repo.GetTransactionSegments(831, true);
 
             foreach (var seg in segments)
-                Trace.WriteLine(seg.Segment);
+                Trace.WriteLine(seg.SegmentString);
 
         }
         [TestMethod]
@@ -32,7 +32,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var segments = repo.GetTransactionSetSegments(821, true);
 
             foreach (var seg in segments)
-                Trace.WriteLine(seg.Segment);
+                Trace.WriteLine(seg.SegmentString);
 
         }
     }
