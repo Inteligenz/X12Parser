@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing;
+using OopFactory.X12.Parsing.Specification;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -536,19 +537,34 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
                     for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
                     {
                         string val = segment.GetElement(i);
-
-                        if (spec != null && spec.Elements.Count >= i)
+                        if (spec != null)
                         {
-                            int maxLength = spec.Elements[i - 1].MaxLength;
+                            var elementSpec = spec.Elements[i - 1];
+                            int maxLength = elementSpec.MaxLength;
 
                             if (maxLength > 0 && val.Length > maxLength)
                             {
                                 Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
                                 val = val.Substring(0, maxLength);
                             }
-                        }
 
-                        cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), val);
+                            if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
+                            {
+                                int intVal = 0;
+                                if (int.TryParse(val, out intVal))
+                                {
+                                    decimal denominator = (decimal) Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
+                                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), (decimal)intVal / denominator);
+                                }
+                                else
+                                {
+                                    Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);                                    
+                                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), DBNull.Value);
+                                }
+                            }
+                            else
+                                cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), val);
+                        }
                     }
                     if (tran != null)
                     {
