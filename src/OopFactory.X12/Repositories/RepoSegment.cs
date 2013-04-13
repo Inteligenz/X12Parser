@@ -5,14 +5,14 @@ using System.Text;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoSegment
+    public class RepoSegment<T> where T : struct
     {
-        public int InterchangeId { get; set; }
-        public int? FunctionalGroupId { get; set; }
-        public int? TransactionSetId { get; set; }
-        public int? ParentLoopId { get; set; }
-        public int? LoopId { get; set; }
-        public int RevisionId { get; set; }
+        public T InterchangeId { get; set; }
+        public T? FunctionalGroupId { get; set; }
+        public T? TransactionSetId { get; set; }
+        public T? ParentLoopId { get; set; }
+        public T? LoopId { get; set; }
+        public T RevisionId { get; set; }
         public int PositionInInterchange { get; set; }
         public string SpecLoopId { get; set; }
         public string SegmentId { get; set; }

@@ -64,6 +64,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)Specifications\*" "$(SolutionDir)Release\Specifications\"
 copy "$(TargetDir)*.dll" "$(SolutionDir)Release\"
+copy "$(TargetDir)*.xml" "$(SolutionDir)Release\"
 copy "$(TargetDir)$(TargetName)$(TargetExt)*" "$(SolutionDir)Release\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

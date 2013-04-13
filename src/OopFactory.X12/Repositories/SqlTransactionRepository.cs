@@ -9,12 +9,18 @@ using System.Diagnostics;
 
 namespace OopFactory.X12.Repositories
 {
-    public class SqlTransactionRepository : SqlReadOnlyTransactionRepository
+    /// <summary>
+    /// Class for storing, retrieving and revising X12 messages.
+    /// This library only does inserts.  Edits and Deletes are accomplished through revisions, but all revisions are retained.
+    /// The Get methods will allow you choose the revision you want.
+    /// </summary>
+    /// <typeparam name="T">The type of all identity columns:  supports int or long</typeparam>
+    public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T> where T : struct
     {
         protected readonly ISpecificationFinder _specFinder;
         protected readonly string[] _indexedSegments;
-        protected DbCreation _commonDb;
-        protected DbCreation _transactionDb;
+        protected DbCreation<T> _commonDb;
+        protected DbCreation<T> _transactionDb;
         
         public SqlTransactionRepository(string dsn)
             : this(dsn, new SpecificationFinder(), new string[] { "REF", "NM1", "N1", "N3", "N4", "DMG", "PER" }, "dbo")
@@ -31,10 +37,13 @@ namespace OopFactory.X12.Repositories
         {
             _specFinder = specFinder;
             _indexedSegments = indexedSegments;
-            _commonDb = new DbCreation(dsn, commonSchema);
-            _transactionDb = new DbCreation(dsn, schema);
+            _commonDb = new DbCreation<T>(dsn, commonSchema);
+            _transactionDb = new DbCreation<T>(dsn, schema);
         }
 
+        /// <summary>
+        /// override this with no implementation when your database is already created and you will not need to check for existance of the objects.
+        /// </summary>
         protected virtual void EnsureSchema()
         {
             if (!_commonDb.TableExists("Container"))
@@ -84,25 +93,32 @@ namespace OopFactory.X12.Repositories
             }
         }
 
-        public int Save(Interchange interchange, string filename, string userName)
+        /// <summary>
+        /// Saves the entire interchange into the database as individual segments and the relationships between the segments and loops
+        /// </summary>
+        /// <param name="interchange">The parsed interchange object</param>
+        /// <param name="filename"></param>
+        /// <param name="userName"></param>
+        /// <returns>The interchangeId from the database</returns>
+        public T Save(Interchange interchange, string filename, string userName)
         {
             EnsureSchema();
             int positionInInterchange = 1;
             
-            int interchangeId = SaveInterchange(interchange, filename, userName);
+            T interchangeId = SaveInterchange(interchange, filename, userName);
             try
             {
                 SaveSegment(null, interchange, positionInInterchange, interchangeId);
 
                 foreach (var fg in interchange.FunctionGroups)
                 {
-                    int functionalGroupId = SaveFunctionalGroup(fg);
+                    T functionalGroupId = SaveFunctionalGroup(fg);
                     SaveSegment(null, fg, ++positionInInterchange, interchangeId, functionalGroupId);
 
                     foreach (var tran in fg.Transactions)
                     {
                         string transactionSetCode = tran.IdentifierCode;
-                        int transactionSetId = SaveTransactionSet(tran);
+                        T transactionSetId = SaveTransactionSet(tran);
                         SaveSegment(null, tran, ++positionInInterchange, interchangeId, functionalGroupId, transactionSetId);
 
                         foreach (var seg in tran.Segments)
@@ -141,9 +157,17 @@ namespace OopFactory.X12.Repositories
             }
         }
 
-        public int SaveRevision(int loopId, IList<RepoSegment> segments, string comments, string revisedBy)
+        /// <summary>
+        /// This will save revisions to an x12 transaction that was returned from the GetTransactionSegments method.
+        /// The update is stored as inserts into the database, and only the most current revision that hasn't been deleted is returned on the next retrieval
+        /// </summary>
+        /// <param name="segments">The segments to be updated, only segments with a different SegmentString or Deleted value will be updated</param>
+        /// <param name="comments">The reason for the revision</param>
+        /// <param name="revisedBy">Ther username of the user who has made the revision</param>
+        /// <returns></returns>
+        public T SaveRevision(IList<RepoSegment<T>> segments, string comments, string revisedBy)
         {
-            int revisionId = 1;
+            T? revisionId;
             using (SqlConnection conn = new SqlConnection(_dsn))
             {
                 conn.Open();
@@ -158,7 +182,7 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
                     cmd.Parameters.AddWithValue("@schemaName", _schema);
                     cmd.Parameters.AddWithValue("@comments", comments);
                     cmd.Parameters.AddWithValue("@revisedBy", revisedBy);
-                    revisionId = Convert.ToInt32(ExecuteScalar(cmd));
+                    revisionId = ConvertT(ExecuteScalar(cmd));
 
                     foreach (var segment in segments)
                     {
@@ -174,12 +198,12 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
                     throw;
                 }
             }
-            return revisionId;
+            return revisionId.Value;
         }
 
-        private int SaveLoopAndChildren(HierarchicalLoopContainer loop, ref int positionInInterchange, int interchangeId, int functionalGroupId, int transactionSetId, string transactionSetCode, int? parentId)
+        private T SaveLoopAndChildren(HierarchicalLoopContainer loop, ref int positionInInterchange, T interchangeId, T functionalGroupId, T transactionSetId, string transactionSetCode, T? parentId)
         {
-            int loopId = 0;
+            T? loopId = null;
             if (loop is HierarchicalLoop)
             {
                 loopId = SaveHierarchicalLoop((HierarchicalLoop)loop, interchangeId, transactionSetId, transactionSetCode, parentId);
@@ -188,35 +212,40 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
             {
                 loopId = SaveLoop((Loop)loop, interchangeId, transactionSetId, transactionSetCode, parentId);
             }
-            SaveSegment(null, loop, positionInInterchange, interchangeId, functionalGroupId, transactionSetId, parentId, loopId);
-            
-            foreach (var seg in loop.Segments)
+            if (loopId.HasValue)
             {
-                if (seg is HierarchicalLoopContainer)
+                SaveSegment(null, loop, positionInInterchange, interchangeId, functionalGroupId, transactionSetId, parentId, loopId);
+
+                foreach (var seg in loop.Segments)
+                {
+                    if (seg is HierarchicalLoopContainer)
+                    {
+                        positionInInterchange++;
+                        SaveLoopAndChildren((HierarchicalLoopContainer)seg, ref positionInInterchange, interchangeId, functionalGroupId, transactionSetId, transactionSetCode, loopId);
+                    }
+                    else
+                        SaveSegment(null, seg, ++positionInInterchange, interchangeId, functionalGroupId, transactionSetId, loopId);
+                }
+
+                foreach (var hl in loop.HLoops)
                 {
                     positionInInterchange++;
-                    SaveLoopAndChildren((HierarchicalLoopContainer)seg, ref positionInInterchange, interchangeId, functionalGroupId, transactionSetId, transactionSetCode, loopId);
+                    SaveLoopAndChildren(hl, ref positionInInterchange, interchangeId, functionalGroupId, transactionSetId, transactionSetCode, loopId);
                 }
-                else
-                    SaveSegment(null, seg, ++positionInInterchange, interchangeId, functionalGroupId, transactionSetId, loopId);
+                return loopId.Value;
             }
-
-            foreach (var hl in loop.HLoops)
-            {
-                positionInInterchange++;
-                SaveLoopAndChildren(hl, ref positionInInterchange, interchangeId, functionalGroupId, transactionSetId, transactionSetCode, loopId);
-            }
-            return loopId;
+            else
+                throw new InvalidOperationException(string.Format("Loop could not be created for interchange {0} position {1}.", interchangeId, positionInInterchange));
         }
 
-        private void MarkInterchangeWithError(int interchangeId)
+        private void MarkInterchangeWithError(T interchangeId)
         {
             var cmd = new SqlCommand(string.Format("update [{0}].Interchange set HasError = 1 where Id = @interchangeId", _schema));
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             ExecuteCmd(cmd);
         }
 
-        private int SaveInterchange(Interchange interchange, string filename, string userName)
+        private T SaveInterchange(Interchange interchange, string filename, string userName)
         {
             DateTime date = DateTime.MaxValue;
 
@@ -250,12 +279,12 @@ SELECT @id
             cmd.Parameters.AddWithValue("@componentSeparator", interchange.Delimiters.SubElementSeparator);
             cmd.Parameters.AddWithValue("@filename", filename);
             cmd.Parameters.AddWithValue("@createdBy", userName);
-            
 
-            return Convert.ToInt32(ExecuteScalar(cmd));
+            var interchangeId = ExecuteScalar(cmd);
+            return base.ConvertT(interchangeId);
         }
 
-        private int SaveFunctionalGroup(FunctionGroup functionGroup)
+        private T SaveFunctionalGroup(FunctionGroup functionGroup)
         {
             string idCode;
             DateTime date = DateTime.MaxValue;
@@ -310,10 +339,10 @@ SELECT @id
             cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
             cmd.Parameters.AddWithValue("@version", version);
 
-            return Convert.ToInt32(ExecuteScalar(cmd));
+            return ConvertT(ExecuteScalar(cmd));
         }
         
-        private int SaveTransactionSet(Transaction transaction)
+        private T SaveTransactionSet(Transaction transaction)
         {
             string controlNumber = transaction.ControlNumber;
             if (controlNumber.Length > 9)
@@ -337,10 +366,10 @@ SELECT @id
             cmd.Parameters.AddWithValue("@identifierCode", transaction.IdentifierCode);
             cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
 
-            return Convert.ToInt32(ExecuteScalar(cmd));
+            return ConvertT(ExecuteScalar(cmd));
         }
         
-        private int SaveHierarchicalLoop(HierarchicalLoop loop, int interchangeId, int transactionSetId, string transactionSetCode, int? parentLoopId)
+        private T SaveHierarchicalLoop(HierarchicalLoop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
         {
             SqlCommand cmd = new SqlCommand(string.Format(@"
 DECLARE @id int
@@ -361,7 +390,7 @@ SELECT @id", _schema, _commonDb.Schema));
             cmd.Parameters.AddWithValue("@levelId", loop.Id);
             cmd.Parameters.AddWithValue("@levelCode", loop.LevelCode);
 
-            return Convert.ToInt32(ExecuteScalar(cmd));            
+            return ConvertT(ExecuteScalar(cmd));            
         }
 
         protected virtual string GetEntityTypeCode(Loop loop)
@@ -378,7 +407,7 @@ SELECT @id", _schema, _commonDb.Schema));
             return null;
         }
         
-        private int SaveLoop(Loop loop, int interchangeId, int transactionSetId, string transactionSetCode, int? parentLoopId)
+        private T SaveLoop(Loop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
         {
             string entityIdentifierCode = GetEntityTypeCode(loop);
 
@@ -403,7 +432,7 @@ SELECT @id", _schema, _commonDb.Schema));
 
             try
             {
-                return Convert.ToInt32(ExecuteScalar(cmd));
+                return ConvertT(ExecuteScalar(cmd));
             }
             catch (Exception exc)
             {
@@ -412,7 +441,7 @@ SELECT @id", _schema, _commonDb.Schema));
             }
         }
 
-        private bool SegmentHasChanged(DetachedSegment segment, int positionInInterchange, int interchangeId, int previousRevisionId)
+        private bool SegmentHasChanged(DetachedSegment segment, int positionInInterchange, T interchangeId, T? previousRevisionId)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -433,7 +462,7 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
                     if (Convert.ToBoolean(reader["Deleted"]))
                         throw new InvalidOperationException(string.Format("Segment {0} of interchange {1} in position {2} has already been deleted by {3} at {4}.", segment.SegmentId, interchangeId, positionInInterchange, reader["RevisedBy"], reader["RevisionDate"]));
 
-                    if (Convert.ToInt32(reader["RevisionId"]) != previousRevisionId)
+                    if (previousRevisionId.HasValue && Convert.ToInt64(reader["RevisionId"]) != Convert.ToInt64(previousRevisionId))
                         throw new InvalidOperationException(string.Format("Segment {0} of interchange {1} in position {2} has already been revised by {3} at {4}.", segment.SegmentId, interchangeId, positionInInterchange, reader["RevisedBy"], reader["RevisionDate"]));
 
                     
@@ -446,19 +475,19 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
                 }
             }
         }
-        protected virtual void SaveSegment(SqlTransaction tran, DetachedSegment segment, int positionInInterchange, int interchangeId, int? functionalGroupId = null, int? transactionSetId = null, int? parentLoopId = null, int? loopId = null, int revisionId = 0, int previousRevisionId = 0, bool deleted = false)
+        protected virtual void SaveSegment(SqlTransaction tran, DetachedSegment segment, int positionInInterchange, T interchangeId, T? functionalGroupId = null, T? transactionSetId = null, T? parentLoopId = null, T? loopId = null, T? revisionId = null, T? previousRevisionId = null, bool deleted = false)
         {
-            if (revisionId == 0 || SegmentHasChanged(segment, positionInInterchange, interchangeId, previousRevisionId) || deleted)
+            if (!revisionId.HasValue || SegmentHasChanged(segment, positionInInterchange, interchangeId, previousRevisionId) || deleted)
             {
                 SqlCommand cmd = new SqlCommand(string.Format(@"
 INSERT INTO [{0}].[Segment]
-VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @loopId, @revisionId, @deleted, @positionInInterchange, @segmentId, @segment)", _schema));
+VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @loopId, isnull(@revisionId,0), @deleted, @positionInInterchange, @segmentId, @segment)", _schema));
                 cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
-                cmd.Parameters.AddWithValue("@functionalGroupId", functionalGroupId.HasValue ? (object)functionalGroupId.Value : DBNull.Value);
-                cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId.HasValue ? (object)transactionSetId.Value : DBNull.Value);
-                cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId.HasValue ? (object)parentLoopId.Value : DBNull.Value);
-                cmd.Parameters.AddWithValue("@loopId", loopId.HasValue ? (object)loopId.Value : DBNull.Value);
-                cmd.Parameters.AddWithValue("@revisionId", revisionId);
+                cmd.Parameters.AddWithValue("@functionalGroupId", (object)functionalGroupId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@transactionSetId", (object)transactionSetId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@loopId", (object)loopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@deleted", deleted);
                 cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
                 cmd.Parameters.AddWithValue("@segmentId", segment.SegmentId);
@@ -493,7 +522,7 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
                     }
 
                     StringBuilder sql = new StringBuilder();
-                    sql.AppendFormat("INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, ParentLoopId, LoopId, RevisionId, Deleted, {2}) VALUES (@interchangeId, @positionInInterchange, @parentLoopId, @loopId, @revisionId, @deleted, {3})", _schema, segment.SegmentId, string.Join(",", fieldNames), string.Join(", ", parameterNames));
+                    sql.AppendFormat("INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, ParentLoopId, LoopId, RevisionId, Deleted, {2}) VALUES (@interchangeId, @positionInInterchange, @parentLoopId, @loopId, isnull(@revisionId,0), @deleted, {3})", _schema, segment.SegmentId, string.Join(",", fieldNames), string.Join(", ", parameterNames));
 
 
                     cmd = new SqlCommand(sql.ToString());
@@ -501,7 +530,7 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
                     cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
                     cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@loopId", (object)loopId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@revisionId", revisionId);
+                    cmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@deleted", deleted);
 
                     for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)

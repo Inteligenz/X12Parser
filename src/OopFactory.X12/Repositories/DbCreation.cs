@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
 using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Repositories
 {
-    public class DbCreation
+    public class DbCreation<T> where T : struct
     {
         private string _dsn;
         private string _schema;
+        private SqlDbType _identitySqlType;
 
         public DbCreation(string dsn, string schema)
         {
             _dsn = dsn;
             _schema = schema;
+            if (typeof(T) == typeof(long))
+                _identitySqlType = SqlDbType.BigInt;
+            else
+                _identitySqlType = SqlDbType.Int;            
         }
 
         public string Schema { get { return _schema; } }
@@ -24,18 +30,18 @@ namespace OopFactory.X12.Repositories
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Container](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [{1}] IDENTITY(1,1) NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Type] [varchar](3) NOT NULL
     CONSTRAINT [PK_Container_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateRevisionTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [dbo].[Revision](
-	[Id] [int] IDENTITY(0,1) NOT NULL,
+	[Id] [{1}] IDENTITY(0,1) NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Comments] [varchar](max) NOT NULL,
     [RevisionDate] datetime NOT NULL,
@@ -45,14 +51,14 @@ CREATE TABLE [dbo].[Revision](
 
 INSERT INTO [dbo].[Revision]
 VALUES ('dbo','Initial Load',getdate(),'system')
-", _schema));
+", _schema, _identitySqlType));
         }
         
         public void CreateInterchangeTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Interchange](
-	[Id] [int] NOT NULL,
+	[Id] [{1}] NOT NULL,
 	[SenderId] [varchar](15) NULL,
 	[ReceiverId] [varchar](15) NULL,
 	[ControlNumber] [varchar](50) NULL,
@@ -65,42 +71,42 @@ CREATE TABLE [{0}].[Interchange](
     [CreatedBy] [varchar](50) NULL,
     [CreatedDate] datetime NULL,
  CONSTRAINT [PK_Interchange_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateFunctionalGroupTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[FunctionalGroup](
-	[Id] [int] NOT NULL,
+	[Id] [{1}] NOT NULL,
 	[FunctionalIdCode] [varchar](2) NULL,
 	[Date] [datetime] NULL,
 	[ControlNumber] [varchar](9) NULL,
 	[Version] [varchar](12) NULL,
     CONSTRAINT [PK_FunctionalGroup_{0}] PRIMARY KEY CLUSTERED (	[Id] ASC )
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateTransactionSetTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[TransactionSet](
-	[Id] [int] NOT NULL,
+	[Id] [{1}] NOT NULL,
 	[IdentifierCode] [varchar](3) NULL,
 	[ControlNumber] [varchar](9) NULL,
 	[ImplementationConventionRef] [varchar](35) NULL,
  CONSTRAINT [PK_Transaction_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateLoopTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Loop](
-    [Id] [int] NOT NULL,
-    [ParentLoopId] [int] NULL,
-    [InterchangeId] [int] NOT NULL,
-    [TransactionSetId] [int] NOT NULL,
+    [Id] [{1}] NOT NULL,
+    [ParentLoopId] [{1}] NULL,
+    [InterchangeId] [{1}] NOT NULL,
+    [TransactionSetId] [{1}] NOT NULL,
     [TransactionSetCode] [varchar](3) NOT NULL,
     [SpecLoopId] [varchar](7) NULL,
     [LevelId] [varchar](12) NULL,
@@ -108,19 +114,19 @@ CREATE TABLE [{0}].[Loop](
     [StartingSegmentId] [varchar](3) NOT NULL,
     [EntityIdentifierCode] [varchar](3) NULL,
   CONSTRAINT [PK_Loop_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateSegmentTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Segment](
-	[InterchangeId] [int] NOT NULL,
-	[FunctionalGroupId] [int] NULL,
-	[TransactionSetId] [int] NULL,
-    [ParentLoopId] [int] NULL,
-    [LoopId] [int] NULL,
-    [RevisionId] [int] NOT NULL,
+	[InterchangeId] [{1}] NOT NULL,
+	[FunctionalGroupId] [{1}] NULL,
+	[TransactionSetId] [{1}] NULL,
+    [ParentLoopId] [{1}] NULL,
+    [LoopId] [{1}] NULL,
+    [RevisionId] [{1}] NOT NULL,
     [Deleted] [bit] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
 	[SegmentId] [varchar](3) NULL,
@@ -142,7 +148,7 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
     [RevisionId] ASC,
 	[SegmentId] ASC
 )
-", _schema));
+", _schema, _identitySqlType));
         }
 
         public void CreateIndexedSegmentTable(SegmentSpecification spec)
@@ -151,13 +157,13 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
 
                 sql.AppendFormat(@"
 CREATE TABLE [{0}].[{1}](
-	[InterchangeId] [int] NOT NULL,
+	[InterchangeId] [{2}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
-    [ParentLoopId] [int] NULL,
-    [LoopId] [int] NULL,
-    [RevisionId] [int] NOT NULL,
+    [ParentLoopId] [{2}] NULL,
+    [LoopId] [{2}] NULL,
+    [RevisionId] [{2}] NOT NULL,
     [Deleted] [bit] NOT NULL,
-", _schema, spec.SegmentId);
+", _schema, spec.SegmentId, _identitySqlType);
 
                 foreach (var element in spec.Elements)
                     if (element.MaxLength > 0 && element.MaxLength < 4000)
@@ -287,7 +293,7 @@ select
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[GetAncestorLoops]
 (	
-	@loopId int,
+	@loopId {1},
 	@includeSelf bit
 )
 RETURNS TABLE 
@@ -308,7 +314,7 @@ RETURN
     select Id, ParentLoopId, InterchangeId, TransactionSetId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, [Level]
     from parents
     where @includeSelf = 1 or Level > 0
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateGetDescendantLoopsFunction()
@@ -316,7 +322,7 @@ RETURN
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].GetDescendantLoops
 (	
-	@loopId int,
+	@loopId {1},
 	@includeSelf bit
 )
 RETURNS TABLE 
@@ -343,7 +349,7 @@ RETURN
   
   select Id, ParentLoopId, InterchangeId, TransactionSetId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, Level
   from children
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateGetTransactionSetSegmentsFunction()
@@ -351,7 +357,7 @@ RETURN
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].GetTransactionSetSegments
 (	
-	@transactionSetId int, @includeControlSegments bit, @revisionId int
+	@transactionSetId {1}, @includeControlSegments bit, @revisionId {1}
 )
 RETURNS TABLE 
 AS
@@ -390,7 +396,7 @@ RETURN
   select *
   from revisedSegments
   where RowNum = 1 and Deleted = 0
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         public void CreateGetTransactionSegmentsFunction()
@@ -398,7 +404,7 @@ RETURN
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[GetTransactionSegments]
 (	
-	@loopId int, @includeControlSegments bit, @revisionId int
+	@loopId {1}, @includeControlSegments bit, @revisionId {1}
 )
 RETURNS TABLE 
 AS
@@ -468,7 +474,7 @@ RETURN
   select *
   from revisedSegments
   where RowNum = 1 and Deleted = 0
-)", _schema));
+)", _schema, _identitySqlType));
         }
 
         private void ExecuteCmd(string sql)
