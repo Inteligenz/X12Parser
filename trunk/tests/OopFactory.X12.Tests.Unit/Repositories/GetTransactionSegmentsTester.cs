@@ -14,6 +14,14 @@ namespace OopFactory.X12.Tests.Unit.Repositories
     public class GetTransactionSegmentsTester
     {
         [TestMethod]
+        public void ReadTransactions()
+        {
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
+            var list = repo.GetTransactionSets(new RepoTransactionSetSearchCriteria<long> { SenderId = "580977458" });
+
+            Assert.IsTrue(list.Count > 0);
+        }
+        [TestMethod]
         public void TestMethod1()
         {
             var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");

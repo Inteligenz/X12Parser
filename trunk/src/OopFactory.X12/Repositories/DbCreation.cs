@@ -79,6 +79,7 @@ CREATE TABLE [{0}].[Interchange](
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[FunctionalGroup](
 	[Id] [{1}] NOT NULL,
+    [InterchangeId] [{1}] NOT NULL,
 	[FunctionalIdCode] [varchar](2) NULL,
 	[Date] [datetime] NULL,
 	[ControlNumber] [varchar](9) NULL,
@@ -92,6 +93,8 @@ CREATE TABLE [{0}].[FunctionalGroup](
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[TransactionSet](
 	[Id] [{1}] NOT NULL,
+    [InterchangeId] [{1}] NOT NULL,
+    [FunctionalGroupId] [{1}] NOT NULL,
 	[IdentifierCode] [varchar](3) NULL,
 	[ControlNumber] [varchar](9) NULL,
 	[ImplementationConventionRef] [varchar](35) NULL,

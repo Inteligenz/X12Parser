@@ -113,13 +113,13 @@ namespace OopFactory.X12.Repositories
 
                 foreach (var fg in interchange.FunctionGroups)
                 {
-                    T functionalGroupId = SaveFunctionalGroup(fg);
+                    T functionalGroupId = SaveFunctionalGroup(fg, interchangeId);
                     SaveSegment(null, fg, ++positionInInterchange, interchangeId, functionalGroupId);
 
                     foreach (var tran in fg.Transactions)
                     {
                         string transactionSetCode = tran.IdentifierCode;
-                        T transactionSetId = SaveTransactionSet(tran);
+                        T transactionSetId = SaveTransactionSet(tran, interchangeId, functionalGroupId);
                         SaveSegment(null, tran, ++positionInInterchange, interchangeId, functionalGroupId, transactionSetId);
 
                         foreach (var seg in tran.Segments)
@@ -285,7 +285,7 @@ SELECT @id
             return base.ConvertT(interchangeId);
         }
 
-        private T SaveFunctionalGroup(FunctionGroup functionGroup)
+        private T SaveFunctionalGroup(FunctionGroup functionGroup, T interchangeId)
         {
             string idCode;
             DateTime date = DateTime.MaxValue;
@@ -330,11 +330,12 @@ INSERT INTO [{1}].[Container] VALUES ('{0}','GS')
 
 SELECT @id = scope_identity()
 
-INSERT INTO [{0}].[FunctionalGroup]
-VALUES (@id, @functionalIdCode, @date, @controlNumber, @version)
+INSERT INTO [{0}].[FunctionalGroup] (Id, InterchangeId, FunctionalIdCode, Date, ControlNumber, Version)
+VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)
 
 SELECT @id
 ", _schema, _commonDb.Schema));
+            cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             cmd.Parameters.AddWithValue("@functionalIdCode", idCode);
             cmd.Parameters.AddWithValue("@date", date);
             cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
@@ -343,7 +344,7 @@ SELECT @id
             return ConvertT(ExecuteScalar(cmd));
         }
         
-        private T SaveTransactionSet(Transaction transaction)
+        private T SaveTransactionSet(Transaction transaction, T interchangeId, T functionalGroupId)
         {
             string controlNumber = transaction.ControlNumber;
             if (controlNumber.Length > 9)
@@ -359,11 +360,13 @@ INSERT INTO [{1}].[Container] VALUES ('{0}','ST')
 
 SELECT @id = scope_identity()
 
-INSERT INTO [{0}].[TransactionSet] (Id, IdentifierCode, ControlNumber) 
-VALUES (@id, @identifierCode, @controlNumber)
+INSERT INTO [{0}].[TransactionSet] (Id, InterchangeId, FunctionalGroupId, IdentifierCode, ControlNumber) 
+VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber)
 
 SELECT @id
 ", _schema, _commonDb.Schema));
+            cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
+            cmd.Parameters.AddWithValue("@functionalGroupId", functionalGroupId);
             cmd.Parameters.AddWithValue("@identifierCode", transaction.IdentifierCode);
             cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
 
