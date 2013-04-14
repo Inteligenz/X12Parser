@@ -187,8 +187,7 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
 
                     foreach (var segment in segments)
                     {
-                        var newSegment = new DetachedSegment(new X12DelimiterSet(segment.SegmentTerminator, segment.ElementSeparator, ':'), segment.SegmentString);
-                        SaveSegment(sqlTran, newSegment, segment.PositionInInterchange, segment.InterchangeId, segment.FunctionalGroupId, segment.TransactionSetId, segment.ParentLoopId, segment.LoopId, revisionId, segment.RevisionId, segment.Deleted);
+                        SaveSegment(sqlTran, segment.Segment, segment.PositionInInterchange, segment.InterchangeId, segment.FunctionalGroupId, segment.TransactionSetId, segment.ParentLoopId, segment.LoopId, revisionId, segment.RevisionId, segment.Deleted);
                     }
 
                     sqlTran.Commit();

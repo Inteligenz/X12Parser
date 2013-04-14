@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace OopFactory.X12.Tests.Unit.Repositories
 {
-    [TestClass, Ignore]
+    [TestClass,Ignore]
     public class GetTransactionSegmentsTester
     {
         [TestMethod]
@@ -21,6 +21,18 @@ namespace OopFactory.X12.Tests.Unit.Repositories
 
             Assert.IsTrue(list.Count > 0);
         }
+
+        [TestMethod]
+        public void ReadLoops()
+        {
+            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", "Test");
+            var list = repo.GetLoops(new RepoLoopSearchCriteria<long> { TransactionSetCode = "837", SpecLoopId = "2300" });
+
+            Assert.IsTrue(list.Count > 0);
+            foreach (var claim in list)
+                Trace.TraceInformation("{0}{1}", claim.Segment.SegmentString, claim.Segment.Delimiters.SegmentTerminator);
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
@@ -29,7 +41,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var segments = repo.GetTransactionSegments(831, 99, true);
 
             foreach (var seg in segments)
-                Trace.WriteLine(seg.SegmentString);
+                Trace.WriteLine(seg.Segment.SegmentString);
 
         }
         [TestMethod]
@@ -40,7 +52,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var segments = repo.GetTransactionSetSegments(821, 99, true);
 
             foreach (var seg in segments)
-                Trace.WriteLine(seg.SegmentString);
+                Trace.WriteLine(seg.Segment.SegmentString);
 
         }
     }

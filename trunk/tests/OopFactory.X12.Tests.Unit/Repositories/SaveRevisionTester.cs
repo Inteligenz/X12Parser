@@ -24,15 +24,10 @@ namespace OopFactory.X12.Tests.Unit.Repositories
             var segments = repo.GetTransactionSegments(3293, Int32.MaxValue, false);
             
             var subsriberSeg = segments.First(s => s.SpecLoopId == "2010BA");
-            var newSeg = new DetachedSegment(new X12DelimiterSet(subsriberSeg.SegmentTerminator, subsriberSeg.ElementSeparator, subsriberSeg.ComponentSeparator), subsriberSeg.SegmentString);
-            newSeg.SetElement(5,"MID");
-            subsriberSeg.SegmentString = newSeg.SegmentString;
+            subsriberSeg.Segment.SetElement(5,"MID");
 
             var claimSeg = segments.First(s => s.SpecLoopId == "2300");
-
-            var editSeg = new DetachedSegment(new X12DelimiterSet(claimSeg.SegmentTerminator, claimSeg.ElementSeparator, claimSeg.ComponentSeparator), claimSeg.SegmentString);
-            editSeg.SetElement(1, "ABC26403774");
-            claimSeg.SegmentString = editSeg.SegmentString;
+            claimSeg.Segment.SetElement(1, "ABC26403774");
 
             var tooSeg = segments.First(s => s.PositionInInterchange == 30);
             tooSeg.Deleted = true;
