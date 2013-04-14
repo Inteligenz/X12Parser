@@ -130,6 +130,8 @@
     </EmbeddedResource>
     <Compile Include="Repositories\DbCreation.cs" />
     <Compile Include="Repositories\RepoSegment.cs" />
+    <Compile Include="Repositories\RepoTransactionSet.cs" />
+    <Compile Include="Repositories\RepoTransactionSetSearchCriteria.cs" />
     <Compile Include="Repositories\SqlReadOnlyTransactionRepository.cs" />
     <Compile Include="Repositories\SqlTransactionRepository.cs" />
     <Compile Include="Transformations\ITransformationService.cs" />
