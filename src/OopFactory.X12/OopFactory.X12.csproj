@@ -129,6 +129,8 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Repositories\DbCreation.cs" />
+    <Compile Include="Repositories\RepoLoop.cs" />
+    <Compile Include="Repositories\RepoLoopSearchCriteria.cs" />
     <Compile Include="Repositories\RepoSegment.cs" />
     <Compile Include="Repositories\RepoTransactionSet.cs" />
     <Compile Include="Repositories\RepoTransactionSetSearchCriteria.cs" />

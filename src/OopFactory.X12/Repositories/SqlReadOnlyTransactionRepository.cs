@@ -27,18 +27,13 @@ namespace OopFactory.X12.Repositories
 
         private RepoSegment<T> RepoSegmentFromReader(SqlDataReader reader)
         {
-            RepoSegment<T> segment = new RepoSegment<T>
+            RepoSegment<T> segment = new RepoSegment<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]),Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]) )
             {
                 InterchangeId = ConvertT(reader["InterchangeId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
                 RevisionId = ConvertT(reader["RevisionId"]),
                 Deleted = Convert.ToBoolean(reader["Deleted"]),
-                SpecLoopId = Convert.ToString(reader["SpecLoopId"]),
-                SegmentId = Convert.ToString(reader["SegmentId"]),
-                SegmentString = Convert.ToString(reader["Segment"]),
-                SegmentTerminator = Convert.ToChar(reader["SegmentTerminator"]),
-                ElementSeparator = Convert.ToChar(reader["ElementSeparator"]),
-                ComponentSeparator = Convert.ToChar(reader["ComponentSeparator"])
+                SpecLoopId = Convert.ToString(reader["SpecLoopId"])
             };
 
             if (!reader.IsDBNull(reader.GetOrdinal("FunctionalGroupId")))
@@ -202,6 +197,83 @@ where ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
                 reader.Close();
 
                 return s;
+            }
+        }
+
+        private RepoLoop<T> RepoLoopFromReader(SqlDataReader reader)
+        {
+            var loop = new RepoLoop<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]), Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]))
+            {
+                LoopId = ConvertT(reader["Id"]),
+                InterchangeId = ConvertT(reader["InterchangeId"]),
+                TransactionSetId = ConvertT(reader["TransactionSetId"]),
+                TransactionSetCode = Convert.ToString(reader["TransactionSetCode"]),
+                SpecLoopId = Convert.ToString(reader["SpecLoopId"]),
+                LevelId = Convert.ToString(reader["LevelId"]),
+                LevelCode = Convert.ToString(reader["LevelCode"]),
+                StartingSegmentId = Convert.ToString(reader["StartingSegmentId"]),
+                EntityIdentifierCode = Convert.ToString(reader["EntityIdentifierCode"]),
+                RevisionId = ConvertT(reader["RevisionId"]),
+                PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"])
+            };
+            if (!reader.IsDBNull(reader.GetOrdinal("ParentLoopId")))
+                loop.ParentLoopId = ConvertT(reader["ParentLoopId"]);
+            return loop;
+        }
+
+        public List<RepoLoop<T>> GetLoops(RepoLoopSearchCriteria<T> criteria)
+        {
+            string sql = string.Format(@"
+select l.Id, l.ParentLoopId, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, 
+  l.SpecLoopId, l.LevelId, l.LevelCode, l.StartingSegmentId, l.EntityIdentifierCode,
+  s1.RevisionId, s1.PositionInInterchange, s1.Segment, 
+  i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
+from [{0}].[Loop] l
+join [{0}].Interchange i on l.InterchangeId = i.Id
+join [{0}].Segment s1 on l.Id = s1.LoopId
+where s1.Deleted = 0
+and s1.RevisionId = (select max(RevisionId) 
+                    from [{0}].Segment s2 
+                    where s1.InterchangeId = s2.InterchangeId 
+                      and s1.PositionInInterchange = s2.PositionInInterchange)
+and l.Id = isnull(@loopId,l.Id)
+and isnull(l.ParentLoopId,0) = coalesce(@parentLoopId,l.ParentLoopId,0)
+and l.InterchangeId = isnull(@interchangeId,l.InterchangeId)
+and l.TransactionSetId = isnull(@transactionSetId,l.TransactionSetId)
+and l.TransactionSetCode = isnull(@transactionSetCode, l.TransactionSetCode)
+and isnull(l.SpecLoopId,'') = coalesce(@specLoopId, l.SpecLoopId,'')
+and isnull(l.LevelId,'') = coalesce(@levelId, l.LevelId,'')
+and isnull(l.LevelCode,'') = coalesce(@levelCode, l.LevelCode,'')
+and l.StartingSegmentId = isnull(@startingSegmentId,l.StartingSegmentId)
+and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.EntityIdentifierCode,'')
+", _schema);
+
+            using (var conn = new SqlConnection(_dsn))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@loopId", (object)criteria.LoopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@parentLoopId", (object)criteria.ParentLoopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@interchangeId", (object)criteria.InterchangeId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@transactionSetId", (object)criteria.TransactionSetId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@transactionSetCode", (object)criteria.TransactionSetCode ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@specLoopId", (object)criteria.SpecLoopId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@levelId", (object)criteria.LevelId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@levelCode", (object)criteria.LevelCode ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@startingSegmentId", (object)criteria.StartingSegmentId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@entityIdentifierCode", (object)criteria.EntityIdentifierCode ?? DBNull.Value);
+
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                var list = new List<RepoLoop<T>>();
+
+                while (reader.Read())
+                {
+                    list.Add(RepoLoopFromReader(reader));
+                }
+                reader.Close();
+
+                return list;
             }
         }
     }

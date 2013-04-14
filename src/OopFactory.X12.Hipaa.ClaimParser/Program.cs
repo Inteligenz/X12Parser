@@ -26,7 +26,7 @@ namespace OopFactory.X12.Hipaa.ClaimParser
 #if DEBUG
                     FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                     var parser = new X12.Parsing.X12Parser();
-                    var interchange = parser.Parse(stream);
+                    var interchange = parser.ParseMultiple(stream).First();
                     File.WriteAllText(filename + ".dat", interchange.SerializeToX12(true));
                     stream.Close();
 #endif           
