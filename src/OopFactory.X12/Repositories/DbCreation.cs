@@ -125,13 +125,13 @@ CREATE TABLE [{0}].[Loop](
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Segment](
 	[InterchangeId] [{1}] NOT NULL,
+	[PositionInInterchange] [int] NOT NULL,
+    [RevisionId] [{1}] NOT NULL,
 	[FunctionalGroupId] [{1}] NULL,
 	[TransactionSetId] [{1}] NULL,
     [ParentLoopId] [{1}] NULL,
     [LoopId] [{1}] NULL,
-    [RevisionId] [{1}] NOT NULL,
     [Deleted] [bit] NOT NULL,
-	[PositionInInterchange] [int] NOT NULL,
 	[SegmentId] [varchar](3) NULL,
 	[Segment] [nvarchar](max) NULL,
  CONSTRAINT [PK_Segment_{0}] PRIMARY KEY CLUSTERED 
@@ -141,17 +141,65 @@ CREATE TABLE [{0}].[Segment](
     [RevisionId] ASC
 )
 )
-
 CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment] 
 (
 	[InterchangeId] ASC,
 	[PositionInInterchange] ASC,
+    [RevisionId] ASC,
 	[ParentLoopId] ASC,
 	[LoopId] ASC,
-    [RevisionId] ASC,
 	[SegmentId] ASC
 )
 ", _schema, _identitySqlType));
+        }
+
+        public void CreateParsingErrorTable()
+        {
+            ExecuteCmd(string.Format(@"
+CREATE TABLE [{0}].[ParsingError](
+	[Id] [{1}] IDENTITY(1,1) NOT NULL,
+    [InterchangeId] [{1}] NOT NULL,
+    [PositionInInterchange] [int] NOT NULL,
+    [RevisionId] [{1}] NOT NULL,
+    [Message] [varchar](max) NOT NULL,
+CONSTRAINT [PK_ParsingError_{0}] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)
+)", _schema, _identitySqlType));
+        }
+
+        public void CreateEntityView()
+        {
+            ExecuteCmd(string.Format(@"
+CREATE VIEW [{0}].[Entity]
+  AS
+select  l.Id as EntityId, l.EntityIdentifierCode, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, l.ParentLoopId, l.SpecLoopId
+, IsPerson = case nm1.[02] when '1' then 1 else 0 end
+, LastName = nm1.[03]
+, FirstName = nm1.[04]
+, MiddleName = nm1.[05]
+, NamePrefix = nm1.[06]
+, NameSuffix = nm1.[07]
+, Ssn = case nm1.[08] when '34' then nm1.[09] 
+                      else (select [02] from [{0}].REF where l.Id = ref.ParentLoopId and [01] = 'SY') end
+, TelephoneNumber = coalesce((select [04] from [{0}].PER where per.ParentLoopId = l.Id and per.[03]='TE')
+                    ,(select [06] from [{0}].PER where per.ParentLoopId = l.Id and per.[05]='TE')
+                    ,(select [08] from [{0}].PER where per.ParentLoopId = l.Id and per.[07]='TE'))
+, AddressLine1 = n3.[01]
+, AddressLine2 = n3.[02]
+, City = n4.[01]
+, StateCode = n4.[02]
+, PostalCode = n4.[03]
+, County = case n4.[05] when 'CY' then n4.[06] else null end
+, CountryCode = n4.[07]
+, DateOfBirth = dmg.[02]
+, Gender = dmg.[03]
+from [{0}].[Loop] l
+join [{0}].[NM1] on l.Id = nm1.LoopId
+left join [{0}].N3 on l.Id = n3.ParentLoopId
+left join [{0}].N4 on l.Id = n4.ParentLoopId
+left join [{0}].[DMG] on l.Id = dmg.ParentLoopId ", _schema));
         }
 
         public void CreateIndexedSegmentTable(SegmentSpecification spec)
@@ -162,10 +210,12 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
 CREATE TABLE [{0}].[{1}](
 	[InterchangeId] [{2}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
+    [RevisionId] [{2}] NOT NULL,
+    [TransactionSetId] [{2}] NULL,
     [ParentLoopId] [{2}] NULL,
     [LoopId] [{2}] NULL,
-    [RevisionId] [{2}] NOT NULL,
     [Deleted] [bit] NOT NULL,
+    [ErrorId] [{2}] NULL,
 ", _schema, spec.SegmentId, _identitySqlType);
 
                 foreach (var element in spec.Elements)
@@ -210,7 +260,6 @@ CREATE TABLE [{0}].[{1}](
                 sql.AppendFormat(@"
     CONSTRAINT [PK_{1}_{0}] PRIMARY KEY CLUSTERED ([InterchangeId] ASC, [PositionInInterchange] ASC, [RevisionId] ASC)
 ) 
-
 CREATE NONCLUSTERED INDEX [IX_{1}_{0}] ON [{0}].[{1}] 
 (
 	[InterchangeId] ASC,
@@ -219,7 +268,8 @@ CREATE NONCLUSTERED INDEX [IX_{1}_{0}] ON [{0}].[{1}]
     [Deleted] ASC,
 	[ParentLoopId] ASC,
 	[LoopId] ASC
-)", _schema, spec.SegmentId);
+)
+", _schema, spec.SegmentId);
                 ExecuteCmd(sql.ToString());
 
                 ExecuteCmd(string.Format(@"
@@ -232,6 +282,11 @@ where RevisionId = (select max(RevisionId)
                     where a.InterchangeId = b.InterchangeId 
                       and a.PositionInInterchange = b.PositionInInterchange)", _schema, spec.SegmentId));
             
+        }
+
+        public void AddErrorIdToIndexedSegmentTable(string segmentId)
+        {
+            ExecuteCmd(string.Format("ALTER TABLE [{0}].[{1}] ADD [ErrorId] [{2}] NULL;", _schema, segmentId, _identitySqlType));
         }
 
         public void CreateSplitSegmentFunction()
@@ -547,6 +602,25 @@ RETURN
         public bool TableExists(string tableName)
         {
             var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'U')) then 1 else 0 end", _schema, tableName)));
+
+            return Convert.ToInt32(result) != 0;
+        }
+
+        public bool ViewExists(string viewName)
+        {
+            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[{0}].[{1}]')) then 1 else 0 end", _schema, viewName)));
+
+            return Convert.ToInt32(result) != 0;
+        }
+
+        public bool TableColumnExists(string tableName, string columnName)
+        {
+            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS 
+(select *
+from information_schema.columns
+where table_schema='{0}' 
+and Table_name = '{1}'
+and column_name = '{2}') then 1 else 0 end", _schema, tableName, columnName)));
 
             return Convert.ToInt32(result) != 0;
         }

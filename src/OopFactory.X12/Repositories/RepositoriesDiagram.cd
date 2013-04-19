@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="OopFactory.X12.Repositories.RepoLoop&lt;T&gt;">
+    <Position X="9" Y="4.75" Width="2.25" />
+    <Members>
+      <Method Name="RepoLoop" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAACAkAAAAAABFAAACQAAAAAAAJBEA=</HashCode>
+      <FileName>Repositories\RepoLoop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.SqlTransactionRepository&lt;T&gt;">
+    <Position X="1" Y="3.25" Width="7.75" />
+    <Members>
+      <Field Name="_commonDb" Hidden="true" />
+      <Field Name="_indexedSegments" Hidden="true" />
+      <Field Name="_transactionDb" Hidden="true" />
+      <Method Name="ExecuteCmd" Hidden="true" />
+      <Method Name="ExecuteScalar" Hidden="true" />
+      <Method Name="MarkInterchangeWithError" Hidden="true" />
+      <Method Name="SaveFunctionalGroup" Hidden="true" />
+      <Method Name="SaveHierarchicalLoop" Hidden="true" />
+      <Method Name="SaveInterchange" Hidden="true" />
+      <Method Name="SaveLoop" Hidden="true" />
+      <Method Name="SaveLoopAndChildren" Hidden="true" />
+      <Method Name="SaveSegment" Hidden="true" />
+      <Method Name="SaveTransactionSet" Hidden="true" />
+      <Method Name="SegmentHasChanged" Hidden="true" />
+      <Method Name="SqlTransactionRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQAAIAgGBAAEAAQAQAAAAABAAAAACATAAAAABARAAE=</HashCode>
+      <FileName>Repositories\SqlTransactionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.RepoLoopSearchCriteria&lt;T&gt;">
+    <Position X="11.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAgAAAAAABEAAACQAAAAAAAJBEA=</HashCode>
+      <FileName>Repositories\RepoLoopSearchCriteria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.RepoSegment&lt;T&gt;">
+    <Position X="14.25" Y="4.75" Width="2.25" />
+    <Members>
+      <Method Name="RepoSegment" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAAAAAAAAACAkAEAAAAAFAAAAQAAAAAAABAAA=</HashCode>
+      <FileName>Repositories\RepoSegment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.RepoTransactionSet&lt;T&gt;">
+    <Position X="9.25" Y="0.75" Width="3.5" />
+    <Members>
+      <Method Name="RepoTransactionSet" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IKAAACAAAAAAAAgAAAAAggAAAAABAICQAAgABAAQAAA=</HashCode>
+      <FileName>Repositories\RepoTransactionSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.RepoTransactionSetSearchCriteria&lt;T&gt;">
+    <Position X="13" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AKIAAABAAAAAAAgAAAAAiAAAAAABAACQAAgCBAAAAAA=</HashCode>
+      <FileName>Repositories\RepoTransactionSetSearchCriteria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Repositories.SqlReadOnlyTransactionRepository&lt;T&gt;">
+    <Position X="1" Y="1" Width="7.75" />
+    <Members>
+      <Field Name="_dsn" Hidden="true" />
+      <Field Name="_schema" Hidden="true" />
+      <Method Name="ConvertT" Hidden="true" />
+      <Method Name="RepoLoopFromReader" Hidden="true" />
+      <Method Name="RepoSegmentFromReader" Hidden="true" />
+      <Method Name="RepoTransactionSetFromReader" Hidden="true" />
+      <Method Name="SqlReadOnlyTransactionRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAABARAAAAAAAAQAAAgAABAAAACAAAAAIgAAAABA=</HashCode>
+      <FileName>Repositories\SqlReadOnlyTransactionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

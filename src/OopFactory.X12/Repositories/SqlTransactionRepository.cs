@@ -18,10 +18,14 @@ namespace OopFactory.X12.Repositories
     /// <typeparam name="T">The type of all identity columns:  supports int or long</typeparam>
     public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T> where T : struct
     {
-        protected readonly ISpecificationFinder _specFinder;
         protected readonly string[] _indexedSegments;
         protected DbCreation<T> _commonDb;
         protected DbCreation<T> _transactionDb;
+        private bool _schemaEnsured;
+        private readonly Dictionary<string, SegmentSpecification> _specs;
+        private int _batchSize;
+        private int _batchCount;
+        private StringBuilder _batchSql;
         
         public SqlTransactionRepository(string dsn)
             : this(dsn, new SpecificationFinder(), new string[] { "REF", "NM1", "N1", "N3", "N4", "DMG", "PER" }, "dbo")
@@ -33,13 +37,21 @@ namespace OopFactory.X12.Repositories
         {
         }
         
-        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo")
+        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo", int segmentBatchSize = 1000)
             : base(dsn, schema)
         {
-            _specFinder = specFinder;
             _indexedSegments = indexedSegments;
             _commonDb = new DbCreation<T>(dsn, commonSchema);
             _transactionDb = new DbCreation<T>(dsn, schema);
+            _schemaEnsured = false;
+            _batchSize = segmentBatchSize;
+            _batchCount = 0;
+            _batchSql = new StringBuilder();
+            _specs = new Dictionary<string, SegmentSpecification>();
+            foreach (var segmentId in indexedSegments)
+            {
+                _specs.Add(segmentId, specFinder.FindSegmentSpec("5010", segmentId));
+            }
         }
 
         /// <summary>
@@ -47,50 +59,71 @@ namespace OopFactory.X12.Repositories
         /// </summary>
         protected virtual void EnsureSchema()
         {
-            if (!_commonDb.TableExists("Container"))
-                _commonDb.CreateContainerTable();
-
-            if (!_commonDb.TableExists("Revision"))
-                _commonDb.CreateRevisionTable();
-
-            if (!_transactionDb.TableExists("Interchange"))
-                _transactionDb.CreateInterchangeTable();
-
-            if (!_transactionDb.TableExists("FunctionalGroup"))
-                _transactionDb.CreateFunctionalGroupTable();
-
-            if (!_transactionDb.TableExists("TransactionSet"))
-                _transactionDb.CreateTransactionSetTable();
-
-            if (!_transactionDb.TableExists("Loop"))
-                _transactionDb.CreateLoopTable();
-
-            if (!_transactionDb.TableExists("Segment"))
-                _transactionDb.CreateSegmentTable();
-
-            if (!_commonDb.FunctionExists("SplitSegment"))
-                _commonDb.CreateSplitSegmentFunction();
-
-            if (!_commonDb.FunctionExists("FlatElements"))
-                _commonDb.CreateFlatElementsFunction();
-
-            if (!_transactionDb.FunctionExists("GetAncestorLoops"))
-                _transactionDb.CreateGetAncestorLoopsFunction();
-
-            if (!_transactionDb.FunctionExists("GetDescendantLoops"))
-                _transactionDb.CreateGetDescendantLoopsFunction();
-
-            if (!_transactionDb.FunctionExists("GetTransactionSetSegments"))
-                _transactionDb.CreateGetTransactionSetSegmentsFunction();
-
-            if (!_transactionDb.FunctionExists("GetTransactionSegments"))
-                _transactionDb.CreateGetTransactionSegmentsFunction();
-
-            foreach (var segmentId in _indexedSegments)
+            if (!_schemaEnsured) // this only needs to be done once
             {
-                var spec = _specFinder.FindSegmentSpec("5010", segmentId);
-                if (spec != null && !_transactionDb.TableExists(segmentId))
-                    _transactionDb.CreateIndexedSegmentTable(spec);
+                if (!_commonDb.TableExists("Container"))
+                    _commonDb.CreateContainerTable();
+
+                if (!_commonDb.TableExists("Revision"))
+                    _commonDb.CreateRevisionTable();
+
+                if (!_transactionDb.TableExists("Interchange"))
+                    _transactionDb.CreateInterchangeTable();
+
+                if (!_transactionDb.TableExists("FunctionalGroup"))
+                    _transactionDb.CreateFunctionalGroupTable();
+
+                if (!_transactionDb.TableExists("TransactionSet"))
+                    _transactionDb.CreateTransactionSetTable();
+
+                if (!_transactionDb.TableExists("Loop"))
+                    _transactionDb.CreateLoopTable();
+
+                if (!_transactionDb.TableExists("Segment"))
+                    _transactionDb.CreateSegmentTable();
+
+                if (!_transactionDb.TableExists("ParsingError"))
+                    _transactionDb.CreateParsingErrorTable();
+
+                if (!_commonDb.FunctionExists("SplitSegment"))
+                    _commonDb.CreateSplitSegmentFunction();
+
+                if (!_commonDb.FunctionExists("FlatElements"))
+                    _commonDb.CreateFlatElementsFunction();
+
+                if (!_transactionDb.FunctionExists("GetAncestorLoops"))
+                    _transactionDb.CreateGetAncestorLoopsFunction();
+
+                if (!_transactionDb.FunctionExists("GetDescendantLoops"))
+                    _transactionDb.CreateGetDescendantLoopsFunction();
+
+                if (!_transactionDb.FunctionExists("GetTransactionSetSegments"))
+                    _transactionDb.CreateGetTransactionSetSegmentsFunction();
+
+                if (!_transactionDb.FunctionExists("GetTransactionSegments"))
+                    _transactionDb.CreateGetTransactionSegmentsFunction();
+
+                foreach (var segmentId in _indexedSegments)
+                {
+                    var spec = _specs[segmentId]; 
+                    if (spec != null)
+                    {
+                        if (!_transactionDb.TableExists(segmentId))
+                            _transactionDb.CreateIndexedSegmentTable(spec);
+                        else if (!_transactionDb.TableColumnExists(segmentId, "ErrorId"))
+                            _transactionDb.AddErrorIdToIndexedSegmentTable(segmentId);
+                    }
+                }
+
+                if (!_transactionDb.ViewExists("Entity")
+                    && _indexedSegments.Contains("NM1")
+                    && _indexedSegments.Contains("N3")
+                    && _indexedSegments.Contains("N4")
+                    && _indexedSegments.Contains("PER")
+                    && _indexedSegments.Contains("DMG"))
+                    _transactionDb.CreateEntityView();
+
+                _schemaEnsured = true;
             }
         }
 
@@ -104,6 +137,7 @@ namespace OopFactory.X12.Repositories
         public T Save(Interchange interchange, string filename, string userName)
         {
             EnsureSchema();
+            InitBatch();
             int positionInInterchange = 1;
             
             T interchangeId = SaveInterchange(interchange, filename, userName);
@@ -149,6 +183,7 @@ namespace OopFactory.X12.Repositories
                 foreach (var seg in interchange.TrailerSegments)
                     SaveSegment(null, seg, ++positionInInterchange, interchangeId);
 
+                ExecuteBatch();
                 return interchangeId;
             }
             catch (Exception)
@@ -482,59 +517,66 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
         {
             if (!revisionId.HasValue || SegmentHasChanged(segment, positionInInterchange, interchangeId, previousRevisionId) || deleted)
             {
-                SqlCommand cmd = new SqlCommand(string.Format(@"
-INSERT INTO [{0}].[Segment]
-VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @loopId, isnull(@revisionId,0), @deleted, @positionInInterchange, @segmentId, @segment)", _schema));
-                cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
-                cmd.Parameters.AddWithValue("@functionalGroupId", (object)functionalGroupId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@transactionSetId", (object)transactionSetId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@loopId", (object)loopId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@deleted", deleted);
-                cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
-                cmd.Parameters.AddWithValue("@segmentId", segment.SegmentId);
-                cmd.Parameters.AddWithValue("@segment", segment.SegmentString);
+                string segmentSql = string.Format(@"
+INSERT INTO [{0}].[Segment] (InterchangeId, FunctionalGroupId, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, PositionInInterchange, SegmentId, Segment)
+VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ", 
+                    _schema,
+                    interchangeId,
+                    (object)functionalGroupId ?? "NULL",
+                    (object)transactionSetId ?? "NULL",
+                    (object)parentLoopId ?? "NULL",
+                    (object)loopId ?? "NULL",
+                    (object)revisionId ?? "NULL",
+                    deleted ? "1" : "0",
+                    positionInInterchange,
+                    segment.SegmentId.Replace("'", "''"),
+                    segment.SegmentString.Replace("'","''"));
 
                 if (tran != null)
                 {
+                    SqlCommand cmd = new SqlCommand(segmentSql);
                     cmd.Connection = tran.Connection;
                     cmd.Transaction = tran;
+                    ExecuteCmd(cmd);
                 }
+                else
+                    AddSqlToBatch(segmentSql);
 
-                ExecuteCmd(cmd);
 
                 if (_indexedSegments.Contains(segment.SegmentId))
                 {
+                    StringBuilder parsingError = new StringBuilder();
+
                     List<string> fieldNames = new List<string>();
                     List<string> parameterNames = new List<string>();
-                    var spec = _specFinder.FindSegmentSpec("5010", segment.SegmentId);
+                    var spec = _specs[segment.SegmentId]; 
                     int maxElements = spec != null ? spec.Elements.Count : 0;
                     for (int i = 1; i <= segment.ElementCount; i++)
                     {
                         if (i <= maxElements)
                         {
                             fieldNames.Add(string.Format("[{0:00}]", i));
-                            parameterNames.Add(string.Format("@e{0:00}", i));
                         }
                         else
                         {
                             string val = segment.GetElement(i);
-                            Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} with value {4} will NOT be indexed because it exceeds the {5} specified number of elements.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxElements);
+                            string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} with value {4} will NOT be indexed because it exceeds the {5} specified number of elements.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxElements);
+                            Trace.TraceInformation(message);
+                            parsingError.AppendLine(message);
                         }
                     }
 
                     StringBuilder sql = new StringBuilder();
-                    sql.AppendFormat("INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, ParentLoopId, LoopId, RevisionId, Deleted, {2}) VALUES (@interchangeId, @positionInInterchange, @parentLoopId, @loopId, isnull(@revisionId,0), @deleted, {3})", _schema, segment.SegmentId, string.Join(",", fieldNames), string.Join(", ", parameterNames));
-
-
-                    cmd = new SqlCommand(sql.ToString());
-                    cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
-                    cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
-                    cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@loopId", (object)loopId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@deleted", deleted);
+                    sql.AppendFormat(@"INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, {2}, ErrorId)
+                    VALUES ({3}, {4}, {5}, {6}, {7}, isnull({8},0), {9}, ",
+                        _schema, segment.SegmentId, string.Join(",", fieldNames), 
+                        interchangeId,
+                        positionInInterchange,
+                        (object)transactionSetId ?? "NULL",
+                        (object)parentLoopId ?? "NULL",
+                        (object)loopId ?? "NULL",
+                        (object)revisionId ?? "NULL",
+                        deleted ? "1" : "0");
 
                     for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
                     {
@@ -546,7 +588,9 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
 
                             if (maxLength > 0 && val.Length > maxLength)
                             {
-                                Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
+                                string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
+                                Trace.TraceInformation(message);
+                                parsingError.AppendLine(message);
                                 val = val.Substring(0, maxLength);
                             }
 
@@ -555,27 +599,75 @@ VALUES (@interchangeId, @functionalGroupId, @transactionSetId, @parentLoopId, @l
                                 int intVal = 0;
                                 if (int.TryParse(val, out intVal))
                                 {
-                                    decimal denominator = (decimal) Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
-                                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), (decimal)intVal / denominator);
+                                    decimal denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
+                                    sql.AppendFormat("{0}, ", (decimal)intVal / denominator);
                                 }
                                 else
                                 {
-                                    Trace.TraceWarning("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);                                    
-                                    cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), DBNull.Value);
+                                    string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);
+                                    Trace.TraceInformation(message);
+                                    parsingError.AppendLine(message);
+                                    sql.AppendFormat("NULL, ");
                                 }
                             }
                             else
-                                cmd.Parameters.AddWithValue(string.Format("@e{0:00}", i), val);
+                            {
+                                if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
+                                    sql.AppendFormat("{0}, ", val);
+                                else
+                                    sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
+                            }
                         }
                     }
+                    T? errorId = null;
+                    string errorMessage = parsingError.ToString();
+                    if (!string.IsNullOrWhiteSpace(errorMessage)) 
+                    {
+                        SqlCommand errCmd = new SqlCommand(string.Format("INSERT INTO [{0}].ParsingError (InterchangeId, PositionInInterchange, RevisionId, Message) VALUES (@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) SELECT scope_identity()", _schema));
+                        errCmd.Parameters.AddWithValue("@interchangeId", interchangeId);
+                        errCmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
+                        errCmd.Parameters.AddWithValue("@revisionId", (object) revisionId ?? DBNull.Value);
+                        errCmd.Parameters.AddWithValue("@message", errorMessage);
+
+                        errorId = ConvertT(ExecuteScalar(errCmd));
+
+                    }
+                    sql.AppendFormat("{0})", (object)errorId ?? "NULL");
+
                     if (tran != null)
                     {
+                        var cmd = new SqlCommand(sql.ToString());
                         cmd.Connection = tran.Connection;
                         cmd.Transaction = tran;
+                        ExecuteCmd(cmd);
                     }
-
-                    ExecuteCmd(cmd);
+                    else
+                        AddSqlToBatch(sql.ToString());
                 }
+            }
+        }
+
+        private void AddSqlToBatch(string sql, params object[] args)
+        {
+            _batchCount++;
+            _batchSql.AppendFormat(sql, args);
+            if (_batchCount >= _batchSize)
+                ExecuteBatch();                
+        }
+
+        private void InitBatch()
+        {
+            _batchCount = 0;
+            _batchSql = new StringBuilder();
+        }
+
+        private void ExecuteBatch()
+        {
+            string sql = _batchSql.ToString();
+            if (!string.IsNullOrWhiteSpace(sql))
+            {
+                ExecuteCmd(new SqlCommand(sql));
+                InitBatch();
             }
         }
 
