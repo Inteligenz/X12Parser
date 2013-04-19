@@ -196,6 +196,7 @@
   <ItemGroup>
     <None Include="Parsing\Model\ParsingModel.cd" />
     <None Include="Parsing\Specification\SpecificationModel.cd" />
+    <None Include="Repositories\RepositoriesDiagram.cd" />
     <None Include="Specifications\X12ParserSpecification.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -17,7 +17,7 @@ namespace OopFactory.X12.Tests.Unit.Repositories
         [TestMethod, Ignore]
         public void SaveRevisionTest()
         {
-            var repo = new SqlTransactionRepository<long>("Data Source=DSTRU-PC;Initial Catalog=X12;Integrated Security=True", 
+            var repo = new SqlTransactionRepository<long>("Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", 
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','), "Test", "dbo");
 
