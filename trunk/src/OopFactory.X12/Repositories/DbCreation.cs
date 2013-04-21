@@ -224,9 +224,9 @@ CREATE TABLE [{0}].[{1}](
                         switch (element.Type)
                         {
                             case ElementDataTypeEnum.Decimal:
-                                int scale = element.MaxLength * 2;
-                                int precision = element.MaxLength > 8 ? element.MaxLength / 2 : 4;
-                                sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, scale, precision);
+                                int precision = element.MaxLength > 18 ? 38 : element.MaxLength * 2;
+                                int scale = element.MaxLength > 8 ? element.MaxLength / 2 : 4;
+                                sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
                                 break;
                             case ElementDataTypeEnum.Numeric:
                                 if (element.ImpliedDecimalPlaces == 0)
@@ -240,9 +240,9 @@ CREATE TABLE [{0}].[{1}](
                                 }
                                 else
                                 {
-                                    scale = element.MaxLength - element.ImpliedDecimalPlaces + 2;
-                                    precision = element.ImpliedDecimalPlaces;
-                                    sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, scale, precision);
+                                    precision = element.MaxLength - element.ImpliedDecimalPlaces + 2;
+                                    scale = element.ImpliedDecimalPlaces;
+                                    sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
                                 }
                                 break;
                             case ElementDataTypeEnum.Date:
@@ -567,34 +567,59 @@ RETURN
 )", _schema, _identitySqlType));
         }
 
-        private void ExecuteCmd(string sql)
+        internal void ExecuteCmd(string sql)
         {
             ExecuteCmd(new SqlCommand(sql));
         }
 
-        private void ExecuteCmd(SqlCommand cmd)
+        internal void ExecuteCmd(SqlCommand cmd)
         {
-            using (var conn = new SqlConnection(_dsn))
+            if (cmd.Transaction == null)
             {
-                conn.Open();
-                cmd.Connection = conn;
-                cmd.ExecuteNonQuery();
+                using (var conn = new SqlConnection(_dsn))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.ExecuteNonQuery();
+                }
             }
+            else
+                cmd.ExecuteNonQuery();
         }
 
-        private object ExecuteScalar(SqlCommand cmd)
+        internal object ExecuteScalar(SqlCommand cmd)
         {
-            using (var conn = new SqlConnection(_dsn))
+            if (cmd.Transaction == null)
             {
-                conn.Open();
-                cmd.Connection = conn;
+
+                using (var conn = new SqlConnection(_dsn))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    return cmd.ExecuteScalar();
+                }
+            }
+            else
+            {
                 return cmd.ExecuteScalar();
             }
         }
 
+        public void CreateSchema()
+        {
+            ExecuteCmd(new SqlCommand(string.Format(@"CREATE SCHEMA [{0}] AUTHORIZATION [dbo]", _schema)));
+            
+        }
         public bool FunctionExists(string functionName)
         {
             var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT')) then 1 else 0 end", _schema, functionName)));
+
+            return Convert.ToInt32(result) != 0;
+        }
+
+        public bool SchemaExists()
+        {
+            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.schemas WHERE name = N'{0}') then 1 else 0 end", _schema)));
 
             return Convert.ToInt32(result) != 0;
         }

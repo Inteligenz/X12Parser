@@ -61,11 +61,17 @@ namespace OopFactory.X12.Repositories
         {
             if (!_schemaEnsured) // this only needs to be done once
             {
+                if (!_commonDb.SchemaExists())
+                    _commonDb.CreateSchema();
+
                 if (!_commonDb.TableExists("Container"))
                     _commonDb.CreateContainerTable();
 
                 if (!_commonDb.TableExists("Revision"))
                     _commonDb.CreateRevisionTable();
+
+                if (!_transactionDb.SchemaExists())
+                    _transactionDb.CreateSchema();
 
                 if (!_transactionDb.TableExists("Interchange"))
                     _transactionDb.CreateInterchangeTable();
@@ -671,37 +677,14 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
             }
         }
 
-        private void ExecuteCmd(SqlCommand cmd)
+        protected void ExecuteCmd(SqlCommand cmd)
         {
-            if (cmd.Transaction == null)
-            {
-                using (var conn = new SqlConnection(_dsn))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            else
-                cmd.ExecuteNonQuery();
+            _transactionDb.ExecuteCmd(cmd);
         }
 
-        private object ExecuteScalar(SqlCommand cmd)
+        protected object ExecuteScalar(SqlCommand cmd)
         {
-            if (cmd.Transaction == null)
-            {
-
-                using (var conn = new SqlConnection(_dsn))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    return cmd.ExecuteScalar();
-                }
-            }
-            else
-            {
-                return cmd.ExecuteScalar();
-            }
+            return _transactionDb.ExecuteScalar(cmd);
         }
     }
 }
