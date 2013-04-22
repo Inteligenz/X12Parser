@@ -9,11 +9,13 @@
   <xs:element name="TransactionSpecification">
     <xs:complexType>
       <xs:sequence>
+        <xs:element name="Name" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="HierarchicalLoop" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="TransactionSetIdentifierCode" type="xs:string"/>
+      <xs:attribute name="FunctionalGroupCode" type="xs:string" use="optional"/>
     </xs:complexType>
   </xs:element>
   
@@ -41,7 +43,7 @@
 
   <xs:complexType name="LoopSpecification">
     <xs:sequence>
-      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Name" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="StartingSegment">
         <xs:complexType>
           <xs:complexContent>

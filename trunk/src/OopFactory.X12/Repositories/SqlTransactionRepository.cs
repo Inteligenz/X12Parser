@@ -18,7 +18,6 @@ namespace OopFactory.X12.Repositories
     /// <typeparam name="T">The type of all identity columns:  supports int or long</typeparam>
     public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T> where T : struct
     {
-        protected readonly string[] _indexedSegments;
         protected DbCreation<T> _commonDb;
         protected DbCreation<T> _transactionDb;
         private bool _schemaEnsured;
@@ -40,7 +39,6 @@ namespace OopFactory.X12.Repositories
         public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo", int segmentBatchSize = 1000)
             : base(dsn, schema)
         {
-            _indexedSegments = indexedSegments;
             _commonDb = new DbCreation<T>(dsn, commonSchema);
             _transactionDb = new DbCreation<T>(dsn, schema);
             _schemaEnsured = false;
@@ -50,7 +48,8 @@ namespace OopFactory.X12.Repositories
             _specs = new Dictionary<string, SegmentSpecification>();
             foreach (var segmentId in indexedSegments)
             {
-                _specs.Add(segmentId, specFinder.FindSegmentSpec("5010", segmentId));
+                var spec = specFinder.FindSegmentSpec("5010", segmentId.Trim());
+                _specs.Add(segmentId.Trim(), spec);
             }
         }
 
@@ -69,6 +68,9 @@ namespace OopFactory.X12.Repositories
 
                 if (!_commonDb.TableExists("Revision"))
                     _commonDb.CreateRevisionTable();
+
+                if (!_commonDb.TableExists("X12CodeList"))
+                    _commonDb.CreateX12CodeListTable();
 
                 if (!_transactionDb.SchemaExists())
                     _transactionDb.CreateSchema();
@@ -109,24 +111,32 @@ namespace OopFactory.X12.Repositories
                 if (!_transactionDb.FunctionExists("GetTransactionSegments"))
                     _transactionDb.CreateGetTransactionSegmentsFunction();
 
-                foreach (var segmentId in _indexedSegments)
+                foreach (var spec in _specs.Values)
                 {
-                    var spec = _specs[segmentId]; 
-                    if (spec != null)
+                    if (!_transactionDb.TableExists(spec.SegmentId))
+                        _transactionDb.CreateIndexedSegmentTable(spec);
+                    else if (!_transactionDb.TableColumnExists(spec.SegmentId, "ErrorId"))
+                        _transactionDb.AddErrorIdToIndexedSegmentTable(spec.SegmentId);
+
+                    foreach (var element in spec.Elements)
                     {
-                        if (!_transactionDb.TableExists(segmentId))
-                            _transactionDb.CreateIndexedSegmentTable(spec);
-                        else if (!_transactionDb.TableColumnExists(segmentId, "ErrorId"))
-                            _transactionDb.AddErrorIdToIndexedSegmentTable(segmentId);
+                        if (element.Type == ElementDataTypeEnum.Identifier && !string.IsNullOrEmpty(element.QualifierSetId) && element.AllowedIdentifiers.Count > 0)
+                        {
+                            if (_commonDb.ElementCountInX12CodeListTable(element.QualifierSetId) == 0)
+                            {
+                                foreach (var identifier in element.AllowedIdentifiers)
+                                    _commonDb.AddToX12CodeListTable(element.QualifierSetId, identifier.ID, identifier.Description);
+                            }
+                        }
                     }
                 }
 
                 if (!_transactionDb.ViewExists("Entity")
-                    && _indexedSegments.Contains("NM1")
-                    && _indexedSegments.Contains("N3")
-                    && _indexedSegments.Contains("N4")
-                    && _indexedSegments.Contains("PER")
-                    && _indexedSegments.Contains("DMG"))
+                    && _specs.ContainsKey("NM1")
+                    && _specs.ContainsKey("N3")
+                    && _specs.ContainsKey("N4")
+                    && _specs.ContainsKey("PER")
+                    && _specs.ContainsKey("DMG"))
                     _transactionDb.CreateEntityView();
 
                 _schemaEnsured = true;
@@ -549,7 +559,7 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     AddSqlToBatch(segmentSql);
 
 
-                if (_indexedSegments.Contains(segment.SegmentId))
+                if (_specs.ContainsKey(segment.SegmentId))
                 {
                     StringBuilder parsingError = new StringBuilder();
 

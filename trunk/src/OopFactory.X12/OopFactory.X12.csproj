@@ -411,9 +411,11 @@
     <EmbeddedResource Include="Specifications\Ansi-200-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-202-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-203-4010Specification.xml" />
-    <EmbeddedResource Include="Specifications\Ansi-204-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-204-Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-205-4010Specification.xml" />
-    <EmbeddedResource Include="Specifications\Ansi-206-4010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-206-4010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Specifications\Ansi-211-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-212-4010Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-213-4010Specification.xml" />

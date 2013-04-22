@@ -138,7 +138,10 @@ namespace OopFactory.X12.Parsing
                             {
                                 var qualifierSet = set.QualifierSets.FirstOrDefault(qs => qs.Name == element.QualifierSetRef);
                                 if (qualifierSet != null)
+                                {
                                     element.AllowedIdentifiers.AddRange(qualifierSet.AllowedIdentifiers);
+                                    element.QualifierSetId = qualifierSet.Id;
+                                }
                             }
                         }
 

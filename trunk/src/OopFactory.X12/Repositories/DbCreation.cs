@@ -40,7 +40,7 @@ CREATE TABLE [{0}].[Container](
         public void CreateRevisionTable()
         {
             ExecuteCmd(string.Format(@"
-CREATE TABLE [dbo].[Revision](
+CREATE TABLE [{0}].[Revision](
 	[Id] [{1}] IDENTITY(0,1) NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Comments] [varchar](max) NOT NULL,
@@ -53,7 +53,40 @@ INSERT INTO [dbo].[Revision]
 VALUES ('dbo','Initial Load',getdate(),'system')
 ", _schema, _identitySqlType));
         }
-        
+
+        public void CreateX12CodeListTable()
+        {
+            ExecuteCmd(string.Format(@"CREATE TABLE [{0}].[X12CodeList](
+	[ElementId] [varchar](4) NOT NULL,
+	[Code] [varchar](6) NOT NULL,
+	[Definition] [varchar](500) NULL,
+ CONSTRAINT [PK_X12CodeList] PRIMARY KEY CLUSTERED 
+(
+	[ElementId] ASC,
+	[Code] ASC
+)
+)
+", _schema));
+        }
+
+        public int ElementCountInX12CodeListTable(string elementId)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format(@"select count(*) from [{0}].X12CodeList where ElementId = @elementId", _schema));
+            cmd.Parameters.AddWithValue("@elementId", elementId);
+
+            return Convert.ToInt32(ExecuteScalar(cmd));
+        }
+
+        public void AddToX12CodeListTable(string elementId, string code, string definition)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format(@"insert into [{0}].X12CodeList (ElementId, Code, Definition) VALUES (@elementId, @code, @definition)", _schema));
+            cmd.Parameters.AddWithValue("@elementId", elementId);
+            cmd.Parameters.AddWithValue("@code", code);
+            cmd.Parameters.AddWithValue("@definition", definition);
+
+            ExecuteCmd(cmd);
+        }
+
         public void CreateInterchangeTable()
         {
             ExecuteCmd(string.Format(@"
