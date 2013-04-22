@@ -35,6 +35,8 @@ namespace OopFactory.X12.Parsing.Specification
         public bool AllowedListInclusive { get; set; }
         [XmlAttribute]
         public string QualifierSetRef { get; set; }
+        [XmlAttribute]
+        public string QualifierSetId { get; set; }
 
         [XmlElement(ElementName="Allowed")]
         public List<AllowedIdentifier> AllowedIdentifiers { get; set; }
