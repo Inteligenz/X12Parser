@@ -858,15 +858,27 @@
             <xsl:value-of select="DTP01"/>
           </xsl:attribute>
           <xsl:attribute name="Date">
+            <xsl:variable name="year" select="substring(DTP03,1,4)"/>
+            <xsl:variable name="month" select="substring(DTP03,5,2)"/>
+            <xsl:variable name="day" select="substring(DTP03,7,2)"/>
             <xsl:choose>
               <xsl:when test="DTP02='DT'">
                 <xsl:choose>
-                  <xsl:when test="substring(DTP03,1,4)='9999'">
+                  <xsl:when test="$year='9999'">
                     <!-- This is usually de-identified data that may contain an invalid date value-->
                     <xsl:value-of select="'9999-12-31'"/>
                   </xsl:when>
+                  <xsl:when test="$month='00' and $day='00'">
+                    <xsl:value-of select="concat($year,'-01-01T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
+                  </xsl:when>
+                  <xsl:when test="$month='00'">
+                    <xsl:value-of select="concat($year,'-01-',$day,'T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
+                  </xsl:when>
+                  <xsl:when test="$day='00'">
+                    <xsl:value-of select="concat($year,'-',$month,'-01T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
+                  </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="concat(substring(DTP03,1,4),'-',substring(DTP03,5,2),'-',substring(DTP03,7,2),'T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
+                    <xsl:value-of select="concat($year,'-',$month,'-',$day,'T',substring(DTP03,9,2),':',substring(DTP03,11,2),':00')"/>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
