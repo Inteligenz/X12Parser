@@ -137,7 +137,7 @@ namespace OopFactory.X12.Repositories
                     && _specs.ContainsKey("N4")
                     && _specs.ContainsKey("PER")
                     && _specs.ContainsKey("DMG"))
-                    _transactionDb.CreateEntityView();
+                    _transactionDb.CreateEntityView(_commonDb.Schema);
 
                 _schemaEnsured = true;
             }
@@ -613,7 +613,11 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                             if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
                             {
                                 int intVal = 0;
-                                if (int.TryParse(val, out intVal))
+                                if (string.IsNullOrWhiteSpace(val))
+                                {
+                                    sql.Append("NULL, ");
+                                }
+                                else if (int.TryParse(val, out intVal))
                                 {
                                     decimal denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
                                     sql.AppendFormat("{0}, ", (decimal)intVal / denominator);
@@ -629,7 +633,12 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                             else
                             {
                                 if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
-                                    sql.AppendFormat("{0}, ", val);
+                                {
+                                    if (!string.IsNullOrWhiteSpace(val))
+                                        sql.AppendFormat("{0}, ", val);
+                                    else
+                                        sql.Append("NULL, ");
+                                }
                                 else
                                     sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
                             }
