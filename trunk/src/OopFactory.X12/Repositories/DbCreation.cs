@@ -202,23 +202,31 @@ CONSTRAINT [PK_ParsingError_{0}] PRIMARY KEY CLUSTERED
 )", _schema, _identitySqlType));
         }
 
-        public void CreateEntityView()
+        public void CreateEntityView(string commonSchema)
         {
             ExecuteCmd(string.Format(@"
 CREATE VIEW [{0}].[Entity]
   AS
-select  l.Id as EntityId, l.EntityIdentifierCode, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, l.ParentLoopId, l.SpecLoopId
+select  l.Id as EntityId, l.EntityIdentifierCode, eic.Definition as EntityIdentifier
+, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, l.ParentLoopId, l.SpecLoopId, l.StartingSegmentId
+, Name = isnull(n1.[02], case nm1.[02] when '2' then nm1.[03] when '1' then nm1.[03] + ', ' + nm1.[04] + isnull(' ' + nm1.[05],'') end)
 , IsPerson = case nm1.[02] when '1' then 1 else 0 end
 , LastName = nm1.[03]
 , FirstName = nm1.[04]
 , MiddleName = nm1.[05]
 , NamePrefix = nm1.[06]
 , NameSuffix = nm1.[07]
-, Ssn = case nm1.[08] when '34' then nm1.[09] 
-                      else (select [02] from [{0}].REF where l.Id = ref.ParentLoopId and [01] = 'SY') end
-, TelephoneNumber = coalesce((select [04] from [{0}].PER where per.ParentLoopId = l.Id and per.[03]='TE')
-                    ,(select [06] from [{0}].PER where per.ParentLoopId = l.Id and per.[05]='TE')
-                    ,(select [08] from [{0}].PER where per.ParentLoopId = l.Id and per.[07]='TE'))
+, IdQualifier = isnull(n1.[03],nm1.[08])
+, Identification = isnull(n1.[04],nm1.[09])
+, Ssn = case when n1.[03] = '34' then n1.[04]
+             when nm1.[08] = '34' then nm1.[09] 
+             else (select top 1 [02] from [{0}].REF where l.Id = ref.ParentLoopId and [01] = 'SY') end
+, Npi = case when n1.[03] = 'XX' then n1.[04]
+             when nm1.[08] = 'XX' then nm1.[09]
+             else (select top 1 [02] from [{0}].REF where l.Id = ref.ParentLoopId and [01] = 'HPI') end
+, TelephoneNumber = coalesce((select top 1 [04] from [{0}].PER where per.ParentLoopId = l.Id and per.[03]='TE')
+                    ,(select top 1 [06] from [{0}].PER where per.ParentLoopId = l.Id and per.[05]='TE')
+                    ,(select top 1 [08] from [{0}].PER where per.ParentLoopId = l.Id and per.[07]='TE'))
 , AddressLine1 = n3.[01]
 , AddressLine2 = n3.[02]
 , City = n4.[01]
@@ -229,10 +237,13 @@ select  l.Id as EntityId, l.EntityIdentifierCode, l.InterchangeId, l.Transaction
 , DateOfBirth = dmg.[02]
 , Gender = dmg.[03]
 from [{0}].[Loop] l
-join [{0}].[NM1] on l.Id = nm1.LoopId
+left join [{1}].X12CodeList eic on l.EntityIdentifierCode = eic.Code and eic.ElementId = '98'
+left join [{0}].[N1] on l.Id = n1.LoopId
+left join [{0}].[NM1] on l.Id = nm1.LoopId
 left join [{0}].N3 on l.Id = n3.ParentLoopId
 left join [{0}].N4 on l.Id = n4.ParentLoopId
-left join [{0}].[DMG] on l.Id = dmg.ParentLoopId ", _schema));
+left join [{0}].[DMG] on l.Id = dmg.ParentLoopId
+where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ", _schema, commonSchema));
         }
 
         public void CreateIndexedSegmentTable(SegmentSpecification spec)
