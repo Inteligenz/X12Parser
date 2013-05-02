@@ -49715,7 +49715,7 @@
     <Element Name="Quantity" Reference="04" Type="R" MinLength="1" MaxLength="15" />
     <Element Name="Facility Code Value" Reference="05" Type="AN" MinLength="1" MaxLength="3" />
     <Element Name="Industry Code" Reference="06" Type="AN" MinLength="1" MaxLength="30" />
-    <Element Name="Diagnosis Code Pointer" Reference="07" Type="N" MinLength="1" MaxLength="2" />
+    <Element Name="Diagnosis Code Pointer" Reference="07" Type="N" MinLength="1" MaxLength="35" />
     <Element Name="Monetary Amount" Reference="08" Type="R" MinLength="1" MaxLength="18" />
     <Element Name="Yes/No Condition or Response Code" Reference="09" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Yes/No Condition or Response Code" />
     <Element Name="Multiple Procedure Code" Reference="10" Type="ID" MinLength="1" MaxLength="2" QualifierSetRef="Multiple Procedure Code" />
