@@ -16,25 +16,32 @@ namespace OopFactory.X12.Parsing
     {
         private ISpecificationFinder _specFinder;
         private bool _throwExceptionOnSyntaxErrors;
+        private char[] _ignoredChars;
 
-        public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors)
+        public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors, char[] ignoredChars)
         {
             _specFinder = specFinder;
             _throwExceptionOnSyntaxErrors = throwExceptionOnSyntaxErrors;
+            _ignoredChars = ignoredChars;
+        }
+
+        public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors)
+            : this(specFinder, throwExceptionOnSyntaxErrors, new char[] { })
+        {
         }
 
         public X12Parser(ISpecificationFinder specFinder)
-            : this(specFinder, true)
+            : this(specFinder, true, new char[] {})
         {
         }
 
         public X12Parser(bool throwExceptionsOnSyntaxErrors)
-            : this(new SpecificationFinder(), throwExceptionsOnSyntaxErrors)
+            : this(new SpecificationFinder(), throwExceptionsOnSyntaxErrors, new char[] { })
         {
         }
 
         public X12Parser()
-            : this(new SpecificationFinder(), true)
+            : this(new SpecificationFinder(), true, new char[] { })
         {
 
         }
@@ -86,7 +93,7 @@ namespace OopFactory.X12.Parsing
         {
             var envelopes = new List<Interchange>();
 
-            using (X12StreamReader reader = new X12StreamReader(stream, encoding))
+            using (X12StreamReader reader = new X12StreamReader(stream, encoding, _ignoredChars))
             {
                 Interchange envelop = new Interchange(_specFinder, reader.CurrentIsaSegment);
                 envelopes.Add(envelop);

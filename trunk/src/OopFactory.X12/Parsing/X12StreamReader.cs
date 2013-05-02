@@ -13,8 +13,9 @@ namespace OopFactory.X12.Parsing
         private X12DelimiterSet _delimiters;
         private string _gsSegment;
         private string _transactionCode;
+        private char[] _ignoredChars;
 
-        public X12StreamReader(Stream stream, Encoding encoding)
+        public X12StreamReader(Stream stream, Encoding encoding, char[] ignoredChars)
         {
             _reader = new StreamReader(stream, encoding);
             char[] header = new char[106];
@@ -22,6 +23,12 @@ namespace OopFactory.X12.Parsing
                 throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
             _delimiters = new X12DelimiterSet(header);
             _isaSegment = new string(header);
+            _ignoredChars = ignoredChars;
+        }
+
+        public X12StreamReader(Stream stream, Encoding encoding)
+            : this(stream, encoding, new char[] { })
+        {
         }
 
         public X12DelimiterSet Delimiters
@@ -76,6 +83,8 @@ namespace OopFactory.X12.Parsing
             char[] one = new char[1];
             while (_reader.Read(one, 0, 1) == 1)
             {
+                if (_ignoredChars.Contains(one[0]))
+                    continue;
                 if (one[0] == _delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
                     continue;
                 else if(one[0] == _delimiters.SegmentTerminator)

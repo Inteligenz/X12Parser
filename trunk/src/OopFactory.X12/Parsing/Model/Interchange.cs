@@ -23,7 +23,7 @@ namespace OopFactory.X12.Parsing.Model
             _functionGroups = new List<FunctionGroup>();
         }
 
-        internal Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production, X12DelimiterSet delimiters)
+        public Interchange(ISpecificationFinder specFinder, DateTime date, int controlNumber, bool production, X12DelimiterSet delimiters)
             : base(null, delimiters, String.Format("ISA{1}00{1}          {1}00{1}          {1}01{1}SENDERID HERE  {1}01{1}RECIEVERID HERE{1}{3:yyMMdd}{1}{3:HHmm}{1}U{1}00401{1}{4:000000000}{1}1{1}{5}{1}{2}{0}",
                 delimiters.SegmentTerminator, delimiters.ElementSeparator, delimiters.SubElementSeparator, date, controlNumber, production ? "P" : "T"))
         {
