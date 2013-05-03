@@ -653,6 +653,13 @@
         <xsl:attribute name="ToothCode">
           <xsl:value-of select="TOO02"/>
         </xsl:attribute>
+      <xsl:if test="string-length(TOO03)>0 and string-length(TOO03/TOO0301)=0">
+        <ToothSurface>
+          <xsl:attribute name="Code">
+            <xsl:value-of select="TOO03"/>
+          </xsl:attribute>
+        </ToothSurface>
+      </xsl:if>
       <xsl:if test="string-length(TOO03/TOO0301)>0">
         <ToothSurface>
           <xsl:attribute name="Code">
