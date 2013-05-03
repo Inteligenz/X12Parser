@@ -376,8 +376,8 @@ namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
               LX*2~
                 SV3*AD:D5820*350***I*1~
                 TOO*JP*8~
-                TOO*JP*9~
-                TOO*JP*13~
+                TOO*JP*9*M~
+                TOO*JP*13*M:O~
     SE*35*873501~
   GE*1*31~
 IEA*1*000000031~";
