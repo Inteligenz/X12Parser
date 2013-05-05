@@ -24,7 +24,7 @@ namespace OopFactory.X12.Repositories
         public string LevelCode { get; set; }
         public string StartingSegmentId { get; set; }
         public string EntityIdentifierCode { get; set; }
-        public T RevisionId { get; set; }
+        public int RevisionId { get; set; }
         public int PositionInInterchange { get; set; }
         public DetachedSegment Segment { get; private set; }
 

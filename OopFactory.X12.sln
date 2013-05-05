@@ -36,9 +36,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.AcknowledgeX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.ImportX12", "src\OopFactory.X12.ImportX12\OopFactory.X12.ImportX12.csproj", "{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Tests.Integration", "tests\OopFactory.X12.Tests.Integration\OopFactory.X12.Tests.Integration.csproj", "{66441684-A8F7-4C9F-AB0F-5F9448352EF1}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -84,6 +86,10 @@ Global
 		SccProjectUniqueName12 = src\\OopFactory.X12.ImportX12\\OopFactory.X12.ImportX12.csproj
 		SccProjectName12 = src/OopFactory.X12.ImportX12
 		SccLocalPath12 = src\\OopFactory.X12.ImportX12
+		SccProjectUniqueName13 = tests\\OopFactory.X12.Tests.Integration\\OopFactory.X12.Tests.Integration.csproj
+		SccProjectTopLevelParentUniqueName13 = OopFactory.X12.sln
+		SccProjectName13 = tests/OopFactory.X12.Tests.Integration
+		SccLocalPath13 = tests\\OopFactory.X12.Tests.Integration
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OopFactory.X12.vsmdi
@@ -217,6 +223,16 @@ Global
 		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|x86.ActiveCfg = Release|x86
 		{0F2CD40F-4B51-48CC-AEA3-9F43EB0A3789}.Release|x86.Build.0 = Release|x86
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,5 +244,6 @@ Global
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 		{9A5654D7-0DF6-448C-A803-41F6AE62E175} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{66441684-A8F7-4C9F-AB0F-5F9448352EF1} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 	EndGlobalSection
 EndGlobal

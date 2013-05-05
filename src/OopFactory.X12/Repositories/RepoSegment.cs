@@ -18,7 +18,7 @@ namespace OopFactory.X12.Repositories
         public T? TransactionSetId { get; set; }
         public T? ParentLoopId { get; set; }
         public T? LoopId { get; set; }
-        public T RevisionId { get; set; }
+        public int RevisionId { get; set; }
         public int PositionInInterchange { get; set; }
         public string SpecLoopId { get; set; }
         public DetachedSegment Segment { get; private set; }

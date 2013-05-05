@@ -114,7 +114,7 @@ namespace OopFactory.X12.Repositories
                 foreach (var spec in _specs.Values)
                 {
                     if (!_transactionDb.TableExists(spec.SegmentId))
-                        _transactionDb.CreateIndexedSegmentTable(spec);
+                        _transactionDb.CreateIndexedSegmentTable(spec, _commonDb.Schema);
                     else if (!_transactionDb.TableColumnExists(spec.SegmentId, "ErrorId"))
                         _transactionDb.AddErrorIdToIndexedSegmentTable(spec.SegmentId);
 
@@ -217,24 +217,27 @@ namespace OopFactory.X12.Repositories
         /// <param name="comments">The reason for the revision</param>
         /// <param name="revisedBy">Ther username of the user who has made the revision</param>
         /// <returns></returns>
-        public T SaveRevision(IList<RepoSegment<T>> segments, string comments, string revisedBy)
+        public int SaveRevision(IList<RepoSegment<T>> segments, string comments, string revisedBy)
         {
-            T? revisionId;
+            int? revisionId;
             using (SqlConnection conn = new SqlConnection(_dsn))
             {
                 conn.Open();
                 var sqlTran = conn.BeginTransaction();
                 try
                 {
-                    SqlCommand cmd = new SqlCommand(string.Format(@"
+
+                    string sql = string.Format(@"
 insert into [{0}].[Revision] (SchemaName,Comments,RevisionDate,RevisedBy) 
 values (@schemaName, @comments, getdate(), @revisedBy)
 
-select scope_identity()", _commonDb.Schema), conn, sqlTran);
+select scope_identity()", _commonDb.Schema);
+
+                    SqlCommand cmd = new SqlCommand(sql, conn, sqlTran);
                     cmd.Parameters.AddWithValue("@schemaName", _schema);
                     cmd.Parameters.AddWithValue("@comments", comments);
                     cmd.Parameters.AddWithValue("@revisedBy", revisedBy);
-                    revisionId = ConvertT(ExecuteScalar(cmd));
+                    revisionId = Convert.ToInt32(ExecuteScalar(cmd));
 
                     foreach (var segment in segments)
                     {
@@ -296,6 +299,29 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
             ExecuteCmd(cmd);
         }
 
+        private string GetContainerIdSql(string segmentId)
+        {
+            if (typeof(T) == typeof(Guid))
+            {
+                return string.Format(@"
+DECLARE @id uniqueidentifier
+
+SET @id = newid()
+
+INSERT INTO [{1}].[Container] VALUES (@id, '{0}','{2}') ", _schema, _commonDb.Schema, segmentId);
+            }
+            else
+            {
+                return string.Format(@"
+DECLARE @id int
+
+INSERT INTO [{1}].[Container] VALUES ('{0}','{2}')
+
+SELECT @id = scope_identity() ", _schema, _commonDb.Schema, segmentId);
+            }
+
+        }
+
         private T SaveInterchange(Interchange interchange, string filename, string userName)
         {
             DateTime date = DateTime.MaxValue;
@@ -308,19 +334,12 @@ select scope_identity()", _commonDb.Schema), conn, sqlTran);
             {
                 Trace.TraceWarning("Interchange date '{0}' and time '{1}' could not be parsed. {2}", interchange.GetElement(9), interchange.GetElement(10), exc.Message);
             }
-            SqlCommand cmd = new SqlCommand(string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] VALUES ('{0}','ISA')
-
-SELECT @id = scope_identity()
-
+            
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql("ISA") + string.Format(@"
 INSERT INTO [{0}].[Interchange] (Id, SenderId, ReceiverId, ControlNumber, [Date], SegmentTerminator, ElementSeparator, ComponentSeparator, Filename, HasError, CreatedBy, CreatedDate)
 VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, @elementSeparator, @componentSeparator, @filename, 0, @createdBy, getdate())
 
-SELECT @id
-
-", _schema, _commonDb.Schema));
+SELECT @id ", _schema));
             cmd.Parameters.AddWithValue("@senderId", interchange.InterchangeSenderId);
             cmd.Parameters.AddWithValue("@receiverId", interchange.InterchangeReceiverId);
             cmd.Parameters.AddWithValue("@controlNumber", interchange.InterchangeControlNumber);
@@ -373,13 +392,7 @@ SELECT @id
                 Trace.TraceWarning("FunctionalGroup version number '{0}' will be truncated because it exceeds the max length of 12.", functionGroup.VersionIdentifierCode);
             }
 
-            SqlCommand cmd = new SqlCommand(string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] VALUES ('{0}','GS')
-
-SELECT @id = scope_identity()
-
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql("GS") + string.Format(@"
 INSERT INTO [{0}].[FunctionalGroup] (Id, InterchangeId, FunctionalIdCode, Date, ControlNumber, Version)
 VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)
 
@@ -403,13 +416,7 @@ SELECT @id
                 Trace.TraceWarning("Transaction control number '{0}' will be truncated because it exceeds the max length of 9.",transaction.ControlNumber);
             }
 
-            SqlCommand cmd = new SqlCommand(string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] VALUES ('{0}','ST')
-
-SELECT @id = scope_identity()
-
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql("ST") + string.Format(@"
 INSERT INTO [{0}].[TransactionSet] (Id, InterchangeId, FunctionalGroupId, IdentifierCode, ControlNumber) 
 VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber)
 
@@ -425,13 +432,7 @@ SELECT @id
         
         private T SaveHierarchicalLoop(HierarchicalLoop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
         {
-            SqlCommand cmd = new SqlCommand(string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] VALUES ('{0}','HL')
-
-SELECT @id = scope_identity()
-
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql("HL") + string.Format(@"
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @levelId, @levelCode, 'HL')
 
@@ -465,13 +466,7 @@ SELECT @id", _schema, _commonDb.Schema));
         {
             string entityIdentifierCode = GetEntityTypeCode(loop);
 
-            SqlCommand cmd = new SqlCommand(string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] VALUES ('{0}',@startingSegment)
-
-SELECT @id = scope_identity()
-
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql(loop.SegmentId) + string.Format(@"
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @startingSegment, @entityIdentifierCode)
 
@@ -495,7 +490,7 @@ SELECT @id", _schema, _commonDb.Schema));
             }
         }
 
-        private bool SegmentHasChanged(DetachedSegment segment, int positionInInterchange, T interchangeId, T? previousRevisionId)
+        private bool SegmentHasChanged(DetachedSegment segment, int positionInInterchange, T interchangeId, int? previousRevisionId)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -529,7 +524,7 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
                 }
             }
         }
-        protected virtual void SaveSegment(SqlTransaction tran, DetachedSegment segment, int positionInInterchange, T interchangeId, T? functionalGroupId = null, T? transactionSetId = null, T? parentLoopId = null, T? loopId = null, T? revisionId = null, T? previousRevisionId = null, bool deleted = false)
+        protected virtual void SaveSegment(SqlTransaction tran, DetachedSegment segment, int positionInInterchange, T interchangeId, T? functionalGroupId = null, T? transactionSetId = null, T? parentLoopId = null, T? loopId = null, int? revisionId = null, int? previousRevisionId = null, bool deleted = false)
         {
             if (!revisionId.HasValue || SegmentHasChanged(segment, positionInInterchange, interchangeId, previousRevisionId) || deleted)
             {
@@ -537,12 +532,12 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
 INSERT INTO [{0}].[Segment] (InterchangeId, FunctionalGroupId, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, PositionInInterchange, SegmentId, Segment)
 VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ", 
                     _schema,
-                    interchangeId,
-                    (object)functionalGroupId ?? "NULL",
-                    (object)transactionSetId ?? "NULL",
-                    (object)parentLoopId ?? "NULL",
-                    (object)loopId ?? "NULL",
-                    (object)revisionId ?? "NULL",
+                    string.Format("'{0}'", interchangeId),
+                    (object)functionalGroupId == null ? "NULL" : string.Format("'{0}'", functionalGroupId),
+                    (object)transactionSetId == null ? "NULL" : string.Format("'{0}'", transactionSetId),
+                    (object)parentLoopId == null ? "NULL" : string.Format("'{0}'", parentLoopId),
+                    (object)loopId == null ? "NULL" : string.Format("'{0}'", loopId),
+                    (object)revisionId == null ? "NULL" : string.Format("'{0}'", revisionId),
                     deleted ? "1" : "0",
                     positionInInterchange,
                     segment.SegmentId.Replace("'", "''"),
@@ -585,13 +580,13 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     StringBuilder sql = new StringBuilder();
                     sql.AppendFormat(@"INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, {2}, ErrorId)
                     VALUES ({3}, {4}, {5}, {6}, {7}, isnull({8},0), {9}, ",
-                        _schema, segment.SegmentId, string.Join(",", fieldNames), 
-                        interchangeId,
+                        _schema, segment.SegmentId, string.Join(",", fieldNames),
+                    string.Format("'{0}'", interchangeId),
                         positionInInterchange,
-                        (object)transactionSetId ?? "NULL",
-                        (object)parentLoopId ?? "NULL",
-                        (object)loopId ?? "NULL",
-                        (object)revisionId ?? "NULL",
+                        (object)transactionSetId == null ? "NULL" : string.Format("'{0}'", transactionSetId),
+                        (object)parentLoopId == null ? "NULL" : string.Format("'{0}'", parentLoopId),
+                        (object)loopId == null ? "NULL" : string.Format("'{0}'", loopId),
+                        (object)revisionId == null ? "NULL" : string.Format("'{0}'", revisionId),
                         deleted ? "1" : "0");
 
                     for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
@@ -648,7 +643,22 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     string errorMessage = parsingError.ToString();
                     if (!string.IsNullOrWhiteSpace(errorMessage)) 
                     {
-                        SqlCommand errCmd = new SqlCommand(string.Format("INSERT INTO [{0}].ParsingError (InterchangeId, PositionInInterchange, RevisionId, Message) VALUES (@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) SELECT scope_identity()", _schema));
+                        var errSql = string.Format(@"
+INSERT INTO [{0}].ParsingError (InterchangeId, PositionInInterchange, RevisionId, Message) 
+VALUES (@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) 
+SELECT scope_identity()", _schema);
+
+                        if (typeof(T) == typeof(Guid))
+                        {
+                            errSql = string.Format(@"DECLARE @id uniqueidentifier
+SET @id = newid()
+INSERT INTO [{0}].ParsingError (Id, InterchangeId, PositionInInterchange, RevisionId, Message) 
+VALUES (@id,@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) 
+SELECT @id", _schema);
+                        }
+
+                        SqlCommand errCmd = new SqlCommand(errSql);
+
                         errCmd.Parameters.AddWithValue("@interchangeId", interchangeId);
                         errCmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
                         errCmd.Parameters.AddWithValue("@revisionId", (object) revisionId ?? DBNull.Value);
@@ -657,7 +667,7 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                         errorId = ConvertT(ExecuteScalar(errCmd));
 
                     }
-                    sql.AppendFormat("{0})", (object)errorId ?? "NULL");
+                    sql.AppendFormat("{0})", (object)errorId == null ? "NULL":string.Format("'{0}'", errorId));
 
                     if (tran != null)
                     {
@@ -691,8 +701,15 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
             string sql = _batchSql.ToString();
             if (!string.IsNullOrWhiteSpace(sql))
             {
-                ExecuteCmd(new SqlCommand(sql));
-                InitBatch();
+                try
+                {
+                    ExecuteCmd(new SqlCommand(sql));
+                    InitBatch();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
