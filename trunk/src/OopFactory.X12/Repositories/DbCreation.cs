@@ -18,7 +18,9 @@ namespace OopFactory.X12.Repositories
         {
             _dsn = dsn;
             _schema = schema;
-            if (typeof(T) == typeof(long))
+            if (typeof(T) == typeof(Guid))
+                _identitySqlType = SqlDbType.UniqueIdentifier;
+            else if (typeof(T) == typeof(long))
                 _identitySqlType = SqlDbType.BigInt;
             else
                 _identitySqlType = SqlDbType.Int;            
@@ -30,18 +32,18 @@ namespace OopFactory.X12.Repositories
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Container](
-	[Id] [{1}] IDENTITY(1,1) NOT NULL,
+	[Id] [{1}] {2} NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Type] [varchar](3) NOT NULL
     CONSTRAINT [PK_Container_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema, _identitySqlType));
+)", _schema, _identitySqlType, _identitySqlType == SqlDbType.UniqueIdentifier ? "DEFAULT (newid())" : "IDENTITY(1,1)"));
         }
 
         public void CreateRevisionTable()
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Revision](
-	[Id] [{1}] IDENTITY(0,1) NOT NULL,
+	[Id] [int] IDENTITY(0,1) NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Comments] [varchar](max) NOT NULL,
     [RevisionDate] datetime NOT NULL,
@@ -49,9 +51,10 @@ CREATE TABLE [{0}].[Revision](
     CONSTRAINT [PK_Revision_dbo] PRIMARY KEY CLUSTERED ( [Id] ASC )
 )
 
-INSERT INTO [dbo].[Revision]
+INSERT INTO [{0}].[Revision] (SchemaName,Comments,RevisionDate,RevisedBy)
 VALUES ('dbo','Initial Load',getdate(),'system')
-", _schema, _identitySqlType));
+", _schema));
+
         }
 
         public void CreateX12CodeListTable()
@@ -159,7 +162,7 @@ CREATE TABLE [{0}].[Loop](
 CREATE TABLE [{0}].[Segment](
 	[InterchangeId] [{1}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
-    [RevisionId] [{1}] NOT NULL,
+    [RevisionId] [int] NOT NULL,
 	[FunctionalGroupId] [{1}] NULL,
 	[TransactionSetId] [{1}] NULL,
     [ParentLoopId] [{1}] NULL,
@@ -190,16 +193,16 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
         {
             ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[ParsingError](
-	[Id] [{1}] IDENTITY(1,1) NOT NULL,
+	[Id] [{1}] {2} NOT NULL,
     [InterchangeId] [{1}] NOT NULL,
     [PositionInInterchange] [int] NOT NULL,
-    [RevisionId] [{1}] NOT NULL,
+    [RevisionId] [int] NOT NULL,
     [Message] [varchar](max) NOT NULL,
 CONSTRAINT [PK_ParsingError_{0}] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )
-)", _schema, _identitySqlType));
+)", _schema, _identitySqlType, _identitySqlType == SqlDbType.UniqueIdentifier ? "DEFAULT (newid())" : "IDENTITY(1,1)"));
         }
 
         public void CreateEntityView(string commonSchema)
@@ -246,7 +249,7 @@ left join [{0}].[DMG] on l.Id = dmg.ParentLoopId
 where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ", _schema, commonSchema));
         }
 
-        public void CreateIndexedSegmentTable(SegmentSpecification spec)
+        public void CreateIndexedSegmentTable(SegmentSpecification spec, string commonSchema)
         {
                 var sql = new StringBuilder();
 
@@ -254,7 +257,7 @@ where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ", _schem
 CREATE TABLE [{0}].[{1}](
 	[InterchangeId] [{2}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
-    [RevisionId] [{2}] NOT NULL,
+    [RevisionId] [int] NOT NULL,
     [TransactionSetId] [{2}] NULL,
     [ParentLoopId] [{2}] NULL,
     [LoopId] [{2}] NULL,
@@ -321,10 +324,11 @@ CREATE VIEW [{0}].[LastRev{1}]
 AS
 select *
 from [{0}].[{1}] a
-where RevisionId = (select max(RevisionId) 
+where RevisionId = (select max([RevisionId])
                     from [{0}].[{1}] b 
                     where a.InterchangeId = b.InterchangeId 
-                      and a.PositionInInterchange = b.PositionInInterchange)", _schema, spec.SegmentId));
+                      and a.PositionInInterchange = b.PositionInInterchange
+                    )", _schema, spec.SegmentId, commonSchema));
             
         }
 
@@ -491,7 +495,7 @@ RETURN
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].GetTransactionSetSegments
 (	
-	@transactionSetId {1}, @includeControlSegments bit, @revisionId {1}
+	@transactionSetId {1}, @includeControlSegments bit, @revisionId int
 )
 RETURNS TABLE 
 AS
@@ -538,7 +542,7 @@ RETURN
             ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[GetTransactionSegments]
 (	
-	@loopId {1}, @includeControlSegments bit, @revisionId {1}
+	@loopId {1}, @includeControlSegments bit, @revisionId int
 )
 RETURNS TABLE 
 AS

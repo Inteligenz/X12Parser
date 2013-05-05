@@ -19,7 +19,9 @@ namespace OopFactory.X12.Repositories
 
         protected T ConvertT(object val)
         {
-            if (typeof(T) == typeof(long))
+            if (typeof(T) == typeof(Guid))
+                return (T)(object)Guid.Parse(val.ToString());
+            else if (typeof(T) == typeof(long))
                 return (T)(object)Convert.ToInt64(val);
             else
                 return (T)(object)Convert.ToInt32(val);
@@ -31,7 +33,7 @@ namespace OopFactory.X12.Repositories
             {
                 InterchangeId = ConvertT(reader["InterchangeId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
-                RevisionId = ConvertT(reader["RevisionId"]),
+                RevisionId = Convert.ToInt32(reader["RevisionId"]),
                 Deleted = Convert.ToBoolean(reader["Deleted"]),
                 SpecLoopId = Convert.ToString(reader["SpecLoopId"])
             };
@@ -57,7 +59,7 @@ namespace OopFactory.X12.Repositories
         /// <param name="revisionId">Use 0 for the original version Int32.MaxValue when you want the latest revision</param>
         /// <param name="includeControlSegments">This will include the ISA, GS, GE and IEA segments</param>
         /// <returns></returns>
-        public List<RepoSegment<T>> GetTransactionSetSegments(T transactionSetId, T revisionId, bool includeControlSegments = false)
+        public List<RepoSegment<T>> GetTransactionSetSegments(T transactionSetId, int revisionId, bool includeControlSegments = false)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -94,7 +96,7 @@ order by PositionInInterchange
         /// <param name="revisionId">Use 0 for the original version and Int32.MaxValue for the latest version</param>
         /// <param name="includeControlSegments">This will include the ISA, GS, GE and IEA segments</param>
         /// <returns></returns>
-        public List<RepoSegment<T>> GetTransactionSegments(T loopId, T revisionId, bool includeControlSegments = false)
+        public List<RepoSegment<T>> GetTransactionSegments(T loopId, int revisionId, bool includeControlSegments = false)
         {
             using (var conn = new SqlConnection(_dsn))
             {
@@ -213,7 +215,7 @@ where ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
                 LevelCode = Convert.ToString(reader["LevelCode"]),
                 StartingSegmentId = Convert.ToString(reader["StartingSegmentId"]),
                 EntityIdentifierCode = Convert.ToString(reader["EntityIdentifierCode"]),
-                RevisionId = ConvertT(reader["RevisionId"]),
+                RevisionId = Convert.ToInt32(reader["RevisionId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"])
             };
             if (!reader.IsDBNull(reader.GetOrdinal("ParentLoopId")))
@@ -262,16 +264,172 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
                 cmd.Parameters.AddWithValue("@startingSegmentId", (object)criteria.StartingSegmentId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@entityIdentifierCode", (object)criteria.EntityIdentifierCode ?? DBNull.Value);
 
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-
                 var list = new List<RepoLoop<T>>();
 
-                while (reader.Read())
+                conn.Open();
+                using (var reader = cmd.ExecuteReader())
                 {
-                    list.Add(RepoLoopFromReader(reader));
+                    while (reader.Read())
+                    {
+                        list.Add(RepoLoopFromReader(reader));
+                    }                    
                 }
-                reader.Close();
+                return list;
+            }
+        }
+
+        private RepoEntity<T> RepoEntityFromReader(SqlDataReader reader)
+        {
+            var entity = new RepoEntity<T>();
+            entity.EntityId = ConvertT(reader["EntityId"]);
+            entity.EntityIdentifierCode = Convert.ToString(reader["EntityIdentifierCode"]);
+            entity.EntityIdentifier = Convert.ToString(reader["EntityIdentifier"]);
+            entity.InterchangeId = ConvertT(reader["InterchangeId"]);
+            entity.TransactionSetId = ConvertT(reader["TransactionSetId"]);
+            entity.TransactionSetCode = Convert.ToString(reader["TransactionSetCode"]);
+            entity.ParentLoopId = ConvertT(reader["ParentLoopId"]);
+            entity.SpecLoopId = Convert.ToString(reader["SpecLoopId"]);
+            entity.StartingSegmentId = Convert.ToString(reader["StartingSegmentId"]);
+            entity.Name = Convert.ToString(reader["Name"]);
+            entity.LastName = Convert.ToString(reader["LastName"]);
+            entity.FirstName = Convert.ToString(reader["FirstName"]);
+            entity.MiddleName = Convert.ToString(reader["MiddleName"]);
+            entity.NamePrefix = Convert.ToString(reader["NamePrefix"]);
+            entity.NameSuffix = Convert.ToString(reader["NameSuffix"]);
+            entity.IdQualifier = Convert.ToString(reader["IdQualifier"]);
+            entity.Identification = Convert.ToString(reader["Identification"]);
+            entity.Ssn = Convert.ToString(reader["Ssn"]);
+            entity.Npi = Convert.ToString(reader["Npi"]);
+            entity.TelephoneNumber = Convert.ToString(reader["TelephoneNumber"]);
+            entity.AddressLine1 = Convert.ToString(reader["AddressLine1"]);
+            entity.AddressLine2 = Convert.ToString(reader["AddressLine2"]);
+            entity.City = Convert.ToString(reader["City"]);
+            entity.StateCode = Convert.ToString(reader["StateCode"]);
+            entity.PostalCode = Convert.ToString(reader["PostalCode"]);
+            entity.County = Convert.ToString(reader["County"]);
+            entity.CountryCode = Convert.ToString(reader["CountryCode"]);
+            entity.Gender = Convert.ToString(reader["Gender"]);
+
+            if (!reader.IsDBNull(reader.GetOrdinal("IsPerson")))
+                entity.IsPerson = Convert.ToBoolean(reader["IsPerson"]);
+
+            if (!reader.IsDBNull(reader.GetOrdinal("DateOfBirth")))
+            {
+                try
+                {
+                    entity.DateOfBirth = DateTime.ParseExact(Convert.ToString(reader["DateOfBirth"]),"yyyyMMdd",null);
+                }
+                catch (FormatException)
+                {
+                    System.Diagnostics.Trace.TraceWarning("Could not parse date of birth {1} to a date time for entity ID: {0}", entity.EntityId, reader["DateOfBirth"]);
+                }
+            }
+
+            return entity;
+        }
+
+        private string GetSqlInString(string[] filters)
+        {
+            List<string> quotedValues = new List<string>();
+            foreach (var filter in filters)
+                quotedValues.Add(string.Format("'{0}'", filter.Replace("'","''")));
+            return string.Join(",",quotedValues);
+        }
+
+        public List<RepoEntity<T>> GetEntities(RepoEntitySearchCriteria<T> criteria)
+        {
+            StringBuilder sql = new StringBuilder(string.Format("select * from [{0}].Entity where 1=1 ", _schema));
+
+            if (!string.IsNullOrEmpty(criteria.EntityIdentifierCodes))
+            {
+                var codes = GetSqlInString( criteria.EntityIdentifierCodes.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries));
+                
+                sql.AppendFormat(" and EntityIdentifierCode in ({0})", codes);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.EntityIdentifierContains))
+                sql.AppendFormat(" and EntityIdentifier like '%{0}%'", criteria.EntityIdentifierContains);
+
+            if (criteria.InterchangeId.HasValue)
+                sql.AppendFormat(" and InterchangeId = '{0}'", criteria.InterchangeId.Value);
+
+            if (criteria.TransactionSetId.HasValue)
+                sql.AppendFormat(" and TransactionSetId = '{0}'", criteria.TransactionSetId.Value);
+
+            if (!string.IsNullOrEmpty(criteria.TransactionSetCode))
+                sql.AppendFormat(" and TransactionSetCode = '{0}'", criteria.TransactionSetCode);
+
+            if (criteria.ParentLoopId.HasValue)
+                sql.AppendFormat(" and ParentLoopId = '{0}'", criteria.ParentLoopId.Value);
+
+            if (!string.IsNullOrEmpty(criteria.SpecLoopId))
+                sql.AppendFormat(" and SpecLoopId = '{0}'", criteria.SpecLoopId);
+
+            if (!string.IsNullOrEmpty(criteria.StartingSegmentId))
+                sql.AppendFormat(" and StartingSegmentId = '{0}'", criteria.StartingSegmentId);
+
+            if (!string.IsNullOrEmpty(criteria.NameContains))
+                sql.AppendFormat(" and Name like '%{0}%'", criteria.NameContains);
+
+            if (criteria.IsPerson.HasValue)
+                sql.AppendFormat(" and IsPerson = {0}", criteria.IsPerson.Value ? "1" : "0");
+
+            if (!string.IsNullOrEmpty(criteria.LastNameStartsWith))
+                sql.AppendFormat(" and LastName like '{0}%'", criteria.LastNameStartsWith);
+
+            if (!string.IsNullOrEmpty(criteria.FirstNameContains))
+                sql.AppendFormat(" and FirstName like '%{0}%'", criteria.FirstNameContains);
+
+            if (!string.IsNullOrEmpty(criteria.IdQualifier))
+                sql.AppendFormat(" and IdQualifier = '{0}'", criteria.IdQualifier);
+
+            if (!string.IsNullOrEmpty(criteria.Identification))
+                sql.AppendFormat(" and Identification = '{0}'", criteria.Identification);
+
+            if (!string.IsNullOrEmpty(criteria.Ssn))
+                sql.AppendFormat(" and Ssn = '{0}'", criteria.Ssn);
+
+            if (!string.IsNullOrEmpty(criteria.Npi))
+                sql.AppendFormat(" and Npi = '{0}'", criteria.Npi);
+
+            if (!string.IsNullOrEmpty(criteria.City))
+                sql.AppendFormat(" and City = '{0}'", criteria.City);
+
+            if (!string.IsNullOrEmpty(criteria.StateCode))
+                sql.AppendFormat(" and StateCode = '{0}'", criteria.StateCode);
+
+            if (!string.IsNullOrEmpty(criteria.PostalCode))
+                sql.AppendFormat(" and PostalCode = '{0}'", criteria.PostalCode);
+
+            if (!string.IsNullOrEmpty(criteria.County))
+                sql.AppendFormat(" and County = '{0}'", criteria.County);
+
+            if (!string.IsNullOrEmpty(criteria.CountryCode))
+                sql.AppendFormat(" and CountryCode = '{0}'", criteria.CountryCode);
+
+            if (criteria.DateOfBirthOn.HasValue)
+                sql.AppendFormat(" and DateOfBirth = '{0:yyyyMMdd}'", criteria.DateOfBirthOn);
+
+            if (criteria.DateOfBirthOnOrAfter.HasValue)
+                sql.AppendFormat(" and DateOfBirth >= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrAfter);
+
+            if (criteria.DateOfBirthOnOrBefore.HasValue)
+                sql.AppendFormat(" and DateOfBirth <= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrBefore);
+
+            if (!string.IsNullOrEmpty(criteria.Gender))
+                sql.AppendFormat(" and Gender = '{0}'", criteria.Gender);
+
+            using (var conn = new SqlConnection(_dsn))
+            {
+                var list = new List<RepoEntity<T>>();
+                conn.Open();
+                using (var reader = new SqlCommand(sql.ToString(), conn).ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(RepoEntityFromReader(reader));
+                    }
+                }
 
                 return list;
             }

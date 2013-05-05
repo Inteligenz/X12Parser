@@ -129,6 +129,8 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Repositories\DbCreation.cs" />
+    <Compile Include="Repositories\RepoEntity.cs" />
+    <Compile Include="Repositories\RepoEntitySearchCriteria.cs" />
     <Compile Include="Repositories\RepoLoop.cs" />
     <Compile Include="Repositories\RepoLoopSearchCriteria.cs" />
     <Compile Include="Repositories\RepoSegment.cs" />
@@ -215,7 +217,9 @@
     <EmbeddedResource Include="Specifications\Ansi-837-5010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Specifications\Ansi-5010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-5010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-810-4010Specification.xml" />
@@ -265,7 +269,9 @@
     <EmbeddedResource Include="Specifications\Ansi-210-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Specifications\Ansi-271-5010Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-271-5010Specification.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Specifications\Ansi-866-4010Specification.xml" />
