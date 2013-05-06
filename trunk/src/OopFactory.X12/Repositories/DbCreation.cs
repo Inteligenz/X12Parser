@@ -556,7 +556,7 @@ RETURN
   , ancestorsOtherChildLoops as (
     select distinct l.*
     from transactionLoops tl
-    join [{0}].Loop l on l.ParentLoopId = tl.Id
+    join [{0}].Loop l on l.ParentLoopId = tl.Id and tl.StartingSegmentId <> 'HL'
     where tl.[Level] > 1 or (tl.Level = 1 and l.SpecLoopId <> (select SpecLoopId from [{0}].[Loop] where Id = @loopId))
 
     union all
@@ -573,6 +573,7 @@ RETURN
     where ParentLoopId is null
     and TransactionSetId = (select top 1 TransactionSetID from transactionLoops)
     and l.SpecLoopId <> (select SpecLoopId from [{0}].[Loop] where Id = @loopId)
+    and l.StartingSegmentId <> 'HL'
   )
   , transactionSegments as (
     select *
