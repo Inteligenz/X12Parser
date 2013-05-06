@@ -299,7 +299,7 @@ select scope_identity()", _commonDb.Schema);
             ExecuteCmd(cmd);
         }
 
-        private string GetContainerIdSql(string segmentId)
+        protected virtual string GetContainerIdSql(string segmentId)
         {
             if (typeof(T) == typeof(Guid))
             {
@@ -308,7 +308,9 @@ DECLARE @id uniqueidentifier
 
 SET @id = newid()
 
-INSERT INTO [{1}].[Container] VALUES (@id, '{0}','{2}') ", _schema, _commonDb.Schema, segmentId);
+INSERT INTO [{1}].[Container] VALUES (@id, '{0}','{2}')
+
+SELECT @id ", _schema, _commonDb.Schema, segmentId);
             }
             else
             {
@@ -461,33 +463,57 @@ SELECT @id", _schema, _commonDb.Schema));
 
             return null;
         }
-        
-        private T SaveLoop(Loop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
+
+        protected string GetSaveLoopSql(T id, Loop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
         {
             string entityIdentifierCode = GetEntityTypeCode(loop);
 
-            SqlCommand cmd = new SqlCommand(GetContainerIdSql(loop.SegmentId) + string.Format(@"
-INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
-VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @startingSegment, @entityIdentifierCode)
+            StringBuilder sql = new StringBuilder();
 
-SELECT @id", _schema, _commonDb.Schema));
-            cmd.Parameters.AddWithValue("@parentLoopId", (object)parentLoopId ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
-            cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
-            cmd.Parameters.AddWithValue("@transactioNSetCode", transactionSetCode);
-            cmd.Parameters.AddWithValue("@specLoopId", loop.Specification.LoopId);
-            cmd.Parameters.AddWithValue("@startingSegment", loop.SegmentId);
-            cmd.Parameters.AddWithValue("@entityIdentifierCode", entityIdentifierCode != null ? (object)entityIdentifierCode : DBNull.Value);
+            sql.AppendFormat(@"
+INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
+VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ", _schema
+           , id
+           , !parentLoopId.HasValue ? "NULL" : string.Format("'{0}'", parentLoopId)
+           , interchangeId
+           , transactionSetId
+           , transactionSetCode
+           , loop.Specification.LoopId
+           , loop.SegmentId
+           , entityIdentifierCode == null ? "NULL" : string.Format("'{0}'", entityIdentifierCode)
+           );
+
+            return sql.ToString();
+        }
+        
+        protected virtual T SaveLoop(Loop loop, T interchangeId, T transactionSetId, string transactionSetCode, T? parentLoopId)
+        {
+            T? id = null;
+
+            SqlCommand cmd = new SqlCommand(GetContainerIdSql(loop.SegmentId));
 
             try
             {
-                return ConvertT(ExecuteScalar(cmd));
+                 id = ConvertT(ExecuteScalar(cmd));
             }
             catch (Exception exc)
             {
                 Trace.TraceError(exc.Message);
                 throw;
             }
+
+            try
+            {
+                ExecuteCmd(new SqlCommand(GetSaveLoopSql(id.Value, loop, interchangeId, transactionSetId, transactionSetCode, parentLoopId)
+                    + " SELECT @id"));
+            }
+            catch (Exception exc)
+            {
+                Trace.TraceError(exc.Message);
+                throw;
+            }
+
+            return id.Value;
         }
 
         private bool SegmentHasChanged(DetachedSegment segment, int positionInInterchange, T interchangeId, int? previousRevisionId)
@@ -682,7 +708,7 @@ SELECT @id", _schema);
             }
         }
 
-        private void AddSqlToBatch(string sql, params object[] args)
+        protected void AddSqlToBatch(string sql, params object[] args)
         {
             _batchCount++;
             _batchSql.AppendFormat(sql, args);
