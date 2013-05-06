@@ -319,7 +319,9 @@ DECLARE @id int
 
 INSERT INTO [{1}].[Container] VALUES ('{0}','{2}')
 
-SELECT @id = scope_identity() ", _schema, _commonDb.Schema, segmentId);
+SET @id = scope_identity() 
+
+SELECT @id ", _schema, _commonDb.Schema, segmentId);
             }
 
         }
@@ -504,8 +506,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ", _schema
 
             try
             {
-                ExecuteCmd(new SqlCommand(GetSaveLoopSql(id.Value, loop, interchangeId, transactionSetId, transactionSetCode, parentLoopId)
-                    + " SELECT @id"));
+                ExecuteCmd(new SqlCommand(GetSaveLoopSql(id.Value, loop, interchangeId, transactionSetId, transactionSetCode, parentLoopId)));
             }
             catch (Exception exc)
             {
