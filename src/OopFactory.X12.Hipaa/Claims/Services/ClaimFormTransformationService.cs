@@ -8,6 +8,7 @@ using System.Xml;
 using OopFactory.X12.Hipaa.Claims.Forms;
 using OopFactory.X12.Hipaa.Claims.Forms.Professional;
 using OopFactory.X12.Hipaa.Common;
+using OopFactory.X12.Parsing;
 
 namespace OopFactory.X12.Hipaa.Claims.Services
 {
@@ -20,14 +21,23 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         public ClaimFormTransformationService(
             IClaimToClaimFormTransfomation professionalTransformation,
             IClaimToClaimFormTransfomation institutionalTransformation,
-            IClaimToClaimFormTransfomation dentalTransformation
+            IClaimToClaimFormTransfomation dentalTransformation,
+            X12Parser parser
             )
+            : base(parser)
         {
             _professionalTransformation = professionalTransformation;
             _institutionalTransformation = institutionalTransformation;
             _dentalTransformation = dentalTransformation;
         }
 
+        public ClaimFormTransformationService(
+            IClaimToClaimFormTransfomation professionalTransformation,
+            IClaimToClaimFormTransfomation institutionalTransformation,
+            IClaimToClaimFormTransfomation dentalTransformation)
+            : this(professionalTransformation, institutionalTransformation, dentalTransformation, new X12Parser())
+        {
+        }
 
         public string TransformClaimDocumentToFoXml(ClaimDocument document)
         {
