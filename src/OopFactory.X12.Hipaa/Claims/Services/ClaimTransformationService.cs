@@ -16,6 +16,18 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 {
     public class ClaimTransformationService
     {
+        private X12Parser _parser;
+
+        public ClaimTransformationService(X12Parser parser)
+        {
+            _parser = parser;
+        }
+
+        public ClaimTransformationService()
+            : this(new X12Parser())
+        {
+        }
+
         /// <summary>
         /// Reads a claim that has been st
         /// </summary>
@@ -24,8 +36,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         public ClaimDocument Transform837ToClaimDocument(Stream stream)
         {
 
-            var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(stream);
+            var interchanges = _parser.ParseMultiple(stream);
             ClaimDocument doc = new ClaimDocument();
             foreach (var interchange in interchanges)
             {
