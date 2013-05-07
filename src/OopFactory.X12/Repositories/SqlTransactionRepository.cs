@@ -133,6 +133,7 @@ namespace OopFactory.X12.Repositories
 
                 if (!_transactionDb.ViewExists("Entity")
                     && _specs.ContainsKey("NM1")
+                    && _specs.ContainsKey("N1")
                     && _specs.ContainsKey("N3")
                     && _specs.ContainsKey("N4")
                     && _specs.ContainsKey("PER")
