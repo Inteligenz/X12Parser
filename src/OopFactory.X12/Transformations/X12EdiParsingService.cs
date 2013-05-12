@@ -13,16 +13,15 @@ namespace OopFactory.X12.Transformations
         private bool _suppressComments;
         private X12Parser _parser;
 
-        public X12EdiParsingService(bool suppressComments)
+        public X12EdiParsingService(bool suppressComments, X12Parser parser)
         {
-            _parser = new X12Parser();
             _suppressComments = suppressComments;
+            _parser = parser;
         }
 
-        public X12EdiParsingService(bool suppressComments, ISpecificationFinder specFinder)
-        {
-            _parser = new X12Parser(specFinder, true);
-        }
+        public X12EdiParsingService(bool suppressComments) : this(suppressComments, new X12Parser()) {}
+
+        public X12EdiParsingService(bool suppressComments, ISpecificationFinder specFinder) : this(suppressComments, new X12Parser(specFinder, true)) {}
 
         public string Transform(string x12)
         {
