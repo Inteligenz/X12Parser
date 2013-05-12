@@ -14,16 +14,19 @@ namespace OopFactory.X12.Validation
     public class X12AcknowledgmentService
     {
         ISpecificationFinder _specFinder;
+        private char[] _ignoredChars;
                 
-        public X12AcknowledgmentService(ISpecificationFinder specFinder)
+        public X12AcknowledgmentService(ISpecificationFinder specFinder, char[] ignoredChars)
         {
             _specFinder = specFinder;
+            _ignoredChars = ignoredChars;
         }
 
-        public X12AcknowledgmentService()
-            : this(new SpecificationFinder())
-        {
-        }
+        public X12AcknowledgmentService(ISpecificationFinder specFinder) : this(specFinder, new char[] { }) { }
+
+        public X12AcknowledgmentService(char[] ignoredChars) : this(new SpecificationFinder(), ignoredChars) { }
+
+        public X12AcknowledgmentService() : this(new SpecificationFinder(), new char[] { }) { }
 
         public List<FunctionalGroupResponse> AcknowledgeTransactions(Stream x12Stream)
         {
@@ -34,7 +37,7 @@ namespace OopFactory.X12.Validation
         {
             var responses = new Dictionary<string,FunctionalGroupResponse>();
 
-            using (var reader = new X12StreamReader(x12Stream, encoding))
+            using (var reader = new X12StreamReader(x12Stream, encoding, _ignoredChars))
             {
                 var trans = reader.ReadNextTransaction();
                 while (!string.IsNullOrEmpty(trans.Transactions.First()))
