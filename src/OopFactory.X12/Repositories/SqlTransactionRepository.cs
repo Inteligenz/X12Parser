@@ -309,7 +309,7 @@ DECLARE @id uniqueidentifier
 
 SET @id = newid()
 
-INSERT INTO [{1}].[Container] VALUES (@id, '{0}','{2}')
+INSERT INTO [{1}].[Container] (Id, SchemaName, Type) VALUES (@id, '{0}','{2}')
 
 SELECT @id ", _schema, _commonDb.Schema, segmentId);
             }
@@ -318,7 +318,7 @@ SELECT @id ", _schema, _commonDb.Schema, segmentId);
                 return string.Format(@"
 DECLARE @id int
 
-INSERT INTO [{1}].[Container] VALUES ('{0}','{2}')
+INSERT INTO [{1}].[Container] (SchemaName, Type) VALUES ('{0}','{2}')
 
 SET @id = scope_identity() 
 
