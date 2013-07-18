@@ -339,8 +339,8 @@ where RevisionId = (select max([RevisionId])
 
         public void CreateSplitSegmentFunction()
         {
-            ExecuteCmd(@"
-CREATE FUNCTION [dbo].[SplitSegment]
+            ExecuteCmd(string.Format(@"
+CREATE FUNCTION [{0}].[SplitSegment]
 (
 	@delimiter varchar(1),
 	@segment nvarchar(max)
@@ -369,13 +369,13 @@ BEGIN
     insert into @elements values (@reference, substring (@segment, @frontIndex + 1,len(@segment)-@frontIndex))
 
 	RETURN 
-END");
+END",_schema));
         }
 
         public void CreateFlatElementsFunction()
         {
-            ExecuteCmd(new SqlCommand(@"
-CREATE FUNCTION dbo.FlatElements
+            ExecuteCmd(new SqlCommand(string.Format(@"
+CREATE FUNCTION [{0}].[FlatElements]
 (	
 	@delimiter varchar(1),
 	@segment nvarchar(max)
@@ -386,7 +386,7 @@ RETURN
 (
 	with elements as (
 select Ref, Element 
-from dbo.SplitSegment(@delimiter,@segment)
+from [{0}].SplitSegment(@delimiter,@segment)
 )
 select 
   [01] = (select Element from elements where Ref = 1),
@@ -423,7 +423,7 @@ select
   [32] = (select Element from elements where Ref = 32),
   [33] = (select Element from elements where Ref = 33),
   [34] = (select Element from elements where Ref = 34)
-)"));
+)",_schema)));
         }
 
         public void CreateGetAncestorLoopsFunction()
