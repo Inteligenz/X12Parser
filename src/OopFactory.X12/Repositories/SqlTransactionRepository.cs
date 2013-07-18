@@ -569,7 +569,8 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     deleted ? "1" : "0",
                     positionInInterchange,
                     segment.SegmentId.Replace("'", "''"),
-                    segment.SegmentString.Replace("'","''"));
+                    segment.SegmentString.Replace("'","''")).Replace("{","{{").Replace("}","}}"); 
+
 
                 if (tran != null)
                 {
@@ -685,7 +686,7 @@ VALUES (@id,@interchangeId, @positionInInterchange, isnull(@revisionId,0), @mess
 SELECT @id", _schema);
                         }
 
-                        SqlCommand errCmd = new SqlCommand(errSql);
+                        SqlCommand errCmd = new SqlCommand(errSql.Replace("{","{{").Replace("}","}}"));
 
                         errCmd.Parameters.AddWithValue("@interchangeId", interchangeId);
                         errCmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
@@ -699,13 +700,13 @@ SELECT @id", _schema);
 
                     if (tran != null)
                     {
-                        var cmd = new SqlCommand(sql.ToString());
+                        var cmd = new SqlCommand(sql.ToString().Replace("{", "{{").Replace("}", "}}"));
                         cmd.Connection = tran.Connection;
                         cmd.Transaction = tran;
                         ExecuteCmd(cmd);
                     }
                     else
-                        AddSqlToBatch(sql.ToString());
+                        AddSqlToBatch(sql.ToString().Replace("{", "{{").Replace("}", "}}"));
                 }
             }
         }
