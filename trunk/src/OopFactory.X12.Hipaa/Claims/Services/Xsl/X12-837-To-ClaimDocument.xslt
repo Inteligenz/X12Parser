@@ -49,7 +49,12 @@
         <xsl:value-of select="CLM/CLM01"/>
       </xsl:attribute>
       <xsl:attribute name="TotalClaimChargeAmount">
-        <xsl:value-of select="CLM/CLM02"/>
+        <xsl:choose>
+          <xsl:when test="string-length(CLM/CLM02) > 0">
+            <xsl:value-of select="CLM/CLM02"/>  
+          </xsl:when>
+          <xsl:otherwise>0</xsl:otherwise><!-- this only happens when a files is not following the 837 implementation guides which requires this field -->
+        </xsl:choose>        
       </xsl:attribute>
       <xsl:if test="string-length(CLM/CLM06)>0">
         <xsl:attribute name="ProviderSignatureOnFile">
