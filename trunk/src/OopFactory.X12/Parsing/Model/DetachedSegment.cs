@@ -122,7 +122,7 @@ namespace OopFactory.X12.Parsing.Model
 
         public DateTime? GetDate8Element(int elementNumber)
         {
-            string element = GetElement(1);
+            string element = GetElement(elementNumber);
             if (element.Length == 8)
                 return DateTime.ParseExact(element, "yyyyMMdd", null);
             else
