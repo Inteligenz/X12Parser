@@ -77,7 +77,7 @@
       <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
     </Loop>
-    <Loop LoopId="2300" Usage="Required" LoopRepeat="100">
+    <Loop LoopId="2300" Usage="Situational" LoopRepeat="100">
       <Name>CLAIM INFORMATION</Name>
       <StartingSegment SegmentId="CLM" Usage="Required" Repeat="1"/>
       <!--Professional Segments-->
@@ -337,7 +337,7 @@
       <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
       <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
     </Loop>
-    <Loop LoopId="2300" Usage="Required" LoopRepeat="100">
+    <Loop LoopId="2300" Usage="Situational" LoopRepeat="100">
       <Name>CLAIM INFORMATION</Name>
       <StartingSegment SegmentId="CLM" Usage="Required" Repeat="1"/>
       <!--Professional Segments-->
