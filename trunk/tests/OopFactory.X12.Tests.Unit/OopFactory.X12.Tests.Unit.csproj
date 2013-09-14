@@ -121,6 +121,7 @@
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\FIN\_824\FromCnSpec.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\FIN\_824\FromTmhpSpec.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_275\_4050\FromImplementationGuide_1.txt" />
+    <EmbeddedResource Include="Parsing\_SampleEdiFiles\FIN\_811\WayneBrantley.txt" />
     <Content Include="Parsing\_SampleEdiFiles\INS\_835\_5010\ExampleFromNth.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_835\_5010\FromNth\835_WithMultipleInterchanges.txt" />
     <EmbeddedResource Include="Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample.txt" />
