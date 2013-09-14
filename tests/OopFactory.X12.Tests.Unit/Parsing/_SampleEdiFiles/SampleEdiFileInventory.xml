@@ -216,6 +216,12 @@
   </TransactionSet>
   <TransactionSet Id="811">
     <EdiFile>
+      <SourceUrl></SourceUrl>
+      <ResourcePath>FIN._811.WayneBrantley.txt</ResourcePath>
+    </EdiFile>
+  </TransactionSet>
+  <TransactionSet Id="811">
+    <EdiFile>
       <SourceUrl>http://www.granitenet.com/Content/pdfs/Granite_811_guide_version1_5.pdf</SourceUrl>
       <ResourcePath>ORD._811.GraniteNetExample.txt</ResourcePath>
     </EdiFile>
