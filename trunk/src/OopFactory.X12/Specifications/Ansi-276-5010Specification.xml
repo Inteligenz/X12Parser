@@ -22,7 +22,7 @@
       </StartingSegment>
     </Loop>
     <Loop LoopId="2200A"> <!-- This might only exist in 005010X214. -->
-      <Name>Information Receiver Trace</Name>
+      <Name>CLAIM SUBMITTER TRACE NUMBER</Name>
       <StartingSegment SegmentId="TRN"/>
       <Segment SegmentId="DTP"/>
     </Loop>
