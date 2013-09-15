@@ -663,10 +663,20 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                                 }
                                 else if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
                                 {
-                                    if (!string.IsNullOrWhiteSpace(val))
-                                        sql.AppendFormat("{0}, ", val);
-                                    else
+                                    decimal decVal = 0;
+                                    if (string.IsNullOrWhiteSpace(val))
                                         sql.Append("NULL, ");
+                                    else if (decimal.TryParse(val, out decVal))
+                                    {
+                                        sql.AppendFormat("{0}, ", val);
+                                    }
+                                    else
+                                    {
+                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into a decimal.", interchangeId, positionInInterchange, segment.SegmentId, i, val);
+                                        Trace.TraceInformation(message);
+                                        parsingError.AppendLine(message);
+                                        sql.AppendFormat("NULL, ");
+                                    }
                                 }
                                 else if (elementSpec.Type == ElementDataTypeEnum.Date)
                                 {
