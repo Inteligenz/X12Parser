@@ -558,7 +558,7 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
             {
                 string segmentSql = string.Format(@"
 INSERT INTO [{0}].[Segment] (InterchangeId, FunctionalGroupId, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, PositionInInterchange, SegmentId, Segment)
-VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ", 
+VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     _schema,
                     string.Format("'{0}'", interchangeId),
                     (object)functionalGroupId == null ? "NULL" : string.Format("'{0}'", functionalGroupId),
@@ -569,7 +569,7 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                     deleted ? "1" : "0",
                     positionInInterchange,
                     segment.SegmentId.Replace("'", "''"),
-                    segment.SegmentString.Replace("'","''")).Replace("{","{{").Replace("}","}}"); 
+                    segment.SegmentString.Replace("'", "''")).Replace("{", "{{").Replace("}", "}}");
 
 
                 if (tran != null)
@@ -589,9 +589,10 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
 
                     List<string> fieldNames = new List<string>();
                     List<string> parameterNames = new List<string>();
-                    var spec = _specs[segment.SegmentId]; 
+                    var spec = _specs[segment.SegmentId];
                     int maxElements = spec != null ? spec.Elements.Count : 0;
-                    for (int i = 1; i <= segment.ElementCount; i++)
+
+                    for (int i = 1; i == 1 || i <= segment.ElementCount; i++)
                     {
                         if (i <= maxElements)
                         {
@@ -618,59 +619,77 @@ VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
                         (object)revisionId == null ? "NULL" : string.Format("'{0}'", revisionId),
                         deleted ? "1" : "0");
 
-                    for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
+                    if (segment.ElementCount == 0)
                     {
-                        string val = segment.GetElement(i);
-                        if (spec != null)
+                        sql.AppendFormat("NULL, ");
+                    }
+                    else
+                    {
+                        for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
                         {
-                            var elementSpec = spec.Elements[i - 1];
-                            int maxLength = elementSpec.MaxLength;
-
-                            if (maxLength > 0 && val.Length > maxLength)
+                            string val = segment.GetElement(i);
+                            if (spec != null)
                             {
-                                string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
-                                Trace.TraceInformation(message);
-                                parsingError.AppendLine(message);
-                                val = val.Substring(0, maxLength);
-                            }
+                                var elementSpec = spec.Elements[i - 1];
+                                int maxLength = elementSpec.MaxLength;
 
-                            if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
-                            {
-                                int intVal = 0;
-                                if (string.IsNullOrWhiteSpace(val))
+                                if (maxLength > 0 && val.Length > maxLength)
                                 {
-                                    sql.Append("NULL, ");
-                                }
-                                else if (int.TryParse(val, out intVal))
-                                {
-                                    decimal denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
-                                    sql.AppendFormat("{0}, ", (decimal)intVal / denominator);
-                                }
-                                else
-                                {
-                                    string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);
+                                    string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
                                     Trace.TraceInformation(message);
                                     parsingError.AppendLine(message);
-                                    sql.AppendFormat("NULL, ");
+                                    val = val.Substring(0, maxLength);
                                 }
-                            }
-                            else
-                            {
-                                if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
+
+                                if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
+                                {
+                                    int intVal = 0;
+                                    if (string.IsNullOrWhiteSpace(val))
+                                    {
+                                        sql.Append("NULL, ");
+                                    }
+                                    else if (int.TryParse(val, out intVal))
+                                    {
+                                        decimal denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
+                                        sql.AppendFormat("{0}, ", (decimal)intVal / denominator);
+                                    }
+                                    else
+                                    {
+                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);
+                                        Trace.TraceInformation(message);
+                                        parsingError.AppendLine(message);
+                                        sql.AppendFormat("NULL, ");
+                                    }
+                                }
+                                else if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
                                 {
                                     if (!string.IsNullOrWhiteSpace(val))
                                         sql.AppendFormat("{0}, ", val);
                                     else
                                         sql.Append("NULL, ");
                                 }
+                                else if (elementSpec.Type == ElementDataTypeEnum.Date)
+                                {
+                                    DateTime date = DateTime.MinValue;
+                                    if (val.Length == 8 && DateTime.TryParse(string.Format("{0}-{1}-{2}", val.Substring(0,4), val.Substring(4,2), val.Substring(6,2)), out date))
+                                        sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
+                                    else
+                                    {
+                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into a date.", interchangeId, positionInInterchange, segment.SegmentId, i, val);
+                                        Trace.TraceInformation(message);
+                                        parsingError.AppendLine(message);
+                                        sql.AppendFormat("NULL, ");
+                                    }
+                                }
                                 else
                                     sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
+
                             }
                         }
                     }
                     T? errorId = null;
                     string errorMessage = parsingError.ToString();
-                    if (!string.IsNullOrWhiteSpace(errorMessage)) 
+                    if (!string.IsNullOrWhiteSpace(errorMessage))
                     {
                         var errSql = string.Format(@"
 INSERT INTO [{0}].ParsingError (InterchangeId, PositionInInterchange, RevisionId, Message) 
@@ -686,17 +705,17 @@ VALUES (@id,@interchangeId, @positionInInterchange, isnull(@revisionId,0), @mess
 SELECT @id", _schema);
                         }
 
-                        SqlCommand errCmd = new SqlCommand(errSql.Replace("{","{{").Replace("}","}}"));
+                        SqlCommand errCmd = new SqlCommand(errSql.Replace("{", "{{").Replace("}", "}}"));
 
                         errCmd.Parameters.AddWithValue("@interchangeId", interchangeId);
                         errCmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
-                        errCmd.Parameters.AddWithValue("@revisionId", (object) revisionId ?? DBNull.Value);
+                        errCmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
                         errCmd.Parameters.AddWithValue("@message", errorMessage);
 
                         errorId = ConvertT(ExecuteScalar(errCmd));
 
                     }
-                    sql.AppendFormat("{0})", (object)errorId == null ? "NULL":string.Format("'{0}'", errorId));
+                    sql.AppendFormat("{0})", (object)errorId == null ? "NULL" : string.Format("'{0}'", errorId));
 
                     if (tran != null)
                     {
@@ -708,6 +727,7 @@ SELECT @id", _schema);
                     else
                         AddSqlToBatch(sql.ToString().Replace("{", "{{").Replace("}", "}}"));
                 }
+
             }
         }
 
@@ -735,8 +755,10 @@ SELECT @id", _schema);
                     ExecuteCmd(new SqlCommand(sql));
                     InitBatch();
                 }
-                catch (Exception)
+                catch (Exception exc)
                 {
+                    Trace.WriteLine(exc.Message);
+                    Trace.WriteLine(sql);
                     throw;
                 }
             }
