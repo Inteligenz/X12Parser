@@ -49756,7 +49756,7 @@
     <Element Name="Copay Status Code" Reference="08" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Copay Status Code" />
     <Element Name="Provider Agreement Code" Reference="09" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Provider Agreement Code" />
     <Element Name="Yes/No Condition or Response Code" Reference="10" Type="ID" MinLength="1" MaxLength="1" QualifierSetRef="Yes/No Condition or Response Code" />
-    <Element Name="Diagnosis Code Pointer" Reference="11" Type="N" MinLength="1" MaxLength="2" />
+    <Element Name="Diagnosis Code Pointer" Reference="11" Type="AN" MinLength="1" MaxLength="7" />
   </Segment>
   <Segment SegmentId="SV4">
     <Standard />
