@@ -7,6 +7,10 @@ namespace OopFactory.X12.Validation.Model
 {
     public class DataElementNote
     {
+        public DataElementNote()
+        {
+            if (ContextErrors == null) ContextErrors = new List<ContextError>();
+        }
         /// <summary>
         /// IK401
         /// </summary>
