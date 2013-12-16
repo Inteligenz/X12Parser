@@ -90,6 +90,7 @@
     <Compile Include="Claims\Services\InstitutionalClaimToUB04ClaimFormTransformation.cs" />
     <Compile Include="Claims\Services\LocalExtensions.cs" />
     <Compile Include="Claims\Services\ProfessionalClaimToHcfa1500FormTransformation.cs" />
+    <Compile Include="Claims\SubmitterInfo.cs" />
     <Compile Include="Claims\ToothInformation.cs" />
     <Compile Include="Common\CodedAmount.cs" />
     <Compile Include="Common\CodedDate.cs" />

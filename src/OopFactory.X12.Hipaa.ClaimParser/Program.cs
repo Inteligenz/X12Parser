@@ -13,10 +13,10 @@ namespace OopFactory.X12.Hipaa.ClaimParser
         static void Main(string[] args)
         {
             var opts = new ExecutionOptions(args);
-
+            InstitutionalClaimToUB04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif");
             var service = new ClaimFormTransformationService(
                 new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
-                new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif"),
+                institutionalClaimToUB04ClaimFormTransformation,
                 new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"));
 
             foreach (var filename in Directory.GetFiles(opts.Path, opts.SearchPattern, SearchOption.TopDirectoryOnly))
@@ -33,8 +33,11 @@ namespace OopFactory.X12.Hipaa.ClaimParser
                     DateTime start = DateTime.Now;
                     FileStream inputFilestream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                     
+                    Dictionary<string,string> revenueDictionary=new Dictionary<string, string>();
+                    revenueDictionary["0572"] = "Test Code";
+                    service.FillRevenueCodeDescriptionMapping(revenueDictionary);
                     var claimDoc = service.Transform837ToClaimDocument(inputFilestream);
-
+                    institutionalClaimToUB04ClaimFormTransformation.PerPageTotalChargesView = true;
                     FileInfo fi = new FileInfo(filename);
                     DirectoryInfo di = new DirectoryInfo(opts.OutputPath);
 

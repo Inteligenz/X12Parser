@@ -11,10 +11,16 @@ namespace OopFactory.X12.Hipaa.Claims.Services
     public class InstitutionalClaimToUB04ClaimFormTransformation : IClaimToClaimFormTransfomation
     {
         private string _formImagePath;
-
         public InstitutionalClaimToUB04ClaimFormTransformation(string formImagePath)
         {
             _formImagePath = formImagePath;
+            PerPageTotalChargesView = false;
+        }
+
+        public bool PerPageTotalChargesView
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -27,84 +33,147 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         {
             var ub = new UB04Claim();
             Provider provider = claim.BillingProvider;
-            ub.Field01_BillingProvider.Line1 = provider.Name.ToString();
-            ub.Field01_BillingProvider.Line2 = provider.Address.Line1;
-            if (string.IsNullOrWhiteSpace(provider.Address.Line2))
-                ub.Field01_BillingProvider.Line3 = provider.Address.Locale;
-            else
-            {
-                ub.Field01_BillingProvider.Line3 = provider.Address.Line2;
-                ub.Field01_BillingProvider.Line4 = provider.Address.Locale;
-            }
+            SetBillingProviderAddressDetails(ub, provider, claim.SubmitterInfo);
 
-            provider = claim.PayToProvider;
-            ub.Field02_PayToProvider.Line1 = provider.Name.ToString();
-            ub.Field02_PayToProvider.Line2 = provider.Address.Line1;
-            
-            if (string.IsNullOrWhiteSpace(provider.Address.Line2))
-                ub.Field02_PayToProvider.Line3 = provider.Address.Locale;
-            else
+            if (claim.PayToProvider != null && 
+                claim.PayToProvider.Name != null &&
+                claim.PayToProvider.Name.ToString() != provider.Name.ToString() &&
+                claim.PayToProvider.Address != null && provider.Address != null &&
+                claim.PayToProvider.Address.Line1 != provider.Address.Line1)
             {
-                ub.Field02_PayToProvider.Line3 = provider.Address.Line2;
-                ub.Field02_PayToProvider.Line4 = provider.Address.Locale;
+                provider = claim.PayToProvider;
+                ub.Field02_PayToProvider.Line1 = provider.Name.ToString();
+                ub.Field02_PayToProvider.Line2 = provider.Address.Line1;
+
+                if (string.IsNullOrWhiteSpace(provider.Address.Line2))
+                    ub.Field02_PayToProvider.Line3 = provider.Address.Locale;
+                else
+                {
+                    ub.Field02_PayToProvider.Line3 = provider.Address.Line2;
+                    ub.Field02_PayToProvider.Line4 = provider.Address.Locale;
+                }
             }
 
             ub.Field03a_PatientControlNumber = claim.PatientControlNumber;
             ub.Field03b_MedicalRecordNumber = claim.MedicalRecordNumber;
             ub.Field04_TypeOfBill = claim.BillTypeCode;
-            ub.Field05_FederalTaxId = claim.PayToProvider.TaxId;
-            ub.Field06_StatementCoversPeriod.FromDate = String.Format("{0:MMddyy}", claim.StatementFromDate);
-            ub.Field06_StatementCoversPeriod.ThroughDate = String.Format("{0:MMddyy}", claim.StatementToDate);
+            if (claim.PayToProvider != null)
+            {
+                ub.Field05_FederalTaxId = claim.PayToProvider.TaxId;
+            }
+            if (claim.StatementFromDate != null)
+            {
+                ub.Field06_StatementCoversPeriod.FromDate = String.Format("{0:MMddyy}", claim.StatementFromDate);
+            }
+            if (claim.StatementToDate != null)
+            {
+                ub.Field06_StatementCoversPeriod.ThroughDate = String.Format("{0:MMddyy}", claim.StatementToDate);
+            }
 
             ClaimMember patient = claim.Patient ?? claim.Subscriber;
 
-            ub.Field08_PatientName_a = patient.Name.Identification.Id;
-            ub.Field08_PatientName_b = patient.Name.ToString();
-
-            ub.Field09_PatientAddress.a_Street = patient.Address.Line1;
-            ub.Field09_PatientAddress.b_City = patient.Address.City;
-            ub.Field09_PatientAddress.c_State = patient.Address.StateCode;
-            ub.Field09_PatientAddress.d_PostalCode = patient.Address.PostalCode;
-            ub.Field09_PatientAddress.e_CountryCode = patient.Address.CountryCode;
-
-            ub.Field10_Birthdate = String.Format("{0:MMddyyyy}", patient.DateOfBirth);
+            if (patient.Name != null &&
+                patient.Name.Identification != null)
+            {
+                ub.Field08_PatientName_a = patient.Name.Identification.Id;
+                ub.Field08_PatientName_b = patient.Name.ToString();
+            }
+            if (patient.Address != null)
+            {
+                string streetAddress;
+                if (string.IsNullOrEmpty(patient.Address.Line2))
+                {
+                    streetAddress = patient.Address.Line1;
+                }
+                else
+                {
+                    streetAddress = string.Concat(patient.Address.Line1, ",", patient.Address.Line2);
+                }
+                if (streetAddress.Length > 48)
+                {
+                    ub.Field09_PatientAddress.a_Street = streetAddress.Substring(0, 48);
+                }
+                else
+                {
+                    ub.Field09_PatientAddress.a_Street = streetAddress;
+                }
+                ub.Field09_PatientAddress.b_City = patient.Address.City;
+                ub.Field09_PatientAddress.c_State = patient.Address.StateCode;
+                ub.Field09_PatientAddress.d_PostalCode = patient.Address.PostalCode;
+                ub.Field09_PatientAddress.e_CountryCode = patient.Address.CountryCode;
+            }
+            if (patient.DateOfBirth != null)
+            {
+                ub.Field10_Birthdate = String.Format("{0:MMddyyyy}", patient.DateOfBirth);
+            }
             ub.Field11_Sex = patient.Gender.ToString().Substring(0, 1);
-            ub.Field12_AdmissionDate = String.Format("{0:MMddyy}", claim.AdmissionDate);
-            ub.Field13_AdmissionHour = String.Format("{0:HH}", claim.AdmissionDate);
-            ub.Field14_AdmissionType = claim.AdmissionType.Code;
-            ub.Field15_AdmissionSource = claim.AdmissionSource.Code;
-            ub.Field16_DischargeHour = String.Format("{0:HH}", claim.DischargeTime);
-            ub.Field17_DischargeStatus = claim.PatientStatus.Code;
-            if (claim.Conditions.Count > 0) ub.Field18_ConditionCode01 = claim.Conditions[0].Code;
-            if (claim.Conditions.Count > 1) ub.Field19_ConditionCode02 = claim.Conditions[1].Code;
-            if (claim.Conditions.Count > 2) ub.Field20_ConditionCode03 = claim.Conditions[2].Code;
-            if (claim.Conditions.Count > 3) ub.Field21_ConditionCode04 = claim.Conditions[3].Code;
-            if (claim.Conditions.Count > 4) ub.Field22_ConditionCode05 = claim.Conditions[4].Code;
-            if (claim.Conditions.Count > 5) ub.Field23_ConditionCode06 = claim.Conditions[5].Code;
-            if (claim.Conditions.Count > 6) ub.Field24_ConditionCode07 = claim.Conditions[6].Code;
-            if (claim.Conditions.Count > 7) ub.Field25_ConditionCode08 = claim.Conditions[7].Code;
-            if (claim.Conditions.Count > 8) ub.Field26_ConditionCode09 = claim.Conditions[8].Code;
-            if (claim.Conditions.Count > 9) ub.Field27_ConditionCode10 = claim.Conditions[9].Code;
-            if (claim.Conditions.Count > 10) ub.Field28_ConditionCode11 = claim.Conditions[1].Code;
+            if (claim.AdmissionDate != null)
+            {
+                ub.Field12_AdmissionDate = String.Format("{0:MMddyy}", claim.AdmissionDate);
+                ub.Field13_AdmissionHour = String.Format("{0:HH}", claim.AdmissionDate);
+            }
+            if (claim.AdmissionType != null)
+            {
+                ub.Field14_AdmissionType = claim.AdmissionType.Code;
+            }
+            if (claim.AdmissionSource != null)
+            {
+                ub.Field15_AdmissionSource = claim.AdmissionSource.Code;
+            }
+            if (claim.DischargeTime != null)
+            {
+                ub.Field16_DischargeHour = String.Format("{0:HH}", claim.DischargeTime);
+            }
+            if (claim.PatientStatus != null)
+            {
+                ub.Field17_DischargeStatus = claim.PatientStatus.Code;
+            }
+            if (claim.Conditions != null)
+            {
+                if (claim.Conditions.Count > 0) ub.Field18_ConditionCode01 = claim.Conditions[0].Code;
+                if (claim.Conditions.Count > 1) ub.Field19_ConditionCode02 = claim.Conditions[1].Code;
+                if (claim.Conditions.Count > 2) ub.Field20_ConditionCode03 = claim.Conditions[2].Code;
+                if (claim.Conditions.Count > 3) ub.Field21_ConditionCode04 = claim.Conditions[3].Code;
+                if (claim.Conditions.Count > 4) ub.Field22_ConditionCode05 = claim.Conditions[4].Code;
+                if (claim.Conditions.Count > 5) ub.Field23_ConditionCode06 = claim.Conditions[5].Code;
+                if (claim.Conditions.Count > 6) ub.Field24_ConditionCode07 = claim.Conditions[6].Code;
+                if (claim.Conditions.Count > 7) ub.Field25_ConditionCode08 = claim.Conditions[7].Code;
+                if (claim.Conditions.Count > 8) ub.Field26_ConditionCode09 = claim.Conditions[8].Code;
+                if (claim.Conditions.Count > 9) ub.Field27_ConditionCode10 = claim.Conditions[9].Code;
+                if (claim.Conditions.Count > 10) ub.Field28_ConditionCode11 = claim.Conditions[10].Code;
+            }
+            foreach (var identification in claim.Identifications)
+            {
+                if (identification.Qualifier != null && identification.Qualifier == "LU" && identification.Id != null)
+                {
+                    ub.Field29_AccidentState = identification.Id;
+                }
+            }
 
-            ub.Field29_AccidentState = ""; // field ignored by CMS
-
-            if (claim.Occurrences.Count > 0) ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
-            if (claim.Occurrences.Count > 1) ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
-            if (claim.Occurrences.Count > 2) ub.Field32a_Occurrence.CopyFrom(claim.Occurrences[2]);
-            if (claim.Occurrences.Count > 3) ub.Field32b_Occurrence.CopyFrom(claim.Occurrences[3]);
-            if (claim.Occurrences.Count > 4) ub.Field33a_Occurrence.CopyFrom(claim.Occurrences[4]);
-            if (claim.Occurrences.Count > 5) ub.Field33b_Occurrence.CopyFrom(claim.Occurrences[5]);
-            if (claim.Occurrences.Count > 6) ub.Field34a_Occurrence.CopyFrom(claim.Occurrences[6]);
-            if (claim.Occurrences.Count > 7) ub.Field34b_Occurrence.CopyFrom(claim.Occurrences[7]);
+            if (claim.Occurrences != null)
+            {
+                if (claim.Occurrences.Count > 0) ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
+                if (claim.Occurrences.Count > 1) ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
+                if (claim.Occurrences.Count > 2) ub.Field32a_Occurrence.CopyFrom(claim.Occurrences[2]);
+                if (claim.Occurrences.Count > 3) ub.Field32b_Occurrence.CopyFrom(claim.Occurrences[3]);
+                if (claim.Occurrences.Count > 4) ub.Field33a_Occurrence.CopyFrom(claim.Occurrences[4]);
+                if (claim.Occurrences.Count > 5) ub.Field33b_Occurrence.CopyFrom(claim.Occurrences[5]);
+                if (claim.Occurrences.Count > 6) ub.Field34a_Occurrence.CopyFrom(claim.Occurrences[6]);
+                if (claim.Occurrences.Count > 7) ub.Field34b_Occurrence.CopyFrom(claim.Occurrences[7]);
+            }
 
             List<UB04OccurrenceSpan> spans = new List<UB04OccurrenceSpan>();
-            
-            if (claim.Occurrences.Count > 8) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[8]));
-            if (claim.Occurrences.Count > 9) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[9]));
 
-            foreach (CodedDateRange span in claim.OccurrenceSpans)
-                spans.Add(new UB04OccurrenceSpan().CopyFrom(span));
+            if (claim.Occurrences != null)
+            {
+                if (claim.Occurrences.Count > 8) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[8]));
+                if (claim.Occurrences.Count > 9) spans.Add(new UB04OccurrenceSpan().CopyFrom(claim.Occurrences[9]));
+            }
+            if (claim.OccurrenceSpans != null)
+            {
+                foreach (CodedDateRange span in claim.OccurrenceSpans)
+                    spans.Add(new UB04OccurrenceSpan().CopyFrom(span));
+            }
 
             if (spans.Count > 0) ub.Field35a_OccurrenceSpan = spans[0];
             if (spans.Count > 1) ub.Field35b_OccurrenceSpan = spans[1];
@@ -112,7 +181,10 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (spans.Count > 3) ub.Field36b_OccurrenceSpan = spans[3];
 
             List<string> blockLines = new List<string>();
-            blockLines.Add(claim.Subscriber.Name.ToString());
+            if (claim.Subscriber.Name != null)
+            {
+                blockLines.Add(claim.Subscriber.Name.ToString());
+            }
             ub.Field38_ResponsibleParty.Line1 = blockLines[0];
             if (claim.Subscriber.Address != null)
             {
@@ -121,31 +193,43 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 if (!string.IsNullOrWhiteSpace(claim.Subscriber.Address.Line2))
                     blockLines.Add(claim.Subscriber.Address.Line2);
                 blockLines.Add(claim.Subscriber.Address.Locale);
-                ub.Field38_ResponsibleParty.Line2 = blockLines[1];
-                ub.Field38_ResponsibleParty.Line3 = blockLines[2];
+                if (blockLines.Count > 1)
+                {
+                    ub.Field38_ResponsibleParty.Line2 = blockLines[1];
+                }
+                if (blockLines.Count > 2)
+                {
+                    ub.Field38_ResponsibleParty.Line3 = blockLines[2];
+                }
             }
 
             if (blockLines.Count > 3)
+            {
                 ub.Field38_ResponsibleParty.Line4 = blockLines[3];
+            }
 
-            if (claim.Values.Count > 0) ub.Field39a_Value.CopyFrom(claim.Values[0]);
-            if (claim.Values.Count > 1) ub.Field39b_Value.CopyFrom(claim.Values[1]);
-            if (claim.Values.Count > 2) ub.Field39c_Value.CopyFrom(claim.Values[2]);
-            if (claim.Values.Count > 3) ub.Field39d_Value.CopyFrom(claim.Values[3]);
-            if (claim.Values.Count > 4) ub.Field40a_Value.CopyFrom(claim.Values[4]);
-            if (claim.Values.Count > 5) ub.Field40b_Value.CopyFrom(claim.Values[5]);
-            if (claim.Values.Count > 6) ub.Field40c_Value.CopyFrom(claim.Values[6]);
-            if (claim.Values.Count > 7) ub.Field40d_Value.CopyFrom(claim.Values[7]);
-            if (claim.Values.Count > 8) ub.Field41a_Value.CopyFrom(claim.Values[8]);
-            if (claim.Values.Count > 9) ub.Field41b_Value.CopyFrom(claim.Values[9]);
-            if (claim.Values.Count > 10) ub.Field41c_Value.CopyFrom(claim.Values[10]);
-            if (claim.Values.Count > 11) ub.Field41d_Value.CopyFrom(claim.Values[11]);
+            if (claim.Values != null)
+            {
+                if (claim.Values.Count > 0) ub.Field39a_Value.CopyFrom(claim.Values[0]);
+                if (claim.Values.Count > 1) ub.Field39b_Value.CopyFrom(claim.Values[1]);
+                if (claim.Values.Count > 2) ub.Field39c_Value.CopyFrom(claim.Values[2]);
+                if (claim.Values.Count > 3) ub.Field39d_Value.CopyFrom(claim.Values[3]);
+                if (claim.Values.Count > 4) ub.Field40a_Value.CopyFrom(claim.Values[4]);
+                if (claim.Values.Count > 5) ub.Field40b_Value.CopyFrom(claim.Values[5]);
+                if (claim.Values.Count > 6) ub.Field40c_Value.CopyFrom(claim.Values[6]);
+                if (claim.Values.Count > 7) ub.Field40d_Value.CopyFrom(claim.Values[7]);
+                if (claim.Values.Count > 8) ub.Field41a_Value.CopyFrom(claim.Values[8]);
+                if (claim.Values.Count > 9) ub.Field41b_Value.CopyFrom(claim.Values[9]);
+                if (claim.Values.Count > 10) ub.Field41c_Value.CopyFrom(claim.Values[10]);
+                if (claim.Values.Count > 11) ub.Field41d_Value.CopyFrom(claim.Values[11]);
+            }
 
             foreach (var line in claim.ServiceLines)
             {
                 ub.ServiceLines.Add(new UB04ServiceLine {
-                    Field42_RevenueCode = line.RevenueCode,
-                    Field44_ProcedureCodes = line.Procedure.ProcedureCode,
+                    Field42_RevenueCode = line.RevenueCode, 
+                    Field43_Description = line.RevenueCodeDescription,
+                    Field44_ProcedureCodes = SetProcedureCodeWithModifiers(line.Procedure),
                     Field45_ServiceDate = line.ServiceDateFrom > DateTime.MinValue ? String.Format("{0:MMddyy}", line.ServiceDateFrom) : "",
                     Field46_ServiceUnits = line.Quantity.ToString(),
                     Field47_TotalCharges = line.ChargeAmount,
@@ -155,81 +239,40 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             ub.Field47_Line23_TotalCharges = claim.TotalClaimChargeAmount;
             ub.Field48_Line23_NonCoveredCharges = claim.ServiceLines.Sum(sl => sl.NonCoveredChargeAmount);
             ub.Field56_NationalProviderIdentifier = claim.BillingProvider.Npi;
-            if (claim.BillingProvider.Identifications.Count >= 1)
-                ub.Field57_OtherProviderIdA = claim.BillingProvider.Identifications[0].Id;
-            if (claim.BillingProvider.Identifications.Count >= 2)
-                ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
-            if (claim.BillingProvider.Identifications.Count >= 3)
-                ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
-
-            if (claim.Payer != null)
+            if (string.IsNullOrEmpty(claim.BillingProvider.Npi))
             {
-                ub.PayerA_Primary.Field50_PayerName = claim.Payer.Name.Formatted();
-                ub.PayerA_Primary.Field51_HealthPlanId = claim.Payer.Name.Identification.Id;
+                if (claim.BillingProvider.Identifications.Count >= 1)
+                    ub.Field57_OtherProviderIdA = claim.BillingProvider.Identifications[0].Id;
+                if (claim.BillingProvider.Identifications.Count >= 2)
+                    ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
+                if (claim.BillingProvider.Identifications.Count >= 3)
+                    ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
             }
-            ub.PayerA_Primary.Field52_ReleaseOfInfoCertIndicator = claim.ReleaseOfInformationCode;
-            ub.PayerA_Primary.Field53_AssignmentOfBenefitsCertIndicator = claim.BenefitsAssignmentCertificationIndicator;
 
-            ub.PayerA_Primary.Field58_InsuredsName = claim.Subscriber.Name.Formatted();
-            ub.PayerA_Primary.Field59_PatientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
-
-            ub.PayerA_Primary.Field60_InsuredsUniqueId = claim.Subscriber.MemberId;
-            ub.PayerA_Primary.Field61_GroupName = claim.SubscriberInformation.Name;
-            ub.PayerA_Primary.Field62_InsuredsGroupNumber = claim.SubscriberInformation.ReferenceIdentification;
-
+            SetCurrentPayer(claim, ub);
             if (claim.OtherSubscriberInformations.Count > 0)
             {
-                var secondarySubscriber = claim.OtherSubscriberInformations[0];
-                if (secondarySubscriber.OtherPayer != null)
-                {
-                    ub.PayerB_Secondary.Field50_PayerName = secondarySubscriber.OtherPayer.Formatted();
-                    ub.PayerB_Secondary.Field51_HealthPlanId = secondarySubscriber.OtherPayer.Identification.Id;
-                }
-                ub.PayerB_Secondary.Field52_ReleaseOfInfoCertIndicator = secondarySubscriber.ReleaseOfInformationCode;
-                ub.PayerB_Secondary.Field53_AssignmentOfBenefitsCertIndicator = secondarySubscriber.BenefitsAssignmentCertificationIndicator;
-                ub.PayerB_Secondary.Field54_PriorPayments = secondarySubscriber.PayorPaidAmount;
-                ub.PayerB_Secondary.Field55_EstimatedAmountDue = secondarySubscriber.RemainingPatientLiability;
-
-                ub.PayerB_Secondary.Field58_InsuredsName = secondarySubscriber.Name.Formatted();
-                ub.PayerB_Secondary.Field59_PatientRelationship = secondarySubscriber.SubscriberInformation.IndividualRelationshipCode;
-                ub.PayerB_Secondary.Field60_InsuredsUniqueId = secondarySubscriber.Name.Identification.Id;
-                ub.PayerB_Secondary.Field61_GroupName = secondarySubscriber.SubscriberInformation.Name;
-                ub.PayerB_Secondary.Field62_InsuredsGroupNumber = secondarySubscriber.SubscriberInformation.ReferenceIdentification;
+                var subscriber = claim.OtherSubscriberInformations[0];
+                SetOtherPayers(subscriber, ub);
             }
-
-
             if (claim.OtherSubscriberInformations.Count > 1)
             {
-                var TertiarySubscriber = claim.OtherSubscriberInformations[1];
-                if (TertiarySubscriber.OtherPayer != null)
-                {
-                    ub.PayerC_Tertiary.Field50_PayerName = TertiarySubscriber.OtherPayer.Formatted();
-                    ub.PayerC_Tertiary.Field51_HealthPlanId = TertiarySubscriber.OtherPayer.Identification.Id;
-                }
-                ub.PayerC_Tertiary.Field52_ReleaseOfInfoCertIndicator = TertiarySubscriber.ReleaseOfInformationCode;
-                ub.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator = TertiarySubscriber.BenefitsAssignmentCertificationIndicator;
-                ub.PayerC_Tertiary.Field54_PriorPayments = TertiarySubscriber.PayorPaidAmount;
-                ub.PayerC_Tertiary.Field55_EstimatedAmountDue = TertiarySubscriber.RemainingPatientLiability;
-
-                ub.PayerC_Tertiary.Field58_InsuredsName = TertiarySubscriber.Name.Formatted();
-                ub.PayerC_Tertiary.Field59_PatientRelationship = TertiarySubscriber.SubscriberInformation.IndividualRelationshipCode;
-                ub.PayerC_Tertiary.Field60_InsuredsUniqueId = TertiarySubscriber.Name.Identification.Id;
-                ub.PayerC_Tertiary.Field61_GroupName = TertiarySubscriber.SubscriberInformation.Name;
-                ub.PayerC_Tertiary.Field62_InsuredsGroupNumber = TertiarySubscriber.SubscriberInformation.ReferenceIdentification;
+                var subscriber = claim.OtherSubscriberInformations[1];
+                SetOtherPayers(subscriber, ub);
             }
             
-            ub.Field63A_TreatmentAuthorizationCode = claim.PriorAuthorizationNumber;
             var controlNumbers = claim.Identifications.Where(id => (new string[] {"F8","D9","9A","9C","LX"}).Contains(id.Qualifier)).ToList();
             if (controlNumbers.Count > 0)
-                ub.Field64A_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[0].Qualifier, controlNumbers[0].Id);
+                ub.Field64A_DocumentControlNumber = controlNumbers[0].Id;
             if (controlNumbers.Count > 1)
-                ub.Field64B_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[1].Qualifier, controlNumbers[1].Id);
+                ub.Field64B_DocumentControlNumber = controlNumbers[1].Id;
             if (controlNumbers.Count > 2)
-                ub.Field64C_DocumentControlNumber = string.Format("{0}: {1}", controlNumbers[2].Qualifier, controlNumbers[2].Id);
-
+                ub.Field64C_DocumentControlNumber = controlNumbers[2].Id;
 
             if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
                 ub.Field66_Version = "9";
+            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD10) != null)
+                ub.Field66_Version = "0";
 
             var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
             if (principalDiagnosis != null)
@@ -283,8 +326,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (claim.AttendingProvider != null)
             {
                 ub.Field76_AttendingPhysician.Npi = claim.AttendingProvider.Npi;
-                ub.Field76_AttendingPhysician.LastName = claim.AttendingProvider.Name.LastName;
-                ub.Field76_AttendingPhysician.FirstName = claim.AttendingProvider.Name.FirstName;
+                if (claim.AttendingProvider.Name != null)
+                {
+                    ub.Field76_AttendingPhysician.LastName = claim.AttendingProvider.Name.LastName;
+                    ub.Field76_AttendingPhysician.FirstName = claim.AttendingProvider.Name.FirstName;
+                }
                 var id = claim.AttendingProvider.Identifications.FirstOrDefault();
                 if (id != null)
                 {
@@ -296,8 +342,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             if (claim.OperatingPhysician != null)
             {
                 ub.Field77_OperatingPhysician.Npi = claim.OperatingPhysician.Npi;
-                ub.Field77_OperatingPhysician.LastName = claim.OperatingPhysician.Name.LastName;
-                ub.Field77_OperatingPhysician.FirstName = claim.OperatingPhysician.Name.FirstName;
+                if (claim.OperatingPhysician.Name != null)
+                {
+                    ub.Field77_OperatingPhysician.LastName = claim.OperatingPhysician.Name.LastName;
+                    ub.Field77_OperatingPhysician.FirstName = claim.OperatingPhysician.Name.FirstName;
+                }
                 var id = claim.OperatingPhysician.Identifications.FirstOrDefault();
                 if (id != null)
                 {
@@ -308,18 +357,400 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
             if (claim.OtherOperatingPhysician != null)
             {
-                ub.Field78_OtherProvider.Npi = claim.OtherOperatingPhysician.Npi;
-                ub.Field78_OtherProvider.LastName = claim.OtherOperatingPhysician.Name.LastName;
-                ub.Field78_OtherProvider.FirstName = claim.OtherOperatingPhysician.Name.FirstName;
-                var id = claim.OtherOperatingPhysician.Identifications.FirstOrDefault();
-                if (id != null)
+                if (claim.RenderingProvider != null && claim.ReferringProvider != null)
                 {
-                    ub.Field78_OtherProvider.IdentifierQualifier = id.Qualifier;
-                    ub.Field78_OtherProvider.Identifier = id.Id;
+                    SetOtherProviders(claim.RenderingProvider, ub.Field78_OtherProvider);
+                    SetOtherProviders(claim.ReferringProvider, ub.Field79_OtherProvider);
+                }
+                else
+                {
+                    SetOtherProviders(claim.OtherOperatingPhysician, ub.Field78_OtherProvider);
+                    if (claim.RenderingProvider != null)
+                    {
+                        SetOtherProviders(claim.RenderingProvider, ub.Field79_OtherProvider);
+                    }
+                    if (claim.ReferringProvider != null)
+                    {
+                        SetOtherProviders(claim.ReferringProvider, ub.Field79_OtherProvider);
+                    }
                 }
             }
+            else
+            {
+                if (claim.RenderingProvider != null)
+                {
+                    SetOtherProviders(claim.RenderingProvider, ub.Field78_OtherProvider);
+                    if (claim.ReferringProvider != null)
+                    {
+                        SetOtherProviders(claim.ReferringProvider, ub.Field79_OtherProvider);
+                    }
+                }
+                else
+                {
+                    if (claim.ReferringProvider != null)
+                    {
+                        SetOtherProviders(claim.ReferringProvider, ub.Field78_OtherProvider);
+                    }
+                }
+            }
+            
+            if (claim.Notes != null)
+            {
+                List<string> remarksList = null;
+                if (claim.Notes.Count != 0)
+                {
+                    if (claim.Notes.Count == 1)
+                    {
+                        remarksList = GetRemarksLineByLine(claim.Notes[0].Description);
+                    }
+                    else if (claim.Notes.Count == 2)
+                    {
+                        remarksList = GetRemarksLineByLine(string.Concat(claim.Notes[0].Description, "   ", claim.Notes[1].Description));
+                    }
+                    if (remarksList.Count > 0)
+                    {
+                        ub.Field80_Remarks.Line1 = remarksList[0];
+                    }
+                    if (remarksList.Count > 1)
+                    {
+                        ub.Field80_Remarks.Line2 = remarksList[1];
+                    }
+                    if (remarksList.Count > 2)
+                    {
+                        ub.Field80_Remarks.Line3 = remarksList[2];
+                    }
+                }
+
+            }
+            if (claim.ProviderInfo != null)
+            {
+                ub.Field81a.Qualifier = "B3";
+                ub.Field81a.Code1 = claim.ProviderInfo.Id;
+            }
+
+			LimitFieldWidths(ub);
 
             return ub;
+        }
+
+        private void LimitFieldWidths(UB04Claim ub)
+        {
+            ub.Field02_PayToProvider.Line1 = SetStringLength(ub.Field02_PayToProvider.Line1, 28);
+            ub.Field02_PayToProvider.Line2 = SetStringLength(ub.Field02_PayToProvider.Line2, 28);
+            ub.Field02_PayToProvider.Line3 = SetStringLength(ub.Field02_PayToProvider.Line3, 28);
+            ub.Field02_PayToProvider.Line4 = SetStringLength(ub.Field02_PayToProvider.Line4, 28);
+            ub.Field03b_MedicalRecordNumber = SetStringLength(ub.Field03b_MedicalRecordNumber, 28);
+            ub.Field05_FederalTaxId = SetStringLength(ub.Field05_FederalTaxId, 10);
+            ub.Field08_PatientName_a = SetStringLength(ub.Field08_PatientName_a, 21);
+            ub.Field08_PatientName_b = SetStringLength(ub.Field08_PatientName_b, 33);
+            ub.Field09_PatientAddress.b_City = SetStringLength(ub.Field09_PatientAddress.b_City, 37);
+            ub.Field29_AccidentState = SetStringLength(ub.Field29_AccidentState, 2);
+            ub.Field38_ResponsibleParty.Line1 = SetStringLength(ub.Field38_ResponsibleParty.Line1, 49);
+            ub.Field38_ResponsibleParty.Line2 = SetStringLength(ub.Field38_ResponsibleParty.Line2, 49);
+            ub.Field38_ResponsibleParty.Line3 = SetStringLength(ub.Field38_ResponsibleParty.Line3, 49);
+            ub.Field38_ResponsibleParty.Line4 = SetStringLength(ub.Field38_ResponsibleParty.Line4, 49);
+            ub.Field56_NationalProviderIdentifier = SetStringLength(ub.Field56_NationalProviderIdentifier, 14);
+            ub.Field76_AttendingPhysician.Npi = SetStringLength(ub.Field76_AttendingPhysician.Npi, 11);
+            ub.Field76_AttendingPhysician.LastName = SetStringLength(ub.Field76_AttendingPhysician.LastName, 18);
+            ub.Field76_AttendingPhysician.FirstName = SetStringLength(ub.Field76_AttendingPhysician.FirstName, 12);
+            ub.Field76_AttendingPhysician.Identifier = SetStringLength(ub.Field76_AttendingPhysician.Identifier, 10);
+            ub.Field77_OperatingPhysician.Npi = SetStringLength(ub.Field77_OperatingPhysician.Npi, 11);
+            ub.Field77_OperatingPhysician.LastName = SetStringLength(ub.Field77_OperatingPhysician.LastName, 18);
+            ub.Field77_OperatingPhysician.FirstName = SetStringLength(ub.Field77_OperatingPhysician.FirstName, 12);
+            ub.Field77_OperatingPhysician.Identifier = SetStringLength(ub.Field77_OperatingPhysician.Identifier, 10);
+
+            foreach (UB04ServiceLine line in ub.ServiceLines)
+            {
+                line.Field43_Description = SetStringLength(line.Field43_Description, 29);
+            }
+        }
+
+
+        private void SetOtherProviders(Provider provider, UB04Provider ub04Provider)
+        {
+            ub04Provider.Npi = SetStringLength(provider.Npi, 11);
+            if (provider.Name != null)
+            {
+                ub04Provider.LastName = SetStringLength(provider.Name.LastName, 18);
+                ub04Provider.FirstName = SetStringLength(provider.Name.FirstName, 12);
+                if (provider.Name.Type != null && provider.Name.Type.Identifier != null)
+                {
+                    ub04Provider.ProviderQualifier = provider.Name.Type.Identifier;
+                }
+            }
+            var id = provider.Identifications.FirstOrDefault();
+            if (id != null)
+            {
+                ub04Provider.IdentifierQualifier = id.Qualifier;
+                ub04Provider.Identifier = SetStringLength(id.Id, 10);
+            }
+        }
+
+        private string SetStringLength(string source, int limit)
+        {
+            string result = string.Empty;
+            if (!string.IsNullOrEmpty(source))
+            {
+                if (source.Length > limit)
+                {
+                    result = source.Substring(0, limit);
+                }
+                else
+                {
+                    return source;
+                }
+            }
+            return result;
+        }
+
+        private void SetBillingProviderAddressDetails(UB04Claim ub, Provider provider,SubmitterInfo submitterinfo)
+        {
+            if (provider.Address == null)
+            {
+                return;
+            }
+
+            string billingProviderAddress;
+            if (string.IsNullOrEmpty(provider.Address.Line2))
+            {
+                billingProviderAddress = provider.Address.Line1;
+            }
+            else
+            {
+                billingProviderAddress = string.Concat(provider.Address.Line1, ",", provider.Address.Line2);
+            }
+            ub.Field01_BillingProvider.Line1 = SetStringLength(provider.Name.ToString(), 28);
+            ub.Field01_BillingProvider.Line2 = SetStringLength(billingProviderAddress, 28);
+            ub.Field01_BillingProvider.Line3 = SetStringLength(provider.Address.Locale, 28);
+            if (provider.Contacts.Count > 0 && provider.Contacts[0].Numbers.Count > 0 )
+            {
+                ub.Field01_BillingProvider.Line4 = provider.Contacts[0].Numbers[0].Number;
+            }
+            if (string.IsNullOrEmpty(ub.Field01_BillingProvider.Line4))
+            {
+                if (submitterinfo != null && 
+                    submitterinfo.Providers != null && 
+                    submitterinfo.Providers.Contacts.Count > 0 && 
+                    submitterinfo.Providers.Contacts[0].Numbers.Count > 0)
+                {
+                    ub.Field01_BillingProvider.Line4 = submitterinfo.Providers.Contacts[0].Numbers[0].Number;
+                }
+            }
+        }
+
+        private List<string> GetRemarksLineByLine(string remark)
+        {
+            List<string> remarksList = new List<string>();
+            try
+            {
+                while (remark.Length > 27)
+                {
+                    int index = remark.LastIndexOf(' ', 27);
+                    if (index == -1)
+                    {
+                        index = 26;
+                        remarksList.Add(remark.Substring(0, index + 1));
+                        remark = remark.Substring(index + 1, remark.Length - (index + 1));
+                        continue;
+                    }
+                    remarksList.Add(remark.Substring(0, index));
+                    remark = remark.Substring(index + 1, remark.Length - (index + 1));
+                }
+                remarksList.Add(remark);
+            }
+            catch (Exception e)
+            {
+                
+            }
+            return remarksList;
+        }
+
+        private void SetOtherPayers(OtherSubscriberInformation subscriber, UB04Claim ub)
+        {
+            if (subscriber == null ||
+                subscriber.SubscriberInformation == null)
+            {
+                return;
+            }
+
+            switch (subscriber.SubscriberInformation.PayerResponsibilitySequenceNumberCode)
+            {
+                case "P":
+                {
+                    if (subscriber.OtherPayer != null)
+                    {
+                        ub.PayerA_Primary.Field50_PayerName = SetStringLength(subscriber.OtherPayer.Formatted(), 26);
+                        ub.PayerA_Primary.Field51_HealthPlanId = SetStringLength(subscriber.OtherPayer.Identification.Id, 17);
+                        if (!string.IsNullOrEmpty(subscriber.OtherPayer.PriorAuthorizationNumber))
+                        {
+                            ub.Field63A_TreatmentAuthorizationCode = SetStringLength(subscriber.OtherPayer.PriorAuthorizationNumber, 34);
+                        }
+                    }
+                    ub.PayerA_Primary.Field52_ReleaseOfInfoCertIndicator = subscriber.ReleaseOfInformationCode;
+                    ub.PayerA_Primary.Field53_AssignmentOfBenefitsCertIndicator = subscriber.BenefitsAssignmentCertificationIndicator;
+                    ub.PayerA_Primary.Field54_PriorPayments = subscriber.PayorPaidAmount;
+                    ub.PayerA_Primary.Field55_EstimatedAmountDue = subscriber.RemainingPatientLiability;
+
+                    ub.PayerA_Primary.Field58_InsuredsName = SetStringLength(subscriber.Name.Formatted(), 29);
+                    ub.PayerA_Primary.Field59_PatientRelationship = subscriber.SubscriberInformation.IndividualRelationshipCode;
+                    ub.PayerA_Primary.Field60_InsuredsUniqueId = SetStringLength(subscriber.Name.Identification.Id, 23);
+                    ub.PayerA_Primary.Field61_GroupName = SetStringLength(subscriber.SubscriberInformation.Name, 17);
+                    ub.PayerA_Primary.Field62_InsuredsGroupNumber = SetStringLength(subscriber.SubscriberInformation.ReferenceIdentification, 21);
+                    break;
+                }
+                case "S":
+                {
+                    if (subscriber.OtherPayer != null)
+                    {
+                        ub.PayerB_Secondary.Field50_PayerName = SetStringLength(subscriber.OtherPayer.Formatted(), 26);
+                        ub.PayerB_Secondary.Field51_HealthPlanId = SetStringLength(subscriber.OtherPayer.Identification.Id, 17);
+                        if (!string.IsNullOrEmpty(subscriber.OtherPayer.PriorAuthorizationNumber))
+                        {
+                            ub.Field63B_TreatmentAuthorizationCode = SetStringLength(subscriber.OtherPayer.PriorAuthorizationNumber, 34);
+                        }
+                    }
+                    ub.PayerB_Secondary.Field52_ReleaseOfInfoCertIndicator = subscriber.ReleaseOfInformationCode;
+                    ub.PayerB_Secondary.Field53_AssignmentOfBenefitsCertIndicator = subscriber.BenefitsAssignmentCertificationIndicator;
+                    ub.PayerB_Secondary.Field54_PriorPayments = subscriber.PayorPaidAmount;
+                    ub.PayerB_Secondary.Field55_EstimatedAmountDue = subscriber.RemainingPatientLiability;
+
+                    ub.PayerB_Secondary.Field58_InsuredsName = SetStringLength(subscriber.Name.Formatted(), 29);
+                    ub.PayerB_Secondary.Field59_PatientRelationship = subscriber.SubscriberInformation.IndividualRelationshipCode;
+                    ub.PayerB_Secondary.Field60_InsuredsUniqueId = SetStringLength(subscriber.Name.Identification.Id, 23);
+                    ub.PayerB_Secondary.Field61_GroupName = SetStringLength(subscriber.SubscriberInformation.Name, 17);
+                    ub.PayerB_Secondary.Field62_InsuredsGroupNumber = SetStringLength(subscriber.SubscriberInformation.ReferenceIdentification, 21);
+                    break;
+                }
+                case "T":
+                {
+                    if (subscriber.OtherPayer != null)
+                    {
+                        ub.PayerC_Tertiary.Field50_PayerName = SetStringLength(subscriber.OtherPayer.Formatted(), 26);
+                        ub.PayerC_Tertiary.Field51_HealthPlanId = SetStringLength(subscriber.OtherPayer.Identification.Id, 17);
+                        if (!string.IsNullOrEmpty(subscriber.OtherPayer.PriorAuthorizationNumber))
+                        {
+                            ub.Field63C_TreatmentAuthorizationCode = SetStringLength(subscriber.OtherPayer.PriorAuthorizationNumber, 34);
+                        }
+                    }
+                    ub.PayerC_Tertiary.Field52_ReleaseOfInfoCertIndicator = subscriber.ReleaseOfInformationCode;
+                    ub.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator = subscriber.BenefitsAssignmentCertificationIndicator;
+                    ub.PayerC_Tertiary.Field54_PriorPayments = subscriber.PayorPaidAmount;
+                    ub.PayerC_Tertiary.Field55_EstimatedAmountDue = subscriber.RemainingPatientLiability;
+
+                    ub.PayerC_Tertiary.Field58_InsuredsName = SetStringLength(subscriber.Name.Formatted(), 29);
+                    ub.PayerC_Tertiary.Field59_PatientRelationship = subscriber.SubscriberInformation.IndividualRelationshipCode;
+                    ub.PayerC_Tertiary.Field60_InsuredsUniqueId = SetStringLength(subscriber.Name.Identification.Id, 23);
+                    ub.PayerC_Tertiary.Field61_GroupName = SetStringLength(subscriber.SubscriberInformation.Name, 17);
+                    ub.PayerC_Tertiary.Field62_InsuredsGroupNumber = SetStringLength(subscriber.SubscriberInformation.ReferenceIdentification, 21);
+                    break;
+                }
+            }
+        }
+
+        private void SetCurrentPayer(Claim claim, UB04Claim ub)
+        {
+            if (claim.SubscriberInformation == null)
+            {
+                return;
+            }
+
+            switch (claim.SubscriberInformation.PayerResponsibilitySequenceNumberCode)
+            {
+                case "P":
+                    {
+                        if (claim.Payer != null)
+                        {
+                            ub.PayerA_Primary.Field50_PayerName = SetStringLength(claim.Payer.Name.Formatted(), 26);
+                            ub.PayerA_Primary.Field51_HealthPlanId = SetStringLength(claim.Payer.Name.Identification.Id, 17);
+                            if (!string.IsNullOrEmpty(claim.PriorAuthorizationNumber))
+                            {
+                                ub.Field63A_TreatmentAuthorizationCode = SetStringLength(claim.PriorAuthorizationNumber, 34);
+                            }
+                        }
+                        ub.PayerA_Primary.Field52_ReleaseOfInfoCertIndicator = claim.ReleaseOfInformationCode;
+                        ub.PayerA_Primary.Field53_AssignmentOfBenefitsCertIndicator = claim.BenefitsAssignmentCertificationIndicator;
+
+                        ub.PayerA_Primary.Field58_InsuredsName = SetStringLength(claim.Subscriber.Name.Formatted(), 29);
+                        ub.PayerA_Primary.Field59_PatientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
+
+                        ub.PayerA_Primary.Field60_InsuredsUniqueId = SetStringLength(claim.Subscriber.MemberId, 23);
+                        ub.PayerA_Primary.Field61_GroupName = SetStringLength(claim.SubscriberInformation.Name, 17);
+                        ub.PayerA_Primary.Field62_InsuredsGroupNumber = SetStringLength(claim.SubscriberInformation.ReferenceIdentification, 21);
+                        break;
+                    }
+                case "S":
+                    {
+                        if (claim.Payer != null)
+                        {
+                            ub.PayerB_Secondary.Field50_PayerName = SetStringLength(claim.Payer.Name.Formatted(), 26);
+                            ub.PayerB_Secondary.Field51_HealthPlanId = SetStringLength(claim.Payer.Name.Identification.Id, 17);
+                            if (!string.IsNullOrEmpty(claim.PriorAuthorizationNumber))
+                            {
+                                ub.Field63B_TreatmentAuthorizationCode = SetStringLength(claim.PriorAuthorizationNumber, 34);
+                            }
+                        }
+                        ub.PayerB_Secondary.Field52_ReleaseOfInfoCertIndicator = claim.ReleaseOfInformationCode;
+                        ub.PayerB_Secondary.Field53_AssignmentOfBenefitsCertIndicator = claim.BenefitsAssignmentCertificationIndicator;
+
+                        ub.PayerB_Secondary.Field58_InsuredsName = SetStringLength(claim.Subscriber.Name.Formatted(), 29);
+                        ub.PayerB_Secondary.Field59_PatientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
+
+                        ub.PayerB_Secondary.Field60_InsuredsUniqueId = SetStringLength(claim.Subscriber.MemberId, 23);
+                        ub.PayerB_Secondary.Field61_GroupName = SetStringLength(claim.SubscriberInformation.Name, 17);
+                        ub.PayerB_Secondary.Field62_InsuredsGroupNumber = SetStringLength(claim.SubscriberInformation.ReferenceIdentification, 21);
+                        break;
+                    }
+                case "T":
+                    {
+                        if (claim.Payer != null)
+                        {
+                            ub.PayerC_Tertiary.Field50_PayerName = SetStringLength(claim.Payer.Name.Formatted(), 26);
+                            ub.PayerC_Tertiary.Field51_HealthPlanId = SetStringLength(claim.Payer.Name.Identification.Id, 17);
+                            if (!string.IsNullOrEmpty(claim.PriorAuthorizationNumber))
+                            {
+                                ub.Field63C_TreatmentAuthorizationCode = SetStringLength(claim.PriorAuthorizationNumber, 34);
+                            }
+                        }
+                        ub.PayerC_Tertiary.Field52_ReleaseOfInfoCertIndicator = claim.ReleaseOfInformationCode;
+                        ub.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator = claim.BenefitsAssignmentCertificationIndicator;
+
+                        ub.PayerC_Tertiary.Field58_InsuredsName = SetStringLength(claim.Subscriber.Name.Formatted(), 29);
+                        ub.PayerC_Tertiary.Field59_PatientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
+
+                        ub.PayerC_Tertiary.Field60_InsuredsUniqueId = SetStringLength(claim.Subscriber.MemberId, 23);
+                        ub.PayerC_Tertiary.Field61_GroupName = SetStringLength(claim.SubscriberInformation.Name, 17);
+                        ub.PayerC_Tertiary.Field62_InsuredsGroupNumber = SetStringLength(claim.SubscriberInformation.ReferenceIdentification, 21);
+                        break;
+                    }
+            }
+        }
+
+        private string SetProcedureCodeWithModifiers(MedicalProcedure procedure)
+        {
+            if (procedure == null)
+            {
+                return String.Empty;
+            }
+
+            StringBuilder procedureCode=new StringBuilder();
+            procedureCode.Append(procedure.ProcedureCode);
+            if (procedure.Modifier1 != null)
+            {
+                procedureCode.Append(" " + procedure.Modifier1);
+            }
+            if (procedure.Modifier2 != null)
+            {
+                procedureCode.Append(" " + procedure.Modifier2);
+            }
+            if (procedure.Modifier3 != null)
+            {
+                procedureCode.Append(" " + procedure.Modifier3);
+            }
+            if (procedure.Modifier4 != null)
+            {
+                procedureCode.Append(" " + procedure.Modifier4);
+            }
+            return procedureCode.ToString();
         }
 
         private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
@@ -349,12 +780,14 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             List<FormPage> pages = new List<FormPage>();
             int pageCount = 1 + ((ub04.ServiceLines.Count - 1) / 22);
             FormPage page = null;
+            int pageIndex = 0;
             for (int i = 0; i < ub04.ServiceLines.Count; i++)
             {
                 if (i % 22 == 0)
                 {
                     page = new FormPage();
                     pages.Add(page);
+                    pageIndex++;
                     page.MasterReference = "ub04";
                     page.ImagePath = _formImagePath;
 
@@ -522,25 +955,57 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 // service lines
                 decimal y = 18 + (i % 22);
                 var line = ub04.ServiceLines[i];
-                
                 // Box 42 - 49 - Service Lines
                 AddBlock(page, 2, y, 4, line.Field42_RevenueCode);
                 AddBlock(page, 7, y, 29, line.Field43_Description);
                 AddBlock(page, 37, y, 17, line.Field44_ProcedureCodes);
                 AddBlock(page, 56, y, 6, line.Field45_ServiceDate);
                 AddBlock(page, 64, y, 9, line.Field46_ServiceUnits, TextAlignEnum.right);
+                
                 AddBlock(page, 74, y, 11, String.Format("{0:0.00}", line.Field47_TotalCharges).Replace('.',' '), TextAlignEnum.right);
                 AddBlock(page, 86, y, 11, String.Format("{0:0.00}", line.Field48_NonCoveredCharges).Replace('.',' '), TextAlignEnum.right);
                 AddBlock(page, 97, y, 2, line.Field49);
 
                 if (i % 22 == 21 || i == ub04.ServiceLines.Count - 1) // Footer
                 {
-                    int pageIndex = 1 + ((i - 1) / 22);
                     AddBlock(page, 13, 40, 3, pageIndex.ToString(), TextAlignEnum.right);
                     AddBlock(page, 20, 40, 3, pageCount.ToString(), TextAlignEnum.right);
+                    if (PerPageTotalChargesView)
+                    {
+                        int lowIndex;
+                        if (i % 22 == 21)
+                        {
+                            lowIndex = i - 21;
+                        }
+                        else
+                        {
+                            lowIndex = i - (i % 22);
+                        }
+                        decimal? pageCharges = 0;
+                        decimal? nonCoveredCharges = 0;
+                        for (int x = i; x >= lowIndex; x--)
+                        {
+                            if (ub04.ServiceLines[x].Field47_TotalCharges != null)
+                            {
+                                pageCharges += ub04.ServiceLines[x].Field47_TotalCharges;
+                            }
+                            if (ub04.ServiceLines[x].Field48_NonCoveredCharges != null)
+                            {
+                                nonCoveredCharges += ub04.ServiceLines[x].Field48_NonCoveredCharges;
+                            }
 
-                    AddBlock(page, 74, 40, 11, String.Format("{0:0.00}", ub04.Field47_Line23_TotalCharges).Replace('.',' '), TextAlignEnum.right);
-                    AddBlock(page, 86, 40, 11, String.Format("{0:0.00}", ub04.Field48_Line23_NonCoveredCharges).Replace('.',' '), TextAlignEnum.right);
+                        }
+                        AddBlock(page, 74, 40, 11, String.Format("{0:0.00}", pageCharges).Replace('.', ' '), TextAlignEnum.right);
+                        AddBlock(page, 86, 40, 11, String.Format("{0:0.00}", nonCoveredCharges).Replace('.', ' '), TextAlignEnum.right);
+                    }
+                    else
+                    {
+                        if (pageIndex == pageCount)
+                        {
+                            AddBlock(page, 74, 40, 11, String.Format("{0:0.00}", ub04.Field47_Line23_TotalCharges).Replace('.', ' '), TextAlignEnum.right);
+                            AddBlock(page, 86, 40, 11, String.Format("{0:0.00}", ub04.Field48_Line23_NonCoveredCharges).Replace('.', ' '), TextAlignEnum.right);
+                        }
+                    }
 
                     // Box 50
                     AddBlock(page, 2, 42, 26, ub04.PayerA_Primary.Field50_PayerName);
@@ -758,6 +1223,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                     // Box 78
                     AddBlock(page, 72, 60, 10, ub04.Field78_OtherProvider.Npi);
+                    AddBlock(page, 67, 60, 2, ub04.Field78_OtherProvider.ProviderQualifier);
                     AddBlock(page, 86, 60, 2, ub04.Field78_OtherProvider.IdentifierQualifier);
                     AddBlock(page, 89, 60, 10, ub04.Field78_OtherProvider.Identifier);
                     AddBlock(page, 64, 61, 18, ub04.Field78_OtherProvider.LastName);
@@ -765,6 +1231,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                     // Box 79
                     AddBlock(page, 72, 62, 10, ub04.Field79_OtherProvider.Npi);
+                    AddBlock(page, 67, 62, 2, ub04.Field79_OtherProvider.ProviderQualifier);
                     AddBlock(page, 86, 62, 2, ub04.Field79_OtherProvider.IdentifierQualifier);
                     AddBlock(page, 89, 62, 10, ub04.Field79_OtherProvider.Identifier);
                     AddBlock(page, 64, 63, 18, ub04.Field79_OtherProvider.LastName);

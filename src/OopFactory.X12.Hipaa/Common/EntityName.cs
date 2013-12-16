@@ -32,6 +32,9 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlAttribute]
         public string LastName { get; set; }
+
+        [XmlAttribute]
+        public string PriorAuthorizationNumber { get; set; }
         [XmlAttribute]
         public string Suffix { get; set; }
 

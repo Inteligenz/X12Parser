@@ -77,6 +77,8 @@ namespace OopFactory.X12.Hipaa.Claims
         public Entity Submitter { get; set; }
         public Entity Receiver { get; set; }
         public BillingInformation BillingInfo { get; set; }
+        public ProviderInformation ProviderInfo { get; set; }
+        public SubmitterInfo SubmitterInfo { get; set; }
         public ClaimMember Subscriber { get; set; }
         public Entity Payer { get; set; }
         public ClaimMember Patient { get; set; }

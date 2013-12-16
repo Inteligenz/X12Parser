@@ -28,6 +28,8 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string RevenueCode { get; set; }
         [XmlAttribute]
+        public string RevenueCodeDescription { get; set; }
+        [XmlAttribute]
         public decimal Quantity { get; set; }
         [XmlAttribute]
         public string Unit { get; set; }
