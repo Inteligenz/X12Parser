@@ -77,6 +77,11 @@
         </xsl:attribute>
       </xsl:if>
       <xsl:if test="string-length(CLM/CLM11)>0">
+        <xsl:if test="CLM/CLM11">
+          <xsl:attribute name="RelatedCauseCode1">
+            <xsl:value-of select="CLM/CLM11"/>
+          </xsl:attribute>
+        </xsl:if>
         <xsl:if test="CLM/CLM11/CLM1101">
           <xsl:attribute name="RelatedCauseCode1">
             <xsl:value-of select="CLM/CLM11/CLM1101"/>
@@ -145,6 +150,12 @@
 
       <xsl:choose>
         <xsl:when test="$ParentLoopId = '2000B'">
+          <xsl:call-template name="ProviderInfoLoop">
+            <xsl:with-param name="HLoop" select="../../."/>
+          </xsl:call-template>
+           <xsl:call-template name="SubmitterLoop">
+            <xsl:with-param name="HLoop" select="../../../."/>
+          </xsl:call-template>
           <xsl:call-template name="BillingProviderHLoop">
             <xsl:with-param name="HLoop" select="../../."/>
           </xsl:call-template>
@@ -522,6 +533,20 @@
     <BillingInfo>
       <xsl:apply-templates select="$HLoop/Loop"/>
     </BillingInfo>
+  </xsl:template>
+  
+  <!-- Hierarchical Loops -->
+  <xsl:template name="SubmitterLoop">
+    <xsl:param name="HLoop"/>
+    <SubmitterInfo>
+      <xsl:apply-templates select="$HLoop/Loop"/>
+    </SubmitterInfo>
+  </xsl:template>
+  
+  <!-- Hierarchical Loops -->
+  <xsl:template name="ProviderInfoLoop">
+    <xsl:param name="HLoop"/>
+      <xsl:apply-templates select="$HLoop/PRV"/>
   </xsl:template>
 
   <!-- XXX: This loop is not completely filled out! -->
@@ -1053,7 +1078,7 @@
   </xsl:template>
 
   <!-- Provider -->
-  <xsl:template match="Loop[count(NM1[NM101='85' or NM101='87' or NM101='PE' or NM101='PR' or NM101='71' or NM101='72' or NM101='ZZ' or NM101='82' or NM101='77' or NM101='DN'])>0]">
+  <xsl:template match="Loop[count(NM1[NM101='85' or NM101='41' or NM101='87' or NM101='PE' or NM101='PR' or NM101='71' or NM101='72' or NM101='ZZ' or NM101='82' or NM101='77' or NM101='DN'])>0]">
     <Provider>
       <Name>
         <xsl:call-template name="EntityName">
@@ -1170,6 +1195,11 @@
 
   <xsl:template name="EntityName">
     <xsl:param name="Loop"/>
+    <xsl:if test="$Loop/REF[REF01='G1']">
+      <xsl:attribute name="PriorAuthorizationNumber">
+        <xsl:value-of select="$Loop/REF[REF01='G1']/REF02"/>
+      </xsl:attribute>
+    </xsl:if>
     <xsl:attribute name="LastName">
       <xsl:value-of select="$Loop/NM1/NM103"/>
     </xsl:attribute>
