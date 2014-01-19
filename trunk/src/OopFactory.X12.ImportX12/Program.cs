@@ -21,11 +21,13 @@ namespace OopFactory.X12.ImportX12
             string parseSearchPattern = ConfigurationManager.AppSettings["ParseSearchPattern"];
             string archiveDirectory = ConfigurationManager.AppSettings["ArchiveDirectory"];
             string failureDirectory = ConfigurationManager.AppSettings["FailureDirectory"];
+            string sqlDateType = ConfigurationManager.AppSettings["SqlDateType"];
+            int segmentBatchSize = Convert.ToInt32(ConfigurationManager.AppSettings["SqlSegmentBatchSize"]);
 
             var specFinder = new SpecificationFinder();
             var parser = new X12Parser(throwExceptionOnSyntaxErrors);
             parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
-            var repo = new SqlTransactionRepository<int>(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"]);
+            var repo = new SqlTransactionRepository<int>(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"], segmentBatchSize, sqlDateType);
 
             foreach (var filename in Directory.GetFiles(parseDirectory, parseSearchPattern, SearchOption.AllDirectories))
             {
