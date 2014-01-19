@@ -36,11 +36,11 @@ namespace OopFactory.X12.Repositories
         {
         }
         
-        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo", int segmentBatchSize = 1000)
+        public SqlTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo", int segmentBatchSize = 1000, string sqlDateType = "date")
             : base(dsn, schema)
         {
-            _commonDb = new DbCreation<T>(dsn, commonSchema);
-            _transactionDb = new DbCreation<T>(dsn, schema);
+            _commonDb = new DbCreation<T>(dsn, commonSchema, sqlDateType);
+            _transactionDb = new DbCreation<T>(dsn, schema, sqlDateType);
             _schemaEnsured = false;
             _batchSize = segmentBatchSize;
             _batchCount = 0;

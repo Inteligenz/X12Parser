@@ -8,7 +8,7 @@ using OopFactory.X12.Repositories;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace OopFactory.X12.Tests.Unit.Repositories
+namespace OopFactory.X12.Tests.Integration.Repositories
 {
     [TestClass, Ignore]
     public class LoadInterchangeTester

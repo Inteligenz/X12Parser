@@ -13,11 +13,13 @@ namespace OopFactory.X12.Repositories
         private string _dsn;
         private string _schema;
         private SqlDbType _identitySqlType;
+        private string _dateType;
 
-        public DbCreation(string dsn, string schema)
+        public DbCreation(string dsn, string schema, string dateType = "date")
         {
             _dsn = dsn;
             _schema = schema;
+            _dateType = dateType;
             if (typeof(T) == typeof(Guid))
                 _identitySqlType = SqlDbType.UniqueIdentifier;
             else if (typeof(T) == typeof(long))
@@ -293,7 +295,7 @@ CREATE TABLE [{0}].[{1}](
                                 }
                                 break;
                             case ElementDataTypeEnum.Date:
-                                sql.AppendFormat("  [{0}] [date] NULL,\n", element.Reference);
+                                sql.AppendFormat("  [{0}] [{1}] NULL,\n", element.Reference, _dateType);
                                 break;
                             default:
                                 sql.AppendFormat("	[{0}] [nvarchar]({1}) NULL,\n", element.Reference, element.MaxLength);

@@ -70,9 +70,6 @@
     <Compile Include="Parsing\BinaryParsingTester.cs" />
     <Compile Include="Parsing\ParsingTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GetTransactionSegmentsTester.cs" />
-    <Compile Include="Repositories\LoadInterchangeTester.cs" />
-    <Compile Include="Repositories\SaveRevisionTester.cs" />
     <Compile Include="Unbundling\UnbundlingTester.cs" />
   </ItemGroup>
   <ItemGroup>
