@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="270">
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="271">
   <Segment SegmentId="BHT"/>
   <HierarchicalLoop LoopId="2000A" LevelCode="20">
     <Name>Information Source Level</Name>
