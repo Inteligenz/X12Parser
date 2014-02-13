@@ -60,6 +60,7 @@
     <Compile Include="Parsing\Model\Typed\IdentificationCodeQualifier.cs" />
     <Compile Include="Parsing\Model\Typed\PricingMethodology.cs" />
     <Compile Include="Parsing\Model\Typed\RelationshipCode.cs" />
+    <Compile Include="Parsing\Model\Typed\ServiceTypeCodes.cs" />
     <Compile Include="Parsing\Model\Typed\TimeCode.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIT1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopN1.cs" />
