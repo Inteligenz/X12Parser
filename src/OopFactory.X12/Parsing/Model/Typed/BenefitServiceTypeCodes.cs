@@ -6,7 +6,7 @@ using OopFactory.X12.Attributes;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public enum ServiceTypeCodes
+    public enum BenefitServiceTypeCodes
     {
     [EDIFieldValue("1")] MedicalCare, 
     [EDIFieldValue("2")] Surgical, 
