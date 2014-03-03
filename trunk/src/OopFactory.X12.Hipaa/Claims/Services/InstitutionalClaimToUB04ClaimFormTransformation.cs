@@ -238,15 +238,18 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             }
             ub.Field47_Line23_TotalCharges = claim.TotalClaimChargeAmount;
             ub.Field48_Line23_NonCoveredCharges = claim.ServiceLines.Sum(sl => sl.NonCoveredChargeAmount);
-            ub.Field56_NationalProviderIdentifier = claim.BillingProvider.Npi;
-            if (string.IsNullOrEmpty(claim.BillingProvider.Npi))
+            if (claim.BillingProvider != null)
             {
-                if (claim.BillingProvider.Identifications.Count >= 1)
-                    ub.Field57_OtherProviderIdA = claim.BillingProvider.Identifications[0].Id;
-                if (claim.BillingProvider.Identifications.Count >= 2)
-                    ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
-                if (claim.BillingProvider.Identifications.Count >= 3)
-                    ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
+                ub.Field56_NationalProviderIdentifier = claim.BillingProvider.Npi;
+                if (string.IsNullOrEmpty(claim.BillingProvider.Npi))
+                {
+                    if (claim.BillingProvider.Identifications.Count >= 1)
+                        ub.Field57_OtherProviderIdA = claim.BillingProvider.Identifications[0].Id;
+                    if (claim.BillingProvider.Identifications.Count >= 2)
+                        ub.Field57_OtherProviderIdB = claim.BillingProvider.Identifications[1].Id;
+                    if (claim.BillingProvider.Identifications.Count >= 3)
+                        ub.Field57_OtherProviderIdC = claim.BillingProvider.Identifications[2].Id;
+                }
             }
 
             SetCurrentPayer(claim, ub);
@@ -505,7 +508,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
         private void SetBillingProviderAddressDetails(UB04Claim ub, Provider provider,SubmitterInfo submitterinfo)
         {
-            if (provider.Address == null)
+            if (provider == null || provider.Address == null)
             {
                 return;
             }
