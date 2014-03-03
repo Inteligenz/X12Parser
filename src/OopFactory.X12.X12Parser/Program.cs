@@ -15,11 +15,13 @@ namespace OopFactory.X12.X12Parser
             int maxBatchSize = 10 * 1012 * 1012; // 10 Mbytes
             if (ConfigurationManager.AppSettings["MaxBatchSize"] != null)
                 maxBatchSize = Convert.ToInt32(ConfigurationManager.AppSettings["MaxBatchSize"]);
+
+            bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
             
             string x12Filename = args[0];
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
-            OopFactory.X12.Parsing.X12Parser parser = new Parsing.X12Parser();
+            OopFactory.X12.Parsing.X12Parser parser = new Parsing.X12Parser(throwException);
             parser.ParserWarning += new Parsing.X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
             
             byte[] header = new byte[6];

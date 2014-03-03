@@ -418,7 +418,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
 
 	        // Federal Tax Number
-	        if (!string.IsNullOrWhiteSpace(claim.PayToProvider.TaxId))
+            if (claim.PayToProvider != null && !string.IsNullOrWhiteSpace(claim.PayToProvider.TaxId))
 	        {
 		        hcfa.Field25_FederalTaxIDNumber = claim.PayToProvider.TaxId;
 		        if (claim.PayToProvider.Identifications.Exists(id=>id.Qualifier == "EI"))
@@ -428,11 +428,14 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 	        }
 	        else
 	        {
-		        hcfa.Field25_FederalTaxIDNumber = claim.BillingProvider.TaxId;
-		        if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "EI"))
-			        hcfa.Field25_IsEIN = true;
-		        if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "SY"))
-			        hcfa.Field25_IsSSN = true;
+                if (claim.BillingProvider != null)
+                {
+                    hcfa.Field25_FederalTaxIDNumber = claim.BillingProvider.TaxId;
+                    if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "EI"))
+                        hcfa.Field25_IsEIN = true;
+                    if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "SY"))
+                        hcfa.Field25_IsSSN = true;
+                }
 	        }
 		
 	        // shouldnt we represent hcfa.Field25_IsSSN and Field25_IsEIN to know which type TaxID?

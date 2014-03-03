@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Configuration;
+using OopFactory.X12.Parsing;
 using OopFactory.X12.Hipaa.Claims.Services;
 
 namespace OopFactory.X12.Hipaa.ClaimParser
@@ -12,12 +14,15 @@ namespace OopFactory.X12.Hipaa.ClaimParser
     {
         static void Main(string[] args)
         {
+            bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
+
             var opts = new ExecutionOptions(args);
             InstitutionalClaimToUB04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif");
             var service = new ClaimFormTransformationService(
                 new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
                 institutionalClaimToUB04ClaimFormTransformation,
-                new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"));
+                new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"),
+                new X12Parser(throwException));
 
             foreach (var filename in Directory.GetFiles(opts.Path, opts.SearchPattern, SearchOption.TopDirectoryOnly))
             {
