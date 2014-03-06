@@ -52,6 +52,7 @@
     <Compile Include="Parsing\Model\DetachedSegment.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
     <Compile Include="Parsing\Model\Typed\AllowanceOrChargeIndicator.cs" />
+    <Compile Include="Parsing\Model\Typed\BenefitServiceTypeCodes.cs" />
     <Compile Include="Parsing\Model\Typed\ContractTypeCode.cs" />
     <Compile Include="Parsing\Model\Typed\DTPFormatQualifier.cs" />
     <Compile Include="Parsing\Model\Typed\DTPQualifier.cs" />
