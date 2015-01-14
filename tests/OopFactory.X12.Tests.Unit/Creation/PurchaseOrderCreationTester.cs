@@ -13,6 +13,16 @@ namespace OopFactory.X12.Tests.Unit.Creation
 		[TestMethod]
 		public void CreatePurchaseOrder850()
 		{
+            string expected = @"ISA*00*          *00*          *01*828513080      *01*001903202U     *100817*0850*U*00401*000000245*0*P*:~
+  GS*PO*828513080*001903202U*20100817*0850*245*X*005010X222~
+    ST*850*0001~
+      BEG*05*SA*S41000439**20100810~
+      CUR*BY*USD~
+      PER*IC*Doe,Jane******Doe,Jane~
+    SE*5*0001~
+  GE*1*1~
+IEA*1*000000245~";
+
 			DateTime purcaseOrderDate = new DateTime(2010, 8, 17, 08, 50, 0);
 			Interchange interchange = new Interchange(purcaseOrderDate, 245, true)
 			{
@@ -49,7 +59,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
 			bhtSegment.SetElement(8, "Doe,Jane");
 
 			var x12 = interchange.SerializeToX12(true);
-			System.Diagnostics.Trace.Write(x12);
+            Assert.AreEqual(expected, x12);
 		}
 
 		[TestMethod]
@@ -95,9 +105,19 @@ namespace OopFactory.X12.Tests.Unit.Creation
 		[TestMethod]
 		public void CreatePurchaseOrderChangeNotice860()
 		{
+            string expected = @"ISA*00*          *00*          *01*828513080      *01*001903202U     *100818*0850*U*00401*000000245*0*P*:~
+  GS*PO*828513080*001903202U*20100818*0850*245*X*005010X222~
+    ST*860*0001~
+      BCH*01*SA****20100817*****20100818~
+      REF*IA*1to30chars~
+      DTM*010*20100819~
+    SE*5*0001~
+  GE*1*1~
+IEA*1*000000245~";
+
 			DateTime purcaseOrderDate = new DateTime(2010, 8, 17, 08, 50, 0);
-			DateTime changeOrderDate = DateTime.Now;
-			DateTime requestedShipDate = DateTime.Now.AddDays(2d);
+            DateTime changeOrderDate = purcaseOrderDate.AddDays(1d);
+            DateTime requestedShipDate = purcaseOrderDate.AddDays(2d);
 
 			Interchange interchange = new Interchange(changeOrderDate , 245, true)
 			{
@@ -157,7 +177,9 @@ namespace OopFactory.X12.Tests.Unit.Creation
 			//Mandatory / Max Use=1 time
 
 			var x12 = interchange.SerializeToX12(true);
-			System.Diagnostics.Trace.Write(x12);
+
+            Assert.AreEqual(expected, x12);
+
 		}
 
 		enum BeginningSegmentPurchaseOrderChangeIndex
