@@ -5,26 +5,26 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public class TypedSegmentAMT : TypedSegment
+    public class TypedSegmentLIN : TypedSegment
     {
-        public TypedSegmentAMT()
-            : base("AMT")
+        public TypedSegmentLIN()
+            : base("LIN")
         {
         }
 
-        public string AMT01_AmountQualifierCode
+        public string LIN01_AssignedIdentification
         {
             get { return _segment.GetElement(1); }
             set { _segment.SetElement(1, value); }
         }
 
-        public decimal? AMT02_MonetaryAmount
+        public string LIN02_ProductOrServiceIdQualifier
         {
-            get { return _segment.GetDecimalElement(2); }
+            get { return _segment.GetElement(2); }
             set { _segment.SetElement(2, value); }
         }
 
-        public string AMT03_CreditDebigFlagCode
+        public string LIN03_ProductOrServiceId
         {
             get { return _segment.GetElement(3); }
             set { _segment.SetElement(3, value); }

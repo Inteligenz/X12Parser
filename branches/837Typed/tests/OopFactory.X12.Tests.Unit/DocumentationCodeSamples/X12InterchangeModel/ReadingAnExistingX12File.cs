@@ -161,7 +161,7 @@ IEA*1*000000031~
             //Billing info HL1 level
             var HL1SourceLoop = HL1InformationSourceLevel.AddLoop(new TypedLoopNM1("PR"));
             //InformationSourceLoop.NM101_EntityIdCode = "PR"; //2B Third-Party Administrator, 36 Employer, GP Gateway Provider, P5 Plan Sponsor, PR Payer
-            HL1SourceLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            HL1SourceLoop.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             HL1SourceLoop.NM103_NameLastOrOrganizationName = "ABC BILLING SERVICE";
             HL1SourceLoop.NM104_NameFirst = "";
             HL1SourceLoop.NM105_NameMiddle = "";
@@ -195,7 +195,7 @@ IEA*1*000000031~
             var HL2SourceLoop = HL1InformationSourceLevel.AddHLoop("2", "21", true);//This is the 2100 Loop - The receiver information
             
             var HL2Info = HL2SourceLoop.AddLoop(new TypedLoopNM1("1P"));
-            HL2Info.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            HL2Info.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             HL2Info.NM103_NameLastOrOrganizationName = "BONE AND JOINT CLINIC";
             HL2Info.NM104_NameFirst = "";
             HL2Info.NM105_NameMiddle = "";
@@ -217,7 +217,7 @@ IEA*1*000000031~
             HL3Info.AddSegment("TRN*1*93175-012547*9877281234");
 
             var Member = HL3Info.AddLoop(new TypedLoopNM1("IL"));
-            Member.NM102_EntityTypeQualifier = EntityTypeQualifier.Person;
+            Member.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.Person;
             Member.NM103_NameLastOrOrganizationName = "SMITH";
             Member.NM104_NameFirst = "ROBERT";
             Member.NM105_NameMiddle="MI";
@@ -227,8 +227,8 @@ IEA*1*000000031~
             Birthday.DMG02_DateOfBirth = DateTime.Parse("05/19/1943");
 
             TypedSegmentDTP SubscribeDate = Member.AddSegment(new TypedSegmentDTP());
-            SubscribeDate.DTP01_DateTimeQualifier = DTPQualifier.Plan;
-            SubscribeDate.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
+            SubscribeDate.DTP01_DateTimeQualifierEnum = DTPQualifier.Plan;
+            SubscribeDate.DTP02_DateTimePeriodFormatQualifierEnum = DTPFormatQualifier.CCYYMMDD;
             SubscribeDate.DTP03_Date = new DateTimePeriod(DateTime.Parse("05/01/2006"));
 
             //Need to create enumeration of the EQ categories, so not just asking for the general 30 information.

@@ -10,9 +10,17 @@ namespace OopFactory.X12.Parsing.Model.Typed
     /// </summary>
     public class TypedSegmentCTP : TypedSegment
     {
+        private TypedElementCompositeUnitOfMeasure _CTP05;
+
         public TypedSegmentCTP()
             : base("CTP")
-        { }
+        {
+        }
+
+        internal override void Initialize(Container parent, X12DelimiterSet delimiters) {
+            base.Initialize(parent, delimiters);
+            _CTP05 = new TypedElementCompositeUnitOfMeasure(_segment, 5);
+        }
 
         public string CTP01_ClassOfTradeCode
         {
@@ -32,16 +40,15 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(3, value); }
         }
 
-        public decimal? CTIP04_Quantity
+        public decimal? CTP04_Quantity
         {
             get { return _segment.GetDecimalElement(4); }
             set { _segment.SetElement(4, value); }
         }
 
-        public string CTP05_CompositeUnitOfMeasure
-        {
-            get { return _segment.GetElement(5); }
-            set { _segment.SetElement(5, value); }
+
+        public TypedElementCompositeUnitOfMeasure CTP05_CompositeUnitOfMeasure {
+            get { return _CTP05; }
         }
 
         public string CTP06_PriceMultiplierQualifier

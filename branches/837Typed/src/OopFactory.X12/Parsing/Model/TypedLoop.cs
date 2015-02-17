@@ -6,7 +6,7 @@ using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
-    public abstract class TypedLoop
+    public abstract class TypedLoop : ISegmentContainer
     {
         internal string _segmentId;
         internal Loop _loop;

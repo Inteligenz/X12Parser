@@ -7,9 +7,16 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentREF : TypedSegment
     {
+        private TypedElementReferenceIdentifier _REF04;
+
         public TypedSegmentREF()
             : base("REF")
         {
+        }
+
+        internal override void Initialize(Container parent, X12DelimiterSet delimiters) {
+            base.Initialize(parent, delimiters);
+            _REF04 = new TypedElementReferenceIdentifier(_segment, 4);
         }
 
         public string REF01_ReferenceIdQualifier
@@ -30,10 +37,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(3, value); }
         }
 
-        public string REF04_ReferenceId
-        {
-            get { return _segment.GetElement(4); }
-            set { _segment.SetElement(4, value); }
+        public TypedElementReferenceIdentifier REF04_ReferenceIdentifier {
+            get { return _REF04; }
         }
     }
 }

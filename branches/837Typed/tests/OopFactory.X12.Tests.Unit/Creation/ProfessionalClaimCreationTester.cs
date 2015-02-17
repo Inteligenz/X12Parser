@@ -48,7 +48,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             bhtSegment.BHT06_TransactionTypeCode = "CH";
 
             var submitterLoop = transaction.AddLoop(new TypedLoopNM1("41")); //submitter identifier code
-            submitterLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            submitterLoop.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             submitterLoop.NM103_NameLastOrOrganizationName = "PREMIER BILLING SERVICE";
             submitterLoop.NM104_NameFirst = "";
             submitterLoop.NM109_IdCode = "TGJ23";
@@ -57,13 +57,13 @@ namespace OopFactory.X12.Tests.Unit.Creation
             var perSegment = submitterLoop.AddSegment(new TypedSegmentPER());
             perSegment.PER01_ContactFunctionCode = "IC"; //information contact function code
             perSegment.PER02_Name = "JERRY";
-            perSegment.PER03_CommunicationNumberQualifier = CommunicationNumberQualifer.Telephone;
+            perSegment.PER03_CommunicationNumberQualifierEnum = CommunicationNumberQualifer.Telephone;
             perSegment.PER04_CommunicationNumber = "3055552222";
-            perSegment.PER05_CommunicationNumberQualifier = CommunicationNumberQualifer.TelephoneExtension;
+            perSegment.PER05_CommunicationNumberQualifierEnum = CommunicationNumberQualifer.TelephoneExtension;
             perSegment.PER06_CommunicationNumber = "231";
 
             var submitterLoop2 = transaction.AddLoop(new TypedLoopNM1("40"));
-            submitterLoop2.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            submitterLoop2.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             submitterLoop2.NM103_NameLastOrOrganizationName = "KEY INSURANCE COMPANY";
             submitterLoop2.NM104_NameFirst = "";
             submitterLoop2.NM109_IdCode = "66783JJT";
@@ -76,7 +76,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             prvSegment.PRV03_ProviderTaxonomyCode = "203BF0100Y";
 
             var provider2010ACLoop = provider2000AHLoop.AddLoop(new TypedLoopNM1("85"));
-            provider2010ACLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            provider2010ACLoop.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             provider2010ACLoop.NM103_NameLastOrOrganizationName = "BEN KILDARE SERVICE";
             provider2010ACLoop.NM109_IdCode = "9876543210";
             provider2010ACLoop.NM108_IdCodeQualifier = "XX";
@@ -94,7 +94,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             provider2010AC_REFSegment.REF02_ReferenceId = "587654321";
 
             var provider2010ACLoop2 = provider2000AHLoop.AddLoop(new TypedLoopNM1("87"));
-            provider2010ACLoop2.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            provider2010ACLoop2.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
 
             var provider2010AC_N3Segment2 = provider2010ACLoop2.AddSegment(new TypedSegmentN3());
             provider2010AC_N3Segment2.N301_AddressInformation = "2345 OCEAN BLVD";
@@ -112,7 +112,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             segmentSBR.SBR09_ClaimFilingIndicatorCode = "CI";
 
             var subscriberName2010BALoop = subscriber2000BHLoop.AddLoop(new TypedLoopNM1("IL"));
-            subscriberName2010BALoop.NM102_EntityTypeQualifier = EntityTypeQualifier.Person;
+            subscriberName2010BALoop.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.Person;
             subscriberName2010BALoop.NM104_NameFirst = "JANE";
             subscriberName2010BALoop.NM103_NameLastOrOrganizationName = "SMITH";
             subscriberName2010BALoop.NM109_IdCode = "JS00111223333";
@@ -121,10 +121,10 @@ namespace OopFactory.X12.Tests.Unit.Creation
             var subscriber_DMGSegment = subscriberName2010BALoop.AddSegment(new TypedSegmentDMG());
             subscriber_DMGSegment.DMG01_DateTimePeriodFormatQualifier = "D8";
             subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("5/1/1943");
-            subscriber_DMGSegment.DMG03_Gender = Gender.Female;
+            subscriber_DMGSegment.DMG03_GenderEnum = Gender.Female;
 
             var subscriberName2010BALoop2 = subscriber2000BHLoop.AddLoop(new TypedLoopNM1("PR"));
-            subscriberName2010BALoop2.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
+            subscriberName2010BALoop2.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.NonPersonEntity;
             subscriberName2010BALoop2.NM103_NameLastOrOrganizationName = "KEY INSURANCE COMPANY";
             subscriberName2010BALoop2.NM108_IdCodeQualifier = "PI";
             subscriberName2010BALoop2.NM109_IdCode = "999996666";
@@ -139,7 +139,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             HL3PATSegment.PAT01_IndividualRelationshipCode = "19";
 
             var HL3NM1Segment = HL3Loop.AddLoop(new TypedLoopNM1("QC"));
-            HL3NM1Segment.NM102_EntityTypeQualifier = EntityTypeQualifier.Person;
+            HL3NM1Segment.NM102_EntityTypeQualifierEnum = EntityTypeQualifier.Person;
             HL3NM1Segment.NM104_NameFirst = "TED";
             HL3NM1Segment.NM103_NameLastOrOrganizationName = "SMITH";
 
@@ -157,7 +157,7 @@ namespace OopFactory.X12.Tests.Unit.Creation
             var HL3NM1_DMG_Segment = HL3NM1Segment.AddSegment(new TypedSegmentDMG());
             HL3NM1_DMG_Segment.DMG01_DateTimePeriodFormatQualifier = "D8";
             HL3NM1_DMG_Segment.DMG02_DateOfBirth = Convert.ToDateTime("5/1/1973");
-            HL3NM1_DMG_Segment.DMG03_Gender = Gender.Male;
+            HL3NM1_DMG_Segment.DMG03_GenderEnum = Gender.Male;
 
             var claim2300Loop = HL3Loop.AddLoop(new TypedLoopCLM());
             claim2300Loop.CLM01_PatientControlNumber = "26463774";
@@ -175,54 +175,59 @@ namespace OopFactory.X12.Tests.Unit.Creation
             refSegment.REF02_ReferenceId = "17312345600006351";
 
             var hiSegment = claim2300Loop.AddSegment(new TypedSegmentHI());
-            hiSegment.HI01_HealthCareCodeInformation = "BK:0340";
-            hiSegment.HI02_HealthCareCodeInformation = "BF:V7389";
+            hiSegment.HI01_HealthCareCodeInformation._1_CodeListQualifierCode = "BK";
+            hiSegment.HI01_HealthCareCodeInformation._2_IndustryCode = "0340";
+            hiSegment.HI02_HealthCareCodeInformation._1_CodeListQualifierCode = "BF";
+            hiSegment.HI02_HealthCareCodeInformation._2_IndustryCode = "V7389";
 
             var lxLoop = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop.LX01_AssignedNumber = "1";
 
             var sv1Segment = lxLoop.AddSegment(new TypedSegmentSV1());
-            sv1Segment.SV101_CompositeMedicalProcedure = "HC:99213";
-            sv1Segment.SV102_MonetaryAmount = "40";
+            sv1Segment.SV101_CompositeMedicalProcedure._1_ProductOrServiceIdQualifier  = "HC";
+            sv1Segment.SV101_CompositeMedicalProcedure._2_ProcedureCode  = "99213";
+            sv1Segment.SV102_MonetaryAmount = 40;
             sv1Segment.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment.SV104_Quantity = "1";
-            sv1Segment.SV107_CompDiagCodePoint = "1";
+            sv1Segment.SV104_Quantity = 1;
+            sv1Segment.SV107_CompDiagCodePoint._1_DiagnosisCodePointer = "1";
 
             var dtpSegment = lxLoop.AddSegment(new TypedSegmentDTP());
-            dtpSegment.DTP01_DateTimeQualifier  = DTPQualifier.Service;
-            dtpSegment.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
-            DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
-            dtpSegment.DTP03_Date = new DateTimePeriod(theDate);
+            dtpSegment.DTP01_DateTimeQualifierEnum  = DTPQualifier.Service;
+            dtpSegment.DTP02_DateTimePeriodFormatQualifierEnum = DTPFormatQualifier.CCYYMMDD;
+            //DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
+            dtpSegment.DTP03_Date = DateTimePeriod.Parse("20061003");
 
             var lxLoop2 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop2.LX01_AssignedNumber = "2";
 
             var sv1Segment2 = lxLoop2.AddSegment(new TypedSegmentSV1());
-            sv1Segment2.SV101_CompositeMedicalProcedure = "HC:87070";
-            sv1Segment2.SV102_MonetaryAmount = "15";
+            sv1Segment2.SV101_CompositeMedicalProcedure._1_ProductOrServiceIdQualifier  = "HC";
+            sv1Segment2.SV101_CompositeMedicalProcedure._2_ProcedureCode  = "87070";
+            sv1Segment2.SV102_MonetaryAmount = 15;
             sv1Segment2.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment2.SV104_Quantity = "1";
-            sv1Segment2.SV107_CompDiagCodePoint = "1";
+            sv1Segment2.SV104_Quantity = 1;
+            sv1Segment2.SV107_CompDiagCodePoint._1_DiagnosisCodePointer = "1";
 
             var dtpSegment2 = lxLoop2.AddSegment(new TypedSegmentDTP());
-            dtpSegment2.DTP01_DateTimeQualifier = DTPQualifier.Service;
-            dtpSegment2.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
-            DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
-            dtpSegment2.DTP03_Date = new DateTimePeriod(theDate2);
+            dtpSegment2.DTP01_DateTimeQualifierEnum = DTPQualifier.Service;
+            dtpSegment2.DTP02_DateTimePeriodFormatQualifierEnum = DTPFormatQualifier.CCYYMMDD;
+            //DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
+            dtpSegment2.DTP03_Date = DateTimePeriod.Parse("20061003");
 
             var lxLoop3 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop3.LX01_AssignedNumber = "3";
 
             var sv1Segment3 = lxLoop3.AddSegment(new TypedSegmentSV1());
-            sv1Segment3.SV101_CompositeMedicalProcedure = "HC:99214";
-            sv1Segment3.SV102_MonetaryAmount = "35";
+            sv1Segment3.SV101_CompositeMedicalProcedure._1_ProductOrServiceIdQualifier = "HC";
+            sv1Segment3.SV101_CompositeMedicalProcedure._2_ProcedureCode = "99214";
+            sv1Segment3.SV102_MonetaryAmount = 35;
             sv1Segment3.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment3.SV104_Quantity = "1";
-            sv1Segment3.SV107_CompDiagCodePoint = "2";
+            sv1Segment3.SV104_Quantity = 1;
+            sv1Segment3.SV107_CompDiagCodePoint._1_DiagnosisCodePointer = "2";
 
             var dtpSegment3 = lxLoop3.AddSegment(new TypedSegmentDTP());
-            dtpSegment3.DTP01_DateTimeQualifier = DTPQualifier.Service;
-            dtpSegment3.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
+            dtpSegment3.DTP01_DateTimeQualifierEnum = DTPQualifier.Service;
+            dtpSegment3.DTP02_DateTimePeriodFormatQualifierEnum = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate3 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment3.DTP03_Date = new DateTimePeriod(theDate3);
 
@@ -230,17 +235,18 @@ namespace OopFactory.X12.Tests.Unit.Creation
             lxLoop4.LX01_AssignedNumber = "4";
 
             var sv1Segment4 = lxLoop4.AddSegment(new TypedSegmentSV1());
-            sv1Segment4.SV101_CompositeMedicalProcedure = "HC:86663";
-            sv1Segment4.SV102_MonetaryAmount = "10";
+            sv1Segment4.SV101_CompositeMedicalProcedure._1_ProductOrServiceIdQualifier = "HC";
+            sv1Segment4.SV101_CompositeMedicalProcedure._2_ProcedureCode = "86663";
+            sv1Segment4.SV102_MonetaryAmount = 10;
             sv1Segment4.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment4.SV104_Quantity = "1";
-            sv1Segment4.SV107_CompDiagCodePoint = "2";
+            sv1Segment4.SV104_Quantity = 1;
+            sv1Segment4.SV107_CompDiagCodePoint._1_DiagnosisCodePointer = "2";
 
             var dtpSegment4 = lxLoop4.AddSegment(new TypedSegmentDTP());
-            dtpSegment4.DTP01_DateTimeQualifier = DTPQualifier.Service;
-            dtpSegment4.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD_CCYYMMDD;
-            DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
-            dtpSegment4.DTP03_Date = new DateTimePeriod(theDate4, DateTime.ParseExact("20061025", "yyyyMMdd", null));
+            dtpSegment4.DTP01_DateTimeQualifierEnum = DTPQualifier.Service;
+            dtpSegment4.DTP02_DateTimePeriodFormatQualifierEnum = DTPFormatQualifier.CCYYMMDD_CCYYMMDD;
+            //DateTime theDate4 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
+            dtpSegment4.DTP03_Date = DateTimePeriod.Parse("20061010-20061025");
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
 
