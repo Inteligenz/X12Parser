@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--431 Railroad Station Master File-->
+<TransactionSpecification TransactionSetIdentifierCode="431" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="SMB" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N4" Usage="Required" Repeat="10" />
+  <Segment SegmentId="CD" Repeat="10" />
+  <Segment SegmentId="SMS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="SMA" Repeat="10" />
+  <Segment SegmentId="N1" Repeat="1" />
+  <Segment SegmentId="SMR" Repeat="10" />
+  <Segment SegmentId="SMO" Repeat="10" />
+</TransactionSpecification>

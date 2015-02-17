@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--869 Order Status Inquiry-->
+<TransactionSpecification TransactionSetIdentifierCode="869" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BSI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="100" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="PRF" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="PID" Repeat="1000" />
+    <Segment SegmentId="MEA" Repeat="40" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Segment SegmentId="GF" Repeat="1" />
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--842 Nonconformance Report-->
+<TransactionSpecification TransactionSetIdentifierCode="842" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BNR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="PID" />
+  <Loop LoopId="MEA">
+    <Name>Measurements</Name>
+    <StartingSegment SegmentId="MEA" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="REF" />
+  </Loop>
+  <Loop LoopId="PWK">
+    <Name>Paperwork</Name>
+    <StartingSegment SegmentId="PWK" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="PRS" />
+    <Segment SegmentId="CID" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="CS" Repeat="1" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="TMD" Repeat="1" />
+    <Segment SegmentId="PSD" Repeat="1" />
+    <Segment SegmentId="PWK" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+    </Loop>
+    <Loop LoopId="MEA">
+      <Name>Measurements</Name>
+      <StartingSegment SegmentId="MEA" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+    </Loop>
+    <Loop LoopId="SPS">
+      <Name>Sampling Parameters for Summary Statist</Name>
+      <StartingSegment SegmentId="SPS" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PSD" Repeat="1" />
+      <Loop LoopId="MEA">
+        <Name>Measurements</Name>
+        <StartingSegment SegmentId="MEA" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+      </Loop>
+      <Loop LoopId="STA">
+        <Name>Statistics</Name>
+        <StartingSegment SegmentId="STA" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="NCD">
+      <Name>Nonconformance Description</Name>
+      <StartingSegment SegmentId="NCD" />
+      <Segment SegmentId="NTE" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="RC" />
+      <Loop LoopId="EFI">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI" />
+        <Segment SegmentId="BIN" Usage="Required" Repeat="1" />
+      </Loop>
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PER" />
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+      <Loop LoopId="NCA">
+        <Name>Nonconformance Action</Name>
+        <StartingSegment SegmentId="NCA" />
+        <Segment SegmentId="NTE" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+        <Loop LoopId="PWK">
+          <Name>Paperwork</Name>
+          <StartingSegment SegmentId="PWK" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTM" />
+        </Loop>
+        <Loop LoopId="N1">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N2" Repeat="2" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="PER" />
+        </Loop>
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

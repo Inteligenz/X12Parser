@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Air Shipment Information -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="104">
+  <Segment SegmentId="N1" Usage="Required"/>
+  <Segment SegmentId="N2"/>
+  <Segment SegmentId="N3"/>
+  <Segment SegmentId="N4"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="PER" Repeat="10"/>
+  <Segment SegmentId="P1"/>
+  <Segment SegmentId="G47"/>
+  <Segment SegmentId="F9"/>
+  <Segment SegmentId="L3" Trailer="true"/>
+  <Segment SegmentId="NTE" Repeat="10" Trailer="true"/>
+  <Loop LoopId="FOB" Usage="Required" LoopRepeat="99999">
+    <Name>FOB</Name>
+    <StartingSegment SegmentId="FOB"/>
+    <Segment SegmentId="SL1" Usage="Required"/>
+    <Segment SegmentId="N9" Usage="Required" Repeat="10"/>
+    <Segment SegmentId="TD4" Repeat="10"/>
+    <Segment SegmentId="H1"/>
+    <Segment SegmentId="H2"/>
+    <Segment SegmentId="H3"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="M1"/>
+    <Segment SegmentId="C3"/>
+    <Segment SegmentId="X1"/>
+    <Segment SegmentId="X2"/>
+    <Segment SegmentId="NTE" Repeat="10"/>
+    <Segment SegmentId="ACS" Repeat="100" Trailer="true"/>
+    <Loop LoopId="N1" LoopRepeat="2">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="N9" Repeat="10"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="L5" LoopRepeat="100">
+      <Name>Description, Marks and Numbers</Name>
+      <StartingSegment SegmentId="L5"/>
+      <Segment SegmentId="L0" Repeat="10"/>
+      <Segment SegmentId="L1" Repeat="10"/>
+      <Segment SegmentId="L4" Repeat="10"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

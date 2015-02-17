@@ -1,0 +1,67 @@
+﻿ISA~00~          ~00~          ~01~107212169      ~01~1234567890123  ~030607~1124~U~04010~000000037~0~P~¦!
+  GS~CI~GRANITEDUN~0140100~20030501~1527~128~X~004010!
+    ST~811~000000001!
+      BIG~20030501~123456~~~~~CD!
+      REF~12~0140101!
+      ITD~03~3~~~~20030501!
+      N1~PE~GRANITE TELECOMMUNICATIONS!
+        N3~234 COPELAND ST!
+        N4~QUINCY~MA~02169!
+      N1~PR~CUUSTOMERNAME~91~01401001!
+        N3~PO BOX 2323!
+        N4~BOSTON~MA~02122!
+      TDS~150.75!
+      BAL~P~PB~88.2!
+      BAL~A~NA~-2.05!
+      BAL~M~TP~-85!
+      BAL~A~BT~10!
+      BAL~M~TT~161.90!
+      N1~87~ GRANITE TELECOMMUNICATIONS!
+      HL~1~~1~1!
+        LX~1!
+        NM1~SJ~2~GRANITETELECOMMUNICATIONS!
+          PER~BI~~TE~8668471500!
+        HL~2~1~2~1!
+          LX~1!
+            REF~14~0140100!
+            TXI~TX~2.56~~~~~O!
+          HL~3~2~4~0!
+            IT1~~1~M4~50.25~~SV~2050~ZZ~1!
+        HL~4~1~2~1!
+          LX~2!
+            REF~11~0140101!
+            TXI~TX~5.26~~~~~O!
+          HL~5~4~4~0!
+            IT1~~1~M4~100.50~~SV~2050~ZZ~1!
+    SE~34~000000001!
+    ST~811~000000002!
+      BIG~20030501~123456~~~~~ME!
+      REF~14~0140100!
+      REF~12~0140101!
+      DTM~186~20030401!
+      DTM~187~20030501!
+      N1~PE~GRANITE TELECOMMUNICATIONS!
+        N3~234 COPELAND ST!
+        N4~QUINCY~MA~02169!
+      N1~PR~CUUSTOMERNAME~91~01401001!
+        N3~PO BOX 2323!
+        N4~BOSTON~MA~02122!
+      TDS~23110!
+      BAL~P~PB~0!
+      BAL~A~NA~-0!
+      BAL~M~TP~-0!
+      BAL~A~BT~0!
+      BAL~M~TT~0!
+      N1~SJ~GRANITE TELECOMMUNICATIONS!
+      HL~1~~1~1!
+        LX~1!
+        NM1~SJ~2~GRANITETELECOMMUNICATIONS!
+          PER~BI~~TE~8668471500!
+          TXI~TX~5.22~~~~2~A!
+        HL~2~1~4~0!
+          IT1~1~1~M4~67.23~~SV~0110~ZZ~1!
+          IT1~2~1~M4~34.78~~SV~0400~ZZ~2!
+          IT1~3~250~M4~123.87~~SV~0700~ZZ~3!
+    SE~29~000000002!
+  GE~2~128!
+IEA~1~000000037!

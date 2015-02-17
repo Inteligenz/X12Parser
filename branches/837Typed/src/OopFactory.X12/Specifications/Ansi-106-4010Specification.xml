@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Motor Carrier Rate Proposal -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="106">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="BLR"/>
+  <Segment SegmentId="TFR"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="G62" Repeat="10"/>
+  <Segment SegmentId="AT5" Repeat="99"/>
+  <Segment SegmentId="PR" Repeat="99"/>
+  <Segment SegmentId="LC1"/>
+  <Segment SegmentId="MI1"/>
+  <Segment SegmentId="MCT" Repeat="999"/>
+  <Loop LoopId="0050">
+    <Name>Equipment or Container Owner and Type</Name>
+    <StartingSegment SegmentId="MS2"/>
+    <Segment SegmentId="AT9"/>
+  </Loop>
+  <Loop LoopId="0100">
+    <Name>Tariff Information</Name>
+    <StartingSegment SegmentId="TF"/>
+    <Segment SegmentId="TS"/>
+  </Loop>
+  <Loop LoopId="0200" Repeat="10">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="0400" Repeat="99999">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="GY" Repeat="999"/>
+    <Segment SegmentId="PR" Repeat="99"/>
+    <Segment SegmentId="TFR"/>
+    <Segment SegmentId="CUR"/>
+    <Segment SegmentId="ATS" Repeat="99"/>
+    <Loop LoopId="0405">
+      <Name>Equipment or Container Owner and Type</Name>
+      <StartingSegment SegmentId="MS2"/>
+      <Segment SegmentId="AT9"/>
+    </Loop>
+    <Loop LoopId="0410">
+      <Name>Tariff Information</Name>
+      <StartingSegment SegmentId="TF"/>
+      <Segment SegmentId="TS"/>
+      <Segment SegmentId="G62" Repeat="5"/>
+    </Loop>
+    <Loop LoopId="0430">
+      <Name>Rate Request Identifier</Name>
+      <StartingSegment SegmentId="CA1"/>
+      <Segment SegmentId="GY" Repeat="999"/>
+      <Segment SegmentId="PR" Repeat="99"/>
+      <Segment SegmentId="LC1"/>
+      <Segment SegmentId="SV"/>
+      <Segment SegmentId="AT5" Repeat="99"/>
+      <Segment SegmentId="MCT" Repeat="999"/>
+      <Loop LoopId="0432">
+        <Name>Equipment or Container Owner and Type</Name>
+        <StartingSegment SegmentId="MS2"/>
+        <Segment SegmentId="AT9"/>
+      </Loop>
+      <Loop LoopId="0434">
+        <Name>Freight Rate Information</Name>
+        <StartingSegment SegmentId="RTT"/>
+        <Segment SegmentId="TFR"/>
+      </Loop>
+      <Loop LoopId="0438">
+        <Name>Tariff Information</Name>
+        <StartingSegment SegmentId="TF"/>
+        <Segment SegmentId="TS"/>
+        <Segment SegmentId="G62"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

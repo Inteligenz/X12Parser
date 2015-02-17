@@ -1,0 +1,35 @@
+﻿ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+    ST*837*3456~
+      BHT*0019*00*0123*19990210*1023*CH~
+      REF*87*004010X097~
+      NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+        PER*IC*JERRY*TE*7176149999~
+      NM1*40*2*INSURANCE COMPANY XYZ*****46*66783JJT~
+      HL*1**20*1~
+        NM1*85*2*DENTAL ASSOCIATES*****24*587654321~
+          N3*234 SEAWAY ST~
+          N4*MIAMI*FL*33111~
+        HL*2*1*22*1~
+          SBR*P*****6***CI~
+          NM1*IL*1*SMITH*JANE****MI*111223333~
+          NM1*PR*2*INSURANCE COMPANY XYZ*****PI*66783JJT~
+          HL*3*2*23*0~
+            PAT*19~
+            NM1*QC*1*SMITH*TED~
+              N3*236 N MAIN ST~
+              N4*MIAMI*FL*33413~
+              DMG*D8*19730501*M~
+            CLM*26403774*150***11::1*Y**Y*Y~
+              DTP*472*D8*19990209~
+              REF*D9*17312345600006351~
+              NM1*82*1*KILDARE*BEN****34*999996666~
+                PRV*PE*ZZ*122300000N~
+              LX*1~
+                SV3*AD:D2150*100****1~
+                TOO*JP*12*M:O~
+              LX*2~
+                SV3*AD:D1110*50****1~
+    SE*31*3456~
+  GE*1*31~
+IEA*1*000000031~

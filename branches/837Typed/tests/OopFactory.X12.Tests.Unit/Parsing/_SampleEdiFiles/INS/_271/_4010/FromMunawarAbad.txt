@@ -1,0 +1,110 @@
+﻿ISA*00*          *00*          *ZZ*CMS            *ZZ*Z9791747       *110222*1135*U*00401*067389488*0*P*|~
+  GS*HB*CMS*Z9791747*20110222*1135*67378454*X*004010X092A1~
+    ST*271*65951444~
+      BHT*9999*11*9999999*20110222*99999999~
+      HL*1**20*1~
+        NM1*PR*2*CMS*****PI*CMS~
+        HL*2*1*21*1~
+          NM1*1P*2******XX*9999999999~
+          HL*3*2*22*0~
+            NM1*IL*1*XXXXXXX*X XXXXX****MI*999999999X~
+              N3*999 X 99XX XX XXX 99X~
+              N4*XXX XXXX*NY*999999999~
+              DMG*D8*19280208*F~
+              INS*Y*18*001*25~
+              DTP*307*D8*20110113~
+              EB*1*IND**MA~
+                DTP*307*D8*19930201~
+              EB*1*IND**MB~
+                DTP*307*D8*19930201~
+              EB*C**96*MB**29*0~
+                DTP*292*RD8*20110101-20111231~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20100601~
+              EB*D*IND**MB*********HC|G0203~
+                DTP*348*D8*20100601~
+              EB*D*IND**MB*********HC|G0202~
+                DTP*348*D8*20100601~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20090803~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070701~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********HC|G0123~
+                DTP*348*D8*20070101~
+              EB*D*IND**MB*********XX|X9999~
+                DTP*348*D8*20050701~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********XX|99999~
+                DTP*348*D8*20050101~
+              EB*D*IND**MB*********HC|G0328~
+                DTP*348*D8*20040101~
+              EB*D*IND**MB*********HC|G0118~
+                DTP*348*D8*20020101~
+              EB*D*IND**MB*********HC|G0117~
+                DTP*348*D8*20020101~
+              EB*D*IND**MB*********HC|G0121~
+                DTP*348*D8*20010701~
+              EB*D*IND**MB*********HC|G0101~
+                DTP*348*D8*20010701~
+              EB*D*IND**MB*********HC|G0120~
+                DTP*348*D8*19980101~
+              EB*D*IND**MB*********HC|G0106~
+                DTP*348*D8*19980101~
+              EB*D*IND**MB*********HC|G0107~
+                DTP*348*D8*19980101~
+              EB*D*IND**MB*********HC|G0104~
+                DTP*348*D8*19980101~
+              EB*D*IND**MB*********HC|G0105~
+                DTP*348*D8*19980101~
+              EB*F*IND*67*MB**29***P6*8~
+              EB*F*IND*AD*MB**29*9999~
+                DTP*292*RD8*20110101-20111231~
+              EB*F*IND**MB*XXXXXXXX XXX XXXXXX XXXXXXX*29*9999~
+                DTP*292*RD8*20110101-20111231~
+              EB*C*IND*10***29***DB*3~
+                DTP*292*RD8*20110101-20111231~
+              EB*R**88*OT~
+                REF*18*X9999 999~
+                DTP*292*D8*20060101~
+                LS*9999~
+                  NM1*PR*2*XXXXXXXXXXXXXXXX XXXXXXXXX XXXXXXX~
+                    N3*9999 XXXXXXX XX X XXX 999~
+                    N4*XXXXXXXX*NY*999999999~
+                    PER*IC**TE*9999999999~
+                  LE*9999~
+              EB*R*IND*30*47~
+                REF*IG*XX99999999XXX~
+                DTP*290*D8*20100426~
+                LS*9999~
+                  NM1*PRP*2*XXXXXXX XXXXXXXXX XXXXXX XXX XX~
+                    N3*9 XXXX XXX 99XX XX~
+                    N4*XXX XXXX*NY*99999~
+                  LE*9999~
+    SE*106*65951444~
+  GE*1*67378454~
+IEA*1*067389488~

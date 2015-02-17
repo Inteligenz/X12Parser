@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--820 Payment Order/Remittance Advice-->
+<TransactionSpecification TransactionSetIdentifierCode="820" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BPR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="BPS"/>
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="TRN" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="RDM" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="1" />
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="ADX">
+      <Name>Adjustment</Name>
+      <StartingSegment SegmentId="ADX" />
+      <Segment SegmentId="NTE" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="DTM" Repeat="1" />
+      <Loop LoopId="REF">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="REF" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+      <Loop LoopId="IT1">
+        <Name>Baseline Item Data (Invoice)</Name>
+        <StartingSegment SegmentId="IT1" />
+        <Loop LoopId="REF">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="REF" />
+          <Segment SegmentId="DTM" Repeat="1" />
+        </Loop>
+        <Loop LoopId="SAC">
+          <Name>Service, Promotion, Allowance, or Charg</Name>
+          <StartingSegment SegmentId="SAC" />
+          <Segment SegmentId="TXI" />
+        </Loop>
+        <Loop LoopId="SLN">
+          <Name>Subline Item Detail</Name>
+          <StartingSegment SegmentId="SLN" />
+          <Loop LoopId="REF">
+            <Name>Reference Identification</Name>
+            <StartingSegment SegmentId="REF" />
+            <Segment SegmentId="DTM" />
+          </Loop>
+          <Loop LoopId="SAC">
+            <Name>Service, Promotion, Allowance, or Charg</Name>
+            <StartingSegment SegmentId="SAC" />
+            <Segment SegmentId="TXI" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="RMR">
+      <Name>Remittance Advice Accounts Receivable O</Name>
+      <StartingSegment SegmentId="RMR" />
+      <Segment SegmentId="NTE" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Loop LoopId="IT1">
+        <Name>Baseline Item Data (Invoice)</Name>
+        <StartingSegment SegmentId="IT1" />
+        <Loop LoopId="REF">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="REF" />
+          <Segment SegmentId="DTM" Repeat="1" />
+        </Loop>
+        <Loop LoopId="SAC">
+          <Name>Service, Promotion, Allowance, or Charg</Name>
+          <StartingSegment SegmentId="SAC" />
+          <Segment SegmentId="TXI" />
+          <Segment SegmentId="TX1" /> <!-- This is actually a misspelling, but will leave in just in case -->
+        </Loop>
+        <Loop LoopId="SLN">
+          <Name>Subline Item Detail</Name>
+          <StartingSegment SegmentId="SLN" />
+          <Loop LoopId="REF">
+            <Name>Reference Identification</Name>
+            <StartingSegment SegmentId="REF" />
+            <Segment SegmentId="DTM" />
+          </Loop>
+          <Loop LoopId="SAC">
+            <Name>Service, Promotion, Allowance, or Charg</Name>
+            <StartingSegment SegmentId="SAC" />
+            <Segment SegmentId="TXI" />
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="ADX">
+        <Name>Adjustment</Name>
+        <StartingSegment SegmentId="ADX" />
+        <Segment SegmentId="NTE" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="DTM"/>
+        <Loop LoopId="REF">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="REF" />
+          <Segment SegmentId="DTM" />
+        </Loop>
+        <Loop LoopId="IT1">
+          <Name>Baseline Item Data (Invoice)</Name>
+          <StartingSegment SegmentId="IT1" />
+          <Loop LoopId="REF">
+            <Name>Reference Identification</Name>
+            <StartingSegment SegmentId="REF" />
+            <Segment SegmentId="DTM" Repeat="1" />
+          </Loop>
+          <Loop LoopId="SAC">
+            <Name>Service, Promotion, Allowance, or Charg</Name>
+            <StartingSegment SegmentId="SAC" />
+            <Segment SegmentId="TXI" />
+          </Loop>
+          <Loop LoopId="SLN">
+            <Name>Subline Item Detail</Name>
+            <StartingSegment SegmentId="SLN" />
+            <Loop LoopId="REF">
+              <Name>Reference Identification</Name>
+              <StartingSegment SegmentId="REF" />
+              <Segment SegmentId="DTM" />
+            </Loop>
+            <Loop LoopId="SAC">
+              <Name>Service, Promotion, Allowance, or Charg</Name>
+              <StartingSegment SegmentId="SAC" />
+              <Segment SegmentId="TXI" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="TXP">
+    <Name>Tax Payment</Name>
+    <StartingSegment SegmentId="TXP" />
+    <Segment SegmentId="TXI" />
+  </Loop>
+  <Loop LoopId="DED">
+    <Name>Deductions</Name>
+    <StartingSegment SegmentId="DED" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="TRN" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="G53" Repeat="1" />
+      <Loop LoopId="AIN">
+        <Name>Income</Name>
+        <StartingSegment SegmentId="AIN" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="DTP" />
+      </Loop>
+      <Loop LoopId="PEN">
+        <Name>Pension Information</Name>
+        <StartingSegment SegmentId="PEN" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="DTP" />
+        <Loop LoopId="INV">
+          <Name>Investment Vehicle Selection</Name>
+          <StartingSegment SegmentId="INV" />
+          <Segment SegmentId="DTP" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="N9" LoopRepeat="1">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="N9" />
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="EMS">
+        <Name>Employment Position</Name>
+        <StartingSegment SegmentId="EMS" />
+        <Segment SegmentId="ATN" />
+        <Segment SegmentId="AIN" />
+        <Segment SegmentId="PYD" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="RYL">
+    <Name>Royalty Payment</Name>
+    <StartingSegment SegmentId="RYL" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Loop LoopId="LOC">
+        <Name>Location</Name>
+        <StartingSegment SegmentId="LOC" />
+        <Loop LoopId="PID">
+          <Name>Product/Item Description</Name>
+          <StartingSegment SegmentId="PID" />
+          <Segment SegmentId="DTM" Repeat="1" />
+          <Loop LoopId="PCT">
+            <Name>Percent Amounts</Name>
+            <StartingSegment SegmentId="PCT" />
+            <Segment SegmentId="QTY" Repeat="1" />
+            <Loop LoopId="AMT">
+              <Name>Monetary Amount</Name>
+              <StartingSegment SegmentId="AMT" />
+              <Segment SegmentId="ADX" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="ASM" LoopRepeat="1">
+        <Name>Amount and Settlement Method</Name>
+        <StartingSegment SegmentId="ASM" />
+        <Segment SegmentId="ADX" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Detail Loop</Name>
+    <StartingSegment SegmentId="LS"/>
+    <Segment SegmentId="LE" Trailer="true"/>
+    <Loop LoopId="N1">
+      <Name>N1</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Loop LoopId="RMT">
+        <Name>RMT</Name>
+        <StartingSegment SegmentId="RMT"/>
+        <Segment SegmentId="CUR"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTM"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

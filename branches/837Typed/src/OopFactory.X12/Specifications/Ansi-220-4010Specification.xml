@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--220 Logistics Service Response-->
+<TransactionSpecification TransactionSetIdentifierCode="220" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B9" Usage="Required" Repeat="1" />
+  <Segment SegmentId="B9A" Usage="Required" Repeat="7" />
+  <Segment SegmentId="L11" Repeat="99" />
+  <Segment SegmentId="G62" Repeat="5" />
+  <Segment SegmentId="MS3" Repeat="99" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Loop LoopId="0500" LoopRepeat="99">
+    <Name>Place/Location Description</Name>
+    <StartingSegment SegmentId="LCD" />
+    <Segment SegmentId="ITA" Repeat="999" />
+    <Segment SegmentId="L8" Repeat="999" />
+    <Segment SegmentId="L9" Repeat="999" />
+    <Segment SegmentId="L3" Repeat="999" />
+  </Loop>
+  <Loop LoopId="1000" LoopRepeat="99">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="N7A" Repeat="1" />
+    <Segment SegmentId="N7B" Repeat="1" />
+    <Segment SegmentId="MEA" Repeat="1" />
+    <Segment SegmentId="M7" Repeat="2" />
+  </Loop>
+  <Loop LoopId="2000" LoopRepeat="99">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="G62" Repeat="2" />
+    <Segment SegmentId="L11" Repeat="99" />
+    <Segment SegmentId="ITA" Repeat="20" />
+    <Loop LoopId="2100" LoopRepeat="1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+    <Loop LoopId="2200" LoopRepeat="999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="LCT" Repeat="1" />
+      <Segment SegmentId="MAN" Repeat="10" />
+      <Segment SegmentId="AT5" Repeat="6" />
+      <Segment SegmentId="AMT" Repeat="1" />
+      <Segment SegmentId="L11" Repeat="10" />
+      <Loop LoopId="2250" LoopRepeat="999">
+        <Name>Lading Detail</Name>
+        <StartingSegment SegmentId="LAD" />
+        <Segment SegmentId="PO4" Repeat="1" />
+        <Segment SegmentId="G69" Repeat="99" />
+        <Segment SegmentId="AT5" Repeat="6" />
+        <Segment SegmentId="AMT" Repeat="1" />
+        <Segment SegmentId="L11" Repeat="10" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

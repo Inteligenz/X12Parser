@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--455 Railroad Parameter Trace Registration-->
+<TransactionSpecification TransactionSetIdentifierCode="455" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTC" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="1" />
+  <Segment SegmentId="ED" Repeat="500000" />
+  <Segment SegmentId="BLR" Repeat="5" />
+  <Segment SegmentId="N9" Repeat="1" />
+  <Segment SegmentId="V9" Repeat="99" />
+  <Loop LoopId="LX" LoopRepeat="99">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="PRM" Repeat="1" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="F9" Repeat="1" />
+    <Segment SegmentId="D9" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

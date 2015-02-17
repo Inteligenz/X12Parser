@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--838 Trading Partner Profile-->
+<TransactionSpecification TransactionSetIdentifierCode="838" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REQ" Repeat="1" />
+  <Segment SegmentId="PER" Repeat="1" />
+  <Segment SegmentId="SPI" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="ERI" Trailer="true" />
+  <Segment SegmentId="AMT" Trailer="true" />
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="PLA" Repeat="1" />
+    <Segment SegmentId="LCD" />
+    <Segment SegmentId="LIN" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="CUR" />
+      <Segment SegmentId="TAX" />
+      <Segment SegmentId="FOB" />
+      <Segment SegmentId="ITD" />
+      <Segment SegmentId="TD5" />
+      <Segment SegmentId="SPI" />
+      <Segment SegmentId="FBB" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="MEA" />
+      <Loop LoopId="LCD">
+        <Name>Place/Location Description</Name>
+        <StartingSegment SegmentId="LCD" />
+        <Segment SegmentId="N2" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DMG" />
+        <Segment SegmentId="MEA" />
+      </Loop>
+      <Loop LoopId="TPD">
+        <Name>Trading Partner Detail</Name>
+        <StartingSegment SegmentId="TPD" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="PID" />
+        <Segment SegmentId="DTM" />
+        <Loop LoopId="LS">
+          <Name>Loop Header</Name>
+          <StartingSegment SegmentId="LS" />
+          <Segment SegmentId="LE" Trailer="true" />
+          <Loop LoopId="TUD">
+            <Name>Trade Union Data</Name>
+            <StartingSegment SegmentId="TUD" />
+            <Segment SegmentId="DTM" />
+            <Segment SegmentId="N1" Repeat="1" />
+            <Segment SegmentId="N2" Repeat="2" />
+            <Segment SegmentId="N3" Repeat="2" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="PER" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="SPR">
+          <Name>Supplier Rating</Name>
+          <StartingSegment SegmentId="SPR" />
+          <Segment SegmentId="N9" />
+          <Segment SegmentId="DTM" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="PAM">
+        <Name>Period Amount</Name>
+        <StartingSegment SegmentId="PAM" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="TAX" />
+        <Segment SegmentId="CUR" />
+      </Loop>
+      <Loop LoopId="TXN">
+        <Name>Transaction Capabilities</Name>
+        <StartingSegment SegmentId="TXN" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="ENE">
+      <Name>Electronic Systems Environment</Name>
+      <StartingSegment SegmentId="ENE" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="TPD" />
+        <Segment SegmentId="PID" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="PER" />
+      </Loop>
+      <Loop LoopId="TXN">
+        <Name>Transaction Capabilities</Name>
+        <StartingSegment SegmentId="TXN" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="DTM" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

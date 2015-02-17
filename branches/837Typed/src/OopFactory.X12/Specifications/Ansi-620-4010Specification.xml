@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--620 Excavation Communication-->
+<TransactionSpecification TransactionSetIdentifierCode="620" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="2" />
+  <Segment SegmentId="REF" Repeat="1" />
+  <Loop LoopId="EXI">
+    <Name>Excavation Ticket Information</Name>
+    <StartingSegment SegmentId="EXI" />
+    <Segment SegmentId="DTM" Usage="Required" Repeat="4" />
+    <Segment SegmentId="PER" Repeat="1" />
+    <Segment SegmentId="NX2" />
+    <Segment SegmentId="PPA" />
+    <Segment SegmentId="MTX" Repeat="1" />
+    <Segment SegmentId="MEA" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="MSG" Repeat="2" />
+      <Segment SegmentId="PER" Repeat="2" />
+      <Segment SegmentId="DTM" Repeat="1" />
+      <Loop LoopId="LIE">
+        <Name>Individual or Event Location</Name>
+        <StartingSegment SegmentId="LIE" />
+        <Segment SegmentId="PPA" Usage="Required" />
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

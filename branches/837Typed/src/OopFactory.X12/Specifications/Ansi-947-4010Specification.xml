@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--947 Warehouse Inventory Adjustment Advice-->
+<TransactionSpecification TransactionSetIdentifierCode="947" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="W15" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="5" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Repeat="5" />
+  <Segment SegmentId="NTE" Repeat="20" />
+  <Loop LoopId="0200" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Warehouse Adjustment Item Detail</Name>
+    <StartingSegment SegmentId="W19" />
+    <Segment SegmentId="G69" Repeat="5" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="CS" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="10" />
+    <Loop LoopId="0310" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="0320" LoopRepeat="50">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="5" />
+    </Loop>
+    <Loop LoopId="0330">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="G62" Repeat="1" />
+      <Segment SegmentId="N1" Repeat="1" />
+      <Loop LoopId="0331" LoopRepeat="10">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="0340">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

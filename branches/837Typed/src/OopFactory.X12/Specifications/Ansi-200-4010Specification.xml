@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--200 Mortgage Credit Report-->
+<TransactionSpecification TransactionSetIdentifierCode="200" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="CRO" />
+  <Segment SegmentId="AAA" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="AMT" />
+  <Segment SegmentId="NX1" />
+  <Segment SegmentId="NX2" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="DMG" />
+      <Segment SegmentId="N10" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+    <Loop LoopId="NX1">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="N10" />
+      <Segment SegmentId="ARS" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+    <Loop LoopId="SOI">
+      <Name>Source of Income</Name>
+      <StartingSegment SegmentId="SOI" />
+      <Segment SegmentId="EMS" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="N10" />
+      <Segment SegmentId="YNQ" />
+      <Loop LoopId="AIN">
+        <Name>Income</Name>
+        <StartingSegment SegmentId="AIN" />
+        <Segment SegmentId="YNQ" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="TLN">
+    <Name>Tradeline</Name>
+    <StartingSegment SegmentId="TLN" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="TBI" />
+    <Segment SegmentId="PPD" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="YNQ" />
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="RO">
+    <Name>Public Record or Obligation</Name>
+    <StartingSegment SegmentId="RO" />
+    <Segment SegmentId="CDS" />
+    <Segment SegmentId="TBI" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="YNQ" />
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="CCI">
+    <Name>Credit Counseling Information</Name>
+    <StartingSegment SegmentId="CCI" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="INQ">
+    <Name>Credit Inquiry Details</Name>
+    <StartingSegment SegmentId="INQ" />
+    <Segment SegmentId="TBI" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="NTE" />
+  </Loop>
+  <Loop LoopId="VAR">
+    <Name>Credit File Variation</Name>
+    <StartingSegment SegmentId="VAR" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="IN1" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="N10" />
+    <Loop LoopId="NX1">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="EMS" />
+      <Segment SegmentId="DTP" />
+    </Loop>
+    <Loop LoopId="SCM">
+      <Name>Credit Score Model</Name>
+      <StartingSegment SegmentId="SCM" />
+      <Segment SegmentId="SCS" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS"/>
+    <Segment SegmentId="LE" Trailer="true"/>
+    <Loop LoopId="NTE">
+      <Name>Note/Special Instruction</Name>
+      <StartingSegment SegmentId="NTE" />
+      <Segment SegmentId="TBI" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="G32" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

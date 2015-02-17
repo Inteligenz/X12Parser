@@ -1,0 +1,57 @@
+﻿<?xml version="1.0"?>
+<TransactionSpecification TransactionSetIdentifierCode="205" FunctionalGroupCode="MN" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Name>Mortgage Note</Name>
+  <Segment SegmentId="BGN" Repeat="1" />
+  <Segment SegmentId="TRN" Repeat="1" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="NM1" LoopRepeat="5">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+    <Segment SegmentId="REF" Repeat="4" />
+  </Loop>
+  <Loop LoopId="MNC">
+    <Name>Mortgage Note Characteristics</Name>
+    <StartingSegment SegmentId="MNC" />
+    <Segment SegmentId="SOM" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="20" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="INT" Repeat="2" />
+    <Segment SegmentId="PCT" Repeat="10" />
+    <Segment SegmentId="AMT" Repeat="10" />
+    <Segment SegmentId="QTY" Repeat="6" />
+    <Segment SegmentId="YNQ" Repeat="12" />
+    <Segment SegmentId="III" Repeat="12" />
+    <Loop LoopId="CDI">
+      <Name>Change Detail Information</Name>
+      <StartingSegment SegmentId="CDI" />
+      <Loop LoopId="LX">
+        <Name>Transaction Set Line Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="VDI" />
+        <Segment SegmentId="YNQ" Repeat="4" />
+        <Segment SegmentId="AMT" Repeat="6" />
+        <Segment SegmentId="PCT" Repeat="6" />
+        <Segment SegmentId="DTP" Repeat="5" />
+        <Segment SegmentId="III" Repeat="12" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" Repeat="10" />
+      <Segment SegmentId="PER" Repeat="2" />
+      <Segment SegmentId="REF" Repeat="15" />
+      <Loop LoopId="NX1">
+        <Name>Property or Entity Identification</Name>
+        <StartingSegment SegmentId="NX1" />
+        <Segment SegmentId="NX2" />
+        <Segment SegmentId="PDS" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

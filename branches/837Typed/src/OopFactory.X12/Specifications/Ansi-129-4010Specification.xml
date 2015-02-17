@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Vehicle Carrier Rate Update -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="129">
+  <Segment SegmentId="VR"/>
+  <Segment SegmentId="G62"/>
+  <Loop LoopId="RT" LoopRepeat="99">
+    <Name></Name>
+    <StartingSegment SegmentId="RT"/>
+    <Segment SegmentId="RT1" Repeat="99"/>
+  </Loop>
+</TransactionSpecification>

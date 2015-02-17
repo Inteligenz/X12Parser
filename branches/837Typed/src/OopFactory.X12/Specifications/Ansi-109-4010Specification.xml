@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Vessel Content Details -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="109">
+  <Segment SegmentId="B4"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="Q2"/>
+  <Segment SegmentId="V9"/>
+  <Loop LoopId="R4">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="V9"/>
+    <Loop LoopId="N9">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9"/>
+      <Segment SegmentId="SG"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

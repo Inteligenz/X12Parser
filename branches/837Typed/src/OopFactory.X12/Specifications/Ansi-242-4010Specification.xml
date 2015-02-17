@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--242 Data Status Tracking-->
+<TransactionSpecification TransactionSetIdentifierCode="242" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="IRP" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="10" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Segment SegmentId="MSG" Repeat="1" />
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="IIS" Repeat="1" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="10" />
+    <Segment SegmentId="QTY" />
+    <Loop LoopId="STS">
+      <Name>Interchange Status Segment</Name>
+      <StartingSegment SegmentId="STS" />
+      <Segment SegmentId="STS" Repeat="1" />
+      <Segment SegmentId="N1" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="10" />
+      <Segment SegmentId="QTY" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

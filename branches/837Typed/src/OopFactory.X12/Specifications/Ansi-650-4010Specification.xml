@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--650 Maintenance Service Order-->
+<TransactionSpecification TransactionSetIdentifierCode="650" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="REF" />
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="REF" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="SPI" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="MEA" />
+    <Loop LoopId="CLI">
+      <Name>Cost Line Item</Name>
+      <StartingSegment SegmentId="CLI" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="RPA" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="COM" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="MTX">
+      <Name>Text</Name>
+      <StartingSegment SegmentId="MTX" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

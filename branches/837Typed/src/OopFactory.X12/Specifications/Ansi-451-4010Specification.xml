@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--451 Railroad Event Report-->
+<TransactionSpecification TransactionSetIdentifierCode="451" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ER" Repeat="2" />
+  <Loop LoopId="ED" LoopRepeat="999">
+    <Name>Equipment Description</Name>
+    <StartingSegment SegmentId="ED" />
+    <Segment SegmentId="ER" Repeat="2" />
+    <Segment SegmentId="NA" Repeat="1" />
+    <Segment SegmentId="IC" Repeat="3" />
+    <Segment SegmentId="CLR" Repeat="10" />
+    <Segment SegmentId="ES" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

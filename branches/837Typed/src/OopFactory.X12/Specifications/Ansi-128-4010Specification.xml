@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Dealer Information -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="128">
+  <Segment SegmentId="N1"/>
+  <Segment SegmentId="N2" Repeat="99"/>
+  <Segment SegmentId="N3" Repeat="2"/>
+  <Segment SegmentId="N4"/>
+  <Segment SegmentId="DN" Repeat="7"/>
+  <Segment SegmentId="R9" Repeat="50"/>
+  <Segment SegmentId="DH" Repeat="28"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="K1"/>
+</TransactionSpecification>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--490 Rate Group Definition-->
+<TransactionSpecification TransactionSetIdentifierCode="490" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="GH" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PI" Repeat="8" />
+  <Segment SegmentId="TT" Repeat="500" />
+  <Segment SegmentId="GY" Repeat="500" />
+  <Segment SegmentId="CD" Repeat="500" />
+  <Segment SegmentId="PR" Repeat="500" />
+  <Loop LoopId="PT" LoopRepeat="500">
+    <Name>Patron</Name>
+    <StartingSegment SegmentId="PT" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+</TransactionSpecification>

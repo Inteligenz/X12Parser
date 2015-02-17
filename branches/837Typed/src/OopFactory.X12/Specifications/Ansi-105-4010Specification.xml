@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Business Entity Filings -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="105">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="PWK"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="LUI"/>
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount</Name>
+    <StartingSegment SegmentId="AMT"/>
+    <Segment SegmentId="PDL"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="CUR"/>
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="DTM"/>
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL"> <!--Level code left empty because only one HL level exists -->
+    <Name></Name>
+    <Segment SegmentId="DTM"/>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
+    </Loop>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="NX1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="PCT"/>
+      <Segment SegmentId="LUI"/>
+      <Segment SegmentId="TPB"/>
+      <Segment SegmentId="PWK"/>
+      <Loop LoopId="AMT">
+        <Name>Monetary Amount</Name>
+        <StartingSegment SegmentId="AMT"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="CUR"/>
+      </Loop>
+      <Loop LoopId="NX2">
+        <Name>Location ID Component</Name>
+        <StartingSegment SegmentId="NX2"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="CUR"/>
+      </Loop>
+      <Loop LoopId="REF">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="REF"/>
+        <Segment SegmentId="DTM"/>
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="MTX"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="NX2"/>
+        <Segment SegmentId="REF"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM"/>
+        <Loop LoopId="LQ">
+          <Name>Industry Code</Name>
+          <StartingSegment SegmentId="LQ"/>
+          <Segment SegmentId="LIM"/>
+          <Segment SegmentId="DTM"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="NX2"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="PCT"/>
+          <Segment SegmentId="PDL"/>
+          <Segment SegmentId="PWK"/>
+          <Segment SegmentId="CUR"/>
+          <Segment SegmentId="CDS"/>
+          <Segment SegmentId="MTX"/>
+          <Loop LoopId="REF">
+            <Name>Reference Identification</Name>
+            <StartingSegment SegmentId="REF"/>
+            <Segment SegmentId="AMT"/>
+            <Segment SegmentId="DTM"/>
+            <Segment SegmentId="CUR"/>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="EFI">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI"/>
+      <Segment SegmentId="BIN"/>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

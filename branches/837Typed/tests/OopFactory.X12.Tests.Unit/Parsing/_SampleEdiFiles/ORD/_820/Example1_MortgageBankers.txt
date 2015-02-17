@@ -1,0 +1,28 @@
+﻿ISA*00*          *00*          *16*102096559TEST  *14*PARTNERTEST    *071214*1406*U*00040*810000263*1*T*>
+  GS*RA*102096559TEST*PARTNER*20071214*1406*810000263*X*004010
+    ST*820*123456
+      BPR*C*337.67*C*ACH*CCP*01*111111111*03*900555*3999999999**01*222222222*03*900444*19990105*VEN
+      TRN*3*888999*3999999999
+      DTM*097*19990102
+      N1*41*XYZ Mortgage Company
+      N1*MH*123 Mortgage Insurance Company*SI*123
+      ENT*01
+        NM1*BW*1*Smith*Gary****34*111223333
+          N3*888 Hollywood Drive
+          N4*Hollywood*KY*99555
+        RMR*ID*8889444*PO*236.00
+          REF*LD*992222
+          DTM*143*19981230
+          IT1*8889444  
+            SAC*N*H850
+              TX1*TX*3.54*.015
+      ENT*01
+        NM1*BW*1*Washington*John****34*999999999
+          N3*2830 Northwood Drive
+          N4*Greensboro*NC*27408
+        RMR*ID*66666789*PO*10167
+          REF*LD*12345  
+          DTM*143*19981215
+    SE*24*123456
+  GE*1*810000263
+IEA*1*810000263

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--225 Response to a Cartage Work Assignment-->
+<TransactionSpecification TransactionSetIdentifierCode="225" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="SCP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="5" />
+</TransactionSpecification>

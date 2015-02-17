@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="811">
+  <Segment SegmentId="BIG"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="PER"/>
+  <Segment SegmentId="ITD"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="TXI"/>
+  <Segment SegmentId="CTT" Trailer="true"/>
+  <Loop LoopId="FA1">
+    <Name>Type of Financial Accounting Data</Name>
+    <StartingSegment SegmentId="FA1"/>
+    <Segment SegmentId="FA2"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL"> <!-- Level level code blank so it can be used for both levels -->
+    <Name></Name>
+    <Loop LoopId="LX">
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="VEH"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="TXI"/>
+      <Loop LoopId="QTY">
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="NM1">
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="DMG"/>
+    </Loop>
+    <Loop LoopId="ITA">
+      <StartingSegment SegmentId="ITA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="TXI"/>
+    </Loop>
+    <Loop LoopId="IT1">
+      <StartingSegment SegmentId="IT1"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="INC"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="MSG"/>
+      <Segment SegmentId="AMT"/>
+      <Loop LoopId="QTY">
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="TXI"/>
+      </Loop>
+      <Loop LoopId="NM1">
+        <StartingSegment SegmentId="NM1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="NX2"/>
+        <Segment SegmentId="DMG"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="SLN">
+      <StartingSegment SegmentId="SLN"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="CUR"/>
+      <Segment SegmentId="INC"/>
+      <Segment SegmentId="ITA"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="MSG"/>
+      <Loop LoopId="QTY">
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+      <Loop LoopId="NM1">
+        <StartingSegment SegmentId="NM1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="DMG"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="TCD">
+      <StartingSegment SegmentId="TCD"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="ITA"/>
+      <Loop LoopId="QTY">
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="USD">
+      <StartingSegment SegmentId="USD"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="ITA"/>
+      <Segment SegmentId="TRF"/>
+      <Loop LoopId="QTY">
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="SI"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="III">
+      <Name>Information</Name>
+      <StartingSegment SegmentId="III"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="PCT"/>
+      <Loop LoopId="LQ">
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="PCT"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1"/>
+      <Segment SegmentId="FA2"/>
+    </Loop>
+  </HierarchicalLoop>
+  <Segment SegmentId="TDS"/>
+  <Loop LoopId="ITA">
+    <StartingSegment SegmentId="ITA"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <Loop LoopId="BAL">
+    <StartingSegment SegmentId="BAL"/>
+    <Segment SegmentId="DTM"/>
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1">
+    </StartingSegment>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="DMG"/>
+    <Loop LoopId="BAL">
+      <StartingSegment SegmentId="BAL"/>
+      <Segment SegmentId="DTM"/>
+    </Loop>
+    <Loop LoopId="ITA">
+      <StartingSegment SegmentId="ITA"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="SI"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="CUR"/>
+    </Loop>
+    <Loop LoopId="LX">
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="REF"/>
+      <Loop LoopId="AMT">
+        <StartingSegment SegmentId="AMT"/>
+        <Segment SegmentId="DTM"/>
+      </Loop>
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="DTM"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--404 Rail Carrier Shipment Information-->
+<TransactionSpecification TransactionSetIdentifierCode="404" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ZC1" Repeat="1" />
+  <Segment SegmentId="BX" Repeat="1" />
+  <Segment SegmentId="BNX" Repeat="1" />
+  <Segment SegmentId="M3" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Usage="Required" Repeat="30" />
+  <Segment SegmentId="CM" Repeat="2" />
+  <Segment SegmentId="M1" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="5" />
+  <Loop LoopId="N7" LoopRepeat="500">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="EM" Repeat="1" />
+    <Loop LoopId="VC" LoopRepeat="21">
+      <Name>Motor Vehicle Control</Name>
+      <StartingSegment SegmentId="VC" />
+      <Loop LoopId="N1" LoopRepeat="2">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="H3" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="M7" Repeat="5" />
+      <Segment SegmentId="N5" Repeat="1" />
+      <Segment SegmentId="IC" Repeat="1" />
+      <Segment SegmentId="IM" Repeat="1" />
+      <Segment SegmentId="M12" Repeat="2" />
+      <Loop LoopId="E1" LoopRepeat="2">
+        <Name>Empty Car Disposition - Pended Destinat</Name>
+        <StartingSegment SegmentId="E1" />
+        <Segment SegmentId="E4" Repeat="1" />
+        <Segment SegmentId="E5" Repeat="13" />
+        <Segment SegmentId="PI" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="GA" Repeat="15" />
+      <Loop LoopId="REF" LoopRepeat="99">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="REF" />
+        <Segment SegmentId="N10" Repeat="15" />
+        <Loop LoopId="N1" LoopRepeat="5">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N3" Repeat="1" />
+          <Segment SegmentId="N4" Repeat="1" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Segment SegmentId="NA" Repeat="10" />
+  <Segment SegmentId="F9" Usage="Required" Repeat="1" />
+  <Segment SegmentId="D9" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="2" />
+    <Segment SegmentId="PER" Repeat="2" />
+    <Segment SegmentId="BL" Repeat="12" />
+  </Loop>
+  <Loop LoopId="S1" LoopRepeat="12">
+    <Name>Stop-off Name</Name>
+    <StartingSegment SegmentId="S1" />
+    <Segment SegmentId="S2" Repeat="2" />
+    <Segment SegmentId="S9" Repeat="1" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="R9" Repeat="1" />
+  <Loop LoopId="E1" LoopRepeat="2">
+    <Name>Empty Car Disposition - Pended Destinat</Name>
+    <StartingSegment SegmentId="E1" />
+    <Segment SegmentId="E4" Repeat="1" />
+    <Segment SegmentId="E5" Repeat="13" />
+    <Segment SegmentId="PI" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="H3" Repeat="20" />
+  <Segment SegmentId="PS" Repeat="5" />
+  <Loop LoopId="LX" LoopRepeat="25">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="L5" Usage="Required" Repeat="15" />
+    <Loop LoopId="L0" LoopRepeat="25">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0" />
+      <Segment SegmentId="MEA" Repeat="3" />
+      <Segment SegmentId="L1" Repeat="10" />
+      <Segment SegmentId="PI" Repeat="30" />
+    </Loop>
+    <Segment SegmentId="X1" Repeat="6" />
+  </Loop>
+  <Loop LoopId="T1" LoopRepeat="64">
+    <Name>Transit Inbound Origin</Name>
+    <StartingSegment SegmentId="T1" />
+    <Segment SegmentId="T2" Repeat="30" />
+    <Segment SegmentId="T3" Repeat="12" />
+    <Segment SegmentId="T6" Repeat="1" />
+    <Segment SegmentId="T8" Repeat="99" />
+  </Loop>
+  <Segment SegmentId="L3" Repeat="1" />
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="LH1" LoopRepeat="100">
+      <Name>Hazardous Identification Information</Name>
+      <StartingSegment SegmentId="LH1" />
+      <Segment SegmentId="LH2" Repeat="4" />
+      <Segment SegmentId="LH3" Repeat="10" />
+      <Segment SegmentId="LFH" Repeat="20" />
+      <Segment SegmentId="LEP" Repeat="3" />
+      <Segment SegmentId="LH4" Repeat="1" />
+      <Segment SegmentId="LHT" Repeat="3" />
+      <Segment SegmentId="LHR" Repeat="5" />
+      <Segment SegmentId="PER" Repeat="5" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="PER" Repeat="5" />
+  <Segment SegmentId="LH2" Repeat="6" />
+  <Segment SegmentId="LHR" Repeat="1" />
+  <Segment SegmentId="LH6" Repeat="5" />
+  <Segment SegmentId="XH" Repeat="1" />
+  <Segment SegmentId="X7" Repeat="10" />
+</TransactionSpecification>

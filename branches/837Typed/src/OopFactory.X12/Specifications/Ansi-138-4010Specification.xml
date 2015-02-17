@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Testing Results Request and Report -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="138">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="ERP"/>
+  <Segment SegmentId="REF"/>
+  <Loop LoopId="N1">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="IN1">
+    <Name></Name>
+    <StartingSegment SegmentId="IN1"/>
+    <Segment SegmentId="IN2"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="SSE"/>
+    <Segment SegmentId="DMG"/>
+    <Segment SegmentId="IND"/>
+    <Segment SegmentId="LUI"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="COM"/>
+    <Segment SegmentId="RQS"/>
+    <Segment SegmentId="SCA"/>
+    <Loop LoopId="EMS">
+      <Name></Name>
+      <StartingSegment SegmentId="EMS"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="DTP"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="TST">
+    <Name/>
+    <StartingSegment SegmentId="TST"/>
+    <Loop LoopId="SBT">
+      <Name/>
+      <StartingSegment SegmentId="SBT"/>
+      <Segment SegmentId="SRE"/>
+      <Segment SegmentId="MSG"/>
+      <Loop LoopId="RAP">
+        <Name/>
+        <StartingSegment SegmentId="RAP"/>
+        <Segment SegmentId="EMS"/>
+      </Loop>
+      <Loop LoopId="SCA">
+        <Name/>
+        <StartingSegment SegmentId="SCA"/>
+        <Segment SegmentId="FOS"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <Name/>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="DEG">
+    <Name/>
+    <StartingSegment SegmentId="DEG"/>
+    <Segment SegmentId="FOS"/>
+  </Loop>
+  <Loop LoopId="SST">
+    <Name/>
+    <StartingSegment SegmentId="SST"/>
+    <Segment SegmentId="SSE"/>
+    <Segment SegmentId="SUM"/>
+    <Segment SegmentId="FOS"/>
+    <Segment SegmentId="RQS"/>
+    <Loop LoopId="N1">
+      <Name/>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="COM"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="PCL">
+    <Name/>
+    <StartingSegment SegmentId="PCL"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="SSE"/>
+    <Segment SegmentId="FOS"/>
+    <Loop LoopId="DEG">
+      <Name/>
+      <StartingSegment SegmentId="DEG"/>
+      <Segment SegmentId="SUM"/>
+      <Segment SegmentId="FOS"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="ATV">
+    <Name/>
+    <StartingSegment SegmentId="ATV"/>
+    <Segment SegmentId="EMS"/>
+    <Segment SegmentId="DTP"/>
+  </Loop>
+</TransactionSpecification>

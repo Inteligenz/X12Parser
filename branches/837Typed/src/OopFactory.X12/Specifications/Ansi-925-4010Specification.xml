@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--925 Claim Tracer-->
+<TransactionSpecification TransactionSetIdentifierCode="925" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="F10" LoopRepeat="99">
+    <Name>Identification of Claim (Tracer)</Name>
+    <StartingSegment SegmentId="F10" />
+    <Segment SegmentId="F02" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

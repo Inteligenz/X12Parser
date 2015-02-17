@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--452 Railroad Problem Log Inquiry or Advice-->
+<TransactionSpecification TransactionSetIdentifierCode="452" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="5" />
+  <Segment SegmentId="DTP" Repeat="2" />
+  <Segment SegmentId="NTE" Repeat="999999" />
+</TransactionSpecification>

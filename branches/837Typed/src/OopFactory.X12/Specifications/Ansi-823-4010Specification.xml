@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--823 Lockbox-->
+<TransactionSpecification TransactionSetIdentifierCode="823" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="N1" LoopRepeat="2">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Segment SegmentId="TRN" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="2" />
+  <Loop LoopId="DEP" LoopRepeat="100">
+    <Name>Deposit</Name>
+    <StartingSegment SegmentId="DEP" />
+    <Segment SegmentId="AMT" Usage="Required" Repeat="1" />
+    <Segment SegmentId="QTY" Usage="Required" Repeat="2" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Loop LoopId="BAT">
+      <Name>Batch</Name>
+      <StartingSegment SegmentId="BAT" />
+      <Segment SegmentId="AVA" Repeat="10" />
+      <Segment SegmentId="AMT" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Loop LoopId="BPR">
+        <Name>Beginning Segment for Payment Order/Rem</Name>
+        <StartingSegment SegmentId="BPR" />
+        <Segment SegmentId="TRN" Repeat="1" />
+        <Segment SegmentId="CUR" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="AVA" Repeat="1" />
+        <Loop LoopId="ADX">
+          <Name>Adjustment</Name>
+          <StartingSegment SegmentId="ADX" />
+          <Segment SegmentId="NTE" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="DTM" Repeat="1" />
+          <Loop LoopId="REF">
+            <Name>Reference Identification</Name>
+            <StartingSegment SegmentId="REF" />
+            <Segment SegmentId="DTM" />
+          </Loop>
+          <Loop LoopId="IT1">
+            <Name>Baseline Item Data (Invoice)</Name>
+            <StartingSegment SegmentId="IT1" />
+            <Loop LoopId="REF">
+              <Name>Reference Identification</Name>
+              <StartingSegment SegmentId="REF" />
+              <Segment SegmentId="DTM" Repeat="1" />
+            </Loop>
+            <Loop LoopId="SAC">
+              <Name>Service, Promotion, Allowance, or Charg</Name>
+              <StartingSegment SegmentId="SAC" />
+              <Segment SegmentId="TXI" />
+            </Loop>
+            <Loop LoopId="SLN">
+              <Name>Subline Item Detail</Name>
+              <StartingSegment SegmentId="SLN" />
+              <Loop LoopId="REF">
+                <Name>Reference Identification</Name>
+                <StartingSegment SegmentId="REF" />
+                <Segment SegmentId="DTM" />
+              </Loop>
+              <Loop LoopId="SAC">
+                <Name>Service, Promotion, Allowance, or Charg</Name>
+                <StartingSegment SegmentId="SAC" />
+                <Segment SegmentId="TXI" />
+              </Loop>
+            </Loop>
+          </Loop>
+        </Loop>
+        <Loop LoopId="N1" LoopRepeat="200">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N2" Repeat="2" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" Repeat="12" />
+          <Segment SegmentId="PER" Repeat="3" />
+        </Loop>
+        <Loop LoopId="RMR">
+          <Name>Remittance Advice Accounts Receivable O</Name>
+          <StartingSegment SegmentId="RMR" />
+          <Segment SegmentId="N1" Repeat="1" />
+          <Segment SegmentId="CUR" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTM" />
+          <Loop LoopId="IT1">
+            <Name>Baseline Item Data (Invoice)</Name>
+            <StartingSegment SegmentId="IT1" />
+            <Loop LoopId="REF">
+              <Name>Reference Identification</Name>
+              <StartingSegment SegmentId="REF" />
+              <Segment SegmentId="DTM" Repeat="1" />
+            </Loop>
+            <Loop LoopId="SAC">
+              <Name>Service, Promotion, Allowance, or Charg</Name>
+              <StartingSegment SegmentId="SAC" />
+              <Segment SegmentId="TXI" />
+            </Loop>
+            <Loop LoopId="SLN">
+              <Name>Subline Item Detail</Name>
+              <StartingSegment SegmentId="SLN" />
+              <Loop LoopId="REF">
+                <Name>Reference Identification</Name>
+                <StartingSegment SegmentId="REF" />
+                <Segment SegmentId="DTM" />
+              </Loop>
+              <Loop LoopId="SAC">
+                <Name>Service, Promotion, Allowance, or Charg</Name>
+                <StartingSegment SegmentId="SAC" />
+                <Segment SegmentId="TXI" />
+              </Loop>
+            </Loop>
+          </Loop>
+          <Loop LoopId="ADX">
+            <Name>Adjustment</Name>
+            <StartingSegment SegmentId="ADX" />
+            <Segment SegmentId="NTE" />
+            <Segment SegmentId="PER" />
+            <Loop LoopId="REF">
+              <Name>Reference Identification</Name>
+              <StartingSegment SegmentId="REF" />
+              <Segment SegmentId="DTM" />
+            </Loop>
+            <Loop LoopId="IT1">
+              <Name>Baseline Item Data (Invoice)</Name>
+              <StartingSegment SegmentId="IT1" />
+              <Loop LoopId="REF">
+                <Name>Reference Identification</Name>
+                <StartingSegment SegmentId="REF" />
+                <Segment SegmentId="DTM" Repeat="1" />
+              </Loop>
+              <Loop LoopId="SAC">
+                <Name>Service, Promotion, Allowance, or Charg</Name>
+                <StartingSegment SegmentId="SAC" />
+                <Segment SegmentId="TXI" />
+              </Loop>
+              <Loop LoopId="SLN">
+                <Name>Subline Item Detail</Name>
+                <StartingSegment SegmentId="SLN" />
+                <Loop LoopId="REF">
+                  <Name>Reference Identification</Name>
+                  <StartingSegment SegmentId="REF" />
+                  <Segment SegmentId="DTM" />
+                </Loop>
+                <Loop LoopId="SAC">
+                  <Name>Service, Promotion, Allowance, or Charg</Name>
+                  <StartingSegment SegmentId="SAC" />
+                  <Segment SegmentId="TXI" />
+                </Loop>
+              </Loop>
+            </Loop>
+          </Loop>
+        </Loop>
+        <Loop LoopId="TXP">
+          <Name>Tax Payment</Name>
+          <StartingSegment SegmentId="TXP" />
+          <Segment SegmentId="TXI" />
+        </Loop>
+        <Loop LoopId="DED">
+          <Name>Deductions</Name>
+          <StartingSegment SegmentId="DED" />
+        </Loop>
+        <Loop LoopId="LX">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="TRN" />
+          <Loop LoopId="NM1">
+            <Name>Individual or Organizational Name</Name>
+            <StartingSegment SegmentId="NM1" />
+            <Segment SegmentId="REF" />
+            <Segment SegmentId="G53" />
+            <Loop LoopId="AIN">
+              <Name>Income</Name>
+              <StartingSegment SegmentId="AIN" />
+              <Segment SegmentId="QTY" />
+              <Segment SegmentId="DTP" />
+            </Loop>
+            <Loop LoopId="PEN">
+              <Name>Pension Information</Name>
+              <StartingSegment SegmentId="PEN" />
+              <Segment SegmentId="AMT" />
+              <Segment SegmentId="DTP" />
+              <Loop LoopId="INV">
+                <Name>Investment Vehicle Selection</Name>
+                <StartingSegment SegmentId="INV" />
+                <Segment SegmentId="DTP" />
+              </Loop>
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

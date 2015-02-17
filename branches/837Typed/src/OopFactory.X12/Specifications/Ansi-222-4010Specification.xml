@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--222 Cartage Work Assignment-->
+<TransactionSpecification TransactionSetIdentifierCode="222" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="SCN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="5" />
+  <Segment SegmentId="G62" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Loop LoopId="0100" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="3" />
+  </Loop>
+  <Loop LoopId="2000" LoopRepeat="999">
+    <Name>Equipment Placement Information</Name>
+    <StartingSegment SegmentId="PLC" />
+  </Loop>
+  <Segment SegmentId="PLC" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N7" Usage="Required" Repeat="10" />
+  <Segment SegmentId="L11" Repeat="10" />
+  <Segment SegmentId="AT5" Repeat="6" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Loop LoopId="2100" LoopRepeat="25">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+  </Loop>
+  <Segment SegmentId="LX" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="5" />
+  <Segment SegmentId="AT3" Usage="Required" Repeat="1" />
+  <Loop LoopId="2200" LoopRepeat="99">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+  </Loop>
+  <Segment SegmentId="S5" Usage="Required" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="10" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="AT5" Repeat="6" />
+  <Segment SegmentId="PLD" Repeat="2" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Loop LoopId="2210" LoopRepeat="1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+  </Loop>
+  <Segment SegmentId="N1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N2" Repeat="1" />
+  <Segment SegmentId="N3" Repeat="2" />
+  <Segment SegmentId="N4" Repeat="1" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Loop LoopId="2400" LoopRepeat="99">
+    <Name>Lading Detail</Name>
+    <StartingSegment SegmentId="LAD" />
+  </Loop>
+  <Segment SegmentId="LAD" Repeat="1" />
+  <Loop LoopId="2410" LoopRepeat="1">
+    <Name>Contact</Name>
+    <StartingSegment SegmentId="G61" />
+  </Loop>
+  <Segment SegmentId="G61" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="5" />
+  <Segment SegmentId="LH6" Repeat="6" />
+  <Loop LoopId="2415" LoopRepeat="25">
+    <Name>Hazardous Identification Information</Name>
+    <StartingSegment SegmentId="LH1" />
+  </Loop>
+  <Segment SegmentId="LH1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="LH2" Repeat="4" />
+  <Segment SegmentId="LH3" Repeat="10" />
+  <Segment SegmentId="LFH" Repeat="20" />
+  <Segment SegmentId="LEP" Repeat="3" />
+  <Segment SegmentId="LH4" Repeat="1" />
+  <Segment SegmentId="LHT" Repeat="3" />
+  <Loop LoopId="2600" LoopRepeat="25">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+  </Loop>
+  <Segment SegmentId="LX" Repeat="1" />
+  <Segment SegmentId="L11" Repeat="10" />
+  <Segment SegmentId="AT3" Usage="Required" Repeat="1" />
+</TransactionSpecification>

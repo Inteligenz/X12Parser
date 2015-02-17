@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="270">
+  <Segment SegmentId="BHT"/>
+  <HierarchicalLoop LoopId="2000A" LevelCode="20">
+    <Name>Information Source Level</Name>
+    <Segment SegmentId="AAA"/>
+    <Loop LoopId="2100A">
+      <Name>Information Source Name</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="2B"/>
+        <EntityIdentifier Code="36"/>
+        <EntityIdentifier Code="GP"/>
+        <EntityIdentifier Code="P5"/>
+        <EntityIdentifier Code="PR"/>
+      </StartingSegment>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="AAA"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="2000B" LevelCode="21">
+    <Name>Information Receiver Level</Name>
+    <Segment SegmentId="AAA"/>
+    <Loop LoopId="2100B">
+      <Name>Information Receiver Name</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="1P"/>
+        <EntityIdentifier Code="2B"/>
+        <EntityIdentifier Code="36"/>
+        <EntityIdentifier Code="80"/>
+        <EntityIdentifier Code="FA"/>
+        <EntityIdentifier Code="GP"/>
+        <EntityIdentifier Code="P5"/>
+        <EntityIdentifier Code="PR"/>
+      </StartingSegment>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="PRV"/>
+      <Segment SegmentId="AAA"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="2000C" LevelCode="22">
+    <Name>Subscriber Level</Name>
+    <Segment SegmentId="TRN"/>
+    <Loop LoopId="2100C">
+      <Name>Subscriber Name</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="IL"/>
+      </StartingSegment>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="PRV"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="INS"/>
+      <Segment SegmentId="HI"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="AAA"/>
+      <Segment SegmentId="MSG"/>
+      <Loop LoopId="2110C">
+        <Name>Subscriber Eligibility or Benefit Inquiry</Name>
+        <StartingSegment SegmentId="EQ"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="III"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+      <Loop LoopId="2110C">
+        <Name>Subscriber Eligibility or Benefit Inquiry</Name>
+        <StartingSegment SegmentId="EB"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="HSD"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="AAA"/>
+        <Segment SegmentId="MSG"/>
+        <Loop LoopId="2115">
+          <Name>Subscriber Eligibility or Benefit Information</Name>
+          <StartingSegment SegmentId="III"/>
+        </Loop>
+        <Loop LoopId="LS">
+          <Name>Loop</Name>
+          <StartingSegment SegmentId="LS"/>
+          <Segment SegmentId="LE"/>
+          <Loop LoopId="2120C">
+            <Name>Subscriber Benefit Related Entity Name</Name>
+            <StartingSegment SegmentId="NM1">
+              <EntityIdentifier Code="1P"/>
+              <EntityIdentifier Code="IL"/>
+              <EntityIdentifier Code="PR"/>
+            </StartingSegment>
+            <Segment SegmentId="N3"/>
+            <Segment SegmentId="N4"/>
+            <Segment SegmentId="PER"/>
+            <Segment SegmentId="PRV"/>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="2000D" LevelCode="23">
+    <Name>Dependent Level</Name>
+    <Segment SegmentId="TRN"/>
+    <Loop LoopId="2100D">
+      <Name>Dependent Name</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="03"/>
+      </StartingSegment>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PRV"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="INS"/>
+      <Segment SegmentId="HI"/>
+      <Segment SegmentId="DTP"/>
+      <Loop LoopId="2110D">
+        <Name>Dependent Eligibility or Benefit Inquiry</Name>
+        <StartingSegment SegmentId="EQ"/>
+        <Segment SegmentId="III"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--362 Cargo Insurance Advice of Shipment-->
+<TransactionSpecification TransactionSetIdentifierCode="362" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" Usage="Required" Repeat="9" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N2" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="1" />
+  <Loop LoopId="L5">
+    <Name>Description, Marks and Numbers</Name>
+    <StartingSegment SegmentId="L5" />
+    <Segment SegmentId="REF" Usage="Required" Repeat="20" />
+    <Segment SegmentId="DTP" Usage="Required" Repeat="9" />
+    <Segment SegmentId="V1" Usage="Required" Repeat="1" />
+    <Segment SegmentId="N1" Repeat="9" />
+    <Segment SegmentId="R1" Repeat="1" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Segment SegmentId="PCT" Repeat="1" />
+    <Loop LoopId="R4" LoopRepeat="5">
+      <Name>Port or Terminal</Name>
+      <StartingSegment SegmentId="R4" />
+      <Segment SegmentId="NX2" Repeat="20" />
+    </Loop>
+    <Loop LoopId="AMT" LoopRepeat="9">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Loop LoopId="LQ">
+        <Name>Industry Code</Name>
+        <StartingSegment SegmentId="LQ" />
+        <Segment SegmentId="PCT" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--943 Warehouse Stock Transfer Shipment Advice-->
+<TransactionSpecification TransactionSetIdentifierCode="943" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="W06" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="5" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Repeat="5" />
+  <Segment SegmentId="NTE" Repeat="20" />
+  <Segment SegmentId="W27" Usage="Required" Repeat="1" />
+  <Segment SegmentId="W28" Repeat="1" />
+  <Segment SegmentId="W10" Repeat="1" />
+  <Loop LoopId="0200" LoopRepeat="9999">
+    <Name>Item Detail Total</Name>
+    <StartingSegment SegmentId="W04" />
+    <Segment SegmentId="G69" Repeat="5" />
+    <Segment SegmentId="N9" Repeat="200" />
+    <Segment SegmentId="W20" Repeat="2" />
+  </Loop>
+  <Segment SegmentId="W03" Usage="Required" Repeat="1" />
+</TransactionSpecification>

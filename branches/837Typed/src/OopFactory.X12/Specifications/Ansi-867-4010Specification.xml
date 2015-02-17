@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--867 Product Transfer and Resale Report-->
+<TransactionSpecification TransactionSetIdentifierCode="867" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BPT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="REF" Repeat="12" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="MEA" Repeat="20" />
+  <Segment SegmentId="PSA" Repeat="10" />
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Loop LoopId="PER">
+      <Name>Administrative Communications Contact</Name>
+      <StartingSegment SegmentId="PER" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="PTD">
+    <Name>Product Transfer and Resale Detail</Name>
+    <StartingSegment SegmentId="PTD" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="REF" Repeat="20" />
+    <Segment SegmentId="PRF" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="MAN" Repeat="1" />
+    <Loop LoopId="N1" LoopRepeat="5">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="20" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Loop LoopId="SII">
+        <Name>Sales Item Information</Name>
+        <StartingSegment SegmentId="SII" />
+        <Segment SegmentId="N9" Repeat="1" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="QTY">
+      <Name>Quantity</Name>
+      <StartingSegment SegmentId="QTY" />
+      <Segment SegmentId="LIN" Repeat="1" />
+      <Segment SegmentId="PO3" Repeat="25" />
+      <Segment SegmentId="PO4" Repeat="1" />
+      <Segment SegmentId="UIT" Repeat="12" />
+      <Segment SegmentId="AMT" Repeat="12" />
+      <Segment SegmentId="ITA" Repeat="10" />
+      <Segment SegmentId="PID" Repeat="200" />
+      <Segment SegmentId="MEA" Repeat="40" />
+      <Segment SegmentId="PWK" Repeat="25" />
+      <Segment SegmentId="PKG" Repeat="25" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="DD" Repeat="1" />
+      <Segment SegmentId="LDT" Repeat="1" />
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Repeat="100" />
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTM" Repeat="1" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="CTT" LoopRepeat="1">
+    <Name>Transaction Totals</Name>
+    <StartingSegment SegmentId="CTT" />
+    <Segment SegmentId="AMT" Repeat="12" />
+    <Segment SegmentId="ITA" Repeat="10" />
+  </Loop>
+</TransactionSpecification>

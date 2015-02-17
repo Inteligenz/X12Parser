@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Multilevel Railcar Load Details -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="125">
+  <Segment SegmentId="BMM"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="N7"/>
+  <Segment SegmentId="VC" Repeat="21"/>
+</TransactionSpecification>

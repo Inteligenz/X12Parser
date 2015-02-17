@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--197 Real Estate Title Evidence-->
+<TransactionSpecification TransactionSetIdentifierCode="197" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="PID">
+    <Name>Product/Item Description</Name>
+    <StartingSegment SegmentId="PID" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Loop LoopId="EFI">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI" />
+        <Segment SegmentId="BIN" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="NX1">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="PDS" />
+      <Segment SegmentId="PDE" />
+    </Loop>
+    <Loop LoopId="FGS">
+      <Name>Form Group</Name>
+      <StartingSegment SegmentId="FGS" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="FPT" />
+      <Segment SegmentId="MSG" />
+      <Segment SegmentId="N9" />
+      <Loop LoopId="IN1">
+        <Name>Individual Identification</Name>
+        <StartingSegment SegmentId="IN1" />
+        <Segment SegmentId="IN2" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="M1" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="LQ">
+        <Name>Industry Code</Name>
+        <StartingSegment SegmentId="LQ" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="IN1">
+          <Name>Individual Identification</Name>
+          <StartingSegment SegmentId="IN1" />
+          <Segment SegmentId="IN2" />
+          <Segment SegmentId="M1" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="G86" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

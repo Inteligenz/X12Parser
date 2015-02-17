@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--889 Promotion Announcement-->
+<TransactionSpecification TransactionSetIdentifierCode="889" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G42" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Usage="Required" Repeat="50" />
+  <Segment SegmentId="NTE" Repeat="300" />
+  <Segment SegmentId="G43" Repeat="1000" />
+  <Segment SegmentId="G23" Repeat="1" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G62" />
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="20">
+    <Name>Promotion Conditions</Name>
+    <StartingSegment SegmentId="G94" />
+    <Segment SegmentId="G95" Repeat="99" />
+  </Loop>
+  <Loop LoopId="0300" LoopRepeat="9999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="G46" Repeat="20" />
+    <Segment SegmentId="G51" Repeat="1" />
+    <Loop LoopId="0310" LoopRepeat="20">
+      <Name>Promotion Conditions</Name>
+      <StartingSegment SegmentId="G94" />
+      <Loop LoopId="0311" LoopRepeat="99">
+        <Name>Performance Requirements</Name>
+        <StartingSegment SegmentId="G95" />
+        <Segment SegmentId="G62" Repeat="2" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="0320" LoopRepeat="9999">
+      <Name>Line Item Detail - Promotion</Name>
+      <StartingSegment SegmentId="G45" />
+      <Segment SegmentId="G69" Repeat="5" />
+      <Segment SegmentId="G43" Repeat="9999" />
+      <Segment SegmentId="G51" Repeat="10" />
+      <Segment SegmentId="G23" Repeat="1" />
+      <Segment SegmentId="G62" Repeat="10" />
+      <Segment SegmentId="G22" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

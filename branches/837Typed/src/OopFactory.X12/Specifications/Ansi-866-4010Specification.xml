@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--866 Production Sequence-->
+<TransactionSpecification TransactionSetIdentifierCode="866" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BSS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="UIT" Repeat="1" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="FOB" Repeat="1" />
+  </Loop>
+  <Loop LoopId="DTM" LoopRepeat="100">
+    <Name>Date/Time Reference</Name>
+    <StartingSegment SegmentId="DTM" />
+    <Segment SegmentId="UIT" Repeat="1" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="LIN">
+      <Name>Item Identification</Name>
+      <StartingSegment SegmentId="LIN" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="QTY" Repeat="1" />
+      <Segment SegmentId="PID" Repeat="1" />
+      <Segment SegmentId="OQS" Repeat="1" />
+      <Loop LoopId="SLN" LoopRepeat="100">
+        <Name>Subline Item Detail</Name>
+        <StartingSegment SegmentId="SLN" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="1" />
+        <Segment SegmentId="N3" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="1" />
+        <Loop LoopId="PID">
+          <Name>Product/Item Description</Name>
+          <StartingSegment SegmentId="PID" />
+          <Segment SegmentId="QTY" Repeat="1" />
+          <Segment SegmentId="MEA" Repeat="10" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" />
+</TransactionSpecification>

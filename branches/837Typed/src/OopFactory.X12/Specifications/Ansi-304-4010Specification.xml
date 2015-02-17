@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--304 Shipping Instructions-->
+<TransactionSpecification TransactionSetIdentifierCode="304" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B2" Usage="Required" Repeat="1" />
+  <Segment SegmentId="B2A" Repeat="1" />
+  <Segment SegmentId="Y6" Repeat="2" />
+  <Segment SegmentId="G1" Repeat="1" />
+  <Segment SegmentId="G2" Repeat="1" />
+  <Segment SegmentId="G3" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="100" />
+  <Segment SegmentId="YNQ" Repeat="10" />
+  <Segment SegmentId="V1" Repeat="2" />
+  <Segment SegmentId="V3" Repeat="1" />
+  <Segment SegmentId="M0" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Loop LoopId="M1" LoopRepeat="5">
+    <Name>Insurance</Name>
+    <StartingSegment SegmentId="M1" />
+    <Segment SegmentId="CUR" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="M2" Repeat="1" />
+  <Segment SegmentId="C2" Repeat="1" />
+  <Segment SegmentId="ITD" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="20" />
+  <Loop LoopId="N1" LoopRepeat="100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="3" />
+  </Loop>
+  <Loop LoopId="R4" LoopRepeat="20">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4" />
+    <Segment SegmentId="DTM" Repeat="15" />
+  </Loop>
+  <Segment SegmentId="R2A" Repeat="25" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="K1" Repeat="12" />
+  <Segment SegmentId="L11" Repeat="99" />
+  <Segment SegmentId="H3" Repeat="6" />
+  <Segment SegmentId="L5" Repeat="999" />
+  <Segment SegmentId="X1" Repeat="25" />
+  <Segment SegmentId="X2" Repeat="5" />
+  <Loop LoopId="C8" LoopRepeat="20">
+    <Name>Certifications and Clauses</Name>
+    <StartingSegment SegmentId="C8" />
+    <Segment SegmentId="C8C" Repeat="5" />
+    <Segment SegmentId="SUP" Repeat="10" />
+  </Loop>
+  <Loop LoopId="LX" LoopRepeat="999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="Y2" Repeat="10" />
+    <Loop LoopId="N7" LoopRepeat="999">
+      <Name>Equipment Details</Name>
+      <StartingSegment SegmentId="N7" />
+      <Segment SegmentId="QTY" Repeat="1" />
+      <Segment SegmentId="L4" Repeat="1" />
+      <Segment SegmentId="N12" Repeat="1" />
+      <Segment SegmentId="M7" Repeat="5" />
+      <Segment SegmentId="M7A" Repeat="100" />
+      <Segment SegmentId="W09" Repeat="1" />
+      <Segment SegmentId="LH6" Repeat="6" />
+      <Loop LoopId="L1" LoopRepeat="20">
+        <Name>Rate and Charges</Name>
+        <StartingSegment SegmentId="L1" />
+        <Segment SegmentId="CUR" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="L7" Repeat="1" />
+      <Segment SegmentId="X1" Repeat="25" />
+      <Segment SegmentId="X2" Repeat="5" />
+      <Segment SegmentId="N9" Repeat="100" />
+      <Loop LoopId="H1" LoopRepeat="10">
+        <Name>Hazardous Material</Name>
+        <StartingSegment SegmentId="H1" />
+        <Segment SegmentId="H2" Repeat="10" />
+      </Loop>
+      <Loop LoopId="LH1" LoopRepeat="100s">
+        <Name>Hazardous Identification Information</Name>
+        <StartingSegment SegmentId="LH1" />
+        <Segment SegmentId="LH2" Repeat="4" />
+        <Segment SegmentId="LH3" Repeat="10" />
+        <Segment SegmentId="LFH" Repeat="25" />
+        <Segment SegmentId="LEP" Repeat="3" />
+        <Segment SegmentId="LH4" Repeat="1" />
+        <Segment SegmentId="LHT" Repeat="3" />
+        <Segment SegmentId="LHR" Repeat="5" />
+        <Segment SegmentId="PER" Repeat="5" />
+      </Loop>
+    </Loop>
+    <Segment SegmentId="L11" Repeat="100" />
+    <Segment SegmentId="K1" Repeat="10" />
+    <Loop LoopId="PO4" LoopRepeat="100">
+      <Name>Item Physical Details</Name>
+      <StartingSegment SegmentId="PO4" />
+      <Segment SegmentId="MEA" Repeat="5" />
+      <Segment SegmentId="MAN" Repeat="5" />
+      <Segment SegmentId="N9" Repeat="5" />
+    </Loop>
+    <Loop LoopId="L0" LoopRepeat="120">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0" />
+      <Segment SegmentId="MEA" Repeat="10" />
+      <Loop LoopId="PO4" LoopRepeat="100">
+        <Name>Item Physical Details</Name>
+        <StartingSegment SegmentId="PO4" />
+        <Segment SegmentId="MEA" Repeat="5" />
+        <Segment SegmentId="MAN" Repeat="5" />
+        <Segment SegmentId="N9" Repeat="5" />
+      </Loop>
+      <Segment SegmentId="QTY" Repeat="5" />
+      <Segment SegmentId="L4" Repeat="1" />
+      <Segment SegmentId="LH6" Repeat="6" />
+      <Loop LoopId="PAL" LoopRepeat="3">
+        <Name>Pallet Information</Name>
+        <StartingSegment SegmentId="PAL" />
+        <Segment SegmentId="QTY" Repeat="1" />
+      </Loop>
+      <Loop LoopId="CTP" LoopRepeat="1">
+        <Name>Pricing Information</Name>
+        <StartingSegment SegmentId="CTP" />
+        <Segment SegmentId="CUR" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="L5" Repeat="999" />
+      <Segment SegmentId="LIN" Repeat="1" />
+      <Segment SegmentId="L12" Repeat="20" />
+      <Segment SegmentId="N9" Repeat="100" />
+      <Segment SegmentId="YNQ" Repeat="10" />
+      <Loop LoopId="L1" LoopRepeat="20">
+        <Name>Rate and Charges</Name>
+        <StartingSegment SegmentId="L1" />
+        <Segment SegmentId="CUR" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="L7" Repeat="1" />
+      <Loop LoopId="SAC" LoopRepeat="10">
+        <Name>Service, Promotion, Allowance, or Charg</Name>
+        <StartingSegment SegmentId="SAC" />
+        <Segment SegmentId="CUR" Repeat="1" />
+      </Loop>
+      <Loop LoopId="L9" LoopRepeat="10">
+        <Name>Charge Detail</Name>
+        <StartingSegment SegmentId="L9" />
+        <Segment SegmentId="CUR" Repeat="1" />
+      </Loop>
+      <Segment SegmentId="X1" Repeat="25" />
+      <Segment SegmentId="X2" Repeat="5" />
+      <Loop LoopId="C8" LoopRepeat="20">
+        <Name>Certifications and Clauses</Name>
+        <StartingSegment SegmentId="C8" />
+        <Segment SegmentId="C8C" Repeat="5" />
+        <Segment SegmentId="SUP" Repeat="10" />
+      </Loop>
+      <Loop LoopId="H1" LoopRepeat="10">
+        <Name>Hazardous Material</Name>
+        <StartingSegment SegmentId="H1" />
+        <Segment SegmentId="H2" Repeat="10" />
+      </Loop>
+      <Loop LoopId="LH1" LoopRepeat="1">
+        <Name>Hazardous Identification Information</Name>
+        <StartingSegment SegmentId="LH1" />
+        <Segment SegmentId="LH2" Repeat="4" />
+        <Segment SegmentId="LH3" Repeat="10" />
+        <Segment SegmentId="LFH" Repeat="25" />
+        <Segment SegmentId="LEP" Repeat="3" />
+        <Segment SegmentId="LH4" Repeat="1" />
+        <Segment SegmentId="LHT" Repeat="3" />
+        <Segment SegmentId="LHR" Repeat="5" />
+        <Segment SegmentId="PER" Repeat="5" />
+      </Loop>
+      <Loop LoopId="N1" LoopRepeat="10">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="G61" Repeat="3" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="L3" LoopRepeat="1">
+    <Name>Total Weight and Charges</Name>
+    <StartingSegment SegmentId="L3" />
+    <Segment SegmentId="CUR" Repeat="1" />
+    <Segment SegmentId="MEA" Repeat="5" />
+    <Segment SegmentId="PWK" Repeat="50" />
+    <Segment SegmentId="SUP" Repeat="999" />s
+    <Loop LoopId="L1" LoopRepeat="20">
+      <Name>Rate and Charges</Name>
+      <StartingSegment SegmentId="L1" />
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+    <Loop LoopId="TDS" LoopRepeat="1">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS" />
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+    <Loop LoopId="SAC" LoopRepeat="10">
+      <Name>Service, Promotion, Allowance, or Charg</Name>
+      <StartingSegment SegmentId="SAC" />
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+    <Loop LoopId="L9" LoopRepeat="10">
+      <Name>Charge Detail</Name>
+      <StartingSegment SegmentId="L9" />
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+    <Segment SegmentId="ISS" Repeat="5" />
+    <Segment SegmentId="V9" Repeat="10" />
+    <Segment SegmentId="K1" Repeat="999" />
+    <Segment SegmentId="L11" Repeat="24" />
+  </Loop>
+</TransactionSpecification>

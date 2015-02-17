@@ -1,0 +1,31 @@
+﻿ISA~00~          ~00~          ~08~6123410000     ~XX~12345678       ~000401~2300~U~00400~000000001~0~P~|}
+  GS~OR~ODEP001~12345678~20000401~1426~1~X~004010}
+    ST~816~100001}
+      BHT~0065~00~00005~20000412}
+      N1~FR~STEINMART~93~153531108}
+      HL~1~~35}
+        N1~CQ~STEINMART}
+        HL~2~1~36}
+          N1~BU~STEINMART~93~0210}
+            N3~3301 N. STATE ROAD #7~LAKES MALL}
+            N4~LAUDERDALE LAKES~FL~33319}
+            PER~IC~~TE~03057336100}
+            REF~WS~00905}
+            DTM~145~19861009}
+        HL~3~1~36}
+          N1~BU~STEINMART~93~0003}
+            N3~8665~S.W. 40TH STREET~(BIND RD)}
+            N4~MIAMI~FL~33165}
+            PER~IC~~TE~03052231711}
+            REF~WS~00905}
+            DTM~145~19861115}
+        HL~4~1~36}
+          N1~BU~STEINMART~93~0004}
+            N3~123 N.W. 13TH STREET}
+            N4~BOCA RATON~FL~33431}
+            PER~IC~~TE~04073954001}
+            REF~WS~00905}
+            DTM~145~870921}
+    SE~27~100001}
+  GE~1~1}
+IEA~1~00000000}

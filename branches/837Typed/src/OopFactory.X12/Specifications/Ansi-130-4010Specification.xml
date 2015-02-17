@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Student Education Record (Transcript) -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="130">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="ERP"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="DMG"/>
+  <Segment SegmentId="LUI"/>
+  <Segment SegmentId="IND"/>
+  <Segment SegmentId="DTP"/>
+  <Segment SegmentId="RAP"/>
+  <Segment SegmentId="PCL"/>
+  <Segment SegmentId="NTE"/>
+  <Loop LoopId="N1">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="IN1">
+    <Name></Name>
+    <StartingSegment SegmentId="IN1"/>
+    <Segment SegmentId="EMS"/>
+    <Segment SegmentId="IN2"/>
+    <Loop LoopId="N3">
+      <Name></Name>
+      <StartingSegment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="NTE"/>
+  </Loop>
+  <Loop LoopId="SST">
+    <Name></Name>
+    <StartingSegment SegmentId="SST"/>
+    <Segment SegmentId="SSE" Repeat="1000"/>
+    <Segment SegmentId="N1"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Loop LoopId="ATV">
+    <Name></Name>
+    <StartingSegment SegmentId="ATV"/>
+    <Segment SegmentId="DTP"/>
+  </Loop>
+  <Loop LoopId="TST">
+    <Name></Name>
+    <StartingSegment SegmentId="TST"/>
+    <Loop LoopId="SBT">
+      <Name></Name>
+      <StartingSegment SegmentId="SBT"/>
+      <Segment SegmentId="SRE"/>
+      <Segment SegmentId="NTE"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="SUM">
+    <Name></Name>
+    <StartingSegment SegmentId="SUM"/>
+    <Segment SegmentId="NTE"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name></Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="HS" Repeat="10"/>
+    <Segment SegmentId="IMM" Repeat="1000"/>
+    <Loop LoopId="HC">
+      <Name></Name>
+      <StartingSegment SegmentId="HC"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="SP">
+      <Name></Name>
+      <StartingSegment SegmentId="SP"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="NTE"/>
+      <Loop LoopId="OPS">
+        <Name></Name>
+        <StartingSegment SegmentId="OPS"/>
+        <Segment SegmentId="OPX"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="SES">
+      <Name></Name>
+      <StartingSegment SegmentId="SES"/>
+      <Segment SegmentId="SSE"/>
+      <Segment SegmentId="NTE"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Loop LoopId="SUM">
+        <Name></Name>
+        <StartingSegment SegmentId="SUM"/>
+        <Segment SegmentId="NTE"/>
+      </Loop>
+      <Loop LoopId="CRS">
+        <Name></Name>
+        <StartingSegment SegmentId="CRS"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="CSU"/>
+        <Segment SegmentId="LUI"/>
+        <Segment SegmentId="RAP"/>
+        <Segment SegmentId="NTE"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="N4"/>
+        <Loop LoopId="MKS">
+          <Name></Name>
+          <StartingSegment SegmentId="MKS"/>
+          <Segment SegmentId="LUI"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="DEG">
+        <Name></Name>
+        <StartingSegment SegmentId="DEG"/>
+        <Segment SegmentId="SUM"/>
+        <Segment SegmentId="FOS"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="NTE"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

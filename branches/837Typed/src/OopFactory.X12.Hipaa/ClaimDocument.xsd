@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.oopfactory.com/2011/XSL/Hipaa" elementFormDefault="qualified" targetNamespace="http://www.oopfactory.com/2011/XSL/Hipaa" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ClaimDocument" nillable="true" type="tns:ClaimDocument" />
+  <xs:complexType name="ClaimDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Claim" type="tns:Claim" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Claim">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Date" type="tns:QualifiedDate" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Amount" type="tns:QualifiedAmount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DateRange" type="tns:QualifiedDateRange" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ServiceLocationInfo" type="tns:ServiceLocationInformation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Submitter" type="tns:Entity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Receiver" type="tns:Entity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BillingInfo" type="tns:BillingInformation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Subscriber" type="tns:ClaimMember" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Payer" type="tns:Entity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Patient" type="tns:ClaimMember" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OtherSubscriberInformation" type="tns:OtherSubscriberInformation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdmissionType" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdmissionSource" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PatientStatus" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiagnosisRelatedGroup" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SubscriberInformation" type="tns:SubscriberInformation" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Condition" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Occurrence" type="tns:CodedDate" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OccurrenceSpan" type="tns:CodedDateRange" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Value" type="tns:CodedAmount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Diagnosis" type="tns:Diagnosis" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Procedure" type="tns:InstitutionalProcedure" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Provider" type="tns:Provider" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Note" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceLine" type="tns:ServiceLine" />
+    </xs:sequence>
+    <xs:attribute name="Version" type="xs:string" />
+    <xs:attribute name="Type" type="tns:ClaimTypeEnum" use="required" />
+    <xs:attribute name="RelatedCauseCode1" type="xs:string" />
+    <xs:attribute name="RelatedCauseCode2" type="xs:string" />
+    <xs:attribute name="RelatedCauseCode3" type="xs:string" />
+    <xs:attribute name="AutoAccidentState" type="xs:string" />
+    <xs:attribute name="PatientSignatureSourceCode" type="xs:string" />
+    <xs:attribute name="TransactionCode" type="xs:string" />
+    <xs:attribute name="ClaimNumber" type="xs:string" />
+    <xs:attribute name="BillTypeCode" type="xs:string" />
+    <xs:attribute name="PatientControlNumber" type="xs:string" />
+    <xs:attribute name="TotalClaimChargeAmount" type="xs:decimal" use="required" />
+    <xs:attribute name="ProviderSignatureOnFile" type="xs:string" />
+    <xs:attribute name="ProviderAcceptAssignmentCode" type="xs:string" />
+    <xs:attribute name="PriorAuthorizationNumber" type="xs:string" />
+    <xs:attribute name="MedicalRecordNumber" type="xs:string" />
+    <xs:attribute name="StatementFromDate" type="xs:date" />
+    <xs:attribute name="StatementToDate" type="xs:date" />
+  </xs:complexType>
+  <xs:complexType name="QualifiedDate">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+        <xs:attribute name="Date" type="xs:dateTime" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="QualifiedAmount">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+        <xs:attribute name="Amount" type="xs:decimal" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="QualifiedDateRange">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+        <xs:attribute name="BeginDate" type="xs:date" use="required" />
+        <xs:attribute name="EndDate" type="xs:date" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ServiceLocationInformation">
+    <xs:attribute name="Qualifier" type="xs:string" />
+    <xs:attribute name="FacilityCode" type="xs:string" />
+    <xs:attribute name="FrequencyTypeCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Entity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="tns:EntityName" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Address" type="tns:PostalAddress" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Identification" type="tns:Identification" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Contact" type="tns:Contact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EntityName">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="tns:EntityType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Identification" type="tns:Identification" />
+    </xs:sequence>
+    <xs:attribute name="LastName" type="xs:string" />
+    <xs:attribute name="Suffix" type="xs:string" />
+    <xs:attribute name="Prefix" type="xs:string" />
+    <xs:attribute name="FirstName" type="xs:string" />
+    <xs:attribute name="MiddleName" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EntityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Identifier" type="xs:string" />
+        <xs:attribute name="Qualifier" type="tns:EntityNameQualifierEnum" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="EntityNameQualifierEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Person" />
+      <xs:enumeration value="NonPerson" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Identification">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+        <xs:attribute name="Id" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ProviderInformation">
+    <xs:simpleContent>
+      <xs:extension base="tns:Identification">
+        <xs:attribute name="ProviderCode" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PostalAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Line1" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Line2" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="City" type="xs:string" />
+    <xs:attribute name="StateCode" type="xs:string" />
+    <xs:attribute name="PostalCode" type="xs:string" />
+    <xs:attribute name="CountryCode" type="xs:string" />
+    <xs:attribute name="CountrySubdivisionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Number" type="tns:ContactNumber" />
+    </xs:sequence>
+    <xs:attribute name="FunctionCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ContactNumber">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Member">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Relationship" type="tns:Lookup" />
+        </xs:sequence>
+        <xs:attribute name="Gender" type="tns:GenderEnum" use="required" />
+        <xs:attribute name="DateOfBirth" type="xs:date" />
+        <xs:attribute name="MemberId" type="xs:string" />
+        <xs:attribute name="Ssn" type="xs:string" />
+        <xs:attribute name="PlanNumber" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Lookup">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Code" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="GenderEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ClaimMember">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Member" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Provider">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ProviderInfo" type="tns:ProviderInformation" />
+        </xs:sequence>
+        <xs:attribute name="Npi" type="xs:string" />
+        <xs:attribute name="TaxId" type="xs:string" />
+        <xs:attribute name="ServiceProviderNumber" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BillingInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProviderInfo" type="tns:ProviderInformation" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Provider" type="tns:Provider" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OtherSubscriberInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SubscriberInformation" type="tns:SubscriberInformation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="tns:EntityName" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OtherPayer" type="tns:EntityName" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Adjustment" type="tns:ClaimsAdjustment" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Amount" type="tns:QualifiedAmount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Provider" type="tns:Provider" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubscriberInformation">
+    <xs:attribute name="PayerResponsibilitySequenceNumberCode" type="xs:string" />
+    <xs:attribute name="IndividualRelationshipCode" type="xs:string" />
+    <xs:attribute name="ReferenceIdentification" type="xs:string" />
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="InsuranceTypeCode" type="xs:string" />
+    <xs:attribute name="CoordinationOfBenefitsCode" type="xs:string" />
+    <xs:attribute name="YesNoConditionResponseCode" type="xs:string" />
+    <xs:attribute name="EmploymentStatusCode" type="xs:string" />
+    <xs:attribute name="ClaimFilingIndicatorCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ClaimsAdjustment">
+    <xs:attribute name="GroupCode" type="xs:string" />
+    <xs:attribute name="ReasonCode" type="xs:string" />
+    <xs:attribute name="Amount" type="xs:decimal" use="required" />
+    <xs:attribute name="Quantity" type="xs:decimal" />
+  </xs:complexType>
+  <xs:complexType name="CodedDate">
+    <xs:attribute name="Code" type="xs:string" />
+    <xs:attribute name="Date" type="xs:date" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CodedDateRange">
+    <xs:attribute name="Code" type="xs:string" />
+    <xs:attribute name="FromDate" type="xs:date" use="required" />
+    <xs:attribute name="ThroughDate" type="xs:date" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CodedAmount">
+    <xs:attribute name="Code" type="xs:string" />
+    <xs:attribute name="Amount" type="xs:decimal" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Diagnosis">
+    <xs:attribute name="DiagnosisType" type="tns:DiagnosisTypeEnum" use="required" />
+    <xs:attribute name="Version" type="tns:CodeListEnum" use="required" />
+    <xs:attribute name="Qualifier" type="xs:string" />
+    <xs:attribute name="Code" type="xs:string" />
+    <xs:attribute name="PoiIndicator" type="xs:string" />
+    <xs:attribute name="Poi" type="tns:PresentOnAdmissionEnum" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DiagnosisTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Principal" />
+      <xs:enumeration value="Admitting" />
+      <xs:enumeration value="PatientReason" />
+      <xs:enumeration value="ExternalCauseOfInjury" />
+      <xs:enumeration value="Other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CodeListEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="ICD9" />
+      <xs:enumeration value="ICD10" />
+      <xs:enumeration value="ABC" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PresentOnAdmissionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="No" />
+      <xs:enumeration value="Yes" />
+      <xs:enumeration value="NotApplicable" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="InstitutionalProcedure">
+    <xs:attribute name="IsPrincipal" type="xs:boolean" use="required" />
+    <xs:attribute name="Version" type="tns:CodeListEnum" use="required" />
+    <xs:attribute name="Qualifier" type="xs:string" />
+    <xs:attribute name="Code" type="xs:string" />
+    <xs:attribute name="Date" type="xs:date" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ServiceLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="PlaceOfService" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Procedure" type="tns:MedicalProcedure" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Drug" type="tns:DrugIdentification" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplementalInformation" type="tns:Paperwork" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Identification" type="tns:Identification" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Amount" type="tns:QualifiedAmount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Date" type="tns:QualifiedDate" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DateRange" type="tns:QualifiedDateRange" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Note" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Provider" type="tns:Provider" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LineAdjustmentInformation" type="tns:LineAdjustmentInformation" />
+    </xs:sequence>
+    <xs:attribute name="LineNumber" type="xs:int" use="required" />
+    <xs:attribute name="RevenueCode" type="xs:string" />
+    <xs:attribute name="Quantity" type="xs:decimal" use="required" />
+    <xs:attribute name="Unit" type="xs:string" />
+    <xs:attribute name="EmergencyIndicator" type="xs:string" />
+    <xs:attribute name="DiagnosisCodePointer1" type="xs:string" />
+    <xs:attribute name="DiagnosisCodePointer2" type="xs:string" />
+    <xs:attribute name="DiagnosisCodePointer3" type="xs:string" />
+    <xs:attribute name="DiagnosisCodePointer4" type="xs:string" />
+    <xs:attribute name="PurchasedServiceIdentifier" type="xs:string" />
+    <xs:attribute name="PurchasedServiceAmount" type="xs:string" />
+    <xs:attribute name="ChargeAmount" type="xs:decimal" use="required" />
+    <xs:attribute name="NonCoveredChargeAmount" type="xs:decimal" />
+    <xs:attribute name="ServiceDateFrom" type="xs:date" use="required" />
+    <xs:attribute name="ServiceDateTo" type="xs:date" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MedicalProcedure">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Qualifier" type="xs:string" />
+        <xs:attribute name="ProcedureCode" type="xs:string" />
+        <xs:attribute name="ProcedureCodeEnd" type="xs:string" />
+        <xs:attribute name="Modifier1" type="xs:string" />
+        <xs:attribute name="Modifier2" type="xs:string" />
+        <xs:attribute name="Modifier3" type="xs:string" />
+        <xs:attribute name="Modifier4" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DrugIdentification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UnitOfMeasure" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Identification" type="tns:Identification" />
+    </xs:sequence>
+    <xs:attribute name="Ndc" type="xs:string" />
+    <xs:attribute name="Quantity" type="xs:decimal" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Paperwork">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ReportType" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReportTransmission" type="tns:Lookup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Identification" type="tns:Identification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LineAdjustmentInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Procedure" type="tns:MedicalProcedure" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Adjustment" type="tns:ClaimsAdjustment" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Amount" type="tns:QualifiedAmount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Date" type="tns:QualifiedDate" />
+    </xs:sequence>
+    <xs:attribute name="OtherPayerPrimaryIdentifier" type="xs:string" />
+    <xs:attribute name="ServiceLinePaidAmount" type="xs:decimal" use="required" />
+    <xs:attribute name="PaidServiceUnitCount" type="xs:decimal" />
+    <xs:attribute name="BundledLineNumber" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="ClaimTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Professional" />
+      <xs:enumeration value="Institutional" />
+      <xs:enumeration value="Dental" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

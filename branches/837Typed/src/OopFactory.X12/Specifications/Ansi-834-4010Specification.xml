@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="834">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="DTP"/>
+  <Loop LoopId="1000A">
+    <Name>SPONSOR NAME</Name>
+    <StartingSegment  SegmentId="N1">
+      <EntityIdentifier Code="P5"/>
+    </StartingSegment>
+  </Loop>
+  <Loop LoopId="1000B">
+    <Name>PAYER</Name>
+    <StartingSegment SegmentId="N1">
+      <EntityIdentifier Code="IN"/>
+    </StartingSegment>
+  </Loop>
+  <Loop LoopId="1000C">
+    <Name>TPA/BROKER NAME</Name>
+    <StartingSegment SegmentId="N1">
+      <EntityIdentifier Code="BO"/>
+      <EntityIdentifier Code="TV"/>
+    </StartingSegment>
+    <Loop LoopId="1100C">
+      <Name>TPA/BROKER ACCOUNT INFORMATION</Name>
+      <StartingSegment SegmentId="ACT"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="2000">
+    <Name>MEMBER LEVEL DETAIL</Name>
+    <StartingSegment SegmentId="INS"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTP"/>
+    <Loop LoopId="2100A">
+      <Name>MEMBER NAME</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="74"/>
+        <EntityIdentifier Code="IL"/>
+      </StartingSegment>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="ICM"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="HLH"/>
+      <Segment SegmentId="LUI"/>
+    </Loop>
+    <Loop LoopId="2100B">
+      <Name>INCORRECT MEMBER NAME</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="70"/>
+      </StartingSegment>
+      <Segment SegmentId="DMG"/>
+    </Loop>
+    <Loop LoopId="2100C">
+      <Name>MEMBER MAILING ADDRESS</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="31"/>
+      </StartingSegment>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="2100D">
+      <Name>MEMBER EMPLOYER</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="ES"/>
+      </StartingSegment>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="2100E">
+      <Name>MEMBER SCHOOL</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="M8"/>
+      </StartingSegment>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="2100F">
+      <Name>CUSTODIAL PARENT</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="S3"/>
+      </StartingSegment>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="2100G">
+      <Name>RESPONSIBLE PERSON</Name>
+      <StartingSegment SegmentId="NM1">
+        <EntityIdentifier Code="E1"/>
+        <EntityIdentifier Code="EI"/>
+        <EntityIdentifier Code="EXS"/>
+        <EntityIdentifier Code="GD"/>
+        <EntityIdentifier Code="J6"/>
+        <EntityIdentifier Code="QD"/>
+      </StartingSegment>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="2200">
+      <Name>DISABILITY INFORMATION</Name>
+      <StartingSegment SegmentId="DSB">
+      </StartingSegment>
+      <Segment SegmentId="DTP"/>
+    </Loop>
+    <Loop LoopId="2300">
+      <Name>HEALTH COVERAGE</Name>
+      <StartingSegment SegmentId="HD" />
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="IDC"/>
+      <Loop LoopId="2310">
+        <Name>PROVIDER INFORMATION</Name>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="NM1"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="PRV"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="PLA"/>
+      </Loop>
+      <Loop LoopId="2320">
+        <Name>COORDINATION OF BENEFITS</Name>
+        <StartingSegment SegmentId="COB"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="2400">
+      <Name>LIFE COVERAGE</Name>
+      <StartingSegment SegmentId="LC"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="REF"/>
+      <Loop LoopId="2410">
+        <Name>BENEFICIARY OR OWNER INFORMATION</Name>
+        <StartingSegment SegmentId="BEN"/>
+        <Segment SegmentId="NM1"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="DMG"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="2500">
+      <Name>FLEXIBLE SPENDING ACCOUNT</Name>
+      <StartingSegment SegmentId="FSA"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+    <Loop LoopId="2600">
+      <Name>RETIREMENT PRODUCT</Name>
+      <StartingSegment SegmentId="RP"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="INV"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="K3"/>
+      <Segment SegmentId="REL"/>
+      <Loop LoopId="2610">
+        <Name>INDIVIDUAL OR ORGANIZATION NAME</Name>
+        <StartingSegment SegmentId="NM1">
+          <EntityIdentifier Code=""/>
+        </StartingSegment>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="DMG"/>
+        <Segment SegmentId="BEN"/>
+        <Segment SegmentId="REF"/>
+        <Loop LoopId="2620">
+          <Name>PROPERTY OR ENTITY IDENTIFICATION</Name>
+          <StartingSegment SegmentId="NX1">
+          </StartingSegment>
+          <Segment SegmentId="N3"/>
+          <Segment SegmentId="N4"/>
+          <Segment SegmentId="DTP"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="2630">
+        <Name>FINANCIAL CONTRIBUTION</Name>
+        <StartingSegment SegmentId="FC" />
+        <Segment SegmentId="DTP"/>
+        <Loop LoopId="2640">
+          <Name>INVESTMENT VEHICLE SELECTION</Name>
+          <StartingSegment SegmentId="INV"/>
+          <Segment SegmentId="DTP"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="ENT"/>
+          <Segment SegmentId="REF"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="K3"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="2650">
+        <Name>INCOME</Name>
+        <StartingSegment SegmentId="AIN"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
+

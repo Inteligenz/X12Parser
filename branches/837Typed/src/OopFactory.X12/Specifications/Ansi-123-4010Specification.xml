@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Vehicle Application Advice -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="126">
+  <Loop LoopId="BVA" Repeat="99">
+    <Name></Name>
+    <StartingSegment SegmentId="BVA"/>
+    <Segment SegmentId="V1"/>
+    <Segment SegmentId="L7"/>
+    <Loop LoopId="VAD" LoopRepeat="99">
+      <Name></Name>
+      <StartingSegment SegmentId="VAD"/>
+      <Segment SegmentId="L7"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

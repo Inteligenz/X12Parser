@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--432 Rail Deprescription-->
+<TransactionSpecification TransactionSetIdentifierCode="432" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="BLR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="DTM" Repeat="6" />
+  <Segment SegmentId="QTY" Repeat="1" />
+  <Loop LoopId="LX" LoopRepeat="10">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="LQ" Repeat="8" />
+    <Segment SegmentId="DRT" Repeat="6" />
+    <Loop LoopId="CIC" LoopRepeat="1500">
+      <Name>Car Information Control</Name>
+      <StartingSegment SegmentId="CIC" />
+      <Segment SegmentId="DRT" Repeat="12" />
+      <Segment SegmentId="QTY" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

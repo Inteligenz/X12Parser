@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--196 Contractor Cost Data Reporting-->
+<TransactionSpecification TransactionSetIdentifierCode="196" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BCM" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+  </Loop>
+  <Loop LoopId="G61">
+    <Name>Contact</Name>
+    <StartingSegment SegmentId="G61" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="CRT" />
+    <Segment SegmentId="BSD" />
+    <Segment SegmentId="CLI" />
+    <Segment SegmentId="CAL" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="RPA" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="PD">
+      <Name>Pricing Data</Name>
+      <StartingSegment SegmentId="PD" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PDD" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--805 Contract Pricing Proposal-->
+<TransactionSpecification TransactionSetIdentifierCode="805" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BCP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="SPI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="MSG" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="2" />
+    <Segment SegmentId="G61" Repeat="2" />
+  </Loop>
+  <Loop LoopId="CBS">
+    <Name>Cost Breakdown Structure</Name>
+    <StartingSegment SegmentId="CBS" />
+    <Segment SegmentId="JIL" Repeat="1" />
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="CB1">
+    <Name>Contract and Cost Accounting Standards</Name>
+    <StartingSegment SegmentId="CB1" />
+    <Segment SegmentId="MSG" />
+    <Segment SegmentId="N9" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="2" />
+      <Segment SegmentId="G61" Repeat="1" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="REF">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Segment SegmentId="PL" />
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="REF" Repeat="1" />
+  </HierarchicalLoop>
+  <Loop LoopId="PD">
+    <Name>Pricing Data</Name>
+    <StartingSegment SegmentId="PD" />
+    <Segment SegmentId="SPI" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="PDD" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LX" LoopRepeat="2">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="G61" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="4" />
+  </Loop>
+</TransactionSpecification>
