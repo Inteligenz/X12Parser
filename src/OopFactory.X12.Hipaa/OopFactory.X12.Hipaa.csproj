@@ -12,7 +12,7 @@
     <AssemblyName>OopFactory.X12.Hipaa</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>%24/x12parser/trunk/src/OopFactory.X12.Hipaa</SccProjectName>
+    <SccProjectName>%24/x12parser/branches/837Typed/src/OopFactory.X12.Hipaa</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs11</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
