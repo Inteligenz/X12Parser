@@ -6,7 +6,7 @@ using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
-    public abstract class Container : Segment
+    public abstract class Container : Segment, ISegmentContainer
     {
         protected List<Segment> _segments;
         

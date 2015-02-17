@@ -29,7 +29,7 @@ namespace OopFactory.X12.Parsing.Model
                 Initialized(this, e);
         }
 
-        internal void Initialize(Container parent, X12DelimiterSet delimiters)
+        internal virtual void Initialize(Container parent, X12DelimiterSet delimiters)
         {
             OnInitializing(new EventArgs());
             _segment = new Segment(parent, delimiters, _segmentId);

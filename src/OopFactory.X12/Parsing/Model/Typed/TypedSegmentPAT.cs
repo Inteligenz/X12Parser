@@ -50,18 +50,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public DateTime? PAT06_DateOfDeath
         {
-            get 
-            {
-                string element = _segment.GetElement(6);
-                if (element.Length == 8)
-                    return DateTime.ParseExact(element, "yyyyMMdd", null);
-                else
-                    return null; 
-            }
-            set 
-            { 
-                _segment.SetElement(6, String.Format("{0:yyyyMMdd}", value)); 
-            }
+            get { return _segment.GetDate8Element(6); }
+            set { _segment.SetDate8Element(6, value); }
         }
 
         public string PAT07_UnitOrBasisForMeasurementCode
@@ -72,15 +62,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public decimal? PAT08_PatientWeight
         {
-            get 
-            {
-                decimal weight;
-                if (decimal.TryParse(_segment.GetElement(8), out weight))
-                    return weight;
-                else
-                    return null; 
-            }
-            set { _segment.SetElement(8, String.Format("{0}", value)); }
+            get { return _segment.GetDecimalElement(8); }
+            set { _segment.SetElement(8, value); }
         }
 
         public bool? PAT09_PregnancyIndicator

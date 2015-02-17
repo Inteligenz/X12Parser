@@ -19,18 +19,11 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get
             {
-                int position;
-                if (int.TryParse(_loop.GetElement(2), out position))
-                    return position;
-                else
-                    return null;
+                return _loop.GetIntElement(2);
             }
             set
             {
-                if (value.HasValue)
-                    _loop.SetElement(2, value.ToString());
-                else
-                    _loop.SetElement(2, "");
+                _loop.SetElement(2, value);
             }
         }
 

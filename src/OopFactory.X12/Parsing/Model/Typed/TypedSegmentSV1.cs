@@ -7,19 +7,26 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentSV1 : TypedSegment
     {
+        private TypedElementCompositeMedicalProcedureIdentifier _sv101;
+        private TypedElementCompositDiagnosisCodePointer  _sv107;
+
         public TypedSegmentSV1() : base("SV1")
         {
         }
 
-        public string SV101_CompositeMedicalProcedure
-        {
-            get { return _segment.GetElement(1); }
-            set { _segment.SetElement(1, value); }
+        internal override void Initialize(Container parent, X12DelimiterSet delimiters) {
+            base.Initialize(parent, delimiters);
+            _sv101 = new TypedElementCompositeMedicalProcedureIdentifier(_segment, 1);
+            _sv107 = new TypedElementCompositDiagnosisCodePointer(_segment, 7);
         }
 
-        public string SV102_MonetaryAmount
+        public TypedElementCompositeMedicalProcedureIdentifier SV101_CompositeMedicalProcedure {
+            get { return _sv101; }
+        }
+
+        public decimal? SV102_MonetaryAmount
         {
-            get { return _segment.GetElement(2); }
+            get { return _segment.GetDecimalElement(2); }
             set { _segment.SetElement(2, value); }
         }
         
@@ -29,9 +36,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(3, value); }
         }
 
-        public string SV104_Quantity
+        public decimal? SV104_Quantity
         {
-            get { return _segment.GetElement(4); }
+            get { return _segment.GetDecimalElement(4); }
             set { _segment.SetElement(4, value); }
         }
         public string SV105_FacilityCode
@@ -40,10 +47,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(5, value); }
         }
 
-        public string SV107_CompDiagCodePoint
-        {
-            get { return _segment.GetElement(7); }
-            set { _segment.SetElement(7, value); }
+        public TypedElementCompositDiagnosisCodePointer SV107_CompDiagCodePoint {
+            get { return _sv107; }
         }
 
         public string SV109_YesNoCondRespCode
