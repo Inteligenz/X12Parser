@@ -8,9 +8,22 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopN1 : TypedLoop
     {
-        public TypedLoopN1()
+       private string _entityIdentifer = string.Empty;
+
+       public TypedLoopN1(string entityIdentifier)
             : base("N1")
         {
+            _entityIdentifer = entityIdentifier;
+        }
+
+       public TypedLoopN1(EntityIdentifierCode entityIdentifier)
+           : base("N1") {
+           _entityIdentifer = entityIdentifier.EDIFieldValue();
+       }
+
+        internal override string GetSegmentString(X12DelimiterSet delimiters)
+        {
+            return String.Format("{0}{1}{2}", _segmentId, delimiters.ElementSeparator, _entityIdentifer);
         }
 
         public string N101_EntityIdentifierCode

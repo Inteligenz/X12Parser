@@ -58,7 +58,7 @@ IEA*1*000000035~";
             big.BIG02_InvoiceNumber = "3662";
             big.BIG07_TransactionTypeCode = "N6";
 
-            var billTo = trans.AddLoop(new TypedLoopN1());
+            var billTo = trans.AddLoop(new TypedLoopN1(EntityIdentifierCode.BillToParty));
             billTo.N101_EntityIdentifierCodeEnum = EntityIdentifierCode.BillToParty;
             billTo.N102_Name = "The Scheduling Coordinator, Inc";
             
@@ -71,7 +71,7 @@ IEA*1*000000035~";
             billToLocale.N403_PostalCode = "95622";
             billToLocale.N404_CountryCode = "US";
 
-            var remitTo = trans.AddLoop(new TypedLoopN1());
+            var remitTo = trans.AddLoop(new TypedLoopN1(EntityIdentifierCode.PartyToReceiveCommercialInvoiceRemittance));
             remitTo.N101_EntityIdentifierCodeEnum = EntityIdentifierCode.PartyToReceiveCommercialInvoiceRemittance;
             remitTo.N102_Name = "Bank of America- (Mkt and GMC)";
 
