@@ -110,10 +110,18 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field19_ReservedForLocalUse { get; set; }                            // 83 characters
         public bool Field20_OutsideLab { get; set; }                                      // 1 = Yes, 2 = No
         public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.                        // 3-1-4 part diagnosis code.
-        public string Field21_Diagnosis1 { get; set; }
-        public string Field21_Diagnosis2 { get; set; }
-        public string Field21_Diagnosis3 { get; set; }
-        public string Field21_Diagnosis4 { get; set; }
+        public string Field21_DiagnosisA { get; set; }
+        public string Field21_DiagnosisB { get; set; }
+        public string Field21_DiagnosisC { get; set; }
+        public string Field21_DiagnosisD { get; set; }
+        public string Field21_DiagnosisE { get; set; }
+        public string Field21_DiagnosisF { get; set; }
+        public string Field21_DiagnosisG { get; set; }
+        public string Field21_DiagnosisH { get; set; }
+        public string Field21_DiagnosisI { get; set; }
+        public string Field21_DiagnosisJ { get; set; }
+        public string Field21_DiagnosisK { get; set; }
+        public string Field21_DiagnosisL { get; set; }
         public string Field22_MedicaidSubmissionCode { get; set; }                          // 11 characters
         public string Field22_OriginalReferenceNumber { get; set; }                        // 18 characters
         public string Field23_PriorAuthorizationNumber { get; set; }                       // 29 characters                         // Service line details

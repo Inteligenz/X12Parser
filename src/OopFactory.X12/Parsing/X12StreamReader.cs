@@ -122,16 +122,16 @@ namespace OopFactory.X12.Parsing
             _reader.Dispose();
         }
 
-        public X12FlatTransaction ReadNextTransaction()
-        {
+        public X12FlatTransaction ReadNextTransaction() {
             StringBuilder segments = new StringBuilder();
 
-            string segmentString = ReadNextSegment();
-            string segmentId = ReadSegmentId(segmentString);
-            do
-            {
-                switch (segmentId)
-                {
+            string segmentString = "";
+            string segmentId = "";
+            do {
+                segmentString = ReadNextSegment();
+                segmentId = ReadSegmentId(segmentString);
+
+                switch (segmentId) {
                     case "ISA":
                         _isaSegment = segmentString + _delimiters.SegmentTerminator;
                         break;
@@ -140,6 +140,8 @@ namespace OopFactory.X12.Parsing
                         break;
                     case "IEA":
                     case "GE":
+                    case "":
+                    case null:
                         break;
                     default:
                         if (segmentId == "ST")
@@ -148,8 +150,6 @@ namespace OopFactory.X12.Parsing
                         segments.Append(_delimiters.SegmentTerminator);
                         break;
                 }
-                segmentString = ReadNextSegment();
-                segmentId = ReadSegmentId(segmentString);
             } while (!string.IsNullOrEmpty(segmentString) && segmentId != "SE"); // transaction trailer segment
 
             return new X12FlatTransaction(

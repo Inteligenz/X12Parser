@@ -112,10 +112,30 @@ namespace OopFactory.X12.Parsing.Model
             StringBuilder sb = new StringBuilder();
             if (addWhitespace)
                 sb.AppendLine();
+
             sb.Append(SegmentString);
+
             if ((_delimiters.SegmentTerminator != '\r' && _delimiters.SegmentTerminator != '\n'))
                 sb.Append(_delimiters.SegmentTerminator);
+
             return sb.ToString();
+        }
+
+        internal virtual void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            if (writer == null)
+                throw new ArgumentNullException("writer", "StreamWriter cannot be null");
+            
+            StringBuilder sb = new StringBuilder();
+
+            if (addWhitespace)
+                sb.AppendLine();
+
+            sb.Append(SegmentString);
+
+            if ((_delimiters.SegmentTerminator != '\r' && _delimiters.SegmentTerminator != '\n'))
+                sb.Append(_delimiters.SegmentTerminator);
+
+            writer.Write(sb.ToString().Trim());
         }
 
         public string SerializeToX12(bool addWhitespace)
@@ -123,7 +143,10 @@ namespace OopFactory.X12.Parsing.Model
             return this.ToX12String(addWhitespace).Trim();
         }
 
-
+        public void SerializeToX12(bool addWhitespace, System.IO.StreamWriter writer)
+        {
+            this.ToX12String(addWhitespace, writer);
+        }
 
         public Container Parent { get; private set; }
 

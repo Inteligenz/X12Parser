@@ -99,8 +99,10 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                 return false;
             }
 
-            // DT
-            if (s.Length == 3) {
+            int length = s.Length;
+
+            // TM - HMM Time: 800
+            if (length == 3) {
                 TimeSpan ts;
 
                 // TimeSpan TryParse in Mono seems broken. Manually do it.
@@ -128,7 +130,8 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                 return true;
             }
 
-            if (s.Length == 4) {
+            // TM - HMM Time: 0800
+            if (length == 4) {
                 TimeSpan ts;
 
                 // TimeSpan TryParse in Mono seems broken. Manually do it.
@@ -158,7 +161,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
 
             var dates = s.TrimEnd('-').Split('-');
 
-            // D8
+            // D8 - yyyyMMDD
             if (dates.Length == 1) {
                 DateTime d1;
 
@@ -170,7 +173,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                 return true;
             }
 
-            // RD8
+            // RD8 - yyyyMMDD-yyyyMMDD
             if (dates.Length == 2) {
                 DateTime d1;
                 DateTime d2;
