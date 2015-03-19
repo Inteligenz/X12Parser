@@ -55,6 +55,10 @@
     <Compile Include="Parsing\Model\Typed\AllowanceOrChargeIndicator.cs" />
     <Compile Include="Parsing\Model\Typed\BenefitServiceTypeCodes.cs" />
     <Compile Include="Parsing\Model\Typed\ContractTypeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentAK5.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentAK4.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopAK3.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentTA1.cs" />
     <Compile Include="Parsing\Model\Typed\DateTimePeriod.cs" />
     <Compile Include="Parsing\Model\Typed\DTPFormatQualifier.cs" />
     <Compile Include="Parsing\Model\Typed\DTPQualifier.cs" />

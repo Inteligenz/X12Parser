@@ -128,6 +128,11 @@ namespace OopFactory.X12.Parsing.Model
             return sb.ToString();
         }
 
+        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer) {
+            foreach (var hloop in HLoops)
+                writer.Write(hloop.ToX12String(addWhitespace));
+        }
+
         internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(base.SegmentId))

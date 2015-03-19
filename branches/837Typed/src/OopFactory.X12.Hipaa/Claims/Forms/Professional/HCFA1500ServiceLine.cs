@@ -23,13 +23,29 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         [XmlAttribute]
         public string Mod4 { get; set; }                  // 2 digits
         [XmlAttribute]
-        public string DiagnosisPointer1 { get; set; }
+        public string DiagnosisPointerA { get; set; }
         [XmlAttribute]
-        public string DiagnosisPointer2 { get; set; }
+        public string DiagnosisPointerB { get; set; }
         [XmlAttribute]
-        public string DiagnosisPointer3 { get; set; }
+        public string DiagnosisPointerC { get; set; }
         [XmlAttribute]
-        public string DiagnosisPointer4 { get; set; }
+        public string DiagnosisPointerD { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerE { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerF { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerG { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerH { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerI { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerJ { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerK { get; set; }
+        [XmlAttribute]
+        public string DiagnosisPointerL { get; set; }
         public decimal? Charges { get; set; }
         public decimal? DaysOrUnits { get; set; }           // 3 characters
         [XmlAttribute]

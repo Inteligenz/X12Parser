@@ -98,10 +98,9 @@ namespace OopFactory.X12.Parsing.Model
             set { SetElement(8, String.Format("{0,-15}", value)); }
         }
 
-        public DateTime InterchangeDate
+        public DateTime InterchangeDate 
         {
-            get
-            {
+            get {
                 DateTime date;
                 if (DateTime.TryParseExact(GetElement(9) + GetElement(10), "yyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out date))
                     return date;
@@ -111,16 +110,43 @@ namespace OopFactory.X12.Parsing.Model
                     throw new ArgumentException(String.Format("{0} and {1} in ISA09 and ISA10 cannot be converted into a date and time.", GetElement(9), GetElement(10)));
 
             }
-            set
-            {
+            set {
                 SetElement(9, string.Format("{0:yyMMdd}", value));
                 SetElement(10, string.Format("{0:HHmm}", value));
             }
         }
 
-        public string InterchangeControlNumber
+        public string InterchangeControlStandardRepetitionSeparator 
+        {
+            get { return GetElement(11); }
+            set { SetElement(11, String.Format("{0,-1}", value)); }
+        }
+
+        public string InterchangeControlVersionNumberCode 
+        {
+            get { return GetElement(12); }
+            set { SetElement(12, String.Format("{0,-5}", value)); }
+        }
+
+        public string InterchangeControlNumber 
         {
             get { return GetElement(13); }
+        }
+
+        public string InterchangeAcknowledgmentRequestedCode 
+        {
+            get { return GetElement(14); }
+            set { SetElement(14, String.Format("{0,-1}", value)); }
+        }
+
+        public string InterchangeUsageIndicatorCode 
+        {
+            get { return GetElement(15); }
+        }
+
+        public string InterchangeComponentElementSeparator
+        {
+            get { return GetElement(16); }
         }
 
         public IEnumerable<FunctionGroup> FunctionGroups
@@ -176,15 +202,27 @@ namespace OopFactory.X12.Parsing.Model
         internal override string SerializeBodyToX12(bool addWhitespace)
         {
             StringBuilder sb = new StringBuilder();
+
             foreach (var fg in _functionGroups)
                 sb.Append(fg.ToX12String(addWhitespace));
+
             return sb.ToString();
+        }
+
+        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer) {
+            foreach (var fg in _functionGroups)
+                fg.ToX12String(addWhitespace, writer);
         }
 
         internal override string ToX12String(bool addWhitespace)
         {
             UpdateTrailerSegmentCount("IEA", 1, _functionGroups.Count);
             return base.ToX12String(addWhitespace);
+        }
+
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            UpdateTrailerSegmentCount("IEA", 1, _functionGroups.Count);
+            base.ToX12String(addWhitespace, writer);
         }
 
         public string Serialize()

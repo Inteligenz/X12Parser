@@ -162,10 +162,20 @@ namespace OopFactory.X12.Parsing.Model
             return sb.ToString();
         }
 
+        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer) {
+            foreach (var transaction in this.Transactions)
+                transaction.ToX12String(addWhitespace, writer);
+        }
+
         internal override string ToX12String(bool addWhitespace)
         {
             UpdateTrailerSegmentCount("GE", 1, _transactions.Count());
             return base.ToX12String(addWhitespace);
+        }
+
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            UpdateTrailerSegmentCount("GE", 1, _transactions.Count());
+            base.ToX12String(addWhitespace, writer);
         }
 
         public virtual string Serialize()
