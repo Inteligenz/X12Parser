@@ -10,11 +10,11 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 {
     public class ProfessionalClaimToHcfa1500FormTransformation : ClaimTransformationService,  IClaimToClaimFormTransfomation
     {
-        private string _formImagePath;
+        private string _formTemplatePath;
 
-        public ProfessionalClaimToHcfa1500FormTransformation(string formImagePath)
+        public ProfessionalClaimToHcfa1500FormTransformation(string formTemplatePath)
         {
-            _formImagePath = formImagePath;
+            _formTemplatePath = formTemplatePath;
         }
 
         private FormDate formatFormDate(DateTime? dateTime)
@@ -166,12 +166,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 	        hcfa.Field07_InsuredsPhoneNumber = String.Empty;
 
 	        // Not present on 837P
-	        hcfa.Field08_PatientStatusIsEmployed = false;
-	        hcfa.Field08_PatientStatusIsFullTimeStudent = false;
-	        hcfa.Field08_PatientStatusIsMarried = false;
-	        hcfa.Field08_PatientStatusIsOther = false;
-	        hcfa.Field08_PatientStatusIsPartTimeStudent = false;
-	        hcfa.Field08_PatientStatusIsSingle = false;
+            hcfa.Field08_Reserved = string.Empty;
 
 	        OtherSubscriberInformation otherSubscriber = null;
 	        if (claim.OtherSubscriberInformations != null)
@@ -179,11 +174,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 		        otherSubscriber = claim.OtherSubscriberInformations.FirstOrDefault();
 	        }
 	
-	
-	        // No way to get below three fields using 837P
-	        hcfa.Field09b_OtherInsuredIsFemale = false;
-	        hcfa.Field09b_OtherInsuredIsMale = false;
-	        hcfa.Field09b_OtherInsuredsDateOfBirth = new FormDate();
+            hcfa.Field09b_Reserved = string.Empty;
 
 	        if (otherSubscriber != null)
 	        {
@@ -195,10 +186,9 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 		        {
 			        hcfa.Field09a_OtherInsuredsPolicyOrGroup = otherSubscriber.SubscriberInformation.ReferenceIdentification;
 		        }
-		        hcfa.Field09b_OtherInsuredsDateOfBirth = formatFormDate(otherSubscriber.DateOfBirth);
-		        hcfa.Field09b_OtherInsuredIsFemale = otherSubscriber.Gender == GenderEnum.Female;
-		        hcfa.Field09b_OtherInsuredIsMale = otherSubscriber.Gender == GenderEnum.Male;
-		        hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = String.Empty; // XXX: OK to assume org in last name? , Edit: this field should be left blank
+
+		        hcfa.Field09c_Reserved = String.Empty;
+
 		        if (otherSubscriber.OtherPayer != null)
 		        {
 			        hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = otherSubscriber.OtherPayer.LastName;
@@ -225,7 +215,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 	        }
 	        if (claim.Payer != null)
 	        {
-		        hcfa.Field11b_InsuredsEmployerOrSchool = String.Empty; // should be left blank
+		        hcfa.Field11b_OtherClaimId = String.Empty; // should be left blank
 		        if (claim.Payer.Name != null)
 		        {
 			        hcfa.Field11c_InsuredsPlanOrProgramName = claim.Payer.Name.LastName;
@@ -293,7 +283,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
 	        // Populating Loc19 with notes from 837
 	        // There can only be one note
-	        hcfa.Field19_ReservedForLocalUse = (claim.Notes.Count >= 1) ? claim.Notes[0].Description : System.String.Empty;
+	        hcfa.Field19_AdditionalClaimInfo = (claim.Notes.Count >= 1) ? claim.Notes[0].Description : System.String.Empty;
 	
 	        // Outside services are stored in claim service lines
 	        double totalAmountSpent = 0.0;
@@ -316,13 +306,29 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
 	        // Diagnosis codes
 	        if (principalDiagnosis != null)
-		        hcfa.Field21_Diagnosis1 = principalDiagnosis.FormattedCode();
+		        hcfa.Field21_DiagnosisA = principalDiagnosis.FormattedCode();
 	        if (otherDiagnoses.Count >= 1)
-		        hcfa.Field21_Diagnosis2 = otherDiagnoses[0].FormattedCode();
+		        hcfa.Field21_DiagnosisB = otherDiagnoses[0].FormattedCode();
 	        if (otherDiagnoses.Count >= 2)
-		        hcfa.Field21_Diagnosis3 = otherDiagnoses[1].FormattedCode();
+		        hcfa.Field21_DiagnosisC = otherDiagnoses[1].FormattedCode();
 	        if (otherDiagnoses.Count >= 3)
-		        hcfa.Field21_Diagnosis4 = otherDiagnoses[2].FormattedCode();
+		        hcfa.Field21_DiagnosisD = otherDiagnoses[2].FormattedCode();
+            if (otherDiagnoses.Count >= 4)
+                hcfa.Field21_DiagnosisE = otherDiagnoses[3].FormattedCode();
+            if (otherDiagnoses.Count >= 5)
+                hcfa.Field21_DiagnosisF = otherDiagnoses[4].FormattedCode();
+            if (otherDiagnoses.Count >= 6)
+                hcfa.Field21_DiagnosisG = otherDiagnoses[5].FormattedCode();
+            if (otherDiagnoses.Count >= 7)
+                hcfa.Field21_DiagnosisH = otherDiagnoses[6].FormattedCode();
+            if (otherDiagnoses.Count >= 8)
+                hcfa.Field21_DiagnosisI = otherDiagnoses[7].FormattedCode();
+            if (otherDiagnoses.Count >= 9)
+                hcfa.Field21_DiagnosisJ = otherDiagnoses[8].FormattedCode();
+            if (otherDiagnoses.Count >= 10)
+                hcfa.Field21_DiagnosisK = otherDiagnoses[9].FormattedCode();
+            if (otherDiagnoses.Count >= 11)
+                hcfa.Field21_DiagnosisL = otherDiagnoses[10].FormattedCode();
 
 	        var frequencyType = "";
 	        if (claim.BillTypeCode.Length == 3)
@@ -376,10 +382,10 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 		        hcfaLine.Mod3 = line.Procedure.Modifier3;
 		        hcfaLine.Mod4 = line.Procedure.Modifier4;
 
-		        hcfaLine.DiagnosisPointer1 = line.DiagnosisCodePointer1;
-		        hcfaLine.DiagnosisPointer2 = line.DiagnosisCodePointer2;
-		        hcfaLine.DiagnosisPointer3 = line.DiagnosisCodePointer3;
-		        hcfaLine.DiagnosisPointer4 = line.DiagnosisCodePointer4;
+		        hcfaLine.DiagnosisPointerA = line.DiagnosisCodePointer1;
+		        hcfaLine.DiagnosisPointerB = line.DiagnosisCodePointer2;
+		        hcfaLine.DiagnosisPointerC = line.DiagnosisCodePointer3;
+		        hcfaLine.DiagnosisPointerD = line.DiagnosisCodePointer4;
 
 		        hcfaLine.Charges = line.ChargeAmount;
 		        hcfaLine.DaysOrUnits = line.Quantity;
@@ -586,9 +592,9 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             return result;
         }
 
-        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
+        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, string fieldName)
         {
-            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
+            return AddBlock(page, x, y, width, text, fieldName, TextAlignEnum.left);
         }
 
         // Returns an "X" if the boolean is true, "" otherwise.
@@ -598,7 +604,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             return b ? "X" : ""; 
         }
 
-        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
+        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, string fieldName, TextAlignEnum textAlign)
         {
             decimal xScale = 0.1m;
             decimal yScale = 0.1685m;
@@ -609,7 +615,8 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 Top = 0.1m + yScale * y,
                 Width = xScale * width,
                 Height = yScale * 1.1m,
-                Text = text
+                Text = text,
+                FieldName = fieldName
             };
             page.Blocks.Add(block);
             return block;
@@ -626,265 +633,262 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     page = new FormPage();
                     pages.Add(page);
                     page.MasterReference = "hcfa1500";
-                    page.ImagePath = _formImagePath;
+                    page.ImagePath = _formTemplatePath;
 
                     // Render header
                     // LINE 1
-                    AddBlock(page, 4, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsMedicare));
-                    AddBlock(page, 11, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsMedicaid));
-                    AddBlock(page, 18, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsTricareChampus));
-                    AddBlock(page, 27, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsChampVa));
-                    AddBlock(page, 34, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsGroupHealthPlan));
-                    AddBlock(page, 42, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsFECABlkLung));
-                    AddBlock(page, 48, 7, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsOther));
-                    AddBlock(page, 53, 7, 30, hcfa.Field01a_InsuredsIDNumber);
+                    AddBlock(page, 9.4m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsMedicare), "Field01_TypeOfCoverageIsMedicare");
+                    AddBlock(page, 15.4m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsMedicaid), "Field01_TypeOfCoverageIsMedicaid");
+                    AddBlock(page, 21.4m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsTricareChampus), "Field01_TypeOfCoverageIsTricareChampus");
+                    AddBlock(page, 29.3m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsChampVa), "Field01_TypeOfCoverageIsChampVa");
+                    AddBlock(page, 35.4m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsGroupHealthPlan), "Field01_TypeOfCoverageIsGroupHealthPlan");
+                    AddBlock(page, 42.5m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsFECABlkLung), "Field01_TypeOfCoverageIsFECABlkLung");
+                    AddBlock(page, 47.7m, 10, 2, ConditionalMarker(hcfa.Field01_TypeOfCoverageIsOther), "Field01_TypeOfCoverageIsOther");
+                    AddBlock(page, 52.5m, 9.9m, 30, hcfa.Field01a_InsuredsIDNumber, "Field01a_InsuredsIDNumber");
 
                     // LINE 2
-                    AddBlock(page, 4, 9, 28.5m, hcfa.Field02_PatientsName);
-                    AddBlock(page, 34, 9, 3, hcfa.Field03_PatientsDateOfBirth.MM);
-                    AddBlock(page, 37, 9, 3, hcfa.Field03_PatientsDateOfBirth.DD);
-                    AddBlock(page, 40, 9, 3, hcfa.Field03_PatientsDateOfBirth.YY);
-                    AddBlock(page, 44.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexMale), TextAlignEnum.center);
-                    AddBlock(page, 49.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexFemale), TextAlignEnum.center);
-                    AddBlock(page, 53, 9, 30, hcfa.Field04_InsuredsName);
+                    AddBlock(page, 10, 11.5m, 28.5m, hcfa.Field02_PatientsName, "Field02_PatientsName");
+                    AddBlock(page, 35.4m, 11.6m, 3, hcfa.Field03_PatientsDateOfBirth.MM, "Field03_PatientsDateOfBirthMM");
+                    AddBlock(page, 38.3m, 11.6m, 3, hcfa.Field03_PatientsDateOfBirth.DD, "Field03_PatientsDateOfBirthDD");
+                    AddBlock(page, 41.5m, 11.6m, 3, hcfa.Field03_PatientsDateOfBirth.YY, "Field03_PatientsDateOfBirthYY");
+                    AddBlock(page, 44.6m, 11.6m, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexMale), "Field03_PatientsSexMale", TextAlignEnum.center);
+                    AddBlock(page, 49.1m, 11.6m, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexFemale), "Field03_PatientsSexFemale", TextAlignEnum.center);
+                    AddBlock(page, 52.5m, 11.5m, 30, hcfa.Field04_InsuredsName, "Field04_InsuredsName");
 
                     // LINE 3
-                    AddBlock(page, 4, 11, 28.5m, hcfa.Field05_PatientsAddress_Street);
-                    AddBlock(page, 36, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSelf)); //self
-                    AddBlock(page, 41, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf)); //spouse
-                    AddBlock(page, 45, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsChildOf)); //child
-                    AddBlock(page, 50, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsOther)); // other
-                    AddBlock(page, 53, 11, 30, hcfa.Field07_InsuredsAddress_Street);
+                    AddBlock(page, 10, 13.3m, 28.5m, hcfa.Field05_PatientsAddress_Street, "Field05_PatientsAddress_Street");
+                    AddBlock(page, 37.2m, 13.4m, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSelf), "Field06_PatientRelationshipToInsuredIsSelf"); //self
+                    AddBlock(page, 41.6m, 13.4m, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf), "Field06_PatientRelationshipToInsuredIsSpouseOf"); //spouse
+                    AddBlock(page, 45.1m, 13.4m, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsChildOf), "Field06_PatientRelationshipToInsuredIsChildOf"); //child
+                    AddBlock(page, 49.5m, 13.4m, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsOther), "Field06_PatientRelationshipToInsuredIsOther"); // other
+                    AddBlock(page, 52.5m, 13.3m, 30, hcfa.Field07_InsuredsAddress_Street, "Field07_InsuredsAddress_Street");
 
                     // LINE 4
-                    AddBlock(page, 4, 13, 25, hcfa.Field05_PatientsAddress_City);
-                    AddBlock(page, 29, 13, 3.5m, hcfa.Field05_PatientsAddress_State);
+                    AddBlock(page, 10, 15, 25, hcfa.Field05_PatientsAddress_City, "Field05_PatientsAddress_City");
+                    AddBlock(page, 31.4m, 15, 3.5m, hcfa.Field05_PatientsAddress_State, "Field05_PatientsAddress_State");
 
                     // Field 8 unused in CMS-1500
-                    AddBlock(page, 38, 13, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsSingle));
-                    AddBlock(page, 44, 13, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsMarried));
-                    AddBlock(page, 50, 13, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsOther));
+                    AddBlock(page, 35, 15, 20, hcfa.Field08_Reserved, "Field08_Reserved");
 
-                    AddBlock(page, 53, 13, 23, hcfa.Field07_InsuredsAddress_City);
-                    AddBlock(page, 77, 13, 6, hcfa.Field07_InsuredsAddress_State);
+                    AddBlock(page, 52.5m, 15, 23, hcfa.Field07_InsuredsAddress_City, "Field07_InsuredsAddress_City");
+                    AddBlock(page, 72.9m, 15, 6, hcfa.Field07_InsuredsAddress_State, "Field07_InsuredsAddress_State");
 
                     // LINE 5
-                    AddBlock(page, 4, 15, 13, hcfa.Field05_PatientsAddress_Zip);
-                    AddBlock(page, 18, 15, 14.5m, hcfa.Field05_PatientsTelephone);
-
-                    // Field 8 unused in CMS-1500
-                    AddBlock(page, 38, 15, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsEmployed));
-                    AddBlock(page, 44, 15, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsFullTimeStudent));
-                    AddBlock(page, 50, 15, 2, ConditionalMarker(hcfa.Field08_PatientStatusIsPartTimeStudent));
-
-                    AddBlock(page, 53, 15, 12, hcfa.Field07_InsuredsAddress_Zip);
-                    AddBlock(page, 68.5m, 15, 14.5m, hcfa.Field07_InsuredsPhoneNumber);
-
+                    AddBlock(page, 10, 16.8m, 13, hcfa.Field05_PatientsAddress_Zip, "Field05_PatientsAddress_Zip");
+                    AddBlock(page, 21.6m, 16.8m, 14.5m, hcfa.Field05_PatientsTelephone, "Field05_PatientsTelephone");
+                    
+                    AddBlock(page, 52.6m, 16.7m, 12, hcfa.Field07_InsuredsAddress_Zip, "Field07_InsuredsAddress_Zip");
+                    AddBlock(page, 68.7m, 16.7m, 14.5m, hcfa.Field07_InsuredsPhoneNumber, "Field07_InsuredsPhoneNumber");
+                    AddBlock(page, 65.3m, 16.7m, 14.5m, hcfa.Field07_InsuredsAreaCode, "Field07_InsuredsAreaCode");
+                    
                     // LINE 6
-                    AddBlock(page, 4, 17, 28.5m, hcfa.Field09_OtherInsuredsName);
-                    AddBlock(page, 53, 17, 30, hcfa.Field11_InsuredsPolicyGroupOfFECANumber);
+                    AddBlock(page, 10, 18.4m, 28.5m, hcfa.Field09_OtherInsuredsName, "Field09_OtherInsuredsName");
+                    AddBlock(page, 53, 18.5m, 30, hcfa.Field11_InsuredsPolicyGroupOfFECANumber, "Field11_InsuredsPolicyGroupOfFECANumber");
 
                     // LINE 7
-                    AddBlock(page, 4, 19, 28.5m, hcfa.Field09a_OtherInsuredsPolicyOrGroup);
-                    AddBlock(page, 38, 19, 2, ConditionalMarker(hcfa.Field10a_PatientConditionRelatedToEmployment));
-                    AddBlock(page, 44, 19, 2, ConditionalMarker(!hcfa.Field10a_PatientConditionRelatedToEmployment));
-                    AddBlock(page, 56, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.MM);
-                    AddBlock(page, 59, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.DD);
-                    AddBlock(page, 62, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.YY);
-                    AddBlock(page, 71.25m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsMale), TextAlignEnum.center);
-                    AddBlock(page, 78.5m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsFemale), TextAlignEnum.center);
+                    AddBlock(page, 10, 20.1m, 28.5m, hcfa.Field09a_OtherInsuredsPolicyOrGroup, "Field09a_OtherInsuredsPolicyOrGroup");
+                    AddBlock(page, 39, 20.3m, 2, ConditionalMarker(hcfa.Field10a_PatientConditionRelatedToEmployment), "Field10a_PatientConditionRelatedToEmploymentYes");
+                    AddBlock(page, 44.2m, 20.3m, 2, ConditionalMarker(!hcfa.Field10a_PatientConditionRelatedToEmployment), "Field10a_PatientConditionRelatedToEmploymentNo");
+                    AddBlock(page, 55, 20.3m, 3, hcfa.Field11a_InsuredsDateOfBirth.MM, "Field11a_InsuredsDateOfBirthMM");
+                    AddBlock(page, 57.7m, 20.3m, 3, hcfa.Field11a_InsuredsDateOfBirth.DD, "Field11a_InsuredsDateOfBirthDD");
+                    AddBlock(page, 61, 20.3m, 3, hcfa.Field11a_InsuredsDateOfBirth.YY, "Field11a_InsuredsDateOfBirthYY");
+                    AddBlock(page, 67.6m, 20.3m, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsMale), "Field11a_InsuredsSexIsMale", TextAlignEnum.center);
+                    AddBlock(page, 73.7m, 20.3m, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsFemale), "Field11a_InsuredsSexIsFemale", TextAlignEnum.center);
 
                     // LINE 8
-                    // Field 9b is not supplied by 837P data.
-                    AddBlock(page, 5, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.MM);
-                    AddBlock(page, 8, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.DD);
-                    AddBlock(page, 11, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.YY);
-                    AddBlock(page, 21, 21, 2, ConditionalMarker(hcfa.Field09b_OtherInsuredIsMale));
-                    AddBlock(page, 27, 21, 2, ConditionalMarker(hcfa.Field09b_OtherInsuredIsFemale));
+                    AddBlock(page, 10, 21.9m, 28.5m, hcfa.Field09b_Reserved, "Field09b_Reserved");
 
-                    AddBlock(page, 38, 21, 2, ConditionalMarker(hcfa.Field10b_PatientConditionRelatedToAutoAccident));
-                    AddBlock(page, 44, 21, 2, ConditionalMarker(!hcfa.Field10b_PatientConditionRelatedToAutoAccident));
-                    AddBlock(page, 48, 21, 2.5m, hcfa.Field10b_PatientConditionRelToAutoAccidentState);
-                    AddBlock(page, 53, 21, 30, hcfa.Field11b_InsuredsEmployerOrSchool);
+                    AddBlock(page, 39, 22, 2, ConditionalMarker(hcfa.Field10b_PatientConditionRelatedToAutoAccident), "Field10b_PatientConditionRelatedToAutoAccidentYes");
+                    AddBlock(page, 44.2m, 22, 2, ConditionalMarker(!hcfa.Field10b_PatientConditionRelatedToAutoAccident), "Field10b_PatientConditionRelatedToAutoAccidentNo");
+                    AddBlock(page, 47.8m, 22, 2.5m, hcfa.Field10b_PatientConditionRelToAutoAccidentState, "Field10b_PatientConditionRelToAutoAccidentState");
+                    AddBlock(page, 53, 21.9m, 30, hcfa.Field11b_OtherClaimId, "Field11b_OtherClaimId");
 
                     // LINE 9
-                    AddBlock(page, 4, 23, 28.5m, hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName);
-                    AddBlock(page, 38, 23, 2, ConditionalMarker(hcfa.Field10c_PatientConditionRelatedToOtherAccident));
-                    AddBlock(page, 44, 23, 2, ConditionalMarker(!hcfa.Field10c_PatientConditionRelatedToOtherAccident));
-                    AddBlock(page, 53, 23, 30, hcfa.Field11c_InsuredsPlanOrProgramName);
+                    AddBlock(page, 10, 23.7m, 28.5m, hcfa.Field09c_Reserved, "Field09c_Reserved");
+                    AddBlock(page, 39, 23.7m, 2, ConditionalMarker(hcfa.Field10c_PatientConditionRelatedToOtherAccident), "Field10c_PatientConditionRelatedToOtherAccidentYes");
+                    AddBlock(page, 44.2m, 23.7m, 2, ConditionalMarker(!hcfa.Field10c_PatientConditionRelatedToOtherAccident), "Field10c_PatientConditionRelatedToOtherAccidentNo");
+                    AddBlock(page, 53, 23.7m, 30, hcfa.Field11c_InsuredsPlanOrProgramName, "Field11c_InsuredsPlanOrProgramName");
 
                     // LINE 10
-                    AddBlock(page, 4, 25, 28.5m, hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName);
-                    AddBlock(page, 33, 25, 20, hcfa.Field10d_ReservedForLocalUse);
-                    AddBlock(page, 55, 25, 2, ConditionalMarker(hcfa.Field11d_IsThereOtherHealthBenefitPlan));
-                    AddBlock(page, 60, 25, 2, ConditionalMarker(!hcfa.Field11d_IsThereOtherHealthBenefitPlan)); 
+                    AddBlock(page, 10, 25.4m, 28.5m, hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName, "Field09d_OtherInsuredsInsurancePlanNameOrProgramName");
+                    AddBlock(page, 35.5m, 25.4m, 20, hcfa.Field10d_ReservedForLocalUse, "Field10d_ReservedForLocalUse");
+                    AddBlock(page, 53.8m, 25.5m, 2, ConditionalMarker(hcfa.Field11d_IsThereOtherHealthBenefitPlan), "Field11d_IsThereOtherHealthBenefitPlanYes");
+                    AddBlock(page, 58.2m, 25.5m, 2, ConditionalMarker(!hcfa.Field11d_IsThereOtherHealthBenefitPlan), "Field11d_IsThereOtherHealthBenefitPlanNo"); 
 
                     // LINE 11
-                    AddBlock(page, 9, 29, 25, hcfa.Field12_PatientsOrAuthorizedSignature, TextAlignEnum.center);
-                    AddBlock(page, 39, 29, 14, hcfa.Field12_PatientsOrAuthorizedSignatureDate.ToString(), TextAlignEnum.center);
-                    AddBlock(page, 59, 29, 24, hcfa.Field13_InsuredsOrAuthorizedSignature, TextAlignEnum.center);
+                    AddBlock(page, 9, 28.7m, 25, hcfa.Field12_PatientsOrAuthorizedSignature, "Field12_PatientsOrAuthorizedSignature", TextAlignEnum.center);
+                    AddBlock(page, 39, 28.7m, 14, hcfa.Field12_PatientsOrAuthorizedSignatureDate.ToString(), "Field12_PatientsOrAuthorizedSignatureDate", TextAlignEnum.center);
+                    AddBlock(page, 54.5m, 28.7m, 24, hcfa.Field13_InsuredsOrAuthorizedSignature, "Field13_InsuredsOrAuthorizedSignature", TextAlignEnum.center);
 
                     // LINE 12
                     if (hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy != null)
                     {
-                        AddBlock(page, 5, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.MM);
-                        AddBlock(page, 8, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.DD);
-                        AddBlock(page, 11, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.YY);
+                        AddBlock(page, 10.4m, 30.65m, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.MM, "Field14_DateOfCurrentIllnessInjuryOrPregnancyMM");
+                        AddBlock(page, 12.9m, 30.65m, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.DD, "Field14_DateOfCurrentIllnessInjuryOrPregnancyDD");
+                        AddBlock(page, 16.2m, 30.65m, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.YY, "Field14_DateOfCurrentIllnessInjuryOrPregnancyYY");
                     }
 
                     // Field 15 
-                    AddBlock(page, 40, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.MM);
-                    AddBlock(page, 43, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.DD);
-                    AddBlock(page, 46, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.YY);
+                    if (hcfa.Field15_DatePatientHadSameOrSimilarIllness != null) {
+                        AddBlock(page, 40.9m, 30.65m, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.MM, "Field15_DatePatientHadSameOrSimilarIllnessMM");
+                        AddBlock(page, 43.6m, 30.65m, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.DD, "Field15_DatePatientHadSameOrSimilarIllnessDD");
+                        AddBlock(page, 46.8m, 30.65m, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.YY, "Field15_DatePatientHadSameOrSimilarIllnessYY");
+                    }
 
                     if (hcfa.Field16_DatePatientUnableToWork_Start != null)
                     {
-                        AddBlock(page, 57, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.MM);
-                        AddBlock(page, 60, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.DD);
-                        AddBlock(page, 63, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.YY);
+                        AddBlock(page, 55.7m, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_Start.MM, "Field16_DatePatientUnableToWork_StartMM");
+                        AddBlock(page, 58.4m, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_Start.DD, "Field16_DatePatientUnableToWork_StartDD");
+                        AddBlock(page, 61.8m, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_Start.YY, "Field16_DatePatientUnableToWork_StartYY");
                     }
 
                     if (hcfa.Field16_DatePatientUnableToWork_End != null)
                     {
-                        AddBlock(page, 71, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.MM);
-                        AddBlock(page, 74, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.DD);
-                        AddBlock(page, 77, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.YY);
+                        AddBlock(page, 67.9m, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_End.MM, "Field16_DatePatientUnableToWork_EndMM");
+                        AddBlock(page, 70.7m, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_End.DD, "Field16_DatePatientUnableToWork_EndDD");
+                        AddBlock(page, 74, 30.65m, 3, hcfa.Field16_DatePatientUnableToWork_End.YY, "Field16_DatePatientUnableToWork_EndYY");
                     }
 
                     // LINE 13
-                    AddBlock(page, 4, 33, 26, hcfa.Field17_ReferringProviderOrOtherSource_Name);
-                    AddBlock(page, 33, 32, 3, hcfa.Field17a_OtherID_Qualifier);
-                    AddBlock(page, 36, 32, 16, hcfa.Field17a_OtherID_Number);
-                    AddBlock(page, 36, 33, 16, hcfa.Field17b_NationalProviderIdentifier);
+                    AddBlock(page, 10, 32.3m, 26, hcfa.Field17_ReferringProviderOrOtherSource_Name, "Field17_ReferringProviderOrOtherSource_Name");
+                    AddBlock(page, 34.5m, 31.5m, 3, hcfa.Field17a_OtherID_Qualifier, "Field17a_OtherID_Qualifier");
+                    AddBlock(page, 37, 31.5m, 16, hcfa.Field17a_OtherID_Number, "Field17a_OtherID_Number");
+                    AddBlock(page, 37, 32.4m, 16, hcfa.Field17b_NationalProviderIdentifier, "Field17b_NationalProviderIdentifier");
 
                     // Field 18
-                    AddBlock(page, 57, 33, 3, hcfa.Field18_HospitalizationDateFrom.MM);
-                    AddBlock(page, 60, 33, 3, hcfa.Field18_HospitalizationDateFrom.DD);
-                    AddBlock(page, 63, 33, 3, hcfa.Field18_HospitalizationDateFrom.YY);
-                    AddBlock(page, 71, 33, 3, hcfa.Field18_HospitalizationDateTo.MM);
-                    AddBlock(page, 74, 33, 3, hcfa.Field18_HospitalizationDateTo.DD);
-                    AddBlock(page, 77, 33, 3, hcfa.Field18_HospitalizationDateTo.YY);
+                    if (hcfa.Field18_HospitalizationDateFrom != null) {
+                        AddBlock(page, 55.7m, 32.3m, 3, hcfa.Field18_HospitalizationDateFrom.MM, "Field18_HospitalizationDateFromMM");
+                        AddBlock(page, 58.4m, 32.3m, 3, hcfa.Field18_HospitalizationDateFrom.DD, "Field18_HospitalizationDateFromDD");
+                        AddBlock(page, 61.8m, 32.3m, 3, hcfa.Field18_HospitalizationDateFrom.YY, "Field18_HospitalizationDateFromYY");
+                    }
+
+                    if (hcfa.Field18_HospitalizationDateTo != null) {
+                        AddBlock(page, 67.9m, 32.3m, 3, hcfa.Field18_HospitalizationDateTo.MM, "Field18_HospitalizationDateToMM");
+                        AddBlock(page, 70.7m, 32.3m, 3, hcfa.Field18_HospitalizationDateTo.DD, "Field18_HospitalizationDateToDD");
+                        AddBlock(page, 74, 32.3m, 3, hcfa.Field18_HospitalizationDateTo.YY, "Field18_HospitalizationDateToYY");
+                    }
 
                     // LINE 14
-                    
                     // We limit the length of the remark to only the size of the block. 
-                    if (hcfa.Field19_ReservedForLocalUse != null && hcfa.Field19_ReservedForLocalUse.Length > 58)
-                        AddBlock(page, 4, 35, 49, hcfa.Field19_ReservedForLocalUse.Substring(0, 58));
+                    if (hcfa.Field19_AdditionalClaimInfo != null && hcfa.Field19_AdditionalClaimInfo.Length > 58)
+                        AddBlock(page, 10, 34.1m, 49, hcfa.Field19_AdditionalClaimInfo.Substring(0, 58), "Field19_AdditionalClaimInfo");
                     else
-                        AddBlock(page, 4, 35, 49, hcfa.Field19_ReservedForLocalUse);
-                    AddBlock(page, 55, 35, 2, ConditionalMarker(hcfa.Field20_OutsideLab));
-                    AddBlock(page, 60, 35, 2, ConditionalMarker(!hcfa.Field20_OutsideLab));
-                    AddBlock(page, 65, 35, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : "", TextAlignEnum.right);
-                    AddBlock(page, 74, 35, 9, "", TextAlignEnum.right); // Note, we do not use second charge box at all here.
+                        AddBlock(page, 10, 34.1m, 49, hcfa.Field19_AdditionalClaimInfo, "Field19_AdditionalClaimInfo");
+
+                    AddBlock(page, 53.9m, 34.1m, 2, ConditionalMarker(hcfa.Field20_OutsideLab), "Field20_OutsideLabYes");
+                    AddBlock(page, 58.3m, 34.1m, 2, ConditionalMarker(!hcfa.Field20_OutsideLab), "Field20_OutsideLabNo");
+                    AddBlock(page, 64.1m, 34.1m, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : "", "Field20_OutsideLabCharges", TextAlignEnum.right);
 
                     // Line 15
-                    AddBlock(page, 6.5m, 37, 8, hcfa.Field21_Diagnosis1);
-                    AddBlock(page, 33.5m, 37, 8, hcfa.Field21_Diagnosis3);
-                    AddBlock(page, 53, 37, 11, hcfa.Field22_MedicaidSubmissionCode);
-                    AddBlock(page, 65, 37, 18, hcfa.Field22_OriginalReferenceNumber);
+                    AddBlock(page, 53, 35.8m, 11, hcfa.Field22_MedicaidSubmissionCode, "Field22_MedicaidSubmissionCode");
+                    AddBlock(page, 63, 35.8m, 18, hcfa.Field22_OriginalReferenceNumber, "Field22_OriginalReferenceNumber");
 
                     // Line 16
-                    AddBlock(page, 6.5m, 39, 8, hcfa.Field21_Diagnosis2);
-                    AddBlock(page, 33.5m, 39, 8, hcfa.Field21_Diagnosis4);
-                    AddBlock(page, 53, 39, 30, hcfa.Field23_PriorAuthorizationNumber);
+                    AddBlock(page, 53, 37.5m, 30, hcfa.Field23_PriorAuthorizationNumber, "Field23_PriorAuthorizationNumber");
+
+                    // DX CODES
+                    AddBlock(page, 11, 35.8m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisA), "Field21_DiagnosisA");
+                    AddBlock(page, 22.2m, 35.8m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisB), "Field21_DiagnosisB");
+                    AddBlock(page, 33.6m, 35.8m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisC), "Field21_DiagnosisC");
+                    AddBlock(page, 45.1m, 35.85m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisD), "Field21_DiagnosisD");
+                    AddBlock(page, 11, 36.7m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisE), "Field21_DiagnosisE");
+                    AddBlock(page, 22.2m, 36.7m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisF), "Field21_DiagnosisF");
+                    AddBlock(page, 33.6m, 36.7m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisG), "Field21_DiagnosisG");
+                    AddBlock(page, 45.1m, 36.75m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisH), "Field21_DiagnosisH");
+                    AddBlock(page, 11, 37.6m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisI), "Field21_DiagnosisI");
+                    AddBlock(page, 22.2m, 37.6m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisJ), "Field21_DiagnosisJ");
+                    AddBlock(page, 33.6m, 37.6m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisK), "Field21_DiagnosisK");
+                    AddBlock(page, 45.1m, 37.6m, 8, PointerNumbericToAlpha(hcfa.Field21_DiagnosisL), "Field21_DiagnosisL");
 
                 }
 
                 // Render service lines
-                decimal y = 42 + 2 * (i % 6);
+                decimal y = 40 + 1.71m * (i % 6);
                 var line = hcfa.Field24_ServiceLines[i];
-                AddBlock(page, 4, y, 60, line.CommentLine);
-                AddBlock(page, 68, y, 3, line.RenderingProviderIdQualifier);
-                AddBlock(page, 71, y, 12, line.RenderingProviderId);
+                string lineNumber = ((i % 6) + 1).ToString();
+
+                AddBlock(page, 10, y + 0.11m, 60, line.CommentLine, string.Format("Field24{0}_Comment", lineNumber));
+                AddBlock(page, 65.2m, y + 0.11m, 3, line.RenderingProviderIdQualifier, string.Format("Field24{0}_RenderingProviderIdQualifier", lineNumber));
+                AddBlock(page, 68, y + 0.11m, 12, line.RenderingProviderId, string.Format("Field24{0}_RenderingProviderId", lineNumber));
 
                 if (line.DateFrom != null)
                 {
-                    AddBlock(page, 4, y + 1, 3, line.DateFrom.MM);
-                    AddBlock(page, 7, y + 1, 3, line.DateFrom.DD);
-                    AddBlock(page, 10, y + 1, 3, line.DateFrom.YY);
+                    AddBlock(page, 9.4m, y + 1, 3, line.DateFrom.MM, string.Format("Field24{0}_DateFrom", lineNumber));
+                    AddBlock(page, 11.9m, y + 1, 3, line.DateFrom.DD, string.Format("Field24{0}_DateFrom", lineNumber));
+                    AddBlock(page, 14.5m, y + 1, 3, line.DateFrom.YY, string.Format("Field24{0}_DateFrom", lineNumber));
                 }
-                else
-                {
-                    AddBlock(page, 4, y + 1, 3, string.Empty);
-                    AddBlock(page, 7, y + 1, 3, string.Empty);
-                    AddBlock(page, 10, y + 1, 3, string.Empty);
-                }
+
                 if (line.DateTo != null)
                 {
-                    AddBlock(page, 13, y + 1, 3, line.DateTo.MM);
-                    AddBlock(page, 16, y + 1, 3, line.DateTo.DD);
-                    AddBlock(page, 19, y + 1, 3, line.DateTo.YY);
+                    AddBlock(page, 17.2m, y + 1, 3, line.DateTo.MM, string.Format("Field24{0}_DateTo", lineNumber));
+                    AddBlock(page, 19.8m, y + 1, 3, line.DateTo.DD, string.Format("Field24{0}_DateTo", lineNumber));
+                    AddBlock(page, 22.3m, y + 1, 3, line.DateTo.YY, string.Format("Field24{0}_DateTo", lineNumber));
                 }
-                else
-                {
-                    AddBlock(page, 13, y + 1, 3, string.Empty);
-                    AddBlock(page, 16, y + 1, 3, string.Empty);
-                    AddBlock(page, 19, y + 1, 3, string.Empty);
-                }
-                AddBlock(page, 22, y + 1, 3, line.PlaceOfService);
-                AddBlock(page, 25, y + 1, 2, line.EmergencyIndicator);
-                AddBlock(page, 29, y + 1, 6, line.ProcedureCode);
-                AddBlock(page, 36, y + 1, 3, line.Mod1);
-                AddBlock(page, 39, y + 1, 3, line.Mod2);
-                AddBlock(page, 42, y + 1, 3, line.Mod3);
-                AddBlock(page, 45, y + 1, 3, line.Mod4);
-                AddBlock(page, 48, y + 1, 2, line.DiagnosisPointer1);
-                AddBlock(page, 49, y + 1, 2, line.DiagnosisPointer2);
-                AddBlock(page, 50, y + 1, 2, line.DiagnosisPointer3);
-                AddBlock(page, 51, y + 1, 2, line.DiagnosisPointer4);
-                AddBlock(page, 53, y + 1, 9, String.Format("{0:0.00}", line.Charges).Replace(".", " "), TextAlignEnum.right);
-                AddBlock(page, 62, y + 1, 4, String.Format("{0}", line.DaysOrUnits), TextAlignEnum.right);
-                AddBlock(page, 66, y + 1, 2, line.EarlyPeriodicScreeningDiagnosisAndTreatment);
-                AddBlock(page, 71, y + 1, 12, line.RenderingProviderNpi);
+
+                AddBlock(page, 25, y + 1, 3, line.PlaceOfService, string.Format("Field24{0}_PlaceOfService", lineNumber));
+                AddBlock(page, 28, y + 1, 2, line.EmergencyIndicator, string.Format("Field24{0}_EmergencyIndicator", lineNumber));
+                AddBlock(page, 29, y + 1, 6, line.ProcedureCode, string.Format("Field24{0}_ProcedureCode", lineNumber));
+                AddBlock(page, 36.8m, y + 1, 3, line.Mod1, string.Format("Field24{0}_Mod1", lineNumber));
+                AddBlock(page, 39.8m, y + 1, 3, line.Mod2, string.Format("Field24{0}_Mod2", lineNumber));
+                AddBlock(page, 42.5m, y + 1, 3, line.Mod3, string.Format("Field24{0}_Mod3", lineNumber));
+                AddBlock(page, 45.1m, y + 1, 3, line.Mod4, string.Format("Field24{0}_Mod4", lineNumber));
+                AddBlock(page, 47.6m, y + 1, 2, line.DiagnosisPointerA, string.Format("Field24{0}_DiagnosisPointerA", lineNumber));
+                AddBlock(page, 48.6m, y + 1, 2, line.DiagnosisPointerB, string.Format("Field24{0}_DiagnosisPointerB", lineNumber));
+                AddBlock(page, 49.6m, y + 1, 2, line.DiagnosisPointerC, string.Format("Field24{0}_DiagnosisPointerC", lineNumber));
+                AddBlock(page, 50.6m, y + 1, 2, line.DiagnosisPointerD, string.Format("Field24{0}_DiagnosisPointerD", lineNumber));
+                AddBlock(page, 51, y + 1, 9, String.Format("{0:0.00}", line.Charges).Replace(".", " "), string.Format("Field24{0}_Charges", lineNumber), TextAlignEnum.right);
+                AddBlock(page, 59.3m, y + 1, 4, String.Format("{0}", line.DaysOrUnits), string.Format("Field24{0}_DaysOrUnits", lineNumber), TextAlignEnum.right);
+                AddBlock(page, 63.4m, y + 1, 2, line.EarlyPeriodicScreeningDiagnosisAndTreatment, string.Format("Field24{0}_EarlyPeriodicScreeningDiagnosisAndTreatment", lineNumber));
+                AddBlock(page, 68, y + 1, 12, line.RenderingProviderNpi, string.Format("Field24{0}_RenderingProviderNpi", lineNumber));
 
 
 
                 if (i % 6 == 5 || i == hcfa.Field24_ServiceLines.Count - 1) // Footer
                 {
                     // Render footer
-                    AddBlock(page, 4, 55, 15, hcfa.Field25_FederalTaxIDNumber);
-                    if (hcfa.Field25_IsSSN)
-                        AddBlock(page, 20, 55, 2, "X");
-                    if (hcfa.Field25_IsEIN)
-                        AddBlock(page, 22, 55, 2, "X");
+                    AddBlock(page, 10, 51.2m, 15, hcfa.Field25_FederalTaxIDNumber, "");
 
-                    AddBlock(page, 26, 55, 14, hcfa.Field26_PatientAccountNumber);
+                    if (hcfa.Field25_IsSSN)
+                        AddBlock(page, 23.4m, 51.35m, 2, "X", "Field25_FederalTaxIDNumberIsSSN");
+                    if (hcfa.Field25_IsEIN)
+                        AddBlock(page, 25.1m, 51.35m, 2, "X", "Field25_FederalTaxIDNumberIsEIN");
+
+                    AddBlock(page, 29, 51.2m, 14, hcfa.Field26_PatientAccountNumber, "Field26_PatientAccountNumber");
 
                     if (hcfa.Field27_AcceptAssignment.HasValue)
                     {
                         if (hcfa.Field27_AcceptAssignment.Value == true)
-                            AddBlock(page, 41, 55, 2, "X");
+                        AddBlock(page, 41.75m, 51.35m, 2, "X", "Field27_AcceptAssignmentYes");
                         else
-                            AddBlock(page, 46, 55, 2, "X");
+                        AddBlock(page, 46, 51.35m, 2, "X", "Field27_AcceptAssignmentNo");
                     }
 
-                    AddBlock(page, 55, 55, 9, String.Format("{0:0.00}", hcfa.Field28_TotalCharge).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 65, 55, 9, String.Format("{0:0.00}", hcfa.Field29_AmountPaid).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 74, 55, 9, String.Format("{0:0.00}", hcfa.Field30_BalanceDue).Replace(".", " "), TextAlignEnum.right);
+                    AddBlock(page, 53, 51.2m, 9, String.Format("{0:0.00}", hcfa.Field28_TotalCharge).Replace(".", " "), "Field28_TotalCharge", TextAlignEnum.right);
+                    AddBlock(page, 61.5m, 51.2m, 9, String.Format("{0:0.00}", hcfa.Field29_AmountPaid).Replace(".", " "), "Field29_AmountPaid", TextAlignEnum.right);
+                    AddBlock(page, 69.5m, 51.2m, 9, String.Format("{0:0.00}", hcfa.Field30_BalanceDue).Replace(".", " "), "Field30_BalanceDue", TextAlignEnum.right);
 
                     // Box 31
-                    if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.HasValue)
-                    {
-                        AddBlock(page, 4, 58, 21, "PROVIDER SIGNATURE", TextAlignEnum.center);
+                    if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.HasValue) {
                         if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.Value == true)
-                            AddBlock(page, 4, 59, 21, "IS ON FILE", TextAlignEnum.center);
+                            AddBlock(page, 9.8m, 55, 21, "SIGNATURE IS ON FILE", "Field31_PhysicianOrSupplierSignatureIsOnFile", TextAlignEnum.left);
                         else
-                            AddBlock(page, 4, 59, 21, "NOT ON FILE", TextAlignEnum.center);
+                            AddBlock(page, 9.8m, 55, 21, "SIGNATURE NOT ON FILE", "Field31_PhysicianOrSupplierSignatureIsOnFile", TextAlignEnum.left);
                     }
+
                     // Box 32
-                    AddBlock(page, 26, 57, 27, hcfa.Field32_ServiceFacilityLocation_Name);
-                    AddBlock(page, 26, 58, 27, hcfa.Field32_ServiceFacilityLocation_Street);
-                    AddBlock(page, 26, 59, 27, String.Format("{0}, {1} {2}", hcfa.Field32_ServiceFacilityLocation_City, hcfa.Field32_ServiceFacilityLocation_State, hcfa.Field32_ServiceFacilityLocation_Zip));
-                    AddBlock(page, 27, 60, 10, hcfa.Field32a_ServiceFacilityLocation_Npi);
-                    AddBlock(page, 38, 60, 15, hcfa.Field32b_ServiceFacilityLocation_OtherID);
+                    AddBlock(page, 28.7m, 53, 27, hcfa.Field32_ServiceFacilityLocation_Name, "Field32_ServiceFacilityLocation_Name");
+                    AddBlock(page, 28.7m, 53.65m, 27, hcfa.Field32_ServiceFacilityLocation_Street, "Field32_ServiceFacilityLocation_Street");
+                    AddBlock(page, 28.7m, 54.4m, 27, String.Format("{0}, {1} {2}", hcfa.Field32_ServiceFacilityLocation_City, hcfa.Field32_ServiceFacilityLocation_State, hcfa.Field32_ServiceFacilityLocation_Zip), "Field32_ServiceFacilityLocation_CityStateZip");
+                    AddBlock(page, 29.3m, 55.65m, 10, hcfa.Field32a_ServiceFacilityLocation_Npi, "Field32a_ServiceFacilityLocation_Npi");
+                    AddBlock(page, 39.2m, 55.65m, 15, hcfa.Field32b_ServiceFacilityLocation_OtherID, "Field32b_ServiceFacilityLocation_OtherID");
 
                     // Box 33
-                    AddBlock(page, 69, 56, 27, hcfa.Field33_BillingProvider_TelephoneNumber); 
-                    AddBlock(page, 53, 57, 27, hcfa.Field33_BillingProvider_Name);
-                    AddBlock(page, 53, 58, 27, hcfa.Field33_BillingProvider_Street);
-                    AddBlock(page, 53, 59, 27, String.Format("{0}, {1} {2}", hcfa.Field33_BillingProvider_City, hcfa.Field33_BillingProvider_State, hcfa.Field33_BillingProvider_Zip));
-                    AddBlock(page, 54, 60, 10, hcfa.Field33a_BillingProvider_Npi);
-                    AddBlock(page, 65, 60, 15, hcfa.Field33b_BillingProvider_OtherID);
+                    AddBlock(page, 66.1m, 52.2m, 27, hcfa.Field33_BillingProvider_TelephoneNumber, "Field33_BillingProvider_TelephoneNumber"); 
+                    AddBlock(page, 52.4m, 53, 27, hcfa.Field33_BillingProvider_Name, "Field33_BillingProvider_Name");
+                    AddBlock(page, 52.4m, 53.65m, 27, hcfa.Field33_BillingProvider_Street, "Field33_BillingProvider_Street");
+                    AddBlock(page, 52.4m, 54.4m, 27, String.Format("{0}, {1} {2}", hcfa.Field33_BillingProvider_City, hcfa.Field33_BillingProvider_State, hcfa.Field33_BillingProvider_Zip), "Field33_BillingProvider_CityStateZip");
+                    AddBlock(page, 53.2m, 55.65m, 10, hcfa.Field33a_BillingProvider_Npi, "Field33a_BillingProvider_Npi");
+                    AddBlock(page, 62.9m, 55.65m, 15, hcfa.Field33b_BillingProvider_OtherID, "Field33b_BillingProvider_OtherID");
 
                 }
 
@@ -893,11 +897,55 @@ namespace OopFactory.X12.Hipaa.Claims.Services
             return pages;
         }
 
+        public virtual List<FormPage> TransformHcfa1500ToClaimFormFoXml(HCFA1500Claim hcfa) {
+            return TransformHcfa1500ToFormPages(hcfa);
+        }
+
         public virtual List<FormPage> TransformClaimToClaimFormFoXml(Claim claim)
         {
             HCFA1500Claim hcfa = TransformClaimToHcfa1500(claim);
 
             return TransformHcfa1500ToFormPages(hcfa);
+        }
+
+        protected string PointerNumbericToAlpha(string pointer) {
+            if (string.IsNullOrWhiteSpace(pointer)) {
+                return string.Empty;
+            }
+
+            string p = pointer.Trim();
+
+            switch (p) {
+                case "1":
+                    p = "A";
+                    break;
+                case "2":
+                    p = "B";
+                    break;
+                case "3":
+                    p = "C";
+                    break;
+                case "4":
+                    p = "D";
+                    break;
+                case "5":
+                    p = "E";
+                    break;
+                case "6":
+                    p = "F";
+                    break;
+                case "7":
+                    p = "G";
+                    break;
+                case "8":
+                    p = "H";
+                    break;
+                case "9":
+                    p = "I";
+                    break;
+            }
+
+            return p;
         }
     }
 }

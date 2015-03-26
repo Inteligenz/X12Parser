@@ -69,6 +69,9 @@
     <Content Include="ADAJ400_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CMS_1500_claim_form_2012-4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HCFA1500_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

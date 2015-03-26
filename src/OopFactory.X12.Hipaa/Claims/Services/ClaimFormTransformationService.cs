@@ -39,25 +39,27 @@ namespace OopFactory.X12.Hipaa.Claims.Services
         {
         }
 
-        public string TransformClaimDocumentToFoXml(ClaimDocument document)
-        {
+        public FormDocument TransformClaimDocumentToFormDocument(ClaimDocument document) {
             FormDocument form = new FormDocument();
 
-            foreach (var claim in document.Claims)
-            {
-                if (claim.Type == ClaimTypeEnum.Professional)
-                {
+            foreach (var claim in document.Claims) {
+                if (claim.Type == ClaimTypeEnum.Professional) {
                     var pages = _professionalTransformation.TransformClaimToClaimFormFoXml(claim);
                     form.Pages.AddRange(pages);
-                }
-                else if (claim.Type == ClaimTypeEnum.Institutional)
-                {
+                } else if (claim.Type == ClaimTypeEnum.Institutional) {
                     var pages = _institutionalTransformation.TransformClaimToClaimFormFoXml(claim);
                     form.Pages.AddRange(pages);
-                }
-                else
+                } else
                     form.Pages.AddRange(_dentalTransformation.TransformClaimToClaimFormFoXml(claim));
             }
+
+
+            return form;
+        }
+
+        public string TransformClaimDocumentToFoXml(ClaimDocument document)
+        {
+            FormDocument form = TransformClaimDocumentToFormDocument(document);
 
             var xml = form.Serialize();
 

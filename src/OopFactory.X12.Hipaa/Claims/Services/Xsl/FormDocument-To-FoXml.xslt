@@ -33,19 +33,23 @@
               </fo:block>
             </xsl:if>
             <xsl:for-each select="Block">
-              <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="4px">
-                <xsl:if test="string-length(LetterSpacing)>0">
-                  <xsl:attribute name="letter-spacing">
-                    <xsl:value-of select="LetterSpacing"/>
-                  </xsl:attribute>
+              <xsl:if test="Top > 0">
+                <xsl:if test="Left > 0">
+                  <fo:block-container position="absolute" margin-left="2px" wrap-option="no-wrap" margin-right="4px">
+                    <xsl:if test="string-length(LetterSpacing)>0">
+                      <xsl:attribute name="letter-spacing">
+                        <xsl:value-of select="LetterSpacing"/>
+                      </xsl:attribute>
+                    </xsl:if>
+                    <xsl:attribute name="text-align"><xsl:value-of select="TextAlign"/></xsl:attribute>
+                    <xsl:attribute name="left"><xsl:value-of select="Left"/>in</xsl:attribute>
+                    <xsl:attribute name="top"><xsl:value-of select="Top"/>in</xsl:attribute>
+                    <xsl:attribute name="width"><xsl:value-of select="Width"/>in</xsl:attribute>
+                    <xsl:attribute name="height"><xsl:value-of select="Height"/>in</xsl:attribute>
+                    <fo:block><xsl:value-of select="Text"/></fo:block>
+                  </fo:block-container>
                 </xsl:if>
-                <xsl:attribute name="text-align"><xsl:value-of select="TextAlign"/></xsl:attribute>
-                <xsl:attribute name="left"><xsl:value-of select="Left"/>in</xsl:attribute>
-                <xsl:attribute name="top"><xsl:value-of select="Top"/>in</xsl:attribute>
-                <xsl:attribute name="width"><xsl:value-of select="Width"/>in</xsl:attribute>
-                <xsl:attribute name="height"><xsl:value-of select="Height"/>in</xsl:attribute>
-                <fo:block><xsl:value-of select="Text"/></fo:block>
-              </fo:block-container>
+              </xsl:if>
             </xsl:for-each>
           </fo:flow>
         </fo:page-sequence>

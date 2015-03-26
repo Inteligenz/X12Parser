@@ -30,22 +30,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string DiagnosisPointerC { get; set; }
         [XmlAttribute]
         public string DiagnosisPointerD { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerE { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerF { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerG { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerH { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerI { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerJ { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerK { get; set; }
-        [XmlAttribute]
-        public string DiagnosisPointerL { get; set; }
         public decimal? Charges { get; set; }
         public decimal? DaysOrUnits { get; set; }           // 3 characters
         [XmlAttribute]

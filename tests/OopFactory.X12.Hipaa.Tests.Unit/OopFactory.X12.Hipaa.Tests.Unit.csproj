@@ -87,6 +87,9 @@
     <Content Include="Claims\TestData\Images\ADAJ400_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Claims\TestData\Images\CMS_1500_claim_form_2012-4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Claims\TestData\Images\HCFA1500_Red.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
