@@ -27,7 +27,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public HCFA1500Claim()
         {
             if (Field03_PatientsDateOfBirth == null) Field03_PatientsDateOfBirth = new FormDate();
-            if (Field09b_OtherInsuredsDateOfBirth == null) Field09b_OtherInsuredsDateOfBirth = new FormDate();
             if (Field11a_InsuredsDateOfBirth == null) Field11a_InsuredsDateOfBirth = new FormDate();
             if (Field12_PatientsOrAuthorizedSignatureDate == null) Field12_PatientsOrAuthorizedSignatureDate = new FormDate();
             if (Field14_DateOfCurrentIllnessInjuryOrPregnancy == null) Field14_DateOfCurrentIllnessInjuryOrPregnancy = new FormDate();
@@ -69,18 +68,21 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field07_InsuredsAddress_Zip { get; set; }                            // 12 characters
         public string Field07_InsuredsAreaCode { get; set; }                                // 3 digits
         public string Field07_InsuredsPhoneNumber { get; set; }                             // 10 digits
-        public bool Field08_PatientStatusIsSingle { get; set; }
-        public bool Field08_PatientStatusIsMarried { get; set; }
-        public bool Field08_PatientStatusIsOther { get; set; }
-        public bool Field08_PatientStatusIsEmployed { get; set; }
-        public bool Field08_PatientStatusIsFullTimeStudent { get; set; }
-        public bool Field08_PatientStatusIsPartTimeStudent { get; set; }
+        public string Field08_Reserved { get; set; }
+        //public bool Field08_PatientStatusIsSingle { get; set; }
+        //public bool Field08_PatientStatusIsMarried { get; set; }
+        //public bool Field08_PatientStatusIsOther { get; set; }
+        //public bool Field08_PatientStatusIsEmployed { get; set; }
+        //public bool Field08_PatientStatusIsFullTimeStudent { get; set; }
+        //public bool Field08_PatientStatusIsPartTimeStudent { get; set; }
         public string Field09_OtherInsuredsName { get; set; }                           // HCFA 1500 standard allows 28 total characters
         public string Field09a_OtherInsuredsPolicyOrGroup { get; set; }                     // 28 characters
-        public FormDate Field09b_OtherInsuredsDateOfBirth { get; set; }                       // MMDDCCYY - 8 characters, goes to DMG02 (page 151) from X12 spec.
-        public bool Field09b_OtherInsuredIsMale { get; set; }                               // 1 = Male, 2 = Female;  1 character.
-        public bool Field09b_OtherInsuredIsFemale { get; set; }
-        public string Field09c_OtherInsuredsEmployerNameOrSchoolName { get; set; }          // 28 characters
+        public string Field09b_Reserved { get; set; }                                    // 28 characters
+        //No longer on the 02/12 form
+        //public FormDate Field09b_OtherInsuredsDateOfBirth { get; set; }                       // MMDDCCYY - 8 characters, goes to DMG02 (page 151) from X12 spec.
+        //public bool Field09b_OtherInsuredIsMale { get; set; }                               // 1 = Male, 2 = Female;  1 character.
+        //public bool Field09b_OtherInsuredIsFemale { get; set; }
+        public string Field09c_Reserved { get; set; }          // 28 characters
         public string Field09d_OtherInsuredsInsurancePlanNameOrProgramName  { get; set; }   // 28 characters
         public bool Field10a_PatientConditionRelatedToEmployment { get; set; }           // 1 = Yes, 2 = No
         public bool Field10b_PatientConditionRelatedToAutoAccident { get; set; }
@@ -91,7 +93,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public FormDate Field11a_InsuredsDateOfBirth { get; set; }                            // MMDDCCYY - 8 characters
         public bool Field11a_InsuredsSexIsMale { get; set; }                                    // 1 = Male, 2 = Female;  1 character.
         public bool Field11a_InsuredsSexIsFemale { get; set; }  
-        public string Field11b_InsuredsEmployerOrSchool { get; set; }                       // 29 characters
+        public string Field11b_OtherClaimId { get; set; }                       // 29 characters
         public string Field11c_InsuredsPlanOrProgramName { get; set; }                      // 29 characters
         public bool Field11d_IsThereOtherHealthBenefitPlan { get; set; }                  // 1 = Yes, 2 = No
         public string Field12_PatientsOrAuthorizedSignature { get; set; }                   // Signed field.  Store 1 = Signature On File, 2 = Signature NOT On File.  If SOF, enter date in next field
@@ -107,7 +109,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
         public string Field17b_NationalProviderIdentifier { get; set; }                    // 10 digit numeric
         public FormDate Field18_HospitalizationDateFrom { get; set; }                         // MMDDCCYY
         public FormDate Field18_HospitalizationDateTo { get; set; }                           // MMDDCCYY
-        public string Field19_ReservedForLocalUse { get; set; }                            // 83 characters
+        public string Field19_AdditionalClaimInfo { get; set; }                            // 83 characters
         public bool Field20_OutsideLab { get; set; }                                      // 1 = Yes, 2 = No
         public decimal? Field20_OutsideLabCharges { get; set; }                                // 8 digit numeric with implied decimal.  ie '20300' is $203.00.                        // 3-1-4 part diagnosis code.
         public string Field21_DiagnosisA { get; set; }

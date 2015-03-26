@@ -151,6 +151,8 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="Claims\Services\CMS_1500_claim_form_2012-3.pdf" />
+    <EmbeddedResource Include="Claims\Services\CMS_1500_claim_form_2012-4.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,7 +19,8 @@ namespace OopFactory.X12.Hipaa.ClaimParser
             var opts = new ExecutionOptions(args);
             InstitutionalClaimToUB04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif");
             var service = new ClaimFormTransformationService(
-                new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
+                new ProfessionalClaimToHcfa1500FormTransformation("CMS_1500_claim_form_2012-4.gif"),
+                //new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
                 institutionalClaimToUB04ClaimFormTransformation,
                 new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"),
                 new X12Parser(throwException));

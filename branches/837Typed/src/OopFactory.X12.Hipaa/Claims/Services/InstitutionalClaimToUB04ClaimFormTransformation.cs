@@ -10,10 +10,10 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 {
     public class InstitutionalClaimToUB04ClaimFormTransformation : IClaimToClaimFormTransfomation
     {
-        private string _formImagePath;
+        private string _formTemplatePath;
         public InstitutionalClaimToUB04ClaimFormTransformation(string formImagePath)
         {
-            _formImagePath = formImagePath;
+            _formTemplatePath = formImagePath;
             PerPageTotalChargesView = false;
         }
 
@@ -792,7 +792,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     pages.Add(page);
                     pageIndex++;
                     page.MasterReference = "ub04";
-                    page.ImagePath = _formImagePath;
+                    page.ImagePath = _formTemplatePath;
 
                     // header
                     // Box 1

@@ -23,6 +23,7 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
         public decimal Width { get; set; }
         public decimal Height { get; set; }
         public string Text { get; set; }
+        public string FieldName { get; set; }
     }
 
     public class FormPage
