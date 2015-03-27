@@ -37,7 +37,13 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public DateTimePeriod DTP03_Date
         {
             get { return _segment.GetDateTimePeriodElement(3); }
-            set { _segment.SetElement(3, value); }
+            set { 
+                _segment.SetElement(3, value); 
+                // Also set the appropriate format qualifier
+                if (value != null) {
+                    this.DTP02_DateTimePeriodFormatQualifier = value.Qualifier;
+                }
+            }
         }
 
     }
