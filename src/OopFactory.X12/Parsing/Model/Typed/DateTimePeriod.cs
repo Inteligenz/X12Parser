@@ -5,71 +5,124 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed {
     public class DateTimePeriod {
-        public bool IsDateRange { get; private set; }
-        public bool IsTime { get; private set; }
+        public string Qualifier { get; private set; }
         public DateTime? _startDate;
         public DateTime? _endDate;
         public TimeSpan? _time;
 
         public DateTimePeriod() {
-            IsDateRange = false;
         }
 
         public DateTimePeriod(TimeSpan time) {
+            this.Qualifier = "TM";
             this._time = time;
-            IsTime = true;
-            IsDateRange = false;
         }
 
         public DateTimePeriod(DateTime date) {
+            this.Qualifier = "D8";
             this._startDate = date;
-            IsDateRange = false;
+        }
+
+        public bool IsTM {
+            get {
+                if (string.IsNullOrWhiteSpace(Qualifier)) {
+                    return false;
+                }
+
+                if (Qualifier == "TM") {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsDT {
+            get {
+                if (string.IsNullOrWhiteSpace(Qualifier)) {
+                    return false;
+                }
+
+                if (Qualifier == "DT") {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsD8 {
+            get {
+                if (string.IsNullOrWhiteSpace(Qualifier)) {
+                    return false;
+                }
+
+                if (Qualifier == "D8") {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsRD8 {
+            get {
+                if (string.IsNullOrWhiteSpace(Qualifier)) {
+                    return false;
+                }
+
+                if (Qualifier == "RD8") {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public DateTimePeriod(DateTime date, TimeSpan time) {
+            SetDT(date, time);
         }
 
         public DateTimePeriod(DateTime startDate, DateTime endDate) {
+            SetRD8(startDate, endDate);
+        }
+
+        public void SetRD8(DateTime startDate, DateTime endDate) {
+            this.Qualifier = "RD8";
             this._startDate = startDate;
             this._endDate = endDate;
-            IsDateRange = true;
+            this._time = null;
+        }
+
+        public void SetDT(DateTime date, TimeSpan time) {
+            this.Qualifier = "DT";
+            this._startDate = date;
+            this._time = time;
+            this._endDate = null;
+
+            string s = date.ToString("yyyyMMdd");
+            s += time.ToString("hhmm");
+
+            this._startDate = DateTime.ParseExact(s, "yyyyMMddhhmm", null, System.Globalization.DateTimeStyles.None);
+        }
+
+        public void SetD8(DateTime date) {
+            this.Qualifier = "D8";
+            this._startDate = date;
+            this._endDate = null;
+            this._time = null;
         }
 
         public DateTime StartDate {
             get { return _startDate.Value; }
-            set {
-                this._startDate = value;
-                SetIsDateRange();
-            }
         }
 
         public DateTime EndDate {
             get { return _endDate.Value; }
-            set {
-                this._endDate = value;
-                SetIsDateRange();
-            }
         }
 
         public TimeSpan Time {
             get { return _time.Value; }
-            set {
-                this._time = value;
-                this.IsTime = true;
-                this.IsDateRange = false;
-                this._endDate = null;
-                this._startDate = null;
-            }
-        }
-
-        private void SetIsDateRange() {
-            if (this._endDate.HasValue && this._startDate.HasValue) {
-                this.IsDateRange = true;
-            } else {
-                this.IsDateRange = false;
-            }
-
-            if (this._endDate.HasValue || this._startDate.HasValue) {
-                this.IsTime = false;
-                this._time = null;
-            }
         }
 
         public override string ToString() {
@@ -77,19 +130,23 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                 return string.Empty;
             }
 
-            // DT
-            if (IsTime) {
-                return String.Format("{0:hhmm}", this._time);
-            } 
-
-            // RD8
-            if (IsDateRange) {
-                return String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", 
-                    this._startDate, this._endDate);
+            if (string.IsNullOrWhiteSpace(Qualifier)) {
+                return string.Empty;
             }
 
-            // D8
-            return String.Format("{0:yyyyMMdd}", this._startDate);
+            switch(Qualifier) {
+                case "TM":
+                    return String.Format("{0:hhmm}", this._time);
+                case "DT":
+                    return String.Format("{0:yyyyMMddhhmm}", this._startDate);
+                case "D8":
+                    return String.Format("{0:yyyyMMdd}", this._startDate);
+                case "RD8":
+                    return String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", 
+                        this._startDate, this._endDate);
+                default:
+                    return string.Empty;
+            }
         }
 
         public static bool TryParse(string s, out DateTimePeriod result) {
@@ -101,7 +158,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
 
             int length = s.Length;
 
-            // TM - HMM Time: 800
+            // TM - hmm Time: 800
             if (length == 3) {
                 TimeSpan ts;
 
@@ -126,11 +183,11 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                     return false;
                 }
 
-                result.Time = ts;
+                result = new DateTimePeriod(ts);
                 return true;
             }
 
-            // TM - HMM Time: 0800
+            // TM - hhmm Time: 0800
             if (length == 4) {
                 TimeSpan ts;
 
@@ -155,11 +212,45 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                     return false;
                 }
 
-                result.Time = ts;
+                result = new DateTimePeriod(ts);
                 return true;
             }
 
-            var dates = s.TrimEnd('-').Split('-');
+            // DT - yyyyMMddhhmm
+            if (length == 12 && !s.Contains('-')) {
+                TimeSpan ts;
+                DateTime d;
+
+                string sDate = s.Substring(0, 8);
+                string sHours = s.Substring(8, 2);
+                string sMin = s.Substring(10, 2);
+
+                int iHours = 0;
+                int iMin = 0;
+
+                if (!int.TryParse(sHours, out iHours)) {
+                    return false;
+                }
+
+                if (!int.TryParse(sMin, out iMin)) {
+                    return false;
+                }
+
+                try {
+                    ts = new TimeSpan(iHours, iMin, 0);
+                } catch (Exception) {
+                    return false;
+                }
+
+                if (!DateTime.TryParseExact(sDate, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out d)) {
+                    return false;
+                }
+
+                result = new DateTimePeriod(d, ts);
+                return true;
+            }
+
+            var dates = s.TrimEnd('-').TrimStart('-').Split('-');
 
             // D8 - yyyyMMDD
             if (dates.Length == 1) {
@@ -169,7 +260,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                     return false;
                 }
 
-                result.StartDate = d1;
+                result = new DateTimePeriod(d1);
                 return true;
             }
 
@@ -186,8 +277,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                     return false;
                 }
 
-                result.StartDate = d1;
-                result.EndDate = d2;
+                result = new DateTimePeriod(d1, d2);
                 return true;
             }
 
@@ -197,58 +287,11 @@ namespace OopFactory.X12.Parsing.Model.Typed {
         public static DateTimePeriod Parse(string s) {
             DateTimePeriod result = new DateTimePeriod();
 
-            if (string.IsNullOrWhiteSpace(s)) {
-                // Deviating from convention. If a empty or null is parsed, don't throw 
-                // an exception. This will ease the programming load of not using TryParse
-                // everytime when setting DateTimePeriod properties.
-                return result;
+            if (TryParse(s, out result) == false) {
+                throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
             }
 
-            // DT
-            if (s.Length == 4) {
-                TimeSpan ts;
-
-                if (!TimeSpan.TryParseExact(s, "hhmm",null, System.Globalization.TimeSpanStyles.None, out ts)) {
-                    throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
-                }
-
-                result.Time = ts;
-                return result;
-            }
-
-            var dates = s.TrimEnd('-').Split('-');
-
-            // D8
-            if (dates.Length == 1) {
-                DateTime d1;
-
-                if (!DateTime.TryParseExact(dates[0], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out d1)) {
-                    throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
-                }
-
-                result.StartDate = d1;
-                return result;
-            }
-
-            // RD8
-            if (dates.Length == 2) {
-                DateTime d1;
-                DateTime d2;
-
-                if (!DateTime.TryParseExact(dates[0], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out d1)) {
-                    throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
-                }
-
-                if (!DateTime.TryParseExact(dates[1], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out d2)) {
-                    throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
-                }
-
-                result.StartDate = d1;
-                result.EndDate = d2;
-                return result;
-            }
-
-            throw new FormatException(string.Format("Invalid DateTimePeriod format: {0}", s));
+            return result;
         }
     }
 }
