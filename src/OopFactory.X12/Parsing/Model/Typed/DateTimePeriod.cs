@@ -23,6 +23,15 @@ namespace OopFactory.X12.Parsing.Model.Typed {
             this._startDate = date;
         }
 
+
+        public DateTimePeriod(DateTime date, TimeSpan time) {
+            SetDT(date, time);
+        }
+
+        public DateTimePeriod(DateTime startDate, DateTime endDate) {
+            SetRD8(startDate, endDate);
+        }
+
         public bool IsTM {
             get {
                 if (string.IsNullOrWhiteSpace(Qualifier)) {
@@ -79,14 +88,6 @@ namespace OopFactory.X12.Parsing.Model.Typed {
             }
         }
 
-        public DateTimePeriod(DateTime date, TimeSpan time) {
-            SetDT(date, time);
-        }
-
-        public DateTimePeriod(DateTime startDate, DateTime endDate) {
-            SetRD8(startDate, endDate);
-        }
-
         public void SetRD8(DateTime startDate, DateTime endDate) {
             this.Qualifier = "RD8";
             this._startDate = startDate;
@@ -138,7 +139,8 @@ namespace OopFactory.X12.Parsing.Model.Typed {
                 case "TM":
                     return String.Format("{0:hhmm}", this._time);
                 case "DT":
-                    return String.Format("{0:yyyyMMddhhmm}", this._startDate);
+                    return String.Concat(String.Format("{0:yyyyMMdd}", this._startDate),
+                        string.Format("{0:hhmm}", this._time));
                 case "D8":
                     return String.Format("{0:yyyyMMdd}", this._startDate);
                 case "RD8":
