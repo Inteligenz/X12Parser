@@ -42,9 +42,17 @@ namespace OopFactory.X12.Parsing.Model
             return _loop.AddSegment(segmentString);
         }
 
+        public Segment AddSegment(string segmentString, bool forceAdd) {
+            return _loop.AddSegment(segmentString, forceAdd);
+        }
+
         public T AddSegment<T>(T segment) where T : TypedSegment
         {
             return _loop.AddSegment(segment);
+        }
+
+        public T AddSegment<T>(T segment, bool forceAdd) where T : TypedSegment {
+            return _loop.AddSegment(segment, forceAdd);
         }
 
     }
