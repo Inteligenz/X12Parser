@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--185 Royalty Regulatory Report-->
+<TransactionSpecification TransactionSetIdentifierCode="185" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DTP" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="ASI" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="ASM" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" />
+    </Loop>
+    <Loop LoopId="PID">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="ASM" />
+      <Loop LoopId="LQ">
+        <Name>Industry Code</Name>
+        <StartingSegment SegmentId="LQ" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="AMT" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS"/>
+    <Segment SegmentId="LE" Trailer="true"/>
+    <Loop LoopId="ASM">
+      <Name>Amount and Settlement Method</Name>
+      <StartingSegment SegmentId="ASM" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

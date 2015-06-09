@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="835">
+  <Segment SegmentId="BPR" Usage="Required" Repeat="1"/>
+  <Segment SegmentId="TRN" Usage="Required" Repeat="1"/>
+  <Segment SegmentId="CUR" Usage="Situational" Repeat="1"/>
+  <Segment SegmentId="REF" Usage="Situational" Repeat="1"/>
+  <Segment SegmentId="DTM" Usage="Situational" Repeat="1"/>
+  <Segment SegmentId="PLB" Trailer="true" Usage="Situational" Repeat="1"/>
+  <Loop LoopId="1000A" Usage="Required" LoopRepeat="1">
+    <Name>PAYER IDENTIFICATION</Name>
+    <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+      <EntityIdentifier Code="PR"/>
+    </StartingSegment>
+    <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
+    <Segment SegmentId="PER" Usage="Situational" Repeat="1"/>
+  </Loop>
+  <Loop LoopId="1000B" Usage="Required" LoopRepeat="1">
+    <Name>PAYEE IDENTFICATION</Name>
+    <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+      <EntityIdentifier Code="PE"/>
+    </StartingSegment>
+    <Segment SegmentId="N3" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="REF" Usage="Situational" Repeat="4"/>
+    <Segment SegmentId="RDM" Usage="Situational" Repeat="1"/>
+  </Loop>
+  <Loop LoopId="2000" Usage="Required" Repeat="9999">
+    <Name>HEADER NUMBER</Name>
+    <StartingSegment SegmentId="LX" Usage="Situational" Repeat="1"/>
+    <Segment SegmentId="TS3" Usage="Situational" Repeat="1"/>
+    <Segment SegmentId="TS2" Usage="Situational" Repeat="1"/>
+    <Loop LoopId="2100">
+      <Name>CLAIM PAYMENT INFORMATION</Name>
+      <StartingSegment SegmentId="CLP" Usage="Required" Repeat="9999"/>
+      <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
+      <Segment SegmentId="NM1" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="MIA" Usage="Situational" Repeat="1"/>
+      <Segment SegmentId="MOA" Usage="Situational" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="5"/>
+      <Segment SegmentId="DTM" Usage="Situational" Repeat="4"/>
+      <Segment SegmentId="PER" Usage="Situational" Repeat="2"/>
+      <Segment SegmentId="AMT" Usage="Situational" Repeat="13"/>
+      <Segment SegmentId="QTY" Usage="Situational" Repeat="14"/>
+      <Loop LoopId="2110">
+        <Name>SERVICE PAYMENT INFORMATION</Name>
+        <StartingSegment SegmentId="SVC" Usage="Situational" Repeat="999"/>
+        <Segment SegmentId="DTM" Usage="Situational" Repeat="2"/>
+        <Segment SegmentId="CAS" Usage="Situational" Repeat="99"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="8"/>
+        <Segment SegmentId="REF" Usage="Situational" Repeat="10"/>
+        <Segment SegmentId="AMT" Usage="Situational" Repeat="9"/>
+        <Segment SegmentId="QTY" Usage="Situational" Repeat="6"/>
+        <Segment SegmentId="LQ" Usage="Situational" Repeat="99"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

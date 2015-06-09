@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--419 Advance Car Disposition-->
+<TransactionSpecification TransactionSetIdentifierCode="419" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="E6" LoopRepeat="150">
+    <Name>Advance Car Disposition</Name>
+    <StartingSegment SegmentId="E6" />
+    <Segment SegmentId="W3" Repeat="1" />
+    <Segment SegmentId="W5" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--290 Cooperative Advertising Agreements-->
+<TransactionSpecification TransactionSetIdentifierCode="290" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="CMA" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DOS" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Segment SegmentId="QTY" Repeat="1" Trailer="true" />
+  <Segment SegmentId="AMT" Repeat="2" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="250">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="1" />
+    <Segment SegmentId="ASM" Repeat="1" />
+  </Loop>
+  <Loop LoopId="MI" LoopRepeat="">
+    <Name>Media Information</Name>
+    <StartingSegment SegmentId="MI" />
+    <Segment SegmentId="DOS" Repeat="1" />
+    <Loop LoopId="N1" LoopRepeat="">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="CRC" Repeat="1" />
+      <Segment SegmentId="PAI" Repeat="60" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

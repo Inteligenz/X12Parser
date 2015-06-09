@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--879 Price Information-->
+<TransactionSpecification TransactionSetIdentifierCode="879" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G91" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="999">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="NTE" Repeat="20" />
+  <Segment SegmentId="G36" Repeat="1" />
+  <Segment SegmentId="G26" Repeat="99" />
+  <Segment SegmentId="G43" Repeat="9999" />
+  <Segment SegmentId="G62" Usage="Required" Repeat="10" />
+  <Segment SegmentId="G93" Repeat="50" />
+  <Segment SegmentId="G46" Repeat="100" />
+  <Loop LoopId="0200" LoopRepeat="9999">
+    <Name>Line Item Numbers</Name>
+    <StartingSegment SegmentId="G28" />
+    <Segment SegmentId="G20" Repeat="1" />
+    <Segment SegmentId="G69" Repeat="5" />
+    <Segment SegmentId="G26" Repeat="99" />
+    <Segment SegmentId="G43" Repeat="9999" />
+    <Segment SegmentId="G62" Repeat="4" />
+    <Segment SegmentId="G46" Repeat="100" />
+    <Segment SegmentId="G22" Repeat="1" />
+    <Segment SegmentId="SAC" Repeat="10" />
+    <Loop LoopId="0210" LoopRepeat="100">
+      <Name>Bracket Price</Name>
+      <StartingSegment SegmentId="G40" />
+      <Segment SegmentId="G46" Repeat="100" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

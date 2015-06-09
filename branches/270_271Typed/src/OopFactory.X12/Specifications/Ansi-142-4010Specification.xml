@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--142 Product Service Claim-->
+<TransactionSpecification TransactionSetIdentifierCode="142" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="N9" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Loop LoopId="N9">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="LIN">
+      <Name>Item Identification</Name>
+      <StartingSegment SegmentId="LIN" />
+      <Segment SegmentId="PID" />
+      <Segment SegmentId="LOC" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="PSC" />
+      <Segment SegmentId="SSS" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="PRR">
+      <Name>Problem Report</Name>
+      <StartingSegment SegmentId="PRR" />
+      <Segment SegmentId="LIN" />
+      <Segment SegmentId="LOC" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="MSG" />
+      <Segment SegmentId="RC" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="PSC" />
+      <Segment SegmentId="SSS" />
+      <Loop LoopId="CID">
+        <Name>Characteristic/Class ID</Name>
+        <StartingSegment SegmentId="CID" />
+        <Segment SegmentId="TMD" />
+        <Loop LoopId="MEA">
+          <Name>Measurements</Name>
+          <StartingSegment SegmentId="MEA" />
+          <Segment SegmentId="DTM" />
+          <Segment SegmentId="LIN" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="REP">
+      <Name>Repair Action</Name>
+      <StartingSegment SegmentId="REP" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="N1" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="RC" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="LIN" />
+      <Segment SegmentId="ITA" />
+      <Segment SegmentId="MSG" />
+      <Segment SegmentId="PRT" />
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" />
+      </Loop>
+      <Loop LoopId="MEA">
+        <Name>Measurements</Name>
+        <StartingSegment SegmentId="MEA" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="LIN" />
+      </Loop>
+      <Loop LoopId="IT1">
+        <Name>Baseline Item Data (Invoice)</Name>
+        <StartingSegment SegmentId="IT1" />
+        <Segment SegmentId="LIN" />
+        <Segment SegmentId="N1" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="PRT" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="ITA" />
+        <Segment SegmentId="CUR" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="TXI" />
+      <Segment SegmentId="CUR" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="TDS">
+    <Name>Total Monetary Value Summary</Name>
+    <StartingSegment SegmentId="TDS" />
+    <Segment SegmentId="TXI" />
+    <Segment SegmentId="CUR" />
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="X12ParserSpecification"
+    targetNamespace="http://tempuri.org/X12ParserSpecification.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/X12ParserSpecification.xsd"
+    xmlns:mstns="http://tempuri.org/X12ParserSpecification.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="TransactionSpecification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="HierarchicalLoop" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="TransactionSetIdentifierCode" type="xs:string"/>
+      <xs:attribute name="FunctionalGroupCode" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  
+  
+  <xs:element name="SegmentSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Name" maxOccurs="1"/>
+        <xs:element name="QualifierSet" type="QualifierSet" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Segment" type="SegmentSpecification" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="HierarchicalLoopSpecification">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="LoopId" type="xs:string" use="required"/>
+    <xs:attribute name="Usage" type="UsageEnum" />
+    <xs:attribute name="LevelCode" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="LoopSpecification">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="StartingSegment">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="SegmentSpecification">
+              <xs:sequence>
+                <xs:element name="EntityIdentifier" minOccurs="0" maxOccurs="20">
+              <xs:complexType>
+                <xs:attribute name="Code"/>
+              </xs:complexType>
+            </xs:element>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Segment" type="SegmentSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Loop" type="LoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="HierarchicalLoop" type="HierarchicalLoopSpecification" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="LoopId" type="xs:string" use="required"/>
+    <xs:attribute name="Usage" type="UsageEnum" />
+    <xs:attribute name="Repeat" type="xs:positiveInteger"/>
+    <xs:attribute name="LoopRepeat" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="SegmentSpecification">
+    <xs:sequence>
+      <xs:element name="Element" type="ElementSpecification" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="SegmentId" type="xs:string"/>
+    <xs:attribute name="Usage" type="UsageEnum"/>
+    <xs:attribute name="Repeat" type="xs:positiveInteger"/>
+    <xs:attribute name="Trailer" type="xs:boolean" />
+  </xs:complexType>
+
+  <xs:complexType name="ElementSpecification">
+    <xs:sequence>
+      <xs:element name="Allowed" type="AllowedIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string"/>
+    <xs:attribute name="Required" type="xs:boolean"/>
+    <xs:attribute name="Type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AN"/>
+          <xs:enumeration value="DT"/>
+          <xs:enumeration value="TM"/>
+          <xs:enumeration value="N"/>
+          <xs:enumeration value="R"/>
+          <xs:enumeration value="ID"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MinLength" type="xs:positiveInteger" />
+    <xs:attribute name="MaxLength" type="xs:positiveInteger" />
+    <xs:attribute name="AllowedListInclusive" type="xs:boolean" />
+    <xs:attribute name="QualifierSetRef" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="QualifierSet">
+    <xs:sequence>
+      <xs:element name="Allowed" type="AllowedIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="AllowedIdentifier" mixed="true">
+    
+    <xs:attribute name="ID" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="UsageEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Required"/>
+      <xs:enumeration value="Situational"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

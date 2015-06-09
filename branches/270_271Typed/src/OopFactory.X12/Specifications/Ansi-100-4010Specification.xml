@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--100 Insurance Plan Description-->
+<TransactionSpecification TransactionSetIdentifierCode="100" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="C3" />
+  <Segment SegmentId="DTP" />
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="COM" />
+    <Segment SegmentId="III" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="PER">
+      <Name>Administrative Communications Contact</Name>
+      <StartingSegment SegmentId="PER" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+    </Loop>
+    <Loop LoopId="PID">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID" />
+      <Segment SegmentId="LIN" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="NM1" />
+      <Loop LoopId="BLI">
+        <Name>Baseline Item Data</Name>
+        <StartingSegment SegmentId="BLI" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="QTY" />
+        <Loop LoopId="SI">
+          <Name>Service Characteristic Identification</Name>
+          <StartingSegment SegmentId="SI" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="QTY" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="AM1">
+        <Name>Informational Values</Name>
+        <StartingSegment SegmentId="AM1" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="PO1">
+        <Name>Baseline Item Data</Name>
+        <StartingSegment SegmentId="PO1" />
+        <Segment SegmentId="LIN" />
+        <Segment SegmentId="SPA" />
+        <Segment SegmentId="III" />
+      </Loop>
+      <Loop LoopId="N4">
+        <Name>Geographic Location</Name>
+        <StartingSegment SegmentId="N4" />
+        <Segment SegmentId="SPA" />
+        <Loop LoopId="AM1">
+          <Name>Informational Values</Name>
+          <StartingSegment SegmentId="AM1" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+        <Loop LoopId="PO1">
+          <Name>Baseline Item Data</Name>
+          <StartingSegment SegmentId="PO1" />
+          <Segment SegmentId="SPA" />
+          <Segment SegmentId="III" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--303 Booking Cancellation (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="303" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="Y6" Repeat="2" />
+  <Segment SegmentId="Y5" Usage="Required" Repeat="1" />
+  <Segment SegmentId="V9" Repeat="10" />
+</TransactionSpecification>

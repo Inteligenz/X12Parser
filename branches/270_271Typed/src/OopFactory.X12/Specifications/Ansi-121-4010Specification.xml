@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="121">
+  <Segment SegmentId="BVS"/>
+  <Segment SegmentId="N7"/>
+  <Segment SegmentId="V1"/>
+  <Segment SegmentId="G62"/>
+  <Loop LoopId="VC">
+    <Name>Motor Vehich Control</Name>
+    <StartingSegment SegmentId="VC"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="DEL"/>
+    <Segment SegmentId="CGS"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+</TransactionSpecification>

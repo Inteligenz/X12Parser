@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--146 Request for Student Educational Record (Transcript)-->
+<TransactionSpecification TransactionSetIdentifierCode="146" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="ERP" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DMG" />
+  <Segment SegmentId="IND" />
+  <Segment SegmentId="SSE" />
+  <Segment SegmentId="SST" />
+  <Segment SegmentId="NTE" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="IN1">
+    <Name>Individual Identification</Name>
+    <StartingSegment SegmentId="IN1" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+  </Loop>
+</TransactionSpecification>

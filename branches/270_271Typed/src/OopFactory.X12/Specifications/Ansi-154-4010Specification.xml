@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--154 Uniform Commercial Code Filing-->
+<TransactionSpecification TransactionSetIdentifierCode="154" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DAD" />
+  <Segment SegmentId="NTE" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="NM1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LS1">
+    <Name>Asset Item Identification</Name>
+    <StartingSegment SegmentId="LS1" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="PO3" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="TXI" />
+    <Segment SegmentId="TAX" />
+    <Segment SegmentId="CDS" />
+    <Segment SegmentId="CED" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="PAM" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="AMT" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="PER" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

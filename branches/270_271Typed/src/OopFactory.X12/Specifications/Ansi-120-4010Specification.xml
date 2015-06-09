@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="120">
+  <Segment SegmentId="BVP"/>
+  <Loop LoopId="G62" Repeat="99">
+    <Name></Name>
+    <StartingSegment SegmentId="G62"/>
+    <Loop LoopId="VC" Repeat="999">
+      <Name></Name>
+      <StartingSegment SegmentId="VC"/>
+      <Segment SegmentId="VC1"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OopFactory.X12.Parsing.Model.Segment">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Property Name="_dataElements" Hidden="true" />
+      <Field Name="_delimiters" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="IXmlSerializable.GetSchema" Hidden="true" />
+      <Method Name="IXmlSerializable.ReadXml" Hidden="true" />
+      <Method Name="IXmlSerializable.WriteXml" Hidden="true" />
+      <Method Name="Segment" Hidden="true" />
+      <Property Name="SegmentId" Hidden="true" />
+      <Property Name="SegmentSpec" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToX12String" Hidden="true" />
+      <Method Name="ValidateAgainstSegmentSpecification" Hidden="true" />
+      <Method Name="ValidateContentFreeOfDelimiters" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAgAAQAAAAAAAZIEAAAgQAEAAAAAAAoQIAAIgAAMIAA=</HashCode>
+      <FileName>Parsing\Model\Segment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.Container">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <Members>
+      <Field Name="_segments" Hidden="true" />
+      <Field Name="_terminatingTrailerSegment" Hidden="true" />
+      <Field Name="_trailerSegments" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="Container" Hidden="true" />
+      <Method Name="CountTotalSegments" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="SerializeBodyToX12" Hidden="true" />
+      <Method Name="SetTerminatingTrailerSegment" Hidden="true" />
+      <Method Name="ToX12String" Hidden="true" />
+      <Method Name="UpdateTrailerSegmentCount" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACIAQAEQBAAAQBAAAAAAAAAACAAAAAAIAAACAQAEAA=</HashCode>
+      <FileName>Parsing\Model\Container.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.Interchange">
+    <Position X="1.75" Y="3.5" Width="2.5" />
+    <Members>
+      <Field Name="_functionGroups" Hidden="true" />
+      <Field Name="_specFinder" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="Interchange" Hidden="true" />
+      <Method Name="RemoveComments" Hidden="true" />
+      <Method Name="SerializeBodyToX12" Hidden="true" />
+      <Property Name="SpecFinder" Hidden="true" />
+      <Method Name="ToX12String" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AQAAABAEQCIAAQAAIQAIEAAAACAAAAAAIIABgAKQAAQ=</HashCode>
+      <FileName>Parsing\Model\Interchange.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.FunctionGroup">
+    <Position X="4.5" Y="3.75" Width="2.25" />
+    <Members>
+      <Field Name="_specFinder" Hidden="true" />
+      <Field Name="_transactions" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="SerializeBodyToX12" Hidden="true" />
+      <Property Name="SpecFinder" Hidden="true" />
+      <Method Name="ToX12String" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACBACAOQAAAFIAAAQAAEAIAACAEAAABIAAAgEAAAAA=</HashCode>
+      <FileName>Parsing\Model\FunctionGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.LoopContainer">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <Members>
+      <Field Name="_loops" Hidden="true" />
+      <Property Name="AllowedChildLoops" Hidden="true" />
+      <Method Name="CountTotalSegments" Hidden="true" />
+      <Method Name="GetLoopSpecification" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="LoopContainer" Hidden="true" />
+      <Method Name="SerializeBodyToX12" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAAAQBAAAAAAAAAAAAEAAQAAAQAAAAAAAg=</HashCode>
+      <FileName>Parsing\Model\LoopContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.HierarchicalLoopContainer">
+    <Position X="7.5" Y="2.75" Width="2" />
+    <Members>
+      <Field Name="_hLoops" Hidden="true" />
+      <Method Name="CountTotalSegments" Hidden="true" />
+      <Method Name="HierarchicalLoopContainer" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="SerializeBodyToX12" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAQBAAAAAAAAAAIAAAAEAAAAQgAAAAAA=</HashCode>
+      <FileName>Parsing\Model\HierarchicalLoopContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.HierarchicalLoop">
+    <Position X="10" Y="5" Width="1.75" />
+    <Members>
+      <Property Name="AllowedChildLoops" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="HierarchicalLoop" Hidden="true" />
+      <Property Name="Specification" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IAACAAAEAAAAABAEAAAAAAAAAAAAAAAAAgAQgAAIAAg=</HashCode>
+      <FileName>Parsing\Model\HierarchicalLoop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.Transaction">
+    <Position X="7.25" Y="5" Width="1.75" />
+    <Members>
+      <Field Name="_allHLoops" Hidden="true" />
+      <Field Name="_loopStartingSegmentIds" Hidden="true" />
+      <Field Name="_loopWithLoopsStartingSegmentIds" Hidden="true" />
+      <Method Name="AddToHLoopDictionary" Hidden="true" />
+      <Property Name="AllowedChildLoops" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="ToX12String" Hidden="true" />
+      <Method Name="Transaction" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAACAEEACAAREAAAAAAgAEAAAAAAAAIAAQgEIAAAg=</HashCode>
+      <FileName>Parsing\Model\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Model.Loop">
+    <Position X="10" Y="0.75" Width="2" />
+    <Members>
+      <Property Name="AllowedChildLoops" Hidden="true" />
+      <Property Name="AllowedChildSegments" Hidden="true" />
+      <Method Name="Loop" Hidden="true" />
+      <Method Name="WriteXml" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAgAAAAAg=</HashCode>
+      <FileName>Parsing\Model\Loop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,51 @@
+﻿ISA*00*bbbbbbbbbb*00*bbbbbbbbbb*01*007061617bbbbbb*01*00507479bbbbbb *930906*2018*U*00303*000007023*0*P*:~
+  GS*KM*007061617*005070479*930906*2025*1225*X*003030~
+    ST*286*034~
+      BGN~
+      NM1*41*2*HOWDEE HOSPITAL*****XX*0123456789~
+        PER*IC*BETTY RUBBLE*TE*9195551111~
+      SPI~
+        HL*1**20*1~
+          LM~
+            LQ~
+              VEH~
+          HL*2*1*20*1~
+            LM~
+              LQ~
+                VEH~
+                NM1*42*2*HOWDEE HOSPITAL*****XX*0123456789~
+                  PER*IC*BETTY RUBBLE*TE*9195551111~
+            HL*3*2*20*0~
+              LM~
+                LQ~
+                  VEH~
+                  NM1*43*2*HOWDEE HOSPITAL*****XX*0123456789~
+                    PER*IC*BETTY RUBBLE*TE*9195551111~
+        HL*4**20*0~
+          LM~
+            LQ~
+              VEH~
+      SPI~
+        HL*5**20*1~
+          LM~
+            LQ~
+              VEH~
+          HL*6*5*20*1~
+            LM~
+              LQ~
+                VEH~
+                NM1*42*2*HOWDEE HOSPITAL*****XX*0123456789~
+                  PER*IC*BETTY RUBBLE*TE*9195551111~
+            HL*7*6*20*0~
+              LM~
+                LQ~
+                  VEH~
+                  NM1*43*2*HOWDEE HOSPITAL*****XX*0123456789~
+                    PER*IC*BETTY RUBBLE*TE*9195551111~
+        HL*8**20*0~
+          LM~
+            LQ~
+              VEH~
+    SE*47*0034~
+  GE*1*1225~
+IEA*1*000007023~

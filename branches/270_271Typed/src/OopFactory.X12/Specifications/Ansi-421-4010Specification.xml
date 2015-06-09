@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--421 Estimated Time of Arrival and Car Scheduling-->
+<TransactionSpecification TransactionSetIdentifierCode="421" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="IS1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Usage="Required" Repeat="5" />
+  <Segment SegmentId="ISC" />
+  <Segment SegmentId="N8" Repeat="1" />
+  <Segment SegmentId="IS2" Usage="Required" />
+  <Segment SegmentId="F9" Repeat="1" />
+  <Segment SegmentId="D9" Repeat="1" />
+  <Segment SegmentId="N1" Repeat="10" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="L5" Repeat="5" />
+  <Segment SegmentId="H3" Repeat="6" />
+  <Segment SegmentId="H5" Repeat="1" />
+  <Segment SegmentId="IC" Repeat="1" />
+  <Segment SegmentId="IMA" Repeat="1" />
+  <Segment SegmentId="PS" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Segment SegmentId="N8A" Repeat="25" />
+  <Loop LoopId="S1" LoopRepeat="12">
+    <Name>Stop-off Name</Name>
+    <StartingSegment SegmentId="S1" />
+    <Segment SegmentId="S9" Repeat="1" />
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="LH1" LoopRepeat="100">
+      <Name>Hazardous Identification Information</Name>
+      <StartingSegment SegmentId="LH1" />
+      <Segment SegmentId="LH2" Repeat="4" />
+      <Segment SegmentId="LH3" Repeat="10" />
+      <Segment SegmentId="LFH" Repeat="20" />
+      <Segment SegmentId="LEP" Repeat="3" />
+      <Segment SegmentId="LH4" Repeat="1" />
+      <Segment SegmentId="LHT" Repeat="3" />
+      <Segment SegmentId="LHR" Repeat="5" />
+      <Segment SegmentId="PER" Repeat="5" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="PER" Repeat="5" />
+</TransactionSpecification>

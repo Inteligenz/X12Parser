@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--819 Operating Expense Statement-->
+<TransactionSpecification TransactionSetIdentifierCode="819" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BOS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="ITD" Repeat="5" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="MSG" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="JIL" LoopRepeat="10000">
+    <Name>Line Item Detail for the Operating Expe</Name>
+    <StartingSegment SegmentId="JIL" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="MSG" Repeat="12" />
+    <Segment SegmentId="MEA" Repeat="10" />
+    <Segment SegmentId="ITA" Repeat="10" />
+    <Segment SegmentId="PSA" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="1" />
+    <Loop LoopId="JID" LoopRepeat="1000">
+      <Name>Equipment Detail</Name>
+      <StartingSegment SegmentId="JID" />
+      <Segment SegmentId="PID" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="MSG" Repeat="12" />
+      <Segment SegmentId="MEA" Repeat="5" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="AMT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="QTY" Repeat="5" />
+  <Segment SegmentId="TDS" Repeat="1" />
+  <Loop LoopId="PSA" LoopRepeat="1000">
+    <Name>Partner Share Accounting</Name>
+    <StartingSegment SegmentId="PSA" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+</TransactionSpecification>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--214 Transportation Carrier Shipment Status Message-->
+<TransactionSpecification TransactionSetIdentifierCode="214" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B10" />
+  <Segment SegmentId="L11" />
+  <Segment SegmentId="MAN" />
+  <Segment SegmentId="K1" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="G61" />
+    <Segment SegmentId="G62" />
+    <Segment SegmentId="L11" />
+  </Loop>
+  <Segment SegmentId="MS3" />
+  <Loop LoopId="0200">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Loop LoopId="0205">
+      <Name>Shipment Status Details</Name>
+      <StartingSegment SegmentId="AT7" />
+      <Segment SegmentId="MS1" />
+      <Segment SegmentId="MS2" />
+    </Loop>
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="MAN" />
+    <Segment SegmentId="Q7" />
+    <Segment SegmentId="K1" />
+    <Segment SegmentId="AT5" />
+    <Segment SegmentId="AT8" />
+    <Loop LoopId="0210">
+      <Name>Carton (Package) Detail</Name>
+      <StartingSegment SegmentId="CD3" />
+      <Segment SegmentId="L11" />
+      <Loop LoopId="0215">
+        <Name>Shipment Status Details</Name>
+        <StartingSegment SegmentId="AT7" />
+        <Segment SegmentId="MS1" />
+        <Segment SegmentId="MS2" />
+      </Loop>
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="Q7" />
+      <Segment SegmentId="AT8" />
+      <Segment SegmentId="MAN" />
+      <Loop LoopId="0220">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="L11" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="0230">
+      <Name>Purchase Order Reference</Name>
+      <StartingSegment SegmentId="PRF" />
+      <Loop LoopId="0231">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="L11" />
+      </Loop>
+      <Loop LoopId="0233">
+        <Name>Carton (Package) Detail</Name>
+        <StartingSegment SegmentId="CD3" />
+        <Segment SegmentId="L11" />
+        <Loop LoopId="0240">
+          <Name>Shipment Status Details</Name>
+          <StartingSegment SegmentId="AT7" />
+          <Segment SegmentId="MS1" />
+          <Segment SegmentId="MS2" />
+          <Segment SegmentId="MAN" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="0250">
+      <Name>Shipment Purchase Order Detail</Name>
+      <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0260">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI" />
+      <Segment SegmentId="BIN" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

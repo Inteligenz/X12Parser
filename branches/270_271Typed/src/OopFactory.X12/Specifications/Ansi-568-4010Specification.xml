@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--568 Contract Payment Management Report-->
+<TransactionSpecification TransactionSetIdentifierCode="568" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="AMT" Usage="Required" Repeat="2" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="1" />
+  </Loop>
+  <Loop LoopId="CS">
+    <Name>Contract Summary</Name>
+    <StartingSegment SegmentId="CS" />
+    <Segment SegmentId="N9" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="1" />
+    <Loop LoopId="LM" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="N9" Usage="Required" Repeat="1" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="QTY" Repeat="1" />
+        <Loop LoopId="LM" LoopRepeat="10">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+        </Loop>
+        <Loop LoopId="N1" LoopRepeat="1">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N2" Repeat="2" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="N9" Repeat="2" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="BAL">
+    <Name>Balance Detail</Name>
+    <StartingSegment SegmentId="BAL" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="RTE" />
+  </Loop>
+</TransactionSpecification>

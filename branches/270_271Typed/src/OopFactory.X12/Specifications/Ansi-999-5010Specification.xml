@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- used http://www.practicemaker.com/user/ANSI%20X12/X231A1_Consolidated_noPW.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="999">
+  <Segment SegmentId="AK1"/>
+  <Loop LoopId="2000">
+    <Name>Transaction Set Response Header</Name>
+    <StartingSegment SegmentId="AK2"/>
+    <Loop LoopId="2100">
+      <Name>Error Identification</Name>
+      <StartingSegment SegmentId="IK3"/>
+      <Segment SegmentId="CTX"/>
+      <Loop LoopId="2110">
+        <Name>Implementation Data Element Note</Name>
+        <StartingSegment SegmentId="IK4"/>
+        <Segment SegmentId="CTX"/>
+      </Loop>
+    </Loop>
+    <Segment SegmentId="IK5" Trailer="true"/>
+  </Loop>
+  <Segment SegmentId="AK9" Trailer="true"/>
+</TransactionSpecification>

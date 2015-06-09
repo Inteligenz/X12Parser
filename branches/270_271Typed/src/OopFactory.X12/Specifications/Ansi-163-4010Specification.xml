@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--163 Transportation Appointment Schedule Information-->
+<TransactionSpecification TransactionSetIdentifierCode="163" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B13" />
+  <Segment SegmentId="B2A" />
+  <Segment SegmentId="H6" />
+  <Segment SegmentId="N7" />
+  <Segment SegmentId="G62" />
+  <Segment SegmentId="L11"/>
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="H3" />
+  <Segment SegmentId="G05" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="L11"/>
+    <Segment SegmentId="G61" />
+    <Segment SegmentId="G62" />
+    <Loop LoopId="0150"> <!-- 4010 only -->
+      <Name>Shipment Purchase Order Detail</Name>
+      <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0150"> <!-- Current Standard -->
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="H6" />
+    <Segment SegmentId="G61" />
+    <Segment SegmentId="G62" />
+    <Loop LoopId="0350"> <!-- 4010 only -->
+      <Name>Shipment Purchase Order Detail</Name>
+      <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0350"> <!-- Current Standard -->
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID"/>
+      <Segment SegmentId="SDQ"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

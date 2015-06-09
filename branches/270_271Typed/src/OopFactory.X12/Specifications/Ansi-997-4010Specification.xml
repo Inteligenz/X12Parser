@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="997">
+  <Segment SegmentId="AK1"/>
+  <Segment SegmentId="AK9" Trailer="true"/>
+  <Loop LoopId="AK2" Usage="Required" LoopRepeat="999999">
+    <Name></Name>
+    <StartingSegment SegmentId="AK2" Usage="Required" Repeat="1"/>
+    <Segment SegmentId="AK5" Trailer="true"/>
+    <Loop LoopId="AK3" Usage="Required" LoopRepeat="999999">
+      <Name>PAYER IDENTIFICATION</Name>
+      <StartingSegment SegmentId="AK3" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="AK4" Usage="Required" Repeat="99"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

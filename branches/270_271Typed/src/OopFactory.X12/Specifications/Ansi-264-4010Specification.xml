@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--264 Mortgage Loan Default Status-->
+<TransactionSpecification TransactionSetIdentifierCode="264" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="MIS" Repeat="1" />
+  <Segment SegmentId="QTY" Repeat="2" Trailer="true" />
+  <Segment SegmentId="AMT" Repeat="2" Trailer="true" />
+  <Loop LoopId="0100" LoopRepeat="2">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="2" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="DTM" Repeat="2" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="2" />
+    <Segment SegmentId="PER" Repeat="2" />
+    <Segment SegmentId="QTY" Repeat="2" />
+    <Segment SegmentId="AMT" Repeat="2" />
+    <Loop LoopId="0210">
+      <Name>Date or Time or Period</Name>
+      <StartingSegment SegmentId="DTP" />
+      <Segment SegmentId="REF" Usage="Required" Repeat="10" />
+      <Loop LoopId="0211">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="1" />
+        <Segment SegmentId="N3" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="2" />
+        <Segment SegmentId="REF" Repeat="4" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="LS">
+      <Name>Loop Header</Name>
+      <StartingSegment SegmentId="LS" />
+      <Segment SegmentId="LE" Trailer="true" />
+      <Loop LoopId="0212" LoopRepeat="1">
+        <Name>Real Estate Condition</Name>
+        <StartingSegment SegmentId="REC" />
+        <Segment SegmentId="N3" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DFI" Repeat="1" />
+        <Segment SegmentId="QTY" Repeat="1" />
+        <Segment SegmentId="AMT" Repeat="10" />
+        <Segment SegmentId="INT" Repeat="1" />
+        <Segment SegmentId="SOM" Repeat="10" />
+        <Segment SegmentId="DTP" Repeat="14" />
+        <Segment SegmentId="MRC" Repeat="2" />
+        <Segment SegmentId="MSG" Repeat="11" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

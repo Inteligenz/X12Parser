@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--880 Grocery Products Invoice-->
+<TransactionSpecification TransactionSetIdentifierCode="880" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G01" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Repeat="5" />
+  <Segment SegmentId="NTE" Repeat="20" />
+  <Segment SegmentId="G27" Repeat="5" />
+  <Segment SegmentId="G23" Repeat="20" />
+  <Segment SegmentId="G25" Repeat="1" />
+  <Segment SegmentId="G31" Usage="Required" Repeat="1" Trailer="true" />
+  <Segment SegmentId="G33" Usage="Required" Repeat="1" Trailer="true" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="100">
+    <Name>Allowance or Charge</Name>
+    <StartingSegment SegmentId="G72" />
+    <Segment SegmentId="G73" Repeat="10" />
+  </Loop>
+  <Loop LoopId="0300" LoopRepeat="9999">
+    <Name>Item Detail - Invoice</Name>
+    <StartingSegment SegmentId="G17" />
+    <Segment SegmentId="G69" Repeat="5" />
+    <Segment SegmentId="G19" Repeat="10" />
+    <Segment SegmentId="G20" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="5" />
+    <Segment SegmentId="G23" Repeat="20" />
+    <Segment SegmentId="G25" Repeat="1" />
+    <Loop LoopId="0310" LoopRepeat="100">
+      <Name>Allowance or Charge</Name>
+      <StartingSegment SegmentId="G72" />
+      <Segment SegmentId="G73" Repeat="10" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="0400" LoopRepeat="500">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="5" />
+    <Loop LoopId="0410">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="QTY" Repeat="1" />
+      <Segment SegmentId="AMT" Repeat="2" />
+      <Segment SegmentId="G72" Repeat="1" />
+      <Loop LoopId="0411">
+        <Name>Item Detail - Invoice</Name>
+        <StartingSegment SegmentId="G17" />
+        <Segment SegmentId="G19" Repeat="10" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

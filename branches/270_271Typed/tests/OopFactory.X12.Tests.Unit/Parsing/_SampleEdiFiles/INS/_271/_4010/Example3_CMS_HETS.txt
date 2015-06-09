@@ -1,0 +1,100 @@
+﻿ISA*00*          *00*          *ZZ*CMS            *ZZ*SUBMITTERID    *090501*0758*U*00401*111111111*0*P*|~
+  GS*HB*CMS*SUBMITTERID*20090501*0758*222222222*X*004010X092A1~
+    ST*271*333333333~
+      BHT*0022*11*TRANSA*20090501*07582355~
+      HL*1**20*1~
+        NM1*PR*2*CMS*****PI*CMS~
+        HL*2*1*21*1~
+          NM1*1P*2*IRNAME*****XX*NPI~
+          HL*3*2*22*0~
+            TRN*2*TRACKNUM*9ABCDEFGHI~
+            NM1*IL*1*LNAME*FNAME*MNAME***MI*HICN~
+              N3*ADDRESS LINE1*ADDRESS LINE2~
+              N4*CITY*SC*ZIPCODE~
+              DMG*D8*19200401*F~
+              INS*Y*18*001*25~
+              DTP*472*D8*20090501~
+              EB*1*IND**MA~
+                DTP*307*D8*19850401~
+              EB*K**47*MA**33***LA*60~
+              EB*C**47*MA**29*992~
+              EB*F**47*MA**29***DY*60~
+              EB*B**47*MA**29*248**DY*30~
+              EB*F**AG*MA**29***DY*20~
+              EB*B**AG*MA**29*124**DY*80~
+              EB*C**47*MA**29*0~
+                DTP*435*RD8*20080813-20080830~
+              EB*F**47*MA**29***DY*43~
+                DTP*435*RD8*20080813-20080830~
+              EB*B**47*MA**29*248**DY*30~
+                DTP*435*RD8*20080813-20080830~
+              EB*F**AG*MA**29***DY*20~
+                DTP*435*RD8*20080813-20080830~
+              EB*B**AG*MA**29*124**DY*80~
+                DTP*435*RD8*20080813-20080830~
+              EB*1*IND**MB~
+                DTP*307*D8*19850401~
+              EB*C**96*MB**29*0~
+                DTP*292*RD8*20090101-20091231~
+              EB*D*IND**MB*********HC|90669~
+                DTP*348*D8*20090406~
+              EB*F*IND*67*MB**29***P6*8~
+              EB*F*IND*AD*MB**29*1840~
+                DTP*292*RD8*20090101-20091231~
+              EB*F*IND**MB*Physical and Speech Therapy*29*1840~
+                DTP*292*RD8*20090101-20091231~
+              EB*C*IND*10***29***DB*3~
+                DTP*292*RD8*20090101-20091231~
+              EB*X**45*MA**26~
+                DTP*292*RD8*20051027-20051107~
+                LS*2120~
+                  NM1*1P*2*ORGNAME*****XX*NPI~
+                  LE*2120~
+              EB*R*IND*30*12~
+                REF*IG*POLICYNUMBER~
+                DTP*290*D8*19900101~
+                LS*2120~
+                  NM1*PRP*2*ORGNAME~
+                    N3*ADDRESSLINE1*ADDRESSLINE2~
+                    N4*CITY*SC*ZIPCODE~
+                  LE*2120~
+              EB*X**42*MA**26~
+                DTP*193*D8*20070705~
+                DTP*194*D8*20070902~
+                DTP*193*D8*20070705~
+                DTP*194*D8*20070717~
+                MSG*HHEH Start Date~
+                MSG*HHEH End Date~
+                MSG*HHEH DOEBA~
+                MSG*HHEH DOLBA~
+                LS*2120~
+                  NM1*PR*2*ORGNAME*****PI*CONTRACTNUMBER~
+                    PRV*HH*9K*NPI~
+                  LE*2120~
+              EB*D**15*MA~
+                DTP*356*D8*20060218~
+                DTP*198*D8*20061110~
+                MSG*ESRD Transplant Discharge Date~
+              EB*R**30*HM~
+                REF*18*PLANNUMBER~
+                DTP*290*D8*20070701~
+                LS*2120~
+                  NM1*PRP*2*ORGNAME~
+                    N3*ADDRESSLINE1*ADDRESSLINE2~
+                    N4*CITY*SC*ZIPCODE~
+                    PER*IC**TE*AAABBBCCCC~
+                  LE*2120~
+              EB*R**88*OT~
+                REF*18*CONTRACTNUMBER PLANNUMBER~
+                DTP*292*D8*20090701~
+                LS*2120~
+                  NM1*PRP*2*ORGNAME~
+                    N3*ADDRESSLINE1~
+                    N4*CITY*SC*ZIPCODE~
+                    PER*IC**TE*TELEPHONENUM~
+                  LE*2120~
+              EB*6~
+                DTP*307*RD8*20070901-20070930~
+    SE*96*333333333~
+  GE*1*222222222~
+IEA*1*111111111~

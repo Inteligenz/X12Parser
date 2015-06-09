@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--358 U.S. Customs Consist Information-->
+<TransactionSpecification TransactionSetIdentifierCode="358" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Loop LoopId="LX" LoopRepeat="500">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="VID" Repeat="1" />
+      <Loop LoopId="MBL" LoopRepeat="9999">
+        <Name>Bill of Lading</Name>
+        <StartingSegment SegmentId="MBL" />
+        <Segment SegmentId="M13" Repeat="1" />
+        <Segment SegmentId="VID" Repeat="500" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Air Freight Details and Invoice -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="110">
+  <!-- Used http://www.pfizer.com/business/edispecs/ap110.pdf -->
+  <!-- Used http://images.fedex.com/us/account/invhome/Air_Ground_X12-4060_New_Customer.pdf -->
+  <Segment SegmentId="B3"/>
+  <Segment SegmentId="B3A"/>
+  <Segment SegmentId="C2"/>
+  <Segment SegmentId="C3"/>
+  <Segment SegmentId="ITD"/>
+  <Segment SegmentId="L3" Trailer="true"/>
+  <Segment SegmentId="ACS" Trailer="true"/>
+  <Segment SegmentId="NTE" Trailer="true"/>
+  <Loop LoopId="N1">
+    <Name>N1</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>LX</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Segment SegmentId="P1"/>
+    <Segment SegmentId="R1"/>
+    <Segment SegmentId="POD"/>
+    <Segment SegmentId="V9"/>
+    <Segment SegmentId="RMT"/>
+    <Segment SegmentId="G47"/>
+    <Segment SegmentId="NTE"/>
+    <Loop LoopId="L5">
+      <Name>Description</Name>
+      <StartingSegment SegmentId="L5"/>
+      <Segment SegmentId="L0"/>
+      <Segment SegmentId="L4"/>
+      <Segment SegmentId="L10"/>
+      <Segment SegmentId="SL1"/>
+    </Loop>
+    <Loop LoopId="L1">
+      <Name>Rates and Charges</Name>
+      <StartingSegment SegmentId="L1"/>
+      <Segment SegmentId="C3"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

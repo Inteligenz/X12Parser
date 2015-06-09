@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--806 Project Schedule Reporting-->
+<TransactionSpecification TransactionSetIdentifierCode="806" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BPP" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="CAL">
+    <Name>Calendar</Name>
+    <StartingSegment SegmentId="CAL" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="RSC">
+    <Name>Resource</Name>
+    <StartingSegment SegmentId="RSC" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="RPA" />
+  </Loop>
+  <Loop LoopId="TID">
+    <Name>Task Identification</Name>
+    <StartingSegment SegmentId="TID" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="PID" />
+    <Loop LoopId="MTX">
+      <Name>Text</Name>
+      <StartingSegment SegmentId="MTX" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="RSC">
+      <Name>Resource</Name>
+      <StartingSegment SegmentId="RSC" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="PCT" />
+      <Segment SegmentId="RPA" />
+      <Segment SegmentId="PAM" />
+    </Loop>
+    <Loop LoopId="MLS">
+      <Name>Milestone</Name>
+      <StartingSegment SegmentId="MLS" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="PCT" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

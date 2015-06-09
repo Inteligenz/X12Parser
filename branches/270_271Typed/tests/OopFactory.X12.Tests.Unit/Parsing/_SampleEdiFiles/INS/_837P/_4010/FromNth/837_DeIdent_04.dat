@@ -1,0 +1,2416 @@
+ISA*00*          *00*          *ZZ*999999999      *ZZ*99999          *110602*9999*U*99999*999999999*0*P*>~
+  GS*HC*999999999*99999*20110602*9999*9999999*X*999999X999X9~
+    ST*837*000000001~
+      BHT*9999*00*999999*20110602*999999*CH~
+      REF*87*999999X999X9~
+      NM1*41*2*XXXXXX XXX XXXXXX*****46*999999999~
+        PER*IC*XXX XXXXXX*TE*9999999999~
+      NM1*40*2*XXXX XXXXXX XX XXXX*****46*99999~
+      HL*1**20*1~
+        NM1*85*2*XXXXXXXXXX XXX XXXXXXXX XXXXXX XX*****XX*9999999999~
+          N3*XX XXX 9999~
+          N4*XXX XXXXXX*IA*99999~
+          REF*EI*999999999~
+        HL*2*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXX*L***MI*XXX999XX9999~
+            N3*999 X 99XX XXXXXX~
+            N4*XXXX XXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110505~
+            HI*XX>99999*XX>9999~
+            NM1*DN*1*XXXXXX*SUE****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXX XXXXXXXXXX XXXXX~
+              N3*999 X. XXXXXX XXXX~
+              N4*XXXX XXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*220*UN*1***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+        HL*3*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXXX*I***MI*XXX999XX9999~
+            N3*999 XXXX XX~
+            N4*XXXXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110426~
+            REF*X4*99X9999999~
+            HI*XX>99999*XX>X9999*XX>99999~
+            NM1*DN*1*XXXX*XXXXXX*M***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*260*UN*1***1>2~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXXX XX XXXX~
+            LX*3~
+              SV1*XX>X9999*9999*UN*35***1>2~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*45*UN*1***1>2~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*133*UN*1***1>2~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*50*UN*1***1>2~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*7~
+              SV1*XX>X9999*850*UN*10***9>9>9~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XXX 99 XXX~
+            LX*8~
+              SV1*XX>X9999*70*UN*10***9>9>9~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*9~
+              SV1*XX>X9999*54*UN*3***9>9>9~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*10~
+              SV1*XX>99999*30*UN*1***9>9>9~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+            LX*11~
+              SV1*XX>99999*34*UN*1***9>9>9~
+              DTP*472*D8*20110426~
+              REF*6R*999X999999999999999999~
+        HL*4*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXXX*I***MI*XXX999XX9999~
+            N3*999 XXXX XX~
+            N4*XXXXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110503~
+            REF*X4*99X9999999~
+            HI*XX>99999*XX>X9999*XX>99999~
+            NM1*DN*1*XXXX*XXXXXX*M***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*260*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXXX XX XXXX~
+            LX*3~
+              SV1*XX>X9999*9999*UN*35***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*45*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*133*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*50*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*7~
+              SV1*XX>X9999*850*UN*10***9>9>9~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XXX 99 XXX~
+            LX*8~
+              SV1*XX>X9999*70*UN*10***9>9>9~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*9~
+              SV1*XX>X9999*36*UN*2***9>9>9~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*10~
+              SV1*XX>99999*34*UN*1***9>9>9~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+        HL*5*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXX*A***MI*XXX999XX9999~
+            N3*999 X XXXXXXX XX~
+            N4*XXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*6*5*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*XXXXXX*E~
+              N3*999 X XXXXXXX XX~
+              N4*XXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110421~
+              HI*XX>9999~
+              NM1*DN*1*XXXXXXX*XXXXX****XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXX XXXXXXXXXX XXXXX~
+                N3*999 X. XXXXXX XXXX~
+                N4*XXXX XXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999*220*UN*1***1~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+        HL*7*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXX*XXXXXX*J***MI*XXX999XX9999~
+            N3*9999 XXXXXXXXX XX~
+            N4*XXXX XXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110505~
+            HI*XX>99999~
+            NM1*DN*1*XXXXXXX*XXXX****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXX XXXXXXXXXX XXXXX~
+              N3*999 X. XXXXXX XXXX~
+              N4*XXXX XXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*220*UN*1***1~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+        HL*8*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXX*XXXX*J***MI*XXX999XX9999~
+            N3*9999 X 99XX XX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*9*8*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXX*XXXXXXX*A~
+              N3*9999 X 99XX XX~
+              N4*XXX XXXXXX*IA*99999~
+              DMG*D8*20000101*M~
+            CLM*9999999999-999*97***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110512~
+              REF*X4*99X9999999~
+              HI*XX>99999~
+              NM1*DN*1*XXXXXX*XXXX XXXXXX****XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+                N3*99 XXXXXXXXXX XXX~
+                N4*XXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999*45*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>X9999*18*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*34*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+        HL*10*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXXXXX****MI*XXX999XX9999~
+            N3*9999 XXXXX XXXXXXXX~
+            N4*XXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*210***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110506~
+            REF*X4*99X9999999~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXX*XXXXX****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*135*UN*1***1~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*30*UN*1***1~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*34*UN*1***1~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+        HL*11*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXXX****MI*XXX999XX9999~
+            N3*9999 XX 99 XX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*265***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110510~
+            REF*X4*99X9999999~
+            HI*BK>20410~
+            NM1*DN*1*XXXX*XXXXX****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*34*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+        HL*12*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXX*XXXXXX*J***MI*XXX999XX9999~
+            N3*9999 9XX XX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*13*12*23*0~
+            PAT*19~
+            NM1*QC*1*XXXXXX*XXXXX*A~
+              N3*9999 9XX XX~
+              N4*XXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*285***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110506~
+              REF*X4*99X9999999~
+              HI*XX>99999*XX>X9999~
+              NM1*DN*1*XXXXXX*XXXXXXX*A***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+                N3*99 XXXXXXXXXX XXX~
+                N4*XXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999>99*220*UN*1***1>2~
+                DTP*472*D8*20110506~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*11*UN*1***1>2~
+                DTP*472*D8*20110506~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*34*UN*1***1>2~
+                DTP*472*D8*20110506~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*20*UN*1***1>2~
+                DTP*472*D8*20110506~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XX/XXX~
+        HL*14*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXXXXX****MI*XXXX9999999999~
+            N3*999 XXX XXXXXX~
+            N4*XXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110505~
+            HI*XX>9999*XX>X9999*XX>99999~
+            NM1*DN*1*XXXXX*XXXXXXXX*S***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXX XXXX XXXXXXXX XXXXXXXX~
+              N3*9999 X 99XX XX~
+              N4*XXXXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*380*UN*1***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXX XX XXXXX XX XX 9 XX~
+            LX*3~
+              SV1*XX>X9999*9999*UN*10***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*45*UN*1***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*133*UN*1***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*50*UN*1***1>2~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*7~
+              SV1*XX>X9999*850*UN*10***9>9>9~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XXX 99 XXX~
+            LX*8~
+              SV1*XX>X9999*70*UN*10***9>9>9~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+            LX*9~
+              SV1*XX>X9999*54*UN*3***9>9>9~
+              DTP*472*D8*20110505~
+              REF*6R*999X999999999999999999~
+        HL*15*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXX*XXXXXXX*D***MI*XXX999XX9999~
+            N3*9999 XX 99XX XX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*16*15*23*0~
+            PAT*01~
+            NM1*QC*1*XXXX*XXXXXX*W~
+              N3*9999 XX 99XX XX~
+              N4*XXX XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110511~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>X9999*XX>99999~
+              NM1*DN*1*XXXXXXXX*XXXXXX*M***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+                N3*99 XXXXXXXXXX XXX~
+                N4*XXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999>99*220*UN*1***1~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*380*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXX XXXX XX XXXXX XX XX 9 XX~
+              LX*3~
+                SV1*XX>X9999*655*UN*5***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXXXX 99 XX XXX XXXX~
+              LX*4~
+                SV1*XX>99999*45*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*50*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>X9999*850*UN*10***9>9>9~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXX XXX 99 XXX~
+              LX*7~
+                SV1*XX>X9999*54*UN*3***9>9>9~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*34*UN*1***9>9>9~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+        HL*17*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXX*XXXXXXX*J***MI*XXX999XX9999~
+            N3*9999 XX XXXX XXXX*APT 1101~
+            N4*XXXX XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*180***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110425~
+            REF*X4*99X9999999~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXX-XX*XXXXXX*F***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*135*UN*1***1~
+              DTP*472*D8*20110425~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1~
+              DTP*472*D8*20110425~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*34*UN*1***1~
+              DTP*472*D8*20110425~
+              REF*6R*999X999999999999999999~
+        HL*18*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXX*B***MI*XXX999XX9999~
+            N3*9999 XXXXXXX XXX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*265***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110503~
+            REF*X4*99X9999999~
+            HI*XX>9999*XX>9999~
+            NM1*DN*1*XXXXXXXX*XXXXX****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*34*UN*1***1>2~
+              DTP*472*D8*20110503~
+              REF*6R*999X999999999999999999~
+        HL*19*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXXX*XXXXXXX*C***MI*XXX999XX9999~
+            N3*9999 99XX XX~
+            N4*XXXXXXX XXXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*235***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110522~
+            DTP*096*D8*20110522~
+            HI*XX>99999*XX>999~
+            NM1*DN*1*XXXXXXX*XXXXXX*C***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*FA*2*XXXXX XXXXXXXX~
+              N3*9999 9XX XXXXXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*235*UN*1***1>2~
+              DTP*472*D8*20110522~
+              REF*6R*999X999999999999999999~
+        HL*20*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXX*L***MI*XXX999XX9999~
+            N3*9999 XX 99XX XXX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*343***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110509~
+            REF*X4*99X9999999~
+            HI*XX>9999~
+            NM1*DN*1*XXXXX*XXXXX*K***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            SBR*S*01***IP****BL~
+              DMG*D8*20000101*F~
+              OI***Y*B**Y~
+              NM1*IL*1*XXXXX*XXXXX*M***MI*XXX999XX9999~
+                N3*9999 XX 99XX XXX~
+                N4*XXX XXXXXX*IA*99999~
+              NM1*PR*2*XXXX XXXXXX XX XXXX*****PI*99999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999>99*45*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*11*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>X9999*3*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*30*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*34*UN*1***1~
+              DTP*472*D8*20110509~
+              REF*6R*999X999999999999999999~
+        HL*21*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*AMY*J***MI*XXX99999999X99~
+            N3*99999 999XX XXX XX XXX 9~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*79***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110506~
+            REF*X4*99X9999999~
+            HI*XX>9999*XX>X9999~
+            NM1*DN*1*XXXX*XXXXX*B***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*59*UN*1***1>2~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*20*UN*1***1>2~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XX/XXX~
+        HL*22*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXX*XXXXXX*J***MI*XXX999XX9999~
+            N3*9999 XXXXXXXXX XX~
+            N4*XXXX XXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*23*22*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXX*XXXXXX*J~
+              N3*9999 XXXXXXXXX XX~
+              N4*XXXX XXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110512~
+              HI*XX>9999*XX>99999~
+              NM1*DN*1*XXXXXX*XXXXX****XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXX XXXXXXXXXX XXXXX~
+                N3*999 X. XXXXXX XXXX~
+                N4*XXXX XXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999>99*225*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*133*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*50*UN*1***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*100*UN*2***1~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>X9999*850*UN*10***1>2~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXX XXX 99 XXX~
+              LX*6~
+                SV1*XX>X9999*2*UN*1***1>2~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>X9999*70*UN*10***1>2~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>X9999*10*UN*2***1>2~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>X9999*36*UN*2***1>2~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+        HL*24*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXX*XXXXXXX*L***MI*XXX999XX9999~
+            N3*9999 XXXXXXX XX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*370***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110510~
+            REF*X4*99X9999999~
+            HI*XX>9999~
+            NM1*DN*1*XXXXX*XXXXXXX*V***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*325*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*34*UN*1***1~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+        HL*25*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXX*XXXXXXXX*M***MI*XXX999XX9999~
+            N3*999 XX 9XX XX~
+            N4*XXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*265***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110506~
+            REF*X4*99X9999999~
+            HI*XX>99999*XX>9999~
+            NM1*DN*1*XXXX*XXXXX*B***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1>2~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1>2~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*34*UN*1***1>2~
+              DTP*472*D8*20110506~
+              REF*6R*999X999999999999999999~
+        HL*26*1*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXXX*XXXXXXX*L***MI*XXX999XX9999~
+            N3*9999 9XX XXX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*27*26*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXXX*GUY*D~
+              N3*9999 9XX XXX~
+              N4*XXX XXXXXX*IA*99999~
+              DMG*D8*20000101*M~
+            CLM*9999999999-999*265***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110511~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999~
+              NM1*DN*1*XXXX*XXXXXXXXX****XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+                REF*SY*999999999~
+              NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+                N3*99 XXXXXXXXXX XXX~
+                N4*XXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+              LX*1~
+                SV1*XX>99999>99*220*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*11*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*34*UN*1***1>2~
+                DTP*472*D8*20110511~
+                REF*6R*999X999999999999999999~
+        HL*28*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXX*XXXXXXX*M***MI*XXX99999999X~
+            N3*9999 X XXXXXX XXX~
+            N4*XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110510~
+            REF*X4*99X9999999~
+            HI*XX>9999*XX>9999~
+            NM1*DN*1*XXXXXX*XXXX*A***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*77*2*XXXXXXXXXX & XXXXXXXX XXX XX XXXX~
+              N3*99 XXXXXXXXXX XXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*220*UN*1***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*11*UN*1***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*210*UN*1***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>X9999*9999*UN*4***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>X9999*36*UN*2***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*30*UN*1***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+            LX*7~
+              SV1*XX>99999*34*UN*1***1>2~
+              DTP*472*D8*20110510~
+              REF*6R*999X999999999999999999~
+        HL*29*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXX*R***MI*XXX999XX9999~
+            N3*9999 99XX XX~
+            N4*XXXX XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*335***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110513~
+            DTP*096*D8*20110513~
+            HI*XX>9999*XX>99999*XX>99999~
+            NM1*DN*1*XXXXXX*XXXXXX*J***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*FA*2*XXXXX XXXXXXXX~
+              N3*9999 9XX XXXXXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*335*UN*1***9>9>9~
+              DTP*472*D8*20110513~
+              REF*6R*999X999999999999999999~
+        HL*30*1*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXX*R***MI*XXX999XX9999~
+            N3*9999 99XX XX~
+            N4*XXXX XXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*85***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110514~
+            DTP*096*D8*20110514~
+            HI*XX>9999*XX>99999*XX>99999~
+            NM1*DN*1*XXXXXX*XXXXXX*J***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXX****XX*9999999999~
+              REF*SY*999999999~
+            NM1*FA*2*XXXXX XXXXXXXX~
+              N3*9999 9XX XXXXXX~
+              N4*XXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXX*M***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*85*UN*1***9>9>9~
+              DTP*472*D8*20110514~
+              REF*6R*999X999999999999999999~
+      HL*31**20*1~
+        NM1*85*2*XXXXXXXX XXXXXXXXX XXXXXXXX*****XX*9999999999~
+          N3*999 XXXX XXXXXX XXXXXX~
+          N4*XXXXXXX XXXXXX*IA*99999~
+          REF*EI*999999999~
+        HL*32*31*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXXXXX*XXXX****MI*XXXXX9999999~
+            N3*9999 9 XXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110527~
+            DTP*096*D8*20110527~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXXX*XXXXXX****XX*9999999999~
+            NM1*82*1*XXXXXXXX*XXXXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*FA*2*XXXXXX XXXXXXXXX XXXXXXXX XXXX~
+              N3*999 X XXXXXX XXXXXX~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXX*XXXXXXXX****XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*350*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999>99*750*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+        HL*33*31*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*AMY****MI*XXX999XX9999~
+            N3*99999 XXXXXXXX XX~
+            N4*XXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*270***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110527~
+            DTP*096*D8*20110527~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+            NM1*82*1*XXXXXXXX*XXXXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*FA*2*XXXXXX XXXXXXXXX XXXXXXXX XXXX~
+              N3*999 X XXXXXX XXXXXX~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXX*XXXXXXXX****XX*9999999999~
+            LX*1~
+              SV1*XX>99999>99*270*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+      HL*34**20*1~
+        NM1*85*2*XXXXXXXXX XXXXXXXX XXX XXXXXXXXXX*****XX*9999999999~
+          N3*XXX XXXXXXXXX XXXXX  XXXXX 999~
+          N4*XXXXXXX XXXXXX*IA*99999~
+          REF*EI*999999999~
+          PER*IC*XXXX XXXXXXXX*TE*9999999999~
+        HL*35*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXX*XXXXXX*L***MI*XXX999XX9999~
+            N3*99999 999XX XX~
+            N4*XXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*36*35*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXX*XXXX*I~
+              N3*99999 999XX XX~
+              N4*XXXXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110525~
+              HI*XX>9999~
+              NM1*DN*1*XXXXX*XXXXXX*K***XX*9999999999~
+              NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXX XXXXXX XXXXXXXX XXXXXXXX~
+                N3*9999 X 99XX XXXXXX~
+                N4*XXXXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+              LX*1~
+                SV1*XX>99999*220*UN*1***1~
+                DTP*472*D8*20110525~
+                REF*6R*999X999999999999999999~
+        HL*37*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXX*XXXX*F***MI*XXX999999999999~
+            N3*999 XXXXXXX XXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*362***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110526~
+            REF*X4*99X9999999~
+            HI*XX>9999*XX>99999~
+            NM1*DN*1*XXXXX*XXXX*K***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*290*UN*1***1>2~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*22*UN*1***1>2~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*50*UN*1***1>2~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+        HL*38*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXX*XXXX*F***MI*XXX999999999999~
+            N3*999 XXXXXXX XXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*340***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110527~
+            HI*XX>9999*XX>99999~
+            NM1*DN*1*XXXXX*XXXX*K***XX*9999999999~
+            NM1*82*1*XXXXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXX*XXXXXX****XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*290*UN*1***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>99999*50*UN*1***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+        HL*39*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXX*XXXXX*S***MI*XXX999XX9999~
+            N3*9999 XXXXXX~
+            N4*XXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110525~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXXX*XXXXXX*B***XX*9999999999~
+            NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXX XXXXXX XXXXXXXX XXXXXXXX~
+              N3*9999 X 99XX XXXXXX~
+              N4*XXXXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*220*UN*1***1~
+              DTP*472*D8*20110525~
+              REF*6R*999X999999999999999999~
+        HL*40*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXXXXXXX*S***MI*XXX9999999XX~
+            N3*99 XXXXX XXXXXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*999.9***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110527~
+            HI*XX>9999*XX>99999~
+            NM1*DN*1*XXXXXX*XXXXXXX*K***XX*9999999999~
+            NM1*82*1*XXXXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXX*XXXXXX****XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*35*UN*5***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>X9999*240*UN*20***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXX XXXXXXXXXXX XXXXXXXXXXXXX 9 XX~
+            LX*3~
+              SV1*XX>X9999*99.9*UN*1***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*100*UN*1***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*189*UN*1***1>2~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+        HL*41*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXX*XXXXXXX*A***MI*XXX99999999X~
+            N3*99 XXX XXXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*42*41*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXX*XXXXXX*A~
+              N3*99 XXX XXXX~
+              N4*XXXXXXX XXXXXX*IA*99999~
+              DMG*D8*20000101*M~
+            CLM*9999999999-999*399***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110526~
+              REF*X4*99X9999999~
+              HI*XX>9999~
+              NM1*DN*1*XXXXXXXX*XXXXXXXX*A***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              LX*1~
+                SV1*XX>99999*220*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*20*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>99999*21*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>99999*22*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+        HL*43*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXX*XXXXXXX*A***MI*XXX99999999X~
+            N3*99 XXX XXXX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*44*43*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXX*XXXXXX*A~
+              N3*99 XXX XXXX~
+              N4*XXXXXXX XXXXXX*IA*99999~
+              DMG*D8*20000101*M~
+            CLM*9999999999-999*9999.9***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110527~
+              HI*XX>9999*XX>X9999*XX>99999~
+              NM1*DN*1*XXXXXXXX*XXXXXXXX*A***XX*9999999999~
+              NM1*82*1*XXXXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXX*XXXXXX****XX*9999999999~
+              LX*1~
+                SV1*XX>X9999*70*UN*10***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>X9999*450*UN*150***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>X9999*6*UN*2***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>X9999*780*UN*10***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXXXXXXX XXX 99XXX~
+              LX*5~
+                SV1*XX>X9999*20*UN*10***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>X9999*31*UN*2***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>X9999*99.9*UN*2***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>X9999*14*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>X9999*960*UN*15***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>X9999*9999*UN*145***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>X9999*69*UN*12***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*12~
+                SV1*XX>99999*200*UN*2***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*13~
+                SV1*XX>99999*40*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+              LX*14~
+                SV1*XX>99999*348*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+              LX*15~
+                SV1*XX>99999*120*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXX XX XXXXXXXX XX XXXX XX 9-9 XXX~
+              LX*16~
+                SV1*XX>99999*450*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXXXXX XX XXXXXXXXX XXXX XXX~
+              LX*17~
+                SV1*XX>99999*157*UN*1***9>9>9~
+                DTP*472*D8*20110527~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XX XXXX XXX XXXX XXX XX XX 9 XX~
+        HL*45*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*46*45*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*9999.9***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110331~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>X9999*XX>99999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*14*UN*2***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>X9999*780*UN*10***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXXXXXXX XXX 99XXX~
+              LX*3~
+                SV1*XX>X9999*99.9*UN*2***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>X9999*792*UN*6***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*22*UN*1***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*100*UN*1***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*348*UN*1***9>9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+        HL*47*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*48*47*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*102***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110331~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999>99*50*UN*1***9>9>9~
+                DTP*472*D8*20110331~
+                REF*6R*999X999999999999999999~
+        HL*49*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*50*49*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*506***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110421~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999>99*50*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*20*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>99999*21*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*12~
+                SV1*XX>99999*22*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+              LX*13~
+                SV1*XX>99999>99*225*UN*1***9>9>9~
+                DTP*472*D8*20110421~
+                REF*6R*999X999999999999999999~
+        HL*51*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*52*51*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*400***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110407~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999>99*50*UN*1***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*66*UN*1***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*22*UN*1***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*75*UN*1***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999>99*135*UN*1***9>9>9~
+                DTP*472*D8*20110407~
+                REF*6R*999X999999999999999999~
+        HL*53*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*54*53*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*102***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110428~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110428~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999*50*UN*1***9>9>9~
+                DTP*472*D8*20110428~
+                REF*6R*999X999999999999999999~
+        HL*55*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*56*55*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*422***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110505~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*66*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*20*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>99999*21*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*12~
+                SV1*XX>99999*22*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*13~
+                SV1*XX>99999*75*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+              LX*14~
+                SV1*XX>99999*50*UN*1***9>9>9~
+                DTP*472*D8*20110505~
+                REF*6R*999X999999999999999999~
+        HL*57*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*58*57*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*102***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110512~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999*50*UN*1***9>9>9~
+                DTP*472*D8*20110512~
+                REF*6R*999X999999999999999999~
+        HL*59*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*60*59*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*102***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110519~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110519~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999*50*UN*1***9>9>9~
+                DTP*472*D8*20110519~
+                REF*6R*999X999999999999999999~
+        HL*61*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*62*61*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*603***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110526~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>99999*220*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*66*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*29*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*34*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*20*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>99999*16*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*12~
+                SV1*XX>99999*17*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*13~
+                SV1*XX>99999*21*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*14~
+                SV1*XX>99999*22*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*15~
+                SV1*XX>99999*75*UN*1***9>9>9~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+        HL*63*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*64*63*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*9999.99***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110414~
+              REF*X4*99X9999999~
+              HI*XX>9999*XX>9999*XX>X9999*XX>99999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXX*XXXXXX****XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*14*UN*2***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>X9999*780*UN*10***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXXXXXXX XXX 99XXX~
+              LX*3~
+                SV1*XX>X9999*9999*UN*4***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>X9999*99.99*UN*3***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>X9999*792*UN*6***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*16*UN*1***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*22*UN*1***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*200*UN*2***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*348*UN*1***9>9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+        HL*65*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXXX*XXXXXX****MI*XXX999999999~
+            N3*999 XX X99~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*66*65*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXXX*KIM*M~
+              N3*999 XX X99~
+              N4*XXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*102***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110414~
+              HI*XX>9999*XX>9999*XX>9999~
+              NM1*DN*1*XXXXXXXXX*XXXXXX*E***XX*9999999999~
+              NM1*82*1*XXXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXX*XXXXXX****XX*9999999999~
+              SBR*S*01***IP****MC~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXXXXX*XXXXXX****MI*9999999X~
+                  N3*999 XX X99~
+                  N4*XXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXX XXXX - XX*****PI*XXXXX~
+              LX*1~
+                SV1*XX>X9999*52*UN*2***9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+                NTE*ADD*XXXX XXXXXXX 99XX~
+              LX*2~
+                SV1*XX>99999>99*50*UN*1***9>9>9~
+                DTP*472*D8*20110414~
+                REF*6R*999X999999999999999999~
+        HL*67*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXX*XXXX****MI*XXX999XX9999~
+            N3*99999 999XX XXXXXX~
+            N4*XXXXXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110526~
+            REF*X4*99X9999999~
+            HI*XX>99999*XX>X9999*XX>X9999~
+            NM1*DN*1*XXXXXX*J*G***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*5*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>X9999*99.9*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>X9999*99.9*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>X9999*9999*UN*8***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*22*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>99999*18*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXXXXXX XXXX~
+            LX*7~
+              SV1*XX>99999*100*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*8~
+              SV1*XX>99999*348*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+            LX*9~
+              SV1*XX>99999*240*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XX XXXXXXXX XX XXXX XX 9-9 XXX~
+            LX*10~
+              SV1*XX>99999>99*95*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+        HL*68*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXX*XXXXX*K***MI*XXX999XX9999~
+            N3*999 XXXXXXX XX XXX 999~
+            N4*XXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*220***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110525~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXX*XXXXXXX*K***XX*9999999999~
+            NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXX XXXXXX XXXXXXXX XXXXXXXX~
+              N3*9999 X 99XX XXXXXX~
+              N4*XXXXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*220*UN*1***1~
+              DTP*472*D8*20110525~
+              REF*6R*999X999999999999999999~
+        HL*69*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXX*XXXXXXX*J***MI*XXX9999999XX~
+            N3*99999 999XX XX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*22***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110526~
+            REF*X4*99X9999999~
+            HI*XX>9999~
+            NM1*DN*1*XXXXX*XXXX XXXXXX****XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*22*UN*1***1~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+        HL*70*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXXXXX*XXXXX*J***MI*XXX999XX9999~
+            N3*9999 999XX XX~
+            N4*XXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999.99***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110525~
+            HI*XX>9999*XX>X9999~
+            NM1*DN*1*XXXXXXX*XXXX*A***XX*9999999999~
+            NM1*82*1*XXXXXXXXX*XXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXX XXXXXX XXXXXXXX XXXXXXXX~
+              N3*9999 X 99XX XXXXXX~
+              N4*XXXXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXXX*XXXX*A***XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*99.99*UN*1***1>2~
+              DTP*472*D8*20110525~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>X9999*9999*UN*20***1>2~
+              DTP*472*D8*20110525~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>99999*348*UN*1***1>2~
+              DTP*472*D8*20110525~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+        HL*71*34*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXXXX*XXXXXX*L***MI*XXX999XX9999~
+            N3*99999 999XX XX~
+            N4*XXXXXXX XXXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*72*71*23*0~
+            PAT*01~
+            NM1*QC*1*XXXXXXX*XXXXX*L~
+              N3*99999 999XX XX~
+              N4*XXXXXXX XXXXXX*IA*99999~
+              DMG*D8*20000101*M~
+            CLM*9999999999-999*399***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110526~
+              REF*X4*99X9999999~
+              HI*BK>20201~
+              NM1*DN*1*XXXXXX*XXXXXXX*D***XX*9999999999~
+              NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+                N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+                N4*XXXXXXX XXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+              LX*1~
+                SV1*XX>99999*220*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*2~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*3~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*4~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*5~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*6~
+                SV1*XX>99999*20*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*7~
+                SV1*XX>99999*16*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*8~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*9~
+                SV1*XX>99999*17*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*10~
+                SV1*XX>99999*21*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+              LX*11~
+                SV1*XX>99999*22*UN*1***1~
+                DTP*472*D8*20110526~
+                REF*6R*999X999999999999999999~
+        HL*73*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXXX*L***MI*XXX999XX9999~
+            N3*999 XXXXXXXXX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110526~
+            REF*X4*99X9999999~
+            HI*XX>9999*XX>X9999*XX>99999~
+            NM1*DN*1*XXXXXXX*XXXXXX*J***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*56*UN*8***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>X9999*450*UN*150***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>X9999*6*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>X9999*780*UN*10***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXXXXXXX XXX 99XXX~
+            LX*5~
+              SV1*XX>X9999*40*UN*20***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*6~
+              SV1*XX>X9999*31*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*7~
+              SV1*XX>X9999*99.9*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*8~
+              SV1*XX>X9999*768*UN*12***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*9~
+              SV1*XX>X9999*9999*UN*50***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*10~
+              SV1*XX>X9999*99.9*UN*6***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*11~
+              SV1*XX>99999*16*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*12~
+              SV1*XX>99999*16*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*13~
+              SV1*XX>99999*20*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*14~
+              SV1*XX>99999*14*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*15~
+              SV1*XX>99999*16*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*16~
+              SV1*XX>99999*21*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*17~
+              SV1*XX>99999*200*UN*2***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+            LX*18~
+              SV1*XX>99999*40*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+        HL*74*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXXX*L***MI*XXX999XX9999~
+            N3*999 XXXXXXXXX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*9999***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110526~
+            HI*XX>9999*XX>X9999*XX>99999~
+            NM1*DN*1*XXXXXXX*XXXXXX*J***XX*9999999999~
+            NM1*82*1*XXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXX*XXXXXX*W***XX*9999999999~
+            LX*1~
+              SV1*XX>99999*248*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XX XXXX XX XXXX XXXX~
+            LX*2~
+              SV1*XX>99999*348*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXX XXXXX XX XXXXX XX XX 9 XX~
+            LX*3~
+              SV1*XX>99999*120*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXX XX XXXXXXXX XX XXXX XX 9-9 XXX~
+            LX*4~
+              SV1*XX>99999*450*UN*1***9>9>9~
+              DTP*472*D8*20110526~
+              REF*6R*999X999999999999999999~
+              NTE*ADD*XXXXXXXXXX XX XXXXXXXXX XXXX XXX~
+        HL*75*34*22*0~
+          SBR*P*18*******BL~
+          NM1*IL*1*XXXXX*XXXXX*L***MI*XXX999XX9999~
+            N3*999 XXXXXXXXX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*M~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          CLM*9999999999-999*999.99***99>>9*Y*A*Y*Y*B~
+            DTP*435*D8*20110527~
+            HI*XX>9999~
+            NM1*DN*1*XXXXXXX*XXXXXX*J***XX*9999999999~
+            NM1*82*1*XXXXXXXX*XXXXXX****XX*9999999999~
+              REF*EI*999999999~
+            NM1*77*2*XXXXXXXXX XXXXXXXX & XXXXXXXXXX~
+              N3*XXX XXXXXXXXX XXXXX XXXXX 999~
+              N4*XXXXXXX XXXXXX*IA*99999~
+            NM1*DQ*1*XXXXXXXX*XXXXXX****XX*9999999999~
+            LX*1~
+              SV1*XX>X9999*56*UN*8***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*2~
+              SV1*XX>X9999*99.9*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*3~
+              SV1*XX>X9999*99.99*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*4~
+              SV1*XX>99999*100*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+            LX*5~
+              SV1*XX>99999*189*UN*1***1~
+              DTP*472*D8*20110527~
+              REF*6R*999X999999999999999999~
+      HL*76**20*1~
+        NM1*85*2*XXXXXXXX & XXXXXXXXXX*****XX*9999999999~
+          N3*999 XXXXX XX~
+          N4*XXXXXXXX*IA*99999~
+          REF*EI*999999999~
+          PER*IC*XXXX XXXXXXXX*TE*9999999999~
+        HL*77*76*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXX*XXXXXXX****MI*XXX999XX9999~
+            N3*9999 XXXXXXXXX XXX~
+            N4*XXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*78*77*23*0~
+            PAT*19~
+            NM1*QC*1*XXXX*XXXXXX*C~
+              N3*9999 XXXXXXXXX XXX~
+              N4*XXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*125***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110531~
+              HI*BK>30928~
+              NM1*DN*1*XXXXX XXXXXX*XXXXXX****XX*9999999999~
+              NM1*82*1*XXXXXXXX*XXXXX*A***XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXX XXX XXXXXXXXXX~
+                N3*9999 XXXXXX XXX X~
+                N4*XXXXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXX*XXXXX*A***XX*9999999999~
+              LX*1~
+                SV1*HC>90806*125*UN*1***1~
+                DTP*472*D8*20110531~
+                REF*6R*999X999999999999999999~
+        HL*79*76*22*1~
+          SBR*P********BL~
+          NM1*IL*1*XXXXX*XXXXXX****MI*XXX999999999~
+            N3*9 X XXXXXX XX~
+            N4*XXXXXXXX*IA*99999~
+            DMG*D8*20000101*F~
+          NM1*PR*2*XXXX XXXX XXXXXX*****PI*99999~
+            N3*999 XXXXX XXX*XXXXX 99~
+            N4*XXX XXXXXX*IA*99999~
+          HL*80*79*23*0~
+            PAT*19~
+            NM1*QC*1*XXXXX*XXXXXX~
+              N3*9 X XXXXXX XX~
+              N4*XXXXXXXX*IA*99999~
+              DMG*D8*20000101*F~
+            CLM*9999999999-999*125***99>>9*Y*A*Y*Y*B~
+              DTP*435*D8*20110531~
+              HI*BK>30928~
+              NM1*DN*1*XXXXXX*XXXXX****XX*9999999999~
+              NM1*82*1*XXXXXXXX*XXXXX*A***XX*9999999999~
+                REF*EI*999999999~
+              NM1*77*2*XXXXXXXX XXX XXXXXXXXXX~
+                N3*9999 XXXXXX XXX X~
+                N4*XXXXXXXX*IA*99999~
+              NM1*DQ*1*XXXXXXXX*XXXXX*A***XX*9999999999~
+              SBR*S*19***IP****CI~
+                DMG*D8*20000101*M~
+                OI***Y*B**Y~
+                NM1*IL*1*XXXXX*XXXXXX****MI*9999999X~
+                  N3*9 X XXXXXX XX~
+                  N4*XXXXXXXX*IA*99999~
+                NM1*PR*2*XXXXXXXX XXXXXXXXXX XXXXXX*****PI*99999~
+              LX*1~
+                SV1*HC>90806*125*UN*1***1~
+                DTP*472*D8*20110531~
+                REF*6R*999X999999999999999999~
+    SE*2412*000000001~
+  GE*1*4201001~
+IEA*1*152635000~

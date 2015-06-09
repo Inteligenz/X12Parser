@@ -1,0 +1,20 @@
+﻿ISA*00*          *00*          *ZZ*SenderID       *ZZ*SCMEDICAID     *011101*0659*U*00401*000000001*0*P*^~
+  GS*HS*SenderID*SCMEDICAID*20011101*0659*1*X*004010X092~
+    ST*270*0001~
+      BHT*0022*13*00001*20000615*1325~
+      HL*1**20*1~
+        NM1*PR*2*Medicaid*****PI*PayerID~
+        HL*2*1*21*1~
+          NM1*1P*2******SV*ProviderID~
+            REF*1D*ProviderID~
+          HL*3*2*22*0~
+            TRN*1*12345-67890*9xxxxxxxxx*sub ID~
+            NM1*IL*1*LastName*FirstName*MI***MI*RecipientID~
+              REF*SY*SocSecNum~
+              REF*EJ*PatientID~
+              DMG*D8*20000614~
+              DTP*472*D8*20000614~
+              EQ*30~
+    SE*16*0001~
+  GE*1*1~
+IEA*1*000000001~

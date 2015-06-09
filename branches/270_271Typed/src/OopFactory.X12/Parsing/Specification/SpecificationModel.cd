@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OopFactory.X12.Parsing.Specification.ElementSpecification">
+    <Position X="12.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAACAAEAABAAAAAAAAQAAACQAAACAQARAAAAAAA=</HashCode>
+      <FileName>Parsing\Specification\ElementSpecification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Specification.HierarchicalLoopSpecification">
+    <Position X="6.75" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAQEAAACAAAAAABAAAAJAAA=</HashCode>
+      <FileName>Parsing\Specification\HierarchicalLoopSpecification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Specification.LoopSpecification">
+    <Position X="9.25" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAEAEAAQEAAACAACAAAAAAAABAAA=</HashCode>
+      <FileName>Parsing\Specification\LoopSpecification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Specification.SegmentSpecification">
+    <Position X="10.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAgAAAAASAAAEAIAAAAAAAAIAAAAIAAA=</HashCode>
+      <FileName>Parsing\Specification\SegmentSpecification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Specification.StartingSegment">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Parsing\Specification\StartingSegment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OopFactory.X12.Parsing.Specification.TransactionSpecification">
+    <Position X="6.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAABCAAAAIABAAAAAAAA=</HashCode>
+      <FileName>Parsing\Specification\TransactionSpecification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

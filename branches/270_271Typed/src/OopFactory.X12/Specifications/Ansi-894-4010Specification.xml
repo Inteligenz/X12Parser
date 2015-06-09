@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--894 Delivery/Return Base Record-->
+<TransactionSpecification TransactionSetIdentifierCode="894" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G82" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" />
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="0100" LoopRepeat="9999">
+      <Name>Line Item Detail/Direct Store Delivery</Name>
+      <StartingSegment SegmentId="G83" />
+      <Segment SegmentId="G22" Repeat="1" />
+      <Segment SegmentId="G72" Repeat="10" />
+      <Segment SegmentId="G23" Repeat="20" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="G72" Repeat="20" />
+  <Segment SegmentId="G23" Repeat="20" />
+  <Segment SegmentId="G84" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G86" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G85" Usage="Required" Repeat="1" />
+</TransactionSpecification>

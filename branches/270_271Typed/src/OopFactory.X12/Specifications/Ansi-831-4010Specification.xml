@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--831 Application Control Totals-->
+<TransactionSpecification TransactionSetIdentifierCode="831" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="2" />
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="TRN" />
+  <Segment SegmentId="QTY" Repeat="10" />
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount</Name>
+    <StartingSegment SegmentId="AMT" />
+    <Segment SegmentId="QTY" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

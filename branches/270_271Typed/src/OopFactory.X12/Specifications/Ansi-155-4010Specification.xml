@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--155 Business Credit Report-->
+<TransactionSpecification TransactionSetIdentifierCode="155" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="10000">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="NX2" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <HierarchicalLoop LoopId="20000">
+    <!-- The HL segment identifies the appropriate hierarchical level: company, 
+        subsidiary, parent company, direct affiliate, indirect affiliate, management, 
+        director, chief executive, management details, ultimate parent, property, 
+        headquarters, and branches. -->
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="LUI" />
+    <Segment SegmentId="C3" />
+    <Segment SegmentId="CRC" />
+    <Segment SegmentId="MTX" />
+    <Loop LoopId="21000">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="TPB" />
+      <Segment SegmentId="DTP" />
+    </Loop>
+    <Loop LoopId="22000">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="COM" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="DTP" />
+      <Loop LoopId="22100">
+        <Name>Request Information</Name>
+        <StartingSegment SegmentId="REQ" />
+        <Segment SegmentId="LOD" />
+        <Segment SegmentId="MTX" />
+        <Segment SegmentId="FDA" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="AWD" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="CRC" />
+        <Segment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="23000">
+      <Name>Information Request</Name>
+      <StartingSegment SegmentId="INR" />
+      <Segment SegmentId="NX1" />
+      <Segment SegmentId="ITC" />
+      <Segment SegmentId="C3" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="ASO" />
+      <Segment SegmentId="SPR" />
+      <Segment SegmentId="DMG" />
+      <Segment SegmentId="EMS" />
+      <Segment SegmentId="TER" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="ASI" />
+      <Segment SegmentId="CRC" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="MTX" />
+      <Loop LoopId="23100">
+        <Name>Credit Inquiry Details</Name>
+        <StartingSegment SegmentId="INQ" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="C3" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="PYT" />
+        <Segment SegmentId="PYM" />
+        <Segment SegmentId="AWD" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="ACD" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="SPR" />
+        <Segment SegmentId="ASO" />
+      </Loop>
+      <Loop LoopId="23200">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="NM1" />
+        <Segment SegmentId="NX1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="TPB" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="NX2" />
+        <Segment SegmentId="COM" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="AWD" />
+        <Segment SegmentId="ASO" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+      </Loop>
+      <Loop LoopId="23300">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="III" />
+        <Segment SegmentId="PCT" />
+        <Loop LoopId="23310">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="MTX" />
+          <Segment SegmentId="LQ" />
+          <Segment SegmentId="AWD" />
+          <Loop LoopId="23311">
+            <Name>Individual or Organizational Name</Name>
+            <StartingSegment SegmentId="NM1" />
+            <Segment SegmentId="N2" />
+            <Segment SegmentId="TPB" />
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="23400">
+        <Name>Request Information</Name>
+        <StartingSegment SegmentId="REQ" />
+        <Segment SegmentId="AWD" />
+        <Segment SegmentId="CRC" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="MTX" />
+      </Loop>
+      <Loop LoopId="23500">
+        <Name>Activity or Process Information</Name>
+        <StartingSegment SegmentId="API" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="CDS" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="BBC" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="ASO" />
+        <Segment SegmentId="MTX" />
+        <Segment SegmentId="PCT" />
+      </Loop>
+      <Loop LoopId="23510">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="III" />
+      </Loop>
+      <Loop LoopId="23520">
+        <Name>Conditions Indicator</Name>
+        <StartingSegment SegmentId="CRC" />
+        <Segment SegmentId="AWD" />
+      </Loop>
+      <Loop LoopId="23530">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="TPB" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="NX2" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="ITC" />
+        <Segment SegmentId="MTX" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="AWD" />
+        <Loop LoopId="23531">
+          <Name>Individual Identification</Name>
+          <StartingSegment SegmentId="IN1" />
+          <Segment SegmentId="IN2" />
+          <Segment SegmentId="TPB" />
+          <Segment SegmentId="N3" />
+          <Segment SegmentId="N4" />
+          <Segment SegmentId="NX2" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="23540">
+        <Name>Administration of Justice Event Description</Name>
+        <StartingSegment SegmentId="CED" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="MTX" />
+        <Segment SegmentId="NM1" />
+        <Segment SegmentId="N2" />
+        <Loop LoopId="23541">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

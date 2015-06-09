@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--150 Tax Rate Notification-->
+<TransactionSpecification TransactionSetIdentifierCode="150" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="N1" />
+  <Segment SegmentId="N2" />
+  <Segment SegmentId="N3" />
+  <Segment SegmentId="N4" />
+  <Segment SegmentId="PER" />
+  <Segment SegmentId="DTP" />
+  <Loop LoopId="TFS">
+    <Name>Tax Form</Name>
+    <StartingSegment SegmentId="TFS" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="MTX" />
+    <Loop LoopId="TRS">
+      <Name>Tax Rate</Name>
+      <StartingSegment SegmentId="TRS" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="QTY" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="DTP" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="FGS">
+      <Name>Form Group</Name>
+      <StartingSegment SegmentId="FGS" />
+      <Segment SegmentId="DTP" />
+      <Loop LoopId="TRS">
+        <Name>Tax Rate</Name>
+        <StartingSegment SegmentId="TRS" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="QTY" />
+        <Loop LoopId="N1">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="DTP" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

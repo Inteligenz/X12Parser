@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--190 Student Enrollment Verification-->
+<TransactionSpecification TransactionSetIdentifierCode="190" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="ENR" />
+  <Segment SegmentId="ERP" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="SST" />
+  <Segment SegmentId="SUM" />
+  <Segment SegmentId="NTE" />
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount Information</Name>
+    <StartingSegment SegmentId="AMT"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+  </Loop>
+  <Loop LoopId="SES">
+    <Name>Academic Session Header</Name>
+    <StartingSegment SegmentId="SES" />
+    <Segment SegmentId="SUM" />
+    <Segment SegmentId="ENR" />
+    <Segment SegmentId="FOS" />
+    <Segment SegmentId="NTE" />
+  </Loop>
+  <Loop LoopId="DEG">
+    <Name>Degree Record</Name>
+    <StartingSegment SegmentId="DEG" />
+    <Segment SegmentId="FOS" />
+    <Segment SegmentId="NTE" />
+  </Loop>
+</TransactionSpecification>

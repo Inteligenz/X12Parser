@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--144 Student Loan Transfer and Status Verification-->
+<TransactionSpecification TransactionSetIdentifierCode="144" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="GR" />
+  <Segment SegmentId="LV" />
+  <Segment SegmentId="DB" />
+  <Segment SegmentId="DTP" />
+  <Segment SegmentId="IDB" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+  </Loop>
+</TransactionSpecification>
