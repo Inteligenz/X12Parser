@@ -15,14 +15,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
         internal override void  Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
         {
             base.Initialize(parent, delimiters, loopSpecification);
-            _clm05 = new TypedElementServiceLocationInfo(_loop, 5);
-            _clm11 = new TypedElementRelatedCausesInfo(_loop, 11);
+            _clm05 = new TypedElementServiceLocationInfo(Loop, 5);
+            _clm11 = new TypedElementRelatedCausesInfo(Loop, 11);
         }
 
         public string CLM01_PatientControlNumber
         {
-            get { return _loop.GetElement(1); }
-            set { _loop.SetElement(1, value); }
+            get { return Loop.GetElement(1); }
+            set { Loop.SetElement(1, value); }
         }
 
         public decimal CLM02_TotalClaimChargeAmount
@@ -30,7 +30,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             get 
             {
                 decimal amount;
-                if (decimal.TryParse(_loop.GetElement(2), out amount))
+                if (decimal.TryParse(Loop.GetElement(2), out amount))
                     return amount;
                 else
                     return 0; 
@@ -39,20 +39,20 @@ namespace OopFactory.X12.Parsing.Model.Typed
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Total Claim Charge Amount must be greater than or equal to zero.");
-                _loop.SetElement(2, value.ToString().TrimStart('0'));
+                Loop.SetElement(2, value.ToString().TrimStart('0'));
             }
         }
 
         public string CLM03_ClaimFilingIndicatorCode
         {
-            get { return _loop.GetElement(3); }
-            set { _loop.SetElement(3, value); }
+            get { return Loop.GetElement(3); }
+            set { Loop.SetElement(3, value); }
         }
 
         public string CLM04_NonInstitutionalClaimTypeCode
         {
-            get { return _loop.GetElement(4); }
-            set { _loop.SetElement(4, value); }
+            get { return Loop.GetElement(4); }
+            set { Loop.SetElement(4, value); }
         }
 
         public TypedElementServiceLocationInfo CLM05
@@ -64,7 +64,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get 
             {
-                switch (_loop.GetElement(6))
+                switch (Loop.GetElement(6))
                 {
                     case "Y": return true;
                     case "N": return false;
@@ -76,37 +76,37 @@ namespace OopFactory.X12.Parsing.Model.Typed
                 if (value.HasValue)
                 {
                     if (value.Value == true)
-                        _loop.SetElement(6, "Y");
+                        Loop.SetElement(6, "Y");
                     else
-                        _loop.SetElement(6, "N");
+                        Loop.SetElement(6, "N");
                 }
                 else
-                    _loop.SetElement(6, "");
+                    Loop.SetElement(6, "");
             }
         }
 
         public string CLM07_ProviderAcceptAssignmentCode
         {
-            get { return _loop.GetElement(7); }
-            set { _loop.SetElement(7, value); }
+            get { return Loop.GetElement(7); }
+            set { Loop.SetElement(7, value); }
         }
 
         public string CLM08_BenefitsAssignmentCerficationIndicator
         {
-            get { return _loop.GetElement(8); }
-            set { _loop.SetElement(8, value); }
+            get { return Loop.GetElement(8); }
+            set { Loop.SetElement(8, value); }
         }
 
         public string CLM09_ReleaseOfInformationCode
         {
-            get { return _loop.GetElement(9); }
-            set { _loop.SetElement(9, value); }
+            get { return Loop.GetElement(9); }
+            set { Loop.SetElement(9, value); }
         }
 
         public string CLM10_PatientSignatureSourceCode
         {
-            get { return _loop.GetElement(10); }
-            set { _loop.SetElement(10, value); }
+            get { return Loop.GetElement(10); }
+            set { Loop.SetElement(10, value); }
         }
 
         public TypedElementRelatedCausesInfo CLM11
@@ -116,14 +116,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public string CLM12_SpecialProgramCode
         {
-            get { return _loop.GetElement(12); }
-            set { _loop.SetElement(12, value); }
+            get { return Loop.GetElement(12); }
+            set { Loop.SetElement(12, value); }
         }
 
         public string CLM20_DelayReasonCode
         {
-            get { return _loop.GetElement(20); }
-            set { _loop.SetElement(20, value); }
+            get { return Loop.GetElement(20); }
+            set { Loop.SetElement(20, value); }
         }
     }
 }

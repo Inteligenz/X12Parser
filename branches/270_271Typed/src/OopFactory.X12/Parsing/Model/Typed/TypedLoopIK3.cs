@@ -11,8 +11,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public string IK301_SegmentIdCode
         {
-            get { return _loop.GetElement(1); }
-            set { _loop.SetElement(1, value); }
+            get { return Loop.GetElement(1); }
+            set { Loop.SetElement(1, value); }
         }
 
         public int? IK302_SegmentPositionInTransactionSet
@@ -20,7 +20,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             get
             {
                 int position;
-                if (int.TryParse(_loop.GetElement(2), out position))
+                if (int.TryParse(Loop.GetElement(2), out position))
                     return position;
                 else
                     return null;
@@ -28,22 +28,22 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set
             {
                 if (value.HasValue)
-                    _loop.SetElement(2, value.ToString());
+                    Loop.SetElement(2, value.ToString());
                 else
-                    _loop.SetElement(2, "");
+                    Loop.SetElement(2, "");
             }
         }
 
         public string IK303_LoopIdentifierCode
         {
-            get { return _loop.GetElement(3); }
-            set { _loop.SetElement(3, value); }
+            get { return Loop.GetElement(3); }
+            set { Loop.SetElement(3, value); }
         }
 
         public string IK304_SyntaxErrorCode
         {
-            get { return _loop.GetElement(4); }
-            set { _loop.SetElement(4, value); }
+            get { return Loop.GetElement(4); }
+            set { Loop.SetElement(4, value); }
         }
     }
 }

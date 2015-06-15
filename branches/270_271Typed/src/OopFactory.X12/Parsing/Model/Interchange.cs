@@ -1,11 +1,12 @@
-﻿using System;
+﻿using OopFactory.X12.Extensions;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
+using OopFactory.X12.Parsing.Specification;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
-using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
@@ -121,6 +122,10 @@ namespace OopFactory.X12.Parsing.Model
         public string InterchangeControlNumber
         {
             get { return GetElement(13); }
+        }
+        public UsageIndicator InterchangeUsageIndicator
+        {
+            get { return GetElement(15).ToEnumFromEDIFieldValue<UsageIndicator>(); }
         }
 
         public IEnumerable<FunctionGroup> FunctionGroups

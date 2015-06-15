@@ -11,6 +11,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("N4")
         {
         }
+        public TypedSegmentN4(Segment segment)
+            : base(segment)
+        {
+        }
 
         public string N401_CityName
         {

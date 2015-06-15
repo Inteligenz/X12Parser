@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OopFactory.X12.Attributes;
 using OopFactory.X12.Extensions;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
@@ -11,6 +12,11 @@ namespace OopFactory.X12.Parsing.Model.Typed
     {
 
         public TypedSegmentDTP() : base("DTP") { }
+
+        public TypedSegmentDTP(Segment segment)
+            : base(segment)
+        {
+        }
 
         public DTPQualifier DTP01_DateTimeQualifier
         {
@@ -32,11 +38,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
                 if (element.Length == 8)
                     return new DateTimePeriod(DateTime.ParseExact(element, "yyyyMMdd", null));
                 if (element.Length == 17)
-                    return new DateTimePeriod(DateTime.ParseExact(element.Substring(0,8), "yyyyMMdd", null),
+                    return new DateTimePeriod(DateTime.ParseExact(element.Substring(0, 8), "yyyyMMdd", null),
                         DateTime.ParseExact(element.Substring(9), "yyyyMMdd", null));
                 return null;
             }
-            set {
+            set
+            {
                 _segment.SetElement(3,
                                     value.IsDateRange
                                         ? String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", value.StartDate, value.EndDate)

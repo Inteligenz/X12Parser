@@ -11,20 +11,20 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public string AK201_TransactionSetIdentifierCode
         {
-            get { return _loop.GetElement(1); }
-            set { _loop.SetElement(1, value); }
+            get { return Loop.GetElement(1); }
+            set { Loop.SetElement(1, value); }
         }
 
         public string AK202_TransactionSetControlNumber
         {
-            get { return _loop.GetElement(2); }
-            set { _loop.SetElement(2, value); }
+            get { return Loop.GetElement(2); }
+            set { Loop.SetElement(2, value); }
         }
 
         public string AK203_ImplementationConventionReference
         {
-            get { return _loop.GetElement(3); }
-            set { _loop.SetElement(3, value); }
+            get { return Loop.GetElement(3); }
+            set { Loop.SetElement(3, value); }
         }
     }
 }

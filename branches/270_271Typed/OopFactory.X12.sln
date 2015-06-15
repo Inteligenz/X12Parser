@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12", "src\OopFactory.X12\OopFactory.X12.csproj", "{AFE1BBBC-B957-461C-9022-B45D3DB117C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.X12Parser", "src\OopFactory.X12.X12Parser\OopFactory.X12.X12Parser.csproj", "{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}"
@@ -40,59 +42,75 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Tests.Integr
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = src\\OopFactory.X12\\OopFactory.X12.csproj
-		SccProjectTopLevelParentUniqueName1 = OopFactory.X12.sln
-		SccProjectName1 = src/OopFactory.X12
-		SccLocalPath1 = src\\OopFactory.X12
-		SccProjectUniqueName2 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
-		SccProjectName2 = src/OopFactory.X12.X12Parser
-		SccLocalPath2 = src\\OopFactory.X12.X12Parser
-		SccProjectUniqueName3 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
+		SccProjectUniqueName0 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
+		SccProjectName0 = src/OopFactory.X12.X12Parser
+		SccAuxPath0 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath0 = src\\OopFactory.X12.X12Parser
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = src\\OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
+		SccProjectName1 = src/OopFactory.X12.UnbundleX12
+		SccAuxPath1 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath1 = src\\OopFactory.X12.UnbundleX12
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = OopFactory.X12.TransformToX12\\OopFactory.X12.TransformToX12.csproj
+		SccProjectName2 = OopFactory.X12.TransformToX12
+		SccAuxPath2 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath2 = OopFactory.X12.TransformToX12
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = src\\OopFactory.X12.Hipaa\\OopFactory.X12.Hipaa.csproj
 		SccProjectTopLevelParentUniqueName3 = OopFactory.X12.sln
-		SccProjectName3 = tests/OopFactory.X12.Tests.Unit
-		SccLocalPath3 = tests\\OopFactory.X12.Tests.Unit
-		SccProjectUniqueName4 = src\\OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
-		SccProjectName4 = src/OopFactory.X12.UnbundleX12
-		SccLocalPath4 = src\\OopFactory.X12.UnbundleX12
-		SccProjectUniqueName5 = OopFactory.X12.TransformToX12\\OopFactory.X12.TransformToX12.csproj
-		SccProjectName5 = OopFactory.X12.TransformToX12
-		SccLocalPath5 = OopFactory.X12.TransformToX12
-		SccProjectUniqueName6 = src\\OopFactory.X12.Hipaa\\OopFactory.X12.Hipaa.csproj
-		SccProjectTopLevelParentUniqueName6 = OopFactory.X12.sln
-		SccProjectName6 = src/OopFactory.X12.Hipaa
-		SccLocalPath6 = src\\OopFactory.X12.Hipaa
-		SccProjectUniqueName7 = tests\\OopFactory.X12.Hipaa.Tests.Unit\\OopFactory.X12.Hipaa.Tests.Unit.csproj
+		SccProjectName3 = src/OopFactory.X12.Hipaa
+		SccAuxPath3 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath3 = src\\OopFactory.X12.Hipaa
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
+		SccProjectTopLevelParentUniqueName4 = OopFactory.X12.sln
+		SccProjectName4 = tests/OopFactory.X12.Tests.Unit
+		SccAuxPath4 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath4 = tests\\OopFactory.X12.Tests.Unit
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = tests\\OopFactory.X12.Hipaa.Tests.Unit\\OopFactory.X12.Hipaa.Tests.Unit.csproj
+		SccProjectTopLevelParentUniqueName5 = OopFactory.X12.sln
+		SccProjectName5 = tests/OopFactory.X12.Hipaa.Tests.Unit
+		SccAuxPath5 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath5 = tests\\OopFactory.X12.Hipaa.Tests.Unit
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = src\\OopFactory.X12.Hipaa.ClaimParser\\OopFactory.X12.Hipaa.ClaimParser.csproj
+		SccProjectName6 = src/OopFactory.X12.Hipaa.ClaimParser
+		SccAuxPath6 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath6 = src\\OopFactory.X12.Hipaa.ClaimParser
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName7 = src\\OopFactory.X12.Validation\\OopFactory.X12.Validation.csproj
 		SccProjectTopLevelParentUniqueName7 = OopFactory.X12.sln
-		SccProjectName7 = tests/OopFactory.X12.Hipaa.Tests.Unit
-		SccLocalPath7 = tests\\OopFactory.X12.Hipaa.Tests.Unit
-		SccProjectUniqueName8 = src\\OopFactory.X12.Hipaa.ClaimParser\\OopFactory.X12.Hipaa.ClaimParser.csproj
-		SccProjectName8 = src/OopFactory.X12.Hipaa.ClaimParser
-		SccLocalPath8 = src\\OopFactory.X12.Hipaa.ClaimParser
-		SccProjectUniqueName9 = src\\OopFactory.X12.Validation\\OopFactory.X12.Validation.csproj
-		SccProjectTopLevelParentUniqueName9 = OopFactory.X12.sln
-		SccProjectName9 = src/OopFactory.X12.Validation
-		SccLocalPath9 = src\\OopFactory.X12.Validation
-		SccProjectUniqueName10 = tests\\OopFactory.X12.Validation.Tests.Unit\\OopFactory.X12.Validation.Tests.Unit.csproj
-		SccProjectTopLevelParentUniqueName10 = OopFactory.X12.sln
-		SccProjectName10 = tests/OopFactory.X12.Validation.Tests.Unit
-		SccLocalPath10 = tests\\OopFactory.X12.Validation.Tests.Unit
-		SccProjectUniqueName11 = src\\OopFactory.X12.AcknowledgeX12\\OopFactory.X12.AcknowledgeX12.csproj
-		SccProjectName11 = src/OopFactory.X12.AcknowledgeX12
-		SccLocalPath11 = src\\OopFactory.X12.AcknowledgeX12
-		SccProjectUniqueName12 = src\\OopFactory.X12.ImportX12\\OopFactory.X12.ImportX12.csproj
-		SccProjectName12 = src/OopFactory.X12.ImportX12
-		SccLocalPath12 = src\\OopFactory.X12.ImportX12
-		SccProjectUniqueName13 = tests\\OopFactory.X12.Tests.Integration\\OopFactory.X12.Tests.Integration.csproj
-		SccProjectTopLevelParentUniqueName13 = OopFactory.X12.sln
-		SccProjectName13 = tests/OopFactory.X12.Tests.Integration
-		SccLocalPath13 = tests\\OopFactory.X12.Tests.Integration
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = OopFactory.X12.vsmdi
+		SccProjectName7 = src/OopFactory.X12.Validation
+		SccAuxPath7 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath7 = src\\OopFactory.X12.Validation
+		SccProvider7 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName8 = tests\\OopFactory.X12.Validation.Tests.Unit\\OopFactory.X12.Validation.Tests.Unit.csproj
+		SccProjectTopLevelParentUniqueName8 = OopFactory.X12.sln
+		SccProjectName8 = tests/OopFactory.X12.Validation.Tests.Unit
+		SccAuxPath8 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath8 = tests\\OopFactory.X12.Validation.Tests.Unit
+		SccProvider8 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName9 = src\\OopFactory.X12.AcknowledgeX12\\OopFactory.X12.AcknowledgeX12.csproj
+		SccProjectName9 = src/OopFactory.X12.AcknowledgeX12
+		SccAuxPath9 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath9 = src\\OopFactory.X12.AcknowledgeX12
+		SccProvider9 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName10 = src\\OopFactory.X12.ImportX12\\OopFactory.X12.ImportX12.csproj
+		SccProjectName10 = src/OopFactory.X12.ImportX12
+		SccAuxPath10 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath10 = src\\OopFactory.X12.ImportX12
+		SccProvider10 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName11 = tests\\OopFactory.X12.Tests.Integration\\OopFactory.X12.Tests.Integration.csproj
+		SccProjectTopLevelParentUniqueName11 = OopFactory.X12.sln
+		SccProjectName11 = tests/OopFactory.X12.Tests.Integration
+		SccAuxPath11 = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath11 = tests\\OopFactory.X12.Tests.Integration
+		SccProvider11 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -238,12 +256,15 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{203C0F4B-D1F0-4C20-8968-7DBD84F4A815} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{AFE1BBBC-B957-461C-9022-B45D3DB117C9} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
-		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{203C0F4B-D1F0-4C20-8968-7DBD84F4A815} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{9A5654D7-0DF6-448C-A803-41F6AE62E175} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 		{66441684-A8F7-4C9F-AB0F-5F9448352EF1} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = OopFactory.X12.vsmdi
 	EndGlobalSection
 EndGlobal

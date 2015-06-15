@@ -13,10 +13,14 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <SccProjectName>%24/x12parser/trunk/src/OopFactory.X12</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>https://tfs.codeplex.com/tfs/tfs11</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,24 +50,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EDIFieldValueAttribute.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Parsing\DentalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\InstitutionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Model\DetachedSegment.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
-    <Compile Include="Parsing\Model\Typed\AllowanceOrChargeIndicator.cs" />
-    <Compile Include="Parsing\Model\Typed\BenefitServiceTypeCodes.cs" />
-    <Compile Include="Parsing\Model\Typed\ContractTypeCode.cs" />
-    <Compile Include="Parsing\Model\Typed\DTPFormatQualifier.cs" />
-    <Compile Include="Parsing\Model\Typed\DTPQualifier.cs" />
-    <Compile Include="Parsing\Model\Typed\EntityIdentifierCode.cs" />
-    <Compile Include="Parsing\Model\Typed\EntityTypeQualifier.cs" />
-    <Compile Include="Parsing\Model\Typed\IdentificationCodeQualifier.cs" />
-    <Compile Include="Parsing\Model\Typed\PricingMethodology.cs" />
-    <Compile Include="Parsing\Model\Typed\RelationshipCode.cs" />
-    <Compile Include="Parsing\Model\Typed\TimeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\AllowanceOrChargeIndicator.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\BenefitServiceTypeCodes.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\CommunicationNumberQualifer.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\FollowupActionCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\CodeListQualifierCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\ContractTypeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\CoverageLevelCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\DTPFormatQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\DTPQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\EligibilityOrBenefitInformation.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\EntityIdentifierCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\EntityTypeQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\Gender.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\IdentificationCodeQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\IndividualRelationshipCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\IndustryCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\InsuranceTypeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\PricingMethodology.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\QuantityQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\RejectReasonCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\RelationshipCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\ServiceTypeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\ShipDeliveryOrCalendarPatternCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\ShipDeliveryPatternTimeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\TimeCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\TimePeriodQualifier.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\UsageIndicator.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopEQ.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIT1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopN1.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopEB.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentAAA.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentBHT.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentBIG.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementContextIdentification.cs" />
@@ -80,6 +104,9 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentDTM.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentFOB.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentHCP.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentHSD.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentINS.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentIII.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentIK5.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentAK1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopAK2.cs" />
@@ -117,8 +144,8 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentTDS.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentTXI.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopPID.cs" />
-    <Compile Include="Parsing\Model\Typed\UnitOrBasisOfMeasurementCode.cs" />
-    <Compile Include="Parsing\Model\Typed\YesNoConditionOrResponseCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\UnitOrBasisOfMeasurementCode.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\YesNoConditionOrResponseCode.cs" />
     <Compile Include="Parsing\ProfessionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Specification\IContainerSpecification.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />

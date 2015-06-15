@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Model.Typed;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 
 namespace OopFactory.X12.Tests.Unit.Creation
 {

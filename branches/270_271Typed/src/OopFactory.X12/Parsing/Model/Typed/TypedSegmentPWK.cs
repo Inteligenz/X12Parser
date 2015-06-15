@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OopFactory.X12.Extensions;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
