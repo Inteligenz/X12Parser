@@ -14,7 +14,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         internal override void Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
         {
             base.Initialize(parent, delimiters, loopSpecification);
-            _ik401 = new TypedElementPositionInSegment(_loop, 1);
+            _ik401 = new TypedElementPositionInSegment(Loop, 1);
         }
 
         public TypedElementPositionInSegment IK401
@@ -24,20 +24,20 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public string IK402_DataElementReferenceNumber
         {
-            get { return _loop.GetElement(2); }
-            set { _loop.SetElement(2, value); }
+            get { return Loop.GetElement(2); }
+            set { Loop.SetElement(2, value); }
         }
 
         public string IK403_SyntaxErrorCode
         {
-            get { return _loop.GetElement(3); }
-            set { _loop.SetElement(3, value); }
+            get { return Loop.GetElement(3); }
+            set { Loop.SetElement(3, value); }
         }
 
         public string IK404_CopyOfBaDataElement
         {
-            get { return _loop.GetElement(4); }
-            set { _loop.SetElement(4, value); }
+            get { return Loop.GetElement(4); }
+            set { Loop.SetElement(4, value); }
         }
     }
 }

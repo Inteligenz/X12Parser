@@ -5,7 +5,7 @@ using System.Text;
 using OopFactory.X12.Attributes;
 using OopFactory.X12.Extensions;
 
-namespace OopFactory.X12.Parsing.Model.Typed
+namespace OopFactory.X12.Parsing.Model.Typed.Enums
 {
     public enum YesNoConditionOrResponseCode
     {

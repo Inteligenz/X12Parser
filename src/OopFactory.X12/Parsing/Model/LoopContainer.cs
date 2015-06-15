@@ -25,6 +25,11 @@ namespace OopFactory.X12.Parsing.Model
 
         public IEnumerable<Loop> Loops { get { return _loops; } }
 
+        public void RemoveLoop(Loop loop)
+        {
+            _segments.Remove(loop);
+            _loops.Remove(loop);
+        }
         public Loop AddLoop(string segmentString) 
         {
             LoopSpecification loopSpec = GetLoopSpecification(segmentString);
@@ -48,8 +53,8 @@ namespace OopFactory.X12.Parsing.Model
             if (loopSpec != null)
             {
                 loop.Initialize(this, _delimiters, loopSpec);
-                _segments.Add(loop._loop);
-                _loops.Add(loop._loop);
+                _segments.Add(loop.Loop);
+                _loops.Add(loop.Loop);
                 return loop;
             }
             else

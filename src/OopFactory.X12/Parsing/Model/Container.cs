@@ -44,6 +44,11 @@ namespace OopFactory.X12.Parsing.Model
 
         internal abstract IEnumerable<string> TrailerSegmentIds { get; }
 
+        public void RemoveSegment(Segment segment)
+        {
+            _segments.Remove(segment);
+        }
+
         public Segment AddSegment(string segmentString)
         {
             return AddSegment(segmentString, false);

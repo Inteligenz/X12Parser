@@ -102,6 +102,15 @@ namespace OopFactory.X12.Parsing.Model
             return _dataElements.ElementAtOrDefault(elementNumber - 1);
         }
 
+        public string GetElement(int elementNumber, int maxLength)
+        {
+            var val = GetElement(elementNumber);
+            if (null == val)
+                return val;
+            else
+                return val.Substring(0, Math.Min(val.Length, maxLength));
+        }
+
         public decimal? GetDecimalElement(int elementNumber)
         {
             decimal element;

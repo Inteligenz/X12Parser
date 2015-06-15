@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model
 {
-    public abstract class TypedSegment 
+    public abstract class TypedSegment
     {
         private string _segmentId;
         internal Segment _segment;
@@ -13,6 +13,12 @@ namespace OopFactory.X12.Parsing.Model
         protected TypedSegment(string segmentId)
         {
             _segmentId = segmentId;
+        }
+
+        public TypedSegment(Segment segment)
+        {
+            _segment = segment;
+            _segmentId = segment.SegmentId;
         }
 
         public event EventHandler Initializing;

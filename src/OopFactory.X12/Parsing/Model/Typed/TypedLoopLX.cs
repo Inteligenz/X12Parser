@@ -19,13 +19,13 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             string segmentString = GetSegmentString(delimiters);
 
-            _loop = new Loop(parent, delimiters, segmentString, loopSpecification);
+            Loop = new Loop(parent, delimiters, segmentString, loopSpecification);
         }
 
         public string LX01_AssignedNumber
         {
-            get { return _loop.GetElement(1); }
-            set { _loop.SetElement(1, value); }
+            get { return Loop.GetElement(1); }
+            set { Loop.SetElement(1, value); }
         }
     }
 }

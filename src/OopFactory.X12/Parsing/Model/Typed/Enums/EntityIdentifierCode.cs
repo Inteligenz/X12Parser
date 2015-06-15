@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OopFactory.X12.Attributes;
 
-namespace OopFactory.X12.Parsing.Model.Typed
+namespace OopFactory.X12.Parsing.Model.Typed.Enums
 {
     public enum EntityIdentifierCode
     {

@@ -12,6 +12,11 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentREF(Segment segment)
+            : base(segment)
+        {
+        }
+
         public string REF01_ReferenceIdQualifier
         {
             get { return _segment.GetElement(1); }

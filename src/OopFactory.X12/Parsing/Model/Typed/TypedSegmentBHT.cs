@@ -11,6 +11,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("BHT")
         {
         }
+        public TypedSegmentBHT(Segment segment)
+            : base(segment)
+        {
+        }
 
         public string BHT01_HierarchicalStructureCode
         {

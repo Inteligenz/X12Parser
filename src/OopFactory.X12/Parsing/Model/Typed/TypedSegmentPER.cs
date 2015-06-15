@@ -1,22 +1,21 @@
-﻿using System;
+﻿using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public enum CommunicationNumberQualifer
-    {
-        Undefined,
-        ElectronicMail,
-        TelephoneExtension,
-        Facsimile,
-        Telephone
-    }
+  
     public class TypedSegmentPER : TypedSegment
     {
         public TypedSegmentPER()
             : base("PER")
+        {
+        }
+
+        public TypedSegmentPER(Segment segment)
+            : base(segment)
         {
         }
 

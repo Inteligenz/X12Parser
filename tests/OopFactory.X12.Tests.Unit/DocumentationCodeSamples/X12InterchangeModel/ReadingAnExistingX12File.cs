@@ -8,6 +8,7 @@ using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Model.Typed;
 using OopFactory.X12.Transformations;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 
 namespace OopFactory.X12.Tests.Unit.DocumentationCodeSamples.X12InterchangeModel
 {

@@ -1,21 +1,20 @@
-﻿using System;
+﻿using OopFactory.X12.Attributes;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public enum Gender
-    {
-        Undefined,
-        Female,
-        Male,
-        Unknown
-    }
-    
     public class TypedSegmentDMG : TypedSegment
     {
         public TypedSegmentDMG() : base("DMG") { }
+
+        public TypedSegmentDMG(Segment segment)
+            : base(segment)
+        {
+        }
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -31,24 +30,24 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public DateTime? DMG02_DateOfBirth
         {
-            get 
-            { 
+            get
+            {
                 string element = _segment.GetElement(2);
                 if (element.Length == 8)
                     return DateTime.ParseExact(element, "yyyyMMdd", null);
                 else
                     return null;
             }
-            set 
-            { 
-                _segment.SetElement(2, String.Format("{0:yyyyMMdd}",value)); 
+            set
+            {
+                _segment.SetElement(2, String.Format("{0:yyyyMMdd}", value));
             }
         }
 
         public Gender DMG03_Gender
         {
-            get 
-            { 
+            get
+            {
                 switch (_segment.GetElement(3))
                 {
                     case "F": return Gender.Female;
@@ -57,7 +56,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
                     default: return Gender.Undefined;
                 }
             }
-            set 
+            set
             {
                 switch (value)
                 {
