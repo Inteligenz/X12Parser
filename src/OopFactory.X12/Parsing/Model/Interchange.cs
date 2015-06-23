@@ -38,12 +38,12 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         public Interchange(DateTime date, int controlNumber, bool production)
-            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':'))
+            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':', '{'))
         {
         }
 
-        public Interchange(DateTime date, int controlNumber, bool production, char segmentTerminator, char elementSeparator, char subElementSeparator)
-            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet(segmentTerminator, elementSeparator, subElementSeparator))
+        public Interchange(DateTime date, int controlNumber, bool production, char segmentTerminator, char elementSeparator, char subElementSeparator, char? repetitionSeparator)
+            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet(segmentTerminator, elementSeparator, subElementSeparator, repetitionSeparator))
         {
         }
 

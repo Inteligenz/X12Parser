@@ -10,12 +10,14 @@ namespace OopFactory.X12.Parsing
         private char _segmentTerminator;
         private char _elementSeparator;
         private char _subElementSeparator;
+        private char? _repetitionSeparator;
 
-        public X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator)
+        public X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator, char? repetitionSeparator)
         {
             _segmentTerminator = segmentTerminator;
             _elementSeparator = elementSeparator;
             _subElementSeparator = subElementSeparator;
+            _repetitionSeparator = repetitionSeparator;
         }
 
         internal X12DelimiterSet(char[] isaSegmentAndTerminator)
@@ -28,10 +30,16 @@ namespace OopFactory.X12.Parsing
                 throw new ArgumentException("First segment must start with ISA");
 
             _elementSeparator = isaSegmentAndTerminator[3];
+            _repetitionSeparator = isaSegmentAndTerminator[82];
             _subElementSeparator = isaSegmentAndTerminator[104];
 
             if (isaSegmentAndTerminator.Length >= 106)
                 _segmentTerminator = isaSegmentAndTerminator[105];
+
+            if (isaSegmentAndTerminator.Length >= 106)
+                _segmentTerminator = isaSegmentAndTerminator[105];
+
+      
 
             if (char.IsLetterOrDigit(_elementSeparator))
                 throw new ArgumentException(_elementSeparator + " is not a valid element separator in position 4 of the file.");
@@ -57,6 +65,13 @@ namespace OopFactory.X12.Parsing
         public char SubElementSeparator
         {
             get { return _subElementSeparator; }
+        }
+        /// <summary>
+        /// Also ISA11
+        /// </summary>
+        public char RepetitionSeparator
+        {
+            get { return _repetitionSeparator.GetValueOrDefault(); }
         }
     }
 }

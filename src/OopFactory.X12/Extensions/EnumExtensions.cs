@@ -18,6 +18,24 @@ namespace OopFactory.X12.Extensions
             throw new InvalidOperationException("No EDIValue Attribute defined for " + enumValue);
         }
 
+        public static string EDIFieldValue<T>(this IEnumerable<T> enumValue, char repetitionSeparator)
+        {
+            var tt = typeof(T);
+            var at = typeof(EDIFieldValueAttribute);
+            var sb = new StringBuilder();
+            enumValue.ToList().ForEach(t =>
+                {
+                    var val = tt.GetField(t.ToString()).GetCustomAttributes(at, false).FirstOrDefault();
+                    if (null != val)
+                    {
+                        sb.AppendFormat("{0}{1}", ((EDIFieldValueAttribute)val).Value, repetitionSeparator);
+                    }
+                });
+            if (0 < sb.Length)
+                sb = sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
         public static string EDIFieldValueSafe(this Enum enumValue)
         {
             if (null == enumValue)
@@ -61,9 +79,22 @@ namespace OopFactory.X12.Extensions
             {
                 return (T)field.GetValue(null);
             }
-
-            throw new InvalidOperationException("No EDI Field Value found for " + itemValue);
+            return new T?();
         }
 
+        public static IEnumerable<T> ToMultiEnumFromEDIFieldValueSafe<T>(this string itemValue, char SubElementSeparator) where T : struct
+        {
+            if (string.IsNullOrWhiteSpace(itemValue))
+                return new T[] { };
+            var type = typeof(T);
+            if (!type.IsEnum)
+                throw new InvalidOperationException();
+            var items = itemValue.Split(SubElementSeparator).ToList();
+            return type.GetFields().Where(t =>
+            {
+                var attrib = (EDIFieldValueAttribute[])t.GetCustomAttributes(typeof(EDIFieldValueAttribute), false);
+                return attrib.Length > 0 && items.Contains(attrib.First().Value);
+            }).Select(t => (T)t.GetValue(null));
+        }
     }
 }
