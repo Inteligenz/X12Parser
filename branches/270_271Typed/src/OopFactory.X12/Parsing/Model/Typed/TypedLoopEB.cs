@@ -41,10 +41,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(2, value); }
         }
 
-        public ServiceTypeCode? EB03_ServiceTypeCodeEnum
+        public IEnumerable<ServiceTypeCode> EB03_ServiceTypeCodeEnums
         {
-            get { return Loop.GetElement(3, 2).ToEnumFromEDIFieldValueSafe<ServiceTypeCode>(); }
-            set { Loop.SetElement(3, value.EDIFieldValue()); }
+            get { return Loop.GetElement(3).ToMultiEnumFromEDIFieldValueSafe<ServiceTypeCode>(Loop._delimiters.RepetitionSeparator); }
+            set { Loop.SetElement(3, value.EDIFieldValue<ServiceTypeCode>(Loop._delimiters.RepetitionSeparator)); }
         }
 
         public InsuranceTypeCode? EB04_InsuranceTypeCodeEnum

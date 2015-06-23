@@ -37,7 +37,7 @@ IEA*1*000000035~";
         [TestMethod]
         public void Create810_4010Version()
         {
-            var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~','*','>')
+            var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~','*','>', '{')
             {
                 SecurityInfoQualifier = "00",
                 InterchangeSenderIdQualifier = "30",
