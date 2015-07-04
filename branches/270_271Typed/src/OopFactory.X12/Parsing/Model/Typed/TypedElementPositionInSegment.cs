@@ -8,46 +8,19 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
-        private int? _elementPositionInSegment;
-        private int? _componentDataElementPositionInComposite;
-        private int? _repeatingDataElementPosition;
-
         public override string ToString()
         {
             string value = string.Format("{1}{0}{2}{0}{3}",
                Segment._delimiters.SubElementSeparator,
-               _elementPositionInSegment, _componentDataElementPositionInComposite, _repeatingDataElementPosition);
+               _1_ElementPositionInSegment,
+               _2_ComponentDataElementPositionInComposite,
+               _3_RepeatingDataElementPosition);
             value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
             return value;
         }
 
-        public int? _1_ElementPositionInSegment
-        {
-            get { return _elementPositionInSegment; }
-            set
-            {
-                _elementPositionInSegment = value;
-            }
-        }
-
-        public int? _2_ComponentDataElementPositionInComposite
-        {
-            get { return _componentDataElementPositionInComposite; }
-            set
-            {
-                _componentDataElementPositionInComposite = value;
-
-            }
-        }
-
-        public int? _3_RepeatingDataElementPosition
-        {
-            get { return _repeatingDataElementPosition; }
-            set
-            {
-                _repeatingDataElementPosition = value;
-
-            }
-        }
+        public int? _1_ElementPositionInSegment { get; set; }
+        public int? _2_ComponentDataElementPositionInComposite { get; set; }
+        public int? _3_RepeatingDataElementPosition { get; set; }
     }
 }
