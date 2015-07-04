@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementAdjustmentIdentifier : BaseElementReference
@@ -7,6 +7,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementAdjustmentIdentifier(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_AdjustmentReasonCode = SubElements.ElementAt(0);
+            if (1 < SubElements.Count()) _2_ReferenceIdentification = SubElements.ElementAt(1);
         }
 
         public override string ToString()

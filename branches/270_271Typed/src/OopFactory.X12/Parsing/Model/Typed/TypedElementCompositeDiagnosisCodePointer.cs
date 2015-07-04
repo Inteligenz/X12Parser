@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementCompositDiagnosisCodePointer : BaseElementReference
@@ -7,6 +7,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementCompositDiagnosisCodePointer(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_DiagnosisCodePointer = Convert.ToInt32(SubElements.ElementAt(0));
+            if (1 < SubElements.Count()) _2_DiagnosisCodePointer = Convert.ToInt32(SubElements.ElementAt(1));
+            if (2 < SubElements.Count()) _3_DiagnosisCodePointer = Convert.ToInt32(SubElements.ElementAt(2));
+            if (3 < SubElements.Count()) _4_DiagnosisCodePointer = Convert.ToInt32(SubElements.ElementAt(3));
         }
 
         public override string ToString()

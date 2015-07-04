@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementPositionInSegment : BaseElementReference
@@ -6,6 +7,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementPositionInSegment(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_ElementPositionInSegment = Convert.ToInt32(SubElements.ElementAt(0));
+            if (1 < SubElements.Count()) _2_ComponentDataElementPositionInComposite = Convert.ToInt32(SubElements.ElementAt(1));
+            if (2 < SubElements.Count()) _3_RepeatingDataElementPosition = Convert.ToInt32(SubElements.ElementAt(2));
         }
 
         public override string ToString()

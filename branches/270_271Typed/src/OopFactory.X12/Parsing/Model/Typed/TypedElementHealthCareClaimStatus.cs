@@ -1,7 +1,7 @@
 ﻿using OopFactory.X12.Extensions;
 using OopFactory.X12.Parsing.Model.Typed.Enums;
 using System;
-
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementHealthCareClaimStatus : BaseElementReference
@@ -9,6 +9,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementHealthCareClaimStatus(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_IndustryCode = SubElements.ElementAt(0);
+            if (1 < SubElements.Count()) _2_IndustryCode = SubElements.ElementAt(1);
+            if (2 < SubElements.Count()) _3_EntityIdentifierCode = SubElements.ElementAt(2).ToEnumFromEDIFieldValue<EntityIdentifierCode>();
         }
 
         public string _1_IndustryCode { get; set; }

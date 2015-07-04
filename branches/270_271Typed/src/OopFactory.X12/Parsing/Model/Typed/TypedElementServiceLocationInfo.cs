@@ -12,6 +12,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementServiceLocationInfo(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_FacilityCodeValue = SubElements.ElementAt(0).ToEnumFromEDIFieldValue<PlaceOfServiceCodes>();
+            if (1 < SubElements.Count()) _2_FacilityCodeQualifier = SubElements.ElementAt(1);
+            if (2 < SubElements.Count()) _3_ClaimFrequencyTypeCode = SubElements.ElementAt(2);
         }
 
         public override string ToString()

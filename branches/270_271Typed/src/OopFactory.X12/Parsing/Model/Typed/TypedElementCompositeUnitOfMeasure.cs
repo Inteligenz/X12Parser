@@ -1,7 +1,7 @@
 ﻿using OopFactory.X12.Extensions;
 using OopFactory.X12.Parsing.Model.Typed.Enums;
 using System;
-
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementCompositeUnitOfMeasure : BaseElementReference
@@ -9,6 +9,21 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementCompositeUnitOfMeasure(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_UnitOrBasisMeasCode = SubElements.ElementAt(0).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>();
+            if (1 < SubElements.Count()) _2_Exponent1 = SubElements.ElementAt(1);
+            if (2 < SubElements.Count()) _3_Multiplier = SubElements.ElementAt(2);
+            if (3 < SubElements.Count()) _4_UnitOrBasisMeasCode = SubElements.ElementAt(3).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>();
+            if (4 < SubElements.Count()) _5_Exponent2 = SubElements.ElementAt(4);
+            if (5 < SubElements.Count()) _6_Multiplier = SubElements.ElementAt(5);
+            if (6 < SubElements.Count()) _7_UnitOrBasisMeasCode = SubElements.ElementAt(6).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>();
+            if (7 < SubElements.Count()) _8_Exponent3 = SubElements.ElementAt(7);
+            if (8 < SubElements.Count()) _9_Multiplier = SubElements.ElementAt(8);
+            if (9 < SubElements.Count()) _10_UnitOrBasisMeasCode = SubElements.ElementAt(9).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>();
+            if (10 < SubElements.Count()) _11_Exponent4 = SubElements.ElementAt(10);
+            if (11 < SubElements.Count()) _12_Multiplier = SubElements.ElementAt(11);
+            if (12 < SubElements.Count()) _13_UnitOrBasisMeasCode = SubElements.ElementAt(12).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>();
+            if (13 < SubElements.Count()) _14_Exponent5 = SubElements.ElementAt(13);
+            if (14 < SubElements.Count()) _15_Multiplier = SubElements.ElementAt(14);
         }
 
         public override string ToString()
