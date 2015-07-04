@@ -57,6 +57,9 @@
     <Compile Include="Parsing\Model\DetachedSegment.cs" />
     <Compile Include="Parsing\Model\ISegmentContainer.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedElementAdjustmentIdentifier.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopCLP.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentBPR.cs" />
     <Compile Include="Parsing\Model\Typed\BaseElementReference.cs" />
     <Compile Include="Parsing\Model\Typed\DateTimePeriod.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\AllowanceOrChargeIndicator.cs" />
@@ -144,11 +147,13 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentMIA.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentMOA.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentMSG.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentN1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN2.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN9.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentNTE.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentOI.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentPID.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentPLB.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentPS1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementRelatedCausesInfo.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementServiceLocationInfo.cs" />
@@ -167,6 +172,7 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentPRV.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentPWK.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentQTY.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentRDM.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSAC.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
@@ -175,7 +181,10 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV5.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSVD.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentTA1.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentTS2.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentTS3.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentTDS.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentTRN.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentTXI.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopPID.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\UnitOrBasisOfMeasurementCode.cs" />
