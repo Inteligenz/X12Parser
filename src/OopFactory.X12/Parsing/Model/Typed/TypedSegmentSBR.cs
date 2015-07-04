@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentSBR : TypedSegment
@@ -12,6 +8,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
         public TypedSegmentSBR(Segment segment) : base(segment) { }
+
         public string SBR01_PayerResponsibilitySequenceNumberCode
         {
             get { return _segment.GetElement(1); }

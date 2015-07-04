@@ -561,7 +561,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 }
                 remarksList.Add(remark);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
             }

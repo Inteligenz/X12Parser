@@ -57,7 +57,9 @@
     <Compile Include="Parsing\Model\DetachedSegment.cs" />
     <Compile Include="Parsing\Model\ISegmentContainer.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\ActionCodes.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementAdjustmentIdentifier.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedElementHealthCareClaimStatus.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopCLP.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentBPR.cs" />
     <Compile Include="Parsing\Model\Typed\BaseElementReference.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentREF.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSAC.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSBR.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentSTC.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV2.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentSV5.cs" />
