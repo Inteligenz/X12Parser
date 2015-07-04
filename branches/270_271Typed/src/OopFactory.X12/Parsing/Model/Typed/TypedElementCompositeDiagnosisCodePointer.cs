@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
@@ -33,37 +30,25 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public int? _1_DiagnosisCodePointer
         {
             get { return _diagnosisCodePointer1; }
-            set
-            {
-                _diagnosisCodePointer1 = value;
-            }
+            set { _diagnosisCodePointer1 = value; }
         }
 
         public int? _2_DiagnosisCodePointer
         {
             get { return _diagnosisCodePointer2; }
-            set
-            {
-                _diagnosisCodePointer2 = value;
-            }
+            set { _diagnosisCodePointer2 = value; }
         }
 
         public int? _3_DiagnosisCodePointer
         {
             get { return _diagnosisCodePointer3; }
-            set
-            {
-                _diagnosisCodePointer3 = value;
-            }
+            set { _diagnosisCodePointer3 = value; }
         }
 
         public int? _4_DiagnosisCodePointer
         {
             get { return _diagnosisCodePointer4; }
-            set
-            {
-                _diagnosisCodePointer4 = value;
-            }
+            set { _diagnosisCodePointer4 = value; }
         }
     }
 }
