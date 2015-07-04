@@ -113,7 +113,6 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentBIG.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementContextIdentification.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementPositionInSegment.cs" />
-    <Compile Include="Parsing\Model\Typed\TypedElementReferenceInSegment.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIK3.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopIK4.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentCAD.cs" />

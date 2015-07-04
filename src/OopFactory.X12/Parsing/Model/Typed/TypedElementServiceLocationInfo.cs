@@ -9,10 +9,6 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementServiceLocationInfo : BaseElementReference
     {
-        private PlaceOfServiceCodes _facilityCodeValue;
-        private string _facilityCodeQualifier;
-        private string _claimFrequencyTypeCode;
-
         public TypedElementServiceLocationInfo(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
@@ -22,29 +18,17 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             string value = String.Format("{1}{0}{2}{0}{3}",
                 Segment._delimiters.SubElementSeparator,
-                _facilityCodeValue.EDIFieldValue(),
-                _facilityCodeQualifier,
-                _claimFrequencyTypeCode);
+                _1_FacilityCodeValue.EDIFieldValue(),
+                _2_FacilityCodeQualifier,
+                _3_ClaimFrequencyTypeCode);
             value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
             return value;
         }
 
-        public PlaceOfServiceCodes _1_FacilityCodeValue
-        {
-            get { return _facilityCodeValue; }
-            set { _facilityCodeValue = value; }
-        }
+        public PlaceOfServiceCodes _1_FacilityCodeValue { get; set; }
 
-        public string _2_FacilityCodeQualifier
-        {
-            get { return _2_FacilityCodeQualifier; }
-            set { _facilityCodeQualifier = value; }
-        }
+        public string _2_FacilityCodeQualifier { get; set; }
 
-        public string _3_ClaimFrequencyTypeCode
-        {
-            get { return _claimFrequencyTypeCode; }
-            set { _claimFrequencyTypeCode = value; }
-        }
+        public string _3_ClaimFrequencyTypeCode { get; set; }
     }
 }
