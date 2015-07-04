@@ -2,7 +2,7 @@
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     /// <summary>
-    /// Tax Information
+    /// Trace Information
     /// </summary>
     public class TypedSegmentTRN : TypedSegment
     {
