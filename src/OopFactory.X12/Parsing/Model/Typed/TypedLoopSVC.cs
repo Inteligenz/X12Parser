@@ -45,7 +45,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(4, value); }
         }
 
-        public decimal? SVD05_Quantiy
+        public decimal? SVC05_Quantiy
         {
             get { return Loop.GetDecimalElement(5); }
             set { Loop.SetElement(5, value); }
@@ -57,7 +57,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(6, value); }
         }
 
-        public decimal? SVD07_Quantiy
+        public decimal? SVC07_Quantiy
         {
             get { return Loop.GetDecimalElement(7); }
             set { Loop.SetElement(7, value); }
