@@ -16,7 +16,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
             Segment = _segment;
             ElementNumber = _elementNumber;
             var elementString = Segment.GetElement(_elementNumber);
-            SubElements = elementString.Split(_segment.Delimiters.SubElementSeparator);
+            if (!string.IsNullOrWhiteSpace(elementString))
+            {
+                SubElements = elementString.Split(_segment.Delimiters.SubElementSeparator);
+            }
+            else
+            {
+                SubElements = new string[] { };
+            }
         }
     }
 }
