@@ -7,10 +7,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentAK1 : TypedSegment
     {
-        public TypedSegmentAK1()
-            : base("AK1")
-        {
-        }
+        public TypedSegmentAK1() : base("AK1") { }
+        public TypedSegmentAK1(Segment seg) : base(seg) { }
 
         public string AK101_FunctionalIdCode
         {

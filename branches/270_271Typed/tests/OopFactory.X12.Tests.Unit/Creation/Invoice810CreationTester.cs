@@ -1,12 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing.Model.Typed;
 using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
+using System.Diagnostics;
 
 namespace OopFactory.X12.Tests.Unit.Creation
 {
@@ -37,7 +34,7 @@ IEA*1*000000035~";
         [TestMethod]
         public void Create810_4010Version()
         {
-            var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~','*','>', '{')
+            var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~', '*', '>', '{')
             {
                 SecurityInfoQualifier = "00",
                 InterchangeSenderIdQualifier = "30",
@@ -62,10 +59,10 @@ IEA*1*000000035~";
             var billTo = trans.AddLoop(new TypedLoopN1());
             billTo.N101_EntityIdentifierCodeEnum = EntityIdentifierCode.BillToParty;
             billTo.N102_Name = "The Scheduling Coordinator, Inc";
-            
+
             var billToAddress = billTo.AddSegment(new TypedSegmentN3());
             billToAddress.N301_AddressInformation = "53241 Hamilton Dr";
-            
+
             var billToLocale = billTo.AddSegment(new TypedSegmentN4());
             billToLocale.N401_CityName = "Palo Alto";
             billToLocale.N402_StateOrProvinceCode = "CA";

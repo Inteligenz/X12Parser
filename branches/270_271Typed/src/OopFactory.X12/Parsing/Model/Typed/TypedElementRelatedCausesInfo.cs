@@ -5,79 +5,56 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public class TypedElementRelatedCausesInfo
+    public class TypedElementRelatedCausesInfo : BaseElementReference
     {
-        private int _elementNumber;
-        private Segment _segment;
         private string _relatedCausesCode1;
         private string _relatedCausesCode2;
         private string _relatedCausesCode3;
         private string _stateOrProviceCode;
         private string _countryCode;
 
-        internal TypedElementRelatedCausesInfo(Segment segment, int elementNumber)
+        public TypedElementRelatedCausesInfo(Segment segment, int elementNumber)
+            : base(segment, elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
         }
 
-        private void UpdateElement()
+        public override string ToString()
         {
             string value = String.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-                    _segment._delimiters.SubElementSeparator,
-                    _relatedCausesCode1, _relatedCausesCode2, _relatedCausesCode3, _stateOrProviceCode, _countryCode);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+                Segment._delimiters.SubElementSeparator,
+                _relatedCausesCode1, _relatedCausesCode2, _relatedCausesCode3, _stateOrProviceCode, _countryCode);
+            value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
+            return value;
         }
 
         public string _1_RelatedCausesCode
         {
             get { return _relatedCausesCode1; }
-            set { 
-                _relatedCausesCode1 = value; 
-                UpdateElement(); 
-            }
+            set { _relatedCausesCode1 = value; }
         }
 
         public string _2_RelatedCausesCode
         {
             get { return _relatedCausesCode2; }
-            set
-            {
-                _relatedCausesCode2 = value;
-                UpdateElement();
-            }
+            set { _relatedCausesCode2 = value; }
         }
 
         public string _3_RelatedCausesCode
         {
             get { return _relatedCausesCode3; }
-            set
-            {
-                _relatedCausesCode3 = value;
-                UpdateElement();
-            }
+            set { _relatedCausesCode3 = value; }
         }
 
         public string _4_StateOrProvidenceCode
         {
             get { return _stateOrProviceCode; }
-            set
-            {
-                _stateOrProviceCode = value;
-                UpdateElement();
-            }
+            set { _stateOrProviceCode = value; }
         }
 
         public string _5_CountryCode
         {
             get { return _countryCode; }
-            set
-            {
-                _countryCode = value;
-                UpdateElement();
-            }
+            set { _countryCode = value; }
         }
-
     }
 }

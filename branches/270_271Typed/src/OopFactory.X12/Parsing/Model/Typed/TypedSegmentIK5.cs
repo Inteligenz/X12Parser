@@ -8,6 +8,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
     public class TypedSegmentIK5 : TypedSegment
     {
         public TypedSegmentIK5() : base("IK5") { }
+        public TypedSegmentIK5(Segment segment) : base(segment) { }
 
         public string IK501_TransactionSetAcknowledgmentCode
         {

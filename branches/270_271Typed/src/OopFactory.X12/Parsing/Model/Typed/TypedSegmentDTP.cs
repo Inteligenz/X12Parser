@@ -13,10 +13,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public TypedSegmentDTP() : base("DTP") { }
 
-        public TypedSegmentDTP(Segment segment)
-            : base(segment)
-        {
-        }
+        public TypedSegmentDTP(Segment segment) : base(segment) { }
 
         public DTPQualifier DTP01_DateTimeQualifier
         {
@@ -49,31 +46,6 @@ namespace OopFactory.X12.Parsing.Model.Typed
                                         ? String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", value.StartDate, value.EndDate)
                                         : String.Format("{0:yyyyMMdd}", value.StartDate));
             }
-        }
-
-    }
-
-
-    /// <summary>
-    /// Move this class in seperate file if being used by other classes.
-    /// </summary>
-    public class DateTimePeriod
-    {
-        public bool IsDateRange { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate { get; private set; }
-
-        public DateTimePeriod(DateTime date)
-        {
-            this.StartDate = date;
-            IsDateRange = false;
-        }
-
-        public DateTimePeriod(DateTime startDate, DateTime endDate)
-        {
-            this.StartDate = startDate;
-            this.EndDate = endDate;
-            IsDateRange = true;
         }
 
     }

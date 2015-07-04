@@ -14,6 +14,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("CAD")
         {
         }
+        public TypedSegmentCAD(Segment seg) : base(seg) { }
 
         /// <summary>
         /// K = Back Haul

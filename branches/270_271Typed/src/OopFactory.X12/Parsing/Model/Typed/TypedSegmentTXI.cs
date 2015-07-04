@@ -16,7 +16,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("TXI")
         {
         }
-
+        public TypedSegmentTXI(Segment segment) : base(segment) { }
         public string TXI01_TaxTypeCode
         {
             get { return _segment.GetElement(1); }

@@ -102,6 +102,11 @@ namespace OopFactory.X12.Parsing.Model
             return base.ToX12String(addWhitespace);
         }
 
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());
+            base.ToX12String(addWhitespace, writer);
+        }
+
         internal override void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(SegmentId))

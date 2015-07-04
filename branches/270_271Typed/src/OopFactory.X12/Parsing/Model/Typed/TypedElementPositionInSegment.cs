@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public class TypedElementPositionInSegment
+    public class TypedElementPositionInSegment : BaseElementReference
     {
-        private int _elementNumber;
-        private Segment _segment;
+        public TypedElementPositionInSegment(Segment segment, int elementNumber)
+            : base(segment, elementNumber)
+        {
+        }
+
         private int? _elementPositionInSegment;
         private int? _componentDataElementPositionInComposite;
         private int? _repeatingDataElementPosition;
 
-        internal TypedElementPositionInSegment(Segment segment, int elementNumber)
-        {
-            _segment = segment;
-            _elementNumber = elementNumber;
-        }
-
-        private void UpdateElement()
+        public override string ToString()
         {
             string value = string.Format("{1}{0}{2}{0}{3}",
-                _segment._delimiters.SubElementSeparator,
-                _elementPositionInSegment, _componentDataElementPositionInComposite, _repeatingDataElementPosition);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+               Segment._delimiters.SubElementSeparator,
+               _elementPositionInSegment, _componentDataElementPositionInComposite, _repeatingDataElementPosition);
+            value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
+            return value;
         }
 
         public int? _1_ElementPositionInSegment
@@ -34,7 +27,6 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set
             {
                 _elementPositionInSegment = value;
-                UpdateElement();
             }
         }
 
@@ -44,7 +36,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set
             {
                 _componentDataElementPositionInComposite = value;
-                UpdateElement();
+
             }
         }
 
@@ -54,7 +46,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set
             {
                 _repeatingDataElementPosition = value;
-                UpdateElement();
+
             }
         }
     }

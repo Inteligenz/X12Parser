@@ -17,6 +17,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentPID(Segment segment) : base(segment) { }
+
         /// <summary>
         /// F = Free form
         /// </summary>

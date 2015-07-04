@@ -14,7 +14,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("TDS")
         {
         }
-
+        public TypedSegmentTDS(Segment segment) : base(segment) { }
         /// <summary>
         /// This is an implied decimal with 2 decimal points,
         /// multiply your decimal by 100 to assign here

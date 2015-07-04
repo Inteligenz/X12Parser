@@ -9,9 +9,9 @@ namespace OopFactory.X12.Repositories
 {
     public class RepoLoop<T> where T : struct
     {
-        public RepoLoop(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator, char? repetitionSeparator)
+        public RepoLoop(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator)
         {
-            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator, repetitionSeparator), segmentString);
+            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
         }
 
         public T LoopId { get; set; }

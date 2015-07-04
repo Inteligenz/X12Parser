@@ -17,6 +17,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentCTT(Segment seg) : base(seg) { }
+
         public int? CTT01_NumberOfLineItems
         {
             get { return _segment.GetIntElement(1); }

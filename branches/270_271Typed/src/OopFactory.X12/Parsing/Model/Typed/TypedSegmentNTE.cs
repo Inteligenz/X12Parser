@@ -15,6 +15,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentNTE(Segment segment) : base(segment) { }
+
         /// <summary>
         /// GEN = Entire Transaction Set
         /// </summary>

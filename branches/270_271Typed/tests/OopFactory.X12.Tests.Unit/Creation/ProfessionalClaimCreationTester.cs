@@ -163,12 +163,10 @@ namespace OopFactory.X12.Tests.Unit.Creation
             var claim2300Loop = HL3Loop.AddLoop(new TypedLoopCLM());
             claim2300Loop.CLM01_PatientControlNumber = "26463774";
             claim2300Loop.CLM02_TotalClaimChargeAmount = Convert.ToDecimal(100);
-            claim2300Loop.CLM05._1_FacilityCodeValue = "11";
-            claim2300Loop.CLM05._2_FacilityCodeQualifier = "B";
-            claim2300Loop.CLM05._3_ClaimFrequencyTypeCode = "1";
-            claim2300Loop.CLM06_ProviderOrSupplierSignatureIndicator = true;
+            claim2300Loop.CLM05 = claim2300Loop.CreateTypedElementServiceLocationInfo(PlaceOfServiceCodes.Office, "B", "1");
+            claim2300Loop.CLM06_ProviderOrSupplierSignatureIndicator = YesNoConditionOrResponseCode.Yes;
             claim2300Loop.CLM07_ProviderAcceptAssignmentCode = "A";
-            claim2300Loop.CLM08_BenefitsAssignmentCerficationIndicator = "Y";
+            claim2300Loop.CLM08_BenefitsAssignmentCerficationIndicator = YesNoConditionOrResponseCode.Yes;
             claim2300Loop.CLM09_ReleaseOfInformationCode = "I";
 
             var refSegment = claim2300Loop.AddSegment(new TypedSegmentREF());
@@ -176,21 +174,21 @@ namespace OopFactory.X12.Tests.Unit.Creation
             refSegment.REF02_ReferenceId = "17312345600006351";
 
             var hiSegment = claim2300Loop.AddSegment(new TypedSegmentHI());
-            hiSegment.HI01_HealthCareCodeInformation = "BK:0340";
-            hiSegment.HI02_HealthCareCodeInformation = "BF:V7389";
+            hiSegment.HI01_HealthCareCodeInformation = hiSegment.CreateNewTypedElementHealthCareCodeInformation(1, CodeListQualifierCode.PrincipalDiagnosis, "0340");
+            hiSegment.HI02_HealthCareCodeInformation = hiSegment.CreateNewTypedElementHealthCareCodeInformation(2, CodeListQualifierCode.Diagnosis, "V7389");
 
             var lxLoop = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
             lxLoop.LX01_AssignedNumber = "1";
 
             var sv1Segment = lxLoop.AddSegment(new TypedSegmentSV1());
-            sv1Segment.SV101_CompositeMedicalProcedure = "HC:99213";
-            sv1Segment.SV102_MonetaryAmount = "40";
-            sv1Segment.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment.SV104_Quantity = "1";
-            sv1Segment.SV107_CompDiagCodePoint = "1";
-
+            sv1Segment.SV101_CompositeMedicalProcedure = sv1Segment.CreateTypedElementCompositeMedicalProcedureIdentifier(
+                ProductOrServiceIdQualifiers.HealthCareFinancingAdministrationCommonProceduralCodingSystem, "99213");
+            sv1Segment.SV102_MonetaryAmount = 40;
+            sv1Segment.SV103_UnitBasisMeasCode = UnitOrBasisOfMeasurementCode.Unit;
+            sv1Segment.SV104_Quantity = 1;
+            sv1Segment.SV107_CompDiagCodePoint = sv1Segment.CreateTypedElementCompositDiagnosisCodePointer(1);
             var dtpSegment = lxLoop.AddSegment(new TypedSegmentDTP());
-            dtpSegment.DTP01_DateTimeQualifier  = DTPQualifier.Service;
+            dtpSegment.DTP01_DateTimeQualifier = DTPQualifier.Service;
             dtpSegment.DTP02_DateTimePeriodFormatQualifier = DTPFormatQualifier.CCYYMMDD;
             DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
             dtpSegment.DTP03_Date = new DateTimePeriod(theDate);
@@ -199,11 +197,12 @@ namespace OopFactory.X12.Tests.Unit.Creation
             lxLoop2.LX01_AssignedNumber = "2";
 
             var sv1Segment2 = lxLoop2.AddSegment(new TypedSegmentSV1());
-            sv1Segment2.SV101_CompositeMedicalProcedure = "HC:87070";
-            sv1Segment2.SV102_MonetaryAmount = "15";
-            sv1Segment2.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment2.SV104_Quantity = "1";
-            sv1Segment2.SV107_CompDiagCodePoint = "1";
+            sv1Segment2.SV101_CompositeMedicalProcedure = sv1Segment2.CreateTypedElementCompositeMedicalProcedureIdentifier(
+                ProductOrServiceIdQualifiers.HealthCareFinancingAdministrationCommonProceduralCodingSystem, "87070");
+            sv1Segment2.SV102_MonetaryAmount = 15;
+            sv1Segment2.SV103_UnitBasisMeasCode = UnitOrBasisOfMeasurementCode.Unit;
+            sv1Segment2.SV104_Quantity = 1;
+            sv1Segment2.SV107_CompDiagCodePoint = sv1Segment.CreateTypedElementCompositDiagnosisCodePointer(1);
 
             var dtpSegment2 = lxLoop2.AddSegment(new TypedSegmentDTP());
             dtpSegment2.DTP01_DateTimeQualifier = DTPQualifier.Service;
@@ -215,11 +214,12 @@ namespace OopFactory.X12.Tests.Unit.Creation
             lxLoop3.LX01_AssignedNumber = "3";
 
             var sv1Segment3 = lxLoop3.AddSegment(new TypedSegmentSV1());
-            sv1Segment3.SV101_CompositeMedicalProcedure = "HC:99214";
-            sv1Segment3.SV102_MonetaryAmount = "35";
-            sv1Segment3.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment3.SV104_Quantity = "1";
-            sv1Segment3.SV107_CompDiagCodePoint = "2";
+            sv1Segment3.SV101_CompositeMedicalProcedure = sv1Segment3.CreateTypedElementCompositeMedicalProcedureIdentifier(
+                ProductOrServiceIdQualifiers.HealthCareFinancingAdministrationCommonProceduralCodingSystem, "99214");
+            sv1Segment3.SV102_MonetaryAmount = 35;
+            sv1Segment3.SV103_UnitBasisMeasCode = UnitOrBasisOfMeasurementCode.Unit;
+            sv1Segment3.SV104_Quantity = 1;
+            sv1Segment3.SV107_CompDiagCodePoint = sv1Segment3.CreateTypedElementCompositDiagnosisCodePointer(2);
 
             var dtpSegment3 = lxLoop3.AddSegment(new TypedSegmentDTP());
             dtpSegment3.DTP01_DateTimeQualifier = DTPQualifier.Service;
@@ -231,11 +231,12 @@ namespace OopFactory.X12.Tests.Unit.Creation
             lxLoop4.LX01_AssignedNumber = "4";
 
             var sv1Segment4 = lxLoop4.AddSegment(new TypedSegmentSV1());
-            sv1Segment4.SV101_CompositeMedicalProcedure = "HC:86663";
-            sv1Segment4.SV102_MonetaryAmount = "10";
-            sv1Segment4.SV103_UnitBasisMeasCode = "UN";
-            sv1Segment4.SV104_Quantity = "1";
-            sv1Segment4.SV107_CompDiagCodePoint = "2";
+            sv1Segment4.SV101_CompositeMedicalProcedure = sv1Segment4.CreateTypedElementCompositeMedicalProcedureIdentifier(
+                ProductOrServiceIdQualifiers.HealthCareFinancingAdministrationCommonProceduralCodingSystem, "86663");
+            sv1Segment4.SV102_MonetaryAmount = 10;
+            sv1Segment4.SV103_UnitBasisMeasCode = UnitOrBasisOfMeasurementCode.Unit;
+            sv1Segment4.SV104_Quantity = 1;
+            sv1Segment4.SV107_CompDiagCodePoint = sv1Segment3.SV107_CompDiagCodePoint = sv1Segment3.CreateTypedElementCompositDiagnosisCodePointer(2);
 
             var dtpSegment4 = lxLoop4.AddSegment(new TypedSegmentDTP());
             dtpSegment4.DTP01_DateTimeQualifier = DTPQualifier.Service;

@@ -12,6 +12,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentPRV(Segment segment) : base(segment) { }
+
         public string PRV01_ProviderCode
         {
             get { return _segment.GetElement(1); }

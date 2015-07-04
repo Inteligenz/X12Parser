@@ -12,10 +12,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
-        public TypedSegmentN3(Segment segment)
-            : base(segment)
-        {
-        }
+        public TypedSegmentN3(Segment segment) : base(segment) { }
 
         public string N301_AddressInformation
         {

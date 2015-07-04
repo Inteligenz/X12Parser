@@ -11,7 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("SBR")
         {
         }
-
+        public TypedSegmentSBR(Segment segment) : base(segment) { }
         public string SBR01_PayerResponsibilitySequenceNumberCode
         {
             get { return _segment.GetElement(1); }

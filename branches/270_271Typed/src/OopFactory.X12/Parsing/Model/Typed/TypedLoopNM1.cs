@@ -21,7 +21,6 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base(loop)
         {
             _entityIdentifer = loop.GetElement(1);
-            Loop = loop;
         }
 
         internal override string GetSegmentString(X12DelimiterSet delimiters)

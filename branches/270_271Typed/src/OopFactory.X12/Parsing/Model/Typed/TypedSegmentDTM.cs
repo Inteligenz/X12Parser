@@ -12,6 +12,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("DTM")
         {
         }
+        public TypedSegmentDTM(Segment segment) : base(segment) { }
 
         public DTPQualifier DTM01_DateTimeQualifier
         {

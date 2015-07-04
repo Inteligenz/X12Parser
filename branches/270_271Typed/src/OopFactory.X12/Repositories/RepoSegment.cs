@@ -9,9 +9,9 @@ namespace OopFactory.X12.Repositories
 {
     public class RepoSegment<T> where T : struct
     {
-        public RepoSegment(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator, char? repetitionSeparator)
+        public RepoSegment(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator)
         {
-            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator, repetitionSeparator), segmentString);
+            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
         }
         public T InterchangeId { get; set; }
         public T? FunctionalGroupId { get; set; }

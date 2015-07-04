@@ -9,10 +9,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopN1 : TypedLoop
     {
-        public TypedLoopN1()
-            : base("N1")
-        {
-        }
+        public TypedLoopN1() : base("N1") { }
+        public TypedLoopN1(Loop loop) : base(loop) { }
 
         public string N101_EntityIdentifierCode
         {
@@ -42,7 +40,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get { return Loop.GetElement(3).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
             set { Loop.SetElement(3, value.EDIFieldValue()); }
-            
+
         }
 
         public string N104_IdentificationCode

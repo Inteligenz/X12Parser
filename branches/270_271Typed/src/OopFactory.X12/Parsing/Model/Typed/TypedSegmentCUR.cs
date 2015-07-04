@@ -15,6 +15,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentCUR(Segment seg) : base(seg) { }
+
         /// <summary>
         /// BY = Buying Party (Purchaser)
         /// SE = Selling Party

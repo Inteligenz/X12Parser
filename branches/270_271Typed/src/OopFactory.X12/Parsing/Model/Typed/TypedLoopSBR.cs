@@ -7,10 +7,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopSBR : TypedLoop
     {
-        public TypedLoopSBR()
-            : base("SBR")
-        {
-        }
+        public TypedLoopSBR() : base("SBR") { }
+        public TypedLoopSBR(Loop loop) : base(loop) { }
 
         public string SBR01_PayerResponsibilitySequenceNumberCode
         {

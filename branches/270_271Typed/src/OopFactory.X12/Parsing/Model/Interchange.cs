@@ -38,7 +38,7 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         public Interchange(DateTime date, int controlNumber, bool production)
-            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':', '{'))
+            : this(new SpecificationFinder(), date, controlNumber, production, new X12DelimiterSet('~', '*', ':', '^'))
         {
         }
 
@@ -99,7 +99,7 @@ namespace OopFactory.X12.Parsing.Model
             set { SetElement(8, String.Format("{0,-15}", value)); }
         }
 
-        public DateTime InterchangeDate
+        public DateTime InterchangeDate 
         {
             get
             {
@@ -119,13 +119,37 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        public string InterchangeControlNumber
+        public string InterchangeControlStandardRepetitionSeparator 
+        {
+            get { return GetElement(11); }
+            set { SetElement(11, String.Format("{0,-1}", value)); }
+        }
+
+        public string InterchangeControlVersionNumberCode 
+        {
+            get { return GetElement(12); }
+            set { SetElement(12, String.Format("{0,-5}", value)); }
+        }
+
+        public string InterchangeControlNumber 
         {
             get { return GetElement(13); }
         }
-        public UsageIndicator InterchangeUsageIndicator
+
+        public string InterchangeAcknowledgmentRequestedCode 
+        {
+            get { return GetElement(14); }
+            set { SetElement(14, String.Format("{0,-1}", value)); }
+        }
+
+        public UsageIndicator InterchangeUsageIndicatorCode 
         {
             get { return GetElement(15).ToEnumFromEDIFieldValue<UsageIndicator>(); }
+        }
+
+        public string InterchangeComponentElementSeparator
+        {
+            get { return GetElement(16); }
         }
 
         public IEnumerable<FunctionGroup> FunctionGroups
@@ -186,10 +210,20 @@ namespace OopFactory.X12.Parsing.Model
             return sb.ToString();
         }
 
+        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer) {
+            foreach (var fg in _functionGroups)
+                fg.ToX12String(addWhitespace, writer);
+        }
+
         internal override string ToX12String(bool addWhitespace)
         {
             UpdateTrailerSegmentCount("IEA", 1, _functionGroups.Count);
             return base.ToX12String(addWhitespace);
+        }
+
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            UpdateTrailerSegmentCount("IEA", 1, _functionGroups.Count);
+            base.ToX12String(addWhitespace, writer);
         }
 
         public string Serialize()

@@ -11,6 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("N2")
         {
         }
+        public TypedSegmentN2(Segment segment) : base(segment) { }
 
         public string N201_Name
         {

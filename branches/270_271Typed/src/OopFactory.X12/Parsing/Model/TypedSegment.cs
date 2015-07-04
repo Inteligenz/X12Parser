@@ -42,4 +42,6 @@ namespace OopFactory.X12.Parsing.Model
             OnInitialized(new EventArgs());
         }
     }
+
+
 }

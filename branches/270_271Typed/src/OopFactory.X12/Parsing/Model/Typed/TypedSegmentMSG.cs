@@ -15,10 +15,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
-        public TypedSegmentMSG(Segment segment)
-            : base(segment)
-        {
-        }
+        public TypedSegmentMSG(Segment segment) : base(segment) { }
 
         public string MSG01_FreeFormMessageText
         {

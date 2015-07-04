@@ -14,6 +14,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("CTP")
         { }
 
+        public TypedSegmentCTP(Segment seg) : base(seg) { }
+
         public string CTP01_ClassOfTradeCode
         {
             get { return _segment.GetElement(1); }
@@ -38,9 +40,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(4, value); }
         }
 
-        public string CTP05_CompositeUnitOfMeasure
+        public TypedElementCompositeUnitOfMeasure CTP05_CompositeUnitOfMeasure
         {
-            get { return _segment.GetElement(5); }
+            get { return new TypedElementCompositeUnitOfMeasure(_segment, 5); }
             set { _segment.SetElement(5, value); }
         }
 

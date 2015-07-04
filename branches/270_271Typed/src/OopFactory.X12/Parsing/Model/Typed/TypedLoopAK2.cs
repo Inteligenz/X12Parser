@@ -8,6 +8,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
     public class TypedLoopAK2 : TypedLoop
     {
         public TypedLoopAK2() : base("AK2") { }
+        public TypedLoopAK2(Loop loop) : base(loop) { }
 
         public string AK201_TransactionSetIdentifierCode
         {

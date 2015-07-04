@@ -16,7 +16,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("SAC")
         {
         }
-
+        public TypedSegmentSAC(Segment segment) : base(segment) { }
         public AllowanceOrChargeIndicator SAC01_AllowanceOrChargeIndicator
         {
             get { return _segment.GetElement(1).ToEnumFromEDIFieldValue<AllowanceOrChargeIndicator>(); }

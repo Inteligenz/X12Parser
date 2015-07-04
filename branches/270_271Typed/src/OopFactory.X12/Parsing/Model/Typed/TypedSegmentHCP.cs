@@ -16,7 +16,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("HCP")
         {
         }
-
+        public TypedSegmentHCP(Segment segment) : base(segment) { }
         public string HCP01_PricingMethodology
         {
             get { return _segment.GetElement(1); }

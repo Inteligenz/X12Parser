@@ -8,6 +8,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
     public class TypedLoopIK3 : TypedLoop
     {
         public TypedLoopIK3() : base("IK3") { }
+        public TypedLoopIK3(Loop loop) : base(loop) { }
 
         public string IK301_SegmentIdCode
         {

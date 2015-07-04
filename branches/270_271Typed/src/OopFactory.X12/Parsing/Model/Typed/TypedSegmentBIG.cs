@@ -15,6 +15,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentBIG(Segment seg) : base(seg) { }
+
         public DateTime? BIG01_InvoiceDate
         {
             get { return _segment.GetDate8Element(1); }
