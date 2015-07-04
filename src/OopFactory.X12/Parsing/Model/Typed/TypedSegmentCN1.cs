@@ -14,6 +14,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentCN1(Segment seg) : base(seg) { }
+
         public string CN101_ContractTypeCode
         {
             get { return _segment.GetElement(1); }

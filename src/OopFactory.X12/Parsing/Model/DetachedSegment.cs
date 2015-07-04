@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OopFactory.X12.Parsing.Model.Typed;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -138,6 +139,23 @@ namespace OopFactory.X12.Parsing.Model
                 return null;
         }
 
+        public OopFactory.X12.Parsing.Model.Typed.DateTimePeriod GetDateTimePeriodElement(int elementNumber)
+        {
+            string element = GetElement(elementNumber);
+
+            if (element.Length == 0)
+                return null;
+
+            OopFactory.X12.Parsing.Model.Typed.DateTimePeriod rv;
+
+            if (OopFactory.X12.Parsing.Model.Typed.DateTimePeriod.TryParse(element, out rv))
+            {
+                return rv;
+            }
+
+            return null;
+        }
+
         protected virtual void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
         {
             // do nothing, this only applies once the segment is attached to an x12 interchange
@@ -159,6 +177,30 @@ namespace OopFactory.X12.Parsing.Model
         public void SetElement(int elementNumber, decimal? value)
         {
             SetElement(elementNumber, string.Format("{0}", value));
+        }
+
+        public void SetElement(int elementNumber, OopFactory.X12.Parsing.Model.Typed.DateTimePeriod value)
+        {
+            if (value == null)
+            {
+                SetElement(elementNumber, string.Empty);
+            }
+            else
+            {
+                SetElement(elementNumber, value.ToString());
+            }
+        }
+
+        public void SetElement(int elementNumber, BaseElementReference value)
+        {
+            if (value == null)
+            {
+                SetElement(elementNumber, string.Empty);
+            }
+            else
+            {
+                SetElement(elementNumber, value.ToString());
+            }
         }
 
         public void SetElement(int elementNumber, int? value)

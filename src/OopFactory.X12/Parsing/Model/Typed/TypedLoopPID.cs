@@ -9,11 +9,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopPID : TypedLoop
     {
-        public TypedLoopPID()
-            : base("PID")
-        {
-        }
-        
+        public TypedLoopPID() : base("PID") { }
+        public TypedLoopPID(Loop loop) : base(loop) { }
+
         /// <summary>
         /// F = Free form
         /// </summary>

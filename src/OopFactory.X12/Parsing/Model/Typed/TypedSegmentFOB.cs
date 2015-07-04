@@ -15,6 +15,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentFOB(Segment segment) : base(segment) { }
+        
         /// <summary>
         /// 11 = Rule 11 Shipment
         /// BP = Paid by Buyer

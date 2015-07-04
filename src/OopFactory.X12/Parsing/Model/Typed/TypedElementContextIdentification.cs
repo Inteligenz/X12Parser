@@ -5,38 +5,34 @@ using System.Text;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public class TypedElementContextIdentification
+    public class TypedElementContextIdentification : BaseElementReference
     {
-        private int _elementNumber;
-        private Segment _segment;
         private string _name;
         private string _reference;
 
-        internal TypedElementContextIdentification(Segment segment, int elementNumber)
+        public TypedElementContextIdentification(Segment segment, int elementNumber)
+            : base(segment, elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
         }
-
-        private void UpdateElement()
+        
+        public override string ToString()
         {
             string value = string.Format("{1}{0}{2}",
-                _segment._delimiters.SubElementSeparator,
-                _name, _reference);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+                 Segment._delimiters.SubElementSeparator,
+                 _name, _reference);
+            value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
+            return value;
         }
-
         public string _1_ContextName
         {
             get { return _name; }
-            set { _name = value; UpdateElement(); }
+            set { _name = value;  }
         }
 
         public string _2_ContextReference
         {
             get { return _reference; }
-            set { _reference = value; UpdateElement(); }
+            set { _reference = value;  }
         }
     }
 }

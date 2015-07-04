@@ -6,7 +6,7 @@ using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Parsing.Model
 {
-    public abstract class Container : Segment
+    public abstract class Container : Segment, ISegmentContainer
     {
         protected List<Segment> _segments;
         
@@ -44,11 +44,6 @@ namespace OopFactory.X12.Parsing.Model
 
         internal abstract IEnumerable<string> TrailerSegmentIds { get; }
 
-        public void RemoveSegment(Segment segment)
-        {
-            _segments.Remove(segment);
-        }
-
         public Segment AddSegment(string segmentString)
         {
             return AddSegment(segmentString, false);
@@ -74,17 +69,17 @@ namespace OopFactory.X12.Parsing.Model
 
         public T AddSegment<T>(T segment) where T : TypedSegment
         {
+            return AddSegment<T>(segment, false);
+        }
+        public T AddSegment<T>(T segment, bool forceAdd) where T : TypedSegment {
             segment.Initialize(this, _delimiters);
             SegmentSpecification spec = AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment._segment.SegmentId);
-            if (spec != null)
-            {
+            if (spec != null || forceAdd) {
                 _segments.Add(segment._segment);
                 return segment;
-            }
-            else
+            } else
                 return null;
         }
-
         public IEnumerable<Segment> TrailerSegments 
         { 
             get
@@ -126,7 +121,8 @@ namespace OopFactory.X12.Parsing.Model
         }
 
         internal abstract string SerializeBodyToX12(bool addWhitespace);
-        
+        internal abstract void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer);
+
         internal override string ToX12String(bool addWhitespace)
         {
             StringBuilder sb = new StringBuilder(base.ToX12String(addWhitespace));
@@ -163,6 +159,41 @@ namespace OopFactory.X12.Parsing.Model
             }
 
             return sb.ToString();
+        }
+
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+            if (writer == null)
+                throw new ArgumentNullException("writer", "StreamWriter cannot be null");
+
+            writer.Write(base.ToX12String(addWhitespace));
+
+            foreach (var segment in this.Segments.Where(seg => !TrailerSegmentIds.Contains(seg.SegmentId))) {
+                if (addWhitespace)
+                    writer.Write(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    writer.Write(segment.ToX12String(addWhitespace));
+            }
+
+            if (addWhitespace) {
+                // Not sure how to handle the new line strips here. Investigate...
+                writer.Write(SerializeBodyToX12(addWhitespace).Replace("\r\n", "\r\n  "));
+            } else
+                SerializeBodyToX12(addWhitespace, writer);
+
+            foreach (var segment in this.Segments.Where(seg => TrailerSegmentIds.Contains(seg.SegmentId))) {
+                if (addWhitespace)
+                    writer.Write(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    writer.Write(segment.ToX12String(addWhitespace));
+            }
+
+            foreach (var segment in this.TrailerSegments) {
+                string[] wrapperSegments = new string[] { "SE", "GE", "IEA" };
+                if (addWhitespace && !wrapperSegments.Contains(segment.SegmentId))
+                    writer.Write(segment.ToX12String(addWhitespace).Replace("\r\n", "\r\n  "));
+                else
+                    writer.Write(segment.ToX12String(addWhitespace));
+            }
         }
     }
 }

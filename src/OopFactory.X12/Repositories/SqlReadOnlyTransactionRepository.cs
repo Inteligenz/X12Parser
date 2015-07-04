@@ -29,7 +29,7 @@ namespace OopFactory.X12.Repositories
 
         private RepoSegment<T> RepoSegmentFromReader(SqlDataReader reader)
         {
-            RepoSegment<T> segment = new RepoSegment<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]), Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]), null)
+            RepoSegment<T> segment = new RepoSegment<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]),Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]) )
             {
                 InterchangeId = ConvertT(reader["InterchangeId"]),
                 PositionInInterchange = Convert.ToInt32(reader["PositionInInterchange"]),
@@ -130,8 +130,7 @@ order by PositionInInterchange", _schema), conn);
             RepoTransactionSet<T> set = new RepoTransactionSet<T>(
                 Convert.ToChar(reader["SegmentTerminator"]),
                 Convert.ToChar(reader["ElementSeparator"]),
-                Convert.ToChar(reader["ComponentSeparator"]),
-                null);
+                Convert.ToChar(reader["ComponentSeparator"]));
 
             set.TransactionSetId = ConvertT(reader["Id"]);
             set.InterchangeId = ConvertT(reader["InterchangeId"]);
@@ -140,12 +139,12 @@ order by PositionInInterchange", _schema), conn);
             set.InterchangeControlNumber = Convert.ToString(reader["InterchangeControlNumber"]);
             if (!reader.IsDBNull(reader.GetOrdinal("InterchangeDate")))
                 set.InterchangeDate = Convert.ToDateTime(reader["InterchangeDate"]);
-
+            
             set.FunctionalGroupId = ConvertT(reader["FunctionalGroupId"]);
             set.FunctionalIdCode = Convert.ToString(reader["FunctionalIdCode"]);
             set.FunctionalGroupControlNumber = Convert.ToString(reader["FunctionalGroupControlNumber"]);
             set.Version = Convert.ToString(reader["Version"]);
-
+            
             set.TransactionSetCode = Convert.ToString(reader["TransactionSetCode"]);
             set.ControlNumber = Convert.ToString(reader["ControlNumber"]);
             if (!reader.IsDBNull(reader.GetOrdinal("ImplementationConventionRef")))
@@ -205,7 +204,7 @@ where ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
 
         private RepoLoop<T> RepoLoopFromReader(SqlDataReader reader)
         {
-            var loop = new RepoLoop<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]), Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]), null)
+            var loop = new RepoLoop<T>(Convert.ToString(reader["Segment"]), Convert.ToChar(reader["SegmentTerminator"]), Convert.ToChar(reader["ElementSeparator"]), Convert.ToChar(reader["ComponentSeparator"]))
             {
                 LoopId = ConvertT(reader["Id"]),
                 InterchangeId = ConvertT(reader["InterchangeId"]),
@@ -273,7 +272,7 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
                     while (reader.Read())
                     {
                         list.Add(RepoLoopFromReader(reader));
-                    }
+                    }                    
                 }
                 return list;
             }
@@ -318,7 +317,7 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
             {
                 try
                 {
-                    entity.DateOfBirth = DateTime.ParseExact(Convert.ToString(reader["DateOfBirth"]), "yyyyMMdd", null);
+                    entity.DateOfBirth = DateTime.ParseExact(Convert.ToString(reader["DateOfBirth"]),"yyyyMMdd",null);
                 }
                 catch (FormatException)
                 {
@@ -333,8 +332,8 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
         {
             List<string> quotedValues = new List<string>();
             foreach (var filter in filters)
-                quotedValues.Add(string.Format("'{0}'", filter.Replace("'", "''")));
-            return string.Join(",", quotedValues);
+                quotedValues.Add(string.Format("'{0}'", filter.Replace("'","''")));
+            return string.Join(",",quotedValues);
         }
 
         public List<RepoEntity<T>> GetEntities(RepoEntitySearchCriteria<T> criteria)
@@ -343,8 +342,8 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
 
             if (!string.IsNullOrEmpty(criteria.EntityIdentifierCodes))
             {
-                var codes = GetSqlInString(criteria.EntityIdentifierCodes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-
+                var codes = GetSqlInString( criteria.EntityIdentifierCodes.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries));
+                
                 sql.AppendFormat(" and EntityIdentifierCode in ({0})", codes);
             }
 

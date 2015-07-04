@@ -11,7 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("PS1")
         {
         }
-
+        public TypedSegmentPS1(Segment segment) : base(segment) { }
         public string PS101_ReferenceId
         {
             get { return _segment.GetElement(1); }

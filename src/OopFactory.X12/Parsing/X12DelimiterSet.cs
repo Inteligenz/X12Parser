@@ -12,7 +12,7 @@ namespace OopFactory.X12.Parsing
         private char _subElementSeparator;
         private char? _repetitionSeparator;
 
-        public X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator, char? repetitionSeparator)
+        public X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator, char? repetitionSeparator = '^')
         {
             _segmentTerminator = segmentTerminator;
             _elementSeparator = elementSeparator;
@@ -22,8 +22,8 @@ namespace OopFactory.X12.Parsing
 
         internal X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
-            string prefix = new string(isaSegmentAndTerminator).Substring(0,3);
-            
+            string prefix = new string(isaSegmentAndTerminator).Substring(0, 3);
+
             if (isaSegmentAndTerminator.Length < 105)
                 throw new ArgumentException("ISA segment and terminator is expected to be exactly 106 characters.");
             if (prefix.ToUpper() != "ISA")
@@ -35,11 +35,6 @@ namespace OopFactory.X12.Parsing
 
             if (isaSegmentAndTerminator.Length >= 106)
                 _segmentTerminator = isaSegmentAndTerminator[105];
-
-            if (isaSegmentAndTerminator.Length >= 106)
-                _segmentTerminator = isaSegmentAndTerminator[105];
-
-      
 
             if (char.IsLetterOrDigit(_elementSeparator))
                 throw new ArgumentException(_elementSeparator + " is not a valid element separator in position 4 of the file.");

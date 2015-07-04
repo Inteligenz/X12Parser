@@ -8,9 +8,9 @@ namespace OopFactory.X12.Repositories
 {
     public class RepoTransactionSet<T> where T : struct
     {
-        public RepoTransactionSet(char segmentTerminator, char elementSeparator, char componentSeparator, char? repetitionSeparator)
+        public RepoTransactionSet(char segmentTerminator, char elementSeparator, char componentSeparator)
         {
-            Delimiters = new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator, repetitionSeparator);
+            Delimiters = new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator);
         }
         
         public T InterchangeId { get; set; }

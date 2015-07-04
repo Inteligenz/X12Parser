@@ -15,6 +15,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
             _entityIdentifer = entityIdentifier;
         }
 
+        public TypedLoopLX(Loop loop) : base(loop) { }
+
         internal override void Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
         {
             string segmentString = GetSegmentString(delimiters);

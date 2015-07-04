@@ -7,19 +7,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopIK4 : TypedLoop
     {
-        private TypedElementPositionInSegment _ik401;
-
         public TypedLoopIK4() : base("IK4") { }
-
-        internal override void Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
-        {
-            base.Initialize(parent, delimiters, loopSpecification);
-            _ik401 = new TypedElementPositionInSegment(Loop, 1);
-        }
-
+        public TypedLoopIK4(Loop loop) : base(loop) { }
         public TypedElementPositionInSegment IK401
         {
-            get { return _ik401; }
+            get { return new TypedElementPositionInSegment(Loop, 1); }
+            set { Loop.SetElement(1, value); }
         }
 
         public string IK402_DataElementReferenceNumber

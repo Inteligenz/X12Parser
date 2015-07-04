@@ -11,6 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("N9")
         {
         }
+        public TypedSegmentN9(Segment segment) : base(segment) { }
 
         public string N901_ReferenceIdentificationQualifier
         {

@@ -1,62 +1,50 @@
-﻿using System;
+﻿using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Extensions;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
-    public class TypedElementServiceLocationInfo
+    public class TypedElementServiceLocationInfo : BaseElementReference
     {
-        private int _elementNumber;
-        private Segment _segment;
-        private string _facilityCodeValue;
+        private PlaceOfServiceCodes _facilityCodeValue;
         private string _facilityCodeQualifier;
         private string _claimFrequencyTypeCode;
 
-        internal TypedElementServiceLocationInfo(Segment segment, int elementNumber)
+        public TypedElementServiceLocationInfo(Segment segment, int elementNumber)
+            : base(segment, elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
         }
 
-        private void UpdateElement()
+        public override string ToString()
         {
             string value = String.Format("{1}{0}{2}{0}{3}",
-                _segment._delimiters.SubElementSeparator,
-                _facilityCodeValue, _facilityCodeQualifier, _claimFrequencyTypeCode);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+                Segment._delimiters.SubElementSeparator,
+                _facilityCodeValue.EDIFieldValue(),
+                _facilityCodeQualifier,
+                _claimFrequencyTypeCode);
+            value = value.TrimEnd(Segment._delimiters.SubElementSeparator);
+            return value;
         }
 
-        public string _1_FacilityCodeValue
+        public PlaceOfServiceCodes _1_FacilityCodeValue
         {
             get { return _facilityCodeValue; }
-            set
-            {
-                _facilityCodeValue = value;
-                UpdateElement();
-            }
+            set { _facilityCodeValue = value; }
         }
 
         public string _2_FacilityCodeQualifier
         {
             get { return _2_FacilityCodeQualifier; }
-            set
-            {
-                _facilityCodeQualifier = value;
-                UpdateElement();
-            }
+            set { _facilityCodeQualifier = value; }
         }
 
         public string _3_ClaimFrequencyTypeCode
         {
             get { return _claimFrequencyTypeCode; }
-            set
-            {
-                _claimFrequencyTypeCode = value;
-                UpdateElement();
-            }
+            set { _claimFrequencyTypeCode = value; }
         }
-
     }
 }

@@ -14,6 +14,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("ITD")
         {
         }
+        public TypedSegmentITD(Segment segment) : base(segment) { }
 
         public string ITD01_TermsTypeCode
         {

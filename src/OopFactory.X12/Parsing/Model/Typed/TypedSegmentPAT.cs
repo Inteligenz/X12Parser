@@ -11,6 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("PAT")
         {
         }
+        public TypedSegmentPAT(Segment segment) : base(segment) { }
 
         protected override void OnInitialized(EventArgs e)
         {

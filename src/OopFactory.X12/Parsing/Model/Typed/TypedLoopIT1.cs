@@ -12,10 +12,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
     /// </summary>
     public class TypedLoopIT1 : TypedLoop
     {
-        public TypedLoopIT1()
-            : base("IT1")
-        {
-        }
+        public TypedLoopIT1() : base("IT1") { }
+
+        public TypedLoopIT1(Loop loop) : base(loop) { }
 
         public string IT101_AssignedIdentification
         {

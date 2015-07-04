@@ -12,7 +12,15 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         Diagnosis,
         [EDIFieldValue("BK")]
         PrincipalDiagnosis,
+        [EDIFieldValue("ABF")]
+        Diagnosis_ICD_10,
+        [EDIFieldValue("ABK")]
+        PrincipalDiagnosis_ICD_10,
+        [EDIFieldValue("ABJ")]
+        AdmittingDiagnosis_ICD_10,
         [EDIFieldValue("ZZ")]
-        MutuallyDefined
+        MutuallyDefined,
+        [EDIFieldValue("BG")]
+        Condition
     }
 }

@@ -1,37 +1,57 @@
-﻿using System;
+﻿using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Extensions;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentSV1 : TypedSegment
     {
-        public TypedSegmentSV1() : base("SV1")
+        public TypedSegmentSV1()
+            : base("SV1")
         {
+        }   
+        public TypedSegmentSV1(Segment segment) : base(segment) { }
+        public TypedElementCompositeMedicalProcedureIdentifier CreateTypedElementCompositeMedicalProcedureIdentifier(ProductOrServiceIdQualifiers ProductOrServiceIdQualifier, string ProcedureCode)
+        {
+            return new TypedElementCompositeMedicalProcedureIdentifier(_segment, 1)
+            {
+                _1_ProductOrServiceIdQualifier = ProductOrServiceIdQualifier,
+                _2_ProcedureCode = ProcedureCode,
+            };
         }
 
-        public string SV101_CompositeMedicalProcedure
+        public TypedElementCompositDiagnosisCodePointer CreateTypedElementCompositDiagnosisCodePointer(int DiagnosisCodePointer1)
         {
-            get { return _segment.GetElement(1); }
+            return new TypedElementCompositDiagnosisCodePointer(_segment, 7)
+            {
+                _1_DiagnosisCodePointer = DiagnosisCodePointer1,
+            };
+        }
+
+        public TypedElementCompositeMedicalProcedureIdentifier SV101_CompositeMedicalProcedure
+        {
+            get { return new TypedElementCompositeMedicalProcedureIdentifier(_segment, 1); }
             set { _segment.SetElement(1, value); }
         }
 
-        public string SV102_MonetaryAmount
+        public decimal? SV102_MonetaryAmount
         {
-            get { return _segment.GetElement(2); }
+            get { return _segment.GetDecimalElement(2); }
             set { _segment.SetElement(2, value); }
         }
-        
-        public string SV103_UnitBasisMeasCode
+
+        public UnitOrBasisOfMeasurementCode SV103_UnitBasisMeasCode
         {
-            get { return _segment.GetElement(3); }
-            set { _segment.SetElement(3, value); }
+            get { return _segment.GetElement(3).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>(); }
+            set { _segment.SetElement(3, value.EDIFieldValue()); }
         }
 
-        public string SV104_Quantity
+        public decimal? SV104_Quantity
         {
-            get { return _segment.GetElement(4); }
+            get { return _segment.GetDecimalElement(4); }
             set { _segment.SetElement(4, value); }
         }
         public string SV105_FacilityCode
@@ -40,9 +60,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(5, value); }
         }
 
-        public string SV107_CompDiagCodePoint
+        public TypedElementCompositDiagnosisCodePointer SV107_CompDiagCodePoint
         {
-            get { return _segment.GetElement(7); }
+            get { return new TypedElementCompositDiagnosisCodePointer(_segment, 7); }
             set { _segment.SetElement(7, value); }
         }
 
@@ -62,8 +82,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
             get { return _segment.GetElement(12); }
             set { _segment.SetElement(12, value); }
-        }        
-        
+        }
+
         public string SV115_CopayStatusCode
         {
             get { return _segment.GetElement(15); }

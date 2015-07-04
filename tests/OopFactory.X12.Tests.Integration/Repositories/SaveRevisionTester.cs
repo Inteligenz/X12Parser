@@ -17,7 +17,7 @@ namespace OopFactory.X12.Tests.Integration.Repositories
         [TestMethod, Ignore]
         public void SaveRevisionTest()
         {
-            var repo = new SqlTransactionRepository<long>("Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", 
+            var repo = new SqlTransactionRepository<long>("Data Source=.;Initial Catalog=X12;Integrated Security=True", 
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','), "Test", "dbo");
 
@@ -42,10 +42,9 @@ namespace OopFactory.X12.Tests.Integration.Repositories
         [TestMethod]
         public void SaveRevisionGuidTest()
         {
-            var repo = new SqlTransactionRepository<Guid>("Data Source=127.0.0.1;Initial Catalog=Test5;Integrated Security=True",
+            var repo = new SqlTransactionRepository<Guid>("Data Source=.;Initial Catalog=Test5;Integrated Security=True",
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','), "X12", "dbo");
-
             var segments = repo.GetTransactionSegments(Guid.Parse("DC737E4D-33D3-487D-9C36-00C93759B8C4"), Int32.MaxValue, false);
 
             var subsriberSeg = segments.First(s => s.SpecLoopId == "2010BA");

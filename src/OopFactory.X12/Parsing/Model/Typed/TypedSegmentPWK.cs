@@ -13,7 +13,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("PWK")
         {
         }
-
+        public TypedSegmentPWK(Segment segment) : base(segment) { }
         public string PWK01_ReportTypeCode
         {
             get { return _segment.GetElement(1); }

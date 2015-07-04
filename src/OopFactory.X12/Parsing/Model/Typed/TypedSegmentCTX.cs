@@ -7,18 +7,16 @@ namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedSegmentCTX : TypedSegment
     {
-        private TypedElementContextIdentification _ctx01;
-        private TypedElementPositionInSegment _ctx05;
-
-        public TypedSegmentCTX() : base("CTX") 
+        public TypedSegmentCTX()
+            : base("CTX")
         {
-            _ctx01 = new TypedElementContextIdentification(_segment, 1);
-            _ctx05 = new TypedElementPositionInSegment(_segment, 5);
         }
+        public TypedSegmentCTX(Segment seg) : base(seg) { }
 
         public TypedElementContextIdentification CTX01
         {
-            get { return _ctx01; }
+            get { return new TypedElementContextIdentification(_segment, 1); }
+            set { _segment.SetElement(1, value); }
         }
 
         public string CTX02_SegmentIdCode
@@ -36,7 +34,6 @@ namespace OopFactory.X12.Parsing.Model.Typed
                     return position;
                 else
                     return null;
-
             }
             set { _segment.SetElement(3, string.Format("{0}", value)); }
         }
@@ -49,7 +46,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public TypedElementPositionInSegment CTX05
         {
-            get { return _ctx05; }
+            get { return new TypedElementPositionInSegment(_segment, 5); }
+            set { _segment.SetElement(5, value); }
         }
 
 

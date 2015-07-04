@@ -16,6 +16,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
             : base("ISS")
         {
         }
+        public TypedSegmentISS(Segment segment) : base(segment) { }
 
         public decimal? ISS01_NumberOfUnitsShipped
         {

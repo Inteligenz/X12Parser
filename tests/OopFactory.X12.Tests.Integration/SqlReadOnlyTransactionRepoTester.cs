@@ -11,7 +11,7 @@ namespace OopFactory.X12.Tests.Integration
     [TestClass]
     public class SqlReadOnlyTransactionRepoTester
     {
-        const string dsn = "Data Source=127.0.0.1;Initial Catalog=Test5;Integrated Security=True";
+        const string dsn = "Data Source=.;Initial Catalog=Test5;Integrated Security=True";
         [TestMethod]
         public void GetEntity()
         {

@@ -14,8 +14,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public TypedSegmentREF(Segment segment)
             : base(segment)
-        {
-        }
+        { }
 
         public string REF01_ReferenceIdQualifier
         {
@@ -35,9 +34,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(3, value); }
         }
 
-        public string REF04_ReferenceId
+        public TypedElementReferenceIdentifier REF04_ReferenceId
         {
-            get { return _segment.GetElement(4); }
+            get { return new TypedElementReferenceIdentifier(_segment, 4); }
             set { _segment.SetElement(4, value); }
         }
     }

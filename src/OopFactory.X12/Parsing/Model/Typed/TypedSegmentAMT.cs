@@ -12,6 +12,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
         {
         }
 
+        public TypedSegmentAMT(Segment seg) : base(seg) { }
+
         public string AMT01_AmountQualifierCode
         {
             get { return _segment.GetElement(1); }

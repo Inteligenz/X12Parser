@@ -11,10 +11,7 @@ namespace OopFactory.X12.Parsing.Model.Typed
     {
         public TypedSegmentDMG() : base("DMG") { }
 
-        public TypedSegmentDMG(Segment segment)
-            : base(segment)
-        {
-        }
+        public TypedSegmentDMG(Segment segment) : base(segment) { }
 
         protected override void OnInitialized(EventArgs e)
         {

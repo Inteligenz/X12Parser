@@ -1,22 +1,36 @@
-﻿using System;
+﻿using OopFactory.X12.Parsing.Model.Typed.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OopFactory.X12.Extensions;
+
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedLoopCLM : TypedLoop
     {
-        private TypedElementServiceLocationInfo _clm05;
-        private TypedElementRelatedCausesInfo _clm11;
-
         public TypedLoopCLM() : base("CLM") { }
+        public TypedLoopCLM(Loop loop) : base(loop) { }
 
-        internal override void  Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
+        public TypedElementServiceLocationInfo CreateTypedElementServiceLocationInfo(PlaceOfServiceCodes FacilityCodeValue, string FacilityCodeQualifier, string ClaimFrequencyTypeCode)
         {
-            base.Initialize(parent, delimiters, loopSpecification);
-            _clm05 = new TypedElementServiceLocationInfo(Loop, 5);
-            _clm11 = new TypedElementRelatedCausesInfo(Loop, 11);
+            return new TypedElementServiceLocationInfo(Loop, 5)
+            {
+                _1_FacilityCodeValue = FacilityCodeValue,
+                _2_FacilityCodeQualifier = FacilityCodeQualifier,
+                _3_ClaimFrequencyTypeCode = ClaimFrequencyTypeCode
+            };
+        }
+
+        public TypedElementRelatedCausesInfo CreateTypedElementRelatedCausesInfo(string RelatedCausesCode1, string RelatedCausesCode2, string RelatedCausesCode3)
+        {
+            return new TypedElementRelatedCausesInfo(Loop, 11)
+            {
+                _1_RelatedCausesCode = RelatedCausesCode1,
+                _2_RelatedCausesCode = RelatedCausesCode2,
+                _3_RelatedCausesCode = RelatedCausesCode3
+            };
         }
 
         public string CLM01_PatientControlNumber
@@ -27,15 +41,15 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public decimal CLM02_TotalClaimChargeAmount
         {
-            get 
+            get
             {
                 decimal amount;
                 if (decimal.TryParse(Loop.GetElement(2), out amount))
                     return amount;
                 else
-                    return 0; 
+                    return 0;
             }
-            set 
+            set
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Total Claim Charge Amount must be greater than or equal to zero.");
@@ -57,32 +71,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public TypedElementServiceLocationInfo CLM05
         {
-            get { return _clm05; }
+            get { return new TypedElementServiceLocationInfo(Loop, 5); }
+            set { Loop.SetElement(5, value); }
         }
 
-        public bool? CLM06_ProviderOrSupplierSignatureIndicator
+        public YesNoConditionOrResponseCode CLM06_ProviderOrSupplierSignatureIndicator
         {
-            get 
-            {
-                switch (Loop.GetElement(6))
-                {
-                    case "Y": return true;
-                    case "N": return false;
-                    default: return null;
-                }
-            }
-            set 
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value == true)
-                        Loop.SetElement(6, "Y");
-                    else
-                        Loop.SetElement(6, "N");
-                }
-                else
-                    Loop.SetElement(6, "");
-            }
+            get { return Loop.GetElement(6).ToEnumFromEDIFieldValue<YesNoConditionOrResponseCode>(); }
+            set { Loop.SetElement(6, value.EDIFieldValue()); }
         }
 
         public string CLM07_ProviderAcceptAssignmentCode
@@ -91,10 +87,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(7, value); }
         }
 
-        public string CLM08_BenefitsAssignmentCerficationIndicator
+        public YesNoConditionOrResponseCode CLM08_BenefitsAssignmentCerficationIndicator
         {
-            get { return Loop.GetElement(8); }
-            set { Loop.SetElement(8, value); }
+            get { return Loop.GetElement(8).ToEnumFromEDIFieldValue<YesNoConditionOrResponseCode>(); }
+            set { Loop.SetElement(8, value.EDIFieldValue()); }
         }
 
         public string CLM09_ReleaseOfInformationCode
@@ -111,7 +107,8 @@ namespace OopFactory.X12.Parsing.Model.Typed
 
         public TypedElementRelatedCausesInfo CLM11
         {
-            get { return _clm11; }
+            get { return new TypedElementRelatedCausesInfo(Loop, 11); }
+            set { Loop.SetElement(11, value); }
         }
 
         public string CLM12_SpecialProgramCode
