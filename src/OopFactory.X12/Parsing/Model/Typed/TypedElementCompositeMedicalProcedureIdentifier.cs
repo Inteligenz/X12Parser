@@ -1,7 +1,7 @@
-﻿using OopFactory.X12.Parsing.Model.Typed.Enums;
+﻿using OopFactory.X12.Extensions;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 using System;
-using OopFactory.X12.Extensions;
-
+using System.Linq;
 namespace OopFactory.X12.Parsing.Model.Typed
 {
     public class TypedElementCompositeMedicalProcedureIdentifier : BaseElementReference
@@ -10,8 +10,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementCompositeMedicalProcedureIdentifier(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
-            Segment = segment;
-            ElementNumber = elementNumber;
+            if (0 < SubElements.Count()) _1_ProductOrServiceIdQualifier = SubElements.ElementAt(0).ToEnumFromEDIFieldValue<ProductOrServiceIdQualifiers>();
+            if (1 < SubElements.Count()) _2_ProcedureCode = SubElements.ElementAt(1);
+            if (2 < SubElements.Count()) _3_ProcedureModifier = SubElements.ElementAt(2);
+            if (3 < SubElements.Count()) _4_ProcedureModifier = SubElements.ElementAt(3);
+            if (4 < SubElements.Count()) _5_ProcedureModifier = SubElements.ElementAt(4);
+            if (5 < SubElements.Count()) _6_ProcedureModifier = SubElements.ElementAt(5);
+            if (6 < SubElements.Count()) _7_Description = SubElements.ElementAt(6);
+            if (7 < SubElements.Count()) _8_ProductOrServiceId = SubElements.ElementAt(7);
         }
 
         public override string ToString()

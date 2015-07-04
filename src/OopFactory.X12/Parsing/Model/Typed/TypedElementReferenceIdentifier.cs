@@ -10,6 +10,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedElementReferenceIdentifier(Segment segment, int elementNumber)
             : base(segment, elementNumber)
         {
+            if (0 < SubElements.Count()) _1_ReferenceIdentifierQualifier = SubElements.ElementAt(0);
+            if (1 < SubElements.Count()) _2_ReferenceIdentifier = SubElements.ElementAt(1);
+            if (2 < SubElements.Count()) _3_ReferenceIdentifierQualifier = SubElements.ElementAt(2);
+            if (3 < SubElements.Count()) _4_ReferenceIdentifier = SubElements.ElementAt(3);
+            if (4 < SubElements.Count()) _5_ReferenceIdentifierQualifier = SubElements.ElementAt(4);
+            if (5 < SubElements.Count()) _6_ReferenceIdentifier = SubElements.ElementAt(5);
         }
 
         public override string ToString()

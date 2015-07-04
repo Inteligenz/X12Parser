@@ -61,6 +61,8 @@
     <Compile Include="Parsing\Model\Typed\TypedElementAdjustmentIdentifier.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementHealthCareClaimStatus.cs" />
     <Compile Include="Parsing\Model\Typed\TypedLoopCLP.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedLoopSVC.cs" />
+    <Compile Include="Parsing\Model\Typed\TypedSegmentNM1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentBPR.cs" />
     <Compile Include="Parsing\Model\Typed\BaseElementReference.cs" />
     <Compile Include="Parsing\Model\Typed\DateTimePeriod.cs" />
@@ -148,7 +150,6 @@
     <Compile Include="Parsing\Model\Typed\TypedSegmentMIA.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentMOA.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentMSG.cs" />
-    <Compile Include="Parsing\Model\Typed\TypedSegmentN1.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN2.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentN9.cs" />
     <Compile Include="Parsing\Model\Typed\TypedSegmentNTE.cs" />

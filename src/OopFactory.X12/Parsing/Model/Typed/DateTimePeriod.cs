@@ -29,6 +29,12 @@ namespace OopFactory.X12.Parsing.Model.Typed
             this._time = time;
         }
 
+        public DateTimePeriod(string element)
+        {
+            //For Deserialization
+            throw new NotImplementedException();
+        }
+
         public DateTimePeriod(DateTime date)
         {
             this.Qualifier = "D8";
