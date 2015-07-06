@@ -102,9 +102,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(12, value.EDIFieldValue()); }
         }
 
-        public string EB13_CompositeMedicalProcedure
+        public TypedElementCompositeMedicalProcedureIdentifier EB13_CompositeMedicalProcedure
         {
-            get { return Loop.GetElement(13); }
+            get { return new TypedElementCompositeMedicalProcedureIdentifier(Loop, 13); }
             set { Loop.SetElement(13, value); }
         }
     }

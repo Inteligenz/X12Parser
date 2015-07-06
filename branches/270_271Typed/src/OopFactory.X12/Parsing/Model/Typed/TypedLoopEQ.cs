@@ -24,9 +24,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         }
 
 
-        public string EQ02_CompositeMedicalProcedure
+        public TypedElementCompositeMedicalProcedureIdentifier EQ02_CompositeMedicalProcedure
         {
-            get { return Loop.GetElement(2); }
+            get { return new TypedElementCompositeMedicalProcedureIdentifier(Loop, 2); }
             set { Loop.SetElement(2, value); }
         }
 
