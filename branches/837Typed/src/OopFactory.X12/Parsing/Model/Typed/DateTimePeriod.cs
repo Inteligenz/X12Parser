@@ -104,7 +104,7 @@ namespace OopFactory.X12.Parsing.Model.Typed {
             string s = date.ToString("yyyyMMdd");
             s += time.ToString("hhmm");
 
-            this._startDate = DateTime.ParseExact(s, "yyyyMMddhhmm", null, System.Globalization.DateTimeStyles.None);
+            this._startDate = DateTime.ParseExact(s, "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None);
         }
 
         public void SetD8(DateTime date) {
