@@ -164,6 +164,26 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         GenericPrescriptionDrug,
         [EDIFieldValue("93")]
         Podiatry,
+        [EDIFieldValue("94")]
+        Podiatry_OfficeVisit,
+        [EDIFieldValue("95")]
+        Podiatry_NursingHomeVisit,
+        [EDIFieldValue("96")]
+        Professional_Physician,
+        [EDIFieldValue("97")]
+        Anesthesiologist,
+        [EDIFieldValue("98")]
+        Professional_PhysicianVisit_Office,
+        [EDIFieldValue("99")]
+        Professional_PhysicianVisit_Inpatient,
+        [EDIFieldValue("A0")]
+        Professional_PhysicianVisit_Outpatient,
+        [EDIFieldValue("A1")]
+        Professional_PhysicianVisit_NursingHome,
+        [EDIFieldValue("A2")]
+        Professional_PhysicianVisit_SkilledNursingFacility,
+        [EDIFieldValue("A3")]
+        Professional_PhysicianVisit_Home,
         [EDIFieldValue("A4")]
         Psychiatric,
         [EDIFieldValue("A6")]
