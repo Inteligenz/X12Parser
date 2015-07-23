@@ -8,33 +8,95 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
 {
     public enum InsuranceTypeCode
     {
+        [EDIFieldValue("D")]
+        Disability,
+        [EDIFieldValue("12")]
+        MedicareSecondaryWorkingAgedBeneficiaryorSpousewithEmployerGroupHealthPlan,
+        [EDIFieldValue("13")]
+        MedicareSecondaryEndStageRenalDiseaseBeneficiaryintheMandatedCoordinationPeriodwithanEmployersGroupHealthPlan,
+        [EDIFieldValue("14")]
+        MedicareSecondaryNoFaultInsuranceincludingAutoisPrimary,
+        [EDIFieldValue("15")]
+        MedicareSecondaryWorkersCompensation,
+        [EDIFieldValue("16")]
+        MedicareSecondaryPublicHealthService_PHS_orOtherFederalAgency,
+        [EDIFieldValue("41")]
+        MedicareSecondaryBlackLung,
+        [EDIFieldValue("42")]
+        MedicareSecondaryVeteransAdministration,
+        [EDIFieldValue("43")]
+        MedicareSecondaryDisabledBeneficiaryUnderAge65withLargeGroupHealthPlan_LGHP,
+        [EDIFieldValue("47")]
+        MedicareSecondaryOtherLiabilityInsuranceisPrimary,
         [EDIFieldValue("AP")]
         AutoInsurancePolicy,
         [EDIFieldValue("C1")]
         Commercial,
         [EDIFieldValue("CO")]
         ConsolidatedOmnibusBudgetReconciliationAct_COBRA,
+        [EDIFieldValue("CP")]
+        MedicareConditionallyPrimary,
+        [EDIFieldValue("DB")]
+        DisabilityBenefits,
+        [EDIFieldValue("EP")]
+        ExclusiveProviderOrganization,
+        [EDIFieldValue("FF")]
+        FamilyorFriends,
         [EDIFieldValue("GP")]
         GroupPolicy,
         [EDIFieldValue("HM")]
         HealthMaintenanceOrganizationHMO,
         [EDIFieldValue("HN")]
         HealthMaintenanceOrganizationHMO_MedicareRisk,
+        [EDIFieldValue("HS")]
+        SpecialLowIncomeMedicareBeneficiary,
+        [EDIFieldValue("IN")]
+        Indemnity,
         [EDIFieldValue("IP")]
         IndividualPolicy,
+        [EDIFieldValue("LC")]
+        LongTermCare,
+        [EDIFieldValue("LD")]
+        LongTermPolicy,
+        [EDIFieldValue("LI")]
+        LifeInsurance,
+        [EDIFieldValue("LT")]
+        Litigation,
         [EDIFieldValue("MA")]
         MedicarePartA,
         [EDIFieldValue("MB")]
         MedicarePartB,
         [EDIFieldValue("MC")]
         Medicaid,
+        [EDIFieldValue("MH")]
+        MedigapPartA,
+        [EDIFieldValue("MI")]
+        MedigapPartB,
+        [EDIFieldValue("MP")]
+        MedicarePrimary,
+        [EDIFieldValue("OT")]
+        Other,
+        [EDIFieldValue("PE")]
+        PropertyInsurancePersonal,
+        [EDIFieldValue("PL")]
+        Personal,
+        [EDIFieldValue("PP")]
+        PersonalPayment_Cash_NoInsurance,
         [EDIFieldValue("PR")]
         PreferredProviderOrganizationPPO,
         [EDIFieldValue("PS")]
         PointofServicePOS,
+        [EDIFieldValue("QM")]
+        QualifiedMedicareBeneficiary,
+        [EDIFieldValue("RP")]
+        PropertyInsurance_Real,
         [EDIFieldValue("SP")]
         SupplementalPolicy,
+        [EDIFieldValue("TF")]
+        TaxEquityFiscalResponsibilityAct_TEFRA,
         [EDIFieldValue("WC")]
         WorkersCompensation,
+        [EDIFieldValue("WU")]
+        WrapUpPolicy
     }
 }
