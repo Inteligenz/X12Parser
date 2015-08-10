@@ -8,10 +8,44 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
 {
     public enum IndustryCode
     {
+        [EDIFieldValue("01")]
+        Pharmacy,
+        [EDIFieldValue("02")]
+        Unassigned,
+        [EDIFieldValue("03")]
+        School,
+        [EDIFieldValue("04")]
+        HomelessShelter,
+        [EDIFieldValue("05")]
+        IndianHealthServiceFree_standingFacility,
+        [EDIFieldValue("06")]
+        IndianHealthServiceProvider_basedFacility,
+        [EDIFieldValue("07")]
+        Tribal638Free_standingFacility,
+        [EDIFieldValue("08")]
+        Tribal638Provider_basedFacility,
+        [EDIFieldValue("09")]
+        Prison_CorrectionalFacility,
         [EDIFieldValue("11")]
         Office,
         [EDIFieldValue("12")]
         Home,
+        [EDIFieldValue("13")]
+        AssistedLivingFacility,
+        [EDIFieldValue("14")]
+        GroupHome,
+        [EDIFieldValue("15")]
+        MobileUnit,
+        [EDIFieldValue("16")]
+        TemporaryLodging,
+        [EDIFieldValue("17")]
+        Walk_inRetailHealthClinic,
+        [EDIFieldValue("18")]
+        PlaceOfEmployment_Worksite,
+        [EDIFieldValue("19")]
+        OffCampus_OutpatientHospital,
+        [EDIFieldValue("20")]
+        UrgentCareFacility,
         [EDIFieldValue("21")]
         InpatientHospital,
         [EDIFieldValue("22")]
@@ -36,6 +70,8 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         Ambulance_Land,
         [EDIFieldValue("42")]
         Ambulance_AirorWater,
+        [EDIFieldValue("49")]
+        IndependentClinic,
         [EDIFieldValue("50")]
         FederallyQualifiedHealthCenter,
         [EDIFieldValue("51")]
@@ -50,6 +86,8 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         ResidentialSubstanceAbuseTreatmentFacility,
         [EDIFieldValue("56")]
         PsychiatricResidentialTreatmentCenter,
+        [EDIFieldValue("57")]
+        Non_residentialSubstanceAbuseTreatmentFacility,
         [EDIFieldValue("60")]
         MassImmunizationCenter,
         [EDIFieldValue("61")]
