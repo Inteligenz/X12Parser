@@ -34,5 +34,10 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(2, value.EDIFieldValue()); }
         }
 
+        public string III02_IndustryCode
+        {
+            get { return _segment.GetElement(2); }
+            set { _segment.SetElement(2, value); }
+        }
     }
 }
