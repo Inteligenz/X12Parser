@@ -18,6 +18,10 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         ResubmissionAllowed,
         [EDIFieldValue("S")]
         DoNotResubmit_InquiryInitiatedToAThirdParty,
+        [EDIFieldValue("W")]
+        Wait30DaysAndResubmit,
+        [EDIFieldValue("X")]
+        Wait10DaysAndResubmit,
         [EDIFieldValue("Y")]
         DoNotResubmit_WeWillHoldYourRequestAndRespondAgainShortly,
     }
