@@ -8,10 +8,10 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
 {
     public enum RejectReasonCode
     {
-        [EDIFieldValue("15")]
-        RequiredApplicationDataMissing,
         [EDIFieldValue("04")]
         AuthorizedQuantityExceeded,
+        [EDIFieldValue("15")]
+        RequiredApplicationDataMissing,
         [EDIFieldValue("41")]
         AuthorizationAccessRestrictions,
         [EDIFieldValue("42")]
@@ -30,6 +30,12 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         ProviderNotonFile,
         [EDIFieldValue("52")]
         ServiceDatesNotWithinProviderPlanEnrollment,
+        [EDIFieldValue("53")]
+        InquiredBenefitInconsistentWithProviderType,
+        [EDIFieldValue("54")]
+        InappropriateProductServiceIdQualifier,
+        [EDIFieldValue("55")]
+        InappropriateProductServiceId,
         [EDIFieldValue("56")]
         InappropriateDate,
         [EDIFieldValue("57")]
@@ -54,6 +60,10 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         PatientNotFound,
         [EDIFieldValue("68")]
         DuplicatePatientIDNumber,
+        [EDIFieldValue("69")]
+        InconsistentWithPatientsAge,
+        [EDIFieldValue("70")]
+        InconsistentWithPatientsGender,
         [EDIFieldValue("71")]
         PatientBirthDateDoesNotMatchThatforthePatientontheDatabase,
         [EDIFieldValue("72")]
@@ -72,5 +82,11 @@ namespace OopFactory.X12.Parsing.Model.Typed.Enums
         SubscriberInsuredNotinGroupPlanIdentified,
         [EDIFieldValue("79")]
         InvalidParticipantIdentification,
+        [EDIFieldValue("80")]
+        NoResponseReceivedFromPayer,
+        [EDIFieldValue("97")]
+        InvalidMissingProviderAddress,
+        [EDIFieldValue("T4")]
+        PayerNameOrIdentifierMissing,
     }
 }
