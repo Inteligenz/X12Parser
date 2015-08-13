@@ -112,6 +112,27 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             }
         }
 
+        [TestMethod]
+        public void ParseInterchangeToXMl()
+        {
+            var x = new XmlDocument();
+
+            var i = new Interchange(DateTime.Now, 1, true);
+            var fg = i.AddFunctionGroup("HS", DateTime.Now, 11, "005010X279A1");
+            Transaction st = fg.AddTransaction("270", "1001");
+            var xml = i.Serialize(true);
+            x.LoadXml(xml);
+            var assert = new Action<string, int>((s, c) =>
+            {
+                var o = int.Parse(x.SelectSingleNode(s).InnerText);
+                Assert.IsNotNull(o);
+                Assert.AreEqual(c, o, s + " count is wrong");
+            });
+            assert("Interchange/IEA/IEA01", 1);
+            assert("Interchange/FunctionGroup/GE/GE01", 1);
+            assert("Interchange/FunctionGroup/Transaction/SE/SE01", 2);
+        }
+
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseAndUnparse()
@@ -176,37 +197,37 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             string originalX12 = interchange.SerializeToX12(true);
 
             string xml = interchange.Serialize();
-            
+
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = true;
             doc.LoadXml(xml);
 
             XmlElement dmgElement = (XmlElement)(doc.GetElementsByTagName("DMG")[0]);
             dmgElement.ParentNode.RemoveChild(dmgElement);
-            
+
             Console.WriteLine(doc.OuterXml);
             string x12 = parser.TransformToX12(doc.OuterXml);
 
             Console.WriteLine("ISA Segmemt:");
             Console.WriteLine(x12.Substring(0, 106));
             Console.WriteLine("Directly from XML:");
-            Console.WriteLine(x12); 
+            Console.WriteLine(x12);
 
-            
+
             var modifiedInterchange = parser.ParseMultiple(x12).First();
 
             string newX12 = modifiedInterchange.SerializeToX12(true);
 
             Console.WriteLine("After passing through interchange object:");
             Console.WriteLine(newX12);
- 
+
             var seSegment = modifiedInterchange.FunctionGroups.First().Transactions.First().TrailerSegments.FirstOrDefault(ts => ts.SegmentId == "SE");
 
             Assert.IsNotNull(seSegment);
             Assert.AreEqual("0001", seSegment.GetElement(2));
             Assert.AreEqual("15", seSegment.GetElement(1));
-            
-            
+
+
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
@@ -234,11 +255,11 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
             string edi = System.IO.File.ReadAllText(filename);
 
-            edi = edi.Replace('~','\x1D');
+            edi = edi.Replace('~', '\x1D');
             System.IO.File.WriteAllText(filename, edi);
         }
 
-        [TestMethod,Ignore]
+        [TestMethod, Ignore]
         public void CreateTestFileWithTrailingBlanks()
         {
             string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";

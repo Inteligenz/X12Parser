@@ -98,12 +98,12 @@ namespace OopFactory.X12.Parsing.Model
 
         internal override string ToX12String(bool addWhitespace)
         {
-            UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());
+            UpdateTrailerSegmentCount(1, CountTotalSegments());
             return base.ToX12String(addWhitespace);
         }
 
         internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
-            UpdateTrailerSegmentCount("SE", 1, CountTotalSegments());
+            UpdateTrailerSegmentCount(1, CountTotalSegments());
             base.ToX12String(addWhitespace, writer);
         }
 
@@ -111,6 +111,7 @@ namespace OopFactory.X12.Parsing.Model
         {
             if (!string.IsNullOrEmpty(SegmentId))
             {
+                UpdateTrailerSegmentCount(1, CountTotalSegments());
                 writer.WriteStartElement("Transaction");
                 writer.WriteAttributeString("ControlNumber", ControlNumber);
 
