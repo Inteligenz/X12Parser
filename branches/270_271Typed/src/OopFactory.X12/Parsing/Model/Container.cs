@@ -103,7 +103,7 @@ namespace OopFactory.X12.Parsing.Model
         }
 
 
-        internal bool UpdateTrailerSegmentCount(string segmentId, int elementNumber, int count)
+        internal bool UpdateTrailerSegmentCount(int elementNumber, int count)
         {
             var segment = _terminatingTrailerSegment;
             if (segment != null)

@@ -169,12 +169,12 @@ namespace OopFactory.X12.Parsing.Model
 
         internal override string ToX12String(bool addWhitespace)
         {
-            UpdateTrailerSegmentCount("GE", 1, _transactions.Count());
+            UpdateTrailerSegmentCount(1, _transactions.Count());
             return base.ToX12String(addWhitespace);
         }
 
         internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
-            UpdateTrailerSegmentCount("GE", 1, _transactions.Count());
+            UpdateTrailerSegmentCount(1, _transactions.Count());
             base.ToX12String(addWhitespace, writer);
         }
 
@@ -194,9 +194,10 @@ namespace OopFactory.X12.Parsing.Model
         #region IXmlSerializable Members
 
         internal override void WriteXml(XmlWriter writer)
-        {
+        {        
             if (!string.IsNullOrEmpty(SegmentId))
             {
+                UpdateTrailerSegmentCount(1, _transactions.Count());
                 writer.WriteStartElement("FunctionGroup");
 
                 base.WriteXml(writer);
