@@ -31,7 +31,7 @@ namespace OopFactory.X12.Parsing
         }
 
         public X12Parser(ISpecificationFinder specFinder)
-            : this(specFinder, true, new char[] {})
+            : this(specFinder, true, new char[] { })
         {
         }
 
@@ -210,7 +210,7 @@ namespace OopFactory.X12.Parsing
                             if (envelop == null)
                                 throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
                             envelop.AddSegment(segmentString);
-                            break;  
+                            break;
                         default:
                             var originalContainer = currentContainer;
                             containerStack.Clear();
@@ -296,11 +296,36 @@ namespace OopFactory.X12.Parsing
         public string TransformToX12(string xml)
         {
             var transform = new XslCompiledTransform();
-            transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")));
-
+            using (var xr = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")))
+            {
+                transform.Load(xr);
+            }
             using (var writer = new StringWriter())
             {
-                transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
+                using (var sr = new StringReader(xml))
+                {
+                    using (var xr = XmlReader.Create(sr))
+                        transform.Transform(xr, new XsltArgumentList(), writer);
+                }
+                return writer.GetStringBuilder().ToString();
+            }
+        }
+
+        public string TransformToX12(XmlDocument xml)
+        {
+            var transform = new XslCompiledTransform();
+            using (var xr = XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")))
+            {
+                transform.Load(xr);
+            }
+            return TransformToX12(transform, xml);
+        }
+
+        public string TransformToX12(XslCompiledTransform transform, XmlDocument xml)
+        {
+            using (var writer = new StringWriter())
+            {
+                transform.Transform(xml, new XsltArgumentList(), writer);
                 return writer.GetStringBuilder().ToString();
             }
         }
