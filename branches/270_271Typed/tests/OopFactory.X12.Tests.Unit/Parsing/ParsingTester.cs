@@ -1,14 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Reflection;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Transformations;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 
 namespace OopFactory.X12.Tests.Unit.Parsing
@@ -121,16 +121,21 @@ namespace OopFactory.X12.Tests.Unit.Parsing
             var fg = i.AddFunctionGroup("HS", DateTime.Now, 11, "005010X279A1");
             Transaction st = fg.AddTransaction("270", "1001");
             var xml = i.Serialize(true);
+            x.PreserveWhitespace = true;
             x.LoadXml(xml);
-            var assert = new Action<string, int>((s, c) =>
+            var assertCount = new Action<string, int>((s, c) =>
             {
                 var o = int.Parse(x.SelectSingleNode(s).InnerText);
                 Assert.IsNotNull(o);
                 Assert.AreEqual(c, o, s + " count is wrong");
             });
-            assert("Interchange/IEA/IEA01", 1);
-            assert("Interchange/FunctionGroup/GE/GE01", 1);
-            assert("Interchange/FunctionGroup/Transaction/SE/SE01", 2);
+            assertCount("Interchange/IEA/IEA01", 1);
+            assertCount("Interchange/FunctionGroup/GE/GE01", 1);
+            assertCount("Interchange/FunctionGroup/Transaction/SE/SE01", 2);
+
+            var prsr = new X12Parser();
+            var edi = prsr.TransformToX12(x.OuterXml);
+            prsr.ParseMultiple(edi);
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]

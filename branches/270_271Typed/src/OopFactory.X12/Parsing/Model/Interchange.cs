@@ -99,7 +99,7 @@ namespace OopFactory.X12.Parsing.Model
             set { SetElement(8, String.Format("{0,-15}", value)); }
         }
 
-        public DateTime InterchangeDate 
+        public DateTime InterchangeDate
         {
             get
             {
@@ -119,30 +119,30 @@ namespace OopFactory.X12.Parsing.Model
             }
         }
 
-        public string InterchangeControlStandardRepetitionSeparator 
+        public string InterchangeControlStandardRepetitionSeparator
         {
             get { return GetElement(11); }
             set { SetElement(11, String.Format("{0,-1}", value)); }
         }
 
-        public string InterchangeControlVersionNumberCode 
+        public string InterchangeControlVersionNumberCode
         {
             get { return GetElement(12); }
             set { SetElement(12, String.Format("{0,-5}", value)); }
         }
 
-        public string InterchangeControlNumber 
+        public string InterchangeControlNumber
         {
             get { return GetElement(13); }
         }
 
-        public string InterchangeAcknowledgmentRequestedCode 
+        public string InterchangeAcknowledgmentRequestedCode
         {
             get { return GetElement(14); }
             set { SetElement(14, String.Format("{0,-1}", value)); }
         }
 
-        public UsageIndicator InterchangeUsageIndicatorCode 
+        public UsageIndicator InterchangeUsageIndicatorCode
         {
             get { return GetElement(15).ToEnumFromEDIFieldValue<UsageIndicator>(); }
         }
@@ -196,9 +196,9 @@ namespace OopFactory.X12.Parsing.Model
 
         internal override IEnumerable<string> TrailerSegmentIds
         {
-            get 
-            { 
-                return new List<string>(); 
+            get
+            {
+                return new List<string>();
             }
         }
 
@@ -210,7 +210,8 @@ namespace OopFactory.X12.Parsing.Model
             return sb.ToString();
         }
 
-        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer) {
+        internal override void SerializeBodyToX12(bool addWhitespace, System.IO.StreamWriter writer)
+        {
             foreach (var fg in _functionGroups)
                 fg.ToX12String(addWhitespace, writer);
         }
@@ -221,7 +222,8 @@ namespace OopFactory.X12.Parsing.Model
             return base.ToX12String(addWhitespace);
         }
 
-        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer) {
+        internal override void ToX12String(bool addWhitespace, System.IO.StreamWriter writer)
+        {
             UpdateTrailerSegmentCount(1, _functionGroups.Count);
             base.ToX12String(addWhitespace, writer);
         }
@@ -231,64 +233,26 @@ namespace OopFactory.X12.Parsing.Model
             return Serialize(false);
         }
 
-        private void RemoveComments(XmlElement element)
-        {
-            List<XmlComment> comments = new List<XmlComment>();
-
-            foreach (XmlNode childElement in element.ChildNodes)
-            {
-                if (childElement is XmlComment)
-                    comments.Add((XmlComment)childElement);
-            }
-
-            foreach (XmlComment comment in comments)
-            {
-                XmlWhitespace prev = comment.PreviousSibling as XmlWhitespace;
-                XmlWhitespace next = comment.NextSibling as XmlWhitespace;
-                if (prev != null && prev.Value != null & prev.Value.StartsWith(Environment.NewLine)
-                    && next != null && next.Value != null && next.Value.StartsWith(Environment.NewLine))
-                {
-                    element.RemoveChild(next);
-                }
-
-                element.RemoveChild(comment);
-            }
-
-            foreach (XmlNode childElement in element.ChildNodes)
-            {
-                if (childElement is XmlElement && childElement.HasChildNodes)
-                {
-                    RemoveComments((XmlElement)childElement);
-                }
-            }
-        }
-
         public virtual string Serialize(bool suppressComments)
         {
-            MemoryStream memoryStream = new MemoryStream();
-
-            Serialize(memoryStream);
-            memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-            StreamReader streamReader = new StreamReader(memoryStream);
-            string xml = streamReader.ReadToEnd();
-
-            if (suppressComments)
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                XmlDocument doc = new XmlDocument();
-                doc.PreserveWhitespace = true;
-                doc.LoadXml(xml);
-                RemoveComments((XmlElement)doc.SelectSingleNode("Interchange"));
-
-                xml = doc.OuterXml;
+                Serialize(memoryStream, suppressComments);
+                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+                using (StreamReader streamReader = new StreamReader(memoryStream))
+                {
+                    return streamReader.ReadToEnd();
+                }
             }
-            return xml;
         }
 
-        public void Serialize(Stream stream)
+        public void Serialize(Stream stream, bool suppressComments = false)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(this.GetType());
-            
-            xmlSerializer.Serialize(stream, this);
+            if (suppressComments)
+                xmlSerializer.Serialize(new NoCommentXmlTextWriter(stream, Encoding.UTF8), this);
+            else
+                xmlSerializer.Serialize(new XmlTextWriter(stream, Encoding.UTF8), this);
         }
 
         #region IXmlSerializable Members

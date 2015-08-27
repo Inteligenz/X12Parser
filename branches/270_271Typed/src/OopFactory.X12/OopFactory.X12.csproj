@@ -193,6 +193,7 @@
     <Compile Include="Parsing\Model\Typed\TypedLoopPID.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\UnitOrBasisOfMeasurementCode.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\YesNoConditionOrResponseCode.cs" />
+    <Compile Include="Parsing\OopXmlTextWriter.cs" />
     <Compile Include="Parsing\ProfessionalClaimSpecificationFinder.cs" />
     <Compile Include="Parsing\Specification\IContainerSpecification.cs" />
     <Compile Include="Parsing\Specification\QualifierSet.cs" />
