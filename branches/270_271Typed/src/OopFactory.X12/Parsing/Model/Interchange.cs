@@ -249,10 +249,8 @@ namespace OopFactory.X12.Parsing.Model
         public void Serialize(Stream stream, bool suppressComments = false)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(this.GetType());
-            if (suppressComments)
-                xmlSerializer.Serialize(new NoCommentXmlTextWriter(stream, Encoding.UTF8), this);
-            else
-                xmlSerializer.Serialize(new XmlTextWriter(stream, Encoding.UTF8), this);
+            var wrtr = suppressComments ? new NoCommentXmlTextWriter(stream, null) : new XmlTextWriter(stream, null);
+            xmlSerializer.Serialize(wrtr, this);
         }
 
         #region IXmlSerializable Members

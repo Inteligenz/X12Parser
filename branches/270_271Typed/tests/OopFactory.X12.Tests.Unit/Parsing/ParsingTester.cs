@@ -113,7 +113,7 @@ namespace OopFactory.X12.Tests.Unit.Parsing
         }
 
         [TestMethod]
-        public void ParseInterchangeToXMl()
+        public void ParseInterchangeToXml()
         {
             var x = new XmlDocument();
 
