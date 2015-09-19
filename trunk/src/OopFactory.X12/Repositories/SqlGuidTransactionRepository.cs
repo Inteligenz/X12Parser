@@ -32,9 +32,13 @@ namespace OopFactory.X12.Repositories
         {
             Guid id = NewGuid();
 
-            AddSqlToBatch("INSERT INTO [{0}].[Container] (Id, SchemaName, Type)  VALUES ('{1}','{2}','{3}') ", _commonDb.Schema, id, _schema, loop.SegmentId);
+            var cmd = new SqlCommand(string.Format("INSERT INTO [{0}].[Container] (Id, SchemaName, Type)  VALUES (@id,@schemaName,@type) ", _commonDb.Schema));
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@schemaName", _schema);
+            cmd.Parameters.AddWithValue("@type", loop.SegmentId);
+            ExecuteCmd(cmd);
 
-            AddSqlToBatch(GetSaveLoopSql(id, loop, interchangeId, transactionSetId, transactionSetCode, parentLoopId));
+            ExecuteCmd(new SqlCommand(GetSaveLoopSql(id, loop, interchangeId, transactionSetId, transactionSetCode, parentLoopId)));
 
             return id;
         }

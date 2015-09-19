@@ -19,8 +19,12 @@ namespace OopFactory.X12.Repositories
 
         protected T ConvertT(object val)
         {
-            if (typeof(T) == typeof(Guid))
+            if (typeof(T) == typeof(Guid) && val == null)
+                return (T)(object)Guid.Empty;
+            else if (typeof(T) == typeof(Guid))
                 return (T)(object)Guid.Parse(val.ToString());
+            else if ((typeof(T) == typeof(long?) || typeof(T) == typeof(int?)) && val == null)
+                return (T)(object)0;
             else if (typeof(T) == typeof(long))
                 return (T)(object)Convert.ToInt64(val);
             else
