@@ -5,27 +5,33 @@ using System.Text;
 using OopFactory.X12.Parsing.Model;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Specification;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
 namespace OopFactory.X12.Repositories
 {
+    public interface IParsingErrorRepo<T> where T : struct
+    {
+        T PersistParsingError(T interchangeId, int positionInInterchange, int? revisionId, string errorMessage);
+    }
     /// <summary>
     /// Class for storing, retrieving and revising X12 messages.
     /// This library only does inserts.  Edits and Deletes are accomplished through revisions, but all revisions are retained.
     /// The Get methods will allow you choose the revision you want.
     /// </summary>
     /// <typeparam name="T">The type of all identity columns:  supports int or long</typeparam>
-    public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T> where T : struct
+    public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T>, IParsingErrorRepo<T> where T : struct
     {
         protected DbCreation<T> _commonDb;
         protected DbCreation<T> _transactionDb;
         private bool _schemaEnsured;
         private readonly Dictionary<string, SegmentSpecification> _specs;
         private int _batchSize;
-        private int _batchCount;
-        private StringBuilder _batchSql;
-        
+        //private int _batchCount;
+        //private StringBuilder _batchSql;
+        private SegmentBatch<T> _segmentBatch;
+
         public SqlTransactionRepository(string dsn)
             : this(dsn, new SpecificationFinder(), new string[] { "REF", "NM1", "N1", "N3", "N4", "DMG", "PER" }, "dbo")
         {
@@ -43,8 +49,7 @@ namespace OopFactory.X12.Repositories
             _transactionDb = new DbCreation<T>(dsn, schema, sqlDateType);
             _schemaEnsured = false;
             _batchSize = segmentBatchSize;
-            _batchCount = 0;
-            _batchSql = new StringBuilder();
+            _segmentBatch = new SegmentBatch<T>(this);
             _specs = new Dictionary<string, SegmentSpecification>();
             foreach (var segmentId in indexedSegments)
             {
@@ -154,7 +159,6 @@ namespace OopFactory.X12.Repositories
         public T Save(Interchange interchange, string filename, string userName)
         {
             EnsureSchema();
-            InitBatch();
             int positionInInterchange = 1;
             
             T interchangeId = SaveInterchange(interchange, filename, userName);
@@ -200,7 +204,7 @@ namespace OopFactory.X12.Repositories
                 foreach (var seg in interchange.TrailerSegments)
                     SaveSegment(null, seg, ++positionInInterchange, interchangeId);
 
-                ExecuteBatch();
+                ExecuteBatch(null);
                 return interchangeId;
             }
             catch (Exception)
@@ -552,227 +556,88 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
                 }
             }
         }
+               
+
         protected virtual void SaveSegment(SqlTransaction tran, DetachedSegment segment, int positionInInterchange, T interchangeId, T? functionalGroupId = null, T? transactionSetId = null, T? parentLoopId = null, T? loopId = null, int? revisionId = null, int? previousRevisionId = null, bool deleted = false)
         {
             if (!revisionId.HasValue || SegmentHasChanged(segment, positionInInterchange, interchangeId, previousRevisionId) || deleted)
             {
-                string segmentSql = string.Format(@"
-INSERT INTO [{0}].[Segment] (InterchangeId, FunctionalGroupId, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, PositionInInterchange, SegmentId, Segment)
-VALUES ({1}, {2}, {3}, {4}, {5}, isnull({6},0), {7}, {8}, '{9}', '{10}') ",
-                    _schema,
-                    string.Format("'{0}'", interchangeId),
-                    (object)functionalGroupId == null ? "NULL" : string.Format("'{0}'", functionalGroupId),
-                    (object)transactionSetId == null ? "NULL" : string.Format("'{0}'", transactionSetId),
-                    (object)parentLoopId == null ? "NULL" : string.Format("'{0}'", parentLoopId),
-                    (object)loopId == null ? "NULL" : string.Format("'{0}'", loopId),
-                    (object)revisionId == null ? "NULL" : string.Format("'{0}'", revisionId),
-                    deleted ? "1" : "0",
-                    positionInInterchange,
-                    segment.SegmentId.Replace("'", "''"),
-                    segment.SegmentString.Replace("'", "''")).Replace("{", "{{").Replace("}", "}}");
+                _segmentBatch.AddSegment(tran, interchangeId, positionInInterchange,
+                    revisionId ?? 0,
+                    ConvertT(functionalGroupId),
+                    ConvertT(transactionSetId),
+                    ConvertT(parentLoopId),
+                    ConvertT(loopId), deleted,
+                    segment, _specs.ContainsKey(segment.SegmentId) ? _specs[segment.SegmentId] : null);
 
-
-                if (tran != null)
+                if (tran != null || _segmentBatch._segmentTable.Rows.Count >= _batchSize)
                 {
-                    SqlCommand cmd = new SqlCommand(segmentSql);
-                    cmd.Connection = tran.Connection;
-                    cmd.Transaction = tran;
-                    ExecuteCmd(cmd);
+                    ExecuteBatch(tran);
                 }
-                else
-                    AddSqlToBatch(segmentSql);
-
-
-                if (_specs.ContainsKey(segment.SegmentId))
-                {
-                    StringBuilder parsingError = new StringBuilder();
-
-                    List<string> fieldNames = new List<string>();
-                    List<string> parameterNames = new List<string>();
-                    var spec = _specs[segment.SegmentId];
-                    int maxElements = spec != null ? spec.Elements.Count : 0;
-
-                    for (int i = 1; i == 1 || i <= segment.ElementCount; i++)
-                    {
-                        if (i <= maxElements)
-                        {
-                            fieldNames.Add(string.Format("[{0:00}]", i));
-                        }
-                        else
-                        {
-                            string val = segment.GetElement(i);
-                            string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} with value {4} will NOT be indexed because it exceeds the {5} specified number of elements.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxElements);
-                            Trace.TraceInformation(message);
-                            parsingError.AppendLine(message);
-                        }
-                    }
-
-                    StringBuilder sql = new StringBuilder();
-                    sql.AppendFormat(@"INSERT INTO [{0}].[{1}] (InterchangeId, PositionInInterchange, TransactionSetId, ParentLoopId, LoopId, RevisionId, Deleted, {2}, ErrorId)
-                    VALUES ({3}, {4}, {5}, {6}, {7}, isnull({8},0), {9}, ",
-                        _schema, segment.SegmentId, string.Join(",", fieldNames),
-                    string.Format("'{0}'", interchangeId),
-                        positionInInterchange,
-                        (object)transactionSetId == null ? "NULL" : string.Format("'{0}'", transactionSetId),
-                        (object)parentLoopId == null ? "NULL" : string.Format("'{0}'", parentLoopId),
-                        (object)loopId == null ? "NULL" : string.Format("'{0}'", loopId),
-                        (object)revisionId == null ? "NULL" : string.Format("'{0}'", revisionId),
-                        deleted ? "1" : "0");
-
-                    if (segment.ElementCount == 0)
-                    {
-                        sql.AppendFormat("NULL, ");
-                    }
-                    else
-                    {
-                        for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
-                        {
-                            string val = segment.GetElement(i);
-                            if (spec != null)
-                            {
-                                var elementSpec = spec.Elements[i - 1];
-                                int maxLength = elementSpec.MaxLength;
-
-                                if (maxLength > 0 && val.Length > maxLength)
-                                {
-                                    string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, maxLength);
-                                    Trace.TraceInformation(message);
-                                    parsingError.AppendLine(message);
-                                    val = val.Substring(0, maxLength);
-                                }
-
-                                if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
-                                {
-                                    int intVal = 0;
-                                    if (string.IsNullOrWhiteSpace(val))
-                                    {
-                                        sql.Append("NULL, ");
-                                    }
-                                    else if (int.TryParse(val, out intVal))
-                                    {
-                                        decimal denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
-                                        sql.AppendFormat("{0}, ", (decimal)intVal / denominator);
-                                    }
-                                    else
-                                    {
-                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into an implied decimal with precision {5}.", interchangeId, positionInInterchange, segment.SegmentId, i, val, elementSpec.ImpliedDecimalPlaces);
-                                        Trace.TraceInformation(message);
-                                        parsingError.AppendLine(message);
-                                        sql.AppendFormat("NULL, ");
-                                    }
-                                }
-                                else if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
-                                {
-                                    decimal decVal = 0;
-                                    if (string.IsNullOrWhiteSpace(val))
-                                        sql.Append("NULL, ");
-                                    else if (decimal.TryParse(val, out decVal))
-                                    {
-                                        sql.AppendFormat("{0}, ", val);
-                                    }
-                                    else
-                                    {
-                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into a decimal.", interchangeId, positionInInterchange, segment.SegmentId, i, val);
-                                        Trace.TraceInformation(message);
-                                        parsingError.AppendLine(message);
-                                        sql.AppendFormat("NULL, ");
-                                    }
-                                }
-                                else if (elementSpec.Type == ElementDataTypeEnum.Date)
-                                {
-                                    DateTime date = DateTime.MinValue;
-                                    if (val.Length == 8 && DateTime.TryParse(string.Format("{0}-{1}-{2}", val.Substring(0,4), val.Substring(4,2), val.Substring(6,2)), out date))
-                                        sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
-                                    else
-                                    {
-                                        string message = string.Format("Element {2}{3:00} in position {1} of interchange {0} cannot be indexed because '{4}' could not be parsed into a date.", interchangeId, positionInInterchange, segment.SegmentId, i, val);
-                                        Trace.TraceInformation(message);
-                                        parsingError.AppendLine(message);
-                                        sql.AppendFormat("NULL, ");
-                                    }
-                                }
-                                else
-                                    sql.AppendFormat("'{0}', ", val.Replace("'", "''"));
-
-                            }
-                        }
-                    }
-                    T? errorId = null;
-                    string errorMessage = parsingError.ToString();
-                    if (!string.IsNullOrWhiteSpace(errorMessage))
-                    {
-                        var errSql = string.Format(@"
-INSERT INTO [{0}].ParsingError (InterchangeId, PositionInInterchange, RevisionId, Message) 
-VALUES (@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) 
-SELECT scope_identity()", _schema);
-
-                        if (typeof(T) == typeof(Guid))
-                        {
-                            errSql = string.Format(@"DECLARE @id uniqueidentifier
-SET @id = newid()
-INSERT INTO [{0}].ParsingError (Id, InterchangeId, PositionInInterchange, RevisionId, Message) 
-VALUES (@id,@interchangeId, @positionInInterchange, isnull(@revisionId,0), @message) 
-SELECT @id", _schema);
-                        }
-
-                        SqlCommand errCmd = new SqlCommand(errSql.Replace("{", "{{").Replace("}", "}}"));
-
-                        errCmd.Parameters.AddWithValue("@interchangeId", interchangeId);
-                        errCmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
-                        errCmd.Parameters.AddWithValue("@revisionId", (object)revisionId ?? DBNull.Value);
-                        errCmd.Parameters.AddWithValue("@message", errorMessage);
-
-                        errorId = ConvertT(ExecuteScalar(errCmd));
-
-                    }
-                    sql.AppendFormat("{0})", (object)errorId == null ? "NULL" : string.Format("'{0}'", errorId));
-
-                    if (tran != null)
-                    {
-                        var cmd = new SqlCommand(sql.ToString().Replace("{", "{{").Replace("}", "}}"));
-                        cmd.Connection = tran.Connection;
-                        cmd.Transaction = tran;
-                        ExecuteCmd(cmd);
-                    }
-                    else
-                        AddSqlToBatch(sql.ToString().Replace("{", "{{").Replace("}", "}}"));
-                }
-
             }
         }
 
-        protected void AddSqlToBatch(string sql, params object[] args)
+        private void ExecuteBatch(SqlTransaction tran)
         {
-            _batchCount++;
-            _batchSql.AppendFormat(sql, args);
-            if (_batchCount >= _batchSize)
-                ExecuteBatch();                
-        }
-
-        private void InitBatch()
-        {
-            _batchCount = 0;
-            _batchSql = new StringBuilder();
-        }
-
-        private void ExecuteBatch()
-        {
-            string sql = _batchSql.ToString();
-            if (!string.IsNullOrWhiteSpace(sql))
+            if (_segmentBatch.SegmentCount > 0)
             {
                 try
                 {
-                    ExecuteCmd(new SqlCommand(sql));
-                    InitBatch();
+                    using (var conn = tran == null ? new SqlConnection(_dsn) : tran.Connection)
+                    {
+                        if (conn.State != System.Data.ConnectionState.Open)
+                            conn.Open();
+                        using (var sbc = new SqlBulkCopy(conn))
+                        {
+                            sbc.DestinationTableName = string.Format("[{0}].Segment", _schema);
+                            foreach (DataColumn c in _segmentBatch._segmentTable.Columns)
+                                sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+                            sbc.WriteToServer(_segmentBatch._segmentTable);
+
+                            foreach (var pair in _segmentBatch._parsedTables)
+                            {
+                                sbc.ColumnMappings.Clear();
+
+                                sbc.DestinationTableName = string.Format("[{0}].[{1}]", _schema, pair.Key);
+                                foreach (DataColumn c in pair.Value.Columns)
+                                    sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+                                sbc.WriteToServer(pair.Value);
+                            }
+                        }
+                    }
+                    _segmentBatch = new SegmentBatch<T>(this);
                 }
                 catch (Exception exc)
                 {
                     Trace.WriteLine(exc.Message);
-                    Trace.WriteLine(sql);
+                    Trace.TraceInformation("Error Saving {0} segments to db starting with {1}.",
+                        _segmentBatch.SegmentCount,
+                        _segmentBatch.StartingSegment);
+
                     throw;
                 }
-            }
+            }            
         }
+
+        public T PersistParsingError(T interchangeId, int positionInInterchange, int? revisionId, string errorMessage)
+        {
+
+            var cmd = new SqlCommand(string.Format(@"
+INSERT INTO [{0}].ParsingError (InterchangeId,PositionInInterchange,RevisionId,Message) 
+VALUES (@interchangeId, @positionInInterchange, @revisionId, @message)
+
+SELECT SCOPE_IDENTITY()
+", _schema));
+
+            cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
+            cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
+            cmd.Parameters.AddWithValue("@revisionId", revisionId ?? 0);
+            cmd.Parameters.AddWithValue("@message", errorMessage);
+
+            return ConvertT(ExecuteScalar(cmd));
+
+        }
+
 
         protected void ExecuteCmd(SqlCommand cmd)
         {

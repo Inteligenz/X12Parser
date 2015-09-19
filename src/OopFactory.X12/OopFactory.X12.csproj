@@ -137,6 +137,7 @@
     <Compile Include="Repositories\RepoSegment.cs" />
     <Compile Include="Repositories\RepoTransactionSet.cs" />
     <Compile Include="Repositories\RepoTransactionSetSearchCriteria.cs" />
+    <Compile Include="Repositories\SegmentBatch.cs" />
     <Compile Include="Repositories\SqlGuidTransactionRepository.cs" />
     <Compile Include="Repositories\SqlReadOnlyTransactionRepository.cs" />
     <Compile Include="Repositories\SqlTransactionRepository.cs" />
