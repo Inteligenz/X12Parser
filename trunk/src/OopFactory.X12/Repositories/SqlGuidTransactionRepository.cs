@@ -34,7 +34,7 @@ namespace OopFactory.X12.Repositories
             Guid id = NewGuid();
 
             _segmentBatch.AddLoop(id, loop, interchangeId,
-                transactionSetId != Guid.Empty ? (object)transactionSetId : null,
+                transactionSetId != Guid.Empty ? transactionSetId : (System.Guid?)null,
                 transactionSetCode,
                 parentLoopId != Guid.Empty ? parentLoopId : null,
                 GetEntityTypeCode(loop));
