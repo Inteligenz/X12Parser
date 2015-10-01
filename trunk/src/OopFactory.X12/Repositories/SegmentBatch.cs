@@ -16,6 +16,7 @@ namespace OopFactory.X12.Repositories
         private IParsingErrorRepo<T> _errorRepo;
         internal Dictionary<string, DataTable> _parsedTables;
         internal DataTable _segmentTable;
+        internal DataTable _loopTable;
         
         public SegmentBatch(IParsingErrorRepo<T> errorRepo)
         {
@@ -33,7 +34,21 @@ namespace OopFactory.X12.Repositories
             _segmentTable.Columns.Add("Deleted", typeof(bool));
             _segmentTable.Columns.Add("SegmentId", typeof(string));
             _segmentTable.Columns.Add("Segment", typeof(string));
-            
+
+            _loopTable = new DataTable();
+            _loopTable.Columns.Add("Id", typeof(T));
+            _loopTable.Columns.Add("ParentLoopId", typeof(T));
+            _loopTable.Columns.Add("InterchangeId", typeof(T));
+            _loopTable.Columns.Add("TransactionSetId", typeof(T));
+            _loopTable.Columns.Add("TransactionSetCode", typeof(string));
+            _loopTable.Columns.Add("SpecLoopId", typeof(string));
+            _loopTable.Columns.Add("StartingSegmentId", typeof(string));
+            _loopTable.Columns.Add("EntityIdentifierCode", typeof(string));     
+        }
+
+        public int LoopCount
+        {
+            get { return _loopTable.Rows.Count; }
         }
 
         public int SegmentCount
@@ -122,14 +137,12 @@ namespace OopFactory.X12.Repositories
 
                 row["InterchangeId"] = interchangeId;
                 row["PositionInInterchange"] = positionInInterchange;
-                row["TransactionSetId"] = transactionSetId;
-                row["ParentLoopId"] = parentLoopId;
-                row["LoopId"] = loopId;
+                row["TransactionSetId"] = (object) transactionSetId ?? DBNull.Value;
+                row["ParentLoopId"] = (object) parentLoopId ?? DBNull.Value;
+                row["LoopId"] = (object) loopId ?? DBNull.Value;
                 row["RevisionId"] = revisionId;
                 row["Deleted"] = deleted;
                 
-                T errorID;
-
                 for (int i = 1; i <= segment.ElementCount && i <= maxElements; i++)
                 {
                     try
@@ -219,6 +232,21 @@ namespace OopFactory.X12.Repositories
 
         }
 
+        public void AddLoop(Guid id, Loop loop, Guid interchangeId, Guid? transactionSetId, string transactionSetCode, Guid? parentLoopId, string entityIdentifierCode)
+        {
+            var row = _loopTable.NewRow();
 
+            row["Id"] = id;
+            row["ParentLoopId"] = (parentLoopId.HasValue && parentLoopId.Value != Guid.Empty) ? (object)parentLoopId : DBNull.Value;
+            row["InterchangeId"] = interchangeId;
+            row["TransactionSetId"] = (transactionSetId != Guid.Empty) ? (object)transactionSetId : DBNull.Value;
+            row["TransactionSetCode"] = transactionSetCode;
+            row["SpecLoopId"] = loop.Specification.LoopId;
+            row["StartingSegmentId"] = loop.SegmentId;
+            row["EntityIdentifierCode"] = entityIdentifierCode;
+
+            _loopTable.Rows.Add(row);
+        }
+        
     }
 }
