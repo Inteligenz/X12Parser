@@ -30,7 +30,7 @@ namespace OopFactory.X12.Repositories
         private int _batchSize;
         //private int _batchCount;
         //private StringBuilder _batchSql;
-        private SegmentBatch<T> _segmentBatch;
+        internal SegmentBatch<T> _segmentBatch;
 
         public SqlTransactionRepository(string dsn)
             : this(dsn, new SpecificationFinder(), new string[] { "REF", "NM1", "N1", "N3", "N4", "DMG", "PER" }, "dbo")
@@ -577,7 +577,7 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
             }
         }
 
-        private void ExecuteBatch(SqlTransaction tran)
+        internal virtual void ExecuteBatch(SqlTransaction tran)
         {
             if (_segmentBatch.SegmentCount > 0)
             {
