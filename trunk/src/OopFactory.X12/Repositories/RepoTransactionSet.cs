@@ -6,7 +6,8 @@ using OopFactory.X12.Parsing;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoTransactionSet<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoTransactionSet<T> where T : struct
     {
         public RepoTransactionSet(char segmentTerminator, char elementSeparator, char componentSeparator)
         {

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoEntity<T>
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoEntity<T>
     {
         public T EntityId { get; set; }
         public string EntityIdentifierCode { get; set; }

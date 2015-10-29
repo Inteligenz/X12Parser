@@ -1,50 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using OopFactory.X12.Parsing.Specification;
-
-namespace OopFactory.X12.Repositories
+﻿namespace OopFactory.X12.Sql
 {
-	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
-    public class DbCreation<T> where T : struct
-    {
-        private string _dsn;
-        private string _schema;
-        private SqlDbType _identitySqlType;
-        private string _dateType;
+	using System;
+	using System.Data;
+	using System.Data.SqlClient;
+	using System.Text;
+	using Parsing.Specification;
 
-        public DbCreation(string dsn, string schema, string dateType = "date")
-        {
-            _dsn = dsn;
-            _schema = schema;
-            _dateType = dateType;
-            if (typeof(T) == typeof(Guid))
-                _identitySqlType = SqlDbType.UniqueIdentifier;
-            else if (typeof(T) == typeof(long))
-                _identitySqlType = SqlDbType.BigInt;
-            else
-                _identitySqlType = SqlDbType.Int;            
-        }
+	public interface IDbCreation
+	{
+		string Schema { get; }
+		void CreateContainerTable();
+		void CreateRevisionTable();
+		void CreateX12CodeListTable();
+		int ElementCountInX12CodeListTable(string elementId);
+		void AddToX12CodeListTable(string elementId, string code, string definition);
+		void CreateInterchangeTable();
+		void CreateFunctionalGroupTable();
+		void CreateTransactionSetTable();
+		void CreateLoopTable();
+		void CreateSegmentTable();
+		void CreateParsingErrorTable();
+		void CreateEntityView(string commonSchema);
+		void CreateIndexedSegmentTable(SegmentSpecification spec, string commonSchema);
+		void AddErrorIdToIndexedSegmentTable(string segmentId);
+		void CreateSplitSegmentFunction();
+		void CreateFlatElementsFunction();
+		void CreateGetAncestorLoopsFunction();
+		void CreateGetDescendantLoopsFunction();
+		void CreateGetTransactionSetSegmentsFunction();
+		void CreateGetTransactionSegmentsFunction();
+		void CreateSchema();
+		bool FunctionExists(string functionName);
+		bool SchemaExists();
+		bool TableExists(string tableName);
+		bool ViewExists(string viewName);
+		bool TableColumnExists(string tableName, string columnName);
+		void ExecuteCmd(string sql);
+		void ExecuteCmd(SqlCommand cmd);
+		object ExecuteScalar(SqlCommand cmd);
+		void RemoveIdentityColumn(string table);
+		bool HasIdentityColumn(string table);
+	}
 
-        public string Schema { get { return _schema; } }
+	public class DbCreation : IDbCreation
+	{
+		private readonly string _dsn;
+		private readonly SqlDbType _identitySqlType;
+		private readonly string _dateType;
 
-        public void CreateContainerTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public DbCreation(string dsn, string schema, Type identityType, string dateType = "date")
+		{
+			_dsn = dsn;
+			Schema = schema;
+			_dateType = dateType;
+			if (identityType == typeof (Guid))
+				_identitySqlType = SqlDbType.UniqueIdentifier;
+			else if (identityType == typeof (long))
+				_identitySqlType = SqlDbType.BigInt;
+			else
+				_identitySqlType = SqlDbType.Int;
+		}
+
+		public string Schema { get; private set; }
+
+		public void CreateContainerTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Container](
-	[Id] [{1}] {2} NOT NULL,
+	[Id] [{1}] NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
 	[Type] [varchar](3) NOT NULL
     CONSTRAINT [PK_Container_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema, _identitySqlType, _identitySqlType == SqlDbType.UniqueIdentifier ? "DEFAULT (newid())" : "IDENTITY(1,1)"));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateRevisionTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateRevisionTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Revision](
 	[Id] [int] IDENTITY(0,1) NOT NULL,
     [SchemaName] [varchar](25) NOT NULL,
@@ -56,13 +88,12 @@ CREATE TABLE [{0}].[Revision](
 
 INSERT INTO [{0}].[Revision] (SchemaName,Comments,RevisionDate,RevisedBy)
 VALUES ('dbo','Initial Load',getdate(),'system')
-", _schema));
+", Schema));
+		}
 
-        }
-
-        public void CreateX12CodeListTable()
-        {
-            ExecuteCmd(string.Format(@"CREATE TABLE [{0}].[X12CodeList](
+		public void CreateX12CodeListTable()
+		{
+			ExecuteCmd(string.Format(@"CREATE TABLE [{0}].[X12CodeList](
 	[ElementId] [varchar](4) NOT NULL,
 	[Code] [varchar](6) NOT NULL,
 	[Definition] [varchar](500) NULL,
@@ -72,30 +103,35 @@ VALUES ('dbo','Initial Load',getdate(),'system')
 	[Code] ASC
 )
 )
-", _schema));
-        }
+", Schema));
+		}
 
-        public int ElementCountInX12CodeListTable(string elementId)
-        {
-            SqlCommand cmd = new SqlCommand(string.Format(@"select count(*) from [{0}].X12CodeList where ElementId = @elementId", _schema));
-            cmd.Parameters.AddWithValue("@elementId", elementId);
+		public int ElementCountInX12CodeListTable(string elementId)
+		{
+			var cmd =
+				new SqlCommand(string.Format(@"select count(*) from [{0}].X12CodeList where ElementId = @elementId", Schema));
+			cmd.Parameters.AddWithValue("@elementId", elementId);
 
-            return Convert.ToInt32(ExecuteScalar(cmd));
-        }
+			return Convert.ToInt32(ExecuteScalar(cmd));
+		}
 
-        public void AddToX12CodeListTable(string elementId, string code, string definition)
-        {
-            SqlCommand cmd = new SqlCommand(string.Format(@"insert into [{0}].X12CodeList (ElementId, Code, Definition) VALUES (@elementId, @code, @definition)", _schema));
-            cmd.Parameters.AddWithValue("@elementId", elementId);
-            cmd.Parameters.AddWithValue("@code", code);
-            cmd.Parameters.AddWithValue("@definition", definition);
+		public void AddToX12CodeListTable(string elementId, string code, string definition)
+		{
+			var cmd =
+				new SqlCommand(
+					string.Format(
+						@"insert into [{0}].X12CodeList (ElementId, Code, Definition) VALUES (@elementId, @code, @definition)",
+						Schema));
+			cmd.Parameters.AddWithValue("@elementId", elementId);
+			cmd.Parameters.AddWithValue("@code", code);
+			cmd.Parameters.AddWithValue("@definition", definition);
 
-            ExecuteCmd(cmd);
-        }
+			ExecuteCmd(cmd);
+		}
 
-        public void CreateInterchangeTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateInterchangeTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Interchange](
 	[Id] [{1}] NOT NULL,
 	[SenderId] [varchar](15) NULL,
@@ -110,12 +146,12 @@ CREATE TABLE [{0}].[Interchange](
     [CreatedBy] [varchar](50) NULL,
     [CreatedDate] datetime NULL,
  CONSTRAINT [PK_Interchange_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateFunctionalGroupTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateFunctionalGroupTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[FunctionalGroup](
 	[Id] [{1}] NOT NULL,
     [InterchangeId] [{1}] NOT NULL,
@@ -124,12 +160,12 @@ CREATE TABLE [{0}].[FunctionalGroup](
 	[ControlNumber] [varchar](9) NULL,
 	[Version] [varchar](12) NULL,
     CONSTRAINT [PK_FunctionalGroup_{0}] PRIMARY KEY CLUSTERED (	[Id] ASC )
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateTransactionSetTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateTransactionSetTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[TransactionSet](
 	[Id] [{1}] NOT NULL,
     [InterchangeId] [{1}] NOT NULL,
@@ -138,12 +174,12 @@ CREATE TABLE [{0}].[TransactionSet](
 	[ControlNumber] [varchar](9) NULL,
 	[ImplementationConventionRef] [varchar](35) NULL,
  CONSTRAINT [PK_Transaction_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateLoopTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateLoopTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Loop](
     [Id] [{1}] NOT NULL,
     [ParentLoopId] [{1}] NULL,
@@ -156,12 +192,12 @@ CREATE TABLE [{0}].[Loop](
     [StartingSegmentId] [varchar](3) NOT NULL,
     [EntityIdentifierCode] [varchar](3) NULL,
   CONSTRAINT [PK_Loop_{0}] PRIMARY KEY CLUSTERED ( [Id] ASC )
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateSegmentTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateSegmentTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[Segment](
 	[InterchangeId] [{1}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
@@ -189,14 +225,14 @@ CREATE NONCLUSTERED INDEX [IX_Segment_{0}] ON [{0}].[Segment]
 	[LoopId] ASC,
 	[SegmentId] ASC
 )
-", _schema, _identitySqlType));
-        }
+", Schema, _identitySqlType));
+		}
 
-        public void CreateParsingErrorTable()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateParsingErrorTable()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE TABLE [{0}].[ParsingError](
-	[Id] [{1}] {2} NOT NULL,
+	[Id] [{1}] NOT NULL,
     [InterchangeId] [{1}] NOT NULL,
     [PositionInInterchange] [int] NOT NULL,
     [RevisionId] [int] NOT NULL,
@@ -205,12 +241,12 @@ CONSTRAINT [PK_ParsingError_{0}] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
 )
-)", _schema, _identitySqlType, _identitySqlType == SqlDbType.UniqueIdentifier ? "DEFAULT (newid())" : "IDENTITY(1,1)"));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateEntityView(string commonSchema)
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateEntityView(string commonSchema)
+		{
+			ExecuteCmd(string.Format(@"
 CREATE VIEW [{0}].[Entity]
   AS
 select  l.Id as EntityId, l.EntityIdentifierCode, eic.Definition as EntityIdentifier
@@ -249,14 +285,14 @@ left join [{0}].[NM1] on l.Id = nm1.LoopId
 left join [{0}].N3 on l.Id = n3.ParentLoopId
 left join [{0}].N4 on l.Id = n4.ParentLoopId
 left join [{0}].[DMG] on l.Id = dmg.ParentLoopId
-where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ", _schema, commonSchema));
-        }
+where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ", Schema, commonSchema));
+		}
 
-        public void CreateIndexedSegmentTable(SegmentSpecification spec, string commonSchema)
-        {
-                var sql = new StringBuilder();
+		public void CreateIndexedSegmentTable(SegmentSpecification spec, string commonSchema)
+		{
+			var sql = new StringBuilder();
 
-                sql.AppendFormat(@"
+			sql.AppendFormat(@"
 CREATE TABLE [{0}].[{1}](
 	[InterchangeId] [{2}] NOT NULL,
 	[PositionInInterchange] [int] NOT NULL,
@@ -266,48 +302,47 @@ CREATE TABLE [{0}].[{1}](
     [LoopId] [{2}] NULL,
     [Deleted] [bit] NOT NULL,
     [ErrorId] [{2}] NULL,
-", _schema, spec.SegmentId, _identitySqlType);
+", Schema, spec.SegmentId, _identitySqlType);
 
-                foreach (var element in spec.Elements)
-                    if (element.MaxLength > 0 && element.MaxLength < 4000)
-                    {
-                        switch (element.Type)
-                        {
-                            case ElementDataTypeEnum.Decimal:
-                                int precision = element.MaxLength > 18 ? 38 : element.MaxLength * 2;
-                                int scale = element.MaxLength > 8 ? element.MaxLength / 2 : 4;
-                                sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
-                                break;
-                            case ElementDataTypeEnum.Numeric:
-                                if (element.ImpliedDecimalPlaces == 0)
-                                {
-                                    if (element.MaxLength < 5)
-                                        sql.AppendFormat("  [{0}] [smallint] NULL,\n", element.Reference);
-                                    else if (element.MaxLength <= 10)
-                                        sql.AppendFormat("  [{0}] [int] NULL,\n", element.Reference);
-                                    else 
-                                        sql.AppendFormat("  [{0}] [bigint] NULL,\n", element.Reference);                                        
-                                }
-                                else
-                                {
-                                    precision = element.MaxLength - element.ImpliedDecimalPlaces + 2;
-                                    scale = element.ImpliedDecimalPlaces;
-                                    sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
-                                }
-                                break;
-                            case ElementDataTypeEnum.Date:
-                                sql.AppendFormat("  [{0}] [{1}] NULL,\n", element.Reference, _dateType);
-                                break;
-                            default:
-                                sql.AppendFormat("	[{0}] [nvarchar]({1}) NULL,\n", element.Reference, element.MaxLength);
-                                break;
-                        }
-                    }
-                    else
-                        sql.AppendFormat("	[{0}] [nvarchar](max) NULL,\n", element.Reference);
+			foreach (var element in spec.Elements)
+				if (element.MaxLength > 0 && element.MaxLength < 4000)
+				{
+					switch (element.Type)
+					{
+						case ElementDataTypeEnum.Decimal:
+							var precision = element.MaxLength > 18 ? 38 : element.MaxLength*2;
+							var scale = element.MaxLength > 8 ? element.MaxLength/2 : 4;
+							sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
+							break;
+						case ElementDataTypeEnum.Numeric:
+							if (element.ImpliedDecimalPlaces == 0)
+							{
+								if (element.MaxLength < 5)
+									sql.AppendFormat("  [{0}] [smallint] NULL,\n", element.Reference);
+								else if (element.MaxLength <= 10)
+									sql.AppendFormat("  [{0}] [int] NULL,\n", element.Reference);
+								else
+									sql.AppendFormat("  [{0}] [bigint] NULL,\n", element.Reference);
+							}
+							else
+							{
+								precision = element.MaxLength - element.ImpliedDecimalPlaces + 2;
+								scale = element.ImpliedDecimalPlaces;
+								sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
+							}
+							break;
+						case ElementDataTypeEnum.Date:
+							sql.AppendFormat("  [{0}] [{1}] NULL,\n", element.Reference, _dateType);
+							break;
+						default:
+							sql.AppendFormat("	[{0}] [nvarchar]({1}) NULL,\n", element.Reference, element.MaxLength);
+							break;
+					}
+				}
+				else
+					sql.AppendFormat("	[{0}] [nvarchar](max) NULL,\n", element.Reference);
 
-
-                sql.AppendFormat(@"
+			sql.AppendFormat(@"
     CONSTRAINT [PK_{1}_{0}] PRIMARY KEY CLUSTERED ([InterchangeId] ASC, [PositionInInterchange] ASC, [RevisionId] ASC)
 ) 
 CREATE NONCLUSTERED INDEX [IX_{1}_{0}] ON [{0}].[{1}] 
@@ -319,10 +354,10 @@ CREATE NONCLUSTERED INDEX [IX_{1}_{0}] ON [{0}].[{1}]
 	[ParentLoopId] ASC,
 	[LoopId] ASC
 )
-", _schema, spec.SegmentId);
-                ExecuteCmd(sql.ToString());
+", Schema, spec.SegmentId);
+			ExecuteCmd(sql.ToString());
 
-                ExecuteCmd(string.Format(@"
+			ExecuteCmd(string.Format(@"
 CREATE VIEW [{0}].[LastRev{1}]
 AS
 select *
@@ -331,18 +366,17 @@ where RevisionId = (select max([RevisionId])
                     from [{0}].[{1}] b 
                     where a.InterchangeId = b.InterchangeId 
                       and a.PositionInInterchange = b.PositionInInterchange
-                    )", _schema, spec.SegmentId, commonSchema));
-            
-        }
+                    )", Schema, spec.SegmentId, commonSchema));
+		}
 
-        public void AddErrorIdToIndexedSegmentTable(string segmentId)
-        {
-            ExecuteCmd(string.Format("ALTER TABLE [{0}].[{1}] ADD [ErrorId] [{2}] NULL;", _schema, segmentId, _identitySqlType));
-        }
+		public void AddErrorIdToIndexedSegmentTable(string segmentId)
+		{
+			ExecuteCmd(string.Format("ALTER TABLE [{0}].[{1}] ADD [ErrorId] [{2}] NULL;", Schema, segmentId, _identitySqlType));
+		}
 
-        public void CreateSplitSegmentFunction()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateSplitSegmentFunction()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[SplitSegment]
 (
 	@delimiter varchar(1),
@@ -372,12 +406,12 @@ BEGIN
     insert into @elements values (@reference, substring (@segment, @frontIndex + 1,len(@segment)-@frontIndex))
 
 	RETURN 
-END",_schema));
-        }
+END", Schema));
+		}
 
-        public void CreateFlatElementsFunction()
-        {
-            ExecuteCmd(new SqlCommand(string.Format(@"
+		public void CreateFlatElementsFunction()
+		{
+			ExecuteCmd(new SqlCommand(string.Format(@"
 CREATE FUNCTION [{0}].[FlatElements]
 (	
 	@delimiter varchar(1),
@@ -426,12 +460,12 @@ select
   [32] = (select Element from elements where Ref = 32),
   [33] = (select Element from elements where Ref = 33),
   [34] = (select Element from elements where Ref = 34)
-)",_schema)));
-        }
+)", Schema)));
+		}
 
-        public void CreateGetAncestorLoopsFunction()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateGetAncestorLoopsFunction()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[GetAncestorLoops]
 (	
 	@loopId {1},
@@ -455,12 +489,12 @@ RETURN
     select Id, ParentLoopId, InterchangeId, TransactionSetId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, [Level]
     from parents
     where @includeSelf = 1 or Level > 0
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateGetDescendantLoopsFunction()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateGetDescendantLoopsFunction()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].GetDescendantLoops
 (	
 	@loopId {1},
@@ -490,12 +524,12 @@ RETURN
   
   select Id, ParentLoopId, InterchangeId, TransactionSetId, SpecLoopId, LevelId, LevelCode, StartingSegmentId, EntityIdentifierCode, Level
   from children
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateGetTransactionSetSegmentsFunction()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateGetTransactionSetSegmentsFunction()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].GetTransactionSetSegments
 (	
 	@transactionSetId {1}, @includeControlSegments bit, @revisionId int
@@ -537,12 +571,12 @@ RETURN
   select *
   from revisedSegments
   where RowNum = 1 and Deleted = 0
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        public void CreateGetTransactionSegmentsFunction()
-        {
-            ExecuteCmd(string.Format(@"
+		public void CreateGetTransactionSegmentsFunction()
+		{
+			ExecuteCmd(string.Format(@"
 CREATE FUNCTION [{0}].[GetTransactionSegments]
 (	
 	@loopId {1}, @includeControlSegments bit, @revisionId int
@@ -616,90 +650,150 @@ RETURN
   select *
   from revisedSegments
   where RowNum = 1 and Deleted = 0
-)", _schema, _identitySqlType));
-        }
+)", Schema, _identitySqlType));
+		}
 
-        internal void ExecuteCmd(string sql)
-        {
-            ExecuteCmd(new SqlCommand(sql));
-        }
+		public void ExecuteCmd(string sql)
+		{
+			ExecuteCmd(new SqlCommand(sql));
+		}
 
-        internal void ExecuteCmd(SqlCommand cmd)
-        {
-            if (cmd.Transaction == null)
-            {
-                using (var conn = new SqlConnection(_dsn))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            else
-                cmd.ExecuteNonQuery();
-        }
+		public void ExecuteCmd(SqlCommand cmd)
+		{
+			if (cmd.Transaction == null)
+			{
+				using (var conn = new SqlConnection(_dsn))
+				{
+					conn.Open();
+					cmd.Connection = conn;
+					cmd.ExecuteNonQuery();
+				}
+			}
+			else
+				cmd.ExecuteNonQuery();
+		}
 
-        internal object ExecuteScalar(SqlCommand cmd)
-        {
-            if (cmd.Transaction == null)
-            {
+		public object ExecuteScalar(SqlCommand cmd)
+		{
+			if (cmd.Transaction == null)
+			{
+				using (var conn = new SqlConnection(_dsn))
+				{
+					conn.Open();
+					cmd.Connection = conn;
+					return cmd.ExecuteScalar();
+				}
+			}
+			return cmd.ExecuteScalar();
+		}
 
-                using (var conn = new SqlConnection(_dsn))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    return cmd.ExecuteScalar();
-                }
-            }
-            else
-            {
-                return cmd.ExecuteScalar();
-            }
-        }
+		public void RemoveIdentityColumn(string table)
+		{
+			using (var conn = new SqlConnection(_dsn))
+			{
+				conn.Open();
 
-        public void CreateSchema()
-        {
-            ExecuteCmd(new SqlCommand(string.Format(@"CREATE SCHEMA [{0}] AUTHORIZATION [dbo]", _schema)));
-            
-        }
-        public bool FunctionExists(string functionName)
-        {
-            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT')) then 1 else 0 end", _schema, functionName)));
+				using (var tx = conn.BeginTransaction())
+				{
+					var createTempColCmd = conn.CreateCommand();
+					createTempColCmd.Transaction = tx;
+					createTempColCmd.CommandText = string.Format(@"
+						alter table [{0}].[{1}] drop constraint PK_{1}_{0}
+						alter table [{0}].[{1}] add TempId int null", Schema, table);
 
-            return Convert.ToInt32(result) != 0;
-        }
+					var updateAndRenameCmd = conn.CreateCommand();
+					updateAndRenameCmd.Transaction = tx;
+					updateAndRenameCmd.CommandText = string.Format(@"
+						update [{0}].[{1}] set TempId = Id
+						alter table [{0}].[{1}] alter column TempId int not null
+						alter table [{0}].[{1}] drop column Id
+						exec sp_rename '[{0}].[{1}].TempId', 'Id', 'COLUMN'
+						alter table [{0}].[{1}] add constraint PK_{1}_{0} primary key clustered (Id)", Schema, table);
 
-        public bool SchemaExists()
-        {
-            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.schemas WHERE name = N'{0}') then 1 else 0 end", _schema)));
+					createTempColCmd.ExecuteNonQuery();
+					updateAndRenameCmd.ExecuteNonQuery();
+					tx.Commit();
+				}
+			}
+		}
 
-            return Convert.ToInt32(result) != 0;
-        }
+		public bool HasIdentityColumn(string table)
+		{
+			var cmd = new SqlCommand(@"SELECT CASE WHEN EXISTS( SELECT 1
+					FROM     SYS.IDENTITY_COLUMNS 
+					WHERE object_id = object_id(@tablename)) THEN 1 ELSE 0 END");
 
-        public bool TableExists(string tableName)
-        {
-            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'U')) then 1 else 0 end", _schema, tableName)));
+			cmd.Parameters.AddWithValue("tablename", string.Format("[{0}].[{1}]", Schema, table));
+			var result = ExecuteScalar(cmd);
+			return Convert.ToBoolean(result);
+		}
 
-            return Convert.ToInt32(result) != 0;
-        }
+		public void CreateSchema()
+		{
+			ExecuteCmd(new SqlCommand(string.Format(@"CREATE SCHEMA [{0}] AUTHORIZATION [dbo]", Schema)));
+		}
 
-        public bool ViewExists(string viewName)
-        {
-            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[{0}].[{1}]')) then 1 else 0 end", _schema, viewName)));
+		public bool FunctionExists(string functionName)
+		{
+			var result =
+				ExecuteScalar(
+					new SqlCommand(
+						string.Format(
+							@"select case when exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT')) then 1 else 0 end",
+							Schema,
+							functionName)));
 
-            return Convert.ToInt32(result) != 0;
-        }
+			return Convert.ToInt32(result) != 0;
+		}
 
-        public bool TableColumnExists(string tableName, string columnName)
-        {
-            var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS 
+		public bool SchemaExists()
+		{
+			var result =
+				ExecuteScalar(
+					new SqlCommand(
+						string.Format(
+							@"select case when EXISTS (SELECT * FROM sys.schemas WHERE name = N'{0}') then 1 else 0 end",
+							Schema)));
+
+			return Convert.ToInt32(result) != 0;
+		}
+
+		public bool TableExists(string tableName)
+		{
+			var result =
+				ExecuteScalar(
+					new SqlCommand(
+						string.Format(
+							@"select case when EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[{1}]') AND type in (N'U')) then 1 else 0 end",
+							Schema,
+							tableName)));
+
+			return Convert.ToInt32(result) != 0;
+		}
+
+		public bool ViewExists(string viewName)
+		{
+			var result =
+				ExecuteScalar(
+					new SqlCommand(
+						string.Format(
+							@"select case when EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[{0}].[{1}]')) then 1 else 0 end",
+							Schema,
+							viewName)));
+
+			return Convert.ToInt32(result) != 0;
+		}
+
+		public bool TableColumnExists(string tableName, string columnName)
+		{
+			var result = ExecuteScalar(new SqlCommand(string.Format(@"select case when EXISTS 
 (select *
 from information_schema.columns
 where table_schema='{0}' 
 and Table_name = '{1}'
-and column_name = '{2}') then 1 else 0 end", _schema, tableName, columnName)));
+and column_name = '{2}') then 1 else 0 end", Schema, tableName, columnName)));
 
-            return Convert.ToInt32(result) != 0;
-        }
-    }
+			return Convert.ToInt32(result) != 0;
+		}
+	}
 }

@@ -21,7 +21,8 @@ namespace OopFactory.X12.Repositories
     /// The Get methods will allow you choose the revision you want.
     /// </summary>
     /// <typeparam name="T">The type of all identity columns:  supports int or long</typeparam>
-    public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T>, IParsingErrorRepo<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class SqlTransactionRepository<T> : SqlReadOnlyTransactionRepository<T>, IParsingErrorRepo<T> where T : struct
     {
         protected DbCreation<T> _commonDb;
         protected DbCreation<T> _transactionDb;

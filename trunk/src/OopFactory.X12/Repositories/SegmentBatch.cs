@@ -11,7 +11,8 @@ using OopFactory.X12.Parsing.Specification;
 namespace OopFactory.X12.Repositories
 {
 
-    internal class SegmentBatch<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	internal class SegmentBatch<T> where T : struct
     {
         private IParsingErrorRepo<T> _errorRepo;
         internal Dictionary<string, DataTable> _parsedTables;

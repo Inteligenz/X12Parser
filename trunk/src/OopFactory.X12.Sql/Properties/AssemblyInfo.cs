@@ -1,29 +1,28 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-/********************************************************** 
- * Copyright © 2011 Dannie Strubhar. All rights reserved. *
- **********************************************************/
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OopFactory.X12")]
+
+[assembly: AssemblyTitle("OopFactory.X12.Sql")]
 [assembly: AssemblyDescription("Open Source .NET C# X12 Parser")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dannie Strubhar")]
-[assembly: AssemblyProduct("OopFactory.X12")]
-[assembly: AssemblyCopyright("Copyright © Dannie Strubhar 2011")]
+[assembly: AssemblyProduct("OopFactory.X12.Sql")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
+
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5cbd2215-698a-4cc3-a0f4-3661a3549a89")]
+
+[assembly: Guid("41a434d2-9c15-4ffc-95d4-cbb61accf50d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,5 +34,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.10.0")]
-[assembly: AssemblyFileVersion("3.0.10.0")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

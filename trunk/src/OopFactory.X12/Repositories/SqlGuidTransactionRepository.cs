@@ -17,7 +17,8 @@ namespace OopFactory.X12.Repositories
     /// and allows for an overridable method for creating new Guids
     /// so that users can apply their own guid comb algorithms
     /// </summary>
-    public class SqlGuidTransactionRepository : SqlTransactionRepository<Guid>
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class SqlGuidTransactionRepository : SqlTransactionRepository<Guid>
     {
         public SqlGuidTransactionRepository(string dsn, ISpecificationFinder specFinder, string[] indexedSegments, string schema = "dbo", string commonSchema = "dbo", int segmentBatchSize = 1000)
             : base(dsn, specFinder, indexedSegments, schema, commonSchema, segmentBatchSize)

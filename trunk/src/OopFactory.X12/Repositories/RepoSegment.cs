@@ -7,7 +7,8 @@ using OopFactory.X12.Parsing.Model;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoSegment<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoSegment<T> where T : struct
     {
         public RepoSegment(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator)
         {

@@ -5,17 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}</ProjectGuid>
+    <ProjectGuid>{82795B66-0F18-4385-8180-A8C7E0F41893}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.X12.Validation</RootNamespace>
-    <AssemblyName>OopFactory.X12.Validation</AssemblyName>
+    <RootNamespace>OopFactory.X12.Sql</RootNamespace>
+    <AssemblyName>OopFactory.X12.Sql</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,19 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerInformation.cs" />
-    <Compile Include="InstitutionalClaimAcknowledgmentService.cs" />
-    <Compile Include="Model\AcknowledgmentCodeEnum.cs" />
-    <Compile Include="Model\ContextError.cs" />
-    <Compile Include="Model\DataElementNote.cs" />
-    <Compile Include="Model\FunctionalGroupResponse.cs" />
-    <Compile Include="Model\PositionInSegment.cs" />
-    <Compile Include="Model\SegmentError.cs" />
+    <Compile Include="DbCreation.cs" />
+    <Compile Include="IIdProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\TransactionSetResponse.cs" />
-    <Compile Include="SegmentInformation.cs" />
-    <Compile Include="X12AcknowledgmentService.cs" />
-    <Compile Include="X12Extensions.cs" />
+    <Compile Include="RepoEntity.cs" />
+    <Compile Include="RepoEntitySearchCriteria.cs" />
+    <Compile Include="RepoLoop.cs" />
+    <Compile Include="RepoLoopSearchCriteria.cs" />
+    <Compile Include="RepoSegment.cs" />
+    <Compile Include="RepoTransactionSet.cs" />
+    <Compile Include="RepoTransactionSetSearchCriteria.cs" />
+    <Compile Include="SegmentBatch.cs" />
+    <Compile Include="SqlReadOnlyTransactionRepository.cs" />
+    <Compile Include="SqlTransactionRepository.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
@@ -65,7 +62,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="OopFactory.X12.Validation.nuspec" />
+    <None Include="OopFactory.X12.Sql.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

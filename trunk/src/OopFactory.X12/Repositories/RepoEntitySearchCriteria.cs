@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoEntitySearchCriteria<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoEntitySearchCriteria<T> where T : struct
     {
         /// <summary>
         /// Comma delimited string of entity identifierCodes to include in results
