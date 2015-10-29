@@ -8,7 +8,7 @@
     <owners>$author$</owners>
     <licenseUrl>http://x12parser.codeplex.com/license</licenseUrl>
     <projectUrl>http://x12parser.codeplex.com/</projectUrl>
-    <iconUrl></iconUrl>
+    <iconUrl>http://x12parser.codeplex.com/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes></releaseNotes>
