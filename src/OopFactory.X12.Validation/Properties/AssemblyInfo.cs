@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OopFactory.X12.Validation")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Open Source .NET C# X12 Parser")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Dannie Strubhar")]
 [assembly: AssemblyProduct("OopFactory.X12.Validation")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]

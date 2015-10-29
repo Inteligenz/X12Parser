@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoTransactionSetSearchCriteria<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoTransactionSetSearchCriteria<T> where T : struct
     {
         public T? InterchangeId { get; set; }
         public string SenderId { get; set; }

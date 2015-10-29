@@ -6,7 +6,8 @@ using System.Data.SqlClient;
 
 namespace OopFactory.X12.Repositories
 {
-    public class SqlReadOnlyTransactionRepository<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class SqlReadOnlyTransactionRepository<T> where T : struct
     {
         protected readonly string _dsn;
         protected readonly string _schema;

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OopFactory.X12.Repositories
 {
-    public class RepoLoopSearchCriteria<T> where T : struct
+	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+	public class RepoLoopSearchCriteria<T> where T : struct
     {
         public T? LoopId { get; set; }
         public T? ParentLoopId { get; set; }
