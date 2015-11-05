@@ -199,7 +199,9 @@
     <EmbeddedResource Include="Specifications\Ansi-997-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OopFactory.X12.nuspec" />
+    <None Include="OopFactory.X12.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Parsing\Model\ParsingModel.cd" />
     <None Include="Parsing\Specification\SpecificationModel.cd" />
     <None Include="Repositories\RepositoriesDiagram.cd" />
