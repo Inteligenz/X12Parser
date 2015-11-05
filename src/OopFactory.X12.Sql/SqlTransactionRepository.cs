@@ -414,26 +414,11 @@ select scope_identity()", _commonDb.Schema);
 
 		protected virtual string GetContainerIdSql(string segmentId)
 		{
-			//NOTE: may need updating
-			if (_identityType == typeof (Guid))
-			{
-				return string.Format(@"
-DECLARE @id uniqueidentifier
-
-SET @id = newid()
-
-INSERT INTO [{1}].[Container] (Id, SchemaName, Type) VALUES (@id, '{0}','{2}')
-
-SELECT @id ", _schema, _commonDb.Schema, segmentId);
-			}
-			return string.Format(@"
-DECLARE @id int
-
-INSERT INTO [{1}].[Container] (SchemaName, Type) VALUES ('{0}','{2}')
-
-SET @id = scope_identity() 
-
-SELECT @id ", _schema, _commonDb.Schema, segmentId);
+			return string.Format(
+				@"INSERT INTO [{1}].[Container] (Id, SchemaName, Type) VALUES (@containerId, '{0}','{2}');",
+				_schema,
+				_commonDb.Schema,
+				segmentId);
 		}
 
 		private object SaveInterchange(Interchange interchange, string filename, string userName)
@@ -454,12 +439,14 @@ SELECT @id ", _schema, _commonDb.Schema, segmentId);
 			}
 
 			var interchangeId = _idProvider.NextId(_schema, "Interchange");
+			var containerId = _idProvider.NextId(_commonDb.Schema, "Container");
 
 			var cmd = new SqlCommand(GetContainerIdSql("ISA") + string.Format(@"
 INSERT INTO [{0}].[Interchange] (Id, SenderId, ReceiverId, ControlNumber, [Date], SegmentTerminator, ElementSeparator, ComponentSeparator, Filename, HasError, CreatedBy, CreatedDate)
 VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, @elementSeparator, @componentSeparator, @filename, 0, @createdBy, getdate())
 ", _schema));
 			cmd.Parameters.AddWithValue("@id", interchangeId);
+			cmd.Parameters.AddWithValue("@containerId", containerId);
 			cmd.Parameters.AddWithValue("@senderId", interchange.InterchangeSenderId);
 			cmd.Parameters.AddWithValue("@receiverId", interchange.InterchangeReceiverId);
 			cmd.Parameters.AddWithValue("@controlNumber", interchange.InterchangeControlNumber);
@@ -469,6 +456,8 @@ VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, 
 			cmd.Parameters.AddWithValue("@componentSeparator", interchange.Delimiters.SubElementSeparator);
 			cmd.Parameters.AddWithValue("@filename", filename);
 			cmd.Parameters.AddWithValue("@createdBy", userName);
+
+			ExecuteCmd(cmd);
 
 			return interchangeId;
 		}
@@ -523,17 +512,21 @@ VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, 
 			}
 
 			var functionalGroupId = _idProvider.NextId(_schema, "FunctionalGroup");
+			var containerId = _idProvider.NextId(_commonDb.Schema, "Container");
 
 			var cmd = new SqlCommand(GetContainerIdSql("GS") + string.Format(@"
 INSERT INTO [{0}].[FunctionalGroup] (Id, InterchangeId, FunctionalIdCode, Date, ControlNumber, Version)
 VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)
 ", _schema, _commonDb.Schema));
 			cmd.Parameters.AddWithValue("@id", functionalGroupId);
+			cmd.Parameters.AddWithValue("@containerId", containerId);
 			cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
 			cmd.Parameters.AddWithValue("@functionalIdCode", idCode);
 			cmd.Parameters.AddWithValue("@date", date);
 			cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
 			cmd.Parameters.AddWithValue("@version", version);
+
+      ExecuteCmd(cmd);
 
 			return functionalGroupId;
 		}
@@ -550,16 +543,20 @@ VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)
 			}
 
 			var transactionSetId = _idProvider.NextId(_schema, "TransactionSet");
+			var containerId = _idProvider.NextId(_commonDb.Schema, "Container");
 
 			var cmd = new SqlCommand(GetContainerIdSql("ST") + string.Format(@"
 INSERT INTO [{0}].[TransactionSet] (Id, InterchangeId, FunctionalGroupId, IdentifierCode, ControlNumber) 
 VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber)
 ", _schema, _commonDb.Schema));
 			cmd.Parameters.AddWithValue("@id", transactionSetId);
+			cmd.Parameters.AddWithValue("@containerId", containerId);
 			cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
 			cmd.Parameters.AddWithValue("@functionalGroupId", functionalGroupId);
 			cmd.Parameters.AddWithValue("@identifierCode", transaction.IdentifierCode);
 			cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
+
+      ExecuteCmd(cmd);
 
 			return transactionSetId;
 		}
@@ -572,11 +569,14 @@ VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber
 			object parentLoopId)
 		{
 			var hlId = _idProvider.NextId(_schema, "Loop");
+			var containerId = _idProvider.NextId(_commonDb.Schema, "ContainerId");
+
 			var cmd = new SqlCommand(GetContainerIdSql("HL") + string.Format(@"
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @levelId, @levelCode, 'HL')
 ", _schema, _commonDb.Schema));
 			cmd.Parameters.AddWithValue("@id", hlId);
+			cmd.Parameters.AddWithValue("@containerId", containerId);
 			cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId != _defaultIdentityTypeValue ? parentLoopId : DBNull.Value);
 			cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
 			cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
@@ -584,6 +584,8 @@ VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCo
 			cmd.Parameters.AddWithValue("@specLoopId", loop.Specification.LoopId);
 			cmd.Parameters.AddWithValue("@levelId", loop.Id);
 			cmd.Parameters.AddWithValue("@levelCode", loop.LevelCode);
+
+      ExecuteCmd(cmd);
 
 			return hlId;
 		}
@@ -768,8 +770,12 @@ order by RevisionId desc", _schema, _commonDb.Schema), conn);
 							containerTable.Columns.Add("Id", _identityType);
 							containerTable.Columns.Add("SchemaName", typeof (string));
 							containerTable.Columns.Add("Type", typeof (string));
+
 							foreach (DataRow row in _segmentBatch._loopTable.Rows)
-								containerTable.Rows.Add(row["Id"], _schema, row["StartingSegmentId"]);
+							{
+								var containerId = _idProvider.NextId(_commonDb.Schema, "Container");
+								containerTable.Rows.Add(containerId, _schema, row["StartingSegmentId"]);
+							}
 
 							foreach (DataColumn c in containerTable.Columns)
 								sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
@@ -857,6 +863,8 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)
 			cmd.Parameters.AddWithValue("@positionInInterchange", positionInInterchange);
 			cmd.Parameters.AddWithValue("@revisionId", revisionId ?? 0);
 			cmd.Parameters.AddWithValue("@message", errorMessage);
+
+      ExecuteCmd(cmd);
 
 			return errorId;
 		}
