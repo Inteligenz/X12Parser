@@ -556,7 +556,7 @@ VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber
 			cmd.Parameters.AddWithValue("@identifierCode", transaction.IdentifierCode);
 			cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
 
-      ExecuteCmd(cmd);
+			ExecuteCmd(cmd);
 
 			return transactionSetId;
 		}
@@ -577,7 +577,7 @@ VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCo
 ", _schema, _commonDb.Schema));
 			cmd.Parameters.AddWithValue("@id", hlId);
 			cmd.Parameters.AddWithValue("@containerId", containerId);
-			cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId != _defaultIdentityTypeValue ? parentLoopId : DBNull.Value);
+			cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId != null && parentLoopId != _defaultIdentityTypeValue ? parentLoopId : DBNull.Value);
 			cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
 			cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
 			cmd.Parameters.AddWithValue("@transactionSetCode", transactionSetCode);
@@ -585,7 +585,7 @@ VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCo
 			cmd.Parameters.AddWithValue("@levelId", loop.Id);
 			cmd.Parameters.AddWithValue("@levelCode", loop.LevelCode);
 
-      ExecuteCmd(cmd);
+			ExecuteCmd(cmd);
 
 			return hlId;
 		}
