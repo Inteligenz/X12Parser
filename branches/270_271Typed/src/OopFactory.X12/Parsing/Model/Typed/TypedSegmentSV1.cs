@@ -32,11 +32,18 @@ namespace OopFactory.X12.Parsing.Model.Typed
             };
         }
 
-        public TypedElementCompositDiagnosisCodePointer CreateTypedElementCompositDiagnosisCodePointer(int DiagnosisCodePointer1)
+        public TypedElementCompositDiagnosisCodePointer CreateTypedElementCompositDiagnosisCodePointer(
+            int DiagnosisCodePointer1,
+            int? DiagnosisCodePointer2 = null,
+            int? DiagnosisCodePointer3 = null,
+            int? DiagnosisCodePointer4 = null)
         {
             return new TypedElementCompositDiagnosisCodePointer(_segment, 7)
             {
                 _1_DiagnosisCodePointer = DiagnosisCodePointer1,
+                _2_DiagnosisCodePointer = DiagnosisCodePointer2,
+                _3_DiagnosisCodePointer = DiagnosisCodePointer3,
+                _4_DiagnosisCodePointer = DiagnosisCodePointer4,
             };
         }
 
