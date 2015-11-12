@@ -569,7 +569,7 @@ VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber
 			object parentLoopId)
 		{
 			var hlId = _idProvider.NextId(_schema, "Loop");
-			var containerId = _idProvider.NextId(_commonDb.Schema, "ContainerId");
+			var containerId = _idProvider.NextId(_commonDb.Schema, "Container");
 
 			var cmd = new SqlCommand(GetContainerIdSql("HL") + string.Format(@"
 INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
