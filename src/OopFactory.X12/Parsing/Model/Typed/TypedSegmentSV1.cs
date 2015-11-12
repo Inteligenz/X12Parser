@@ -12,14 +12,23 @@ namespace OopFactory.X12.Parsing.Model.Typed
         public TypedSegmentSV1()
             : base("SV1")
         {
-        }   
+        }
         public TypedSegmentSV1(Segment segment) : base(segment) { }
-        public TypedElementCompositeMedicalProcedureIdentifier CreateTypedElementCompositeMedicalProcedureIdentifier(ProductOrServiceIdQualifiers ProductOrServiceIdQualifier, string ProcedureCode)
+        public TypedElementCompositeMedicalProcedureIdentifier CreateTypedElementCompositeMedicalProcedureIdentifier(ProductOrServiceIdQualifiers ProductOrServiceIdQualifier
+            , string ProcedureCode
+            , string Modifier1 = null
+            , string Modifier2 = null
+            , string Modifier3 = null
+            , string Modifier4 = null)
         {
             return new TypedElementCompositeMedicalProcedureIdentifier(_segment, 1)
             {
                 _1_ProductOrServiceIdQualifier = ProductOrServiceIdQualifier,
                 _2_ProcedureCode = ProcedureCode,
+                _3_ProcedureModifier = Modifier1,
+                _4_ProcedureModifier = Modifier2,
+                _5_ProcedureModifier = Modifier3,
+                _6_ProcedureModifier = Modifier4,
             };
         }
 
