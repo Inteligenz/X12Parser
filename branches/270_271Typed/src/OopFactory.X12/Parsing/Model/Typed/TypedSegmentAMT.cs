@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OopFactory.X12.Extensions;
+using OopFactory.X12.Parsing.Model.Typed.Enums;
 
 namespace OopFactory.X12.Parsing.Model.Typed
 {
@@ -20,9 +18,15 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { _segment.SetElement(1, value); }
         }
 
-        public string AMT02_MonetaryAmount
+        public AmountQualifierCode AMT01_AmountQualifierCodeEnum
         {
-            get { return _segment.GetElement(2); }
+            get { return _segment.GetElement(1).ToEnumFromEDIFieldValue<AmountQualifierCode>(); }
+            set { _segment.SetElement(6, value.EDIFieldValue()); }
+        }
+
+        public decimal AMT02_MonetaryAmount
+        {
+            get { return _segment.GetDecimalElement(2).GetValueOrDefault(); }
             set { _segment.SetElement(2, value); }
         }
 

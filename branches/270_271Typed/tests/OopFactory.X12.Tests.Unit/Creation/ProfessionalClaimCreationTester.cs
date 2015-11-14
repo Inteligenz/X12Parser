@@ -177,8 +177,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             hiSegment.HI01_HealthCareCodeInformation = hiSegment.CreateNewTypedElementHealthCareCodeInformation(1, CodeListQualifierCode.PrincipalDiagnosis, "0340");
             hiSegment.HI02_HealthCareCodeInformation = hiSegment.CreateNewTypedElementHealthCareCodeInformation(2, CodeListQualifierCode.Diagnosis, "V7389");
 
-            var lxLoop = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
-            lxLoop.LX01_AssignedNumber = "1";
+            var lxLoop = claim2300Loop.AddLoop(new TypedLoopLX() { LX01_AssignedNumber = 1 });
+            lxLoop.LX01_AssignedNumber = 1;
 
             var sv1Segment = lxLoop.AddSegment(new TypedSegmentSV1());
             sv1Segment.SV101_CompositeMedicalProcedure = sv1Segment.CreateTypedElementCompositeMedicalProcedureIdentifier(
@@ -193,8 +193,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             DateTime theDate = DateTime.ParseExact("20061003", "yyyyMMdd", null);
             dtpSegment.DTP03_Date = new DateTimePeriod(theDate);
 
-            var lxLoop2 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
-            lxLoop2.LX01_AssignedNumber = "2";
+            var lxLoop2 = claim2300Loop.AddLoop(new TypedLoopLX());
+            lxLoop2.LX01_AssignedNumber = 2;
 
             var sv1Segment2 = lxLoop2.AddSegment(new TypedSegmentSV1());
             sv1Segment2.SV101_CompositeMedicalProcedure = sv1Segment2.CreateTypedElementCompositeMedicalProcedureIdentifier(
@@ -210,8 +210,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             DateTime theDate2 = DateTime.ParseExact("20061003", "yyyyMMdd", null);
             dtpSegment2.DTP03_Date = new DateTimePeriod(theDate2);
 
-            var lxLoop3 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
-            lxLoop3.LX01_AssignedNumber = "3";
+            var lxLoop3 = claim2300Loop.AddLoop(new TypedLoopLX());
+            lxLoop3.LX01_AssignedNumber = 3;
 
             var sv1Segment3 = lxLoop3.AddSegment(new TypedSegmentSV1());
             sv1Segment3.SV101_CompositeMedicalProcedure = sv1Segment3.CreateTypedElementCompositeMedicalProcedureIdentifier(
@@ -227,8 +227,8 @@ namespace OopFactory.X12.Tests.Unit.Creation
             DateTime theDate3 = DateTime.ParseExact("20061010", "yyyyMMdd", null);
             dtpSegment3.DTP03_Date = new DateTimePeriod(theDate3);
 
-            var lxLoop4 = claim2300Loop.AddLoop(new TypedLoopLX("LX"));
-            lxLoop4.LX01_AssignedNumber = "4";
+            var lxLoop4 = claim2300Loop.AddLoop(new TypedLoopLX());
+            lxLoop4.LX01_AssignedNumber = 4;
 
             var sv1Segment4 = lxLoop4.AddSegment(new TypedSegmentSV1());
             sv1Segment4.SV101_CompositeMedicalProcedure = sv1Segment4.CreateTypedElementCompositeMedicalProcedureIdentifier(

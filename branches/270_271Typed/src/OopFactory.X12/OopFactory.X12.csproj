@@ -58,6 +58,7 @@
     <Compile Include="Parsing\Model\ISegmentContainer.cs" />
     <Compile Include="Parsing\Model\TypedLoop.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\ActionCodes.cs" />
+    <Compile Include="Parsing\Model\Typed\Enums\AmountQualifierCode.cs" />
     <Compile Include="Parsing\Model\Typed\Enums\ClaimAdjustmentGroupCode.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementAdjustmentIdentifier.cs" />
     <Compile Include="Parsing\Model\Typed\TypedElementHealthCareClaimStatus.cs" />
