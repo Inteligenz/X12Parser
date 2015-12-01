@@ -30,6 +30,14 @@ namespace OopFactory.X12.Parsing.Model.Typed
             set { Loop.SetElement(1, value.EDIFieldValue()); }
         }
 
+        /// <summary>
+        /// Read only on purpose, added to handle error condition with United Health Care (UHC)
+        /// </summary>
+        public EligibilityOrBenefitInformation? EB01_EligibilityOrBenefitInformationEnum_Safe
+        {
+            get { return Loop.GetElement(1).ToEnumFromEDIFieldValueSafe<EligibilityOrBenefitInformation>(); }
+        }
+
         public CoverageLevelCode? EB02_CoverageLevelCodeEnum
         {
             get { return Loop.GetElement(2).ToEnumFromEDIFieldValueSafe<CoverageLevelCode>(); }
