@@ -671,8 +671,8 @@
     <EmbeddedResource Include="Specifications\Ansi-132-Specification.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Specifications\Ansi-133-Specification.xml" />
-    <Content Include="Specifications\Ansi-158-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-133-Specification.xml" />
+    <EmbeddedResource Include="Specifications\Ansi-158-Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-187-Specification.xml" />
     <EmbeddedResource Include="Specifications\Ansi-179-Specification.xml" />
   </ItemGroup>
