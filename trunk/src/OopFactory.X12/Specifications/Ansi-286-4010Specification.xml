@@ -12,6 +12,7 @@
     <Segment SegmentId="N9"/>
     <Segment SegmentId="PER"/>
     <Segment SegmentId="DTM"/>
+    <Segment SegmentId="LCD"/>
   </Loop>
   <Loop LoopId="SPI">
     <Name>Specifcation Identifier</Name>
