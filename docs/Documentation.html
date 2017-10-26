@@ -1,0 +1,82 @@
+<div class="wikidoc">
+<h3>Out-of-the-Box Usage:</h3>
+<p>X12Parser is a collection of simple command line console applications for transforming an X12 file.</p>
+<p><em><strong>X12Parser.exe</strong></em></p>
+<p>X12Parser transforms an X12 file into a more domain easily readable xml file.<br>
+<br>
+The 2 arguments to the command line are input filename and output filename. &nbsp;Only the input filename is required. If the second argument (output filename) is not present, X12Parser will use the input filename and add a &quot;.xml&quot; to create the output filename.<br>
+<br>
+<span style="text-decoration:underline">Example:</span><br>
+X12Parser &quot;D:\Test.clm&quot; &quot;D:\Test.xml&quot;</p>
+<p>See&nbsp;<a href="/wikipage?title=Parsing%20an%20834%20Transaction&referringTitle=Documentation">Parsing an 834 Transaction</a>&nbsp;or&nbsp;<a href="/wikipage?title=Parsing%20an%20837%20Transaction&referringTitle=Documentation">Parsing an 837 Transaction</a>&nbsp;to
+ see an example of what the output will resemble and how to write more code to output to html or back to a formatted x12.</p>
+<p><em><strong>UnbundleX12.exe</strong></em></p>
+<p>UnbundleX12 separates an X12 file into multiple valid X12 files at a specified X12 loop ID. When loops are separated their header information (parent loop or segment) is retained. The SE transaction trailer segment and GE function group segment, however,
+ is updated to correctly reflect the number of segments in the transaction and the number of transactions in the function group so the resulting x12 is still valid.</p>
+<p>The 5 arguments to the command line are input filename, X12 loop ID, output directory, output filename format and include whitespace. The first 3 arguments are required. If the fourth argument is not present, UnbundleX12 will use&nbsp;the input filename
+ and add a 3 digit incrementing counter to create the output filename. &nbsp;If the fourth argument is specified it can use the following special tokens:</p>
+<table border="0">
+<tbody>
+<tr>
+<td>Token</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>{0}</td>
+<td>Output directory specified on the command line</td>
+</tr>
+<tr>
+<td>{1}</td>
+<td>Input filename including extension</td>
+</tr>
+<tr>
+<td>{2}</td>
+<td>Counter incremented for every unbundled loop</td>
+</tr>
+<tr>
+<td>{3}</td>
+<td>File extension of input file</td>
+</tr>
+</tbody>
+</table>
+<p>The fifth argument will toggle on or off the include whitespace option when creating the X12 file. &nbsp;If not specified it is set to &quot;true&quot;. If set to &quot;true&quot;, this option adds carriage returns and indentation to the loop structure to make it more human
+ readable. Note that adding whitespace may make the file unreadable with some EDI applications.</p>
+<p><span style="text-decoration:underline">3 argument example:</span></p>
+<p>UnbundleX12 &quot;D:\837Test.clm&quot; &quot;2300&quot; &quot;D:\Output&quot;</p>
+<p>If the 837 input file had 2 claims in it, then &quot;837Test.clm_001.clm&quot; and&nbsp;&quot;837Test.clm_002.clm&quot; would be created in the&nbsp;D:\Output directory.</p>
+<p><span style="text-decoration:underline">4 argument example:</span></p>
+<p>UnbundleX12 &quot;D:\837Test.clm&quot; &quot;2300&quot; &quot;D:\837Unbundle&quot; &quot;{0}\{1}_Output_{2:000}{3}&quot;</p>
+<p>If the 837 input file had 2 claims in it, then &quot;837Test.clm_Output_001.clm&quot; and&nbsp;&quot;837Test.clm_Output_002.clm&quot; would be created in the&nbsp;D:\Output directory.</p>
+<p><span style="text-decoration:underline">5 argument example:</span></p>
+<p>UnbundleX12 &quot;D:\837Test.clm&quot; &quot;2300&quot; &quot;D:\837Unbundle&quot; &quot;{0}\{1}_Output_{2:000}{3}&quot; &quot;true&quot;</p>
+<p>If the 837 input file had 2 claims in it, then &quot;837Test.clm_Output_001.clm&quot; and&nbsp;&quot;837Test.clm_Output_002.clm&quot; would be created in the&nbsp;D:\Output directory formatted with whitespace indentation.</p>
+<p><em>Unbundling Tips:</em></p>
+<ul>
+<li>To unbundle 837 files into individual claims, use loop ID 2300 </li><li>To unbundle 835 files into individual remittance EOBs, use loop ID 2100 </li><li>If the resulting X12 file is &quot;unreadable&quot; by an EDI application try turning off the whitespace option (see fifth argument)
+</li></ul>
+<p>For further technical explanation of the unbundle feature, see&nbsp;<a href="http://x12parser.codeplex.com/wikipage?title=Unbundling%20an%20X12%20file%20by%20Loop%20ID">Unbundling an X12 file by Loop ID</a>.</p>
+<h3>Usage as development tool:</h3>
+<ul>
+<li>The most common use case of this parser is to transform the XML into a flat representation to be pushed into a database or into flat files to be consumed by other applications. &nbsp;See
+<a href="/wikipage?title=Creating%20a%20flat%20file%20from%20the%20X12%20xml%20using%20XSLT%20and%20XslCompiledTransform">
+Creating a flat file or Excel file from the X12 xml using XSLT and XslCompiled Transform</a> to see how to create a flattened version of the x12 transaction.
+</li><li>Other transaction sets can be parse by creating and injecting your own specification file. See
+<a href="/wikipage?title=Injecting%20your%20own%20X12%20Specification">Injecting your own X12 Specification</a>.<a></a>
+<a></a></li></ul>
+<p><a></a></p>
+<p><a></a></p>
+<h3><a>Supported Transaction Sets:</a></h3>
+<p>See a full list of supported transactions here:&nbsp;<a href="https://x12parser.codeplex.com/wikipage?title=Transaction%20Set%20Configuration">https://x12parser.codeplex.com/wikipage?title=Transaction%20Set%20Configuration</a>.</p>
+<p><a>To request another transaction set, please add an issue to the issue tracker&nbsp;</a><a href="http://x12parser.codeplex.com/WorkItem/Create">http://x12parser.codeplex.com/WorkItem/Create</a>.</p>
+<h3>Other Discussions</h3>
+<ul>
+<li><a href="http://x12parser.codeplex.com/wikipage?title=Comparing%20Open%20Source%20EDI%20Software">Comparing Open Source EDI Software</a>, prepared by contributor
+<a href="http://www.codeplex.com/site/users/view/nth">nth</a> </li><li><a href="http://x12parser.codeplex.com/wikipage?title=About%20the%20X12%20Parser">About the X12 Parser</a>
+</li></ul>
+<h3>Other Useful Tools</h3>
+<ul>
+<li>Deidentifier for removing PII and PHI (<a href="http://etasoft.com/ot.htm">http://etasoft.com/ot.htm</a>) especially for creating test files.
+</li><li>If you are new to EDI this a good place to start:&nbsp;<a href="http://www.xtranslator.com/prod/beginguidex12.pdf">http://www.xtranslator.com/prod/beginguidex12.pdf</a>. &nbsp;This is a pretty decent product too if you have a few thousand dollars to spare.
+</li><li>FO Processor for transforming FO-XML into PDF <a href="http://fonet.codeplex.com">
+http://fonet.codeplex.com</a>. </li></ul>
+</div><div class="ClearBoth"></div>

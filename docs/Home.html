@@ -1,0 +1,196 @@
+<div class="wikidoc">
+<p><strong>Project Description</strong><br>
+This is an open source .NET C# implementation of an X12 Parser.<br>
+<br>
+The parser allows for a specification of any X12 transaction set to create a generic X12 xml representation of the hierarchical data contained within the X12 document.</p>
+<p>No database integration is required by design, though&nbsp; you can use the ImportX12 app to
+<a href="/wikipage?title=Sql Server Database Integration">parse into a SQL Server database</a> and skip the XML.<br>
+<br>
+<strong>Motivation</strong><br>
+The motivation for this project is to provide a quick and easy way to examine edi files without the overhead of creating databases as the target for parsed EDI files.<br>
+<br>
+It aims to demystify the X12 standard and make parsing it accessible to the masses, not to just very expensive parsing tools.<br>
+It also aims to reduce the overhead of getting started with X12 parsing by not requiring any database integration to solve the problem of parsing the file.<br>
+<br>
+<strong>Assumptions</strong><br>
+The built-in specs contain all 4010 standards and some 5010 specifications, but you can inject your own if you are using a later standard or a non-public specification.<br>
+<br>
+See <a href="/wikipage?title=Parsing%20an%20837%20Transaction&referringTitle=Home">
+Parsing an 837 Transaction</a> to see an example of the three possible output formats and their corresponding code samples.<br>
+<br>
+</p>
+<p><strong>Contributor Blogs</strong></p>
+<ul>
+<li><a href="http://x12parser.codeplex.com/wikipage?title=Comparing%20Open%20Source%20EDI%20Software">Comparing Open Source EDI Software</a>&nbsp;contributed by nth
+</li></ul>
+<p><br>
+<strong>Latest features:</strong></p>
+<ul>
+<li>Added <a href="/wikipage?title=Sql Server Database Integration">SQL Server Database integration</a> with the ImportX12 console app and SqlTransactionRepository class.
+</li><li>Added all 4010 specifications to Release 2.3.4. </li><li>Added <a title="837 ClaimParser Usage" href="http://x12parser.codeplex.com/wikipage?title=837%20Claim%20Parser%20Usage">
+ClaimParser application</a> specific for 837 healthcare claim parsing to Release 2.2.4.
+</li><li>Adds the ability to unbundle an X12 file by a LoopID so that they can be processed individually. See
+<a href="/wikipage?title=Unbundling%20an%20X12%20file%20by%20Loop%20ID&referringTitle=Home">
+Unbundling an X12 file by Loop ID</a> for an example. </li><li>Adds ISpecificationFinder which allows the user to inject custom specifications. Derive the provided implementation SpecificationFinder to override only specific transactions. See
+<a href="/wikipage?title=Injecting%20your%20own%20X12%20Specification">Injecting your own X12 Specification</a><a>
+</a><a></a></li><li><a>Unobtrusive X12 manipulation with the Interchange object. Examples of modifying an X12 document can be found in
+</a><a href="/wikipage?title=X12%20Interchange%20Model&referringTitle=Home">X12 Interchange Model</a>.
+</li><li>Transformation to HTML to view X12 as X12 with translations as tool-tips in the example output below. See the last code sample in
+<a href="/wikipage?title=Parsing%20an%20837%20Transaction&referringTitle=Home">Parsing an 837 Transaction</a>.
+</li></ul>
+<div style="border:1px dotted gray; padding-right:10px; width:800px; overflow:auto; height:400px">
+<div style="float:right; font-size:smaller; color:lightgrey">INTERCHANGE</div>
+<div style="font-weight:bold">ISA<span title="Author Information Qualifier" style="background-color:#efefef"> *<span title="No Authorization Information Present" style="color:blue">00</span></span><span title="Author Information" style="background-color:#efefef">
+ *<span> </span></span><span title="Security Information Qualifer" style="background-color:#efefef">*<span title="Password" style="color:blue">01</span></span><span title="Security Information" style="background-color:#efefef"> *<span>SECRET
+</span></span><span title="Interchange ID Qualifier" style="background-color:#efefef">*<span title="Mutually Defined" style="color:blue">ZZ</span></span><span title="Interchange Sender ID" style="background-color:#efefef"> *<span>SUBMITTERS.ID
+</span></span><span title="Interchange ID Qualifier" style="background-color:#efefef">*<span title="Mutually Defined" style="color:blue">ZZ</span></span><span title="Interchange Receiver ID" style="background-color:#efefef"> *<span>RECEIVERS.ID
+</span></span><span title="Interchange Date" style="background-color:#efefef">*<span>030101</span></span><span title="Interchange Time" style="background-color:#efefef"> *<span>1253</span></span><span title="Inter Control Standards Identifier" style="background-color:#efefef">
+ *<span>^</span></span><span title="Inter Control Version Number" style="background-color:#efefef"> *<span>00501</span></span><span title="Inter Control Number" style="background-color:#efefef"> *<span>000000905</span></span><span title="Acknowlegment Requested" style="background-color:#efefef">
+ *<span title="Interchange Acknowledgment Requested" style="color:blue">1</span></span><span title="Usage Indicator" style="background-color:#efefef"> *<span title="Test Data" style="color:blue">T</span></span><span title="Component Element Separator" style="background-color:#efefef">
+ *<span>:</span></span>~</div>
+<div style="margin-left:20px; border:1px dotted gray; padding-right:10px">
+<div style="float:right; font-size:smaller; color:lightgrey">FUNCTION GROUP</div>
+<div style="font-weight:bold">GS<span title="Functional Identifier Code" style="background-color:#efefef"> *<span title="Health Care" style="color:blue">HC</span></span><span title="Application Sender's Code" style="background-color:#efefef"> *<span>SENDER
+ CODE</span></span><span title="Application Receiver's Code" style="background-color:#efefef"> *<span>RECEIVER CODE</span></span><span title="Date" style="background-color:#efefef"> *<span>19991231</span></span><span title="Time" style="background-color:#efefef">
+ *<span>0802</span></span><span title="Group Control Number" style="background-color:#efefef"> *<span>1</span></span><span title="Responsible Agency Code" style="background-color:#efefef"> *<span title="Accredited Standards Committee X12" style="color:blue">X</span></span><span title="Version/Release/Industry Identifier Code" style="background-color:#efefef">
+ *<span>005010X222</span></span>~</div>
+<div style="border:3px double black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">TRANSACTION</div>
+<div style="font-weight:bold">ST<span title="Transaction Set Identifier Code" style="background-color:#efefef"> *<span title="Health Care Claim" style="color:blue">837</span></span><span title="Transaction Set Control Number" style="background-color:#efefef">
+ *<span>0021</span></span><span> *<span>005010X222</span></span>~</div>
+<div style="margin-left:25px">BHT<span title="Hierarchical Structure Code" style="background-color:#efefef"> *<span>0019</span></span><span title="Transaction Set Purpose Code" style="background-color:#efefef"> *<span>00</span></span><span title="Reference Identification" style="background-color:#efefef">
+ *<span>244579</span></span><span title="Date" style="background-color:#efefef"> *<span>20061015</span></span><span title="Time" style="background-color:#efefef"> *<span>1023</span></span><span title="Transaction Type Code" style="background-color:#efefef">
+ *<span title="Chargeable" style="color:blue">CH</span></span>~</div>
+<div title="Loop ID: 1000A, SUBMITTER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBMITTER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Submitter" style="color:blue">41</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>PREMIER BILLING SERVICE</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Electronic Transmitter Identification Number (ETIN" style="color:blue">46</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>TGJ23</span></span>~</div>
+<div style="margin-left:25px">PER<span title="Contact Function Code" style="background-color:#efefef"> *<span title="Information Contact" style="color:blue">IC</span></span><span title="Name" style="background-color:#efefef"> *<span>JERRY</span></span><span title="Communication Number Qualifier" style="background-color:#efefef">
+ *<span title="Telephone" style="color:blue">TE</span></span><span title="Communication Number" style="background-color:#efefef"> *<span>3055552222</span></span><span title="Communication Number Qualifier" style="background-color:#efefef"> *<span title="Telephone Extension" style="color:blue">EX</span></span><span title="Communication Number" style="background-color:#efefef">
+ *<span>231</span></span>~</div>
+</div>
+<div title="Loop ID: 1000B, RECEIVER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">RECEIVER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Receiver" style="color:blue">40</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>KEY INSURANCE COMPANY</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Electronic Transmitter Identification Number (ETIN" style="color:blue">46</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>66783JJT</span></span>~</div>
+</div>
+<div title="Loop ID: 2000A, BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span title="Level Code" style="background-color:#efefef"> *<span title="Information Source" style="color:blue">20</span></span><span title="Hierarchical Child Code" style="background-color:#efefef">
+ *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div style="margin-left:25px">PRV<span title="Provider Code" style="background-color:#efefef"> *<span title="Billing" style="color:blue">BI</span></span><span title="Reference Identification Qualifier" style="background-color:#efefef"> *<span title="Health Care Provider Taxonomy Code" style="color:blue">PXC</span></span><span title="Reference Identification" style="background-color:#efefef">
+ *<span>203BF0100Y</span></span>~</div>
+<div title="Loop ID: 2010AA, BILLING PROVIDER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">BILLING PROVIDER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Billing Provider" style="color:blue">85</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>BEN KILDARE SERVICE</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Centers for Medicare and Medicaid Services Nationa" style="color:blue">XX</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>9876543210</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#efefef"> *<span>234 SEAWAY ST</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#efefef"> *<span>MIAMI</span></span><span title="State or Provice Code" style="background-color:#efefef"> *<span>FL</span></span><span title="Postal Code" style="background-color:#efefef">
+ *<span>33111</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#efefef"> *<span title="Employer’s Identification Number" style="color:blue">EI</span></span><span title="Reference Identification" style="background-color:#efefef">
+ *<span>587654321</span></span>~</div>
+</div>
+<div title="Loop ID: 2010AB, PAY-TO ADDRESS NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PAY-TO ADDRESS NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Pay-to Provider" style="color:blue">87</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#efefef"> *<span>2345 OCEAN BLVD</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#efefef"> *<span>MAIMI</span></span><span title="State or Provice Code" style="background-color:#efefef"> *<span>FL</span></span><span title="Postal Code" style="background-color:#efefef">
+ *<span>33111</span></span>~</div>
+</div>
+<div title="Loop ID: 2000B, SUBSCRIBER HIERARCHICAL LOOP" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBSCRIBER HIERARCHICAL LOOP</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>2</span></span><span title="Hierarchical Parent ID Number" style="background-color:#efefef"> *<span>1</span></span><span title="Level Code" style="background-color:#efefef">
+ *<span title="Subscriber" style="color:blue">22</span></span><span title="Hierarchical Child Code" style="background-color:#efefef"> *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div style="margin-left:25px">SBR<span title="Payer Responsibility Sequence Number Code" style="background-color:#efefef"> *<span title="Primary" style="color:blue">P</span></span><span> *</span><span title="Reference Identification" style="background-color:#efefef">
+ *<span>2222-SJ</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Claim Filing Indicator Code" style="background-color:#efefef"> *<span title="Commercial Insurance Co." style="color:blue">CI</span></span>~</div>
+<div title="Loop ID: 2010BA, SUBSCRIBER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBSCRIBER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Insured or Subscriber" style="color:blue">IL</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Person" style="color:blue">1</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>SMITH</span></span><span title="Name First" style="background-color:#efefef"> *<span>JANE</span></span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Member Identification Number" style="color:blue">MI</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>JS00111223333</span></span>~</div>
+<div style="margin-left:25px">DMG<span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expressed in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>19430501</span></span><span title="Gender Code" style="background-color:#efefef"> *<span title="Female" style="color:blue">F</span></span>~</div>
+</div>
+<div title="Loop ID: 2010BC, PAYER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PAYER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Payer" style="color:blue">PR</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>KEY INSURANCE COMPANY</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Payor Identification" style="color:blue">PI</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>999996666</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#efefef"> *<span title="Provider Commercial Number" style="color:blue">G2</span></span><span title="Reference Identification" style="background-color:#efefef">
+ *<span>KA6663</span></span>~</div>
+</div>
+<div title="Loop ID: 2000C, PATIENT HIERARCHICAL LOOP" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PATIENT HIERARCHICAL LOOP</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>3</span></span><span title="Hierarchical Parent ID Number" style="background-color:#efefef"> *<span>2</span></span><span title="Level Code" style="background-color:#efefef">
+ *<span title="Dependent" style="color:blue">23</span></span><span title="Hierarchical Child Code" style="background-color:#efefef"> *<span title="No Subordinate HL Segment in This Hiearchical Structure" style="color:blue">0</span></span>~</div>
+<div style="margin-left:25px">PAT<span title="Individual Relationship Code" style="background-color:#efefef"> *<span title="Child" style="color:blue">19</span></span>~</div>
+<div title="Loop ID: 2010CA, PATIENT NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PATIENT NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Patient" style="color:blue">QC</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Person" style="color:blue">1</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>SMITH</span></span><span title="Name First" style="background-color:#efefef"> *<span>TED</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#efefef"> *<span>236 N MAIN ST</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#efefef"> *<span>MIAMI</span></span><span title="State or Provice Code" style="background-color:#efefef"> *<span>FL</span></span><span title="Postal Code" style="background-color:#efefef">
+ *<span>33413</span></span>~</div>
+<div style="margin-left:25px">DMG<span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expressed in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>19730501</span></span><span title="Gender Code" style="background-color:#efefef"> *<span title="Male" style="color:blue">M</span></span>~</div>
+</div>
+<div title="Loop ID: 2300, CLAIM INFORMATION" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">CLAIM INFORMATION</div>
+<div style="font-weight:bold">CLM<span title="Patient Control Number" style="background-color:#efefef"> *<span>26463774</span></span><span title="Total Claim Charge Amount" style="background-color:#efefef"> *<span>100</span></span><span> *</span><span> *</span><span title="Facility Code" style="background-color:#efefef">
+ *<span>11:<span title="Place of Service Codes for Professional or Dental Services" style="color:blue">B</span>:1</span></span><span title="Provider or Supplier Signature Indicator" style="background-color:#efefef"> *<span title="Yes" style="color:blue">Y</span></span><span title="Provider Accept Assignment Code" style="background-color:#efefef">
+ *<span title="Assigned" style="color:blue">A</span></span><span title="Benefits Assignment Certification Indicator" style="background-color:#efefef"> *<span title="Yes" style="color:blue">Y</span></span><span title="Release of Information Code" style="background-color:#efefef">
+ *<span title="Informed Consent to Release Medical Information for Conditions or Diagnoses Regulated by Federal Statutes" style="color:blue">I</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#efefef"> *<span title="Claim Number" style="color:blue">D9</span></span><span title="Reference Identification" style="background-color:#efefef"> *<span>17312345600006351</span></span>~</div>
+<div style="margin-left:25px">HI<span title="Health Care Code Information" style="background-color:#efefef"> *<span><span title="Principal Diagnosis (ICD-9)" style="color:blue">BK</span>:0340</span></span><span title="Health Care Code Information" style="background-color:#efefef">
+ *<span><span title="Diagnosis (ICD-9)" style="color:blue">BF</span>:V7389</span></span>~</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#efefef"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#efefef"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:99213</span></span><span title="Line Item Charge Amount" style="background-color:#efefef">
+ *<span>40</span></span><span title="Unit or Basis for Measurement" style="background-color:#efefef"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#efefef"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#efefef"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>20061003</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#efefef"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#efefef"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:87070</span></span><span title="Line Item Charge Amount" style="background-color:#efefef">
+ *<span>15</span></span><span title="Unit or Basis for Measurement" style="background-color:#efefef"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#efefef"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#efefef"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>20061003</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#efefef"> *<span>3</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#efefef"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:99214</span></span><span title="Line Item Charge Amount" style="background-color:#efefef">
+ *<span>35</span></span><span title="Unit or Basis for Measurement" style="background-color:#efefef"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#efefef"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#efefef"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>20061010</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:3px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#efefef"> *<span>4</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#efefef"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:86663</span></span><span title="Line Item Charge Amount" style="background-color:#efefef">
+ *<span>10</span></span><span title="Unit or Basis for Measurement" style="background-color:#efefef"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#efefef"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#efefef"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>20061010</span></span>~</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-weight:bold">SE<span title="Number of Included Segments" style="background-color:#efefef"> *<span>42</span></span><span title="Transaction Set Control Number" style="background-color:#efefef"> *<span>0021</span></span>~</div>
+</div>
+<div style="font-weight:bold">GE<span title="Number of Transaction Sets Included" style="background-color:#efefef"> *<span>1</span></span><span title="Group Control Number" style="background-color:#efefef"> *<span>1</span></span>~</div>
+</div>
+<div style="font-weight:bold">IEA<span title="Number of Included Functional Groups" style="background-color:#efefef"> *<span>1</span></span><span title="Interchange Control Number" style="background-color:#efefef"> *<span>000000905</span></span>~</div>
+</div>
+<p>See <a href="http://x12parser.codeplex.com/documentation">Documentation</a> for a list of supported transaction sets.</p>
+</div><div class="ClearBoth"></div>

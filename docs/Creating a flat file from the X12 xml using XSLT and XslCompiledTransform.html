@@ -1,0 +1,162 @@
+<div class="wikidoc">
+<h1>Creating a flat file or Excel file from the X12 xml using XSLT and XslCompiledTransform</h1>
+<p>The most common use case for using this X12 Parser is to eventually save the data to a database or to save it to a flat file to be consumed by other applications.<br>
+The easiest way to do this and brush up on your XPath query skills is to use an XSLT. There are many ways that an XSLT can be transformed. You can run an XSLT within the Visual Studio environment and specify an Input and an Output file while debugging.</p>
+<p>This tutorial will show you how to call the XSLT from your C# code so that you can create a console application for parsing to your specific needs. &nbsp;The completed project can be found
+<a href="http://download.codeplex.com/download?ProjectName=x12parser&DownloadId=242069">
+here</a>.</p>
+<h3>Step 1. Create a console application and reference the OopFactory.X12.dll.</h3>
+<div style="margin-left:50px"><img title="CreateProject.png" src="http://i3.codeplex.com/download?ProjectName=x12parser&DownloadId=242055" alt="CreateProject.png" width="630px"></div>
+<h3>Step 2. Add an xslt file to your project.</h3>
+<div style="margin-left:50px"><img title="AddNewItemXslt.png" src="http://i3.codeplex.com/download?ProjectName=x12parser&DownloadId=242051" alt="AddNewItemXslt.png" width="600px"></div>
+<h3>Step 3. Change the build action of the xslt file to &quot;Embedded Resource&quot;.</h3>
+<div style="margin-left:50px"><img title="ChangeBuildAction.png" src="http://i3.codeplex.com/download?ProjectName=x12parser&DownloadId=242054" alt="ChangeBuildAction.png" width="600px"></div>
+<div>This is being done so that we can embed the xslt into the assembly and not worry about locating the file during execution. Optionally you could copy the file to the output directory, but I have had problems with Unit Test that don't run from the location
+ of the output directory making the code to locate it a bit more difficult.</div>
+<div>For transformations that may change frequently, such as UI transformations, it might be advantages to not embed the xslt, but for back-end processing this is rarely the case.</div>
+<h3>Step 4. Add a sample edi file to the project that will help test the application.</h3>
+<p>Use any sample EDI you like. For the sake of this example, I have formatted the X12 in this example so that you can see the structure of the edi segments. &nbsp;It should also work just as well without the extra whitespace.</p>
+<div style="margin-left:50px"><img title="AddSampleEdiFile.png" src="http://i3.codeplex.com/download?ProjectName=x12parser&DownloadId=242053" alt="AddSampleEdiFile.png" width="600px"></div>
+<h3>Step 5. Change your program file to load to parse the EDI file and use the xslt to transform to a csv format.</h3>
+<p>The following example assumes that you embedded your xslt. &nbsp;If you choose to have an external file instead use the FileStream object instead.</p>
+<div style="color:black; background-color:whitesmoke">
+<pre><span style="color:blue">using</span> System.Text;
+<span style="color:blue">using</span> System.IO;
+<span style="color:blue">using</span> System.Reflection;
+<span style="color:blue">using</span> System.Xml;
+<span style="color:blue">using</span> System.Xml.Xsl;
+<span style="color:blue">using</span> OopFactory.X12.Parsing;
+<span style="color:blue">using</span> OopFactory.X12.Parsing.Model;
+
+<span style="color:blue">namespace</span> MyX12.Edi835Parser
+{
+    <span style="color:blue">class</span> Program
+    {
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main(<span style="color:blue">string</span>[] args)
+        {
+            Stream transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(<span style="color:#a31515">&quot;MyX12.Edi835Parser.X12-835-To-CSV.xslt&quot;</span>);
+            Stream inputStream = <span style="color:blue">new</span> FileStream(args[0], FileMode.Open, FileAccess.Read);
+            Stream outputFile = <span style="color:blue">new</span> FileStream(args[1], FileMode.Create, FileAccess.Write);
+
+            X12Parser parser = <span style="color:blue">new</span> X12Parser();
+            Interchange interchange = parser.Parse(inputStream);
+            <span style="color:blue">string</span> xml = interchange.Serialize();
+
+            <span style="color:blue">var</span> transform = <span style="color:blue">new</span> XslCompiledTransform();
+            transform.Load(XmlReader.Create(transformStream));
+
+            transform.Transform(XmlReader.Create(<span style="color:blue">new</span> StringReader(xml)), <span style="color:blue">new</span> XsltArgumentList(), outputFile);
+        }
+    }
+}
+</pre>
+</div>
+<h3>Step 6. Write your transformation</h3>
+<div style="color:black; background-color:whitesmoke">
+<pre><span style="color:blue">&lt;?</span><span style="color:#a31515">xml</span> <span style="color:red">version</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1.0</span><span style="color:black">&quot;</span> <span style="color:red">encoding</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">utf-8</span><span style="color:black">&quot;</span><span style="color:blue">?&gt;</span>
+<span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">stylesheet</span> <span style="color:red">version</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1.0</span><span style="color:black">&quot;</span> <span style="color:red">xmlns:xsl</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">http://www.w3.org/1999/XSL/Transform</span><span style="color:black">&quot;</span>
+    <span style="color:red">xmlns:msxsl</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">urn:schemas-microsoft-com:xslt</span><span style="color:black">&quot;</span> <span style="color:red">exclude-result-prefixes</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">msxsl</span><span style="color:black">&quot;</span>
+<span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">output</span> <span style="color:red">method</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">text</span><span style="color:black">&quot;</span> <span style="color:red">indent</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">yes</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+
+  <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">template</span> <span style="color:red">match</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Interchange</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">apply-templates</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">FunctionGroup/Transaction/Loop[@LoopId='2000']/Loop[@LoopId='2100']</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">template</span><span style="color:blue">&gt;</span>
+
+  <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">template</span> <span style="color:red">match</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Loop[@LoopId='2100']</span><span style="color:black">&quot;</span> <span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">variable</span> <span style="color:red">name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">trans</span><span style="color:black">&quot;</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">../../.</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">variable</span> <span style="color:red">name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">payer</span><span style="color:black">&quot;</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">../../Loop[@LoopId='1000A']</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">variable</span> <span style="color:red">name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">payee</span><span style="color:black">&quot;</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">../../Loop[@LoopId='1000B']</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">variable</span> <span style="color:red">name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">payment</span><span style="color:black">&quot;</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">.</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$trans/BPR/BPR16</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payer/N1/N102</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payee/N1/N102</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payee/N1/N104</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CLP/CLP01</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CLP/CLP02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CLP/CLP03</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/NM1[NM101='QC']/NM103</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/NM1[NM101='QC']/NM104</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CAS[CAS01='CO']/CAS02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CAS[CAS01='CR']/CAS02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CAS[CAS01='OA']/CAS02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CAS[CAS01='PI']/CAS02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">$payment/CAS[CAS01='PR']/CAS02</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">value-of</span> <span style="color:red">select</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">','</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">text</span><span style="color:blue">&gt;</span>&amp;#x0A;<span style="color:blue">&lt;/</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">text</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">template</span><span style="color:blue">&gt;</span>
+<span style="color:blue">&lt;/</span><span style="color:#a31515">xsl</span><span style="color:blue">:</span><span style="color:#a31515">stylesheet</span><span style="color:blue">&gt;</span>
+</pre>
+</div>
+<p>Since most transactions are very hierarchical in nature, it might be beneficial to have a separate transformation at different levels so the same information is not repeated so often.</p>
+<p>This is usually managed by having separate CSV files for different levels in the transaction, or having a fixed-width file with a record indicator column to indicate the expected specification of the fixed-width line.</p>
+<h3>Step 7. Change the command line arguments in your Debug configuration to run your sample file.</h3>
+<div style="margin-left:50px"><img title="SetCommandLineArguments.png" src="http://download.codeplex.com/download?ProjectName=x12parser&DownloadId=242060" alt="SetCommandLineArguments.png" width="600px"></div>
+<h3>Step 8. Run your application and inspect your output.</h3>
+<p>The expected output is as follows:</p>
+<div style="color:black; background-color:whitesmoke">
+<pre>20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,444444,1,56.70,FUDD,ELMER,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,999999,4,25.95,SAM,YOSEMITE,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,888888,4,162.13,SQUAREPANTS,BOB,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,111111,2,56.52,LEGHORN,FOGHORN,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,121212,4,56.52,EXPLORER,DORA,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,333333,1,74.61,BEAR,YOGI,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,777777,25,136.9,BIRD,TWEETY,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,123456,22,-42.58,SIMPSON,HOMER,,,,,,
+20040315,ASHTABULA COUNTY ADAMH BD,LAKE AREA RECOVERY CENTER ,346608640,090909,22,-86.76,DUCK,DAFFY,,,,,,
+
+</pre>
+</div>
+<h2>835 Example to CSV and Excel formats</h2>
+<p>The next example is very similar to the previous except there are two transformations. The first is to a flat csv file, the 2nd has the same information but is transformed into Excel's xml format so that formatting can be retained. You can download this
+ example <a href="http://download.codeplex.com/Download?ProjectName=x12parser&DownloadId=290294">
+here</a>.</p>
+<p>This example was an actually request from a user that was new to development but had a very tight deadline that he was expected to meet. &nbsp;The csv version took me about 2 hours to produce and the Excel version took me about 3 hours to produce. &nbsp;The
+ output csv looks like the following and can be open with Excel or it can be loaded with some other application into a database for further manipulation.</p>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white">
+<pre>Filename, Check Sequence, Payer Name,Payee Name,Payee ID,check Date,Check $,Check/EFT Number,NPI,Patient Name,Policy/HIC Number,Acct Number,ICN,Date Of Ser From,Date Of Ser To,Procedure,Billed Amount,Allowed Amount,Deductible,Coins,Paid Amount
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 1&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,0,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXXX&quot;,&quot;&quot;,&quot;&quot;,&quot;9999999999999&quot;,01/27/2011,01/27/2011,&quot;99999&quot;,135,99.99,,,0
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXXXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,04/19/2010,04/19/2010,&quot;99999&quot;,95,99.99,,,99.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;99999&quot;,380,999.99,,,109.26
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;99999&quot;,133,99.99,,,99.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;99999&quot;,160,99.99,,,99.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;X9999&quot;,9999,9999.9,,,9999.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;X9999&quot;,9999,99.9,,,99.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;X9999&quot;,12,9.99,,,9.99
+&quot;835_DeIdent_02.dat&quot;,&quot;Check 2&quot;,&quot;XXX - XXX X9 XXXX X&quot;,&quot;XXXXXXXXXX XXX XXXXXXXX XXX&quot;,&quot;9999999999&quot;,04/05/2011,99999.99,999999999,&quot;9999999999&quot;,&quot;XXXXX, XXXX&quot;,&quot;&quot;,&quot;999999999&quot;,&quot;9999999999999&quot;,02/24/2011,02/24/2011,&quot;99999&quot;,133,99.99,,,99.99
+
+</pre>
+</div>
+<div>
+<p>The development follows similar steps as outlined above, but the XSLT will be outputing xml instead of text. The finished Excel file will be formated as follows:</p>
+<p><img src="http://download.codeplex.com/Download?ProjectName=x12parser&DownloadId=290293" alt="835 as Excel" width="1233" height="282" style="margin:10px"></p>
+</div>
+<div>
+<p>This xml is 10 times larger than the corresponding csv, so I would only use it if the end user is a person instead of another application. The following formatting was applied to this document:</p>
+<ul>
+<li>The header row is bolded and fixed </li><li>Each new check is separated by double lines </li><li>Alternating rows within a check have different backgrounds </li></ul>
+<p>To implement the formatted Excel file you don't necessary have to learn Excel's xml format. These are the steps you should follow.</p>
+<ol>
+<li>Implement the version that creates a flat csv file following steps 1-8 above.
+</li><li>Open the csv in Excel and apply the formatting that you want (or give it to a business analyst to define with the customer what they want it to look like).
+</li><li>Save the file in &quot;XML Spreadsheet 2003 (*.xml)&quot; format type. </li><li>Re-open the xml file in notepad and copy this into your xslt that will output xml.
+</li><li>Reverse engineer your transformation into xml. </li></ol>
+<p>To keep the application simple, it just looks at the extension of the output file, if it is .xml then it will produce the formatted excel file otherwise it produces a csv file.</p>
+<p>Since Word and Excel support xml formats, you could potentially use this technique for all of your reporting instead of having to use reporting engines that may allow you to control the format on screen, but don't always look the same when you export to
+ Excel. &nbsp;I am also a fan of using fo-xml for generating pdfs. &nbsp;There is an open source fo processor that works quite nicely at http://fonet.codeplex.com.</p>
+</div>
+</div><div class="ClearBoth"></div>

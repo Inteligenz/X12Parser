@@ -1,0 +1,51 @@
+<div class="wikidoc">
+<h1>About the X12 Parser</h1>
+<h2>History</h2>
+<p>Like many of you, I stumbled onto X12 when my employer was using it, and they introduced me to a heavy binder explaining the specification and expecting me to figure it out.<br>
+<br>
+The first place that I worked with X12 used something called a HIPAA accelerator which was some sort of extension you could buy to use BizTalk to parse your messages into a database. That's as much as I know about that product because it was too intimidating
+ to learn how to use it that I just left it to the &quot;professionals&quot; to figure it out and I stayed in my lane to do the coding once it got into the proprietary database format of the company. To make a long story short that company had a knack for making everything
+ it did a lot more complicated than it needed to be, not only did I not last there very long, but the company was shut down within a year after I left.<br>
+<br>
+I went on my merry way and thought I would never have to see those nasty X12 specs again until fate would have it that I ended up at another company that had a need to parse X12 files in the form of medical claims. All the memories came rushing back. We evaluated
+ multiple solutions, some very expensive, others very messy and requiring lots of database integration (similar to the BizTalk model). It actually turned out in my favor that the solutions were so expensive, because I convinced my boss that I could do the same
+ thing in 2-3 weeks and save the company tens of thousands of dollars. I was pretty confident (or naive depending on who you ask) that it could be done. There was plenty of intimidation from multiple sources (that I will not name) who thought that I shouldn't
+ do it (not to mention their implication that I couldn't do it). However, I'm one of those people that once you tell me I can't do something, than you've pretty much guaranteed that it's going to take an act of Congress to stop me.<br>
+<br>
+So about 3 or 4 weeks later I was successful in producing a parser that could parse 837 Dental, Professional and Institutional claims and within another couple weeks I was able to load it into the propriety database of the COTS package we were using for adjudication.
+ My critics weren't impressed. It wasn't until my tool was able to parse files hundreds of times faster than the tool that came with the COTS package that people started to take notice. Though again many were still not impressed. So I decided to create this
+ open source version of my original X12 parser, to see how it would do in the open market against other solutions.
+<br>
+<br>
+What you see is not the original parser, it was weighed down by my naive understanding of X12 at the time (so my critics were half right), but I took everything that I learned from running it to ground in production for 2 years and remade it so that it could
+ withstand being used for any transaction set.</p>
+<h2>Goals</h2>
+<p>Of course, in the beginning I suspect that many will use this tool because it is free, but my goal is for it to become a contender with commercial solutions and stop the tyranny of making the reading of a simple but robust messages so difficult. So here
+ is my core list of goals for this tool:</p>
+<ol>
+<li>Reduce the upfront time needed to learn what X12 is. </li><li>Reduce the upfront time needed to start getting productive in X12. </li><li>Promote the usage of X12 as a viable and robust form of B2B communication beyond messaging through clearinghouses.
+</li><li>Promote the use of solid programming principles by having the source open and providing many examples of how to provide simple, elegant and highly maintainable code.
+</li><li>Compete for market share and mind share with commercial solutions. </li></ol>
+<p>Some of these goals will be met by the tool itself. &nbsp;Some will be met by the documentation provided on this site. &nbsp;I welcome any suggestions that can help achieve these goals.</p>
+<h2>Why XML will not replace X12</h2>
+<p>I have read many post from people who are quite frustrated at how difficult it is to read X12 and they can't see why everyone just doesn't switch to XML. A quick assessment might lead you to believe that there is too much infrastructure built around X12
+ that it would be difficult to switch, but instead of accepting that argument, I actually think X12 and XML can co-exist and compliment the strengths of the other.</p>
+<ul>
+<li>X12 will always be more efficient to transmit, XML can be 5 to 10 times more verbose and will always be more expensive. It doesn't matter that memory and bandwidth is cheap. XML will always be 5 to 10 times more expensive to transmit and store.
+</li><li>X12 is easier to standardize, because no one has to agree on what to call something in the message (so it's language independent too) they only have to agree on what it means and where that data resides in the message structure
+</li></ul>
+<p><br>
+The way these two formats can complement each other is to use X12 for external communications with your trading partners and use XML for internal communications between different components of your system. Once you are within your own domain, you don't have
+ to get any one else to agree to your XML format and the XML format will be much easier to read.</p>
+<h2>About the Author</h2>
+<p>I have been programming in some form since the mid 80's though I first became a professional developer in the mid 90's.
+<br>
+<br>
+I have always sought to simplify programming or some aspect of it throughout my career. I have taught Fundamentals of Programming as well as some other courses (VB, C, C&#43;&#43;) at my local community colleges as well as some Software Engineering courses in Monterrey,
+ Mexico. Most of my current work is in C#, though I do enjoy working in T-SQL as well.<br>
+<br>
+My latest inspiration is when I discovered jquery. A brilliant person, <a href="http://ejohn.org/about/">
+John Resig</a>, chose to not accept the industry standard javascript as the way that client-side scripting had to be written. He had a vision of how programming should be. &nbsp;It wasn't just about the syntax. &nbsp;It was about how it expressed the programmer's
+ intent as well as how it was implemented under the covers to take true advantage of the architecture of the internet. He stuck to what he believed and re-taught an entire industry how what they were doing was too hard and could be done simpler, cleaner and
+ produce a beautiful result, visually and structurally. These are the goals that I aspire too.</p>
+</div><div class="ClearBoth"></div>

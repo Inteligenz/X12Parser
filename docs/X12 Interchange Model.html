@@ -1,0 +1,201 @@
+<div class="wikidoc">
+<h1>X12 Interchange Model</h1>
+<p>The X12 Parser is designed around a set of objects that get loaded with the help of an X12Parser object. Once loaded, the Interchange object can operate without any further assistance from the X12Parser.
+<br>
+<br>
+You can use these objects to:</p>
+<ol>
+<li>Read an existing X12 file without the use of the XML transformations. </li><li>Load an existing X12 file and make modifications without disturbing any segments that you do not explicit change.
+</li><li>Create a new X12 document using a built in or custom transaction specification.
+</li></ol>
+<p><br>
+An X12 envelop starts with an Interchange surrounding a set of Function Groups surrounding a set of Transactions.<br>
+The transactions can hold individual segments, loops or hierarchical loops. The following domain model represents these objects with the least repetition of their common characteristics.<br>
+<br>
+<img title="ParsingModel.png" alt="ParsingModel.png" src="http://i3.codeplex.com/download?ProjectName=x12parser&DownloadId=227123"><br>
+<br>
+Let's look at how to use these objects with some code samples to work with the following 270 Eligibility Inquiry x12:<br>
+<br>
+</p>
+<div>
+<div style="border-top:gray 1px dotted; border-right:gray 1px dotted; width:935px; border-bottom:gray 1px dotted; border-left:gray 1px dotted; padding-right:10px">
+<div style="font-size:smaller; float:right; color:lightgrey">INTERCHANGE</div>
+<div style="font-weight:bold">ISA<span title="Author Information Qualifier" style="background-color:#efefef"> *<span title="No Authorization Information Present" style="color:blue">00</span></span><span title="Author Information" style="background-color:#efefef">
+ *<span> </span></span><span title="Security Information Qualifer" style="background-color:#efefef">*<span title="No Security Information Present" style="color:blue">00</span></span><span title="Security Information" style="background-color:#efefef"> *<span>
+</span></span><span title="Interchange ID Qualifier" style="background-color:#efefef">*<span title="Duns (Dun & Bradstreet)" style="color:blue">01</span></span><span title="Interchange Sender ID" style="background-color:#efefef"> *<span>9012345720000
+</span></span><span title="Interchange ID Qualifier" style="background-color:#efefef">*<span title="Duns (Dun & Bradstreet)" style="color:blue">01</span></span><span title="Interchange Receiver ID" style="background-color:#efefef"> *<span>9088877320000
+</span></span><span title="Interchange Date" style="background-color:#efefef">*<span>020816</span></span><span title="Interchange Time" style="background-color:#efefef"> *<span>1144</span></span><span title="Inter Control Standards Identifier" style="background-color:#efefef">
+ *<span title="U.S. EDI Community of ASC X12, TDCC, and UCS" style="color:blue">U</span></span><span title="Inter Control Version Number" style="background-color:#efefef"> *<span>00401</span></span><span title="Inter Control Number" style="background-color:#efefef">
+ *<span>000000031</span></span><span title="Acknowlegment Requested" style="background-color:#efefef"> *<span title="Interchange Acknowledgment Requested" style="color:blue">1</span></span><span title="Usage Indicator" style="background-color:#efefef"> *<span title="Test Data" style="color:blue">T</span></span><span title="Component Element Separator" style="background-color:#efefef">
+ *<span>:</span></span>~</div>
+<div style="border-top:gray 1px dotted; border-right:gray 1px dotted; border-bottom:gray 1px dotted; margin-left:20px; border-left:gray 1px dotted; padding-right:10px">
+<div style="font-size:smaller; float:right; color:lightgrey">FUNCTION GROUP</div>
+<div style="font-weight:bold">GS<span title="Functional Identifier Code" style="background-color:#efefef"> *<span title="Eligibility, Coverage or Benefit Inquiry" style="color:blue">HS</span></span><span title="Application Sender's Code" style="background-color:#efefef">
+ *<span>901234572000</span></span><span title="Application Receiver's Code" style="background-color:#efefef"> *<span>908887732000</span></span><span title="Date" style="background-color:#efefef"> *<span>20070816</span></span><span title="Time" style="background-color:#efefef">
+ *<span>1615</span></span><span title="Group Control Number" style="background-color:#efefef"> *<span>31</span></span><span title="Responsible Agency Code" style="background-color:#efefef"> *<span title="Accredited Standards Committee X12" style="color:blue">X</span></span><span title="Version/Release/Industry Identifier Code" style="background-color:#efefef">
+ *<span>005010X279</span></span>~</div>
+<div style="border-top:black 3px double; border-right:black 3px double; border-bottom:black 3px double; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:black 3px double; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">TRANSACTION</div>
+<div style="font-weight:bold">ST<span title="Transaction Set Identifier Code" style="background-color:#efefef"> *<span>270</span></span><span title="Transaction Set Control Number" style="background-color:#efefef"> *<span>1234</span></span><span> *<span>005010X279</span></span>~</div>
+<div style="margin-left:25px">BHT<span title="Hierarchical Structure Code" style="background-color:#efefef"> *<span title="Information Source, Information Receiver, Subscriber, Dependent" style="color:blue">0022</span></span><span title="Transaction Set Purpose Code" style="background-color:#efefef">
+ *<span title="Request" style="color:blue">13</span></span><span title="Reference Identification" style="background-color:#efefef"> *<span>10001234</span></span><span title="Date" style="background-color:#efefef"> *<span>20060501</span></span><span title="Time" style="background-color:#efefef">
+ *<span>1319</span></span>~</div>
+<div title="Loop ID: 2000A, Information Source Level" style="border-top:black 2px solid; border-right:black 2px solid; border-bottom:black 2px solid; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:black 2px solid; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Information Source Level</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>1</span></span><span> *</span><span title="Level Code" style="background-color:#efefef"> *<span title="Information Source" style="color:blue">20</span></span><span title="Hierarchical Child Code" style="background-color:#efefef">
+ *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div title="Loop ID: 2100A, Information Source Name" style="margin-bottom:3px; border-top:gray 1px dotted; border-right:gray 1px dotted; border-bottom:gray 1px dotted; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:gray 1px dotted; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Information Source Name</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Payer" style="color:blue">PR</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>ABC COMPANY</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Payor Identification" style="color:blue">PI</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>842610001</span></span>~</div>
+</div>
+<div title="Loop ID: 2100B, Information Receiver Level" style="border-top:black 2px solid; border-right:black 2px solid; border-bottom:black 2px solid; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:black 2px solid; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Information Receiver Level</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>2</span></span><span title="Hierarchical Parent ID Number" style="background-color:#efefef"> *<span>1</span></span><span title="Level Code" style="background-color:#efefef">
+ *<span>21</span></span><span title="Hierarchical Child Code" style="background-color:#efefef"> *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div title="Loop ID: 2100B, Information Receiver Name" style="margin-bottom:3px; border-top:gray 1px dotted; border-right:gray 1px dotted; border-bottom:gray 1px dotted; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:gray 1px dotted; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Information Receiver Name</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Provider" style="color:blue">1P</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>BONE AND JOINT CLINIC</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Service Provider Number" style="color:blue">SV</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>2000035</span></span>~</div>
+</div>
+<div title="Loop ID: 2000C, Subscriber Level" style="border-top:black 2px solid; border-right:black 2px solid; border-bottom:black 2px solid; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:black 2px solid; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Subscriber Level</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#efefef"> *<span>3</span></span><span title="Hierarchical Parent ID Number" style="background-color:#efefef"> *<span>2</span></span><span title="Level Code" style="background-color:#efefef">
+ *<span title="Subscriber" style="color:blue">22</span></span><span title="Hierarchical Child Code" style="background-color:#efefef"> *<span title="No Subordinate HL Segment in This Hiearchical Structure" style="color:blue">0</span></span>~</div>
+<div style="margin-left:25px">TRN<span title="Trace Type Code" style="background-color:#efefef"> *<span title="Current Transaction Trace Numbers" style="color:blue">1</span></span><span title="Reference Identification" style="background-color:#efefef"> *<span>93175-012547</span></span><span title="Originating Company Identifier" style="background-color:#efefef">
+ *<span>9877281234</span></span>~</div>
+<div title="Loop ID: 2100C, Subscriber Name" style="margin-bottom:3px; border-top:gray 1px dotted; border-right:gray 1px dotted; border-bottom:gray 1px dotted; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:gray 1px dotted; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Subscriber Name</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#efefef"> *<span title="Insured or Subscriber" style="color:blue">IL</span></span><span title="Entity Type Qualifier" style="background-color:#efefef"> *<span title="Person" style="color:blue">1</span></span><span title="Name Last or Organization Name" style="background-color:#efefef">
+ *<span>SMITH</span></span><span title="Name First" style="background-color:#efefef"> *<span>ROBERT</span></span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#efefef"> *<span title="Member Identification Number" style="color:blue">MI</span></span><span title="Identification Code" style="background-color:#efefef">
+ *<span>11122333301</span></span>~</div>
+<div style="margin-left:25px">DMG<span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expressed in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>19430519</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#efefef"> *<span>291</span></span><span title="Date Time Period Format Qualifier" style="background-color:#efefef"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#efefef">
+ *<span>20060501</span></span>~</div>
+<div title="Loop ID: 2110C, Subscriber Eligibility or Benefit Inquiry" style="margin-bottom:3px; border-top:gray 1px dotted; border-right:gray 1px dotted; border-bottom:gray 1px dotted; padding-bottom:5px; padding-top:5px; padding-left:5px; margin-left:20px; border-left:gray 1px dotted; padding-right:5px">
+<div style="font-size:smaller; float:right; color:lightgrey">Subscriber Eligibility or Benefit Inquiry</div>
+<div style="font-weight:bold">EQ<span title="Service Type Code" style="background-color:#efefef"> *<span title="Health Benefit Plan Coverage" style="color:blue">30</span></span>~</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-weight:bold">SE<span title="Number of Included Segments" style="background-color:#efefef"> *<span>13</span></span><span title="Transaction Set Control Number" style="background-color:#efefef"> *<span>1234</span></span>~</div>
+</div>
+<div style="font-weight:bold">GE<span title="Number of Transaction Sets Included" style="background-color:#efefef"> *<span>1</span></span><span title="Group Control Number" style="background-color:#efefef"> *<span>31</span></span>~</div>
+</div>
+<div style="font-weight:bold">IEA<span title="Number of Included Functional Groups" style="background-color:#efefef"> *<span>1</span></span><span title="Interchange Control Number" style="background-color:#efefef"> *<span>000000031</span></span>~</div>
+</div>
+</div>
+<h2>Reading an existing X12 file</h2>
+<p>The following code sample shows loading an Interchange object from an existing X12 string.</p>
+<p>It then demonstrates traversing the object model to test specific elements against the expected values.</p>
+<div style="width:1200px; color:black; background-color:white">
+<pre><span style="color:blue">private</span> <span style="color:blue">string</span> inquiry = <span style="color:#a31515">@&quot;ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*0*T*:~
+                                              GS*HS*901234572000*908887732000*20070816*1615*31*X*00501X092A1~
+                                                ST*270*1234~
+                                                  BHT*0022*13*10001234*20070816*1319*00~
+                                                  HL*1**20*1~
+                                                    NM1*PR*2*ABC BILLING SERVICE*****PI*842610001~
+                                                    HL*2*1*21*1~
+                                                      NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~
+                                                      HL*3*2*22*0~
+                                                        TRN*1*93175-012547*9877281234~
+                                                        NM1*IL*1*SMITH*ROBERT*MI****11122333301~
+                                                          DMG*D8*19430519~
+                                                          DTP*291*D8*20060501~
+                                                          EQ*30~
+                                                SE*13*1234~
+                                              GE*1*31~
+                                            IEA*1*000000031~
+                                            &quot;;
+
+[<span style="color:#2b91af">TestMethod</span>]
+<span style="color:blue">public</span> <span style="color:blue">void</span> Read270Test()
+{
+    <span style="color:#2b91af">X12Parser</span> parser = <span style="color:blue">new</span> <span style="color:#2b91af">X12Parser</span>();
+    <span style="color:#2b91af">Interchange</span> interchange = parser.Parse(<span style="color:blue">new</span> <span style="color:#2b91af">MemoryStream</span>(<span style="color:#2b91af">Encoding</span>.ASCII.GetBytes(inquiry)));
+    <span style="color:#2b91af">Assert</span>.AreEqual(<span style="color:#a31515">&quot;9088877320000  &quot;</span>, interchange.InterchangeReceiverId);
+<br>    <span style="color:#2b91af">Transaction</span> transaction = interchange.FunctionGroups.First().Transactions.First();
+    Segment bht = transaction.Segments.First();
+<br>    <span style="color:#2b91af">Assert</span>.AreEqual(<span style="color:#a31515">&quot;10001234&quot;</span>, bht.GetElement(3));
+
+    <span style="color:#2b91af">HierarchicalLoop</span> subscriberLoop = transaction.FindHLoop(<span style="color:#a31515">&quot;3&quot;</span>);
+
+    <span style="color:#2b91af">Loop</span> subscriberNameLoop = subscriberLoop.Loops.First();
+
+    <span style="color:#2b91af">Assert</span>.AreEqual(<span style="color:#a31515">&quot;SMITH&quot;</span>, subscriberNameLoop.GetElement(3), <span style="color:#a31515">&quot;Subscriber last name not expected.&quot;</span>);
+    <span style="color:#2b91af">Assert</span>.AreEqual(<span style="color:#a31515">&quot;11122333301&quot;</span>, subscriberNameLoop.GetElement(9), <span style="color:#a31515">&quot;Subscriber member id not expected.&quot;</span>);
+
+}
+</pre>
+</div>
+<p>&nbsp;</p>
+<h2>Modifying an existing X12 file</h2>
+<p>See the test&nbsp; <font color="#0000ff">ParseModifyAndTransformBackToX12</font><font color="#000000"> for an example of code to modify an existing file.</font></p>
+<h2>Creating a new X12 document</h2>
+<p>Some suggested reading for understanding the X12 format in general: <a title="http://docs.oracle.com/cd/E19398-01/820-1275/agdaw/index.html" href="http://docs.oracle.com/cd/E19398-01/820-1275/agdaw/index.html">
+http://docs.oracle.com/cd/E19398-01/820-1275/agdaw/index.html</a></p>
+<p>Some suggested reading for understanding the 270 format: <a title="http://www.anthem.com/edi/noapplication/f3/s1/t0/pw_ad086850.pdf" href="http://www.anthem.com/edi/noapplication/f3/s1/t0/pw_ad086850.pdf">
+http://www.anthem.com/edi/noapplication/f3/s1/t0/pw_ad086850.pdf</a></p>
+<p>Starting with an outlined version of a 270 file (This code will be included in the test
+<font color="#0000ff">Create270Test</font> in the next release with the test code given above -
+<font color="#0000ff">Read270Test</font>)</p>
+<div style="width:1200px; color:black; background-color:white">
+<pre><span style="color:blue">private</span> <span style="color:blue">string</span> inquiryOutline = <span style="color:#a31515">@&quot;ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*0*T*:~
+                                              GS*HS*901234572000*908887732000*20070816*1615*31*X*00501X092A1~
+                                                ST*270*1234~
+                                                  BHT*0022*13*10001234*20070816*1319*00~
+                                                  HL*1**20*1~
+                                                    NM1*PR*2*ABC BILLING SERVICE*****PI*842610001~
+                                                    HL*2*1*21*1~
+                                                      NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~
+                                                      HL*3*2*22*0~
+                                                        TRN*1*93175-012547*9877281234~
+                                                        NM1*IL*1*SMITH*ROBERT*MI****11122333301~
+                                                          DMG*D8*19430519~
+                                                          DTP*291*D8*20060501~
+                                                          EQ*30~
+                                                SE*13*1234~
+                                              GE*1*31~
+                                            IEA*1*000000031~
+                                            &quot;;
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>First you need to create the interchange (The ISA line above). </p>
+<p>The following code creates this: <font color="#0000ff">ISA*00*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *00*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *01*9012345720000&nbsp; *01*9088877320000&nbsp; *020816*1144*U*00401*000000031*0*T*:~
+ (Along with its ending code in IEA)</font></p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781388"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781389" width="614" height="393" style="border-left-width:0px; border-right-width:0px; border-bottom-width:0px; padding-top:0px; padding-left:0px; display:inline; padding-right:0px; border-top-width:0px"></a></p>
+<p>&nbsp;</p>
+<p>Once the interchange is created, you need to add the Function Group to it. (This is the second line in the above example 270 text starting with GS)</p>
+<p>This section of code creates this: <font color="#0000ff">GS*HS*901234572000*908887732000*20070816*1615*31*X*00501X092A1~(Along with its ending code in GE)</font></p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781390"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781391" width="613" height="235" style="border-left-width:0px; border-right-width:0px; border-bottom-width:0px; padding-top:0px; padding-left:0px; display:inline; padding-right:0px; border-top-width:0px"></a></p>
+<p>&nbsp;</p>
+<p>The next step is adding an actual transaction to the message. This is done by creating a transaction and a BHT – the header for the group of HL levels below.</p>
+<p>This section of code creates this:<font color="#0000ff"> ST*270*1234~BHT*0022*13*10001234*20070816*1319*00~(Along with its ending code in SE)</font></p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781392"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781393" width="611" height="247" style="border-left-width:0px; border-right-width:0px; border-bottom-width:0px; padding-top:0px; padding-left:0px; display:inline; padding-right:0px; border-top-width:0px"></a></p>
+<p>&nbsp;</p>
+<p>Now you will be adding the information for the HL levels to the BHT created above. There are 4 levels to a 270 request:</p>
+<blockquote>
+<p>HL1 – The information source level</p>
+<p>HL2 – The information receiver level</p>
+<p>HL3 – The subscriber level</p>
+<p>HL4 – The dependent level (Optional)</p>
+</blockquote>
+<p>To create the HL1 level (Information Source):</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781394"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781395" width="1139" height="331" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p>&nbsp;</p>
+<p>To create the HL2 level (Information Receiver)</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781396"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781397" width="938" height="316" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p>&nbsp;</p>
+<p>For the HL3 Level (Member/Subscriber):</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781379"><img title="image" border="0" alt="image" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=x12parser&DownloadId=781380" width="966" height="461" style="border-left-width:0px; border-right-width:0px; border-bottom-width:0px; padding-top:0px; padding-left:0px; display:inline; padding-right:0px; border-top-width:0px"></a></p>
+<p>&nbsp;</p>
+<p>And the same process would be used for creating an HL4 (Dependent) record addition to the 270.</p>
+<p>Basically what you are doing is building up the document with each added hierarchal level or loop until the document is complete.
+</p>
+</span></span></div><div class="ClearBoth"></div>

@@ -1,0 +1,1930 @@
+<div class="wikidoc">
+<p>The following table shows the segments used in each X12 transaction. This list can be used to configure which segments to index into tables for SQL Server integration</p>
+<table>
+<colgroup span="1"><col span="3"><col span="1" width="500"></colgroup>
+<thead>
+<tr>
+<th>Transaction Set Code</th>
+<th>Function Group Code</th>
+<th>Name</th>
+<th>Segments Used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>PG</td>
+<td>Insurance Plan Description</td>
+<td>AM1, AMT, BGN, BLI, C3, COM, DTP, III, LIN, MSG, N1, N2, N3, N4, NM1, PER, PID, PO1, QTY, REF, SE, SI, SPA, ST</td>
+</tr>
+<tr>
+<td>101</td>
+<td>NL</td>
+<td>Name and Address Lists</td>
+<td>BGN, COM, DTM, IN2, LX, N1, N9, NX2, REF, SE, SPA, ST</td>
+</tr>
+<tr>
+<td>102</td>
+<td>AC</td>
+<td>Associated Data</td>
+<td>BDS, OOI, ORI, REF, SE, ST</td>
+</tr>
+<tr>
+<td>103</td>
+<td>AB</td>
+<td>Abandoned Property Filings</td>
+<td>AMT, BGN, BLN, BPR, CUR, DTM, DTP, INI, INT, LX, N1, N2, N3, N4, NM1, NTE, PCT, PDS, PER, QTY, REF, SE, SHI, ST, TC2, TRN, YNQ</td>
+</tr>
+<tr>
+<td>104</td>
+<td>SA</td>
+<td>Air Shipment Information</td>
+<td>ACS, C3, DTM, F9, FOB, G47, H1, H2, H3, L0, L1, L3, L4, L5, M1, N1, N2, N3, N4, N9, NTE, P1, PER, SE, SL1, ST, TD4, X1, X2</td>
+</tr>
+<tr>
+<td>105</td>
+<td>BF</td>
+<td>Business Entity Filings</td>
+<td>AMT, BGN, BIN, CDS, CUR, DTM, EFI, HL, LIN, LM, LQ, LUI, LX, MTX, N2, N3, N4, NM1, NX1, NX2, PCT, PDL, PER, PWK, QTY, REF, SE, ST, TPB</td>
+</tr>
+<tr>
+<td>106</td>
+<td>MH</td>
+<td>Motor Carrier Rate Proposal</td>
+<td>AT5, AT9, BGN, BLR, CA1, CUR, G62, GY, LC1, LX, MCT, MI1, MS2, N1, N2, N3, N4, PER, PR, RTT, SE, ST, SV, TF, TFR, TS</td>
+</tr>
+<tr>
+<td>107</td>
+<td>MC</td>
+<td>Request for Motor Carrier Rate Proposal</td>
+<td>AT5, AT9, BGN, CA1, CUR, G62, GY, ID4, IV1, LX, MCT, MI1, MS2, N1, N2, N3, N4, PER, PR, SE, ST, SV</td>
+</tr>
+<tr>
+<td>108</td>
+<td>MK</td>
+<td>Response to a Motor Carrier Rate Proposal</td>
+<td>BGN, BLR, CA1, G62, LC1, N1, N2, N3, N4, PER, SE, ST</td>
+</tr>
+<tr>
+<td>109</td>
+<td>VE</td>
+<td>Vessel Content Details</td>
+<td>B4, DTM, N9, Q2, R4, SE, SG, ST, V9</td>
+</tr>
+<tr>
+<td>110</td>
+<td>IA</td>
+<td>Air Freight Details and Invoice</td>
+<td>ACS, B3, B3A, C2, C3, G47, ITD, L0, L1, L3, L4, L5, L10, LX, N1, N2, N3, N4, N9, NTE, P1, PER, POD, R1, RMT, SE, SL1, ST, V9</td>
+</tr>
+<tr>
+<td>111</td>
+<td>IF</td>
+<td>Individual Insurance Policy and Client Information</td>
+<td>AM1, AMT, ASI, BEN, BHT, BLI, BLN, C3, COM, DMG, DTP, HL, III, IN1, LIN, LQ, LUI, N2, N3, N4, NM1, NX1, PDL, PER, QTY, REF, RPA, SE, SPA, ST, UDA</td>
+</tr>
+<tr>
+<td>112</td>
+<td>PQ</td>
+<td>Property Damage Report</td>
+<td>AMT, BGN, C3, CID, DTP, HL, III, K2, LM, MEA, MS1, MSG, N2, N3, N4, N9, NM1, PCT, PER, QTY, SE, SLN, ST, SUP, TXI</td>
+</tr>
+<tr>
+<td>113</td>
+<td>CL</td>
+<td>Election Campaign and Lobbyist Reporting</td>
+<td>AWD, BGN, DTM, EMS, G86, HL, LQ, MTX, N1, N2, N3, N4, N9, NM1, NX2, PAM, PCT, PDL, PER, PWK, QTY, SE, ST, TPB</td>
+</tr>
+<tr>
+<td>120</td>
+<td>VC</td>
+<td>Vehicle Shipping Order</td>
+<td>BVP, DTM, G62, N1, N2, N3, N4, REF, SE, ST, VC, VC1</td>
+</tr>
+<tr>
+<td>121</td>
+<td>VS</td>
+<td>Vehicle Service</td>
+<td>BVS, CGS, DEL, DTM, G62, N7, REF, SE, ST, V1, VC</td>
+</tr>
+<tr>
+<td>124</td>
+<td>VD</td>
+<td>Vehicle Damage</td>
+<td>AMT, AP1, BCI, BGN, C3, CRC, CTP, DAM, DL, DP, DTM, DTP, DVI, F13, ID, III, LE, LID, LM, LQ, LS, LX, MSG, N2, N3, N4, N9, NM1, PCT, PER, PID, QTY, REF, SAC, SE, ST, SUP, TXI, VAT, VEH, YNQ</td>
+</tr>
+<tr>
+<td>125</td>
+<td>MR</td>
+<td>Multilevel Railcar Load Details</td>
+<td>BMM, G62, N7, SE, ST, VC</td>
+</tr>
+<tr>
+<td>126</td>
+<td>VA</td>
+<td>Vehicle Application Advice</td>
+<td>BVA, L7, SE, ST, V1, VAD</td>
+</tr>
+<tr>
+<td>127</td>
+<td>VB</td>
+<td>Vehicle Baying Order</td>
+<td>BVB, G62, SE, SFC, ST, VC</td>
+</tr>
+<tr>
+<td>128</td>
+<td>DI</td>
+<td>Dealer Information</td>
+<td>DH, DN, K1, N1, N2, N3, N4, PER, R9, SE, ST</td>
+</tr>
+<tr>
+<td>129</td>
+<td>VH</td>
+<td>Vehicle Carrier Rate Update</td>
+<td>G62, RT, RT1, SE, ST, VR</td>
+</tr>
+<tr>
+<td>130</td>
+<td>ED</td>
+<td>Student Educational Record (Transcript)</td>
+<td>ATV, BGN, CRS, CSU, DEG, DMG, DTP, EMS, ERP, FOS, HC, HS, IMM, IN1, IN2, IND, LUI, LX, MKS, N1, N2, N3, N4, NTE, OPS, OPX, PCL, PER, RAP, REF, SBT, SE, SES, SP, SRE, SSE, SST, ST, SUM, TST</td>
+</tr>
+<tr>
+<td>131</td>
+<td>AK</td>
+<td>Student Educational Record (Transcript) Acknowledgment</td>
+<td>BGN, IN2, N1, QTY, REF, SE, ST, SUM</td>
+</tr>
+<tr>
+<td>132</td>
+<td>HU</td>
+<td>Human Resource Information</td>
+<td>AIN, BGN, CN1, COM, CON, CQ, CRS, CSU, DEG, DMG, DTP, ELV, EMS, ESI, FOS, HL, III, ISI, LQ, LUI, N1, N2, N3, N4, N9, NM1, PCT, QTY, REF, SE, SES, ST, WLD, YNQ</td>
+</tr>
+<tr>
+<td>133</td>
+<td>CW</td>
+<td>Educational Institution Record</td>
+<td>AMT, ATV, BGN, COM, DEG, DTP, EDF, ENM, ERP, FOS, HL, ISI, LQ, N1, N2, N3, N4, NM1, NTE, OPX, PCT, PPA, QTY, REF, SCT, SE, SLA, SP, ST, YNQ</td>
+</tr>
+<tr>
+<td>135</td>
+<td>SL</td>
+<td>Student Aid Origination Record</td>
+<td>AMT, BGN, DEF, DMA, DMG, DTP, ENR, ENT, FNA, GR, IDB, IN1, IN2, LM, LQ, LX, MEA, N1, N3, N4, NTE, PER, PLI, QTY, REF, SAD, SCT, SE, ST, Y6, YNQ</td>
+</tr>
+<tr>
+<td>138</td>
+<td>TT</td>
+<td>Educational Testing and Prospect Request and Report</td>
+<td>ATV, BGN, COM, DEG, DMG, DTP, EMS, ERP, FOS, IN1, IN2, IND, LUI, MSG, N1, N3, N4, PCL, PER, RAP, REF, RQS, SBT, SCA, SE, SRE, SSE, SST, ST, SUM, TST</td>
+</tr>
+<tr>
+<td>139</td>
+<td>SL</td>
+<td>Student Loan Guarantee Result</td>
+<td>AMT, BGN, DB, DTP, ENT, GR, IDB, IN2, LM, LQ, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>140</td>
+<td>WA</td>
+<td>Product Registration</td>
+<td>AMT, BGN, CUR, DTM, ITA, ITD, LIN, LM, LQ, LX, N1, N2, N3, N4, N9, PER, PID, PSC, QTY, REF, SE, SLN, SSS, ST, TXI</td>
+</tr>
+<tr>
+<td>141</td>
+<td>WA</td>
+<td>Product Service Claim Response</td>
+<td>AMT, BGN, CUR, DTM, LX, MSG, N1, N2, N3, N4, N9, PCS, PER, QTY, RC, REF, SE, ST, TDS</td>
+</tr>
+<tr>
+<td>142</td>
+<td>WA</td>
+<td>Product Service Claim</td>
+<td>AMT, BGN, CID, CUR, DTM, IT1, ITA, LIN, LM, LOC, LQ, LX, MEA, MSG, N1, N2, N3, N4, N9, PER, PID, PRR, PRT, PSC, QTY, RC, REF, REP, SE, SSS, ST, TDS, TMD, TXI</td>
+</tr>
+<tr>
+<td>143</td>
+<td>WA</td>
+<td>Product Service Notification</td>
+<td>BGN, CID, CUR, DTM, ITA, LIN, LOC, MSG, N1, N2, N3, N4, N9, PER, PID, PRR, PRT, PWK, QTY, REF, REP, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>144</td>
+<td>LT</td>
+<td>Student Loan Transfer and Status Verification</td>
+<td>BGN, DB, DMG, DTP, ENT, GR, IDB, IN2, LV, N3, N4, REF, SE, ST</td>
+</tr>
+<tr>
+<td>146</td>
+<td>RY</td>
+<td>Request for Student Educational Record (Transcript)</td>
+<td>BGN, DMG, ERP, IN1, IN2, IND, N1, N2, N3, N4, NTE, PER, REF, SE, SSE, SST, ST</td>
+</tr>
+<tr>
+<td>147</td>
+<td>RZ</td>
+<td>Response to Request for Student Educational Record (Transcript)</td>
+<td>AAA, BGN, IN1, IN2, N1, N2, N3, N4, NTE, PER, PWK, REF, SE, ST</td>
+</tr>
+<tr>
+<td>148</td>
+<td>IJ</td>
+<td>Report of Injury, Illness or Incident</td>
+<td>ACT, AD1, AIN, AMT, BHT, CFI, CRC, CRI, CUR, DMG, DTP, EMT, ESI, FC, GRI, HL, III, IMP, LE, LM, LN, LQ, LS, LX, N2, N3, N4, NM1, PCT, PER, PID, QTY, REF, REL, SE, ST, TPB, TXI, VEH, WS</td>
+</tr>
+<tr>
+<td>149</td>
+<td>NT</td>
+<td>Notice of Tax Adjustment or Assessment</td>
+<td>AMT, BGN, DTM, FGS, IN2, MSG, N1, N2, N3, N4, PCT, PER, REF, SE, ST, TDS, TFS, TIA</td>
+</tr>
+<tr>
+<td>150</td>
+<td>TN</td>
+<td>Tax Rate Notification</td>
+<td>AMT, BGN, DTP, FGS, MTX, N1, N2, N3, N4, PER, QTY, SE, ST, TFS, TRS</td>
+</tr>
+<tr>
+<td>151</td>
+<td>TA</td>
+<td>Electronic Filing of Tax Return Data Acknowledgment</td>
+<td>AMT, BTA, BTI, DTM, FGS, PBI, QTY, REF, SE, ST, TFS, TIA</td>
+</tr>
+<tr>
+<td>152</td>
+<td>GR</td>
+<td>Statistical Government Information</td>
+<td>BGN, DTM, GRI, ICH, N1, N2, N3, N4, N9, NTE, PAM, PER, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>153</td>
+<td>CB</td>
+<td>Unemployment Insurance Tax Claim or Charge Information</td>
+<td>AMT, BTI, CHB, DPN, DTM, MSG, N1, N2, N3, N4, NM1, PAM, PCT, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>154</td>
+<td>UC</td>
+<td>Secured Interest Filing</td>
+<td>AMT, BGN, CDS, CED, DAD, DTM, LIN, LS1, N1, N2, N3, N4, N9, NM1, NTE, PAM, PER, PID, PO3, SE, ST, TAX, TXI</td>
+</tr>
+<tr>
+<td>155</td>
+<td>BC</td>
+<td>Business Credit Report</td>
+<td>ACD, API, ASI, ASO, AWD, BBC, BGN, C3, CDS, CED, COM, CRC, DMG, DTP, EMS, FDA, HL, III, IN1, IN2, INQ, INR, ITC, LM, LOD, LQ, LUI, LX, MEA, MTX, N1, N2, N3, N4, N9, NM1, NX1, NX2, PCT, PER, PYM, PYT,</td>
+</tr>
+<tr>
+<td>157</td>
+<td>NP</td>
+<td>Notice of Power of Attorney</td>
+<td>BGN, DTM, HL, IN2, N1, N2, N3, N4, NM1, PER, REF, SE, SPY, ST</td>
+</tr>
+<tr>
+<td>158</td>
+<td>TJ</td>
+<td>Tax Jurisdiction Sourcing</td>
+<td>ASI, BGN, DTP, LX, N1, NX2, PPA, SE, ST, TA</td>
+</tr>
+<tr>
+<td>159</td>
+<td>MP</td>
+<td>Motion Picture Booking Confirmation</td>
+<td>AMT, BGN, CUR, DTP, G63, LQ, LUI, LX, MEA, MSG, N1, N4, N9, PCT, QTY, REF, SE, ST, THE</td>
+</tr>
+<tr>
+<td>160</td>
+<td>SJ</td>
+<td>Transportation Automatic Equipment Identification</td>
+<td>AEI, AES, BAX, DTM, EI, LQ, MEA, N9, QTY, SE, ST, TSI, YNQ</td>
+</tr>
+<tr>
+<td>161</td>
+<td>TR</td>
+<td>Train Sheet</td>
+<td>BTS, DTM, FAC, H3, N9, NM1, PER, PWK, SE, ST, V9</td>
+</tr>
+<tr>
+<td>163</td>
+<td>AS</td>
+<td>Transportation Appointment Schedule Information</td>
+<td>B13, B2A, G05, G61, G62, H3, H6, L11, N1, N2, N3, N4, N7, OID, S5, SDQ, SE, ST</td>
+</tr>
+<tr>
+<td>170</td>
+<td>ER</td>
+<td>Revenue Receipts Statement</td>
+<td>BOX, DTM, LX, N1, PER, REF, SE, ST, THE</td>
+</tr>
+<tr>
+<td>175</td>
+<td>FC</td>
+<td>Court and Law Enforcement Notice</td>
+<td>AMT, BGN, CDS, CED, CRC, DMG, DTM, III, LE, LM, LQ, LS, LX, MEA, MSG, N2, N3, N4, NM1, PAM, PER, QTY, REF, SE, SPI, ST</td>
+</tr>
+<tr>
+<td>176</td>
+<td>FC</td>
+<td>Court Submission</td>
+<td>AMT, BBC, BCU, BGN, BIN, CDS, CED, CRC, DTM, EFI, FGS, LM, LQ, MSG, N2, N3, N4, NM1, PAM, PCT, PER, QTY, REF, SE, SPI, ST</td>
+</tr>
+<tr>
+<td>179</td>
+<td>EP</td>
+<td>Environmental Compliance Reporting</td>
+<td>AMT, BDS, BGN, DTM, G86, HL, III, LM, LOC, LQ, MEA, MTX, N1, N2, N3, N4, N9, NM1, NTE, OOI, PCT, PER, PWK, QTY, REF, SE, SPI, ST, TPB, YNQ</td>
+</tr>
+<tr>
+<td>180</td>
+<td>AN</td>
+<td>Return Merchandise Authorization and Notification</td>
+<td>AMT, BGN, BLI, CRC, DD, DTM, FA1, FA2, G38, GF, LM, LQ, LX, MEA, N1, N2, N3, N4, N9, NTE, PER, PID, PKG, PRF, QTY, RDR, SAC, SDQ, SE, ST, TD1, TD5</td>
+</tr>
+<tr>
+<td>185</td>
+<td>RD</td>
+<td>Royalty Regulatory Report</td>
+<td>AMT, ASI, ASM, BGN, DTP, LE, LM, LQ, LS, LX, MEA, N1, N2, N3, N4, NTE, PCT, PER, PID, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>186</td>
+<td>UW</td>
+<td>Insurance Underwriting Requirements Reporting</td>
+<td>ACT, AM1, AMT, ASL, BGN, BIN, BOR, CD2, CDS, CED, CUR, DMA, DMG, DTP, EC, EFI, EMS, FH, HL, III, IN1, LE, LS, LTR, LX, MPI, MSG, N1, N3, N4, NM1, PER, PWK, QTY, REF, REL, SE, SIN, SPK, ST, TOA, TOV, U</td>
+</tr>
+<tr>
+<td>187</td>
+<td>AE</td>
+<td>Premium Audit Request and Return</td>
+<td>AD1, AMT, BAL, BGN, BIN, CRC, CUR, DMA, DMG, DTP, DVI, EFI, HL, III, ITA, LQ, LX, MEA, MSG, N1, N2, N3, N4, NM1, NX2, PCT, PDP, PDR, PDS, PER, PID, QTY, REF, SE, SI, ST, SUP, TDS, TXI, VAT, VEH</td>
+</tr>
+<tr>
+<td>188</td>
+<td>EC</td>
+<td>Educational Course Inventory</td>
+<td>CSE, CSU, DTP, ERP, MSG, N1, N2, N3, N4, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>189</td>
+<td>AF</td>
+<td>Application for Admission to Educational Institutions</td>
+<td>AMT, ATV, BGN, COM, CRS, DEG, DMG, DTP, EMS, FOS, HC, III, IMM, IN1, IN2, IND, LE, LQ, LS, LT, LTE, LUI, LX, MSG, N1, N2, N3, N4, NTE, PCL, PDL, PER, QTY, REF, RQS, RSD, SBT, SE, SES, SRE, SSE, SST, S</td>
+</tr>
+<tr>
+<td>190</td>
+<td>SV</td>
+<td>Student Enrollment Verification</td>
+<td>AMT, BGN, DEG, DMG, DTP, ENR, ENT, ERP, FOS, IN2, LQ, N1, N2, N3, N4, NTE, PER, SE, SES, SST, ST, SUM</td>
+</tr>
+<tr>
+<td>191</td>
+<td>SD</td>
+<td>Student Loan Pre-Claims and Claims</td>
+<td>AMT, BGN, DB, DEF, DMA, DMG, DTP, ENR, ENT, GR, IN1, IN2, N3, N4, PER, REF, SE, SLI, ST, YNQ</td>
+</tr>
+<tr>
+<td>194</td>
+<td>GT</td>
+<td>Grant or Assistance Application</td>
+<td>AMT, BGN, DEG, DMG, DTM, EMS, FOS, HL, HSD, INX, K2, K3, L11, LDT, LX, MTX, N1, N2, N3, N4, N9, NM1, NTE, NX1, PAM, PCT, PD, PDD, PER, PL, PO1, PPL, PWK, QTY, REF, SE, SPI, ST, YNQ</td>
+</tr>
+<tr>
+<td>195</td>
+<td>LA</td>
+<td>Federal Communications Commission (FCC) License Application</td>
+<td>AMT, BGN, CRC, DTM, LIE, LM, LQ, MEA, MSG, N1, N2, N3, N4, NTE, PER, PO1, PWK, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>196</td>
+<td>PK</td>
+<td>Contractor Cost Data Reporting</td>
+<td>AMT, BCM, BSD, CAL, CLI, CRT, DTM, DTP, G61, HL, MEA, MSG, N1, N2, N3, N4, PCT, PD, PDD, PID, QTY, REF, RPA, SE, ST</td>
+</tr>
+<tr>
+<td>197</td>
+<td>TO</td>
+<td>Real Estate Title Evidence</td>
+<td>AMT, BGN, BIN, DTP, EFI, FGS, FPT, G86, IN1, IN2, LQ, LX, M1, MSG, N1, N2, N3, N4, N9, NM1, NX1, NX2, PDE, PDS, PER, PID, REF, SE, ST</td>
+</tr>
+<tr>
+<td>198</td>
+<td>ME</td>
+<td>Loan Verification Information</td>
+<td>ACT, AIN, AMT, API, BGN, CDA, DTP, EMS, FAA, IN1, IN2, MSG, N1, N2, N3, N4, NM1, NTE, NX1, NX2, PER, PEX, PRD, PWK, QTY, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>199</td>
+<td>TO</td>
+<td>Real Estate Settlement Information</td>
+<td>AMT, BGN, DTM, DTP, FGS, III, IN1, IN2, LN1, LRQ, LX, N1, N2, N3, N4, NM1, NTE, NX1, NX2, PCT, PDE, PDS, PER, QTY, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>200</td>
+<td>ME</td>
+<td>Mortgage Credit Report</td>
+<td>AAA, AIN, AMT, ARS, BGN, CCI, CDS, CRO, DMG, DTP, EMS, G32, IN1, IN2, INQ, LE, LS, LX, MSG, N1, N2, N3, N4, N10, NTE, NX1, NX2, PER, PPD, QTY, REF, RO, SCM, SCS, SE, SOI, ST, TBI, TLN, VAR, YNQ</td>
+</tr>
+<tr>
+<td>201</td>
+<td>ME</td>
+<td>Residential Loan Application</td>
+<td>ACT, AIN, AMT, ARS, BEP, BGN, CDA, CRC, DMG, DTP, EMS, FAA, FTH, III, IN1, IN2, LE, LIN, LRQ, LS, LX, MCD, MSG, N1, N2, N3, N4, N10, NM1, NTE, NX1, NX2, PCT, PDE, PDS, PER, PEX, PPY, QTY, REA, REF, RE</td>
+</tr>
+<tr>
+<td>202</td>
+<td>MJ</td>
+<td>Secondary Mortgage Market Loan Delivery</td>
+<td>AIN, AMT, ASM, BEP, BGN, BUY, CN1, CRC, CTT, DEX, DMG, DTP, IGI, III, IN1, IN2, INT, LN1, LUC, LX, MPP, MSG, N1, N2, N3, N4, N9, NM1, NX1, NX2, PAM, PCT, PDS, PER, PEX, PPD, PWK, QTY, REA, REF, RLD, S</td>
+</tr>
+<tr>
+<td>203</td>
+<td>MG</td>
+<td>Secondary Mortgage Market Investor Report</td>
+<td>AMT, BGN, DTM, DTP, INT, IRA, LQ, LX, MPP, N1, N2, N3, N4, NX2, PER, PRC, QTY, REF, RLT, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>204</td>
+<td>SM</td>
+<td>Motor Carrier Load Tender</td>
+<td>AT5, AT8, B2, B2A, C3, G61, G62, L3, L4, L5, L11, LAD, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHT, LX, M7, MEA, MS3, N1, N2, N3, N4, N7, N7A, N7B, NTE, OID, PER, PLD, RTT, S5, SE, ST</td>
+</tr>
+<tr>
+<td>205</td>
+<td>MN</td>
+<td>Mortgage Note</td>
+<td>AMT, BGN, CDI, CTT, DTP, III, IN1, IN2, INT, LX, MNC, N2, N3, N4, NM1, NX1, NX2, PCT, PDS, PER, QTY, REF, SE, SOM, ST, TRN, VDI, YNQ</td>
+</tr>
+<tr>
+<td>206</td>
+<td>MG</td>
+<td>Real Estate Inspection</td>
+<td>AIN, AMT, BGN, CRC, CTP, DFI, DTP, III, IN1, IN2, LN, MSG, N1, N2, N3, N4, N9, NTE, NX1, NX2, OBI, PDE, PDS, PER, PWK, QTY, REA, REC, REF, RLT, SE, SI, ST, YNQ</td>
+</tr>
+<tr>
+<td>210</td>
+<td>IM</td>
+<td>Motor Carrier Freight Details and Invoice</td>
+<td>B3, C2, C3, CD3, G62, H1, H2, H3, H6, ITD, K1, L0, L1, L3, L4, L5, L7, L9, L11, LX, M7, N1, N2, N3, N4, N7, OID, POD, R3, S5, SDQ, SE, ST</td>
+</tr>
+<tr>
+<td>211</td>
+<td>BL</td>
+<td>Motor Carrier Bill of Lading</td>
+<td>AT1, AT2, AT3, AT4, AT5, B2A, BOL, G61, G62, K1, L4, L11, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHT, LX, MAN, MS2, MS3, N1, N2, N3, N4, OID, SE, ST</td>
+</tr>
+<tr>
+<td>212</td>
+<td>TM</td>
+<td>Motor Carrier Delivery Trailer Manifest</td>
+<td>AT7, AT8, AT9, ATA, B2A, BLR, G61, G62, L11, LX, M7, MAN, MS1, MS2, N1, N2, N3, N4, OID, Q7, SDQ, SE, ST, TSD</td>
+</tr>
+<tr>
+<td>213</td>
+<td>MI</td>
+<td>Motor Carrier Shipment Status Inquiry</td>
+<td>B11, C3, G61, K2, L10, N1, N2, N3, N4, REF, SE, ST</td>
+</tr>
+<tr>
+<td>214</td>
+<td>QM</td>
+<td>Transportation Carrier Shipment Status Message</td>
+<td>AT5, AT7, AT8, B10, G62, K1, L11, LX, M7, MAN, MS1, MS2, MS3, N1, N2, N3, N4, OID, Q7, SDQ, SE, ST</td>
+</tr>
+<tr>
+<td>215</td>
+<td>UP</td>
+<td>Motor Carrier Pickup Manifest</td>
+<td>ACS, AT6, B1, C3, CD3, CGS, G61, G62, IT1, L5, L11, MAN, MS4, MS5, MS6, N1, N2, N3, N4, N10, NTE, PER, PID, R4, SE, SLN, SMD, ST, TXI, X1, X2</td>
+</tr>
+<tr>
+<td>216</td>
+<td>PU</td>
+<td>Motor Carrier Shipment Pickup Notification</td>
+<td>AT5, G61, K2, N1, N2, N3, N4, PRF, PUN, SE, ST, TEM</td>
+</tr>
+<tr>
+<td>217</td>
+<td>FG</td>
+<td>Motor Carrier Loading and Route Guide</td>
+<td>BLR, G61, GY, L11, LE, LS, LX, N1, N3, N4, RST, SE, ST, SV</td>
+</tr>
+<tr>
+<td>219</td>
+<td>AB</td>
+<td>Logistics Service Request</td>
+<td>AMT, AT5, B9, B9A, CUR, G61, G62, G69, ITA, L3, L11, LAD, LCT, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHT, LX, MAN, MEA, MS3, N1, N2, N3, N4, N7, N7A, N7B, NTE, PER, PO4, S5, SE, ST</td>
+</tr>
+<tr>
+<td>220</td>
+<td>AH</td>
+<td>Logistics Service Response</td>
+<td>AMT, AT5, B9, B9A, G62, G69, ITA, L3, L8, L9, L11, LAD, LCD, LCT, LX, M7, MAN, MEA, MS3, N1, N2, N3, N4, N7, N7A, N7B, NTE, PER, PO4, S5, SE, ST</td>
+</tr>
+<tr>
+<td>222</td>
+<td>CE</td>
+<td>Cartage Work Assignment</td>
+<td>AT3, AT5, G61, G62, L11, LAD, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHT, LX, N1, N2, N3, N4, N7, NTE, PLC, PLD, S5, SCN, SE, ST</td>
+</tr>
+<tr>
+<td>223</td>
+<td>MQ</td>
+<td>Consolidators Freight Bill and Invoice</td>
+<td>AT8, B10, B2A, B3A, CSD, L1, L11, LE, LS, LX, M7, N1, N2, N3, N4, N7, OID, SDQ, SE, ST</td>
+</tr>
+<tr>
+<td>224</td>
+<td>MA</td>
+<td>Motor Carrier Summary Freight Bill Manifest</td>
+<td>CF1, CF2, L11, SE, ST</td>
+</tr>
+<tr>
+<td>225</td>
+<td>MY</td>
+<td>Response to a Cartage Work Assignment</td>
+<td>L11, SCP, SE, ST</td>
+</tr>
+<tr>
+<td>227</td>
+<td>TU</td>
+<td>Trailer Usage Report</td>
+<td>BLR, G61, G62, L11, M7, N1, N2, N3, N4, N7, NTE, SE, ST, TRL</td>
+</tr>
+<tr>
+<td>228</td>
+<td>EN</td>
+<td>Equipment Inspection Report</td>
+<td>BGN, DTM, EQD, L11, M7, MEA, N1, N3, N4, N9, NA, NM1, NTE, PER, Q5, SE, ST, W2</td>
+</tr>
+<tr>
+<td>240</td>
+<td>MZ</td>
+<td>Motor Carrier Package Status</td>
+<td>AT7, BGN, BIN, CD3, EFI, L11, LE, LS, LX, MAN, MS2, N1, N2, N3, N4, NM1, NTE, Q7, SE, ST</td>
+</tr>
+<tr>
+<td>242</td>
+<td>DS</td>
+<td>Data Status Tracking</td>
+<td>BGN, DTP, HL, IIS, IRP, MSG, N1, QTY, REF, SE, ST, STS</td>
+</tr>
+<tr>
+<td>244</td>
+<td>PN</td>
+<td>Product Source Information</td>
+<td>BGN, BSF, CID, COM, DTM, N1, N2, NM1, NX2, PID, SE, ST</td>
+</tr>
+<tr>
+<td>245</td>
+<td>ME</td>
+<td>Real Estate Tax Service Response</td>
+<td>AMT, ASM, BGN, DTP, HL, INC, LN, MLA, N2, N3, N4, NM1, NX1, NX2, PDE, PDS, PER, PTS, REF, SE, ST, TA, TDT, TIA, TII</td>
+</tr>
+<tr>
+<td>248</td>
+<td>SU</td>
+<td>Account Assignment/Inquiry and Service/Status</td>
+<td>ACT, AIN, AMT, BAL, BHT, DMG, DTP, EMS, HL, INT, N2, N3, N4, NM1, PER, REF, SE, ST, STC</td>
+</tr>
+<tr>
+<td>249</td>
+<td>AT</td>
+<td>Animal Toxicological Data</td>
+<td>ADI, ADT, ANI, AOC, AOI, AOL, AOR, ARC, AST, ATR, BGN, G61, GDP, GID, GRP, MSG, N1, N2, N3, N4, NTE, REF, SE, ST, STP</td>
+</tr>
+<tr>
+<td>250</td>
+<td>PV</td>
+<td>Purchase Order Shipment Management Document</td>
+<td>BGN, DTM, FOB, G05, H3, L11, N1, N2, N3, N4, PRF, SE, SSD, ST</td>
+</tr>
+<tr>
+<td>251</td>
+<td>CP</td>
+<td>Pricing Support</td>
+<td>AMT, BGN, CUR, DTM, G61, LX, MTX, N1, N2, N3, N4, NTE, PCT, PD, PDD, PID, PL, PO1, PPL, QTY, REF, SE, SPI, ST</td>
+</tr>
+<tr>
+<td>252</td>
+<td>IE</td>
+<td>Insurance Producer Administration</td>
+<td>ACT, AM1, AMT, ASI, BGN, BIN, CDS, CED, COM, DMA, DMG, DTM, DTP, EFI, EMS, ENT, III, LIC, LIN, LX, MSG, N1, N2, N3, N4, N9, NM1, PER, PWK, REF, SE, SPA, SRE, ST, TST, UC, YNQ</td>
+</tr>
+<tr>
+<td>255</td>
+<td>UI</td>
+<td>Underwriting Information Services</td>
+<td>ACT, AM1, ASI, BGN, BIN, CD2, CN1, CUR, DMA, DMG, DTM, DTP, EFI, EMS, IND, LE, LS, LX, MSG, N2, N3, N4, NM1, NTE, NX2, PER, PO1, PWK, REC, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>256</td>
+<td>PE</td>
+<td>Periodic Compensation</td>
+<td>ADX, AM1, AMT, BLI, BLN, BSC, CUR, DMG, DTP, ENT, III, MSG, N1, N2, N3, N4, N9, NM1, PER, QTY, REF, RPA, SE, ST</td>
+</tr>
+<tr>
+<td>259</td>
+<td>MG</td>
+<td>Residential Mortgage Insurance Explanation of Benefits</td>
+<td>AMT, AWD, BGN, DFI, DTM, FIS, III, INT, MSG, N1, N2, N3, N4, N9, PCT, PER, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>260</td>
+<td>MG</td>
+<td>Application for Mortgage Insurance Benefits</td>
+<td>AMT, BGN, CSI, DFI, DTP, FCL, FIS, INT, MIR, MSG, N1, N2, N3, N4, NM1, NTE, PCT, PER, REC, REF, SE, ST</td>
+</tr>
+<tr>
+<td>261</td>
+<td>ME</td>
+<td>Real Estate Information Request</td>
+<td>AM1, AMT, API, BGN, DTM, DTP, III, IN1, IN2, LN1, LX, N1, N2, N3, N4, NM1, NTE, NX1, NX2, PCT, PDE, PDS, PER, PEX, PWK, QTY, REA, REC, REF, SE, ST, TRN, YNQ</td>
+</tr>
+<tr>
+<td>262</td>
+<td>ME</td>
+<td>Real Estate Information Report</td>
+<td>AIN, AM1, AMT, API, BGN, CRC, CUR, DTP, III, IN1, IN2, LN2, LQ, LX, MEA, MSG, N2, N3, N4, NM1, NTE, NX1, NX2, PCT, PDE, PDS, PER, PEX, PTF, PWK, QTY, REA, REC, REF, RET, SE, SPI, ST, TRN, YNQ</td>
+</tr>
+<tr>
+<td>263</td>
+<td>ME</td>
+<td>Residential Mortgage Insurance Application Response</td>
+<td>BGN, G63, LX, MIC, MIR, N1, N9, PCT, REF, SE, ST, TXI</td>
+</tr>
+<tr>
+<td>264</td>
+<td>MG</td>
+<td>Mortgage Loan Default Status</td>
+<td>AMT, BGN, DFI, DTM, DTP, INT, LE, LS, LX, MIS, MRC, MSG, N1, N2, N3, N4, PER, QTY, REC, REF, SE, SOM, ST, YNQ</td>
+</tr>
+<tr>
+<td>265</td>
+<td>TO</td>
+<td>Real Estate Title Insurance Services Order</td>
+<td>AMT, BGN, DMG, FPT, IN1, IN2, LE, LN1, LRQ, LS, LX, MCD, MSG, N1, N2, N3, N4, NX1, NX2, PDE, PDS, PER, PRD, PWK, REF, SE, ST, TIS</td>
+</tr>
+<tr>
+<td>266</td>
+<td>MG</td>
+<td>Mortgage or Property Record Change Notification</td>
+<td>AMT, API, BGN, CRC, DTP, INT, LX, N1, N2, N3, N4, N9, NM1, NTE, PCT, PER, PID, QTY, REF, SE, ST, VEH</td>
+</tr>
+<tr>
+<td>267</td>
+<td>AD</td>
+<td>Individual Life, Annuity and Disability Application</td>
+<td>ACT, AM1, AMT, ASI, ASL, BEN, BGN, BIN, BLI, C3, CDS, CED, COM, DMA, DMG, DTM, DTP, EC, EFI, EMP, EMS, ENT, ERI, FH, HL, III, IND, INV, K2, LE, LIN, LQ, LS, LUI, LX, MPI, MSG, N1, N2, N3, N4, N9, NM1,</td>
+</tr>
+<tr>
+<td>268</td>
+<td>PF</td>
+<td>Annuity Activity</td>
+<td>ACT, AM1, AMT, ASI, BEN, BGN, BIN, BLI, C3, CON, DMG, DTM, DTP, EFI, G86, III, IT1, LIN, LX, MSG, N1, N2, N3, N4, NM1, PAM, PDL, PER, PID, PO1, REF, RPA, SE, SPA, ST</td>
+</tr>
+<tr>
+<td>269</td>
+<td>HV</td>
+<td>Health Care Benefit Coordination Verification</td>
+<td>AAA, BGN, CLP, DTP, N1, N2, N3, N4, NM1, PER, REF, SE, ST, SVC, TRN</td>
+</tr>
+<tr>
+<td>270</td>
+<td>HS</td>
+<td>Eligibility, Coverage or Benefit Inquiry</td>
+<td>AMT, BHT, DMG, DTP, EQ, HI, HL, III, INS, MPI, N2, N3, N4, NM1, PDP, PDR, PER, PRV, REF, SE, ST, TRN, VEH</td>
+</tr>
+<tr>
+<td>271</td>
+<td>HB</td>
+<td>Eligibility, Coverage or Benefit Information</td>
+<td>AAA, AMT, BHT, DMG, DTP, EB, EM, HI, HL, HSD, III, INS, LE, LIN, LQ, LS, LUI, MPI, MSG, N2, N3, N4, NM1, PCT, PDP, PDR, PER, PID, PKD, PRV, REF, SD1, SE, ST, TRN, VEH</td>
+</tr>
+<tr>
+<td>272</td>
+<td>LN</td>
+<td>Property and Casualty Loss Notification</td>
+<td>AMT, BCI, BGN, CRC, DAM, DTP, DVI, EM, ICH, III, K1, K2, LE, LID, LIE, LIN, LQ, LS, LX, MSG, N2, N3, N4, N9, NM1, NX1, PCT, PDP, PDR, PER, PIN, PKD, PWK, QTY, R1, R4, REF, SD1, SE, SI, ST, V1, VAT, VE</td>
+</tr>
+<tr>
+<td>273</td>
+<td>ID</td>
+<td>Insurance/Annuity Application Status</td>
+<td>ACT, AMT, BEN, BGN, BLI, CUR, DMA, DMG, DTP, ENT, G61, INV, K3, LIN, LQ, LX, M1, MSG, N2, N3, N4, NM1, PER, QTY, REF, REL, RPA, SE, SPA, ST, UD, UDA, V9</td>
+</tr>
+<tr>
+<td>274</td>
+<td>PW</td>
+<td>Healthcare Provider Information</td>
+<td>AAA, ACT, AMT, API, BCI, BDS, BHT, CRC, DEG, DMG, DTM, DTP, EMS, HAD, HL, HPL, HSD, IND, LQ, LUI, LX, MTX, N1, N2, N3, N4, NM1, NX1, OOI, PDI, PER, QTY, REF, SE, ST, TPB, TRN, WS, YNQ</td>
+</tr>
+<tr>
+<td>275</td>
+<td>PI</td>
+<td>Patient Information</td>
+<td>BDS, BGN, CAT, DMG, DTM, DTP, HI, IN1, LX, N3, N4, NM1, NX1, OOI, PER, PID, PRV, REF, SE, ST, STC, SVC, TRN</td>
+</tr>
+<tr>
+<td>276</td>
+<td>HR</td>
+<td>Health Care Claim Status Request</td>
+<td>AMT, BHT, DMG, DTP, HL, N2, N3, N4, NM1, PAT, PER, REF, SBR, SE, ST, SVC, TOO, TRN</td>
+</tr>
+<tr>
+<td>277</td>
+<td>HN</td>
+<td>Health Care Information Status Notification</td>
+<td>AMT, BHT, DMG, DTP, HL, N1, N2, N3, N4, NM1, PAT, PER, PWK, QTY, REF, SBR, SE, ST, STC, SVC, TOO, TRN</td>
+</tr>
+<tr>
+<td>278</td>
+<td>HI</td>
+<td>Health Care Services Review Information</td>
+<td>AAA, BHT, CL1, CR1, CR2, CR4, CR5, CR6, CR7, CR8, CRC, DMG, DN2, DRA, DTP, HCR, HI, HL, HSD, INS, MSG, N2, N3, N4, NM1, PER, PRV, PWK, REF, SE, ST, SV1, SV2, SV3, TOO, TRN, UM</td>
+</tr>
+<tr>
+<td>280</td>
+<td>VI</td>
+<td>Voter Registration Information</td>
+<td>BGN, BIN, CRC, DTM, EFI, ICH, IN1, IN2, MEA, N1, N2, N3, N4, NX1, NX2, PER, PWK, REF, SE, ST</td>
+</tr>
+<tr>
+<td>283</td>
+<td>TE</td>
+<td>Tax or Fee Exemption Certification</td>
+<td>AMT, BGN, DTM, IN2, INI, LQ, LX, MSG, N1, N2, N3, N4, NM1, PER, PID, QTY, REF, SE, ST, TC2, TXI, YNQ</td>
+</tr>
+<tr>
+<td>284</td>
+<td>IH</td>
+<td>Commercial Vehicle Safety Reports</td>
+<td>AMT, BGN, DMA, DMG, DTM, DVI, EMS, H1, HL, III, LH2, LH3, LIE, LOD, LQ, MAN, MEA, MTX, N2, N3, N4, N9, NM1, PER, PO4, PWK, QTY, REF, SE, SRE, ST, TC2, VEH, YNQ</td>
+</tr>
+<tr>
+<td>285</td>
+<td>CV</td>
+<td>Commercial Vehicle Safety and Credentials Information Exchange</td>
+<td>AMT, BGN, DMA, DMG, DTM, DVI, H1, LE, LM, LQ, LS, MEA, N2, N3, N4, N9, N12, NM1, NTE, NX1, PCT, PER, QTY, REF, SE, SPR, SRE, ST, STA, TC2, VC1, VEH, YNQ</td>
+</tr>
+<tr>
+<td>286</td>
+<td>KM</td>
+<td>Commercial Vehicle Credentials</td>
+<td>AMT, BGN, CUR, DTM, DVI, EMS, H1, HL, LM, LQ, MEA, MSG, N2, N3, N4, N9, N12, NM1, PDL, PER, QTY, SE, SPI, ST, TC2, TD5, VEH, YNQ</td>
+</tr>
+<tr>
+<td>288</td>
+<td>WI</td>
+<td>Wage Determination</td>
+<td>AMT, BGN, CRC, DTM, LM, LQ, LX, N1, N2, N3, N4, NTE, PER, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>290</td>
+<td>CO</td>
+<td>Cooperative Advertising Agreements</td>
+<td>AMT, ASM, CMA, CRC, DOS, MI, N1, N2, N3, N4, NTE, PAI, PER, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>300</td>
+<td>RO</td>
+<td>Reservation (Booking Request) (Ocean)</td>
+<td>B1, DTM, EA, G61, H1, H2, H3, K1, L0, L1, L4, L5, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LX, N1, N2, N3, N4, N7, N9, PER, R4, R2A, REF, SE, ST, V1, V9, W09, Y1, Y2, Y6, Y7</td>
+</tr>
+<tr>
+<td>301</td>
+<td>RO</td>
+<td>Confirmation (Ocean)</td>
+<td>B1, DTM, EA, G61, H1, H2, H3, K1, L0, L1, L4, L5, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LX, N1, N2, N3, N4, N7, N9, PER, R4, R2A, SE, ST, V1, V9, W09, Y3, Y4, Y6</td>
+</tr>
+<tr>
+<td>303</td>
+<td>RO</td>
+<td>Booking Cancellation (Ocean)</td>
+<td>B1, SE, ST, V9, Y5, Y6</td>
+</tr>
+<tr>
+<td>304</td>
+<td>SO</td>
+<td>Shipping Instructions</td>
+<td>B2, B2A, C2, C8, C8C, CTP, CUR, DTM, G1, G2, G3, G61, H1, H2, H3, ISS, ITD, K1, L0, L1, L3, L4, L5, L7, L9, L11, L12, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHR, LHT, LIN, LX, M0, M1, M2, M7, M7A, MAN, ME</td>
+</tr>
+<tr>
+<td>309</td>
+<td>AQ</td>
+<td>Customs Manifest</td>
+<td>CII, DMA, DMG, DTM, H1, H2, LX, M7, M10, M11, M12, M13, MAN, N1, N3, N4, N9, N10, NM1, P4, PER, R4, REF, SE, ST, VC, VEH, VID, X1</td>
+</tr>
+<tr>
+<td>310</td>
+<td>IO</td>
+<td>Freight Receipt and Invoice (Ocean)</td>
+<td>B3, B2A, C2, C3, C8, C8C, DTM, G3, G61, H1, H2, H3, K1, L0, L1, L3, L5, L7, L11, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LX, M0, M1, M7, N1, N2, N3, N4, N7, N9, N12, PER, PWK, QTY, R2, R4, R2A, SE, ST</td>
+</tr>
+<tr>
+<td>311</td>
+<td>SO</td>
+<td>Canada Customs Information</td>
+<td>B2A, DTM, ED, G2, K1, L0, L3, L4, L5, LX, M7, N1, N2, N3, N4, N9, NA, R4, SE, ST, V1, V2, V3, X1, X2, Y2, Y6</td>
+</tr>
+<tr>
+<td>312</td>
+<td>IO</td>
+<td>Arrival Notice (Ocean)</td>
+<td>B3, C3, DTM, G1, G2, H1, H2, H3, K1, L0, L1, L3, L4, L5, L7, L11, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LX, M7, N1, N2, N3, N4, N7, N9, N12, PER, Q3, QTY, R2, R4, SE, ST, V1, V9, W09, Y6</td>
+</tr>
+<tr>
+<td>313</td>
+<td>QO</td>
+<td>Shipment Status Inquiry (Ocean)</td>
+<td>B4, N1, N9, SE, ST</td>
+</tr>
+<tr>
+<td>315</td>
+<td>QO</td>
+<td>Status Details (Ocean)</td>
+<td>B4, DTM, N9, Q2, R4, SE, SG, ST, V9</td>
+</tr>
+<tr>
+<td>317</td>
+<td>SO</td>
+<td>Delivery/Pickup Order</td>
+<td>G61, G62, H1, L0, L5, N1, N2, N3, N4, N9, SE, ST, TD5</td>
+</tr>
+<tr>
+<td>319</td>
+<td>SO</td>
+<td>Terminal Information</td>
+<td>BA2, CD1, SE, ST</td>
+</tr>
+<tr>
+<td>322</td>
+<td>SO</td>
+<td>Terminal Operations and Intermodal Ramp Activity</td>
+<td>DTM, GR5, H1, H3, K1, L0, L3, L5, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, M7, N1, N3, N4, N7, N9, NA, PER, Q5, R4, SE, ST, V1, V4, W2, W09, Y7, ZC1</td>
+</tr>
+<tr>
+<td>323</td>
+<td>SO</td>
+<td>Vessel Schedule and Itinerary (Ocean)</td>
+<td>DTM, K1, R4, SE, ST, V1, V9</td>
+</tr>
+<tr>
+<td>324</td>
+<td>SO</td>
+<td>Vessel Stow Plan (Ocean)</td>
+<td>DTM, ED, H1, H3, M7, N7, N9, NA, R4, SE, ST, V1, V4, W09</td>
+</tr>
+<tr>
+<td>325</td>
+<td>SO</td>
+<td>Consolidation of Goods In Container</td>
+<td>B12, C3, G20, H1, H2, H3, L3, L8, LIN, M7, MAN, MBL, N1, N2, N3, N4, N9, PRF, R4, SE, SN1, ST, TD1, UIT, V1, V9, W09</td>
+</tr>
+<tr>
+<td>326</td>
+<td>SO</td>
+<td>Consignment Summary List</td>
+<td>DTM, G1, MBL, N7, N9, R4, SE, ST, V1, VC</td>
+</tr>
+<tr>
+<td>350</td>
+<td>AU</td>
+<td>Customs Status Information</td>
+<td>BA1, K1, M7, M10, M7A, N7, N9, NM1, P4, SE, ST, V9, VEH, VID, X4</td>
+</tr>
+<tr>
+<td>352</td>
+<td>AV</td>
+<td>Customs Carrier General Order Status</td>
+<td>K1, M10, M14, P4, SE, ST</td>
+</tr>
+<tr>
+<td>353</td>
+<td>AX</td>
+<td>Customs Events Advisory Details</td>
+<td>CM, K1, M10, M15, M7A, MEA, P4, SE, ST, V1, V2</td>
+</tr>
+<tr>
+<td>354</td>
+<td>AY</td>
+<td>Customs Automated Manifest Archive Status</td>
+<td>M10, P4, SE, ST, X01, X02</td>
+</tr>
+<tr>
+<td>355</td>
+<td>AZ</td>
+<td>Customs Acceptance/Rejection</td>
+<td>CII, DMG, H1, H2, K1, K3, LX, M7, M10, M11, M12, M13, M14, M15, M20, M21, MBL, N1, N3, N4, N9, N10, NM1, P4, PER, R4, REF, SE, ST, VC, VEH, VID, X1</td>
+</tr>
+<tr>
+<td>356</td>
+<td>BA</td>
+<td>Customs Permit to Transfer Request</td>
+<td>M10, M20, P4, SE, ST</td>
+</tr>
+<tr>
+<td>357</td>
+<td>BB</td>
+<td>Customs In-Bond Information</td>
+<td>LX, M10, M12, M13, M21, N1, N9, P4, SE, ST</td>
+</tr>
+<tr>
+<td>358</td>
+<td>BD</td>
+<td>Customs Consist Information</td>
+<td>CII, DMA, DMG, M7, M10, M13, MBL, N3, N4, N9, NM1, P4, REF, SE, ST, VEH, VID, X1</td>
+</tr>
+<tr>
+<td>359</td>
+<td>BG</td>
+<td>Customs Customer Profile Management</td>
+<td>AAA, CII, CPM, DMA, DMG, N3, N4, NM1, PER, REF, SE, ST, VEH, VID</td>
+</tr>
+<tr>
+<td>361</td>
+<td>SO</td>
+<td>Carrier Interchange Agreement (Ocean)</td>
+<td>CI, K1, N1, SE, ST</td>
+</tr>
+<tr>
+<td>362</td>
+<td>OC</td>
+<td>Cargo Insurance Advice of Shipment</td>
+<td>AMT, BGN, CUR, DTP, L5, LQ, N1, N2, NX2, PCT, QTY, R1, R4, REF, SE, ST, V1</td>
+</tr>
+<tr>
+<td>404</td>
+<td>SR</td>
+<td>Rail Carrier Shipment Information</td>
+<td>BL, BNX, BX, CD, CM, D9, DTM, E1, E4, E5, EM, F9, GA, H3, IC, IM, L0, L1, L3, L5, LE, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHR, LHT, LS, LX, M1, M3, M7, M12, MEA, N1, N2, N3, N4, N5, N7, N9, N10, NA, PE</td>
+</tr>
+<tr>
+<td>410</td>
+<td>IR</td>
+<td>Rail Carrier Freight Details and Invoice</td>
+<td>B3B, BL, C4, CD, CM, D9, DTM, F9, G4, GA, IC, IM, L0, L1, L3, L5, LX, M7, M12, MEA, N1, N2, N3, N4, N5, N7, N8, N9, NTE, PER, PI, PS, R2, R9, S1, S2, S9, SE, ST, T1, T2, T3, T6, T8, VC, X7</td>
+</tr>
+<tr>
+<td>412</td>
+<td>TB</td>
+<td>Trailer or Container Repair Billing</td>
+<td>AMT, CUR, DTM, DTP, III, IT1, MEA, N1, N2, N3, N4, PER, R11, R12, R13, REF, SE, ST</td>
+</tr>
+<tr>
+<td>414</td>
+<td>CR</td>
+<td>Rail Carhire Settlements</td>
+<td>CHR, CIC, CTC, CUR, CV, CYC, LEQ, LX, PI, PRI, REF, SE, ST</td>
+</tr>
+<tr>
+<td>417</td>
+<td>WB</td>
+<td>Rail Carrier Waybill Interchange</td>
+<td>BL, BNX, BX, CD, CM, D9, DTM, E1, E4, E5, EM, F9, G4, GA, H3, H5, IC, IM, IMA, L0, L1, L5, LE, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LS, LX, M7, M12, MEA, N1, N2, N3, N4, N5, N7, N8, N9, N10, N8A, P</td>
+</tr>
+<tr>
+<td>418</td>
+<td>IC</td>
+<td>Rail Advance Interchange Consist</td>
+<td>BAX, DMA, DMG, IMA, LE, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LS, N1, N3, N4, NM1, PER, PS, REF, SE, ST, W1, W2, W3, W4, W5, W6</td>
+</tr>
+<tr>
+<td>419</td>
+<td>SR</td>
+<td>Advance Car Disposition</td>
+<td>E6, SE, ST, W3, W5</td>
+</tr>
+<tr>
+<td>420</td>
+<td>CH</td>
+<td>Car Handling Information</td>
+<td>E6, E8, SE, ST</td>
+</tr>
+<tr>
+<td>421</td>
+<td>IS</td>
+<td>Estimated Time of Arrival and Car Scheduling</td>
+<td>D9, F9, H3, H5, IC, IMA, IS1, IS2, ISC, L5, LE, LEP, LFH, LH1, LH2, LH3, LH4, LHR, LHT, LS, N1, N3, N4, N8, N9, N8A, PER, PS, R2, REF, S1, S9, SE, ST</td>
+</tr>
+<tr>
+<td>422</td>
+<td>DM</td>
+<td>Equipment Order</td>
+<td>BCQ, D9, DTM, F9, GA, LE, LQ, LS, LX, N1, N3, N4, N7, N9, NTE, PER, PI, QTY, R2, SCR, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>423</td>
+<td>RL</td>
+<td>Rail Industrial Switch List</td>
+<td>BGN, D9, DTM, F9, L5, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHR, LHT, LQ, LX, N1, N2, N3, N4, N7, N9, PER, QTY, R2, SE, ST, XD, YNQ</td>
+</tr>
+<tr>
+<td>424</td>
+<td>SB</td>
+<td>Rail Carrier Services Settlement</td>
+<td>AMT, BSW, CI, CUR, D9, DTM, ED, F9, MEA, N1, N2, N3, N4, NM1, NTE, PER, SE, ST, SWC, SWD, SWR</td>
+</tr>
+<tr>
+<td>425</td>
+<td>WT</td>
+<td>Rail Waybill Request</td>
+<td>D9, F9, SE, ST, ZT</td>
+</tr>
+<tr>
+<td>426</td>
+<td>RW</td>
+<td>Rail Revenue Waybill</td>
+<td>BL, BNX, BX, CD, CUR, D9, DTM, F9, G4, GA, H3, IC, L0, L1, L3, L5, L1A, LX, M7, MEA, N1, N2, N3, N4, N5, N7, N8, N9, N8A, NTE, PER, PI, PS, R2, R9, R2B, R2C, R2D, S1, S9, SE, ST, T1, T2, T3, T6, T8, V</td>
+</tr>
+<tr>
+<td>429</td>
+<td>RU</td>
+<td>Railroad Retirement Activity</td>
+<td>NTE, RU1, RU2, RU3, SE, ST</td>
+</tr>
+<tr>
+<td>431</td>
+<td>RM</td>
+<td>Railroad Station Master File</td>
+<td>DTM, N1, N4, REF, SE, SMB, SMO, SMR, SMS, ST</td>
+</tr>
+<tr>
+<td>432</td>
+<td>RX</td>
+<td>Rail Deprescription</td>
+<td>BGN, BLR, CIC, DRT, DTM, LQ, LX, N9, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>433</td>
+<td>RH</td>
+<td>Railroad Reciprocal Switch File</td>
+<td>BGN, CD, DTM, N1, PI, SE, SMS, ST</td>
+</tr>
+<tr>
+<td>434</td>
+<td>RJ</td>
+<td>Railroad Mark Register Update Activity</td>
+<td>BRR, DTM, N1, N2, N3, N4, PER, SE, ST</td>
+</tr>
+<tr>
+<td>435</td>
+<td>RK</td>
+<td>Standard Transportation Commodity Code Master</td>
+<td>CRC, DTM, LEP, LFH, LH2, LH3, LH4, LQ, LX, MSG, N9, SE, SID, ST</td>
+</tr>
+<tr>
+<td>436</td>
+<td>LI</td>
+<td>Locomotive Information</td>
+<td>K3, LFI, N7, SE, ST</td>
+</tr>
+<tr>
+<td>437</td>
+<td>RV</td>
+<td>Railroad Junctions and Interchanges Activity</td>
+<td>BJF, DTM, JCT, JS, SE, SID, ST</td>
+</tr>
+<tr>
+<td>440</td>
+<td>WR</td>
+<td>Shipment Weights</td>
+<td>BW, G4, G5, SE, ST</td>
+</tr>
+<tr>
+<td>451</td>
+<td>EV</td>
+<td>Railroad Event Report</td>
+<td>CLR, ED, ER, ES, IC, NA, SE, ST</td>
+</tr>
+<tr>
+<td>452</td>
+<td>PL</td>
+<td>Railroad Problem Log Inquiry or Advice</td>
+<td>BGP, DTP, N1, N9, NTE, SE, ST</td>
+</tr>
+<tr>
+<td>453</td>
+<td>ST</td>
+<td>Railroad Service Commitment Advice</td>
+<td>APR, CT, DTP, ISC, ISD, LX, N1, OD, PI, PR, R2, SE, SHR, SR, SSC, ST</td>
+</tr>
+<tr>
+<td>455</td>
+<td>PB</td>
+<td>Railroad Parameter Trace Registration</td>
+<td>BLR, BTC, D9, DTP, ED, F9, LX, N1, N4, N9, PRM, SE, ST, V9</td>
+</tr>
+<tr>
+<td>456</td>
+<td>EI</td>
+<td>Railroad Equipment Inquiry or Advice</td>
+<td>D9, EIA, ER, ES, F9, H3, H5, IC, IS1, IS2, ISC, L5, LX, N1, N4, N7, N8, N9, NA, PI, R2, S1, S9, SE, ST, VC</td>
+</tr>
+<tr>
+<td>460</td>
+<td>TP</td>
+<td>Railroad Price Distribution Request or Response</td>
+<td>CD, DK, FK, GY, LX, N3, N4, PER, PI, PR, PT, R9, R2B, R2C, RAB, RD, REN, RS, SA, SB, SC, SE, SS, ST</td>
+</tr>
+<tr>
+<td>463</td>
+<td>TP</td>
+<td>Rail Rate Reply</td>
+<td>DK, LQ, NTE, REN, SE, ST</td>
+</tr>
+<tr>
+<td>466</td>
+<td>TP</td>
+<td>Rate Request</td>
+<td>DK, PI, PR1, PR2, REN, SE, ST</td>
+</tr>
+<tr>
+<td>468</td>
+<td>TP</td>
+<td>Rate Docket Journal Log</td>
+<td>DK, JL, K1, PI, REN, SE, ST</td>
+</tr>
+<tr>
+<td>470</td>
+<td>RB</td>
+<td>Railroad Clearance</td>
+<td>AMT, BGN, D9, F9, H3, L4, L5, L10, LET, LX, MEA, N1, N2, N3, N4, N7, N9, NTE, PER, R2, SE, ST</td>
+</tr>
+<tr>
+<td>475</td>
+<td>SN</td>
+<td>Rail Route File Maintenance</td>
+<td>BGN, DTM, PER, R9, RDD, SE, ST</td>
+</tr>
+<tr>
+<td>485</td>
+<td>TP</td>
+<td>Ratemaking Action</td>
+<td>DK, FK, MC, PRI, RA, SA, SC, SE, ST, SW</td>
+</tr>
+<tr>
+<td>486</td>
+<td>TP</td>
+<td>Rate Docket Expiration</td>
+<td>DR, PI, REN, SA, SE, ST</td>
+</tr>
+<tr>
+<td>490</td>
+<td>TP</td>
+<td>Rate Group Definition</td>
+<td>CD, DK, GH, GY, N3, N4, PER, PI, PR, PT, REN, SE, ST, TT</td>
+</tr>
+<tr>
+<td>492</td>
+<td>TP</td>
+<td>Miscellaneous Rates</td>
+<td>DK, DM, PRI, SC, SE, ST</td>
+</tr>
+<tr>
+<td>494</td>
+<td>TP</td>
+<td>Rail Scale Rates</td>
+<td>CD, DK, GY, LX, N4, PI, PR, PT, R9, R2B, R2C, RAB, RD, REN, SA, SCL, SE, SS, ST</td>
+</tr>
+<tr>
+<td>500</td>
+<td>MM</td>
+<td>Medical Event Reporting</td>
+<td>BGN, CTT, DMG, DTM, HL, LIN, LM, LQ, MEA, MTX, N2, N3, N4, NM1, PER, PID, PWK, QTY, REF, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>501</td>
+<td>WG</td>
+<td>Vendor Performance Review</td>
+<td>AMT, BGN, CRT, DTP, LE, LM, LQ, LS, MEA, N1, N2, N3, N4, NTE, PCT, PER, QTY, REF, SE, SPR, ST</td>
+</tr>
+<tr>
+<td>503</td>
+<td>PH</td>
+<td>Pricing History</td>
+<td>AMT, BGN, CS, DTM, FOB, LE, LIN, LM, LQ, LS, N1, N2, N3, N4, NTE, PCT, PER, PID, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>504</td>
+<td>CC</td>
+<td>Clauses and Provisions</td>
+<td>BGN, DTP, LM, LQ, MSG, N1, N2, N3, N4, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>511</td>
+<td>RN</td>
+<td>Requisition</td>
+<td>BR, DD, FA1, FA2, G61, G62, G69, GF, LIN, LM, LQ, LX, MAN, MEA, N1, N2, N3, N4, N9, NTE, PO1, PWK, QTY, R4, REF, SE, ST</td>
+</tr>
+<tr>
+<td>517</td>
+<td>MV</td>
+<td>Material Obligation Validation</td>
+<td>BR, DD, FA1, FA2, G61, G62, GF, LM, LQ, N1, N2, N3, N4, N9, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>521</td>
+<td>AO</td>
+<td>Income or Asset Offset</td>
+<td>AD1, AMT, BGN, BPR, CDS, CUR, DTM, IN2, MSG, N1, N2, N3, N4, NM1, NTE, PAM, PER, REF, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>527</td>
+<td>MD</td>
+<td>Material Due-In and Receipt</td>
+<td>AMT, BR, CS, DD, FA1, FA2, G61, G62, G66, G69, GF, LIN, LM, LQ, N1, N2, N3, N4, N9, NTE, PO4, QTY, RCD, REF, SE, ST</td>
+</tr>
+<tr>
+<td>536</td>
+<td>LR</td>
+<td>Logistics Reassignment</td>
+<td>BR, CON, CS, CTP, DD, G61, G62, G69, HL, LDT, LIN, LM, LQ, MEA, MSG, N1, N2, N3, N4, N9, PKG, PWK, QTY, RCD, SE, ST</td>
+</tr>
+<tr>
+<td>540</td>
+<td>ES</td>
+<td>Notice of Employment Status</td>
+<td>BGN, DTM, EMS, ENT, HD, IN2, N1, N2, N3, N4, NM1, PAM, PER, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>561</td>
+<td>D4</td>
+<td>Contract Abstract</td>
+<td>AMT, BGN, CS, CTT, DTM, FA1, FA2, G61, G62, HL, ITD, LM, LQ, N1, N2, N3, N4, N9, PCT, PID, PO1, REF, RRE, SCH, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>567</td>
+<td>D3</td>
+<td>Contract Completion Status</td>
+<td>AMT, BC, CS, G61, G62, LM, LQ, N1, N2, N3, N4, N9, NTE, SE, ST</td>
+</tr>
+<tr>
+<td>568</td>
+<td>D5</td>
+<td>Contract Payment Management Report</td>
+<td>AMT, BAL, BGN, CS, CTT, DTM, FA1, FA2, LM, LQ, LX, N1, N2, N3, N4, N9, PER, QTY, REF, RTE, SE, ST</td>
+</tr>
+<tr>
+<td>601</td>
+<td>SE</td>
+<td>Customs Export Shipment Information</td>
+<td>BA1, DTM, L13, M12, MAN, N1, N2, N3, N4, P5, REF, SE, ST, V5, VEH, VID, X1, YNQ</td>
+</tr>
+<tr>
+<td>603</td>
+<td>EO</td>
+<td>Transportation Equipment Registration</td>
+<td>BGN, DTM, LQ, MEA, N1, N2, N3, N4, N9, N21, PER, SE, ST, VEH, YNQ</td>
+</tr>
+<tr>
+<td>620</td>
+<td>EX</td>
+<td>Excavation Communication</td>
+<td>BGN, DTM, EXI, LIE, LM, LQ, MEA, MSG, MTX, N1, N2, N3, N4, NX2, PER, PPA, REF, SE, ST</td>
+</tr>
+<tr>
+<td>625</td>
+<td>WL</td>
+<td>Well Information</td>
+<td>BGN, CID, DTP, HL, LIE, LM, LQ, MEA, MTX, N1, N2, N3, N4, PER, PID, PPA, QTY, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>650</td>
+<td>MO</td>
+<td>Maintenance Service Order</td>
+<td>AMT, BGN, CLI, COM, DTM, HL, LIN, LM, LQ, MEA, MTX, N1, N2, N3, N4, NM1, PCT, PER, QTY, REF, RPA, SE, SPI, ST, YNQ</td>
+</tr>
+<tr>
+<td>715</td>
+<td>GL</td>
+<td>Intermodal Group Loading Plan</td>
+<td>BGN, GR2, GR4, GR5, N4, N7, R4, REF, SE, ST, V1</td>
+</tr>
+<tr>
+<td>753</td>
+<td>RF</td>
+<td>Request for Routing Instructions</td>
+<td>AT8, BGN, CMC, G62, L11, LX, N1, N2, N3, N4, OID, PER, SE, ST, USI, YNQ</td>
+</tr>
+<tr>
+<td>754</td>
+<td>RG</td>
+<td>Routing Instructions</td>
+<td>AT9, BGN, BLR, FOB, G62, L11, LE, LS, LX, MAN, MSI, MTX, N1, N2, N3, N4, OID, PAL, PER, PID, PKD, PKG, PO1, QTY, R4, REF, S5, SE, SMD, SN1, ST, TD1</td>
+</tr>
+<tr>
+<td>805</td>
+<td>CP</td>
+<td>Contract Pricing Proposal</td>
+<td>AMT, BCP, CB1, CBS, CUR, DTM, G61, HL, JIL, LIN, LX, MTX, N1, N2, N3, N4, N9, PD, PDD, PL, REF, SE, SPI, ST</td>
+</tr>
+<tr>
+<td>806</td>
+<td>PJ</td>
+<td>Project Schedule Reporting</td>
+<td>AMT, BPP, CAL, DTM, MLS, MTX, N1, N2, N3, N4, NM1, PAM, PCT, PER, PID, QTY, REF, RPA, RSC, SE, ST, TID</td>
+</tr>
+<tr>
+<td>810</td>
+<td>IN</td>
+<td>Invoice</td>
+<td>AMT, BAL, BIG, CAD, CRC, CTP, CTT, CUR, DMG, DTM, FA1, FA2, FOB, INC, ISS, IT1, IT3, ITD, L7, LM, LQ, MEA, MSG, MTX, N1, N2, N3, N4, N9, NTE, PAM, PER, PID, PKG, PO4, PWK, QTY, R4, REF, SAC, SDQ, SE,</td>
+</tr>
+<tr>
+<td>811</td>
+<td>CI</td>
+<td>Consolidated Service Invoice/Statement</td>
+<td>AMT, BAL, BIG, CAD, CTT, CUR, DMG, DTM, DTP, FA1, FA2, HL, III, INC, IT1, ITA, ITD, LCD, LQ, LX, MEA, MSG, N1, N2, N3, N4, NM1, NTE, NX2, PCT, PER, PID, QTY, REF, SE, SI, SLN, ST, TCD, TDS, TRF, TXI,</td>
+</tr>
+<tr>
+<td>812</td>
+<td>CD</td>
+<td>Credit/Debit Adjustment</td>
+<td>AMT, BCD, CDD, CUR, DTM, FA1, FA2, FOB, ITD, LIN, LM, LQ, N1, N2, N3, N4, N9, N11, PCT, PER, PO4, SAC, SE, SHD, ST</td>
+</tr>
+<tr>
+<td>813</td>
+<td>TF</td>
+<td>Electronic Filing of Tax Return Data</td>
+<td>BPR, BTI, DTM, FGS, IN2, MSG, N1, N2, N3, N4, PER, REF, SE, ST, TFS, TIA, TRN</td>
+</tr>
+<tr>
+<td>814</td>
+<td>GE</td>
+<td>General Request, Response or Confirmation</td>
+<td>AMT, ASI, AWD, BGN, CUR, DTM, FA1, FA2, LCD, LIN, LM, LQ, MTX, N1, N2, N3, N4, N9, NM1, PER, PM, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>815</td>
+<td>CS</td>
+<td>Cryptographic Service Message</td>
+<td>CSB, CSC, CSM, DTP, SE, ST</td>
+</tr>
+<tr>
+<td>816</td>
+<td>OR</td>
+<td>Organizational Relationships</td>
+<td>ASI, BHT, CAL, DTM, HL, LQ, N1, N2, N3, N4, PER, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>818</td>
+<td>RP</td>
+<td>Commission Sales Report</td>
+<td>AMT, BSC, CUR, DTM, LIN, N3, N4, N11, NM1, PID, REF, SAL, SCD, SE, ST</td>
+</tr>
+<tr>
+<td>819</td>
+<td>JB</td>
+<td>Joint Interest Billing and Operating Expense Statement</td>
+<td>AMT, BOS, CTT, CUR, DTM, ITA, ITD, JID, JIL, MEA, MSG, N1, N2, N3, N4, PER, PID, PSA, QTY, REF, SE, ST, TDS</td>
+</tr>
+<tr>
+<td>820</td>
+<td>RA</td>
+<td>Payment Order/Remittance Advice</td>
+<td>ADX, AIN, AMT, ASM, ATN, BPR, CUR, DED, DMG, DTM, DTP, EMS, ENT, FA1, FA2, G53, HD, INS, INV, IT1, LOC, LX, N1, N2, N3, N4, N9, NM1, NTE, PCT, PEN, PER, PID, PYD, QTY, RDM, REF, RMR, RPA, RYL, SAC, SE</td>
+</tr>
+<tr>
+<td>821</td>
+<td>FR</td>
+<td>Financial Information Reporting</td>
+<td>ACT, AMT, AVA, B2A, BLN, CTP, CUR, DTM, ENT, FA1, FA2, FIR, LM, LQ, MSG, N1, N2, N3, N4, N9, NM1, PER, REF, RTE, SE, ST, TRN, TSU</td>
+</tr>
+<tr>
+<td>822</td>
+<td>AA</td>
+<td>Account Analysis</td>
+<td>ACT, ADJ, BGN, BLN, CTP, CUR, DTM, ENT, LX, N1, N2, N3, N4, PER, RTE, SE, SER, ST</td>
+</tr>
+<tr>
+<td>823</td>
+<td>LB</td>
+<td>Lockbox</td>
+<td>ADX, AIN, AMT, AVA, BAT, BPR, CUR, DED, DEP, DTM, DTP, G53, INV, IT1, LX, N1, N2, N3, N4, NM1, NTE, PEN, PER, QTY, REF, RMR, SAC, SE, SLN, ST, TRN, TXI, TXP</td>
+</tr>
+<tr>
+<td>824</td>
+<td>AG</td>
+<td>Application Advice</td>
+<td>AMT, BGN, CTX, DTM, LM, LQ, N1, N2, N3, N4, NM1, NTE, OTI, PER, QTY, RED, REF, SE, ST, TED</td>
+</tr>
+<tr>
+<td>826</td>
+<td>TI</td>
+<td>Tax Information Exchange</td>
+<td>BTI, DTM, FGS, IN2, N1, N2, N3, N4, PER, REF, SE, ST, TFS, TIA, YNQ</td>
+</tr>
+<tr>
+<td>827</td>
+<td>FR</td>
+<td>Financial Return Notice</td>
+<td>CUR, DTM, N2, N3, N4, NM1, PER, REF, RIC, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>828</td>
+<td>DA</td>
+<td>Debit Authorization</td>
+<td>AMT, BAU, CTT, DAD, N1, N2, N3, N4, NM1, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>829</td>
+<td>PY</td>
+<td>Payment Cancellation Request</td>
+<td>AMT, DTM, PCR, QTY, REF, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>830</td>
+<td>PS</td>
+<td>Planning Schedule with Release Capability</td>
+<td>ATH, BFR, CSH, CTP, CTT, CUR, DD, DTM, FOB, FST, ITD, LDT, LIN, LM, LQ, MAN, MEA, N1, N2, N3, N4, NM1, PER, PID, PKG, PO3, PO4, PRS, PWK, QTY, REF, SAC, SDP, SDQ, SE, SHP, SLN, ST, TAX, TD1, TD3, TD4,</td>
+</tr>
+<tr>
+<td>831</td>
+<td>CT</td>
+<td>Application Control Totals</td>
+<td>AMT, BGN, DTM, N9, QTY, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>832</td>
+<td>SC</td>
+<td>Price/Sales Catalog</td>
+<td>AAA, BCT, CRC, CRD, CTB, CTP, CTT, CUR, DTM, EFI, FOB, G26, G36, G39, G40, G43, G53, G54, G55, G93, ITD, LDT, LE, LFG, LIN, LM, LQ, LS, MEA, MTX, N1, N2, N3, N4, N9, PAL, PAM, PER, PID, PKG, PKL, PO1,</td>
+</tr>
+<tr>
+<td>833</td>
+<td>ME</td>
+<td>Mortgage Credit Report Order</td>
+<td>ACT, AIN, AMT, ARS, BGN, CAI, CDA, CIV, CRO, DMG, DTP, EMP, EMS, FAA, FPT, IN1, IN2, K2, LRQ, LX, MSG, N1, N2, N3, N4, N10, NX1, NX2, PER, PPY, PWK, QTY, REA, REF, SE, ST, YNQ</td>
+</tr>
+<tr>
+<td>834</td>
+<td>BE</td>
+<td>Benefit Enrollment and Maintenance</td>
+<td>ACT, AD1, AIN, AMT, BEN, BGN, COB, DMG, DSB, DTP, EC, ENT, FC, FSA, HD, HI, HLH, ICM, IDC, INS, INV, K3, LC, LE, LS, LUI, LX, N1, N2, N3, N4, NM1, NX1, PER, PLA, PM, PRV, QTY, REF, REL, RP, SE, ST</td>
+</tr>
+<tr>
+<td>835</td>
+<td>HP</td>
+<td>Health Care Claim Payment/Advice</td>
+<td>AMT, BPR, CAS, CLP, CUR, DTM, K3, LQ, LX, MIA, MOA, N1, N2, N3, N4, NM1, NTE, PER, PLB, QTY, RAS, RDM, REF, SE, ST, SVC, TOO, TRN, TS2, TS3</td>
+</tr>
+<tr>
+<td>836</td>
+<td>RQ</td>
+<td>Procurement Notices</td>
+<td>AMT, BCO, CTB, CTP, DTM, FOB, ITD, LDT, LM, LQ, MEA, MTX, N1, N2, N3, N4, PER, PID, PO1, PO3, PWK, QTY, REF, SE, SI, SLN, ST</td>
+</tr>
+<tr>
+<td>837</td>
+<td>HC</td>
+<td>Health Care Claim</td>
+<td>AMT, BHT, CAS, CL1, CLM, CN1, CR1, CR2, CR3, CR4, CR5, CR6, CR7, CR8, CRC, CTP, CUR, DMG, DN1, DN2, DSB, DTP, FRM, HCP, HI, HL, HSD, III, IMM, K3, LIN, LQ, LUI, LX, MEA, MIA, MOA, N2, N3, N4, NM1, NTE</td>
+</tr>
+<tr>
+<td>838</td>
+<td>TD</td>
+<td>Trading Partner Profile</td>
+<td>AMT, BTP, CUR, DMG, DTM, ENE, ERI, FBB, FOB, ITD, LCD, LE, LIN, LM, LQ, LS, LX, MEA, N1, N2, N3, N4, N9, PAM, PER, PID, PLA, REQ, SE, SPI, SPR, ST, TAX, TD5, TPD, TUD, TXN</td>
+</tr>
+<tr>
+<td>839</td>
+<td>PK</td>
+<td>Project Cost Reporting</td>
+<td>AMT, BCS, BSD, CAL, CFT, CLI, DLV, DTM, MSG, N1, N2, N3, N4, PAM, PCT, PER, QTY, REF, RPA, SE, ST</td>
+</tr>
+<tr>
+<td>840</td>
+<td>RQ</td>
+<td>Request for Quotation</td>
+<td>ADV, AMT, BQT, CB1, CN1, CSH, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FOB, FST, G53, G61, INC, IT8, ITD, LDT, LIN, LM, LQ, MAN, MEA, MTX, N1, N2, N3, N4, N9, PAM, PCT, PER, PID, PKG, PO1, PO3, PO4, PWK, QT</td>
+</tr>
+<tr>
+<td>841</td>
+<td>SP</td>
+<td>Specifications/Technical Information</td>
+<td>AMT, BIN, CID, CSF, CSS, DTM, EFI, HL, LE, LIN, LOC, LS, LX, MEA, MSG, N1, N2, N3, N4, N9, NTE, PER, PID, PKD, PKG, PRR, PRS, PRT, PSD, PWK, QTY, RDT, REF, SE, SPI, SPS, ST, STA, TMD, UIT, X1, X2, X7</td>
+</tr>
+<tr>
+<td>842</td>
+<td>NC</td>
+<td>Nonconformance Report</td>
+<td>AMT, BIN, BNR, CID, CS, DTM, EFI, FA1, FA2, HL, LIN, LM, LQ, MEA, N1, N2, N3, N4, NCA, NCD, NTE, PER, PID, PRS, PSD, PWK, QTY, RC, REF, SE, SPS, ST, STA, TMD, YNQ</td>
+</tr>
+<tr>
+<td>843</td>
+<td>RR</td>
+<td>Response to Request for Quotation</td>
+<td>ADV, AMT, BQR, CPR, CSH, CST, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FOB, FST, INC, IT8, ITD, LDT, LIN, LM, LQ, MAN, MEA, MTX, N1, N2, N3, N4, N9, PAM, PCT, PD, PDD, PER, PID, PKG, PO1, PO3, PO4, PWK, QTY</td>
+</tr>
+<tr>
+<td>844</td>
+<td>CF</td>
+<td>Product Transfer Account Adjustment</td>
+<td>AMT, BAA, CON, CTT, CUR, DTM, LIN, MEA, N1, N2, N3, N4, N9, NTE, PAD, PER, PID, QTY, RCD, REF, SE, SII, SSS, ST, UIT</td>
+</tr>
+<tr>
+<td>845</td>
+<td>PA</td>
+<td>Price Authorization Acknowledgment/Status</td>
+<td>AMT, BPA, CON, CTB, CTP, CTT, CUR, DTM, G53, ITD, LIN, MEA, N1, N2, N3, N4, NTE, PAD, PER, PID, QTY, REF, SE, SHP, SLN, SSS, ST, UIT</td>
+</tr>
+<tr>
+<td>846</td>
+<td>IB</td>
+<td>Inventory Inquiry/Advice</td>
+<td>BIA, CS, CTP, CTT, CUR, DD, DTM, G53, LDT, LE, LIN, LM, LQ, LS, MAN, MEA, N1, N2, N3, N4, PCT, PER, PID, PKG, QTY, REF, SAC, SCH, SDQ, SE, SLN, ST, UIT</td>
+</tr>
+<tr>
+<td>847</td>
+<td>MX</td>
+<td>Material Claim</td>
+<td>AMT, BHT, CTP, CTT, CUR, DTM, HL, LIN, MEA, N1, N2, N3, N4, NTE, PER, PID, PKG, QTY, REF, SAC, SE, SHP, ST</td>
+</tr>
+<tr>
+<td>848</td>
+<td>MS</td>
+<td>Material Safety Data Sheet</td>
+<td>BMS, CID, DTM, LIN, LX, MEA, MSG, MSS, N1, N2, N3, N4, NTE, PER, PID, PKG, REF, SD1, SE, ST, STA, TD4, TMD</td>
+</tr>
+<tr>
+<td>849</td>
+<td>CF</td>
+<td>Response to Product Transfer Account Adjustment</td>
+<td>AAA, AMT, BRC, CON, CTT, CUR, DTM, LIN, MEA, N1, N2, N3, N4, NTE, PAD, PER, PID, QTY, RCD, REF, SE, SSS, ST, UIT</td>
+</tr>
+<tr>
+<td>850</td>
+<td>PO</td>
+<td>Purchase Order</td>
+<td>ADV, AMT, BEG, CB1, CN1, CSH, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FA1, FA2, FOB, G61, IN2, INC, IT3, IT8, ITD, LDT, LE, LIN, LM, LQ, LS, MAN, MEA, MTX, N1, N2, N3, N4, N9, NX2, PAM, PCT, PER, PID, PKG,</td>
+</tr>
+<tr>
+<td>851</td>
+<td>LS</td>
+<td>Asset Schedule</td>
+<td>AMT, BLS, CTP, CTT, CUR, DTM, ITA, LIN, LS1, MSG, N1, N2, N3, N4, N9, PAM, PER, PID, PO3, SE, ST, TAX, TXI</td>
+</tr>
+<tr>
+<td>852</td>
+<td>PD</td>
+<td>Product Activity Data</td>
+<td>AMT, CTP, CTT, CUR, DTM, FOB, G95, LIN, N1, N2, N3, N4, N9, PAL, PER, PO4, QTY, SAC, SDQ, SE, ST, TD5, XPO, XQ, ZA</td>
+</tr>
+<tr>
+<td>853</td>
+<td>RI</td>
+<td>Routing and Carrier Instruction</td>
+<td>BGN, CTT, FK, G62, MEA, N1, N2, N3, N4, NTE, PER, REF, SE, ST, TD3, TD4, TD5</td>
+</tr>
+<tr>
+<td>854</td>
+<td>DD</td>
+<td>Shipment Delivery Discrepancy Information</td>
+<td>BDD, G07, G61, G62, K1, L11, LE, LS, LX, N1, N2, N3, N4, Q8, SE, ST</td>
+</tr>
+<tr>
+<td>855</td>
+<td>PR</td>
+<td>Purchase Order Acknowledgment</td>
+<td>ACK, ADV, AMT, BAK, CSH, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FOB, IN2, INC, IT8, ITD, LDT, LIN, MAN, MEA, MTX, N1, N2, N3, N4, N9, NX2, PAM, PER, PID, PKG, PO1, PO3, PO4, PWK, QTY, REF, SAC, SCH, SDQ,</td>
+</tr>
+<tr>
+<td>856</td>
+<td>SH</td>
+<td>Ship Notice/Manifest</td>
+<td>AT9, BSN, CLD, CTT, CUR, DTM, DTP, ETD, FOB, GF, HL, LEP, LFH, LH1, LH2, LH3, LH4, LHE, LHR, LHT, LIN, LM, LQ, MAN, MEA, N1, N2, N3, N4, PAL, PER, PID, PKG, PO4, PRF, PWK, R4, REF, SAC, SDQ, SE, SLN,</td>
+</tr>
+<tr>
+<td>857</td>
+<td>BS</td>
+<td>Shipment and Billing Notice</td>
+<td>BHT, CTP, CUR, DTM, FA1, FA2, FOB, G05, HL, ISS, IT1, IT3, ITD, LM, LQ, LX, MAN, MEA, MTX, N1, N2, N3, N4, N9, PAL, PER, PID, PKG, PO4, PRF, SAC, SE, SLN, SN1, ST, TC2, TD1, TD3, TD4, TD5, TDS, TXI</td>
+</tr>
+<tr>
+<td>858</td>
+<td>SI</td>
+<td>Shipment Information</td>
+<td>AXL, BL, BNX, BX, C3, CD, CM, D9, E1, E4, E5, EM, F9, FA1, FA2, G62, GA, H3, H6, HL, IC, ITD, L0, L1, L3, L5, L7, L10, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHE, LHR, LHT, LP, M1, M2, M3, M7, M12, MEA, N</td>
+</tr>
+<tr>
+<td>859</td>
+<td>FB</td>
+<td>Freight Invoice</td>
+<td>B3, B3A, C3, CM, D9, F9, FOB, G4, G62, GA, H1, H2, H3, H6, IC, ITA, ITD, L0, L1, L3, L5, L7, L8, LH, LX, M1, M2, M7, MEA, N1, N2, N3, N4, N5, N7, N8, N9, NA, NTE, P1, P2, PER, POD, PS, R1, R2, R9, REF</td>
+</tr>
+<tr>
+<td>860</td>
+<td>PC</td>
+<td>Purchase Order Change Request - Buyer Initiated</td>
+<td>ADV, AMT, BCH, CB1, CN1, CSH, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FA1, FA2, FOB, G53, G61, IN2, INC, IT8, ITD, LDT, LE, LIN, LM, LQ, LS, MAN, MEA, MTX, N1, N2, N3, N4, N9, NX2, PAM, PCT, PER, PID, PKG,</td>
+</tr>
+<tr>
+<td>861</td>
+<td>RC</td>
+<td>Receiving Advice/Acceptance Certificate</td>
+<td>BRA, CTT, CUR, DTM, FA1, FA2, FOB, LIN, LM, LQ, MAN, MEA, N1, N2, N3, N4, NM1, PER, PID, PO4, PRF, RCD, REF, SAC, SE, SLN, SN1, ST, TD1, TD3, TD4, TD5</td>
+</tr>
+<tr>
+<td>862</td>
+<td>SS</td>
+<td>Shipping Schedule</td>
+<td>BSS, CTT, DTM, FOB, FST, JIT, LIN, N1, N2, N3, N4, PER, PKG, PO4, PRS, QTY, REF, SDP, SDQ, SE, SHP, ST, TD1, TD3, TD5, UIT</td>
+</tr>
+<tr>
+<td>863</td>
+<td>RT</td>
+<td>Report of Test Results</td>
+<td>BTR, CID, DTM, HL, LIN, LM, LQ, MEA, N1, N2, N3, N4, N9, NM1, NTE, PER, PID, PO4, PSD, QTY, REF, SE, SPS, ST, STA, TMD, TSP, UIT</td>
+</tr>
+<tr>
+<td>864</td>
+<td>TX</td>
+<td>Text Message</td>
+<td>BMG, DTM, MIT, MSG, MTX, N1, N2, N3, N4, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>865</td>
+<td>CA</td>
+<td>Purchase Order Change Acknowledgment/Request - Seller Initiated</td>
+<td>ACK, ADV, AMT, BCA, CSH, CTB, CTP, CTT, CUR, DIS, DTM, EFI, FOB, G53, IN2, INC, IT8, ITD, LDT, LIN, LM, LQ, MAN, MEA, MTX, N1, N2, N3, N4, N9, NX2, PAM, PCT, PD, PDD, PER, PID, PKG, PO3, PO4, POC, PWK</td>
+</tr>
+<tr>
+<td>866</td>
+<td>SQ</td>
+<td>Production Sequence</td>
+<td>BSS, CTT, DTM, FOB, LIN, MEA, N1, N2, N3, N4, OQS, PER, PID, QTY, REF, SE, SLN, ST, UIT</td>
+</tr>
+<tr>
+<td>867</td>
+<td>PT</td>
+<td>Product Transfer and Resale Report</td>
+<td>AMT, BPT, CTT, CUR, DD, DTM, FA1, FA2, ITA, LCD, LDT, LIN, LM, LQ, LX, MAN, MEA, N1, N2, N3, N4, N9, PER, PID, PKG, PO3, PO4, PRF, PSA, PTD, PWK, QTY, REF, SE, SII, ST, UIT</td>
+</tr>
+<tr>
+<td>868</td>
+<td>MT</td>
+<td>Electronic Form Structure</td>
+<td>DAI, DDI, DMI, E01, E03, E10, E13, E20, E22, E24, E30, E34, E40, E41, MSG, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>869</td>
+<td>RS</td>
+<td>Order Status Inquiry</td>
+<td>BSI, CTT, DD, DTM, FA1, FA2, GF, HL, LIN, LM, LQ, MEA, N1, N2, N3, N4, NTE, PER, PID, PRF, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>870</td>
+<td>RS</td>
+<td>Order Status Report</td>
+<td>BSR, CS, CTT, CUR, DTM, HL, ISR, LM, LQ, LX, MEA, N1, N2, N3, N4, PER, PID, PKG, PO1, PO3, PRF, PWK, QTY, REF, SAC, SE, SLN, ST, TD1, TD3, TD4, TD5</td>
+</tr>
+<tr>
+<td>872</td>
+<td>ME</td>
+<td>Residential Mortgage Insurance Application</td>
+<td>AMT, BFS, BGN, BUY, CDI, DMG, DTP, III, IN1, IN2, LN1, LRQ, LX, MCD, MIC, MSG, N1, N10, NM1, NX1, NX2, PAS, PCT, PER, PEX, PRD, PRJ, REA, REF, RES, SCM, SCS, SE, ST, VDI, YNQ</td>
+</tr>
+<tr>
+<td>873</td>
+<td>CU</td>
+<td>Commodity Movement Services</td>
+<td>AMT, BGN, CS, DTM, DTP, LCD, LQ, MEA, N1, N3, N4, N9, PER, QTY, REF, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>874</td>
+<td>CQ</td>
+<td>Commodity Movement Services Response</td>
+<td>BGN, CS, DTM, III, LCD, N1, N3, N4, N9, PER, REF, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>875</td>
+<td>OG</td>
+<td>Grocery Products Purchase Order</td>
+<td>G23, G50, G61, G62, G66, G68, G69, G70, G72, G73, G76, N1, N2, N3, N4, N9, NTE, QTY, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>876</td>
+<td>OG</td>
+<td>Grocery Products Purchase Order Change</td>
+<td>G23, G61, G62, G66, G68, G69, G70, G72, G73, G76, G92, N1, N2, N3, N4, N9, NTE, QTY, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>877</td>
+<td>CJ</td>
+<td>Manufacturer Coupon Family Code Structure</td>
+<td>BGN, DTM, ENT, G28, G69, LIN, N1, SE, ST</td>
+</tr>
+<tr>
+<td>878</td>
+<td>QG</td>
+<td>Product Authorization/De-authorization</td>
+<td>CTP, G21, G22, G62, G69, G72, N1, N2, N3, N4, PID, SE, ST</td>
+</tr>
+<tr>
+<td>879</td>
+<td>QG</td>
+<td>Price Information</td>
+<td>G20, G22, G26, G28, G36, G40, G43, G46, G61, G62, G69, G91, G93, N1, N2, N3, N4, N9, NTE, SAC, SE, ST</td>
+</tr>
+<tr>
+<td>880</td>
+<td>GP</td>
+<td>Grocery Products Invoice</td>
+<td>AMT, CAD, ENT, G01, G17, G19, G20, G23, G25, G31, G33, G61, G62, G69, G72, G73, MTX, N1, N2, N3, N4, N9, NTE, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>881</td>
+<td>CN</td>
+<td>Manufacturer Coupon Redemption Detail</td>
+<td>AMT, BGN, G01, G72, G73, LIN, LQ, LX, N1, N2, N3, N4, N9, PER, QTY, REF, SE, ST</td>
+</tr>
+<tr>
+<td>882</td>
+<td>IG</td>
+<td>Direct Store Delivery Summary Information</td>
+<td>G23, G25, G31, G33, G47, G48, G49, G61, G72, G73, N1, N2, N3, N4, N9, SE, ST</td>
+</tr>
+<tr>
+<td>883</td>
+<td>DF</td>
+<td>Market Development Fund Allocation</td>
+<td>AMT, BMA, G43, G61, G62, G95, LIN, LX, N1, QTY, SE, ST, UIT</td>
+</tr>
+<tr>
+<td>884</td>
+<td>MF</td>
+<td>Market Development Fund Settlement</td>
+<td>AMT, BAL, BMP, G61, N1, N9, NTE, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>885</td>
+<td>UA</td>
+<td>Retail Account Characteristics</td>
+<td>DTM, ENT, G13, G18, G29, G30, G53, LM, LQ, N1, N2, N3, N4, N9, PER, RDI, SE, SPR, ST</td>
+</tr>
+<tr>
+<td>886</td>
+<td>UB</td>
+<td>Customer Call Reporting</td>
+<td>CRC, CTP, DTM, ENT, G28, G29, G32, G35, G37, N1, PER, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>887</td>
+<td>CN</td>
+<td>Coupon Notification</td>
+<td>AMT, BGN, DTM, G11, G12, G14, G15, G28, G43, G51, LIN, N1, N2, N3, N4, N9, PCT, PER, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>888</td>
+<td>QG</td>
+<td>Item Maintenance</td>
+<td>BGN, G22, G23, G24, G26, G36, G39, G40, G43, G46, G53, G54, G55, G61, G62, G69, G93, H1, LDT, LIN, LM, LQ, LX, MEA, N1, N2, N3, N4, N9, NTE, PAL, PID, PKG, QTY, REF, SE, SLN, ST, TD1, TD4, UIT, USI</td>
+</tr>
+<tr>
+<td>889</td>
+<td>QG</td>
+<td>Promotion Announcement</td>
+<td>G22, G23, G42, G43, G45, G46, G51, G61, G62, G69, G94, G95, LX, N1, N2, N3, N4, N9, NTE, QTY, SE, ST</td>
+</tr>
+<tr>
+<td>890</td>
+<td>D4</td>
+<td>Contract &amp; Rebate Management Transaction</td>
+<td>AMT, CPI, CPL, CTH, CUR, DTM, ECS, FU1, FU2, FU3, FU4, FU5, FX2, FX3, FX4, FX5, FX6, FX7, LE, LS, LX, MEA, MTX, N1, N2, N3, N4, NM1, NX1, PER, PPR, PSG, QTY, REF, SAC, SE, SEF, ST, TBP</td>
+</tr>
+<tr>
+<td>891</td>
+<td>UD</td>
+<td>Deduction Research Report</td>
+<td>ADX, AMT, BGN, ENT, N1, N9, PER, REF, SE, ST</td>
+</tr>
+<tr>
+<td>893</td>
+<td>AM</td>
+<td>Item Information Request</td>
+<td>B2A, DTM, G39, G43, G69, N1, N2, N3, N4, RCR, REF, SE, ST</td>
+</tr>
+<tr>
+<td>894</td>
+<td>DX</td>
+<td>Delivery/Return Base Record</td>
+<td>DTM, G22, G23, G72, G82, G83, G84, G85, G86, LE, LS, MTX, N9, SE, SLN, ST</td>
+</tr>
+<tr>
+<td>895</td>
+<td>DX</td>
+<td>Delivery/Return Acknowledgment or Adjustment</td>
+<td>G22, G23, G72, G84, G85, G86, G87, G88, G89, LE, LS, SE, ST</td>
+</tr>
+<tr>
+<td>896</td>
+<td>QG</td>
+<td>Product Dimension Maintenance</td>
+<td>G43, G61, G62, ID1, ID2, ID3, N1, N2, N3, N4, N9, NTE, SE, ST</td>
+</tr>
+<tr>
+<td>920</td>
+<td>GC</td>
+<td>Loss or Damage Claim - General Commodities</td>
+<td>CUR, F01, F02, F04, F05, F09, G61, G62, L11, M7, MAN, N1, N3, N4, NTE, Q7, SE, ST</td>
+</tr>
+<tr>
+<td>924</td>
+<td>GC</td>
+<td>Loss or Damage Claim - Motor Vehicle</td>
+<td>F01, F02, F07, F12, F6X, SE, ST</td>
+</tr>
+<tr>
+<td>925</td>
+<td>GC</td>
+<td>Claim Tracer</td>
+<td>F02, F10, SE, ST</td>
+</tr>
+<tr>
+<td>926</td>
+<td>GC</td>
+<td>Claim Status Report and Tracer Reply</td>
+<td>F11, F13, F14, SE, ST, TRN</td>
+</tr>
+<tr>
+<td>928</td>
+<td>AI</td>
+<td>Automotive Inspection Detail</td>
+<td>BIX, ID, SE, ST, TI, VC</td>
+</tr>
+<tr>
+<td>940</td>
+<td>OW</td>
+<td>Warehouse Shipping Order</td>
+<td>AMT, AT9, BNX, FA1, FA2, G61, G62, G66, G69, LE, LEP, LFH, LH1, LH2, LH3, LH4, LH6, LHR, LHT, LM, LQ, LS, LX, MAN, MEA, N1, N2, N3, N4, N9, NTE, PAL, PER, QTY, R2, SDQ, SE, SLN, ST, TD3, W6, W01, W05,</td>
+</tr>
+<tr>
+<td>943</td>
+<td>AR</td>
+<td>Warehouse Stock Transfer Shipment Advice</td>
+<td>G61, G62, G69, N1, N2, N3, N4, N9, NTE, PER, SE, ST, W03, W04, W06, W10, W20, W27, W28</td>
+</tr>
+<tr>
+<td>944</td>
+<td>RE</td>
+<td>Warehouse Stock Transfer Receipt Advice</td>
+<td>G08, G61, G62, G69, LX, MAN, N1, N2, N3, N4, N9, NTE, PAL, PER, SE, ST, TD1, W07, W08, W13, W14, W17, W18, W20</td>
+</tr>
+<tr>
+<td>945</td>
+<td>SW</td>
+<td>Warehouse Shipping Advice</td>
+<td>AMT, FA1, FA2, G61, G62, G69, G72, LE, LM, LQ, LS, LX, MAN, MEA, N1, N2, N3, N4, N9, NTE, PAL, PER, QTY, R4, SE, ST, TD1, W6, W03, W06, W10, W12, W27, W28</td>
+</tr>
+<tr>
+<td>947</td>
+<td>AW</td>
+<td>Warehouse Inventory Adjustment Advice</td>
+<td>AMT, CS, FA1, FA2, G61, G62, G69, LM, LQ, LX, N1, N2, N3, N4, N9, NTE, PER, SE, ST, W15, W19</td>
+</tr>
+<tr>
+<td>980</td>
+<td>&nbsp;</td>
+<td>Functional Group Totals</td>
+<td>BT1, SE, ST</td>
+</tr>
+<tr>
+<td>990</td>
+<td>GF</td>
+<td>Response to a Load Tender</td>
+<td>B1, L11, SE, ST</td>
+</tr>
+<tr>
+<td>993</td>
+<td>NR</td>
+<td>Secured Receipt or Acknowledgment</td>
+<td>AK1, AK2, APE, S4A, SE, SPE, ST, SVA</td>
+</tr>
+<tr>
+<td>996</td>
+<td>FT</td>
+<td>File Transfer</td>
+<td>BGF, K3, SE, ST</td>
+</tr>
+<tr>
+<td>997</td>
+<td>FA</td>
+<td>Functional Acknowledgment</td>
+<td>AK1, AK2, AK3, AK4, AK5, AK9, SE, ST</td>
+</tr>
+<tr>
+<td>998</td>
+<td>AL</td>
+<td>Set Cancellation</td>
+<td>SE, ST, ZD</td>
+</tr>
+<tr>
+<td>999</td>
+<td>FA</td>
+<td>Implementation Acknowledgment</td>
+<td>AK1, AK2, AK9, CTX, IK3, IK4, IK5, SE, ST</td>
+</tr>
+</tbody>
+</table>
+</div><div class="ClearBoth"></div>

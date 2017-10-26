@@ -1,0 +1,799 @@
+<div class="wikidoc">
+<h1>Parsing an 837 Transaction</h1>
+<p>An 837 is a Claim for medical services transaction. The 837P is the most common of the 3 claim types: Dental, Professional and Institutional.<br>
+The following example will show you how to:</p>
+<ol>
+<li>Take an 837 file and create X12 XML that shows the hieararchical relationships of the X12 segments with comments related to their values.
+</li><li>Take an 837 file and format it as X12 to reveal it's heirarchical relationship.
+</li><li>Transform an 837 into HTML for presentation as X12 with tool tips. </li></ol>
+<p><br>
+A sample 837 file that looks like this:</p>
+<div style="overflow:auto; border:1px solid gray; height:300px; width:825px">
+<div style="color:black; background-color:white; margin-right:15px">
+<pre>ISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *030101*1253*^*00501*000000905*1*T*:~
+GS*HC*SENDER CODE*RECEIVER CODE*19991231*0802*1*X*005010X222~
+ST*837*0021*005010X222~
+BHT*0019*00*244579*20061015*1023*CH~
+NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+PER*IC*JERRY*TE*3055552222*EX*231~
+NM1*40*2*KEY INSURANCE COMPANY*****46*66783JJT~
+HL*1**20*1~
+PRV*BI*PXC*203BF0100Y~
+NM1*85*2*BEN KILDARE SERVICE*****XX*9876543210~
+N3*234 SEAWAY ST~
+N4*MIAMI*FL*33111~
+REF*EI*587654321~
+NM1*87*2~
+N3*2345 OCEAN BLVD~
+N4*MAIMI*FL*33111~
+HL*2*1*22*1~
+SBR*P**2222-SJ******CI~
+NM1*IL*1*SMITH*JANE****MI*JS00111223333~
+DMG*D8*19430501*F~
+NM1*PR*2*KEY INSURANCE COMPANY*****PI*999996666~
+REF*G2*KA6663~
+HL*3*2*23*0~
+PAT*19~
+NM1*QC*1*SMITH*TED~
+N3*236 N MAIN ST~
+N4*MIAMI*FL*33413~
+DMG*D8*19730501*M~
+CLM*26463774*100***11:B:1*Y*A*Y*I~
+REF*D9*17312345600006351~
+HI*BK:0340*BF:V7389~
+LX*1~
+SV1*HC:99213*40*UN*1***1~
+DTP*472*D8*20061003~
+LX*2~
+SV1*HC:87070*15*UN*1***1~
+DTP*472*D8*20061003~
+LX*3~
+SV1*HC:99214*35*UN*1***2~
+DTP*472*D8*20061010~
+LX*4~
+SV1*HC:86663*10*UN*1***2~
+DTP*472*D8*20061010~
+SE*42*0021~
+GE*1*1~
+IEA*1*000000905~
+</pre>
+</div>
+</div>
+<p><br>
+This can be parsed with the following lines of C# code:</p>
+<div style="color:black; background-color:white; width:800px">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> System.IO;
+<span style="color:blue">using</span> OopFactory.X12.Parsing;
+<span style="color:blue">using</span> OopFactory.X12.Parsing.Model;
+
+<span style="color:blue">public</span> <span style="color:blue">class</span> Program
+{
+   <span style="color:skyblue">FileStream</span> fstream = <span style="color:blue">new</span> <span style="color:skyblue">FileStream</span>(<span style="color:#a31515">&quot;Sample1.txt&quot;</span>, <span style="color:skyblue">FileMode</span>.Open, <span style="color:skyblue">FileAccess</span>.Read);
+   <span style="color:blue">var</span> parser = <span style="color:blue">new</span> <span style="color:skyblue">X12Parser</span>();
+   <span style="color:skyblue">Interchange</span> interchange = parser.Parse(fstream);
+   <span style="color:blue">string</span> xml = interchange.Serialize();
+}
+</pre>
+</div>
+<p><br>
+The resulting output xml will look like this:</p>
+<div style="overflow:auto; border:1px solid gray; height:300px; width:825px">
+<div style="color:black; background-color:white; margin-right:15px">
+<pre><span style="color:blue">&lt;?</span><span style="color:#a31515">xml</span> <span style="color:red">version</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1.0</span><span style="color:black">&quot;</span><span style="color:blue">?&gt;</span>
+<span style="color:blue">&lt;</span><span style="color:#a31515">Interchange</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">ISA</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Author Information Qualifier--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA01</span><span style="color:blue">&gt;</span>00<span style="color:green">&lt;!--No Authorization Information Present--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA01</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Author Information--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA02</span><span style="color:blue">&gt;</span>          <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA02</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Security Information Qualifer--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA03</span><span style="color:blue">&gt;</span>01<span style="color:green">&lt;!--Password--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA03</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Security Information--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA04</span><span style="color:blue">&gt;</span>SECRET    <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA04</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange ID Qualifier--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA05</span><span style="color:blue">&gt;</span>ZZ<span style="color:green">&lt;!--Mutually Defined--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA05</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange Sender ID--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA06</span><span style="color:blue">&gt;</span>SUBMITTERS.ID  <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA06</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange ID Qualifier--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA07</span><span style="color:blue">&gt;</span>ZZ<span style="color:green">&lt;!--Mutually Defined--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA07</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange Receiver ID--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA08</span><span style="color:blue">&gt;</span>RECEIVERS.ID   <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA08</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange Date--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA09</span><span style="color:blue">&gt;</span>030101<span style="color:blue">&lt;/</span><span style="color:#a31515">ISA09</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange Time--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA10</span><span style="color:blue">&gt;</span>1253<span style="color:blue">&lt;/</span><span style="color:#a31515">ISA10</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Inter Control Standards Identifier--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA11</span><span style="color:blue">&gt;</span>^<span style="color:blue">&lt;/</span><span style="color:#a31515">ISA11</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Inter Control Version Number--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA12</span><span style="color:blue">&gt;</span>00501<span style="color:blue">&lt;/</span><span style="color:#a31515">ISA12</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Inter Control Number--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA13</span><span style="color:blue">&gt;</span>000000905<span style="color:blue">&lt;/</span><span style="color:#a31515">ISA13</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Acknowlegment Requested--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA14</span><span style="color:blue">&gt;</span>1<span style="color:green">&lt;!--Interchange Acknowledgment Requested--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA14</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Usage Indicator--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA15</span><span style="color:blue">&gt;</span>T<span style="color:green">&lt;!--Test Data--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ISA15</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Component Element Separator--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">ISA16</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">ISA1601</span> <span style="color:blue">/&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">ISA1602</span> <span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA16</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">ISA</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">FunctionGroup</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">GS</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Functional Identifier Code--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS01</span><span style="color:blue">&gt;</span>HC<span style="color:green">&lt;!--Health Care--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">GS01</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Application Sender's Code--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS02</span><span style="color:blue">&gt;</span>SENDER CODE<span style="color:blue">&lt;/</span><span style="color:#a31515">GS02</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Application Receiver's Code--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS03</span><span style="color:blue">&gt;</span>RECEIVER CODE<span style="color:blue">&lt;/</span><span style="color:#a31515">GS03</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Date--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS04</span><span style="color:blue">&gt;</span>19991231<span style="color:blue">&lt;/</span><span style="color:#a31515">GS04</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Time--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS05</span><span style="color:blue">&gt;</span>0802<span style="color:blue">&lt;/</span><span style="color:#a31515">GS05</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Group Control Number--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS06</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">GS06</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Responsible Agency Code--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS07</span><span style="color:blue">&gt;</span>X<span style="color:green">&lt;!--Accredited Standards Committee X12--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">GS07</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Version/Release/Industry Identifier Code--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GS08</span><span style="color:blue">&gt;</span>005010X222<span style="color:blue">&lt;/</span><span style="color:#a31515">GS08</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;/</span><span style="color:#a31515">GS</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">Transaction</span> <span style="color:red">ControlNumber</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">0021</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">ST</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Transaction Set Identifier Code--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">ST01</span><span style="color:blue">&gt;</span>837<span style="color:green">&lt;!--Health Care Claim--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">ST01</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Transaction Set Control Number--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">ST02</span><span style="color:blue">&gt;</span>0021<span style="color:blue">&lt;/</span><span style="color:#a31515">ST02</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">ST03</span><span style="color:blue">&gt;</span>005010X222<span style="color:blue">&lt;/</span><span style="color:#a31515">ST03</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">ST</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">BHT</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Hierarchical Structure Code--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT01</span><span style="color:blue">&gt;</span>0019<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT01</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Transaction Set Purpose Code--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT02</span><span style="color:blue">&gt;</span>00<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT02</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Reference Identification--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT03</span><span style="color:blue">&gt;</span>244579<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT03</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Date--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT04</span><span style="color:blue">&gt;</span>20061015<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT04</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Time--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT05</span><span style="color:blue">&gt;</span>1023<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT05</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Transaction Type Code--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">BHT06</span><span style="color:blue">&gt;</span>CH<span style="color:blue">&lt;/</span><span style="color:#a31515">BHT06</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">BHT</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1000A</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">SUBMITTER NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>41<span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>2<span style="color:green">&lt;!--Non-Person Entity--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>PREMIER BILLING SERVICE<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM105</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM106</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM107</span> <span style="color:blue">/&gt;</span>
+          <span style="color:green">&lt;!--Identification Code Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>46<span style="color:green">&lt;!--Electronic Transmitter Identification Number (ETIN--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Identification Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>TGJ23<span style="color:blue">&lt;/</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">PER</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Contact Function Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER01</span><span style="color:blue">&gt;</span>IC<span style="color:blue">&lt;/</span><span style="color:#a31515">PER01</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Name--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER02</span><span style="color:blue">&gt;</span>JERRY<span style="color:blue">&lt;/</span><span style="color:#a31515">PER02</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Communication Number Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER03</span><span style="color:blue">&gt;</span>TE<span style="color:green">&lt;!--Telephone--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">PER03</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Communication Number--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER04</span><span style="color:blue">&gt;</span>3055552222<span style="color:blue">&lt;/</span><span style="color:#a31515">PER04</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Communication Number Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER05</span><span style="color:blue">&gt;</span>EX<span style="color:green">&lt;!--Telephone Extension--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">PER05</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Communication Number--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PER06</span><span style="color:blue">&gt;</span>231<span style="color:blue">&lt;/</span><span style="color:#a31515">PER06</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">PER</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1000B</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">RECEIVER NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>40<span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>2<span style="color:green">&lt;!--Non-Person Entity--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>KEY INSURANCE COMPANY<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM105</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM106</span> <span style="color:blue">/&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM107</span> <span style="color:blue">/&gt;</span>
+          <span style="color:green">&lt;!--Identification Code Qualifier--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>46<span style="color:green">&lt;!--Electronic Transmitter Identification Number (ETIN--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Identification Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>66783JJT<span style="color:blue">&lt;/</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">HierarchicalLoop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2000A</span><span style="color:black">&quot;</span> <span style="color:red">LoopName</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL</span><span style="color:black">&quot;</span> <span style="color:red">Id</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1&quot; ParentId=&quot;</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Hierarchical ID Number--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HL02</span> <span style="color:blue">/&gt;</span>
+          <span style="color:green">&lt;!--Level Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>20<span style="color:green">&lt;!--Information Source--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>
+          <span style="color:green">&lt;!--Hierarchical Child Code--&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>1<span style="color:green">&lt;!--Additional Subordinate HL Data Segment in This Hierarchical Structure--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">PRV</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PRV01</span><span style="color:blue">&gt;</span>BI<span style="color:blue">&lt;/</span><span style="color:#a31515">PRV01</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PRV02</span><span style="color:blue">&gt;</span>PXC<span style="color:blue">&lt;/</span><span style="color:#a31515">PRV02</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">PRV03</span><span style="color:blue">&gt;</span>203BF0100Y<span style="color:blue">&lt;/</span><span style="color:#a31515">PRV03</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">PRV</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2010AA</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">BILLING PROVIDER NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>85<span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>2<span style="color:green">&lt;!--Non-Person Entity--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>BEN KILDARE SERVICE<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM105</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM106</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM107</span> <span style="color:blue">/&gt;</span>
+            <span style="color:green">&lt;!--Identification Code Qualifier--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>XX<span style="color:green">&lt;!--Centers for Medicare and Medicaid Services Nationa--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Identification Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>9876543210<span style="color:blue">&lt;/</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Address Information--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>234 SEAWAY ST<span style="color:blue">&lt;/</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--City Name--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>MIAMI<span style="color:blue">&lt;/</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--State or Provice Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>FL<span style="color:blue">&lt;/</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Postal Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>33111<span style="color:blue">&lt;/</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Reference Identification Qualifier--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>EI<span style="color:blue">&lt;/</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Reference Identification--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>587654321<span style="color:blue">&lt;/</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2010AB</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">PAY-TO ADDRESS NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>87<span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>2<span style="color:green">&lt;!--Non-Person Entity--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Address Information--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>2345 OCEAN BLVD<span style="color:blue">&lt;/</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--City Name--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>MAIMI<span style="color:blue">&lt;/</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--State or Provice Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>FL<span style="color:blue">&lt;/</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Postal Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>33111<span style="color:blue">&lt;/</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">HierarchicalLoop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2000B</span><span style="color:black">&quot;</span> <span style="color:red">LoopName</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">SUBSCRIBER HIERARCHICAL LOOP</span><span style="color:black">&quot;</span> <span style="color:red">Id</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2</span><span style="color:black">&quot;</span> <span style="color:red">ParentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Hierarchical ID Number--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>2<span style="color:blue">&lt;/</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Hierarchical Parent ID Number--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">HL02</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">HL02</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Level Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>22<span style="color:green">&lt;!--Subscriber--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>
+            <span style="color:green">&lt;!--Hierarchical Child Code--&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>1<span style="color:green">&lt;!--Additional Subordinate HL Data Segment in This Hierarchical Structure--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">SBR</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR01</span><span style="color:blue">&gt;</span>P<span style="color:blue">&lt;/</span><span style="color:#a31515">SBR01</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR02</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR03</span><span style="color:blue">&gt;</span>2222-SJ<span style="color:blue">&lt;/</span><span style="color:#a31515">SBR03</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR04</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR05</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR06</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR07</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR08</span> <span style="color:blue">/&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">SBR09</span><span style="color:blue">&gt;</span>CI<span style="color:blue">&lt;/</span><span style="color:#a31515">SBR09</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">SBR</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2010BA</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">SUBSCRIBER NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>IL<span style="color:green">&lt;!--Insured or Subscriber--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>1<span style="color:green">&lt;!--Person--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>SMITH<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Name First--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span><span style="color:blue">&gt;</span>JANE<span style="color:blue">&lt;/</span><span style="color:#a31515">NM104</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM105</span> <span style="color:blue">/&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM106</span> <span style="color:blue">/&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM107</span> <span style="color:blue">/&gt;</span>
+              <span style="color:green">&lt;!--Identification Code Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>MI<span style="color:blue">&lt;/</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Identification Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>JS00111223333<span style="color:blue">&lt;/</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">DMG</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">DMG01</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expressed in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DMG01</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">DMG02</span><span style="color:blue">&gt;</span>19430501<span style="color:blue">&lt;/</span><span style="color:#a31515">DMG02</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Gender Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">DMG03</span><span style="color:blue">&gt;</span>F<span style="color:green">&lt;!--Female--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DMG03</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">DMG</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2010BC</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">PAYER NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>PR<span style="color:green">&lt;!--Payer--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>2<span style="color:green">&lt;!--Non-Person Entity--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>KEY INSURANCE COMPANY<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span> <span style="color:blue">/&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM105</span> <span style="color:blue">/&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM106</span> <span style="color:blue">/&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM107</span> <span style="color:blue">/&gt;</span>
+              <span style="color:green">&lt;!--Identification Code Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>PI<span style="color:green">&lt;!--Payor Identification--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM108</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Identification Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>999996666<span style="color:blue">&lt;/</span><span style="color:#a31515">NM109</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Reference Identification Qualifier--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>G2<span style="color:blue">&lt;/</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Reference Identification--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>KA6663<span style="color:blue">&lt;/</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;</span><span style="color:#a31515">HierarchicalLoop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2000C</span><span style="color:black">&quot;</span> <span style="color:red">LoopName</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">PATIENT HIERARCHICAL LOOP</span><span style="color:black">&quot;</span> <span style="color:red">Id</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">3</span><span style="color:black">&quot;</span> <span style="color:red">ParentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Hierarchical ID Number--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>3<span style="color:blue">&lt;/</span><span style="color:#a31515">HL01</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Hierarchical Parent ID Number--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">HL02</span><span style="color:blue">&gt;</span>2<span style="color:blue">&lt;/</span><span style="color:#a31515">HL02</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Level Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>23<span style="color:green">&lt;!--Dependent--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL03</span><span style="color:blue">&gt;</span>
+              <span style="color:green">&lt;!--Hierarchical Child Code--&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>0<span style="color:green">&lt;!--No Subordinate HL Segment in This Hiearchical Structure--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">HL04</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">HL</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">PAT</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">PAT01</span><span style="color:blue">&gt;</span>19<span style="color:blue">&lt;/</span><span style="color:#a31515">PAT01</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">PAT</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2010CA</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">PATIENT NAME</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Entity Identifier Code--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>QC<span style="color:blue">&lt;/</span><span style="color:#a31515">NM101</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Entity Type Qualifier--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>1<span style="color:green">&lt;!--Person--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">NM102</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Name Last or Organization Name--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>SMITH<span style="color:blue">&lt;/</span><span style="color:#a31515">NM103</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Name First--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">NM104</span><span style="color:blue">&gt;</span>TED<span style="color:blue">&lt;/</span><span style="color:#a31515">NM104</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">NM1</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Address Information--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>236 N MAIN ST<span style="color:blue">&lt;/</span><span style="color:#a31515">N301</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">N3</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--City Name--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>MIAMI<span style="color:blue">&lt;/</span><span style="color:#a31515">N401</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--State or Provice Code--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>FL<span style="color:blue">&lt;/</span><span style="color:#a31515">N402</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Postal Code--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>33413<span style="color:blue">&lt;/</span><span style="color:#a31515">N403</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">N4</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">DMG</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DMG01</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expressed in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DMG01</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DMG02</span><span style="color:blue">&gt;</span>19730501<span style="color:blue">&lt;/</span><span style="color:#a31515">DMG02</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Gender Code--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DMG03</span><span style="color:blue">&gt;</span>M<span style="color:green">&lt;!--Male--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DMG03</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">DMG</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2300</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">CLAIM INFORMATION</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">CLM</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM01</span><span style="color:blue">&gt;</span>26463774<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM02</span><span style="color:blue">&gt;</span>100<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM02</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM03</span> <span style="color:blue">/&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM04</span> <span style="color:blue">/&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM05</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">CLM0501</span><span style="color:blue">&gt;</span>11<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM0501</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">CLM0502</span><span style="color:blue">&gt;</span>B<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM0502</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">CLM0503</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM0503</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">CLM05</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM06</span><span style="color:blue">&gt;</span>Y<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM06</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM07</span><span style="color:blue">&gt;</span>A<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM07</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM08</span><span style="color:blue">&gt;</span>Y<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM08</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">CLM09</span><span style="color:blue">&gt;</span>I<span style="color:blue">&lt;/</span><span style="color:#a31515">CLM09</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">CLM</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Reference Identification Qualifier--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>D9<span style="color:blue">&lt;/</span><span style="color:#a31515">REF01</span><span style="color:blue">&gt;</span>
+                <span style="color:green">&lt;!--Reference Identification--&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>17312345600006351<span style="color:blue">&lt;/</span><span style="color:#a31515">REF02</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">REF</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">HI</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">HI01</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">HI0101</span><span style="color:blue">&gt;</span>BK<span style="color:blue">&lt;/</span><span style="color:#a31515">HI0101</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">HI0102</span><span style="color:blue">&gt;</span>0340<span style="color:blue">&lt;/</span><span style="color:#a31515">HI0102</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">HI01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">HI02</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">HI0201</span><span style="color:blue">&gt;</span>BF<span style="color:blue">&lt;/</span><span style="color:#a31515">HI0201</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">HI0202</span><span style="color:blue">&gt;</span>V7389<span style="color:blue">&lt;/</span><span style="color:#a31515">HI0202</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">HI02</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">HI</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2400</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">LINE COUNTER</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>HC<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>99213<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;/</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>40<span style="color:blue">&lt;/</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>UN<span style="color:blue">&lt;/</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV105</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV106</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Data/Time Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>472<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expression in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>20061003<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2400</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">LINE COUNTER</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>2<span style="color:blue">&lt;/</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>HC<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>87070<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;/</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>15<span style="color:blue">&lt;/</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>UN<span style="color:blue">&lt;/</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV105</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV106</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Data/Time Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>472<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expression in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>20061003<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2400</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">LINE COUNTER</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>3<span style="color:blue">&lt;/</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>HC<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>99214<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;/</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>35<span style="color:blue">&lt;/</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>UN<span style="color:blue">&lt;/</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV105</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV106</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>2<span style="color:blue">&lt;/</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Data/Time Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>472<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expression in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>20061010<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">2400</span><span style="color:black">&quot;</span> <span style="color:red">Name</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">LINE COUNTER</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>4<span style="color:blue">&lt;/</span><span style="color:#a31515">LX01</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">LX</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>HC<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10101</span><span style="color:blue">&gt;</span>
+                    <span style="color:blue">&lt;</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>86663<span style="color:blue">&lt;/</span><span style="color:#a31515">SV10102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;/</span><span style="color:#a31515">SV101</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>10<span style="color:blue">&lt;/</span><span style="color:#a31515">SV102</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>UN<span style="color:blue">&lt;/</span><span style="color:#a31515">SV103</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">SV104</span><span style="color:blue">&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV105</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV106</span> <span style="color:blue">/&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>2<span style="color:blue">&lt;/</span><span style="color:#a31515">SV107</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">SV1</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Data/Time Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>472<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP01</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period Format Qualifier--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>D8<span style="color:green">&lt;!--Date Expression in Format CCYYMMDD--&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">DTP02</span><span style="color:blue">&gt;</span>
+                  <span style="color:green">&lt;!--Date Time Period--&gt;</span>
+                  <span style="color:blue">&lt;</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>20061010<span style="color:blue">&lt;/</span><span style="color:#a31515">DTP03</span><span style="color:blue">&gt;</span>
+                <span style="color:blue">&lt;/</span><span style="color:#a31515">DTP</span><span style="color:blue">&gt;</span>
+              <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+            <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+          <span style="color:blue">&lt;/</span><span style="color:#a31515">HierarchicalLoop</span><span style="color:blue">&gt;</span>
+        <span style="color:blue">&lt;/</span><span style="color:#a31515">HierarchicalLoop</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">HierarchicalLoop</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">SE</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Number of Included Segments--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">SE01</span><span style="color:blue">&gt;</span>42<span style="color:blue">&lt;/</span><span style="color:#a31515">SE01</span><span style="color:blue">&gt;</span>
+        <span style="color:green">&lt;!--Transaction Set Control Number--&gt;</span>
+        <span style="color:blue">&lt;</span><span style="color:#a31515">SE02</span><span style="color:blue">&gt;</span>0021<span style="color:blue">&lt;/</span><span style="color:#a31515">SE02</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;/</span><span style="color:#a31515">SE</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;/</span><span style="color:#a31515">Transaction</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">GE</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Number of Transaction Sets Included--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GE01</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">GE01</span><span style="color:blue">&gt;</span>
+      <span style="color:green">&lt;!--Group Control Number--&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">GE02</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">GE02</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;/</span><span style="color:#a31515">GE</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">FunctionGroup</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">IEA</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Number of Included Functional Groups--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">IEA01</span><span style="color:blue">&gt;</span>1<span style="color:blue">&lt;/</span><span style="color:#a31515">IEA01</span><span style="color:blue">&gt;</span>
+    <span style="color:green">&lt;!--Interchange Control Number--&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">IEA02</span><span style="color:blue">&gt;</span>000000905<span style="color:blue">&lt;/</span><span style="color:#a31515">IEA02</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">IEA</span><span style="color:blue">&gt;</span>
+<span style="color:blue">&lt;/</span><span style="color:#a31515">Interchange</span><span style="color:blue">&gt;</span>
+</pre>
+</div>
+</div>
+<p><br>
+In some cases you may only want to be able to see the hierarchy in the X12 without the need for it to be xml. You can use the following code snippet to add whitespace to the stream:</p>
+<div style="color:black; background-color:white; width:800px">
+<pre>FileStream fstream = <span style="color:blue">new</span> FileStream(<span style="color:#a31515">&quot;Sample1.txt&quot;</span>, FileOpen.Open, FileAccess.Read);
+<span style="color:blue">var</span> parser = <span style="color:blue">new</span> X12Parser();
+Interchange interchange = parser.Parse(fstream);
+<span style="color:blue">string</span> x12 = interchange.SerializeToX12(<span style="color:blue">true</span>);
+</pre>
+</div>
+<p><br>
+This will produce the following output:<br>
+<br>
+</p>
+<div style="overflow:auto; border:1px solid gray; height:300px; width:825px">
+<div style="color:black; background-color:white; margin-right:15px">
+<pre>ISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *030101*1253*^*00501*000000905*1*T*:~
+  GS*HC*SENDER CODE*RECEIVER CODE*19991231*0802*1*X*005010X222~
+    ST*837*0021*005010X222~
+      BHT*0019*00*244579*20061015*1023*CH~
+      NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+        PER*IC*JERRY*TE*3055552222*EX*231~
+      NM1*40*2*KEY INSURANCE COMPANY*****46*66783JJT~
+      HL*1**20*1~
+        PRV*BI*PXC*203BF0100Y~
+        NM1*85*2*BEN KILDARE SERVICE*****XX*9876543210~
+          N3*234 SEAWAY ST~
+          N4*MIAMI*FL*33111~
+          REF*EI*587654321~
+        NM1*87*2~
+          N3*2345 OCEAN BLVD~
+          N4*MAIMI*FL*33111~
+        HL*2*1*22*1~
+          SBR*P**2222-SJ******CI~
+          NM1*IL*1*SMITH*JANE****MI*JS00111223333~
+            DMG*D8*19430501*F~
+          NM1*PR*2*KEY INSURANCE COMPANY*****PI*999996666~
+            REF*G2*KA6663~
+          HL*3*2*23*0~
+            PAT*19~
+            NM1*QC*1*SMITH*TED~
+              N3*236 N MAIN ST~
+              N4*MIAMI*FL*33413~
+              DMG*D8*19730501*M~
+            CLM*26463774*100***11:B:1*Y*A*Y*I~
+              REF*D9*17312345600006351~
+              HI*BK:0340*BF:V7389~
+              LX*1~
+                SV1*HC:99213*40*UN*1***1~
+                DTP*472*D8*20061003~
+              LX*2~
+                SV1*HC:87070*15*UN*1***1~
+                DTP*472*D8*20061003~
+              LX*3~
+                SV1*HC:99214*35*UN*1***2~
+                DTP*472*D8*20061010~
+              LX*4~
+                SV1*HC:86663*10*UN*1***2~
+                DTP*472*D8*20061010~
+    SE*42*0021~
+  GE*1*1~
+IEA*1*000000905~
+</pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<hr>
+<h2>Transform 837 Transaction as HTML</h2>
+<p>If your output is to the web and you want the html to take advantage of style and tool tips, you can use the following code for a more rich output.</p>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white; width:800px">
+<pre>  <span style="color:blue">var</span> htmlService = <span style="color:blue">new</span> X12HtmlTransformationService(<span style="color:blue">new</span> X12EdiParsingService(suppressComments: <span style="color:blue">false</span>));
+
+  Stream ediFile = <span style="color:blue">new</span> FileStream(<span style="color:#a31515">&quot;c:\\5010_Example1_HealthInsurance.txt&quot;</span>, FileMode.Open, FileAccess.Read);
+
+  <span style="color:blue">string</span> html = htmlService.Transform(<span style="color:blue">new</span> StreamReader(ediFile).ReadToEnd());
+
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>The divs have the following class names that will allow you to add some of your own style through css:</p>
+<ul>
+<li>interchange </li><li>function-group </li><li>transaction </li><li>hierarchical-loop </li><li>loop </li><li>first-segment </li><li>segment </li><li>element </li><li>element-value </li><li>component </li></ul>
+<p>Hover over a loop or qualifier to see it's meaning.</p>
+<div style="overflow:auto; border:1px solid gray; height:400px; width:825px">
+<div style="border:1px dotted gray; padding-right:10px">
+<div style="font-weight:bold">ISA<span title="Author Information Qualifier" style="background-color:#dfdfdf"> *<span title="No Authorization Information Present" style="color:blue">00</span></span><span title="Author Information" style="background-color:#dfdfdf">
+ *<span> </span></span><span title="Security Information Qualifer" style="background-color:#dfdfdf">*<span title="Password" style="color:blue">01</span></span><span title="Security Information" style="background-color:#dfdfdf"> *<span>SECRET
+</span></span><span title="Interchange ID Qualifier" style="background-color:#dfdfdf">*<span title="Mutually Defined" style="color:blue">ZZ</span></span><span title="Interchange Sender ID" style="background-color:#dfdfdf"> *<span>SUBMITTERS.ID
+</span></span><span title="Interchange ID Qualifier" style="background-color:#dfdfdf">*<span title="Mutually Defined" style="color:blue">ZZ</span></span><span title="Interchange Receiver ID" style="background-color:#dfdfdf"> *<span>RECEIVERS.ID
+</span></span><span title="Interchange Date" style="background-color:#dfdfdf">*<span>030101</span></span><span title="Interchange Time" style="background-color:#dfdfdf"> *<span>1253</span></span><span title="Inter Control Standards Identifier" style="background-color:#dfdfdf">
+ *<span>^</span></span><span title="Inter Control Version Number" style="background-color:#dfdfdf"> *<span>00501</span></span><span title="Inter Control Number" style="background-color:#dfdfdf"> *<span>000000905</span></span><span title="Acknowlegment Requested" style="background-color:#dfdfdf">
+ *<span title="Interchange Acknowledgment Requested" style="color:blue">1</span></span><span title="Usage Indicator" style="background-color:#dfdfdf"> *<span title="Test Data" style="color:blue">T</span></span><span title="Component Element Separator" style="background-color:#dfdfdf">
+ *<span>:</span></span>~</div>
+<div style="margin-left:20px; border:1px dotted gray; padding-right:10px">
+<div style="font-weight:bold">GS<span title="Functional Identifier Code" style="background-color:#dfdfdf"> *<span title="Health Care" style="color:blue">HC</span></span><span title="Application Sender's Code" style="background-color:#dfdfdf"> *<span>SENDER
+ CODE</span></span><span title="Application Receiver's Code" style="background-color:#dfdfdf"> *<span>RECEIVER CODE</span></span><span title="Date" style="background-color:#dfdfdf"> *<span>19991231</span></span><span title="Time" style="background-color:#dfdfdf">
+ *<span>0802</span></span><span title="Group Control Number" style="background-color:#dfdfdf"> *<span>1</span></span><span title="Responsible Agency Code" style="background-color:#dfdfdf"> *<span title="Accredited Standards Committee X12" style="color:blue">X</span></span><span title="Version/Release/Industry Identifier Code" style="background-color:#dfdfdf">
+ *<span>005010X222</span></span>~</div>
+<div style="border:3px double black; margin-left:20px; padding:5px">
+<div style="font-weight:bold">ST<span title="Transaction Set Identifier Code" style="background-color:#dfdfdf"> *<span title="Health Care Claim" style="color:blue">837</span></span><span title="Transaction Set Control Number" style="background-color:#dfdfdf">
+ *<span>0021</span></span><span> *<span>005010X222</span></span>~</div>
+<div style="margin-left:25px">BHT<span title="Hierarchical Structure Code" style="background-color:#dfdfdf"> *<span>0019</span></span><span title="Transaction Set Purpose Code" style="background-color:#dfdfdf"> *<span>00</span></span><span title="Reference Identification" style="background-color:#dfdfdf">
+ *<span>244579</span></span><span title="Date" style="background-color:#dfdfdf"> *<span>20061015</span></span><span title="Time" style="background-color:#dfdfdf"> *<span>1023</span></span><span title="Transaction Type Code" style="background-color:#dfdfdf">
+ *<span title="Chargeable" style="color:blue">CH</span></span>~</div>
+<div title="Loop ID: 1000A, SUBMITTER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBMITTER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Submitter" style="color:blue">41</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>PREMIER BILLING SERVICE</span></span><span> *<span>&nbsp;</span></span><span> *<span>&nbsp;</span></span><span> *<span>&nbsp;</span></span><span> *</span><span title="Identification Code Qualifier" style="background-color:#dfdfdf"> *<span title="Electronic Transmitter Identification Number (ETIN" style="color:blue">46</span></span><span title="Identification Code" style="background-color:#dfdfdf">
+ *<span>TGJ23</span></span>~</div>
+<div style="margin-left:25px">PER<span title="Contact Function Code" style="background-color:#dfdfdf"> *<span title="Information Contact" style="color:blue">IC</span></span><span title="Name" style="background-color:#dfdfdf"> *<span>JERRY</span></span><span title="Communication Number Qualifier" style="background-color:#dfdfdf">
+ *<span title="Telephone" style="color:blue">TE</span></span><span title="Communication Number" style="background-color:#dfdfdf"> *<span>3055552222</span></span><span title="Communication Number Qualifier" style="background-color:#dfdfdf"> *<span title="Telephone Extension" style="color:blue">EX</span></span><span title="Communication Number" style="background-color:#dfdfdf">
+ *<span>231</span></span>~</div>
+</div>
+<div title="Loop ID: 1000B, RECEIVER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">RECEIVER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Receiver" style="color:blue">40</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>KEY INSURANCE COMPANY</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#dfdfdf"> *<span title="Electronic Transmitter Identification Number (ETIN" style="color:blue">46</span></span><span title="Identification Code" style="background-color:#dfdfdf">
+ *<span>66783JJT</span></span>~</div>
+</div>
+<div title="Loop ID: 2000A, BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">BILLING/PAY-TO PROVIDER HIERARCHICAL LEVEL</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#dfdfdf"> *<span>1</span></span><span> *</span><span title="Level Code" style="background-color:#dfdfdf"> *<span title="Information Source" style="color:blue">20</span></span><span title="Hierarchical Child Code" style="background-color:#dfdfdf">
+ *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div style="margin-left:25px">PRV<span title="Provider Code" style="background-color:#dfdfdf"> *<span title="Billing" style="color:blue">BI</span></span><span title="Reference Identification Qualifier" style="background-color:#dfdfdf"> *<span title="Health Care Provider Taxonomy Code" style="color:blue">PXC</span></span><span title="Reference Identification" style="background-color:#dfdfdf">
+ *<span>203BF0100Y</span></span>~</div>
+<div title="Loop ID: 2010AA, BILLING PROVIDER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">BILLING PROVIDER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Billing Provider" style="color:blue">85</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>BEN KILDARE SERVICE</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#dfdfdf"> *<span title="Centers for Medicare and Medicaid Services Nationa" style="color:blue">XX</span></span><span title="Identification Code" style="background-color:#dfdfdf">
+ *<span>9876543210</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#dfdfdf"> *<span>234 SEAWAY ST</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#dfdfdf"> *<span>MIAMI</span></span><span title="State or Provice Code" style="background-color:#dfdfdf"> *<span>FL</span></span><span title="Postal Code" style="background-color:#dfdfdf">
+ *<span>33111</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#dfdfdf"> *<span title="Employer’s Identification Number" style="color:blue">EI</span></span><span title="Reference Identification" style="background-color:#dfdfdf">
+ *<span>587654321</span></span>~</div>
+</div>
+<div title="Loop ID: 2010AB, PAY-TO ADDRESS NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PAY-TO ADDRESS NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Pay-to Provider" style="color:blue">87</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Non-Person Entity" style="color:blue">2</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#dfdfdf"> *<span>2345 OCEAN BLVD</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#dfdfdf"> *<span>MAIMI</span></span><span title="State or Provice Code" style="background-color:#dfdfdf"> *<span>FL</span></span><span title="Postal Code" style="background-color:#dfdfdf">
+ *<span>33111</span></span>~</div>
+</div>
+<div title="Loop ID: 2000B, SUBSCRIBER HIERARCHICAL LOOP" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBSCRIBER HIERARCHICAL LOOP</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#dfdfdf"> *<span>2</span></span><span title="Hierarchical Parent ID Number" style="background-color:#dfdfdf"> *<span>1</span></span><span title="Level Code" style="background-color:#dfdfdf">
+ *<span title="Subscriber" style="color:blue">22</span></span><span title="Hierarchical Child Code" style="background-color:#dfdfdf"> *<span title="Additional Subordinate HL Data Segment in This Hierarchical Structure" style="color:blue">1</span></span>~</div>
+<div style="margin-left:25px">SBR<span title="Payer Responsibility Sequence Number Code" style="background-color:#dfdfdf"> *<span title="Primary" style="color:blue">P</span></span><span> *</span><span title="Reference Identification" style="background-color:#dfdfdf">
+ *<span>2222-SJ</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Claim Filing Indicator Code" style="background-color:#dfdfdf"> *<span title="Commercial Insurance Co." style="color:blue">CI</span></span>~</div>
+<div title="Loop ID: 2010BA, SUBSCRIBER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SUBSCRIBER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Insured or Subscriber" style="color:blue">IL</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Person" style="color:blue">1</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>SMITH</span></span><span title="Name First" style="background-color:#dfdfdf"> *<span>JANE</span></span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#dfdfdf"> *<span title="Member Identification Number" style="color:blue">MI</span></span><span title="Identification Code" style="background-color:#dfdfdf">
+ *<span>JS00111223333</span></span>~</div>
+<div style="margin-left:25px">DMG<span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expressed in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>19430501</span></span><span title="Gender Code" style="background-color:#dfdfdf"> *<span title="Female" style="color:blue">F</span></span>~</div>
+</div>
+<div title="Loop ID: 2010BC, PAYER NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PAYER NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Payer" style="color:blue">PR</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Non-Person Entity" style="color:blue">2</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>KEY INSURANCE COMPANY</span></span><span> *</span><span> *</span><span> *</span><span> *</span><span title="Identification Code Qualifier" style="background-color:#dfdfdf"> *<span title="Payor Identification" style="color:blue">PI</span></span><span title="Identification Code" style="background-color:#dfdfdf">
+ *<span>999996666</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#dfdfdf"> *<span title="Provider Commercial Number" style="color:blue">G2</span></span><span title="Reference Identification" style="background-color:#dfdfdf">
+ *<span>KA6663</span></span>~</div>
+</div>
+<div title="Loop ID: 2000C, PATIENT HIERARCHICAL LOOP" style="border:2px solid black; margin-left:20px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PATIENT HIERARCHICAL LOOP</div>
+<div style="font-weight:bold">HL<span title="Hierarchical ID Number" style="background-color:#dfdfdf"> *<span>3</span></span><span title="Hierarchical Parent ID Number" style="background-color:#dfdfdf"> *<span>2</span></span><span title="Level Code" style="background-color:#dfdfdf">
+ *<span title="Dependent" style="color:blue">23</span></span><span title="Hierarchical Child Code" style="background-color:#dfdfdf"> *<span title="No Subordinate HL Segment in This Hiearchical Structure" style="color:blue">0</span></span>~</div>
+<div style="margin-left:25px">PAT<span title="Individual Relationship Code" style="background-color:#dfdfdf"> *<span title="Child" style="color:blue">19</span></span>~</div>
+<div title="Loop ID: 2010CA, PATIENT NAME" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">PATIENT NAME</div>
+<div style="font-weight:bold">NM1<span title="Entity Identifier Code" style="background-color:#dfdfdf"> *<span title="Patient" style="color:blue">QC</span></span><span title="Entity Type Qualifier" style="background-color:#dfdfdf"> *<span title="Person" style="color:blue">1</span></span><span title="Name Last or Organization Name" style="background-color:#dfdfdf">
+ *<span>SMITH</span></span><span title="Name First" style="background-color:#dfdfdf"> *<span>TED</span></span>~</div>
+<div style="margin-left:25px">N3<span title="Address Information" style="background-color:#dfdfdf"> *<span>236 N MAIN ST</span></span>~</div>
+<div style="margin-left:25px">N4<span title="City Name" style="background-color:#dfdfdf"> *<span>MIAMI</span></span><span title="State or Provice Code" style="background-color:#dfdfdf"> *<span>FL</span></span><span title="Postal Code" style="background-color:#dfdfdf">
+ *<span>33413</span></span>~</div>
+<div style="margin-left:25px">DMG<span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expressed in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>19730501</span></span><span title="Gender Code" style="background-color:#dfdfdf"> *<span title="Male" style="color:blue">M</span></span>~</div>
+</div>
+<div title="Loop ID: 2300, CLAIM INFORMATION" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">CLAIM INFORMATION</div>
+<div style="font-weight:bold">CLM<span title="Patient Control Number" style="background-color:#dfdfdf"> *<span>26463774</span></span><span title="Total Claim Charge Amount" style="background-color:#dfdfdf"> *<span>100</span></span><span> *</span><span> *</span><span title="Facility Code" style="background-color:#dfdfdf">
+ *<span>11:<span title="Place of Service Codes for Professional or Dental Services" style="color:blue">B</span>:1</span></span><span title="Provider or Supplier Signature Indicator" style="background-color:#dfdfdf"> *<span title="Yes" style="color:blue">Y</span></span><span title="Provider Accept Assignment Code" style="background-color:#dfdfdf">
+ *<span title="Assigned" style="color:blue">A</span></span><span title="Benefits Assignment Certification Indicator" style="background-color:#dfdfdf"> *<span title="Yes" style="color:blue">Y</span></span><span title="Release of Information Code" style="background-color:#dfdfdf">
+ *<span title="Informed Consent to Release Medical Information for Conditions or Diagnoses Regulated by Federal Statutes" style="color:blue">I</span></span>~</div>
+<div style="margin-left:25px">REF<span title="Reference Identification Qualifier" style="background-color:#dfdfdf"> *<span title="Claim Number" style="color:blue">D9</span></span><span title="Reference Identification" style="background-color:#dfdfdf"> *<span>17312345600006351</span></span>~</div>
+<div style="margin-left:25px">HI<span title="Health Care Code Information" style="background-color:#dfdfdf"> *<span><span title="Principal Diagnosis (ICD-9)" style="color:blue">BK</span>:0340</span></span><span title="Health Care Code Information" style="background-color:#dfdfdf">
+ *<span><span title="Diagnosis (ICD-9)" style="color:blue">BF</span>:V7389</span></span>~</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#dfdfdf"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#dfdfdf"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:99213</span></span><span title="Line Item Charge Amount" style="background-color:#dfdfdf">
+ *<span>40</span></span><span title="Unit or Basis for Measurement" style="background-color:#dfdfdf"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#dfdfdf"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#dfdfdf"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#dfdfdf"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>20061003</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#dfdfdf"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#dfdfdf"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:87070</span></span><span title="Line Item Charge Amount" style="background-color:#dfdfdf">
+ *<span>15</span></span><span title="Unit or Basis for Measurement" style="background-color:#dfdfdf"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#dfdfdf"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#dfdfdf"> *<span>1</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#dfdfdf"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>20061003</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#dfdfdf"> *<span>3</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#dfdfdf"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:99214</span></span><span title="Line Item Charge Amount" style="background-color:#dfdfdf">
+ *<span>35</span></span><span title="Unit or Basis for Measurement" style="background-color:#dfdfdf"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#dfdfdf"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#dfdfdf"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#dfdfdf"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>20061010</span></span>~</div>
+</div>
+<div title="Loop ID: 2400, SERVICE LINE" style="border:1px dotted gray; margin-left:20px; margin-bottom:2px; padding:5px">
+<div style="float:right; font-size:smaller; color:lightgrey">SERVICE LINE</div>
+<div style="font-weight:bold">LX<span title="Assigned Number" style="background-color:#dfdfdf"> *<span>4</span></span>~</div>
+<div style="margin-left:25px">SV1<span title="Composite Medical Procedure Identifier" style="background-color:#dfdfdf"> *<span><span title="Health Care Financing Administration Common Procedural Coding System (HCPCS) Codes" style="color:blue">HC</span>:86663</span></span><span title="Line Item Charge Amount" style="background-color:#dfdfdf">
+ *<span>10</span></span><span title="Unit or Basis for Measurement" style="background-color:#dfdfdf"> *<span title="Unit" style="color:blue">UN</span></span><span title="Service Unit Count" style="background-color:#dfdfdf"> *<span>1</span></span><span> *</span><span>
+ *</span><span title="COMPOSITE DIAGNOSIS CODE POINTER" style="background-color:#dfdfdf"> *<span>2</span></span>~</div>
+<div style="margin-left:25px">DTP<span title="Data/Time Qualifier" style="background-color:#dfdfdf"> *<span title="Service" style="color:blue">472</span></span><span title="Date Time Period Format Qualifier" style="background-color:#dfdfdf"> *<span title="Date Expression in Format CCYYMMDD" style="color:blue">D8</span></span><span title="Date Time Period" style="background-color:#dfdfdf">
+ *<span>20061010</span></span>~</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-weight:bold">SE<span title="Number of Included Segments" style="background-color:#dfdfdf"> *<span>42</span></span><span title="Transaction Set Control Number" style="background-color:#dfdfdf"> *<span>0021</span></span>~</div>
+</div>
+<div style="font-weight:bold">GE<span title="Number of Transaction Sets Included" style="background-color:#dfdfdf"> *<span>1</span></span><span title="Group Control Number" style="background-color:#dfdfdf"> *<span>1</span></span>~</div>
+</div>
+<div style="font-weight:bold">IEA<span title="Number of Included Functional Groups" style="background-color:#dfdfdf"> *<span>1</span></span><span title="Interchange Control Number" style="background-color:#dfdfdf"> *<span>000000905</span></span>~</div>
+</div>
+</div>
+</div><div class="ClearBoth"></div>

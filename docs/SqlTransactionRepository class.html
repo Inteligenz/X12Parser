@@ -1,0 +1,56 @@
+<div class="wikidoc">
+<p>The SqlTransactionRepository class can be used for additional control over the import of X12 into a SQL Server database.&nbsp; In most cases you can use the OopFactory.X12.ImportX12 console app out-of-the-box and will only need to work with the SqlReadOnlyTransactionRepository
+ class.<br>
+<br>
+</p>
+<h2>SqlTransactionRepository Class Diagram</h2>
+<p>These two classes are split apart because their a quite a number of constructor arguments you need when you are importing data that aren't needed when you are reading data.&nbsp; If you are not using the Revision feature, all you need outside of the OopFactory.X12.ImportX12
+ app is to use the SqlReadOnlyTransactionRepository.<br>
+<img title="SqlTransactionRepository.png" src="http://i3.codeplex.com/Download?ProjectName=x12parser&DownloadId=663744" alt="SqlTransactionRepository.png"></p>
+<p>These classes have been created as generics so that you choose between using SQL's int, bigint or uniqueidentifier&nbsp;as your table identities, by using the class with int, long or Guid for T.</p>
+<p>The Container table will hold the identities for interchanges, function groups, transaction sets and for loops, so it will fill up quick, but will probably still be sufficient to use Int in many cases.</p>
+<hr>
+<h2>SqlReadOnlyTransactionRepository Methods</h2>
+<h3>GetTransactionSets</h3>
+<p><img title="RepoTransactionSet.png" src="http://i3.codeplex.com/Download?ProjectName=x12parser&DownloadId=663757" alt="RepoTransactionSet.png"></p>
+<p>&nbsp;</p>
+<h3>GetTransactionSetSegments</h3>
+<p>GetTransactionSetSegments accepts the following arguments:</p>
+<ul>
+<li>transactionSetID = the Id from the TransactionSet table, this can also be obtained by searching for transactions using the GetTransactionSets method and specifying filter criteria with the RepoTransactionSetSearchCriteria.
+</li><li>revisionId - the revisionId of the the transaction, use Int32.MaxValue to get the latest revision.
+</li><li>includeControlSegments - will add the ISA,GS,GE and IEA segments to the segments returned.
+</li></ul>
+<p>It will return a List&lt;RepoSegment&lt;T&gt;&gt; which is shown below:</p>
+<p><img title="RepoSegment.png" src="http://i3.codeplex.com/Download?ProjectName=x12parser&DownloadId=663756" alt="RepoSegment.png"></p>
+<p>&nbsp;</p>
+<h3>GetLoops</h3>
+<p><img title="RepoLoop.png" src="http://i3.codeplex.com/Download?ProjectName=x12parser&DownloadId=663755" alt="RepoLoop.png"></p>
+<p>&nbsp;</p>
+<h3>GetTransactionSegments</h3>
+<p>A transaction is defined differently for each transaction set.&nbsp; The SqlTransactionRepository allows you to treat any loop in your transact set as a transaction.</p>
+<p>For example, an 837 health care claim would use SpecLoopId = &quot;2300&quot; to define a claim as a transaction.&nbsp; When you call GetTransactionSegments, it will unbundle the segments related to that transaction (ancestor loops and their related segments, and
+ all child segments).&nbsp; This is similare to the UnbundleX12 console app.</p>
+<p>The data structure returned is a list of RepoSegments with a Segment property.</p>
+<p>To rebuild an unbundled X12 message, call GetTransactionSegments with includeControlSegments = true, and concatenate the Segment.SegmentString with Segment.Delimiters.SegmentTerminator for the segments returned.&nbsp; This will give you a valid X12 message
+ that you can then use existing transformations to work with. See <a href="/wikipage?title=837%20Claim%20Parser%20Usage">
+Claim Parser</a> for some claim transformations.</p>
+<hr>
+<h2>SqlTransactionRepository Methods</h2>
+<h3>Save</h3>
+<p>The Save methods accepts an Interchange object which is the output of the X12Parser's PareMultiple method.&nbsp; You can send this directly to the Save method and it will return the Id value from the Interchange table.&nbsp; If you intend to do any post
+ processing, this Id can be sent to the GetTransactionSets or GetLoops method to identify the newly created elements that you may want to act upon.</p>
+<p><em><strong>Database Creation</strong></em></p>
+<p>When you call the Save method for the first time, the class will check for the expected database tables and automatically and create the necessary table, views and user-defined functions depending on your values for schema, commonSchema, and indexedSegments.&nbsp;
+ This is useful to get you started right away, but it does this check on every save.</p>
+<p>To bypass this, you can create a derived class with no implementation for EnsureSchema.&nbsp; You can use the default implementation in development to create your database objects, and then turn off EnsureSchema once you've moved to production so that it
+ doesn't incur the extra database hit.</p>
+<h3>SaveRevision</h3>
+<p>The SaveRevision methods accepts an IList&lt;RepoSegment&lt;T&gt;&gt; that it expects you got from the GetTransactionSetSegments or GetTransactionSegments methods.</p>
+<p>Once you have made the updates to the segments you can send it to the SaveRevision method.&nbsp; The save revision will insert new database entries for the segments that have actually changed.&nbsp; Subsequent calls to GetTransactionSetSegments and GetTransactionSegments
+ will only get the latest revision that is less than the RevisionId sent to either of those methods.</p>
+<p><em><strong>Database Concurrency</strong></em></p>
+<p>The SaveRevision method will check concurrency at the segment level.&nbsp; Before saving a segment change it will make sure that the RevisionID at the time that the RepoSegment was retrieved has not changed.&nbsp; If it has changed, it will rollback all
+ changes in the revision.&nbsp; This will cause the Revision table to skip some ID values.<strong><br>
+</strong></p>
+</div><div class="ClearBoth"></div>

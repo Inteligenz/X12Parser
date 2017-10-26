@@ -1,0 +1,100 @@
+<div class="wikidoc">
+<h1>Injecting your own X12 specification</h1>
+<p>Though I would hope you would want to submit your specifications for inclusion in the open source (I will mention your name and company on the documentation for your contribution), there might be reasons that you might want to maintain your own specifications,
+ but be able to update versions of the OopFactory.X12.dll without losing your work. Some of these reasons might be:</p>
+<ol>
+<li>Your company has different descriptions for loops or elements that you want displayed on the html view. This is especially true for some loops that just have a loop ID of NM1 which isn't very descriptive.
+</li><li>You have a specific agreement with a trading partner that uses slightly modified specifications per a companion guide that you have agreed upon.
+</li><li>You have spotted a bug in the embedded specifications and would like to fix it externally to the assembly while you wait for the next update with the fix.
+</li><li>You absolutely love X12 so much that you are using it for persistence of objects that are not part of the X12 standard sets. :-)
+</li></ol>
+<p><br>
+In any of the above cases you would want to be able to use your own specification that is outside the OopFactory.X12 assembly. Let's look at how that can be done. &nbsp;The completed solution can be downloaded
+<a href="http://download.codeplex.com/download?ProjectName=x12parser&DownloadId=247140">
+here</a>.</p>
+<h2>Implement ISpecificationFinder by Overriding SpecificationFinder</h2>
+<p>By default, OopFactory.X12.Parsing.X12Parser uses OopFactory.X12.Parsing.SpecificationFinder which will load the embedded XML specifications based on the version and transaction code in the GS and ST segments respectively. You selective choose to override
+ which specification to use creating your own derived class of SpecificationFinder.<br>
+<br>
+1. &nbsp;Create a new console application and reference the OopFactory.X12.dll.</p>
+<p>2. &nbsp;Add your custom specification. &nbsp;In this example I use the 997 for brievity:</p>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">&lt;?</span><span style="color:#a31515">xml</span> <span style="color:red">version</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1.0</span><span style="color:black">&quot;</span> <span style="color:red">encoding</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">utf-8</span><span style="color:black">&quot;</span> <span style="color:blue">?&gt;</span>
+<span style="color:blue">&lt;</span><span style="color:#a31515">TransactionSpecification</span> <span style="color:red">xmlns</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">http://tempuri.org/X12ParserSpecification.xsd</span><span style="color:black">&quot;</span>  <span style="color:red">TransactionSetIdentifierCode</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">997</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">Segment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK1</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">Segment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK9</span><span style="color:black">&quot;</span> <span style="color:red">Trailer</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">true</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+  <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK2</span><span style="color:black">&quot;</span> <span style="color:red">Usage</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Required</span><span style="color:black">&quot;</span> <span style="color:red">LoopRepeat</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">999999</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">Name</span><span style="color:blue">&gt;</span><span style="color:blue">&lt;/</span><span style="color:#a31515">Name</span><span style="color:blue">&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">StartingSegment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK2</span><span style="color:black">&quot;</span> <span style="color:red">Usage</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Required</span><span style="color:black">&quot;</span> <span style="color:red">Repeat</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">Segment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK5</span><span style="color:black">&quot;</span> <span style="color:red">Trailer</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">true</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;</span><span style="color:#a31515">Loop</span> <span style="color:red">LoopId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK2/AK3</span><span style="color:black">&quot;</span> <span style="color:red">Usage</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Required</span><span style="color:black">&quot;</span> <span style="color:red">LoopRepeat</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">999999</span><span style="color:black">&quot;</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">Name</span><span style="color:blue">&gt;</span>PAYER IDENTIFICATION<span style="color:blue">&lt;/</span><span style="color:#a31515">Name</span><span style="color:blue">&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">StartingSegment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK3</span><span style="color:black">&quot;</span> <span style="color:red">Usage</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Required</span><span style="color:black">&quot;</span> <span style="color:red">Repeat</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">1</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+      <span style="color:blue">&lt;</span><span style="color:#a31515">Segment</span> <span style="color:red">SegmentId</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">AK4</span><span style="color:black">&quot;</span> <span style="color:red">Usage</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">Required</span><span style="color:black">&quot;</span> <span style="color:red">Repeat</span><span style="color:blue">=</span><span style="color:black">&quot;</span><span style="color:blue">99</span><span style="color:black">&quot;</span><span style="color:blue">/&gt;</span>
+    <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+  <span style="color:blue">&lt;/</span><span style="color:#a31515">Loop</span><span style="color:blue">&gt;</span>
+<span style="color:blue">&lt;/</span><span style="color:#a31515">TransactionSpecification</span><span style="color:blue">&gt;</span>
+</pre>
+</div>
+<p>The class model for the specification is as follows:</p>
+<p><img src="http://download.codeplex.com/download?ProjectName=x12parser&DownloadId=252702" alt="Specification Model" style="vertical-align:middle; border:1px solid black"></p>
+<p>3. &nbsp;Change the file properties Build Action = &quot;Embedded Resource&quot;.</p>
+<p>4. &nbsp;Add a new class to inherit from SpecificationFinder:</p>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> System.IO;
+<span style="color:blue">using</span> System.Reflection;
+<span style="color:blue">using</span> OopFactory.X12.Parsing;
+<span style="color:blue">using</span> OopFactory.X12.Parsing.Specification;
+
+<span style="color:blue">namespace</span> MyCustomParser
+{
+    <span style="color:blue">public</span> <span style="color:blue">class</span> MySpecificationFinder : SpecificationFinder
+    {
+        <span style="color:blue">public</span> <span style="color:blue">override</span> OopFactory.X12.Parsing.Specification.TransactionSpecification FindTransactionSpec(<span style="color:blue">string</span> functionalCode, <span style="color:blue">string</span> versionCode, <span style="color:blue">string</span> transactionSetCode)
+        {
+            <span style="color:blue">if</span> (transactionSetCode == <span style="color:#a31515">&quot;997&quot;</span>)
+            {
+                Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(<span style="color:#a31515">&quot;MyCustomParser.My997Spec.xml&quot;</span>);
+                <span style="color:blue">return</span> TransactionSpecification.Deserialize(<span style="color:blue">new</span> StreamReader(specStream).ReadToEnd());
+            }
+            <span style="color:blue">else</span>
+                <span style="color:blue">return</span> <span style="color:blue">base</span>.FindTransactionSpec(functionalCode, versionCode, transactionSetCode);
+        }
+    }
+}</pre>
+</div>
+<p>&nbsp;</p>
+<p>5. &nbsp;Inject your custom specification finder into the X12Parser:</p>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> System.IO;
+<span style="color:blue">using</span> OopFactory.X12.Parsing;
+
+<span style="color:blue">namespace</span> MyCustomParser
+{
+    <span style="color:blue">class</span> Program
+    {
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main(<span style="color:blue">string</span>[] args)
+        {
+            <span style="color:blue">string</span> x12Filename = args[0];
+            <span style="color:blue">string</span> outputFilename = args.Length &gt; 1 ? args[1] : x12Filename &#43; <span style="color:#a31515">&quot;.xml&quot;</span>;
+
+            FileStream fs = <span style="color:blue">new</span> FileStream(x12Filename, FileMode.Open);
+            OopFactory.X12.Parsing.X12Parser parser = <span style="color:blue">new</span> X12Parser(<span style="color:blue">new</span> MySpecificationFinder());
+            <span style="color:blue">string</span> xml = parser.Parse(fs).Serialize();
+            fs.Close();
+
+            FileStream outputFs = <span style="color:blue">new</span> FileStream(outputFilename, FileMode.Create);
+            StreamWriter writer = <span style="color:blue">new</span> StreamWriter(outputFs);
+            writer.Write(xml);
+            writer.Close();
+        }
+    }
+}
+</pre>
+</div>
+</div><div class="ClearBoth"></div>

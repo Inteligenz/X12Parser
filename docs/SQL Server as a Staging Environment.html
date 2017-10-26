@@ -1,0 +1,33 @@
+<div class="wikidoc">
+<p>The SQL Server Integration is provided so that you can stage all of your incoming X12 messages in a consistent format that retains the full message that was received. In most cases this will not be your &quot;processing&quot; system.<br>
+<br>
+It is best practices to keep your import simple and only expect to import the files into the database to await processing.&nbsp; Do your processing in a separate process that can mark the status of each transaction (i.e. create your own status/workflow table)
+ so you can handle business exception processing.<br>
+<br>
+Depending on the skill sets of your development staff, the implementations can vary widely after that depending on how you answer the following questions:</p>
+<ol>
+<li>IS your staff experienced/comfortable with xslt transformations? </li><li>Is your staff experienced/comfortable advance SQL queries (i.e. subqueries and common table expressions)?
+</li><li>Do you need other systems to integrate by read the individual fields directly from the database?
+</li><li>Is the target system also using SQL Server? </li><li>Is the development staff's primary language .NET? </li><li>Will the transactions be forced in batch into it's target system, or does it need to run through business logic that determines what will happen to each transaction?
+</li></ol>
+<p>The above questions will lead to one of two directions for implementation:</p>
+<ol>
+<li>Do a full parse of all segments into the individual segment tables, transformations to a normalized system will be done with queries of the indexed segment tables.
+</li><li>Do a full parse only to the root tables (Interchange, FunctionalGroup, TransactionSet, Loop, Segment) and only parse out to segments for searching support (i.e. NM1, N1, REF segments).&nbsp; transformations will be performed by reconstititing the X12 message
+ from the GetTransactionSegments method and doing xslt transformations in memory.
+</li></ol>
+<p>There really isn't a right or wrong answer, but each solution can by easy or hard depending on your business constraints.&nbsp; Here is how the answers to questions 1 through 6 might affect your implementation:</p>
+<ul>
+<li>If your staff is not comfortable with xslt you may want to stay in the database.
+</li><li>If your staff is not comfortable with writing their own SQL (i.e. this is not a task you can be accomplished by an ORM), then keep the database simple for searching and loading up unbundled x12 messages.
+</li><li>If your staff is not comfortable with xslt or advanced SQL, an open source solution may not be appropriate for you or you may want to consider a support contract.
+</li><li>If other systems need to export data directly out of your database, this will be easier to do using SQL and having all your segments in indexed tables.
+</li><li>If your target system is not SQL SERVER it might be easier for your post processing to load the unbundled message into a programming language that can output to the other database format.&nbsp; Either that or like previous you would need to query the tables
+ into some flat file format to get into your other system (assuming you don't send the X12 directly there, this is only useful if you have some normalized way to export your data that is simpler than X12)
+</li><li>If your staff's primary language isn't C# and you are mostly using the console apps out-of-the-box, then you should definitely do a full parse of all segments.
+</li><li>If you are doing batch imports (not really doing any exception handling) than it might be appropriate to do this as a full parse with SQL queries to get into your processing system.
+</li><li>If you have complex business logic for determine whether the x12 transaction is ready for import into it's target system, it might be easier to do that in code one transaction at a time.
+</li></ul>
+<p>Though it might seem slower to process each transaction one a time, as long as it a different app from the import, this can be scaled out be having multiple independent processing consuming each transaction.</p>
+<p>I hope this helps you narrow down what is appropriate for your organization.&nbsp; Good Luck!</p>
+</div><div class="ClearBoth"></div>

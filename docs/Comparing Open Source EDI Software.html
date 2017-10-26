@@ -1,0 +1,130 @@
+<div class="wikidoc">
+<p>In working for a small company in the healthcare industry I was recently given the task of creating a simple workflow to translate X12 837 and 835 EDI files.&#160; I immediately began researching different options.&#160; I’m sharing the results of my research
+ with the hope that others can benefit from it.</p>
+<p>I had 3 objectives the software had to meet:</p>
+<ol>
+<li>Transform 837/835 into XML (with minimal setup/configuration/coding) </li><li>Transform XML into 837/835 (with minimal setup/configuration/coding) </li><li>Be as inexpensive as possible </li></ol>
+<h1></h1>
+<p>Since expense was an issue and most commercial EDI packages are quite expensive, I looked to open source first. I reviewed several open source applications capable of processing X12 files (this is by no means an exhaustive list).&#160; I considered an application
+ to be “actively developed” if it had a release within the past 12 months. Here are my reviews in no particular order.</p>
+<h2><a href="http://bots.sourceforge.net/en/index.shtml" target="_blank">BOTS</a></h2>
+<p>BOTS is perhaps the most well known open source EDI application (at least that’s what Google tells me), so I thought I’d start there. From the website,
+</p>
+<blockquote>
+<p>“Bots is complete software for EDI (Electronic Data Interchange): translate and communicate. All major edi data formats are supported: edifact, x12, tradacoms, xml.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Complete workflow application – it can pick up, process and save out files according to workflow rules.
+</li><li>Can transform X12 to XML and XML to X12. </li><li>Backed by a consulting company, so if you need help, you can hire them. </li><li>An active <a href="http://groups.google.com/group/botsmail" target="_blank">support forum</a> for issues.
+</li><li>Actively developed (latest build: 8/31/2010) </li><li>Python based, cross platform. </li></ul>
+<p><u><strong>Weaknesses</strong></u></p>
+<ul>
+<li>Administration portal interface is just so-so. Very basic UI. Often difficult to figure out what to do next.
+</li><li>Steep learning curve to get a workflow running due to the <a href="http://bots.sourceforge.net/en/edi_translation_conceptual.shtml" target="_blank">
+routes, channels and translations</a> (not to mention grammars and mapping scripts) that need to be configured. In fact, after installation and several hours of configuration, I was unable to get any where close to running test files through.
+</li><li>The further I got into it, the more it looked like it would <a href="http://groups.google.com/group/botsmail/browse_thread/thread/11ae67d6409b1ee1/ed046781bb34d5c2?q=837&lnk=ol&" target="_blank">
+require knowledge</a> of Python scripts to get it running for 837/835 files. I didn’t want to invest that much time into it, the X12 standards are difficult enough to learn as is!
+</li></ul>
+<h3></h3>
+<h2><a href="http://edireader.sourceforge.net/" target="_blank">EDIReader</a></h2>
+<p>EDIReader is also a fairly well known EDI app.&#160; It’s a java package with several command line utilities designed as examples of it’s usage.&#160; From the website:</p>
+<blockquote>
+<p>“EDIReader is a Java package for parsing business documents structured according to Electronic Data Interchange (EDI) standards. It supports the SAX and JAXP interfaces defined for XML, making it suitable for use in any XML-based system that allows the configuration
+ of a custom SAX parser.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Simple to use – call one of the example .bat scripts from the command line, pass it filenames and you’re done.
+</li><li>Very good X12 to XML transform engine – it accurately produced XML for any edi file I tested.
+</li><li>Backed by a consulting company, so if you need help, you can hire them. </li><li>Actively developed (latest build: 2/14/2011) </li><li>Java based – cross platform. </li></ul>
+<p><strong><u>Weaknesses</u></strong></p>
+<ul>
+<li>Not a complete workflow application – though I found that I liked working with the simple scripts files; it meant I could immediately begin testing output without&#160; a lot of install and configuration time. The script functionality could be easily extended
+ to support an simple, but effective, input/output workflow. </li><li>No XML to X12 transform available in the open source app.&#160; To get that functionality you’d need to purchase
+<a href="http://berryworkssoftware.net/index.php?option=com_content&task=view&id=14&Itemid=28" target="_blank">
+ediwriter</a>. </li><li>Relatively inactive <a href="http://sourceforge.net/projects/edireader/forums/forum/361407" target="_blank">
+support forum</a> – there haven’t been any post there for several years.&#160; (I do realize the EDI formats don’t change often, but still I would think there would be
+<em>some</em> activity.) </li><li>I also ran into a maddening quirk with how EDIReader creates the XML hierarchy. There was a least one instance where a loop level (I forget which loop id) would create a sibling node instead of a child node.&#160; This made it frustrating to build an Xpath
+ statement that represented the relationship between those particular loops. </li></ul>
+<h2><a href="http://pyx12.sourceforge.net/" target="_blank">Pyx12</a></h2>
+<p>Pyx12 was mentioned in a couple places so I thought I’d take a look at it as well. From the website:</p>
+<blockquote>
+<p>“Pyx12 is a HIPAA X12 document validator and converter. It parses an ANSI X12N (Healthcare) data file and validates it against a representation of the Implementation Guidelines for a HIPAA transaction.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Can transform X12 to XML and XML to X12. </li><li>Good <a href="http://pyx12.sourceforge.net/doc/maps/" target="_blank">documentation</a> on the X12 healthcare formats.
+</li><li>Python based – cross platform. </li></ul>
+<p><strong><u>Weaknesses</u></strong></p>
+<ul>
+<li>Not a complete workflow application – designed to run from the command line. </li><li>Requires tweaking of configuration, map and transform files to get it running. The deeper I went with Pyx12, the more configuration I found I needed to do.&#160; I finally gave up.
+</li><li>Not actively developed (latest build: 6/16/2008) Though I could be wrong here; as of May 2011 the looks to be some development
+<a href="http://sourceforge.net/projects/pyx12/develop" target="_blank">activity</a>.
+</li><li>Inactive <a href="http://sourceforge.net/projects/pyx12/forums/forum/126425" target="_blank">
+support forum</a> – Same comment as EDIReader; since the formats have changed very little I could understand why there’s not a lot of activity.
+</li></ul>
+<h2><a href="http://hipaatalk.sourceforge.net/" target="_blank">HIPAATalk</a></h2>
+<p>I ran across HIPAATalk on sourceforge and it looked like an interesting approach to EDI transform.&#160; It didn’t exactly fit my criteria of being able to transform into XML, but storing in a database would do if I couldn’t find a decent transform to XML
+ app. From the website:</p>
+<blockquote>
+<p>“HIPAATalk - Contains stored procedures and sample DTS packages for parsing and converting X12 to flat tables and creating HIPAA-compliant X12 files.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Complete workflow application – it can pick up, process and save out files according to workflow rules. The caveat here is you need to be running SQL Server Integration Services (SSIS) on SQL Server Standard or above to get the full workflow functionality,
+ so it could be expensive if you don’t already have SQL Server available. </li><li>If you’re a big MS SQL fan – this one’s for you. It’s a set of DTS packages and a database designed to do the X12 transformations.
+</li><li>Can transform X12 to database and database to X12. </li><li>Actively developed (latest build: 2/17/2011) </li><li>Active <a href="http://sourceforge.net/projects/hipaatalk/forums/forum/513633" target="_blank">
+support forum</a> – not a lot of entries there, but the developer is responsive. </li></ul>
+<p><strong><u>Weaknesses</u></strong></p>
+<ul>
+<li>It’s currently written as DTS packages (SQL Server 2000) that need to be converted to DTSX packages to run on SQL Server 2005/2008 systems.&#160; That process was more difficult than it should have been.&#160; (I could have just been me though).
+</li><li>Documentation is light – it pretty much assumes that you know what to do with the DTS packages and how to do it.
+</li><li>Not cross platform. </li><li>Can’t transform&#160; to XML. </li></ul>
+<h2><a href="http://www.mirthcorp.com/products/mirth-connect" target="_blank">Mirth Connect</a></h2>
+<p>Mirth came up on a on a separate project having to do with HL7 messaging.&#160; Since it has X12 capability, I thought I’d look into it.&#160; From the website:</p>
+<blockquote>
+<p>“Mirth Connect, the Swiss Army knife healthcare integration engine. Specifically designed for HL7 message integration, Mirth provides the necessary tools for developing, testing, deploying, and monitoring interfaces.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Complete workflow application – it can pick up, process and save out files according to workflow rules.
+</li><li>Great UI – it was pretty simple to get a workflow set without reading much documentation.
+</li><li>Can transform X12 to XML and XML to X12. </li><li>Backed by a company, so if you need help, you can purchase support. </li><li>An <a href="http://www.mirthcorp.com/community/forums/forumdisplay.php?f=6" target="_blank">
+active support</a> forum for issues. </li><li>Actively developed (latest build: 7/6/2011) </li><li>Java based, cross platform. </li></ul>
+<p><strong><u>Weaknesses</u></strong></p>
+<ul>
+<li>Flat X12 XML format – by this I mean it creates all XML nodes as siblings – there is
+<a href="http://www.mirthcorp.com/community/forums/showthread.php?t=3860&highlight=x12" target="_blank">
+no hierarchy</a> at all.&#160; This makes it very difficult to produce a useable XML file without a lot of additional work.
+</li><li>Restricted access to documentation – Yes they do have <a href="http://www.mirthcorp.com/community/wiki/display/mirth/Home" target="_blank">
+some</a> available for free, but it looks like most of the advanced documentation
+<a href="http://www.mirthcorp.com/services/support/online-tutorials" target="_blank">
+(online tutorials</a> and <a href="http://www.mirthcorp.com/services/support/developer-questions-answers" target="_blank">
+developer Q&amp;A</a>) is available only if you purchase support. </li></ul>
+<h2><a href="http://x12parser.codeplex.com/" target="_blank">X12Parser</a></h2>
+<p>X12Parser showed up on a google search so I thought I’d check it out. From the website:</p>
+<blockquote>
+<p>“The parser allows for a specification of any X12 transaction set to create a generic X12 xml representation of the hierarchical data contained within the X12 document.”</p>
+</blockquote>
+<p><strong><u>Strengths</u></strong></p>
+<ul>
+<li>Simple to use – call one of the example exe’s from the command line, pass it filenames and you’re done. I was testing files within 5 minutes of downloading the app.
+</li><li>Accurate representation of X12 structure in XML – this really differentiated it from EDIReader; X12Parser accurately represents all the loops and their relationships to parent, child and sibling loops.
+</li><li>Good use of internal XML comments.&#160; The XML is well documented – which helps newbies like myself understand what each node is.
+</li><li>X12 Unbundle feature – this new feature will “unbundle” an X12 file into multiple valid X12 files based on a specified loop id. Great for separating into individual claims.
+</li><li>Actively developed (latest build: 7/10/2011) </li><li>Quick development iteration – I initially had trouble with a couple files causing X12Parser to fail, but contacted Dannie and he quickly resolved the issues .
+</li><li>Active <a href="http://x12parser.codeplex.com/discussions" target="_blank">support forum</a>.
+</li></ul>
+<p><strong><u>Weaknesses</u></strong></p>
+<ul>
+<li>Not a complete workflow application – though I like working with the command line executables; it means I can test output without a lot of install and configuration time.
+</li><li>Not cross platform. (Not too big of a deal for me since Windows is my preferred OS)
+</li></ul>
+<p><strong><font size="5">Conclusion</font></strong></p>
+<p>As you can imagine, since I’m writing this on the X12Parser site, that it’s ultimately what I ended up using.
+</p>
+<p>I’ve now tested 100’s of 837/835 files through it and feel confident enough in it’s ability to put it into production use. I’m planning on integrating the X12Parser executables into an ETL workflow process (most likely
+<a href="http://kettle.pentaho.com/" target="_blank">Pentaho</a> or <a href="http://www.talend.com/products-data-integration/" target="_blank">
+Talend</a>).</p>
+</div><div class="ClearBoth"></div>

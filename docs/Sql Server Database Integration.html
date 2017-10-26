@@ -1,0 +1,56 @@
+<div class="wikidoc">
+<p>See also:</p>
+<ul>
+<li><a href="/wikipage?title=SQL Server as a Staging Environment">SQL Server as a Staging Environment</a>
+</li><li><a href="/wikipage?title=SqlTransactionRepository Class">SqlTransactionRepository Class</a>
+</li><li><a href="/wikipage?title=Sql Server Functions and Views">Sql Server Functions and Views</a>
+</li></ul>
+<h2>Database Schema</h2>
+<p>You can import your X12 into a SQL Server database by using the OopFactoryX12.ImportX12 console app. This will create the following schema in the database once you have loaded a file:</p>
+<p><br>
+<img title="X12Schema.png" src="http://i3.codeplex.com/Download?ProjectName=x12parser&DownloadId=663718" alt="X12Schema.png"></p>
+<p>Table Purpose:</p>
+<ul>
+<li><strong>Container</strong>: keeps all Int or BigInt identities for the Interchange, FunctionalGroup, TransactionSet and Loop tables.
+</li><li><strong>Revision - </strong>allows for edits of the X12 and keeping track of comments related to those edits.&nbsp; A record of 0 is added by default to represent the initial load of all X12.
+</li><li><strong>X12CodeList</strong> - This will contain the lookup values for any elements in a segment that has been Indexed into a separate table.
+</li><li><strong>Interchange, FunctionalGroup, TransactionSet, Loop, Segment</strong> - this is the database realization of the Interchange model into a relational model.&nbsp; All segments are shown as they were in the x12 message in the Segment column of the Segment
+ table. </li><li><strong>NM1, N1, N3&nbsp;...</strong> - these are the indexed segment tables specified in the IndexedSegment configuration values.&nbsp; It uses the X12 specification for each segment to define the table.&nbsp; Because of this, there is the potential that
+ something in the segment was not parsable.&nbsp; It may either get truncated or was not parsable to the segment specification's data type.&nbsp; These are errors in the X12, but this will be noted in the log file of the ImportX12 app.&nbsp; The original segment
+ will always remain as a string in the Segment column of the Segment table. </li><li><strong>ParsingError</strong> - because the indexed tables are typed into decimal and datetime when relevant, this table will contain any errors translating the target data type or any errors exceeding the max length of a string element.&nbsp; The errorId
+ will be recorded in the indexed segment table.&nbsp;&nbsp; The original Segment table&nbsp;will always contain the original value from the x12 file.
+</li></ul>
+<hr>
+<h2>ImportX12 Configuration</h2>
+<p>The application has the following application settings.&nbsp; Just point the connection string to an empty database and all the tables, views and user-defined functions will be created on-the-fly when you import a file.</p>
+<ul>
+<li><strong>schema </strong>- schema of the Interchange, FunctionalGroup, TransactionSet, Loop, Segment tables and any indexed segment tables.&nbsp; If you are using a schema other than &quot;dbo&quot; make sure that you create it first in your target database.&nbsp;
+ The ImportX12 app will create tables, but will expect the schema to already exist.
+</li><li><strong>containerSchema </strong>- schema of the common tables: Container and Revision
+</li><li><strong>ThrowExceptionOnSyntaxErrors </strong>- indicates whether an exception should be thrown on.&nbsp; When the value is false an warning will be sent through the ParsingWarning event instead.<br>
+<ul>
+<li>Hierarchical Parent Id references that don't exist, if false, than the HL will be treated as a top level HL without a parent
+</li><li>Segments that don't occur in the transaction set's specification, if false, the segment will parsed as a segment of the current loop where it was found.
+</li></ul>
+</li><li><strong>IndexedSegments </strong>- a comma delimited list of X23 segment IDs that you would like to have as individual tables.&nbsp; The specification of that segment ID will be used to determine how many element columns to create and of which data type.
+ For example, if you are parsing 837 health claims you would use the list &quot;AMT,BHT,CAS,CL1,CLM,CN1,CR1,CR2,CR3,CR4,CR5,CR6,CR7,CR8,CRC,CTP,CUR,DMG,DN1,DN2,DSB,DTP,FRM,HCP,HI,HL,HSD,III,IMM,K3,LIN,LQ,LUI,LX,MEA,MIA,MOA,N2,N3,N4,NM1,NTE,OI,PAT,PER,PRV,PS1,PWK,QTY,RAS,REF,SBR,SV1,SV2,SV3,SV4,SV5,SV6,SV7,SVD,TOO,UR&quot;.
+ See <a href="/wikipage?title=Transaction%20Set%20Configuration">Transaction Set Configuration</a> for a full list.
+</li><li><strong>ParseDirectory </strong>- the directory to search for X12 files </li><li><strong>ParseSearchPattern </strong>- the file search pattern to filter files for parsing with the ParseDirectory
+</li><li><strong>ArchiveDirectory </strong>- the directory to move each file the parses and imports successfully.
+</li><li><strong>FailureDirectory </strong>- the directory to move any file that fails to parse or load.&nbsp; If the Interchange record was written, the HasErrors column will be set to true on failed files.
+</li></ul>
+<hr>
+<h2>Schema Configuration</h2>
+<p>The application allows you to configure the containerSchema separately from the schema so that you can choose to partition your x12.&nbsp; This can be useful in the following scenarios:</p>
+<ol>
+<li>You want each client's data in a separate schema so their data will never co-mingle and each client does not suffer performance issues because another client has a large amount of records.
+</li><li>You want to separate your X12 into inbound and outbound messages. </li><li>You want to set separate security on different schemas for different users in your environment so they only access what they need to know, since most X12 contains Personally Identifiable Information.
+</li></ol>
+<p>They system is designed as an INSERT ONLY transactional database.&nbsp; Updates and Deletes are handled by adding revisions.&nbsp; The built in user-defined functions take this into account and only show the latest revision of each segment.</p>
+<hr>
+<h2>Revision Feature</h2>
+<p>In most cases you won't be doing any revisions, especially if the X12 messages represent TRUE EDI messages that came to you from a trading partner through a clearinghouse.&nbsp; Mistakes in the X12 should be handled by acknowledgment files that reject bad
+ transactions.&nbsp; However, there are other use cases of X12 that are not TRUE EDI.&nbsp; When the transaction came to you in some other format and you have a data entry system that creates X12 so that you have a common process for integrating all incoming
+ transactions, errors may have been introduced.&nbsp; In this case errors in your X12 may be your responsibility and you might want a process for creating edits of you X12.&nbsp; In this case you will be able to use the SaveRevision method of the SqlTransactionRepository
+ to make edits that will produce valid X12 for your downstream processes.</p>
+</div><div class="ClearBoth"></div>
