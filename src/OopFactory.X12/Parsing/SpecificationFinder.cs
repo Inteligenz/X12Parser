@@ -55,6 +55,11 @@ namespace OopFactory.X12.Parsing
                         return GetSpecification("837-5010");
                     else
                         return GetSpecification("837-4010");
+                case "850":
+                    if (versionCode.Contains("5010"))
+                        return GetSpecification("850-5010");
+                    else
+                        return GetSpecification("850-4010");
                 case "875":
                     return GetSpecification("875-5010");
                 case "880":
