@@ -1,5 +1,5 @@
 ## 837 Professional Claim, Sample 1 X12 XML
-{code:xml}
+```xml
 <?xml version="1.0"?>
 <Interchange>
   <ISA>
@@ -477,4 +477,4 @@
     <IEA02>000000905</IEA02>
   </IEA>
 </Interchange>
-{code:xml}
+```
