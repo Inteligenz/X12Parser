@@ -1,6 +1,6 @@
 ## Sample 1 output serialized to XML
 
-{code:xml}
+```xml
 <?xml version="1.0"?>
 <Interchange>
   <ISA>
@@ -287,4 +287,4 @@
     <IEA02>000000031</IEA02>
   </IEA>
 </Interchange>
-{code:xml}
+```
