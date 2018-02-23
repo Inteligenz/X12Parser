@@ -31,3 +31,5 @@ bin/*
 */read.1.tlog
 bin
 obj
+Release/*
+.vs/*
