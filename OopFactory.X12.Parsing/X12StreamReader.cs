@@ -1,0 +1,233 @@
+﻿namespace OopFactory.X12.Parsing
+{
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using OopFactory.X12.Shared.Models;
+
+    /// <summary>
+    /// Represents a <see cref="StreamReader"/> for reading an X12 file
+    /// </summary>
+    public class X12StreamReader : IDisposable
+    {
+        private readonly StreamReader reader;
+        private readonly X12DelimiterSet delimiters;
+        private readonly char[] ignoredChars;
+        private string gsSegment;
+        private string isaSegment;
+        private string transactionCode;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12StreamReader"/> class
+        /// </summary>
+        /// <param name="stream"><see cref="Stream"/> used for reading</param>
+        /// <param name="encoding"><see cref="Encoding"/> used for properly reading the stream</param>
+        /// <param name="ignoredChars">Array of characters to be ignored while reading</param>
+        public X12StreamReader(Stream stream, Encoding encoding, char[] ignoredChars)
+        {
+            this.reader = new StreamReader(stream, encoding);
+            var header = new char[106];
+            if (this.reader.Read(header, 0, 106) < 106)
+            {
+                throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
+            }
+
+            this.delimiters = new X12DelimiterSet(header);
+            this.isaSegment = new string(header);
+            this.ignoredChars = ignoredChars;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12StreamReader"/> class
+        /// </summary>
+        /// <param name="stream"><see cref="Stream"/> used for reading</param>
+        /// <param name="encoding"><see cref="Encoding"/> used for properly reading the stream</param>
+        public X12StreamReader(Stream stream, Encoding encoding)
+            : this(stream, encoding, new char[] { })
+        {
+        }
+
+        /// <summary>
+        /// Gets the X12 delimiters
+        /// </summary>
+        public X12DelimiterSet Delimiters => this.delimiters;
+
+        /// <summary>
+        /// Gets the current ISA segment
+        /// </summary>
+        public string CurrentIsaSegment => this.isaSegment;
+
+        /// <summary>
+        /// Gets the current GS segment
+        /// </summary>
+        public string CurrentGsSegment => this.gsSegment;
+
+        /// <summary>
+        /// Gets the last transaction code
+        /// </summary>
+        public string LastTransactionCode => this.transactionCode;
+
+        /// <summary>
+        /// Gets the segment id for the current segment
+        /// </summary>
+        /// <param name="segmentString">Segment string with id to extract</param>
+        /// <returns>The current segment id</returns>
+        public string ReadSegmentId(string segmentString)
+        {
+            int index = segmentString.IndexOf(this.delimiters.ElementSeparator);
+            return index >= 0 ? segmentString.Substring(0, index) : null;
+        }
+
+        /// <summary>
+        /// Splits the current segment string
+        /// </summary>
+        /// <param name="segmentString">Segment string to split</param>
+        /// <returns>Array of segment parts</returns>
+        public string[] SplitSegment(string segmentString)
+        {
+            int endSegmentIndex = segmentString.IndexOf(this.Delimiters.SegmentTerminator);
+            return endSegmentIndex >= 0 
+                       ? segmentString.Substring(0, endSegmentIndex).Split(this.Delimiters.ElementSeparator)
+                       : segmentString.Split(this.Delimiters.ElementSeparator);
+        }
+
+        /// <summary>
+        /// Checks if the provided segment id is contained in the transaction
+        /// </summary>
+        /// <param name="transaction">Transaction to test</param>
+        /// <param name="segmentId">Segment id to check for</param>
+        /// <returns>True if the segment id is present; otherwise, false</returns>
+        public bool TransactionContainsSegment(string transaction, string segmentId)
+        {
+            var segments = transaction.Split(this.Delimiters.SegmentTerminator).ToList();
+            return segments.Exists(s => s.StartsWith(segmentId + this.Delimiters.ElementSeparator));                
+        }
+
+        /// <summary>
+        /// Reads the next segment in the stream
+        /// </summary>
+        /// <returns>Segment string read from stream</returns>
+        public string ReadNextSegment()
+        {
+            bool isBinary = false;
+            var sb = new StringBuilder();
+            var one = new char[1];
+            while (this.reader.Read(one, 0, 1) == 1)
+            {
+                if (this.ignoredChars.Contains(one[0]))
+                {
+                    continue;
+                }
+
+                if (one[0] == this.delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
+                {
+                    continue;
+                }
+
+                if (one[0] == this.delimiters.SegmentTerminator)
+                {
+                    break;
+                }
+
+                if (one[0] != 0)
+                {
+                    sb.Append(one);
+                }
+
+                if (isBinary && one[0] == this.delimiters.ElementSeparator)
+                {
+                    int binarySize = 0;
+                    string[] elements = sb.ToString().Split(this.delimiters.ElementSeparator);
+                    if (elements[0] == "BIN" && elements.Length >= 2)
+                    {
+                        int.TryParse(sb.ToString().Split(this.delimiters.ElementSeparator)[1], out binarySize);
+                    }
+
+                    if (elements[0] == "BDS" && elements.Length >= 3)
+                    {
+                        int.TryParse(sb.ToString().Split(this.delimiters.ElementSeparator)[2], out binarySize);
+                    }
+
+                    if (binarySize > 0)
+                    {
+                        var buffer = new char[binarySize];
+                        this.reader.Read(buffer, 0, binarySize);
+                        sb.Append(buffer);
+                        break;
+                    }
+                }
+
+                if (!isBinary && (sb.ToString() == "BIN" + this.delimiters.ElementSeparator 
+                                  || sb.ToString() == "BDS" + this.delimiters.ElementSeparator))
+                {
+                    isBinary = true;
+                }
+            }
+
+            return sb.ToString().TrimStart();
+        }
+
+        /// <summary>
+        /// Reads the next transaction in the stream
+        /// </summary>
+        /// <returns>Transaction read from the stream</returns>
+        public X12FlatTransaction ReadNextTransaction()
+        {
+            StringBuilder segments = new StringBuilder();
+
+            string segmentString = this.ReadNextSegment();
+            string segmentId = this.ReadSegmentId(segmentString);
+            do
+            {
+                switch (segmentId)
+                {
+                    case "ISA":
+                        this.isaSegment = segmentString + this.delimiters.SegmentTerminator;
+                        break;
+                    case "GS":
+                        this.gsSegment = segmentString + this.delimiters.SegmentTerminator;
+                        break;
+                    case "IEA":
+                    case "GE":
+                        break;
+                    default:
+                        if (segmentId == "ST")
+                        {
+                            this.transactionCode = this.SplitSegment(segmentString)[1];
+                        }
+
+                        segments.Append(segmentString);
+                        segments.Append(this.delimiters.SegmentTerminator);
+                        break;
+                }
+                segmentString = this.ReadNextSegment();
+                segmentId = this.ReadSegmentId(segmentString);
+            }
+            while (!string.IsNullOrEmpty(segmentString) && segmentId != "SE");
+
+            return new X12FlatTransaction(
+                this.CurrentIsaSegment,
+                this.CurrentGsSegment,
+                segments.ToString());
+        }
+
+        /// <summary>
+        /// Releases unmanaged resources
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.reader?.Dispose();
+            }
+        }
+    }
+}
