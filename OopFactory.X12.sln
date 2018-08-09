@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12", "src\OopFactory.X12\OopFactory.X12.csproj", "{AFE1BBBC-B957-461C-9022-B45D3DB117C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.X12Parser", "src\OopFactory.X12.X12Parser\OopFactory.X12.X12Parser.csproj", "{19307F16-3D8C-4E4D-8903-8BAD12EDAE78}"
@@ -40,62 +42,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Sql", "src\O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.TransformToX12", "src\OopFactory.X12.TransformToX12\OopFactory.X12.TransformToX12.csproj", "{8E4B7C5F-87EE-43CB-A1DE-75ECB5916B19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{FC1769FD-76F2-40B7-9FA3-AC3E2F24D8B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Shared", "OopFactory.Shared\OopFactory.X12.Shared.csproj", "{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Parsing", "OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj", "{29EEAA38-BFB2-4732-A286-EB91355F9BCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Specifications", "OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj", "{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = src\\OopFactory.X12\\OopFactory.X12.csproj
-		SccProjectTopLevelParentUniqueName1 = OopFactory.X12.sln
-		SccProjectName1 = src/OopFactory.X12
-		SccLocalPath1 = src\\OopFactory.X12
-		SccProjectUniqueName2 = src\\OopFactory.X12.X12Parser\\OopFactory.X12.X12Parser.csproj
-		SccProjectName2 = src/OopFactory.X12.X12Parser
-		SccLocalPath2 = src\\OopFactory.X12.X12Parser
-		SccProjectUniqueName3 = tests\\OopFactory.X12.Tests.Unit\\OopFactory.X12.Tests.Unit.csproj
-		SccProjectTopLevelParentUniqueName3 = OopFactory.X12.sln
-		SccProjectName3 = tests/OopFactory.X12.Tests.Unit
-		SccLocalPath3 = tests\\OopFactory.X12.Tests.Unit
-		SccProjectUniqueName4 = src\\OopFactory.X12.UnbundleX12\\OopFactory.X12.UnbundleX12.csproj
-		SccProjectName4 = src/OopFactory.X12.UnbundleX12
-		SccLocalPath4 = src\\OopFactory.X12.UnbundleX12
-		SccProjectUniqueName5 = OopFactory.X12.TransformToX12\\OopFactory.X12.TransformToX12.csproj
-		SccProjectName5 = OopFactory.X12.TransformToX12
-		SccLocalPath5 = OopFactory.X12.TransformToX12
-		SccProjectUniqueName6 = src\\OopFactory.X12.Hipaa\\OopFactory.X12.Hipaa.csproj
-		SccProjectTopLevelParentUniqueName6 = OopFactory.X12.sln
-		SccProjectName6 = src/OopFactory.X12.Hipaa
-		SccLocalPath6 = src\\OopFactory.X12.Hipaa
-		SccProjectUniqueName7 = tests\\OopFactory.X12.Hipaa.Tests.Unit\\OopFactory.X12.Hipaa.Tests.Unit.csproj
-		SccProjectTopLevelParentUniqueName7 = OopFactory.X12.sln
-		SccProjectName7 = tests/OopFactory.X12.Hipaa.Tests.Unit
-		SccLocalPath7 = tests\\OopFactory.X12.Hipaa.Tests.Unit
-		SccProjectUniqueName8 = src\\OopFactory.X12.Hipaa.ClaimParser\\OopFactory.X12.Hipaa.ClaimParser.csproj
-		SccProjectName8 = src/OopFactory.X12.Hipaa.ClaimParser
-		SccLocalPath8 = src\\OopFactory.X12.Hipaa.ClaimParser
-		SccProjectUniqueName9 = src\\OopFactory.X12.Validation\\OopFactory.X12.Validation.csproj
-		SccProjectTopLevelParentUniqueName9 = OopFactory.X12.sln
-		SccProjectName9 = src/OopFactory.X12.Validation
-		SccLocalPath9 = src\\OopFactory.X12.Validation
-		SccProjectUniqueName10 = tests\\OopFactory.X12.Validation.Tests.Unit\\OopFactory.X12.Validation.Tests.Unit.csproj
-		SccProjectTopLevelParentUniqueName10 = OopFactory.X12.sln
-		SccProjectName10 = tests/OopFactory.X12.Validation.Tests.Unit
-		SccLocalPath10 = tests\\OopFactory.X12.Validation.Tests.Unit
-		SccProjectUniqueName11 = src\\OopFactory.X12.AcknowledgeX12\\OopFactory.X12.AcknowledgeX12.csproj
-		SccProjectName11 = src/OopFactory.X12.AcknowledgeX12
-		SccLocalPath11 = src\\OopFactory.X12.AcknowledgeX12
-		SccProjectUniqueName12 = src\\OopFactory.X12.ImportX12\\OopFactory.X12.ImportX12.csproj
-		SccProjectName12 = src/OopFactory.X12.ImportX12
-		SccLocalPath12 = src\\OopFactory.X12.ImportX12
-		SccProjectUniqueName13 = tests\\OopFactory.X12.Tests.Integration\\OopFactory.X12.Tests.Integration.csproj
-		SccProjectTopLevelParentUniqueName13 = OopFactory.X12.sln
-		SccProjectName13 = tests/OopFactory.X12.Tests.Integration
-		SccLocalPath13 = tests\\OopFactory.X12.Tests.Integration
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = OopFactory.X12.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -245,18 +200,63 @@ Global
 		{8E4B7C5F-87EE-43CB-A1DE-75ECB5916B19}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8E4B7C5F-87EE-43CB-A1DE-75ECB5916B19}.Release|x86.ActiveCfg = Release|x86
 		{8E4B7C5F-87EE-43CB-A1DE-75ECB5916B19}.Release|x86.Build.0 = Release|x86
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}.Release|x86.Build.0 = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Debug|x86.Build.0 = Debug|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|x86.ActiveCfg = Release|Any CPU
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD}.Release|x86.Build.0 = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Debug|x86.Build.0 = Debug|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{203C0F4B-D1F0-4C20-8968-7DBD84F4A815} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{AFE1BBBC-B957-461C-9022-B45D3DB117C9} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
-		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
-		{82795B66-0F18-4385-8180-A8C7E0F41893} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{CE09ACD3-898F-467D-BA43-3FDF181A51AE} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{203C0F4B-D1F0-4C20-8968-7DBD84F4A815} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{8FB2C5B0-C09A-4F83-B2FC-66062E429AD2} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{65B52E5E-4105-4A4B-AB14-D16DFC3942A4} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
 		{9A5654D7-0DF6-448C-A803-41F6AE62E175} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
 		{66441684-A8F7-4C9F-AB0F-5F9448352EF1} = {54C5B25A-2D9B-4189-8DFA-CFF39BFACE09}
+		{82795B66-0F18-4385-8180-A8C7E0F41893} = {CC068D63-72CD-4A76-B0D3-3C76F5162FAE}
+		{74A34062-7CF9-41B5-9F36-A0367C9AFA2F} = {FC1769FD-76F2-40B7-9FA3-AC3E2F24D8B2}
+		{29EEAA38-BFB2-4732-A286-EB91355F9BCD} = {FC1769FD-76F2-40B7-9FA3-AC3E2F24D8B2}
+		{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA} = {FC1769FD-76F2-40B7-9FA3-AC3E2F24D8B2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82406A0F-880D-4913-8252-9A64EC0C4A3B}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = OopFactory.X12.vsmdi
 	EndGlobalSection
 EndGlobal

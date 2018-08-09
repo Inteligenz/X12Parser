@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Configuration;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Repositories;
-using System.IO;
-using System.Diagnostics;
-namespace OopFactory.X12.ImportX12
+﻿namespace OopFactory.X12.ImportX12
 {
+    using System;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Repositories;
+    using OopFactory.X12.Shared.Specification;
+
     class Program
     {
         static void Main(string[] args)
