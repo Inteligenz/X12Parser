@@ -15,7 +15,7 @@
             this.subElementSeparator = subElementSeparator;
         }
 
-        internal X12DelimiterSet(char[] isaSegmentAndTerminator)
+        public X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
             var prefix = new string(isaSegmentAndTerminator).Substring(0, 3);
             
