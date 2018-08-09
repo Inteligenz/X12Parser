@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OopFactory.Shared</RootNamespace>
+    <AssemblyName>OopFactory.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\EDIFieldValueAttribute.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\DetachedSegment.cs" />
+    <Compile Include="Models\ElementValidationException.cs" />
+    <Compile Include="Models\FunctionGroup.cs" />
+    <Compile Include="Models\HierarchicalLoop.cs" />
+    <Compile Include="Models\HierarchicalLoopContainer.cs" />
+    <Compile Include="Models\Interchange.cs" />
+    <Compile Include="Models\Loop.cs" />
+    <Compile Include="Models\LoopContainer.cs" />
+    <Compile Include="Models\Segment.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionValidationException.cs" />
+    <Compile Include="Models\TypedLoop.cs" />
+    <Compile Include="Models\TypedSegment.cs" />
+    <Compile Include="Models\Typed\AllowanceOrChargeIndicator.cs" />
+    <Compile Include="Models\Typed\BenefitServiceTypeCodes.cs" />
+    <Compile Include="Models\Typed\ContractTypeCode.cs" />
+    <Compile Include="Models\Typed\DTPFormatQualifier.cs" />
+    <Compile Include="Models\Typed\DTPQualifier.cs" />
+    <Compile Include="Models\Typed\EntityIdentifierCode.cs" />
+    <Compile Include="Models\Typed\EntityTypeQualifier.cs" />
+    <Compile Include="Models\Typed\IdentificationCodeQualifier.cs" />
+    <Compile Include="Models\Typed\PricingMethodology.cs" />
+    <Compile Include="Models\Typed\RelationshipCode.cs" />
+    <Compile Include="Models\Typed\TimeCode.cs" />
+    <Compile Include="Models\Typed\TypedElementContextIdentification.cs" />
+    <Compile Include="Models\Typed\TypedElementHealthCareCodeInfo.cs" />
+    <Compile Include="Models\Typed\TypedElementPositionInSegment.cs" />
+    <Compile Include="Models\Typed\TypedElementReferenceInSegment.cs" />
+    <Compile Include="Models\Typed\TypedElementRelatedCausesInfo.cs" />
+    <Compile Include="Models\Typed\TypedElementServiceLocationInfo.cs" />
+    <Compile Include="Models\Typed\TypedLoopAK2.cs" />
+    <Compile Include="Models\Typed\TypedLoopCLM.cs" />
+    <Compile Include="Models\Typed\TypedLoopIK3.cs" />
+    <Compile Include="Models\Typed\TypedLoopIK4.cs" />
+    <Compile Include="Models\Typed\TypedLoopIT1.cs" />
+    <Compile Include="Models\Typed\TypedLoopLX.cs" />
+    <Compile Include="Models\Typed\TypedLoopN1.cs" />
+    <Compile Include="Models\Typed\TypedLoopNM1.cs" />
+    <Compile Include="Models\Typed\TypedLoopPID.cs" />
+    <Compile Include="Models\Typed\TypedLoopSBR.cs" />
+    <Compile Include="Models\Typed\TypedSegmentAK1.cs" />
+    <Compile Include="Models\Typed\TypedSegmentAK9.cs" />
+    <Compile Include="Models\Typed\TypedSegmentAMT.cs" />
+    <Compile Include="Models\Typed\TypedSegmentBHT.cs" />
+    <Compile Include="Models\Typed\TypedSegmentBIG.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCAD.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCN1.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCTP.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCTT.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCTX.cs" />
+    <Compile Include="Models\Typed\TypedSegmentCUR.cs" />
+    <Compile Include="Models\Typed\TypedSegmentDMG.cs" />
+    <Compile Include="Models\Typed\TypedSegmentDTM.cs" />
+    <Compile Include="Models\Typed\TypedSegmentDTP.cs" />
+    <Compile Include="Models\Typed\TypedSegmentFOB.cs" />
+    <Compile Include="Models\Typed\TypedSegmentHCP.cs" />
+    <Compile Include="Models\Typed\TypedSegmentHI.cs" />
+    <Compile Include="Models\Typed\TypedSegmentIK5.cs" />
+    <Compile Include="Models\Typed\TypedSegmentISS.cs" />
+    <Compile Include="Models\Typed\TypedSegmentITD.cs" />
+    <Compile Include="Models\Typed\TypedSegmentMSG.cs" />
+    <Compile Include="Models\Typed\TypedSegmentN2.cs" />
+    <Compile Include="Models\Typed\TypedSegmentN3.cs" />
+    <Compile Include="Models\Typed\TypedSegmentN4.cs" />
+    <Compile Include="Models\Typed\TypedSegmentN9.cs" />
+    <Compile Include="Models\Typed\TypedSegmentNTE.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPAT.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPER.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPID.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPRV.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPS1.cs" />
+    <Compile Include="Models\Typed\TypedSegmentPWK.cs" />
+    <Compile Include="Models\Typed\TypedSegmentREF.cs" />
+    <Compile Include="Models\Typed\TypedSegmentSAC.cs" />
+    <Compile Include="Models\Typed\TypedSegmentSBR.cs" />
+    <Compile Include="Models\Typed\TypedSegmentSV1.cs" />
+    <Compile Include="Models\Typed\TypedSegmentTDS.cs" />
+    <Compile Include="Models\Typed\TypedSegmentTXI.cs" />
+    <Compile Include="Models\Typed\UnitOrBasisOfMeasurementCode.cs" />
+    <Compile Include="Models\Typed\YesNoConditionOrResponseCode.cs" />
+    <Compile Include="Models\X12DelimiterSet.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj">
+      <Project>{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}</Project>
+      <Name>OopFactory.X12.Specifications</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
