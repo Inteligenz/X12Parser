@@ -1,114 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Attributes;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Parsing.Model.Typed
 {
+    using OopFactory.X12.Shared.Attributes;
+
     public enum TimeCode
     {
-        [EDIFieldValue("01")]
+        [EdiFieldValue("01")]
         EquivalentToIsoP01,
-        [EDIFieldValue("02")]
+        [EdiFieldValue("02")]
         EquivalentToIsoP02,
-        [EDIFieldValue("03")]
+        [EdiFieldValue("03")]
         EquivalentToIsoP03,
-        [EDIFieldValue("04")]
+        [EdiFieldValue("04")]
         EquivalentToIsoP04,
-        [EDIFieldValue("05")]
+        [EdiFieldValue("05")]
         EquivalentToIsoP05,
-        [EDIFieldValue("06")]
+        [EdiFieldValue("06")]
         EquivalentToIsoP06,
-        [EDIFieldValue("07")]
+        [EdiFieldValue("07")]
         EquivalentToIsoP07,
-        [EDIFieldValue("08")]
+        [EdiFieldValue("08")]
         EquivalentToIsoP08,
-        [EDIFieldValue("09")]
+        [EdiFieldValue("09")]
         EquivalentToIsoP09,
-        [EDIFieldValue("10")]
+        [EdiFieldValue("10")]
         EquivalentToIsoP10,
-        [EDIFieldValue("11")]
+        [EdiFieldValue("11")]
         EquivalentToIsoP11,
-        [EDIFieldValue("12")]
+        [EdiFieldValue("12")]
         EquivalentToIsoP12,
-        [EDIFieldValue("13")]
+        [EdiFieldValue("13")]
         EquivalentToIsoM12,
-        [EDIFieldValue("14")]
+        [EdiFieldValue("14")]
         EquivalentToIsoM11,
-        [EDIFieldValue("15")]
+        [EdiFieldValue("15")]
         EquivalentToIsoM10,
-        [EDIFieldValue("16")]
+        [EdiFieldValue("16")]
         EquivalentToIsoM09,
-        [EDIFieldValue("17")]
+        [EdiFieldValue("17")]
         EquivalentToIsoM08,
-        [EDIFieldValue("18")]
+        [EdiFieldValue("18")]
         EquivalentToIsoM07,
-        [EDIFieldValue("19")]
+        [EdiFieldValue("19")]
         EquivalentToIsoM06,
-        [EDIFieldValue("20")]
+        [EdiFieldValue("20")]
         EquivalentToIsoM05,
-        [EDIFieldValue("21")]
+        [EdiFieldValue("21")]
         EquivalentToIsoM04,
-        [EDIFieldValue("22")]
+        [EdiFieldValue("22")]
         EquivalentToIsoM03,
-        [EDIFieldValue("23")]
+        [EdiFieldValue("23")]
         EquivalentToIsoM02,
-        [EDIFieldValue("24")]
+        [EdiFieldValue("24")]
         EquivalentToIsoM01,
-        [EDIFieldValue("AD")]
+        [EdiFieldValue("AD")]
         AlaskaDaylightTime,
-        [EDIFieldValue("AS")]
+        [EdiFieldValue("AS")]
         AlaskaStandardTime,
-        [EDIFieldValue("AT")]
+        [EdiFieldValue("AT")]
         AlaskaTime,
-        [EDIFieldValue("CD")]
+        [EdiFieldValue("CD")]
         CentralDaylightTime,
-        [EDIFieldValue("CS")]
+        [EdiFieldValue("CS")]
         CentralStandardTime,
-        [EDIFieldValue("CT")]
+        [EdiFieldValue("CT")]
         CentralTime,
-        [EDIFieldValue("ED")]
+        [EdiFieldValue("ED")]
         EasternDaylightTime,
-        [EDIFieldValue("ES")]
+        [EdiFieldValue("ES")]
         EasternStandardTime,
-        [EDIFieldValue("ET")]
+        [EdiFieldValue("ET")]
         EasternTime,
-        [EDIFieldValue("GM")]
+        [EdiFieldValue("GM")]
         GreenwichMeanTime,
-        [EDIFieldValue("HD")]
+        [EdiFieldValue("HD")]
         Hawaii_AleutianDaylightTime,
-        [EDIFieldValue("HS")]
+        [EdiFieldValue("HS")]
         Hawaii_AleutianStandardTime,
-        [EDIFieldValue("HT")]
+        [EdiFieldValue("HT")]
         Hawaii_AleutianTime,
-        [EDIFieldValue("LT")]
+        [EdiFieldValue("LT")]
         LocalTime,
-        [EDIFieldValue("MD")]
+        [EdiFieldValue("MD")]
         MountainDaylightTime,
-        [EDIFieldValue("MS")]
+        [EdiFieldValue("MS")]
         MountainStandardTime,
-        [EDIFieldValue("MT")]
+        [EdiFieldValue("MT")]
         MountainTime,
-        [EDIFieldValue("ND")]
+        [EdiFieldValue("ND")]
         NewfoundlandDaylightTime,
-        [EDIFieldValue("NS")]
+        [EdiFieldValue("NS")]
         NewfoundlandStandardTime,
-        [EDIFieldValue("NT")]
+        [EdiFieldValue("NT")]
         NewfoundlandTime,
-        [EDIFieldValue("PD")]
+        [EdiFieldValue("PD")]
         PacificDaylightTime,
-        [EDIFieldValue("PS")]
+        [EdiFieldValue("PS")]
         PacificStandardTime,
-        [EDIFieldValue("PT")]
+        [EdiFieldValue("PT")]
         PacificTime,
-        [EDIFieldValue("TD")]
+        [EdiFieldValue("TD")]
         AtlanticDaylightTime,
-        [EDIFieldValue("TS")]
+        [EdiFieldValue("TS")]
         AtlanticStandardTime,
-        [EDIFieldValue("TT")]
+        [EdiFieldValue("TT")]
         AtlanticTime,
-        [EDIFieldValue("UT")]
+        [EdiFieldValue("UT")]
         UniversalTimeCoordinate
     }
 }

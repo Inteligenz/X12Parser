@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
     public class TypedElementPositionInSegment
     {
@@ -22,9 +17,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         private void UpdateElement()
         {
             string value = string.Format("{1}{0}{2}{0}{3}",
-                _segment._delimiters.SubElementSeparator,
+                _segment.Delimiters.SubElementSeparator,
                 _elementPositionInSegment, _componentDataElementPositionInComposite, _repeatingDataElementPosition);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
+            value = value.TrimEnd(_segment.Delimiters.SubElementSeparator);
             _segment.SetElement(_elementNumber, value);
         }
 

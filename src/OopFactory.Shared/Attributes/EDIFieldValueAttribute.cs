@@ -2,7 +2,7 @@
 {
     using System;
 
-    using OopFactory.Shared.Properties;
+    using OopFactory.X12.Shared.Properties;
 
     /// <summary>
     /// Represents an X12 field value

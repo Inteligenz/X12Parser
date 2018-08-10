@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using OopFactory.Shared.Properties;
+    using OopFactory.X12.Shared.Properties;
     using OopFactory.X12.Shared.Attributes;
 
     /// <summary>

@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Attributes;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using OopFactory.X12.Shared.Attributes;
+
     public enum RelationshipCode
     {
-        [EDIFieldValue("A")]
+        [EdiFieldValue("A")]
         Add,
-        [EDIFieldValue("D")]
+
+        [EdiFieldValue("D")]
         Delete,
-        [EDIFieldValue("I")]
+
+        [EdiFieldValue("I")]
         Include,
-        [EDIFieldValue("O")]
+
+        [EdiFieldValue("O")]
         InformationOnly,
-        [EDIFieldValue("S")]
+
+        [EdiFieldValue("S")]
         Substituted
     }
 }

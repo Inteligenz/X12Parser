@@ -1,43 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using OopFactory.X12.Specifications;
+
     public class TypedLoopIK4 : TypedLoop
     {
-        private TypedElementPositionInSegment _ik401;
+        public TypedElementPositionInSegment IK401 { get; private set; }
 
         public TypedLoopIK4() : base("IK4") { }
 
-        internal override void Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
+        internal override void Initialize(Container parent, X12DelimiterSet delimiters, LoopSpecification loopSpecification)
         {
             base.Initialize(parent, delimiters, loopSpecification);
-            _ik401 = new TypedElementPositionInSegment(_loop, 1);
-        }
-
-        public TypedElementPositionInSegment IK401
-        {
-            get { return _ik401; }
+            this.IK401 = new TypedElementPositionInSegment(this.Loop, 1);
         }
 
         public string IK402_DataElementReferenceNumber
         {
-            get { return _loop.GetElement(2); }
-            set { _loop.SetElement(2, value); }
+            get { return this.Loop.GetElement(2); }
+            set { this.Loop.SetElement(2, value); }
         }
 
         public string IK403_SyntaxErrorCode
         {
-            get { return _loop.GetElement(3); }
-            set { _loop.SetElement(3, value); }
+            get { return this.Loop.GetElement(3); }
+            set { this.Loop.SetElement(3, value); }
         }
 
         public string IK404_CopyOfBaDataElement
         {
-            get { return _loop.GetElement(4); }
-            set { _loop.SetElement(4, value); }
+            get { return this.Loop.GetElement(4); }
+            set { this.Loop.SetElement(4, value); }
         }
     }
 }

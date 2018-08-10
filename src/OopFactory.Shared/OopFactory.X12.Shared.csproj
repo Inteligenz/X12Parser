@@ -7,8 +7,8 @@
     <ProjectGuid>{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.Shared</RootNamespace>
-    <AssemblyName>OopFactory.Shared</AssemblyName>
+    <RootNamespace>OopFactory.X12.Shared</RootNamespace>
+    <AssemblyName>OopFactory.X12.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
     public class TypedElementContextIdentification
     {
-        private int _elementNumber;
-        private Segment _segment;
-        private string _name;
-        private string _reference;
+        private readonly int elementNumber;
+        private readonly Segment segment;
+        private string name;
+        private string reference;
 
         internal TypedElementContextIdentification(Segment segment, int elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
+            this.segment = segment;
+            this.elementNumber = elementNumber;
         }
 
         private void UpdateElement()
         {
             string value = string.Format("{1}{0}{2}",
-                _segment._delimiters.SubElementSeparator,
-                _name, _reference);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+                this.segment.Delimiters.SubElementSeparator,
+                this.name,
+                this.reference);
+            value = value.TrimEnd(this.segment.Delimiters.SubElementSeparator);
+            this.segment.SetElement(this.elementNumber, value);
         }
 
         public string _1_ContextName
         {
-            get { return _name; }
-            set { _name = value; UpdateElement(); }
+            get { return this.name; }
+            set { this.name = value; UpdateElement(); }
         }
 
         public string _2_ContextReference
         {
-            get { return _reference; }
-            set { _reference = value; UpdateElement(); }
+            get { return this.reference; }
+            set { this.reference = value; UpdateElement(); }
         }
     }
 }

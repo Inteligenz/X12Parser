@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using OopFactory.X12.Specifications;
+
     public class TypedLoopLX : TypedLoop
     {
-        private string _entityIdentifer;
+        private readonly string entityIdentifer;
 
         public TypedLoopLX(string entityIdentifier) 
             : base("LX")
         {
-            _entityIdentifer = entityIdentifier;
+            this.entityIdentifer = entityIdentifier;
         }
 
-        internal override void Initialize(Container parent, X12DelimiterSet delimiters, Specification.LoopSpecification loopSpecification)
+        internal override void Initialize(Container parent, X12DelimiterSet delimiters, LoopSpecification loopSpecification)
         {
             string segmentString = GetSegmentString(delimiters);
 
-            _loop = new Loop(parent, delimiters, segmentString, loopSpecification);
+            this.Loop = new Loop(parent, delimiters, segmentString, loopSpecification);
         }
 
         public string LX01_AssignedNumber
         {
-            get { return _loop.GetElement(1); }
-            set { _loop.SetElement(1, value); }
+            get { return this.Loop.GetElement(1); }
+            set { this.Loop.SetElement(1, value); }
         }
     }
 }

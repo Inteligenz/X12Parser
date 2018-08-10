@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using System;
+
     public class TypedElementServiceLocationInfo
     {
         private int _elementNumber;
@@ -22,9 +19,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         private void UpdateElement()
         {
             string value = String.Format("{1}{0}{2}{0}{3}",
-                _segment._delimiters.SubElementSeparator,
+                _segment.Delimiters.SubElementSeparator,
                 _facilityCodeValue, _facilityCodeQualifier, _claimFrequencyTypeCode);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
+            value = value.TrimEnd(_segment.Delimiters.SubElementSeparator);
             _segment.SetElement(_elementNumber, value);
         }
 

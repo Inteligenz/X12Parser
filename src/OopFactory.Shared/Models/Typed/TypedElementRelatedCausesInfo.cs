@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace OopFactory.X12.Parsing.Model.Typed
+namespace OopFactory.X12.Shared.Models.Typed
 {
     public class TypedElementRelatedCausesInfo
     {
@@ -24,9 +21,9 @@ namespace OopFactory.X12.Parsing.Model.Typed
         private void UpdateElement()
         {
             string value = String.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-                    _segment._delimiters.SubElementSeparator,
+                    _segment.Delimiters.SubElementSeparator,
                     _relatedCausesCode1, _relatedCausesCode2, _relatedCausesCode3, _stateOrProviceCode, _countryCode);
-            value = value.TrimEnd(_segment._delimiters.SubElementSeparator);
+            value = value.TrimEnd(_segment.Delimiters.SubElementSeparator);
             _segment.SetElement(_elementNumber, value);
         }
 

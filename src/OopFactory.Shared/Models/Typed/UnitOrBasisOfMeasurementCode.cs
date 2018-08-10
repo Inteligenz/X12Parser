@@ -1,1601 +1,1596 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Attributes;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using OopFactory.X12.Shared.Attributes;
+
     public enum UnitOrBasisOfMeasurementCode
     {
-        [EDIFieldValue("01")]
+        [EdiFieldValue("01")]
         ActualPounds,
-        [EDIFieldValue("02")]
+        [EdiFieldValue("02")]
         StatuteMile,
-        [EDIFieldValue("03")]
+        [EdiFieldValue("03")]
         Seconds,
-        [EDIFieldValue("04")]
+        [EdiFieldValue("04")]
         SmallSpray,
-        [EDIFieldValue("05")]
+        [EdiFieldValue("05")]
         Lifts,
-        [EDIFieldValue("06")]
+        [EdiFieldValue("06")]
         Digits,
-        [EDIFieldValue("07")]
+        [EdiFieldValue("07")]
         Strand,
-        [EDIFieldValue("08")]
+        [EdiFieldValue("08")]
         HeatLots,
-        [EDIFieldValue("09")]
+        [EdiFieldValue("09")]
         Tire,
-        [EDIFieldValue("10")]
+        [EdiFieldValue("10")]
         Group,
-        [EDIFieldValue("11")]
+        [EdiFieldValue("11")]
         Outfit,
-        [EDIFieldValue("12")]
+        [EdiFieldValue("12")]
         Packet,
-        [EDIFieldValue("13")]
+        [EdiFieldValue("13")]
         Ration,
-        [EDIFieldValue("14")]
+        [EdiFieldValue("14")]
         Shot,
-        [EDIFieldValue("15")]
+        [EdiFieldValue("15")]
         Stick,
-        [EDIFieldValue("16")]
+        [EdiFieldValue("16")]
         _115KilogramDrum,
-        [EDIFieldValue("17")]
+        [EdiFieldValue("17")]
         _100PoundDrum,
-        [EDIFieldValue("18")]
+        [EdiFieldValue("18")]
         _55GallonDrum,
-        [EDIFieldValue("19")]
+        [EdiFieldValue("19")]
         TankTruck,
-        [EDIFieldValue("1A")]
+        [EdiFieldValue("1A")]
         CarMile,
-        [EDIFieldValue("1B")]
+        [EdiFieldValue("1B")]
         CarCount,
-        [EDIFieldValue("1C")]
+        [EdiFieldValue("1C")]
         LocomotiveCount,
-        [EDIFieldValue("1D")]
+        [EdiFieldValue("1D")]
         CabooseCount,
-        [EDIFieldValue("1E")]
+        [EdiFieldValue("1E")]
         EmptyCar,
-        [EDIFieldValue("1F")]
+        [EdiFieldValue("1F")]
         TrainMile,
-        [EDIFieldValue("1G")]
+        [EdiFieldValue("1G")]
         FuelUsage_Gallons,
-        [EDIFieldValue("1H")]
+        [EdiFieldValue("1H")]
         CabooseMile,
-        [EDIFieldValue("1I")]
+        [EdiFieldValue("1I")]
         FixedRate,
-        [EDIFieldValue("1J")]
+        [EdiFieldValue("1J")]
         TonMiles,
-        [EDIFieldValue("1K")]
+        [EdiFieldValue("1K")]
         LocomotiveMile,
-        [EDIFieldValue("1L")]
+        [EdiFieldValue("1L")]
         TotalCarCount,
-        [EDIFieldValue("1M")]
+        [EdiFieldValue("1M")]
         TotalCarMile,
-        [EDIFieldValue("1N")]
+        [EdiFieldValue("1N")]
         Count,
-        [EDIFieldValue("1O")]
+        [EdiFieldValue("1O")]
         Season,
-        [EDIFieldValue("1P")]
+        [EdiFieldValue("1P")]
         TankCar,
-        [EDIFieldValue("1Q")]
+        [EdiFieldValue("1Q")]
         Frames,
-        [EDIFieldValue("1R")]
+        [EdiFieldValue("1R")]
         Transactions,
-        [EDIFieldValue("1X")]
+        [EdiFieldValue("1X")]
         QuarterMile,
-        [EDIFieldValue("20")]
+        [EdiFieldValue("20")]
         _20FootContainer,
-        [EDIFieldValue("21")]
+        [EdiFieldValue("21")]
         _40FootContainer,
-        [EDIFieldValue("22")]
+        [EdiFieldValue("22")]
         DeciliterperGram,
-        [EDIFieldValue("23")]
+        [EdiFieldValue("23")]
         GramsPerCubicCentimeter,
-        [EDIFieldValue("24")]
+        [EdiFieldValue("24")]
         TheoreticalPounds,
-        [EDIFieldValue("25")]
+        [EdiFieldValue("25")]
         GramsPerSquareCentimeter,
-        [EDIFieldValue("26")]
+        [EdiFieldValue("26")]
         ActualTons,
-        [EDIFieldValue("27")]
+        [EdiFieldValue("27")]
         TheoreticalTons,
-        [EDIFieldValue("28")]
+        [EdiFieldValue("28")]
         KilogramsPerSquareMeter,
-        [EDIFieldValue("29")]
+        [EdiFieldValue("29")]
         PoundsPer1000SquareFeet,
-        [EDIFieldValue("2A")]
+        [EdiFieldValue("2A")]
         RadiansPerSecond,
-        [EDIFieldValue("2B")]
+        [EdiFieldValue("2B")]
         RadiansPerSecondSquared,
-        [EDIFieldValue("2C")]
+        [EdiFieldValue("2C")]
         Roentgen,
-        [EDIFieldValue("2F")]
+        [EdiFieldValue("2F")]
         VoltsPerMeter,
-        [EDIFieldValue("2G")]
+        [EdiFieldValue("2G")]
         Volts_AlternatingCurrent,
-        [EDIFieldValue("2H")]
+        [EdiFieldValue("2H")]
         Volts_DirectCurrent,
-        [EDIFieldValue("2I")]
+        [EdiFieldValue("2I")]
         BritishThermalUnitsPerHour,
-        [EDIFieldValue("2J")]
+        [EdiFieldValue("2J")]
         CubicCentimetersPerSecond,
-        [EDIFieldValue("2K")]
+        [EdiFieldValue("2K")]
         CubicFeetPerHour,
-        [EDIFieldValue("2L")]
+        [EdiFieldValue("2L")]
         CubicFeetPerMinute,
-        [EDIFieldValue("2M")]
+        [EdiFieldValue("2M")]
         CentimetersPerSecond,
-        [EDIFieldValue("2N")]
+        [EdiFieldValue("2N")]
         Decibels,
-        [EDIFieldValue("2P")]
+        [EdiFieldValue("2P")]
         Kilobyte,
-        [EDIFieldValue("2Q")]
+        [EdiFieldValue("2Q")]
         Kilobecquerel,
-        [EDIFieldValue("2R")]
+        [EdiFieldValue("2R")]
         Kilocurie,
-        [EDIFieldValue("2U")]
+        [EdiFieldValue("2U")]
         Megagram,
-        [EDIFieldValue("2V")]
+        [EdiFieldValue("2V")]
         MegagramsPerHour,
-        [EDIFieldValue("2W")]
+        [EdiFieldValue("2W")]
         Bin,
-        [EDIFieldValue("2X")]
+        [EdiFieldValue("2X")]
         MetersPerMinute,
-        [EDIFieldValue("2Y")]
+        [EdiFieldValue("2Y")]
         Milliroentgen,
-        [EDIFieldValue("2Z")]
+        [EdiFieldValue("2Z")]
         Millivolts,
-        [EDIFieldValue("30")]
+        [EdiFieldValue("30")]
         HorsepowerDaysPerAirDryMetricTons,
-        [EDIFieldValue("31")]
+        [EdiFieldValue("31")]
         Catchweight,
-        [EDIFieldValue("32")]
+        [EdiFieldValue("32")]
         KilogramsPerAirDryMetricTons,
-        [EDIFieldValue("33")]
+        [EdiFieldValue("33")]
         KilopascalSquareMetersPerGram,
-        [EDIFieldValue("34")]
+        [EdiFieldValue("34")]
         KilopascalsPerMillimeter,
-        [EDIFieldValue("35")]
+        [EdiFieldValue("35")]
         MillilitersPerSquareCentimeterSecond,
-        [EDIFieldValue("36")]
+        [EdiFieldValue("36")]
         CubicFeetPerMinutePerSquareFoot,
-        [EDIFieldValue("37")]
+        [EdiFieldValue("37")]
         OuncesPerSquareFoot,
-        [EDIFieldValue("38")]
+        [EdiFieldValue("38")]
         OuncesPerSquareFootPerOneHundredthOfAnInch,
-        [EDIFieldValue("39")]
+        [EdiFieldValue("39")]
         BasisPoints,
-        [EDIFieldValue("3B")]
+        [EdiFieldValue("3B")]
         Megajoule,
-        [EDIFieldValue("3C")]
+        [EdiFieldValue("3C")]
         Manmonth,
-        [EDIFieldValue("3E")]
+        [EdiFieldValue("3E")]
         PoundsPerPoundofProduct,
-        [EDIFieldValue("3F")]
+        [EdiFieldValue("3F")]
         KilogramsPerLiterOfProduct,
-        [EDIFieldValue("3G")]
+        [EdiFieldValue("3G")]
         PoundsPerPieceOfProduct,
-        [EDIFieldValue("3H")]
+        [EdiFieldValue("3H")]
         KilogramsPerKilogramOfProduct,
-        [EDIFieldValue("3I")]
+        [EdiFieldValue("3I")]
         KilogramsPerPieceOfProduct,
-        [EDIFieldValue("40")]
+        [EdiFieldValue("40")]
         MilliliterPerSecond,
-        [EDIFieldValue("41")]
+        [EdiFieldValue("41")]
         MilliliterPerMinute,
-        [EDIFieldValue("43")]
+        [EdiFieldValue("43")]
         SuperBulkBag,
-        [EDIFieldValue("44")]
+        [EdiFieldValue("44")]
         _500KilogramBulkBag,
-        [EDIFieldValue("45")]
+        [EdiFieldValue("45")]
         _300KilogramBulkBag,
-        [EDIFieldValue("46")]
+        [EdiFieldValue("46")]
         _25KilogramBulkBag,
-        [EDIFieldValue("47")]
+        [EdiFieldValue("47")]
         _50PoundBag,
-        [EDIFieldValue("48")]
+        [EdiFieldValue("48")]
         BulkCarLoad,
-        [EDIFieldValue("4A")]
+        [EdiFieldValue("4A")]
         Bobbin,
-        [EDIFieldValue("4B")]
+        [EdiFieldValue("4B")]
         Cap,
-        [EDIFieldValue("4C")]
+        [EdiFieldValue("4C")]
         Centistokes,
-        [EDIFieldValue("4D")]
+        [EdiFieldValue("4D")]
         Curie,
-        [EDIFieldValue("4E")]
+        [EdiFieldValue("4E")]
         _20Pack,
-        [EDIFieldValue("4F")]
+        [EdiFieldValue("4F")]
         _100Pack,
-        [EDIFieldValue("4G")]
+        [EdiFieldValue("4G")]
         Microliter,
-        [EDIFieldValue("4H")]
+        [EdiFieldValue("4H")]
         Micrometer,
-        [EDIFieldValue("4I")]
+        [EdiFieldValue("4I")]
         MetersPerSecond,
-        [EDIFieldValue("4J")]
+        [EdiFieldValue("4J")]
         MetersPerSecondPerSecond,
-        [EDIFieldValue("4K")]
+        [EdiFieldValue("4K")]
         Milliamperes,
-        [EDIFieldValue("4L")]
+        [EdiFieldValue("4L")]
         Megabyte,
-        [EDIFieldValue("4M")]
+        [EdiFieldValue("4M")]
         MilligramsPerHour,
-        [EDIFieldValue("4N")]
+        [EdiFieldValue("4N")]
         Megabecquerel,
-        [EDIFieldValue("4O")]
+        [EdiFieldValue("4O")]
         Microfarad,
-        [EDIFieldValue("4P")]
+        [EdiFieldValue("4P")]
         NewtonsPerMeter,
-        [EDIFieldValue("4Q")]
+        [EdiFieldValue("4Q")]
         OunceInch,
-        [EDIFieldValue("4R")]
+        [EdiFieldValue("4R")]
         OunceFoot,
-        [EDIFieldValue("4S")]
+        [EdiFieldValue("4S")]
         Pascal,
-        [EDIFieldValue("4T")]
+        [EdiFieldValue("4T")]
         Picofarad,
-        [EDIFieldValue("4U")]
+        [EdiFieldValue("4U")]
         PoundsPerHour,
-        [EDIFieldValue("4V")]
+        [EdiFieldValue("4V")]
         CubicMeterPerHour,
-        [EDIFieldValue("4W")]
+        [EdiFieldValue("4W")]
         TonPerHour,
-        [EDIFieldValue("4X")]
+        [EdiFieldValue("4X")]
         KiloliterPerHour,
-        [EDIFieldValue("50")]
+        [EdiFieldValue("50")]
         ActualKilograms,
-        [EDIFieldValue("51")]
+        [EdiFieldValue("51")]
         ActualTonnes,
-        [EDIFieldValue("52")]
+        [EdiFieldValue("52")]
         Credits,
-        [EDIFieldValue("53")]
+        [EdiFieldValue("53")]
         TheoreticalKilograms,
-        [EDIFieldValue("54")]
+        [EdiFieldValue("54")]
         TheoreticalTonnes,
-        [EDIFieldValue("56")]
+        [EdiFieldValue("56")]
         Sitas,
-        [EDIFieldValue("57")]
+        [EdiFieldValue("57")]
         Mesh,
-        [EDIFieldValue("58")]
+        [EdiFieldValue("58")]
         NetKilograms,
-        [EDIFieldValue("59")]
+        [EdiFieldValue("59")]
         PartsPerMillion,
-        [EDIFieldValue("5A")]
+        [EdiFieldValue("5A")]
         BarrelsPerMinute,
-        [EDIFieldValue("5B")]
+        [EdiFieldValue("5B")]
         Batch,
-        [EDIFieldValue("5C")]
+        [EdiFieldValue("5C")]
         GallonsPerThousand,
-        [EDIFieldValue("5E")]
+        [EdiFieldValue("5E")]
         MMSCFPerDay,
-        [EDIFieldValue("5F")]
+        [EdiFieldValue("5F")]
         PoundsPerThousand,
-        [EDIFieldValue("5G")]
+        [EdiFieldValue("5G")]
         Pump,
-        [EDIFieldValue("5H")]
+        [EdiFieldValue("5H")]
         Stage,
-        [EDIFieldValue("5I")]
+        [EdiFieldValue("5I")]
         StandardCubicFoot,
-        [EDIFieldValue("5J")]
+        [EdiFieldValue("5J")]
         HydraulicHorsePower,
-        [EDIFieldValue("5K")]
+        [EdiFieldValue("5K")]
         CountPerMinute,
-        [EDIFieldValue("5P")]
+        [EdiFieldValue("5P")]
         SeismicLevel,
-        [EDIFieldValue("5Q")]
+        [EdiFieldValue("5Q")]
         SeismicLine,
-        [EDIFieldValue("60")]
+        [EdiFieldValue("60")]
         PercentWeight,
-        [EDIFieldValue("61")]
+        [EdiFieldValue("61")]
         PartsPerBillion,
-        [EDIFieldValue("62")]
+        [EdiFieldValue("62")]
         PercentPer1000Hours,
-        [EDIFieldValue("63")]
+        [EdiFieldValue("63")]
         FailureRateInTime,
-        [EDIFieldValue("64")]
+        [EdiFieldValue("64")]
         PoundsPerSquareInchGauge,
-        [EDIFieldValue("65")]
+        [EdiFieldValue("65")]
         Coulomb,
-        [EDIFieldValue("66")]
+        [EdiFieldValue("66")]
         Oersteds,
-        [EDIFieldValue("67")]
+        [EdiFieldValue("67")]
         Siemens,
-        [EDIFieldValue("68")]
+        [EdiFieldValue("68")]
         Ampere,
-        [EDIFieldValue("69")]
+        [EdiFieldValue("69")]
         TestSpecificScale,
-        [EDIFieldValue("70")]
+        [EdiFieldValue("70")]
         Volt,
-        [EDIFieldValue("71")]
+        [EdiFieldValue("71")]
         VoltAmperePerPound,
-        [EDIFieldValue("72")]
+        [EdiFieldValue("72")]
         WattsPerPound,
-        [EDIFieldValue("73")]
+        [EdiFieldValue("73")]
         AmpereTurnPerCentimeter,
-        [EDIFieldValue("74")]
+        [EdiFieldValue("74")]
         MilliPascals,
-        [EDIFieldValue("76")]
+        [EdiFieldValue("76")]
         Gauss,
-        [EDIFieldValue("77")]
+        [EdiFieldValue("77")]
         Mil,
-        [EDIFieldValue("78")]
+        [EdiFieldValue("78")]
         Kilogauss,
-        [EDIFieldValue("79")]
+        [EdiFieldValue("79")]
         ElectronVolt,
-        [EDIFieldValue("80")]
+        [EdiFieldValue("80")]
         PoundsPerSquareInchAbsolute,
-        [EDIFieldValue("81")]
+        [EdiFieldValue("81")]
         Henry,
-        [EDIFieldValue("82")]
+        [EdiFieldValue("82")]
         Ohm,
-        [EDIFieldValue("83")]
+        [EdiFieldValue("83")]
         Farad,
-        [EDIFieldValue("84")]
+        [EdiFieldValue("84")]
         KiloPoundsPerSquareInch_KSI,
-        [EDIFieldValue("85")]
+        [EdiFieldValue("85")]
         FootPounds,
-        [EDIFieldValue("86")]
+        [EdiFieldValue("86")]
         Joules,
-        [EDIFieldValue("87")]
+        [EdiFieldValue("87")]
         PoundsPerCubicFoot,
-        [EDIFieldValue("89")]
+        [EdiFieldValue("89")]
         Poise,
-        [EDIFieldValue("8C")]
+        [EdiFieldValue("8C")]
         Cord,
-        [EDIFieldValue("8D")]
+        [EdiFieldValue("8D")]
         Duty,
-        [EDIFieldValue("8P")]
+        [EdiFieldValue("8P")]
         Project,
-        [EDIFieldValue("8R")]
+        [EdiFieldValue("8R")]
         Program,
-        [EDIFieldValue("8S")]
+        [EdiFieldValue("8S")]
         Session,
-        [EDIFieldValue("8U")]
+        [EdiFieldValue("8U")]
         SquareKilometer,
-        [EDIFieldValue("90")]
+        [EdiFieldValue("90")]
         SayboldUniversalSecond,
-        [EDIFieldValue("91")]
+        [EdiFieldValue("91")]
         Stokes,
-        [EDIFieldValue("92")]
+        [EdiFieldValue("92")]
         CaloriesPerCubicCentimeter,
-        [EDIFieldValue("93")]
+        [EdiFieldValue("93")]
         CaloriesPerGram,
-        [EDIFieldValue("94")]
+        [EdiFieldValue("94")]
         CurlUnits,
-        [EDIFieldValue("95")]
+        [EdiFieldValue("95")]
         _20kGallonTankcar,
-        [EDIFieldValue("96")]
+        [EdiFieldValue("96")]
         _10kGallonTankcar,
-        [EDIFieldValue("97")]
+        [EdiFieldValue("97")]
         _10KilogramDrum,
-        [EDIFieldValue("98")]
+        [EdiFieldValue("98")]
         _15KilogramDrum,
-        [EDIFieldValue("99")]
+        [EdiFieldValue("99")]
         Watt,
-        [EDIFieldValue("A8")]
+        [EdiFieldValue("A8")]
         DollarsPerHours,
-        [EDIFieldValue("AA")]
+        [EdiFieldValue("AA")]
         Ball,
-        [EDIFieldValue("AB")]
+        [EdiFieldValue("AB")]
         BulkPack,
-        [EDIFieldValue("AC")]
+        [EdiFieldValue("AC")]
         Acre,
-        [EDIFieldValue("AD")]
+        [EdiFieldValue("AD")]
         Bytes,
-        [EDIFieldValue("AE")]
+        [EdiFieldValue("AE")]
         AmperesPerMeter,
-        [EDIFieldValue("AF")]
+        [EdiFieldValue("AF")]
         Centigram,
-        [EDIFieldValue("AG")]
+        [EdiFieldValue("AG")]
         Angstrom,
-        [EDIFieldValue("AH")]
+        [EdiFieldValue("AH")]
         AdditionalMinutes,
-        [EDIFieldValue("AI")]
+        [EdiFieldValue("AI")]
         AverageMinutesPerCall,
-        [EDIFieldValue("AJ")]
+        [EdiFieldValue("AJ")]
         Cop,
-        [EDIFieldValue("AK")]
+        [EdiFieldValue("AK")]
         Fathom,
-        [EDIFieldValue("AL")]
+        [EdiFieldValue("AL")]
         AccessLines,
-        [EDIFieldValue("AM")]
+        [EdiFieldValue("AM")]
         Ampoule,
-        [EDIFieldValue("AN")]
+        [EdiFieldValue("AN")]
         MinutesOrMessages,
-        [EDIFieldValue("AO")]
+        [EdiFieldValue("AO")]
         Ampereturn,
-        [EDIFieldValue("AP")]
+        [EdiFieldValue("AP")]
         AluminumPoundsOnly,
-        [EDIFieldValue("AQ")]
+        [EdiFieldValue("AQ")]
         AntihemophilicFactorUnits,
-        [EDIFieldValue("AR")]
+        [EdiFieldValue("AR")]
         Suppository,
-        [EDIFieldValue("AS")]
+        [EdiFieldValue("AS")]
         Assortment,
-        [EDIFieldValue("AT")]
+        [EdiFieldValue("AT")]
         Atmosphere,
-        [EDIFieldValue("AU")]
+        [EdiFieldValue("AU")]
         OcularInsertSystem,
-        [EDIFieldValue("AV")]
+        [EdiFieldValue("AV")]
         Capsule,
-        [EDIFieldValue("AW")]
+        [EdiFieldValue("AW")]
         PowderFilledVials,
-        [EDIFieldValue("AX")]
+        [EdiFieldValue("AX")]
         Twenty,
-        [EDIFieldValue("AY")]
+        [EdiFieldValue("AY")]
         Assembly,
-        [EDIFieldValue("AZ")]
+        [EdiFieldValue("AZ")]
         BritishThermalUnitsPerPound,
-        [EDIFieldValue("B0")]
+        [EdiFieldValue("B0")]
         BritishThermalUnitsPerCubicFoot,
-        [EDIFieldValue("B1")]
+        [EdiFieldValue("B1")]
         BarrelsPerDay,
-        [EDIFieldValue("B2")]
+        [EdiFieldValue("B2")]
         Bunks,
-        [EDIFieldValue("B3")]
+        [EdiFieldValue("B3")]
         BattingPound,
-        [EDIFieldValue("B4")]
+        [EdiFieldValue("B4")]
         BarrelImperial,
-        [EDIFieldValue("B5")]
+        [EdiFieldValue("B5")]
         Billet,
-        [EDIFieldValue("B6")]
+        [EdiFieldValue("B6")]
         Bun,
-        [EDIFieldValue("B7")]
+        [EdiFieldValue("B7")]
         Cycles,
-        [EDIFieldValue("B8")]
+        [EdiFieldValue("B8")]
         Board,
-        [EDIFieldValue("B9")]
+        [EdiFieldValue("B9")]
         Batt,
-        [EDIFieldValue("BA")]
+        [EdiFieldValue("BA")]
         Bale,
-        [EDIFieldValue("BB")]
+        [EdiFieldValue("BB")]
         BaseBox,
-        [EDIFieldValue("BC")]
+        [EdiFieldValue("BC")]
         Bucket,
-        [EDIFieldValue("BD")]
+        [EdiFieldValue("BD")]
         Bundle,
-        [EDIFieldValue("BE")]
+        [EdiFieldValue("BE")]
         Beam,
-        [EDIFieldValue("BF")]
+        [EdiFieldValue("BF")]
         BoardFeet,
-        [EDIFieldValue("BG")]
+        [EdiFieldValue("BG")]
         Bag,
-        [EDIFieldValue("BH")]
+        [EdiFieldValue("BH")]
         Brush,
-        [EDIFieldValue("BI")]
+        [EdiFieldValue("BI")]
         Bar,
-        [EDIFieldValue("BJ")]
+        [EdiFieldValue("BJ")]
         Band,
-        [EDIFieldValue("BK")]
+        [EdiFieldValue("BK")]
         Book,
-        [EDIFieldValue("BL")]
+        [EdiFieldValue("BL")]
         Block,
-        [EDIFieldValue("BM")]
+        [EdiFieldValue("BM")]
         Bolt,
-        [EDIFieldValue("BN")]
+        [EdiFieldValue("BN")]
         Bulk,
-        [EDIFieldValue("BO")]
+        [EdiFieldValue("BO")]
         Bottle,
-        [EDIFieldValue("BP")]
+        [EdiFieldValue("BP")]
         _100BoardFeet,
-        [EDIFieldValue("BQ")]
+        [EdiFieldValue("BQ")]
         Brakehorsepower,
-        [EDIFieldValue("BR")]
+        [EdiFieldValue("BR")]
         Barrel,
-        [EDIFieldValue("BS")]
+        [EdiFieldValue("BS")]
         Basket,
-        [EDIFieldValue("BT")]
+        [EdiFieldValue("BT")]
         Belt,
-        [EDIFieldValue("BU")]
+        [EdiFieldValue("BU")]
         Bushel,
-        [EDIFieldValue("BV")]
+        [EdiFieldValue("BV")]
         BushelDryImperial,
-        [EDIFieldValue("BW")]
+        [EdiFieldValue("BW")]
         BaseWeight,
-        [EDIFieldValue("BX")]
+        [EdiFieldValue("BX")]
         Box,
-        [EDIFieldValue("BY")]
+        [EdiFieldValue("BY")]
         BritishThermalUnit,
-        [EDIFieldValue("BZ")]
+        [EdiFieldValue("BZ")]
         MillionBTUs,
-        [EDIFieldValue("C0")]
+        [EdiFieldValue("C0")]
         Calls,
-        [EDIFieldValue("C1")]
+        [EdiFieldValue("C1")]
         CompositeProductPounds_TotalWeight,
-        [EDIFieldValue("C2")]
+        [EdiFieldValue("C2")]
         Carset,
-        [EDIFieldValue("C3")]
+        [EdiFieldValue("C3")]
         Centiliter,
-        [EDIFieldValue("C4")]
+        [EdiFieldValue("C4")]
         Carload,
-        [EDIFieldValue("C5")]
+        [EdiFieldValue("C5")]
         Cost,
-        [EDIFieldValue("C6")]
+        [EdiFieldValue("C6")]
         Cell,
-        [EDIFieldValue("C7")]
+        [EdiFieldValue("C7")]
         Centipoise_CPS,
-        [EDIFieldValue("C8")]
+        [EdiFieldValue("C8")]
         CubicDecimeter,
-        [EDIFieldValue("C9")]
+        [EdiFieldValue("C9")]
         CoilGroup,
-        [EDIFieldValue("CA")]
+        [EdiFieldValue("CA")]
         Case,
-        [EDIFieldValue("CB")]
+        [EdiFieldValue("CB")]
         Carboy,
-        [EDIFieldValue("CC")]
+        [EdiFieldValue("CC")]
         CubicCentimeter,
-        [EDIFieldValue("CD")]
+        [EdiFieldValue("CD")]
         Carat,
-        [EDIFieldValue("CE")]
+        [EdiFieldValue("CE")]
         CentigradeCelsius,
-        [EDIFieldValue("CF")]
+        [EdiFieldValue("CF")]
         CubicFeet,
-        [EDIFieldValue("CG")]
+        [EdiFieldValue("CG")]
         Card,
-        [EDIFieldValue("CH")]
+        [EdiFieldValue("CH")]
         Container,
-        [EDIFieldValue("CI")]
+        [EdiFieldValue("CI")]
         CubicInches,
-        [EDIFieldValue("CJ")]
+        [EdiFieldValue("CJ")]
         Cone,
-        [EDIFieldValue("CK")]
+        [EdiFieldValue("CK")]
         Connector,
-        [EDIFieldValue("CL")]
+        [EdiFieldValue("CL")]
         Cylinder,
-        [EDIFieldValue("CM")]
+        [EdiFieldValue("CM")]
         Centimeter,
-        [EDIFieldValue("CN")]
+        [EdiFieldValue("CN")]
         Can,
-        [EDIFieldValue("CO")]
+        [EdiFieldValue("CO")]
         CubicMeters_Net,
-        [EDIFieldValue("CP")]
+        [EdiFieldValue("CP")]
         Crate,
-        [EDIFieldValue("CQ")]
+        [EdiFieldValue("CQ")]
         Cartridge,
-        [EDIFieldValue("CR")]
+        [EdiFieldValue("CR")]
         CubicMeter,
-        [EDIFieldValue("CS")]
+        [EdiFieldValue("CS")]
         Cassette,
-        [EDIFieldValue("CT")]
+        [EdiFieldValue("CT")]
         Carton,
-        [EDIFieldValue("CU")]
+        [EdiFieldValue("CU")]
         Cup,
-        [EDIFieldValue("CV")]
+        [EdiFieldValue("CV")]
         Cover,
-        [EDIFieldValue("CW")]
+        [EdiFieldValue("CW")]
         HundredPounds_CWT,
-        [EDIFieldValue("CX")]
+        [EdiFieldValue("CX")]
         Coil,
-        [EDIFieldValue("CY")]
+        [EdiFieldValue("CY")]
         CubicYard,
-        [EDIFieldValue("CZ")]
+        [EdiFieldValue("CZ")]
         Combo,
-        [EDIFieldValue("D2")]
+        [EdiFieldValue("D2")]
         Shares,
-        [EDIFieldValue("D3")]
+        [EdiFieldValue("D3")]
         SquareDecimeter,
-        [EDIFieldValue("D5")]
+        [EdiFieldValue("D5")]
         KilogramPerSquareCentimeter,
-        [EDIFieldValue("D8")]
+        [EdiFieldValue("D8")]
         DraizeScore,
-        [EDIFieldValue("D9")]
+        [EdiFieldValue("D9")]
         DynePerSquareCentimeter,
-        [EDIFieldValue("DA")]
+        [EdiFieldValue("DA")]
         Days,
-        [EDIFieldValue("DB")]
+        [EdiFieldValue("DB")]
         DryPounds,
-        [EDIFieldValue("DC")]
+        [EdiFieldValue("DC")]
         Disk,
-        [EDIFieldValue("DD")]
+        [EdiFieldValue("DD")]
         Degree,
-        [EDIFieldValue("DE")]
+        [EdiFieldValue("DE")]
         Deal,
-        [EDIFieldValue("DF")]
+        [EdiFieldValue("DF")]
         Dram,
-        [EDIFieldValue("DG")]
+        [EdiFieldValue("DG")]
         Decigram,
-        [EDIFieldValue("DH")]
+        [EdiFieldValue("DH")]
         Miles,
-        [EDIFieldValue("DI")]
+        [EdiFieldValue("DI")]
         Dispenser,
-        [EDIFieldValue("DJ")]
+        [EdiFieldValue("DJ")]
         Decagram,
-        [EDIFieldValue("DK")]
+        [EdiFieldValue("DK")]
         Kilometers,
-        [EDIFieldValue("DL")]
+        [EdiFieldValue("DL")]
         Deciliter,
-        [EDIFieldValue("DM")]
+        [EdiFieldValue("DM")]
         Decimeter,
-        [EDIFieldValue("DN")]
+        [EdiFieldValue("DN")]
         DeciNewtonMeter,
-        [EDIFieldValue("DO")]
+        [EdiFieldValue("DO")]
         DollarsUS,
-        [EDIFieldValue("DP")]
+        [EdiFieldValue("DP")]
         DozenPair,
-        [EDIFieldValue("DQ")]
+        [EdiFieldValue("DQ")]
         DataRecords,
-        [EDIFieldValue("DR")]
+        [EdiFieldValue("DR")]
         Drum,
-        [EDIFieldValue("DS")]
+        [EdiFieldValue("DS")]
         Display,
-        [EDIFieldValue("DT")]
+        [EdiFieldValue("DT")]
         DryTon,
-        [EDIFieldValue("DU")]
+        [EdiFieldValue("DU")]
         Dyne,
-        [EDIFieldValue("DW")]
+        [EdiFieldValue("DW")]
         CalendarDays,
-        [EDIFieldValue("DX")]
+        [EdiFieldValue("DX")]
         DynesPerCentimeter,
-        [EDIFieldValue("DY")]
+        [EdiFieldValue("DY")]
         DirectoryBooks,
-        [EDIFieldValue("DZ")]
+        [EdiFieldValue("DZ")]
         Dozen,
-        [EDIFieldValue("E1")]
+        [EdiFieldValue("E1")]
         Hectometer,
-        [EDIFieldValue("E3")]
+        [EdiFieldValue("E3")]
         Inches_FractionAverage,
-        [EDIFieldValue("E4")]
+        [EdiFieldValue("E4")]
         Inches_FractionMinimum,
-        [EDIFieldValue("E5")]
+        [EdiFieldValue("E5")]
         Inches_FractionActual,
-        [EDIFieldValue("E7")]
+        [EdiFieldValue("E7")]
         Inches_DecimalAverage,
-        [EDIFieldValue("E8")]
+        [EdiFieldValue("E8")]
         Inches_DecimalActual,
-        [EDIFieldValue("E9")]
+        [EdiFieldValue("E9")]
         English_FeetInches,
-        [EDIFieldValue("EA")]
+        [EdiFieldValue("EA")]
         Each,
-        [EDIFieldValue("EB")]
+        [EdiFieldValue("EB")]
         ElectronicMailBoxes,
-        [EDIFieldValue("EC")]
+        [EdiFieldValue("EC")]
         EachPerMonth,
-        [EDIFieldValue("ED")]
+        [EdiFieldValue("ED")]
         Inches_DecimalNominal,
-        [EDIFieldValue("EE")]
+        [EdiFieldValue("EE")]
         Employees,
-        [EDIFieldValue("EF")]
+        [EdiFieldValue("EF")]
         Inches_FractionNominal,
-        [EDIFieldValue("EG")]
+        [EdiFieldValue("EG")]
         DoubletimeHours,
-        [EDIFieldValue("EH")]
+        [EdiFieldValue("EH")]
         Knots,
-        [EDIFieldValue("EJ")]
+        [EdiFieldValue("EJ")]
         Locations,
-        [EDIFieldValue("EM")]
+        [EdiFieldValue("EM")]
         Inches_DecimalMinimum,
-        [EDIFieldValue("EP")]
+        [EdiFieldValue("EP")]
         ElevenPack,
-        [EDIFieldValue("EQ")]
+        [EdiFieldValue("EQ")]
         EquivalentGallons,
-        [EDIFieldValue("EV")]
+        [EdiFieldValue("EV")]
         Envelope,
-        [EDIFieldValue("EX")]
+        [EdiFieldValue("EX")]
         Feet_InchesAndFraction,
-        [EDIFieldValue("EY")]
+        [EdiFieldValue("EY")]
         Feet_InchesAndDecimal,
-        [EDIFieldValue("EZ")]
+        [EdiFieldValue("EZ")]
         FeetAndDecimal,
-        [EDIFieldValue("F1")]
+        [EdiFieldValue("F1")]
         ThousandCubicFeetPerDay,
-        [EDIFieldValue("F2")]
+        [EdiFieldValue("F2")]
         InternationalUnit,
-        [EDIFieldValue("F3")]
+        [EdiFieldValue("F3")]
         Equivalent,
-        [EDIFieldValue("F4")]
+        [EdiFieldValue("F4")]
         Minim,
-        [EDIFieldValue("F5")]
+        [EdiFieldValue("F5")]
         MOL,
-        [EDIFieldValue("F6")]
+        [EdiFieldValue("F6")]
         PricePerShare,
-        [EDIFieldValue("F9")]
+        [EdiFieldValue("F9")]
         FibersPerCubicCentimeterOfAir,
-        [EDIFieldValue("FA")]
+        [EdiFieldValue("FA")]
         Fahrenheit,
-        [EDIFieldValue("FB")]
+        [EdiFieldValue("FB")]
         Fields,
-        [EDIFieldValue("FC")]
+        [EdiFieldValue("FC")]
         _1000CubicFeet,
-        [EDIFieldValue("FD")]
+        [EdiFieldValue("FD")]
         MillionParticlesPerCubicFoot,
-        [EDIFieldValue("FE")]
+        [EdiFieldValue("FE")]
         TrackFoot,
-        [EDIFieldValue("FF")]
+        [EdiFieldValue("FF")]
         HundredCubicMeters,
-        [EDIFieldValue("FG")]
+        [EdiFieldValue("FG")]
         TransdermalPatch,
-        [EDIFieldValue("FH")]
+        [EdiFieldValue("FH")]
         Micromolar,
-        [EDIFieldValue("FJ")]
+        [EdiFieldValue("FJ")]
         SizingFactor,
-        [EDIFieldValue("FK")]
+        [EdiFieldValue("FK")]
         Fibers,
-        [EDIFieldValue("FL")]
+        [EdiFieldValue("FL")]
         FlakeTon,
-        [EDIFieldValue("FM")]
+        [EdiFieldValue("FM")]
         MillionCubicFeet,
-        [EDIFieldValue("FO")]
+        [EdiFieldValue("FO")]
         FluidOunce,
-        [EDIFieldValue("FP")]
+        [EdiFieldValue("FP")]
         PoundsPerSqFt,
-        [EDIFieldValue("FR")]
+        [EdiFieldValue("FR")]
         FeetPerMinute,
-        [EDIFieldValue("FS")]
+        [EdiFieldValue("FS")]
         FeetPerSecond,
-        [EDIFieldValue("FT")]
+        [EdiFieldValue("FT")]
         Foot,
-        [EDIFieldValue("FZ")]
+        [EdiFieldValue("FZ")]
         FluidOunce_Imperial,
-        [EDIFieldValue("G2")]
+        [EdiFieldValue("G2")]
         USGallonsPerMinute,
-        [EDIFieldValue("G3")]
+        [EdiFieldValue("G3")]
         ImperialGallonsPerMinute,
-        [EDIFieldValue("G4")]
+        [EdiFieldValue("G4")]
         Gigabecquerel,
-        [EDIFieldValue("G5")]
+        [EdiFieldValue("G5")]
         Gill_Imperial,
-        [EDIFieldValue("G7")]
+        [EdiFieldValue("G7")]
         MicroficheSheet,
-        [EDIFieldValue("GA")]
+        [EdiFieldValue("GA")]
         Gallon,
-        [EDIFieldValue("GB")]
+        [EdiFieldValue("GB")]
         GallonsPerDay,
-        [EDIFieldValue("GC")]
+        [EdiFieldValue("GC")]
         GramsPer100Grams,
-        [EDIFieldValue("GD")]
+        [EdiFieldValue("GD")]
         GrossBarrels,
-        [EDIFieldValue("GE")]
+        [EdiFieldValue("GE")]
         PoundsPerGallon,
-        [EDIFieldValue("GF")]
+        [EdiFieldValue("GF")]
         GramsPer100Centimeters,
-        [EDIFieldValue("GG")]
+        [EdiFieldValue("GG")]
         GreatGross_DozenGross,
-        [EDIFieldValue("GH")]
+        [EdiFieldValue("GH")]
         HalfGallon,
-        [EDIFieldValue("GI")]
+        [EdiFieldValue("GI")]
         ImperialGallons,
-        [EDIFieldValue("GJ")]
+        [EdiFieldValue("GJ")]
         GramsPerMilliliter,
-        [EDIFieldValue("GK")]
+        [EdiFieldValue("GK")]
         GramsPerKilogram,
-        [EDIFieldValue("GL")]
+        [EdiFieldValue("GL")]
         GramsPerLiter,
-        [EDIFieldValue("GM")]
+        [EdiFieldValue("GM")]
         GramsPerSqMeter,
-        [EDIFieldValue("GN")]
+        [EdiFieldValue("GN")]
         GrossGallons,
-        [EDIFieldValue("GO")]
+        [EdiFieldValue("GO")]
         MilligramsPerSquareMeter,
-        [EDIFieldValue("GP")]
+        [EdiFieldValue("GP")]
         MilligramsPerCubicMeter,
-        [EDIFieldValue("GQ")]
+        [EdiFieldValue("GQ")]
         MicrogramsPerCubicMeter,
-        [EDIFieldValue("GR")]
+        [EdiFieldValue("GR")]
         Gram,
-        [EDIFieldValue("GS")]
+        [EdiFieldValue("GS")]
         Gross,
-        [EDIFieldValue("GT")]
+        [EdiFieldValue("GT")]
         GrossKilogram,
-        [EDIFieldValue("GU")]
+        [EdiFieldValue("GU")]
         GaussPerOersteds,
-        [EDIFieldValue("GV")]
+        [EdiFieldValue("GV")]
         Gigajoules,
-        [EDIFieldValue("GW")]
+        [EdiFieldValue("GW")]
         GallonsPerThousandCubicFeet,
-        [EDIFieldValue("GX")]
+        [EdiFieldValue("GX")]
         Grain,
-        [EDIFieldValue("GY")]
+        [EdiFieldValue("GY")]
         GrossYard,
-        [EDIFieldValue("GZ")]
+        [EdiFieldValue("GZ")]
         GageSystems,
-        [EDIFieldValue("H1")]
+        [EdiFieldValue("H1")]
         HalfPages_Electronic,
-        [EDIFieldValue("H2")]
+        [EdiFieldValue("H2")]
         HalfLiter,
-        [EDIFieldValue("H4")]
+        [EdiFieldValue("H4")]
         Hectoliter,
-        [EDIFieldValue("HA")]
+        [EdiFieldValue("HA")]
         Hank,
-        [EDIFieldValue("HB")]
+        [EdiFieldValue("HB")]
         HundredBoxes,
-        [EDIFieldValue("HC")]
+        [EdiFieldValue("HC")]
         HundredCount,
-        [EDIFieldValue("HD")]
+        [EdiFieldValue("HD")]
         HalfDozen,
-        [EDIFieldValue("HE")]
+        [EdiFieldValue("HE")]
         HundredthOfACarat,
-        [EDIFieldValue("HF")]
+        [EdiFieldValue("HF")]
         HundredFeet,
-        [EDIFieldValue("HG")]
+        [EdiFieldValue("HG")]
         Hectogram,
-        [EDIFieldValue("HH")]
+        [EdiFieldValue("HH")]
         HundredCubicFeet,
-        [EDIFieldValue("HI")]
+        [EdiFieldValue("HI")]
         HundredSheets,
-        [EDIFieldValue("HJ")]
+        [EdiFieldValue("HJ")]
         Horsepower,
-        [EDIFieldValue("HK")]
+        [EdiFieldValue("HK")]
         HundredKilograms,
-        [EDIFieldValue("HL")]
+        [EdiFieldValue("HL")]
         HundredFeet_Linear,
-        [EDIFieldValue("HM")]
+        [EdiFieldValue("HM")]
         MilesPerHour,
-        [EDIFieldValue("HN")]
+        [EdiFieldValue("HN")]
         MillimetersOfMercury,
-        [EDIFieldValue("HO")]
+        [EdiFieldValue("HO")]
         HundredTroyOunces,
-        [EDIFieldValue("HP")]
+        [EdiFieldValue("HP")]
         MillimeterH20,
-        [EDIFieldValue("HQ")]
+        [EdiFieldValue("HQ")]
         Hectare,
-        [EDIFieldValue("HR")]
+        [EdiFieldValue("HR")]
         Hours,
-        [EDIFieldValue("HS")]
+        [EdiFieldValue("HS")]
         HundredSquareFeet,
-        [EDIFieldValue("HT")]
+        [EdiFieldValue("HT")]
         HalfHour,
-        [EDIFieldValue("HU")]
+        [EdiFieldValue("HU")]
         Hundred,
-        [EDIFieldValue("HV")]
+        [EdiFieldValue("HV")]
         HundredWeight_Short,
-        [EDIFieldValue("HW")]
+        [EdiFieldValue("HW")]
         HundredWeight_Long,
-        [EDIFieldValue("HY")]
+        [EdiFieldValue("HY")]
         HundredYards,
-        [EDIFieldValue("HZ")]
+        [EdiFieldValue("HZ")]
         Hertz,
-        [EDIFieldValue("IA")]
+        [EdiFieldValue("IA")]
         InchPound,
-        [EDIFieldValue("IB")]
+        [EdiFieldValue("IB")]
         InchesPerSecond_VibrationVelocity,
-        [EDIFieldValue("IC")]
+        [EdiFieldValue("IC")]
         CountsPerInch,
-        [EDIFieldValue("IE")]
+        [EdiFieldValue("IE")]
         Person,
-        [EDIFieldValue("IF")]
+        [EdiFieldValue("IF")]
         InchesOfWater,
-        [EDIFieldValue("IH")]
+        [EdiFieldValue("IH")]
         Inhaler,
-        [EDIFieldValue("II")]
+        [EdiFieldValue("II")]
         ColumnInches,
-        [EDIFieldValue("IK")]
+        [EdiFieldValue("IK")]
         PeaksPerInch_PPI,
-        [EDIFieldValue("IL")]
+        [EdiFieldValue("IL")]
         InchesPerMinute,
-        [EDIFieldValue("IM")]
+        [EdiFieldValue("IM")]
         Impressions,
-        [EDIFieldValue("IN")]
+        [EdiFieldValue("IN")]
         Inch,
-        [EDIFieldValue("IP")]
+        [EdiFieldValue("IP")]
         InsurancePolicy,
-        [EDIFieldValue("IT")]
+        [EdiFieldValue("IT")]
         CountsPerCentimeter,
-        [EDIFieldValue("IU")]
+        [EdiFieldValue("IU")]
         InchesPerSecond_LinearSpeed,
-        [EDIFieldValue("IV")]
+        [EdiFieldValue("IV")]
         InchesPerSecondPerSecond_Acceleration,
-        [EDIFieldValue("IW")]
+        [EdiFieldValue("IW")]
         InchesPerSecondPerSecond_VibrationAcceleration,
-        [EDIFieldValue("J2")]
+        [EdiFieldValue("J2")]
         JoulePerKilogram,
-        [EDIFieldValue("JA")]
+        [EdiFieldValue("JA")]
         Job,
-        [EDIFieldValue("JB")]
+        [EdiFieldValue("JB")]
         Jumbo,
-        [EDIFieldValue("JE")]
+        [EdiFieldValue("JE")]
         JoulePerKelvin,
-        [EDIFieldValue("JG")]
+        [EdiFieldValue("JG")]
         JoulePerGram,
-        [EDIFieldValue("JK")]
+        [EdiFieldValue("JK")]
         MegaJoulePerKilogram,
-        [EDIFieldValue("JM")]
+        [EdiFieldValue("JM")]
         MegajoulePerCubicMeter,
-        [EDIFieldValue("JO")]
+        [EdiFieldValue("JO")]
         Joint,
-        [EDIFieldValue("JR")]
+        [EdiFieldValue("JR")]
         Jar,
-        [EDIFieldValue("JU")]
+        [EdiFieldValue("JU")]
         Jug,
-        [EDIFieldValue("K1")]
+        [EdiFieldValue("K1")]
         KilowattDemand,
-        [EDIFieldValue("K2")]
+        [EdiFieldValue("K2")]
         KilovoltAmperesReactiveDemand,
-        [EDIFieldValue("K3")]
+        [EdiFieldValue("K3")]
         KilovoltAmperesReactiveHour,
-        [EDIFieldValue("K4")]
+        [EdiFieldValue("K4")]
         KilovoltAmperes,
-        [EDIFieldValue("K5")]
+        [EdiFieldValue("K5")]
         KilovoltAmperesReactive,
-        [EDIFieldValue("K6")]
+        [EdiFieldValue("K6")]
         Kiloliter,
-        [EDIFieldValue("K7")]
+        [EdiFieldValue("K7")]
         Kilowatt,
-        [EDIFieldValue("K9")]
+        [EdiFieldValue("K9")]
         KilogramsPerMillimeterSquared_KGPerMM2,
-        [EDIFieldValue("KA")]
+        [EdiFieldValue("KA")]
         Cake,
-        [EDIFieldValue("KB")]
+        [EdiFieldValue("KB")]
         Kilocharacters,
-        [EDIFieldValue("KC")]
+        [EdiFieldValue("KC")]
         KilogramsPerCubicMeter,
-        [EDIFieldValue("KD")]
+        [EdiFieldValue("KD")]
         KilogramsDecimal,
-        [EDIFieldValue("KE")]
+        [EdiFieldValue("KE")]
         Keg,
-        [EDIFieldValue("KF")]
+        [EdiFieldValue("KF")]
         Kilopackets,
-        [EDIFieldValue("KG")]
+        [EdiFieldValue("KG")]
         Kilogram,
-        [EDIFieldValue("KH")]
+        [EdiFieldValue("KH")]
         KilowattHour,
-        [EDIFieldValue("KI")]
+        [EdiFieldValue("KI")]
         KilogramsPerMillimeterWidth,
-        [EDIFieldValue("KJ")]
+        [EdiFieldValue("KJ")]
         Kilosegments,
-        [EDIFieldValue("KK")]
+        [EdiFieldValue("KK")]
         _100Kilograms,
-        [EDIFieldValue("KL")]
+        [EdiFieldValue("KL")]
         KilogramsPerMeter,
-        [EDIFieldValue("KM")]
+        [EdiFieldValue("KM")]
         KilogramsPerSquareMeter_Kilograms_Decimal,
-        [EDIFieldValue("KO")]
+        [EdiFieldValue("KO")]
         MillequivalenceCausticPotashPerGramOfProduct,
-        [EDIFieldValue("KP")]
+        [EdiFieldValue("KP")]
         KilometersPerHour,
-        [EDIFieldValue("KQ")]
+        [EdiFieldValue("KQ")]
         Kilopascal,
-        [EDIFieldValue("KR")]
+        [EdiFieldValue("KR")]
         Kiloroentgen,
-        [EDIFieldValue("KS")]
+        [EdiFieldValue("KS")]
         _1000PoundsPerSquareInch,
-        [EDIFieldValue("KT")]
+        [EdiFieldValue("KT")]
         Kit,
-        [EDIFieldValue("KU")]
+        [EdiFieldValue("KU")]
         _Task,
-        [EDIFieldValue("KV")]
+        [EdiFieldValue("KV")]
         Kelvin,
-        [EDIFieldValue("KW")]
+        [EdiFieldValue("KW")]
         KilogramsPerMillimeter,
-        [EDIFieldValue("KX")]
+        [EdiFieldValue("KX")]
         MillilitersPerKilogram,
-        [EDIFieldValue("L2")]
+        [EdiFieldValue("L2")]
         LitersPerMinute,
-        [EDIFieldValue("LA")]
+        [EdiFieldValue("LA")]
         PoundsPerCubicInch,
-        [EDIFieldValue("LB")]
+        [EdiFieldValue("LB")]
         Pound,
-        [EDIFieldValue("LC")]
+        [EdiFieldValue("LC")]
         LinearCentimeter,
-        [EDIFieldValue("LE")]
+        [EdiFieldValue("LE")]
         Lite,
-        [EDIFieldValue("LF")]
+        [EdiFieldValue("LF")]
         LinearFoot,
-        [EDIFieldValue("LG")]
+        [EdiFieldValue("LG")]
         LongTon,
-        [EDIFieldValue("LH")]
+        [EdiFieldValue("LH")]
         LaborHours,
-        [EDIFieldValue("LI")]
+        [EdiFieldValue("LI")]
         LinearInch,
-        [EDIFieldValue("LJ")]
+        [EdiFieldValue("LJ")]
         LargeSpray,
-        [EDIFieldValue("LK")]
+        [EdiFieldValue("LK")]
         Link,
-        [EDIFieldValue("LL")]
+        [EdiFieldValue("LL")]
         Lifetime,
-        [EDIFieldValue("LM")]
+        [EdiFieldValue("LM")]
         LinearMeter,
-        [EDIFieldValue("LN")]
+        [EdiFieldValue("LN")]
         Length,
-        [EDIFieldValue("LO")]
+        [EdiFieldValue("LO")]
         Lot,
-        [EDIFieldValue("LP")]
+        [EdiFieldValue("LP")]
         LiquidPounds,
-        [EDIFieldValue("LQ")]
+        [EdiFieldValue("LQ")]
         LitersPerDay,
-        [EDIFieldValue("LR")]
+        [EdiFieldValue("LR")]
         Layers,
-        [EDIFieldValue("LS")]
+        [EdiFieldValue("LS")]
         LumpSum,
-        [EDIFieldValue("LT")]
+        [EdiFieldValue("LT")]
         Liter,
-        [EDIFieldValue("LX")]
+        [EdiFieldValue("LX")]
         LinearYardsPerPound,
-        [EDIFieldValue("LY")]
+        [EdiFieldValue("LY")]
         LinearYard,
-        [EDIFieldValue("M0")]
+        [EdiFieldValue("M0")]
         MagneticTapes,
-        [EDIFieldValue("M1")]
+        [EdiFieldValue("M1")]
         MilligramsperLiter,
-        [EDIFieldValue("M2")]
+        [EdiFieldValue("M2")]
         MillimeterActual,
-        [EDIFieldValue("M3")]
+        [EdiFieldValue("M3")]
         Mat,
-        [EDIFieldValue("M4")]
+        [EdiFieldValue("M4")]
         MonetaryValue,
-        [EDIFieldValue("M5")]
+        [EdiFieldValue("M5")]
         Microcurie,
-        [EDIFieldValue("M6")]
+        [EdiFieldValue("M6")]
         Millibar,
-        [EDIFieldValue("M7")]
+        [EdiFieldValue("M7")]
         MicroInch,
-        [EDIFieldValue("M8")]
+        [EdiFieldValue("M8")]
         MegaPascals,
-        [EDIFieldValue("M9")]
+        [EdiFieldValue("M9")]
         MillionBritishThermalUnitsperOneThousandCubicFeet,
-        [EDIFieldValue("MA")]
+        [EdiFieldValue("MA")]
         MachinePerUnit,
-        [EDIFieldValue("MB")]
+        [EdiFieldValue("MB")]
         MillimeterNominal,
-        [EDIFieldValue("MC")]
+        [EdiFieldValue("MC")]
         Microgram,
-        [EDIFieldValue("MD")]
+        [EdiFieldValue("MD")]
         AirDryMetricTon,
-        [EDIFieldValue("ME")]
+        [EdiFieldValue("ME")]
         Milligram,
-        [EDIFieldValue("MF")]
+        [EdiFieldValue("MF")]
         MilligramPerSqFtperSide,
-        [EDIFieldValue("MG")]
+        [EdiFieldValue("MG")]
         MetricGrossTon,
-        [EDIFieldValue("MH")]
+        [EdiFieldValue("MH")]
         Microns_Micrometers,
-        [EDIFieldValue("MI")]
+        [EdiFieldValue("MI")]
         Metric,
-        [EDIFieldValue("MJ")]
+        [EdiFieldValue("MJ")]
         Minutes,
-        [EDIFieldValue("MK")]
+        [EdiFieldValue("MK")]
         MilligramsPerSquareInch,
-        [EDIFieldValue("ML")]
+        [EdiFieldValue("ML")]
         Milliliter,
-        [EDIFieldValue("MM")]
+        [EdiFieldValue("MM")]
         Millimeter,
-        [EDIFieldValue("MN")]
+        [EdiFieldValue("MN")]
         MetricNetTon,
-        [EDIFieldValue("MO")]
+        [EdiFieldValue("MO")]
         Months,
-        [EDIFieldValue("MP")]
+        [EdiFieldValue("MP")]
         MetricTon,
-        [EDIFieldValue("MQ")]
+        [EdiFieldValue("MQ")]
         _1000Meters,
-        [EDIFieldValue("MR")]
+        [EdiFieldValue("MR")]
         Meter,
-        [EDIFieldValue("MS")]
+        [EdiFieldValue("MS")]
         SquareMillimeter,
-        [EDIFieldValue("MT")]
+        [EdiFieldValue("MT")]
         MetricLongTon,
-        [EDIFieldValue("MU")]
+        [EdiFieldValue("MU")]
         Millicurie,
-        [EDIFieldValue("MV")]
+        [EdiFieldValue("MV")]
         NumberOfMults,
-        [EDIFieldValue("MW")]
+        [EdiFieldValue("MW")]
         MetricTonKilograms,
-        [EDIFieldValue("MX")]
+        [EdiFieldValue("MX")]
         Mixed,
-        [EDIFieldValue("MY")]
+        [EdiFieldValue("MY")]
         MillimeterAverage,
-        [EDIFieldValue("MZ")]
+        [EdiFieldValue("MZ")]
         MillimeterMinimum,
-        [EDIFieldValue("N1")]
+        [EdiFieldValue("N1")]
         PenCalories,
-        [EDIFieldValue("N2")]
+        [EdiFieldValue("N2")]
         NumberOfLines,
-        [EDIFieldValue("N3")]
+        [EdiFieldValue("N3")]
         PrintPoint,
-        [EDIFieldValue("N4")]
+        [EdiFieldValue("N4")]
         PenGrams_Protein,
-        [EDIFieldValue("N6")]
+        [EdiFieldValue("N6")]
         Megahertz,
-        [EDIFieldValue("N7")]
+        [EdiFieldValue("N7")]
         Parts,
-        [EDIFieldValue("N9")]
+        [EdiFieldValue("N9")]
         CartridgeNeedle,
-        [EDIFieldValue("NA")]
+        [EdiFieldValue("NA")]
         MilligramsPerKilogram,
-        [EDIFieldValue("NB")]
+        [EdiFieldValue("NB")]
         Barge,
-        [EDIFieldValue("NC")]
+        [EdiFieldValue("NC")]
         Car,
-        [EDIFieldValue("ND")]
+        [EdiFieldValue("ND")]
         NetBarrels,
-        [EDIFieldValue("NE")]
+        [EdiFieldValue("NE")]
         NetLiters,
-        [EDIFieldValue("NF")]
+        [EdiFieldValue("NF")]
         Messages,
-        [EDIFieldValue("NG")]
+        [EdiFieldValue("NG")]
         NetGallons,
-        [EDIFieldValue("NH")]
+        [EdiFieldValue("NH")]
         MessageHours,
-        [EDIFieldValue("NI")]
+        [EdiFieldValue("NI")]
         NetImperialGallons,
-        [EDIFieldValue("NJ")]
+        [EdiFieldValue("NJ")]
         NumberOfScreens,
-        [EDIFieldValue("NL")]
+        [EdiFieldValue("NL")]
         Load,
-        [EDIFieldValue("NM")]
+        [EdiFieldValue("NM")]
         NauticalMile,
-        [EDIFieldValue("NN")]
+        [EdiFieldValue("NN")]
         Train,
-        [EDIFieldValue("NQ")]
+        [EdiFieldValue("NQ")]
         Mho,
-        [EDIFieldValue("NR")]
+        [EdiFieldValue("NR")]
         MicroMho,
-        [EDIFieldValue("NS")]
+        [EdiFieldValue("NS")]
         ShortTon,
-        [EDIFieldValue("NT")]
+        [EdiFieldValue("NT")]
         Trailer,
-        [EDIFieldValue("NU")]
+        [EdiFieldValue("NU")]
         NewtonMeter,
-        [EDIFieldValue("NV")]
+        [EdiFieldValue("NV")]
         Vehicle,
-        [EDIFieldValue("NW")]
+        [EdiFieldValue("NW")]
         Newton,
-        [EDIFieldValue("NX")]
+        [EdiFieldValue("NX")]
         PartsPerThousand,
-        [EDIFieldValue("NY")]
+        [EdiFieldValue("NY")]
         PoundsPerAirDryMetricTon,
-        [EDIFieldValue("OA")]
+        [EdiFieldValue("OA")]
         Panel,
-        [EDIFieldValue("OC")]
+        [EdiFieldValue("OC")]
         Billboard,
-        [EDIFieldValue("ON")]
+        [EdiFieldValue("ON")]
         OuncesPerSquareYard,
-        [EDIFieldValue("OP")]
+        [EdiFieldValue("OP")]
         TwoPack,
-        [EDIFieldValue("OT")]
+        [EdiFieldValue("OT")]
         OvertimeHours,
-        [EDIFieldValue("OZ")]
+        [EdiFieldValue("OZ")]
         Ounce_Av,
-        [EDIFieldValue("P0")]
+        [EdiFieldValue("P0")]
         Pages_Electronic,
-        [EDIFieldValue("P1")]
+        [EdiFieldValue("P1")]
         Percent,
-        [EDIFieldValue("P2")]
+        [EdiFieldValue("P2")]
         Pounds_PerFoot,
-        [EDIFieldValue("P3")]
+        [EdiFieldValue("P3")]
         ThreePack,
-        [EDIFieldValue("P4")]
+        [EdiFieldValue("P4")]
         FourPack,
-        [EDIFieldValue("P5")]
+        [EdiFieldValue("P5")]
         FivePack,
-        [EDIFieldValue("P6")]
+        [EdiFieldValue("P6")]
         SixPack,
-        [EDIFieldValue("P7")]
+        [EdiFieldValue("P7")]
         SevenPack,
-        [EDIFieldValue("P8")]
+        [EdiFieldValue("P8")]
         EightPack,
-        [EDIFieldValue("P9")]
+        [EdiFieldValue("P9")]
         NinePack,
-        [EDIFieldValue("PA")]
+        [EdiFieldValue("PA")]
         Pail,
-        [EDIFieldValue("PB")]
+        [EdiFieldValue("PB")]
         PairInches,
-        [EDIFieldValue("PC")]
+        [EdiFieldValue("PC")]
         Piece,
-        [EDIFieldValue("PD")]
+        [EdiFieldValue("PD")]
         Pad,
-        [EDIFieldValue("PE")]
+        [EdiFieldValue("PE")]
         PoundsEquivalent,
-        [EDIFieldValue("PF")]
+        [EdiFieldValue("PF")]
         Pallet_Lift,
-        [EDIFieldValue("PG")]
+        [EdiFieldValue("PG")]
         PoundsGross,
-        [EDIFieldValue("PH")]
+        [EdiFieldValue("PH")]
         Pack,
-        [EDIFieldValue("PI")]
+        [EdiFieldValue("PI")]
         Pitch,
-        [EDIFieldValue("PJ")]
+        [EdiFieldValue("PJ")]
         Pounds_Decimal_PoundsPerSquareFoot_PoundGage,
-        [EDIFieldValue("PK")]
+        [EdiFieldValue("PK")]
         Package,
-        [EDIFieldValue("PL")]
+        [EdiFieldValue("PL")]
         Pallet_UnitLoad,
-        [EDIFieldValue("PM")]
+        [EdiFieldValue("PM")]
         PoundsPercentage,
-        [EDIFieldValue("PN")]
+        [EdiFieldValue("PN")]
         PoundsNet,
-        [EDIFieldValue("PO")]
+        [EdiFieldValue("PO")]
         PoundsPerInchOfLength,
-        [EDIFieldValue("PP")]
+        [EdiFieldValue("PP")]
         Plate,
-        [EDIFieldValue("PQ")]
+        [EdiFieldValue("PQ")]
         PagesPerInch,
-        [EDIFieldValue("PR")]
+        [EdiFieldValue("PR")]
         Pair,
-        [EDIFieldValue("PS")]
+        [EdiFieldValue("PS")]
         PoundsPerSqInch,
-        [EDIFieldValue("PT")]
+        [EdiFieldValue("PT")]
         Pint,
-        [EDIFieldValue("PU")]
+        [EdiFieldValue("PU")]
         MassPounds,
-        [EDIFieldValue("PV")]
+        [EdiFieldValue("PV")]
         HalfPint,
-        [EDIFieldValue("PW")]
+        [EdiFieldValue("PW")]
         PoundsPerInchOfWidth,
-        [EDIFieldValue("PX")]
+        [EdiFieldValue("PX")]
         Pint_Imperial,
-        [EDIFieldValue("PY")]
+        [EdiFieldValue("PY")]
         Peck_DryUS,
-        [EDIFieldValue("PZ")]
+        [EdiFieldValue("PZ")]
         Peck_DryImperial,
-        [EDIFieldValue("Q1")]
+        [EdiFieldValue("Q1")]
         Quarter_Time,
-        [EDIFieldValue("Q2")]
+        [EdiFieldValue("Q2")]
         Pint_USDry,
-        [EDIFieldValue("Q3")]
+        [EdiFieldValue("Q3")]
         Meal,
-        [EDIFieldValue("Q4")]
+        [EdiFieldValue("Q4")]
         Fifty,
-        [EDIFieldValue("Q5")]
+        [EdiFieldValue("Q5")]
         TwentyFive,
-        [EDIFieldValue("Q6")]
+        [EdiFieldValue("Q6")]
         ThirtySix,
-        [EDIFieldValue("Q7")]
+        [EdiFieldValue("Q7")]
         TwentyFour,
-        [EDIFieldValue("QA")]
+        [EdiFieldValue("QA")]
         Pages_Facsimile,
-        [EDIFieldValue("QB")]
+        [EdiFieldValue("QB")]
         Pages_Hardcopy,
-        [EDIFieldValue("QC")]
+        [EdiFieldValue("QC")]
         Channel,
-        [EDIFieldValue("QD")]
+        [EdiFieldValue("QD")]
         QuarterDozen,
-        [EDIFieldValue("QE")]
+        [EdiFieldValue("QE")]
         Photographs,
-        [EDIFieldValue("QH")]
+        [EdiFieldValue("QH")]
         QuarterHours,
-        [EDIFieldValue("QK")]
+        [EdiFieldValue("QK")]
         QuarterKilogram,
-        [EDIFieldValue("QR")]
+        [EdiFieldValue("QR")]
         Quire,
-        [EDIFieldValue("QS")]
+        [EdiFieldValue("QS")]
         Quart_DryUS,
-        [EDIFieldValue("QT")]
+        [EdiFieldValue("QT")]
         Quart,
-        [EDIFieldValue("QU")]
+        [EdiFieldValue("QU")]
         Quart_Imperial,
-        [EDIFieldValue("R1")]
+        [EdiFieldValue("R1")]
         Pica,
-        [EDIFieldValue("R2")]
+        [EdiFieldValue("R2")]
         Becquerel,
-        [EDIFieldValue("R3")]
+        [EdiFieldValue("R3")]
         RevolutionsPerMinute,
-        [EDIFieldValue("R4")]
+        [EdiFieldValue("R4")]
         Calorie,
-        [EDIFieldValue("R5")]
+        [EdiFieldValue("R5")]
         ThousandsOfDollars,
-        [EDIFieldValue("R6")]
+        [EdiFieldValue("R6")]
         MillionsOfDollars,
-        [EDIFieldValue("R7")]
+        [EdiFieldValue("R7")]
         BillionsOfDollars,
-        [EDIFieldValue("R8")]
+        [EdiFieldValue("R8")]
         RoentgenEquivalentInMan_REM,
-        [EDIFieldValue("R9")]
+        [EdiFieldValue("R9")]
         ThousandCubicMeters,
-        [EDIFieldValue("RA")]
+        [EdiFieldValue("RA")]
         Rack,
-        [EDIFieldValue("RB")]
+        [EdiFieldValue("RB")]
         Radian,
-        [EDIFieldValue("RC")]
+        [EdiFieldValue("RC")]
         Rod_area_16Pt25SquareYards,
-        [EDIFieldValue("RD")]
+        [EdiFieldValue("RD")]
         Rod_length_5Pt5Yards,
-        [EDIFieldValue("RE")]
+        [EdiFieldValue("RE")]
         Reel,
-        [EDIFieldValue("RG")]
+        [EdiFieldValue("RG")]
         Ring,
-        [EDIFieldValue("RH")]
+        [EdiFieldValue("RH")]
         RunningOrOperatingHours,
-        [EDIFieldValue("RK")]
+        [EdiFieldValue("RK")]
         RollMetricMeasure,
-        [EDIFieldValue("RL")]
+        [EdiFieldValue("RL")]
         Roll,
-        [EDIFieldValue("RM")]
+        [EdiFieldValue("RM")]
         Ream,
-        [EDIFieldValue("RN")]
+        [EdiFieldValue("RN")]
         ReamMetricMeasure,
-        [EDIFieldValue("RO")]
+        [EdiFieldValue("RO")]
         Round,
-        [EDIFieldValue("RP")]
+        [EdiFieldValue("RP")]
         PoundsPerReam,
-        [EDIFieldValue("RS")]
+        [EdiFieldValue("RS")]
         Resets,
-        [EDIFieldValue("RT")]
+        [EdiFieldValue("RT")]
         RevenueTonMiles,
-        [EDIFieldValue("RU")]
+        [EdiFieldValue("RU")]
         Run,
-        [EDIFieldValue("S1")]
+        [EdiFieldValue("S1")]
         Semester,
-        [EDIFieldValue("S2")]
+        [EdiFieldValue("S2")]
         Trimester,
-        [EDIFieldValue("S3")]
+        [EdiFieldValue("S3")]
         SquareFeetPerSecond,
-        [EDIFieldValue("S4")]
+        [EdiFieldValue("S4")]
         SquareMetersPerSecond,
-        [EDIFieldValue("S5")]
+        [EdiFieldValue("S5")]
         SixtyFourthsOfAnInch,
-        [EDIFieldValue("S6")]
+        [EdiFieldValue("S6")]
         Sessions,
-        [EDIFieldValue("S7")]
+        [EdiFieldValue("S7")]
         StorageUnits,
-        [EDIFieldValue("S8")]
+        [EdiFieldValue("S8")]
         StandardAdvertisingUnits_SAUs,
-        [EDIFieldValue("S9")]
+        [EdiFieldValue("S9")]
         SlipSheet,
-        [EDIFieldValue("SA")]
+        [EdiFieldValue("SA")]
         Sandwich,
-        [EDIFieldValue("SB")]
+        [EdiFieldValue("SB")]
         SquareMile,
-        [EDIFieldValue("SC")]
+        [EdiFieldValue("SC")]
         SquareCentimeter,
-        [EDIFieldValue("SD")]
+        [EdiFieldValue("SD")]
         SolidPounds,
-        [EDIFieldValue("SE")]
+        [EdiFieldValue("SE")]
         Section,
-        [EDIFieldValue("SF")]
+        [EdiFieldValue("SF")]
         SquareFoot,
-        [EDIFieldValue("SG")]
+        [EdiFieldValue("SG")]
         Segment,
-        [EDIFieldValue("SH")]
+        [EdiFieldValue("SH")]
         Sheet,
-        [EDIFieldValue("SI")]
+        [EdiFieldValue("SI")]
         SquareInch,
-        [EDIFieldValue("SJ")]
+        [EdiFieldValue("SJ")]
         Sack,
-        [EDIFieldValue("SK")]
+        [EdiFieldValue("SK")]
         SplitTanktruck,
-        [EDIFieldValue("SL")]
+        [EdiFieldValue("SL")]
         Sleeve,
-        [EDIFieldValue("SM")]
+        [EdiFieldValue("SM")]
         SquareMeter,
-        [EDIFieldValue("SN")]
+        [EdiFieldValue("SN")]
         SquareRod,
-        [EDIFieldValue("SO")]
+        [EdiFieldValue("SO")]
         Spool,
-        [EDIFieldValue("SP")]
+        [EdiFieldValue("SP")]
         ShelfPackage,
-        [EDIFieldValue("SQ")]
+        [EdiFieldValue("SQ")]
         Square,
-        [EDIFieldValue("SR")]
+        [EdiFieldValue("SR")]
         Strip,
-        [EDIFieldValue("SS")]
+        [EdiFieldValue("SS")]
         SheetMetricMeasure,
-        [EDIFieldValue("ST")]
+        [EdiFieldValue("ST")]
         Set,
-        [EDIFieldValue("SV")]
+        [EdiFieldValue("SV")]
         Skid,
-        [EDIFieldValue("SW")]
+        [EdiFieldValue("SW")]
         Skein,
-        [EDIFieldValue("SX")]
+        [EdiFieldValue("SX")]
         Shipment,
-        [EDIFieldValue("SY")]
+        [EdiFieldValue("SY")]
         SquareYard,
-        [EDIFieldValue("SZ")]
+        [EdiFieldValue("SZ")]
         Syringe,
-        [EDIFieldValue("T0")]
+        [EdiFieldValue("T0")]
         TelecommunicationsLinesInService,
-        [EDIFieldValue("T1")]
+        [EdiFieldValue("T1")]
         ThousandPoundsGross,
-        [EDIFieldValue("T2")]
+        [EdiFieldValue("T2")]
         ThousandthsOfAnInch,
-        [EDIFieldValue("T3")]
+        [EdiFieldValue("T3")]
         ThousandPieces,
-        [EDIFieldValue("T4")]
+        [EdiFieldValue("T4")]
         ThousandBags,
-        [EDIFieldValue("T5")]
+        [EdiFieldValue("T5")]
         ThousandCasings,
-        [EDIFieldValue("T6")]
+        [EdiFieldValue("T6")]
         ThousandGallons,
-        [EDIFieldValue("T7")]
+        [EdiFieldValue("T7")]
         ThousandImpressions,
-        [EDIFieldValue("T8")]
+        [EdiFieldValue("T8")]
         ThousandLinearInches,
-        [EDIFieldValue("T9")]
+        [EdiFieldValue("T9")]
         ThousandKilowattHours,
-        [EDIFieldValue("TA")]
+        [EdiFieldValue("TA")]
         TenthCubicFoot,
-        [EDIFieldValue("TB")]
+        [EdiFieldValue("TB")]
         Tube,
-        [EDIFieldValue("TC")]
+        [EdiFieldValue("TC")]
         Truckload,
-        [EDIFieldValue("TD")]
+        [EdiFieldValue("TD")]
         Therms,
-        [EDIFieldValue("TE")]
+        [EdiFieldValue("TE")]
         Tote,
-        [EDIFieldValue("TF")]
+        [EdiFieldValue("TF")]
         TenSquareYards,
-        [EDIFieldValue("TG")]
+        [EdiFieldValue("TG")]
         GrossTon,
-        [EDIFieldValue("TH")]
+        [EdiFieldValue("TH")]
         Thousand,
-        [EDIFieldValue("TI")]
+        [EdiFieldValue("TI")]
         ThousandSquareInches,
-        [EDIFieldValue("TJ")]
+        [EdiFieldValue("TJ")]
         ThousandSqCentimeters,
-        [EDIFieldValue("TK")]
+        [EdiFieldValue("TK")]
         Tank,
-        [EDIFieldValue("TL")]
+        [EdiFieldValue("TL")]
         ThousandFeet_Linear,
-        [EDIFieldValue("TM")]
+        [EdiFieldValue("TM")]
         ThousandFeet_Board,
-        [EDIFieldValue("TN")]
+        [EdiFieldValue("TN")]
         NetTon,
-        [EDIFieldValue("TO")]
+        [EdiFieldValue("TO")]
         TroyOunce,
-        [EDIFieldValue("TP")]
+        [EdiFieldValue("TP")]
         TenPack,
-        [EDIFieldValue("TQ")]
+        [EdiFieldValue("TQ")]
         ThousandFeet,
-        [EDIFieldValue("TR")]
+        [EdiFieldValue("TR")]
         TenSquareFeet,
-        [EDIFieldValue("TS")]
+        [EdiFieldValue("TS")]
         ThousandSquareFeet,
-        [EDIFieldValue("TT")]
+        [EdiFieldValue("TT")]
         ThousandLinearMeters,
-        [EDIFieldValue("TU")]
+        [EdiFieldValue("TU")]
         ThousandLinearYards,
-        [EDIFieldValue("TV")]
+        [EdiFieldValue("TV")]
         ThousandKilograms,
-        [EDIFieldValue("TW")]
+        [EdiFieldValue("TW")]
         ThousandSheets,
-        [EDIFieldValue("TX")]
+        [EdiFieldValue("TX")]
         TroyPound,
-        [EDIFieldValue("TY")]
+        [EdiFieldValue("TY")]
         Tray,
-        [EDIFieldValue("TZ")]
+        [EdiFieldValue("TZ")]
         ThousandCubicFeet,
-        [EDIFieldValue("U1")]
+        [EdiFieldValue("U1")]
         Treatments,
-        [EDIFieldValue("U2")]
+        [EdiFieldValue("U2")]
         Tablet,
-        [EDIFieldValue("U3")]
+        [EdiFieldValue("U3")]
         Ten,
-        [EDIFieldValue("U5")]
+        [EdiFieldValue("U5")]
         TwoHundredFifty,
-        [EDIFieldValue("UA")]
+        [EdiFieldValue("UA")]
         Torr,
-        [EDIFieldValue("UB")]
+        [EdiFieldValue("UB")]
         TelecommunicationsLinesInService_Average,
-        [EDIFieldValue("UC")]
+        [EdiFieldValue("UC")]
         TelecommunicationsPorts,
-        [EDIFieldValue("UD")]
+        [EdiFieldValue("UD")]
         TenthMinutes,
-        [EDIFieldValue("UE")]
+        [EdiFieldValue("UE")]
         TenthHours,
-        [EDIFieldValue("UF")]
+        [EdiFieldValue("UF")]
         UsagePerTelecommunicationsLine_Average,
-        [EDIFieldValue("UH")]
+        [EdiFieldValue("UH")]
         TenThousandYards,
-        [EDIFieldValue("UL")]
+        [EdiFieldValue("UL")]
         Unitless,
-        [EDIFieldValue("UM")]
+        [EdiFieldValue("UM")]
         MillionUnits,
-        [EDIFieldValue("UN")]
+        [EdiFieldValue("UN")]
         Unit,
-        [EDIFieldValue("UP")]
+        [EdiFieldValue("UP")]
         Troche,
-        [EDIFieldValue("UQ")]
+        [EdiFieldValue("UQ")]
         Wafer,
-        [EDIFieldValue("UR")]
+        [EdiFieldValue("UR")]
         Application,
-        [EDIFieldValue("US")]
+        [EdiFieldValue("US")]
         DosageForm,
-        [EDIFieldValue("UT")]
+        [EdiFieldValue("UT")]
         Inhalation,
-        [EDIFieldValue("UU")]
+        [EdiFieldValue("UU")]
         Lozenge,
-        [EDIFieldValue("UV")]
+        [EdiFieldValue("UV")]
         PercentTopicalOnly,
-        [EDIFieldValue("UW")]
+        [EdiFieldValue("UW")]
         Milliequivalent,
-        [EDIFieldValue("UX")]
+        [EdiFieldValue("UX")]
         Dram_Minim,
-        [EDIFieldValue("UY")]
+        [EdiFieldValue("UY")]
         FiftySquareFeet,
-        [EDIFieldValue("UZ")]
+        [EdiFieldValue("UZ")]
         FiftyCount,
-        [EDIFieldValue("V1")]
+        [EdiFieldValue("V1")]
         Flat,
-        [EDIFieldValue("V2")]
+        [EdiFieldValue("V2")]
         Pouch,
-        [EDIFieldValue("VA")]
+        [EdiFieldValue("VA")]
         VoltAmperePerKilogram,
-        [EDIFieldValue("VC")]
+        [EdiFieldValue("VC")]
         FiveHundred,
-        [EDIFieldValue("VI")]
+        [EdiFieldValue("VI")]
         Vial,
-        [EDIFieldValue("VP")]
+        [EdiFieldValue("VP")]
         PercentVolume,
-        [EDIFieldValue("VR")]
+        [EdiFieldValue("VR")]
         VoltAmpereReactive,
-        [EDIFieldValue("VS")]
+        [EdiFieldValue("VS")]
         Visit,
-        [EDIFieldValue("W2")]
+        [EdiFieldValue("W2")]
         WetKilo,
-        [EDIFieldValue("WA")]
+        [EdiFieldValue("WA")]
         WattsPerKilogram,
-        [EDIFieldValue("WB")]
+        [EdiFieldValue("WB")]
         WetPound,
-        [EDIFieldValue("WD")]
+        [EdiFieldValue("WD")]
         WorkDays,
-        [EDIFieldValue("WE")]
+        [EdiFieldValue("WE")]
         WetTon,
-        [EDIFieldValue("WG")]
+        [EdiFieldValue("WG")]
         WineGallon,
-        [EDIFieldValue("WH")]
+        [EdiFieldValue("WH")]
         Wheel,
-        [EDIFieldValue("WI")]
+        [EdiFieldValue("WI")]
         WeightPerSquareInch,
-        [EDIFieldValue("WK")]
+        [EdiFieldValue("WK")]
         Week,
-        [EDIFieldValue("WM")]
+        [EdiFieldValue("WM")]
         WorkingMonths,
-        [EDIFieldValue("WP")]
+        [EdiFieldValue("WP")]
         Pennyweight,
-        [EDIFieldValue("WR")]
+        [EdiFieldValue("WR")]
         Wrap,
-        [EDIFieldValue("WW")]
+        [EdiFieldValue("WW")]
         MillilitersOfWater,
-        [EDIFieldValue("X1")]
+        [EdiFieldValue("X1")]
         Chains_LandSurvey,
-        [EDIFieldValue("X2")]
+        [EdiFieldValue("X2")]
         Bunch,
-        [EDIFieldValue("X3")]
+        [EdiFieldValue("X3")]
         Clove,
-        [EDIFieldValue("X4")]
+        [EdiFieldValue("X4")]
         Drop,
-        [EDIFieldValue("X5")]
+        [EdiFieldValue("X5")]
         Head,
-        [EDIFieldValue("X6")]
+        [EdiFieldValue("X6")]
         Heart,
-        [EDIFieldValue("X7")]
+        [EdiFieldValue("X7")]
         Leaf,
-        [EDIFieldValue("X8")]
+        [EdiFieldValue("X8")]
         Loaf,
-        [EDIFieldValue("X9")]
+        [EdiFieldValue("X9")]
         Portion,
-        [EDIFieldValue("XP")]
+        [EdiFieldValue("XP")]
         BaseBoxPerPound,
-        [EDIFieldValue("Y1")]
+        [EdiFieldValue("Y1")]
         Slice,
-        [EDIFieldValue("Y2")]
+        [EdiFieldValue("Y2")]
         Tablespoon,
-        [EDIFieldValue("Y3")]
+        [EdiFieldValue("Y3")]
         Teaspoon,
-        [EDIFieldValue("Y4")]
+        [EdiFieldValue("Y4")]
         Tub,
-        [EDIFieldValue("YD")]
+        [EdiFieldValue("YD")]
         Yard,
-        [EDIFieldValue("YL")]
+        [EdiFieldValue("YL")]
         _100LinealYards,
-        [EDIFieldValue("YR")]
+        [EdiFieldValue("YR")]
         Years,
-        [EDIFieldValue("YT")]
+        [EdiFieldValue("YT")]
         TenYards,
-        [EDIFieldValue("Z1")]
+        [EdiFieldValue("Z1")]
         LiftVan,
-        [EDIFieldValue("Z2")]
+        [EdiFieldValue("Z2")]
         Chest,
-        [EDIFieldValue("Z3")]
+        [EdiFieldValue("Z3")]
         Cask,
-        [EDIFieldValue("Z4")]
+        [EdiFieldValue("Z4")]
         Hogshead,
-        [EDIFieldValue("Z5")]
+        [EdiFieldValue("Z5")]
         Lug,
-        [EDIFieldValue("Z6")]
+        [EdiFieldValue("Z6")]
         ConferencePoints,
-        [EDIFieldValue("Z8")]
+        [EdiFieldValue("Z8")]
         NewspaperAgateLine,
-        [EDIFieldValue("ZA")]
+        [EdiFieldValue("ZA")]
         Bimonthly,
-        [EDIFieldValue("ZB")]
+        [EdiFieldValue("ZB")]
         Biweekly,
-        [EDIFieldValue("ZC")]
+        [EdiFieldValue("ZC")]
         Semiannual,
-        [EDIFieldValue("ZP")]
+        [EdiFieldValue("ZP")]
         Page,
-        [EDIFieldValue("ZZ")]
+        [EdiFieldValue("ZZ")]
         MutuallyDefined
-
     }
 }
