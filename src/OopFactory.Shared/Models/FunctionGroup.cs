@@ -13,16 +13,17 @@
 
     public class FunctionGroup : Container, IXmlSerializable
     {
-        private readonly ISpecificationFinder specFinder;
-        private readonly List<Transaction> transactions;
+        public List<Transaction> Transactions { get; }
+
+        internal ISpecificationFinder SpecFinder { get; }
 
         internal FunctionGroup() : base(null, null, "GS") { }
 
         internal FunctionGroup(ISpecificationFinder specFinder, Container parent, X12DelimiterSet delimiters, string segment)
             : base(parent, delimiters, segment)
         {
-            this.specFinder = specFinder;
-            this.transactions = new List<Transaction>();
+            this.SpecFinder = specFinder;
+            this.Transactions = new List<Transaction>();
         }
 
         public Interchange Interchange => (Interchange)this.Parent;
@@ -61,7 +62,7 @@
                 else
                 {
                     throw new ArgumentException(
-                        String.Format(
+                        string.Format(
                             "{0} and {1} cannot be converted into a date and time.",
                             GetElement(4),
                             GetElement(5)));
@@ -93,47 +94,38 @@
             set { this.SetElement(8, value); }
         }
 
-        public List<Transaction> Transactions
-        {
-            get { return this.transactions; }
-        }
-
-        internal ISpecificationFinder SpecFinder => this.specFinder;
-
         internal override IList<SegmentSpecification> AllowedChildSegments => new List<SegmentSpecification>();
 
         internal override IEnumerable<string> TrailerSegmentIds => new List<string>();
 
         public Transaction FindTransaction(string controlNumber)
         {
-            return this.transactions.FirstOrDefault(t => t.ControlNumber == controlNumber);
+            return this.Transactions.FirstOrDefault(t => t.ControlNumber == controlNumber);
         }
 
-        internal Transaction AddTransaction(string segmentString)
+        public Transaction AddTransaction(string segmentString)
         {
             string transactionType = new Segment(null, this.DelimiterSet, segmentString).GetElement(1);
 
-            TransactionSpecification spec = this.specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, transactionType);
+            TransactionSpecification spec = this.SpecFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, transactionType);
 
             var transaction = new Transaction(this, this.DelimiterSet, segmentString, spec);
-            this.transactions.Add(transaction);
+            this.Transactions.Add(transaction);
             return transaction;
         }
 
         public Transaction AddTransaction(string identifierCode, string controlNumber)
         {
-            TransactionSpecification spec = this.specFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, identifierCode);
-            var transaction = new Transaction(
-                this,
-                this.DelimiterSet, 
-                string.Format("ST{0}{0}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator),
-                spec);
-            transaction.IdentifierCode = identifierCode;
-            transaction.ControlNumber = controlNumber;
+            TransactionSpecification spec = this.SpecFinder.FindTransactionSpec(this.FunctionalIdentifierCode, this.VersionIdentifierCode, identifierCode);
+            var transaction = new Transaction(this, this.DelimiterSet, string.Format("ST{0}{0}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator), spec)
+            {
+                IdentifierCode = identifierCode,
+                ControlNumber = controlNumber
+            };
             transaction.SetTerminatingTrailerSegment(
                 string.Format("SE{0}0{0}{2}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator, controlNumber));
 
-            this.transactions.Add(transaction);
+            this.Transactions.Add(transaction);
             return transaction;
         }
 
@@ -159,9 +151,9 @@
             return sb.ToString();
         }
 
-        internal override string ToX12String(bool addWhitespace)
+        public override string ToX12String(bool addWhitespace)
         {
-            this.UpdateTrailerSegmentCount("GE", 1, this.transactions.Count());
+            this.UpdateTrailerSegmentCount("GE", 1, this.Transactions.Count());
             return base.ToX12String(addWhitespace);
         }
 

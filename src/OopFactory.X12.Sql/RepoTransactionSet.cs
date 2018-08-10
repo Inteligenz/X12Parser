@@ -1,7 +1,7 @@
 ﻿namespace OopFactory.X12.Sql
 {
 	using System;
-	using Parsing;
+    using OopFactory.X12.Shared.Models;
 
 	public class RepoTransactionSet
 	{

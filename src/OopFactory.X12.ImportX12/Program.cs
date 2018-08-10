@@ -8,7 +8,9 @@
 
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Repositories;
-    using OopFactory.X12.Shared.Specification;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Specifications.Interfaces;
 
     class Program
     {

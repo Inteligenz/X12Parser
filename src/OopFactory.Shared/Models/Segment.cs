@@ -13,7 +13,7 @@
 
     public class Segment : DetachedSegment, IXmlSerializable
     {
-        internal Segment(Container parent, X12DelimiterSet delimiters, string segment)
+        public Segment(Container parent, X12DelimiterSet delimiters, string segment)
             : base(delimiters, segment)
         {
             this.Parent = parent;
@@ -127,7 +127,7 @@
             }
         }
         
-        internal virtual string ToX12String(bool addWhitespace)
+        public virtual string ToX12String(bool addWhitespace)
         {
             var sb = new StringBuilder();
             if (addWhitespace)
@@ -150,25 +150,37 @@
         }
         
         public Container Parent { get; }
-
+        
         private FunctionGroup FunctionGroup
         {
             get
             {
                 if (this is Interchange)
+                {
                     return null;
+                }
                 else
                 {
                     if (this is FunctionGroup)
+                    {
                         return (FunctionGroup)this;
+                    }
                     else if (this is Transaction)
+                    {
                         return ((Transaction)this).FunctionGroup;
+                    }
                     else if (this.Parent is FunctionGroup)
+                    {
                         return ((FunctionGroup)this.Parent);
+                    }
                     else if (this.Parent is Interchange)
+                    {
                         return null;
+                    }
                     else
+                    {
                         return (FunctionGroup)this.Parent.Transaction.Parent;
+                    }
                 }
             }
         }

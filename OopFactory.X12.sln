@@ -44,11 +44,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.TransformToX
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{FC1769FD-76F2-40B7-9FA3-AC3E2F24D8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Shared", "OopFactory.Shared\OopFactory.X12.Shared.csproj", "{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Shared", "src\OopFactory.Shared\OopFactory.X12.Shared.csproj", "{74A34062-7CF9-41B5-9F36-A0367C9AFA2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Parsing", "OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj", "{29EEAA38-BFB2-4732-A286-EB91355F9BCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Parsing", "src\OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj", "{29EEAA38-BFB2-4732-A286-EB91355F9BCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Specifications", "OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj", "{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopFactory.X12.Specifications", "src\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj", "{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

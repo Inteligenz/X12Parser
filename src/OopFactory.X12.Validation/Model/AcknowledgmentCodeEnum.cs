@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Validation.Model
+﻿namespace OopFactory.X12.Validation.Model
 {
     public enum AcknowledgmentCodeEnum
     {

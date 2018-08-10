@@ -333,8 +333,8 @@
 
         public List<Interchange> UnbundleByLoop(Interchange interchange, string loopId)
         {
-            char terminator = interchange._delimiters.SegmentTerminator;
-            var service = new UnbundlingService(interchange._delimiters.SegmentTerminator);
+            char terminator = interchange.Delimiters.SegmentTerminator;
+            var service = new UnbundlingService(interchange.Delimiters.SegmentTerminator);
             string isa = interchange.SegmentString;
             string iea = interchange.TrailerSegments.First().SegmentString;
             List<string> list = new List<string>();
@@ -366,7 +366,7 @@
         {
             List<Interchange> interchanges = new List<Interchange>();
 
-            char terminator = interchange._delimiters.SegmentTerminator;
+            char terminator = interchange.Delimiters.SegmentTerminator;
             string isa = interchange.SegmentString;
             string iea = interchange.TrailerSegments.First().SegmentString;
             foreach (FunctionGroup group in interchange.FunctionGroups)

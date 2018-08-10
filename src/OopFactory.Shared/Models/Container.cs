@@ -90,17 +90,17 @@
         public T AddSegment<T>(T segment) where T : TypedSegment
         {
             segment.Initialize(this, this.DelimiterSet);
-            SegmentSpecification spec = this.AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment._segment.SegmentId);
+            SegmentSpecification spec = this.AllowedChildSegments.FirstOrDefault(acs => acs.SegmentId == segment.Segment.SegmentId);
             if (spec != null)
             {
-                this.segments.Add(segment._segment);
+                this.segments.Add(segment.Segment);
                 return segment;
             }
 
             return null;
         }
         
-        internal void SetTerminatingTrailerSegment(string segmentString)
+        public void SetTerminatingTrailerSegment(string segmentString)
         {
             this.terminatingTrailerSegment = new Segment(this, this.DelimiterSet, segmentString);
         }
@@ -133,7 +133,7 @@
 
         internal abstract string SerializeBodyToX12(bool addWhitespace);
         
-        internal override string ToX12String(bool addWhitespace)
+        public override string ToX12String(bool addWhitespace)
         {
             var sb = new StringBuilder(base.ToX12String(addWhitespace));
 

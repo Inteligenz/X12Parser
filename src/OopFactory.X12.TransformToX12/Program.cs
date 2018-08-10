@@ -1,8 +1,10 @@
-﻿using System;
-using System.IO;
-
-namespace OopFactory.X12.TransformToX12
+﻿namespace OopFactory.X12.TransformToX12
 {
+    using System;
+    using System.IO;
+
+    using OopFactory.X12.Parsing;
+
     class Program
     {
         static void Main(string[] args)
@@ -16,7 +18,7 @@ namespace OopFactory.X12.TransformToX12
             }
             var fs = new StreamReader(x12Filename);
             string xmltext = fs.ReadToEnd();
-            var parser = new Parsing.X12Parser();
+            var parser = new X12Parser();
             string x12 = string.Empty;
             try
             {

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Specification;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+
+using OopFactory.X12.Shared.Models;
+using OopFactory.X12.Specifications;
+using OopFactory.X12.Specifications.Enumerations;
+using OopFactory.X12.Specifications.Finders;
+using OopFactory.X12.Specifications.Interfaces;
 
 namespace OopFactory.X12.Repositories
 {

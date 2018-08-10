@@ -59,11 +59,11 @@
             this.AllHLoops.Add(hloop.Id, hloop);
         }
 
-        internal HierarchicalLoop AddHLoop(string segmentString)
+        public HierarchicalLoop AddHLoop(string segmentString)
         {
             Transaction transaction = this.Transaction;
 
-            var hl = new HierarchicalLoop(this, _delimiters, segmentString);
+            var hl = new HierarchicalLoop(this, this.DelimiterSet, segmentString);
 
             HierarchicalLoopContainer specContainer = this;
             while (!(specContainer is HierarchicalLoopContainer && specContainer.HasHierachicalSpecs()))

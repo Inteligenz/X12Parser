@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
+
+using OopFactory.X12.Shared.Models;
 
 namespace OopFactory.X12.Repositories
 {
@@ -12,7 +9,7 @@ namespace OopFactory.X12.Repositories
     {
         public RepoSegment(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator)
         {
-            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
+            this.Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
         }
         public T InterchangeId { get; set; }
         public T? FunctionalGroupId { get; set; }

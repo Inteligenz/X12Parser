@@ -7,14 +7,14 @@
 	using System.Diagnostics;
 	using System.Linq;
 	using System.Text;
-	using Parsing;
-	using Parsing.Model;
-	using Parsing.Specification;
-
-	public interface IParsingErrorRepo
-	{
-		object PersistParsingError(object interchangeId, int positionInInterchange, int? revisionId, string errorMessage);
-	}
+    
+	using OopFactory.X12.Shared.Models;
+	using OopFactory.X12.Specifications;
+    using OopFactory.X12.Specifications.Enumerations;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Specifications.Interfaces;
+    using OopFactory.X12.Sql.Interfaces;
+    using OopFactory.X12.Sql.IdentityProviders;
 
 	/// <summary>
 	///     Class for storing, retrieving and revising X12 messages.
@@ -30,9 +30,7 @@
 		private bool _schemaEnsured;
 		private readonly Dictionary<string, SegmentSpecification> _specs;
 		private readonly int _batchSize;
-		private readonly IIdProvider _idProvider;
-		//private int _batchCount;
-		//private StringBuilder _batchSql;
+		private readonly IIdentityProvider _idProvider;
 		internal SegmentBatch _segmentBatch;
 
 		public SqlTransactionRepository(string dsn, Type identityType)
@@ -70,7 +68,7 @@
 			}
 		}
 
-		private IIdProvider GetIdProvider(string dsn, string commonSchema, Type identityType, int segmentBatchSize)
+		private IIdentityProvider GetIdProvider(string dsn, string commonSchema, Type identityType, int segmentBatchSize)
 		{
 			if (!identityType.IsValueType)
 				throw new ArgumentException("identityType must be a value type", "identityType");

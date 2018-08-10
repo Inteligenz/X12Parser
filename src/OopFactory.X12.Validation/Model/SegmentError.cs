@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Validation.Model
+﻿namespace OopFactory.X12.Validation.Model
 {
+    using System.Collections.Generic;
+
     public class SegmentError
     {
         public SegmentError()
@@ -51,8 +48,8 @@ namespace OopFactory.X12.Validation.Model
                 SegmentIdCode,
                 SegmentPosition,
                 LoopIdentifierCode,
-                ImplementationSegmentSyntaxErrorCode, GetErrorDescription(ImplementationSegmentSyntaxErrorCode));
-                
+                ImplementationSegmentSyntaxErrorCode,
+                GetErrorDescription(ImplementationSegmentSyntaxErrorCode));
         }
     }
 }

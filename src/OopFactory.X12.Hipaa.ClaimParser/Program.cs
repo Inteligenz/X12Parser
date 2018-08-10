@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Configuration;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Hipaa.Claims.Services;
-
-namespace OopFactory.X12.Hipaa.ClaimParser
+﻿namespace OopFactory.X12.Hipaa.ClaimParser
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.IO;
+    using System.Linq;
+    using System.Xml;
+
+    using OopFactory.X12.Hipaa.Claims.Services;
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications.Interfaces;
+
     class Program
     {
         static void Main(string[] args)

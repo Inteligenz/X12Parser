@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-
-namespace OopFactory.X12.UnbundleX12
+﻿namespace OopFactory.X12.UnbundleX12
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.IO;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+
     class Program
     {
         static void Main(string[] args)

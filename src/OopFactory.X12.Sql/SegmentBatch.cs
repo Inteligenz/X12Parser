@@ -7,9 +7,11 @@
 	using System.Diagnostics;
 	using System.Linq;
 	using System.Text;
-	using Parsing.Model;
-	using Parsing.Specification;
-	using Repositories;
+
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications;
+    using OopFactory.X12.Specifications.Enumerations;
+    using OopFactory.X12.Sql.Interfaces;
 
 	internal class SegmentBatch
 	{

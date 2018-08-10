@@ -13,11 +13,27 @@
     public class X12StreamReader : IDisposable
     {
         private readonly StreamReader reader;
-        private readonly X12DelimiterSet delimiters;
         private readonly char[] ignoredChars;
-        private string gsSegment;
-        private string isaSegment;
-        private string transactionCode;
+
+        /// <summary>
+        /// Gets the X12 Delimiters
+        /// </summary>
+        public X12DelimiterSet Delimiters { get; private set; }
+
+        /// <summary>
+        /// Gets the current ISA segment
+        /// </summary>
+        public string CurrentIsaSegment { get; private set; }
+
+        /// <summary>
+        /// Gets the current GS segment
+        /// </summary>
+        public string CurrentGsSegment { get; private set; }
+
+        /// <summary>
+        /// Gets the last transaction code
+        /// </summary>
+        public string LastTransactionCode { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X12StreamReader"/> class
@@ -34,8 +50,8 @@
                 throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
             }
 
-            this.delimiters = new X12DelimiterSet(header);
-            this.isaSegment = new string(header);
+            this.Delimiters = new X12DelimiterSet(header);
+            this.CurrentIsaSegment = new string(header);
             this.ignoredChars = ignoredChars;
         }
 
@@ -50,33 +66,13 @@
         }
 
         /// <summary>
-        /// Gets the X12 delimiters
-        /// </summary>
-        public X12DelimiterSet Delimiters => this.delimiters;
-
-        /// <summary>
-        /// Gets the current ISA segment
-        /// </summary>
-        public string CurrentIsaSegment => this.isaSegment;
-
-        /// <summary>
-        /// Gets the current GS segment
-        /// </summary>
-        public string CurrentGsSegment => this.gsSegment;
-
-        /// <summary>
-        /// Gets the last transaction code
-        /// </summary>
-        public string LastTransactionCode => this.transactionCode;
-
-        /// <summary>
         /// Gets the segment id for the current segment
         /// </summary>
         /// <param name="segmentString">Segment string with id to extract</param>
         /// <returns>The current segment id</returns>
         public string ReadSegmentId(string segmentString)
         {
-            int index = segmentString.IndexOf(this.delimiters.ElementSeparator);
+            int index = segmentString.IndexOf(this.Delimiters.ElementSeparator);
             return index >= 0 ? segmentString.Substring(0, index) : null;
         }
 
@@ -121,12 +117,12 @@
                     continue;
                 }
 
-                if (one[0] == this.delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
+                if (one[0] == this.Delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
                 {
                     continue;
                 }
 
-                if (one[0] == this.delimiters.SegmentTerminator)
+                if (one[0] == this.Delimiters.SegmentTerminator)
                 {
                     break;
                 }
@@ -136,18 +132,18 @@
                     sb.Append(one);
                 }
 
-                if (isBinary && one[0] == this.delimiters.ElementSeparator)
+                if (isBinary && one[0] == this.Delimiters.ElementSeparator)
                 {
                     int binarySize = 0;
-                    string[] elements = sb.ToString().Split(this.delimiters.ElementSeparator);
+                    string[] elements = sb.ToString().Split(this.Delimiters.ElementSeparator);
                     if (elements[0] == "BIN" && elements.Length >= 2)
                     {
-                        int.TryParse(sb.ToString().Split(this.delimiters.ElementSeparator)[1], out binarySize);
+                        int.TryParse(sb.ToString().Split(this.Delimiters.ElementSeparator)[1], out binarySize);
                     }
 
                     if (elements[0] == "BDS" && elements.Length >= 3)
                     {
-                        int.TryParse(sb.ToString().Split(this.delimiters.ElementSeparator)[2], out binarySize);
+                        int.TryParse(sb.ToString().Split(this.Delimiters.ElementSeparator)[2], out binarySize);
                     }
 
                     if (binarySize > 0)
@@ -159,8 +155,8 @@
                     }
                 }
 
-                if (!isBinary && (sb.ToString() == "BIN" + this.delimiters.ElementSeparator 
-                                  || sb.ToString() == "BDS" + this.delimiters.ElementSeparator))
+                if (!isBinary && (sb.ToString() == "BIN" + this.Delimiters.ElementSeparator 
+                                  || sb.ToString() == "BDS" + this.Delimiters.ElementSeparator))
                 {
                     isBinary = true;
                 }
@@ -184,10 +180,10 @@
                 switch (segmentId)
                 {
                     case "ISA":
-                        this.isaSegment = segmentString + this.delimiters.SegmentTerminator;
+                        this.CurrentIsaSegment = segmentString + this.Delimiters.SegmentTerminator;
                         break;
                     case "GS":
-                        this.gsSegment = segmentString + this.delimiters.SegmentTerminator;
+                        this.CurrentGsSegment = segmentString + this.Delimiters.SegmentTerminator;
                         break;
                     case "IEA":
                     case "GE":
@@ -195,11 +191,11 @@
                     default:
                         if (segmentId == "ST")
                         {
-                            this.transactionCode = this.SplitSegment(segmentString)[1];
+                            this.LastTransactionCode = this.SplitSegment(segmentString)[1];
                         }
 
                         segments.Append(segmentString);
-                        segments.Append(this.delimiters.SegmentTerminator);
+                        segments.Append(this.Delimiters.SegmentTerminator);
                         break;
                 }
                 segmentString = this.ReadNextSegment();
@@ -222,6 +218,10 @@
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Releases unmanaged resources if disposing is true
+        /// </summary>
+        /// <param name="disposing">Flag indicating is object is being disposed</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

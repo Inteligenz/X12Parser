@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-
-namespace OopFactory.X12.Repositories
+﻿namespace OopFactory.X12.Repositories
 {
-	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
+    using System;
+
+    using OopFactory.X12.Shared.Models;
+
+    [Obsolete("Use OopFactory.X12.Sql library and namespace")]
 	public class RepoLoop<T> where T : struct
     {
         public RepoLoop(string segmentString, char segmentTerminator, char elementSeparator, char componentSeparator)
         {
-            Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
+            this.Segment = new DetachedSegment(new X12DelimiterSet(segmentTerminator, elementSeparator, componentSeparator), segmentString);
         }
 
         public T LoopId { get; set; }

@@ -1,7 +1,6 @@
 ﻿namespace OopFactory.X12.Sql
 {
-	using Parsing;
-	using Parsing.Model;
+	using OopFactory.X12.Shared.Models;
 
 	public class RepoSegment
 	{

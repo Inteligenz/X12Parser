@@ -1,112 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Attributes;
-
-namespace OopFactory.X12.Parsing.Model.Typed
+﻿namespace OopFactory.X12.Shared.Models.Typed
 {
+    using OopFactory.X12.Shared.Attributes;
+
     public enum ContractTypeCode
     {
-        [EDIFieldValue("01")]
+        [EdiFieldValue("01")]
         DiagnosisRelatedGroup_DRG,
-        [EDIFieldValue("02")]
+        [EdiFieldValue("02")]
         PerDiem,
-        [EDIFieldValue("03")]
+        [EdiFieldValue("03")]
         VariablePerDiem,
-        [EDIFieldValue("04")]
+        [EdiFieldValue("04")]
         Flat,
-        [EDIFieldValue("05")]
+        [EdiFieldValue("05")]
         Capitated,
-        [EDIFieldValue("06")]
+        [EdiFieldValue("06")]
         Percent,
-        [EDIFieldValue("09")]
+        [EdiFieldValue("09")]
         Other,
-        [EDIFieldValue("AB")]
+        [EdiFieldValue("AB")]
         NegotiatedGrowingEquityMortgage_GEM,
-        [EDIFieldValue("AC")]
+        [EdiFieldValue("AC")]
         AnticipatedContract,
-        [EDIFieldValue("AD")]
+        [EdiFieldValue("AD")]
         FederalHousingAuthorityAdjustableRateMortgage,
-        [EDIFieldValue("AE")]
+        [EdiFieldValue("AE")]
         FederalHousingAuthorityVeteransAffairsFixedRateMortgage,
-        [EDIFieldValue("AF")]
+        [EdiFieldValue("AF")]
         ConventionalSecondMortgages,
-        [EDIFieldValue("AG")]
+        [EdiFieldValue("AG")]
         ConventionalFixedRateMortgages,
-        [EDIFieldValue("AH")]
+        [EdiFieldValue("AH")]
         FederalHousingAuthorityVeteransAffairsGraduatedPaymentMortgage,
-        [EDIFieldValue("AI")]
+        [EdiFieldValue("AI")]
         NegotiatedConventional_GraduatedPayment_Or_StepRateMortgage,
-        [EDIFieldValue("AJ")]
+        [EdiFieldValue("AJ")]
         ConventionalAdjustableRateMortgage,
-        [EDIFieldValue("CA")]
+        [EdiFieldValue("CA")]
         CostPlusIncentiveFee_WithPerformanceIncentives,
-        [EDIFieldValue("CB")]
+        [EdiFieldValue("CB")]
         CostPlusIncentiveFee_WithoutPerformanceIncentives,
-        [EDIFieldValue("CH")]
+        [EdiFieldValue("CH")]
         CostSharing,
-        [EDIFieldValue("CP")]
+        [EdiFieldValue("CP")]
         CostPlus,
-        [EDIFieldValue("CS")]
+        [EdiFieldValue("CS")]
         Cost,
-        [EDIFieldValue("CW")]
+        [EdiFieldValue("CW")]
         CostPlusAwardFee,
-        [EDIFieldValue("CX")]
+        [EdiFieldValue("CX")]
         CostPlusFixedFee,
-        [EDIFieldValue("CY")]
+        [EdiFieldValue("CY")]
         CostPlusIncentiveFee,
-        [EDIFieldValue("DI")]
+        [EdiFieldValue("DI")]
         Distributor,
-        [EDIFieldValue("EA")]
+        [EdiFieldValue("EA")]
         ExclusiveAgency,
-        [EDIFieldValue("ER")]
+        [EdiFieldValue("ER")]
         ExclusiveRight,
-        [EDIFieldValue("FA")]
+        [EdiFieldValue("FA")]
         FirmorActualContract,
-        [EDIFieldValue("FB")]
+        [EdiFieldValue("FB")]
         FixedPriceIncentiveFirmTarget_WithPerformanceIncentive,
-        [EDIFieldValue("FC")]
+        [EdiFieldValue("FC")]
         FixedPriceIncentiveFirmTarget_WithoutPerformanceIncentive,
-        [EDIFieldValue("FD")]
+        [EdiFieldValue("FD")]
         FixedPriceRedetermination,
-        [EDIFieldValue("FE")]
+        [EdiFieldValue("FE")]
         FixedPricewithEscalation,
-        [EDIFieldValue("FF")]
+        [EdiFieldValue("FF")]
         FixedPriceIncentiveSuccessiveTarget_WithPerformanceIncentive,
-        [EDIFieldValue("FG")]
+        [EdiFieldValue("FG")]
         FixedPriceIncentiveSuccessiveTarget_WithoutPerformanceIncentive,
-        [EDIFieldValue("FH")]
+        [EdiFieldValue("FH")]
         FixedPriceAwardFee,
-        [EDIFieldValue("FI")]
+        [EdiFieldValue("FI")]
         FixedPriceIncentive,
-        [EDIFieldValue("FJ")]
+        [EdiFieldValue("FJ")]
         FixedPriceLevelofEffort,
-        [EDIFieldValue("FK")]
+        [EdiFieldValue("FK")]
         NoCost,
-        [EDIFieldValue("FL")]
+        [EdiFieldValue("FL")]
         FlatAmount,
-        [EDIFieldValue("FM")]
+        [EdiFieldValue("FM")]
         RetroactiveFixedPriceRedetermination,
-        [EDIFieldValue("FR")]
+        [EdiFieldValue("FR")]
         FirmFixedPrice,
-        [EDIFieldValue("FX")]
+        [EdiFieldValue("FX")]
         FixedPricewithEconomicPriceAdjustment,
-        [EDIFieldValue("LA")]
+        [EdiFieldValue("LA")]
         Labor,
-        [EDIFieldValue("LE")]
+        [EdiFieldValue("LE")]
         LevelofEffort,
-        [EDIFieldValue("LH")]
+        [EdiFieldValue("LH")]
         LaborHours,
-        [EDIFieldValue("OC")]
+        [EdiFieldValue("OC")]
         OtherContractType,
-        [EDIFieldValue("PR")]
+        [EdiFieldValue("PR")]
         ProspectReservation,
-        [EDIFieldValue("SP")]
+        [EdiFieldValue("SP")]
         SamePercentageasFilmRentalEarned_SPFRE,
-        [EDIFieldValue("TM")]
+        [EdiFieldValue("TM")]
         TimeandMaterials,
-        [EDIFieldValue("ZZ")]
+        [EdiFieldValue("ZZ")]
         MutuallyDefined,
     }
 }

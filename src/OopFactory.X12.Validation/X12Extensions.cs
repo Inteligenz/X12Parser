@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.IO;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing.Model.Typed;
-using OopFactory.X12.Parsing.Specification;
+
+using OopFactory.X12.Shared.Models;
+using OopFactory.X12.Shared.Models.Typed;
 using OopFactory.X12.Validation.Model;
 
 namespace OopFactory.X12.Validation

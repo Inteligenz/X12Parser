@@ -1,16 +1,18 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.IO;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Validation;
-using OopFactory.X12.Validation.Model;
-
-namespace OopFactory.X12.AcknowledgeX12
+﻿namespace OopFactory.X12.AcknowledgeX12
 {
+    using System;
+    using System.Text;
+    using System.Configuration;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.IO;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Validation;
+    using OopFactory.X12.Validation.Model;
+
     class Program
     {
         static void Main(string[] args)
@@ -22,43 +24,48 @@ namespace OopFactory.X12.AcknowledgeX12
 
             var service = new X12AcknowledgmentService();
 
-            using (FileStream fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
             {
-                using (X12StreamReader reader = new X12StreamReader(fs, Encoding.UTF8))
+                using (var reader = new X12StreamReader(fs, Encoding.UTF8))
                 {
                     var firstTrans = reader.ReadNextTransaction();
                     if (reader.LastTransactionCode == "837")
                     {
                         if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV2"))
+                        {
                             service = new InstitutionalClaimAcknowledgmentService();
+                        }
                         if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV1"))
+                        {
                             service = new X12AcknowledgmentService(new ProfessionalClaimSpecificationFinder());
-                    }                    
+                        }
+                    }
                 }
             }
 
-            using (FileStream fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(inputFilename, FileMode.Open, FileAccess.Read))
             {
                 // Create aknowledgements and identify errors
-                var responses = service.AcknowledgeTransactions(fs);
+                IList<FunctionalGroupResponse> responses = service.AcknowledgeTransactions(fs);
 
                 // Change any acknowledgment codes here to reject transactions with errors
                 // CUSTOM BUSINESS LOGIC HERE
 
                 // Transform to outbound interchange for serialization
-                var interchange = new Interchange(DateTime.Now, int.Parse(isaControlNumber), true);
-                interchange.AuthorInfoQualifier = ConfigurationManager.AppSettings["AuthorInfoQualifier"];
-                interchange.AuthorInfo = ConfigurationManager.AppSettings["AuthorInfo"];
-                interchange.SecurityInfoQualifier = ConfigurationManager.AppSettings["SecurityInfoQualifier"];
-                interchange.SecurityInfo = ConfigurationManager.AppSettings["SecurityInfo"];
-                interchange.InterchangeSenderIdQualifier = ConfigurationManager.AppSettings["InterchangeSenderIdQualifier"];
-                interchange.InterchangeSenderId = ConfigurationManager.AppSettings["InterchangeSenderId"];
-                interchange.InterchangeReceiverIdQualifier = responses.First().SenderIdQualifier;
-                interchange.InterchangeReceiverId = responses.First().SenderId;
+                var interchange = new Interchange(DateTime.Now, int.Parse(isaControlNumber), true)
+                {
+                    AuthorInfoQualifier = ConfigurationManager.AppSettings["AuthorInfoQualifier"],
+                    AuthorInfo = ConfigurationManager.AppSettings["AuthorInfo"],
+                    SecurityInfoQualifier = ConfigurationManager.AppSettings["SecurityInfoQualifier"],
+                    SecurityInfo = ConfigurationManager.AppSettings["SecurityInfo"],
+                    InterchangeSenderIdQualifier = ConfigurationManager.AppSettings["InterchangeSenderIdQualifier"],
+                    InterchangeSenderId = ConfigurationManager.AppSettings["InterchangeSenderId"],
+                    InterchangeReceiverIdQualifier = responses.First().SenderIdQualifier,
+                    InterchangeReceiverId = responses.First().SenderId
+                };
                 interchange.SetElement(12, "00501");
                 
-               
-                var group = interchange.AddFunctionGroup("FA", DateTime.Now, int.Parse(gsControlNumber));
+                FunctionGroup group = interchange.AddFunctionGroup("FA", DateTime.Now, int.Parse(gsControlNumber));
                 group.ApplicationSendersCode = ConfigurationManager.AppSettings["InterchangeSenderId"];
                 group.VersionIdentifierCode = "005010X231A1";
 

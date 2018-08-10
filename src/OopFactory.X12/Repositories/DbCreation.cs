@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using OopFactory.X12.Parsing.Specification;
 
 namespace OopFactory.X12.Repositories
 {
+    using OopFactory.X12.Specifications;
+    using OopFactory.X12.Specifications.Enumerations;
+
 	[Obsolete("Use OopFactory.X12.Sql library and namespace")]
     public class DbCreation<T> where T : struct
     {
