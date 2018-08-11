@@ -7,10 +7,8 @@
     using System.Text;
 
     using OopFactory.X12.Parsing;
-    using OopFactory.X12.Repositories;
-    using OopFactory.X12.Shared.Models;
     using OopFactory.X12.Specifications.Finders;
-    using OopFactory.X12.Specifications.Interfaces;
+    using OopFactory.X12.Sql;
 
     class Program
     {
@@ -29,8 +27,8 @@
 
             var specFinder = new SpecificationFinder();
             var parser = new X12Parser(throwExceptionOnSyntaxErrors);
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
-            var repo = new SqlTransactionRepository<int>(dsn, specFinder, segments, ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"], segmentBatchSize, sqlDateType);
+            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
+            var repo = new SqlTransactionRepository(dsn, specFinder, segments, typeof(int), ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"], segmentBatchSize, sqlDateType);
 
             foreach (var filename in Directory.GetFiles(parseDirectory, parseSearchPattern, SearchOption.AllDirectories))
             {
@@ -86,7 +84,7 @@
             }
         }
 
-        static void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        static void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
         {
             Trace.TraceWarning("Error parsing interchange {0} at position {1}: {2}", args.InterchangeControlNumber, args.SegmentPositionInInterchange, args.Message);
         }

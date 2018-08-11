@@ -25,7 +25,7 @@
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
             var parser = new X12Parser(throwException);
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
+            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
             
             byte[] header = new byte[6];
             using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
@@ -102,7 +102,7 @@
             }
         }
 
-        static void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        static void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
         {
             Console.WriteLine(args.Message);
         }

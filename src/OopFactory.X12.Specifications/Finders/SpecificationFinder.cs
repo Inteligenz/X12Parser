@@ -61,13 +61,13 @@
                 case "999":
                     return GetSpecification("999-5010");
                 default:
-                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Ansi-{0}-4010Specification.xml", transactionSetCode));
+                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}-4010Specification.xml", transactionSetCode));
                     if (specStream != null)
                     {
                         return GetSpecification(transactionSetCode + "-4010");
                     }
 
-                    specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Ansi-{0}-Specification.xml", transactionSetCode));
+                    specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}-Specification.xml", transactionSetCode));
                     if (specStream != null)
                     {
                         return GetSpecification(transactionSetCode + "-");
