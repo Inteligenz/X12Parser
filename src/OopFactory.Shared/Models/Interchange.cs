@@ -196,7 +196,7 @@
             return sb.ToString();
         }
 
-        internal override string ToX12String(bool addWhitespace)
+        public override string ToX12String(bool addWhitespace)
         {
             this.UpdateTrailerSegmentCount("IEA", 1, this.functionGroups.Count);
             return base.ToX12String(addWhitespace);

@@ -1,17 +1,18 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Diagnostics;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Hipaa.Common;
-using OopFactory.X12.Hipaa.Claims;
-using OopFactory.X12.Hipaa.Claims.Services;
-
-namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
+﻿namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 {
+    using System;
+    using System.Linq;
+    using System.IO;
+    using System.Diagnostics;
+    using System.Reflection;
+
+    using OopFactory.X12.Hipaa.Claims;
+    using OopFactory.X12.Hipaa.Claims.Services;
+    using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Parsing;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ClaimModelTester
     {
@@ -384,7 +385,7 @@ IEA*1*000000031~";
 
             var service = new ClaimTransformationService();
 
-            var x12Parser = new Parsing.X12Parser();
+            var x12Parser = new X12Parser();
             var document = service.Transform837ToClaimDocument(x12Parser.ParseMultiple(x12).First());
 
             Claim claim = document.Claims.First();

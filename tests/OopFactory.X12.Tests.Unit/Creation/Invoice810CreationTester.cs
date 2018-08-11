@@ -1,14 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing.Model.Typed;
-
-namespace OopFactory.X12.Tests.Unit.Creation
+﻿namespace OopFactory.X12.Tests.Unit.Creation
 {
+    using System;
+    using System.Diagnostics;
+
+    using OopFactory.X12.Shared.Enumerations;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Shared.Models.TypedLoops;
+    using OopFactory.X12.Shared.Models.TypedSegments;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class Invoice810CreationTester
     {

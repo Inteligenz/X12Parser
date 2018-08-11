@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using OopFactory.X12.Shared.Models;
-using OopFactory.X12.Shared.Models.Typed;
+using OopFactory.X12.Shared.Models.TypedLoops;
+using OopFactory.X12.Shared.Models.TypedSegments;
 using OopFactory.X12.Validation.Model;
 
 namespace OopFactory.X12.Validation

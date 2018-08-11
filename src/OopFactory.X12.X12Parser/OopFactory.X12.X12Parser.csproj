@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OopFactory.X12.X12Parser</RootNamespace>
     <AssemblyName>X12Parser</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,15 +54,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OopFactory.Shared\OopFactory.X12.Shared.csproj">
+    <ProjectReference Include="..\OopFactory.Shared\OopFactory.X12.Shared.csproj">
       <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
       <Name>OopFactory.X12.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj">
+    <ProjectReference Include="..\OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj">
       <Project>{29eeaa38-bfb2-4732-a286-eb91355f9bcd}</Project>
       <Name>OopFactory.X12.Parsing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj">
+    <ProjectReference Include="..\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj">
       <Project>{26e9a9d5-d0b4-4b86-83d7-a0a3370a57ea}</Project>
       <Name>OopFactory.X12.Specifications</Name>
     </ProjectReference>

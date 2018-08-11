@@ -1,18 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
-using OopFactory.X12;
-using System.Reflection;
-using System.IO;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing.Specification;
-
-namespace OopFactory.X12.Tests.Unit.Creation
+﻿namespace OopFactory.X12.Tests.Unit.Creation
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.IO;
+
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications;
+    using OopFactory.X12.Specifications.Enumerations;
+    using OopFactory.X12.Specifications.Sets;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class InstitutionalClaimCreationTester
     {

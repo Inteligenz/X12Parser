@@ -1,16 +1,21 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing.Model.Typed;
-using OopFactory.X12.Transformations;
-
-namespace OopFactory.X12.Tests.Unit.DocumentationCodeSamples.X12InterchangeModel
+﻿namespace OopFactory.X12.Tests.Unit.DocumentationCodeSamples.X12InterchangeModel
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Enumerations;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Shared.Models.Typed;
+    using OopFactory.X12.Shared.Models.TypedLoops;
+    using OopFactory.X12.Shared.Models.TypedSegments;
+    using OopFactory.X12.Transformations;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ReadingAnExistingX12File
     {

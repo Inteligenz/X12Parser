@@ -556,15 +556,18 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                         remark = remark.Substring(index + 1, remark.Length - (index + 1));
                         continue;
                     }
+
                     remarksList.Add(remark.Substring(0, index));
                     remark = remark.Substring(index + 1, remark.Length - (index + 1));
                 }
+
                 remarksList.Add(remark);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
             }
+
             return remarksList;
         }
 

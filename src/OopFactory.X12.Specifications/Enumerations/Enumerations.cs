@@ -6,6 +6,7 @@
     public enum RequirementEnum
     {
         Mandatory,
+
         Optional
     }
 
@@ -13,7 +14,9 @@
     public enum UsageEnum
     {
         Required,
+
         Situational,
+
         [XmlEnum("Not Used")]
         NotUsed
     }
@@ -23,16 +26,22 @@
     {
         [XmlEnum("AN")]
         String,
+
         [XmlEnum("N")]
         Numeric,
+
         [XmlEnum("R")]
         Decimal,
+
         [XmlEnum("ID")]
         Identifier,
+
         [XmlEnum("DT")]
         Date,
+
         [XmlEnum("TM")]
         Time,
+
         [XmlEnum("B")]
         Binary
     }

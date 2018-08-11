@@ -1,17 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Diagnostics;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Validation;
-using OopFactory.X12.Validation.Model;
-
-namespace OopFactory.X12.Validation.Tests.Unit
+﻿namespace OopFactory.X12.Validation.Tests.Unit
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+
+    using OopFactory.X12.Shared.Models;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class X12AcknowledgmentServiceTester
     {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Repositories;
-
-namespace OopFactory.X12.Hipaa.Claims.Repositories
+﻿namespace OopFactory.X12.Hipaa.Claims.Repositories
 {
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Repositories;
+
     public class SqlClaimRepository<T> : SqlTransactionRepository<T> where T : struct
     {
         public SqlClaimRepository(string dsn, string schema)

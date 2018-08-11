@@ -1,15 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Repositories;
-using System.Reflection;
-using System.Diagnostics;
-
-namespace OopFactory.X12.Tests.Integration.Repositories
+﻿namespace OopFactory.X12.Tests.Integration.Repositories
 {
+    using System;
+    using System.Diagnostics;
+
+    using OopFactory.X12.Repositories;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass,Ignore]
     public class GetTransactionSegmentsTester
     {

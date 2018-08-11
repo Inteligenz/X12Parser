@@ -1,17 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.IO;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Hipaa.Common;
-using OopFactory.X12.Hipaa.Eligibility;
-using OopFactory.X12.Hipaa.Eligibility.Services;
-
-namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
+﻿namespace OopFactory.X12.Hipaa.Tests.Unit.Eligibility
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.IO;
+    using System.Reflection;
+
+    using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Eligibility;
+    using OopFactory.X12.Hipaa.Eligibility.Services;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class BenefitResponseTester
     {

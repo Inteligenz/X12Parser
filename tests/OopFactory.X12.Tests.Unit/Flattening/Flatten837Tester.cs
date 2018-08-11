@@ -1,18 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
-using System.IO;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using System.Xml;
-using System.Xml.Xsl;
-
-
-namespace OopFactory.X12.Tests.Unit.Flattening
+﻿namespace OopFactory.X12.Tests.Unit.Flattening
 {
+    using System.Linq;
+    using System.IO;
+    using System.Reflection;
+    using System.Xml;
+    using System.Xml.Xsl;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class Flatten837Tester
     {

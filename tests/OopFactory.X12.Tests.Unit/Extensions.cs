@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Reflection;
-
-namespace OopFactory.X12.Tests.Unit
+﻿namespace OopFactory.X12.Tests.Unit
 {
+    using System.IO;
+    using System.Reflection;
+
     public static class Extensions
     {
         public static Stream GetEdi(string resourcePath)

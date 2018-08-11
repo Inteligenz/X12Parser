@@ -1,13 +1,16 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Parsing.Model.Typed;
-
-namespace OopFactory.X12.Tests.Unit.Creation
+﻿namespace OopFactory.X12.Tests.Unit.Creation
 {
+    using System;
+    using System.IO;
+
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Shared.Models.Typed;
+    using OopFactory.X12.Shared.Models.TypedLoops;
+    using OopFactory.X12.Shared.Models.TypedSegments;
+    using OopFactory.X12.Shared.Enumerations;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ProfessionalClaimCreationTester
     {

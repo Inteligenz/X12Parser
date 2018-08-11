@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Reflection;
-using System.Xml.Xsl;
-using System.Xml;
-
-namespace OopFactory.X12.Transformations
+﻿namespace OopFactory.X12.Transformations
 {
+    using System.IO;
+    using System.Xml.Xsl;
+    using System.Xml;
+
     public abstract class X12TransformationService : ITransformationService
     {
-        private ITransformationService _preProcessor;
+        private readonly ITransformationService preProcessor;
 
         public X12TransformationService(ITransformationService preProcessor)
         {
-            _preProcessor = preProcessor;
+            this.preProcessor = preProcessor;
         }
 
         protected abstract XslCompiledTransform GetTransform();
@@ -25,12 +20,11 @@ namespace OopFactory.X12.Transformations
             return new XsltArgumentList();
         }
         
-
         #region ITransformationService Members
 
         public virtual string Transform(string x12)
         {
-            string xml = _preProcessor.Transform(x12);
+            string xml = this.preProcessor.Transform(x12);
             
             XslCompiledTransform transform = GetTransform();            
 

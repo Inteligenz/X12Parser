@@ -1,18 +1,16 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Hipaa.Claims;
-using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
-using OopFactory.X12.Hipaa.Claims.Services;
-using System.Xml;
-
-namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
+﻿namespace OopFactory.X12.Hipaa.Tests.Unit.Claims
 {
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using System.Linq;
+    using System.Xml;
+
+    using OopFactory.X12.Hipaa.Claims;
+    using OopFactory.X12.Hipaa.Claims.Services;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ClaimFormTester
     {

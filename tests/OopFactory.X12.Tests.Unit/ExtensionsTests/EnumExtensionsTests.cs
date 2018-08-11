@@ -1,22 +1,21 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Attributes;
-using OopFactory.X12.Extensions;
-
-namespace OopFactory.X12.Tests.Unit.ExtensionsTests
+﻿namespace OopFactory.X12.Tests.Unit.ExtensionsTests
 {
+    using System;
+
+    using OopFactory.X12.Shared.Attributes;
+    using OopFactory.X12.Shared.Extensions;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class EnumExtensionsTests
     {
         private enum TestEDIField
         {
-            [EDIFieldValue("101")]
+            [EdiFieldValue("101")]
             Value1,
 
-            [EDIFieldValue("102")]
+            [EdiFieldValue("102")]
             Value2,
 
             Value3

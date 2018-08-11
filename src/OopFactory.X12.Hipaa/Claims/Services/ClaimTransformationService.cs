@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Xml;
-using System.Xml.Xsl;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-
-namespace OopFactory.X12.Hipaa.Claims.Services
+﻿namespace OopFactory.X12.Hipaa.Claims.Services
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Xml;
+    using System.Xml.Xsl;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+
     public class ClaimTransformationService
     {
         private X12Parser _parser;

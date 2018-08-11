@@ -1,12 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing.Model;
-
-namespace OopFactory.X12.Tests.Unit.Creation
+﻿namespace OopFactory.X12.Tests.Unit.Creation
 {
+    using System;
+
+    using OopFactory.X12.Shared.Models;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 	[TestClass]
 	public class PurchaseOrderCreationTester
 	{

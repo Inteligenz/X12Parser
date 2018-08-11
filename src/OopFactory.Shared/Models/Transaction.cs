@@ -77,7 +77,7 @@
             }
         }
 
-        internal override string ToX12String(bool addWhitespace)
+        public override string ToX12String(bool addWhitespace)
         {
             this.UpdateTrailerSegmentCount("SE", 1, this.CountTotalSegments());
             return base.ToX12String(addWhitespace);

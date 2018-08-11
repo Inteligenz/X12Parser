@@ -1,34 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Xsl;
-using System.IO;
-using System.Xml;
-using System.Reflection;
-
-namespace OopFactory.X12.Transformations
+﻿namespace OopFactory.X12.Transformations
 {
+    using System.Xml.Xsl;
+    using System.Xml;
+    using System.Reflection;
+
     public class X12HtmlTransformationService : X12TransformationService
     {
-        private ITransformationService _preProcessor;
+        private readonly ITransformationService preProcessor;
+
+        private static XslCompiledTransform transform;
 
         public X12HtmlTransformationService(ITransformationService preProcessor)
             : base(preProcessor)
         {
-            _preProcessor = preProcessor;
+            this.preProcessor = preProcessor;
         }
-
-        private static XslCompiledTransform _transform;
 
         protected override XslCompiledTransform GetTransform()
         {
-            if (_transform == null)
+            if (transform == null)
             {
-                _transform = new XslCompiledTransform();
-                _transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-HTML.xslt")));
+                transform = new XslCompiledTransform();
+                transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-HTML.xslt")));
             }
-            return _transform;
+
+            return transform;
         }
     }
 }

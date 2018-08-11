@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Repositories;
-using System.Diagnostics;
-
-namespace OopFactory.X12.Tests.Integration
+﻿namespace OopFactory.X12.Tests.Integration
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using OopFactory.X12.Repositories;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class SqlReadOnlyTransactionRepoTester
     {

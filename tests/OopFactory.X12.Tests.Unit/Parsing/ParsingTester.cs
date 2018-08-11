@@ -1,18 +1,21 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Reflection;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Transformations;
-using System.Diagnostics;
-using System.Xml;
-
-namespace OopFactory.X12.Tests.Unit.Parsing
+﻿namespace OopFactory.X12.Tests.Unit.Parsing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Xml;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Shared.Models;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Transformations;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// Summary description for ParsingTester
     /// </summary>

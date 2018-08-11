@@ -1,16 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Parsing.Model;
-using OopFactory.X12.Repositories;
-using System.Reflection;
-using System.Diagnostics;
-
-namespace OopFactory.X12.Tests.Integration.Repositories
+﻿namespace OopFactory.X12.Tests.Integration.Repositories
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Repositories;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class SaveRevisionTester
     {
