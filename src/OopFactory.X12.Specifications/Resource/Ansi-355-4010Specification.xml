@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--355 U.S. Customs Acceptance/Rejection-->
+<TransactionSpecification TransactionSetIdentifierCode="355" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Segment SegmentId="K1" Repeat="10" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Segment SegmentId="K1" Repeat="10" />
+    <Loop LoopId="LX" LoopRepeat="9999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Loop LoopId="M13" LoopRepeat="1">
+        <Name>Manifest Amendment Details</Name>
+        <StartingSegment SegmentId="M13" />
+        <Segment SegmentId="K1" Repeat="10" />
+        <Loop LoopId="M11" LoopRepeat="1">
+          <Name>Manifest Bill of Lading Details</Name>
+          <StartingSegment SegmentId="M11" />
+          <Segment SegmentId="K1" Repeat="10" />
+        </Loop>
+        <Loop LoopId="N9" LoopRepeat="999">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="N9" />
+          <Segment SegmentId="K1" Repeat="10" />
+        </Loop>
+        <Loop LoopId="N1" LoopRepeat="5">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="K1" Repeat="10" />
+          <Loop LoopId="N3" LoopRepeat="2">
+            <Name>Address Information</Name>
+            <StartingSegment SegmentId="N3" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+          <Loop LoopId="N4" LoopRepeat="1">
+            <Name>Geographic Location</Name>
+            <StartingSegment SegmentId="N4" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+          <Loop LoopId="PER" LoopRepeat="1">
+            <Name>Administrative Communications Contact</Name>
+            <StartingSegment SegmentId="PER" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="M12" LoopRepeat="9999">
+          <Name>In-bond Identifying Information</Name>
+          <StartingSegment SegmentId="M12" />
+          <Segment SegmentId="K1" Repeat="10" />
+          <Loop LoopId="P5" LoopRepeat="5">
+            <Name>Port Information</Name>
+            <StartingSegment SegmentId="P5" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+          <Loop LoopId="M21" LoopRepeat="1">
+            <Name>Supplementary In-Bond Information</Name>
+            <StartingSegment SegmentId="M21" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="M14" LoopRepeat="9999">
+        <Name>General Order Status Information</Name>
+        <StartingSegment SegmentId="M14" />
+        <Segment SegmentId="K1" Repeat="10" />
+      </Loop>
+      <Loop LoopId="M15" LoopRepeat="9999">
+        <Name>U.S. Customs Events Advisory Details</Name>
+        <StartingSegment SegmentId="M15" />
+        <Segment SegmentId="K1" Repeat="10" />
+      </Loop>
+      <Loop LoopId="M20" LoopRepeat="9999">
+        <Name>Permit to Transfer Request Details</Name>
+        <StartingSegment SegmentId="M20" />
+        <Segment SegmentId="K1" Repeat="10" />
+      </Loop>
+      <Loop LoopId="VID" LoopRepeat="999">
+        <Name>Conveyance Identification</Name>
+        <StartingSegment SegmentId="VID" />
+        <Segment SegmentId="K1" Repeat="10" />
+        <Loop LoopId="MBL" LoopRepeat="9999">
+          <Name>Bill of Lading</Name>
+          <StartingSegment SegmentId="MBL" />
+          <Segment SegmentId="K1" Repeat="10" />
+          <Loop LoopId="M13" LoopRepeat="999">
+            <Name>Manifest Amendment Details</Name>
+            <StartingSegment SegmentId="M13" />
+            <Segment SegmentId="K1" Repeat="10" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="VC" LoopRepeat="21">
+          <Name>Motor Vehicle Control</Name>
+          <StartingSegment SegmentId="VC" />
+          <Segment SegmentId="K1" Repeat="10" />
+        </Loop>
+        <Loop LoopId="N10" LoopRepeat="999">
+          <Name>Quantity and Description</Name>
+          <StartingSegment SegmentId="N10" />
+          <Segment SegmentId="K1" Repeat="10" />
+          <Loop LoopId="H1" LoopRepeat="10">
+            <Name>Hazardous Material</Name>
+            <StartingSegment SegmentId="H1" />
+            <Segment SegmentId="K1" Repeat="10" />
+            <Loop LoopId="H2" LoopRepeat="99">
+              <Name>Additional Hazardous Material Descripti</Name>
+              <StartingSegment SegmentId="H2" />
+              <Segment SegmentId="K1" Repeat="10" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Segment SegmentId="K3" Usage="Required" Repeat="1" />
+</TransactionSpecification>

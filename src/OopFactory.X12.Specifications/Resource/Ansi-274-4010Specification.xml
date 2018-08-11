@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 274 Healthcare Provider Information -->
+<TransactionSpecification TransactionSetIdentifierCode="274" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="PER"/>
+  <HierarchicalLoop LoopId="2000">
+    <Name></Name>
+    <Segment SegmentId="TRN"/>
+    <Segment SegmentId="AAA"/>
+    <Loop LoopId="2100">
+      <Name></Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="API"/>
+      <Segment SegmentId="DEG"/>
+      <Segment SegmentId="IND"/>
+      <Segment SegmentId="LUI"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="AAA"/>
+      <Segment SegmentId="MTX"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="WS"/>
+      <Segment SegmentId="CRC"/>
+      <Segment SegmentId="HSD"/>
+      <Segment SegmentId="BCI"/>
+      <Segment SegmentId="PDI"/>
+      <Segment SegmentId="HAD"/>
+      <Segment SegmentId="ACT"/>
+      <Loop LoopId="2110">
+        <Name>Property or Entity Identificaion</Name>
+        <StartingSegment SegmentId="NX1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="AAA"/>
+      </Loop>
+      <Loop LoopId="2120">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="TBP"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="YNQ"/>
+        <Segment SegmentId="AAA"/>
+      </Loop>
+      <Loop LoopId="2130">
+        <Name>Health Care Provider License</Name>
+        <StartingSegment SegmentId="HPL"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="AAA"/>
+      </Loop>
+      <Loop LoopId="2140">
+        <Name>Reference Information</Name>
+        <StartingSegment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="AAA"/>
+      </Loop>
+      <Loop LoopId="2150">
+        <Name>Employment Position</Name>
+        <StartingSegment SegmentId="EMS"/>
+        <Segment SegmentId="DTP"/>
+      </Loop>
+      <Loop LoopId="2160">
+        <Name>Transaction Set Line Number</Name>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="OOI"/>
+        <Segment SegmentId="BDS"/>
+        <Segment SegmentId="AAA"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

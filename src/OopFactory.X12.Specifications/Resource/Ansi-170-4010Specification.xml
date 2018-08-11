@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--170 Revenue Receipts Statement-->
+<TransactionSpecification TransactionSetIdentifierCode="170" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="N1" />
+  <Segment SegmentId="PER" />
+  <Loop LoopId="THE">
+    <Name>Screen Theater Identification</Name>
+    <StartingSegment SegmentId="THE" />
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="DTM">
+        <Name>Date/Time Reference</Name>
+        <StartingSegment SegmentId="DTM" />
+        <Segment SegmentId="BOX" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--315 Status Details (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="315" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B4" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="30" />
+  <Segment SegmentId="Q2" Repeat="1" />
+  <Segment SegmentId="SG" Repeat="15" />
+  <Loop LoopId="R4" LoopRepeat="20">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4" />
+    <Segment SegmentId="DTM" Repeat="15" />
+  </Loop>
+  <Segment SegmentId="V9" Repeat="10" />
+</TransactionSpecification>

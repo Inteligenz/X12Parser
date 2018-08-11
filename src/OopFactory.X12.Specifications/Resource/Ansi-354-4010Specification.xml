@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--354 U.S. Customs Automated Manifest Archive Status-->
+<TransactionSpecification TransactionSetIdentifierCode="354" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Segment SegmentId="X01" Usage="Required" Repeat="1" />
+    <Segment SegmentId="X02" Repeat="9999" />
+  </Loop>
+</TransactionSpecification>

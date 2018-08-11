@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--249 Animal Toxicological Data-->
+<TransactionSpecification TransactionSetIdentifierCode="249" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="STP" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="1" />
+  </Loop>
+  <Loop LoopId="GID">
+    <Name>Group Identification</Name>
+    <StartingSegment SegmentId="GID" />
+    <Segment SegmentId="GRP" Usage="Required" Repeat="1" />
+    <Segment SegmentId="MSG" Usage="Required" />
+    <Segment SegmentId="GDP" Usage="Required" />
+    <Segment SegmentId="REF" Usage="Required" />
+    <Loop LoopId="N1" LoopRepeat="">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+    </Loop>
+    <Loop LoopId="ANI">
+      <Name>Animal Identification</Name>
+      <StartingSegment SegmentId="ANI" />
+      <Segment SegmentId="ARC" Usage="Required" />
+      <Segment SegmentId="GDP" />
+      <Segment SegmentId="ADI" Repeat="1" />
+      <Segment SegmentId="ATR" />
+      <Loop LoopId="AOL">
+        <Name>Animal Observation Location</Name>
+        <StartingSegment SegmentId="AOL" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="AOR">
+          <Name>Animal Observation Result</Name>
+          <StartingSegment SegmentId="AOR" />
+          <Segment SegmentId="NTE" Usage="Required" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="AST">
+        <Name>Animal Reproductive Status</Name>
+        <StartingSegment SegmentId="AST" />
+        <Segment SegmentId="ADT" Repeat="1" />
+        <Segment SegmentId="AOC" />
+      </Loop>
+      <Loop LoopId="AOI">
+        <Name>Animal Offspring/Fetus Identification</Name>
+        <StartingSegment SegmentId="AOI" />
+        <Segment SegmentId="ATR" />
+        <Loop LoopId="AOL">
+          <Name>Animal Observation Location</Name>
+          <StartingSegment SegmentId="AOL" />
+          <Segment SegmentId="MSG" />
+          <Loop LoopId="AOR">
+            <Name>Animal Observation Result</Name>
+            <StartingSegment SegmentId="AOR" />
+            <Segment SegmentId="NTE" Usage="Required" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

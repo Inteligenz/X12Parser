@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--475 Rail Route File Maintenance-->
+<TransactionSpecification TransactionSetIdentifierCode="475" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Loop LoopId="R9" LoopRepeat="50">
+    <Name>Route Code</Name>
+    <StartingSegment SegmentId="R9" />
+    <Segment SegmentId="PER" Repeat="1" />
+    <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+    <Segment SegmentId="RDD" Repeat="5" />
+  </Loop>
+</TransactionSpecification>

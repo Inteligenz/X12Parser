@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--998 Set Cancellation-->
+<TransactionSpecification TransactionSetIdentifierCode="998" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ZD" Usage="Required" Repeat="1" />
+</TransactionSpecification>

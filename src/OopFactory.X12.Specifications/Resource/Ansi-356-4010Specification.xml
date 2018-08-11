@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--356 U.S. Customs Permit to Transfer Request-->
+<TransactionSpecification TransactionSetIdentifierCode="356" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Segment SegmentId="M20" Usage="Required" Repeat="9999" />
+  </Loop>
+</TransactionSpecification>

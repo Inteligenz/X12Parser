@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--248 Account Assignment/Inquiry and Service/Status-->
+<TransactionSpecification TransactionSetIdentifierCode="248" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT" Usage="Required" Repeat="1" />
+  <Loop LoopId="NM1" LoopRepeat="">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="NM1" Usage="Required" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DMG" Repeat="1" />
+    <Segment SegmentId="AIN" />
+    <Segment SegmentId="EMS" />
+    <Segment SegmentId="BAL" Repeat="1" />
+    <Loop LoopId="DTP">
+      <Name>Date or Time or Period</Name>
+      <StartingSegment SegmentId="DTP" />
+      <Segment SegmentId="STC" />
+      <Segment SegmentId="INT" Repeat="1" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="ACT" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

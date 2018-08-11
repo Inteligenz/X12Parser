@@ -99,7 +99,7 @@
                 if (_4010Specification == null)
                 {
                     Stream specStream = Assembly.GetExecutingAssembly()
-                        .GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-4010Specification.xml");
+                        .GetManifestResourceStream("OopFactory.X12.Specifications.Resource.Ansi-4010Specification.xml");
                     var reader = new StreamReader(specStream);
                     SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
                     _4010Specification = new Dictionary<string, SegmentSpecification>();
@@ -134,7 +134,7 @@
                 if (_5010Specification == null)
                 {
                     Stream specStream = Assembly.GetExecutingAssembly()
-                        .GetManifestResourceStream("OopFactory.X12.Specifications.Ansi-5010Specification.xml");
+                        .GetManifestResourceStream("OopFactory.X12.Specifications.Resource.Ansi-5010Specification.xml");
                     var reader = new StreamReader(specStream);
                     SegmentSet set = SegmentSet.Deserialize(reader.ReadToEnd());
                     _5010Specification = new Dictionary<string, SegmentSpecification>();
@@ -174,7 +174,7 @@
                 specKey,
                 key =>
                     {
-                        Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Ansi-{0}Specification.xml", key));
+                        Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}Specification.xml", key));
                         return TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd());
                     });
         }

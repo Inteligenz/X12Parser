@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--189 Application for Admission to Educational Institutions-->
+<TransactionSpecification TransactionSetIdentifierCode="189" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="REF">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="REF" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N1" />
+  </Loop>
+  <Loop LoopId="IN1">
+    <Name>Individual Identification</Name>
+    <StartingSegment SegmentId="IN1" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="IND" />
+    <Segment SegmentId="IMM" />
+    <Segment SegmentId="HC" />
+    <Segment SegmentId="LUI" />
+    <Segment SegmentId="III" />
+    <Segment SegmentId="NTE" />
+    <Loop LoopId="N3">
+      <Name>Address Information</Name>
+      <StartingSegment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="DTP" />
+    </Loop>
+    <Loop LoopId="COM">
+      <Name>Communication Contact Information</Name>
+      <StartingSegment SegmentId="COM" />
+      <Segment SegmentId="DTP" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="QTY" />
+      <Loop LoopId="EMS">
+        <Name>Employment Position</Name>
+        <StartingSegment SegmentId="EMS" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="AMT" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="ATV">
+    <Name>Student Activities and Awards</Name>
+    <StartingSegment SegmentId="ATV" />
+    <Segment SegmentId="DTP" />
+  </Loop>
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount</Name>
+    <StartingSegment SegmentId="AMT" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="SSE">
+    <Name>Entry and Exit Information</Name>
+    <StartingSegment SegmentId="SSE" />
+    <Segment SegmentId="DEG" />
+    <Segment SegmentId="FOS" />
+  </Loop>
+  <Loop LoopId="LQ">
+    <Name>Industry Code Identification</Name>
+    <StartingSegment SegmentId="LQ"/>
+    <Segment SegmentId="PDL"/>
+  </Loop>
+  <Loop LoopId="RSD">
+    <Name>Residency Information</Name>
+    <StartingSegment SegmentId="RSD" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="REF" />
+  </Loop>
+  <Loop LoopId="RQS">
+    <Name>Request for Information</Name>
+    <StartingSegment SegmentId="RQS" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="SST">
+    <Name>Student Academic Status</Name>
+    <StartingSegment SegmentId="SST" />
+    <Segment SegmentId="SSE" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="COM" />
+    <Segment SegmentId="SUM" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="SES">
+      <Name>Academic Session Header</Name>
+      <StartingSegment SegmentId="SES" />
+      <Loop LoopId="CRS">
+        <Name>Course Record</Name>
+        <StartingSegment SegmentId="CRS" />
+        <Segment SegmentId="NTE" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="TST">
+    <Name>Test Score Record</Name>
+    <StartingSegment SegmentId="TST" />
+    <Loop LoopId="SBT">
+      <Name>Subtest</Name>
+      <StartingSegment SegmentId="SBT" />
+      <Segment SegmentId="SRE" />
+      <Segment SegmentId="NTE" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="PCL">
+    <Name>Previous College</Name>
+    <StartingSegment SegmentId="PCL" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="COM" />
+    <Segment SegmentId="SSE" />
+    <Segment SegmentId="SUM" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="SES">
+      <Name>Academic Session Header</Name>
+      <StartingSegment SegmentId="SES" />
+      <Loop LoopId="CRS">
+        <Name>Course Record</Name>
+        <StartingSegment SegmentId="CRS" />
+        <Segment SegmentId="NTE" />
+      </Loop>
+      <Loop LoopId="DEG">
+        <Name>Degree Record</Name>
+        <StartingSegment SegmentId="DEG" />
+        <Segment SegmentId="SUM" />
+        <Segment SegmentId="FOS" />
+        <Segment SegmentId="NTE" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="LT">
+    <Name>Letter of Recommendation</Name>
+    <StartingSegment SegmentId="LT" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="COM" />
+    <Segment SegmentId="N1" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="LTE" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--176 Court Submission-->
+<TransactionSpecification TransactionSetIdentifierCode="176" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="FGS">
+    <Name>Form Group</Name>
+    <StartingSegment SegmentId="FGS" />
+    <Segment SegmentId="CDS" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="SPI" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="CRC" />
+    <Segment SegmentId="PAM" />
+    <Segment SegmentId="BCU" />
+    <Segment SegmentId="MSG" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="CED" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" />
+      <Segment SegmentId="CED" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+    <Loop LoopId="BBC">
+      <Name>Legal Claims</Name>
+      <StartingSegment SegmentId="BBC" />
+      <Segment SegmentId="AMT" />
+    </Loop>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="PCT" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="BBC">
+        <Name>Legal Claims</Name>
+        <StartingSegment SegmentId="BBC" />
+        <Segment SegmentId="AMT" />
+      </Loop>
+      <Loop LoopId="DTM">
+        <Name>Date/Time Reference</Name>
+        <StartingSegment SegmentId="DTM" />
+        <Segment SegmentId="CRC" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="EFI">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI" />
+      <Segment SegmentId="BIN" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

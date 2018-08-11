@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--266 Mortgage or Property Record Change Notification -->
+<TransactionSpecification TransactionSetIdentifierCode="266" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Loop LoopId="0100">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2" Repeat="1"/>
+    <Segment SegmentId="N3" Repeat="2"/>
+    <Segment SegmentId="N4" Repeat="1"/>
+    <Segment SegmentId="PER" Repeat="2"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="API" Repeat="2"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="QTY" Repeat="2"/>
+    <Segment SegmentId="AMT"/>
+    <Loop LoopId="0210">
+      <Name>Party Identification</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2" Repeat="1"/>
+      <Segment SegmentId="N3" Repeat="2"/>
+      <Segment SegmentId="N4" Repeat="1"/>
+      <Segment SegmentId="REF" Repeat="2"/>
+      <Segment SegmentId="PER" Repeat="2"/>
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Extended Reference Information</Name>
+      <StartingSegment SegmentId="N9"/>
+      <Loop LoopId="0221">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1"/>
+        <Segment SegmentId="N2" Repeat="1"/>
+        <Segment SegmentId="N3" Repeat="2"/>
+        <Segment SegmentId="N4" Repeat="1"/>
+        <Segment SegmentId="PER" Repeat="2"/>
+        <Segment SegmentId="REF"/>
+      </Loop>
+      <Loop LoopId="0222">
+        <Name>Activity or Process Information</Name>
+        <StartingSegment SegmentId="API"/>
+        <Segment SegmentId="N3" Repeat="2"/>
+        <Segment SegmentId="N4" Repeat="1"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="CRC" Repeat="10"/>
+        <Segment SegmentId="QTY" Repeat="1"/>
+        <Segment SegmentId="AMT" Repeat="1"/>
+        <Segment SegmentId="INT" Repeat="1"/>
+        <Segment SegmentId="PCT" Repeat="1"/>
+        <Segment SegmentId="NTE" Repeat="100"/>
+        <Segment SegmentId="VEH" Repeat="1"/>
+        <Segment SegmentId="PID"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--422 Shipper's Car Order-->
+<TransactionSpecification TransactionSetIdentifierCode="422" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BCQ" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="QTY" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="3" />
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+    <Segment SegmentId="N9" Repeat="4" />
+  </Loop>
+  <Loop LoopId="LX" LoopRepeat="31">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="G62" Usage="Required" Repeat="2" />
+    <Segment SegmentId="D9" Repeat="1" />
+    <Loop LoopId="F9" LoopRepeat="31">
+      <Name>Origin Station</Name>
+      <StartingSegment SegmentId="F9" />
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="R2" Usage="Required" Repeat="10" />
+      <Loop LoopId="SCO" LoopRepeat="9999">
+        <Name>Shipper's Car Ordered</Name>
+        <StartingSegment SegmentId="SCO" />
+        <Segment SegmentId="G62" Repeat="1" />
+        <Segment SegmentId="N9" Repeat="4" />
+        <Loop LoopId="N7" LoopRepeat="9999">
+          <Name>Equipment Details</Name>
+          <StartingSegment SegmentId="N7" />
+          <Segment SegmentId="NA" Repeat="1" />
+          <Segment SegmentId="N9" Repeat="5" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

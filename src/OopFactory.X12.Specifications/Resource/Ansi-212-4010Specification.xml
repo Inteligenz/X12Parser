@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--212 Motor Carrier Delivery Trailer Manifest-->
+<TransactionSpecification TransactionSetIdentifierCode="212" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ATA" />
+  <Segment SegmentId="B2A" />
+  <Segment SegmentId="L11" />
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="G61" />
+    <Segment SegmentId="G62" />
+    <Segment SegmentId="L11" />
+  </Loop>
+  <Loop LoopId="0150">
+    <Name>Shipment Status Details</Name>
+    <StartingSegment SegmentId="AT7" />
+    <Segment SegmentId="G62" />
+    <Segment SegmentId="MS1" />
+    <Loop LoopId="0160">
+      <Name>Equipment or Container Owner and Type</Name>
+      <StartingSegment SegmentId="MS2" />
+      <Segment SegmentId="M7" />
+      <Segment SegmentId="AT9" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="BLR" />
+    <Segment SegmentId="MAN" />
+    <Segment SegmentId="AT8" />
+    <Segment SegmentId="G62" />
+    <Segment SegmentId="TSD" />
+    <Loop LoopId="0210">
+      <Name>Shipment Purchase Order Detail</Name>
+      <StartingSegment SegmentId="SPO" />
+      <Segment SegmentId="SDQ" />
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="L11" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

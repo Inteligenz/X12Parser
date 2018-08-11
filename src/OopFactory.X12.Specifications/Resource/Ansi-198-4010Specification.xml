@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--198 Loan Verification Information-->
+<TransactionSpecification TransactionSetIdentifierCode="198" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="IN1">
+    <Name>Individual Identification</Name>
+    <StartingSegment SegmentId="IN1" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="API">
+      <Name>Activity or Process Information</Name>
+      <StartingSegment SegmentId="API" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="AIN" />
+        <Segment SegmentId="DTP" />
+        <Loop LoopId="PWK">
+          <Name>Paperwork</Name>
+          <StartingSegment SegmentId="PWK" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="EMS" />
+          <Segment SegmentId="NTE" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="REF" />
+          <Loop LoopId="AIN">
+            <Name>Income</Name>
+            <StartingSegment SegmentId="AIN" />
+            <Segment SegmentId="DTP" />
+          </Loop>
+          <Loop LoopId="NX1">
+            <Name>Property or Entity Identification</Name>
+            <StartingSegment SegmentId="NX1" />
+            <Segment SegmentId="NX2" />
+            <Segment SegmentId="ACT" />
+            <Segment SegmentId="NM1" />
+            <Segment SegmentId="PRD" />
+            <Segment SegmentId="PEX" />
+            <Segment SegmentId="AMT" />
+            <Segment SegmentId="QTY" />
+            <Segment SegmentId="YNQ" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+          <Loop LoopId="FAA">
+            <Name>Financial Asset Account</Name>
+            <StartingSegment SegmentId="FAA" />
+            <Segment SegmentId="NM1" />
+            <Segment SegmentId="QTY" />
+            <Segment SegmentId="MSG" />
+            <Segment SegmentId="AMT" /> <!-- 4010 only -->
+            <Loop LoopId="DTP">
+              <Name>Date or Time or Period</Name>
+              <StartingSegment SegmentId="DTP"/>
+              <Segment SegmentId="AMT" />
+            </Loop>
+          </Loop>
+          <Loop LoopId="CDA">
+            <Name>Consumer Credit Account</Name>
+            <StartingSegment SegmentId="CDA" />
+            <Segment SegmentId="NM1" />
+            <Segment SegmentId="QTY" />
+            <Segment SegmentId="DTP" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

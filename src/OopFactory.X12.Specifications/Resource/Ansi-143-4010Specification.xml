@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--143 Product Service Notification-->
+<TransactionSpecification TransactionSetIdentifierCode="143" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LIN">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="LOC" />
+    <Segment SegmentId="CID" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="PWK" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="QTY" />
+    </Loop>
+    <Loop LoopId="PRR">
+      <Name>Problem Report</Name>
+      <StartingSegment SegmentId="PRR" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="N9">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="N9" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="REP">
+        <Name>Repair Action</Name>
+        <StartingSegment SegmentId="REP" />
+        <Segment SegmentId="MSG" />
+        <Segment SegmentId="QTY" />
+        <Loop LoopId="N9">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="N9" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="PRT">
+        <Name>Part Disposition</Name>
+        <StartingSegment SegmentId="PRT" />
+        <Segment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PER" />
+      </Loop>
+      <Loop LoopId="ITA">
+        <Name>Allowance, Charge or Service</Name>
+        <StartingSegment SegmentId="ITA" />
+        <Segment SegmentId="CUR" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="SLN">
+      <Name>Subline Item Detail</Name>
+      <StartingSegment SegmentId="SLN" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="LOC" />
+      <Segment SegmentId="DTM" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PER" />
+      </Loop>
+      <Loop LoopId="PRR">
+        <Name>Problem Report</Name>
+        <StartingSegment SegmentId="PRR" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="REP">
+          <Name>Repair Action</Name>
+          <StartingSegment SegmentId="REP" />
+          <Segment SegmentId="MSG" />
+          <Segment SegmentId="QTY" />
+        </Loop>
+        <Loop LoopId="PRT">
+          <Name>Part Disposition</Name>
+          <StartingSegment SegmentId="PRT" />
+          <Segment SegmentId="N1" />
+          <Segment SegmentId="N2" />
+          <Segment SegmentId="N3" />
+          <Segment SegmentId="N4" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="PER" />
+        </Loop>
+        <Loop LoopId="ITA">
+          <Name>Allowance, Charge or Service</Name>
+          <StartingSegment SegmentId="ITA" />
+          <Segment SegmentId="CUR" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

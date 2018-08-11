@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Request for Motor Carrier Rate Proposal -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="107">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="AT5"/>
+  <Segment SegmentId="PR"/>
+  <Segment SegmentId="ID4"/>
+  <Segment SegmentId="IV1"/>
+  <Segment SegmentId="MI1"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="MCT"/>
+  <Loop LoopId="0050">
+    <Name></Name>
+    <StartingSegment SegmentId="MS2"/>
+    <Segment SegmentId="AT9"/>
+  </Loop>
+  <Loop LoopId="0100">
+    <Name></Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name></Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="GY"/>
+    <Segment SegmentId="CUR"/>
+    <Segment SegmentId="PR"/>
+    <Segment SegmentId="ID4"/>
+    <Segment SegmentId="AT5"/>
+    <Loop LoopId="0205">
+      <Name></Name>
+      <StartingSegment SegmentId="MS2"/>
+      <Segment SegmentId="AT9"/>
+    </Loop>
+    <Loop LoopId="0210">
+      <Name></Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="G62"/>
+    </Loop>
+    <Loop LoopId="0230">
+      <Name></Name>
+      <StartingSegment SegmentId="CA1"/>
+      <Segment SegmentId="GY"/>
+      <Segment SegmentId="PR"/>
+      <Segment SegmentId="ID4"/>
+      <Segment SegmentId="IV1"/>
+      <Segment SegmentId="SV"/>
+      <Segment SegmentId="AT5"/>
+      <Segment SegmentId="MCT"/>
+      <Loop LoopId="0232">
+        <Name></Name>
+        <StartingSegment SegmentId="MS2"/>
+        <Segment SegmentId="AT9"/>
+      </Loop>
+      <Loop LoopId="0235">
+        <Name></Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="G62"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

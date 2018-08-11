@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--159 Motion Picture Booking Confirmation-->
+<TransactionSpecification TransactionSetIdentifierCode="159" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="N1" />
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="THE">
+      <Name>Screen Theater Identification</Name>
+      <StartingSegment SegmentId="THE" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="CUR" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="LUI" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="LQ" />
+      <Loop LoopId="DTP">
+        <Name>Date or Time or Period</Name>
+        <StartingSegment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="LQ" />
+        <Loop LoopId="N9">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="N9" />
+          <Segment SegmentId="PCT" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="G63">
+        <Name>Period</Name>
+        <StartingSegment SegmentId="G63" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="REF" />
+        <Loop LoopId="N9">
+          <Name>Reference Identification</Name>
+          <StartingSegment SegmentId="N9" />
+          <Segment SegmentId="PCT" />
+          <Segment SegmentId="AMT" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="MSG" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

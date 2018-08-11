@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--896 Product Dimension Maintenance-->
+<TransactionSpecification TransactionSetIdentifierCode="896" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="NTE" Repeat="20" />
+  <Segment SegmentId="G43" Repeat="200" />
+  <Loop LoopId="0200" LoopRepeat="999">
+    <Name>Item Detail Dimensions</Name>
+    <StartingSegment SegmentId="ID1" />
+    <Segment SegmentId="ID2" Repeat="1" />
+    <Segment SegmentId="ID3" Repeat="50" />
+  </Loop>
+</TransactionSpecification>

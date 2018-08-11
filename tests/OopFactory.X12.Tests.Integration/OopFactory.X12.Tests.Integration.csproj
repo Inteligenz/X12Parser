@@ -45,6 +45,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,10 @@
     <ProjectReference Include="..\..\src\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj">
       <Project>{26e9a9d5-d0b4-4b86-83d7-a0a3370a57ea}</Project>
       <Name>OopFactory.X12.Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\OopFactory.X12.Sql\OopFactory.X12.Sql.csproj">
+      <Project>{82795b66-0f18-4385-8180-a8c7e0f41893}</Project>
+      <Name>OopFactory.X12.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\OopFactory.X12\OopFactory.X12.csproj">
       <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>

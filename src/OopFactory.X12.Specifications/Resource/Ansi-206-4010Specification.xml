@@ -1,0 +1,72 @@
+﻿<?xml version="1.0"?>
+<TransactionSpecification TransactionSetIdentifierCode="206" FunctionalGroupCode="MG" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Name>Real Estate Inspection</Name>
+  <Segment SegmentId="BGN" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="1" />
+  <Segment SegmentId="MSG" Repeat="1" />
+  <Loop LoopId="0100">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="2" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Service Characteristic Identification</Name>
+    <StartingSegment SegmentId="SI" />
+    <Segment SegmentId="N9" Repeat="2" />
+    <Segment SegmentId="RLT" Repeat="1" />
+    <Segment SegmentId="REC" Repeat="1" />
+    <Segment SegmentId="LN" Repeat="1" />
+    <Segment SegmentId="PWK" Repeat="5" />
+    <Segment SegmentId="PER" Repeat="2" />
+    <Segment SegmentId="DTP" Repeat="10" />
+    <Segment SegmentId="AMT" Repeat="20" />
+    <Segment SegmentId="NTE" Repeat="5" />
+    <Segment SegmentId="CTP" Repeat="1" />
+    <Loop LoopId="0210">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" Repeat="12" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="5" />
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="PDS" />
+      <Segment SegmentId="PDE" />
+      <Segment SegmentId="REA" Repeat="1" />
+      <Segment SegmentId="III" Repeat="5" />
+      <Segment SegmentId="REC" />
+      <Segment SegmentId="DTP" Repeat="2" />
+      <Segment SegmentId="YNQ" Repeat="20" />
+      <Segment SegmentId="NTE" Repeat="10" />
+      <Segment SegmentId="PWK" Repeat="2" />
+      <Segment SegmentId="PER" Repeat="2" />
+      <Segment SegmentId="AMT" Repeat="20" />
+      <Segment SegmentId="CTP" Repeat="1" />
+      <Loop LoopId="0221">
+        <Name>Party Identification</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="10" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="1" />
+        <Segment SegmentId="CRC" Repeat="1" />
+        <Segment SegmentId="DFI" Repeat="5" />
+        <Segment SegmentId="YNQ" Repeat="10" />
+        <Segment SegmentId="AMT" Repeat="5" />
+        <Segment SegmentId="NTE" Repeat="10" />
+        <Segment SegmentId="OBI" />
+        <Segment SegmentId="AIN" Repeat="10" />
+        <Segment SegmentId="QTY" Repeat="3" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

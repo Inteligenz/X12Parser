@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 141 Product Service Claim Response -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="141">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="QTY"/>
+  <Segment SegmentId="N9"/>
+  <Loop LoopId="N1">
+    <Name/>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name/>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PCS"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="MSG"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="RC"/>
+  </Loop>
+  <Loop LoopId="TDS">
+    <Name/>
+    <StartingSegment SegmentId="TDS"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="CUR"/>
+  </Loop>
+</TransactionSpecification>

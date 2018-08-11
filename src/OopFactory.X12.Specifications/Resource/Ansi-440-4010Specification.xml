@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--440 Shipment Weights-->
+<TransactionSpecification TransactionSetIdentifierCode="440" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BW" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G4" Repeat="1" />
+  <Segment SegmentId="G5" Usage="Required" Repeat="255" />
+</TransactionSpecification>

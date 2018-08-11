@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--872 Residential Mortgage Insurance Application-->
+<TransactionSpecification TransactionSetIdentifierCode="872" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="5" />
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="N1" Usage="Required" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Loop LoopId="LRQ">
+      <Name>Mortgage Characteristics Requested</Name>
+      <StartingSegment SegmentId="LRQ" />
+      <Segment SegmentId="LN1" Usage="Required" Repeat="1" />
+      <Segment SegmentId="PRD" Usage="Required" Repeat="1" />
+      <Segment SegmentId="MIC" Usage="Required" Repeat="5" />
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="REF" Repeat="10" />
+      <Segment SegmentId="PEX" Repeat="20" />
+      <Segment SegmentId="RLD" Repeat="5" />
+      <Segment SegmentId="PAY" Repeat="1" />
+      <Segment SegmentId="RAT" Repeat="1" />
+      <Loop LoopId="SCM" LoopRepeat="10">
+        <Name>Credit Score Model</Name>
+        <StartingSegment SegmentId="SCM" />
+        <Segment SegmentId="SCS" Repeat="5" />
+      </Loop>
+      <Loop LoopId="NX1" LoopRepeat="5">
+        <Name>Property or Entity Identification</Name>
+        <StartingSegment SegmentId="NX1" />
+        <Segment SegmentId="NX2" Usage="Required" Repeat="30" />
+        <Loop LoopId="PAS" LoopRepeat="5">
+          <Name>Property Appraisal Summary</Name>
+          <StartingSegment SegmentId="PAS" />
+          <Segment SegmentId="N1" Repeat="2" />
+          <Segment SegmentId="PER" Repeat="10" />
+          <Segment SegmentId="MSG" Repeat="10" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="IN1" LoopRepeat="12">
+        <Name>Individual Identification</Name>
+        <StartingSegment SegmentId="IN1" />
+        <Segment SegmentId="IN2" Usage="Required" Repeat="10" />
+        <Segment SegmentId="YNQ" Repeat="5" />
+        <Segment SegmentId="DMG" Repeat="1" />
+        <Segment SegmentId="MSG" Repeat="1" />
+        <Segment SegmentId="N10" Repeat="1" />
+        <Segment SegmentId="BFS" Repeat="1" />
+        <Loop LoopId="SCM" LoopRepeat="10">
+          <Name>Credit Score Model</Name>
+          <StartingSegment SegmentId="SCM" />
+          <Segment SegmentId="SCS" Repeat="5" />
+        </Loop>
+        <Loop LoopId="NX1" LoopRepeat="10">
+          <Name>Property or Entity Identification</Name>
+          <StartingSegment SegmentId="NX1" />
+          <Segment SegmentId="NX2" Usage="Required" Repeat="30" />
+          <Segment SegmentId="N10" Repeat="1" />
+          <Segment SegmentId="ARS" Repeat="1" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="REA" LoopRepeat="1">
+        <Name>Real Estate Property Information</Name>
+        <StartingSegment SegmentId="REA" />
+        <Segment SegmentId="AMT" Repeat="10" />
+      </Loop>
+      <Loop LoopId="MCD" LoopRepeat="1">
+        <Name>Mortgage Closing Data</Name>
+        <StartingSegment SegmentId="MCD" />
+        <Segment SegmentId="AMT" Repeat="10" />
+      </Loop>
+      <Loop LoopId="BUY" LoopRepeat="20">
+        <Name>Loan Buydown</Name>
+        <StartingSegment SegmentId="BUY" />
+        <Segment SegmentId="TBA" Repeat="10" />
+      </Loop>
+      <Loop LoopId="PRJ" LoopRepeat="1">
+        <Name>Multifamily Housing Project</Name>
+        <StartingSegment SegmentId="PRJ" />
+        <Segment SegmentId="PER" Repeat="10" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

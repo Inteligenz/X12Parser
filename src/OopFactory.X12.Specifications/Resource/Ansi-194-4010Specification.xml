@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--194 Grant or Assistance Application-->
+<TransactionSpecification TransactionSetIdentifierCode="194" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="LDT" />
+  <Segment SegmentId="PWK" />
+  <Loop LoopId="N9">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="N9" />
+    <Segment SegmentId="L11" />
+    <Segment SegmentId="MTX" />
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="PAM" />
+    <Segment SegmentId="HSD" />
+    <Segment SegmentId="NX1" />
+    <Segment SegmentId="YNQ" />
+    <Loop LoopId="N9">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="L11" />
+      <Segment SegmentId="MTX" />
+      <Loop LoopId="INX">
+        <Name>Index Detail</Name>
+        <StartingSegment SegmentId="INX" />
+        <Segment SegmentId="K3" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="PO1">
+      <Name>Baseline Item Data</Name>
+      <StartingSegment SegmentId="PO1" />
+      <Segment SegmentId="MTX" />
+    </Loop>
+    <Loop LoopId="PPL">
+      <Name>Price Support Data</Name>
+      <StartingSegment SegmentId="PPL" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="PD">
+        <Name>Pricing Data</Name>
+        <StartingSegment SegmentId="PD" />
+        <Segment SegmentId="PDD" />
+      </Loop>
+      <Loop LoopId="PL">
+        <Name>Proposal Cost Logic</Name>
+        <StartingSegment SegmentId="PL" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="NTE" />
+        <Loop LoopId="PD">
+          <Name>Pricing Data</Name>
+          <StartingSegment SegmentId="PD" />
+          <Segment SegmentId="SPI" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="PDD" />
+          <Segment SegmentId="MTX" />
+          <Segment SegmentId="DTM" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="DMG" />
+      <Segment SegmentId="EMS" />
+      <Loop LoopId="N9">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="N9" />
+        <Segment SegmentId="L11" />
+        <Segment SegmentId="MTX" />
+      </Loop>
+      <Loop LoopId="DEG">
+        <Name>Degree Record</Name>
+        <StartingSegment SegmentId="DEG" />
+        <Segment SegmentId="FOS" />
+        <Segment SegmentId="N1" />
+      </Loop>
+      <Loop LoopId="K2">
+        <Name>Administrative Message</Name>
+        <StartingSegment SegmentId="K2" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="NM1" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

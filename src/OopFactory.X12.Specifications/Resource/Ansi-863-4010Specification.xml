@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--863 Report of Test Results-->
+<TransactionSpecification TransactionSetIdentifierCode="863" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="REF" Repeat="12" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="PID" Repeat="200" />
+  <Segment SegmentId="PO4" Repeat="1" />
+  <Segment SegmentId="TMD" Repeat="1" />
+  <Segment SegmentId="MEA" Repeat="20" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Loop LoopId="PER">
+      <Name>Administrative Communications Contact</Name>
+      <StartingSegment SegmentId="PER" />
+      <Segment SegmentId="REF" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LIN">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Loop LoopId="PID" Repeat="1000">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID"/>
+      <Loop LoopId="MEA">
+        <Name>Measurements</Name>
+        <StartingSegment SegmentId="MEA"/>
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="REF" Repeat="10" />
+        <Segment SegmentId="CID"/>
+        <Segment SegmentId="PSD"/>
+        <Segment SegmentId="TMD"/>
+      </Loop>
+      <Loop LoopId="TSP">
+        <Name>Test Period or Interval</Name>
+        <StartingSegment SegmentId="TSP" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="REF" Repeat="10" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

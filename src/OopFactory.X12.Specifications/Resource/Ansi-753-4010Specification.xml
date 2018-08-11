@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--753 Request for Routing Instructions -->
+<TransactionSpecification TransactionSetIdentifierCode="753" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1"/>
+  <Segment SegmentId="PER" Repeat="1"/>
+  <Segment SegmentId="YNQ" Repeat="1"/>
+  <Segment SegmentId="LX"/>
+  <Loop LoopId="0100">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2" Repeat="1"/>
+    <Segment SegmentId="N3" Repeat="2"/>
+    <Segment SegmentId="N4" Repeat="1"/>
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="9999">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2" Repeat="1"/>
+    <Segment SegmentId="N3" Repeat="2"/>
+    <Segment SegmentId="N4" Repeat="1"/>
+    <Segment SegmentId="L11" Repeat="5"/>
+    <Segment SegmentId="G62" Repeat="2"/>
+    <Segment SegmentId="USI" Repeat="1"/>
+    <Segment SegmentId="AT8" Repeat="1"/>
+    <Loop LoopId="0205">
+      <Name>Commodity Classifications</Name>
+      <StartingSegment SegmentId="CMC"/>
+      <Segment SegmentId="AT8" Repeat="1"/>
+    </Loop>
+    <Loop LoopId="0210">
+      <Name>Order Information Detail</Name>
+      <StartingSegment SegmentId="OID"/>
+      <Segment SegmentId="CMD" Repeat="1"/>
+      <Segment SegmentId="YNQ" Repeat="1"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

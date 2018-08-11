@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--893 Item Information Request-->
+<TransactionSpecification TransactionSetIdentifierCode="893" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G39" Usage="Required" Repeat="9999" />
+  <Segment SegmentId="G69" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="999">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="2" />
+  </Loop>
+</TransactionSpecification>

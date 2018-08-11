@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--895 Delivery/Return Acknowledgment or Adjustment-->
+<TransactionSpecification TransactionSetIdentifierCode="895" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G87" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G88" Repeat="1" />
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="0100" LoopRepeat="9999">
+      <Name>Line-Item Detail Adjustment</Name>
+      <StartingSegment SegmentId="G89" />
+      <Segment SegmentId="G22" Repeat="1" />
+      <Segment SegmentId="G72" Repeat="10" />
+      <Segment SegmentId="G23" Repeat="20" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="G72" Repeat="20" />
+  <Segment SegmentId="G23" Repeat="20" />
+  <Segment SegmentId="G84" Repeat="1" />
+  <Segment SegmentId="G86" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G85" Usage="Required" Repeat="1" />
+</TransactionSpecification>

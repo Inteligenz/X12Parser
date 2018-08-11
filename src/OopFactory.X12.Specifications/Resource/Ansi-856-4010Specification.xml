@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="856">
+  <Segment SegmentId="BSN" Repeat="1"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="CTT" Usage="Situational" Trailer="true" Repeat="1"/>
+  <HierarchicalLoop LoopId="SHIPMENT" Usage="Required" LevelCode="S">
+    <Name>SHIPMENT</Name>
+    <Segment SegmentId="LIN"/>
+    <Segment SegmentId="SN1"/>
+    <Segment SegmentId="SLN"/>
+    <Segment SegmentId="PRF"/>
+    <Segment SegmentId="PO4"/>
+    <Segment SegmentId="PID"/>
+    <Segment SegmentId="MEA"/>
+    <Segment SegmentId="PKW"/>
+    <Segment SegmentId="PKG"/>
+    <Segment SegmentId="TD1"/>
+    <Segment SegmentId="TD5"/>
+    <Segment SegmentId="TD3"/>
+    <Segment SegmentId="TD4"/>
+    <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="FOB"/>
+    <Loop LoopId="BT" Usage="Required" LoopRepeat="1">
+      <Name>Bill-To-Party</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="BT"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="IC" Usage="Required" LoopRepeat="1">
+      <Name>Intermedicate Consignee</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="IC"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="SU" Usage="Required" LoopRepeat="1">
+      <Name>Supplier</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="SU"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="ST" Usage="Required" LoopRepeat="1">
+      <Name>Ship To</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="ST"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="SF" Usage="Required" LoopRepeat="1">
+      <Name>Ship From</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="SF"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="SE" Usage="Required" LoopRepeat="1">
+      <Name>Selling Party</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="SE"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="BY" Usage="Required" LoopRepeat="1">
+      <Name>Buying Party</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="BY"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+    <Loop LoopId="SAC" Usage="Required" LoopRepeat="1">
+      <Name>Service, Promotion, Allowance, or Charge</Name>
+      <StartingSegment SegmentId="SAC" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="ORDER" Usage="Required" LevelCode="O">
+    <Name>ORDER</Name>
+    <Segment SegmentId="PRF" Usage="Required" Repeat="1"/>
+    <!--<Segment SegmentId="TD5" Usage="Required" Repeat="1"/> DON'T SEE THIS IN THE ANSI X12 DOCS -->
+    <Segment SegmentId="PID"/>
+    <!--<Segment SegmentId="TD1"/> DON'T SEE THIS IN THE ANSI X12 DOCS -->
+    <Segment SegmentId="REF"/>
+    <Loop LoopId="SAC" Usage="Required" LoopRepeat="1">
+      <Name>Service, Promotion, Allowance, or Charge</Name>
+      <StartingSegment SegmentId="SAC" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="CUR" Repeat="1" />
+    </Loop>
+    <Loop LoopId="BY" Usage="Required" LoopRepeat="1">
+      <Name>Buying Party</Name>
+      <StartingSegment SegmentId="N1" Usage="Required" Repeat="1">
+        <EntityIdentifier Code="BY"/>
+      </StartingSegment>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3" Usage="Required" Repeat="2"/>
+      <Segment SegmentId="N4" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="FOB"/>
+    </Loop>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="TARE" Usage="Required" LevelCode="T">
+    <Name>TARE</Name>
+    <Segment SegmentId="MAN" Usage="Required" Repeat="1"/>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="PACK" Usage="Required" LevelCode="P">
+    <Name>PACK</Name>
+    <Segment SegmentId="MAN" Usage="Required" Repeat="1"/>
+  </HierarchicalLoop>
+  <HierarchicalLoop LoopId="ITEM" Usage="Required" LevelCode="I">
+    <Name>ITEM</Name>
+    <Segment SegmentId="LIN"/>
+    <Segment SegmentId="SN1"/>
+    <Segment SegmentId="SLN"/>
+    <Segment SegmentId="PRF"/>
+    <Segment SegmentId="PO4"/>
+    <Segment SegmentId="PID"/>
+    <Segment SegmentId="MEA"/>
+    <Segment SegmentId="PKW"/>
+    <Segment SegmentId="PKG"/>
+    <Segment SegmentId="TD1"/>
+    <Segment SegmentId="TD5"/>
+    <Segment SegmentId="TD3"/>
+    <Segment SegmentId="TD4"/>
+    <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+    <Segment SegmentId="CUR"/>
+    <Segment SegmentId="V1"/>
+    <Segment SegmentId="PER"/>
+    <Loop LoopId="LOAD" Usage="Required" LoopRepeat="1">
+      <Name>LOAD DETAIL</Name>
+      <StartingSegment SegmentId="CLD" Usage="Required" Repeat="1"/>
+      <Segment SegmentId="REF" Usage="Situational" Repeat="200"/>
+      <Segment SegmentId="DTP"/>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

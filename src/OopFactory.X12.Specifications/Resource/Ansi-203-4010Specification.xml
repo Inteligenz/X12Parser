@@ -1,0 +1,48 @@
+﻿<?xml version="1.0"?>
+<TransactionSpecification TransactionSetIdentifierCode="203" FunctionalGroupCode="MG" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Name>Secondary Mortgage Market Investor Report</Name>
+  <Segment SegmentId="BGN" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+  <Loop LoopId="LX">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="REF" Repeat="4" />
+    <Segment SegmentId="MPP" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="10" />
+    <Segment SegmentId="INT" Repeat="2" />
+    <Segment SegmentId="QTY" Repeat="5" />
+    <Segment SegmentId="DTM" Repeat="5" />
+    <Loop LoopId="RLT">
+      <Name>Real Estate Loan Type</Name>
+      <StartingSegment SegmentId="RLT" />
+      <Segment SegmentId="DTP" Repeat="3" />
+      <Segment SegmentId="AMT" Repeat="8" />
+      <Segment SegmentId="IRA" Repeat="1" />
+      <Segment SegmentId="INT" Repeat="2" />
+      <Segment SegmentId="PRC" Repeat="3" />
+      <Segment SegmentId="NX2" Repeat="10" />
+      <Segment SegmentId="LQ" Repeat="5" />
+      <Loop LoopId="N1" LoopRepeat="1">
+        <Name>Party Identification</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="2" />
+        <Segment SegmentId="YNQ" />
+        <Loop LoopId="AMT">
+          <Name>Monetary Amount Information</Name>
+          <StartingSegment SegmentId="AMT" />
+          <Segment SegmentId="DTP" Repeat="1" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

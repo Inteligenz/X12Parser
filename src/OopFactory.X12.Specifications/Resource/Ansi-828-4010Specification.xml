@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--828 Debit Authorization-->
+<TransactionSpecification TransactionSetIdentifierCode="828" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BAU" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Repeat="1" />
+  <Segment SegmentId="N2" />
+  <Segment SegmentId="N3" />
+  <Segment SegmentId="N4" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="PER" />
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+  <Segment SegmentId="AMT" Repeat="1" Trailer="true" />
+  <Loop LoopId="DAD">
+    <Name>Debit Authorization Detail</Name>
+    <StartingSegment SegmentId="DAD" />
+    <Segment SegmentId="NM1" Repeat="1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+</TransactionSpecification>

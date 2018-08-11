@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--309 U.S. Customs Manifest-->
+<TransactionSpecification TransactionSetIdentifierCode="309" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Loop LoopId="P4" LoopRepeat="20">
+    <Name>U.S. Port Information</Name>
+    <StartingSegment SegmentId="P4" />
+    <Loop LoopId="LX" LoopRepeat="9999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="M13" Repeat="1" />
+      <Segment SegmentId="M11" Repeat="1" />
+      <Segment SegmentId="N9" Repeat="999" />
+      <Loop LoopId="N1" LoopRepeat="5">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="1" />
+      </Loop>
+      <Loop LoopId="M12" LoopRepeat="1">
+        <Name>In-bond Identifying Information</Name>
+        <StartingSegment SegmentId="M12" />
+        <Segment SegmentId="P5" Repeat="5" />
+      </Loop>
+      <Loop LoopId="VID" LoopRepeat="999">
+        <Name>Conveyance Identification</Name>
+        <StartingSegment SegmentId="VID" />
+        <Segment SegmentId="VC" Repeat="21" />
+        <Loop LoopId="N10" LoopRepeat="999">
+          <Name>Quantity and Description</Name>
+          <StartingSegment SegmentId="N10" />
+          <Loop LoopId="H1" LoopRepeat="10">
+            <Name>Hazardous Material</Name>
+            <StartingSegment SegmentId="H1" />
+            <Segment SegmentId="H2" Repeat="99" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--926 Claim Status Report and Tracer Reply-->
+<TransactionSpecification TransactionSetIdentifierCode="926" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="F11" LoopRepeat="500">
+    <Name>Status</Name>
+    <StartingSegment SegmentId="F11" />
+    <Segment SegmentId="F14" Repeat="99" />
+    <Segment SegmentId="TRN" Repeat="1" />
+    <Segment SegmentId="F13" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

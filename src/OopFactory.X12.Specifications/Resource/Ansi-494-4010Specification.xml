@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--494 Rail Scale Rates-->
+<TransactionSpecification TransactionSetIdentifierCode="494" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PI" Usage="Required" Repeat="8" />
+  <Segment SegmentId="PR" Repeat="200" />
+  <Segment SegmentId="SS" Repeat="1" />
+  <Segment SegmentId="SA" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CD" Repeat="150" />
+  <Segment SegmentId="GY" Repeat="150" />
+  <Segment SegmentId="RAB" Repeat="12" />
+  <Segment SegmentId="PT" Repeat="50" />
+  <Loop LoopId="LX" LoopRepeat="1">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PI" Repeat="15" />
+  </Loop>
+  <Loop LoopId="R9" LoopRepeat="10">
+    <Name>Route Code</Name>
+    <StartingSegment SegmentId="R9" />
+    <Loop LoopId="R2B" LoopRepeat="10">
+      <Name>Junctions and Proportions</Name>
+      <StartingSegment SegmentId="R2B" />
+      <Segment SegmentId="R2C" Repeat="10" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="SCL" LoopRepeat="999">
+    <Name>Rate Basis/Scales</Name>
+    <StartingSegment SegmentId="SCL" />
+    <Segment SegmentId="RD" Repeat="6" />
+  </Loop>
+</TransactionSpecification>

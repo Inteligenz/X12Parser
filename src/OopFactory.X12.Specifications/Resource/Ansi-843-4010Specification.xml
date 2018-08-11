@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--843 Response to Request for Quotation-->
+<TransactionSpecification TransactionSetIdentifierCode="843" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BQR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="TAX" Repeat="3" />
+  <Segment SegmentId="FOB" />
+  <Segment SegmentId="CTP" />
+  <Segment SegmentId="PAM" Repeat="10" />
+  <Segment SegmentId="CSH" Repeat="25" />
+  <Segment SegmentId="SAC" Repeat="25" />
+  <Segment SegmentId="ITD" Repeat="5" />
+  <Segment SegmentId="DIS" Repeat="20" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="LIN" Repeat="5" />
+  <Segment SegmentId="PID" Repeat="200" />
+  <Segment SegmentId="MEA" Repeat="40" />
+  <Segment SegmentId="PWK" Repeat="25" />
+  <Segment SegmentId="PKG" Repeat="25" />
+  <Segment SegmentId="TD1" Repeat="2" />
+  <Segment SegmentId="TD5" Repeat="12" />
+  <Segment SegmentId="TD3" Repeat="12" />
+  <Segment SegmentId="TD4" Repeat="5" />
+  <Segment SegmentId="MAN" Repeat="10" />
+  <Segment SegmentId="CTB" Repeat="5" />
+  <Segment SegmentId="CPR" Repeat="2" />
+  <Segment SegmentId="PCT" />
+  <Loop LoopId="N9" LoopRepeat="1000">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="N9" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="MSG" Repeat="1000" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="10000">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="SI" />
+    <Segment SegmentId="FOB" Repeat="1" />
+    <Segment SegmentId="TD1" Repeat="2" />
+    <Segment SegmentId="TD5" Repeat="12" />
+    <Segment SegmentId="TD3" Repeat="12" />
+    <Segment SegmentId="TD4" Repeat="5" />
+    <Segment SegmentId="PKG" Repeat="25" />
+    <Segment SegmentId="MSG" />
+  </Loop>
+  <Loop LoopId="AMT">
+    <Name>Monetary Amount</Name>
+    <StartingSegment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+  </Loop>
+  <Loop LoopId="ADV">
+    <Name>Advertising Demographic Information</Name>
+    <StartingSegment SegmentId="ADV" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="MTX" />
+  </Loop>
+  <Loop LoopId="LDT">
+    <Name>Lead Time</Name>
+    <StartingSegment SegmentId="LDT" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="MTX" />
+  </Loop>
+  <Loop LoopId="PO1" LoopRepeat="100000">
+    <Name>Baseline Item Data</Name>
+    <StartingSegment SegmentId="PO1" />
+    <Segment SegmentId="LIN" />
+    <Segment SegmentId="CUR" Repeat="1" />
+    <Segment SegmentId="PO3" Repeat="25" />
+    <Segment SegmentId="CTP" />
+    <Segment SegmentId="PAM" Repeat="10" />
+    <Segment SegmentId="MEA" Repeat="40" />
+    <Loop LoopId="PID" LoopRepeat="1000">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID" />
+      <Segment SegmentId="MEA" Repeat="10" />
+    </Loop>
+    <Segment SegmentId="PWK" Repeat="25" />
+    <Segment SegmentId="PKG" Repeat="25" />
+    <Segment SegmentId="PO4" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="SAC" Repeat="25" />
+    <Segment SegmentId="IT8" Repeat="25" />
+    <Segment SegmentId="CSH" />
+    <Segment SegmentId="ITD" Repeat="2" />
+    <Segment SegmentId="DIS" Repeat="20" />
+    <Segment SegmentId="TAX" Repeat="3" />
+    <Segment SegmentId="FOB" />
+    <Segment SegmentId="SDQ" Repeat="50" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="FST" Repeat="5" />
+    <Segment SegmentId="TD1" Repeat="1" />
+    <Segment SegmentId="TD5" Repeat="12" />
+    <Segment SegmentId="TD3" Repeat="12" />
+    <Segment SegmentId="TD4" Repeat="5" />
+    <Segment SegmentId="MAN" Repeat="10" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="MSG" />
+    <Segment SegmentId="CTB" Repeat="5" />
+    <Segment SegmentId="SPI" />
+    <Loop LoopId="QTY">
+      <Name>Quantity</Name>
+      <StartingSegment SegmentId="QTY" />
+      <Segment SegmentId="SI" />
+    </Loop>
+    <Loop LoopId="SCH" LoopRepeat="104">
+      <Name>Line Item Schedule</Name>
+      <StartingSegment SegmentId="SCH" />
+      <Segment SegmentId="TD1" Repeat="1" />
+      <Segment SegmentId="TD5" Repeat="12" />
+      <Segment SegmentId="TD3" Repeat="12" />
+      <Segment SegmentId="TD4" Repeat="5" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="CST" LoopRepeat="100">
+      <Name>Cost Analysis</Name>
+      <StartingSegment SegmentId="CST" />
+      <Segment SegmentId="PID" Repeat="1" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="2" />
+    </Loop>
+    <Loop LoopId="SLN" LoopRepeat="1000">
+      <Name>Subline Item Detail</Name>
+      <StartingSegment SegmentId="SLN" />
+      <Segment SegmentId="MSG" />
+      <Segment SegmentId="PID" Repeat="1000" />
+      <Segment SegmentId="ADV" />
+      <Loop LoopId="QTY">
+        <Name>Quantity</Name>
+        <StartingSegment SegmentId="QTY" />
+        <Segment SegmentId="SI" />
+      </Loop>
+      <Loop LoopId="CST" LoopRepeat="100">
+        <Name>Cost Analysis</Name>
+        <StartingSegment SegmentId="CST" />
+        <Segment SegmentId="PID" Repeat="1" />
+        <Segment SegmentId="CUR" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="2" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="PD">
+      <Name>Pricing Data</Name>
+      <StartingSegment SegmentId="PD" />
+      <Segment SegmentId="PDD" />
+    </Loop>
+    <Loop LoopId="LDT">
+      <Name>Lead Time</Name>
+      <StartingSegment SegmentId="LDT" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="MSG" Repeat="1" />
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="N9" LoopRepeat="1000">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="MSG" Repeat="1000" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="SI" />
+      <Segment SegmentId="DTM" Repeat="1" />
+      <Segment SegmentId="FOB" Repeat="1" />
+      <Segment SegmentId="SCH" Repeat="200" />
+      <Segment SegmentId="TD1" Repeat="2" />
+      <Segment SegmentId="TD5" Repeat="12" />
+      <Segment SegmentId="TD3" Repeat="12" />
+      <Segment SegmentId="TD4" Repeat="5" />
+      <Segment SegmentId="PKG" Repeat="25" />
+      <Loop LoopId="LDT">
+        <Name>Lead Time</Name>
+        <StartingSegment SegmentId="LDT" />
+        <Segment SegmentId="MAN" Repeat="10" />
+        <Segment SegmentId="QTY" Repeat="5" />
+        <Segment SegmentId="MSG" Repeat="1" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="AMT">
+      <Name>Monetary Amount</Name>
+      <StartingSegment SegmentId="AMT" />
+      <Segment SegmentId="PCT" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="CTT" LoopRepeat="1">
+    <Name>Transaction Totals</Name>
+    <StartingSegment SegmentId="CTT" />
+    <Segment SegmentId="AMT" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

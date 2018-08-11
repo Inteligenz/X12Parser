@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--503 Pricing History-->
+<TransactionSpecification TransactionSetIdentifierCode="503" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="LIN">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="PID" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="PCT" />
+    <Segment SegmentId="REF" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" />
+    </Loop>
+    <Loop LoopId="LS">
+      <Name>Loop Header</Name>
+      <StartingSegment SegmentId="LS" />
+      <Segment SegmentId="LE" Trailer="true" />
+      <Loop LoopId="QTY">
+        <Name>Quantity</Name>
+        <StartingSegment SegmentId="QTY" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="NTE" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" />
+        </Loop>
+        <Loop LoopId="N1">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N2" Repeat="2" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="DTM" />
+          <Segment SegmentId="CS" />
+          <Segment SegmentId="FOB" />
+          <Loop LoopId="LM">
+            <Name>Code Source Information</Name>
+            <StartingSegment SegmentId="LM" />
+            <Segment SegmentId="LQ" Usage="Required" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--301 Confirmation (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="301" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="Y6" Repeat="2" />
+  <Segment SegmentId="Y3" Usage="Required" Repeat="1" />
+  <Loop LoopId="Y4" LoopRepeat="10">
+    <Name>Container Release</Name>
+    <StartingSegment SegmentId="Y4" />
+    <Segment SegmentId="W09" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="100" />
+  <Segment SegmentId="R2A" Repeat="25" />
+  <Loop LoopId="N1" LoopRepeat="4">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="3" />
+  </Loop>
+  <Loop LoopId="R4" LoopRepeat="20">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4" />
+    <Segment SegmentId="DTM" Repeat="15" />
+  </Loop>
+  <Segment SegmentId="W09" Repeat="1" />
+  <Segment SegmentId="H3" Repeat="6" />
+  <Segment SegmentId="EA" Repeat="5" />
+  <Loop LoopId="LX" LoopRepeat="999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="N7" Repeat="1" />
+    <Segment SegmentId="W09" Repeat="1" />
+    <Segment SegmentId="K1" Repeat="10" />
+    <Segment SegmentId="L0" Repeat="1" />
+    <Segment SegmentId="L5" Repeat="1" />
+    <Segment SegmentId="L4" Repeat="1" />
+    <Segment SegmentId="L1" Repeat="1" />
+    <Loop LoopId="H1" LoopRepeat="10">
+      <Name>Hazardous Material</Name>
+      <StartingSegment SegmentId="H1" />
+      <Segment SegmentId="H2" Repeat="10" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="V1" Repeat="2" />
+  <Segment SegmentId="V9" Repeat="10" />
+</TransactionSpecification>

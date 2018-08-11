@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--829 Payment Cancellation Request-->
+<TransactionSpecification TransactionSetIdentifierCode="829" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="PCR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="TRN" Repeat="2" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Segment SegmentId="QTY" Repeat="10" />
+  <Segment SegmentId="AMT" Repeat="10" />
+</TransactionSpecification>

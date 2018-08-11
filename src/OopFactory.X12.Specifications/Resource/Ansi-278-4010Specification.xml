@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--278 Health Care Services Review Information-->
+<TransactionSpecification TransactionSetIdentifierCode="278" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT" Usage="Required" Repeat="1" />
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="TRN" Repeat="9" />
+    <Segment SegmentId="AAA" Repeat="9" />
+    <Segment SegmentId="UM" Repeat="1" />
+    <Segment SegmentId="HCR" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="DTP" Repeat="9" />
+    <Segment SegmentId="HI" Repeat="1" />
+    <Segment SegmentId="HSD" Repeat="1" />
+    <Segment SegmentId="CRC" Repeat="9" />
+    <Segment SegmentId="CL1" Repeat="1" />
+    <Segment SegmentId="CR1" Repeat="1" />
+    <Segment SegmentId="CR2" Repeat="1" />
+    <Segment SegmentId="CR4" Repeat="1" />
+    <Segment SegmentId="CR5" Repeat="1" />
+    <Segment SegmentId="CR6" Repeat="1" />
+    <Segment SegmentId="CR7" Repeat="1" />
+    <Segment SegmentId="CR8" Repeat="1" />
+    <Segment SegmentId="PWK" />
+    <Segment SegmentId="MSG" Repeat="1" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="REF" Repeat="9" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="AAA" Repeat="9" />
+      <Segment SegmentId="PRV" Repeat="1" />
+      <Segment SegmentId="DMG" Repeat="1" />
+      <Segment SegmentId="INS" Repeat="1" />
+      <Segment SegmentId="DTP" Repeat="9" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

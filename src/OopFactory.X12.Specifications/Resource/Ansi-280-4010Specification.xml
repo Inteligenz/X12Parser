@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--280 Voter Registration Information-->
+<TransactionSpecification TransactionSetIdentifierCode="280" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="PWK">
+    <Name>Paperwork</Name>
+    <StartingSegment SegmentId="PWK" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="CRC" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="PER" />
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="ICH" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="NX1">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="EFI">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI" />
+      <Segment SegmentId="BIN" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

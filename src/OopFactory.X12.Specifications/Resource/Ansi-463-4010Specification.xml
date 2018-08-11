@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--463 Rail Rate Reply-->
+<TransactionSpecification TransactionSetIdentifierCode="463" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Loop LoopId="DK" LoopRepeat="300000">
+    <Name>Docket Header</Name>
+    <StartingSegment SegmentId="DK" />
+    <Loop LoopId="LQ" LoopRepeat="10">
+      <Name>Industry Code</Name>
+      <StartingSegment SegmentId="LQ" />
+      <Segment SegmentId="NTE" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

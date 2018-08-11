@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--920 Loss or Damage Claim - General Commodities-->
+<TransactionSpecification TransactionSetIdentifierCode="920" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="F01" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="5" />
+  <Segment SegmentId="CUR" Repeat="5" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="20" />
+  </Loop>
+  <Loop LoopId="F02" LoopRepeat="9999">
+    <Name>Identification of Shipment</Name>
+    <StartingSegment SegmentId="F02" />
+    <Segment SegmentId="N9" Repeat="99" />
+    <Segment SegmentId="MAN" Repeat="9999" />
+    <Segment SegmentId="F05" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="30" />
+    <Segment SegmentId="Q7" Repeat="10" />
+    <Segment SegmentId="M7" Repeat="5" />
+    <Loop LoopId="F09" LoopRepeat="100">
+      <Name>Detail - Supporting Evidence for Claim</Name>
+      <StartingSegment SegmentId="F09" />
+      <Segment SegmentId="F04" Repeat="1" />
+      <Segment SegmentId="F05" Repeat="10" />
+      <Segment SegmentId="NTE" Repeat="9999" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

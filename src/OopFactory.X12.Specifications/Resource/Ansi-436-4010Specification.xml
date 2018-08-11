@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--436 Locomotive Information-->
+<TransactionSpecification TransactionSetIdentifierCode="436" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="LFI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N7" Usage="Required" Repeat="1" />
+  <Segment SegmentId="K3" Repeat="3" />
+</TransactionSpecification>

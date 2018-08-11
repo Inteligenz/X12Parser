@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--861 Receiving Advice/Acceptance Certificate-->
+<TransactionSpecification TransactionSetIdentifierCode="861" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BRA" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+  <Segment SegmentId="PRF" Repeat="25" />
+  <Segment SegmentId="TD1" Repeat="2" />
+  <Segment SegmentId="TD5" Repeat="12" />
+  <Segment SegmentId="TD3" Repeat="12" />
+  <Segment SegmentId="TD4" Repeat="5" />
+  <Segment SegmentId="MEA" Repeat="40" />
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="100" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="FOB" Repeat="1" />
+  </Loop>
+  <Loop LoopId="LM" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="RCD" LoopRepeat="200000">
+    <Name>Receiving Conditions</Name>
+    <StartingSegment SegmentId="RCD" />
+    <Segment SegmentId="SN1" Repeat="1" />
+    <Segment SegmentId="CUR" Repeat="1" />
+    <Segment SegmentId="LIN" Repeat="100" />
+    <Segment SegmentId="PID" Repeat="1000" />
+    <Segment SegmentId="PO4" Repeat="100" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="PRF" Repeat="25" />
+    <Segment SegmentId="MEA" />
+    <Segment SegmentId="FOB" Repeat="1" />
+    <Segment SegmentId="TD1" Repeat="20" />
+    <Segment SegmentId="TD5" Repeat="12" />
+    <Segment SegmentId="TD3" Repeat="12" />
+    <Segment SegmentId="TD4" Repeat="5" />
+    <Segment SegmentId="SAC" Repeat="10" />
+    <Segment SegmentId="MAN" />
+    <Loop LoopId="LM" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="SLN" LoopRepeat="100">
+      <Name>Subline Item Detail</Name>
+      <StartingSegment SegmentId="SLN" />
+      <Segment SegmentId="PID" Repeat="1000" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Loop LoopId="LM" LoopRepeat="10">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="200">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="100" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="FOB" Repeat="1" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+</TransactionSpecification>

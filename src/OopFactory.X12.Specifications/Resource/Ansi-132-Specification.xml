@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 132 Human Resource Information -->
+<TransactionSpecification TransactionSetIdentifierCode="132" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="COM"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="DMG"/>
+    <Segment SegmentId="III"/>
+    <Segment SegmentId="LUI"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="PCT"/>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Loop LoopId="N3">
+        <Name>Party Location</Name>
+        <StartingSegment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="COM"/>
+      </Loop>      
+    </Loop>
+    <Loop LoopId="CQ">
+      <Name>Credentials and Qualification</Name>
+      <StartingSegment SegmentId="CQ"/>
+      <Segment SegmentId="FOS"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="ISI"/>
+      <Segment SegmentId="YNQ"/>
+      <Loop LoopId="DEG">
+        <Name>Degree Record</Name>
+        <StartingSegment SegmentId="DEG"/>
+        <Segment SegmentId="FOS"/>
+        <Segment SegmentId="QTY"/>
+      </Loop>
+      <Loop LoopId="CRS">
+        <Name>Course Record</Name>
+        <StartingSegment SegmentId="CRS"/>
+        <Segment SegmentId="CSU"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <Name>Party Identification</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="COM"/>
+      </Loop>      
+    </Loop>
+    <Loop LoopId="EMS">
+      <Name>Employment Position</Name>
+      <StartingSegment SegmentId="EMS"/>
+      <Segment SegmentId="ISI"/>
+      <Segment SegmentId="ESI"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="YNQ"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="ELV"/>
+      <Segment SegmentId="AIN"/>
+      <Segment SegmentId="CN1"/>
+      <Segment SegmentId="CON"/>
+      <Loop LoopId="N9">
+        <Name>Extended Reference Information</Name>
+        <StartingSegment SegmentId="N9"/>
+        <Segment SegmentId="PCT"/>
+      </Loop>
+      <Loop LoopId="N1">
+        <Name>Party Identification</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N4"/>
+      </Loop>
+      <Loop LoopId="SES">
+        <Name>Academic Session Header</Name>
+        <StartingSegment SegmentId="SES"/>
+        <Segment SegmentId="DTP"/>
+        <Loop LoopId="WLD">
+          <Name>Workload Detail</Name>
+          <StartingSegment SegmentId="WLD"/>
+          <Segment SegmentId="N1"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="DTP"/>
+          <Segment SegmentId="REF"/>
+          <Segment SegmentId="PCT"/>
+          <Segment SegmentId="YNQ"/>
+        </Loop>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

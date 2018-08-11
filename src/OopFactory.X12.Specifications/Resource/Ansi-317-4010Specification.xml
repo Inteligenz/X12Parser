@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--317 Delivery/Pickup Order-->
+<TransactionSpecification TransactionSetIdentifierCode="317" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="9" />
+  </Loop>
+  <Segment SegmentId="G62" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Usage="Required" Repeat="9" />
+  <Segment SegmentId="TD5" Usage="Required" Repeat="1" />
+  <Loop LoopId="L0" LoopRepeat="9999">
+    <Name>Line Item - Quantity and Weight</Name>
+    <StartingSegment SegmentId="L0" />
+    <Segment SegmentId="L5" Repeat="999" />
+    <Segment SegmentId="H1" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--466 Rate Request-->
+<TransactionSpecification TransactionSetIdentifierCode="466" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DK" Repeat="1" />
+  <Segment SegmentId="PR1" Repeat="1" />
+  <Segment SegmentId="PR2" Repeat="1" />
+  <Segment SegmentId="PI" Repeat="1" />
+</TransactionSpecification>

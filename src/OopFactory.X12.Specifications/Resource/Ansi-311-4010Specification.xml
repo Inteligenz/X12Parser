@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--311 Canadian Customs Information-->
+<TransactionSpecification TransactionSetIdentifierCode="311" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B2A" Usage="Required" Repeat="1" />
+  <Segment SegmentId="Y6" Repeat="2" />
+  <Segment SegmentId="N9" Usage="Required" Repeat="10" />
+  <Segment SegmentId="V1" Repeat="1" />
+  <Segment SegmentId="V2" Repeat="1" />
+  <Segment SegmentId="V3" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="2" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="R4" Usage="Required" Repeat="10" />
+  <Segment SegmentId="K1" Repeat="5" />
+  <Loop LoopId="LX" LoopRepeat="999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="Y2" Repeat="10" />
+    <Loop LoopId="ED" LoopRepeat="999">
+      <Name>Equipment Description</Name>
+      <StartingSegment SegmentId="ED" />
+      <Segment SegmentId="M7" Repeat="5" />
+      <Segment SegmentId="NA" Repeat="1" />
+      <Segment SegmentId="L4" Repeat="1" />
+      <Segment SegmentId="G2" Repeat="1" />
+    </Loop>
+    <Loop LoopId="L0" LoopRepeat="120">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0" />
+      <Segment SegmentId="L5" Usage="Required" Repeat="999" />
+      <Segment SegmentId="L4" Repeat="1" />
+      <Segment SegmentId="X1" Repeat="5" />
+      <Segment SegmentId="X2" Repeat="5" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="L3" Repeat="1" />
+  <Segment SegmentId="K1" Repeat="2" />
+</TransactionSpecification>

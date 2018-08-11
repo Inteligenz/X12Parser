@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--857 Shipment and Billing Notice-->
+<TransactionSpecification TransactionSetIdentifierCode="857" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="BCHB"/>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="BS1" LoopRepeat="1">
+      <Name>Total Shipment Information</Name>
+      <StartingSegment SegmentId="G05" />
+      <Segment SegmentId="TD1" Repeat="5" />
+      <Segment SegmentId="TD3" Repeat="5" />
+      <Segment SegmentId="TD4" Repeat="5" />
+      <Segment SegmentId="TD5" Repeat="10" />
+      <Segment SegmentId="FOB" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="5" />
+      <Segment SegmentId="N9" Repeat="20" />
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Loop LoopId="N1" LoopRepeat="10">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS2" LoopRepeat="1">
+      <Name>Total Monetary Value Summary</Name>
+      <StartingSegment SegmentId="TDS" />
+      <Segment SegmentId="PRF" Repeat="1" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="ITD" Repeat="5" />
+      <Segment SegmentId="TXI" Repeat="10" />
+      <Segment SegmentId="SN1" Repeat="1" />
+      <Segment SegmentId="ISS" Repeat="1" />
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="SAC" LoopRepeat="25">
+        <Name>Service, Promotion, Allowance, or Charg</Name>
+        <StartingSegment SegmentId="SAC" />
+        <Segment SegmentId="TXI" Repeat="10" />
+      </Loop>
+      <Loop LoopId="N1" LoopRepeat="10">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="BS3" LoopRepeat="1">
+      <Name>Pallet Information</Name>
+      <StartingSegment SegmentId="PAL" />
+      <Segment SegmentId="SN1" Repeat="1" />
+      <Segment SegmentId="MAN" Repeat="10" />
+    </Loop>
+    <Loop LoopId="BS4" LoopRepeat="1">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="N9" Repeat="15" />
+      <Segment SegmentId="SN1" Repeat="1" />
+      <Segment SegmentId="PO4" Repeat="1" />
+      <Segment SegmentId="MEA" Repeat="10" />
+      <Segment SegmentId="PKG" Repeat="10" />
+      <Segment SegmentId="MAN" Repeat="10" />
+    </Loop>
+    <Loop LoopId="BS5" LoopRepeat="1">
+      <Name>Baseline Item Data (Invoice)</Name>
+      <StartingSegment SegmentId="IT1" />
+      <Segment SegmentId="IT3" Repeat="1" />
+      <Segment SegmentId="PO4" Repeat="1" />
+      <Segment SegmentId="TD4" />
+      <Segment SegmentId="TC2" Repeat="5" />
+      <Segment SegmentId="TXI" Repeat="10" />
+      <Segment SegmentId="CTP" Repeat="10" />
+      <Segment SegmentId="N9" Repeat="10" />
+      <Segment SegmentId="MEA" Repeat="10" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="ITD" />
+      <Loop LoopId="ITA">
+        <StartingSegment SegmentId="ITA"/>
+        <Segment SegmentId="N1"/>
+      </Loop>
+      <Loop LoopId="PID" LoopRepeat="25">
+        <Name>Product/Item Description</Name>
+        <StartingSegment SegmentId="PID" />
+        <Segment SegmentId="MEA" Repeat="10" />
+      </Loop>
+      <Loop LoopId="SLN" LoopRepeat="1000">
+        <Name>Subline Item Detail</Name>
+        <StartingSegment SegmentId="SLN" />
+        <Segment SegmentId="PID" Repeat="25" />
+      </Loop>
+      <Loop LoopId="SAC" LoopRepeat="25">
+        <Name>Service, Promotion, Allowance, or Charg</Name>
+        <StartingSegment SegmentId="SAC" />
+        <Segment SegmentId="TXI" Repeat="10" />
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" />
+      </Loop>
+      <Loop LoopId="FA1">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

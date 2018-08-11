@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--102 Associated Data -->
+<TransactionSpecification TransactionSetIdentifierCode="102" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ORI"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="OOI"/>
+  <Segment SegmentId="BDS"/>
+</TransactionSpecification>

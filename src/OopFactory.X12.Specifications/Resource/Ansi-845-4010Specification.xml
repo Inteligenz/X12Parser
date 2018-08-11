@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--845 Price Authorization Acknowledgment/Status-->
+<TransactionSpecification TransactionSetIdentifierCode="845" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BPA" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Segment SegmentId="REF" Repeat="12" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="10000">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="10" />
+  </Loop>
+  <Loop LoopId="CON" LoopRepeat="10000">
+    <Name>Contract Number Detail</Name>
+    <StartingSegment SegmentId="CON" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="CTB" Repeat="10" />
+    <Segment SegmentId="ITD" Repeat="2" />
+    <Loop LoopId="N1" LoopRepeat="10000">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="DTM" Repeat="2" />
+      <Segment SegmentId="CTB" Repeat="25" />
+    </Loop>
+    <Loop LoopId="PAD">
+      <Name>Product Adjustment Detail</Name>
+      <StartingSegment SegmentId="PAD" />
+      <Segment SegmentId="CTB" Repeat="10" />
+      <Segment SegmentId="PID" Repeat="200" />
+      <Segment SegmentId="MEA" Repeat="40" />
+      <Segment SegmentId="UIT" Repeat="20" />
+      <Segment SegmentId="QTY" Repeat="5" />
+      <Segment SegmentId="AMT" Repeat="5" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="SSS" Repeat="1" />
+      <Segment SegmentId="SHP" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="2" />
+      <Loop LoopId="LIN" LoopRepeat="1">
+        <Name>Item Identification</Name>
+        <StartingSegment SegmentId="LIN" />
+        <Segment SegmentId="G53" Repeat="1" />
+        <Segment SegmentId="SLN" Repeat="100" />
+      </Loop>
+      <Loop LoopId="N1" LoopRepeat="10000">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="CTB" Repeat="25" />
+      </Loop>
+      <Loop LoopId="CTP" LoopRepeat="25">
+        <Name>Pricing Information</Name>
+        <StartingSegment SegmentId="CTP" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="CTB" Repeat="25" />
+        <Loop LoopId="N1" LoopRepeat="10000">
+          <Name>Name</Name>
+          <StartingSegment SegmentId="N1" />
+          <Segment SegmentId="N2" Repeat="2" />
+          <Segment SegmentId="N3" Repeat="2" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="DTM" Repeat="10" />
+          <Segment SegmentId="CTB" Repeat="25" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--240 Motor Carrier Package Status-->
+<TransactionSpecification TransactionSetIdentifierCode="240" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Repeat="1"/>
+  <Loop LoopId="1000">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2" Repeat="2"/>
+    <Segment SegmentId="N3" Repeat="2"/>
+    <Segment SegmentId="N4" Repeat="1"/>
+  </Loop>
+  <Loop LoopId="2000">
+    <Name>Transaction Set Line Number</Name>
+    <StartingSegment SegmentId="LX"/>
+    <Loop LoopId="2500">
+      <Name>Party Identification</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="NM1"/>
+      <Segment SegmentId="NTE"/>
+    </Loop>
+    <Loop LoopId="2600">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI"/>
+      <Segment SegmentId="BIN"/>
+    </Loop>
+    <Loop LoopId="2700">
+      <Name>Business Instructions and Reference Number</Name>
+      <StartingSegment SegmentId="L11"/>
+      <Segment SegmentId="MS2"/>
+      <Loop LoopId="LS">
+        <Name>Loop</Name>
+        <StartingSegment SegmentId="LS"/>
+        <Segment SegmentId="LE" Trailer="true"/>
+        <Loop LoopId="2710">
+          <Name>Marks and Numbers Information</Name>
+          <StartingSegment SegmentId="MAN"/>
+          <Segment SegmentId="L11"/>
+          <Segment SegmentId="AT7"/>
+          <Segment SegmentId="CD3"/>
+          <Segment SegmentId="NM1"/>
+          <Segment SegmentId="Q7"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="2720">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI"/>
+        <Segment SegmentId="BIN"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

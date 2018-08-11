@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--862 Shipping Schedule-->
+<TransactionSpecification TransactionSetIdentifierCode="862" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BSS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="FOB" Repeat="1" />
+  </Loop>
+  <Loop LoopId="LIN" LoopRepeat="10000">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="UIT" Usage="Required" Repeat="1" />
+    <Segment SegmentId="PKG" />
+    <Segment SegmentId="PO4" />
+    <Segment SegmentId="PRS" Repeat="1" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="1" />
+    <Segment SegmentId="SDP" Repeat="1" />
+    <Loop LoopId="FST" LoopRepeat="100">
+      <Name>Forecast Schedule</Name>
+      <StartingSegment SegmentId="FST" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="SDQ" />
+      <Loop LoopId="JIT" LoopRepeat="96">
+        <Name>Just-In-Time Schedule</Name>
+        <StartingSegment SegmentId="JIT" />
+        <Segment SegmentId="REF" Repeat="500" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="SHP" LoopRepeat="10">
+      <Name>Shipped/Received Information</Name>
+      <StartingSegment SegmentId="SHP" />
+      <Segment SegmentId="REF" Repeat="12" />
+    </Loop>
+    <Segment SegmentId="TD1" Repeat="1" />
+    <Segment SegmentId="TD3" Repeat="1" />
+    <Segment SegmentId="TD5" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="CTT" Repeat="1" />
+</TransactionSpecification>

@@ -151,29 +151,37 @@ IEA*1*000000031~";
         [TestMethod]
         public void ClaimCreationTest()
         {
+            // arrange
             Interchange interchange = CreateSample1WithFunctionGroup();
             Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
             Segment bhtSegment = transaction.AddSegment("BHT*0019*00*3920394930203*20070816*1615*CH");
             Segment refSegment = transaction.AddSegment("REF*87*004010X096A1");
+
             Loop senderLoop = transaction.AddLoop("NM1*41*2*HOWDEE HOSPITAL*****XX*0123456789");
             senderLoop.AddSegment("PER*IC*BETTY RUBBLE*TE*9195551111");
+
             Loop receiverLoop = transaction.AddLoop("NM1*40*2*BLUE CROSS BLUE SHIELD OF NC*****46*987654321");
+
             HierarchicalLoop providerLoop = transaction.AddHLoop("1", "20", true);
             providerLoop.AddSegment("PRV*BI*ZZ*203BA0200N");
-            var billingProvider = providerLoop.AddLoop("NM1*85*2*HOWDEE HOSPITAL*****XX*0123456789");
+
+            Loop billingProvider = providerLoop.AddLoop("NM1*85*2*HOWDEE HOSPITAL*****XX*0123456789");
             billingProvider.AddSegment("N3*123 HOWDEE BOULEVARD");
             billingProvider.AddSegment("N4*DURHAM*NC*27701");
             billingProvider.AddSegment("REF*1J*654");
             billingProvider.AddSegment("PER*IC*BETTY RUBBLE*TE*9195551111*FX*6145551212");
+
             HierarchicalLoop subscriberLoop = providerLoop.AddHLoop("2", "22", false);
             subscriberLoop.AddSegment("SBR*P*18*XYZ1234567******BL");
             subscriberLoop.AddSegment("PAT*********Y");
-            var subscriberNameLoop = subscriberLoop.AddLoop("NM1*IL*1*DOUGH*MARY****MI*12312312312");
+
+            Loop subscriberNameLoop = subscriberLoop.AddLoop("NM1*IL*1*DOUGH*MARY****MI*12312312312");
             subscriberNameLoop.AddSegment("N3*BOX 12312");
             subscriberNameLoop.AddSegment("N4*DURHAM*NC*27715");
             subscriberNameLoop.AddSegment("DMG*D8*19670807*F");
             subscriberLoop.AddLoop("NM1*PR*2*BLUE CROSS BLUE SHIELD OF NC*****PI*987654321");
-            var claimLoop = subscriberLoop.AddLoop("CLM*2235057*200***13:A:1*Y**Y*A*********N");
+
+            Loop claimLoop = subscriberLoop.AddLoop("CLM*2235057*200***13:A:1*Y**Y*A*********N");
             claimLoop.AddSegment("DTP*434*RD8*20070730-20070730");
             claimLoop.AddSegment("CL1*1*9*01");
             claimLoop.AddSegment("AMT*C5*160");
@@ -184,9 +192,11 @@ IEA*1*000000031~";
             claimLoop.AddSegment("HI*BH:41:D8:20070501*BH:27:D8:20070715*BH:33:D8:20070415*BH:C2:D8:20070410");
             claimLoop.AddSegment("HI*BE:30:::20");
             claimLoop.AddSegment("HI*BG:01");
-            var physicianLoop = claimLoop.AddLoop("NM1*71*1*SMITH*ELIZABETH*AL***34*243898989");
+
+            Loop physicianLoop = claimLoop.AddLoop("NM1*71*1*SMITH*ELIZABETH*AL***34*243898989");
             physicianLoop.AddSegment("REF*1G*P97777");
-            var claimLineLoop = claimLoop.AddLoop("LX*1");
+
+            Loop claimLineLoop = claimLoop.AddLoop("LX*1");
             claimLineLoop.AddSegment("SV2*0300*HC:81000*120*UN*1");
             claimLineLoop.AddSegment("DTP*472*D8*20070730");
             claimLineLoop = claimLoop.AddLoop("LX*2");
@@ -196,7 +206,11 @@ IEA*1*000000031~";
             claimLineLoop.AddSegment("SV2*0270*HC:J1120*30*UN*1");
             claimLineLoop.AddSegment("DTP*472*D8*20070730");
 
-            Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837I._4010.Example1.txt")).ReadToEnd(), interchange.SerializeToX12(true));
+            var reader = new StreamReader(Extensions.GetEdi("INS._837I._4010.Example1.txt"));
+
+            // act
+            // assert 
+            Assert.AreEqual(reader.ReadToEnd(), interchange.SerializeToX12(true));
         }
 
         [TestMethod]

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--813 Electronic Filing of Tax Return Data-->
+<TransactionSpecification TransactionSetIdentifierCode="813" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+  <Segment SegmentId="TIA" Repeat="1000" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Segment SegmentId="TRN" Repeat="1000" />
+  <Segment SegmentId="BPR" Repeat="1000" />
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="IN2" Repeat="10" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+  <Loop LoopId="TFS" LoopRepeat="100000">
+    <Name>Tax Form</Name>
+    <StartingSegment SegmentId="TFS" />
+    <Segment SegmentId="REF" Repeat="10" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="MSG" Repeat="1000" />
+    <Loop LoopId="N1" LoopRepeat="5">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="IN2" Repeat="10" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+    </Loop>
+    <Loop LoopId="TIA" LoopRepeat="10000">
+      <Name>Tax Information and Amount</Name>
+      <StartingSegment SegmentId="TIA" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="MSG" Repeat="1000" />
+    </Loop>
+    <Loop LoopId="FGS" LoopRepeat="100000">
+      <Name>Form Group</Name>
+      <StartingSegment SegmentId="FGS" />
+      <Segment SegmentId="REF" Repeat="10" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Loop LoopId="N1" LoopRepeat="5">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="IN2" Repeat="10" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+      <Loop LoopId="TIA" LoopRepeat="10000">
+        <Name>Tax Information and Amount</Name>
+        <StartingSegment SegmentId="TIA" />
+        <Segment SegmentId="DTM" Repeat="10" />
+        <Segment SegmentId="MSG" Repeat="1000" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

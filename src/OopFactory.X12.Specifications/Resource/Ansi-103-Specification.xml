@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--103 Abandoned Property Filings-->
+<TransactionSpecification TransactionSetIdentifierCode="103" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="BPR"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="TRN"/>
+  <Segment SegmentId="CUR"/>
+  <Segment SegmentId="REF"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="AMT"/>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="INI"/>
+    <Segment SegmentId="TC2"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="NM1"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="YNQ"/>
+    <Loop LoopId="PER">
+      <Name>Administrative Communications Contact</Name>
+      <StartingSegment SegmentId="PER"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+    <Loop LoopId="LX">
+      <Name>Transaction Set Line Number</Name>
+      <StartingSegment SegmentId="LX"/>
+      <Segment SegmentId="BLN"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="INT"/>
+      <Segment SegmentId="PDS"/>
+      <Segment SegmentId="REF"/>
+      <Loop LoopId="SHI">
+        <Name>Security Holding Information</Name>
+        <StartingSegment SegmentId="SHI"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="PCT"/>
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organization Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="REF"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>
