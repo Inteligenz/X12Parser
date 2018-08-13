@@ -74,6 +74,10 @@
     <Compile Include="Unbundling\UnbundlingTester.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OopFactory.X12.Transformations\OopFactory.X12.Transformations.csproj">
+      <Project>{c080e31b-1f81-4f6e-b634-90d834b1811d}</Project>
+      <Name>OopFactory.X12.Transformations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\OopFactory.Shared\OopFactory.X12.Shared.csproj">
       <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
       <Name>OopFactory.X12.Shared</Name>

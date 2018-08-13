@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
 
+    using OopFactory.X12.Parsing.Properties;
     using OopFactory.X12.Shared.Models;
 
     /// <summary>
@@ -47,7 +48,7 @@
             var header = new char[106];
             if (this.reader.Read(header, 0, 106) < 106)
             {
-                throw new ArgumentException("ISA segment and terminator is expected to be at least 106 characters.");
+                throw new ArgumentException(Resources.X12ReaderInvalidHeader);
             }
 
             this.Delimiters = new X12DelimiterSet(header);

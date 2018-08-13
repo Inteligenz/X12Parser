@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29EEAA38-BFB2-4732-A286-EB91355F9BCD}</ProjectGuid>
+    <ProjectGuid>{C080E31B-1F81-4F6E-B634-90D834B1811D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OopFactory.X12.Parsing</RootNamespace>
-    <AssemblyName>OopFactory.X12.Parsing</AssemblyName>
+    <RootNamespace>OopFactory.X12.Transformations</RootNamespace>
+    <AssemblyName>OopFactory.X12.Transformations</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,38 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="UnbundlingService.cs" />
-    <Compile Include="X12EdiParsingService.cs" />
-    <Compile Include="X12FlatTransaction.cs" />
-    <Compile Include="X12Parser.cs" />
-    <Compile Include="X12ParserWarningEventArgs.cs" />
-    <Compile Include="X12StreamReader.cs" />
+    <Compile Include="ITransformationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransformationStreamFactory.cs" />
+    <Compile Include="X12HtmlTransformationService.cs" />
+    <Compile Include="X12TransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OopFactory.X12.Transformations\OopFactory.X12.Transformations.csproj">
-      <Project>{c080e31b-1f81-4f6e-b634-90d834b1811d}</Project>
-      <Name>OopFactory.X12.Transformations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OopFactory.Shared\OopFactory.X12.Shared.csproj">
-      <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
-      <Name>OopFactory.X12.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OopFactory.X12.Specifications\OopFactory.X12.Specifications.csproj">
-      <Project>{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}</Project>
-      <Name>OopFactory.X12.Specifications</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Resources\X12-XML-to-HTML.xslt" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\X12-XML-to-X12.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

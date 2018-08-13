@@ -73,14 +73,14 @@
             {
                 LoopContainer parent = (LoopContainer)container.Parent;
                 string thisLoopId = excludedLoopId;
-                if (container is Loop)
+                if (container is Loop containerLoop)
                 {
-                    thisLoopId = ((Loop)container).Specification.LoopId;
+                    thisLoopId = containerLoop.Specification.LoopId;
                 }
 
-                if (container is HierarchicalLoop)
+                if (container is HierarchicalLoop hierarchicalLoop)
                 {
-                    thisLoopId = ((HierarchicalLoop)container).Specification.LoopId;
+                    thisLoopId = hierarchicalLoop.Specification.LoopId;
                 }
 
                 var sb = new StringBuilder(this.SerializeParent(parent, thisLoopId));
@@ -88,9 +88,9 @@
                 sb.Append($"{this.segmentTerminator}");
                 foreach (var segment in container.Segments)
                 {
-                    if (segment is Loop)
+                    if (segment is Loop loop)
                     {
-                        if (((Loop)segment).Specification.LoopId != excludedLoopId)
+                        if (loop.Specification.LoopId != excludedLoopId)
                         {
                             sb.AppendLine(segment.SerializeToX12(true));
                         }
@@ -114,9 +114,9 @@
 
                 foreach (var segment in container.Transaction.Segments)
                 {
-                    if (segment is Loop)
+                    if (segment is Loop loop)
                     {
-                        if (((Loop)segment).Specification.LoopId != excludedLoopId)
+                        if (loop.Specification.LoopId != excludedLoopId)
                         {
                             sb.AppendLine(segment.SerializeToX12(true));
                         }

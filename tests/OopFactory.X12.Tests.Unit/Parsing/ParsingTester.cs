@@ -72,23 +72,23 @@
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
 
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 #if DEBUG
             new FileStream(resourcePath.Replace(".txt", ".xml"), FileMode.Create).PrintToFile(xml);
 #endif
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.LoadXml(xml);
             int index = 1;
             string query = GetXPathQuery(index);
             while (!string.IsNullOrWhiteSpace(query))
             {
                 string expected = GetExpectedValue(index);
-                XmlNode node = doc.SelectSingleNode((string)query);
+                XmlNode node = doc.SelectSingleNode(query);
                 Assert.IsNotNull(node, "Query '{0}' not found in {1}.", query, resourcePath);
                 Assert.AreEqual(expected, node.InnerText, "Value {0} not expected from query {1} in {2}.", node.InnerText, query, resourcePath);
-                Trace.WriteLine(String.Format("Query '{0}' succeeded.", query));
+                Trace.WriteLine(string.Format("Query '{0}' succeeded.", query));
                 query = GetXPathQuery(++index);
             }
 
@@ -125,7 +125,7 @@
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(resourcePath);
             var parser = new X12Parser();
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(parser_ParserWarning);
+            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
             List<Interchange> interchanges = parser.ParseMultiple(stream);
 
             if (resourcePath.Contains("_811"))
@@ -139,7 +139,7 @@
             Trace.Write(x12.ToString());
         }
 
-        void parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        private void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
         {
             Trace.Write(args.Message);
         }
@@ -177,11 +177,12 @@
             var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string originalX12 = interchange.SerializeToX12(true);
-
             string xml = interchange.Serialize();
-            
-            XmlDocument doc = new XmlDocument();
-            doc.PreserveWhitespace = true;
+
+            var doc = new XmlDocument
+            {
+                PreserveWhitespace = true
+            };
             doc.LoadXml(xml);
 
             XmlElement dmgElement = (XmlElement)(doc.GetElementsByTagName("DMG")[0]);
@@ -194,10 +195,8 @@
             Console.WriteLine(x12.Substring(0, 106));
             Console.WriteLine("Directly from XML:");
             Console.WriteLine(x12); 
-
             
             var modifiedInterchange = parser.ParseMultiple(x12).First();
-
             string newX12 = modifiedInterchange.SerializeToX12(true);
 
             Console.WriteLine("After passing through interchange object:");
@@ -208,8 +207,6 @@
             Assert.IsNotNull(seSegment);
             Assert.AreEqual("0001", seSegment.GetElement(2));
             Assert.AreEqual("15", seSegment.GetElement(1));
-            
-            
         }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]

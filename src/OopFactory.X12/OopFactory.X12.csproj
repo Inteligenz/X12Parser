@@ -59,23 +59,12 @@
     <Compile Include="Repositories\SqlGuidTransactionRepository.cs" />
     <Compile Include="Repositories\SqlReadOnlyTransactionRepository.cs" />
     <Compile Include="Repositories\SqlTransactionRepository.cs" />
-    <Compile Include="Transformations\ITransformationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transformations\X12EdiParsingService.cs" />
-    <Compile Include="Transformations\X12HtmlTransformationService.cs" />
-    <Compile Include="Transformations\X12TransformationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OopFactory.X12.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Repositories\RepositoriesDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Transformations\X12-XML-to-HTML.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Transformations\X12-XML-to-X12.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OopFactory.Shared\OopFactory.X12.Shared.csproj">

@@ -4,14 +4,15 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Text;
     using System.Xml;
     using System.Xml.Xsl;
     
+    using OopFactory.X12.Parsing.Properties;
     using OopFactory.X12.Shared.Models;
     using OopFactory.X12.Specifications.Finders;
     using OopFactory.X12.Specifications.Interfaces;
+    using OopFactory.X12.Transformations;
 
     public class X12Parser
     {
@@ -71,8 +72,7 @@
             var interchanges = this.ParseMultiple(stream);
             if (interchanges.Count > 1)
             {
-                throw new ApplicationException(
-                    "Your file contains more than one interchange, you must use ParseMultiple instead of Parse to get all the records in this file.");
+                throw new ApplicationException(Resources.X12ParserParseError);
             }
 
             return interchanges.FirstOrDefault();
@@ -124,7 +124,7 @@
                         case "IEA":
                             if (envelop == null)
                             {
-                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMismatchSegment, segmentString, "ISA"));
                             }
 
                             envelop.SetTerminatingTrailerSegment(segmentString);
@@ -132,7 +132,7 @@
                         case "GS":
                             if (envelop == null)
                             { 
-                                throw new InvalidOperationException(string.Format("Segment '{0}' cannot occur before and ISA segment.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMissingPrecedingSegment, segmentString, "ISA"));
                             }
 
                             currentContainer = fg = envelop.AddFunctionGroup(segmentString);
@@ -140,7 +140,7 @@
                         case "GE":
                             if (fg == null)
                             {
-                                throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching GS segment precending it.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMismatchSegment, segmentString, "GS"));
                             }
 
                             fg.SetTerminatingTrailerSegment(segmentString);
@@ -159,7 +159,7 @@
                         case "SE":
                             if (tr == null)
                             { 
-                                throw new InvalidOperationException(string.Format("Segment '{0}' does not have a matching ST segment preceding it.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMismatchSegment, segmentString, "ST"));
                             }
 
                             tr.SetTerminatingTrailerSegment(segmentString);
@@ -179,7 +179,10 @@
                                 }
                                 else
                                 {
-                                    throw new InvalidOperationException(string.Format("Heierchical Loop {0}  cannot be added to transaction set {1} because it's specification cannot be identified.", segmentString, tr.ControlNumber));
+                                    throw new InvalidOperationException(string.Format(
+                                        Resources.X12ParserInvalidHLoopSpecification,
+                                        segmentString,
+                                        tr.ControlNumber));
                                 }
                             }
 
@@ -232,7 +235,7 @@
                         case "TA1": // Technical acknowledgement
                             if (envelop == null)
                             { 
-                                throw new InvalidOperationException(string.Format("Segment {0} does not have a matching ISA segment preceding it.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMismatchSegment, segmentString, "ISA"));
                             }
 
                             envelop.AddSegment(segmentString);
@@ -252,10 +255,8 @@
                                     break;
                                 }
 
-                                if (currentContainer is LoopContainer)
+                                if (currentContainer is LoopContainer loopContainer)
                                 {
-                                    LoopContainer loopContainer = (LoopContainer)currentContainer;
-
                                     Loop newLoop = loopContainer.AddLoop(segmentString);
                                     if (newLoop != null)
                                     {
@@ -263,10 +264,8 @@
                                         break;
                                     }
 
-                                    if (currentContainer is Transaction)
+                                    if (currentContainer is Transaction tran)
                                     {
-                                        Transaction tran = (Transaction)currentContainer;
-
                                         if (this.throwExceptionOnSyntaxErrors)
                                         {
                                             throw new TransactionValidationException(
@@ -289,14 +288,13 @@
                                         break;
                                     }
 
-                                    if (currentContainer is Loop)
+                                    if (currentContainer is Loop containerLoop)
                                     {
-                                        containerStack.Push(((Loop)currentContainer).Specification.LoopId);
+                                        containerStack.Push(containerLoop.Specification.LoopId);
                                     }
 
-                                    if (currentContainer is HierarchicalLoop)
+                                    if (currentContainer is HierarchicalLoop hloop)
                                     {
-                                        HierarchicalLoop hloop = (HierarchicalLoop)currentContainer;
                                         containerStack.Push($"{hloop.Specification.LoopId}[{hloop.Id}]");
                                     }
 
@@ -322,7 +320,8 @@
         public string TransformToX12(string xml)
         {
             var transform = new XslCompiledTransform();
-            transform.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Transformations.X12-XML-to-X12.xslt")));
+            Stream stream = TransformationStreamFactory.GetX12TransformationStream();
+            transform.Load(XmlReader.Create(stream));
 
             using (var writer = new StringWriter())
             {
