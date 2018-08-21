@@ -7,22 +7,29 @@
     using System.Linq;
     using System.Xml;
 
+    using Fonet;
+
     using OopFactory.X12.Hipaa.Claims.Services;
     using OopFactory.X12.Parsing;
-    using OopFactory.X12.Shared.Models;
-    using OopFactory.X12.Specifications.Interfaces;
 
-    class Program
+    /// <summary>
+    /// Primary driver for the Hippa.ClaimParser
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main entry point for the Hippa.ClaimParser driver
+        /// </summary>
+        /// <param name="args">Additional arguments for driver options</param>
+        public static void Main(string[] args)
         {
             bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
 
             var opts = new ExecutionOptions(args);
-            InstitutionalClaimToUb04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUb04ClaimFormTransformation("UB04_Red.gif");
+            var institutionalClaimToUb04ClaimFormTransformation = new InstitutionalClaimToUb04ClaimFormTransformation("UB04_Red.gif");
             var service = new ClaimFormTransformationService(
                 new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
-                institutionalClaimToUB04ClaimFormTransformation,
+                institutionalClaimToUb04ClaimFormTransformation,
                 new DentalClaimToJ400FormTransformation("ADAJ400_Red.gif"),
                 new X12Parser(throwException));
 
@@ -31,27 +38,28 @@
                 try
                 {
 #if DEBUG
-                    FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                    var parser = new X12.Parsing.X12Parser();
+                    var stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                    var parser = new X12Parser();
                     var interchange = parser.ParseMultiple(stream).First();
                     File.WriteAllText(filename + ".dat", interchange.SerializeToX12(true));
                     stream.Close();
 #endif           
                     DateTime start = DateTime.Now;
-                    FileStream inputFilestream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                    
-                    Dictionary<string,string> revenueDictionary=new Dictionary<string, string>();
-                    revenueDictionary["0572"] = "Test Code";
+                    var inputFilestream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+                    var revenueDictionary = new Dictionary<string, string>
+                    {
+                        ["0572"] = "Test Code"
+                    };
                     service.FillRevenueCodeDescriptionMapping(revenueDictionary);
                     var claimDoc = service.Transform837ToClaimDocument(inputFilestream);
-                    institutionalClaimToUB04ClaimFormTransformation.PerPageTotalChargesView = true;
-                    FileInfo fi = new FileInfo(filename);
-                    DirectoryInfo di = new DirectoryInfo(opts.OutputPath);
+                    institutionalClaimToUb04ClaimFormTransformation.PerPageTotalChargesView = true;
+                    var fi = new FileInfo(filename);
+                    var di = new DirectoryInfo(opts.OutputPath);
 
                     if (opts.MakeXml)
                     {
-                        string outputFilename = string.Format("{0}\\{1}.xml", di.FullName, fi.Name);
-
+                        string outputFilename = $"{di.FullName}\\{fi.Name}.xml";
                         string xml = claimDoc.Serialize();
                         xml = xml.Replace("encoding=\"utf-16\"", "encoding=\"utf-8\"");
                         File.WriteAllText(outputFilename, xml);
@@ -59,24 +67,24 @@
 
                     if (opts.MakePdf)
                     {
-                        string outputFilename = string.Format("{0}\\{1}.pdf", di.FullName, fi.Name);
+                        string outputFilename = $"{di.FullName}\\{fi.Name}.pdf";
                         using (FileStream pdfOutput = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
                         {
-                            XmlDocument foDoc = new XmlDocument();
+                            var foDoc = new XmlDocument();
                             string foXml = service.TransformClaimDocumentToFoXml(claimDoc);
                             foDoc.LoadXml(foXml);
 
-                            var driver = Fonet.FonetDriver.Make();
+                            FonetDriver driver = FonetDriver.Make();
                             driver.Render(foDoc, pdfOutput);
                             pdfOutput.Close();
                         }
                     }
 
-                    opts.WriteLine(string.Format("{0} parsed in {1}.", filename, DateTime.Now - start));
+                    opts.WriteLine($"{filename} parsed in {DateTime.Now - start}.");
                 }
                 catch (Exception exc)
                 {
-                    opts.WriteLine(string.Format("Exception occurred: {0}.  {1}.  {2}", exc.GetType().FullName, exc.Message, exc.StackTrace));
+                    opts.WriteLine($"Exception occurred: {exc.GetType().FullName}.  {exc.Message}.  {exc.StackTrace}");
                 }
             }
         }

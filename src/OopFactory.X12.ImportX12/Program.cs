@@ -10,9 +10,15 @@
     using OopFactory.X12.Specifications.Finders;
     using OopFactory.X12.Sql;
 
-    class Program
+    /// <summary>
+    /// Primary driver for the ImportX12 application
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main entry point for the ImportX12 driver
+        /// </summary>
+        public static void Main()
         {
             string dsn = ConfigurationManager.ConnectionStrings["X12"].ConnectionString;
             
@@ -27,23 +33,31 @@
 
             var specFinder = new SpecificationFinder();
             var parser = new X12Parser(throwExceptionOnSyntaxErrors);
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
-            var repo = new SqlTransactionRepository(dsn, specFinder, segments, typeof(int), ConfigurationManager.AppSettings["schema"], ConfigurationManager.AppSettings["containerSchema"], segmentBatchSize, sqlDateType);
+            parser.ParserWarning += Parser_ParserWarning;
+            var repo = new SqlTransactionRepository(
+                dsn,
+                specFinder,
+                segments,
+                typeof(int),
+                ConfigurationManager.AppSettings["schema"],
+                ConfigurationManager.AppSettings["containerSchema"],
+                segmentBatchSize,
+                sqlDateType);
 
             foreach (var filename in Directory.GetFiles(parseDirectory, parseSearchPattern, SearchOption.AllDirectories))
             {
-                byte[] header = new byte[6];
-                using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                var header = new byte[6];
+                using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     // peak at first 6 characters to determine if this is a unicode file
                     fs.Read(header, 0, 6);
                     fs.Close();
                 }
+
                 Encoding encoding = (header[1] == 0 && header[3] == 0 && header[5] == 0) ? Encoding.Unicode : Encoding.UTF8;
-
-
+                
                 var fi = new FileInfo(filename);
-                using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     try
                     {
@@ -53,14 +67,19 @@
                         {
                             repo.Save(interchange, filename, Environment.UserName);
                         }
+
                         if (!string.IsNullOrWhiteSpace(archiveDirectory))
+                        {
                             MoveTo(fi, parseDirectory, archiveDirectory);
+                        }
                     }
                     catch (Exception exc)
                     {
-                        Trace.TraceError("Error parsing {0}: {1}\n{2}", fi.FullName, exc.Message, exc.StackTrace);
+                        Trace.TraceError($"Error parsing {fi.FullName}: {exc.Message}\n{exc.StackTrace}");
                         if (!string.IsNullOrEmpty(failureDirectory))
-                                MoveTo(fi, parseDirectory, failureDirectory);
+                        {
+                            MoveTo(fi, parseDirectory, failureDirectory);
+                        }
                     }
                 }
             }
@@ -69,24 +88,25 @@
         private static void MoveTo(FileInfo fi, string sourceDirectory, string targetDirectory)
         {
             string targetFilename = string.Format("{0}{1}", targetDirectory, fi.FullName.Replace(sourceDirectory, ""));
-            FileInfo targetFile = new FileInfo(targetFilename);
+            var targetFile = new FileInfo(targetFilename);
             try
             {
                 if (!targetFile.Directory.Exists)
                 {
                     targetFile.Directory.Create();
                 }
+
                 fi.MoveTo(targetFilename);
             }
             catch (Exception exc2)
             {
-                Trace.TraceError("Error moving {0} to {1}: {2}\n{3}", fi.FullName, targetFilename, exc2.Message, exc2.StackTrace);
+                Trace.TraceError($"Error moving {fi.FullName} to {targetFilename}: {exc2.Message}\n{exc2.StackTrace}");
             }
         }
 
-        static void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        private static void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
         {
-            Trace.TraceWarning("Error parsing interchange {0} at position {1}: {2}", args.InterchangeControlNumber, args.SegmentPositionInInterchange, args.Message);
+            Trace.TraceWarning($"Error parsing interchange {args.InterchangeControlNumber} at position {args.SegmentPositionInInterchange}: {args.Message}");
         }
     }
 }

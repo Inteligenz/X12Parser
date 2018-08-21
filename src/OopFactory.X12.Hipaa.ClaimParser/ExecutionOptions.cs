@@ -1,52 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-
-namespace OopFactory.X12.Hipaa.ClaimParser
+﻿namespace OopFactory.X12.Hipaa.ClaimParser
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.IO;
+
+    /// <summary>
+    /// Represents a collection of additional application options
+    /// </summary>
     public class ExecutionOptions
     {
-        private List<string> _options;
+        private readonly List<string> options;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExecutionOptions"/> class
+        /// </summary>
+        /// <param name="args">Additional commandline arguments</param>
         public ExecutionOptions(string[] args)
         {
-            if (args.Length > 0)
-                Path = args[0];
-            else
-                Path = System.Environment.CurrentDirectory;
-            if (args.Length > 1)
-                SearchPattern = args[1];
-            else
-                SearchPattern = "*.*";
-            if (args.Length > 2)
-                OutputPath = args[2];
-            else
-                OutputPath = System.Environment.CurrentDirectory;
+            this.Path = args.Length > 0 ? args[0] : Environment.CurrentDirectory;
+            this.SearchPattern = args.Length > 1 ? args[1] : "*.*";
+            this.OutputPath = args.Length > 2 ? args[2] : Environment.CurrentDirectory;
+            this.options = new List<string>();
 
-            _options = new List<string>();
             for (int i = 3; i < args.Length; i++)
-                _options.Add(args[i].ToUpper());
-        }
-
-        public string Path { get; private set; }
-        public string SearchPattern { get; private set; }
-        public string OutputPath { get; private set; }
-        public bool MakeXml { get { return !_options.Contains("NOXML"); } }
-        public bool MakePdf { get { return !_options.Contains("NOPDF"); } }
-        public string LogFile
-        {
-            get
             {
-                return ConfigurationManager.AppSettings["LogFile"];
+                this.options.Add(args[i].ToUpper());
             }
         }
 
+        /// <summary>
+        /// Gets the input path for source files
+        /// </summary>
+        public string Path { get; }
+
+        /// <summary>
+        /// Gets the file search pattern for finding valid source files
+        /// </summary>
+        public string SearchPattern { get; }
+
+        /// <summary>
+        /// Gets the output path for processed files
+        /// </summary>
+        public string OutputPath { get; }
+
+        /// <summary>
+        /// Gets the flag whether the X12 document should be converted to XML
+        /// </summary>
+        public bool MakeXml => !this.options.Contains("NOXML");
+
+        /// <summary>
+        /// Gets the flag whether the X12 document should be converted to PDF
+        /// </summary>
+        public bool MakePdf => !this.options.Contains("NOPDF"); 
+
+        /// <summary>
+        /// Gets the name of the log file for additional messages
+        /// </summary>
+        public string LogFile => ConfigurationManager.AppSettings["LogFile"];
+
+        /// <summary>
+        /// Prints a message to the console and logfile
+        /// </summary>
+        /// <param name="content">Message to be printed</param>
         public void WriteLine(string content)
         {
-            string contents = string.Format("{0}: {1}\r\n", DateTime.Now, content);
+            string contents = $"{DateTime.Now}: {content}";
             Console.WriteLine(contents);
-            File.AppendAllText(LogFile, contents);
+            File.AppendAllText(this.LogFile, contents);
         }
     }
 }
