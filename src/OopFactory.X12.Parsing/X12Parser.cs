@@ -14,12 +14,21 @@
     using OopFactory.X12.Specifications.Interfaces;
     using OopFactory.X12.Transformations;
 
+    /// <summary>
+    /// Parser for converting X12 documents to Interchanges
+    /// </summary>
     public class X12Parser
     {
         private readonly ISpecificationFinder specFinder;
         private readonly bool throwExceptionOnSyntaxErrors;
         private readonly char[] ignoredChars;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12Parser"/> class
+        /// </summary>
+        /// <param name="specFinder">Specification finder for determining how to process X12</param>
+        /// <param name="throwExceptionOnSyntaxErrors">Flag if exceptions should be thrown with invalid syntax</param>
+        /// <param name="ignoredChars">Characters to be ignored by the parser</param>
         public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors, char[] ignoredChars)
         {
             this.specFinder = specFinder;
@@ -27,35 +36,59 @@
             this.ignoredChars = ignoredChars;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12Parser"/> class
+        /// </summary>
+        /// <param name="specFinder">Specification finder for determining how to process X12</param>
+        /// <param name="throwExceptionOnSyntaxErrors">Flag if exceptions should be thrown with invalid syntax</param>
         public X12Parser(ISpecificationFinder specFinder, bool throwExceptionOnSyntaxErrors)
             : this(specFinder, throwExceptionOnSyntaxErrors, new char[] { })
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12Parser"/> class
+        /// </summary>
+        /// <param name="specFinder">Specification finder for determining how to process X12</param>
         public X12Parser(ISpecificationFinder specFinder)
-            : this(specFinder, true, new char[] {})
+            : this(specFinder, true, new char[] { })
         {
         }
 
-        public X12Parser(bool throwExceptionsOnSyntaxErrors)
-            : this(new SpecificationFinder(), throwExceptionsOnSyntaxErrors, new char[] { })
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12Parser"/> class
+        /// </summary>
+        /// <param name="throwExceptionOnSyntaxErrors">Flag if exceptions should be thrown with invalid syntax</param>
+        public X12Parser(bool throwExceptionOnSyntaxErrors)
+            : this(new SpecificationFinder(), throwExceptionOnSyntaxErrors, new char[] { })
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12Parser"/> class
+        /// </summary>
         public X12Parser()
             : this(new SpecificationFinder(), true, new char[] { })
         {
         }
 
+        /// <summary>
+        /// Event handler definition for broadcasting issues with the X12
+        /// </summary>
+        /// <param name="sender">Object sending the call</param>
+        /// <param name="args">Additional event arguments</param>
         public delegate void X12ParserWarningEventHandler(object sender, X12ParserWarningEventArgs args);
 
+        /// <summary>
+        /// Event hook to be triggered on parser warning
+        /// </summary>
         public event X12ParserWarningEventHandler ParserWarning;
 
-        private void OnParserWarning(X12ParserWarningEventArgs args)
-        {
-            this.ParserWarning?.Invoke(this, args);
-        }
-
+        /// <summary>
+        /// Parses a single interchange from an X12 document
+        /// </summary>
+        /// <param name="x12">X12 data to be parsed</param>
+        /// <returns>First interchange parsed from X12</returns>
         [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(string x12)
         {
@@ -66,6 +99,11 @@
             }
         }
 
+        /// <summary>
+        /// Parses a single interchange from an X12 document
+        /// </summary>
+        /// <param name="stream">Stream pointing to source X12 data</param>
+        /// <returns>First interchange parsed from X12</returns>
         [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(Stream stream)
         {
@@ -78,6 +116,11 @@
             return interchanges.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Parses all interchanges from an X12 document
+        /// </summary>
+        /// <param name="x12">X12 data to be parsed</param>
+        /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
         public List<Interchange> ParseMultiple(string x12)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(x12);
@@ -87,11 +130,22 @@
             }
         }
 
+        /// <summary>
+        /// Parses all interchanges from an X12 document
+        /// </summary>
+        /// <param name="stream">Stream pointing to source X12 data</param>
+        /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
         public List<Interchange> ParseMultiple(Stream stream)
         {
             return this.ParseMultiple(stream, Encoding.UTF8);
         }
 
+        /// <summary>
+        /// Parses all interchanges from an X12 document
+        /// </summary>
+        /// <param name="stream">Stream pointing to source X12 data</param>
+        /// <param name="encoding">Stream encoding for reading data</param>
+        /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
         public List<Interchange> ParseMultiple(Stream stream, Encoding encoding)
         {
             var envelopes = new List<Interchange>();
@@ -283,7 +337,7 @@
                                             SegmentPositionInInterchange = segmentIndex,
                                             SegmentId = segmentId,
                                             Segment = segmentString,
-                                            Message = string.Format("Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.  It will be added to loop {6}, but this may invalidate all subsequent segments.", tran.IdentifierCode, tran.ControlNumber, string.Empty, segmentString, segmentIndex, string.Join(",", containerStack), containerStack.LastOrDefault())
+                                            Message = string.Format("Segment '{2}' in segment position {3} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {4}.  It will be added to loop {5}, but this may invalidate all subsequent segments.", tran.IdentifierCode, tran.ControlNumber, segmentString, segmentIndex, string.Join(",", containerStack), containerStack.LastOrDefault())
                                         });
                                         break;
                                     }
@@ -317,6 +371,11 @@
             }
         }
 
+        /// <summary>
+        /// Transforms XML data to X12 data and returns the string representation
+        /// </summary>
+        /// <param name="xml">XML data to be transformed</param>
+        /// <returns>String representation of data in X12</returns>
         public string TransformToX12(string xml)
         {
             var transform = new XslCompiledTransform();
@@ -330,13 +389,19 @@
             }
         }
 
+        /// <summary>
+        /// Separates all <see cref="Segment"/> objects from an <see cref="Interchange"/> and returns the collection
+        /// </summary>
+        /// <param name="interchange">Object to remove Segments from</param>
+        /// <param name="loopId">Identifier of loop to unbundle</param>
+        /// <returns>Collection of <see cref="Interchange"/> objects</returns>
         public List<Interchange> UnbundleByLoop(Interchange interchange, string loopId)
         {
             char terminator = interchange.Delimiters.SegmentTerminator;
-            var service = new UnbundlingService(interchange.Delimiters.SegmentTerminator);
+            var service = new UnbundlingService(terminator);
             string isa = interchange.SegmentString;
             string iea = interchange.TrailerSegments.First().SegmentString;
-            List<string> list = new List<string>();
+            var list = new List<string>();
             foreach (FunctionGroup group in interchange.FunctionGroups)
             {
                 foreach (Transaction transaction in group.Transactions)
@@ -345,10 +410,10 @@
                 }
             }
 
-            List<Interchange> interchanges = new List<Interchange>();
+            var interchanges = new List<Interchange>();
             foreach (string item in list)
             {
-                StringBuilder x12 = new StringBuilder();
+                var x12 = new StringBuilder();
                 x12.Append($"{isa}{terminator}");
                 x12.Append(item);
                 x12.Append($"{iea}{terminator}");
@@ -361,10 +426,14 @@
             return interchanges;
         }
 
+        /// <summary>
+        /// Separates all <see cref="Segment"/> objects from an <see cref="Interchange"/>
+        /// </summary>
+        /// <param name="interchange">Object to remove Segments from</param>
+        /// <returns>Collection of <see cref="Interchange"/> objects</returns>
         public List<Interchange> UnbundleByTransaction(Interchange interchange)
         {
-            List<Interchange> interchanges = new List<Interchange>();
-
+            var interchanges = new List<Interchange>();
             char terminator = interchange.Delimiters.SegmentTerminator;
             string isa = interchange.SegmentString;
             string iea = interchange.TrailerSegments.First().SegmentString;
@@ -372,13 +441,14 @@
             {
                 foreach (Transaction transaction in group.Transactions)
                 {
-                    StringBuilder x12 = new StringBuilder();
+                    var x12 = new StringBuilder();
                     x12.Append($"{isa}{terminator}");
                     x12.Append($"{group.SegmentString}{terminator}");
                     x12.Append(transaction.SerializeToX12(false));
                     x12.Append($"{group.TrailerSegments.First().SegmentString}{terminator}");
                     x12.Append($"{iea}{terminator}");
-                    using (MemoryStream mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString())))
+
+                    using (var mstream = new MemoryStream(Encoding.ASCII.GetBytes(x12.ToString())))
                     {
                         interchanges.AddRange(this.ParseMultiple(mstream));
                     }
@@ -386,6 +456,11 @@
             }
 
             return interchanges;
+        }
+
+        private void OnParserWarning(X12ParserWarningEventArgs args)
+        {
+            this.ParserWarning?.Invoke(this, args);
         }
     }
 }
