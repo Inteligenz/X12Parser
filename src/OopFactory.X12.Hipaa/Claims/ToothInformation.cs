@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    /// <summary>
+    /// Represents information associated with a patient's tooth
+    /// </summary>
     public class ToothInformation
     {
+        /// <summary>
+        /// Gets or sets the code identifier for the tooth
+        /// </summary>
         [XmlAttribute]
         public string ToothCode { get; set; }
 
-        [XmlElement(ElementName="ToothSurface")]
+        /// <summary>
+        /// Gets or sets the <see cref="Common.Lookup"/> collection for the tooth surface
+        /// </summary>
+        [XmlElement(ElementName = "ToothSurface")]
         public List<Common.Lookup> ToothSurfaces { get; set; }
     }
 }

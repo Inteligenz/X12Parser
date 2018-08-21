@@ -11,41 +11,48 @@
 
     public class ClaimTransformationService
     {
-        private X12Parser _parser;
-        private Dictionary<string, string> _revenueCodeToDescriptionMapping; 
+        private readonly X12Parser parser;
+        private Dictionary<string, string> revenueCodeToDescriptionMapping; 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClaimTransformationService"/> class
+        /// </summary>
+        /// <param name="parser">X12 document parser</param>
         public ClaimTransformationService(X12Parser parser)
         {
-            _parser = parser;
+            this.parser = parser;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClaimTransformationService"/> class
+        /// </summary>
         public ClaimTransformationService()
             : this(new X12Parser())
         {
         }
   
         /// <summary>
-        /// Reads a claim that has been st
+        /// Reads a claim that has been sent
         /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
+        /// <param name="stream">Data stream used for reading</param>
+        /// <returns><see cref="ClaimDocument"/> created from 837 stream</returns>
         public ClaimDocument Transform837ToClaimDocument(Stream stream)
         {
-
-            var interchanges = _parser.ParseMultiple(stream);
+            var interchanges = this.parser.ParseMultiple(stream);
             ClaimDocument doc = new ClaimDocument();
             foreach (var interchange in interchanges)
             {
-                var thisDoc = Transform837ToClaimDocument(interchange);
-                AddRevenueCodeDescription(thisDoc);
+                var thisDoc = this.Transform837ToClaimDocument(interchange);
+                this.AddRevenueCodeDescription(thisDoc);
                 doc.Claims.AddRange(thisDoc.Claims);
             }
+
             return doc;
         }
 
         private void AddRevenueCodeDescription(ClaimDocument claimdoc)
         {
-            if (_revenueCodeToDescriptionMapping == null)
+            if (this.revenueCodeToDescriptionMapping == null)
             {
                 return;
             }
@@ -56,21 +63,19 @@
                  {
                      if (serviceLine.RevenueCode != null)
                      {
-                         if (_revenueCodeToDescriptionMapping.ContainsKey(serviceLine.RevenueCode))
+                         if (this.revenueCodeToDescriptionMapping.ContainsKey(serviceLine.RevenueCode))
                          {
-                             serviceLine.RevenueCodeDescription = _revenueCodeToDescriptionMapping[serviceLine.RevenueCode];
+                             serviceLine.RevenueCodeDescription = this.revenueCodeToDescriptionMapping[serviceLine.RevenueCode];
                          }
                      }
                  }
              }
         }
 
-        public void FillRevenueCodeDescriptionMapping(Dictionary<string,string> revCodeDictionary )
+        public void FillRevenueCodeDescriptionMapping(Dictionary<string,string> revCodeDictionary)
         {
-            _revenueCodeToDescriptionMapping = revCodeDictionary;
+            this.revenueCodeToDescriptionMapping = revCodeDictionary;
         }
-
-
 
         public ClaimDocument Transform837ToClaimDocument(Interchange interchange)
         {
@@ -79,7 +84,10 @@
             var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Services.Xsl.X12-837-To-ClaimDocument.xslt");
 
             var transform = new XslCompiledTransform();
-            if (transformStream != null) transform.Load(XmlReader.Create(transformStream));
+            if (transformStream != null)
+            {
+                transform.Load(XmlReader.Create(transformStream));
+            }
 
             var outputStream = new MemoryStream();
 

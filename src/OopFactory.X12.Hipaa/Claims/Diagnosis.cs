@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     public enum DiagnosisTypeEnum
     {
         Unknown,
@@ -27,12 +25,15 @@ namespace OopFactory.X12.Hipaa.Claims
 
     public class Diagnosis
     {
+        /// <summary>
+        /// Gets the <see cref="DiagnosisTypeEnum"/> value represented by the object's qualifier
+        /// </summary>
         [XmlAttribute]
         public DiagnosisTypeEnum DiagnosisType
         {
             get
             {
-                switch (Qualifier)
+                switch (this.Qualifier)
                 {
                     case "ABK":
                     case "BK":
@@ -53,15 +54,17 @@ namespace OopFactory.X12.Hipaa.Claims
                         return DiagnosisTypeEnum.Unknown;
                 }
             }
-            set { }
         }
 
+        /// <summary>
+        /// Gets the <see cref="CodeListEnum"/> value represented by object's qualifier
+        /// </summary>
         [XmlAttribute]
         public CodeListEnum Version
         {
             get
             {
-                switch (Qualifier)
+                switch (this.Qualifier)
                 {
                     case "ABK":
                     case "ABJ":
@@ -79,35 +82,17 @@ namespace OopFactory.X12.Hipaa.Claims
                         return CodeListEnum.Unknown;
                 }
             }
-            set { }
         }
 
-        [XmlAttribute]
-        public string Qualifier { get; set; }
-
-        [XmlAttribute]
-        public string Code { get; set; }
-
-        public string FormattedCode()
-        {
-            if (string.IsNullOrWhiteSpace(Code) || Code.Length <= 3 || Code.Contains('.'))
-                return Code;
-            else if (Version == CodeListEnum.ICD9)
-                return String.Format("{0}.{1}", Code.Substring(0, 3), Code.Substring(3));
-            else
-                return Code;
-
-        }
-
-        [XmlAttribute]
-        public string PoiIndicator { get; set; }
-
+        /// <summary>
+        /// Gets the <see cref="PresentOnAdmissionEnum"/> value represented by the object's POI indicator
+        /// </summary>
         [XmlAttribute]
         public PresentOnAdmissionEnum Poi
         {
             get
             {
-                switch (PoiIndicator)
+                switch (this.PoiIndicator)
                 {
                     case "N":
                         return PresentOnAdmissionEnum.No;
@@ -119,7 +104,35 @@ namespace OopFactory.X12.Hipaa.Claims
                         return PresentOnAdmissionEnum.Unknown;
                 }
             }
-            set { }
+        }
+
+        [XmlAttribute]
+        public string Qualifier { get; set; }
+
+        [XmlAttribute]
+        public string Code { get; set; }
+
+        [XmlAttribute]
+        public string PoiIndicator { get; set; }
+
+        /// <summary>
+        /// Returns the object's code in a formatted string
+        /// </summary>
+        /// <returns>string representation with object's code</returns>
+        public string FormattedCode()
+        {
+            if (string.IsNullOrWhiteSpace(this.Code) || this.Code.Length <= 3 || this.Code.Contains('.'))
+            {
+                return this.Code;
+            }
+            else if (this.Version == CodeListEnum.ICD9)
+            {
+                return $"{this.Code.Substring(0, 3)}.{this.Code.Substring(3)}";
+            }
+            else
+            {
+                return this.Code;
+            }
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace OopFactory.X12.AcknowledgeX12
 {
     using System;
-    using System.Text;
-    using System.Configuration;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Configuration;
     using System.IO;
+    using System.Linq;
+    using System.Text;
 
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
@@ -13,9 +13,16 @@
     using OopFactory.X12.Validation;
     using OopFactory.X12.Validation.Model;
 
-    class Program
+    /// <summary>
+    /// Primary class for the AcknowledgeX12 application
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Primary entry point for the AcknowldegeX12 utility
+        /// </summary>
+        /// <param name="args">Additional command arguments for option overloading</param>
+        public static void Main(string[] args)
         {
             string inputFilename = args[0];
             string outputFilename = args[1];
@@ -35,6 +42,7 @@
                         {
                             service = new InstitutionalClaimAcknowledgmentService();
                         }
+
                         if (reader.TransactionContainsSegment(firstTrans.Transactions[0], "SV1"))
                         {
                             service = new X12AcknowledgmentService(new ProfessionalClaimSpecificationFinder());

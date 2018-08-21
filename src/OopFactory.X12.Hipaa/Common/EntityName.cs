@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System.Text;
+    using System.Xml.Serialization;
+
     public enum EntityNameQualifierEnum
     {
         Person,
+
         NonPerson
     }
 
@@ -16,8 +14,10 @@ namespace OopFactory.X12.Hipaa.Common
     {
         [XmlAttribute]
         public string Identifier { get; set; }
+
         [XmlAttribute]
         public EntityNameQualifierEnum Qualifier { get; set; }
+
         [XmlText]
         public string Description { get; set; }
     }
@@ -26,8 +26,12 @@ namespace OopFactory.X12.Hipaa.Common
     {
         public EntityName()
         {
-            if (Identification == null) Identification = new Identification();
+            if (this.Identification == null)
+            {
+                this.Identification = new Identification();
+            }
         }
+
         public EntityType Type { get; set; }
 
         [XmlAttribute]
@@ -35,13 +39,16 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlAttribute]
         public string PriorAuthorizationNumber { get; set; }
+
         [XmlAttribute]
         public string Suffix { get; set; }
 
         [XmlAttribute]
         public string Prefix { get; set; }
+
         [XmlAttribute]
         public string FirstName { get; set; }
+
         [XmlAttribute]
         public string MiddleName { get; set; }
 
@@ -49,27 +56,32 @@ namespace OopFactory.X12.Hipaa.Common
         
         public string Formatted()
         {
-            if (Type == null || Type.Qualifier == EntityNameQualifierEnum.NonPerson)
-                return LastName;
+            if (this.Type == null || this.Type.Qualifier == EntityNameQualifierEnum.NonPerson)
+            {
+                return this.LastName;
+            }
             else
             {
-                StringBuilder name = new StringBuilder();
+                var name = new StringBuilder();
 
-                name.Append(LastName);
-                if (!string.IsNullOrWhiteSpace(Suffix))
+                name.Append(this.LastName);
+                if (!string.IsNullOrWhiteSpace(this.Suffix))
                 {
-                    name.AppendFormat(" {0}", Suffix);
+                    name.AppendFormat(" {0}", this.Suffix);
                 }
+
                 name.Append(",");
-                if (!string.IsNullOrWhiteSpace(Prefix))
-                    name.AppendFormat(" {0}", Prefix);
-                name.AppendFormat(" {0}", FirstName);
-                if (!string.IsNullOrWhiteSpace(MiddleName))
+                if (!string.IsNullOrWhiteSpace(this.Prefix))
                 {
-                    if (MiddleName.Length == 1)
-                        name.AppendFormat(" {0}.", MiddleName);
-                    else
-                        name.AppendFormat(" {0}", MiddleName);
+                    name.AppendFormat(" {0}", this.Prefix);
+                }
+
+                name.AppendFormat(" {0}", this.FirstName);
+                if (!string.IsNullOrWhiteSpace(this.MiddleName))
+                {
+                    name.AppendFormat(
+                        this.MiddleName.Length == 1 ? " {0}." : " {0}",
+                        this.MiddleName);
                 }
                 
                 return name.ToString().TrimEnd();
@@ -78,7 +90,7 @@ namespace OopFactory.X12.Hipaa.Common
 
         public override string ToString()
         {
-            return Formatted();
+            return this.Formatted();
         }
     }
 }

@@ -1,623 +1,593 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Hipaa.Common;
-using OopFactory.X12.Hipaa.Claims.Forms;
-using OopFactory.X12.Hipaa.Claims.Forms.Professional;
-
-namespace OopFactory.X12.Hipaa.Claims.Services
+﻿namespace OopFactory.X12.Hipaa.Claims.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using OopFactory.X12.Hipaa.Claims.Forms;
+    using OopFactory.X12.Hipaa.Claims.Forms.Professional;
+    using OopFactory.X12.Hipaa.Common;
+
+    /// <summary>
+    /// Provides a transformer for <see cref="Claim"/> objects to HCFA1500 claims
+    /// </summary>
     public class ProfessionalClaimToHcfa1500FormTransformation : ClaimTransformationService,  IClaimToClaimFormTransfomation
     {
-        private string _formImagePath;
+        private readonly string formImagePath;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfessionalClaimToHcfa1500FormTransformation"/> class
+        /// </summary>
+        /// <param name="formImagePath">Form image path to be transformed</param>
         public ProfessionalClaimToHcfa1500FormTransformation(string formImagePath)
         {
-            _formImagePath = formImagePath;
-        }
-
-        private FormDate formatFormDate(DateTime? dateTime)
-        {
-            return new FormDate
-            {
-                MM = String.Format("{0:MM}", dateTime),
-                DD = String.Format("{0:dd}", dateTime),
-                YY = String.Format("{0:yy}", dateTime)
-            };
+            this.formImagePath = formImagePath;
         }
 
         /// <summary>
         /// Takes a generic claim object stream parameter and maps properties to  
-        /// corresponding properties in the HCFA 1500 claim. Returns a HCFA1500 claim.
+        /// corresponding properties in the HCFA 1500 claim.
         /// Follows crosswalk published at http://www.nucc.org/images/stories/PDF/1500_form_map_to_837p_4010a1_v1-0_112008.pdf
         /// </summary>
-        /// <param name="claim"></param>
-        /// <returns></returns>
+        /// <param name="claim"><see cref="Claim"/> to be transformed</param>
+        /// <returns>HCFA1500 claim</returns>
         public virtual HCFA1500Claim TransformClaimToHcfa1500(Claim claim)
         {
-	        var hcfa = new HCFA1500Claim();
+            var hcfa = new HCFA1500Claim();
 
-	        if (claim == null)
-	        {
-		        hcfa.Field24_ServiceLines = new List<HCFA1500ServiceLine>();
-		        hcfa.Field24_ServiceLines.Add(new HCFA1500ServiceLine());
-		        return hcfa;
-	        }
+            if (claim == null)
+            {
+                hcfa.Field24_ServiceLines = new List<HCFA1500ServiceLine>
+                {
+                    new HCFA1500ServiceLine()
+                };
+                return hcfa;
+            }
 
-	        String indicatorCode = null;
-	        if (claim.SubscriberInformation != null &&
-		        claim.SubscriberInformation.ClaimFilingIndicatorCode != null)
-	        {
-		        indicatorCode = claim.SubscriberInformation.ClaimFilingIndicatorCode;
-	        }
+            string indicatorCode = null;
+            if (claim.SubscriberInformation?.ClaimFilingIndicatorCode != null)
+            {
+                indicatorCode = claim.SubscriberInformation.ClaimFilingIndicatorCode;
+            }
 
-	        switch (indicatorCode)
-	        {
-		        case "CH":
-			        hcfa.Field01_TypeOfCoverageIsTricareChampus = true;
-			        break;
-		        case "MB":
-			        hcfa.Field01_TypeOfCoverageIsMedicare = true;
-			        break;
-		        case "MC":
-			        hcfa.Field01_TypeOfCoverageIsMedicaid = true;
-			        break;
-		        case "VA":
-			        hcfa.Field01_TypeOfCoverageIsChampVa = true;
-			        break;
-		        default:
-			        if (claim.SubscriberInformation != null && claim.SubscriberInformation.ClaimFilingIndicatorCode != null)
-				        hcfa.Field01_TypeOfCoverageIsOther = true;
-			        break;
-	        }
+            switch (indicatorCode)
+            {
+                case "CH":
+                    hcfa.Field01_TypeOfCoverageIsTricareChampus = true;
+                    break;
+                case "MB":
+                    hcfa.Field01_TypeOfCoverageIsMedicare = true;
+                    break;
+                case "MC":
+                    hcfa.Field01_TypeOfCoverageIsMedicaid = true;
+                    break;
+                case "VA":
+                    hcfa.Field01_TypeOfCoverageIsChampVa = true;
+                    break;
+                default:
+                    if (claim.SubscriberInformation?.ClaimFilingIndicatorCode != null)
+                    {
+                        hcfa.Field01_TypeOfCoverageIsOther = true;
+                    }
 
-	        // XXX: I don't see any code corresponding to FECA Black Lung in the 837P standard
-	        hcfa.Field01_TypeOfCoverageIsFECABlkLung = false;
-	        hcfa.Field01_TypeOfCoverageIsGroupHealthPlan = false;
+                    break;
+            }
 
-	        ClaimMember patient = claim.Patient ?? claim.Subscriber;
-	        ClaimMember subscriber = claim.Subscriber;
+            // XXX: I don't see any code corresponding to FECA Black Lung in the 837P standard
+            hcfa.Field01_TypeOfCoverageIsFECABlkLung = false;
+            hcfa.Field01_TypeOfCoverageIsGroupHealthPlan = false;
 
-	        if (!String.IsNullOrEmpty(patient.MemberId))
-	        {
-		        hcfa.Field01a_InsuredsIDNumber = patient.MemberId;
-	        }
-	        else if (patient != null &&
-		        patient.Name != null &&
-		        patient.Name.Identification != null &&
-		        !string.IsNullOrEmpty(patient.Name.Identification.Id))
-	        {
-		        hcfa.Field01a_InsuredsIDNumber = patient.Name.Identification.Id;
-	        }
-	        else if (!String.IsNullOrEmpty(subscriber.MemberId))
-	        {
-		        hcfa.Field01a_InsuredsIDNumber = subscriber.MemberId;
-	        }
-	        else if (subscriber != null &&
-		        subscriber.Name != null &&
-		        subscriber.Name.Identification != null &&
-		        !string.IsNullOrEmpty(subscriber.Name.Identification.Id))
-	        {
-		        hcfa.Field01a_InsuredsIDNumber = subscriber.Name.Identification.Id;
-	        }
-	        hcfa.Field01a_InsuredsIDNumber = hcfa.Field01a_InsuredsIDNumber;
-	
-	        // Patient Name
-	        if (patient.Name != null)
-		        hcfa.Field02_PatientsName = patient.Name.Formatted();
+            ClaimMember patient = claim.Patient ?? claim.Subscriber;
+            ClaimMember subscriber = claim.Subscriber;
 
-	        // patient birthdate
-	        if (patient.DateOfBirth != null)
-		        hcfa.Field03_PatientsDateOfBirth = formatFormDate(patient.DateOfBirth);
+            if (!string.IsNullOrEmpty(patient.MemberId))
+            {
+                hcfa.Field01a_InsuredsIDNumber = patient.MemberId;
+            }
+            else if (patient?.Name?.Identification != null &&
+                !string.IsNullOrEmpty(patient.Name.Identification.Id))
+            {
+                hcfa.Field01a_InsuredsIDNumber = patient.Name.Identification.Id;
+            }
+            else if (!string.IsNullOrEmpty(subscriber.MemberId))
+            {
+                hcfa.Field01a_InsuredsIDNumber = subscriber.MemberId;
+            }
+            else if (subscriber?.Name?.Identification != null &&
+                !string.IsNullOrEmpty(subscriber.Name.Identification.Id))
+            {
+                hcfa.Field01a_InsuredsIDNumber = subscriber.Name.Identification.Id;
+            }
 
-	        hcfa.Field03_PatientsSexFemale = patient.Gender == GenderEnum.Female;
-	        hcfa.Field03_PatientsSexMale = patient.Gender == GenderEnum.Male;
+            hcfa.Field01a_InsuredsIDNumber = hcfa.Field01a_InsuredsIDNumber;
+    
+            // Patient Name
+            if (patient.Name != null)
+            {
+                hcfa.Field02_PatientsName = patient.Name.Formatted();
+            }
 
-	        if (subscriber.Name != null)
-		        hcfa.Field04_InsuredsName = subscriber.Name.Formatted();
+            // patient birthdate
+            if (patient.DateOfBirth != null)
+            {
+                hcfa.Field03_PatientsDateOfBirth = FormatFormDate(patient.DateOfBirth);
+            }
 
-	        // Patient Address
-	        if (patient.Address != null)
-	        {
-		        hcfa.Field05_PatientsAddress_Street = String.Format("{0} {1}", patient.Address.Line1, patient.Address.Line2).TrimEnd();
-		        hcfa.Field05_PatientsAddress_City = patient.Address.City;
-		        hcfa.Field05_PatientsAddress_State = patient.Address.StateCode;
-		        hcfa.Field05_PatientsAddress_Zip = patient.Address.PostalCode;
-	        }
+            hcfa.Field03_PatientsSexFemale = patient.Gender == GenderEnum.Female;
+            hcfa.Field03_PatientsSexMale = patient.Gender == GenderEnum.Male;
 
-	        // Relationship information from https://www.cahabagba.com/part_b/msp/Providers_Electronic_Billing_Instructions.htm
-	        String patientRelationship = String.Empty;
-	        if (claim.Patient != null && claim.Patient.Relationship != null)
-	        {
-		        patientRelationship = claim.Patient.Relationship.Code;
-	        }
+            if (subscriber.Name != null)
+            {
+                hcfa.Field04_InsuredsName = subscriber.Name.Formatted();
+            }
+
+            // Patient Address
+            if (patient.Address != null)
+            {
+                hcfa.Field05_PatientsAddress_Street = $"{patient.Address.Line1} {patient.Address.Line2}".TrimEnd();
+                hcfa.Field05_PatientsAddress_City = patient.Address.City;
+                hcfa.Field05_PatientsAddress_State = patient.Address.StateCode;
+                hcfa.Field05_PatientsAddress_Zip = patient.Address.PostalCode;
+            }
+
+            // Relationship information from https://www.cahabagba.com/part_b/msp/Providers_Electronic_Billing_Instructions.htm
+            string patientRelationship = string.Empty;
+            if (claim.Patient?.Relationship != null)
+            {
+                patientRelationship = claim.Patient.Relationship.Code;
+            }
             else if (claim.SubscriberInformation != null)
             {
                 patientRelationship = claim.SubscriberInformation.IndividualRelationshipCode;
             }
-	        switch (patientRelationship)
-	        {
-		        case "01":
-			        hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf = true;
-			        break;
-		        case "19":
-			        hcfa.Field06_PatientRelationshipToInsuredIsChildOf = true;
-			        break;
-		        case "18":
-			        hcfa.Field06_PatientRelationshipToInsuredIsSelf = true;
-			        break;
-		        default:
-			        if (claim.SubscriberInformation != null && claim.SubscriberInformation.ClaimFilingIndicatorCode != null)
-				        hcfa.Field06_PatientRelationshipToInsuredIsOther = true;
-			        break;
-	        }
 
-	        if (subscriber.Address != null)
-	        {
-		        hcfa.Field07_InsuredsAddress_Street = subscriber.Address.Line1;
-		        hcfa.Field07_InsuredsAddress_City = subscriber.Address.City;
-		        hcfa.Field07_InsuredsAddress_State = subscriber.Address.StateCode;
-		        hcfa.Field07_InsuredsAddress_Zip = subscriber.Address.PostalCode;
-	        }
+            switch (patientRelationship)
+            {
+                case "01":
+                    hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf = true;
+                    break;
+                case "19":
+                    hcfa.Field06_PatientRelationshipToInsuredIsChildOf = true;
+                    break;
+                case "18":
+                    hcfa.Field06_PatientRelationshipToInsuredIsSelf = true;
+                    break;
+                default:
+                    if (claim.SubscriberInformation?.ClaimFilingIndicatorCode != null)
+                    {
+                        hcfa.Field06_PatientRelationshipToInsuredIsOther = true;
+                    }
 
-	        // Not present on 837P
-	        hcfa.Field07_InsuredsAreaCode =  String.Empty;
-	        hcfa.Field07_InsuredsPhoneNumber = String.Empty;
+                    break;
+            }
 
-	        // Not present on 837P
-	        hcfa.Field08_PatientStatusIsEmployed = false;
-	        hcfa.Field08_PatientStatusIsFullTimeStudent = false;
-	        hcfa.Field08_PatientStatusIsMarried = false;
-	        hcfa.Field08_PatientStatusIsOther = false;
-	        hcfa.Field08_PatientStatusIsPartTimeStudent = false;
-	        hcfa.Field08_PatientStatusIsSingle = false;
+            if (subscriber.Address != null)
+            {
+                hcfa.Field07_InsuredsAddress_Street = subscriber.Address.Line1;
+                hcfa.Field07_InsuredsAddress_City = subscriber.Address.City;
+                hcfa.Field07_InsuredsAddress_State = subscriber.Address.StateCode;
+                hcfa.Field07_InsuredsAddress_Zip = subscriber.Address.PostalCode;
+            }
 
-	        OtherSubscriberInformation otherSubscriber = null;
-	        if (claim.OtherSubscriberInformations != null)
-	        {
-		        otherSubscriber = claim.OtherSubscriberInformations.FirstOrDefault();
-	        }
-	
-	
-	        // No way to get below three fields using 837P
-	        hcfa.Field09b_OtherInsuredIsFemale = false;
-	        hcfa.Field09b_OtherInsuredIsMale = false;
-	        hcfa.Field09b_OtherInsuredsDateOfBirth = new FormDate();
+            // Not present on 837P
+            hcfa.Field07_InsuredsAreaCode = string.Empty;
+            hcfa.Field07_InsuredsPhoneNumber = string.Empty;
 
-	        if (otherSubscriber != null)
-	        {
-		        if (otherSubscriber.Name != null)
-		        {
-			        hcfa.Field09_OtherInsuredsName = otherSubscriber.Name.Formatted();
-		        }
-		        if (otherSubscriber.SubscriberInformation != null)
-		        {
-			        hcfa.Field09a_OtherInsuredsPolicyOrGroup = otherSubscriber.SubscriberInformation.ReferenceIdentification;
-		        }
-		        hcfa.Field09b_OtherInsuredsDateOfBirth = formatFormDate(otherSubscriber.DateOfBirth);
-		        hcfa.Field09b_OtherInsuredIsFemale = otherSubscriber.Gender == GenderEnum.Female;
-		        hcfa.Field09b_OtherInsuredIsMale = otherSubscriber.Gender == GenderEnum.Male;
-		        hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = String.Empty; // XXX: OK to assume org in last name? , Edit: this field should be left blank
-		        if (otherSubscriber.OtherPayer != null)
-		        {
-			        hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = otherSubscriber.OtherPayer.LastName;
-		        }
-	        }
+            // Not present on 837P
+            hcfa.Field08_PatientStatusIsEmployed = false;
+            hcfa.Field08_PatientStatusIsFullTimeStudent = false;
+            hcfa.Field08_PatientStatusIsMarried = false;
+            hcfa.Field08_PatientStatusIsOther = false;
+            hcfa.Field08_PatientStatusIsPartTimeStudent = false;
+            hcfa.Field08_PatientStatusIsSingle = false;
 
-	        hcfa.Field10a_PatientConditionRelatedToEmployment = claim.RelatedCauseCode1 == "EM" || claim.RelatedCauseCode2 == "EM" || claim.RelatedCauseCode3 == "EM";
-	        hcfa.Field10b_PatientConditionRelatedToAutoAccident = claim.RelatedCauseCode1 == "AA" || claim.RelatedCauseCode2 == "AA" || claim.RelatedCauseCode3 == "AA";
-	        hcfa.Field10c_PatientConditionRelatedToOtherAccident = claim.RelatedCauseCode1 == "AB" || claim.RelatedCauseCode1 == "AP" || claim.RelatedCauseCode1 == "OA" ||
-														           claim.RelatedCauseCode2 == "AB" || claim.RelatedCauseCode2 == "AP" || claim.RelatedCauseCode2 == "OA" ||
-														           claim.RelatedCauseCode3 == "AB" || claim.RelatedCauseCode3 == "AP" || claim.RelatedCauseCode3 == "OA";
-	        hcfa.Field10b_PatientConditionRelToAutoAccidentState = claim.AutoAccidentState;
+            OtherSubscriberInformation otherSubscriber = null;
+            if (claim.OtherSubscriberInformations != null)
+            {
+                otherSubscriber = claim.OtherSubscriberInformations.FirstOrDefault();
+            }
+    
+            // No way to get below three fields using 837P
+            hcfa.Field09b_OtherInsuredIsFemale = false;
+            hcfa.Field09b_OtherInsuredIsMale = false;
+            hcfa.Field09b_OtherInsuredsDateOfBirth = new FormDate();
 
-	        if (hcfa.Field10a_PatientConditionRelatedToEmployment)
-		        hcfa.Field10d_ReservedForLocalUse = String.Empty;
+            if (otherSubscriber != null)
+            {
+                if (otherSubscriber.Name != null)
+                {
+                    hcfa.Field09_OtherInsuredsName = otherSubscriber.Name.Formatted();
+                }
 
-	        if (claim.SubscriberInformation != null)
-		        hcfa.Field11_InsuredsPolicyGroupOfFECANumber = claim.SubscriberInformation.ReferenceIdentification;
-	        if (subscriber != null)
-	        {
-		        hcfa.Field11a_InsuredsDateOfBirth = formatFormDate(subscriber.DateOfBirth);
-		        hcfa.Field11a_InsuredsSexIsFemale = subscriber.Gender == GenderEnum.Female;
-		        hcfa.Field11a_InsuredsSexIsMale = subscriber.Gender == GenderEnum.Male;
-	        }
-	        if (claim.Payer != null)
-	        {
-		        hcfa.Field11b_InsuredsEmployerOrSchool = String.Empty; // should be left blank
-		        if (claim.Payer.Name != null)
-		        {
-			        hcfa.Field11c_InsuredsPlanOrProgramName = claim.Payer.Name.LastName;
-		        }
-	        }
+                if (otherSubscriber.SubscriberInformation != null)
+                {
+                    hcfa.Field09a_OtherInsuredsPolicyOrGroup = otherSubscriber.SubscriberInformation.ReferenceIdentification;
+                }
 
-	        hcfa.Field11d_IsThereOtherHealthBenefitPlan = otherSubscriber != null;
+                hcfa.Field09b_OtherInsuredsDateOfBirth = FormatFormDate(otherSubscriber.DateOfBirth);
+                hcfa.Field09b_OtherInsuredIsFemale = otherSubscriber.Gender == GenderEnum.Female;
+                hcfa.Field09b_OtherInsuredIsMale = otherSubscriber.Gender == GenderEnum.Male;
 
-	        hcfa.Field12_PatientsOrAuthorizedSignature = claim.ReleaseOfInformationCode == "Y" ? "Signature on file" : String.Empty;
+                // XXX: OK to assume org in last name? , Edit: this field should be left blank
+                hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = string.Empty;
+                if (otherSubscriber.OtherPayer != null)
+                {
+                    hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = otherSubscriber.OtherPayer.LastName;
+                }
+            }
 
-	        hcfa.Field12_PatientsOrAuthorizedSignatureDate = new FormDate();
+            hcfa.Field10a_PatientConditionRelatedToEmployment = claim.RelatedCauseCode1 == "EM" || claim.RelatedCauseCode2 == "EM" || claim.RelatedCauseCode3 == "EM";
+            hcfa.Field10b_PatientConditionRelatedToAutoAccident = claim.RelatedCauseCode1 == "AA" || claim.RelatedCauseCode2 == "AA" || claim.RelatedCauseCode3 == "AA";
+            hcfa.Field10c_PatientConditionRelatedToOtherAccident = claim.RelatedCauseCode1 == "AB" || claim.RelatedCauseCode1 == "AP" || claim.RelatedCauseCode1 == "OA" ||
+                                                                   claim.RelatedCauseCode2 == "AB" || claim.RelatedCauseCode2 == "AP" || claim.RelatedCauseCode2 == "OA" ||
+                                                                   claim.RelatedCauseCode3 == "AB" || claim.RelatedCauseCode3 == "AP" || claim.RelatedCauseCode3 == "OA";
+            hcfa.Field10b_PatientConditionRelToAutoAccidentState = claim.AutoAccidentState;
 
-	        hcfa.Field13_InsuredsOrAuthorizedSignature = claim.BenefitsAssignmentCertificationIndicator == "Y" ? "Signature on file" : String.Empty;
+            if (hcfa.Field10a_PatientConditionRelatedToEmployment)
+            {
+                hcfa.Field10d_ReservedForLocalUse = string.Empty;
+            }
 
-	        var onsetDate = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "431") ?? claim.Dates.FirstOrDefault(dr => dr.Qualifier == "439");
+            if (claim.SubscriberInformation != null)
+            {
+                hcfa.Field11_InsuredsPolicyGroupOfFECANumber = claim.SubscriberInformation.ReferenceIdentification;
+            }
 
-	        if (onsetDate != null)
-	        {
-		        hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy = formatFormDate(onsetDate.Date);
-	        }
+            if (subscriber != null)
+            {
+                hcfa.Field11a_InsuredsDateOfBirth = FormatFormDate(subscriber.DateOfBirth);
+                hcfa.Field11a_InsuredsSexIsFemale = subscriber.Gender == GenderEnum.Female;
+                hcfa.Field11a_InsuredsSexIsMale = subscriber.Gender == GenderEnum.Male;
+            }
 
-	        var similarIllnessDate = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "438"); // only supported in 4010 837P
-	        if (similarIllnessDate != null)
-	        {
-		        hcfa.Field15_DatePatientHadSameOrSimilarIllness = formatFormDate(similarIllnessDate.Date);
-	        }
+            if (claim.Payer != null)
+            {
+                hcfa.Field11b_InsuredsEmployerOrSchool = string.Empty;
+                if (claim.Payer.Name != null)
+                {
+                    hcfa.Field11c_InsuredsPlanOrProgramName = claim.Payer.Name.LastName;
+                }
+            }
 
-	        var disabilityStart = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "360");
-	        var disabilityEnd = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "361");
-	        if (disabilityStart != null)
-	        {
-		        hcfa.Field16_DatePatientUnableToWork_Start = formatFormDate(disabilityStart.Date);
-	        }
-	        if (disabilityEnd != null)
-	        {
-		        hcfa.Field16_DatePatientUnableToWork_End = formatFormDate(disabilityEnd.Date);
-	        }
+            hcfa.Field11d_IsThereOtherHealthBenefitPlan = otherSubscriber != null;
+            hcfa.Field12_PatientsOrAuthorizedSignature = claim.ReleaseOfInformationCode == "Y" ? "Signature on file" : string.Empty;
+            hcfa.Field12_PatientsOrAuthorizedSignatureDate = new FormDate();
+            hcfa.Field13_InsuredsOrAuthorizedSignature = claim.BenefitsAssignmentCertificationIndicator == "Y" ? "Signature on file" : string.Empty;
+            var onsetDate = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "431") ?? claim.Dates.FirstOrDefault(dr => dr.Qualifier == "439");
 
-	        var referringProvider = claim.Providers.FirstOrDefault(pr => pr.Name.Type.Identifier == "DN" && pr.Name.Identification.Qualifier == "XX");
-	        if (referringProvider != null)
-	        {
-		        hcfa.Field17_ReferringProviderOrOtherSource_Name = referringProvider.Name.Formatted();
+            if (onsetDate != null)
+            {
+                hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy = FormatFormDate(onsetDate.Date);
+            }
 
-		        var id = referringProvider.Identifications.FirstOrDefault();
-		        if (id != null)
-		        {
-			        hcfa.Field17a_OtherID_Number = id.Id;
-			        hcfa.Field17a_OtherID_Qualifier = id.Qualifier;
-		        }
+            // only supported in 4010 837P
+            var similarIllnessDate = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "438");
 
-		        hcfa.Field17b_NationalProviderIdentifier = referringProvider.Npi;
-	        }
+            if (similarIllnessDate != null)
+            {
+                hcfa.Field15_DatePatientHadSameOrSimilarIllness = FormatFormDate(similarIllnessDate.Date);
+            }
 
-	        // Admission date and hour
-	        hcfa.Field18_HospitalizationDateFrom = new FormDate();
-	        hcfa.Field18_HospitalizationDateTo = new FormDate();
-	        if (claim.AdmissionDate.HasValue)
-	        {
-		        hcfa.Field18_HospitalizationDateFrom = formatFormDate(claim.AdmissionDate);
-	        }
-	        if (claim.DischargeTime.HasValue)
-	        {
-		        hcfa.Field18_HospitalizationDateTo = formatFormDate(claim.DischargeTime);
-	        }
+            var disabilityStart = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "360");
+            var disabilityEnd = claim.Dates.FirstOrDefault(dr => dr.Qualifier == "361");
+            if (disabilityStart != null)
+            {
+                hcfa.Field16_DatePatientUnableToWork_Start = FormatFormDate(disabilityStart.Date);
+            }
 
-	        // Populating Loc19 with notes from 837
-	        // There can only be one note
-	        hcfa.Field19_ReservedForLocalUse = (claim.Notes.Count >= 1) ? claim.Notes[0].Description : System.String.Empty;
-	
-	        // Outside services are stored in claim service lines
-	        double totalAmountSpent = 0.0;
-	        foreach (var line in claim.ServiceLines)
-	        {
-		        if (line.PurchasedServiceIdentifier != null)
-		        {
-			        hcfa.Field20_OutsideLab = true;
-			        if (line.PurchasedServiceAmount != null)
-			        {
-				        totalAmountSpent += Convert.ToDouble(line.PurchasedServiceAmount);
-			        }
-		        }
-	        }
+            if (disabilityEnd != null)
+            {
+                hcfa.Field16_DatePatientUnableToWork_End = FormatFormDate(disabilityEnd.Date);
+            }
 
-	        hcfa.Field20_OutsideLabCharges = (Decimal)totalAmountSpent;
+            var referringProvider = claim.Providers.FirstOrDefault(pr => pr.Name.Type.Identifier == "DN" && pr.Name.Identification.Qualifier == "XX");
+            if (referringProvider != null)
+            {
+                hcfa.Field17_ReferringProviderOrOtherSource_Name = referringProvider.Name.Formatted();
 
-	        var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
-	        var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
+                var id = referringProvider.Identifications.FirstOrDefault();
+                if (id != null)
+                {
+                    hcfa.Field17a_OtherID_Number = id.Id;
+                    hcfa.Field17a_OtherID_Qualifier = id.Qualifier;
+                }
 
-	        // Diagnosis codes
-	        if (principalDiagnosis != null)
-		        hcfa.Field21_Diagnosis1 = principalDiagnosis.FormattedCode();
-	        if (otherDiagnoses.Count >= 1)
-		        hcfa.Field21_Diagnosis2 = otherDiagnoses[0].FormattedCode();
-	        if (otherDiagnoses.Count >= 2)
-		        hcfa.Field21_Diagnosis3 = otherDiagnoses[1].FormattedCode();
-	        if (otherDiagnoses.Count >= 3)
-		        hcfa.Field21_Diagnosis4 = otherDiagnoses[2].FormattedCode();
+                hcfa.Field17b_NationalProviderIdentifier = referringProvider.Npi;
+            }
 
-	        var frequencyType = "";
-	        if (claim.BillTypeCode.Length == 3)
-	        {
-		        frequencyType = claim.BillTypeCode.Substring(2, 1);
-	        }
-	        if (frequencyType == "7" || frequencyType == "8")
-		        hcfa.Field22_MedicaidSubmissionCode = frequencyType;
-	        else
-		        hcfa.Field22_MedicaidSubmissionCode = String.Empty;
+            // Admission date and hour
+            hcfa.Field18_HospitalizationDateFrom = new FormDate();
+            hcfa.Field18_HospitalizationDateTo = new FormDate();
+            if (claim.AdmissionDate.HasValue)
+            {
+                hcfa.Field18_HospitalizationDateFrom = FormatFormDate(claim.AdmissionDate);
+            }
 
-	        var originalRef = claim.Identifications.FirstOrDefault(id => id.Qualifier == "F8");
+            if (claim.DischargeTime.HasValue)
+            {
+                hcfa.Field18_HospitalizationDateTo = FormatFormDate(claim.DischargeTime);
+            }
 
-	        if (originalRef != null)
-		        hcfa.Field22_OriginalReferenceNumber = originalRef.Id;
-	        else
-		        hcfa.Field22_OriginalReferenceNumber = String.Empty;
+            // Populating Loc19 with notes from 837
+            // There can only be one note
+            hcfa.Field19_ReservedForLocalUse = (claim.Notes.Count >= 1) ? claim.Notes[0].Description : string.Empty;
+    
+            // Outside services are stored in claim service lines
+            double totalAmountSpent = 0.0;
+            foreach (var line in claim.ServiceLines)
+            {
+                if (line.PurchasedServiceIdentifier != null)
+                {
+                    hcfa.Field20_OutsideLab = true;
+                    if (line.PurchasedServiceAmount != null)
+                    {
+                        totalAmountSpent += Convert.ToDouble(line.PurchasedServiceAmount);
+                    }
+                }
+            }
 
-	        hcfa.Field23_PriorAuthorizationNumber = claim.PriorAuthorizationNumber;
+            hcfa.Field20_OutsideLabCharges = (decimal)totalAmountSpent;
 
-	        var hcfaServiceLines = new List<HCFA1500ServiceLine>();
+            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
+            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
 
-	        // Service Lines
-	        foreach (var line in claim.ServiceLines)
-	        {
-		        var hcfaLine = new HCFA1500ServiceLine();
-		        hcfaLine.DateFrom = new FormDate
-		        {
-			        MM = String.Format("{0:MM}", line.ServiceDateFrom),
-			        DD = String.Format("{0:dd}", line.ServiceDateFrom),
-			        YY = String.Format("{0:yy}", line.ServiceDateFrom)
-		        };
-		        hcfaLine.DateTo = new FormDate
-		        {
-			        MM = String.Format("{0:MM}", line.ServiceDateTo),
-			        DD = String.Format("{0:dd}", line.ServiceDateTo),
-			        YY = String.Format("{0:yy}", line.ServiceDateTo)
-		        };
+            // Diagnosis codes
+            if (principalDiagnosis != null)
+            {
+                hcfa.Field21_Diagnosis1 = principalDiagnosis.FormattedCode();
+            }
 
-		        if (line.PlaceOfService != null && !string.IsNullOrWhiteSpace(line.PlaceOfService.Code))
-			        hcfaLine.PlaceOfService = line.PlaceOfService.Code;
-		        else
-			        hcfaLine.PlaceOfService = claim.ServiceLocationInfo.FacilityCode;
-		
-		        hcfaLine.EmergencyIndicator = line.EmergencyIndicator;
+            if (otherDiagnoses.Count >= 1)
+            {
+                hcfa.Field21_Diagnosis2 = otherDiagnoses[0].FormattedCode();
+            }
 
-		        hcfaLine.ProcedureCode = line.Procedure.ProcedureCode;
-		        hcfaLine.ProcedureCode = line.Procedure.ProcedureCode;
-		        hcfaLine.Mod1 = line.Procedure.Modifier1;
-		        hcfaLine.Mod2 = line.Procedure.Modifier2;
-		        hcfaLine.Mod3 = line.Procedure.Modifier3;
-		        hcfaLine.Mod4 = line.Procedure.Modifier4;
+            if (otherDiagnoses.Count >= 2)
+            {
+                hcfa.Field21_Diagnosis3 = otherDiagnoses[1].FormattedCode();
+            }
 
-		        hcfaLine.DiagnosisPointer1 = line.DiagnosisCodePointer1;
-		        hcfaLine.DiagnosisPointer2 = line.DiagnosisCodePointer2;
-		        hcfaLine.DiagnosisPointer3 = line.DiagnosisCodePointer3;
-		        hcfaLine.DiagnosisPointer4 = line.DiagnosisCodePointer4;
+            if (otherDiagnoses.Count >= 3)
+            {
+                hcfa.Field21_Diagnosis4 = otherDiagnoses[2].FormattedCode();
+            }
 
-		        hcfaLine.Charges = line.ChargeAmount;
-		        hcfaLine.DaysOrUnits = line.Quantity;
-		        hcfaLine.EarlyPeriodicScreeningDiagnosisAndTreatment = line.EpsdtIndicator;
+            string frequencyType = string.Empty;
+            if (claim.BillTypeCode.Length == 3)
+            {
+                frequencyType = claim.BillTypeCode.Substring(2, 1);
+            }
 
-		        if (line.RenderingProvider != null && !string.IsNullOrWhiteSpace(line.RenderingProvider.Npi))
-			        hcfaLine.RenderingProviderNpi = line.RenderingProvider.Npi;
-		        else if (claim.RenderingProvider != null && !string.IsNullOrWhiteSpace(claim.RenderingProvider.Npi))
-			        hcfaLine.RenderingProviderNpi = claim.RenderingProvider.Npi;
+            if (frequencyType == "7" || frequencyType == "8")
+            {
+                hcfa.Field22_MedicaidSubmissionCode = frequencyType;
+            }
+            else
+            {
+                hcfa.Field22_MedicaidSubmissionCode = string.Empty;
+            }
 
-		        if (line.RenderingProvider != null && line.RenderingProvider.Identifications.Count > 0)
-		        {
-			        hcfaLine.RenderingProviderIdQualifier = line.RenderingProvider.Identifications[0].Qualifier;
-			        hcfaLine.RenderingProviderId = line.RenderingProvider.Identifications[0].Id;
-		        }
-		        else if (line.RenderingProvider != null && line.RenderingProvider.ProviderInfo != null)
-		        {
-			        hcfaLine.RenderingProviderIdQualifier = line.RenderingProvider.ProviderInfo.Qualifier;
-			        hcfaLine.RenderingProviderId = line.RenderingProvider.ProviderInfo.Id;
-		        }
-		        else if (claim.RenderingProvider != null && claim.RenderingProvider.Identifications.Count > 0)
-		        {
-			        hcfaLine.RenderingProviderIdQualifier = claim.RenderingProvider.Identifications[0].Qualifier;
-			        hcfaLine.RenderingProviderId = claim.RenderingProvider.Identifications[0].Id;
-		        }
-		        else if (claim.RenderingProvider != null && claim.RenderingProvider.ProviderInfo != null)
-		        {
-			        hcfaLine.RenderingProviderIdQualifier = claim.RenderingProvider.ProviderInfo.Qualifier;
-			        hcfaLine.RenderingProviderId = claim.RenderingProvider.ProviderInfo.Id;
-		        }
+            var originalRef = claim.Identifications.FirstOrDefault(id => id.Qualifier == "F8");
 
+            hcfa.Field22_OriginalReferenceNumber = originalRef?.Id ?? string.Empty;
+            hcfa.Field23_PriorAuthorizationNumber = claim.PriorAuthorizationNumber;
 
-		        hcfaServiceLines.Add(hcfaLine);
-	        }
-	        hcfa.Field24_ServiceLines = hcfaServiceLines;
+            var hcfaServiceLines = new List<HCFA1500ServiceLine>();
 
+            // Service Lines
+            foreach (var line in claim.ServiceLines)
+            {
+                var hcfaLine = new HCFA1500ServiceLine
+                {
+                    DateFrom = new FormDate
+                    {
+                        Month = string.Format("{0:MM}", line.ServiceDateFrom),
+                        Day = string.Format("{0:dd}", line.ServiceDateFrom),
+                        Year = string.Format("{0:yy}", line.ServiceDateFrom)
+                    },
+                    DateTo = new FormDate
+                    {
+                        Month = string.Format("{0:MM}", line.ServiceDateTo),
+                        Day = string.Format("{0:dd}", line.ServiceDateTo),
+                        Year = string.Format("{0:yy}", line.ServiceDateTo)
+                    }
+                };
 
-	        // Federal Tax Number
+                if (line.PlaceOfService != null && !string.IsNullOrWhiteSpace(line.PlaceOfService.Code))
+                {
+                    hcfaLine.PlaceOfService = line.PlaceOfService.Code;
+                }
+                else
+                {
+                    hcfaLine.PlaceOfService = claim.ServiceLocationInfo.FacilityCode;
+                }
+        
+                hcfaLine.EmergencyIndicator = line.EmergencyIndicator;
+
+                hcfaLine.ProcedureCode = line.Procedure.ProcedureCode;
+                hcfaLine.ProcedureCode = line.Procedure.ProcedureCode;
+                hcfaLine.Mod1 = line.Procedure.Modifier1;
+                hcfaLine.Mod2 = line.Procedure.Modifier2;
+                hcfaLine.Mod3 = line.Procedure.Modifier3;
+                hcfaLine.Mod4 = line.Procedure.Modifier4;
+
+                hcfaLine.DiagnosisPointer1 = line.DiagnosisCodePointer1;
+                hcfaLine.DiagnosisPointer2 = line.DiagnosisCodePointer2;
+                hcfaLine.DiagnosisPointer3 = line.DiagnosisCodePointer3;
+                hcfaLine.DiagnosisPointer4 = line.DiagnosisCodePointer4;
+
+                hcfaLine.Charges = line.ChargeAmount;
+                hcfaLine.DaysOrUnits = line.Quantity;
+                hcfaLine.EarlyPeriodicScreeningDiagnosisAndTreatment = line.EpsdtIndicator;
+
+                if (line.RenderingProvider != null && !string.IsNullOrWhiteSpace(line.RenderingProvider.Npi))
+                {
+                    hcfaLine.RenderingProviderNpi = line.RenderingProvider.Npi;
+                }
+                else if (claim.RenderingProvider != null && !string.IsNullOrWhiteSpace(claim.RenderingProvider.Npi))
+                {
+                    hcfaLine.RenderingProviderNpi = claim.RenderingProvider.Npi;
+                }
+
+                if (line.RenderingProvider != null && line.RenderingProvider.Identifications.Count > 0)
+                {
+                    hcfaLine.RenderingProviderIdQualifier = line.RenderingProvider.Identifications[0].Qualifier;
+                    hcfaLine.RenderingProviderId = line.RenderingProvider.Identifications[0].Id;
+                }
+                else if (line.RenderingProvider?.ProviderInfo != null)
+                {
+                    hcfaLine.RenderingProviderIdQualifier = line.RenderingProvider.ProviderInfo.Qualifier;
+                    hcfaLine.RenderingProviderId = line.RenderingProvider.ProviderInfo.Id;
+                }
+                else if (claim.RenderingProvider != null && claim.RenderingProvider.Identifications.Count > 0)
+                {
+                    hcfaLine.RenderingProviderIdQualifier = claim.RenderingProvider.Identifications[0].Qualifier;
+                    hcfaLine.RenderingProviderId = claim.RenderingProvider.Identifications[0].Id;
+                }
+                else if (claim.RenderingProvider?.ProviderInfo != null)
+                {
+                    hcfaLine.RenderingProviderIdQualifier = claim.RenderingProvider.ProviderInfo.Qualifier;
+                    hcfaLine.RenderingProviderId = claim.RenderingProvider.ProviderInfo.Id;
+                }
+                
+                hcfaServiceLines.Add(hcfaLine);
+            }
+
+            hcfa.Field24_ServiceLines = hcfaServiceLines;
+            
+            // Federal Tax Number
             if (claim.PayToProvider != null && !string.IsNullOrWhiteSpace(claim.PayToProvider.TaxId))
-	        {
-		        hcfa.Field25_FederalTaxIDNumber = claim.PayToProvider.TaxId;
-		        if (claim.PayToProvider.Identifications.Exists(id=>id.Qualifier == "EI"))
-			        hcfa.Field25_IsEIN = true;
-		        if (claim.PayToProvider.Identifications.Exists(id => id.Qualifier == "SY"))
-			        hcfa.Field25_IsSSN = true;
-	        }
-	        else
-	        {
+            {
+                hcfa.Field25_FederalTaxIDNumber = claim.PayToProvider.TaxId;
+                if (claim.PayToProvider.Identifications.Exists(id => id.Qualifier == "EI"))
+                {
+                    hcfa.Field25_IsEIN = true;
+                }
+
+                if (claim.PayToProvider.Identifications.Exists(id => id.Qualifier == "SY"))
+                {
+                    hcfa.Field25_IsSSN = true;
+                }
+            }
+            else
+            {
                 if (claim.BillingProvider != null)
                 {
                     hcfa.Field25_FederalTaxIDNumber = claim.BillingProvider.TaxId;
                     if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "EI"))
+                    {
                         hcfa.Field25_IsEIN = true;
+                    }
+
                     if (claim.BillingProvider.Identifications.Exists(id => id.Qualifier == "SY"))
+                    {
                         hcfa.Field25_IsSSN = true;
+                    }
                 }
-	        }
-		
-	        // shouldnt we represent hcfa.Field25_IsSSN and Field25_IsEIN to know which type TaxID?
-	        hcfa.Field26_PatientAccountNumber = claim.PatientControlNumber;
-
-	        if (claim.ProviderAcceptAssignmentCode == "A" || claim.ProviderAcceptAssignmentCode == "B")
-		        hcfa.Field27_AcceptAssignment = true;
-	        else if (claim.ProviderAcceptAssignmentCode == "C")
-		        hcfa.Field27_AcceptAssignment = false;
-
-	        hcfa.Field28_TotalCharge = claim.TotalClaimChargeAmount;
-	        hcfa.Field29_AmountPaid = claim.PatientAmountPaid ?? 0;
-	        foreach (var otherSubscriberObj in claim.OtherSubscriberInformations)
-	        {
-		        if (otherSubscriberObj.Amounts.Count > 0)
-			        hcfa.Field29_AmountPaid += otherSubscriberObj.Amounts[0].Amount;
-	        }
-	
-
-	        hcfa.Field30_BalanceDue = hcfa.Field28_TotalCharge - hcfa.Field29_AmountPaid; // does not exist on 837P
-
-	        if (claim.ProviderSignatureOnFile == "Y")
-		        hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile = true;
-	        else if (claim.ProviderSignatureOnFile == "N")
-		        hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile = false;
-
-	        // Service Location
-	        var serviceLocation = claim.ServiceLocation;
-	        if (serviceLocation != null)
-	        {
-		        if (serviceLocation.Name != null)
-			        hcfa.Field32_ServiceFacilityLocation_Name = serviceLocation.Name.LastName;
-		        else
-			        hcfa.Field32_ServiceFacilityLocation_Name = null;
-
-		        if (serviceLocation.Address != null)
-		        {
-			        hcfa.Field32_ServiceFacilityLocation_Street = serviceLocation.Address.Line1;
-			        hcfa.Field32_ServiceFacilityLocation_City = serviceLocation.Address.City;
-			        hcfa.Field32_ServiceFacilityLocation_State = serviceLocation.Address.StateCode;
-			        hcfa.Field32_ServiceFacilityLocation_Zip = serviceLocation.Address.PostalCode;
-		        }
-		        else
-		        {
-			        hcfa.Field32_ServiceFacilityLocation_Street = string.Empty;
-			        hcfa.Field32_ServiceFacilityLocation_City = string.Empty;
-			        hcfa.Field32_ServiceFacilityLocation_State = string.Empty;
-			        hcfa.Field32_ServiceFacilityLocation_Zip = string.Empty;
-		        }
-
-		        hcfa.Field32a_ServiceFacilityLocation_Npi = serviceLocation.Npi;
-		        if (serviceLocation.Identifications != null && serviceLocation.Identifications.Count > 0)
-			        hcfa.Field32b_ServiceFacilityLocation_OtherID = serviceLocation.Identifications.First().Id;
-		        else
-			        hcfa.Field32b_ServiceFacilityLocation_OtherID = null;
-	        }
-	        // Pay To Provider
-	        if (claim.BillingProvider != null)
-	        {
-		        if (claim.BillingProvider.Name != null)
-			        hcfa.Field33_BillingProvider_Name = claim.BillingProvider.Name.LastName;
-		        else
-			        hcfa.Field33_BillingProvider_Name = null;
-
-		        if (claim.BillingProvider.Address != null)
-		        {
-			        hcfa.Field33_BillingProvider_Street = claim.BillingProvider.Address.Line1;
-			        hcfa.Field33_BillingProvider_City = claim.BillingProvider.Address.City;
-			        hcfa.Field33_BillingProvider_State = claim.BillingProvider.Address.StateCode;
-		            hcfa.Field33_BillingProvider_Zip = claim.BillingProvider.Address.PostalCode;
-		        }
-		        else
-		        {
-			        hcfa.Field33_BillingProvider_Street = string.Empty;
-			        hcfa.Field33_BillingProvider_City = string.Empty;
-			        hcfa.Field33_BillingProvider_State = string.Empty;
-			        hcfa.Field33_BillingProvider_Zip = string.Empty;
-		        }
-
-		        hcfa.Field33a_BillingProvider_Npi = claim.BillingProvider.Npi;
-	        }
-
-	        LimitFieldWidths(hcfa);
-
-	        return hcfa;
-        }
-
-
-        private void LimitFieldWidths(HCFA1500Claim hcfa)
-        {
-            hcfa.Field01a_InsuredsIDNumber = SetStringLength(hcfa.Field01a_InsuredsIDNumber, 35);
-            hcfa.Field02_PatientsName = SetStringLength(hcfa.Field02_PatientsName, 28);
-            hcfa.Field04_InsuredsName = SetStringLength(hcfa.Field04_InsuredsName, 30);
-            hcfa.Field05_PatientsAddress_Street = SetStringLength(hcfa.Field05_PatientsAddress_Street, 28);
-            hcfa.Field05_PatientsAddress_City = SetStringLength(hcfa.Field05_PatientsAddress_City, 29);
-            hcfa.Field05_PatientsAddress_Zip = SetStringLength(hcfa.Field05_PatientsAddress_Zip, 14);
-            hcfa.Field07_InsuredsAddress_Street = SetStringLength(hcfa.Field07_InsuredsAddress_Street, 35);
-            hcfa.Field07_InsuredsAddress_City = SetStringLength(hcfa.Field07_InsuredsAddress_City, 28);
-            hcfa.Field07_InsuredsAddress_Zip = SetStringLength(hcfa.Field07_InsuredsAddress_Zip, 14);
-            hcfa.Field09_OtherInsuredsName = SetStringLength(hcfa.Field09_OtherInsuredsName, 28);
-            hcfa.Field09a_OtherInsuredsPolicyOrGroup = SetStringLength(hcfa.Field09a_OtherInsuredsPolicyOrGroup, 28);
-            hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = SetStringLength(hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName, 28);
-            hcfa.Field11_InsuredsPolicyGroupOfFECANumber = SetStringLength(hcfa.Field11_InsuredsPolicyGroupOfFECANumber, 35);
-            hcfa.Field11c_InsuredsPlanOrProgramName = SetStringLength(hcfa.Field11c_InsuredsPlanOrProgramName, 35);
-            hcfa.Field17_ReferringProviderOrOtherSource_Name = SetStringLength(hcfa.Field17_ReferringProviderOrOtherSource_Name, 26);
-            hcfa.Field17a_OtherID_Qualifier = SetStringLength(hcfa.Field17a_OtherID_Qualifier, 3);
-            hcfa.Field17a_OtherID_Number = SetStringLength(hcfa.Field17a_OtherID_Number, 16);
-            hcfa.Field17b_NationalProviderIdentifier = SetStringLength(hcfa.Field17b_NationalProviderIdentifier, 16);
-            hcfa.Field22_MedicaidSubmissionCode = SetStringLength(hcfa.Field22_MedicaidSubmissionCode, 11);
-            hcfa.Field22_OriginalReferenceNumber = SetStringLength(hcfa.Field22_OriginalReferenceNumber, 18);
-            hcfa.Field23_PriorAuthorizationNumber = SetStringLength(hcfa.Field23_PriorAuthorizationNumber, 30);
-
-            foreach (var line in hcfa.Field24_ServiceLines)
-            {
-                line.RenderingProviderNpi = SetStringLength(line.RenderingProviderNpi, 12);
             }
-            hcfa.Field25_FederalTaxIDNumber = SetStringLength(hcfa.Field25_FederalTaxIDNumber, 15);
-            hcfa.Field26_PatientAccountNumber = SetStringLength(hcfa.Field26_PatientAccountNumber, 14);
-            hcfa.Field32_ServiceFacilityLocation_Name = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Name, 31);
-            hcfa.Field32_ServiceFacilityLocation_Street = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Street, 31);
-            hcfa.Field32_ServiceFacilityLocation_City = SetStringLength(hcfa.Field32_ServiceFacilityLocation_City, 16);
-            hcfa.Field32_ServiceFacilityLocation_State = SetStringLength(hcfa.Field32_ServiceFacilityLocation_State, 2);
-            hcfa.Field32_ServiceFacilityLocation_Zip = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Zip, 10);
-            hcfa.Field32a_ServiceFacilityLocation_Npi = SetStringLength(hcfa.Field32a_ServiceFacilityLocation_Npi, 11);
-            hcfa.Field32b_ServiceFacilityLocation_OtherID = SetStringLength(hcfa.Field32b_ServiceFacilityLocation_OtherID, 17);
-            hcfa.Field33_BillingProvider_Name = SetStringLength(hcfa.Field33_BillingProvider_Name, 35);
-            hcfa.Field33_BillingProvider_Street = SetStringLength(hcfa.Field33_BillingProvider_Street, 31);
-            hcfa.Field33_BillingProvider_City = SetStringLength(hcfa.Field33_BillingProvider_City, 19);
-            hcfa.Field33_BillingProvider_State = SetStringLength(hcfa.Field33_BillingProvider_State, 2);
-            hcfa.Field33_BillingProvider_Zip = SetStringLength(hcfa.Field33_BillingProvider_Zip, 10);
-            hcfa.Field33a_BillingProvider_Npi = SetStringLength(hcfa.Field33a_BillingProvider_Npi, 10);
-        }
+        
+            // shouldnt we represent hcfa.Field25_IsSSN and Field25_IsEIN to know which type TaxID?
+            hcfa.Field26_PatientAccountNumber = claim.PatientControlNumber;
 
-        private string SetStringLength(string source, int limit)
-        {
-            string result = string.Empty;
-            if (!string.IsNullOrEmpty(source))
+            if (claim.ProviderAcceptAssignmentCode == "A" || claim.ProviderAcceptAssignmentCode == "B")
             {
-                if (source.Length > limit)
+                hcfa.Field27_AcceptAssignment = true;
+            }
+            else if (claim.ProviderAcceptAssignmentCode == "C")
+            {
+                hcfa.Field27_AcceptAssignment = false;
+            }
+
+            hcfa.Field28_TotalCharge = claim.TotalClaimChargeAmount;
+            hcfa.Field29_AmountPaid = claim.PatientAmountPaid ?? 0;
+            foreach (var otherSubscriberObj in claim.OtherSubscriberInformations)
+            {
+                if (otherSubscriberObj.Amounts.Count > 0)
                 {
-                    result = source.Substring(0, limit);
+                    hcfa.Field29_AmountPaid += otherSubscriberObj.Amounts[0].Amount;
+                }
+            }
+
+            // does not exist on 837P
+            hcfa.Field30_BalanceDue = hcfa.Field28_TotalCharge - hcfa.Field29_AmountPaid; 
+
+            if (claim.ProviderSignatureOnFile == "Y")
+            {
+                hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile = true;
+            }
+            else if (claim.ProviderSignatureOnFile == "N")
+            {
+                hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile = false;
+            }
+
+            // Service Location
+            var serviceLocation = claim.ServiceLocation;
+            if (serviceLocation != null)
+            {
+                hcfa.Field32_ServiceFacilityLocation_Name = serviceLocation.Name?.LastName;
+
+                if (serviceLocation.Address != null)
+                {
+                    hcfa.Field32_ServiceFacilityLocation_Street = serviceLocation.Address.Line1;
+                    hcfa.Field32_ServiceFacilityLocation_City = serviceLocation.Address.City;
+                    hcfa.Field32_ServiceFacilityLocation_State = serviceLocation.Address.StateCode;
+                    hcfa.Field32_ServiceFacilityLocation_Zip = serviceLocation.Address.PostalCode;
                 }
                 else
                 {
-                    return source;
+                    hcfa.Field32_ServiceFacilityLocation_Street = string.Empty;
+                    hcfa.Field32_ServiceFacilityLocation_City = string.Empty;
+                    hcfa.Field32_ServiceFacilityLocation_State = string.Empty;
+                    hcfa.Field32_ServiceFacilityLocation_Zip = string.Empty;
+                }
+
+                hcfa.Field32a_ServiceFacilityLocation_Npi = serviceLocation.Npi;
+                if (serviceLocation.Identifications != null && serviceLocation.Identifications.Count > 0)
+                {
+                    hcfa.Field32b_ServiceFacilityLocation_OtherID = serviceLocation.Identifications.First().Id;
+                }
+                else
+                {
+                    hcfa.Field32b_ServiceFacilityLocation_OtherID = null;
                 }
             }
-            return result;
-        }
 
-        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
-        {
-            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
-        }
-
-        // Returns an "X" if the boolean is true, "" otherwise.
-        // Used for filling in the CMS 1500 form where X's are placed where true
-        private String ConditionalMarker(Boolean b)
-        {
-            return b ? "X" : ""; 
-        }
-
-        private FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
-        {
-            decimal xScale = 0.1m;
-            decimal yScale = 0.1685m;
-            var block = new FormBlock
+            // Pay To Provider
+            if (claim.BillingProvider != null)
             {
-                TextAlign = textAlign,
-                Left = -0.21m + xScale * x,
-                Top = 0.1m + yScale * y,
-                Width = xScale * width,
-                Height = yScale * 1.1m,
-                Text = text
-            };
-            page.Blocks.Add(block);
-            return block;
+                hcfa.Field33_BillingProvider_Name = claim.BillingProvider.Name?.LastName;
+
+                if (claim.BillingProvider.Address != null)
+                {
+                    hcfa.Field33_BillingProvider_Street = claim.BillingProvider.Address.Line1;
+                    hcfa.Field33_BillingProvider_City = claim.BillingProvider.Address.City;
+                    hcfa.Field33_BillingProvider_State = claim.BillingProvider.Address.StateCode;
+                    hcfa.Field33_BillingProvider_Zip = claim.BillingProvider.Address.PostalCode;
+                }
+                else
+                {
+                    hcfa.Field33_BillingProvider_Street = string.Empty;
+                    hcfa.Field33_BillingProvider_City = string.Empty;
+                    hcfa.Field33_BillingProvider_State = string.Empty;
+                    hcfa.Field33_BillingProvider_Zip = string.Empty;
+                }
+
+                hcfa.Field33a_BillingProvider_Npi = claim.BillingProvider.Npi;
+            }
+
+            LimitFieldWidths(hcfa);
+
+            return hcfa;
         }
 
+        /// <summary>
+        /// Transforms HCFA1500 claim data to form pages
+        /// </summary>
+        /// <param name="hcfa"><see cref="HCFA1500Claim"/> data to be transformed</param>
+        /// <returns>Collection of <see cref="FormPage"/> objects</returns>
         public virtual List<FormPage> TransformHcfa1500ToFormPages(HCFA1500Claim hcfa)
         {
-            List<FormPage> pages = new List<FormPage>();
+            var pages = new List<FormPage>();
             FormPage page = null;
             for (int i = 0; i < hcfa.Field24_ServiceLines.Count; i++)
             {
@@ -626,7 +596,7 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     page = new FormPage();
                     pages.Add(page);
                     page.MasterReference = "hcfa1500";
-                    page.ImagePath = _formImagePath;
+                    page.ImagePath = this.formImagePath;
 
                     // Render header
                     // LINE 1
@@ -641,19 +611,19 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                     // LINE 2
                     AddBlock(page, 4, 9, 28.5m, hcfa.Field02_PatientsName);
-                    AddBlock(page, 34, 9, 3, hcfa.Field03_PatientsDateOfBirth.MM);
-                    AddBlock(page, 37, 9, 3, hcfa.Field03_PatientsDateOfBirth.DD);
-                    AddBlock(page, 40, 9, 3, hcfa.Field03_PatientsDateOfBirth.YY);
+                    AddBlock(page, 34, 9, 3, hcfa.Field03_PatientsDateOfBirth.Month);
+                    AddBlock(page, 37, 9, 3, hcfa.Field03_PatientsDateOfBirth.Day);
+                    AddBlock(page, 40, 9, 3, hcfa.Field03_PatientsDateOfBirth.Year);
                     AddBlock(page, 44.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexMale), TextAlignEnum.center);
                     AddBlock(page, 49.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexFemale), TextAlignEnum.center);
                     AddBlock(page, 53, 9, 30, hcfa.Field04_InsuredsName);
 
                     // LINE 3
                     AddBlock(page, 4, 11, 28.5m, hcfa.Field05_PatientsAddress_Street);
-                    AddBlock(page, 36, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSelf)); //self
-                    AddBlock(page, 41, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf)); //spouse
-                    AddBlock(page, 45, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsChildOf)); //child
-                    AddBlock(page, 50, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsOther)); // other
+                    AddBlock(page, 36, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSelf));
+                    AddBlock(page, 41, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsSpouseOf));
+                    AddBlock(page, 45, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsChildOf));
+                    AddBlock(page, 50, 11, 2, ConditionalMarker(hcfa.Field06_PatientRelationshipToInsuredIsOther));
                     AddBlock(page, 53, 11, 30, hcfa.Field07_InsuredsAddress_Street);
 
                     // LINE 4
@@ -688,17 +658,17 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 4, 19, 28.5m, hcfa.Field09a_OtherInsuredsPolicyOrGroup);
                     AddBlock(page, 38, 19, 2, ConditionalMarker(hcfa.Field10a_PatientConditionRelatedToEmployment));
                     AddBlock(page, 44, 19, 2, ConditionalMarker(!hcfa.Field10a_PatientConditionRelatedToEmployment));
-                    AddBlock(page, 56, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.MM);
-                    AddBlock(page, 59, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.DD);
-                    AddBlock(page, 62, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.YY);
+                    AddBlock(page, 56, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Month);
+                    AddBlock(page, 59, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Day);
+                    AddBlock(page, 62, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Year);
                     AddBlock(page, 71.25m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsMale), TextAlignEnum.center);
                     AddBlock(page, 78.5m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsFemale), TextAlignEnum.center);
 
                     // LINE 8
                     // Field 9b is not supplied by 837P data.
-                    AddBlock(page, 5, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.MM);
-                    AddBlock(page, 8, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.DD);
-                    AddBlock(page, 11, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.YY);
+                    AddBlock(page, 5, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.Month);
+                    AddBlock(page, 8, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.Day);
+                    AddBlock(page, 11, 21, 3, hcfa.Field09b_OtherInsuredsDateOfBirth.Year);
                     AddBlock(page, 21, 21, 2, ConditionalMarker(hcfa.Field09b_OtherInsuredIsMale));
                     AddBlock(page, 27, 21, 2, ConditionalMarker(hcfa.Field09b_OtherInsuredIsFemale));
 
@@ -727,28 +697,28 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     // LINE 12
                     if (hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy != null)
                     {
-                        AddBlock(page, 5, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.MM);
-                        AddBlock(page, 8, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.DD);
-                        AddBlock(page, 11, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.YY);
+                        AddBlock(page, 5, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.Month);
+                        AddBlock(page, 8, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.Day);
+                        AddBlock(page, 11, 31, 3, hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy.Year);
                     }
 
                     // Field 15 
-                    AddBlock(page, 40, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.MM);
-                    AddBlock(page, 43, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.DD);
-                    AddBlock(page, 46, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.YY);
+                    AddBlock(page, 40, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.Month);
+                    AddBlock(page, 43, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.Day);
+                    AddBlock(page, 46, 31, 3, hcfa.Field15_DatePatientHadSameOrSimilarIllness.Year);
 
                     if (hcfa.Field16_DatePatientUnableToWork_Start != null)
                     {
-                        AddBlock(page, 57, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.MM);
-                        AddBlock(page, 60, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.DD);
-                        AddBlock(page, 63, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.YY);
+                        AddBlock(page, 57, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.Month);
+                        AddBlock(page, 60, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.Day);
+                        AddBlock(page, 63, 31, 3, hcfa.Field16_DatePatientUnableToWork_Start.Year);
                     }
 
                     if (hcfa.Field16_DatePatientUnableToWork_End != null)
                     {
-                        AddBlock(page, 71, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.MM);
-                        AddBlock(page, 74, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.DD);
-                        AddBlock(page, 77, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.YY);
+                        AddBlock(page, 71, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.Month);
+                        AddBlock(page, 74, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.Day);
+                        AddBlock(page, 77, 31, 3, hcfa.Field16_DatePatientUnableToWork_End.Year);
                     }
 
                     // LINE 13
@@ -758,24 +728,30 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 36, 33, 16, hcfa.Field17b_NationalProviderIdentifier);
 
                     // Field 18
-                    AddBlock(page, 57, 33, 3, hcfa.Field18_HospitalizationDateFrom.MM);
-                    AddBlock(page, 60, 33, 3, hcfa.Field18_HospitalizationDateFrom.DD);
-                    AddBlock(page, 63, 33, 3, hcfa.Field18_HospitalizationDateFrom.YY);
-                    AddBlock(page, 71, 33, 3, hcfa.Field18_HospitalizationDateTo.MM);
-                    AddBlock(page, 74, 33, 3, hcfa.Field18_HospitalizationDateTo.DD);
-                    AddBlock(page, 77, 33, 3, hcfa.Field18_HospitalizationDateTo.YY);
+                    AddBlock(page, 57, 33, 3, hcfa.Field18_HospitalizationDateFrom.Month);
+                    AddBlock(page, 60, 33, 3, hcfa.Field18_HospitalizationDateFrom.Day);
+                    AddBlock(page, 63, 33, 3, hcfa.Field18_HospitalizationDateFrom.Year);
+                    AddBlock(page, 71, 33, 3, hcfa.Field18_HospitalizationDateTo.Month);
+                    AddBlock(page, 74, 33, 3, hcfa.Field18_HospitalizationDateTo.Day);
+                    AddBlock(page, 77, 33, 3, hcfa.Field18_HospitalizationDateTo.Year);
 
                     // LINE 14
-                    
                     // We limit the length of the remark to only the size of the block. 
                     if (hcfa.Field19_ReservedForLocalUse != null && hcfa.Field19_ReservedForLocalUse.Length > 58)
+                    {
                         AddBlock(page, 4, 35, 49, hcfa.Field19_ReservedForLocalUse.Substring(0, 58));
+                    }
                     else
+                    {
                         AddBlock(page, 4, 35, 49, hcfa.Field19_ReservedForLocalUse);
+                    }
+
                     AddBlock(page, 55, 35, 2, ConditionalMarker(hcfa.Field20_OutsideLab));
                     AddBlock(page, 60, 35, 2, ConditionalMarker(!hcfa.Field20_OutsideLab));
-                    AddBlock(page, 65, 35, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : "", TextAlignEnum.right);
-                    AddBlock(page, 74, 35, 9, "", TextAlignEnum.right); // Note, we do not use second charge box at all here.
+                    AddBlock(page, 65, 35, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : string.Empty, TextAlignEnum.right);
+                    
+                    // Note, we do not use second charge box at all here.
+                    AddBlock(page, 74, 35, 9, string.Empty, TextAlignEnum.right); 
 
                     // Line 15
                     AddBlock(page, 6.5m, 37, 8, hcfa.Field21_Diagnosis1);
@@ -787,7 +763,6 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 6.5m, 39, 8, hcfa.Field21_Diagnosis2);
                     AddBlock(page, 33.5m, 39, 8, hcfa.Field21_Diagnosis4);
                     AddBlock(page, 53, 39, 30, hcfa.Field23_PriorAuthorizationNumber);
-
                 }
 
                 // Render service lines
@@ -799,9 +774,9 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
                 if (line.DateFrom != null)
                 {
-                    AddBlock(page, 4, y + 1, 3, line.DateFrom.MM);
-                    AddBlock(page, 7, y + 1, 3, line.DateFrom.DD);
-                    AddBlock(page, 10, y + 1, 3, line.DateFrom.YY);
+                    AddBlock(page, 4, y + 1, 3, line.DateFrom.Month);
+                    AddBlock(page, 7, y + 1, 3, line.DateFrom.Day);
+                    AddBlock(page, 10, y + 1, 3, line.DateFrom.Year);
                 }
                 else
                 {
@@ -811,9 +786,9 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 }
                 if (line.DateTo != null)
                 {
-                    AddBlock(page, 13, y + 1, 3, line.DateTo.MM);
-                    AddBlock(page, 16, y + 1, 3, line.DateTo.DD);
-                    AddBlock(page, 19, y + 1, 3, line.DateTo.YY);
+                    AddBlock(page, 13, y + 1, 3, line.DateTo.Month);
+                    AddBlock(page, 16, y + 1, 3, line.DateTo.Day);
+                    AddBlock(page, 19, y + 1, 3, line.DateTo.Year);
                 }
                 else
                 {
@@ -832,49 +807,59 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                 AddBlock(page, 49, y + 1, 2, line.DiagnosisPointer2);
                 AddBlock(page, 50, y + 1, 2, line.DiagnosisPointer3);
                 AddBlock(page, 51, y + 1, 2, line.DiagnosisPointer4);
-                AddBlock(page, 53, y + 1, 9, String.Format("{0:0.00}", line.Charges).Replace(".", " "), TextAlignEnum.right);
-                AddBlock(page, 62, y + 1, 4, String.Format("{0}", line.DaysOrUnits), TextAlignEnum.right);
+                AddBlock(page, 53, y + 1, 9, string.Format("{0:0.00}", line.Charges).Replace(".", " "), TextAlignEnum.right);
+                AddBlock(page, 62, y + 1, 4, $"{line.DaysOrUnits}", TextAlignEnum.right);
                 AddBlock(page, 66, y + 1, 2, line.EarlyPeriodicScreeningDiagnosisAndTreatment);
                 AddBlock(page, 71, y + 1, 12, line.RenderingProviderNpi);
 
 
-
-                if (i % 6 == 5 || i == hcfa.Field24_ServiceLines.Count - 1) // Footer
+                // Footer
+                if (i % 6 == 5 || i == hcfa.Field24_ServiceLines.Count - 1) 
                 {
                     // Render footer
                     AddBlock(page, 4, 55, 15, hcfa.Field25_FederalTaxIDNumber);
                     if (hcfa.Field25_IsSSN)
-                        AddBlock(page, 20, 55, 2, "X");
-                    if (hcfa.Field25_IsEIN)
-                        AddBlock(page, 22, 55, 2, "X");
-
-                    AddBlock(page, 26, 55, 14, hcfa.Field26_PatientAccountNumber);
-
-                    if (hcfa.Field27_AcceptAssignment.HasValue)
                     {
-                        if (hcfa.Field27_AcceptAssignment.Value == true)
-                            AddBlock(page, 41, 55, 2, "X");
-                        else
-                            AddBlock(page, 46, 55, 2, "X");
+                        AddBlock(page, 20, 55, 2, "X");
                     }
 
-                    AddBlock(page, 55, 55, 9, String.Format("{0:0.00}", hcfa.Field28_TotalCharge).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 65, 55, 9, String.Format("{0:0.00}", hcfa.Field29_AmountPaid).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 74, 55, 9, String.Format("{0:0.00}", hcfa.Field30_BalanceDue).Replace(".", " "), TextAlignEnum.right);
+                    if (hcfa.Field25_IsEIN)
+                    {
+                        AddBlock(page, 22, 55, 2, "X");
+                    }
+
+                    AddBlock(page, 26, 55, 14, hcfa.Field26_PatientAccountNumber);
+                    if (hcfa.Field27_AcceptAssignment.HasValue)
+                    {
+                        AddBlock(
+                            page,
+                            hcfa.Field27_AcceptAssignment.Value == true ? 41 : 46,
+                            55,
+                            2,
+                            "X");
+                    }
+
+                    AddBlock(page, 55, 55, 9, string.Format("{0:0.00}", hcfa.Field28_TotalCharge).Replace(".", " "), TextAlignEnum.right);
+                    AddBlock(page, 65, 55, 9, string.Format("{0:0.00}", hcfa.Field29_AmountPaid).Replace(".", " "), TextAlignEnum.right);
+                    AddBlock(page, 74, 55, 9, string.Format("{0:0.00}", hcfa.Field30_BalanceDue).Replace(".", " "), TextAlignEnum.right);
 
                     // Box 31
                     if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.HasValue)
                     {
                         AddBlock(page, 4, 58, 21, "PROVIDER SIGNATURE", TextAlignEnum.center);
-                        if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.Value == true)
-                            AddBlock(page, 4, 59, 21, "IS ON FILE", TextAlignEnum.center);
-                        else
-                            AddBlock(page, 4, 59, 21, "NOT ON FILE", TextAlignEnum.center);
+                        AddBlock(
+                            page,
+                            4,
+                            59,
+                            21,
+                            hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.Value == true ? "IS ON FILE" : "NOT ON FILE",
+                            TextAlignEnum.center);
                     }
+
                     // Box 32
                     AddBlock(page, 26, 57, 27, hcfa.Field32_ServiceFacilityLocation_Name);
                     AddBlock(page, 26, 58, 27, hcfa.Field32_ServiceFacilityLocation_Street);
-                    AddBlock(page, 26, 59, 27, String.Format("{0}, {1} {2}", hcfa.Field32_ServiceFacilityLocation_City, hcfa.Field32_ServiceFacilityLocation_State, hcfa.Field32_ServiceFacilityLocation_Zip));
+                    AddBlock(page, 26, 59, 27, string.Format("{0}, {1} {2}", hcfa.Field32_ServiceFacilityLocation_City, hcfa.Field32_ServiceFacilityLocation_State, hcfa.Field32_ServiceFacilityLocation_Zip));
                     AddBlock(page, 27, 60, 10, hcfa.Field32a_ServiceFacilityLocation_Npi);
                     AddBlock(page, 38, 60, 15, hcfa.Field32b_ServiceFacilityLocation_OtherID);
 
@@ -882,12 +867,10 @@ namespace OopFactory.X12.Hipaa.Claims.Services
                     AddBlock(page, 69, 56, 27, hcfa.Field33_BillingProvider_TelephoneNumber); 
                     AddBlock(page, 53, 57, 27, hcfa.Field33_BillingProvider_Name);
                     AddBlock(page, 53, 58, 27, hcfa.Field33_BillingProvider_Street);
-                    AddBlock(page, 53, 59, 27, String.Format("{0}, {1} {2}", hcfa.Field33_BillingProvider_City, hcfa.Field33_BillingProvider_State, hcfa.Field33_BillingProvider_Zip));
+                    AddBlock(page, 53, 59, 27, $"{hcfa.Field33_BillingProvider_City}, {hcfa.Field33_BillingProvider_State} {hcfa.Field33_BillingProvider_Zip}");
                     AddBlock(page, 54, 60, 10, hcfa.Field33a_BillingProvider_Npi);
                     AddBlock(page, 65, 60, 15, hcfa.Field33b_BillingProvider_OtherID);
-
                 }
-
             }
 
             return pages;
@@ -895,9 +878,115 @@ namespace OopFactory.X12.Hipaa.Claims.Services
 
         public virtual List<FormPage> TransformClaimToClaimFormFoXml(Claim claim)
         {
-            HCFA1500Claim hcfa = TransformClaimToHcfa1500(claim);
+            HCFA1500Claim hcfa = this.TransformClaimToHcfa1500(claim);
 
-            return TransformHcfa1500ToFormPages(hcfa);
+            return this.TransformHcfa1500ToFormPages(hcfa);
+        }
+
+        private static FormDate FormatFormDate(DateTime? dateTime)
+        {
+            return new FormDate
+                       {
+                           Month = string.Format("{0:MM}", dateTime),
+                           Day = string.Format("{0:dd}", dateTime),
+                           Year = string.Format("{0:yy}", dateTime)
+                       };
+        }
+
+        private static void LimitFieldWidths(HCFA1500Claim hcfa)
+        {
+            hcfa.Field01a_InsuredsIDNumber = SetStringLength(hcfa.Field01a_InsuredsIDNumber, 35);
+            hcfa.Field02_PatientsName = SetStringLength(hcfa.Field02_PatientsName, 28);
+            hcfa.Field04_InsuredsName = SetStringLength(hcfa.Field04_InsuredsName, 30);
+            hcfa.Field05_PatientsAddress_Street = SetStringLength(hcfa.Field05_PatientsAddress_Street, 28);
+            hcfa.Field05_PatientsAddress_City = SetStringLength(hcfa.Field05_PatientsAddress_City, 29);
+            hcfa.Field05_PatientsAddress_Zip = SetStringLength(hcfa.Field05_PatientsAddress_Zip, 14);
+            hcfa.Field07_InsuredsAddress_Street = SetStringLength(hcfa.Field07_InsuredsAddress_Street, 35);
+            hcfa.Field07_InsuredsAddress_City = SetStringLength(hcfa.Field07_InsuredsAddress_City, 28);
+            hcfa.Field07_InsuredsAddress_Zip = SetStringLength(hcfa.Field07_InsuredsAddress_Zip, 14);
+            hcfa.Field09_OtherInsuredsName = SetStringLength(hcfa.Field09_OtherInsuredsName, 28);
+            hcfa.Field09a_OtherInsuredsPolicyOrGroup = SetStringLength(hcfa.Field09a_OtherInsuredsPolicyOrGroup, 28);
+            hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName = SetStringLength(hcfa.Field09d_OtherInsuredsInsurancePlanNameOrProgramName, 28);
+            hcfa.Field11_InsuredsPolicyGroupOfFECANumber = SetStringLength(hcfa.Field11_InsuredsPolicyGroupOfFECANumber, 35);
+            hcfa.Field11c_InsuredsPlanOrProgramName = SetStringLength(hcfa.Field11c_InsuredsPlanOrProgramName, 35);
+            hcfa.Field17_ReferringProviderOrOtherSource_Name = SetStringLength(hcfa.Field17_ReferringProviderOrOtherSource_Name, 26);
+            hcfa.Field17a_OtherID_Qualifier = SetStringLength(hcfa.Field17a_OtherID_Qualifier, 3);
+            hcfa.Field17a_OtherID_Number = SetStringLength(hcfa.Field17a_OtherID_Number, 16);
+            hcfa.Field17b_NationalProviderIdentifier = SetStringLength(hcfa.Field17b_NationalProviderIdentifier, 16);
+            hcfa.Field22_MedicaidSubmissionCode = SetStringLength(hcfa.Field22_MedicaidSubmissionCode, 11);
+            hcfa.Field22_OriginalReferenceNumber = SetStringLength(hcfa.Field22_OriginalReferenceNumber, 18);
+            hcfa.Field23_PriorAuthorizationNumber = SetStringLength(hcfa.Field23_PriorAuthorizationNumber, 30);
+
+            foreach (var line in hcfa.Field24_ServiceLines)
+            {
+                line.RenderingProviderNpi = SetStringLength(line.RenderingProviderNpi, 12);
+            }
+
+            hcfa.Field25_FederalTaxIDNumber = SetStringLength(hcfa.Field25_FederalTaxIDNumber, 15);
+            hcfa.Field26_PatientAccountNumber = SetStringLength(hcfa.Field26_PatientAccountNumber, 14);
+            hcfa.Field32_ServiceFacilityLocation_Name = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Name, 31);
+            hcfa.Field32_ServiceFacilityLocation_Street = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Street, 31);
+            hcfa.Field32_ServiceFacilityLocation_City = SetStringLength(hcfa.Field32_ServiceFacilityLocation_City, 16);
+            hcfa.Field32_ServiceFacilityLocation_State = SetStringLength(hcfa.Field32_ServiceFacilityLocation_State, 2);
+            hcfa.Field32_ServiceFacilityLocation_Zip = SetStringLength(hcfa.Field32_ServiceFacilityLocation_Zip, 10);
+            hcfa.Field32a_ServiceFacilityLocation_Npi = SetStringLength(hcfa.Field32a_ServiceFacilityLocation_Npi, 11);
+            hcfa.Field32b_ServiceFacilityLocation_OtherID = SetStringLength(hcfa.Field32b_ServiceFacilityLocation_OtherID, 17);
+            hcfa.Field33_BillingProvider_Name = SetStringLength(hcfa.Field33_BillingProvider_Name, 35);
+            hcfa.Field33_BillingProvider_Street = SetStringLength(hcfa.Field33_BillingProvider_Street, 31);
+            hcfa.Field33_BillingProvider_City = SetStringLength(hcfa.Field33_BillingProvider_City, 19);
+            hcfa.Field33_BillingProvider_State = SetStringLength(hcfa.Field33_BillingProvider_State, 2);
+            hcfa.Field33_BillingProvider_Zip = SetStringLength(hcfa.Field33_BillingProvider_Zip, 10);
+            hcfa.Field33a_BillingProvider_Npi = SetStringLength(hcfa.Field33a_BillingProvider_Npi, 10);
+        }
+
+        private static string SetStringLength(string source, int limit)
+        {
+            string result = string.Empty;
+            if (!string.IsNullOrEmpty(source))
+            {
+                if (source.Length > limit)
+                {
+                    result = source.Substring(0, limit);
+                }
+                else
+                {
+                    return source;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Used for filling in the CMS 1500 form where X's are placed where true
+        /// </summary>
+        /// <param name="b">Flag if marker should return "X"</param>
+        /// <returns>"X" if the boolean is true, "" otherwise</returns>
+        private static string ConditionalMarker(bool b)
+        {
+            return b ? "X" : string.Empty;
+        }
+
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
+        {
+            const decimal XScale = 0.1m;
+            const decimal YScale = 0.1685m;
+            var block = new FormBlock
+                            {
+                                TextAlign = textAlign,
+                                Left = -0.21m + XScale * x,
+                                Top = 0.1m + YScale * y,
+                                Width = XScale * width,
+                                Height = YScale * 1.1m,
+                                Text = text
+                            };
+            page.Blocks.Add(block);
+            return block;
+        }
+
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
+        {
+            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
         }
     }
 }

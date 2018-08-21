@@ -1,22 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     public class OtherSubscriberInformation
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OtherSubscriberInformation"/> class
+        /// </summary>
         public OtherSubscriberInformation()
         {
-            if (Name == null) Name = new EntityName();
-            if (OtherPayer == null) OtherPayer = new EntityName();
-            if (Adjustments == null) Adjustments = new List<ClaimsAdjustment>();
-            if (Amounts == null) Amounts = new List<QualifiedAmount>();
-            if (Providers == null) Providers = new List<Provider>();
+            if (this.Name == null)
+            {
+                this.Name = new EntityName();
+            }
+
+            if (this.OtherPayer == null)
+            {
+                this.OtherPayer = new EntityName();
+            }
+
+            if (this.Adjustments == null)
+            {
+                this.Adjustments = new List<ClaimsAdjustment>();
+            }
+
+            if (this.Amounts == null)
+            {
+                this.Amounts = new List<QualifiedAmount>();
+            }
+
+            if (this.Providers == null)
+            {
+                this.Providers = new List<Provider>();
+            }
         }
+
         [XmlAttribute]
         public GenderEnum Gender { get; set; }
 
@@ -27,20 +50,17 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute(AttributeName = "DateOfBirth", DataType = "date")]
         public DateTime SerializableDateOfBirth
         {
-            get { return DateOfBirth ?? DateTime.MinValue; }
-            set { DateOfBirth = value; }
+            get { return this.DateOfBirth ?? DateTime.MinValue; }
+            set { this.DateOfBirth = value; }
         }
 
         [XmlIgnore]
-        public bool SerializableDateOfBirthSpecified
-        {
-            get { return DateOfBirth.HasValue; }
-            set { }
-        }
+        public bool SerializableDateOfBirthSpecified => this.DateOfBirth.HasValue;
         #endregion
 
         [XmlAttribute]
         public string BenefitsAssignmentCertificationIndicator { get; set; }
+
         [XmlAttribute]
         public string ReleaseOfInformationCode { get; set; }
 
@@ -48,8 +68,8 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "D");
-                return amount == null ? 0 : amount.Amount;
+                var amount = this.Amounts.FirstOrDefault(a => a.Qualifier == "D");
+                return amount?.Amount ?? 0;
             }
         }
 
@@ -57,8 +77,8 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "EAF");
-                return amount == null ? (decimal?)null : amount.Amount;
+                var amount = this.Amounts.FirstOrDefault(a => a.Qualifier == "EAF");
+                return amount?.Amount;
             }
         }
 
@@ -66,8 +86,8 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "A8");
-                return amount == null ? (decimal?)null : amount.Amount;
+                var amount = this.Amounts.FirstOrDefault(a => a.Qualifier == "A8");
+                return amount?.Amount;
             }
         }
 
@@ -85,7 +105,5 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlElement(ElementName = "Provider")]
         public List<Provider> Providers { get; set; }
-
-
     }
 }

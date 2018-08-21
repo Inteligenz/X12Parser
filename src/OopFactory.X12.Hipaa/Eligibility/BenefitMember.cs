@@ -1,20 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Eligibility
+﻿namespace OopFactory.X12.Hipaa.Eligibility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
+    /// <summary>
+    /// Represents a <see cref="Member"/> with benefit metadata
+    /// </summary>
     public class BenefitMember : Member
     {
         public BenefitMember()
         {
-            if (Diagnoses == null) Diagnoses = new List<Lookup>();
-            if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
-            if (Dates == null) Dates = new List<QualifiedDate>();
-            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
+            if (this.Diagnoses == null)
+            {
+                this.Diagnoses = new List<Lookup>();
+            }
+
+            if (this.RequestValidations == null)
+            {
+                this.RequestValidations = new List<RequestValidation>();
+            }
+
+            if (this.Dates == null)
+            {
+                this.Dates = new List<QualifiedDate>();
+            }
+
+            if (this.DateRanges == null)
+            {
+                this.DateRanges = new List<QualifiedDateRange>();
+            }
         }
 
         [XmlAttribute]
@@ -22,16 +40,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
 
         public ProviderInformation ProviderInfo { get; set; }
 
-        [XmlElement(ElementName="Diagnosis")]
+        [XmlElement(ElementName = "Diagnosis")]
         public List<Lookup> Diagnoses { get; set; }
 
         [XmlElement(ElementName = "RequestValidation")]
         public new List<RequestValidation> RequestValidations { get; set; }
 
-        [XmlElement(ElementName="Date")]
+        [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
 
-        [XmlElement(ElementName="DateRange")]
+        [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
 
         #region PlanDate properties
@@ -39,24 +57,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "291");
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "291");
                 return date == null ? (DateTime?)null : date.Date;
             }
         }
 
         [XmlAttribute(AttributeName = "PlanDate", DataType = "date")]
-        public DateTime SerializablePlanDate
-        {
-            get { return PlanDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializablePlanDate => this.PlanDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializablePlanDateSpecified
-        {
-            get { return PlanDate.HasValue; }
-            set { }
-        }
+        public bool SerializablePlanDateSpecified => this.PlanDate.HasValue;
         #endregion
 
         #region PlanBeginDate properties
@@ -64,24 +74,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "346");
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "346");
                 return date == null ? (DateTime?)null : date.Date;
             }
         }
 
         [XmlAttribute(AttributeName="PlanBeginDate", DataType="date")]
-        public DateTime SerializablePlanBeginDate
-        {
-            get { return PlanBeginDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializablePlanBeginDate => this.PlanBeginDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializablePlanBeginDateSpecified
-        {
-            get { return PlanBeginDate.HasValue; }
-            set { }
-        }
+        public bool SerializablePlanBeginDateSpecified => this.PlanBeginDate.HasValue; 
         #endregion
 
         #region PlanEndDate properties
@@ -89,24 +91,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "347");
-                return date == null ? (DateTime?)null : date.Date;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "347");
+                return date?.Date;
             }
         }
 
         [XmlAttribute(AttributeName = "PlanEndDate", DataType = "date")]
-        public DateTime SerializablePlanEndDate
-        {
-            get { return PlanEndDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializablePlanEndDate => this.PlanEndDate ?? DateTime.MinValue; 
 
         [XmlIgnore]
-        public bool SerializablePlanEndDateSpecified
-        {
-            get { return PlanEndDate.HasValue; }
-            set { }
-        }
+        public bool SerializablePlanEndDateSpecified => this.PlanEndDate.HasValue; 
         #endregion
 
         #region EligibilityDate properties
@@ -114,24 +108,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "307");
-                return date == null ? (DateTime?)null : date.Date;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "307");
+                return date?.Date;
             }
         }
 
         [XmlAttribute(AttributeName = "EligibilityDate", DataType = "date")]
-        public DateTime SerializableEligibilityDate
-        {
-            get { return EligibilityDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializableEligibilityDate => this.EligibilityDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializableEligibilityDateSpecified
-        {
-            get { return EligibilityDate.HasValue; }
-            set { }
-        }
+        public bool SerializableEligibilityDateSpecified => this.EligibilityDate.HasValue;
         #endregion
 
         #region EligibilityBeginDate properties
@@ -139,24 +125,16 @@ namespace OopFactory.X12.Hipaa.Eligibility
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "356");
-                return date == null ? (DateTime?)null : date.Date;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "356");
+                return date?.Date;
             }
         }
 
         [XmlAttribute(AttributeName = "EligibilityBeginDate", DataType = "date")]
-        public DateTime SerializableEligibilityBeginDate
-        {
-            get { return EligibilityBeginDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializableEligibilityBeginDate => this.EligibilityBeginDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializableEligibilityBeginDateSpecified
-        {
-            get { return EligibilityBeginDate.HasValue; }
-            set { }
-        }
+        public bool SerializableEligibilityBeginDateSpecified => this.EligibilityBeginDate.HasValue;
         #endregion
 
         #region EligibilityEndDate properties

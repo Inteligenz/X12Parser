@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System.Xml.Serialization;
+
     public class CodedAmount
     {
         [XmlAttribute]
@@ -17,15 +13,11 @@ namespace OopFactory.X12.Hipaa.Common
         [XmlAttribute(AttributeName = "Amount")]
         public decimal SerializableAmount
         {
-            get { return Amount ?? decimal.Zero; }
-            set { Amount = value; }
+            get { return this.Amount ?? decimal.Zero; }
+            set { this.Amount = value; }
         }
 
         [XmlIgnore]
-        public bool SerializableAmountSpecified
-        {
-            get { return Amount.HasValue; }
-            set { }
-        }
+        public bool SerializableAmountSpecified => this.Amount.HasValue;
     }
 }

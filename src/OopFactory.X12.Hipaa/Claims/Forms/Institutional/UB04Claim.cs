@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
     [Serializable]
     public class UB04Claim
     {
@@ -108,9 +106,6 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
             if (Field81c == null) Field81c = new UB04CodeCode();
             if (Field81d == null) Field81d = new UB04CodeCode();
         }
-
-
-        // Now the accessor definitions:
 
         public UB04Block Field01_BillingProvider { get; set; }
 

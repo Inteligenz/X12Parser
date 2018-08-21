@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Dental
 {
+    using System.Collections.Generic;
+
 #if DEBUG
     class J515Claim
     {

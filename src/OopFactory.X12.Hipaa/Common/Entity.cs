@@ -1,41 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    /// <summary>
+    /// Represents a base unit which stores common data
+    /// </summary>
     public class Entity
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Entity"/> class
+        /// </summary>
         public Entity()
         {
-            if (Name == null) Name = new EntityName();
-            if (Identifications == null) Identifications = new List<Identification>();
-            if (Contacts == null) Contacts = new List<Contact>();
-            if (RequestValidations!=null) RequestValidations = new List<RequestValidation>();
+            if (this.Name == null)
+            {
+                this.Name = new EntityName();
+            }
+
+            if (this.Identifications == null)
+            {
+                this.Identifications = new List<Identification>();
+            }
+
+            if (this.Contacts == null)
+            {
+                this.Contacts = new List<Contact>();
+            }
+
+            if (this.RequestValidations != null)
+            {
+                this.RequestValidations = new List<RequestValidation>();
+            }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the <see cref="Entity"/>
+        /// </summary>
         public EntityName Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address of the <see cref="Entity"/>
+        /// </summary>
         public PostalAddress Address { get; set; }
 
-        [XmlElement(ElementName="Identification")]
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Identification"/> objects
+        /// </summary>
+        [XmlElement(ElementName = "Identification")]
         public List<Identification> Identifications { get; set; }
 
-        protected string GetReferenceId(string qualifier)
-        {
-            var reference = Identifications.FirstOrDefault(id => id.Qualifier == qualifier);
-            if (reference != null)
-                return reference.Id;
-            else
-                return null;
-        }
-
-        [XmlElement(ElementName="Contact")]
+        /// <summary>
+        /// Gets or sets the <see cref="Contact"/> collection
+        /// </summary>
+        [XmlElement(ElementName = "Contact")]
         public List<Contact> Contacts { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="RequestValidation"/> collection
+        /// </summary>
         [XmlElement(ElementName = "RequestValidation")]
         public List<RequestValidation> RequestValidations { get; set; }
 
+        /// <summary>
+        /// Returns the reference id with a matching qualifier
+        /// </summary>
+        /// <param name="qualifier">Filter to get the correct reference id</param>
+        /// <returns>The id of the reference which matches the qualifier; otherwise, null</returns>
+        protected string GetReferenceId(string qualifier)
+        {
+            var reference = this.Identifications.FirstOrDefault(id => id.Qualifier == qualifier);
+            return reference?.Id;
+        }
     }
 }

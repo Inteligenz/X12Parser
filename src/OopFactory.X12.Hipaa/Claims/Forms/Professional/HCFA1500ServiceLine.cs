@@ -1,8 +1,7 @@
-﻿using System;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 {
+    using System.Xml.Serialization;
+
     public class HCFA1500ServiceLine
     {
         public string CommentLine { get; set; }             // 61 characters (in grey area from boxes 24A through 24G

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System.Xml.Serialization;
+
     public class ClaimsAdjustment
     {
         [XmlAttribute]
         public string GroupCode { get; set; }
+
         [XmlAttribute]
         public string ReasonCode { get; set; }
+
         [XmlAttribute]
         public decimal Amount { get; set; }
 
@@ -22,16 +19,12 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute(AttributeName = "Quantity")]
         public decimal SerializableQuantity
         {
-            get { return Quantity ?? decimal.Zero; }
-            set { Quantity = value; }
+            get { return this.Quantity.GetValueOrDefault(); }
+            set { this.Quantity = value; }
         }
 
         [XmlIgnore]
-        public bool SerializableQuantitySpecified
-        {
-            get { return Quantity.HasValue; }
-            set { }
-        }
+        public bool SerializableQuantitySpecified => this.Quantity.HasValue;
 
     }
 }

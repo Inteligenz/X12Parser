@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using System.IO;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
     public enum TextAlignEnum
     {
         left,
@@ -17,11 +14,17 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
     public class FormBlock
     {
         public string LetterSpacing { get; set; }
+
         public TextAlignEnum TextAlign { get; set; }
+
         public decimal Left { get; set; }
+
         public decimal Top { get; set; }
+
         public decimal Width { get; set; }
+
         public decimal Height { get; set; }
+
         public string Text { get; set; }
     }
 
@@ -29,11 +32,17 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
     {
         public FormPage()
         {
-            if (Blocks == null) Blocks = new List<FormBlock>();
+            if (this.Blocks == null)
+            {
+                this.Blocks = new List<FormBlock>();
+            }
         }
+
         public string MasterReference { get; set; }
+
         public string ImagePath { get; set; }
-        [XmlElement(ElementName="Block")]
+
+        [XmlElement(ElementName = "Block")]
         public List<FormBlock> Blocks { get; set; }
     }
 
@@ -41,14 +50,16 @@ namespace OopFactory.X12.Hipaa.Claims.Forms
     {
         public FormDocument()
         {
-            if (Pages == null) Pages = new List<FormPage>();
+            if (this.Pages == null)
+            {
+                this.Pages = new List<FormPage>();
+            }
         }
 
-        [XmlElement(ElementName="Page")]
+        [XmlElement(ElementName = "Page")]
         public List<FormPage> Pages { get; set; }
 
         #region Serialization Methods
-
         public string Serialize()
         {
             var writer = new StringWriter();

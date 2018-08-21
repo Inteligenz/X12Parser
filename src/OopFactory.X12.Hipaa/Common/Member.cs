@@ -1,77 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System;
+    using System.Xml.Serialization;
+
+    /// <summary>
+    /// Collection of gender identifier for members
+    /// </summary>
     public enum GenderEnum
     {
+        /// <summary>
+        /// Unknown member gender
+        /// </summary>
         Unknown,
+
+        /// <summary>
+        /// Male member gender
+        /// </summary>
         Male,
+
+        /// <summary>
+        /// Female member gender
+        /// </summary>
         Female
     }
 
+    /// <summary>
+    /// Represents a person (extends the <see cref="Entity"/> class)
+    /// </summary>
     public class Member : Entity
     {
+        /// <summary>
+        /// Gets or sets the gender of the member
+        /// </summary>
         [XmlAttribute]        
         public GenderEnum Gender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="DateTime"/> the member was born
+        /// </summary>
         [XmlIgnore]
         public DateTime? DateOfBirth { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="Lookup"/> object attached to the member
+        /// </summary>
         public Lookup Relationship { get; set; }
         
-        #region Serializable DateOfBirth Properties
-        [XmlAttribute(AttributeName="DateOfBirth", DataType="date")]
+        /// <summary>
+        /// Gets or sets the <see cref="DateOfBirth"/> of the member that can be serialized to XML
+        /// </summary>
+        [XmlAttribute(AttributeName = "DateOfBirth", DataType = "date")]
         public DateTime SerializableDateOfBirth 
         {
-            get { return DateOfBirth ?? DateTime.MinValue; }
-            set { DateOfBirth = value; }
+            get { return this.DateOfBirth ?? DateTime.MinValue; }
+            set { this.DateOfBirth = value; }
         }
 
+        /// <summary>
+        /// Gets whether the <see cref="DateOfBirth"/> has been specified
+        /// </summary>
         [XmlIgnore]
-        public bool SerializableDateOfBirthSpecified 
-        {
-            get { return DateOfBirth.HasValue; }
-            set {}
-        }
-        #endregion
+        public bool SerializableDateOfBirthSpecified => this.DateOfBirth.HasValue;
 
-
-
+        /// <summary>
+        /// Gets the unique identifier of the <see cref="Member"/>
+        /// </summary>
         [XmlAttribute]
         public string MemberId
         {
             get
             {
-                if (Name != null && Name.Identification != null && Name.Identification.Qualifier == "MI")
-                    return Name.Identification.Id;
+                if (this.Name?.Identification != null && this.Name.Identification.Qualifier == "MI")
+                {
+                    return this.Name.Identification.Id;
+                }
                 else
-                    return GetReferenceId("1W");
+                {
+                    return this.GetReferenceId("1W");
+                }
             }
-            set { }
         }
-
+        
+        /// <summary>
+        /// Gets the Social Security Number (SSN) of the <see cref="Member"/>
+        /// </summary>
         [XmlAttribute]
-        public string Ssn
-        {
-            get { return GetReferenceId("SY"); }
-            set { }
-        }
+        public string Ssn => this.GetReferenceId("SY");
 
+        /// <summary>
+        /// Gets the plan number of the <see cref="Member"/>
+        /// </summary>
         [XmlAttribute]
-        public string PlanNumber
-        {
-            get { return GetReferenceId("18"); }
-            set { }
-        }
+        public string PlanNumber => this.GetReferenceId("18");
 
+        /// <summary>
+        /// Gets the group number of the <see cref="Member"/>
+        /// </summary>
         [XmlAttribute]
-        public string GroupNumber
-        {
-            get { return GetReferenceId("6P"); }
-        }
+        public string GroupNumber => this.GetReferenceId("6P");
     }
 }

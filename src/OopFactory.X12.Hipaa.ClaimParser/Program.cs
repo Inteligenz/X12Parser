@@ -19,7 +19,7 @@
             bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
 
             var opts = new ExecutionOptions(args);
-            InstitutionalClaimToUB04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUB04ClaimFormTransformation("UB04_Red.gif");
+            InstitutionalClaimToUb04ClaimFormTransformation institutionalClaimToUB04ClaimFormTransformation = new InstitutionalClaimToUb04ClaimFormTransformation("UB04_Red.gif");
             var service = new ClaimFormTransformationService(
                 new ProfessionalClaimToHcfa1500FormTransformation("HCFA1500_Red.gif"),
                 institutionalClaimToUB04ClaimFormTransformation,

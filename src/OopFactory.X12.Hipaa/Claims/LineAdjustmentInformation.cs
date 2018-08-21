@@ -1,19 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     public class LineAdjustmentInformation
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineAdjustmentInformation"/> class
+        /// </summary>
         public LineAdjustmentInformation()
         {
-            if (Adjustments == null) Adjustments = new List<ClaimsAdjustment>();
-            if (Amounts == null) Amounts = new List<QualifiedAmount>();
-            if (Dates == null) Dates = new List<QualifiedDate>();
+            if (this.Adjustments == null)
+            {
+                this.Adjustments = new List<ClaimsAdjustment>();
+            }
+
+            if (this.Amounts == null)
+            {
+                this.Amounts = new List<QualifiedAmount>();
+            }
+
+            if (this.Dates == null)
+            {
+                this.Dates = new List<QualifiedDate>();
+            }
         }
 
         [XmlAttribute]
@@ -46,10 +60,9 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                if (Dates.Exists(d => d.Qualifier == "573"))
-                    return Dates.First(d => d.Qualifier == "573").Date;
-                else
-                    return DateTime.MinValue;
+                return this.Dates.Exists(d => d.Qualifier == "573")
+                    ? this.Dates.First(d => d.Qualifier == "573").Date
+                    : DateTime.MinValue;
             }
         }
 
@@ -57,14 +70,15 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                if (Amounts.Exists(a => a.Qualifier == "EAF"))
-                    return Amounts.First(a => a.Qualifier == "EAF").Amount;
+                if (this.Amounts.Exists(a => a.Qualifier == "EAF"))
+                {
+                    return this.Amounts.First(a => a.Qualifier == "EAF").Amount;
+                }
                 else
+                {
                     return null;
+                }
             }
         }
-
-
-
     }
 }

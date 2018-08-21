@@ -1,67 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
+    /// <summary>
+    /// Collection of claims types
+    /// </summary>
     public enum ClaimTypeEnum
     {
+        /// <summary>
+        /// Professional claim type
+        /// </summary>
         Professional,
+
+        /// <summary>
+        /// Institutional claim type
+        /// </summary>
         Institutional,
+
+        /// <summary>
+        /// Dental claim type
+        /// </summary>
         Dental
     }
 
+    /// <summary>
+    /// Represents a health insurance claim object
+    /// </summary>
     [XmlRoot(Namespace = "http://www.oopfactory.com/2011/XSL/Hipaa")]
     public class Claim
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Claim"/> class
+        /// </summary>
         public Claim()
         {
-            if (Dates == null) Dates = new List<QualifiedDate>();
-            if (Amounts == null) Amounts = new List<QualifiedAmount>();
-            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
-            if (Providers == null) Providers = new List<Provider>();
-            if (ServiceLines == null) ServiceLines = new List<ServiceLine>();
-            if (OtherSubscriberInformations == null) OtherSubscriberInformations = new List<OtherSubscriberInformation>();
+            if (this.Dates == null)
+            {
+                this.Dates = new List<QualifiedDate>();
+            }
+
+            if (this.Amounts == null)
+            {
+                this.Amounts = new List<QualifiedAmount>();
+            }
+
+            if (this.DateRanges == null)
+            {
+                this.DateRanges = new List<QualifiedDateRange>();
+            }
+
+            if (this.Providers == null)
+            {
+                this.Providers = new List<Provider>();
+            }
+
+            if (this.ServiceLines == null)
+            {
+                this.ServiceLines = new List<ServiceLine>();
+            }
+
+            if (this.OtherSubscriberInformations == null)
+            {
+                this.OtherSubscriberInformations = new List<OtherSubscriberInformation>();
+            }
         }
+
         [XmlAttribute]
         public string Version { get; set; }
+
         [XmlAttribute]
         public ClaimTypeEnum Type { get; set; }
+
         [XmlAttribute]
         public string RelatedCauseCode1 { get; set; }
+
         [XmlAttribute]
         public string RelatedCauseCode2 { get; set; }
+
         [XmlAttribute]
         public string RelatedCauseCode3 { get; set; }
+
         [XmlAttribute]
         public string AutoAccidentState { get; set; }
+
         [XmlAttribute]
         public string PatientSignatureSourceCode { get; set; }
+
         [XmlAttribute]
         public string TransactionCode { get; set; }
+
         [XmlAttribute]
         public string ClaimNumber { get; set; }
+
         [XmlAttribute]
         public string BillTypeCode { get; set; }
+
         [XmlAttribute]
         public string PatientControlNumber { get; set; }
+
         [XmlAttribute]
         public decimal TotalClaimChargeAmount { get; set; }
+
         [XmlAttribute]
         public string ProviderSignatureOnFile { get; set; }
+
         [XmlAttribute]
         public string ProviderAcceptAssignmentCode { get; set; }
+
         [XmlAttribute]
         public string BenefitsAssignmentCertificationIndicator { get; set; }
+
         [XmlAttribute]
         public string ReleaseOfInformationCode { get; set; }
+
         [XmlAttribute]
         public string PriorAuthorizationNumber { get; set; }
-
+        
         [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
         
@@ -70,24 +130,29 @@ namespace OopFactory.X12.Hipaa.Claims
 
         [XmlElement(ElementName = "DateRange")]
         public List<QualifiedDateRange> DateRanges { get; set; }
-
-
+        
         public ServiceLocationInformation ServiceLocationInfo { get; set; }
 
         public Entity Submitter { get; set; }
+
         public Entity Receiver { get; set; }
+
         public BillingInformation BillingInfo { get; set; }
+
         public ProviderInformation ProviderInfo { get; set; }
+
         public SubmitterInfo SubmitterInfo { get; set; }
+
         public ClaimMember Subscriber { get; set; }
+
         public Entity Payer { get; set; }
+
         public ClaimMember Patient { get; set; }
 
         [XmlElement(ElementName = "OtherSubscriberInformation")]
         public List<OtherSubscriberInformation> OtherSubscriberInformations { get; set; }
 
         #region Institional Claim Properties
-
         /// <summary>
         /// Box 3B on the UB04
         /// </summary>
@@ -146,20 +211,16 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlElement(ElementName = "Note")]
         public List<Lookup> Notes { get; set; }
 
-        [XmlElement(ElementName="ServiceLine")]
+        [XmlElement(ElementName = "ServiceLine")]
         public List<ServiceLine> ServiceLines { get; set; }
 
         #region Calculated Fields
-
         public decimal? PatientAmountPaid
         {
             get
             {
-                var amount = Amounts.FirstOrDefault(a => a.Qualifier == "F5");
-                if (amount != null)
-                    return amount.Amount;
-                else
-                    return null;
+                var amount = this.Amounts.FirstOrDefault(a => a.Qualifier == "F5");
+                return amount?.Amount;
             }
         }
 
@@ -170,35 +231,35 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var dateRange = DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
+                var dateRange = this.DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
                 if (dateRange != null)
+                {
                     return dateRange.BeginDate;
+                }
                 else
                 {
-                    var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
+                    var date = this.Dates.FirstOrDefault(dr => dr.Qualifier == "434");
                     if (date != null)
+                    {
                         return date.Date;
-                    else if (ServiceLines.Count > 0)
-                        return ServiceLines.Min(sl => sl.ServiceDateFrom);
+                    }
+                    else if (this.ServiceLines.Count > 0)
+                    {
+                        return this.ServiceLines.Min(sl => sl.ServiceDateFrom);
+                    }
                     else
+                    {
                         return null;
+                    }
                 }
             }
         }
 
         [XmlAttribute(AttributeName = "StatementFromDate", DataType = "date")]
-        public DateTime SerializableStatementFromDate
-        {
-            get { return StatementFromDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializableStatementFromDate => this.StatementFromDate ?? DateTime.MinValue; 
 
         [XmlIgnore]
-        public bool SerializableStatementFromDateSpecified
-        {
-            get { return StatementFromDate.HasValue; }
-            set { }
-        }
+        public bool SerializableStatementFromDateSpecified => this.StatementFromDate.HasValue;
 
         /// <summary>
         /// Box 6 on the UB04
@@ -207,35 +268,35 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var dateRange = DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
+                var dateRange = this.DateRanges.FirstOrDefault(dr => dr.Qualifier == "434");
                 if (dateRange != null)
+                {
                     return dateRange.EndDate;
+                }
                 else
                 {
-                    var date = Dates.FirstOrDefault(dr => dr.Qualifier == "434");
+                    var date = this.Dates.FirstOrDefault(dr => dr.Qualifier == "434");
                     if (date != null)
+                    {
                         return date.Date;
-                    else if (ServiceLines.Count > 0)
-                        return ServiceLines.Max(sl => sl.ServiceDateTo);
+                    }
+                    else if (this.ServiceLines.Count > 0)
+                    {
+                        return this.ServiceLines.Max(sl => sl.ServiceDateTo);
+                    }
                     else
+                    {
                         return null;
+                    }
                 }
             }
         }
 
         [XmlAttribute(AttributeName = "StatementToDate", DataType = "date")]
-        public DateTime SerializableStatementToDate
-        {
-            get { return StatementToDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializableStatementToDate => this.StatementToDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializableStatementToDateSpecified
-        {
-            get { return StatementToDate.HasValue; }
-            set { }
-        }
+        public bool SerializableStatementToDateSpecified => this.StatementToDate.HasValue;
 
         /// <summary>
         /// Box 12 and 13 on the UB04
@@ -244,11 +305,8 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "435");
-                if (date != null)
-                    return date.Date;
-                else
-                    return null;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "435");
+                return date?.Date;
             }
         }
 
@@ -259,11 +317,8 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "096");
-                if (date != null)
-                    return date.Date;
-                else
-                    return null;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "096");
+                return date?.Date;
             }
         }
 
@@ -271,80 +326,56 @@ namespace OopFactory.X12.Hipaa.Claims
         {
             get
             {
-                var serviceFacilityLocation = ServiceFacilityLocation;
-                if (serviceFacilityLocation != null)
-                    return serviceFacilityLocation;
-                else
-                {
-                    if (BillingInfo != null)
-                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
-                    else
-                        return null;
-                }
+                return this.ServiceFacilityLocation
+                       ?? this.BillingInfo?.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
             }
         }
 
-        public Provider BillingProvider
-        {
-            get
-            {
-                if (BillingInfo != null)
-                {
-                    return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
-                }
-                else
-                    return null;
-            }
-        }
+        public Provider BillingProvider => this.BillingInfo?.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
 
         public Provider PayToProvider
         {
             get
             {
-                if (BillingInfo != null)
+                if (this.BillingInfo != null)
                 {
-                    var payToProvider = BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "87");
-                    if (payToProvider != null)
-                        return payToProvider;
-                    else // the billing provider is the pay to provider when the pay-to provider is not present
-                        return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
+                    var payToProvider = this.BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "87");
+                    return payToProvider ?? this.BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "85");
                 }
                 else
+                {
                     return null;
+                }
             }
         }
 
-        public Provider PayToPlan
-        {
-            get
-            {
-                if (BillingInfo != null)
-                    return BillingInfo.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "PE");
-                else
-                    return null;
-            }
-        }
+        public Provider PayToPlan => this.BillingInfo?.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "PE");
 
-        public Provider AttendingProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "71"); } }
-        public Provider OperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "72"); } }
-        public Provider OtherOperatingPhysician { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "ZZ"); } }
-        public Provider RenderingProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "82"); } }
-        public Provider ServiceFacilityLocation { get { return Providers.FirstOrDefault(p => new string[] {"77", "FA", "LI", "TL"}.Contains(p.Name.Type.Identifier)); } }
-        public Provider ReferringProvider { get { return Providers.FirstOrDefault(p => p.Name.Type.Identifier == "DN" || p.Name.Type.Identifier == "P3"); } }
+        public Provider AttendingProvider => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "71");
+
+        public Provider OperatingPhysician => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "72");
+
+        public Provider OtherOperatingPhysician => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "ZZ");
+
+        public Provider RenderingProvider => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "82");
+
+        public Provider ServiceFacilityLocation => this.Providers.FirstOrDefault(p => new[] {"77", "FA", "LI", "TL"}.Contains(p.Name.Type.Identifier));
+
+        public Provider ReferringProvider => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "DN" || p.Name.Type.Identifier == "P3");
 
         #endregion
 
         #region Serialization Methods
         public string Serialize()
         {
-            StringWriter writer = new StringWriter();
+            var writer = new StringWriter();
             new XmlSerializer(typeof(Claim)).Serialize(writer, this);
             return writer.ToString();
         }
 
         public static Claim Deserialize(string xml)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Claim));
+            var serializer = new XmlSerializer(typeof(Claim));
             return (Claim)serializer.Deserialize(new StringReader(xml));
         }
         #endregion

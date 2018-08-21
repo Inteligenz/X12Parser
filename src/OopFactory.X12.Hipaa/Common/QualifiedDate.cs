@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System;
+    using System.Xml.Serialization;
+
     public class QualifiedDate
     {
         [XmlAttribute]
@@ -16,6 +13,5 @@ namespace OopFactory.X12.Hipaa.Common
 
         [XmlText]
         public string Description { get; set; }
-
     }
 }

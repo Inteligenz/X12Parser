@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     public class InstitutionalProcedure
     {
         [XmlAttribute]
-        public bool IsPrincipal
-        {
-            get { return new string[] { "BBR", "BR", "CAH" }.Contains(Qualifier); }
-            set { }
-        }
+        public bool IsPrincipal => new[] { "BBR", "BR", "CAH" }.Contains(this.Qualifier);
 
         [XmlAttribute]
         public CodeListEnum Version
         {
             get
             {
-                switch (Qualifier)
+                switch (this.Qualifier)
                 {
                     case "BBR":
                     case "BBQ":
@@ -35,7 +30,6 @@ namespace OopFactory.X12.Hipaa.Claims
                         return CodeListEnum.Unknown;
                 }
             }
-            set { }
         }
 
         [XmlAttribute]
@@ -44,7 +38,7 @@ namespace OopFactory.X12.Hipaa.Claims
         [XmlAttribute]
         public string Code { get; set; }
 
-        [XmlAttribute(DataType="date")]
+        [XmlAttribute(DataType = "date")]
         public DateTime Date { get; set; }
     }
 }

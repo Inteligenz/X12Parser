@@ -1,25 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Eligibility
+﻿namespace OopFactory.X12.Hipaa.Eligibility
 {
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     public class EligibilityBenefitInformation
     {
         public EligibilityBenefitInformation()
         {
-            if (Identifications == null) Identifications = new List<Identification>();
-            if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
-            if (Dates == null) Dates = new List<QualifiedDate>();
-            if (DateRanges == null) DateRanges = new List<QualifiedDateRange>();
-            if (Messages == null) Messages = new List<string>();
-            if (RelatedEntities == null) RelatedEntities = new List<RelatedEntity>();
+            if (this.Identifications == null)
+            {
+                this.Identifications = new List<Identification>();
+            }
 
+            if (this.RequestValidations == null)
+            {
+                this.RequestValidations = new List<RequestValidation>();
+            }
+
+            if (this.Dates == null)
+            {
+                this.Dates = new List<QualifiedDate>();
+            }
+
+            if (this.DateRanges == null)
+            {
+                this.DateRanges = new List<QualifiedDateRange>();
+            }
+
+            if (this.Messages == null)
+            {
+                this.Messages = new List<string>();
+            }
+
+            if (this.RelatedEntities == null)
+            {
+                this.RelatedEntities = new List<RelatedEntity>();
+            }
         }
+
         public string ServiceTypeCount { get; set; }
         [XmlIgnore]
         public decimal? Amount { get; set; }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Common
+﻿namespace OopFactory.X12.Hipaa.Common
 {
+    using System.Linq;
+    using System.Xml.Serialization;
+
     public class Provider : Entity
     {
         [XmlAttribute]
@@ -13,12 +10,15 @@ namespace OopFactory.X12.Hipaa.Common
         {
             get
             {
-                if (Name != null && Name.Identification != null && Name.Identification.Qualifier == "XX")
-                    return Name.Identification.Id;
+                if (this.Name?.Identification != null && this.Name.Identification.Qualifier == "XX")
+                {
+                    return this.Name.Identification.Id;
+                }
                 else
-                    return GetReferenceId("HPI");
+                {
+                    return this.GetReferenceId("HPI");
+                }
             }
-            set { }
         }
 
         [XmlAttribute]
@@ -26,19 +26,17 @@ namespace OopFactory.X12.Hipaa.Common
         {
             get
             {
-                if (Name != null && Name.Identification != null && new string[] { "FI", "24" }.Contains(Name.Identification.Qualifier) )
-                    return Name.Identification.Id;
+                if (this.Name?.Identification != null 
+                    && new[] { "FI", "24" }.Contains(this.Name.Identification.Qualifier))
+                {
+                    return this.Name.Identification.Id;
+                }
                 else
                 {
-                    var taxId = GetReferenceId("EI");
-                    if (taxId != null)
-                        return taxId;
-                    else
-                        return GetReferenceId("TJ");
-
+                    var taxId = this.GetReferenceId("EI");
+                    return taxId ?? this.GetReferenceId("TJ");
                 }
             }
-            set { }
         }
 
         [XmlAttribute]
@@ -46,12 +44,16 @@ namespace OopFactory.X12.Hipaa.Common
         {
             get
             {
-                if (Name != null && Name.Identification != null && Name.Identification.Qualifier == "SV")
-                    return Name.Identification.Id;
+                if (this.Name?.Identification != null
+                    && this.Name.Identification.Qualifier == "SV")
+                {
+                    return this.Name.Identification.Id;
+                }
                 else
+                {
                     return null;
+                }
             }
-            set { }
         }
 
         public ProviderInformation ProviderInfo { get; set; }

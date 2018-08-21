@@ -55,7 +55,7 @@ IEA*1*000000031~
         public void Read270Test()
         {
             X12Parser parser = new X12Parser();
-            Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(inquiry))).First();
+            Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(this.inquiry))).First();
 
             Assert.AreEqual("9088877320000  ", interchange.InterchangeReceiverId);
 

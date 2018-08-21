@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Eligibility
+﻿namespace OopFactory.X12.Hipaa.Eligibility
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
     [XmlRoot(Namespace = "http://www.oopfactory.com/2011/XSL/Hipaa")]
     public class EligibilityBenefitDocument
     {
         public EligibilityBenefitDocument()
         {
-            if (EligibilityBenefitInquiries == null) EligibilityBenefitInquiries = new List<EligibilityBenefitInquiry>();
-            if (EligibilityBenefitResponses == null) EligibilityBenefitResponses = new List<EligibilityBenefitResponse>();
-            if (RequestValidations == null) RequestValidations = new List<RequestValidation>();
+            if (this.EligibilityBenefitInquiries == null)
+            {
+                this.EligibilityBenefitInquiries = new List<EligibilityBenefitInquiry>();
+            }
+
+            if (this.EligibilityBenefitResponses == null)
+            {
+                this.EligibilityBenefitResponses = new List<EligibilityBenefitResponse>();
+            }
+
+            if (this.RequestValidations == null)
+            {
+                this.RequestValidations = new List<RequestValidation>();
+            }
         }
 
         [XmlElement(ElementName="EligibilityBenefitInquiry")]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
     public class UB04PatientAddress
     {
@@ -12,6 +7,5 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
         public string c_State { get; set; }
         public string d_PostalCode { get; set; }
         public string e_CountryCode { get; set; }
-
     }
 }

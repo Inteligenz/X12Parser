@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Eligibility
+﻿namespace OopFactory.X12.Hipaa.Eligibility
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
     [XmlRoot(Namespace = "http://www.oopfactory.com/2011/XSL/Hipaa")]
     public class EligibilityBenefitResponse : EligibilityBenefitBase
     {
         public EligibilityBenefitResponse()
         {
-            if (BenefitInfos == null) BenefitInfos = new List<EligibilityBenefitInformation>();
+            if (this.BenefitInfos == null)
+            {
+                this.BenefitInfos = new List<EligibilityBenefitInformation>();
+            }
         }
 
         [XmlAttribute]
         public string TransactionControlNumber { get; set; }
-
-
+        
         [XmlElement(ElementName = "BenefitInfo")]
         public List<EligibilityBenefitInformation> BenefitInfos { get; set; }
-
-
-
+        
         #region Serialization Methods
         public string Serialize()
         {

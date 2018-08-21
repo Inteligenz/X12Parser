@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Professional
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
     public class HCFA1500Claim
     {
         /*

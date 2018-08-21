@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
+﻿namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 {
+    using OopFactory.X12.Hipaa.Common;
+
     public class UB04OccurrenceSpan
     {
         public string Code { get; set; }
@@ -14,18 +10,17 @@ namespace OopFactory.X12.Hipaa.Claims.Forms.Institutional
 
         public UB04OccurrenceSpan CopyFrom(CodedDate source)
         {
-            Code = source.Code;
-            FromDate = String.Format("{0:MMddyy}", source.Date);
+            this.Code = source.Code;
+            this.FromDate = string.Format("{0:MMddyy}", source.Date);
             return this;
         }
 
         public UB04OccurrenceSpan CopyFrom(CodedDateRange source)
         {
-            Code = source.Code;
-            FromDate = String.Format("{0:MMddyy}", source.FromDate);
-            ThroughDate = String.Format("{0:MMddyy}", source.ThroughDate);
+            this.Code = source.Code;
+            this.FromDate = string.Format("{0:MMddyy}", source.FromDate);
+            this.ThroughDate = string.Format("{0:MMddyy}", source.ThroughDate);
             return this;
         }
- 
     }
 }

@@ -1,18 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using OopFactory.X12.Hipaa.Common;
-
-namespace OopFactory.X12.Hipaa.Claims
+﻿namespace OopFactory.X12.Hipaa.Claims
 {
+    using System.Xml.Serialization;
+
+    using OopFactory.X12.Hipaa.Common;
+
+    /// <summary>
+    /// Represents information associated with a submitter
+    /// </summary>
     public class SubmitterInfo
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubmitterInfo"/> class
+        /// </summary>
         public SubmitterInfo()
         {
-            if (Providers == null) Providers = new Provider();
+            if (this.Providers == null)
+            {
+                this.Providers = new Provider();
+            }
         }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Provider"/> for the submitter
+        /// </summary>
         [XmlElement(ElementName = "Provider")]
         public Provider Providers { get; set; }
     }
