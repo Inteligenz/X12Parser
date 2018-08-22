@@ -1,17 +1,20 @@
 ﻿namespace OopFactory.X12.Sql
 {
-	using System;
+    using System;
 
-	public static class TypeExtensions
-	{
-		public static object GetDefaultValue(this Type t)
-		{
-            if (t.IsValueType)
-            {
-                return Activator.CreateInstance(t);
-            }
-
-			return null;
-		}
-	}
+    /// <summary>
+    /// Collection of common <see cref="Type"/> extensions
+    /// </summary>
+    public static class TypeExtensions
+    {
+        /// <summary>
+        /// Creates a default instance if value type
+        /// </summary>
+        /// <param name="t">Object to create instance of</param>
+        /// <returns>New instance if value type; otherwise, null</returns>
+        public static object GetDefaultValue(this Type t)
+        {
+            return t.IsValueType ? Activator.CreateInstance(t) : null;
+        }
+    }
 }
