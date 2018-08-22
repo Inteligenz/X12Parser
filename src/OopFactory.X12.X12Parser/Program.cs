@@ -9,15 +9,16 @@
 
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
-    using OopFactory.X12.Specifications.Interfaces;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            int maxBatchSize = 10 * 1012 * 1012; // 10 Mbytes
+            int maxBatchSize = 10 * 1024 * 1024;
             if (ConfigurationManager.AppSettings["MaxBatchSize"] != null)
+            {
                 maxBatchSize = Convert.ToInt32(ConfigurationManager.AppSettings["MaxBatchSize"]);
+            }
 
             bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
             
@@ -25,9 +26,9 @@
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
             var parser = new X12Parser(throwException);
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
+            parser.ParserWarning += Parser_ParserWarning;
             
-            byte[] header = new byte[6];
+            var header = new byte[6];
             using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
             {
                 // peak at first 6 characters to determine if this is a unicode file
@@ -49,11 +50,12 @@
                             interchanges.First().Serialize(outputFs);
                         }
                     }
+
                     if (interchanges.Count > 1)
                     {
                         for (int i = 1; i < interchanges.Count; i++)
                         {
-                            outputFilename = string.Format("{0}_{1}.xml", args.Length > 1 ? args[1] : x12Filename, i + 1);
+                            outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i + 1}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
                                 interchanges[i].Serialize(outputFs);
@@ -81,7 +83,7 @@
                         }
                         else
                         {
-                            outputFilename = string.Format("{0}_{1}.xml", args.Length > 1 ? args[1] : x12Filename, i++);
+                            outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
                                 parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
@@ -93,8 +95,8 @@
                         nextTransaction = reader.ReadNextTransaction();
                     }
 
-                    outputFilename = string.Format("{0}_{1}.xml", args.Length > 1 ? args[1] : x12Filename, i++);
-                    using (FileStream outputFs = new FileStream(outputFilename, FileMode.Create))
+                    outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
+                    using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                     {
                         parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
                     }

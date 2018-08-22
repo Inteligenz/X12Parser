@@ -1,45 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-
-using OopFactory.X12.Parsing;
-using OopFactory.X12.Specifications;
-using OopFactory.X12.Specifications.Enumerations;
-using OopFactory.X12.Specifications.Finders;
-using OopFactory.X12.Specifications.Interfaces;
-using OopFactory.X12.Validation.Model;
-
-namespace OopFactory.X12.Validation
+﻿namespace OopFactory.X12.Validation
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Specifications;
+    using OopFactory.X12.Specifications.Enumerations;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Specifications.Interfaces;
+    using OopFactory.X12.Validation.Model;
+
     public class X12AcknowledgmentService
     {
-        ISpecificationFinder _specFinder;
-        private char[] _ignoredChars;
-                
+        private readonly ISpecificationFinder specFinder;
+        private readonly char[] ignoredChars;
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12AcknowledgmentService"/> class
+        /// </summary>
+        /// <param name="specFinder">Specification finder for obtaining X12 parsing details</param>
+        /// <param name="ignoredChars">Ignored characters in the X12 document</param>
         public X12AcknowledgmentService(ISpecificationFinder specFinder, char[] ignoredChars)
         {
-            _specFinder = specFinder;
-            _ignoredChars = ignoredChars;
+            this.specFinder = specFinder;
+            this.ignoredChars = ignoredChars;
         }
 
-        public X12AcknowledgmentService(ISpecificationFinder specFinder) : this(specFinder, new char[] { }) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12AcknowledgmentService"/> class
+        /// </summary>
+        /// <param name="specFinder">Specification finder for obtaining X12 parsing details</param>
+        public X12AcknowledgmentService(ISpecificationFinder specFinder)
+            : this(specFinder, new char[] { })
+        {
+        }
 
-        public X12AcknowledgmentService(char[] ignoredChars) : this(new SpecificationFinder(), ignoredChars) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12AcknowledgmentService"/> class
+        /// </summary>
+        /// <param name="ignoredChars">Ignored characters in the X12 document</param>
+        public X12AcknowledgmentService(char[] ignoredChars)
+            : this(new SpecificationFinder(), ignoredChars)
+        {
+        }
 
-        public X12AcknowledgmentService() : this(new SpecificationFinder(), new char[] { }) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12AcknowledgmentService"/> class
+        /// </summary>
+        public X12AcknowledgmentService()
+            : this(new SpecificationFinder(), new char[] { })
+        {
+        }
 
         public List<FunctionalGroupResponse> AcknowledgeTransactions(Stream x12Stream)
         {
-            return AcknowledgeTransactions(x12Stream, Encoding.UTF8);
-        }        
+            return this.AcknowledgeTransactions(x12Stream, Encoding.UTF8);
+        }
 
         public virtual List<FunctionalGroupResponse> AcknowledgeTransactions(Stream x12Stream, Encoding encoding)
         {
             var responses = new Dictionary<string,FunctionalGroupResponse>();
 
-            using (var reader = new X12StreamReader(x12Stream, encoding, _ignoredChars))
+            using (var reader = new X12StreamReader(x12Stream, encoding, this.ignoredChars))
             {
                 var trans = reader.ReadNextTransaction();
                 while (!string.IsNullOrEmpty(trans.Transactions.First()))
@@ -52,22 +77,24 @@ namespace OopFactory.X12.Validation
 
                     if (!responses.ContainsKey(groupControlNumber))
                     {
-                        responses.Add(groupControlNumber, new FunctionalGroupResponse
-                        {
-                            SenderIdQualifier = isaElements[5],
-                            SenderId = isaElements[6],
-                            FunctionalIdCode = functionalIdentifierCode,
-                            GroupControlNumber = groupControlNumber,
-                            VersionIdentifierCode = versionIdentifierCode
-                        });
+                        responses.Add(
+                            groupControlNumber,
+                            new FunctionalGroupResponse
+                                {
+                                    SenderIdQualifier = isaElements[5],
+                                    SenderId = isaElements[6],
+                                    FunctionalIdCode = functionalIdentifierCode,
+                                    GroupControlNumber = groupControlNumber,
+                                    VersionIdentifierCode = versionIdentifierCode
+                                });
                     }
+
                     var groupResponse = responses[groupControlNumber];
-                    var response = AcknowledgeTransaction(reader, functionalIdentifierCode, versionIdentifierCode, trans.Transactions[0]);
+                    var response = this.AcknowledgeTransaction(reader, functionalIdentifierCode, versionIdentifierCode, trans.Transactions[0]);
                     groupResponse.TransactionSetResponses.Add(response);
 
                     trans = reader.ReadNextTransaction();
                 }
-                
             }
 
             return responses.Values.ToList();
@@ -82,29 +109,33 @@ namespace OopFactory.X12.Validation
                 TransactionSetControlNumber = stElements[2]
             };
             if (stElements.Length >= 4)
+            {
                 response.ImplementationConventionReference = stElements[3];
+            }
 
-            var transactionSpec = _specFinder.FindTransactionSpec(functionalCode, versionIdentifierCode, response.TransactionSetIdentifierCode);
+            TransactionSpecification transactionSpec = this.specFinder.FindTransactionSpec(
+                functionalCode,
+                versionIdentifierCode,
+                response.TransactionSetIdentifierCode);
 
             if (transactionSpec == null)
             {
-                response.SyntaxErrorCodes.Add("1"); // Transaction Set Not Supported
+                response.SyntaxErrorCodes.Add("1");
                 response.AcknowledgmentCode = AcknowledgmentCodeEnum.R_Rejected;
                 return response;
             }
 
-            #region Validate against transaction specification
-            Stack<ContainerInformation> containers = new Stack<ContainerInformation>();
+            var containers = new Stack<ContainerInformation>();
             var transactionContainer = new ContainerInformation { Spec = transactionSpec };
             containers.Push(transactionContainer);
+            var segmentInfos = new List<SegmentInformation>();
 
-            List<SegmentInformation> segmentInfos = new List<SegmentInformation>();
-            string[] segments = transaction.Split(new char[] { reader.Delimiters.SegmentTerminator }, StringSplitOptions.RemoveEmptyEntries);
+            string[] segments = transaction.Split(new[] { reader.Delimiters.SegmentTerminator }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < segments.Length; i++)
             {
                 string[] elements = segments[i].Split(reader.Delimiters.ElementSeparator);
                 var segmentInfo = new SegmentInformation { SegmentId = elements[0], SegmentPosition = i + 1, Elements = elements };
-                segmentInfo.Spec = _specFinder.FindSegmentSpec(versionIdentifierCode, segmentInfo.SegmentId);
+                segmentInfo.Spec = this.specFinder.FindSegmentSpec(versionIdentifierCode, segmentInfo.SegmentId);
                 segmentInfos.Add(segmentInfo);
 
                 ContainerInformation currentContainer = containers.Peek();
@@ -113,22 +144,26 @@ namespace OopFactory.X12.Validation
                 {
                     case "ST":
                     case "SE":
-                        segmentInfo.LoopId = "";
+                        segmentInfo.LoopId = string.Empty;
                         transactionContainer.Segments.Add(segmentInfo);
                         break;
                     case "HL":
                         string hlNumber = segmentInfo.Elements[1];
                         string hlParentNumber = segmentInfo.Elements[2];
                         string hlLevelCode = segmentInfo.Elements[3];
-                        var hlSpec = transactionSpec.HierarchicalLoopSpecifications.FirstOrDefault(hls => hls.LevelCode == hlLevelCode);
+                        HierarchicalLoopSpecification hlSpec = transactionSpec.HierarchicalLoopSpecifications.FirstOrDefault(hls => hls.LevelCode == hlLevelCode);
                         if (hlSpec != null)
                         {
                             while (!(containers.Peek().Spec is TransactionSpecification))
                             {
                                 if (containers.Peek().HLoopNumber == hlParentNumber)
+                                {
                                     break;
+                                }
+
                                 containers.Pop();
                             }
+
                             segmentInfo.LoopId = hlSpec.LoopId;
                             var hlContainer = new ContainerInformation { Spec = hlSpec, HLoopNumber = hlNumber };
                             hlContainer.Segments.Add(segmentInfo);
@@ -137,10 +172,10 @@ namespace OopFactory.X12.Validation
                         }
                         else
                         {
-                            response.SegmentErrors.Add(CreateDataElementError(segmentInfo, 3, "I6", hlLevelCode)); //Code Value Not Used in Implementation
+                            response.SegmentErrors.Add(this.CreateDataElementError(segmentInfo, 3, "I6", hlLevelCode));
                             response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
-                            return response; // end validation if HL cannot be recognized since hl spec will not be available
                         }
+
                         break;
                     default:
                         bool matchFound = false;
@@ -150,9 +185,11 @@ namespace OopFactory.X12.Validation
 
                             if (matchingLoopSpecs.Count > 0)
                             {
-                                IContainerSpecification matchingLoopSpec = null;
+                                IContainerSpecification matchingLoopSpec;
                                 if (matchingLoopSpecs.Count == 1)
+                                {
                                     matchingLoopSpec = matchingLoopSpecs.First();
+                                }
                                 else
                                 {
                                     string entityCode = elements[1];
@@ -170,7 +207,7 @@ namespace OopFactory.X12.Validation
                                 }
                                 else
                                 {
-                                    response.SegmentErrors.Add(CreateSegmentError(segmentInfo, "6")); //Segment Not in Defined Transaction Set
+                                    response.SegmentErrors.Add(this.CreateSegmentError(segmentInfo, "6"));
                                     response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
                                     return response;
                                 }
@@ -185,9 +222,9 @@ namespace OopFactory.X12.Validation
                             {
                                 if (currentContainer.Spec is TransactionSpecification)
                                 {
-                                    response.SegmentErrors.Add(CreateSegmentError(segmentInfo, "2")); // Unexpected segment
+                                    response.SegmentErrors.Add(this.CreateSegmentError(segmentInfo, "2")); 
                                     response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
-                                    return response; // end validation if unrecognized segment encountered (cannot guarantee we are pointing at correct container)
+                                    return response; 
                                 }
                                 else
                                 {
@@ -195,47 +232,57 @@ namespace OopFactory.X12.Validation
                                     currentContainer = containers.Peek();
                                 }
                             }
-                        } while (!matchFound);
+                        }
+                        while (!matchFound);
+
                         break;
                 }
-                response.SegmentErrors.AddRange(ValidateSegmentAgainstSpec(segmentInfo));
+
+                response.SegmentErrors.AddRange(this.ValidateSegmentAgainstSpec(segmentInfo));
             }
 
-            response.SegmentErrors.AddRange(ValidateContainerAgainstSpec(transactionContainer));
-
-            #endregion
-
-            #region Validate transaction trailer
+            response.SegmentErrors.AddRange(this.ValidateContainerAgainstSpec(transactionContainer));
+            
             var trailerSegment = segmentInfos.FirstOrDefault(si => si.SegmentId == "SE");
             if (trailerSegment == null)
             {
-                response.SyntaxErrorCodes.Add("2"); //Transaction Set Trailer Missing
+                response.SyntaxErrorCodes.Add("2");
             }
             else
             {
                 if (trailerSegment.Elements.Length <= 2 || trailerSegment.Elements[2] != response.TransactionSetControlNumber)
-                    response.SyntaxErrorCodes.Add("3"); // Transaction Set Control Number in Header and Trailer Do Not Match
+                {
+                    response.SyntaxErrorCodes.Add("3");
+                }
 
                 if (trailerSegment.Elements.Length >= 2)
                 {
                     int segmentCount;
                     int.TryParse(trailerSegment.Elements[1], out segmentCount);
                     if (segmentCount != segmentInfos.Count)
-                        response.SyntaxErrorCodes.Add("4"); // Number of Included Segments Does Not Match Actual Count
+                    {
+                        response.SyntaxErrorCodes.Add("4");
+                    }
                 }
                 else
-                    response.SyntaxErrorCodes.Add("4"); // Number of Included Segments Does Not Match Actual Count
+                {
+                    response.SyntaxErrorCodes.Add("4");
+                }
             }
-
-            #endregion
 
             if (response.SegmentErrors.Count > 0 || response.SyntaxErrorCodes.Count > 0)
             {
                 if (response.SegmentErrors.Count > 0)
-                    response.SyntaxErrorCodes.Add("5"); //One or More Segments in Error
+                {
+                    response.SyntaxErrorCodes.Add("5");
+                }
+
                 if (response.AcknowledgmentCode == AcknowledgmentCodeEnum.A_Accepted)
+                {
                     response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
+                }
             }
+
             return response;
         }
 
@@ -247,17 +294,22 @@ namespace OopFactory.X12.Validation
             {
                 if (!container.Segments.Exists(s => s.SegmentId == segmentSpec.SegmentId))
                 {
-                    errors.Add(CreateSegmentError(new SegmentInformation {
-                        SegmentId = segmentSpec.SegmentId,
-                        LoopId = container.Spec.LoopId,
-                        SegmentPosition = container.Segments.Count > 0 ? container.Segments.First().SegmentPosition : 0},
-                        "3")); // Required segment is missing
+                    errors.Add(this.CreateSegmentError(
+                        new SegmentInformation
+                        { 
+                            SegmentId = segmentSpec.SegmentId,
+                            LoopId = container.Spec.LoopId,
+                            SegmentPosition = container.Segments.Count > 0 ? container.Segments.First().SegmentPosition : 0
+                        },
+                        "3"));
                 }
 
                 if (segmentSpec.Repeat > 0 && container.Segments.Count(s => s.SegmentId == segmentSpec.SegmentId) > segmentSpec.Repeat)
                 {
-                    errors.Add(CreateSegmentError(container.Segments.Last(s=>s.SegmentId == segmentSpec.SegmentId),
-                        "5")); // Segment Exceeds Maximum Use
+                    errors.Add(
+                        this.CreateSegmentError(
+                            container.Segments.Last(s => s.SegmentId == segmentSpec.SegmentId),
+                            "5"));
                 }
             }
 
@@ -265,25 +317,31 @@ namespace OopFactory.X12.Validation
             {
                 if (!container.Containers.Exists(c => c.Spec.LoopId == loopSpec.LoopId))
                 {
-                    errors.Add(CreateSegmentError(new SegmentInformation
-                    {
-                        SegmentId = loopSpec.StartingSegment.SegmentId,
-                        LoopId = container.Spec.LoopId,
-                        SegmentPosition = container.Segments.Count > 0 ? container.Segments.Last().SegmentPosition : 0
-                    }, "I7")); // Implementation Loop Occurs Under Minimum Times
+                    errors.Add(
+                        this.CreateSegmentError(
+                            new SegmentInformation
+                                {
+                                    SegmentId = loopSpec.StartingSegment.SegmentId,
+                                    LoopId = container.Spec.LoopId,
+                                    SegmentPosition = container.Segments.Count > 0 ? container.Segments.Last().SegmentPosition : 0
+                                },
+                                "I7"));
                 }
 
                 if (loopSpec.LoopRepeat > 0 && container.Containers.Count(c => c.Spec.LoopId == loopSpec.LoopId) > loopSpec.LoopRepeat)
                 {
-                    errors.Add(CreateSegmentError(container.Containers.Last(c=>c.Spec.LoopId == loopSpec.LoopId).Segments.First(),
-                        "4")); // Loop Occurs Over Maximum Times
+                    errors.Add(
+                        this.CreateSegmentError(
+                            container.Containers.Last(c => c.Spec.LoopId == loopSpec.LoopId).Segments.First(),
+                            "4"));
                 }
             }
 
             foreach (var childContainer in container.Containers)
             {
-                errors.AddRange(ValidateContainerAgainstSpec(childContainer));
+                errors.AddRange(this.ValidateContainerAgainstSpec(childContainer));
             }
+
             return errors;
         }
 
@@ -300,32 +358,35 @@ namespace OopFactory.X12.Validation
                     {
                         string element = segmentInfo.Elements[iSpec + 1];
 
-                        if (element == "" && elementSpec.Required)
-                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
+                        if (string.IsNullOrEmpty(element) && elementSpec.Required)
+                        {
+                            errors.Add(this.CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
+                        }
                         else if (element.Length < elementSpec.MinLength && (elementSpec.Required || element.Length > 0))
                         {
-                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "4", element));
+                            errors.Add(this.CreateDataElementError(segmentInfo, iSpec + 1, "4", element));
                         }
                         else if (element.Length > elementSpec.MaxLength && elementSpec.MaxLength > 0)
                         {
-                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "5", element));
+                            errors.Add(this.CreateDataElementError(segmentInfo, iSpec + 1, "5", element));
                         }
-                        
                     }
                     else
                     {
-                        if (elementSpec.Required) // required element is missing from segment
-                            errors.Add(CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
-
+                        if (elementSpec.Required)
+                        {
+                            errors.Add(this.CreateDataElementError(segmentInfo, iSpec + 1, "1", null));
+                        }
                     }
                 }
 
                 if (segmentInfo.Elements.Length - 1 > segmentInfo.Spec.Elements.Count)
                 {
                     int elementPosition = segmentInfo.Spec.Elements.Count + 1;
-                    errors.Add(CreateDataElementError(segmentInfo, elementPosition, "3", segmentInfo.Elements[elementPosition]));
+                    errors.Add(this.CreateDataElementError(segmentInfo, elementPosition, "3", segmentInfo.Elements[elementPosition]));
                 }
             }
+
             return errors;            
         }
 

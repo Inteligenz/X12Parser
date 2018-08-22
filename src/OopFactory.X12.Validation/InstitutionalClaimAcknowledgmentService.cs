@@ -4,6 +4,9 @@
 
     public class InstitutionalClaimAcknowledgmentService : X12AcknowledgmentService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InstitutionalClaimAcknowledgmentService"/> class
+        /// </summary>
         public InstitutionalClaimAcknowledgmentService()
             : base(new InstitutionalClaimSpecificationFinder())
         {

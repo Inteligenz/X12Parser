@@ -2,16 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-    using System.IO;
 
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
 
-    class Program
+    /// <summary>
+    /// Primary driver for the UnbundleX12 library
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main entry point for the driver
+        /// </summary>
+        /// <param name="args">Additional arguments for program options</param>
+        public static void Main(string[] args)
         {
             var opts = new ExecutionOptions();
             try
@@ -24,41 +31,42 @@
                 return;
             }
 
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             
             foreach (var filename in Directory.GetFiles(opts.InputDirectory, opts.FilenamePattern))
             {
-                FileInfo inputFile = new FileInfo(filename);
-                List<Interchange> list = new List<Interchange>();
-                using (FileStream fs = new FileStream(inputFile.FullName, FileMode.Open, FileAccess.Read))
+                var inputFile = new FileInfo(filename);
+                var list = new List<Interchange>();
+
+                using (var fs = new FileStream(inputFile.FullName, FileMode.Open, FileAccess.Read))
                 {
-                    X12StreamReader reader = new X12StreamReader(fs, Encoding.UTF8);
+                    var reader = new X12StreamReader(fs, Encoding.UTF8);
                     X12FlatTransaction transaction = reader.ReadNextTransaction();
                     while (!string.IsNullOrEmpty(transaction.Transactions.First()))
                     {
                         string x12 = transaction.ToString();
-                        var interchange = parser.ParseMultiple(x12).First();
+                        Interchange interchange = parser.ParseMultiple(x12).First();
                         if (opts.LoopId == "ST")
+                        {
                             list.Add(interchange);
+                        }
                         else
                         {
                             list.AddRange(parser.UnbundleByLoop(interchange, opts.LoopId));
                         }
+
                         transaction = reader.ReadNextTransaction();
                     }
                 }
-                List<Interchange> interchanges = parser.ParseMultiple(new FileStream(filename, FileMode.Open, FileAccess.Read));
+                
                 for (int i = 0; i < list.Count; i++)
                 {
-                    string outputFilename = String.Format(opts.FormatString, opts.OutputDirectory, inputFile.Name, i + 1, inputFile.Extension);
-                    using (FileStream outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                    string outputFilename = string.Format(opts.FormatString, opts.OutputDirectory, inputFile.Name, i + 1, inputFile.Extension);
+                    
+                    using (var outputFilestream = new FileStream(outputFilename, FileMode.Create, FileAccess.Write))
+                    using (var writer = new StreamWriter(outputFilestream))
                     {
-                        using (StreamWriter writer = new StreamWriter(outputFilestream))
-                        {
-                            writer.Write(list[i].SerializeToX12(opts.IncludeWhitespace));
-                            writer.Close();
-                        }
-                        outputFilestream.Close();
+                        writer.Write(list[i].SerializeToX12(opts.IncludeWhitespace));
                     }
                 }
             }

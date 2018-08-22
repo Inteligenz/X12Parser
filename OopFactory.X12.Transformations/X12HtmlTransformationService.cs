@@ -1,8 +1,7 @@
 ﻿namespace OopFactory.X12.Transformations
 {
-    using System.Xml.Xsl;
     using System.Xml;
-    using System.Reflection;
+    using System.Xml.Xsl;
 
     public class X12HtmlTransformationService : X12TransformationService
     {
