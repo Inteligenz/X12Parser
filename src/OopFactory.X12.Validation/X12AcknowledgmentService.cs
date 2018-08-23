@@ -13,7 +13,7 @@
     using OopFactory.X12.Validation.Model;
 
     /// <summary>
-    /// Provides something interesting
+    /// Provides X12 acknowledgment
     /// </summary>
     public class X12AcknowledgmentService
     {
