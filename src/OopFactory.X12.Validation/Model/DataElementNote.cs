@@ -2,32 +2,45 @@
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents the IK40X note
+    /// </summary>
     public class DataElementNote
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataElementNote"/> class
+        /// </summary>
         public DataElementNote()
         {
-            if (ContextErrors == null) ContextErrors = new List<ContextError>();
+            if (this.ContextErrors == null)
+            {
+                this.ContextErrors = new List<ContextError>();
+            }
         }
+
         /// <summary>
-        /// IK401
+        /// Gets or sets IK401
         /// </summary>
         public PositionInSegment PositionInSegment { get; set; }
 
         /// <summary>
-        /// IK402
+        /// Gets or sets IK402
         /// </summary>
         public string DataElementReferenceNumber { get; set; }
 
         /// <summary>
-        /// IK403
+        /// Gets or sets IK403
         /// </summary>
         public string SyntaxErrorCode { get; set; }
 
         /// <summary>
-        /// IK404
+        /// Gets or sets IK404
         /// </summary>
         public string CopyOfBadElement { get; set; }
         
+        /// <summary>
+        /// Gets or sets the collection of <see cref="ContextError"/> references
+        /// </summary>
         public List<ContextError> ContextErrors { get; set; }
     }
 }

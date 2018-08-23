@@ -1,19 +1,22 @@
 ﻿namespace OopFactory.X12.Validation.Model
 {
+    /// <summary>
+    /// A collection of positions in a segment
+    /// </summary>
     public class PositionInSegment
     {
         /// <summary>
-        /// 1
+        /// Gets or sets the first position in a Segment
         /// </summary>
         public int? ElementPositionInSegment { get; set; }
 
         /// <summary>
-        /// 3
+        /// Gets or sets the second position in a Segment
         /// </summary>
         public int? ComponentDataElementPositionInComposite { get; set; }
 
         /// <summary>
-        /// 3
+        /// Gets or sets the third position in a Segment
         /// </summary>
         public int? RepeatingDataElementPosition { get; set; }
     }

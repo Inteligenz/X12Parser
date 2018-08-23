@@ -4,19 +4,30 @@
 
     public class FunctionalGroupResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FunctionalGroupResponse"/> class
+        /// </summary>
         public FunctionalGroupResponse()
         {
-            if (TransactionSetResponses == null)
-                TransactionSetResponses = new List<TransactionSetResponse>();
-            if (SyntaxErrorCodes == null)
-                SyntaxErrorCodes = new List<string>();
+            if (this.TransactionSetResponses == null)
+            {
+                this.TransactionSetResponses = new List<TransactionSetResponse>();
+            }
+
+            if (this.SyntaxErrorCodes == null)
+            {
+                this.SyntaxErrorCodes = new List<string>();
+            }
         }
 
         public string SenderIdQualifier { get; set; }
+
         public string SenderId { get; set; }
 
         public string FunctionalIdCode { get; set; }
+
         public string GroupControlNumber { get; set; }
+
         public string VersionIdentifierCode { get; set; }
 
         public List<TransactionSetResponse> TransactionSetResponses { get; set; }

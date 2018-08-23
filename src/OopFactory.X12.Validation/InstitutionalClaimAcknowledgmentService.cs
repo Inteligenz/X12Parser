@@ -2,6 +2,9 @@
 {
     using OopFactory.X12.Specifications.Finders;
 
+    /// <summary>
+    /// Represents the institutional claims extension of the <see cref="X12AcknowledgmentService"/>
+    /// </summary>
     public class InstitutionalClaimAcknowledgmentService : X12AcknowledgmentService
     {
         /// <summary>

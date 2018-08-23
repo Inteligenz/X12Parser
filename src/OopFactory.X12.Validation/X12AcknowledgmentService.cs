@@ -1,6 +1,5 @@
 ﻿namespace OopFactory.X12.Validation
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -13,6 +12,9 @@
     using OopFactory.X12.Specifications.Interfaces;
     using OopFactory.X12.Validation.Model;
 
+    /// <summary>
+    /// Provides something interesting
+    /// </summary>
     public class X12AcknowledgmentService
     {
         private readonly ISpecificationFinder specFinder;
@@ -55,18 +57,29 @@
         {
         }
 
+        /// <summary>
+        /// Builds a collection of <see cref="FunctionalGroupResponse"/> objects from Transactions
+        /// </summary>
+        /// <param name="x12Stream">Stream containing X12 Transactions</param>
+        /// <returns>Collection of <see cref="FunctionalGroupResponse"/> objects</returns>
         public List<FunctionalGroupResponse> AcknowledgeTransactions(Stream x12Stream)
         {
             return this.AcknowledgeTransactions(x12Stream, Encoding.UTF8);
         }
 
+        /// <summary>
+        /// Builds a collection of <see cref="FunctionalGroupResponse"/> objects from Transactions
+        /// </summary>
+        /// <param name="x12Stream">Stream containing X12 Transactions</param>
+        /// <param name="encoding">Stream encoding for proper reading</param>
+        /// <returns>Collection of <see cref="FunctionalGroupResponse"/> objects</returns>
         public virtual List<FunctionalGroupResponse> AcknowledgeTransactions(Stream x12Stream, Encoding encoding)
         {
-            var responses = new Dictionary<string,FunctionalGroupResponse>();
+            var responses = new Dictionary<string, FunctionalGroupResponse>();
 
             using (var reader = new X12StreamReader(x12Stream, encoding, this.ignoredChars))
             {
-                var trans = reader.ReadNextTransaction();
+                X12FlatTransaction trans = reader.ReadNextTransaction();
                 while (!string.IsNullOrEmpty(trans.Transactions.First()))
                 {
                     string[] isaElements = reader.SplitSegment(trans.IsaSegment);
@@ -88,10 +101,9 @@
                                     VersionIdentifierCode = versionIdentifierCode
                                 });
                     }
-
-                    var groupResponse = responses[groupControlNumber];
-                    var response = this.AcknowledgeTransaction(reader, functionalIdentifierCode, versionIdentifierCode, trans.Transactions[0]);
-                    groupResponse.TransactionSetResponses.Add(response);
+                    
+                    TransactionSetResponse response = this.AcknowledgeTransaction(reader, functionalIdentifierCode, versionIdentifierCode, trans.Transactions[0]);
+                    responses[groupControlNumber].TransactionSetResponses.Add(response);
 
                     trans = reader.ReadNextTransaction();
                 }
@@ -130,7 +142,7 @@
             containers.Push(transactionContainer);
             var segmentInfos = new List<SegmentInformation>();
 
-            string[] segments = transaction.Split(new[] { reader.Delimiters.SegmentTerminator }, StringSplitOptions.RemoveEmptyEntries);
+            string[] segments = transaction.Split(new[] { reader.Delimiters.SegmentTerminator }, System.StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < segments.Length; i++)
             {
                 string[] elements = segments[i].Split(reader.Delimiters.ElementSeparator);

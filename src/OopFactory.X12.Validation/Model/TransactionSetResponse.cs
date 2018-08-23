@@ -4,16 +4,26 @@
 
     public class TransactionSetResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionSetResponse"/> class
+        /// </summary>
         public TransactionSetResponse()
         {
-            if (SegmentErrors == null)
-                SegmentErrors = new List<SegmentError>();
-            if (SyntaxErrorCodes == null)
-                SyntaxErrorCodes = new List<string>();
+            if (this.SegmentErrors == null)
+            {
+                this.SegmentErrors = new List<SegmentError>();
+            }
+
+            if (this.SyntaxErrorCodes == null)
+            {
+                this.SyntaxErrorCodes = new List<string>();
+            }
         }
 
         public string TransactionSetIdentifierCode { get; set; }
+
         public string TransactionSetControlNumber { get; set; }
+
         public string ImplementationConventionReference { get; set; }
 
         public List<SegmentError> SegmentErrors { get; set; }

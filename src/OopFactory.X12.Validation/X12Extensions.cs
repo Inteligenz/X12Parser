@@ -8,8 +8,16 @@
     using OopFactory.X12.Shared.Models.TypedSegments;
     using OopFactory.X12.Validation.Model;
 
+    /// <summary>
+    /// Collection of X12 shared model extensions
+    /// </summary>
     public static class X12Extensions
     {
+        /// <summary>
+        /// FunctionGroup extension for adding a 999 Transaction
+        /// </summary>
+        /// <param name="group">FunctionGroup to add transaction to</param>
+        /// <param name="groupResponses">Collection of FunctionGroup responses</param>
         public static void Add999Transaction(this FunctionGroup group, IEnumerable<FunctionalGroupResponse> groupResponses)
         {
             int transactionId = 0;
