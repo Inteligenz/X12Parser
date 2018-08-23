@@ -7,6 +7,9 @@
 
     using OopFactory.X12.Sql.Interfaces;
 
+    /// <summary>
+    /// Represents an Identity provider for int-based identifiers
+    /// </summary>
     public class IntHiLowIdentityProvider : IIdentityProvider
     {
         private readonly IDictionary<string, Identity<int>> ids = new Dictionary<string, Identity<int>>();
@@ -14,6 +17,12 @@
         private readonly string schema;
         private readonly int batchSize;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IntHiLowIdentityProvider"/> class
+        /// </summary>
+        /// <param name="dsn">Data source name</param>
+        /// <param name="schema">Database schema</param>
+        /// <param name="batchSize">Size of batch for chunking</param>
         public IntHiLowIdentityProvider(string dsn, string schema, int batchSize)
         {
             this.dsn = dsn;
@@ -21,21 +30,25 @@
             this.batchSize = batchSize;
         }
 
+        /// <summary>
+        /// Validates the provider's schema and ensures a table exists
+        /// </summary>
         public void EnsureSchema()
         {
             using (var conn = new SqlConnection(this.dsn))
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    var sql = string.Format(@"
-						if not EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[HiLo]') AND type in (N'U'))
-						begin
-						  CREATE TABLE [{0}].HiLo (
-							NextId int not null,
-							[Table] varchar(100) not null
-						  )
-						end", this.schema);
+                    var sql = string.Format(
+@"if not EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[{0}].[HiLo]') AND type in (N'U'))
+begin
+  CREATE TABLE [{0}].HiLo (
+	NextId int not null,
+	[Table] varchar(100) not null
+  )
+end",
+                        this.schema);
 
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
@@ -43,6 +56,12 @@
             }
         }
 
+        /// <summary>
+        /// Obtains the next identifier from the database and returns it
+        /// </summary>
+        /// <param name="schema">Schema of database to retrieve next id from</param>
+        /// <param name="table">Table to get next id from</param>
+        /// <returns>Next id obtained from database</returns>
         public object NextId(string schema, string table)
         {
             if (!this.ids.ContainsKey(table))
@@ -56,8 +75,8 @@
                 return id.NextId++;
             }
 
-            var sql = @"
-				declare @table varchar(100)
+            string sql = 
+                @"declare @table varchar(100)
 				set @table = '[{1}].[{2}]'
 				select @nextId = NextId from [{0}].HiLo with (updlock, rowlock) where lower([table]) = lower(@table)
 				if isnull(@nextId, 0) = 0

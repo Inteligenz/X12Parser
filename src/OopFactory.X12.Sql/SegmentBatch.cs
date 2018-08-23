@@ -15,74 +15,71 @@
 
     internal class SegmentBatch
     {
-        private readonly IParsingErrorRepo _errorRepo;
-        internal Dictionary<string, DataTable> _parsedTables;
-        internal DataTable _segmentTable;
-        internal DataTable _loopTable;
-        private readonly Type _identityType;
-        private readonly object _defaultIdentityTypeValue;
+        private readonly IParsingErrorRepo errorRepo;
+        private readonly Type identityType;
+        private readonly object defaultIdentityTypeValue;
 
         public SegmentBatch(IParsingErrorRepo errorRepo, Type identityType)
         {
-            _identityType = identityType;
-            _defaultIdentityTypeValue = identityType.GetDefaultValue();
-            _errorRepo = errorRepo;
-            _parsedTables = new Dictionary<string, DataTable>();
+            this.identityType = identityType;
+            this.defaultIdentityTypeValue = identityType.GetDefaultValue();
+            this.errorRepo = errorRepo;
+            this.ParsedTables = new Dictionary<string, DataTable>();
 
-            _segmentTable = new DataTable();
-            _segmentTable.Columns.Add("InterchangeId", identityType);
-            _segmentTable.Columns.Add("PositionInInterchange", typeof (int));
-            _segmentTable.Columns.Add("RevisionId", typeof (int));
-            _segmentTable.Columns.Add("FunctionalGroupId", identityType);
-            _segmentTable.Columns.Add("TransactionSetId", identityType);
-            _segmentTable.Columns.Add("ParentLoopId", identityType);
-            _segmentTable.Columns.Add("LoopId", identityType);
-            _segmentTable.Columns.Add("Deleted", typeof (bool));
-            _segmentTable.Columns.Add("SegmentId", typeof (string));
-            _segmentTable.Columns.Add("Segment", typeof (string));
+            this.SegmentTable = new DataTable();
+            this.SegmentTable.Columns.Add("InterchangeId", identityType);
+            this.SegmentTable.Columns.Add("PositionInInterchange", typeof(int));
+            this.SegmentTable.Columns.Add("RevisionId", typeof(int));
+            this.SegmentTable.Columns.Add("FunctionalGroupId", identityType);
+            this.SegmentTable.Columns.Add("TransactionSetId", identityType);
+            this.SegmentTable.Columns.Add("ParentLoopId", identityType);
+            this.SegmentTable.Columns.Add("LoopId", identityType);
+            this.SegmentTable.Columns.Add("Deleted", typeof(bool));
+            this.SegmentTable.Columns.Add("SegmentId", typeof(string));
+            this.SegmentTable.Columns.Add("Segment", typeof(string));
 
-            _loopTable = new DataTable();
-            _loopTable.Columns.Add("Id", identityType);
-            _loopTable.Columns.Add("ParentLoopId", identityType);
-            _loopTable.Columns.Add("InterchangeId", identityType);
-            _loopTable.Columns.Add("TransactionSetId", identityType);
-            _loopTable.Columns.Add("TransactionSetCode", typeof (string));
-            _loopTable.Columns.Add("SpecLoopId", typeof (string));
-            _loopTable.Columns.Add("StartingSegmentId", typeof (string));
-            _loopTable.Columns.Add("EntityIdentifierCode", typeof (string));
+            this.LoopTable = new DataTable();
+            this.LoopTable.Columns.Add("Id", identityType);
+            this.LoopTable.Columns.Add("ParentLoopId", identityType);
+            this.LoopTable.Columns.Add("InterchangeId", identityType);
+            this.LoopTable.Columns.Add("TransactionSetId", identityType);
+            this.LoopTable.Columns.Add("TransactionSetCode", typeof(string));
+            this.LoopTable.Columns.Add("SpecLoopId", typeof(string));
+            this.LoopTable.Columns.Add("StartingSegmentId", typeof(string));
+            this.LoopTable.Columns.Add("EntityIdentifierCode", typeof(string));
         }
 
-        public int LoopCount
-        {
-            get { return _loopTable.Rows.Count; }
-        }
+        internal Dictionary<string, DataTable> ParsedTables { get; set; }
 
-        public int SegmentCount
-        {
-            get { return _segmentTable.Rows.Count; }
-        }
+        internal DataTable SegmentTable { get; set; }
+
+        internal DataTable LoopTable { get; set; }
+
+        public int LoopCount => this.LoopTable.Rows.Count;
+
+        public int SegmentCount => this.SegmentTable.Rows.Count;
 
         public string StartingSegment
         {
             get
             {
-                if (_segmentTable.Rows.Count > 0)
+                if (this.SegmentTable.Rows.Count > 0)
                 {
-                    var firstSegment = _segmentTable.Rows[0];
-                    return string.Format(
-                        "{2} (InterchangeId:{0};Position:{1})",
-                        firstSegment["InterchangeId"],
-                        firstSegment["PositionInInterchange"],
-                        firstSegment["Segment"]);
+                    var firstSegment = this.SegmentTable.Rows[0];
+                    return $"{firstSegment["Segment"]} (InterchangeId:{firstSegment["InterchangeId"]};Position:{firstSegment["PositionInInterchange"]})";
                 }
+
                 return null;
             }
         }
 
+        /// <summary>
+        /// Clears the tables of data
+        /// </summary>
         public void Clear()
         {
-            _parsedTables.Clear();
-            _segmentTable.Clear();
+            this.ParsedTables.Clear();
+            this.SegmentTable.Clear();
         }
 
         public void AddSegment(
@@ -98,7 +95,7 @@
             DetachedSegment segment,
             SegmentSpecification spec)
         {
-            _segmentTable.Rows.Add(
+            this.SegmentTable.Rows.Add(
                 interchangeId,
                 positionInInterchange,
                 revisionId,
@@ -113,33 +110,34 @@
             if (spec != null)
             {
                 var parsingError = new StringBuilder();
-
                 var fieldNames = new List<string>();
-
-                int maxElements = spec != null ? spec.Elements.Count : 0;
+                int maxElements = spec.Elements.Count;
 
                 for (var i = 1; i == 1 || i <= maxElements; i++)
                 {
                     fieldNames.Add(string.Format("{0:00}", i));
                 }
 
-                if (!_parsedTables.ContainsKey(segment.SegmentId))
+                if (!this.ParsedTables.ContainsKey(segment.SegmentId))
                 {
-                    _parsedTables.Add(segment.SegmentId, new DataTable());
-                    _parsedTables[segment.SegmentId].Columns.Add("InterchangeId", _identityType);
-                    _parsedTables[segment.SegmentId].Columns.Add("PositionInInterchange", typeof (int));
-                    _parsedTables[segment.SegmentId].Columns.Add("TransactionSetId", _identityType);
-                    _parsedTables[segment.SegmentId].Columns.Add("ParentLoopId", _identityType);
-                    _parsedTables[segment.SegmentId].Columns.Add("LoopId", _identityType);
-                    _parsedTables[segment.SegmentId].Columns.Add("RevisionId", typeof (int));
-                    _parsedTables[segment.SegmentId].Columns.Add("Deleted", typeof (bool));
+                    this.ParsedTables.Add(segment.SegmentId, new DataTable());
+                    this.ParsedTables[segment.SegmentId].Columns.Add("InterchangeId", this.identityType);
+                    this.ParsedTables[segment.SegmentId].Columns.Add("PositionInInterchange", typeof(int));
+                    this.ParsedTables[segment.SegmentId].Columns.Add("TransactionSetId", this.identityType);
+                    this.ParsedTables[segment.SegmentId].Columns.Add("ParentLoopId", this.identityType);
+                    this.ParsedTables[segment.SegmentId].Columns.Add("LoopId", this.identityType);
+                    this.ParsedTables[segment.SegmentId].Columns.Add("RevisionId", typeof(int));
+                    this.ParsedTables[segment.SegmentId].Columns.Add("Deleted", typeof(bool));
 
-                    foreach (var f in fieldNames)
-                        _parsedTables[segment.SegmentId].Columns.Add(f, typeof (string));
+                    foreach (string f in fieldNames)
+                    {
+                        this.ParsedTables[segment.SegmentId].Columns.Add(f, typeof(string));
+                    }
 
-                    _parsedTables[segment.SegmentId].Columns.Add("ErrorId", _identityType);
+                    this.ParsedTables[segment.SegmentId].Columns.Add("ErrorId", this.identityType);
                 }
-                var row = _parsedTables[segment.SegmentId].NewRow();
+
+                DataRow row = this.ParsedTables[segment.SegmentId].NewRow();
 
                 row["InterchangeId"] = interchangeId;
                 row["PositionInInterchange"] = positionInInterchange;
@@ -176,14 +174,14 @@
 
                         if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
                         {
-                            var intVal = 0;
+                            int intVal;
                             if (string.IsNullOrWhiteSpace(val))
                             {
                                 row[column] = null;
                             }
                             else if (int.TryParse(val, out intVal))
                             {
-                                var denominator = (decimal) Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
+                                var denominator = (decimal)Math.Pow(10, elementSpec.ImpliedDecimalPlaces);
                                 row[column] = intVal / denominator;
                             }
                             else
@@ -204,11 +202,15 @@
                         }
                         else if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
                         {
-                            decimal decVal = 0;
+                            decimal decVal;
                             if (string.IsNullOrWhiteSpace(val))
+                            {
                                 row[column] = null;
+                            }
                             else if (decimal.TryParse(val, out decVal))
+                            {
                                 row[column] = val;
+                            }
                             else
                             {
                                 var message =
@@ -227,15 +229,19 @@
                         else if (elementSpec.Type == ElementDataTypeEnum.Date)
                         {
                             if (string.IsNullOrWhiteSpace(val))
+                            {
                                 row[column] = null;
+                            }
                             else
                             {
-                                var date = DateTime.MinValue;
+                                DateTime date;
                                 if (val.Length == 8 &&
                                     DateTime.TryParse(
-                                        string.Format("{0}-{1}-{2}", val.Substring(0, 4), val.Substring(4, 2), val.Substring(6, 2)),
+                                        $"{val.Substring(0, 4)}-{val.Substring(4, 2)}-{val.Substring(6, 2)}",
                                         out date))
+                                {
                                     row[column] = date;
+                                }
                                 else
                                 {
                                     var message =
@@ -253,7 +259,9 @@
                             }
                         }
                         else
+                        {
                             row[column] = val;
+                        }
                     }
                     catch (Exception e)
                     {
@@ -269,13 +277,15 @@
                 }
 
                 if (parsingError.Length > 0)
-                    row["ErrorId"] = _errorRepo.PersistParsingError(
+                {
+                    row["ErrorId"] = this.errorRepo.PersistParsingError(
                         interchangeId,
                         positionInInterchange,
                         revisionId,
                         parsingError.ToString());
+                }
 
-                _parsedTables[segment.SegmentId].Rows.Add(row);
+                this.ParsedTables[segment.SegmentId].Rows.Add(row);
             }
         }
 
@@ -288,14 +298,14 @@
             object parentLoopId,
             string entityIdentifierCode)
         {
-            var row = _loopTable.NewRow();
+            var row = this.LoopTable.NewRow();
 
             row["Id"] = id;
-            row["ParentLoopId"] = (parentLoopId != null && parentLoopId != _defaultIdentityTypeValue)
+            row["ParentLoopId"] = (parentLoopId != null && parentLoopId != this.defaultIdentityTypeValue)
                 ? parentLoopId
                 : DBNull.Value;
             row["InterchangeId"] = interchangeId;
-            row["TransactionSetId"] = (transactionSetId != null && transactionSetId != _defaultIdentityTypeValue)
+            row["TransactionSetId"] = (transactionSetId != null && transactionSetId != this.defaultIdentityTypeValue)
                 ? transactionSetId
                 : DBNull.Value;
             row["TransactionSetCode"] = transactionSetCode;
@@ -303,7 +313,7 @@
             row["StartingSegmentId"] = loop.SegmentId;
             row["EntityIdentifierCode"] = entityIdentifierCode;
 
-            _loopTable.Rows.Add(row);
+            this.LoopTable.Rows.Add(row);
         }
     }
 }

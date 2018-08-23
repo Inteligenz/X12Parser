@@ -355,7 +355,7 @@
         public int SaveRevision(IList<RepoSegment> segments, string comments, string revisedBy)
         {
             int? revisionId;
-            using (var conn = new SqlConnection(this._dsn))
+            using (var conn = new SqlConnection(this.Dsn))
             {
                 conn.Open();
                 var sqlTran = conn.BeginTransaction();
@@ -369,7 +369,7 @@ select scope_identity()",
                         this.CommonDb.Schema);
 
                     var cmd = new SqlCommand(sql, conn, sqlTran);
-                    cmd.Parameters.AddWithValue("@schemaName", this._schema);
+                    cmd.Parameters.AddWithValue("@schemaName", this.Schema);
                     cmd.Parameters.AddWithValue("@comments", comments);
                     cmd.Parameters.AddWithValue("@revisedBy", revisedBy);
                     revisionId = Convert.ToInt32(this.ExecuteScalar(cmd));
@@ -408,12 +408,12 @@ select scope_identity()",
             int? revisionId,
             string errorMessage)
         {
-            var errorId = this.idProvider.NextId(this._schema, "ParsingError");
+            var errorId = this.idProvider.NextId(this.Schema, "ParsingError");
 
             var cmd = new SqlCommand(string.Format(
 @"INSERT INTO [{0}].ParsingError (Id, InterchangeId,PositionInInterchange,RevisionId,Message) 
 VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
-                this._schema));
+                this.Schema));
 
             cmd.Parameters.AddWithValue("@id", errorId);
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
@@ -432,7 +432,7 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
             {
                 try
                 {
-                    using (var conn = tran == null ? new SqlConnection(this._dsn) : tran.Connection)
+                    using (var conn = tran == null ? new SqlConnection(this.Dsn) : tran.Connection)
                     {
                         if (conn.State != ConnectionState.Open)
                         {
@@ -444,14 +444,14 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
                             sbc.DestinationTableName = $"[{this.CommonDb.Schema}].[Container]";
 
                             var containerTable = new DataTable();
-                            containerTable.Columns.Add("Id", this._identityType);
+                            containerTable.Columns.Add("Id", this.IdentityType);
                             containerTable.Columns.Add("SchemaName", typeof(string));
                             containerTable.Columns.Add("Type", typeof(string));
 
-                            foreach (DataRow row in this.SegmentBatch._loopTable.Rows)
+                            foreach (DataRow row in this.SegmentBatch.LoopTable.Rows)
                             {
                                 var containerId = this.idProvider.NextId(this.CommonDb.Schema, "Container");
-                                containerTable.Rows.Add(containerId, this._schema, row["StartingSegmentId"]);
+                                containerTable.Rows.Add(containerId, this.Schema, row["StartingSegmentId"]);
                             }
 
                             foreach (DataColumn c in containerTable.Columns)
@@ -464,17 +464,17 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
 
                         using (var sbc = new SqlBulkCopy(conn))
                         {
-                            sbc.DestinationTableName = $"[{this._schema}].[Loop]";
-                            foreach (DataColumn c in this.SegmentBatch._loopTable.Columns)
+                            sbc.DestinationTableName = $"[{this.Schema}].[Loop]";
+                            foreach (DataColumn c in this.SegmentBatch.LoopTable.Columns)
                             {
                                 sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
                             }
 
-                            sbc.WriteToServer(this.SegmentBatch._loopTable);
+                            sbc.WriteToServer(this.SegmentBatch.LoopTable);
                         }
                     }
 
-                    this.SegmentBatch._loopTable.Clear();
+                    this.SegmentBatch.LoopTable.Clear();
                 }
                 catch (Exception exc)
                 {
@@ -492,7 +492,7 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
             {
                 try
                 {
-                    using (var conn = tran == null ? new SqlConnection(this._dsn) : tran.Connection)
+                    using (var conn = tran == null ? new SqlConnection(this.Dsn) : tran.Connection)
                     {
                         if (conn.State != ConnectionState.Open)
                         {
@@ -501,19 +501,19 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
 
                         using (var sbc = new SqlBulkCopy(conn))
                         {
-                            sbc.DestinationTableName = string.Format("[{0}].Segment", this._schema);
-                            foreach (DataColumn c in this.SegmentBatch._segmentTable.Columns)
+                            sbc.DestinationTableName = string.Format("[{0}].Segment", this.Schema);
+                            foreach (DataColumn c in this.SegmentBatch.SegmentTable.Columns)
                             {
                                 sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
                             }
 
-                            sbc.WriteToServer(this.SegmentBatch._segmentTable);
+                            sbc.WriteToServer(this.SegmentBatch.SegmentTable);
 
-                            foreach (KeyValuePair<string, DataTable> pair in this.SegmentBatch._parsedTables)
+                            foreach (KeyValuePair<string, DataTable> pair in this.SegmentBatch.ParsedTables)
                             {
                                 sbc.ColumnMappings.Clear();
 
-                                sbc.DestinationTableName = $"[{this._schema}].[{pair.Key}]";
+                                sbc.DestinationTableName = $"[{this.Schema}].[{pair.Key}]";
                                 foreach (DataColumn c in pair.Value.Columns)
                                 {
                                     sbc.ColumnMappings.Add(c.ColumnName, c.ColumnName);
@@ -524,7 +524,7 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
                         }
                     }
 
-                    this.SegmentBatch = new SegmentBatch(this, this._identityType);
+                    this.SegmentBatch = new SegmentBatch(this, this.IdentityType);
                 }
                 catch (Exception exc)
                 {
@@ -553,7 +553,7 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
         {
             return string.Format(
                 @"INSERT INTO [{1}].[Container] (Id, SchemaName, Type) VALUES (@containerId, '{0}','{2}');",
-                this._schema,
+                this.Schema,
                 this.CommonDb.Schema,
                 segmentId);
         }
@@ -591,9 +591,9 @@ VALUES (@id, @interchangeId, @positionInInterchange, @revisionId, @message)",
             return string.Format(
 @"INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, StartingSegmentId, EntityIdentifierCode)
 VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
-                this._schema,
+                this.Schema,
                 id,
-                parentLoopId == this._defaultIdentityTypeValue ? "NULL" : $"'{parentLoopId}'",
+                parentLoopId == this.DefaultIdentityTypeValue ? "NULL" : $"'{parentLoopId}'",
                 interchangeId,
                 transactionSetId,
                 transactionSetCode,
@@ -609,15 +609,15 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
             string transactionSetCode,
             object parentLoopId)
         {
-            var id = this.idProvider.NextId(this._schema, "Loop");
+            var id = this.idProvider.NextId(this.Schema, "Loop");
 
             this.SegmentBatch.AddLoop(
                 id,
                 loop,
                 interchangeId,
-                transactionSetId != this._defaultIdentityTypeValue ? transactionSetId : null,
+                transactionSetId != this.DefaultIdentityTypeValue ? transactionSetId : null,
                 transactionSetCode,
-                parentLoopId != this._defaultIdentityTypeValue ? parentLoopId : null,
+                parentLoopId != this.DefaultIdentityTypeValue ? parentLoopId : null,
                 this.GetEntityTypeCode(loop));
 
             return id;
@@ -652,7 +652,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
                     segment,
                     this.specs.ContainsKey(segment.SegmentId) ? this.specs[segment.SegmentId] : null);
 
-                if (tran != null || this.SegmentBatch._segmentTable.Rows.Count >= this.batchSize)
+                if (tran != null || this.SegmentBatch.SegmentTable.Rows.Count >= this.batchSize)
                 {
                     this.ExecuteBatch(tran);
                 }
@@ -713,7 +713,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
                     parentId);
             }
 
-            if (loopId != null && loopId != this._defaultIdentityTypeValue)
+            if (loopId != null && loopId != this.DefaultIdentityTypeValue)
             {
                 this.SaveSegment(
                     null,
@@ -755,7 +755,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
                 foreach (var hl in loop.HLoops)
                 {
                     positionInInterchange++;
-                    SaveLoopAndChildren(
+                    this.SaveLoopAndChildren(
                         hl,
                         ref positionInInterchange,
                         interchangeId,
@@ -775,7 +775,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
         private void MarkInterchangeWithError(object interchangeId)
         {
             var cmd =
-                new SqlCommand($"update [{this._schema}].Interchange set HasError = 1 where Id = @interchangeId");
+                new SqlCommand($"update [{this.Schema}].Interchange set HasError = 1 where Id = @interchangeId");
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             this.ExecuteCmd(cmd);
         }
@@ -797,7 +797,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
                     exc.Message);
             }
 
-            var interchangeId = this.idProvider.NextId(this._schema, "Interchange");
+            var interchangeId = this.idProvider.NextId(this.Schema, "Interchange");
             var containerId = this.idProvider.NextId(this.CommonDb.Schema, "Container");
 
             var cmd = new SqlCommand(
@@ -805,7 +805,7 @@ VALUES ('{1}', {2}, '{3}', '{4}', '{5}', '{6}', '{7}', {8}) ",
                     "ISA") + string.Format(
 @"INSERT INTO [{0}].[Interchange] (Id, SenderId, ReceiverId, ControlNumber, [Date], SegmentTerminator, ElementSeparator, ComponentSeparator, Filename, HasError, CreatedBy, CreatedDate)
 VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, @elementSeparator, @componentSeparator, @filename, 0, @createdBy, getdate())",
-                    this._schema));
+                    this.Schema));
 
             cmd.Parameters.AddWithValue("@id", interchangeId);
             cmd.Parameters.AddWithValue("@containerId", containerId);
@@ -880,13 +880,13 @@ VALUES (@id, @senderId, @receiverId, @controlNumber, @date, @segmentTerminator, 
                     functionGroup.VersionIdentifierCode);
             }
 
-            var functionalGroupId = this.idProvider.NextId(this._schema, "FunctionalGroup");
+            var functionalGroupId = this.idProvider.NextId(this.Schema, "FunctionalGroup");
             var containerId = this.idProvider.NextId(this.CommonDb.Schema, "Container");
 
             var cmd = new SqlCommand(this.GetContainerIdSql("GS") + string.Format(
 @"INSERT INTO [{0}].[FunctionalGroup] (Id, InterchangeId, FunctionalIdCode, Date, ControlNumber, Version)
 VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)",
-                this._schema));
+                this.Schema));
 
             cmd.Parameters.AddWithValue("@id", functionalGroupId);
             cmd.Parameters.AddWithValue("@containerId", containerId);
@@ -912,13 +912,13 @@ VALUES (@id, @interchangeId, @functionalIdCode, @date, @controlNumber, @version)
                     transaction.ControlNumber);
             }
 
-            var transactionSetId = this.idProvider.NextId(this._schema, "TransactionSet");
+            var transactionSetId = this.idProvider.NextId(this.Schema, "TransactionSet");
             var containerId = this.idProvider.NextId(this.CommonDb.Schema, "Container");
 
             var cmd = new SqlCommand(this.GetContainerIdSql("ST") + string.Format(
 @"INSERT INTO [{0}].[TransactionSet] (Id, InterchangeId, FunctionalGroupId, IdentifierCode, ControlNumber) 
 VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber)",
-                this._schema));
+                this.Schema));
 
             cmd.Parameters.AddWithValue("@id", transactionSetId);
             cmd.Parameters.AddWithValue("@containerId", containerId);
@@ -939,17 +939,17 @@ VALUES (@id, @interchangeId, @functionalGroupId, @identifierCode, @controlNumber
             string transactionSetCode,
             object parentLoopId)
         {
-            var hlId = this.idProvider.NextId(this._schema, "Loop");
+            var hlId = this.idProvider.NextId(this.Schema, "Loop");
             var containerId = this.idProvider.NextId(this.CommonDb.Schema, "Container");
 
             var cmd = new SqlCommand(this.GetContainerIdSql("HL") + string.Format(
 @"INSERT INTO [{0}].[Loop] (Id, ParentLoopId, InterchangeId, TransactionSetId, TransactionSetCode, SpecLoopId, LevelId, LevelCode, StartingSegmentId)
 VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCode, @specLoopId, @levelId, @levelCode, 'HL')",
-                this._schema));
+                this.Schema));
 
             cmd.Parameters.AddWithValue("@id", hlId);
             cmd.Parameters.AddWithValue("@containerId", containerId);
-            cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId != null && parentLoopId != _defaultIdentityTypeValue ? parentLoopId : DBNull.Value);
+            cmd.Parameters.AddWithValue("@parentLoopId", parentLoopId != null && parentLoopId != DefaultIdentityTypeValue ? parentLoopId : DBNull.Value);
             cmd.Parameters.AddWithValue("@interchangeId", interchangeId);
             cmd.Parameters.AddWithValue("@transactionSetId", transactionSetId);
             cmd.Parameters.AddWithValue("@transactionSetCode", transactionSetCode);
@@ -968,7 +968,7 @@ VALUES (@id, @parentLoopId, @interchangeId, @transactionSetId, @transactionSetCo
             object interchangeId,
             int? previousRevisionId)
         {
-            using (var conn = new SqlConnection(this._dsn))
+            using (var conn = new SqlConnection(this.Dsn))
             {
                 var cmd = new SqlCommand(
                     string.Format(
@@ -977,7 +977,7 @@ from [{0}].Segment s
 left join [{1}].Revision r on s.RevisionId = r.Id
 where InterchangeId = @interchangeId and PositionInInterchange = @positionInInterchange
 order by RevisionId desc",
-                        this._schema,
+                        this.Schema,
                         this.CommonDb.Schema),
                     conn);
 

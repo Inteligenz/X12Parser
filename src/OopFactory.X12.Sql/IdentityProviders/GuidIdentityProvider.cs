@@ -4,12 +4,26 @@
 
     using OopFactory.X12.Sql.Interfaces;
 
+    /// <summary>
+    /// Represents an Identity provider for guid-based identifiers
+    /// </summary>
     public class GuidIdentityProvider : IIdentityProvider
     {
+        /// <summary>
+        /// Validates the provider's schema and ensures a table exists
+        /// </summary>
+        /// <exception cref="NotImplementedException">Thrown on call</exception>
         public void EnsureSchema()
         {
+            throw new NotImplementedException("'EnsureSchema' in not needed with GuidIdentityProvider");
         }
 
+        /// <summary>
+        /// Obtains the next identifier and returns it
+        /// </summary>
+        /// <param name="schema">Schema of database to retrieve next id from</param>
+        /// <param name="table">Table to get next id from</param>
+        /// <returns>Next id obtained from database</returns>
         public object NextId(string schema, string table)
         {
             /*
