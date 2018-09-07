@@ -6,8 +6,8 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>http://x12parser.codeplex.com/license</licenseUrl>
-    <projectUrl>http://x12parser.codeplex.com/</projectUrl>
+    <licenseUrl>https://github.com/bvanfleet/X12Parser/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bvanfleet/X12Parser/</projectUrl>
     <iconUrl>http://x12parser.codeplex.com/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
