@@ -4,10 +4,10 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using OopFactory.X12.Specifications.Finders;
-    using OopFactory.X12.Repositories;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Sql;
 
     [TestClass]
     public class SaveRevisionTester
@@ -15,14 +15,17 @@
         [TestMethod, Ignore]
         public void SaveRevisionTest()
         {
-            var repo = new SqlTransactionRepository<long>("Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", 
+            var repo = new SqlTransactionRepository(
+                "Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", 
                 new SpecificationFinder(),
-                "NM1,N1,N3,N4,N9,REF,PER".Split(','), "Test", "dbo");
+                "NM1,N1,N3,N4,N9,REF,PER".Split(','),
+                typeof(long),
+                "Test");
 
-            var segments = repo.GetTransactionSegments(3293, Int32.MaxValue, false);
+            var segments = repo.GetTransactionSegments(3293, int.MaxValue);
             
             var subsriberSeg = segments.First(s => s.SpecLoopId == "2010BA");
-            subsriberSeg.Segment.SetElement(5,"MID");
+            subsriberSeg.Segment.SetElement(5, "MID");
 
             var claimSeg = segments.First(s => s.SpecLoopId == "2300");
             claimSeg.Segment.SetElement(1, "ABC26403774");
@@ -40,11 +43,14 @@
         [TestMethod]
         public void SaveRevisionGuidTest()
         {
-            var repo = new SqlTransactionRepository<Guid>("Data Source=127.0.0.1;Initial Catalog=Test5;Integrated Security=True",
+            var repo = new SqlTransactionRepository(
+                "Data Source=127.0.0.1;Initial Catalog=Test5;Integrated Security=True",
                 new SpecificationFinder(),
-                "NM1,N1,N3,N4,N9,REF,PER".Split(','), "X12", "dbo");
+                "NM1,N1,N3,N4,N9,REF,PER".Split(','),
+                typeof(Guid),
+                "X12");
 
-            var segments = repo.GetTransactionSegments(Guid.Parse("DC737E4D-33D3-487D-9C36-00C93759B8C4"), Int32.MaxValue, false);
+            var segments = repo.GetTransactionSegments(Guid.Parse("DC737E4D-33D3-487D-9C36-00C93759B8C4"), int.MaxValue);
 
             var subsriberSeg = segments.First(s => s.SpecLoopId == "2010BA");
             subsriberSeg.Segment.SetElement(5, "MID");

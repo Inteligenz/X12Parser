@@ -1,15 +1,15 @@
 ﻿namespace OopFactory.X12.Tests.Unit.Flattening
 {
-    using System.Linq;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Xml;
     using System.Xml.Xsl;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class Flatten837Tester

@@ -4,11 +4,11 @@
     using System.Diagnostics;
     using System.Reflection;
 
-    using OopFactory.X12.Parsing;
-    using OopFactory.X12.Repositories;
-    using OopFactory.X12.Specifications.Finders;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using OopFactory.X12.Parsing;
+    using OopFactory.X12.Specifications.Finders;
+    using OopFactory.X12.Sql;
 
     [TestClass, Ignore]
     public class LoadInterchangeTester
@@ -16,40 +16,48 @@
         [TestMethod]
         public void LoadAllTestFiles()
         {
+            var indexedSegments = new[]
+                                      {
+                                          "AMT",
+                                          "BHT",
+                                          "CAS",
+                                          "CL1",
+                                          "CLM",
+                                          "CN1",
+                                          "DMG",
+                                          "DN1",
+                                          "DTP",
+                                          "HCP",
+                                          "HI",
+                                          "HL",
+                                          "K3",
+                                          "LX",
+                                          "MEA",
+                                          "N3",
+                                          "N4",
+                                          "NM1",
+                                          "NTE",
+                                          "OI",
+                                          "PAT",
+                                          "PER",
+                                          "PRV",
+                                          "PWK",
+                                          "QTY",
+                                          "REF",
+                                          "SBR",
+                                          "SV1",
+                                          "SV2",
+                                          "SV3",
+                                          "SVD",
+                                          "TOO"
+                                      };
 
-            var repo = new SqlTransactionRepository<long>("Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", new SpecificationFinder(),
-                new string[] {"AMT",
-                "BHT",
-                "CAS",
-                "CL1",
-                "CLM",
-                "CN1",
-                "DMG",
-                "DN1",
-                "DTP",
-                "HCP",
-                "HI",
-                "HL",
-                "K3",
-                "LX",
-                "MEA",
-                "N3",
-                "N4",
-                "NM1",
-                "NTE",
-                "OI",
-                "PAT",
-                "PER",
-                "PRV",
-                "PWK",
-                "QTY",
-                "REF",
-                "SBR",
-                "SV1",
-                "SV2",
-                "SV3",
-                "SVD",
-                "TOO",}, "Inbound");
+            var repo = new SqlTransactionRepository(
+                "Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True",
+                new SpecificationFinder(),
+                indexedSegments,
+                typeof(long),
+                "Inbound");
 
             var parser = new X12Parser();
 
