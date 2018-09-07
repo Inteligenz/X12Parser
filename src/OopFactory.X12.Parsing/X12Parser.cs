@@ -241,7 +241,7 @@
                             }
 
                             bool parentFound = false;
-                            if (string.IsNullOrEmpty(parentId))
+                            if (!string.IsNullOrEmpty(parentId))
                             {
                                 if (hloops.ContainsKey(parentId))
                                 {
