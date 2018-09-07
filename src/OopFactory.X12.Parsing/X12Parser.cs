@@ -225,7 +225,7 @@
                             string parentId = hlSegment.GetElement(2);
                             string levelCode = hlSegment.GetElement(3);
 
-                            while (!(currentContainer is HierarchicalLoopContainer) || !((HierarchicalLoopContainer)currentContainer).AllowsHierarchicalLoop(levelCode))
+                            while (!(currentContainer is HierarchicalLoopContainer hlCurrentContainer && hlCurrentContainer.AllowsHierarchicalLoop(levelCode)))
                             {
                                 if (currentContainer.Parent != null)
                                 {
@@ -271,7 +271,7 @@
 
                             if (string.IsNullOrEmpty(parentId) || !parentFound)
                             {
-                                while (!(currentContainer is HierarchicalLoopContainer && ((HierarchicalLoopContainer)currentContainer).HasHierachicalSpecs()))
+                                while (!(currentContainer is HierarchicalLoopContainer hlCurrentContainer && hlCurrentContainer.HasHierachicalSpecs()))
                                 {
                                     currentContainer = currentContainer.Parent;
                                 }
