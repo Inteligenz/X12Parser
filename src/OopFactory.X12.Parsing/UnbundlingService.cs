@@ -54,14 +54,12 @@
             {
                 sb.Append(segment.SegmentString);
                 sb.Append($"{this.segmentTerminator}");
-            
             }
 
             foreach (var segment in loop.Transaction.FunctionGroup.TrailerSegments)
             {
                 sb.Append(segment.SegmentString);
                 sb.Append($"{this.segmentTerminator}");
-            
             }
 
             return sb.ToString();

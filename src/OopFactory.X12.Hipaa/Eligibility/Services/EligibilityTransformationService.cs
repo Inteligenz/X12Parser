@@ -9,8 +9,16 @@
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
 
+    /// <summary>
+    /// Provides methods for transforming data to and from their Eligibility benefit objects
+    /// </summary>
     public class EligibilityTransformationService
     {
+        /// <summary>
+        /// Transforms data from a stream in 271 format into its <see cref="EligibilityBenefitDocument"/> representation
+        /// </summary>
+        /// <param name="stream">Stream containing 271 data to be transformed</param>
+        /// <returns>Object transformed from stream</returns>
         public EligibilityBenefitDocument Transform271ToBenefitResponse(Stream stream)
         {
             EligibilityBenefitDocument fullResponse = new EligibilityBenefitDocument();
@@ -42,6 +50,11 @@
             return fullResponse;
         }
 
+        /// <summary>
+        /// Transforms a provided <see cref="EligibilityBenefitResponse"/> to its HTML string representation
+        /// </summary>
+        /// <param name="response">Benefit response to transform</param>
+        /// <returns>HTML compliant string representation</returns>
         public string TransformBenefitResponseToHtml(EligibilityBenefitResponse response)
         {
             string xml = response.Serialize();

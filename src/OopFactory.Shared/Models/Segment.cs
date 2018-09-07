@@ -20,7 +20,12 @@
             this.Initialize(segment);
             base.DelimiterSet = delimiters;
         }
-        
+
+        public Container Parent { get; }
+
+        private SegmentSpecification SegmentSpec =>
+            this.SpecFinder.FindSegmentSpec(this.FunctionGroup != null ? this.FunctionGroup.VersionIdentifierCode : string.Empty, this.SegmentId);
+
         public static int ParseBinarySize(char elementSeparator, string segment, out int binaryStart)
         {
             binaryStart = -1;
@@ -38,7 +43,7 @@
             {
                 string slength = segment.Substring(firstIndex + 1, nextIndex - firstIndex - 1);
                 binaryStart = nextIndex + 1;
-                int length = 0;
+                int length;
                 if (int.TryParse(slength, out length))
                 {
                     return length;
@@ -50,79 +55,83 @@
         
         protected override void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
         {
-            if (this.SegmentSpec != null)
+            ElementSpecification spec = this.SegmentSpec?.Elements[elementNumber - 1];
+
+            if (spec != null)
             {
-                ElementSpecification spec = this.SegmentSpec.Elements[elementNumber - 1];
-                if (spec != null)
+                if (value.Length == 0 && spec.Required)
                 {
-                    if (value.Length == 0 && spec.Required)
+                    throw new ElementValidationException("Element {0} is required.", elementId, value);
+                }
+
+                if (value.Length > 0)
+                {
+                    if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
                     {
-                        throw new ElementValidationException("Element {0} is required.", elementId, value);
+                        throw new ElementValidationException(
+                            "Element {0} cannot contain the value '{1}' because it must be between {2} and {3} characters in length.",
+                            elementId,
+                            value,
+                            spec.MinLength,
+                            spec.MaxLength);
                     }
-                    if (value.Length > 0)
-                    {
-                        if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
+                }
+
+                switch (spec.Type)
+                {
+                    case ElementDataTypeEnum.Numeric:
+                        int number;
+                        if (!int.TryParse(value, out number))
                         {
                             throw new ElementValidationException(
-                                "Element {0} cannot contain the value '{1}' because it must be between {2} and {3} characters in length.",
+                                "Element {0} cannot contain the value '{1}' because it is constrained to be an implied decimal.",
                                 elementId,
-                                value,
-                                spec.MinLength,
-                                spec.MaxLength);
+                                value);
                         }
-                    }
-                    switch (spec.Type)
-                    {
-                        case ElementDataTypeEnum.Numeric:
-                            int number;
-                            if (!int.TryParse(value, out number))
-                            {
-                                throw new ElementValidationException(
-                                    "Element {0} cannot contain the value '{1}' because it is constrained to be an implied decimal.",
-                                    elementId,
-                                    value);
-                            }
 
-                            break;
-                        case ElementDataTypeEnum.Decimal:
-                            decimal decNumber;
-                            if (!decimal.TryParse(value, out decNumber))
-                            {
-                                throw new ElementValidationException(
-                                    "Element {0} cannot contain the value '{1}' because it is contrained to be a decimal.",
-                                    elementId,
-                                    value);
-                            }
+                        break;
+                    case ElementDataTypeEnum.Decimal:
+                        decimal decNumber;
+                        if (!decimal.TryParse(value, out decNumber))
+                        {
+                            throw new ElementValidationException(
+                                "Element {0} cannot contain the value '{1}' because it is contrained to be a decimal.",
+                                elementId,
+                                value);
+                        }
 
-                            break;
-                        case ElementDataTypeEnum.Identifier:
-                            if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
+                        break;
+                    case ElementDataTypeEnum.Identifier:
+                        if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
+                        {
+                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
                             {
-                                if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
+                                string[] ids = new string[spec.AllowedIdentifiers.Count];
+                                for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
                                 {
-                                    string[] ids = new string[spec.AllowedIdentifiers.Count];
-                                    for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
-                                    {
-                                        ids[i] = spec.AllowedIdentifiers[i].ID;
-                                    }
-
-                                    string expected = string.Empty;
-                                    if (ids.Length > 1)
-                                    {
-                                        expected = string.Join(", ", ids, 0, ids.Length - 1);
-                                        expected += " or " + ids[ids.Length - 1];
-                                    }
-                                    else
-                                    {
-                                        expected = ids[0];
-                                    }
-
-                                    throw new ElementValidationException("Element '{0}' cannot contain the value '{1}'.  Specification restricts this to {2}.", elementId, value, expected);
+                                    ids[i] = spec.AllowedIdentifiers[i].ID;
                                 }
-                            }
 
-                            break;
-                    }
+                                string expected = string.Empty;
+                                if (ids.Length > 1)
+                                {
+                                    expected = string.Join(", ", ids, 0, ids.Length - 1);
+                                    expected += " or " + ids[ids.Length - 1];
+                                }
+                                else
+                                {
+                                    expected = ids[0];
+                                }
+
+                                throw new ElementValidationException(
+                                    "Element '{0}' cannot contain the value '{1}'.  Specification restricts this to {2}.",
+                                    elementId,
+                                    value,
+                                    expected);
+                            }
+                        }
+
+                        break;
                 }
             }
         }
@@ -149,8 +158,6 @@
             return this.ToX12String(addWhitespace).Trim();
         }
         
-        public Container Parent { get; }
-        
         private FunctionGroup FunctionGroup
         {
             get
@@ -159,29 +166,25 @@
                 {
                     return null;
                 }
-                else
+
+                if (this is FunctionGroup)
                 {
-                    if (this is FunctionGroup)
-                    {
-                        return (FunctionGroup)this;
-                    }
-                    else if (this is Transaction)
-                    {
-                        return ((Transaction)this).FunctionGroup;
-                    }
-                    else if (this.Parent is FunctionGroup)
-                    {
-                        return ((FunctionGroup)this.Parent);
-                    }
-                    else if (this.Parent is Interchange)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return (FunctionGroup)this.Parent.Transaction.Parent;
-                    }
+                    return (FunctionGroup)this;
                 }
+                else if (this is Transaction)
+                {
+                    return ((Transaction)this).FunctionGroup;
+                }
+                else if (this.Parent is FunctionGroup functionGroup)
+                {
+                    return functionGroup;
+                }
+                else if (this.Parent is Interchange)
+                {
+                    return null;
+                }
+
+                return (FunctionGroup)this.Parent.Transaction.Parent;
             }
         }
 
@@ -193,33 +196,21 @@
                 {
                     return this.FunctionGroup.SpecFinder;
                 }
-                else if (this is Interchange)
+
+                if (this is Interchange)
                 {
                     return ((Interchange)this).SpecFinder;
                 }
-                else
-                {
-                    return ((Interchange)this.Parent).SpecFinder;
-                }
-            }
-        }
-         
-        private SegmentSpecification SegmentSpec
-        {
-            get
-            {
-                if (this.FunctionGroup != null)
-                {
-                    return this.SpecFinder.FindSegmentSpec(this.FunctionGroup.VersionIdentifierCode, this.SegmentId);
-                }
-                else
-                {
-                    return this.SpecFinder.FindSegmentSpec(string.Empty, this.SegmentId);
-                }               
+
+                return ((Interchange)this.Parent).SpecFinder;
             }
         }
 
         #region IXmlSerializable Members
+        public override string ToString()
+        {
+            return this.SegmentString;
+        }
 
         System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
         {
@@ -264,7 +255,7 @@
                             && this.SegmentSpec.Elements.Count > i 
                             && this.SegmentSpec.Elements[i].Type == ElementDataTypeEnum.Identifier)
                         {
-                            var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == DataElements[i]);
+                            var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == this.DataElements[i]);
                             if (allowedValue != null)
                             {
                                 writer.WriteComment(allowedValue.Description);
@@ -302,11 +293,6 @@
 
                 writer.WriteEndElement();
             }
-        }
-
-        public override string ToString()
-        {
-            return this.SegmentString;
         }
 
         #endregion

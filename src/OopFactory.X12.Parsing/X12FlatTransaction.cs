@@ -13,7 +13,9 @@
         }
 
         public string IsaSegment { get; }
+
         public string GsSegment { get; }
+
         public List<string> Transactions { get; }
 
         public int GetSize()

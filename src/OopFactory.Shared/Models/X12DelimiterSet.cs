@@ -2,19 +2,28 @@
 {
     using System;
 
+    /// <summary>
+    /// Represents the collection of delimiters used in X12 interchanges
+    /// </summary>
     public class X12DelimiterSet
     {
-        private readonly char segmentTerminator;
-        private readonly char elementSeparator;
-        private readonly char subElementSeparator;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12DelimiterSet"/> class
+        /// </summary>
+        /// <param name="segmentTerminator">Desired segment terminator</param>
+        /// <param name="elementSeparator">Desired element separator</param>
+        /// <param name="subElementSeparator">Desired sub-element separator</param>
         public X12DelimiterSet(char segmentTerminator, char elementSeparator, char subElementSeparator)
         {
-            this.segmentTerminator = segmentTerminator;
-            this.elementSeparator = elementSeparator;
-            this.subElementSeparator = subElementSeparator;
+            this.SegmentTerminator = segmentTerminator;
+            this.ElementSeparator = elementSeparator;
+            this.SubElementSeparator = subElementSeparator;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="X12DelimiterSet"/> class with the provided ISA Segment
+        /// </summary>
+        /// <param name="isaSegmentAndTerminator">ISA Segment and terminator to parse delimiter set from</param>
         public X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
             var prefix = new string(isaSegmentAndTerminator).Substring(0, 3);
@@ -29,34 +38,43 @@
                 throw new ArgumentException("First segment must start with ISA");
             }
 
-            this.elementSeparator = isaSegmentAndTerminator[3];
-            this.subElementSeparator = isaSegmentAndTerminator[104];
+            this.ElementSeparator = isaSegmentAndTerminator[3];
+            this.SubElementSeparator = isaSegmentAndTerminator[104];
 
             if (isaSegmentAndTerminator.Length >= 106)
             {
-                this.segmentTerminator = isaSegmentAndTerminator[105];
+                this.SegmentTerminator = isaSegmentAndTerminator[105];
             }
 
-            if (char.IsLetterOrDigit(this.elementSeparator))
+            if (char.IsLetterOrDigit(this.ElementSeparator))
             {
-                throw new ArgumentException(this.elementSeparator + " is not a valid element separator in position 4 of the file.");
+                throw new ArgumentException(this.ElementSeparator + " is not a valid element separator in position 4 of the file.");
             }
 
-            if (char.IsLetterOrDigit(this.subElementSeparator))
+            if (char.IsLetterOrDigit(this.SubElementSeparator))
             {
-                throw new ArgumentException(this.subElementSeparator + " is not a valid subelement separator in position 105 of the file.");
+                throw new ArgumentException(this.SubElementSeparator + " is not a valid subelement separator in position 105 of the file.");
             }
 
-            if (char.IsLetterOrDigit(this.segmentTerminator))
+            if (char.IsLetterOrDigit(this.SegmentTerminator))
             {
-                throw new ArgumentException(this.segmentTerminator + " is not a valid segment terminator in position 106 of the file.");
+                throw new ArgumentException(this.SegmentTerminator + " is not a valid segment terminator in position 106 of the file.");
             }
         }
 
-        public char SegmentTerminator => this.segmentTerminator;
+        /// <summary>
+        /// Gets the segment terminator character
+        /// </summary>
+        public char SegmentTerminator { get; }
 
-        public char ElementSeparator => this.elementSeparator;
+        /// <summary>
+        /// Gets the element separator character
+        /// </summary>
+        public char ElementSeparator { get; }
 
-        public char SubElementSeparator => this.subElementSeparator;
+        /// <summary>
+        /// Gets the sub-element separator character
+        /// </summary>
+        public char SubElementSeparator { get; }
     }
 }

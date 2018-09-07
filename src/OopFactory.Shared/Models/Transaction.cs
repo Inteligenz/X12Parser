@@ -68,7 +68,7 @@
             {
                 var list = new List<string>();
 
-                foreach (var spec in this.Specification.SegmentSpecifications.Where(ss => ss.Trailer == true))
+                foreach (var spec in this.Specification.SegmentSpecifications.Where(ss => ss.Trailer))
                 {
                     list.Add(spec.SegmentId);
                 }

@@ -87,7 +87,7 @@
 
         private static void MoveTo(FileInfo fi, string sourceDirectory, string targetDirectory)
         {
-            string targetFilename = string.Format("{0}{1}", targetDirectory, fi.FullName.Replace(sourceDirectory, ""));
+            string targetFilename = string.Format("{0}{1}", targetDirectory, fi.FullName.Replace(sourceDirectory, string.Empty));
             var targetFile = new FileInfo(targetFilename);
             try
             {

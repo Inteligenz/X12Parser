@@ -83,7 +83,7 @@
                 }
                 else
                 {
-                    foreach (string element in segment.TrimEnd(new char[] { this.DelimiterSet.SegmentTerminator }).Substring(separatorIndex + 1).Split(this.DelimiterSet.ElementSeparator))
+                    foreach (string element in segment.TrimEnd(new[] { this.DelimiterSet.SegmentTerminator }).Substring(separatorIndex + 1).Split(this.DelimiterSet.ElementSeparator))
                     {
                         this.DataElements.Add(element);
                     }

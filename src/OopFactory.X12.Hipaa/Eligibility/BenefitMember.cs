@@ -58,7 +58,7 @@
             get
             {
                 var date = this.Dates.FirstOrDefault(d => d.Qualifier == "291");
-                return date == null ? (DateTime?)null : date.Date;
+                return date?.Date;
             }
         }
 
@@ -75,7 +75,7 @@
             get
             {
                 var date = this.Dates.FirstOrDefault(d => d.Qualifier == "346");
-                return date == null ? (DateTime?)null : date.Date;
+                return date?.Date;
             }
         }
 
@@ -142,24 +142,16 @@
         {
             get
             {
-                var date = Dates.FirstOrDefault(d => d.Qualifier == "357");
-                return date == null ? (DateTime?)null : date.Date;
+                var date = this.Dates.FirstOrDefault(d => d.Qualifier == "357");
+                return date?.Date;
             }
         }
 
         [XmlAttribute(AttributeName = "EligibilityEndDate", DataType = "date")]
-        public DateTime SerializableEligibilityEndDate
-        {
-            get { return EligibilityEndDate ?? DateTime.MinValue; }
-            set { }
-        }
+        public DateTime SerializableEligibilityEndDate => this.EligibilityEndDate ?? DateTime.MinValue;
 
         [XmlIgnore]
-        public bool SerializableEligibilityEndDateSpecified
-        {
-            get { return EligibilityEndDate.HasValue; }
-            set { }
-        }
+        public bool SerializableEligibilityEndDateSpecified => this.EligibilityEndDate.HasValue;
         #endregion
     }
 }

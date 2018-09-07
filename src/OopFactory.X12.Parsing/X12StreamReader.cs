@@ -17,26 +17,6 @@
         private readonly char[] ignoredChars;
 
         /// <summary>
-        /// Gets the X12 Delimiters
-        /// </summary>
-        public X12DelimiterSet Delimiters { get; private set; }
-
-        /// <summary>
-        /// Gets the current ISA segment
-        /// </summary>
-        public string CurrentIsaSegment { get; private set; }
-
-        /// <summary>
-        /// Gets the current GS segment
-        /// </summary>
-        public string CurrentGsSegment { get; private set; }
-
-        /// <summary>
-        /// Gets the last transaction code
-        /// </summary>
-        public string LastTransactionCode { get; private set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="X12StreamReader"/> class
         /// </summary>
         /// <param name="stream"><see cref="Stream"/> used for reading</param>
@@ -65,6 +45,26 @@
             : this(stream, encoding, new char[] { })
         {
         }
+
+        /// <summary>
+        /// Gets the X12 Delimiters
+        /// </summary>
+        public X12DelimiterSet Delimiters { get; }
+
+        /// <summary>
+        /// Gets the current ISA segment
+        /// </summary>
+        public string CurrentIsaSegment { get; private set; }
+
+        /// <summary>
+        /// Gets the current GS segment
+        /// </summary>
+        public string CurrentGsSegment { get; private set; }
+
+        /// <summary>
+        /// Gets the last transaction code
+        /// </summary>
+        public string LastTransactionCode { get; private set; }
 
         /// <summary>
         /// Gets the segment id for the current segment
@@ -113,12 +113,8 @@
             var one = new char[1];
             while (this.reader.Read(one, 0, 1) == 1)
             {
-                if (this.ignoredChars.Contains(one[0]))
-                {
-                    continue;
-                }
-
-                if (one[0] == this.Delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0)
+                if (this.ignoredChars.Contains(one[0])
+                || (one[0] == this.Delimiters.SegmentTerminator && sb.ToString().Trim().Length == 0))
                 {
                     continue;
                 }
@@ -172,7 +168,7 @@
         /// <returns>Transaction read from the stream</returns>
         public X12FlatTransaction ReadNextTransaction()
         {
-            StringBuilder segments = new StringBuilder();
+            var segments = new StringBuilder();
 
             string segmentString = this.ReadNextSegment();
             string segmentId = this.ReadSegmentId(segmentString);

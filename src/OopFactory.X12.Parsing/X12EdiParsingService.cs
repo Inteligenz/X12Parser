@@ -30,7 +30,7 @@
         public string Transform(string x12)
         {
             Interchange interchange = this.parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(x12))).FirstOrDefault();
-            return interchange.Serialize(this.suppressComments);
+            return interchange?.Serialize(this.suppressComments);
         }
         
     }

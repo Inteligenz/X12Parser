@@ -75,16 +75,14 @@
                 this.segments.Add(segment);
                 return segment;
             }
-            else if (this.SegmentId == "NM1" &&
-                new[] { "N3", "N4", "PER", "REF" }.Contains(segment.SegmentId))
+
+            if (this.SegmentId == "NM1" && new[] { "N3", "N4", "PER", "REF" }.Contains(segment.SegmentId))
             {
                 this.segments.Add(segment);
                 return segment;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public T AddSegment<T>(T segment) where T : TypedSegment
@@ -120,15 +118,9 @@
                     segment.SetElement(elementNumber, count.ToString());
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         internal abstract string SerializeBodyToX12(bool addWhitespace);

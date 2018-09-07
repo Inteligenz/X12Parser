@@ -41,56 +41,73 @@
         }
 
         public string ServiceTypeCount { get; set; }
+
         [XmlIgnore]
         public decimal? Amount { get; set; }
 
         #region Serializable Amount properties
-        [XmlAttribute(AttributeName="Amount")]
+
+        [XmlAttribute(AttributeName = "Amount")]
         public decimal SerializableAmount
         {
-            get { return Amount ?? decimal.Zero; }
-            set { Amount = value; }
+            get
+            {
+                return this.Amount ?? decimal.Zero;
+            }
+            set
+            {
+                this.Amount = value;
+            }
         }
 
         [XmlIgnore]
-        public bool SerializableAmountSpecified
-        {
-            get { return Amount.HasValue; }
-            set { }
-        }
+        public bool SerializableAmountSpecified => this.Amount.HasValue;
+
         #endregion
 
         [XmlIgnore]
         public decimal? Percentage { get; set; }
 
         #region Serializable Percentage properties
-        [XmlAttribute(AttributeName="Percentage")]
+
+        [XmlAttribute(AttributeName = "Percentage")]
         public decimal SerializablePercentage
         {
-            get { return Percentage ?? decimal.Zero; }
-            set { Percentage = value; }
+            get
+            {
+                return this.Percentage ?? decimal.Zero;
+            }
+
+            set
+            {
+                this.Percentage = value;
+            }
         }
 
         [XmlIgnore]
-        public bool SerializablePercentageSpecified
-        {
-            get { return Percentage.HasValue; }
-            set { }
-        }
+        public bool SerializablePercentageSpecified => this.Percentage.HasValue;
+
         #endregion
 
         public Lookup InfoType { get; set; }
+
         public Lookup CoverageLevel { get; set; }
 
-        [XmlElement(ElementName="ServiceType")]
+        [XmlElement(ElementName = "ServiceType")]
         public List<Lookup> ServiceTypes { get; set; }
 
         public Lookup InsuranceType { get; set; }
+
         public string PlanCoverageDescription { get; set; }
+
         public Lookup TimePeriod { get; set; }
+
         public QualifiedAmount Quantity { get; set; }
+
         public Lookup InPlanNetwork { get; set; }
+
         public Lookup AuthorizationCertificationRequired { get; set; }
+
         public MedicalProcedure Procedure { get; set; }
 
         [XmlElement(ElementName = "Identification")]

@@ -148,11 +148,11 @@
         [TestMethod]
         public void ParseAndTransformToX12()
         {
-            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);  // "INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt";
+            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);  // "INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt";
             if (!resourcePath.Contains("_0x1D"))
             {
                 Trace.WriteLine(resourcePath);
-                Stream stream = GetEdi(resourcePath);
+                Stream stream = this.GetEdi(resourcePath);
 
                 var parser = new X12Parser();
                 Interchange interchange = parser.ParseMultiple(stream).First();
@@ -172,11 +172,10 @@
         [TestMethod]
         public void ParseModifyAndTransformBackToX12()
         {
-            var stream = GetEdi("INS._270._4010.Example1_DHHS.txt");
+            var stream = this.GetEdi("INS._270._4010.Example1_DHHS.txt");
 
             var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
-            string originalX12 = interchange.SerializeToX12(true);
             string xml = interchange.Serialize();
 
             var doc = new XmlDocument
@@ -185,7 +184,7 @@
             };
             doc.LoadXml(xml);
 
-            XmlElement dmgElement = (XmlElement)(doc.GetElementsByTagName("DMG")[0]);
+            XmlElement dmgElement = (XmlElement)doc.GetElementsByTagName("DMG")[0];
             dmgElement.ParentNode.RemoveChild(dmgElement);
             
             Console.WriteLine(doc.OuterXml);

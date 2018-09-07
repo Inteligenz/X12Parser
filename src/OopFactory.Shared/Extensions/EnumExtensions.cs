@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
 
-    using OopFactory.X12.Shared.Properties;
     using OopFactory.X12.Shared.Attributes;
+    using OopFactory.X12.Shared.Properties;
 
     /// <summary>
     /// Represents a collection of extensions for Enumerations
