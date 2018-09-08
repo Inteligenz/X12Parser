@@ -2,14 +2,14 @@
 {
     using System.Diagnostics;
     using System.IO;
-    using System.Reflection;
     using System.Linq;
+    using System.Reflection;
     using System.Xml;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using OopFactory.X12.Hipaa.Claims;
     using OopFactory.X12.Hipaa.Claims.Services;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ClaimFormTester
@@ -19,7 +19,7 @@
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.ProfessionalClaim1.txt");              
 
-             var service = new ProfessionalClaimToHcfa1500FormTransformation("");
+             var service = new ProfessionalClaimToHcfa1500FormTransformation(string.Empty);
 
             // send the x12 stream in to obtain a claim object
              var document = service.Transform837ToClaimDocument(stream);
@@ -54,14 +54,13 @@
 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(
-				new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"),
-				new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif"),
-				new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif")
-                );
+                new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"),
+                new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif"),
+                new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"));
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
 
-            XmlDocument foDocument = new XmlDocument();
+            var foDocument = new XmlDocument();
             string foXml = service.TransformClaimDocumentToFoXml(document);
             foDocument.LoadXml(foXml);
 
@@ -77,8 +76,7 @@
         public void X12ToUbPdfLayoutTest()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
-
-			
+            
             var transformation = new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
                 
             // new up a ClaimTransformationService object
@@ -86,14 +84,14 @@
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
 
-            XmlDocument foDocument = new XmlDocument();
+            var foDocument = new XmlDocument();
             string foXml = service.TransformClaimDocumentToFoXml(document);
             foDocument.LoadXml(foXml);
 
 #if DEBUG
             var driver = Fonet.FonetDriver.Make();
 
-            FileStream outputFile = new FileStream("c:\\Temp\\Pdfs\\InstitutionalClaimPlaceholders.pdf", FileMode.Create, FileAccess.Write);
+            var outputFile = new FileStream("c:\\Temp\\Pdfs\\InstitutionalClaimPlaceholders.pdf", FileMode.Create, FileAccess.Write);
             driver.Render(foDocument, outputFile);
 #endif
         }
@@ -103,8 +101,7 @@
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
 
-			var transformation = new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
-            
+            var transformation = new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
             
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(transformation, transformation, transformation);
@@ -114,7 +111,7 @@
             var ub04 = transformation.TransformClaimToUB04(document.Claims.First());
             Trace.WriteLine(ub04.Serialize());
 
-            XmlDocument foDocument = new XmlDocument();
+            var foDocument = new XmlDocument();
             string foXml = service.TransformClaimDocumentToFoXml(document);
             foDocument.LoadXml(foXml);
 
