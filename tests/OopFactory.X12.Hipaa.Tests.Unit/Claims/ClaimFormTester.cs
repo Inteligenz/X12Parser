@@ -16,6 +16,11 @@
     {
         private static readonly string testDirectory = @"C:\Temp\Pdfs";
 
+        private static readonly string testImageDirectory = @"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\TestData\Images\";
+
+        /// <summary>
+        /// Initializes the test being performed by ensuring the testing directory has been created and is empty.
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -69,9 +74,9 @@
 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(
-                new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"),
-                new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif"),
-                new ProfessionalClaimToHcfa1500FormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\HCFA1500_Red.gif"));
+                new ProfessionalClaimToHcfa1500FormTransformation($"{testImageDirectory}\\HCFA1500_Red.gif"),
+                new InstitutionalClaimToUb04ClaimFormTransformation($"{testImageDirectory}\\UB04_Red.gif"),
+                new ProfessionalClaimToHcfa1500FormTransformation($"{testImageDirectory}\\HCFA1500_Red.gif"));
 
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
 
@@ -92,7 +97,7 @@
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
             
-            var transformation = new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
+            var transformation = new InstitutionalClaimToUb04ClaimFormTransformation($"{testImageDirectory}\\UB04_Red.gif");
                 
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(transformation, transformation, transformation); 
@@ -116,7 +121,7 @@
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
 
-            var transformation = new InstitutionalClaimToUb04ClaimFormTransformation(@"..\..\..\tests\OopFactory.X12.Hipaa.Tests.Unit\Claims\Images\UB04_Red.gif");
+            var transformation = new InstitutionalClaimToUb04ClaimFormTransformation($"{testImageDirectory}\\UB04_Red.gif");
             
             // new up a ClaimTransformationService object
             var service = new ClaimFormTransformationService(transformation, transformation, transformation);
