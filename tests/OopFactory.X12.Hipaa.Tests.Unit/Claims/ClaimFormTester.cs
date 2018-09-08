@@ -14,6 +14,21 @@
     [TestClass]
     public class ClaimFormTester
     {
+        private static readonly string testDirectory = @"C:\Temp\Pdfs";
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            // C:\Temp is a standard folder for Windows. However, we'll
+            // want to verify that the \Pdfs folder exists and is empty
+            if (Directory.Exists(testDirectory))
+            {
+                Directory.Delete(testDirectory, true);
+            }
+
+            Directory.CreateDirectory(testDirectory);
+        }
+
         [TestMethod]
         public void X12ToClaimModelTest()
         {
@@ -67,7 +82,7 @@
 #if DEBUG
             var driver = Fonet.FonetDriver.Make();
 
-            FileStream outputFile = new FileStream("c:\\Temp\\Pdfs\\ProfessionalClaim1.pdf", FileMode.Create, FileAccess.Write);
+            FileStream outputFile = new FileStream($"{testDirectory}\\ProfessionalClaim1.pdf", FileMode.Create, FileAccess.Write);
             driver.Render(foDocument, outputFile);            
 #endif
         }
@@ -91,7 +106,7 @@
 #if DEBUG
             var driver = Fonet.FonetDriver.Make();
 
-            var outputFile = new FileStream("c:\\Temp\\Pdfs\\InstitutionalClaimPlaceholders.pdf", FileMode.Create, FileAccess.Write);
+            var outputFile = new FileStream($"{testDirectory}\\InstitutionalClaimPlaceholders.pdf", FileMode.Create, FileAccess.Write);
             driver.Render(foDocument, outputFile);
 #endif
         }
@@ -118,7 +133,7 @@
 #if DEBUG
             var driver = Fonet.FonetDriver.Make();
 
-            FileStream outputFile = new FileStream("c:\\Temp\\Pdfs\\InstitutionalClaim5010.pdf", FileMode.Create, FileAccess.Write);
+            FileStream outputFile = new FileStream($"{testDirectory}\\InstitutionalClaim5010.pdf", FileMode.Create, FileAccess.Write);
             driver.Render(foDocument, outputFile);
 #endif
         }
