@@ -9,12 +9,12 @@
     using System.Text;
     using System.Xml;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
     using OopFactory.X12.Specifications.Finders;
     using OopFactory.X12.Transformations;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Summary description for ParsingTester
@@ -22,53 +22,16 @@
     [TestClass]
     public class ParsingTester
     {
-        #region TestContext
-
-        private TestContext testContextInstance;
-
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-        #endregion
-
-        private Stream GetEdi(string resourcePath)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles." + resourcePath);
-        }
-
-        private string GetXPathQuery(int index)
-        {
-            if (TestContext.DataRow.Table.Columns.Contains(String.Format("Query{0}", index)))
-                return Convert.ToString(TestContext.DataRow[String.Format("Query{0}", index)]);
-            else
-                return null;
-        }
-
-        private string GetExpectedValue(int index)
-        {
-            if (TestContext.DataRow.Table.Columns.Contains(String.Format("Expected{0}", index)))
-                return Convert.ToString(TestContext.DataRow[String.Format("Expected{0}", index)]);
-            else
-                return null;
-        }
+        /// Gets or sets the test context which provides information about and functionality for the current test run.
+        /// </summary>
+        public TestContext TestContext { get; set; }
 
         [DeploymentItem("tests\\OopFactory.X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseToXml()
         {
-            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
 
@@ -81,15 +44,15 @@
             var doc = new XmlDocument();
             doc.LoadXml(xml);
             int index = 1;
-            string query = GetXPathQuery(index);
+            string query = this.GetXPathQuery(index);
             while (!string.IsNullOrWhiteSpace(query))
             {
-                string expected = GetExpectedValue(index);
+                string expected = this.GetExpectedValue(index);
                 XmlNode node = doc.SelectSingleNode(query);
                 Assert.IsNotNull(node, "Query '{0}' not found in {1}.", query, resourcePath);
                 Assert.AreEqual(expected, node.InnerText, "Value {0} not expected from query {1} in {2}.", node.InnerText, query, resourcePath);
                 Trace.WriteLine(string.Format("Query '{0}' succeeded.", query));
-                query = GetXPathQuery(++index);
+                query = this.GetXPathQuery(++index);
             }
 
             if (resourcePath.Contains("_837D"))
@@ -119,21 +82,25 @@
         [TestMethod]
         public void ParseAndUnparse()
         {
-            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(resourcePath);
             var parser = new X12Parser();
-            parser.ParserWarning += new X12Parser.X12ParserWarningEventHandler(Parser_ParserWarning);
+            parser.ParserWarning += this.Parser_ParserWarning;
             List<Interchange> interchanges = parser.ParseMultiple(stream);
 
             if (resourcePath.Contains("_811"))
-                Trace.Write("");
+            {
+                Trace.Write(string.Empty);
+            }
 
             StringBuilder x12 = new StringBuilder();
             foreach (var interchange in interchanges)
+            {
                 x12.AppendLine(interchange.SerializeToX12(true));
+            }
 
             Assert.AreEqual(orignalX12, x12.ToString().Trim());
             Trace.Write(x12.ToString());
@@ -152,7 +119,7 @@
             if (!resourcePath.Contains("_0x1D"))
             {
                 Trace.WriteLine(resourcePath);
-                Stream stream = this.GetEdi(resourcePath);
+                Stream stream = GetEdi(resourcePath);
 
                 var parser = new X12Parser();
                 Interchange interchange = parser.ParseMultiple(stream).First();
@@ -172,7 +139,7 @@
         [TestMethod]
         public void ParseModifyAndTransformBackToX12()
         {
-            var stream = this.GetEdi("INS._270._4010.Example1_DHHS.txt");
+            var stream = GetEdi("INS._270._4010.Example1_DHHS.txt");
 
             var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
@@ -212,7 +179,7 @@
         [TestMethod]
         public void ParseToHtml()
         {
-            string resourcePath = Convert.ToString(TestContext.DataRow["ResourcePath"]);
+            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             if (!resourcePath.Contains("MultipleInterchanges"))
@@ -231,36 +198,65 @@
         public void CreateTestFile()
         {
             string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
-            string edi = System.IO.File.ReadAllText(filename);
+            string edi = File.ReadAllText(filename);
+            edi = edi.Replace('~', '\x1D');
 
-            edi = edi.Replace('~','\x1D');
-            System.IO.File.WriteAllText(filename, edi);
+            // act - assert
+            File.WriteAllText(filename, edi);
         }
 
         [TestMethod,Ignore]
         public void CreateTestFileWithTrailingBlanks()
         {
+            // arrange
             string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";
-            StringBuilder edi = new StringBuilder(System.IO.File.ReadAllText(filename));
+            var edi = new StringBuilder(File.ReadAllText(filename));
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
+            edi.Append((char)0);
 
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            System.IO.File.WriteAllText(filename, edi.ToString());
+            // act - assert
+            File.WriteAllText(filename, edi.ToString());
         }
 
         [TestMethod]
         public void ParseUnicodeFile()
         {
+            // arrange
             var fs = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles.INS._837P._5010.UnicodeExample.txt");
+            var parser = new X12Parser();
 
-
-            X12Parser parser = new X12Parser();
+            // act - assert
             var interchange = parser.ParseMultiple(fs, Encoding.Unicode);
             Trace.Write(interchange.First().Serialize());
+        }
+
+        private static Stream GetEdi(string resourcePath)
+        {
+            return Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Tests.Unit.Parsing._SampleEdiFiles." + resourcePath);
+        }
+
+        private string GetXPathQuery(int index)
+        {
+            if (this.TestContext.DataRow.Table.Columns.Contains($"Query{index}"))
+            {
+                return Convert.ToString(this.TestContext.DataRow[$"Query{index}"]);
+            }
+
+            return null;
+        }
+
+        private string GetExpectedValue(int index)
+        {
+            if (this.TestContext.DataRow.Table.Columns.Contains($"Expected{index}"))
+            {
+                return Convert.ToString(this.TestContext.DataRow[$"Expected{index}"]);
+            }
+
+            return null;
         }
     }
 }

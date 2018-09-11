@@ -16,7 +16,6 @@
           N4*LOCCITY*LOCSTATE*LOCZIP~
       HL*2**O~
         PRF*PO NUMBER~
-        TD5*****CHR*CC~
       HL*3**I~
         LIN*001*SK*100014544*VN*25555120~
         SN1**10*EA**10*EA~
@@ -39,6 +38,6 @@
         LIN*007*SK*100014546*VN*25555150~
         SN1**12*EA**12*EA~
       CTT*9~
-    SE*40*0414~
+    SE*39*0414~
   GE*1*414~
 IEA*1*000001054~
