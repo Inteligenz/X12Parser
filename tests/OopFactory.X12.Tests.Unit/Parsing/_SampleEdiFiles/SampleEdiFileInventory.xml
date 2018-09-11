@@ -347,6 +347,7 @@
     <EdiFile>
       <ResourcePath>INS._837D._4010.Spec_4.2.2_Automobile.txt</ResourcePath>
     </EdiFile>
+    <!-- Disabled while investigating 4010 837I specification documentation
     <EdiFile>
       <ResourcePath>INS._837I._4010.Example1.txt</ResourcePath>
     </EdiFile>
@@ -369,17 +370,18 @@
       <ResourcePath>INS._837I._4010.Spec_4.2.3_AutomobileAccident.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <ResourcePath>INS._837I._5010.Spec_3.1.1.txt</ResourcePath>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <ResourcePath>INS._837I._5010.Spec_3.1.2_TwoClaimsForTheSameProvider.txt</ResourcePath>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch2.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <ResourcePath>INS._837I._5010.Spec_3.1.3_PPORepricedClaim.txt</ResourcePath>
+      <SourceUrl>Provided by user swreed</SourceUrl>
+      <ResourcePath>INS._837I._4010.FromSwreed.Batch3.txt</ResourcePath>
     </EdiFile>
-    <EdiFile>
-      <ResourcePath>INS._837I._5010.Spec_3.1.4_OutOfNetworkRepricedClaim.txt</ResourcePath>
-    </EdiFile>
+    -->
     <EdiFile>
       <ResourcePath>INS._837P._4010.Cms1500Test.txt</ResourcePath>
     </EdiFile>
@@ -431,16 +433,16 @@
       <ResourcePath>INS._837P._4010.FromNth.837_DeIdent_05.dat</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <SourceUrl>Provided by user swreed</SourceUrl>
-      <ResourcePath>INS._837I._4010.FromSwreed.Batch1.txt</ResourcePath>
+      <ResourcePath>INS._837I._5010.Spec_3.1.1.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <SourceUrl>Provided by user swreed</SourceUrl>
-      <ResourcePath>INS._837I._4010.FromSwreed.Batch2.txt</ResourcePath>
+      <ResourcePath>INS._837I._5010.Spec_3.1.2_TwoClaimsForTheSameProvider.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
-      <SourceUrl>Provided by user swreed</SourceUrl>
-      <ResourcePath>INS._837I._4010.FromSwreed.Batch3.txt</ResourcePath>
+      <ResourcePath>INS._837I._5010.Spec_3.1.3_PPORepricedClaim.txt</ResourcePath>
+    </EdiFile>
+    <EdiFile>
+      <ResourcePath>INS._837I._5010.Spec_3.1.4_OutOfNetworkRepricedClaim.txt</ResourcePath>
     </EdiFile>
     <EdiFile>
       <ResourcePath>INS._837P._5010.Example1_HealthInsurance.txt</ResourcePath>
