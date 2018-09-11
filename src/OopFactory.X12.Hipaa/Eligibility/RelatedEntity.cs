@@ -4,6 +4,9 @@
 
     public class RelatedEntity : Entity
     {
+        /// <summary>
+        /// Gets or sets the provider information
+        /// </summary>
         public ProviderInformation ProviderInfo { get; set; }
     }
 }

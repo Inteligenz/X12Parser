@@ -6,20 +6,9 @@
     public class Provider : Entity
     {
         [XmlAttribute]
-        public string Npi
-        {
-            get
-            {
-                if (this.Name?.Identification != null && this.Name.Identification.Qualifier == "XX")
-                {
-                    return this.Name.Identification.Id;
-                }
-                else
-                {
-                    return this.GetReferenceId("HPI");
-                }
-            }
-        }
+        public string Npi => this.Name?.Identification?.Qualifier == "XX"
+                           ? this.Name.Identification.Id 
+                           : this.GetReferenceId("HPI");
 
         [XmlAttribute]
         public string TaxId
@@ -31,11 +20,9 @@
                 {
                     return this.Name.Identification.Id;
                 }
-                else
-                {
-                    var taxId = this.GetReferenceId("EI");
-                    return taxId ?? this.GetReferenceId("TJ");
-                }
+
+                var taxId = this.GetReferenceId("EI");
+                return taxId ?? this.GetReferenceId("TJ");
             }
         }
 
@@ -49,10 +36,8 @@
                 {
                     return this.Name.Identification.Id;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 

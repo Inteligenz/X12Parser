@@ -15,24 +15,38 @@
 
         private void UpdateElement()
         {
-            string value = string.Format("{1}{0}{2}",
-                this.segment.Delimiters.SubElementSeparator,
-                this.name,
-                this.reference);
+            string value = 
+                $"{this.name}{this.segment.Delimiters.SubElementSeparator}{this.reference}";
             value = value.TrimEnd(this.segment.Delimiters.SubElementSeparator);
             this.segment.SetElement(this.elementNumber, value);
         }
 
         public string _1_ContextName
         {
-            get { return this.name; }
-            set { this.name = value; UpdateElement(); }
+            get
+            {
+                return this.name;
+            }
+
+            set
+            {
+                this.name = value;
+                this.UpdateElement();
+            }
         }
 
         public string _2_ContextReference
         {
-            get { return this.reference; }
-            set { this.reference = value; UpdateElement(); }
+            get
+            {
+                return this.reference;
+            }
+
+            set
+            {
+                this.reference = value;
+                this.UpdateElement();
+            }
         }
     }
 }

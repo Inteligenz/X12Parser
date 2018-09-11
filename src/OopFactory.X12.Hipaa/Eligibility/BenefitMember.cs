@@ -12,6 +12,9 @@
     /// </summary>
     public class BenefitMember : Member
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BenefitMember"/> class
+        /// </summary>
         public BenefitMember()
         {
             if (this.Diagnoses == null)
@@ -38,8 +41,14 @@
         [XmlAttribute]
         public string BirthSequenceNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ProviderInformation"/>
+        /// </summary>
         public ProviderInformation ProviderInfo { get; set; }
 
+        /// <summary>
+        /// Gets or sets diagnosis received from a provider
+        /// </summary>
         [XmlElement(ElementName = "Diagnosis")]
         public List<Lookup> Diagnoses { get; set; }
 
@@ -121,6 +130,9 @@
         #endregion
 
         #region EligibilityBeginDate properties
+        /// <summary>
+        /// Gets the date the eligibility begins
+        /// </summary>
         public DateTime? EligibilityBeginDate
         {
             get
@@ -130,6 +142,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the serializable data for the <see cref="EligibilityBeginDate"/>
+        /// </summary>
         [XmlAttribute(AttributeName = "EligibilityBeginDate", DataType = "date")]
         public DateTime SerializableEligibilityBeginDate => this.EligibilityBeginDate ?? DateTime.MinValue;
 
@@ -138,6 +153,9 @@
         #endregion
 
         #region EligibilityEndDate properties
+        /// <summary>
+        /// Gets the date when the benefits end
+        /// </summary>
         public DateTime? EligibilityEndDate
         {
             get
@@ -147,6 +165,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the serializable data for the <see cref="EligibilityEndDate"/>
+        /// </summary>
         [XmlAttribute(AttributeName = "EligibilityEndDate", DataType = "date")]
         public DateTime SerializableEligibilityEndDate => this.EligibilityEndDate ?? DateTime.MinValue;
 

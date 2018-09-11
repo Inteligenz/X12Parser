@@ -7,6 +7,9 @@
 
     public class EligibilityBenefitInformation
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EligibilityBenefitInformation"/> class
+        /// </summary>
         public EligibilityBenefitInformation()
         {
             if (this.Identifications == null)
@@ -40,6 +43,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the number of service type
+        /// </summary>
         public string ServiceTypeCount { get; set; }
 
         [XmlIgnore]
@@ -89,13 +95,22 @@
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the benefit information type
+        /// </summary>
         public Lookup InfoType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the benefit coverage level
+        /// </summary>
         public Lookup CoverageLevel { get; set; }
 
         [XmlElement(ElementName = "ServiceType")]
         public List<Lookup> ServiceTypes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the insurance type
+        /// </summary>
         public Lookup InsuranceType { get; set; }
 
         public string PlanCoverageDescription { get; set; }
