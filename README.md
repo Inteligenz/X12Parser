@@ -1,4 +1,7 @@
-# X12.NET
+![https://github.com/bvanfleet/X12.NET](https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png)
+
+X12.NET
+-------
 
 This is an open source .NET C# implementation of an X12 Parser. Originally forked from [Inteligenz/X12Parser](https://github.com/Inteligenz/X12Parser).
 
