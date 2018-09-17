@@ -1,4 +1,8 @@
-![https://github.com/bvanfleet/X12.NET](https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png" />
+</div>
+
+--------
 
 X12.NET
 -------
