@@ -5,15 +5,28 @@
     
     using OopFactory.X12.Shared.Models;
 
+    /// <summary>
+    /// Provides methods for unbundling loops from different loop container types
+    /// </summary>
     internal class UnbundlingService
     {
         private readonly char segmentTerminator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnbundlingService"/> class
+        /// </summary>
+        /// <param name="segmentTerminator">Termination character for a segment</param>
         public UnbundlingService(char segmentTerminator)
         {
             this.segmentTerminator = segmentTerminator;
         }
        
+        /// <summary>
+        /// Unbundles each loop from a <see cref="LoopContainer"/>
+        /// </summary>
+        /// <param name="list">Collection of loops being unbundled</param>
+        /// <param name="container">Container with loops to be unbundled</param>
+        /// <param name="loopId">Loop identifier</param>
         public void UnbundleLoops(IList<string> list, LoopContainer container, string loopId)
         {
             foreach (Loop loop in container.Loops)
@@ -27,6 +40,12 @@
             }
         }
 
+        /// <summary>
+        /// Unbundles each loop from a <see cref="HierarchicalLoopContainer"/>
+        /// </summary>
+        /// <param name="list">Collection of loops being unbundled</param>
+        /// <param name="container">Container with loops to be unbundled</param>
+        /// <param name="loopId">Loop identifier</param>
         public void UnbundleHLoops(List<string> list, HierarchicalLoopContainer container, string loopId)
         {
             this.UnbundleLoops(list, container, loopId);
@@ -53,13 +72,13 @@
             foreach (var segment in loop.Transaction.TrailerSegments)
             {
                 sb.Append(segment.SegmentString);
-                sb.Append($"{this.segmentTerminator}");
+                sb.Append(this.segmentTerminator);
             }
 
             foreach (var segment in loop.Transaction.FunctionGroup.TrailerSegments)
             {
                 sb.Append(segment.SegmentString);
-                sb.Append($"{this.segmentTerminator}");
+                sb.Append(this.segmentTerminator);
             }
 
             return sb.ToString();
@@ -83,7 +102,7 @@
 
                 var sb = new StringBuilder(this.SerializeParent(parent, thisLoopId));
                 sb.Append(container.SegmentString);
-                sb.Append($"{this.segmentTerminator}");
+                sb.Append(this.segmentTerminator);
                 foreach (var segment in container.Segments)
                 {
                     if (segment is Loop loop)
@@ -96,7 +115,7 @@
                     else
                     {
                         sb.Append(segment.SegmentString);
-                        sb.Append($"{this.segmentTerminator}");
+                        sb.Append(this.segmentTerminator);
                     }
                 }
 
@@ -106,9 +125,9 @@
             {
                 var sb = new StringBuilder();
                 sb.Append(container.Transaction.FunctionGroup.SegmentString);
-                sb.Append($"{this.segmentTerminator}");
+                sb.Append(this.segmentTerminator);
                 sb.Append(container.Transaction.SegmentString);
-                sb.Append($"{this.segmentTerminator}");
+                sb.Append(this.segmentTerminator);
 
                 foreach (var segment in container.Transaction.Segments)
                 {
@@ -122,7 +141,7 @@
                     else
                     {
                         sb.Append(segment.SegmentString);
-                        sb.Append($"{this.segmentTerminator}");
+                        sb.Append(this.segmentTerminator);
                     }
                 }
 

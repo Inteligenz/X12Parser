@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="X12ParserHLoopIdExists" xml:space="preserve">
+    <value>Hierarchical Loop '{0}' cannot be added to transaction '{1}' because the ID '{2}' already exists.</value>
+    <comment>Format Parameter(s): loopId, transactionId, loopId</comment>
+  </data>
   <data name="X12ParserInvalidHLoopSpecification" xml:space="preserve">
     <value>Heierchical Loop {0} cannot be added to transaction set {1} because it's specification cannot be identified.</value>
     <comment>Format Parameter(s): hloopId, transactionSetId</comment>
@@ -125,6 +129,18 @@
     <value>Segment {0} does not have a matching {1} segment preceding it.</value>
     <comment>Format Parameter(s): currentId, requiredId</comment>
   </data>
+  <data name="X12ParserMissingGsSegment" xml:space="preserve">
+    <value>Segment '{0}' cannot occur without a preceding GS segment.</value>
+    <comment>Format Parameter(s): segmentString</comment>
+  </data>
+  <data name="X12ParserMissingParentIdError" xml:space="preserve">
+    <value>Hierarchical Loop '{0}' expects Parent ID '{1}' which did not occur preceding it.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.</value>
+    <comment>Format Parameter(s): loopId, parentId</comment>
+  </data>
+  <data name="X12ParserMissingParentIdWarning" xml:space="preserve">
+    <value>Hierarchical Loop '{0}' expects Parent ID '{1}' which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.</value>
+    <comment>Format Parameter(s): loopId, parentId</comment>
+  </data>
   <data name="X12ParserMissingPrecedingSegment" xml:space="preserve">
     <value>Segment '{0}' cannot occur before a {1} segment.</value>
     <comment>Format Parameter(s): currentId, precedingId</comment>
@@ -132,6 +148,14 @@
   <data name="X12ParserParseError" xml:space="preserve">
     <value>Your file contains more than one interchange, you must use ParseMultiple instead of Parse to get all the records in this file.</value>
     <comment>Format Parameter(s): none</comment>
+  </data>
+  <data name="X12ParserSegmentCannotBeIdentitied" xml:space="preserve">
+    <value>Segment '{3}' in segment position '{4}' within transaction '{1}' cannot be identified within the supplied specification for transaction set '{0}' in any of the expected loops: {5}.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.</value>
+    <comment>Format Parameter(s): transactionSetId, transactionId, segmentId, segmentPosition, containerStack</comment>
+  </data>
+  <data name="X12ParserSegmentWarning" xml:space="preserve">
+    <value>Segment '{2}' in segment position '{3}' within transaction '{1}' cannot be identified within the supplied specification for transaction set '{0}' in any of the expected loops: {4}.  It will be added to loop '{5}', but this may invalidate all subsequent segments.</value>
+    <comment>Format Parameter(s): transactionSetId, transactionId, segmentId, segmentPosition, containerStack, loopId</comment>
   </data>
   <data name="X12ReaderInvalidHeader" xml:space="preserve">
     <value>ISA segment and terminator is expected to be at least 106 characters.</value>

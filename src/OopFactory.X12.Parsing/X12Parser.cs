@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -203,7 +204,7 @@
                         case "ST":
                             if (fg == null)
                             {
-                                throw new InvalidOperationException(string.Format("segment '{0}' cannot occur without a preceding GS segment.", segmentString));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserMissingGsSegment, segmentString));
                             }
 
                             segmentIndex = 1;
@@ -220,10 +221,10 @@
                             tr = null;
                             break;
                         case "HL":
-                            var hlSegment = new Segment(null, reader.Delimiters, segmentString);
-                            string id = hlSegment.GetElement(1);
-                            string parentId = hlSegment.GetElement(2);
-                            string levelCode = hlSegment.GetElement(3);
+                            var hierarchicalLoopSegment = new Segment(null, reader.Delimiters, segmentString);
+                            string id = hierarchicalLoopSegment.GetElement(1);
+                            string parentId = hierarchicalLoopSegment.GetElement(2);
+                            string levelCode = hierarchicalLoopSegment.GetElement(3);
 
                             while (!(currentContainer is HierarchicalLoopContainer hlCurrentContainer && hlCurrentContainer.AllowsHierarchicalLoop(levelCode)))
                             {
@@ -252,7 +253,7 @@
                                 {
                                     if (this.throwExceptionOnSyntaxErrors)
                                     {
-                                        throw new InvalidOperationException(string.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.", id, parentId));
+                                        throw new InvalidOperationException(string.Format(Resources.X12ParserMissingParentIdError, id, parentId));
                                     }
 
                                     this.OnParserWarning(new X12ParserWarningEventArgs
@@ -264,7 +265,7 @@
                                         SegmentPositionInInterchange = segmentIndex,
                                         Segment = segmentString,
                                         SegmentId = segmentId,
-                                        Message = string.Format("Hierarchical Loop {0} expects Parent ID {1} which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid.", id, parentId)
+                                        Message = string.Format(Resources.X12ParserMissingParentIdWarning, id, parentId)
                                     });
                                 }
                             }
@@ -281,12 +282,12 @@
 
                             if (hloops.ContainsKey(id))
                             {
-                                throw new InvalidOperationException(string.Format("Hierarchical Loop {0} cannot be added to transaction {1} because the ID {2} already exists.", segmentString, tr.ControlNumber, id));
+                                throw new InvalidOperationException(string.Format(Resources.X12ParserHLoopIdExists, segmentString, tr.ControlNumber, id));
                             }
 
                             hloops.Add(id, (HierarchicalLoop)currentContainer);
                             break;
-                        case "TA1": // Technical acknowledgement
+                        case "TA1":
                             if (envelop == null)
                             { 
                                 throw new InvalidOperationException(string.Format(Resources.X12ParserMismatchSegment, segmentString, "ISA"));
@@ -323,7 +324,13 @@
                                         if (this.throwExceptionOnSyntaxErrors)
                                         {
                                             throw new TransactionValidationException(
-                                                "Segment '{3}' in segment position {4} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {5}.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor.", tran.IdentifierCode, tran.ControlNumber, string.Empty, segmentString, segmentIndex, string.Join(",", containerStack));
+                                                Resources.X12ParserSegmentCannotBeIdentitied,
+                                                tran.IdentifierCode,
+                                                tran.ControlNumber,
+                                                string.Empty,
+                                                segmentString,
+                                                segmentIndex,
+                                                string.Join(",", containerStack));
                                         }
 
                                         currentContainer = originalContainer;
@@ -337,7 +344,14 @@
                                             SegmentPositionInInterchange = segmentIndex,
                                             SegmentId = segmentId,
                                             Segment = segmentString,
-                                            Message = string.Format("Segment '{2}' in segment position {3} within transaction '{1}' cannot be identified within the supplied specification for transaction set {0} in any of the expected loops: {4}.  It will be added to loop {5}, but this may invalidate all subsequent segments.", tran.IdentifierCode, tran.ControlNumber, segmentString, segmentIndex, string.Join(",", containerStack), containerStack.LastOrDefault())
+                                            Message = string.Format(
+                                                Resources.X12ParserSegmentWarning,
+                                                tran.IdentifierCode,
+                                                tran.ControlNumber,
+                                                segmentString,
+                                                segmentIndex,
+                                                string.Join(",", containerStack),
+                                                containerStack.LastOrDefault())
                                         });
                                         break;
                                     }

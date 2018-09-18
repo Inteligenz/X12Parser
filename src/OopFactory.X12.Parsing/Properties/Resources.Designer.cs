@@ -61,6 +61,15 @@ namespace OopFactory.X12.Parsing.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hierarchical Loop &apos;{0}&apos; cannot be added to transaction &apos;{1}&apos; because the ID &apos;{2}&apos; already exists..
+        /// </summary>
+        internal static string X12ParserHLoopIdExists {
+            get {
+                return ResourceManager.GetString("X12ParserHLoopIdExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heierchical Loop {0} cannot be added to transaction set {1} because it&apos;s specification cannot be identified..
         /// </summary>
         internal static string X12ParserInvalidHLoopSpecification {
@@ -79,6 +88,33 @@ namespace OopFactory.X12.Parsing.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Segment &apos;{0}&apos; cannot occur without a preceding GS segment..
+        /// </summary>
+        internal static string X12ParserMissingGsSegment {
+            get {
+                return ResourceManager.GetString("X12ParserMissingGsSegment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hierarchical Loop &apos;{0}&apos; expects Parent ID &apos;{1}&apos; which did not occur preceding it.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor..
+        /// </summary>
+        internal static string X12ParserMissingParentIdError {
+            get {
+                return ResourceManager.GetString("X12ParserMissingParentIdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hierarchical Loop &apos;{0}&apos; expects Parent ID &apos;{1}&apos; which did not occur preceding it.  This will be parsed as if it has no parent, but the file may not be valid..
+        /// </summary>
+        internal static string X12ParserMissingParentIdWarning {
+            get {
+                return ResourceManager.GetString("X12ParserMissingParentIdWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Segment &apos;{0}&apos; cannot occur before a {1} segment..
         /// </summary>
         internal static string X12ParserMissingPrecedingSegment {
@@ -93,6 +129,24 @@ namespace OopFactory.X12.Parsing.Properties {
         internal static string X12ParserParseError {
             get {
                 return ResourceManager.GetString("X12ParserParseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Segment &apos;{3}&apos; in segment position &apos;{4}&apos; within transaction &apos;{1}&apos; cannot be identified within the supplied specification for transaction set &apos;{0}&apos; in any of the expected loops: {5}.  To change this to a warning, pass throwExceptionOnSyntaxErrors = false to the X12Parser constructor..
+        /// </summary>
+        internal static string X12ParserSegmentCannotBeIdentitied {
+            get {
+                return ResourceManager.GetString("X12ParserSegmentCannotBeIdentitied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Segment &apos;{2}&apos; in segment position &apos;{3}&apos; within transaction &apos;{1}&apos; cannot be identified within the supplied specification for transaction set &apos;{0}&apos; in any of the expected loops: {4}.  It will be added to loop &apos;{5}&apos;, but this may invalidate all subsequent segments..
+        /// </summary>
+        internal static string X12ParserSegmentWarning {
+            get {
+                return ResourceManager.GetString("X12ParserSegmentWarning", resourceCulture);
             }
         }
         

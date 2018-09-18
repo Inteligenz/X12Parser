@@ -8,7 +8,7 @@
     public class X12ParserWarningEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets or sets the flag indicating whether the file is valid
+        /// Gets or sets a value indicating whether the file is valid
         /// </summary>
         public bool FileIsValid { get; set; }
 

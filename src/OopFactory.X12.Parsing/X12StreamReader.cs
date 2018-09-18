@@ -195,6 +195,7 @@
                         segments.Append(this.Delimiters.SegmentTerminator);
                         break;
                 }
+
                 segmentString = this.ReadNextSegment();
                 segmentId = this.ReadSegmentId(segmentString);
             }
