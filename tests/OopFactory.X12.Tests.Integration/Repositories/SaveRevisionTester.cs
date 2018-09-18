@@ -12,11 +12,13 @@
     [TestClass]
     public class SaveRevisionTester
     {
+        private static readonly string Dsn = "Data Source=localhost;Initial Catalog=Test;Integrated Security=True";
+
         [TestMethod, Ignore]
         public void SaveRevisionTest()
         {
             var repo = new SqlTransactionRepository(
-                "Data Source=127.0.0.1;Initial Catalog=X12;Integrated Security=True", 
+                Dsn, 
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','),
                 typeof(long),
@@ -44,7 +46,7 @@
         public void SaveRevisionGuidTest()
         {
             var repo = new SqlTransactionRepository(
-                "Data Source=127.0.0.1;Initial Catalog=Test5;Integrated Security=True",
+                Dsn,
                 new SpecificationFinder(),
                 "NM1,N1,N3,N4,N9,REF,PER".Split(','),
                 typeof(Guid),
