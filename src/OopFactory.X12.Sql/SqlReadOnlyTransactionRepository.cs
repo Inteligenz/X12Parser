@@ -6,6 +6,8 @@
     using System.Diagnostics;
     using System.Text;
 
+    using OopFactory.X12.Sql.Properties;
+
     /// <summary>
     /// Collection of readonly methods for retrieving data from database into X12 models
     /// </summary>
@@ -61,12 +63,12 @@
             {
                 var cmd = new SqlCommand(
                     string.Format(
-@"select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
+@"SELECT ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
 ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
-from [{0}].GetTransactionSetSegments(@transactionSetId, @includeControlSegments, @revisionId) ts
-join [{0}].Interchange i on ts.InterchangeId = i.Id
-left join [{0}].Loop l on ts.LoopId = l.Id
-order by PositionInInterchange",
+FROM [{0}].GetTransactionSetSegments(@transactionSetId, @includeControlSegments, @revisionId) ts
+JOIN [{0}].Interchange i ON ts.InterchangeId = i.Id
+LEFT JOIN [{0}].Loop l ON ts.LoopId = l.Id
+ORDER BY PositionInInterchange",
                     this.Schema),
                     conn);
 
@@ -101,12 +103,12 @@ order by PositionInInterchange",
             {
                 var cmd = new SqlCommand(
                     string.Format(
-@"select ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
+@"SELECT ts.InterchangeId, ts.FunctionalGroupId, ts.TransactionSetId, ts.ParentLoopId, ts.LoopId, ts.RevisionId, ts.Deleted,
 ts.PositionInInterchange, l.SpecLoopId, ts.SegmentId, ts.Segment, i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
-from [{0}].GetTransactionSegments(@loopId, @includeControlSegments, @revisionId) ts
-join [{0}].Interchange i on ts.InterchangeId = i.Id
-left join [{0}].Loop l on ts.LoopId = l.Id
-order by PositionInInterchange",
+FROM [{0}].GetTransactionSegments(@loopId, @includeControlSegments, @revisionId) ts
+JOIN [{0}].Interchange i ON ts.InterchangeId = i.Id
+LEFT JOIN [{0}].Loop l ON ts.LoopId = l.Id
+ORDER BY PositionInInterchange",
                     this.Schema),
                     conn);
 
@@ -115,15 +117,16 @@ order by PositionInInterchange",
                 cmd.Parameters.AddWithValue("@revisionId", revisionId);
 
                 conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                var s = new List<RepoSegment>();
-                while (reader.Read())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    s.Add(this.RepoSegmentFromReader(reader));
-                }
+                    var s = new List<RepoSegment>();
+                    while (reader.Read())
+                    {
+                        s.Add(this.RepoSegmentFromReader(reader));
+                    }
 
-                return s;
+                    return s;
+                }
             }
         }
 
@@ -135,22 +138,26 @@ order by PositionInInterchange",
         public List<RepoTransactionSet> GetTransactionSets(RepoTransactionSetSearchCriteria criteria)
         {
             var sql = string.Format(
-@"select ts.Id, ts.InterchangeId, i.SenderId, i.ReceiverId, i.ControlNumber as InterchangeControlNumber, i.[Date] as InterchangeDate, i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator, ts.FunctionalGroupId, fg.FunctionalIdCode, fg.ControlNumber as FunctionalGroupControlNumber, fg.[Version], ts.IdentifierCode as TransactionSetCode, ts.ControlNumber, ts.ImplementationConventionRef
-from [{0}].TransactionSet ts
-join [{0}].Interchange i on ts.InterchangeId = i.Id
-join [{0}].FunctionalGroup fg on ts.FunctionalGroupId = fg.Id
-where ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
-  and i.SenderId = isnull(@senderId,i.SenderId)
-  and i.ReceiverId = isnull(@receiverId,i.ReceiverId)
-  and i.ControlNumber = isnull(@interchangeControlNumber, i.ControlNumber)
-  and i.[Date] >= isnull(@interchangeMinDate,i.[Date])
-  and i.[Date] <= isnull(@interchangeMaxDate,i.[Date])
-  and ts.FunctionalGroupId = isnull(@functionGroupId, ts.FunctionalGroupId)
-  and fg.ControlNumber = isnull(@functionGroupControlNumber, fg.ControlNumber)
-  and fg.[Version] like isnull('%' + @versionPattern + '%',fg.[Version])
-  and ts.Id = isnull(@transactionSetId, ts.Id)
-  and ts.IdentifierCode = isnull(@transactionSetCode, ts.IdentifierCode)
-  and ts.ControlNumber = isnull(@transactionSetControlNumber, ts.ControlNumber)",
+@"SELECT ts.Id, ts.InterchangeId, i.SenderId, i.ReceiverId,
+  i.ControlNumber AS InterchangeControlNumber, i.[Date] as InterchangeDate,
+  i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator, ts.FunctionalGroupId,
+  fg.FunctionalIdCode, fg.ControlNumber AS FunctionalGroupControlNumber, fg.[Version],
+  ts.IdentifierCode AS TransactionSetCode, ts.ControlNumber, ts.ImplementationConventionRef
+FROM [{0}].TransactionSet ts
+JOIN [{0}].Interchange i ON ts.InterchangeId = i.Id
+JOIN [{0}].FunctionalGroup fg ON ts.FunctionalGroupId = fg.Id
+WHERE ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
+  AND i.SenderId = isnull(@senderId,i.SenderId)
+  AND i.ReceiverId = isnull(@receiverId,i.ReceiverId)
+  AND i.ControlNumber = isnull(@interchangeControlNumber, i.ControlNumber)
+  AND i.[Date] >= isnull(@interchangeMinDate,i.[Date])
+  AND i.[Date] <= isnull(@interchangeMaxDate,i.[Date])
+  AND ts.FunctionalGroupId = isnull(@functionGroupId, ts.FunctionalGroupId)
+  AND fg.ControlNumber = isnull(@functionGroupControlNumber, fg.ControlNumber)
+  AND fg.[Version] like isnull('%' + @versionPattern + '%',fg.[Version])
+  AND ts.Id = isnull(@transactionSetId, ts.Id)
+  AND ts.IdentifierCode = isnull(@transactionSetCode, ts.IdentifierCode)
+  AND ts.ControlNumber = isnull(@transactionSetControlNumber, ts.ControlNumber)",
                 this.Schema);
 
             using (var conn = new SqlConnection(this.Dsn))
@@ -194,28 +201,28 @@ where ts.InterchangeId = isnull(@interchangeId, ts.InterchangeId)
         public List<RepoLoop> GetLoops(RepoLoopSearchCriteria criteria)
         {
             var sql = string.Format(
-@"select l.Id, l.ParentLoopId, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, 
+@"SELECT l.Id, l.ParentLoopId, l.InterchangeId, l.TransactionSetId, l.TransactionSetCode, 
   l.SpecLoopId, l.LevelId, l.LevelCode, l.StartingSegmentId, l.EntityIdentifierCode,
   s1.RevisionId, s1.PositionInInterchange, s1.Segment, 
   i.SegmentTerminator, i.ElementSeparator, i.ComponentSeparator
-from [{0}].[Loop] l
-join [{0}].Interchange i on l.InterchangeId = i.Id
-join [{0}].Segment s1 on l.Id = s1.LoopId
-where s1.Deleted = 0
-and s1.RevisionId = (select max(RevisionId) 
-                    from [{0}].Segment s2 
-                    where s1.InterchangeId = s2.InterchangeId 
-                      and s1.PositionInInterchange = s2.PositionInInterchange)
-and l.Id = isnull(@loopId,l.Id)
-and isnull(l.ParentLoopId,0) = coalesce(@parentLoopId,l.ParentLoopId,0)
-and l.InterchangeId = isnull(@interchangeId,l.InterchangeId)
-and l.TransactionSetId = isnull(@transactionSetId,l.TransactionSetId)
-and l.TransactionSetCode = isnull(@transactionSetCode, l.TransactionSetCode)
-and isnull(l.SpecLoopId,'') = coalesce(@specLoopId, l.SpecLoopId,'')
-and isnull(l.LevelId,'') = coalesce(@levelId, l.LevelId,'')
-and isnull(l.LevelCode,'') = coalesce(@levelCode, l.LevelCode,'')
-and l.StartingSegmentId = isnull(@startingSegmentId,l.StartingSegmentId)
-and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.EntityIdentifierCode,'')",
+FROM [{0}].[Loop] l
+JOIN [{0}].Interchange i ON l.InterchangeId = i.Id
+JOIN [{0}].Segment s1 ON l.Id = s1.LoopId
+WHERE s1.Deleted = 0
+AND s1.RevisionId = (SELECT max(RevisionId) 
+                    FROM [{0}].Segment s2 
+                    WHERE s1.InterchangeId = s2.InterchangeId 
+                      AND s1.PositionInInterchange = s2.PositionInInterchange)
+AND l.Id = isnull(@loopId,l.Id)
+AND isnull(l.ParentLoopId,0) = coalesce(@parentLoopId,l.ParentLoopId,0)
+AND l.InterchangeId = isnull(@interchangeId,l.InterchangeId)
+AND l.TransactionSetId = isnull(@transactionSetId,l.TransactionSetId)
+AND l.TransactionSetCode = isnull(@transactionSetCode, l.TransactionSetCode)
+AND isnull(l.SpecLoopId,'') = coalesce(@specLoopId, l.SpecLoopId,'')
+AND isnull(l.LevelId,'') = coalesce(@levelId, l.LevelId,'')
+AND isnull(l.LevelCode,'') = coalesce(@levelCode, l.LevelCode,'')
+AND l.StartingSegmentId = isnull(@startingSegmentId,l.StartingSegmentId)
+AND isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.EntityIdentifierCode,'')",
                 this.Schema);
 
             using (var conn = new SqlConnection(this.Dsn))
@@ -254,134 +261,138 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
         /// <returns>List of <see cref="RepoEntity"/> found within criteria from database</returns>
         public List<RepoEntity> GetEntities(RepoEntitySearchCriteria criteria)
         {
-            var sql = new StringBuilder($"select * from [{this.Schema}].Entity where 1=1 ");
-
-            if (!string.IsNullOrEmpty(criteria.EntityIdentifierCodes))
+            var sql = new StringBuilder($"SELECT * FROM [{this.Schema}].Entity");
+            if (criteria != null)
             {
-                var codes =
-                    this.GetSqlInString(criteria.EntityIdentifierCodes.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+                sql.Append(" WHERE 1=1");
 
-                sql.AppendFormat(" and EntityIdentifierCode in ({0})", codes);
-            }
+                if (!string.IsNullOrEmpty(criteria.EntityIdentifierCodes))
+                {
+                    var codes = this.GetSqlInString(
+                        criteria.EntityIdentifierCodes.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 
-            if (!string.IsNullOrEmpty(criteria.EntityIdentifierContains))
-            {
-                sql.AppendFormat(" and EntityIdentifier like '%{0}%'", criteria.EntityIdentifierContains);
-            }
+                    sql.AppendFormat(" AND EntityIdentifierCode IN ({0})", codes);
+                }
 
-            if (criteria.InterchangeId != this.DefaultIdentityTypeValue)
-            {
-                sql.AppendFormat(" and InterchangeId = '{0}'", criteria.InterchangeId);
-            }
+                if (!string.IsNullOrEmpty(criteria.EntityIdentifierContains))
+                {
+                    sql.AppendFormat(" AND EntityIdentifier LIKE '%{0}%'", criteria.EntityIdentifierContains);
+                }
 
-            if (criteria.TransactionSetId != this.DefaultIdentityTypeValue)
-            {
-                sql.AppendFormat(" and TransactionSetId = '{0}'", criteria.TransactionSetId);
-            }
+                if (criteria.InterchangeId != this.DefaultIdentityTypeValue)
+                {
+                    sql.AppendFormat(" AND InterchangeId = '{0}'", criteria.InterchangeId);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.TransactionSetCode))
-            {
-                sql.AppendFormat(" and TransactionSetCode = '{0}'", criteria.TransactionSetCode);
-            }
+                if (criteria.TransactionSetId != this.DefaultIdentityTypeValue)
+                {
+                    sql.AppendFormat(" AND TransactionSetId = '{0}'", criteria.TransactionSetId);
+                }
 
-            if (criteria.ParentLoopId != this.DefaultIdentityTypeValue)
-            {
-                sql.AppendFormat(" and ParentLoopId = '{0}'", criteria.ParentLoopId);
-            }
+                if (!string.IsNullOrEmpty(criteria.TransactionSetCode))
+                {
+                    sql.AppendFormat(" AND TransactionSetCode = '{0}'", criteria.TransactionSetCode);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.SpecLoopId))
-            {
-                sql.AppendFormat(" and SpecLoopId = '{0}'", criteria.SpecLoopId);
-            }
+                if (criteria.ParentLoopId != this.DefaultIdentityTypeValue)
+                {
+                    sql.AppendFormat(" AND ParentLoopId = '{0}'", criteria.ParentLoopId);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.StartingSegmentId))
-            {
-                sql.AppendFormat(" and StartingSegmentId = '{0}'", criteria.StartingSegmentId);
-            }
+                if (!string.IsNullOrEmpty(criteria.SpecLoopId))
+                {
+                    sql.AppendFormat(" AND SpecLoopId = '{0}'", criteria.SpecLoopId);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.NameContains))
-            {
-                sql.AppendFormat(" and Name like '%{0}%'", criteria.NameContains);
-            }
+                if (!string.IsNullOrEmpty(criteria.StartingSegmentId))
+                {
+                    sql.AppendFormat(" AND StartingSegmentId = '{0}'", criteria.StartingSegmentId);
+                }
 
-            if (criteria.IsPerson.HasValue)
-            {
-                sql.AppendFormat(" and IsPerson = {0}", criteria.IsPerson.Value ? "1" : "0");
-            }
+                if (!string.IsNullOrEmpty(criteria.NameContains))
+                {
+                    sql.AppendFormat(" AND Name LIKE '%{0}%'", criteria.NameContains);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.LastNameStartsWith))
-            {
-                sql.AppendFormat(" and LastName like '{0}%'", criteria.LastNameStartsWith);
-            }
+                if (criteria.IsPerson.HasValue)
+                {
+                    sql.AppendFormat(" AND IsPerson = {0}", criteria.IsPerson.Value ? "1" : "0");
+                }
 
-            if (!string.IsNullOrEmpty(criteria.FirstNameContains))
-            {
-                sql.AppendFormat(" and FirstName like '%{0}%'", criteria.FirstNameContains);
-            }
+                if (!string.IsNullOrEmpty(criteria.LastNameStartsWith))
+                {
+                    sql.AppendFormat(" AND LastName LIKE '{0}%'", criteria.LastNameStartsWith);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.IdQualifier))
-            {
-                sql.AppendFormat(" and IdQualifier = '{0}'", criteria.IdQualifier);
-            }
+                if (!string.IsNullOrEmpty(criteria.FirstNameContains))
+                {
+                    sql.AppendFormat(" AND FirstName LIKE '%{0}%'", criteria.FirstNameContains);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.Identification))
-            {
-                sql.AppendFormat(" and Identification = '{0}'", criteria.Identification);
-            }
+                if (!string.IsNullOrEmpty(criteria.IdQualifier))
+                {
+                    sql.AppendFormat(" AND IdQualifier = '{0}'", criteria.IdQualifier);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.Ssn))
-            {
-                sql.AppendFormat(" and Ssn = '{0}'", criteria.Ssn);
-            }
+                if (!string.IsNullOrEmpty(criteria.Identification))
+                {
+                    sql.AppendFormat(" AND Identification = '{0}'", criteria.Identification);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.Npi))
-            {
-                sql.AppendFormat(" and Npi = '{0}'", criteria.Npi);
-            }
+                if (!string.IsNullOrEmpty(criteria.Ssn))
+                {
+                    sql.AppendFormat(" AND Ssn = '{0}'", criteria.Ssn);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.City))
-            {
-                sql.AppendFormat(" and City = '{0}'", criteria.City);
-            }
+                if (!string.IsNullOrEmpty(criteria.Npi))
+                {
+                    sql.AppendFormat(" AND Npi = '{0}'", criteria.Npi);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.StateCode))
-            {
-                sql.AppendFormat(" and StateCode = '{0}'", criteria.StateCode);
-            }
+                if (!string.IsNullOrEmpty(criteria.City))
+                {
+                    sql.AppendFormat(" AND City = '{0}'", criteria.City);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.PostalCode))
-            {
-                sql.AppendFormat(" and PostalCode = '{0}'", criteria.PostalCode);
-            }
+                if (!string.IsNullOrEmpty(criteria.StateCode))
+                {
+                    sql.AppendFormat(" AND StateCode = '{0}'", criteria.StateCode);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.County))
-            {
-                sql.AppendFormat(" and County = '{0}'", criteria.County);
-            }
+                if (!string.IsNullOrEmpty(criteria.PostalCode))
+                {
+                    sql.AppendFormat(" AND PostalCode = '{0}'", criteria.PostalCode);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.CountryCode))
-            {
-                sql.AppendFormat(" and CountryCode = '{0}'", criteria.CountryCode);
-            }
+                if (!string.IsNullOrEmpty(criteria.County))
+                {
+                    sql.AppendFormat(" AND County = '{0}'", criteria.County);
+                }
 
-            if (criteria.DateOfBirthOn.HasValue)
-            {
-                sql.AppendFormat(" and DateOfBirth = '{0:yyyyMMdd}'", criteria.DateOfBirthOn);
-            }
+                if (!string.IsNullOrEmpty(criteria.CountryCode))
+                {
+                    sql.AppendFormat(" AND CountryCode = '{0}'", criteria.CountryCode);
+                }
 
-            if (criteria.DateOfBirthOnOrAfter.HasValue)
-            {
-                sql.AppendFormat(" and DateOfBirth >= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrAfter);
-            }
+                if (criteria.DateOfBirthOn.HasValue)
+                {
+                    sql.AppendFormat(" AND DateOfBirth = '{0:yyyyMMdd}'", criteria.DateOfBirthOn);
+                }
 
-            if (criteria.DateOfBirthOnOrBefore.HasValue)
-            {
-                sql.AppendFormat(" and DateOfBirth <= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrBefore);
-            }
+                if (criteria.DateOfBirthOnOrAfter.HasValue)
+                {
+                    sql.AppendFormat(" AND DateOfBirth >= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrAfter);
+                }
 
-            if (!string.IsNullOrEmpty(criteria.Gender))
-            {
-                sql.AppendFormat(" and Gender = '{0}'", criteria.Gender);
+                if (criteria.DateOfBirthOnOrBefore.HasValue)
+                {
+                    sql.AppendFormat(" AND DateOfBirth <= '{0:yyyyMMdd}'", criteria.DateOfBirthOnOrBefore);
+                }
+
+                if (!string.IsNullOrEmpty(criteria.Gender))
+                {
+                    sql.AppendFormat(" AND Gender = '{0}'", criteria.Gender);
+                }
             }
 
             using (var conn = new SqlConnection(this.Dsn))
@@ -411,23 +422,24 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
             {
                 return Guid.Empty;
             }
-            else if (this.IdentityType == typeof(Guid))
+
+            if (this.IdentityType == typeof(Guid))
             {
                 return Guid.Parse(val.ToString());
             }
-            else if ((this.IdentityType == typeof(long?) || this.IdentityType == typeof(int?))
+
+            if ((this.IdentityType == typeof(long?) || this.IdentityType == typeof(int?))
                 && val == null)
             {
                 return 0;
             }
-            else if (this.IdentityType == typeof(long))
+
+            if (this.IdentityType == typeof(long))
             {
                 return Convert.ToInt64(val);
             }
-            else
-            {
-                return Convert.ToInt32(val);
-            }
+
+            return Convert.ToInt32(val);
         }
 
         private RepoSegment RepoSegmentFromReader(SqlDataReader reader)
@@ -578,7 +590,7 @@ and isnull(l.EntityIdentifierCode,'') = coalesce(@entityIdentifierCode, l.Entity
                 catch (FormatException)
                 {
                     Trace.TraceWarning(
-                        "Could not parse date of birth {1} to a date time for entity ID: {0}",
+                        Resources.DateOfBirthParsingError,
                         entity.EntityId,
                         reader["DateOfBirth"]);
                 }

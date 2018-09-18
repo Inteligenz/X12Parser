@@ -52,6 +52,11 @@
     <Compile Include="Interfaces\IIdentityProvider.cs" />
     <Compile Include="Interfaces\IParsingErrorRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RepoEntity.cs" />
     <Compile Include="RepoEntitySearchCriteria.cs" />
     <Compile Include="RepoLoop.cs" />
@@ -86,6 +91,12 @@
     <None Include="OopFactory.X12.Sql.nuspec">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

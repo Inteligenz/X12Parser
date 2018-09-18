@@ -12,6 +12,7 @@
     using OopFactory.X12.Specifications;
     using OopFactory.X12.Specifications.Enumerations;
     using OopFactory.X12.Sql.Interfaces;
+    using OopFactory.X12.Sql.Properties;
 
     internal class SegmentBatch
     {
@@ -115,7 +116,7 @@
 
                 for (var i = 1; i == 1 || i <= maxElements; i++)
                 {
-                    fieldNames.Add(string.Format("{0:00}", i));
+                    fieldNames.Add($"{i:00}");
                 }
 
                 if (!this.ParsedTables.ContainsKey(segment.SegmentId))
@@ -154,18 +155,17 @@
                         string val = segment.GetElement(i);
                         var elementSpec = spec.Elements[i - 1];
                         int maxLength = elementSpec.MaxLength;
-                        var column = string.Format("{0:00}", i);
+                        var column = $"{i:00}";
 
                         if (maxLength > 0 && val.Length > maxLength)
                         {
                             var message =
                                 string.Format(
-                                    "Element {2}{3:00} in position {1} of interchange {0} will be truncated because {4} exceeds the max length of {5}.",
+                                    Resources.ElementTruncatedWarning,
                                     interchangeId,
                                     positionInInterchange,
                                     segment.SegmentId,
                                     i,
-                                    val,
                                     maxLength);
                             Trace.TraceInformation(message);
                             parsingError.AppendLine(message);
@@ -209,7 +209,7 @@
                             }
                             else if (decimal.TryParse(val, out decVal))
                             {
-                                row[column] = val;
+                                row[column] = decVal;
                             }
                             else
                             {
@@ -301,11 +301,11 @@
             var row = this.LoopTable.NewRow();
 
             row["Id"] = id;
-            row["ParentLoopId"] = (parentLoopId != null && parentLoopId != this.defaultIdentityTypeValue)
+            row["ParentLoopId"] = !(parentLoopId == null || parentLoopId == this.defaultIdentityTypeValue)
                 ? parentLoopId
                 : DBNull.Value;
             row["InterchangeId"] = interchangeId;
-            row["TransactionSetId"] = (transactionSetId != null && transactionSetId != this.defaultIdentityTypeValue)
+            row["TransactionSetId"] = !(transactionSetId == null || transactionSetId == this.defaultIdentityTypeValue)
                 ? transactionSetId
                 : DBNull.Value;
             row["TransactionSetCode"] = transactionSetCode;
