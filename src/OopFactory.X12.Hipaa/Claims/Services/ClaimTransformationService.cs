@@ -39,7 +39,7 @@
         public ClaimDocument Transform837ToClaimDocument(Stream stream)
         {
             var interchanges = this.parser.ParseMultiple(stream);
-            ClaimDocument doc = new ClaimDocument();
+            var doc = new ClaimDocument();
             foreach (var interchange in interchanges)
             {
                 var thisDoc = this.Transform837ToClaimDocument(interchange);
@@ -97,6 +97,5 @@
 
             return ClaimDocument.Deserialize(xml);
         }
-
     }
 }

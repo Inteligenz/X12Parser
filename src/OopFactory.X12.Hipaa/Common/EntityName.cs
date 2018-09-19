@@ -3,12 +3,7 @@
     using System.Text;
     using System.Xml.Serialization;
 
-    public enum EntityNameQualifierEnum
-    {
-        Person,
-
-        NonPerson
-    }
+    using OopFactory.X12.Hipaa.Enums;
 
     public class EntityType
     {
@@ -16,7 +11,7 @@
         public string Identifier { get; set; }
 
         [XmlAttribute]
-        public EntityNameQualifierEnum Qualifier { get; set; }
+        public EntityNameQualifier Qualifier { get; set; }
 
         [XmlText]
         public string Description { get; set; }
@@ -56,36 +51,32 @@
         
         public string Formatted()
         {
-            if (this.Type == null || this.Type.Qualifier == EntityNameQualifierEnum.NonPerson)
+            if (this.Type == null || this.Type.Qualifier == EntityNameQualifier.NonPerson)
             {
                 return this.LastName;
             }
-            else
+
+            var name = new StringBuilder();
+
+            name.Append(this.LastName);
+            if (!string.IsNullOrWhiteSpace(this.Suffix))
             {
-                var name = new StringBuilder();
-
-                name.Append(this.LastName);
-                if (!string.IsNullOrWhiteSpace(this.Suffix))
-                {
-                    name.AppendFormat(" {0}", this.Suffix);
-                }
-
-                name.Append(",");
-                if (!string.IsNullOrWhiteSpace(this.Prefix))
-                {
-                    name.AppendFormat(" {0}", this.Prefix);
-                }
-
-                name.AppendFormat(" {0}", this.FirstName);
-                if (!string.IsNullOrWhiteSpace(this.MiddleName))
-                {
-                    name.AppendFormat(
-                        this.MiddleName.Length == 1 ? " {0}." : " {0}",
-                        this.MiddleName);
-                }
-                
-                return name.ToString().TrimEnd();
+                name.Append($" {this.Suffix}");
             }
+
+            name.Append(",");
+            if (!string.IsNullOrWhiteSpace(this.Prefix))
+            {
+                name.Append($" {this.Prefix}");
+            }
+
+            name.Append($" {this.FirstName}");
+            if (!string.IsNullOrWhiteSpace(this.MiddleName))
+            {
+                name.Append(this.MiddleName.Length == 1 ? $" {this.MiddleName}." : $" {this.MiddleName}");
+            }
+            
+            return name.ToString().TrimEnd();
         }
 
         public override string ToString()

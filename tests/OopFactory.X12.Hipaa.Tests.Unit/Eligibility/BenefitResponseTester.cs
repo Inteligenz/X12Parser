@@ -12,6 +12,8 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using OopFactory.X12.Hipaa.Enums;
+
     [TestClass]
     public class BenefitResponseTester
     {
@@ -29,7 +31,7 @@
                         Type = new EntityType
                         {
                             Identifier = "PR",
-                            Qualifier = EntityNameQualifierEnum.NonPerson
+                            Qualifier = EntityNameQualifier.NonPerson
                         },
                         LastName = "ABC Company",
                         Identification = new Identification { Qualifier = "PI", Id = "842610001" }
@@ -42,7 +44,7 @@
                         Type = new EntityType
                         {
                             Identifier = "1P",
-                            Qualifier = EntityNameQualifierEnum.NonPerson
+                            Qualifier = EntityNameQualifier.NonPerson
                         },
                         LastName = "BONE AND JOIN CLINIC",
                         Identification = new Identification { Qualifier = "SV", Id = "2000035" }
@@ -50,13 +52,13 @@
                 },
                 Subscriber = new BenefitMember
                 {
-                    Gender = GenderEnum.Male,
+                    Gender = Gender.Male,
                     DateOfBirth = DateTime.Parse("1963-05-19"),
                     Name = new EntityName
                     {
                         Type = new EntityType
                         {
-                            Qualifier = EntityNameQualifierEnum.Person
+                            Qualifier = EntityNameQualifier.Person
                         },
                         LastName = "SMITH",
                         FirstName = "JOHN",

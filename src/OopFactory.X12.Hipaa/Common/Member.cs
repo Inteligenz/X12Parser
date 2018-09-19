@@ -3,26 +3,7 @@
     using System;
     using System.Xml.Serialization;
 
-    /// <summary>
-    /// Collection of gender identifier for members
-    /// </summary>
-    public enum GenderEnum
-    {
-        /// <summary>
-        /// Unknown member gender
-        /// </summary>
-        Unknown,
-
-        /// <summary>
-        /// Male member gender
-        /// </summary>
-        Male,
-
-        /// <summary>
-        /// Female member gender
-        /// </summary>
-        Female
-    }
+    using OopFactory.X12.Hipaa.Enums;
 
     /// <summary>
     /// Represents a person (extends the <see cref="Entity"/> class)
@@ -33,7 +14,7 @@
         /// Gets or sets the gender of the member
         /// </summary>
         [XmlAttribute]        
-        public GenderEnum Gender { get; set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="DateTime"/> the member was born

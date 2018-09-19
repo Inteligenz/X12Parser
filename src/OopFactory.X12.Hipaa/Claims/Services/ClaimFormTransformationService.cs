@@ -7,6 +7,7 @@
     using System.Xml.Xsl;
 
     using OopFactory.X12.Hipaa.Claims.Forms;
+    using OopFactory.X12.Hipaa.Enums;
     using OopFactory.X12.Parsing;
 
     public class ClaimFormTransformationService : ClaimTransformationService
@@ -65,12 +66,12 @@
 
             foreach (var claim in document.Claims)
             {
-                if (claim.Type == ClaimTypeEnum.Professional)
+                if (claim.Type == ClaimType.Professional)
                 {
                     var pages = this.professionalTransformation.TransformClaimToClaimFormFoXml(claim);
                     form.Pages.AddRange(pages);
                 }
-                else if (claim.Type == ClaimTypeEnum.Institutional)
+                else if (claim.Type == ClaimType.Institutional)
                 {
                     var pages = this.institutionalTransformation.TransformClaimToClaimFormFoXml(claim);
                     form.Pages.AddRange(pages);

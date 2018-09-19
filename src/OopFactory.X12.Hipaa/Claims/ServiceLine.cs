@@ -155,10 +155,8 @@
                 {
                     return this.Amounts.First(a => a.Qualifier == "GT").Amount;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 
@@ -170,10 +168,8 @@
                 {
                     return this.Amounts.First(a => a.Qualifier == "N8").Amount;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 

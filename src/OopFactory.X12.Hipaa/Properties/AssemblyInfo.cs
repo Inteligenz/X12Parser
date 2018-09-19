@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("OopFactory.X12.Hipaa")]
 [assembly: AssemblyDescription("Open Source .NET C# X12 Parser")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dannie Strubhar")]
+[assembly: AssemblyCompany("Brad Van Fleet")]
 [assembly: AssemblyProduct("OopFactory.X12.Hipaa")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]

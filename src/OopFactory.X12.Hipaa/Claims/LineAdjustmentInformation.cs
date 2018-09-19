@@ -56,29 +56,14 @@
         [XmlElement(ElementName = "Date")]
         public List<QualifiedDate> Dates { get; set; }
 
-        public DateTime RemittanceDate
-        {
-            get
-            {
-                return this.Dates.Exists(d => d.Qualifier == "573")
-                    ? this.Dates.First(d => d.Qualifier == "573").Date
-                    : DateTime.MinValue;
-            }
-        }
+        public DateTime RemittanceDate =>
+            this.Dates.Exists(d => d.Qualifier == "573")
+                ? this.Dates.First(d => d.Qualifier == "573").Date
+                : DateTime.MinValue;
 
-        public decimal? RemainingPatientLiability
-        {
-            get
-            {
-                if (this.Amounts.Exists(a => a.Qualifier == "EAF"))
-                {
-                    return this.Amounts.First(a => a.Qualifier == "EAF").Amount;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
+        public decimal? RemainingPatientLiability =>
+            this.Amounts.Exists(a => a.Qualifier == "EAF")
+                ? this.Amounts.First(a => a.Qualifier == "EAF").Amount
+                : (decimal?)null;
     }
 }

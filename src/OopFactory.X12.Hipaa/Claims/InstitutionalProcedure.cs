@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
     using System.Xml.Serialization;
-
-    using OopFactory.X12.Hipaa.Common;
+    
+    using OopFactory.X12.Hipaa.Enums;
 
     public class InstitutionalProcedure
     {
@@ -12,7 +12,7 @@
         public bool IsPrincipal => new[] { "BBR", "BR", "CAH" }.Contains(this.Qualifier);
 
         [XmlAttribute]
-        public CodeListEnum Version
+        public CodeList Version
         {
             get
             {
@@ -20,14 +20,14 @@
                 {
                     case "BBR":
                     case "BBQ":
-                        return CodeListEnum.ICD10;
+                        return CodeList.ICD10;
                     case "BR":
                     case "BQ":
-                        return CodeListEnum.ICD9;
+                        return CodeList.ICD9;
                     case "CAH":
-                        return CodeListEnum.ABC;
+                        return CodeList.ABC;
                     default:
-                        return CodeListEnum.Unknown;
+                        return CodeList.Unknown;
                 }
             }
         }

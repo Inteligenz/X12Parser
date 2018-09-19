@@ -6,6 +6,7 @@
     using System.Xml.Serialization;
 
     using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     public class OtherSubscriberInformation
     {
@@ -41,7 +42,7 @@
         }
 
         [XmlAttribute]
-        public GenderEnum Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [XmlIgnore]
         public DateTime? DateOfBirth { get; set; }

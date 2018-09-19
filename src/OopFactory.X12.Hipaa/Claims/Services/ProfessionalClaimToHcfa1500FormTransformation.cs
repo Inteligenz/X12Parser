@@ -6,7 +6,7 @@
 
     using OopFactory.X12.Hipaa.Claims.Forms;
     using OopFactory.X12.Hipaa.Claims.Forms.Professional;
-    using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     /// <summary>
     /// Provides a transformer for <see cref="Claim"/> objects to HCFA1500 claims
@@ -113,8 +113,8 @@
                 hcfa.Field03_PatientsDateOfBirth = FormatFormDate(patient.DateOfBirth);
             }
 
-            hcfa.Field03_PatientsSexFemale = patient.Gender == GenderEnum.Female;
-            hcfa.Field03_PatientsSexMale = patient.Gender == GenderEnum.Male;
+            hcfa.Field03_PatientsSexFemale = patient.Gender == Gender.Female;
+            hcfa.Field03_PatientsSexMale = patient.Gender == Gender.Male;
 
             if (subscriber.Name != null)
             {
@@ -205,8 +205,8 @@
                 }
 
                 hcfa.Field09b_OtherInsuredsDateOfBirth = FormatFormDate(otherSubscriber.DateOfBirth);
-                hcfa.Field09b_OtherInsuredIsFemale = otherSubscriber.Gender == GenderEnum.Female;
-                hcfa.Field09b_OtherInsuredIsMale = otherSubscriber.Gender == GenderEnum.Male;
+                hcfa.Field09b_OtherInsuredIsFemale = otherSubscriber.Gender == Gender.Female;
+                hcfa.Field09b_OtherInsuredIsMale = otherSubscriber.Gender == Gender.Male;
 
                 // XXX: OK to assume org in last name? , Edit: this field should be left blank
                 hcfa.Field09c_OtherInsuredsEmployerNameOrSchoolName = string.Empty;
@@ -236,8 +236,8 @@
             if (subscriber != null)
             {
                 hcfa.Field11a_InsuredsDateOfBirth = FormatFormDate(subscriber.DateOfBirth);
-                hcfa.Field11a_InsuredsSexIsFemale = subscriber.Gender == GenderEnum.Female;
-                hcfa.Field11a_InsuredsSexIsMale = subscriber.Gender == GenderEnum.Male;
+                hcfa.Field11a_InsuredsSexIsFemale = subscriber.Gender == Gender.Female;
+                hcfa.Field11a_InsuredsSexIsMale = subscriber.Gender == Gender.Male;
             }
 
             if (claim.Payer != null)
@@ -328,8 +328,8 @@
 
             hcfa.Field20_OutsideLabCharges = (decimal)totalAmountSpent;
 
-            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
-            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
+            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisType.Principal);
+            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisType.Other).ToList();
 
             // Diagnosis codes
             if (principalDiagnosis != null)
@@ -381,15 +381,15 @@
                 {
                     DateFrom = new FormDate
                     {
-                        Month = string.Format("{0:MM}", line.ServiceDateFrom),
-                        Day = string.Format("{0:dd}", line.ServiceDateFrom),
-                        Year = string.Format("{0:yy}", line.ServiceDateFrom)
+                        Month = $"{line.ServiceDateFrom:MM}",
+                        Day = $"{line.ServiceDateFrom:dd}",
+                        Year = $"{line.ServiceDateFrom:yy}"
                     },
                     DateTo = new FormDate
                     {
-                        Month = string.Format("{0:MM}", line.ServiceDateTo),
-                        Day = string.Format("{0:dd}", line.ServiceDateTo),
-                        Year = string.Format("{0:yy}", line.ServiceDateTo)
+                        Month = $"{line.ServiceDateTo:MM}",
+                        Day = $"{line.ServiceDateTo:dd}",
+                        Year = $"{line.ServiceDateTo:yy}"
                     }
                 };
 
@@ -614,8 +614,8 @@
                     AddBlock(page, 34, 9, 3, hcfa.Field03_PatientsDateOfBirth.Month);
                     AddBlock(page, 37, 9, 3, hcfa.Field03_PatientsDateOfBirth.Day);
                     AddBlock(page, 40, 9, 3, hcfa.Field03_PatientsDateOfBirth.Year);
-                    AddBlock(page, 44.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexMale), TextAlignEnum.center);
-                    AddBlock(page, 49.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexFemale), TextAlignEnum.center);
+                    AddBlock(page, 44.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexMale), TextAlign.center);
+                    AddBlock(page, 49.5m, 9, 2.5m, ConditionalMarker(hcfa.Field03_PatientsSexFemale), TextAlign.center);
                     AddBlock(page, 53, 9, 30, hcfa.Field04_InsuredsName);
 
                     // LINE 3
@@ -661,8 +661,8 @@
                     AddBlock(page, 56, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Month);
                     AddBlock(page, 59, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Day);
                     AddBlock(page, 62, 19, 3, hcfa.Field11a_InsuredsDateOfBirth.Year);
-                    AddBlock(page, 71.25m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsMale), TextAlignEnum.center);
-                    AddBlock(page, 78.5m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsFemale), TextAlignEnum.center);
+                    AddBlock(page, 71.25m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsMale), TextAlign.center);
+                    AddBlock(page, 78.5m, 19, 2, ConditionalMarker(hcfa.Field11a_InsuredsSexIsFemale), TextAlign.center);
 
                     // LINE 8
                     // Field 9b is not supplied by 837P data.
@@ -690,9 +690,9 @@
                     AddBlock(page, 60, 25, 2, ConditionalMarker(!hcfa.Field11d_IsThereOtherHealthBenefitPlan)); 
 
                     // LINE 11
-                    AddBlock(page, 9, 29, 25, hcfa.Field12_PatientsOrAuthorizedSignature, TextAlignEnum.center);
-                    AddBlock(page, 39, 29, 14, hcfa.Field12_PatientsOrAuthorizedSignatureDate.ToString(), TextAlignEnum.center);
-                    AddBlock(page, 59, 29, 24, hcfa.Field13_InsuredsOrAuthorizedSignature, TextAlignEnum.center);
+                    AddBlock(page, 9, 29, 25, hcfa.Field12_PatientsOrAuthorizedSignature, TextAlign.center);
+                    AddBlock(page, 39, 29, 14, hcfa.Field12_PatientsOrAuthorizedSignatureDate.ToString(), TextAlign.center);
+                    AddBlock(page, 59, 29, 24, hcfa.Field13_InsuredsOrAuthorizedSignature, TextAlign.center);
 
                     // LINE 12
                     if (hcfa.Field14_DateOfCurrentIllnessInjuryOrPregnancy != null)
@@ -748,10 +748,10 @@
 
                     AddBlock(page, 55, 35, 2, ConditionalMarker(hcfa.Field20_OutsideLab));
                     AddBlock(page, 60, 35, 2, ConditionalMarker(!hcfa.Field20_OutsideLab));
-                    AddBlock(page, 65, 35, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : string.Empty, TextAlignEnum.right);
+                    AddBlock(page, 65, 35, 9, hcfa.Field20_OutsideLab ? Convert.ToString(hcfa.Field20_OutsideLabCharges) : string.Empty, TextAlign.right);
                     
                     // Note, we do not use second charge box at all here.
-                    AddBlock(page, 74, 35, 9, string.Empty, TextAlignEnum.right); 
+                    AddBlock(page, 74, 35, 9, string.Empty, TextAlign.right); 
 
                     // Line 15
                     AddBlock(page, 6.5m, 37, 8, hcfa.Field21_Diagnosis1);
@@ -784,6 +784,7 @@
                     AddBlock(page, 7, y + 1, 3, string.Empty);
                     AddBlock(page, 10, y + 1, 3, string.Empty);
                 }
+
                 if (line.DateTo != null)
                 {
                     AddBlock(page, 13, y + 1, 3, line.DateTo.Month);
@@ -796,6 +797,7 @@
                     AddBlock(page, 16, y + 1, 3, string.Empty);
                     AddBlock(page, 19, y + 1, 3, string.Empty);
                 }
+
                 AddBlock(page, 22, y + 1, 3, line.PlaceOfService);
                 AddBlock(page, 25, y + 1, 2, line.EmergencyIndicator);
                 AddBlock(page, 29, y + 1, 6, line.ProcedureCode);
@@ -807,12 +809,11 @@
                 AddBlock(page, 49, y + 1, 2, line.DiagnosisPointer2);
                 AddBlock(page, 50, y + 1, 2, line.DiagnosisPointer3);
                 AddBlock(page, 51, y + 1, 2, line.DiagnosisPointer4);
-                AddBlock(page, 53, y + 1, 9, string.Format("{0:0.00}", line.Charges).Replace(".", " "), TextAlignEnum.right);
-                AddBlock(page, 62, y + 1, 4, $"{line.DaysOrUnits}", TextAlignEnum.right);
+                AddBlock(page, 53, y + 1, 9, $"{line.Charges:0.00}".Replace(".", " "), TextAlign.right);
+                AddBlock(page, 62, y + 1, 4, $"{line.DaysOrUnits}", TextAlign.right);
                 AddBlock(page, 66, y + 1, 2, line.EarlyPeriodicScreeningDiagnosisAndTreatment);
                 AddBlock(page, 71, y + 1, 12, line.RenderingProviderNpi);
-
-
+                
                 // Footer
                 if (i % 6 == 5 || i == hcfa.Field24_ServiceLines.Count - 1) 
                 {
@@ -833,33 +834,33 @@
                     {
                         AddBlock(
                             page,
-                            hcfa.Field27_AcceptAssignment.Value == true ? 41 : 46,
+                            hcfa.Field27_AcceptAssignment.Value ? 41 : 46,
                             55,
                             2,
                             "X");
                     }
 
-                    AddBlock(page, 55, 55, 9, string.Format("{0:0.00}", hcfa.Field28_TotalCharge).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 65, 55, 9, string.Format("{0:0.00}", hcfa.Field29_AmountPaid).Replace(".", " "), TextAlignEnum.right);
-                    AddBlock(page, 74, 55, 9, string.Format("{0:0.00}", hcfa.Field30_BalanceDue).Replace(".", " "), TextAlignEnum.right);
+                    AddBlock(page, 55, 55, 9, $"{hcfa.Field28_TotalCharge:0.00}".Replace(".", " "), TextAlign.right);
+                    AddBlock(page, 65, 55, 9, $"{hcfa.Field29_AmountPaid:0.00}".Replace(".", " "), TextAlign.right);
+                    AddBlock(page, 74, 55, 9, $"{hcfa.Field30_BalanceDue:0.00}".Replace(".", " "), TextAlign.right);
 
                     // Box 31
                     if (hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.HasValue)
                     {
-                        AddBlock(page, 4, 58, 21, "PROVIDER SIGNATURE", TextAlignEnum.center);
+                        AddBlock(page, 4, 58, 21, "PROVIDER SIGNATURE", TextAlign.center);
                         AddBlock(
                             page,
                             4,
                             59,
                             21,
-                            hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.Value == true ? "IS ON FILE" : "NOT ON FILE",
-                            TextAlignEnum.center);
+                            hcfa.Field31_PhysicianOrSupplierSignatureIsOnFile.Value ? "IS ON FILE" : "NOT ON FILE",
+                            TextAlign.center);
                     }
 
                     // Box 32
                     AddBlock(page, 26, 57, 27, hcfa.Field32_ServiceFacilityLocation_Name);
                     AddBlock(page, 26, 58, 27, hcfa.Field32_ServiceFacilityLocation_Street);
-                    AddBlock(page, 26, 59, 27, string.Format("{0}, {1} {2}", hcfa.Field32_ServiceFacilityLocation_City, hcfa.Field32_ServiceFacilityLocation_State, hcfa.Field32_ServiceFacilityLocation_Zip));
+                    AddBlock(page, 26, 59, 27, $"{hcfa.Field32_ServiceFacilityLocation_City}, {hcfa.Field32_ServiceFacilityLocation_State} {hcfa.Field32_ServiceFacilityLocation_Zip}");
                     AddBlock(page, 27, 60, 10, hcfa.Field32a_ServiceFacilityLocation_Npi);
                     AddBlock(page, 38, 60, 15, hcfa.Field32b_ServiceFacilityLocation_OtherID);
 
@@ -887,9 +888,9 @@
         {
             return new FormDate
                        {
-                           Month = string.Format("{0:MM}", dateTime),
-                           Day = string.Format("{0:dd}", dateTime),
-                           Year = string.Format("{0:yy}", dateTime)
+                           Month = $"{dateTime:MM}",
+                           Day = $"{dateTime:dd}",
+                           Year = $"{dateTime:yy}"
                        };
         }
 
@@ -941,20 +942,12 @@
 
         private static string SetStringLength(string source, int limit)
         {
-            string result = string.Empty;
-            if (!string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty(source))
             {
-                if (source.Length > limit)
-                {
-                    result = source.Substring(0, limit);
-                }
-                else
-                {
-                    return source;
-                }
+                return string.Empty;
             }
 
-            return result;
+            return source.Length > limit ? source.Substring(0, limit) : source;
         }
 
         /// <summary>
@@ -967,7 +960,7 @@
             return b ? "X" : string.Empty;
         }
 
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
         {
             const decimal XScale = 0.1m;
             const decimal YScale = 0.1685m;
@@ -986,7 +979,7 @@
 
         private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
         {
-            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
+            return AddBlock(page, x, y, width, text, TextAlign.left);
         }
     }
 }

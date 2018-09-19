@@ -8,10 +8,11 @@
 
     using OopFactory.X12.Hipaa.Claims;
     using OopFactory.X12.Hipaa.Claims.Services;
-    using OopFactory.X12.Hipaa.Common;
     using OopFactory.X12.Parsing;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using OopFactory.X12.Hipaa.Enums;
 
     [TestClass]
     public class ClaimModelTester
@@ -23,7 +24,7 @@
 
             var claim = new Claim
             {
-                Type = ClaimTypeEnum.Institutional,
+                Type = ClaimType.Institutional,
                 PatientControlNumber = "756048Q",
                 TotalClaimChargeAmount = 89.93M
             };
@@ -58,7 +59,7 @@
             Assert.AreEqual("PA", claim.ServiceLocation.Address.StateCode, "Unexpected Billing Provider Address State Code");
             Assert.AreEqual("17111", claim.ServiceLocation.Address.PostalCode, "Unexpected Billing Provider Address Postal Code");
             // Box 2 - Pay To Provider
-            Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
+            Assert.AreEqual(ClaimType.Institutional, claim.Type);
             Assert.AreEqual("JONES HOSPITAL", claim.PayToProvider.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.PayToProvider.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
             Assert.AreEqual("CENTERVILLE", claim.PayToProvider.Address.City, "Unexpected Billing Provider Address City");
@@ -93,7 +94,7 @@
             // Box 10 Birthdate
             Assert.AreEqual(DateTime.Parse("1926-11-11"), patient.DateOfBirth);
             // Box 11 Sex
-            Assert.AreEqual(GenderEnum.Male, patient.Gender);
+            Assert.AreEqual(Gender.Male, patient.Gender);
             // Box 12 & 13 Admission Date and Hour
             Assert.AreEqual(DateTime.Parse("1996-09-10 2:02 PM"), claim.AdmissionDate);
             // Box 14 Admission Type
@@ -123,7 +124,7 @@
 
             Claim claim = document.Claims.First();
             Trace.Write(claim.Serialize());
-            Assert.AreEqual(ClaimTypeEnum.Institutional, claim.Type);
+            Assert.AreEqual(ClaimType.Institutional, claim.Type);
             // Box 1 - Service Location
             Assert.AreEqual("JONES HOSPITAL", claim.ServiceLocation.Name.LastName, "Unexpected Billing Provider Last Name");
             Assert.AreEqual("225 MAIN STREET BARKLEY BUILDING", claim.ServiceLocation.Address.Line1, "Unexpected Billing Provider Adddress Line 1");
@@ -165,7 +166,7 @@
             // Box 10 Birthdate
             Assert.AreEqual(DateTime.Parse("1926-11-11"), patient.DateOfBirth);
             // Box 11 Sex
-            Assert.AreEqual(GenderEnum.Male, patient.Gender);
+            Assert.AreEqual(Gender.Male, patient.Gender);
             // Box 12 & 13 Admission Date and Hour
             Assert.AreEqual(DateTime.Parse("1996-09-11 2:02 PM"), claim.AdmissionDate);
             // Box 14 Admission Type
@@ -276,7 +277,7 @@
             // Box 66 - Diagnosis Version
 
             // Box 67 - Diagnosis
-            Assert.AreEqual("3669", claim.Diagnoses.First(d => d.DiagnosisType == DiagnosisTypeEnum.Principal).Code);
+            Assert.AreEqual("3669", claim.Diagnoses.First(d => d.DiagnosisType == DiagnosisType.Principal).Code);
             // Box 68
 
             // Box 69 - Admitting Diagnosis

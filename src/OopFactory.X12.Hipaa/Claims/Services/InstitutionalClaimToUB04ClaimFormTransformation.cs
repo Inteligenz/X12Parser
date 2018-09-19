@@ -8,6 +8,7 @@
     using OopFactory.X12.Hipaa.Claims.Forms;
     using OopFactory.X12.Hipaa.Claims.Forms.Institutional;
     using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     public class InstitutionalClaimToUb04ClaimFormTransformation : IClaimToClaimFormTransfomation
     {
@@ -29,8 +30,8 @@
         /// Implementation of mapping as described at http://ahca.myflorida.com/Medicaid/meds/pdf/837i_v2-1_crosswalk_v2.pdf
         /// Detailed instructions found at https://www.cms.gov/transmittals/downloads/R1104CP.pdf
         /// </summary>
-        /// <param name="claim"></param>
-        /// <returns></returns>
+        /// <param name="claim">Claim to be transformed</param>
+        /// <returns><see cref="UB04Claim"/> with provided claim</returns>
         public virtual UB04Claim TransformClaimToUB04(Claim claim)
         {
             var ub = new UB04Claim();
@@ -67,12 +68,12 @@
 
             if (claim.StatementFromDate != null)
             {
-                ub.Field06_StatementCoversPeriod.FromDate = string.Format("{0:MMddyy}", claim.StatementFromDate);
+                ub.Field06_StatementCoversPeriod.FromDate = $"{claim.StatementFromDate:MMddyy}";
             }
 
             if (claim.StatementToDate != null)
             {
-                ub.Field06_StatementCoversPeriod.ThroughDate = string.Format("{0:MMddyy}", claim.StatementToDate);
+                ub.Field06_StatementCoversPeriod.ThroughDate = $"{claim.StatementFromDate:MMddyy}";
             }
 
             ClaimMember patient = claim.Patient ?? claim.Subscriber;
@@ -85,19 +86,12 @@
 
             if (patient.Address != null)
             {
-                string streetAddress;
-                if (string.IsNullOrEmpty(patient.Address.Line2))
-                {
-                    streetAddress = patient.Address.Line1;
-                }
-                else
-                {
-                    streetAddress = string.Concat(patient.Address.Line1, ",", patient.Address.Line2);
-                }
+                string streetAddress = string.IsNullOrEmpty(patient.Address.Line2)
+                               ? patient.Address.Line1
+                               : string.Join(",", patient.Address.Line1, patient.Address.Line2);
 
-                ub.Field09_PatientAddress.a_Street = streetAddress.Length > 48 
-                    ? streetAddress.Substring(0, 48)
-                    : streetAddress;
+                ub.Field09_PatientAddress.a_Street =
+                    streetAddress.Length > 48 ? streetAddress.Substring(0, 48) : streetAddress;
 
                 ub.Field09_PatientAddress.b_City = patient.Address.City;
                 ub.Field09_PatientAddress.c_State = patient.Address.StateCode;
@@ -107,14 +101,14 @@
 
             if (patient.DateOfBirth != null)
             {
-                ub.Field10_Birthdate = string.Format("{0:MMddyyyy}", patient.DateOfBirth);
+                ub.Field10_Birthdate = $"{patient.DateOfBirth:MMddyyyy}";
             }
 
             ub.Field11_Sex = patient.Gender.ToString().Substring(0, 1);
             if (claim.AdmissionDate != null)
             {
-                ub.Field12_AdmissionDate = string.Format("{0:MMddyy}", claim.AdmissionDate);
-                ub.Field13_AdmissionHour = string.Format("{0:HH}", claim.AdmissionDate);
+                ub.Field12_AdmissionDate = $"{claim.AdmissionDate:MMddyy}";
+                ub.Field13_AdmissionHour = $"{claim.AdmissionDate:HH}";
             }
 
             if (claim.AdmissionType != null)
@@ -129,7 +123,7 @@
 
             if (claim.DischargeTime != null)
             {
-                ub.Field16_DischargeHour = string.Format("{0:HH}", claim.DischargeTime);
+                ub.Field16_DischargeHour = $"{claim.DischargeTime:HH}";
             }
 
             if (claim.PatientStatus != null)
@@ -205,14 +199,45 @@
 
             if (claim.Occurrences != null)
             {
-                if (claim.Occurrences.Count > 0) ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
-                if (claim.Occurrences.Count > 1) ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
-                if (claim.Occurrences.Count > 2) ub.Field32a_Occurrence.CopyFrom(claim.Occurrences[2]);
-                if (claim.Occurrences.Count > 3) ub.Field32b_Occurrence.CopyFrom(claim.Occurrences[3]);
-                if (claim.Occurrences.Count > 4) ub.Field33a_Occurrence.CopyFrom(claim.Occurrences[4]);
-                if (claim.Occurrences.Count > 5) ub.Field33b_Occurrence.CopyFrom(claim.Occurrences[5]);
-                if (claim.Occurrences.Count > 6) ub.Field34a_Occurrence.CopyFrom(claim.Occurrences[6]);
-                if (claim.Occurrences.Count > 7) ub.Field34b_Occurrence.CopyFrom(claim.Occurrences[7]);
+                if (claim.Occurrences.Count > 0)
+                {
+                    ub.Field31a_Occurrence.CopyFrom(claim.Occurrences[0]);
+                }
+
+                if (claim.Occurrences.Count > 1)
+                {
+                    ub.Field31b_Occurrence.CopyFrom(claim.Occurrences[1]);
+                }
+
+                if (claim.Occurrences.Count > 2)
+                {
+                    ub.Field32a_Occurrence.CopyFrom(claim.Occurrences[2]);
+                }
+
+                if (claim.Occurrences.Count > 3)
+                {
+                    ub.Field32b_Occurrence.CopyFrom(claim.Occurrences[3]);
+                }
+
+                if (claim.Occurrences.Count > 4)
+                {
+                    ub.Field33a_Occurrence.CopyFrom(claim.Occurrences[4]);
+                }
+
+                if (claim.Occurrences.Count > 5)
+                {
+                    ub.Field33b_Occurrence.CopyFrom(claim.Occurrences[5]);
+                }
+
+                if (claim.Occurrences.Count > 6)
+                {
+                    ub.Field34a_Occurrence.CopyFrom(claim.Occurrences[6]);
+                }
+
+                if (claim.Occurrences.Count > 7)
+                {
+                    ub.Field34b_Occurrence.CopyFrom(claim.Occurrences[7]);
+                }
             }
 
             var spans = new List<UB04OccurrenceSpan>();
@@ -293,18 +318,65 @@
 
             if (claim.Values != null)
             {
-                if (claim.Values.Count > 0) ub.Field39a_Value.CopyFrom(claim.Values[0]);
-                if (claim.Values.Count > 1) ub.Field39b_Value.CopyFrom(claim.Values[1]);
-                if (claim.Values.Count > 2) ub.Field39c_Value.CopyFrom(claim.Values[2]);
-                if (claim.Values.Count > 3) ub.Field39d_Value.CopyFrom(claim.Values[3]);
-                if (claim.Values.Count > 4) ub.Field40a_Value.CopyFrom(claim.Values[4]);
-                if (claim.Values.Count > 5) ub.Field40b_Value.CopyFrom(claim.Values[5]);
-                if (claim.Values.Count > 6) ub.Field40c_Value.CopyFrom(claim.Values[6]);
-                if (claim.Values.Count > 7) ub.Field40d_Value.CopyFrom(claim.Values[7]);
-                if (claim.Values.Count > 8) ub.Field41a_Value.CopyFrom(claim.Values[8]);
-                if (claim.Values.Count > 9) ub.Field41b_Value.CopyFrom(claim.Values[9]);
-                if (claim.Values.Count > 10) ub.Field41c_Value.CopyFrom(claim.Values[10]);
-                if (claim.Values.Count > 11) ub.Field41d_Value.CopyFrom(claim.Values[11]);
+                if (claim.Values.Count > 0)
+                {
+                    ub.Field39a_Value.CopyFrom(claim.Values[0]);
+                }
+
+                if (claim.Values.Count > 1)
+                {
+                    ub.Field39b_Value.CopyFrom(claim.Values[1]);
+                }
+
+                if (claim.Values.Count > 2)
+                {
+                    ub.Field39c_Value.CopyFrom(claim.Values[2]);
+                }
+
+                if (claim.Values.Count > 3)
+                {
+                    ub.Field39d_Value.CopyFrom(claim.Values[3]);
+                }
+
+                if (claim.Values.Count > 4)
+                {
+                    ub.Field40a_Value.CopyFrom(claim.Values[4]);
+                }
+
+                if (claim.Values.Count > 5)
+                {
+                    ub.Field40b_Value.CopyFrom(claim.Values[5]);
+                }
+
+                if (claim.Values.Count > 6)
+                {
+                    ub.Field40c_Value.CopyFrom(claim.Values[6]);
+                }
+
+                if (claim.Values.Count > 7)
+                {
+                    ub.Field40d_Value.CopyFrom(claim.Values[7]);
+                }
+
+                if (claim.Values.Count > 8)
+                {
+                    ub.Field41a_Value.CopyFrom(claim.Values[8]);
+                }
+
+                if (claim.Values.Count > 9)
+                {
+                    ub.Field41b_Value.CopyFrom(claim.Values[9]);
+                }
+
+                if (claim.Values.Count > 10)
+                {
+                    ub.Field41c_Value.CopyFrom(claim.Values[10]);
+                }
+
+                if (claim.Values.Count > 11)
+                {
+                    ub.Field41d_Value.CopyFrom(claim.Values[11]);
+                }
             }
 
             foreach (var line in claim.ServiceLines)
@@ -314,7 +386,7 @@
                         Field42_RevenueCode = line.RevenueCode, 
                         Field43_Description = line.RevenueCodeDescription,
                         Field44_ProcedureCodes = SetProcedureCodeWithModifiers(line.Procedure),
-                        Field45_ServiceDate = line.ServiceDateFrom > DateTime.MinValue ? string.Format("{0:MMddyy}", line.ServiceDateFrom) : string.Empty,
+                        Field45_ServiceDate = line.ServiceDateFrom > DateTime.MinValue ? $"{line.ServiceDateFrom:MMddyy}" : string.Empty,
                         Field46_ServiceUnits = line.Quantity.ToString(),
                         Field47_TotalCharges = line.ChargeAmount,
                         Field48_NonCoveredCharges = line.NonCoveredChargeAmount
@@ -374,61 +446,151 @@
                 ub.Field64C_DocumentControlNumber = controlNumbers[2].Id;
             }
 
-            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD9) != null)
+            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeList.ICD9) != null)
             {
                 ub.Field66_Version = "9";
             }
 
-            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeListEnum.ICD10) != null)
+            if (claim.Diagnoses.FirstOrDefault(d => d.Version == CodeList.ICD10) != null)
             {
                 ub.Field66_Version = "0";
             }
 
-            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Principal);
+            var principalDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisType.Principal);
             if (principalDiagnosis != null)
             {
                 ub.Field67_PrincipleDiagnosis.CopyFrom(principalDiagnosis);
             }
 
-            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.Other).ToList();
-            if (otherDiagnoses.Count > 0) ub.Field67A_Diagnosis.CopyFrom(otherDiagnoses[0]);
-            if (otherDiagnoses.Count > 1) ub.Field67B_Diagnosis.CopyFrom(otherDiagnoses[1]);
-            if (otherDiagnoses.Count > 2) ub.Field67C_Diagnosis.CopyFrom(otherDiagnoses[2]);
-            if (otherDiagnoses.Count > 3) ub.Field67D_Diagnosis.CopyFrom(otherDiagnoses[3]);
-            if (otherDiagnoses.Count > 4) ub.Field67E_Diagnosis.CopyFrom(otherDiagnoses[4]);
-            if (otherDiagnoses.Count > 5) ub.Field67F_Diagnosis.CopyFrom(otherDiagnoses[5]);
-            if (otherDiagnoses.Count > 6) ub.Field67G_Diagnosis.CopyFrom(otherDiagnoses[6]);
-            if (otherDiagnoses.Count > 7) ub.Field67H_Diagnosis.CopyFrom(otherDiagnoses[7]);
-            if (otherDiagnoses.Count > 8) ub.Field67I_Diagnosis.CopyFrom(otherDiagnoses[8]);
-            if (otherDiagnoses.Count > 9) ub.Field67J_Diagnosis.CopyFrom(otherDiagnoses[9]);
-            if (otherDiagnoses.Count > 10) ub.Field67K_Diagnosis.CopyFrom(otherDiagnoses[10]);
-            if (otherDiagnoses.Count > 11) ub.Field67L_Diagnosis.CopyFrom(otherDiagnoses[11]);
-            if (otherDiagnoses.Count > 12) ub.Field67M_Diagnosis.CopyFrom(otherDiagnoses[12]);
-            if (otherDiagnoses.Count > 13) ub.Field67N_Diagnosis.CopyFrom(otherDiagnoses[13]);
-            if (otherDiagnoses.Count > 14) ub.Field67O_Diagnosis.CopyFrom(otherDiagnoses[14]);
-            if (otherDiagnoses.Count > 15) ub.Field67P_Diagnosis.CopyFrom(otherDiagnoses[15]);
-            if (otherDiagnoses.Count > 16) ub.Field67Q_Diagnosis.CopyFrom(otherDiagnoses[16]);
+            var otherDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisType.Other).ToList();
 
-            var admittingDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisTypeEnum.Admitting);
+            if (otherDiagnoses.Count > 0)
+            {
+                ub.Field67A_Diagnosis.CopyFrom(otherDiagnoses[0]);
+            }
+
+            if (otherDiagnoses.Count > 1)
+            {
+                ub.Field67B_Diagnosis.CopyFrom(otherDiagnoses[1]);
+            }
+
+            if (otherDiagnoses.Count > 2)
+            {
+                ub.Field67C_Diagnosis.CopyFrom(otherDiagnoses[2]);
+            }
+
+            if (otherDiagnoses.Count > 3)
+            {
+                ub.Field67D_Diagnosis.CopyFrom(otherDiagnoses[3]);
+            }
+
+            if (otherDiagnoses.Count > 4)
+            {
+                ub.Field67E_Diagnosis.CopyFrom(otherDiagnoses[4]);
+            }
+
+            if (otherDiagnoses.Count > 5)
+            {
+                ub.Field67F_Diagnosis.CopyFrom(otherDiagnoses[5]);
+            }
+
+            if (otherDiagnoses.Count > 6)
+            {
+                ub.Field67G_Diagnosis.CopyFrom(otherDiagnoses[6]);
+            }
+
+            if (otherDiagnoses.Count > 7)
+            {
+                ub.Field67H_Diagnosis.CopyFrom(otherDiagnoses[7]);
+            }
+
+            if (otherDiagnoses.Count > 8)
+            {
+                ub.Field67I_Diagnosis.CopyFrom(otherDiagnoses[8]);
+            }
+
+            if (otherDiagnoses.Count > 9)
+            {
+                ub.Field67J_Diagnosis.CopyFrom(otherDiagnoses[9]);
+            }
+
+            if (otherDiagnoses.Count > 10)
+            {
+                ub.Field67K_Diagnosis.CopyFrom(otherDiagnoses[10]);
+            }
+
+            if (otherDiagnoses.Count > 11)
+            {
+                ub.Field67L_Diagnosis.CopyFrom(otherDiagnoses[11]);
+            }
+
+            if (otherDiagnoses.Count > 12)
+            {
+                ub.Field67M_Diagnosis.CopyFrom(otherDiagnoses[12]);
+            }
+
+            if (otherDiagnoses.Count > 13)
+            {
+                ub.Field67N_Diagnosis.CopyFrom(otherDiagnoses[13]);
+            }
+
+            if (otherDiagnoses.Count > 14)
+            {
+                ub.Field67O_Diagnosis.CopyFrom(otherDiagnoses[14]);
+            }
+
+            if (otherDiagnoses.Count > 15)
+            {
+                ub.Field67P_Diagnosis.CopyFrom(otherDiagnoses[15]);
+            }
+
+            if (otherDiagnoses.Count > 16)
+            {
+                ub.Field67Q_Diagnosis.CopyFrom(otherDiagnoses[16]);
+            }
+
+            var admittingDiagnosis = claim.Diagnoses.FirstOrDefault(d => d.DiagnosisType == DiagnosisType.Admitting);
             if (admittingDiagnosis != null)
             {
                 ub.Field69_AdmittingDiagnosisCode.CopyFrom(admittingDiagnosis);
             }
 
-            var patientReasonDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.PatientReason).ToList();
-            if (patientReasonDiagnoses.Count > 0) ub.Field70a_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[0]);
-            if (patientReasonDiagnoses.Count > 1) ub.Field70b_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[1]);
-            if (patientReasonDiagnoses.Count > 2) ub.Field70c_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[2]);
+            var patientReasonDiagnoses = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisType.PatientReason).ToList();
+            if (patientReasonDiagnoses.Count > 0)
+            {
+                ub.Field70a_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[0]);
+            }
+
+            if (patientReasonDiagnoses.Count > 1)
+            {
+                ub.Field70b_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[1]);
+            }
+
+            if (patientReasonDiagnoses.Count > 2)
+            {
+                ub.Field70c_PatientReasonDiagnosisCode.CopyFrom(patientReasonDiagnoses[2]);
+            }
 
             if (claim.DiagnosisRelatedGroup != null)
             {
                 ub.Field71_PPSCode = claim.DiagnosisRelatedGroup.Code;
             }
 
-            var causes = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisTypeEnum.ExternalCauseOfInjury).ToList();
-            if (causes.Count > 0) ub.Field72a_ExternalCauseOfInjury.CopyFrom(causes[0]);
-            if (causes.Count > 1) ub.Field72b_ExternalCauseOfInjury.CopyFrom(causes[1]);
-            if (causes.Count > 2) ub.Field72c_ExternalCauseOfInjury.CopyFrom(causes[2]);
+            var causes = claim.Diagnoses.Where(d => d.DiagnosisType == DiagnosisType.ExternalCauseOfInjury).ToList();
+            if (causes.Count > 0)
+            {
+                ub.Field72a_ExternalCauseOfInjury.CopyFrom(causes[0]);
+            }
+
+            if (causes.Count > 1)
+            {
+                ub.Field72b_ExternalCauseOfInjury.CopyFrom(causes[1]);
+            }
+
+            if (causes.Count > 2)
+            {
+                ub.Field72c_ExternalCauseOfInjury.CopyFrom(causes[2]);
+            }
 
             var principalProcedure = claim.Procedures.FirstOrDefault(p => p.IsPrincipal);
             if (principalProcedure != null)
@@ -437,11 +599,30 @@
             }
 
             var otherProcedures = claim.Procedures.Where(p => !p.IsPrincipal).ToList();
-            if (otherProcedures.Count > 0) ub.Field74a_OtherProcedure.CopyFrom(otherProcedures[0]);
-            if (otherProcedures.Count > 1) ub.Field74b_OtherProcedure.CopyFrom(otherProcedures[1]);
-            if (otherProcedures.Count > 2) ub.Field74c_OtherProcedure.CopyFrom(otherProcedures[2]);
-            if (otherProcedures.Count > 3) ub.Field74d_OtherProcedure.CopyFrom(otherProcedures[3]);
-            if (otherProcedures.Count > 4) ub.Field74e_OtherProcedure.CopyFrom(otherProcedures[4]);
+            if (otherProcedures.Count > 0)
+            {
+                ub.Field74a_OtherProcedure.CopyFrom(otherProcedures[0]);
+            }
+
+            if (otherProcedures.Count > 1)
+            {
+                ub.Field74b_OtherProcedure.CopyFrom(otherProcedures[1]);
+            }
+
+            if (otherProcedures.Count > 2)
+            {
+                ub.Field74c_OtherProcedure.CopyFrom(otherProcedures[2]);
+            }
+
+            if (otherProcedures.Count > 3)
+            {
+                ub.Field74d_OtherProcedure.CopyFrom(otherProcedures[3]);
+            }
+
+            if (otherProcedures.Count > 4)
+            {
+                ub.Field74e_OtherProcedure.CopyFrom(otherProcedures[4]);
+            }
 
             if (claim.AttendingProvider != null)
             {
@@ -590,8 +771,7 @@
                 line.Field43_Description = SetStringLength(line.Field43_Description, 29);
             }
         }
-
-
+        
         private static void SetOtherProviders(Provider provider, UB04Provider ub04Provider)
         {
             ub04Provider.Npi = SetStringLength(provider.Npi, 11);
@@ -615,20 +795,12 @@
 
         private static string SetStringLength(string source, int limit)
         {
-            string result = string.Empty;
-            if (!string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty(source))
             {
-                if (source.Length > limit)
-                {
-                    result = source.Substring(0, limit);
-                }
-                else
-                {
-                    return source;
-                }
+                return string.Empty;
             }
 
-            return result;
+            return source.Length > limit ? source.Substring(0, limit) : source;
         }
 
         private static void SetBillingProviderAddressDetails(UB04Claim ub, Provider provider,SubmitterInfo submitterinfo)
@@ -638,20 +810,14 @@
                 return;
             }
 
-            string billingProviderAddress;
-            if (string.IsNullOrEmpty(provider.Address.Line2))
-            {
-                billingProviderAddress = provider.Address.Line1;
-            }
-            else
-            {
-                billingProviderAddress = string.Concat(provider.Address.Line1, ",", provider.Address.Line2);
-            }
+            string billingProviderAddress = string.IsNullOrEmpty(provider.Address.Line2)
+                                        ? provider.Address.Line1
+                                        : string.Join(",", provider.Address.Line1, provider.Address.Line2);
 
             ub.Field01_BillingProvider.Line1 = SetStringLength(provider.Name.ToString(), 28);
             ub.Field01_BillingProvider.Line2 = SetStringLength(billingProviderAddress, 28);
             ub.Field01_BillingProvider.Line3 = SetStringLength(provider.Address.Locale, 28);
-            if (provider.Contacts.Count > 0 && provider.Contacts[0].Numbers.Count > 0 )
+            if (provider.Contacts.Count > 0 && provider.Contacts[0].Numbers.Count > 0)
             {
                 ub.Field01_BillingProvider.Line4 = provider.Contacts[0].Numbers[0].Number;
             }
@@ -689,7 +855,7 @@
 
                 remarksList.Add(remark);
             }
-            catch (Exception)
+            catch
             {
             }
 
@@ -899,10 +1065,10 @@
 
         private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
         {
-            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
+            return AddBlock(page, x, y, width, text, TextAlign.left);
         }
 
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
         {
             decimal xScale = 0.08333m;
             decimal yScale = 0.16667m;
@@ -1067,33 +1233,33 @@
 
                     // Box 39 - Value Codes
                     AddBlock(page, 53, 13, 2, ub04.Field39a_Value.Code);
-                    AddBlock(page, 57, 13, 12, string.Format("{0:0.00}", ub04.Field39a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 57, 13, 12, string.Format("{0:0.00}", ub04.Field39a_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 14, 2, ub04.Field39b_Value.Code);
-                    AddBlock(page, 57, 14, 12, string.Format("{0:0.00}", ub04.Field39b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 57, 14, 12, string.Format("{0:0.00}", ub04.Field39b_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 15, 2, ub04.Field39c_Value.Code);
-                    AddBlock(page, 57, 15, 12, string.Format("{0:0.00}", ub04.Field39c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 57, 15, 12, string.Format("{0:0.00}", ub04.Field39c_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 16, 2, ub04.Field39d_Value.Code);
-                    AddBlock(page, 57, 16, 12, string.Format("{0:0.00}", ub04.Field39d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 57, 16, 12, string.Format("{0:0.00}", ub04.Field39d_Value.Amount).Replace('.', ' '), TextAlign.right);
 
                     // Box 40
                     AddBlock(page, 69, 13, 2, ub04.Field40a_Value.Code);
-                    AddBlock(page, 72.5m, 13, 12, string.Format("{0:0.00}", ub04.Field40a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 72.5m, 13, 12, string.Format("{0:0.00}", ub04.Field40a_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 69, 14, 2, ub04.Field40b_Value.Code);
-                    AddBlock(page, 72.5m, 14, 12, string.Format("{0:0.00}", ub04.Field40b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 72.5m, 14, 12, string.Format("{0:0.00}", ub04.Field40b_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 69, 15, 2, ub04.Field40c_Value.Code);
-                    AddBlock(page, 72.5m, 15, 12, string.Format("{0:0.00}", ub04.Field40c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 72.5m, 15, 12, string.Format("{0:0.00}", ub04.Field40c_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 69, 16, 2, ub04.Field40d_Value.Code);
-                    AddBlock(page, 72.5m, 16, 12, string.Format("{0:0.00}", ub04.Field40d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 72.5m, 16, 12, string.Format("{0:0.00}", ub04.Field40d_Value.Amount).Replace('.', ' '), TextAlign.right);
 
                     // Box 41 - Value Codes
                     AddBlock(page, 84, 13, 2, ub04.Field41a_Value.Code);
-                    AddBlock(page, 88, 13, 12, string.Format("{0:0.00}", ub04.Field41a_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 88, 13, 12, string.Format("{0:0.00}", ub04.Field41a_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 84, 14, 2, ub04.Field41b_Value.Code);
-                    AddBlock(page, 88, 14, 12, string.Format("{0:0.00}", ub04.Field41b_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 88, 14, 12, string.Format("{0:0.00}", ub04.Field41b_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 84, 15, 2, ub04.Field41c_Value.Code);
-                    AddBlock(page, 88, 15, 12, string.Format("{0:0.00}", ub04.Field41c_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 88, 15, 12, string.Format("{0:0.00}", ub04.Field41c_Value.Amount).Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 84, 16, 2, ub04.Field41d_Value.Code);
-                    AddBlock(page, 88, 16, 12, string.Format("{0:0.00}", ub04.Field41d_Value.Amount).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 88, 16, 12, string.Format("{0:0.00}", ub04.Field41d_Value.Amount).Replace('.', ' '), TextAlign.right);
                 }
 
                 // service lines
@@ -1105,17 +1271,17 @@
                 AddBlock(page, 7, y, 29, line.Field43_Description);
                 AddBlock(page, 37, y, 17, line.Field44_ProcedureCodes);
                 AddBlock(page, 56, y, 6, line.Field45_ServiceDate);
-                AddBlock(page, 64, y, 9, line.Field46_ServiceUnits, TextAlignEnum.right);
+                AddBlock(page, 64, y, 9, line.Field46_ServiceUnits, TextAlign.right);
                 
-                AddBlock(page, 74, y, 11, string.Format("{0:0.00}", line.Field47_TotalCharges).Replace('.',' '), TextAlignEnum.right);
-                AddBlock(page, 86, y, 11, string.Format("{0:0.00}", line.Field48_NonCoveredCharges).Replace('.',' '), TextAlignEnum.right);
+                AddBlock(page, 74, y, 11, string.Format("{0:0.00}", line.Field47_TotalCharges).Replace('.', ' '), TextAlign.right);
+                AddBlock(page, 86, y, 11, string.Format("{0:0.00}", line.Field48_NonCoveredCharges).Replace('.', ' '), TextAlign.right);
                 AddBlock(page, 97, y, 2, line.Field49);
 
                 // Footer
                 if (i % 22 == 21 || i == ub04.ServiceLines.Count - 1) 
                 {
-                    AddBlock(page, 13, 40, 3, pageIndex.ToString(), TextAlignEnum.right);
-                    AddBlock(page, 20, 40, 3, pageCount.ToString(), TextAlignEnum.right);
+                    AddBlock(page, 13, 40, 3, pageIndex.ToString(), TextAlign.right);
+                    AddBlock(page, 20, 40, 3, pageCount.ToString(), TextAlign.right);
                     if (this.PerPageTotalChargesView)
                     {
                         int lowIndex;
@@ -1143,15 +1309,15 @@
                             }
                         }
 
-                        AddBlock(page, 74, 40, 11, string.Format("{0:0.00}", pageCharges).Replace('.', ' '), TextAlignEnum.right);
-                        AddBlock(page, 86, 40, 11, string.Format("{0:0.00}", nonCoveredCharges).Replace('.', ' '), TextAlignEnum.right);
+                        AddBlock(page, 74, 40, 11, string.Format("{0:0.00}", pageCharges).Replace('.', ' '), TextAlign.right);
+                        AddBlock(page, 86, 40, 11, string.Format("{0:0.00}", nonCoveredCharges).Replace('.', ' '), TextAlign.right);
                     }
                     else
                     {
                         if (pageIndex == pageCount)
                         {
-                            AddBlock(page, 74, 40, 11, string.Format("{0:0.00}", ub04.Field47_Line23_TotalCharges).Replace('.', ' '), TextAlignEnum.right);
-                            AddBlock(page, 86, 40, 11, string.Format("{0:0.00}", ub04.Field48_Line23_NonCoveredCharges).Replace('.', ' '), TextAlignEnum.right);
+                            AddBlock(page, 74, 40, 11, string.Format("{0:0.00}", ub04.Field47_Line23_TotalCharges).Replace('.', ' '), TextAlign.right);
+                            AddBlock(page, 86, 40, 11, string.Format("{0:0.00}", ub04.Field48_Line23_NonCoveredCharges).Replace('.', ' '), TextAlign.right);
                         }
                     }
 
@@ -1176,14 +1342,14 @@
                     AddBlock(page, 50, 44, 2, ub04.PayerC_Tertiary.Field53_AssignmentOfBenefitsCertIndicator);
 
                     // Box 54
-                    AddBlock(page, 54.25m, 42, 11, string.Format("{0:0.00}", ub04.PayerA_Primary.Field54_PriorPayments).Replace('.',' '), TextAlignEnum.right);
-                    AddBlock(page, 54.25m, 43, 11, string.Format("{0:0.00}", ub04.PayerB_Secondary.Field54_PriorPayments).Replace('.', ' '), TextAlignEnum.right);
-                    AddBlock(page, 54.25m, 44, 11, string.Format("{0:0.00}", ub04.PayerC_Tertiary.Field54_PriorPayments).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 54.25m, 42, 11, string.Format("{0:0.00}", ub04.PayerA_Primary.Field54_PriorPayments).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 54.25m, 43, 11, string.Format("{0:0.00}", ub04.PayerB_Secondary.Field54_PriorPayments).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 54.25m, 44, 11, string.Format("{0:0.00}", ub04.PayerC_Tertiary.Field54_PriorPayments).Replace('.', ' '), TextAlign.right);
 
                     // Box 55
-                    AddBlock(page, 66.5m, 42, 12, string.Format("{0:0.00}", ub04.PayerA_Primary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
-                    AddBlock(page, 66.5m, 43, 12, string.Format("{0:0.00}", ub04.PayerB_Secondary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
-                    AddBlock(page, 66.5m, 44, 12, string.Format("{0:0.00}", ub04.PayerC_Tertiary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlignEnum.right);
+                    AddBlock(page, 66.5m, 42, 12, string.Format("{0:0.00}", ub04.PayerA_Primary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 66.5m, 43, 12, string.Format("{0:0.00}", ub04.PayerB_Secondary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 66.5m, 44, 12, string.Format("{0:0.00}", ub04.PayerC_Tertiary.Field55_EstimatedAmountDue).Replace('.', ' '), TextAlign.right);
 
                     // Box 56
                     AddBlock(page, 85, 41, 10, ub04.Field56_NationalProviderIdentifier);

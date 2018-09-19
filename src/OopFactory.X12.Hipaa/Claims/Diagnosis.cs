@@ -3,33 +3,15 @@
     using System.Linq;
     using System.Xml.Serialization;
 
-    using OopFactory.X12.Hipaa.Common;
-
-    public enum DiagnosisTypeEnum
-    {
-        Unknown,
-        Principal,
-        Admitting,
-        PatientReason,
-        ExternalCauseOfInjury,
-        Other
-    }
-
-    public enum PresentOnAdmissionEnum
-    {
-        Unknown,
-        No,
-        Yes,
-        NotApplicable
-    }
-
+    using OopFactory.X12.Hipaa.Enums;
+    
     public class Diagnosis
     {
         /// <summary>
-        /// Gets the <see cref="DiagnosisTypeEnum"/> value represented by the object's qualifier
+        /// Gets the <see cref="DiagnosisType"/> value represented by the object's qualifier
         /// </summary>
         [XmlAttribute]
-        public DiagnosisTypeEnum DiagnosisType
+        public DiagnosisType DiagnosisType
         {
             get
             {
@@ -37,30 +19,30 @@
                 {
                     case "ABK":
                     case "BK":
-                        return DiagnosisTypeEnum.Principal;
+                        return DiagnosisType.Principal;
                     case "ABJ":
                     case "BJ":
-                        return DiagnosisTypeEnum.Admitting;
+                        return DiagnosisType.Admitting;
                     case "APR":
                     case "PR":
-                        return DiagnosisTypeEnum.PatientReason;
+                        return DiagnosisType.PatientReason;
                     case "ABN":
                     case "BN":
-                        return DiagnosisTypeEnum.ExternalCauseOfInjury;
+                        return DiagnosisType.ExternalCauseOfInjury;
                     case "ABF":
                     case "BF":
-                        return DiagnosisTypeEnum.Other;
+                        return DiagnosisType.Other;
                     default:
-                        return DiagnosisTypeEnum.Unknown;
+                        return DiagnosisType.Unknown;
                 }
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="CodeListEnum"/> value represented by object's qualifier
+        /// Gets the <see cref="CodeList"/> value represented by object's qualifier
         /// </summary>
         [XmlAttribute]
-        public CodeListEnum Version
+        public CodeList Version
         {
             get
             {
@@ -71,37 +53,37 @@
                     case "APR":
                     case "ABN":
                     case "ABF":
-                        return CodeListEnum.ICD10;
+                        return CodeList.ICD10;
                     case "BK":
                     case "BJ":
                     case "PR":
                     case "BN":
                     case "BF":
-                        return CodeListEnum.ICD9;
+                        return CodeList.ICD9;
                     default:
-                        return CodeListEnum.Unknown;
+                        return CodeList.Unknown;
                 }
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="PresentOnAdmissionEnum"/> value represented by the object's POI indicator
+        /// Gets the <see cref="PresentOnAdmission"/> value represented by the object's POI indicator
         /// </summary>
         [XmlAttribute]
-        public PresentOnAdmissionEnum Poi
+        public PresentOnAdmission Poi
         {
             get
             {
                 switch (this.PoiIndicator)
                 {
                     case "N":
-                        return PresentOnAdmissionEnum.No;
+                        return PresentOnAdmission.No;
                     case "Y":
-                        return PresentOnAdmissionEnum.Yes;
+                        return PresentOnAdmission.Yes;
                     case "W":
-                        return PresentOnAdmissionEnum.NotApplicable;
+                        return PresentOnAdmission.NotApplicable;
                     default:
-                        return PresentOnAdmissionEnum.Unknown;
+                        return PresentOnAdmission.Unknown;
                 }
             }
         }
@@ -125,14 +107,8 @@
             {
                 return this.Code;
             }
-            else if (this.Version == CodeListEnum.ICD9)
-            {
-                return $"{this.Code.Substring(0, 3)}.{this.Code.Substring(3)}";
-            }
-            else
-            {
-                return this.Code;
-            }
+
+            return this.Version == CodeList.ICD9 ? $"{this.Code.Substring(0, 3)}.{this.Code.Substring(3)}" : this.Code;
         }
     }
 }

@@ -25,6 +25,5 @@
 
         [XmlIgnore]
         public bool SerializableQuantitySpecified => this.Quantity.HasValue;
-
     }
 }

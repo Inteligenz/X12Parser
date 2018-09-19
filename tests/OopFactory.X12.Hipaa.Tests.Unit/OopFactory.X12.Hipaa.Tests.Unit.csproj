@@ -62,10 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\OopFactory.Shared\OopFactory.X12.Shared.csproj">
-      <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
-      <Name>OopFactory.X12.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\OopFactory.X12.Hipaa\OopFactory.X12.Hipaa.csproj">
       <Project>{203c0f4b-d1f0-4c20-8968-7dbd84f4a815}</Project>
       <Name>OopFactory.X12.Hipaa</Name>
@@ -73,6 +69,10 @@
     <ProjectReference Include="..\..\src\OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj">
       <Project>{29eeaa38-bfb2-4732-a286-eb91355f9bcd}</Project>
       <Name>OopFactory.X12.Parsing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\OopFactory.X12.Shared\OopFactory.X12.Shared.csproj">
+      <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
+      <Name>OopFactory.X12.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

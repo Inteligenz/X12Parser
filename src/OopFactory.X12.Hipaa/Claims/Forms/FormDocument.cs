@@ -4,18 +4,13 @@
     using System.IO;
     using System.Xml.Serialization;
 
-    public enum TextAlignEnum
-    {
-        left,
-        center,
-        right
-    }
+    using OopFactory.X12.Hipaa.Enums;
 
     public class FormBlock
     {
         public string LetterSpacing { get; set; }
 
-        public TextAlignEnum TextAlign { get; set; }
+        public TextAlign TextAlign { get; set; }
 
         public decimal Left { get; set; }
 

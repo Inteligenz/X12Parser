@@ -5,7 +5,7 @@
 
     using OopFactory.X12.Hipaa.Claims.Forms;
     using OopFactory.X12.Hipaa.Claims.Forms.Dental;
-    using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     public class DentalClaimToJ400FormTransformation : IClaimToClaimFormTransfomation
     {
@@ -40,8 +40,8 @@
             }
 
             j400.Field13_SubscriberDateOfBirth = claim.Subscriber.DateOfBirth;
-            j400.Field14_SubscriberGender_Female = claim.Subscriber.Gender == GenderEnum.Female;
-            j400.Field14_SubscriberGender_Male = claim.Subscriber.Gender == GenderEnum.Male;
+            j400.Field14_SubscriberGender_Female = claim.Subscriber.Gender == Gender.Female;
+            j400.Field14_SubscriberGender_Male = claim.Subscriber.Gender == Gender.Male;
             j400.Field15_SubscriberId = claim.Subscriber.Name.Identification.Id;
             j400.Field16_SubscriberGroupNumber = claim.SubscriberInformation.ReferenceIdentification;
             
@@ -86,8 +86,8 @@
             }
 
             j400.Field21_PatientDateOfBirth = patient.DateOfBirth;
-            j400.Field22_PatientGender_Female = patient.Gender == GenderEnum.Female;
-            j400.Field22_PatientGender_Male = patient.Gender == GenderEnum.Male;
+            j400.Field22_PatientGender_Female = patient.Gender == Gender.Female;
+            j400.Field22_PatientGender_Male = patient.Gender == Gender.Male;
             j400.Field23_PatientAccountNumber = claim.PatientControlNumber;
             
             foreach (var line in claim.ServiceLines)
@@ -110,10 +110,10 @@
 
         private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
         {
-            return AddBlock(page, x, y, width, text, TextAlignEnum.left);
+            return AddBlock(page, x, y, width, text, TextAlign.left);
         }
 
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlignEnum textAlign)
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
         {
             decimal xScale = 0.100m; // 0.0839m;
             decimal yScale = 0.16667m; // 0.1656m;
@@ -133,8 +133,7 @@
 
         public List<FormPage> TransformJ400ToFormPages(J400Claim j400)
         {
-            List<FormPage> pages = new List<FormPage>();
-            int pageCount = 1 + ((j400.ServiceLines.Count - 1) / 10);
+            var pages = new List<FormPage>();
             FormPage page = null;
             for (int i = 0; i < j400.ServiceLines.Count; i++)
             {
@@ -149,14 +148,14 @@
                     AddBlock(page, 43, 9, 38, j400.Field12_SubscriberInformation.Line2);
                     AddBlock(page, 43, 10, 38, j400.Field12_SubscriberInformation.Line3);
                     AddBlock(page, 43, 11, 38, j400.Field12_SubscriberInformation.Line4);
-                    AddBlock(page, 43, 13, 10, string.Format("{0:MM/dd/yyyy}", j400.Field13_SubscriberDateOfBirth));
+                    AddBlock(page, 43, 13, 10, $"{j400.Field13_SubscriberDateOfBirth:MM/dd/yyyy}");
                     AddBlock(page, 57, 13, 1, j400.Field14_SubscriberGender_Female ? "X" : string.Empty);
                     AddBlock(page, 60, 13, 1, j400.Field14_SubscriberGender_Male ? "X" : string.Empty);
                     AddBlock(page, 65, 13, 15, j400.Field15_SubscriberId);
                     AddBlock(page, 43, 15, 11, j400.Field16_SubscriberGroupNumber);
                     AddBlock(page, 56, 15, 24, 'X'.Repeat(24));
 
-                    AddBlock(page, 43, 18, 1, j400.Field18_PatientRelationshipToSubscriber_Self ? "X": string.Empty);
+                    AddBlock(page, 43, 18, 1, j400.Field18_PatientRelationshipToSubscriber_Self ? "X" : string.Empty);
                     AddBlock(page, 48, 18, 1, j400.Field18_PatientRelationshipToSubscriber_Spouse ? "X" : string.Empty);
                     AddBlock(page, 54, 18, 1, j400.Field18_PatientRelationshipToSubscriber_Dependent ? "X" : string.Empty);
                     AddBlock(page, 63, 18, 1, j400.Field04_OtherDentalOrMedicalCoverage ? "X" : string.Empty);
@@ -164,7 +163,7 @@
                     AddBlock(page, 43, 21, 38, j400.Field20_PatientInformation.Line2);
                     AddBlock(page, 43, 22, 38, j400.Field20_PatientInformation.Line3);
                     AddBlock(page, 43, 23, 38, j400.Field20_PatientInformation.Line4);
-                    AddBlock(page, 43, 25, 10, string.Format("{0:MM/dd/yyyy}", j400.Field21_PatientDateOfBirth));
+                    AddBlock(page, 43, 25, 10, $"{j400.Field21_PatientDateOfBirth:MM/dd/yyyy}");
                     AddBlock(page, 57, 25, 1, j400.Field22_PatientGender_Female ? "X" : string.Empty);
                     AddBlock(page, 60, 25, 1, j400.Field22_PatientGender_Male ? "X" : string.Empty);
                     AddBlock(page, 64, 25, 17, j400.Field23_PatientAccountNumber);
@@ -172,14 +171,14 @@
 
                 decimal y = 29 + (i % 10);
                 var line = j400.ServiceLines[i];
-                AddBlock(page, 2, y, 10, string.Format("{0:MM/dd/yyyy}", line.Field24_ProcedureDate));
+                AddBlock(page, 2, y, 10, $"{line.Field24_ProcedureDate:MM/dd/yyyy}");
                 AddBlock(page, 13, y, 2, line.Field25_AreaOfOralCavity);
                 AddBlock(page, 16, y, 2, line.Field26_ToothSystem);
                 AddBlock(page, 19, y, 11, line.Field27_ToothNumberOrLetter);
                 AddBlock(page, 31, y, 5, line.Field28_ToothSurface);
                 AddBlock(page, 37, y, 5, line.Field29_ProcedureCode);
                 AddBlock(page, 43, y, 31, 'D'.Repeat(31));
-                string amount = string.Format("{0:0.00}", line.Field31_Fee).Replace(".", string.Empty);
+                string amount = $"{line.Field31_Fee:0.00}".Replace(".", string.Empty);
                 AddBlock(page, 81 - amount.Length, y, amount.Length, amount);
 
                 // Footer

@@ -7,27 +7,7 @@
     using System.Xml.Serialization;
 
     using OopFactory.X12.Hipaa.Common;
-
-    /// <summary>
-    /// Collection of claims types
-    /// </summary>
-    public enum ClaimTypeEnum
-    {
-        /// <summary>
-        /// Professional claim type
-        /// </summary>
-        Professional,
-
-        /// <summary>
-        /// Institutional claim type
-        /// </summary>
-        Institutional,
-
-        /// <summary>
-        /// Dental claim type
-        /// </summary>
-        Dental
-    }
+    using OopFactory.X12.Hipaa.Enums;
 
     /// <summary>
     /// Represents a health insurance claim object
@@ -75,7 +55,7 @@
         public string Version { get; set; }
 
         [XmlAttribute]
-        public ClaimTypeEnum Type { get; set; }
+        public ClaimType Type { get; set; }
 
         [XmlAttribute]
         public string RelatedCauseCode1 { get; set; }

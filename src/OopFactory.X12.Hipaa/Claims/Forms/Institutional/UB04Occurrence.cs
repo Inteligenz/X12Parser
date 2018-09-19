@@ -18,14 +18,14 @@
         public UB04Occurrence CopyFrom(CodedDate source)
         {
             this.Code = source.Code;
-            this.Date = string.Format("{0:MMddyy}", source.Date);
+            this.Date = $"{source.Date:MMddyy}";
             return this;
         }
 
         public UB04Occurrence CopyFrom(InstitutionalProcedure source)
         {
             this.Code = source.Code;
-            this.Date = string.Format("{0:MMddyy}", source.Date);
+            this.Date = $"{source.Date:MMddyy}";
             return this;
         }
     }
