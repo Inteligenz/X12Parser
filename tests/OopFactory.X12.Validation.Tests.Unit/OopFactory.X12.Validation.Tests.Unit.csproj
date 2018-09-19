@@ -65,10 +65,6 @@
       <Project>{65B52E5E-4105-4A4B-AB14-D16DFC3942A4}</Project>
       <Name>OopFactory.X12.Validation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\OopFactory.X12\OopFactory.X12.csproj">
-      <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
-      <Name>OopFactory.X12</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\837I_4010_Batch1.txt" />

@@ -77,10 +77,6 @@
       <Project>{82795b66-0f18-4385-8180-a8c7e0f41893}</Project>
       <Name>OopFactory.X12.Sql</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\OopFactory.X12\OopFactory.X12.csproj">
-      <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
-      <Name>OopFactory.X12</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

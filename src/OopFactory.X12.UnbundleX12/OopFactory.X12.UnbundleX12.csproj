@@ -63,10 +63,6 @@
       <Project>{29eeaa38-bfb2-4732-a286-eb91355f9bcd}</Project>
       <Name>OopFactory.X12.Parsing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OopFactory.X12\OopFactory.X12.csproj">
-      <Project>{AFE1BBBC-B957-461C-9022-B45D3DB117C9}</Project>
-      <Name>OopFactory.X12</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
