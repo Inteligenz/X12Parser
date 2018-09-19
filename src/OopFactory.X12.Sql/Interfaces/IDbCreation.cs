@@ -1,7 +1,5 @@
 ﻿namespace OopFactory.X12.Sql.Interfaces
 {
-    using System.Data.SqlClient;
-
     using OopFactory.X12.Specifications;
 
     /// <summary>
@@ -10,13 +8,11 @@
     public interface IDbCreation
     {
         string Schema { get; }
+        IValidation Validator { get; }
+        IExecutor Executor { get; }
+
         void CreateSchema();
-
-        /* Sql Execution Methods */
-        void ExecuteCmd(string sql);
-        void ExecuteCmd(SqlCommand cmd);
-        object ExecuteScalar(SqlCommand cmd);
-
+        
         /* Table creation */
         void CreateContainerTable();
         void CreateRevisionTable();
@@ -42,13 +38,6 @@
         void CreateGetDescendantLoopsFunction();
         void CreateGetTransactionSetSegmentsFunction();
         void CreateGetTransactionSegmentsFunction();
-
-        /* Validation methods */
-        bool FunctionExists(string functionName);
-        bool SchemaExists();
-        bool TableExists(string tableName);
-        bool ViewExists(string viewName);
-        bool TableColumnExists(string tableName, string columnName);
 
         void RemoveIdentityColumn(string table);
         bool HasIdentityColumn(string table);

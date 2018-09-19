@@ -109,98 +109,98 @@
         {
             if (!this.schemaEnsured)
             {
-                if (!this.CommonDb.SchemaExists())
+                if (!this.CommonDb.Validator.SchemaExists())
                 {
                     this.CommonDb.CreateSchema();
                 }
 
-                if (!this.CommonDb.TableExists("Container"))
+                if (!this.CommonDb.Validator.TableExists("Container"))
                 {
                     this.CommonDb.CreateContainerTable();
                 }
 
-                if (!this.CommonDb.TableExists("Revision"))
+                if (!this.CommonDb.Validator.TableExists("Revision"))
                 {
                     this.CommonDb.CreateRevisionTable();
                 }
 
-                if (!this.CommonDb.TableExists("X12CodeList"))
+                if (!this.CommonDb.Validator.TableExists("X12CodeList"))
                 {
                     this.CommonDb.CreateX12CodeListTable();
                 }
 
-                if (!this.TransactionDb.SchemaExists())
+                if (!this.TransactionDb.Validator.SchemaExists())
                 {
                     this.TransactionDb.CreateSchema();
                 }
 
-                if (!this.TransactionDb.TableExists("Interchange"))
+                if (!this.TransactionDb.Validator.TableExists("Interchange"))
                 {
                     this.TransactionDb.CreateInterchangeTable();
                 }
 
-                if (!this.TransactionDb.TableExists("FunctionalGroup"))
+                if (!this.TransactionDb.Validator.TableExists("FunctionalGroup"))
                 {
                     this.TransactionDb.CreateFunctionalGroupTable();
                 }
 
-                if (!this.TransactionDb.TableExists("TransactionSet"))
+                if (!this.TransactionDb.Validator.TableExists("TransactionSet"))
                 {
                     this.TransactionDb.CreateTransactionSetTable();
                 }
 
-                if (!this.TransactionDb.TableExists("Loop"))
+                if (!this.TransactionDb.Validator.TableExists("Loop"))
                 {
                     this.TransactionDb.CreateLoopTable();
                 }
 
-                if (!this.TransactionDb.TableExists("Segment"))
+                if (!this.TransactionDb.Validator.TableExists("Segment"))
                 {
                     this.TransactionDb.CreateSegmentTable();
                 }
 
-                if (!this.TransactionDb.TableExists("ParsingError"))
+                if (!this.TransactionDb.Validator.TableExists("ParsingError"))
                 {
                     this.TransactionDb.CreateParsingErrorTable();
                 }
 
-                if (!this.CommonDb.FunctionExists("SplitSegment"))
+                if (!this.CommonDb.Validator.FunctionExists("SplitSegment"))
                 {
                     this.CommonDb.CreateSplitSegmentFunction();
                 }
 
-                if (!this.CommonDb.FunctionExists("FlatElements"))
+                if (!this.CommonDb.Validator.FunctionExists("FlatElements"))
                 {
                     this.CommonDb.CreateFlatElementsFunction();
                 }
 
-                if (!this.TransactionDb.FunctionExists("GetAncestorLoops"))
+                if (!this.TransactionDb.Validator.FunctionExists("GetAncestorLoops"))
                 {
                     this.TransactionDb.CreateGetAncestorLoopsFunction();
                 }
 
-                if (!this.TransactionDb.FunctionExists("GetDescendantLoops"))
+                if (!this.TransactionDb.Validator.FunctionExists("GetDescendantLoops"))
                 {
                     this.TransactionDb.CreateGetDescendantLoopsFunction();
                 }
 
-                if (!this.TransactionDb.FunctionExists("GetTransactionSetSegments"))
+                if (!this.TransactionDb.Validator.FunctionExists("GetTransactionSetSegments"))
                 {
                     this.TransactionDb.CreateGetTransactionSetSegmentsFunction();
                 }
 
-                if (!this.TransactionDb.FunctionExists("GetTransactionSegments"))
+                if (!this.TransactionDb.Validator.FunctionExists("GetTransactionSegments"))
                 {
                     this.TransactionDb.CreateGetTransactionSegmentsFunction();
                 }
 
                 foreach (var spec in this.specs.Values)
                 {
-                    if (!this.TransactionDb.TableExists(spec.SegmentId))
+                    if (!this.TransactionDb.Validator.TableExists(spec.SegmentId))
                     {
                         this.TransactionDb.CreateIndexedSegmentTable(spec, this.CommonDb.Schema);
                     }
-                    else if (!this.TransactionDb.TableColumnExists(spec.SegmentId, "ErrorId"))
+                    else if (!this.TransactionDb.Validator.TableColumnExists(spec.SegmentId, "ErrorId"))
                     {
                         this.TransactionDb.AddErrorIdToIndexedSegmentTable(spec.SegmentId);
                     }
@@ -225,7 +225,7 @@
                     }
                 }
 
-                if (!this.TransactionDb.ViewExists("Entity")
+                if (!this.TransactionDb.Validator.ViewExists("Entity")
                     && this.specs.ContainsKey("NM1")
                     && this.specs.ContainsKey("N1")
                     && this.specs.ContainsKey("N3")
@@ -585,7 +585,7 @@
         /// <param name="cmd">SQL command being executed</param>
         protected void ExecuteCmd(SqlCommand cmd)
         {
-            this.TransactionDb.ExecuteCmd(cmd);
+            this.TransactionDb.Executor.ExecuteCmd(cmd);
         }
 
         /// <summary>
@@ -595,7 +595,7 @@
         /// <returns>Result of the command execution</returns>
         protected object ExecuteScalar(SqlCommand cmd)
         {
-            return this.TransactionDb.ExecuteScalar(cmd);
+            return this.TransactionDb.Executor.ExecuteScalar(cmd);
         }
 
         /// <summary>
