@@ -194,10 +194,10 @@
             }
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void CreateTestFile()
         {
-            string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
+            string filename = @"..\..\..\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
             string edi = File.ReadAllText(filename);
             edi = edi.Replace('~', '\x1D');
 
@@ -205,11 +205,11 @@
             File.WriteAllText(filename, edi);
         }
 
-        [TestMethod,Ignore]
+        [TestMethod]
         public void CreateTestFileWithTrailingBlanks()
         {
             // arrange
-            string filename = @"C:\Projects\Codeplex\X12Parser\trunk\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";
+            string filename = @"..\..\..\tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";
             var edi = new StringBuilder(File.ReadAllText(filename));
             edi.Append((char)0);
             edi.Append((char)0);
