@@ -57,7 +57,7 @@
     <Compile Include="X12AcknowledgmentServiceTester.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\OopFactory.Shared\OopFactory.X12.Shared.csproj">
+    <ProjectReference Include="..\..\src\OopFactory.X12.Shared\OopFactory.X12.Shared.csproj">
       <Project>{74a34062-7cf9-41b5-9f36-a0367c9afa2f}</Project>
       <Name>OopFactory.X12.Shared</Name>
     </ProjectReference>
