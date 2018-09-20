@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets or sets the <see cref="Provider"/> for the submitter
         /// </summary>
-        [XmlElement(ElementName = "Provider")]
+        [XmlElement(ElementName = Enums.ClaimElements.Provider)]
         public Provider Providers { get; set; }
     }
 }

@@ -98,6 +98,7 @@
     <Compile Include="Common\CodedDate.cs" />
     <Compile Include="Common\CodedDateRange.cs" />
     <Compile Include="Common\Contact.cs" />
+    <Compile Include="Enums\ClaimElements.cs" />
     <Compile Include="Enums\ClaimType.cs" />
     <Compile Include="Enums\CodeList.cs" />
     <Compile Include="Common\HealthCarePricing.cs" />

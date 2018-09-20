@@ -6,6 +6,7 @@
     using System.Xml.Serialization;
 
     using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     public class ServiceLine
     {
@@ -185,19 +186,19 @@
         [XmlElement(ElementName = "Identification")]
         public List<Identification> Identifications { get; set; }
 
-        [XmlElement(ElementName = "Amount")]
+        [XmlElement(ElementName = ClaimElements.Amount)]
         public List<QualifiedAmount> Amounts { get; set; }
 
-        [XmlElement(ElementName = "Date")]
+        [XmlElement(ElementName = ClaimElements.Date)]
         public List<QualifiedDate> Dates { get; set; }
 
-        [XmlElement(ElementName = "DateRange")]
+        [XmlElement(ElementName = ClaimElements.DateRange)]
         public List<QualifiedDateRange> DateRanges { get; set; }
 
-        [XmlElement(ElementName = "Note")]
+        [XmlElement(ElementName = ClaimElements.Note)]
         public List<Lookup> Notes { get; set; }
 
-        [XmlElement(ElementName = "Provider")]
+        [XmlElement(ElementName = ClaimElements.Provider)]
         public List<Provider> Providers { get; set; }
 
         [XmlElement(ElementName = "LineAdjustmentInformation")]

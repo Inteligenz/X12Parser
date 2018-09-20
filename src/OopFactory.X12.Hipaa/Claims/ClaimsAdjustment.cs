@@ -2,6 +2,8 @@
 {
     using System.Xml.Serialization;
 
+    using OopFactory.X12.Hipaa.Enums;
+
     public class ClaimsAdjustment
     {
         [XmlAttribute]
@@ -16,7 +18,7 @@
         [XmlIgnore]
         public decimal? Quantity { get; set; }
 
-        [XmlAttribute(AttributeName = "Quantity")]
+        [XmlAttribute(AttributeName = ClaimElements.Quantity)]
         public decimal SerializableQuantity
         {
             get { return this.Quantity.GetValueOrDefault(); }

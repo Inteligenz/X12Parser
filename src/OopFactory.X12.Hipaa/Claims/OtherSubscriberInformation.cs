@@ -98,13 +98,13 @@
         
         public EntityName OtherPayer { get; set; }
 
-        [XmlElement(ElementName = "Adjustment")]
+        [XmlElement(ElementName = ClaimElements.Adjustment)]
         public List<ClaimsAdjustment> Adjustments { get; set; }
 
-        [XmlElement(ElementName = "Amount")]
+        [XmlElement(ElementName = ClaimElements.Amount)]
         public List<QualifiedAmount> Amounts { get; set; }
 
-        [XmlElement(ElementName = "Provider")]
+        [XmlElement(ElementName = ClaimElements.Provider)]
         public List<Provider> Providers { get; set; }
     }
 }

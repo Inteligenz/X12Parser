@@ -102,13 +102,13 @@
         [XmlAttribute]
         public string PriorAuthorizationNumber { get; set; }
         
-        [XmlElement(ElementName = "Date")]
+        [XmlElement(ElementName = ClaimElements.Date)]
         public List<QualifiedDate> Dates { get; set; }
         
-        [XmlElement(ElementName = "Amount")]
+        [XmlElement(ElementName = ClaimElements.Amount)]
         public List<QualifiedAmount> Amounts { get; set; }
 
-        [XmlElement(ElementName = "DateRange")]
+        [XmlElement(ElementName = ClaimElements.DateRange)]
         public List<QualifiedDateRange> DateRanges { get; set; }
         
         public ServiceLocationInformation ServiceLocationInfo { get; set; }
@@ -180,7 +180,7 @@
         [XmlElement(ElementName = "Procedure")]
         public List<InstitutionalProcedure> Procedures { get; set; }
 
-        [XmlElement(ElementName = "Provider")]
+        [XmlElement(ElementName = ClaimElements.Provider)]
         public List<Provider> Providers { get; set; }
 
         [XmlElement(ElementName = "Identification")]
@@ -188,10 +188,10 @@
 
         #endregion
 
-        [XmlElement(ElementName = "Note")]
+        [XmlElement(ElementName = ClaimElements.Note)]
         public List<Lookup> Notes { get; set; }
 
-        [XmlElement(ElementName = "ServiceLine")]
+        [XmlElement(ElementName = ClaimElements.ServiceLine)]
         public List<ServiceLine> ServiceLines { get; set; }
 
         #region Calculated Fields
@@ -346,17 +346,26 @@
         #endregion
 
         #region Serialization Methods
+        /// <summary>
+        /// Deserializes an XML string into its <see cref="Claim"/> model representation
+        /// </summary>
+        /// <param name="xml">XML data string to deserialize</param>
+        /// <returns>Claim model deserialized from string</returns>
+        public static Claim Deserialize(string xml)
+        {
+            var serializer = new XmlSerializer(typeof(Claim));
+            return (Claim)serializer.Deserialize(new StringReader(xml));
+        }
+
+        /// <summary>
+        /// Serializes the <see cref="Claim"/> object into an XML data string
+        /// </summary>
+        /// <returns>XML string representation of object</returns>
         public string Serialize()
         {
             var writer = new StringWriter();
             new XmlSerializer(typeof(Claim)).Serialize(writer, this);
             return writer.ToString();
-        }
-
-        public static Claim Deserialize(string xml)
-        {
-            var serializer = new XmlSerializer(typeof(Claim));
-            return (Claim)serializer.Deserialize(new StringReader(xml));
         }
         #endregion
     }

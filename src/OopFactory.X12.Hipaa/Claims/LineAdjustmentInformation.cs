@@ -6,6 +6,7 @@
     using System.Xml.Serialization;
 
     using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     public class LineAdjustmentInformation
     {
@@ -47,13 +48,13 @@
 
         public MedicalProcedure Procedure { get; set; }
         
-        [XmlElement(ElementName = "Adjustment")]
+        [XmlElement(ElementName = ClaimElements.Adjustment)]
         public List<ClaimsAdjustment> Adjustments { get; set; }
 
-        [XmlElement(ElementName = "Amount")]
+        [XmlElement(ElementName = ClaimElements.Amount)]
         public List<QualifiedAmount> Amounts { get; set; }
 
-        [XmlElement(ElementName = "Date")]
+        [XmlElement(ElementName = ClaimElements.Date)]
         public List<QualifiedDate> Dates { get; set; }
 
         public DateTime RemittanceDate =>

@@ -6,6 +6,7 @@
     using System.Xml.Serialization;
 
     using OopFactory.X12.Hipaa.Common;
+    using OopFactory.X12.Hipaa.Enums;
 
     /// <summary>
     /// Represents a <see cref="Member"/> with benefit metadata
@@ -55,10 +56,10 @@
         [XmlElement(ElementName = "RequestValidation")]
         public new List<RequestValidation> RequestValidations { get; set; }
 
-        [XmlElement(ElementName = "Date")]
+        [XmlElement(ElementName = ClaimElements.Date)]
         public List<QualifiedDate> Dates { get; set; }
 
-        [XmlElement(ElementName = "DateRange")]
+        [XmlElement(ElementName = ClaimElements.DateRange)]
         public List<QualifiedDateRange> DateRanges { get; set; }
 
         #region PlanDate properties
