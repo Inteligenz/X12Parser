@@ -224,10 +224,10 @@
 
         public Provider AmbulanceDropoffLocation => this.Providers.FirstOrDefault(p => p.Name.Type.Identifier == "45");
 
-        [XmlElement(ElementName = "OralCavityDesignation")]
+        [XmlElement(ElementName = DentalElements.OralCavityDesignation)]
         public List<Common.Lookup> OralCavityDesignations { get; set; }
 
-        [XmlElement(ElementName = "ToothInformation")]
+        [XmlElement(ElementName = DentalElements.ToothInformation)]
         public List<ToothInformation> ToothInformations { get; set; }
     }
 }

@@ -50,8 +50,7 @@
         /// </summary>
         [XmlElement(ElementName = "RequestValidation")]
         public List<RequestValidation> RequestValidations { get; set; }
-
-        #region Serialization Methods
+        
         /// <summary>
         /// Deserializes an XML string into its <see cref="EligibilityBenefitDocument"/> object
         /// </summary>
@@ -73,6 +72,5 @@
             new XmlSerializer(typeof(EligibilityBenefitDocument)).Serialize(writer, this);
             return writer.ToString();
         }
-        #endregion
     }
 }

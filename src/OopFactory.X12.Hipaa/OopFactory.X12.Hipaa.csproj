@@ -123,6 +123,7 @@
     <Compile Include="Common\Lookup.cs" />
     <Compile Include="Common\Member.cs" />
     <Compile Include="Common\PostalAddress.cs" />
+    <Compile Include="Enums\DentalElements.cs" />
     <Compile Include="Enums\DiagnosisType.cs" />
     <Compile Include="Enums\EntityNameQualifier.cs" />
     <Compile Include="Enums\FormElements.cs" />

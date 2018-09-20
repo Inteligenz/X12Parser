@@ -9,6 +9,5 @@
 
         [XmlAttribute]
         public string ProviderDescription { get; set; }
-
     }
 }

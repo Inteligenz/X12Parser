@@ -1,19 +1,19 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 /********************************************************** 
- * Copyright © 2011 Dannie Strubhar. All rights reserved. *
+ * Copyright © 2018 Brad Van Fleet. All rights reserved. *
  **********************************************************/
+
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OopFactory.X12.Hipaa")]
-[assembly: AssemblyDescription("Open Source .NET C# X12 Parser")]
+[assembly: AssemblyDescription("Open Source C# .NET X12 Parser")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Brad Van Fleet")]
 [assembly: AssemblyProduct("OopFactory.X12.Hipaa")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCopyright("Copyright © 2018 Brad Van Fleet")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

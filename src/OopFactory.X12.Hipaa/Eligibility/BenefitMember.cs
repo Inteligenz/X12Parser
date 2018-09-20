@@ -39,6 +39,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the birth sequence number for the member
+        /// </summary>
         [XmlAttribute]
         public string BirthSequenceNumber { get; set; }
 
@@ -53,16 +56,27 @@
         [XmlElement(ElementName = "Diagnosis")]
         public List<Lookup> Diagnoses { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of request validations
+        /// </summary>
         [XmlElement(ElementName = "RequestValidation")]
         public new List<RequestValidation> RequestValidations { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of qualified dates
+        /// </summary>
         [XmlElement(ElementName = ClaimElements.Date)]
         public List<QualifiedDate> Dates { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of qualified date ranges
+        /// </summary>
         [XmlElement(ElementName = ClaimElements.DateRange)]
         public List<QualifiedDateRange> DateRanges { get; set; }
-
-        #region PlanDate properties
+        
+        /// <summary>
+        /// Gets the plan date from the collection of qualified dates
+        /// </summary>
         public DateTime? PlanDate
         {
             get
@@ -72,14 +86,21 @@
             }
         }
 
+        /// <summary>
+        /// Gets the serializable form of the plan date
+        /// </summary>
         [XmlAttribute(AttributeName = "PlanDate", DataType = "date")]
         public DateTime SerializablePlanDate => this.PlanDate ?? DateTime.MinValue;
 
+        /// <summary>
+        /// Indicates whether the plan date has a value or not
+        /// </summary>
         [XmlIgnore]
         public bool SerializablePlanDateSpecified => this.PlanDate.HasValue;
-        #endregion
-
-        #region PlanBeginDate properties
+        
+        /// <summary>
+        /// Gets the plan begin date from the collection of dates
+        /// </summary>
         public DateTime? PlanBeginDate
         {
             get
@@ -89,14 +110,18 @@
             }
         }
 
-        [XmlAttribute(AttributeName="PlanBeginDate", DataType="date")]
+        /// <summary>
+        /// Gets the serializable form of the plan begin date
+        /// </summary>
+        [XmlAttribute(AttributeName = "PlanBeginDate", DataType = "date")]
         public DateTime SerializablePlanBeginDate => this.PlanBeginDate ?? DateTime.MinValue;
 
+        /// <summary>
+        /// Indicates whether the plan begin date has a value or not
+        /// </summary>
         [XmlIgnore]
-        public bool SerializablePlanBeginDateSpecified => this.PlanBeginDate.HasValue; 
-        #endregion
-
-        #region PlanEndDate properties
+        public bool SerializablePlanBeginDateSpecified => this.PlanBeginDate.HasValue;
+        
         public DateTime? PlanEndDate
         {
             get
@@ -111,9 +136,7 @@
 
         [XmlIgnore]
         public bool SerializablePlanEndDateSpecified => this.PlanEndDate.HasValue; 
-        #endregion
-
-        #region EligibilityDate properties
+        
         public DateTime? EligibilityDate
         {
             get
@@ -128,9 +151,7 @@
 
         [XmlIgnore]
         public bool SerializableEligibilityDateSpecified => this.EligibilityDate.HasValue;
-        #endregion
-
-        #region EligibilityBeginDate properties
+        
         /// <summary>
         /// Gets the date the eligibility begins
         /// </summary>
@@ -149,11 +170,12 @@
         [XmlAttribute(AttributeName = "EligibilityBeginDate", DataType = "date")]
         public DateTime SerializableEligibilityBeginDate => this.EligibilityBeginDate ?? DateTime.MinValue;
 
+        /// <summary>
+        /// Indicates whether the eligibility begin date has a value or not
+        /// </summary>
         [XmlIgnore]
         public bool SerializableEligibilityBeginDateSpecified => this.EligibilityBeginDate.HasValue;
-        #endregion
-
-        #region EligibilityEndDate properties
+        
         /// <summary>
         /// Gets the date when the benefits end
         /// </summary>
@@ -172,8 +194,10 @@
         [XmlAttribute(AttributeName = "EligibilityEndDate", DataType = "date")]
         public DateTime SerializableEligibilityEndDate => this.EligibilityEndDate ?? DateTime.MinValue;
 
+        /// <summary>
+        /// Indicates whether the eligibility end date has a value or not
+        /// </summary>
         [XmlIgnore]
         public bool SerializableEligibilityEndDateSpecified => this.EligibilityEndDate.HasValue;
-        #endregion
     }
 }

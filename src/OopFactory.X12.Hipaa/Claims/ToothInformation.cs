@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets or sets the <see cref="Common.Lookup"/> collection for the tooth surface
         /// </summary>
-        [XmlElement(ElementName = "ToothSurface")]
+        [XmlElement(ElementName = Enums.DentalElements.ToothSurface)]
         public List<Common.Lookup> ToothSurfaces { get; set; }
     }
 }

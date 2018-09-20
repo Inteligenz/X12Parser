@@ -47,20 +47,8 @@
         /// Gets the unique identifier of the <see cref="Member"/>
         /// </summary>
         [XmlAttribute]
-        public string MemberId
-        {
-            get
-            {
-                if (this.Name?.Identification != null && this.Name.Identification.Qualifier == "MI")
-                {
-                    return this.Name.Identification.Id;
-                }
-                else
-                {
-                    return this.GetReferenceId("1W");
-                }
-            }
-        }
+        public string MemberId =>
+            this.Name?.Identification?.Qualifier == "MI" ? this.Name.Identification.Id : this.GetReferenceId("1W");
         
         /// <summary>
         /// Gets the Social Security Number (SSN) of the <see cref="Member"/>
