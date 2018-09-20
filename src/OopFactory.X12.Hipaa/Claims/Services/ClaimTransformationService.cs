@@ -9,9 +9,13 @@
     using OopFactory.X12.Parsing;
     using OopFactory.X12.Shared.Models;
 
+    /// <summary>
+    /// Provides <see cref="ClaimDocument"/> transformation methods for converting 837 X12 data
+    /// </summary>
     public class ClaimTransformationService
     {
         private readonly X12Parser parser;
+
         private Dictionary<string, string> revenueCodeToDescriptionMapping; 
 
         /// <summary>
@@ -50,6 +54,41 @@
             return doc;
         }
 
+        /// <summary>
+        /// Populates the revenue code description mapping with the provided dictionary
+        /// </summary>
+        /// <param name="revCodeDictionary">Dictionary to populate into revenue code description mapping</param>
+        public void FillRevenueCodeDescriptionMapping(Dictionary<string,string> revCodeDictionary)
+        {
+            this.revenueCodeToDescriptionMapping = revCodeDictionary;
+        }
+
+        /// <summary>
+        /// Transforms the provided 837 <see cref="Interchange"/> to its matching <see cref="ClaimDocument"/>
+        /// </summary>
+        /// <param name="interchange">837 data to be transformed</param>
+        /// <returns>Resultant ClaimDocument</returns>
+        public ClaimDocument Transform837ToClaimDocument(Interchange interchange)
+        {
+            var xml = interchange.Serialize();
+
+            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Services.Xsl.X12-837-To-ClaimDocument.xslt");
+
+            var transform = new XslCompiledTransform();
+            if (transformStream != null)
+            {
+                transform.Load(XmlReader.Create(transformStream));
+            }
+
+            var outputStream = new MemoryStream();
+
+            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
+            outputStream.Position = 0;
+            xml = new StreamReader(outputStream).ReadToEnd();
+
+            return ClaimDocument.Deserialize(xml);
+        }
+
         private void AddRevenueCodeDescription(ClaimDocument claimdoc)
         {
             if (this.revenueCodeToDescriptionMapping == null)
@@ -70,32 +109,6 @@
                      }
                  }
              }
-        }
-
-        public void FillRevenueCodeDescriptionMapping(Dictionary<string,string> revCodeDictionary)
-        {
-            this.revenueCodeToDescriptionMapping = revCodeDictionary;
-        }
-
-        public ClaimDocument Transform837ToClaimDocument(Interchange interchange)
-        {
-            var xml = interchange.Serialize();
-
-            var transformStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("OopFactory.X12.Hipaa.Claims.Services.Xsl.X12-837-To-ClaimDocument.xslt");
-
-            var transform = new XslCompiledTransform();
-            if (transformStream != null)
-            {
-                transform.Load(XmlReader.Create(transformStream));
-            }
-
-            var outputStream = new MemoryStream();
-
-            transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), outputStream);
-            outputStream.Position = 0;
-            xml = new StreamReader(outputStream).ReadToEnd();
-
-            return ClaimDocument.Deserialize(xml);
         }
     }
 }

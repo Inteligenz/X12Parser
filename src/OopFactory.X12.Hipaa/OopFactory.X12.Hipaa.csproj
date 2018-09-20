@@ -61,8 +61,10 @@
     <Compile Include="Claims\Forms\Dental\J400ServiceLine.cs" />
     <Compile Include="Claims\Forms\Dental\J515Claim.cs" />
     <Compile Include="Claims\Forms\Dental\J515ServiceLines.cs" />
+    <Compile Include="Claims\Forms\FormBlock.cs" />
     <Compile Include="Claims\Forms\FormDocument.cs" />
     <Compile Include="Claims\Forms\FormDate.cs" />
+    <Compile Include="Claims\Forms\FormPage.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Block.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04CodeCode.cs" />
     <Compile Include="Claims\Forms\Institutional\UB04Diagnosis.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Common\PostalAddress.cs" />
     <Compile Include="Enums\DiagnosisType.cs" />
     <Compile Include="Enums\EntityNameQualifier.cs" />
+    <Compile Include="Enums\FormElements.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\PresentOnAdmission.cs" />
     <Compile Include="Enums\TextAlign.cs" />
@@ -129,6 +132,11 @@
     <Compile Include="Common\Provider.cs" />
     <Compile Include="Common\ProviderInformation.cs" />
     <Compile Include="Eligibility\Services\EligibilityTransformationService.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OopFactory.X12.Parsing\OopFactory.X12.Parsing.csproj">
@@ -151,6 +159,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Eligibility\Services\Xsl\X12-271-To-BenefitResponse.xslt">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

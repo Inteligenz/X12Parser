@@ -84,8 +84,7 @@
             {
                 hcfa.Field01a_InsuredsIDNumber = patient.MemberId;
             }
-            else if (patient?.Name?.Identification != null &&
-                !string.IsNullOrEmpty(patient.Name.Identification.Id))
+            else if (!string.IsNullOrEmpty(patient?.Name?.Identification.Id))
             {
                 hcfa.Field01a_InsuredsIDNumber = patient.Name.Identification.Id;
             }
@@ -93,8 +92,7 @@
             {
                 hcfa.Field01a_InsuredsIDNumber = subscriber.MemberId;
             }
-            else if (subscriber?.Name?.Identification != null &&
-                !string.IsNullOrEmpty(subscriber.Name.Identification.Id))
+            else if (!string.IsNullOrEmpty(subscriber?.Name?.Identification.Id))
             {
                 hcfa.Field01a_InsuredsIDNumber = subscriber.Name.Identification.Id;
             }
@@ -393,7 +391,7 @@
                     }
                 };
 
-                if (line.PlaceOfService != null && !string.IsNullOrWhiteSpace(line.PlaceOfService.Code))
+                if (!string.IsNullOrWhiteSpace(line.PlaceOfService?.Code))
                 {
                     hcfaLine.PlaceOfService = line.PlaceOfService.Code;
                 }
@@ -420,11 +418,11 @@
                 hcfaLine.DaysOrUnits = line.Quantity;
                 hcfaLine.EarlyPeriodicScreeningDiagnosisAndTreatment = line.EpsdtIndicator;
 
-                if (line.RenderingProvider != null && !string.IsNullOrWhiteSpace(line.RenderingProvider.Npi))
+                if (!string.IsNullOrWhiteSpace(line.RenderingProvider?.Npi))
                 {
                     hcfaLine.RenderingProviderNpi = line.RenderingProvider.Npi;
                 }
-                else if (claim.RenderingProvider != null && !string.IsNullOrWhiteSpace(claim.RenderingProvider.Npi))
+                else if (!string.IsNullOrWhiteSpace(claim.RenderingProvider?.Npi))
                 {
                     hcfaLine.RenderingProviderNpi = claim.RenderingProvider.Npi;
                 }
@@ -960,7 +958,7 @@
             return b ? "X" : string.Empty;
         }
 
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign = TextAlign.left)
         {
             const decimal XScale = 0.1m;
             const decimal YScale = 0.1685m;
@@ -975,11 +973,6 @@
                             };
             page.Blocks.Add(block);
             return block;
-        }
-
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
-        {
-            return AddBlock(page, x, y, width, text, TextAlign.left);
         }
     }
 }

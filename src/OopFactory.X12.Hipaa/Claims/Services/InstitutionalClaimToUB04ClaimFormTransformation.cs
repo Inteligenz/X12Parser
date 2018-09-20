@@ -1062,13 +1062,8 @@
 
             return procedureCode.ToString();
         }
-
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
-        {
-            return AddBlock(page, x, y, width, text, TextAlign.left);
-        }
-
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
+        
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign = TextAlign.left)
         {
             decimal xScale = 0.08333m;
             decimal yScale = 0.16667m;
@@ -1233,13 +1228,13 @@
 
                     // Box 39 - Value Codes
                     AddBlock(page, 53, 13, 2, ub04.Field39a_Value.Code);
-                    AddBlock(page, 57, 13, 12, string.Format("{0:0.00}", ub04.Field39a_Value.Amount).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 57, 13, 12, $"{ub04.Field39a_Value.Amount:0.00}".Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 14, 2, ub04.Field39b_Value.Code);
-                    AddBlock(page, 57, 14, 12, string.Format("{0:0.00}", ub04.Field39b_Value.Amount).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 57, 14, 12, $"{ub04.Field39b_Value.Amount:0.00}".Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 15, 2, ub04.Field39c_Value.Code);
-                    AddBlock(page, 57, 15, 12, string.Format("{0:0.00}", ub04.Field39c_Value.Amount).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 57, 15, 12, $"{ub04.Field39c_Value.Amount:0.00}".Replace('.', ' '), TextAlign.right);
                     AddBlock(page, 53, 16, 2, ub04.Field39d_Value.Code);
-                    AddBlock(page, 57, 16, 12, string.Format("{0:0.00}", ub04.Field39d_Value.Amount).Replace('.', ' '), TextAlign.right);
+                    AddBlock(page, 57, 16, 12, $"{ub04.Field39d_Value.Amount:0.00}".Replace('.', ' '), TextAlign.right);
 
                     // Box 40
                     AddBlock(page, 69, 13, 2, ub04.Field40a_Value.Code);

@@ -7,6 +7,9 @@
     using OopFactory.X12.Hipaa.Claims.Forms.Dental;
     using OopFactory.X12.Hipaa.Enums;
 
+    /// <summary>
+    /// Provides implementation of interface for transforming an object of one claim type to another
+    /// </summary>
     public class DentalClaimToJ400FormTransformation : IClaimToClaimFormTransfomation
     {
         private readonly string formImagePath;
@@ -14,12 +17,17 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="DentalClaimToJ400FormTransformation"/> class
         /// </summary>
-        /// <param name="formImagePath"></param>
+        /// <param name="formImagePath">Path to form image</param>
         public DentalClaimToJ400FormTransformation(string formImagePath)
         {
             this.formImagePath = formImagePath;
         }
 
+        /// <summary>
+        /// Transforms provided <see cref="Claim"/> to its <see cref="J400Claim"/> representation
+        /// </summary>
+        /// <param name="claim">Claim object to be transformed</param>
+        /// <returns>Resultant <see cref="J400Claim"/> object</returns>
         public J400Claim TransformClaimToJ400(Claim claim)
         {
             var j400 = new J400Claim();
@@ -108,29 +116,11 @@
             return j400;
         }
 
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text)
-        {
-            return AddBlock(page, x, y, width, text, TextAlign.left);
-        }
-
-        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign)
-        {
-            decimal xScale = 0.100m; // 0.0839m;
-            decimal yScale = 0.16667m; // 0.1656m;
-            var block = new FormBlock
-            {
-                LetterSpacing = "1.2px",
-                TextAlign = textAlign,
-                Left = 0.14m + xScale * x,
-                Top = 0.06m + yScale * y,
-                Width = xScale * width,
-                Height = yScale * 1.1m,
-                Text = text
-            };
-            page.Blocks.Add(block);
-            return block;
-        }
-
+        /// <summary>
+        /// Transforms provided <see cref="J400Claim"/> object to a collection of <see cref="FormPage"/>
+        /// </summary>
+        /// <param name="j400">Claim object to be transformed</param>
+        /// <returns>Collection of <see cref="FormPage"/> objects</returns>
         public List<FormPage> TransformJ400ToFormPages(J400Claim j400)
         {
             var pages = new List<FormPage>();
@@ -190,10 +180,33 @@
             return pages;
         }
 
+        /// <summary>
+        /// Transforms provided <see cref="Claim"/> object to a collection of <see cref="FormPage"/>
+        /// </summary>
+        /// <param name="claim">Claim object to be transformed</param>
+        /// <returns>Collection of <see cref="FormPage"/> objects</returns>
         public List<FormPage> TransformClaimToClaimFormFoXml(Claim claim)
         {
             J400Claim j400 = this.TransformClaimToJ400(claim);
             return this.TransformJ400ToFormPages(j400);
+        }
+
+        private static FormBlock AddBlock(FormPage page, decimal x, decimal y, decimal width, string text, TextAlign textAlign = TextAlign.left)
+        {
+            decimal xScale = 0.100m; // 0.0839m;
+            decimal yScale = 0.16667m; // 0.1656m;
+            var block = new FormBlock
+                            {
+                                LetterSpacing = "1.2px",
+                                TextAlign = textAlign,
+                                Left = 0.14m + xScale * x,
+                                Top = 0.06m + yScale * y,
+                                Width = xScale * width,
+                                Height = yScale * 1.1m,
+                                Text = text
+                            };
+            page.Blocks.Add(block);
+            return block;
         }
     }
 }

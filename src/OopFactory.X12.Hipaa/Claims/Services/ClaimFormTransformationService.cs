@@ -1,6 +1,7 @@
 ﻿namespace OopFactory.X12.Hipaa.Claims.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
     using System.Xml;
@@ -8,8 +9,12 @@
 
     using OopFactory.X12.Hipaa.Claims.Forms;
     using OopFactory.X12.Hipaa.Enums;
+    using OopFactory.X12.Hipaa.Properties;
     using OopFactory.X12.Parsing;
 
+    /// <summary>
+    /// Provides <see cref="ClaimDocument"/> transformation to XML capability
+    /// </summary>
     public class ClaimFormTransformationService : ClaimTransformationService
     {
         private readonly IClaimToClaimFormTransfomation professionalTransformation;
@@ -59,26 +64,32 @@
         {
             if (document == null)
             {
-                throw new ArgumentNullException(nameof(document), "Invalid claim document provided");
+                throw new ArgumentNullException(nameof(document), Resources.InvalidClaimDocumentError);
             }
 
             var form = new FormDocument();
 
             foreach (var claim in document.Claims)
             {
-                if (claim.Type == ClaimType.Professional)
+                IList<FormPage> pages;
+
+                switch (claim.Type)
                 {
-                    var pages = this.professionalTransformation.TransformClaimToClaimFormFoXml(claim);
-                    form.Pages.AddRange(pages);
-                }
-                else if (claim.Type == ClaimType.Institutional)
-                {
-                    var pages = this.institutionalTransformation.TransformClaimToClaimFormFoXml(claim);
-                    form.Pages.AddRange(pages);
-                }
-                else
-                {
-                    form.Pages.AddRange(this.dentalTransformation.TransformClaimToClaimFormFoXml(claim));
+                    case ClaimType.Professional:
+                        pages = this.professionalTransformation.TransformClaimToClaimFormFoXml(claim);
+                        form.Pages.AddRange(pages);
+                        break;
+                    case ClaimType.Institutional:
+                        pages = this.institutionalTransformation.TransformClaimToClaimFormFoXml(claim);
+                        form.Pages.AddRange(pages);
+                        break;
+                    case ClaimType.Dental:
+                        pages = this.dentalTransformation.TransformClaimToClaimFormFoXml(claim);
+                        form.Pages.AddRange(pages);
+                        break;
+                    default:
+                        // If we get here, then something went extremely wrong
+                        throw new InvalidOperationException(Resources.InvalidClaimTypeError);
                 }
             }
 

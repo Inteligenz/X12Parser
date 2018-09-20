@@ -6,43 +6,14 @@
 
     using OopFactory.X12.Hipaa.Enums;
 
-    public class FormBlock
-    {
-        public string LetterSpacing { get; set; }
-
-        public TextAlign TextAlign { get; set; }
-
-        public decimal Left { get; set; }
-
-        public decimal Top { get; set; }
-
-        public decimal Width { get; set; }
-
-        public decimal Height { get; set; }
-
-        public string Text { get; set; }
-    }
-
-    public class FormPage
-    {
-        public FormPage()
-        {
-            if (this.Blocks == null)
-            {
-                this.Blocks = new List<FormBlock>();
-            }
-        }
-
-        public string MasterReference { get; set; }
-
-        public string ImagePath { get; set; }
-
-        [XmlElement(ElementName = "Block")]
-        public List<FormBlock> Blocks { get; set; }
-    }
-
+    /// <summary>
+    /// Represents a single collection of <see cref="FormPage"/> objects
+    /// </summary>
     public class FormDocument
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormDocument"/> class
+        /// </summary>
         public FormDocument()
         {
             if (this.Pages == null)
@@ -51,22 +22,32 @@
             }
         }
 
-        [XmlElement(ElementName = "Page")]
+        /// <summary>
+        /// Gets or sets the collection of <see cref="FormPage"/> objects that make up the document
+        /// </summary>
+        [XmlElement(ElementName = FormElements.Page)]
         public List<FormPage> Pages { get; set; }
 
-        #region Serialization Methods
+        /// <summary>
+        /// Converts an XML string into its equivalent <see cref="FormDocument"/> object
+        /// </summary>
+        /// <param name="xml">String data to be deserialized</param>
+        /// <returns>Representative <see cref="FormDocument"/> object</returns>
+        public static FormDocument Deserialize(string xml)
+        {
+            var serializer = new XmlSerializer(typeof(FormDocument));
+            return (FormDocument)serializer.Deserialize(new StringReader(xml));
+        }
+
+        /// <summary>
+        /// Converts the object into its XML equivalent
+        /// </summary>
+        /// <returns>XML string that represents the object</returns>
         public string Serialize()
         {
             var writer = new StringWriter();
             new XmlSerializer(typeof(FormDocument)).Serialize(writer, this);
             return writer.ToString();
         }
-
-        public static FormDocument Deserialize(string xml)
-        {
-            var serializer = new XmlSerializer(typeof(FormDocument));
-            return (FormDocument)serializer.Deserialize(new StringReader(xml));
-        }
-        #endregion
     }
 }

@@ -24,10 +24,9 @@
         /// <summary>
         /// Gets or sets the collection of <see cref="Claim"/> objects
         /// </summary>
-        [XmlElement(ElementName = "Claim")]
+        [XmlElement(ElementName = Enums.FormElements.Claim)]
         public List<Claim> Claims { get; set; }
 
-        #region Serialization Methods
         /// <summary>
         /// Deserializes an XML representation of an object and returns the <see cref="ClaimDocument"/>
         /// </summary>
@@ -50,6 +49,5 @@
             new XmlSerializer(typeof(ClaimDocument)).Serialize(writer, this);
             return writer.ToString();
         }
-        #endregion
     }
 }
