@@ -4,8 +4,6 @@
 
     public abstract class TypedSegment 
     {
-        internal Segment Segment;
-
         private readonly string segmentId;
 
         public event EventHandler Initializing;
@@ -17,20 +15,23 @@
             this.segmentId = segmentId;
         }
 
-        protected virtual void OnInitializing(EventArgs e)
-        {
-            this.Initializing?.Invoke(this, e);
-        }
-        protected virtual void OnInitialized(EventArgs e)
-        {
-            this.Initialized?.Invoke(this, e);
-        }
+        internal Segment Segment { get; set; }
 
         internal void Initialize(Container parent, X12DelimiterSet delimiters)
         {
             this.OnInitializing(new EventArgs());
             this.Segment = new Segment(parent, delimiters, this.segmentId);
             this.OnInitialized(new EventArgs());
+        }
+
+        protected virtual void OnInitializing(EventArgs e)
+        {
+            this.Initializing?.Invoke(this, e);
+        }
+
+        protected virtual void OnInitialized(EventArgs e)
+        {
+            this.Initialized?.Invoke(this, e);
         }
     }
 }

@@ -6,20 +6,20 @@
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    
+
+    using OopFactory.X12.Shared.Properties;
     using OopFactory.X12.Specifications;
     using OopFactory.X12.Specifications.Finders;
     using OopFactory.X12.Specifications.Interfaces;
 
-    public class Interchange : Container, IXmlSerializable
+    public class Interchange : Container
     {
-        private readonly ISpecificationFinder specFinder;
         private readonly List<FunctionGroup> functionGroups;
 
         public Interchange(ISpecificationFinder specFinder, string segmentString)
             : base(null, new X12DelimiterSet(segmentString.ToCharArray()), segmentString)
         {
-            this.specFinder = specFinder;
+            this.SpecFinder = specFinder;
             this.functionGroups = new List<FunctionGroup>();
         }
 
@@ -33,11 +33,11 @@
                 controlNumber,
                 production ? "P" : "T"))
         {
-            this.specFinder = specFinder;
+            this.SpecFinder = specFinder;
             if (controlNumber > 999999999 || controlNumber < 1)
             {
                 throw new ElementValidationException(
-                    "{0} Interchange Control Number must be a positive number between 1 and 999999999.",
+                    Resources.InterchangeValueOutOfRange,
                     "ISA00",
                     controlNumber.ToString());
             }
@@ -64,51 +64,55 @@
         public string AuthorInfoQualifier
         {
             get { return this.GetElement(1); }
-            set { this.SetElement(1, string.Format("{0,-2}", value)); }
+            set { this.SetElement(1, $"{value,-2}"); }
         }
 
         public string AuthorInfo
         {
             get { return this.GetElement(2); }
-            set { this.SetElement(2, string.Format("{0,-10}", value)); }
+            set { this.SetElement(2, $"{value,-10}"); }
         }
 
         public string SecurityInfoQualifier
         {
             get { return this.GetElement(3); }
-            set { this.SetElement(3, string.Format("{0,-2}", value)); }
+            set { this.SetElement(3, $"{value,-2}"); }
         }
 
         public string SecurityInfo
         {
             get { return this.GetElement(4); }
-            set { this.SetElement(4, string.Format("{0,-10}", value)); }
+            set { this.SetElement(4, $"{value,-10}"); }
         }
 
         public string InterchangeSenderIdQualifier
         {
             get { return this.GetElement(5); }
-            set { this.SetElement(5, string.Format("{0,-2}", value)); }
+            set { this.SetElement(5, $"{value,-2}"); }
         }
 
         public string InterchangeSenderId
         {
             get { return this.GetElement(6); }
-            set { this.SetElement(6, string.Format("{0,-15}", value)); }
+            set { this.SetElement(6, $"{value,-15}"); }
         }
 
         public string InterchangeReceiverIdQualifier
         {
             get { return this.GetElement(7); }
-            set { this.SetElement(7, string.Format("{0,-2}", value)); }
+            set { this.SetElement(7, $"{value,-2}"); }
         }
 
         public string InterchangeReceiverId
         {
             get { return this.GetElement(8); }
-            set { this.SetElement(8, string.Format("{0,-15}", value)); }
+            set { this.SetElement(8, $"{value,-15}"); }
         }
 
+        /// <summary>
+        /// Gets or sets the interchange date
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if ISA date time elements cannot be parsed</exception>
         public DateTime InterchangeDate
         {
             get
@@ -118,24 +122,23 @@
                 {
                     return date;
                 }
-                else if (DateTime.TryParseExact(this.GetElement(9), "yyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
+
+                if (DateTime.TryParseExact(this.GetElement(9), "yyMMdd", null, System.Globalization.DateTimeStyles.None, out date))
                 {
                     return date;
                 }
-                else
-                {
-                    throw new ArgumentException(
-                        string.Format(
-                            "{0} and {1} in ISA09 and ISA10 cannot be converted into a date and time.",
-                            this.GetElement(9),
-                            this.GetElement(10)));
-                }
+
+                throw new ArgumentException(
+                    string.Format(
+                        Resources.IsaDateTimeParsingError,
+                        this.GetElement(9),
+                        this.GetElement(10)));
             }
 
             set
             {
-                this.SetElement(9, string.Format("{0:yyMMdd}", value));
-                this.SetElement(10, string.Format("{0:HHmm}", value));
+                this.SetElement(9, $"{value:yyMMdd}");
+                this.SetElement(10, $"{value:HHmm}");
             }
         }
 
@@ -143,7 +146,7 @@
 
         public IEnumerable<FunctionGroup> FunctionGroups => this.functionGroups;
 
-        internal ISpecificationFinder SpecFinder => this.specFinder;
+        internal ISpecificationFinder SpecFinder { get; }
 
         internal override IList<SegmentSpecification> AllowedChildSegments => new List<SegmentSpecification>();
 
@@ -151,7 +154,7 @@
 
         public FunctionGroup AddFunctionGroup(string segmentString)
         {
-            var fg = new FunctionGroup(specFinder, this, this.DelimiterSet, segmentString);
+            var fg = new FunctionGroup(this.SpecFinder, this, this.DelimiterSet, segmentString);
             this.functionGroups.Add(fg);
             return fg;
         }
@@ -161,39 +164,39 @@
             return this.AddFunctionGroup(functionIdCode, date, controlNumber, "004010X096A1");
         }
 
+        /// <summary>
+        /// Adds a new <see cref="FunctionGroup"/> to the interchange
+        /// </summary>
+        /// <param name="functionIdCode">Id code of new FunctionGroup</param>
+        /// <param name="date">DateTime for function group</param>
+        /// <param name="controlNumber">FunctionGroup control number</param>
+        /// <param name="version">Version for FunctionGroup</param>
+        /// <returns>New FunctionGroup object</returns>
+        /// <exception cref="ElementValidationException">Thrown if the control number is not within acceptable range</exception>
         public FunctionGroup AddFunctionGroup(string functionIdCode, DateTime date, int controlNumber, string version)
         {
             if (controlNumber > 999999999 || controlNumber < 1)
             {
                 throw new ElementValidationException(
-                    "Element {0} cannot containe the value '{1}' because it must be a positive number between 1 and 999999999.",
+                    Resources.ElementValueOutOfRange,
                     "GS06",
                     controlNumber.ToString());
             }
 
             var fg = new FunctionGroup(
-                this.specFinder,
+                this.SpecFinder,
                 this,
                 this.DelimiterSet,
-                string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}{2}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator, version));
-            fg.FunctionalIdentifierCode = functionIdCode;
-            fg.Date = date;
-            fg.ControlNumber = controlNumber;
+                string.Format("GS{0}{0}{0}{0}{0}{0}{0}X{0}{2}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator, version))
+            {
+                FunctionalIdentifierCode = functionIdCode,
+                Date = date,
+                ControlNumber = controlNumber
+            };
 
             fg.SetTerminatingTrailerSegment(string.Format("GE{0}0{0}{2}{1}", this.DelimiterSet.ElementSeparator, this.DelimiterSet.SegmentTerminator, controlNumber));
             this.functionGroups.Add(fg);
             return fg;
-        }
-
-        internal override string SerializeBodyToX12(bool addWhitespace)
-        {
-            var sb = new StringBuilder();
-            foreach (var fg in this.functionGroups)
-            {
-                sb.Append(fg.ToX12String(addWhitespace));
-            }
-
-            return sb.ToString();
         }
 
         public override string ToX12String(bool addWhitespace)
@@ -205,40 +208,6 @@
         public string Serialize()
         {
             return this.Serialize(false);
-        }
-
-        private void RemoveComments(XmlElement element)
-        {
-            List<XmlComment> comments = new List<XmlComment>();
-
-            foreach (XmlNode childElement in element.ChildNodes)
-            {
-                if (childElement is XmlComment)
-                {
-                    comments.Add((XmlComment)childElement);
-                }
-            }
-
-            foreach (XmlComment comment in comments)
-            {
-                XmlWhitespace prev = comment.PreviousSibling as XmlWhitespace;
-                XmlWhitespace next = comment.NextSibling as XmlWhitespace;
-                if (prev != null && prev.Value != null & prev.Value.StartsWith(Environment.NewLine)
-                    && next != null && next.Value != null && next.Value.StartsWith(Environment.NewLine))
-                {
-                    element.RemoveChild(next);
-                }
-
-                element.RemoveChild(comment);
-            }
-
-            foreach (XmlNode childElement in element.ChildNodes)
-            {
-                if (childElement is XmlElement && childElement.HasChildNodes)
-                {
-                    this.RemoveComments((XmlElement)childElement);
-                }
-            }
         }
 
         public virtual string Serialize(bool suppressComments)
@@ -269,7 +238,16 @@
             xmlSerializer.Serialize(stream, this);
         }
 
-        #region IXmlSerializable Members
+        internal override string SerializeBodyToX12(bool addWhitespace)
+        {
+            var sb = new StringBuilder();
+            foreach (var fg in this.functionGroups)
+            {
+                sb.Append(fg.ToX12String(addWhitespace));
+            }
+
+            return sb.ToString();
+        }
 
         internal override void WriteXml(XmlWriter writer)
         {
@@ -307,6 +285,38 @@
             }
         }
 
-        #endregion
+        private void RemoveComments(XmlElement element)
+        {
+            var comments = new List<XmlComment>();
+
+            foreach (XmlNode childElement in element.ChildNodes)
+            {
+                if (childElement is XmlComment xmlComment)
+                {
+                    comments.Add(xmlComment);
+                }
+            }
+
+            foreach (XmlComment comment in comments)
+            {
+                XmlWhitespace prev = comment.PreviousSibling as XmlWhitespace;
+                XmlWhitespace next = comment.NextSibling as XmlWhitespace;
+                if (prev?.Value != null && prev.Value.StartsWith(Environment.NewLine)
+                    && next?.Value != null && next.Value.StartsWith(Environment.NewLine))
+                {
+                    element.RemoveChild(next);
+                }
+
+                element.RemoveChild(comment);
+            }
+
+            foreach (XmlNode childElement in element.ChildNodes)
+            {
+                if (childElement is XmlElement xmlElement && childElement.HasChildNodes)
+                {
+                    this.RemoveComments(xmlElement);
+                }
+            }
+        }
     }
 }

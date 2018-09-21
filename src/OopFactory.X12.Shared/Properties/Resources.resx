@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateTimeParsingError" xml:space="preserve">
+    <value>{0} and {1} cannot be converted into a date and time.</value>
+    <comment>Format parameter(s): date, time</comment>
+  </data>
   <data name="EDIFieldNotFound" xml:space="preserve">
     <value>No EDI Field Value found for '{0}'</value>
     <comment>Format parameter(s): value</comment>
@@ -125,8 +129,60 @@
     <value>No EDIValue Attribute defined for '{0}'</value>
     <comment>Format parameter(s): value</comment>
   </data>
+  <data name="ElementRequiredError" xml:space="preserve">
+    <value>Element {0} is required.</value>
+    <comment>Format parameter(s): elementId</comment>
+  </data>
+  <data name="ElementSegmentTerminatorError" xml:space="preserve">
+    <value>Element {0} cannot contain the value '{1}' with the segment terminator {2}</value>
+    <comment>Format parameter(s): elementId, value, segmentTerminator</comment>
+  </data>
+  <data name="ElementValueOutOfRange" xml:space="preserve">
+    <value>Element {0} cannot containe the value '{1}' because it must be a positive number between 1 and 999999999.</value>
+    <comment>Format parameter(s): elementId, value</comment>
+  </data>
+  <data name="InterchangeValueOutOfRange" xml:space="preserve">
+    <value>{0} Interchange Control Number must be a positive number between 1 and 999999999.</value>
+    <comment>Format parameter(s): isaSegment</comment>
+  </data>
+  <data name="InvalidElementSeparatorError" xml:space="preserve">
+    <value>{0} is not a valid element separator in position 4 of the file.</value>
+    <comment>Format parameter(s): elementSeparator</comment>
+  </data>
+  <data name="InvalidHLSpecError" xml:space="preserve">
+    <value>Cannot find specification for hierarichal loop {0}</value>
+    <comment>Format parameter(s): segmentString</comment>
+  </data>
+  <data name="InvalidSegmentTerminatorError" xml:space="preserve">
+    <value>{0} is not a valid segment terminator in position 106 of the file.</value>
+    <comment>Format parameter(s): segmentTerminator</comment>
+  </data>
+  <data name="InvalidSubelementSeparatorError" xml:space="preserve">
+    <value>{0} is not a valid subelement separator in position 105 of the file.</value>
+    <comment>Format parameter(s): subelementSeparator</comment>
+  </data>
+  <data name="IsaDateTimeParsingError" xml:space="preserve">
+    <value>{0} and {1} in ISA09 and ISA10 cannot be converted into a date and time.</value>
+    <comment>Format parameter(s): date, time</comment>
+  </data>
+  <data name="IsaLengthMismatchError" xml:space="preserve">
+    <value>ISA segment and terminator is expected to be exactly 106 characters.</value>
+    <comment>Format parameter(s):</comment>
+  </data>
+  <data name="IsaSegmentMissingPrefixError" xml:space="preserve">
+    <value>First segment must start with ISA</value>
+    <comment>Format parameter(s):</comment>
+  </data>
   <data name="NullStringArgument" xml:space="preserve">
     <value>Value cannot be null or whitespace</value>
     <comment>Format parameter(s):</comment>
+  </data>
+  <data name="TransactionHLCodeError" xml:space="preserve">
+    <value>{0} Transaction does not expect {2} level code value {3} that appears in transaction control number {1}.</value>
+    <comment>Format parameter(s): idCode, controlNumber, hlSpec, hlCodeLevel</comment>
+  </data>
+  <data name="UnableToAddHLoop" xml:space="preserve">
+    <value>Hierarchical Loop ID {3} cannot be added to {0} transaction with control number {1} because it already exists.</value>
+    <comment>Format parameter(s): idCode, controlNumber, loopId</comment>
   </data>
 </root>

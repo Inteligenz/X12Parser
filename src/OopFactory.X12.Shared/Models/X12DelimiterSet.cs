@@ -2,6 +2,8 @@
 {
     using System;
 
+    using OopFactory.X12.Shared.Properties;
+
     /// <summary>
     /// Represents the collection of delimiters used in X12 interchanges
     /// </summary>
@@ -24,18 +26,19 @@
         /// Initializes a new instance of the <see cref="X12DelimiterSet"/> class with the provided ISA Segment
         /// </summary>
         /// <param name="isaSegmentAndTerminator">ISA Segment and terminator to parse delimiter set from</param>
+        /// <exception cref="ArgumentException">Thrown if the ISA segment or terminator are invalid</exception>
         public X12DelimiterSet(char[] isaSegmentAndTerminator)
         {
             var prefix = new string(isaSegmentAndTerminator).Substring(0, 3);
             
             if (isaSegmentAndTerminator.Length < 105)
             {
-                throw new ArgumentException("ISA segment and terminator is expected to be exactly 106 characters.");
+                throw new ArgumentException(Resources.IsaLengthMismatchError);
             }
 
             if (prefix.ToUpper() != "ISA")
             {
-                throw new ArgumentException("First segment must start with ISA");
+                throw new ArgumentException(Resources.IsaSegmentMissingPrefixError);
             }
 
             this.ElementSeparator = isaSegmentAndTerminator[3];
@@ -48,17 +51,17 @@
 
             if (char.IsLetterOrDigit(this.ElementSeparator))
             {
-                throw new ArgumentException(this.ElementSeparator + " is not a valid element separator in position 4 of the file.");
+                throw new ArgumentException(string.Format(Resources.InvalidElementSeparatorError, this.ElementSeparator));
             }
 
             if (char.IsLetterOrDigit(this.SubElementSeparator))
             {
-                throw new ArgumentException(this.SubElementSeparator + " is not a valid subelement separator in position 105 of the file.");
+                throw new ArgumentException(string.Format(Resources.InvalidSubelementSeparatorError, this.SubElementSeparator));
             }
 
             if (char.IsLetterOrDigit(this.SegmentTerminator))
             {
-                throw new ArgumentException(this.SegmentTerminator + " is not a valid segment terminator in position 106 of the file.");
+                throw new ArgumentException(string.Format(Resources.InvalidSegmentTerminatorError, this.SegmentTerminator));
             }
         }
 

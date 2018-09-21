@@ -53,9 +53,7 @@
 
             return hloop;
         }
-
-        #region IXmlSerializable Members
-
+        
         internal override void WriteXml(System.Xml.XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(this.SegmentId))
@@ -72,6 +70,5 @@
                 writer.WriteEndElement();
             }
         }
-        #endregion
     }
 }

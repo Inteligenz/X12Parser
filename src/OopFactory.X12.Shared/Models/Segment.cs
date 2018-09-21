@@ -7,6 +7,7 @@
     using System.Xml;
     using System.Xml.Serialization;
 
+    using OopFactory.X12.Shared.Properties;
     using OopFactory.X12.Specifications;
     using OopFactory.X12.Specifications.Enumerations;
     using OopFactory.X12.Specifications.Interfaces;
@@ -18,13 +19,64 @@
         {
             this.Parent = parent;
             this.Initialize(segment);
-            base.DelimiterSet = delimiters;
+            this.DelimiterSet = delimiters;
         }
 
         public Container Parent { get; }
 
         private SegmentSpecification SegmentSpec =>
             this.SpecFinder.FindSegmentSpec(this.FunctionGroup != null ? this.FunctionGroup.VersionIdentifierCode : string.Empty, this.SegmentId);
+
+        private FunctionGroup FunctionGroup
+        {
+            get
+            {
+                if (this is Interchange)
+                {
+                    return null;
+                }
+
+                if (this is FunctionGroup)
+                {
+                    return (FunctionGroup)this;
+                }
+
+                if (this is Transaction)
+                {
+                    return ((Transaction)this).FunctionGroup;
+                }
+
+                if (this.Parent is FunctionGroup functionGroup)
+                {
+                    return functionGroup;
+                }
+
+                if (this.Parent is Interchange)
+                {
+                    return null;
+                }
+
+                return (FunctionGroup)this.Parent.Transaction.Parent;
+            }
+        }
+
+        private ISpecificationFinder SpecFinder
+        {
+            get
+            {
+                if (this.FunctionGroup != null)
+                {
+                    return this.FunctionGroup.SpecFinder;
+                }
+
+                if (this is Interchange)
+                {
+                    return ((Interchange)this).SpecFinder;
+                }
+
+                return ((Interchange)this.Parent).SpecFinder;
+            }
+        }
 
         public static int ParseBinarySize(char elementSeparator, string segment, out int binaryStart)
         {
@@ -53,89 +105,6 @@
             return 0;
         }
         
-        protected override void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
-        {
-            ElementSpecification spec = this.SegmentSpec?.Elements[elementNumber - 1];
-
-            if (spec != null)
-            {
-                if (value.Length == 0 && spec.Required)
-                {
-                    throw new ElementValidationException("Element {0} is required.", elementId, value);
-                }
-
-                if (value.Length > 0)
-                {
-                    if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
-                    {
-                        throw new ElementValidationException(
-                            "Element {0} cannot contain the value '{1}' because it must be between {2} and {3} characters in length.",
-                            elementId,
-                            value,
-                            spec.MinLength,
-                            spec.MaxLength);
-                    }
-                }
-
-                switch (spec.Type)
-                {
-                    case ElementDataTypeEnum.Numeric:
-                        int number;
-                        if (!int.TryParse(value, out number))
-                        {
-                            throw new ElementValidationException(
-                                "Element {0} cannot contain the value '{1}' because it is constrained to be an implied decimal.",
-                                elementId,
-                                value);
-                        }
-
-                        break;
-                    case ElementDataTypeEnum.Decimal:
-                        decimal decNumber;
-                        if (!decimal.TryParse(value, out decNumber))
-                        {
-                            throw new ElementValidationException(
-                                "Element {0} cannot contain the value '{1}' because it is contrained to be a decimal.",
-                                elementId,
-                                value);
-                        }
-
-                        break;
-                    case ElementDataTypeEnum.Identifier:
-                        if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
-                        {
-                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
-                            {
-                                string[] ids = new string[spec.AllowedIdentifiers.Count];
-                                for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
-                                {
-                                    ids[i] = spec.AllowedIdentifiers[i].ID;
-                                }
-
-                                string expected = string.Empty;
-                                if (ids.Length > 1)
-                                {
-                                    expected = string.Join(", ", ids, 0, ids.Length - 1);
-                                    expected += " or " + ids[ids.Length - 1];
-                                }
-                                else
-                                {
-                                    expected = ids[0];
-                                }
-
-                                throw new ElementValidationException(
-                                    "Element '{0}' cannot contain the value '{1}'.  Specification restricts this to {2}.",
-                                    elementId,
-                                    value,
-                                    expected);
-                            }
-                        }
-
-                        break;
-                }
-            }
-        }
-        
         public virtual string ToX12String(bool addWhitespace)
         {
             var sb = new StringBuilder();
@@ -157,76 +126,12 @@
         {
             return this.ToX12String(addWhitespace).Trim();
         }
-        
-        private FunctionGroup FunctionGroup
-        {
-            get
-            {
-                if (this is Interchange)
-                {
-                    return null;
-                }
 
-                if (this is FunctionGroup)
-                {
-                    return (FunctionGroup)this;
-                }
-                else if (this is Transaction)
-                {
-                    return ((Transaction)this).FunctionGroup;
-                }
-                else if (this.Parent is FunctionGroup functionGroup)
-                {
-                    return functionGroup;
-                }
-                else if (this.Parent is Interchange)
-                {
-                    return null;
-                }
-
-                return (FunctionGroup)this.Parent.Transaction.Parent;
-            }
-        }
-
-        private ISpecificationFinder SpecFinder
-        {
-            get
-            {
-                if (this.FunctionGroup != null)
-                {
-                    return this.FunctionGroup.SpecFinder;
-                }
-
-                if (this is Interchange)
-                {
-                    return ((Interchange)this).SpecFinder;
-                }
-
-                return ((Interchange)this.Parent).SpecFinder;
-            }
-        }
-
-        #region IXmlSerializable Members
         public override string ToString()
         {
             return this.SegmentString;
         }
 
-        System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-        {
-            throw new NotImplementedException();
-        }
-
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            this.WriteXml(writer);
-        }
-        
         internal virtual void WriteXml(XmlWriter writer)
         {
             if (!string.IsNullOrEmpty(this.SegmentId))
@@ -295,6 +200,102 @@
             }
         }
 
-        #endregion
+        protected override void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
+        {
+            ElementSpecification spec = this.SegmentSpec?.Elements[elementNumber - 1];
+
+            if (spec != null)
+            {
+                if (value.Length == 0 && spec.Required)
+                {
+                    throw new ElementValidationException(Resources.ElementRequiredError, elementId, value);
+                }
+
+                if (value.Length > 0)
+                {
+                    if (value.Length < spec.MinLength || spec.MaxLength > 0 && value.Length > spec.MaxLength)
+                    {
+                        throw new ElementValidationException(
+                            "Element {0} cannot contain the value '{1}' because it must be between {2} and {3} characters in length.",
+                            elementId,
+                            value,
+                            spec.MinLength,
+                            spec.MaxLength);
+                    }
+                }
+
+                switch (spec.Type)
+                {
+                    case ElementDataTypeEnum.Numeric:
+                        int number;
+                        if (!int.TryParse(value, out number))
+                        {
+                            throw new ElementValidationException(
+                                "Element {0} cannot contain the value '{1}' because it is constrained to be an implied decimal.",
+                                elementId,
+                                value);
+                        }
+
+                        break;
+                    case ElementDataTypeEnum.Decimal:
+                        decimal decNumber;
+                        if (!decimal.TryParse(value, out decNumber))
+                        {
+                            throw new ElementValidationException(
+                                "Element {0} cannot contain the value '{1}' because it is constrained to be a decimal.",
+                                elementId,
+                                value);
+                        }
+
+                        break;
+                    case ElementDataTypeEnum.Identifier:
+                        if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
+                        {
+                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
+                            {
+                                string[] ids = new string[spec.AllowedIdentifiers.Count];
+                                for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
+                                {
+                                    ids[i] = spec.AllowedIdentifiers[i].ID;
+                                }
+
+                                string expected = string.Empty;
+                                if (ids.Length > 1)
+                                {
+                                    expected = string.Join(", ", ids, 0, ids.Length - 1);
+                                    expected += " or " + ids[ids.Length - 1];
+                                }
+                                else
+                                {
+                                    expected = ids[0];
+                                }
+
+                                throw new ElementValidationException(
+                                    "Element '{0}' cannot contain the value '{1}'.  Specification restricts this to {2}.",
+                                    elementId,
+                                    value,
+                                    expected);
+                            }
+                        }
+
+                        break;
+                }
+            }
+        }
+
+        System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            this.WriteXml(writer);
+        }
     }
 }

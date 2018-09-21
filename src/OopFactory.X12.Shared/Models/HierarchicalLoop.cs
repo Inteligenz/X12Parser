@@ -8,6 +8,12 @@
 
     public class HierarchicalLoop : HierarchicalLoopContainer
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HierarchicalLoop"/> class with the provided parameters
+        /// </summary>
+        /// <param name="parent">Parent container</param>
+        /// <param name="delimiters">Delimiter set indicating how to segregate segments and elements</param>
+        /// <param name="segment">Segment string for the loop</param>
         internal HierarchicalLoop(Container parent, X12DelimiterSet delimiters, string segment)
             : base(parent, delimiters, segment)
         {
@@ -22,26 +28,17 @@
             this.Specification != null ? this.Specification.SegmentSpecifications : new List<SegmentSpecification>();
 
         [XmlAttribute("Id")]
-        public string Id
-        {
-            get { return GetElement(1); }
-        }
+        public string Id => this.GetElement(1);
 
         [XmlAttribute("ParentId")]
-        public string ParentId
-        {
-            get { return GetElement(2); }
-        }
+        public string ParentId => this.GetElement(2);
 
-        public string LevelCode
-        {
-            get { return GetElement(3); }
-        }
+        public string LevelCode => this.GetElement(3);
 
         public string HierarchicalChildCode
         {
-            get { return GetElement(4); }
-            internal set { SetElement(4, value); }
+            get { return this.GetElement(4); }
+            internal set { this.SetElement(4, value); }
         }
 
         public override bool AllowsHierarchicalLoop(string levelCode)
@@ -77,11 +74,11 @@
 
         internal override void WriteXml(System.Xml.XmlWriter writer)
         {
-            if (!string.IsNullOrEmpty(base.SegmentId))
+            if (!string.IsNullOrEmpty(this.SegmentId))
             {
                 writer.WriteStartElement("HierarchicalLoop");
 
-                if (Specification != null)
+                if (this.Specification != null)
                 {
                     writer.WriteAttributeString("LoopId", this.Specification.LoopId);
                     writer.WriteAttributeString("LoopName", this.Specification.Name);
@@ -98,13 +95,7 @@
 
         public override string ToString()
         {
-            return string.Format(
-                "Loop(Id={0},ParentId={1},Level={2},ChildLoops={3}, ChildSegments={4})",
-                this.Id,
-                this.ParentId,
-                this.LevelCode,
-                this.Loops.Count(),
-                this.Segments.Count());
+            return $"Loop(Id={this.Id},ParentId={this.ParentId},Level={this.LevelCode},ChildLoops={this.Loops.Count()}, ChildSegments={this.Segments.Count})";
         }
     }
 }

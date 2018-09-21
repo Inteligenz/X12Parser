@@ -8,9 +8,6 @@
 
     public class Transaction : HierarchicalLoopContainer
     {
-        private List<string> loopStartingSegmentIds;
-        private List<string> loopWithLoopsStartingSegmentIds;
-
         internal Transaction(Container parent, X12DelimiterSet delimiters, string segment, TransactionSpecification spec)
             : base(parent, delimiters, segment)
         {
@@ -53,13 +50,6 @@
                 hloop.HierarchicalChildCode = willHoldChildHLoops.Value ? "1" : "0";
             }
             return hloop;
-        }
-        
-        internal override void Initialize(string segment)
-        {
-            base.Initialize(segment);
-            this.loopStartingSegmentIds = new List<string> { "NM1" };
-            this.loopWithLoopsStartingSegmentIds = new List<string>();
         }
 
         internal override IEnumerable<string> TrailerSegmentIds

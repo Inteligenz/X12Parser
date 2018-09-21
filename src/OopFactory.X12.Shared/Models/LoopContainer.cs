@@ -7,23 +7,20 @@
 
     public abstract class LoopContainer : Container
     {
-        private List<Loop> loops;
-
         internal LoopContainer(Container parent, X12DelimiterSet delimiters, string startingSegment)
             : base(parent, delimiters, startingSegment)
         {
         }
 
-        internal override void Initialize(string segment)
-        {
-            base.Initialize(segment);
-            this.loops = new List<Loop>();
-        }
+        public IList<Loop> Loops { get; private set; }
 
         internal abstract IList<LoopSpecification> AllowedChildLoops { get; }
 
-        public IEnumerable<Loop> Loops => this.loops;
-
+        /// <summary>
+        /// Adds a loop specified by the provided segment string to the <see cref="LoopContainer"/>
+        /// </summary>
+        /// <param name="segmentString">String representing the loop to be added</param>
+        /// <returns>Loop added to the container; otherwise, null</returns>
         public Loop AddLoop(string segmentString) 
         {
             LoopSpecification loopSpec = this.GetLoopSpecification(segmentString);
@@ -31,8 +28,8 @@
             if (loopSpec != null)
             {
                 var loop = new Loop(this, this.DelimiterSet, segmentString, loopSpec);
-                this.segments.Add(loop);
-                this.loops.Add(loop);
+                this.Segments.Add(loop);
+                this.Loops.Add(loop);
                 return loop;
             }
 
@@ -47,8 +44,8 @@
             if (loopSpec != null)
             {
                 loop.Initialize(this, this.DelimiterSet, loopSpec);
-                this.segments.Add(loop.Loop);
-                this.loops.Add(loop.Loop);
+                this.Segments.Add(loop.Loop);
+                this.Loops.Add(loop.Loop);
                 return loop;
             }
 
@@ -60,6 +57,12 @@
                 segmentString);
         }
 
+        internal override void Initialize(string segment)
+        {
+            base.Initialize(segment);
+            this.Loops = new List<Loop>();
+        }
+
         private LoopSpecification GetLoopSpecification(string segmentString)
         {
             var segment = new Segment(this, this.DelimiterSet, segmentString);
@@ -68,13 +71,14 @@
                 .Where(cl => cl.StartingSegment.SegmentId == segment.SegmentId)
                 .ToList();
 
-            if (matchingLoopSpecs == null || matchingLoopSpecs.Count == 0)
+            if (matchingLoopSpecs.Count == 0)
             {
                 return null;
             }
-            else if (segment.SegmentId == "NM1" || segment.SegmentId == "N1")
+
+            if (segment.SegmentId == "NM1" || segment.SegmentId == "N1")
             {
-                LoopSpecification spec = matchingLoopSpecs.Where(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code.ToString() == segment.GetElement(1) || ei.Code.ToString() == "Item" + segment.GetElement(1))).FirstOrDefault();
+                LoopSpecification spec = matchingLoopSpecs.FirstOrDefault(ls => ls.StartingSegment.EntityIdentifiers.Any(ei => ei.Code == segment.GetElement(1) || ei.Code == "Item" + segment.GetElement(1)));
                 if (spec == null)
                 {
                     if (matchingLoopSpecs.Count(ls => ls.StartingSegment.SegmentId == segment.SegmentId) == 1)
@@ -85,10 +89,8 @@
 
                 return spec;
             }
-            else
-            {
-                return matchingLoopSpecs.FirstOrDefault();
-            }
+
+            return matchingLoopSpecs.FirstOrDefault();
         }
 
         internal override int CountTotalSegments()

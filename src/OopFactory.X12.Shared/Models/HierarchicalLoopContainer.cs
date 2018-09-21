@@ -5,13 +5,22 @@
     using System.Linq;
     using System.Text;
 
+    using OopFactory.X12.Shared.Properties;
+
+    /// <summary>
+    /// Represents a <see cref="LoopContainer"/> with hierarchical structure and data
+    /// </summary>
     public abstract class HierarchicalLoopContainer : LoopContainer
     {
-        protected Dictionary<string, HierarchicalLoop> AllHLoops;
-
         private Dictionary<string, HierarchicalLoop> hLoops;
 
         public IEnumerable<HierarchicalLoop> HLoops => this.hLoops.Values;
+
+        protected Dictionary<string, HierarchicalLoop> AllHLoops { get; set; }
+        
+        public abstract bool AllowsHierarchicalLoop(string levelCode);
+
+        public abstract HierarchicalLoop AddHLoop(string id, string levelCode, bool? existingHierarchalLoops);
 
         public HierarchicalLoop FindHLoop(string id)
         {
@@ -37,28 +46,16 @@
 
             return false;
         }
-        
-        public abstract bool AllowsHierarchicalLoop(string levelCode);
 
-        public abstract HierarchicalLoop AddHLoop(string id, string levelCode, bool? existingHierarchalLoops);
-
-        internal HierarchicalLoopContainer(Container parent, X12DelimiterSet delimiters, string startingSegment)
-            : base(parent, delimiters, startingSegment)
-        {
-            this.AllHLoops = new Dictionary<string, HierarchicalLoop>();
-        }
-
-        internal override void Initialize(string segment)
-        {
-            base.Initialize(segment);
-            this.hLoops = new Dictionary<string, HierarchicalLoop>();
-        }
-
-        internal void AddToHLoopDictionary(HierarchicalLoop hloop)
-        {
-            this.AllHLoops.Add(hloop.Id, hloop);
-        }
-
+        /// <summary>
+        /// Adds <see cref="HierarchicalLoop"/> to the current container with the provided segment string
+        /// </summary>
+        /// <param name="segmentString">String of loop to be added</param>
+        /// <returns>Loop created from segment string</returns>
+        /// <exception cref="TransactionValidationException">Thrown if the transaction has been previously added
+        /// of if the transaction specification is null</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the current loop container doesn't have a valid
+        /// parent</exception>
         public HierarchicalLoop AddHLoop(string segmentString)
         {
             Transaction transaction = this.Transaction;
@@ -75,7 +72,7 @@
                 else
                 {
                     throw new InvalidOperationException(
-                        string.Format("Cannot find specification for hierarichal loop {0}", segmentString));
+                        string.Format(Resources.InvalidHLSpecError, segmentString));
                 }
             }
 
@@ -85,16 +82,14 @@
                     hls => hls.LevelCode == null || hls.LevelCode.ToString() == hl.LevelCode);
             }
 
-            if (specContainer is HierarchicalLoop)
+            if (specContainer is HierarchicalLoop hLoopWithSpec)
             {
-                HierarchicalLoop loopWithSpec = (HierarchicalLoop)specContainer;
-                hl.Specification = loopWithSpec.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
+                hl.Specification = hLoopWithSpec.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
                     hls => hls.LevelCode == null || hls.LevelCode.ToString() == hl.LevelCode);
             }
 
-            if (specContainer is Loop)
+            if (specContainer is Loop loopWithSpec)
             {
-                Loop loopWithSpec = (Loop)specContainer;
                 hl.Specification = loopWithSpec.Specification.HierarchicalLoopSpecifications.FirstOrDefault(
                     hls => hls.LevelCode == null || hls.LevelCode.ToString() == hl.LevelCode);
             }
@@ -102,7 +97,7 @@
             if (hl.Specification == null)
             {
                 throw new TransactionValidationException(
-                    "{0} Transaction does not expect {2} level code value {3} that appears in transaction control number {1}.",
+                    Resources.TransactionHLCodeError,
                     transaction.IdentifierCode,
                     transaction.ControlNumber,
                     "HL03",
@@ -116,22 +111,39 @@
             {
                 specContainer.AddToHLoopDictionary(hl);
             }
-            catch (ArgumentException exc)
+            catch (ArgumentException)
             {
-                if (exc.Message == "An item with the same key has already been added.")
-                {
-                    throw new TransactionValidationException(
-                        "Hierarchical Loop ID {3} cannot be added to {0} transaction with control number {1} because it already exists.",
-                        transaction.IdentifierCode,
-                        transaction.ControlNumber,
-                        "HL01",
-                        hl.Id);
-                }
-
-                throw;
+                throw new TransactionValidationException(
+                    Resources.UnableToAddHLoop,
+                    transaction.IdentifierCode,
+                    transaction.ControlNumber,
+                    "HL01",
+                    hl.Id);
             }
 
             return hl;
+        }
+
+        /// <summary>
+        /// Adds a provided <see cref="HierarchicalLoop"/> to the container
+        /// </summary>
+        /// <param name="hloop">Loop to be added</param>
+        /// <exception cref="ArgumentException">Thrown if the loop ID is not unique</exception>
+        internal void AddToHLoopDictionary(HierarchicalLoop hloop)
+        {
+            this.AllHLoops.Add(hloop.Id, hloop);
+        }
+
+        internal HierarchicalLoopContainer(Container parent, X12DelimiterSet delimiters, string startingSegment)
+            : base(parent, delimiters, startingSegment)
+        {
+            this.AllHLoops = new Dictionary<string, HierarchicalLoop>();
+        }
+
+        internal override void Initialize(string segment)
+        {
+            base.Initialize(segment);
+            this.hLoops = new Dictionary<string, HierarchicalLoop>();
         }
 
         internal override int CountTotalSegments()
@@ -141,7 +153,7 @@
 
         internal override string SerializeBodyToX12(bool addWhitespace)
         {
-            StringBuilder sb = new StringBuilder(base.SerializeBodyToX12(addWhitespace));
+            var sb = new StringBuilder(base.SerializeBodyToX12(addWhitespace));
             foreach (var hloop in this.HLoops)
             {
                 sb.Append(hloop.ToX12String(addWhitespace));
@@ -152,7 +164,7 @@
 
         internal override void WriteXml(System.Xml.XmlWriter writer)
         {
-            if (!string.IsNullOrEmpty(base.SegmentId))
+            if (!string.IsNullOrEmpty(this.SegmentId))
             {
                 base.WriteXml(writer);
 

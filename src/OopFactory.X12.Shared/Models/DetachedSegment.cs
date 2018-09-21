@@ -5,24 +5,44 @@
     using System.Linq;
     using System.Text;
 
+    using OopFactory.X12.Shared.Properties;
+
+    /// <summary>
+    /// Represents a segment that's not a part of any transaction or interchange
+    /// </summary>
     public class DetachedSegment
     {
         internal X12DelimiterSet DelimiterSet;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DetachedSegment"/> class
+        /// </summary>
+        /// <param name="delimiters">Delimiter set for the segment to use</param>
+        /// <param name="segment">Segment string to initialize with</param>
         public DetachedSegment(X12DelimiterSet delimiters, string segment)
         {
             this.DelimiterSet = delimiters;
             this.Initialize(segment);
         }
 
+        /// <summary>
+        /// Gets the segment ID string
+        /// </summary>
         public string SegmentId { get; private set; }
 
+        /// <summary>
+        /// Gets the <see cref="X12DelimiterSet"/> used by the segment
+        /// </summary>
         public X12DelimiterSet Delimiters => this.DelimiterSet;
 
-        public int ElementCount => this.DataElements.Count();
+        /// <summary>
+        /// Gets the number of elements stored on the segment
+        /// </summary>
+        public int ElementCount => this.DataElements.Count;
 
-        protected List<string> DataElements { get; set; }
-
+        /// <summary>
+        /// Gets the segment string representing the object
+        /// </summary>
         public string SegmentString
         {
             get
@@ -49,72 +69,10 @@
             }
         }
 
-        internal virtual void Initialize(string segment)
-        {
-            if (segment == null)
-            {
-                throw new ArgumentNullException(nameof(segment));
-            }
-
-            this.DataElements = new List<string>();
-            int separatorIndex = segment.IndexOf(this.DelimiterSet.ElementSeparator);
-            if (separatorIndex >= 0)
-            {
-                this.SegmentId = segment.Substring(0, separatorIndex);
-                if (this.SegmentId == "BIN")
-                {
-                    int binaryStartIndex;
-                    int size = Segment.ParseBinarySize(this.DelimiterSet.ElementSeparator, segment, out binaryStartIndex);
-                    this.DataElements.Add(size.ToString());
-                    this.DataElements.Add(segment.Substring(binaryStartIndex, size));
-                }
-                else if (this.SegmentId == "BDS")
-                {
-                    int nextIndex = segment.IndexOf(this.DelimiterSet.ElementSeparator, separatorIndex + 1);
-                    if (nextIndex > separatorIndex + 1)
-                    {
-                        this.DataElements.Add(segment.Substring(separatorIndex + 1, nextIndex - separatorIndex - 1));
-
-                        int binaryStartIndex;
-                        int size = Segment.ParseBinarySize(this.DelimiterSet.ElementSeparator, segment, out binaryStartIndex);
-                        this.DataElements.Add(size.ToString());
-                        this.DataElements.Add(segment.Substring(binaryStartIndex, size));
-                    }
-                }
-                else
-                {
-                    foreach (string element in segment.TrimEnd(new[] { this.DelimiterSet.SegmentTerminator }).Substring(separatorIndex + 1).Split(this.DelimiterSet.ElementSeparator))
-                    {
-                        this.DataElements.Add(element);
-                    }
-                }
-            }
-            else
-            {
-                this.SegmentId = segment;
-            }
-        }
-
-        private void ValidateContentFreeOfDelimiters(string elementId, string value)
-        {
-            if (value.Contains(this.DelimiterSet.SegmentTerminator))
-            {
-                throw new ElementValidationException(
-                    "Element {0} cannot contain the value '{1}' with the segment terminator {2}",
-                    elementId,
-                    value,
-                    this.DelimiterSet.SegmentTerminator);
-            }
-
-            if (value.Contains(this.DelimiterSet.ElementSeparator))
-            {
-                throw new ElementValidationException(
-                    "Element {0} cannot contain the value '{1}' with the element separator {2}.",
-                    elementId,
-                    value,
-                    this.DelimiterSet.ElementSeparator);
-            }
-        }
+        /// <summary>
+        /// Gets or sets the collection of data element strings in the segment
+        /// </summary>
+        protected List<string> DataElements { get; set; }
 
         public string GetElement(int elementNumber)
         {
@@ -154,14 +112,14 @@
             return null;
         }
 
-        protected virtual void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
-        {
-            // do nothing, this only applies once the segment is attached to an x12 interchange
-        }
-
+        /// <summary>
+        /// Sets the provided element at the position indicated by the elementNumber
+        /// </summary>
+        /// <param name="elementNumber">Position in segment to set value</param>
+        /// <param name="value">Data to be stored</param>
         public void SetElement(int elementNumber, string value)
         {
-            string elementId = string.Format("{0}{1:00}", this.SegmentId, elementNumber);
+            string elementId = $"{this.SegmentId}{elementNumber:00}";
             this.ValidateContentFreeOfDelimiters(elementId, value);
             this.ValidateAgainstSegmentSpecification(elementId, elementNumber, value);
             if (elementNumber > this.DataElements.Count)
@@ -188,6 +146,78 @@
         public void SetDate8Element(int elementNumber, DateTime? value)
         {
             this.SetElement(elementNumber, string.Format("{0:yyyyMMdd}", value));
+        }
+
+        internal virtual void Initialize(string segment)
+        {
+            if (segment == null)
+            {
+                throw new ArgumentNullException(nameof(segment));
+            }
+
+            this.DataElements = new List<string>();
+            int separatorIndex = segment.IndexOf(this.DelimiterSet.ElementSeparator);
+            if (separatorIndex >= 0)
+            {
+                this.SegmentId = segment.Substring(0, separatorIndex);
+                if (this.SegmentId == "BIN")
+                {
+                    int binaryStartIndex;
+                    int size = Segment.ParseBinarySize(this.DelimiterSet.ElementSeparator, segment, out binaryStartIndex);
+                    this.DataElements.Add(size.ToString());
+                    this.DataElements.Add(segment.Substring(binaryStartIndex, size));
+                }
+                else if (this.SegmentId == "BDS")
+                {
+                    int nextIndex = segment.IndexOf(this.DelimiterSet.ElementSeparator, separatorIndex + 1);
+                    if (nextIndex > separatorIndex + 1)
+                    {
+                        this.DataElements.Add(segment.Substring(separatorIndex + 1, nextIndex - separatorIndex - 1));
+
+                        int binaryStartIndex;
+                        int size = Segment.ParseBinarySize(this.DelimiterSet.ElementSeparator, segment, out binaryStartIndex);
+                        this.DataElements.Add(size.ToString());
+                        this.DataElements.Add(segment.Substring(binaryStartIndex, size));
+                    }
+                }
+                else
+                {
+                    foreach (string element in segment.TrimEnd(this.DelimiterSet.SegmentTerminator).Substring(separatorIndex + 1).Split(this.DelimiterSet.ElementSeparator))
+                    {
+                        this.DataElements.Add(element);
+                    }
+                }
+            }
+            else
+            {
+                this.SegmentId = segment;
+            }
+        }
+
+        protected virtual void ValidateAgainstSegmentSpecification(string elementId, int elementNumber, string value)
+        {
+            // This method only applies once the segment is attached to an x12 interchange
+        }
+
+        private void ValidateContentFreeOfDelimiters(string elementId, string value)
+        {
+            if (value.Contains(this.DelimiterSet.SegmentTerminator))
+            {
+                throw new ElementValidationException(
+                    Resources.ElementSegmentTerminatorError,
+                    elementId,
+                    value,
+                    this.DelimiterSet.SegmentTerminator);
+            }
+
+            if (value.Contains(this.DelimiterSet.ElementSeparator))
+            {
+                throw new ElementValidationException(
+                    "Element {0} cannot contain the value '{1}' with the element separator {2}.",
+                    elementId,
+                    value,
+                    this.DelimiterSet.ElementSeparator);
+            }
         }
     }
 }
