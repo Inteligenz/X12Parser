@@ -10,8 +10,12 @@
         /// <summary>
         /// Gets or sets the allowed Id
         /// </summary>
+        /// <remarks>
+        /// Name must remain in all caps.
+        /// Otherwise, ISA allowed qualifiers won't be properly identified
+        /// </remarks>
         [XmlAttribute]
-        public string Id { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Gets or sets the Id description

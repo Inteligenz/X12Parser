@@ -217,7 +217,7 @@
                                 {
                                     this.CommonDb.AddToX12CodeListTable(
                                         element.QualifierSetId,
-                                        identifier.Id,
+                                        identifier.ID,
                                         identifier.Description);
                                 }
                             }

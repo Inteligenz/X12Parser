@@ -160,7 +160,7 @@
                             && this.SegmentSpec.Elements.Count > i 
                             && this.SegmentSpec.Elements[i].Type == ElementDataType.Identifier)
                         {
-                            var allowedValue = identifiers.FirstOrDefault(ai => ai.Id == this.DataElements[i]);
+                            var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == this.DataElements[i]);
                             if (allowedValue != null)
                             {
                                 writer.WriteComment(allowedValue.Description);
@@ -182,7 +182,7 @@
                                 && this.SegmentSpec.Elements.Count > i 
                                 && this.SegmentSpec.Elements[i].Type == ElementDataType.Identifier)
                             {
-                                var allowedValue = identifiers.FirstOrDefault(ai => ai.Id == subElements[j]);
+                                var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == subElements[j]);
                                 if (allowedValue != null)
                                 {
                                     writer.WriteComment(allowedValue.Description);
@@ -251,12 +251,12 @@
                     case ElementDataType.Identifier:
                         if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
                         {
-                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.Id == value) == null)
+                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
                             {
                                 string[] ids = new string[spec.AllowedIdentifiers.Count];
                                 for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
                                 {
-                                    ids[i] = spec.AllowedIdentifiers[i].Id;
+                                    ids[i] = spec.AllowedIdentifiers[i].ID;
                                 }
 
                                 string expected = string.Empty;
