@@ -15,8 +15,8 @@
 
         public AllowanceOrChargeIndicator SAC01_AllowanceOrChargeIndicator
         {
-            get { return this.Segment.GetElement(1).ToEnumFromEDIFieldValue<AllowanceOrChargeIndicator>(); }
-            set { this.Segment.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(1).ToEnumFromEdiFieldValue<AllowanceOrChargeIndicator>(); }
+            set { this.Segment.SetElement(1, value.EdiFieldValue()); }
         }
 
         public string SAC02_ServicePromotionAllowanceOrChargeCode
@@ -47,11 +47,17 @@
             {
                 int element;
                 if (int.TryParse(this.Segment.GetElement(5), out element))
+                {
                     return element;
-                else
-                    return null;
+                }
+                
+                return null;
             }
-            set { this.Segment.SetElement(5, string.Format("{0}", value)); }
+
+            set
+            {
+                this.Segment.SetElement(5, value);
+            }
         }
 
         /// <summary>

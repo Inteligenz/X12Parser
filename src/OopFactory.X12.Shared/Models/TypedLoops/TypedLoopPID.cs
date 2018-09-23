@@ -57,8 +57,8 @@
 
         public YesNoConditionOrResponseCode PID08_YesNoConditionOrResponseCode
         {
-            get { return this.Loop.GetElement(8).ToEnumFromEDIFieldValue<YesNoConditionOrResponseCode>(); }
-            set { this.Loop.SetElement(8, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(8).ToEnumFromEdiFieldValue<YesNoConditionOrResponseCode>(); }
+            set { this.Loop.SetElement(8, value.EdiFieldValue()); }
         }
 
         public string PID09_LanguageCode

@@ -8,18 +8,21 @@
     public class TypedSegmentDTP : TypedSegment
     {
 
-        public TypedSegmentDTP() : base("DTP") { }
+        public TypedSegmentDTP()
+            : base("DTP")
+        {
+        }
 
         public DTPQualifier DTP01_DateTimeQualifier
         {
-            get { return this.Segment.GetElement(1).ToEnumFromEDIFieldValue<DTPQualifier>(); }
-            set { this.Segment.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(1).ToEnumFromEdiFieldValue<DTPQualifier>(); }
+            set { this.Segment.SetElement(1, value.EdiFieldValue()); }
         }
 
         public DTPFormatQualifier DTP02_DateTimePeriodFormatQualifier
         {
-            get { return this.Segment.GetElement(2).ToEnumFromEDIFieldValue<DTPFormatQualifier>(); }
-            set { this.Segment.SetElement(2, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(2).ToEnumFromEdiFieldValue<DTPFormatQualifier>(); }
+            set { this.Segment.SetElement(2, value.EdiFieldValue()); }
         }
 
         public DateTimePeriod DTP03_Date
@@ -31,6 +34,7 @@
                 {
                     return new DateTimePeriod(DateTime.ParseExact(element, "yyyyMMdd", null));
                 }
+
                 if (element.Length == 17)
                 {
                     return new DateTimePeriod(
@@ -43,37 +47,11 @@
 
             set
             {
-                this.Segment.SetElement(3,
-                                    value.IsDateRange
-                                        ? String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", value.StartDate, value.EndDate)
-                                        : String.Format("{0:yyyyMMdd}", value.StartDate));
+                string date = value.IsDateRange
+                                  ? $"{value.StartDate:yyyyMMdd}-{value.EndDate:yyyyMMdd}"
+                                  : $"{value.StartDate:yyyyMMdd}";
+                this.Segment.SetElement(3, date);
             }
         }
-
-    }
-
-
-    /// <summary>
-    /// Move this class in seperate file if being used by other classes.
-    /// </summary>
-    public class DateTimePeriod
-    {
-        public bool IsDateRange { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate { get; private set; }
-
-        public DateTimePeriod(DateTime date)
-        {
-            this.StartDate = date;
-            IsDateRange = false;
-        }
-
-        public DateTimePeriod(DateTime startDate, DateTime endDate)
-        {
-            this.StartDate = startDate;
-            this.EndDate = endDate;
-            IsDateRange = true;
-        }
-
     }
 }

@@ -21,8 +21,8 @@
 
         public PricingMethodology HCP01_PricingMethodologyEnum
         {
-            get { return this.Segment.GetElement(1).ToEnumFromEDIFieldValue<PricingMethodology>(); }
-            set { this.Segment.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(1).ToEnumFromEdiFieldValue<PricingMethodology>(); }
+            set { this.Segment.SetElement(1, value.EdiFieldValue()); }
         }
 
         public decimal? HCP02_AllowedAmount
@@ -87,8 +87,8 @@
 
         public UnitOrBasisOfMeasurementCode HCP11_UnitOrBasisOfMeasurementCodeEnum
         {
-            get { return this.Segment.GetElement(11).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>(); }
-            set { this.Segment.SetElement(11, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(11).ToEnumFromEdiFieldValue<UnitOrBasisOfMeasurementCode>(); }
+            set { this.Segment.SetElement(11, value.EdiFieldValue()); }
         }
 
         public decimal? HCP12_Quantity
@@ -114,6 +114,5 @@
             get { return this.Segment.GetElement(15); }
             set { this.Segment.SetElement(15, value); }
         }
-
     }
 }

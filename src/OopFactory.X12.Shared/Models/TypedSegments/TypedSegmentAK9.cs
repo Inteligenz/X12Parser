@@ -18,15 +18,7 @@
             get
             {
                 int count;
-                if (int.TryParse(this.Segment.GetElement(2), out count))
-                {
-                    return count;
-                }
-                else
-                {
-                    return 0;
-                }
-
+                return int.TryParse(this.Segment.GetElement(2), out count) ? count : 0;
             }
 
             set
@@ -40,14 +32,7 @@
             get
             {
                 int count;
-                if (int.TryParse(this.Segment.GetElement(3), out count))
-                {
-                    return count;
-                }
-                else
-                {
-                    return 0;
-                }
+                return int.TryParse(this.Segment.GetElement(3), out count) ? count : 0;
             }
 
             set
@@ -61,14 +46,7 @@
             get
             {
                 int count;
-                if (int.TryParse(this.Segment.GetElement(4), out count))
-                {
-                    return count;
-                }
-                else
-                {
-                    return 0;
-                }
+                return int.TryParse(this.Segment.GetElement(4), out count) ? count : 0;
             }
 
             set

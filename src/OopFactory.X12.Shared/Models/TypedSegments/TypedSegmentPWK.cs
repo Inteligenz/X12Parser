@@ -36,8 +36,8 @@
 
         public EntityIdentifierCode PWK04_EntityIdentiferCodeEnum
         {
-            get { return this.Segment.GetElement(4).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
-            set { this.Segment.SetElement(4, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(4).ToEnumFromEdiFieldValue<EntityIdentifierCode>(); }
+            set { this.Segment.SetElement(4, value.EdiFieldValue()); }
         }
 
         public string PWK05_IdentificationCodeQualifier
@@ -48,8 +48,8 @@
 
         public IdentificationCodeQualifier PWK05_IdentificationCodeQualifierEnum
         {
-            get { return this.Segment.GetElement(5).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
-            set { this.Segment.SetElement(5, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(5).ToEnumFromEdiFieldValue<IdentificationCodeQualifier>(); }
+            set { this.Segment.SetElement(5, value.EdiFieldValue()); }
         }
 
         public string PWK06_IdentificationCode

@@ -99,13 +99,23 @@
 
         public int? ITD13_DayOfMonth
         {
-            get { return this.Segment.GetIntElement(13); }
+            get
+            {
+                return this.Segment.GetIntElement(13);
+            }
+
             set 
             {
                 if (value >= 1 && value <= 31)
+                {
                     this.Segment.SetElement(13, value);
+                }
                 else
-                    throw new ArgumentOutOfRangeException("ITD13_DayOfMonth", string.Format("{0} is not a value between 1 and 31.", value));
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(this.ITD13_DayOfMonth),
+                        $"{value} is not a value between 1 and 31.");
+                }
             }
         }
 

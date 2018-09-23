@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2018 Brad Van Fleet</copyright>
+    <copyright>$copyright$</copyright>
     <tags>X12 Parser</tags>
     <dependencies>
       <dependency id="OopFactory.X12.Parsing" version="$version$" />

@@ -5,13 +5,13 @@
     public enum EntityTypeQualifier
     {
         [EdiFieldValue("")]
-        Undefined = 0,
+        Undefined,
 
         [EdiFieldValue("1")]
-        Person = 1,
+        Person,
 
         [EdiFieldValue("2")]
-        NonPersonEntity = 2,
+        NonPersonEntity,
 
         [EdiFieldValue("3")]
         Unknown,

@@ -26,8 +26,8 @@
         [TestMethod]
         public void EDIFieldValue_WhenAttributeExists_ShouldReturnAttributeValue()
         {
-            Assert.AreEqual("101", TestEDIField.Value1.EDIFieldValue());
-            Assert.AreEqual("102", TestEDIField.Value2.EDIFieldValue());
+            Assert.AreEqual("101", TestEDIField.Value1.EdiFieldValue());
+            Assert.AreEqual("102", TestEDIField.Value2.EdiFieldValue());
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@
             InvalidOperationException exceptionThrown = null;
             try
             {
-                TestEDIField.Value3.EDIFieldValue();
+                TestEDIField.Value3.EdiFieldValue();
             }
             catch (InvalidOperationException exception)
             {
@@ -57,8 +57,8 @@
         [TestMethod]
         public void ToEnumFromEDIFieldValue_WhenValidEnumEDIFieldValues_ShouldReturnEnum()
         {
-            Assert.AreEqual(TestEDIField.Value1 , "101".ToEnumFromEDIFieldValue<TestEDIField>());
-            Assert.AreEqual(TestEDIField.Value2, "102".ToEnumFromEDIFieldValue<TestEDIField>());
+            Assert.AreEqual(TestEDIField.Value1 , "101".ToEnumFromEdiFieldValue<TestEDIField>());
+            Assert.AreEqual(TestEDIField.Value2, "102".ToEnumFromEdiFieldValue<TestEDIField>());
 
         }
 

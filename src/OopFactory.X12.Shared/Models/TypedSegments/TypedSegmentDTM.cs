@@ -15,8 +15,8 @@
 
         public DTPQualifier DTM01_DateTimeQualifier
         {
-            get { return this.Segment.GetElement(1).ToEnumFromEDIFieldValue<DTPQualifier>(); }
-            set { this.Segment.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(1).ToEnumFromEdiFieldValue<DTPQualifier>(); }
+            set { this.Segment.SetElement(1, value.EdiFieldValue()); }
         }
 
         public string DTM02_Date
@@ -33,14 +33,14 @@
 
         public TimeCode DTM04_TimeCode
         {
-            get { return this.Segment.GetElement(4).ToEnumFromEDIFieldValue<TimeCode>(); }
-            set { this.Segment.SetElement(4, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(4).ToEnumFromEdiFieldValue<TimeCode>(); }
+            set { this.Segment.SetElement(4, value.EdiFieldValue()); }
         }
 
         public DTPFormatQualifier DTM05_DateTimePeriodFormatQualifier
         {
-            get { return this.Segment.GetElement(5).ToEnumFromEDIFieldValue<DTPFormatQualifier>(); }
-            set { this.Segment.SetElement(5, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(5).ToEnumFromEdiFieldValue<DTPFormatQualifier>(); }
+            set { this.Segment.SetElement(5, value.EdiFieldValue()); }
         }
 
         public string DTM06_DateTimePeriod

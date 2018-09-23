@@ -38,22 +38,27 @@
             switch (value)
             {
                 case CommunicationNumberQualifer.ElectronicMail:
-                    this.Segment.SetElement(elementNumber, "EM"); break;
+                    this.Segment.SetElement(elementNumber, "EM");
+                    break;
                 case CommunicationNumberQualifer.TelephoneExtension:
-                    this.Segment.SetElement(elementNumber, "EX"); break;
+                    this.Segment.SetElement(elementNumber, "EX");
+                    break;
                 case CommunicationNumberQualifer.Facsimile:
-                    this.Segment.SetElement(elementNumber, "FX"); break;
+                    this.Segment.SetElement(elementNumber, "FX");
+                    break;
                 case CommunicationNumberQualifer.Telephone:
-                    this.Segment.SetElement(elementNumber, "TE"); break;
+                    this.Segment.SetElement(elementNumber, "TE");
+                    break;
                 default:
-                    this.Segment.SetElement(elementNumber, ""); break;
+                    this.Segment.SetElement(elementNumber, string.Empty);
+                    break;
             }
         }
 
         public CommunicationNumberQualifer PER03_CommunicationNumberQualifier
         {
-            get { return GetQualifier(3); }
-            set { SetQualifier(3, value); }
+            get { return this.GetQualifier(3); }
+            set { this.SetQualifier(3, value); }
         }
 
         public string PER04_CommunicationNumber
@@ -64,8 +69,8 @@
 
         public CommunicationNumberQualifer PER05_CommunicationNumberQualifier
         {
-            get { return GetQualifier(5); }
-            set { SetQualifier(5, value); }
+            get { return this.GetQualifier(5); }
+            set { this.SetQualifier(5, value); }
         }
 
         public string PER06_CommunicationNumber

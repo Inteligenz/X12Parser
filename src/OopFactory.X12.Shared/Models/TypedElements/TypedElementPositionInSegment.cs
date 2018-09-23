@@ -2,54 +2,73 @@
 {
     public class TypedElementPositionInSegment
     {
-        private int _elementNumber;
-        private Segment _segment;
-        private int? _elementPositionInSegment;
-        private int? _componentDataElementPositionInComposite;
-        private int? _repeatingDataElementPosition;
+        private readonly int elementNumber;
+
+        private readonly Segment segment;
+
+        private int? elementPositionInSegment;
+
+        private int? componentDataElementPositionInComposite;
+
+        private int? repeatingDataElementPosition;
 
         internal TypedElementPositionInSegment(Segment segment, int elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
+            this.segment = segment;
+            this.elementNumber = elementNumber;
         }
 
         private void UpdateElement()
         {
-            string value = string.Format("{1}{0}{2}{0}{3}",
-                _segment.Delimiters.SubElementSeparator,
-                _elementPositionInSegment, _componentDataElementPositionInComposite, _repeatingDataElementPosition);
-            value = value.TrimEnd(_segment.Delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+            string value = string.Format(
+                "{1}{0}{2}{0}{3}",
+                this.segment.Delimiters.SubElementSeparator,
+                this.elementPositionInSegment,
+                this.componentDataElementPositionInComposite,
+                this.repeatingDataElementPosition);
+            value = value.TrimEnd(this.segment.Delimiters.SubElementSeparator);
+            this.segment.SetElement(this.elementNumber, value);
         }
 
         public int? _1_ElementPositionInSegment
         {
-            get { return _elementPositionInSegment; }
+            get
+            {
+                return this.elementPositionInSegment;
+            }
+
             set
             {
-                _elementPositionInSegment = value;
-                UpdateElement();
+                this.elementPositionInSegment = value;
+                this.UpdateElement();
             }
         }
 
         public int? _2_ComponentDataElementPositionInComposite
         {
-            get { return _componentDataElementPositionInComposite; }
+            get
+            {
+                return this.componentDataElementPositionInComposite;
+            }
+
             set
             {
-                _componentDataElementPositionInComposite = value;
-                UpdateElement();
+                this.componentDataElementPositionInComposite = value;
+                this.UpdateElement();
             }
         }
 
         public int? _3_RepeatingDataElementPosition
         {
-            get { return _repeatingDataElementPosition; }
+            get
+            {
+                return this.repeatingDataElementPosition;
+            }
+
             set
             {
-                _repeatingDataElementPosition = value;
-                UpdateElement();
+                this.repeatingDataElementPosition = value;
+                this.UpdateElement();
             }
         }
     }

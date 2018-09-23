@@ -27,8 +27,8 @@
 
         public UnitOrBasisOfMeasurementCode IT103_UnitOrBasisForMeasurementCode
         {
-            get { return this.Loop.GetElement(3).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>(); }
-            set { this.Loop.SetElement(3, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(3).ToEnumFromEdiFieldValue<UnitOrBasisOfMeasurementCode>(); }
+            set { this.Loop.SetElement(3, value.EdiFieldValue()); }
         }
 
         public decimal? IT104_UnitPrice

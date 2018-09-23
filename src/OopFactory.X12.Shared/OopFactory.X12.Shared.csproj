@@ -45,6 +45,7 @@
     <Compile Include="Enumerations\Gender.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\DateTimePeriod.cs" />
     <Compile Include="Models\DetachedSegment.cs" />
     <Compile Include="Models\ElementValidationException.cs" />
     <Compile Include="Models\FunctionGroup.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Enumerations\UnitOrBasisOfMeasurementCode.cs" />
     <Compile Include="Enumerations\YesNoConditionOrResponseCode.cs" />
     <Compile Include="Models\X12DelimiterSet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,6 +145,9 @@
       <Project>{26E9A9D5-D0B4-4B86-83D7-A0A3370A57EA}</Project>
       <Name>OopFactory.X12.Specifications</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OopFactory.X12.Shared.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

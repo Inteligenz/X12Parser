@@ -18,8 +18,8 @@
 
         public EntityIdentifierCode N101_EntityIdentifierCodeEnum
         {
-            get { return this.Loop.GetElement(1).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
-            set { this.Loop.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(1).ToEnumFromEdiFieldValue<EntityIdentifierCode>(); }
+            set { this.Loop.SetElement(1, value.EdiFieldValue()); }
         }
 
         public string N102_Name
@@ -36,8 +36,8 @@
 
         public IdentificationCodeQualifier N103_IdentificationCodeQualifierEnum
         {
-            get { return this.Loop.GetElement(3).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
-            set { this.Loop.SetElement(3, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(3).ToEnumFromEdiFieldValue<IdentificationCodeQualifier>(); }
+            set { this.Loop.SetElement(3, value.EdiFieldValue()); }
             
         }
 
@@ -61,8 +61,8 @@
 
         public EntityIdentifierCode N106_EntityIdentifierCodeEnum
         {
-            get { return this.Loop.GetElement(6).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
-            set { this.Loop.SetElement(6, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(6).ToEnumFromEdiFieldValue<EntityIdentifierCode>(); }
+            set { this.Loop.SetElement(6, value.EdiFieldValue()); }
         }
     }
 }

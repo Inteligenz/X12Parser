@@ -7,7 +7,10 @@
     {
         public TypedElementPositionInSegment IK401 { get; private set; }
 
-        public TypedLoopIK4() : base("IK4") { }
+        public TypedLoopIK4()
+            : base("IK4")
+        {
+        }
 
         internal override void Initialize(Container parent, X12DelimiterSet delimiters, LoopSpecification loopSpecification)
         {

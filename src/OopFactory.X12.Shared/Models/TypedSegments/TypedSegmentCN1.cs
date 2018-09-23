@@ -18,8 +18,8 @@
 
         public ContractTypeCode CN101_ContractTypeCodeEnum
         {
-            get { return this.Segment.GetElement(1).ToEnumFromEDIFieldValue<ContractTypeCode>(); }
-            set { this.Segment.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(1).ToEnumFromEdiFieldValue<ContractTypeCode>(); }
+            set { this.Segment.SetElement(1, value.EdiFieldValue()); }
         }
 
         public decimal? CN102_MonetaryAmount

@@ -2,7 +2,10 @@
 {
     public class TypedLoopIK3 : TypedLoop
     {
-        public TypedLoopIK3() : base("IK3") { }
+        public TypedLoopIK3()
+            : base("IK3")
+        {
+        }
 
         public string IK301_SegmentIdCode
         {
@@ -16,16 +19,16 @@
             {
                 int position;
                 if (int.TryParse(this.Loop.GetElement(2), out position))
+                {
                     return position;
-                else
-                    return null;
+                }
+
+                return null;
             }
+
             set
             {
-                if (value.HasValue)
-                    this.Loop.SetElement(2, value.ToString());
-                else
-                    this.Loop.SetElement(2, "");
+                this.Loop.SetElement(2, value.HasValue ? value.ToString() : string.Empty);
             }
         }
 

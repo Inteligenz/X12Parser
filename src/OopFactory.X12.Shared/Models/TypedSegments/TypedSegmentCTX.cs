@@ -29,15 +29,13 @@
                 {
                     return position;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
 
             set
             {
-                this.Segment.SetElement(3, string.Format("{0}", value));
+                this.Segment.SetElement(3, $"{value}");
             }
         }
 

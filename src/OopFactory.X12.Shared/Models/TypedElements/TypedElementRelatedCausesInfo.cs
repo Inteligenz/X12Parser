@@ -1,80 +1,109 @@
 ﻿namespace OopFactory.X12.Shared.Models.TypedElements
 {
-    using System;
-
     public class TypedElementRelatedCausesInfo
     {
-        private int _elementNumber;
-        private Segment _segment;
-        private string _relatedCausesCode1;
-        private string _relatedCausesCode2;
-        private string _relatedCausesCode3;
-        private string _stateOrProviceCode;
-        private string _countryCode;
+        private readonly int elementNumber;
+
+        private readonly Segment segment;
+
+        private string relatedCausesCode1;
+
+        private string relatedCausesCode2;
+
+        private string relatedCausesCode3;
+
+        private string stateOrProviceCode;
+
+        private string countryCode;
 
         internal TypedElementRelatedCausesInfo(Segment segment, int elementNumber)
         {
-            _segment = segment;
-            _elementNumber = elementNumber;
+            this.segment = segment;
+            this.elementNumber = elementNumber;
         }
 
         private void UpdateElement()
         {
-            string value = String.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-                    _segment.Delimiters.SubElementSeparator,
-                    _relatedCausesCode1, _relatedCausesCode2, _relatedCausesCode3, _stateOrProviceCode, _countryCode);
-            value = value.TrimEnd(_segment.Delimiters.SubElementSeparator);
-            _segment.SetElement(_elementNumber, value);
+            string value = string.Format(
+                "{1}{0}{2}{0}{3}{0}{4}{0}{5}",
+                this.segment.Delimiters.SubElementSeparator,
+                this.relatedCausesCode1,
+                this.relatedCausesCode2,
+                this.relatedCausesCode3,
+                this.stateOrProviceCode,
+                this.countryCode);
+            value = value.TrimEnd(this.segment.Delimiters.SubElementSeparator);
+            this.segment.SetElement(this.elementNumber, value);
         }
 
         public string _1_RelatedCausesCode
         {
-            get { return _relatedCausesCode1; }
-            set { 
-                _relatedCausesCode1 = value; 
-                UpdateElement(); 
+            get
+            {
+                return this.relatedCausesCode1;
+            }
+
+            set
+            {
+                this.relatedCausesCode1 = value;
+                this.UpdateElement();
             }
         }
 
         public string _2_RelatedCausesCode
         {
-            get { return _relatedCausesCode2; }
+            get
+            {
+                return this.relatedCausesCode2;
+            }
+
             set
             {
-                _relatedCausesCode2 = value;
-                UpdateElement();
+                this.relatedCausesCode2 = value;
+                this.UpdateElement();
             }
         }
 
         public string _3_RelatedCausesCode
         {
-            get { return _relatedCausesCode3; }
+            get
+            {
+                return this.relatedCausesCode3;
+            }
+
             set
             {
-                _relatedCausesCode3 = value;
-                UpdateElement();
+                this.relatedCausesCode3 = value;
+                this.UpdateElement();
             }
         }
 
         public string _4_StateOrProvidenceCode
         {
-            get { return _stateOrProviceCode; }
+            get
+            {
+                return this.stateOrProviceCode;
+            }
+
             set
             {
-                _stateOrProviceCode = value;
-                UpdateElement();
+                this.stateOrProviceCode = value;
+                this.UpdateElement();
             }
         }
 
         public string _5_CountryCode
         {
-            get { return _countryCode; }
+            get
+            {
+                return this.countryCode;
+            }
+
             set
             {
-                _countryCode = value;
-                UpdateElement();
+                this.countryCode = value;
+                this.UpdateElement();
             }
         }
-
     }
 }

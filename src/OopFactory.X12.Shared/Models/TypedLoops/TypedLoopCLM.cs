@@ -12,6 +12,7 @@
             : base("CLM")
         {
         }
+
         public TypedElementServiceLocationInfo CLM05 { get; private set; }
 
         public TypedElementRelatedCausesInfo CLM11 { get; private set; }
@@ -34,15 +35,17 @@
             get 
             {
                 decimal amount;
-                if (decimal.TryParse(this.Loop.GetElement(2), out amount))
-                    return amount;
-                else
-                    return 0; 
+                return decimal.TryParse(this.Loop.GetElement(2), out amount) ? amount : 0;
             }
+
             set 
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException("Total Claim Charge Amount must be greater than or equal to zero.");
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "Total Claim Charge Amount must be greater than or equal to zero.");
+                }
+
                 this.Loop.SetElement(2, value.ToString().TrimStart('0'));
             }
         }
@@ -70,17 +73,17 @@
                     default: return null;
                 }
             }
+
             set 
             {
                 if (value.HasValue)
                 {
-                    if (value.Value == true)
-                        this.Loop.SetElement(6, "Y");
-                    else
-                        this.Loop.SetElement(6, "N");
+                    this.Loop.SetElement(6, value.Value ? "Y" : "N");
                 }
                 else
-                    this.Loop.SetElement(6, "");
+                {
+                    this.Loop.SetElement(6, string.Empty);
+                }
             }
         }
 

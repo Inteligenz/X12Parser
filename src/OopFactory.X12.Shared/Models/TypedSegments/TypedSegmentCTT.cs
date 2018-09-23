@@ -33,8 +33,8 @@
 
         public UnitOrBasisOfMeasurementCode CTT04_UnitOrBasisForMeasurementCode
         {
-            get { return this.Segment.GetElement(4).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>(); }
-            set { this.Segment.SetElement(4, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(4).ToEnumFromEdiFieldValue<UnitOrBasisOfMeasurementCode>(); }
+            set { this.Segment.SetElement(4, value.EdiFieldValue()); }
         }
 
         public decimal? CTT05_Volume
@@ -45,8 +45,8 @@
 
         public UnitOrBasisOfMeasurementCode CTT06_UnitOrBasisForMeasurementCode
         {
-            get { return this.Segment.GetElement(6).ToEnumFromEDIFieldValue<UnitOrBasisOfMeasurementCode>(); }
-            set { this.Segment.SetElement(6, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(6).ToEnumFromEdiFieldValue<UnitOrBasisOfMeasurementCode>(); }
+            set { this.Segment.SetElement(6, value.EdiFieldValue()); }
         }
 
         public string CTT07_Description

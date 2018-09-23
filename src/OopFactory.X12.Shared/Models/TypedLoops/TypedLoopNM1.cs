@@ -1,29 +1,27 @@
 ﻿namespace OopFactory.X12.Shared.Models.TypedLoops
 {
-    using System;
-
     using OopFactory.X12.Shared.Enumerations;
     using OopFactory.X12.Shared.Extensions;
     using OopFactory.X12.Specifications;
 
     public class TypedLoopNM1 : TypedLoop
     {
-        private readonly string entityIdentifer;
+        private readonly string entityIdentifier;
 
         public TypedLoopNM1(string entityIdentifier)
             : base("NM1")
         {
-            this.entityIdentifer = entityIdentifier;
+            this.entityIdentifier = entityIdentifier;
         }
 
         internal override string GetSegmentString(X12DelimiterSet delimiters)
         {
-            return String.Format("{0}{1}{2}", this.SegmentId, delimiters.ElementSeparator, this.entityIdentifer);
+            return $"{this.SegmentId}{delimiters.ElementSeparator}{this.entityIdentifier}";
         }
 
         internal override void Initialize(Container parent, X12DelimiterSet delimiters, LoopSpecification loopSpecification)
         {
-            string segmentString = GetSegmentString(delimiters);
+            string segmentString = this.GetSegmentString(delimiters);
             this.Loop = new Loop(parent, delimiters, segmentString, loopSpecification);
         }
 
@@ -35,14 +33,14 @@
 
         public EntityIdentifierCode NM101_EntityIdentifierCodeEnum
         {
-            get { return this.Loop.GetElement(1).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
-            set { this.Loop.SetElement(1, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(1).ToEnumFromEdiFieldValue<EntityIdentifierCode>(); }
+            set { this.Loop.SetElement(1, value.EdiFieldValue()); }
         }
 
         public EntityTypeQualifier NM102_EntityTypeQualifier
         {
-            get  { return this.Loop.GetElement(2).ToEnumFromEDIFieldValue<EntityTypeQualifier>(); }
-            set { this.Loop.SetElement(2,value.EDIFieldValue()); }
+            get  { return this.Loop.GetElement(2).ToEnumFromEdiFieldValue<EntityTypeQualifier>(); }
+            set { this.Loop.SetElement(2,value.EdiFieldValue()); }
         }
 
         public string NM103_NameLastOrOrganizationName
@@ -83,8 +81,8 @@
 
         public IdentificationCodeQualifier NM108_IdCodeQualifierEnum
         {
-            get { return this.Loop.GetElement(8).ToEnumFromEDIFieldValue<IdentificationCodeQualifier>(); }
-            set { this.Loop.SetElement(8, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(8).ToEnumFromEdiFieldValue<IdentificationCodeQualifier>(); }
+            set { this.Loop.SetElement(8, value.EdiFieldValue()); }
         }
 
         public string NM109_IdCode
@@ -107,8 +105,8 @@
 
         public EntityIdentifierCode NM111_EntityIdentifierCodeEnum
         {
-            get { return this.Loop.GetElement(11).ToEnumFromEDIFieldValue<EntityIdentifierCode>(); }
-            set { this.Loop.SetElement(11, value.EDIFieldValue()); }
+            get { return this.Loop.GetElement(11).ToEnumFromEdiFieldValue<EntityIdentifierCode>(); }
+            set { this.Loop.SetElement(11, value.EdiFieldValue()); }
         }
 
         public string NM112_NameLastOrOrganizationName

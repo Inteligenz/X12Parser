@@ -11,7 +11,13 @@
     /// </summary>
     public static class EnumExtensions
     {
-        public static string EDIFieldValue(this Enum enumValue)
+        /// <summary>
+        /// Gets the <see cref="EdiFieldValueAttribute"/> from the referenced Enum value
+        /// </summary>
+        /// <param name="enumValue">Value to get EdiFieldValue from</param>
+        /// <returns>EdiFieldValueAttribute parsed from Enum</returns>
+        /// <exception cref="InvalidOperationException">Thrown if Enum cannot be parsed</exception>
+        public static string EdiFieldValue(this Enum enumValue)
         {
             var attributes = (EdiFieldValueAttribute[])enumValue
                 .GetType()
@@ -26,7 +32,14 @@
             throw new InvalidOperationException(string.Format(Resources.EDIValueNotFound, enumValue));
         }
 
-        public static T ToEnumFromEDIFieldValue<T>(this string itemValue)
+        /// <summary>
+        /// Parses the EdiFieldValue to its equivalent Enum
+        /// </summary>
+        /// <typeparam name="T">Enum value to parse to</typeparam>
+        /// <param name="itemValue">EdiFieldValue to be parsed</param>
+        /// <returns>Enum representation of value</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the value is not valid</exception>
+        public static T ToEnumFromEdiFieldValue<T>(this string itemValue)
         {
             var type = typeof(T);
             if (!type.IsEnum)

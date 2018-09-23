@@ -6,12 +6,15 @@
     
     public class TypedSegmentDMG : TypedSegment
     {
-        public TypedSegmentDMG() : base("DMG") { }
+        public TypedSegmentDMG()
+            : base("DMG")
+        {
+        }
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            DMG01_DateTimePeriodFormatQualifier = "D8"; // default value
+            this.DMG01_DateTimePeriodFormatQualifier = "D8";
         }
 
         public string DMG01_DateTimePeriodFormatQualifier
@@ -26,13 +29,16 @@
             { 
                 string element = this.Segment.GetElement(2);
                 if (element.Length == 8)
+                {
                     return DateTime.ParseExact(element, "yyyyMMdd", null);
-                else
-                    return null;
+                }
+
+                return null;
             }
+
             set 
             { 
-                this.Segment.SetElement(2, String.Format("{0:yyyyMMdd}",value)); 
+                this.Segment.SetElement(2, $"{value:yyyyMMdd}"); 
             }
         }
 
@@ -48,18 +54,23 @@
                     default: return Gender.Undefined;
                 }
             }
+
             set 
             {
                 switch (value)
                 {
                     case Gender.Female:
-                        this.Segment.SetElement(3, "F"); break;
+                        this.Segment.SetElement(3, "F");
+                        break;
                     case Gender.Male:
-                        this.Segment.SetElement(3, "M"); break;
+                        this.Segment.SetElement(3, "M");
+                        break;
                     case Gender.Unknown:
-                        this.Segment.SetElement(3, "U"); break;
+                        this.Segment.SetElement(3, "U");
+                        break;
                     default:
-                        this.Segment.SetElement(3, ""); break;
+                        this.Segment.SetElement(3, string.Empty);
+                        break;
                 }
             }
         }

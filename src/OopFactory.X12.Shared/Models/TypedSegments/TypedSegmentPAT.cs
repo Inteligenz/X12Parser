@@ -51,13 +51,16 @@
             {
                 string element = this.Segment.GetElement(6);
                 if (element.Length == 8)
+                {
                     return DateTime.ParseExact(element, "yyyyMMdd", null);
-                else
-                    return null; 
+                }
+
+                return null; 
             }
+
             set 
             { 
-                this.Segment.SetElement(6, String.Format("{0:yyyyMMdd}", value)); 
+                this.Segment.SetElement(6, $"{value:yyyyMMdd}"); 
             }
         }
 
@@ -73,11 +76,17 @@
             {
                 decimal weight;
                 if (decimal.TryParse(this.Segment.GetElement(8), out weight))
+                {
                     return weight;
-                else
-                    return null; 
+                }
+
+                return null; 
             }
-            set { this.Segment.SetElement(8, String.Format("{0}", value)); }
+
+            set
+            {
+                this.Segment.SetElement(8, value);
+            }
         }
 
         public bool? PAT09_PregnancyIndicator
@@ -91,12 +100,17 @@
                     default: return null;
                 }
             }
+
             set 
             {
                 if (value.HasValue)
+                {
                     this.Segment.SetElement(9, value.Value ? "Y" : "N");
+                }
                 else
-                    this.Segment.SetElement(9, "");
+                {
+                    this.Segment.SetElement(9, string.Empty);
+                }
             }
         }
     }

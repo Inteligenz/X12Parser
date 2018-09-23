@@ -14,7 +14,7 @@
 
         internal override void Initialize(Container parent, X12DelimiterSet delimiters, LoopSpecification loopSpecification)
         {
-            string segmentString = GetSegmentString(delimiters);
+            string segmentString = this.GetSegmentString(delimiters);
 
             this.Loop = new Loop(parent, delimiters, segmentString, loopSpecification);
         }

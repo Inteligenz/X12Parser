@@ -51,8 +51,8 @@
 
         public RelationshipCode TXI07_RelationshipCode
         {
-            get { return this.Segment.GetElement(7).ToEnumFromEDIFieldValue<RelationshipCode>(); }
-            set { this.Segment.SetElement(7, value.EDIFieldValue()); }
+            get { return this.Segment.GetElement(7).ToEnumFromEdiFieldValue<RelationshipCode>(); }
+            set { this.Segment.SetElement(7, value.EdiFieldValue()); }
         }
 
         public decimal? TXI08_DollarBasisForPercent

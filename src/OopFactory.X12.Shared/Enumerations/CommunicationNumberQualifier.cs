@@ -3,9 +3,13 @@
     public enum CommunicationNumberQualifer
     {
         Undefined,
+
         ElectronicMail,
+
         TelephoneExtension,
+
         Facsimile,
+
         Telephone
     }
 }
