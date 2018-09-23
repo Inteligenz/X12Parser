@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\X12Elements.cs" />
     <Compile Include="Finders\DentalClaimSpecificationFinder.cs" />
     <Compile Include="Finders\InstitutionalClaimSpecificationFinder.cs" />
     <Compile Include="Interfaces\ISpecificationFinder.cs" />
@@ -53,6 +54,11 @@
     <Compile Include="Interfaces\IContainerSpecification.cs" />
     <Compile Include="Lookup.cs" />
     <Compile Include="LoopSpecification.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Sets\QualifierSet.cs" />
     <Compile Include="Sets\SegmentSet.cs" />
     <Compile Include="SegmentSpecification.cs" />
@@ -61,6 +67,10 @@
     <Compile Include="TransactionSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resource\Ansi-100-4010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -1049,6 +1059,7 @@
     <EmbeddedResource Include="Resource\Ansi-999-5010Specification.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="package.nuspec" />
     <None Include="Resource\X12ParserSpecification.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

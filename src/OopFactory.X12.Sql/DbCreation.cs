@@ -312,12 +312,12 @@ where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ",
                 {
                     switch (element.Type)
                     {
-                        case ElementDataTypeEnum.Decimal:
+                        case ElementDataType.Decimal:
                             var precision = element.MaxLength > 18 ? 38 : element.MaxLength * 2;
                             var scale = element.MaxLength > 8 ? element.MaxLength / 2 : 4;
                             sql.AppendFormat("  [{0}] [decimal]({1},{2}) NULL,\n", element.Reference, precision, scale);
                             break;
-                        case ElementDataTypeEnum.Numeric:
+                        case ElementDataType.Numeric:
                             if (element.ImpliedDecimalPlaces == 0)
                             {
                                 if (element.MaxLength < 5)
@@ -345,7 +345,7 @@ where l.StartingSegmentId in ('N1','NM1','ENT','NX1','PT','IN1','NX1') ",
                             }
 
                             break;
-                        case ElementDataTypeEnum.Date:
+                        case ElementDataType.Date:
                             sql.AppendFormat("  [{0}] [{1}] NULL,\n", element.Reference, this.dateType);
                             break;
                         default:

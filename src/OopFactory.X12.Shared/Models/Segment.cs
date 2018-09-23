@@ -158,9 +158,9 @@
                         writer.WriteValue(this.DataElements[i]);
                         if (this.SegmentSpec != null
                             && this.SegmentSpec.Elements.Count > i 
-                            && this.SegmentSpec.Elements[i].Type == ElementDataTypeEnum.Identifier)
+                            && this.SegmentSpec.Elements[i].Type == ElementDataType.Identifier)
                         {
-                            var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == this.DataElements[i]);
+                            var allowedValue = identifiers.FirstOrDefault(ai => ai.Id == this.DataElements[i]);
                             if (allowedValue != null)
                             {
                                 writer.WriteComment(allowedValue.Description);
@@ -180,9 +180,9 @@
                             writer.WriteValue(subElements[j]);
                             if (this.SegmentSpec != null 
                                 && this.SegmentSpec.Elements.Count > i 
-                                && this.SegmentSpec.Elements[i].Type == ElementDataTypeEnum.Identifier)
+                                && this.SegmentSpec.Elements[i].Type == ElementDataType.Identifier)
                             {
-                                var allowedValue = identifiers.FirstOrDefault(ai => ai.ID == subElements[j]);
+                                var allowedValue = identifiers.FirstOrDefault(ai => ai.Id == subElements[j]);
                                 if (allowedValue != null)
                                 {
                                     writer.WriteComment(allowedValue.Description);
@@ -226,7 +226,7 @@
 
                 switch (spec.Type)
                 {
-                    case ElementDataTypeEnum.Numeric:
+                    case ElementDataType.Numeric:
                         int number;
                         if (!int.TryParse(value, out number))
                         {
@@ -237,7 +237,7 @@
                         }
 
                         break;
-                    case ElementDataTypeEnum.Decimal:
+                    case ElementDataType.Decimal:
                         decimal decNumber;
                         if (!decimal.TryParse(value, out decNumber))
                         {
@@ -248,15 +248,15 @@
                         }
 
                         break;
-                    case ElementDataTypeEnum.Identifier:
+                    case ElementDataType.Identifier:
                         if (spec.AllowedListInclusive && spec.AllowedIdentifiers.Count > 0)
                         {
-                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.ID == value) == null)
+                            if (spec.AllowedIdentifiers.FirstOrDefault(ai => ai.Id == value) == null)
                             {
                                 string[] ids = new string[spec.AllowedIdentifiers.Count];
                                 for (int i = 0; i < spec.AllowedIdentifiers.Count; i++)
                                 {
-                                    ids[i] = spec.AllowedIdentifiers[i].ID;
+                                    ids[i] = spec.AllowedIdentifiers[i].Id;
                                 }
 
                                 string expected = string.Empty;

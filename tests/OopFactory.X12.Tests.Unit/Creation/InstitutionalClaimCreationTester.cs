@@ -63,7 +63,7 @@ IEA*1*000000031~";
                 Required = true,
                 MinLength = 2,
                 MaxLength = 2,
-                Type = ElementDataTypeEnum.Identifier
+                Type = ElementDataType.Identifier
             });
             string xml = set.Serialize();
             Trace.Write(xml);

@@ -172,7 +172,7 @@
                             val = val.Substring(0, maxLength);
                         }
 
-                        if (elementSpec.Type == ElementDataTypeEnum.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
+                        if (elementSpec.Type == ElementDataType.Numeric && elementSpec.ImpliedDecimalPlaces > 0)
                         {
                             int intVal;
                             if (string.IsNullOrWhiteSpace(val))
@@ -200,7 +200,7 @@
                                 row[column] = null;
                             }
                         }
-                        else if (elementSpec.Type == ElementDataTypeEnum.Numeric || elementSpec.Type == ElementDataTypeEnum.Decimal)
+                        else if (elementSpec.Type == ElementDataType.Numeric || elementSpec.Type == ElementDataType.Decimal)
                         {
                             decimal decVal;
                             if (string.IsNullOrWhiteSpace(val))
@@ -226,7 +226,7 @@
                                 row[column] = null;
                             }
                         }
-                        else if (elementSpec.Type == ElementDataTypeEnum.Date)
+                        else if (elementSpec.Type == ElementDataType.Date)
                         {
                             if (string.IsNullOrWhiteSpace(val))
                             {

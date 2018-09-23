@@ -39,7 +39,7 @@
         /// Gets or sets the usage (e.g. required, situational, not used, etc)
         /// </summary>
         [XmlAttribute]
-        public UsageEnum Usage { get; set; }
+        public Usage Usage { get; set; }
 
         /// <summary>
         /// Gets or sets the number of times the segment is repeated in the document
@@ -61,9 +61,15 @@
         [XmlIgnore]
         public bool TrailerSpecified { get; set; }
 
+        /// <summary>
+        /// Gets or sets the specification standard for the segment
+        /// </summary>
         public SegmentSpecificationStandard Standard { get; set; }
 
-        [XmlElement(ElementName = "Element")]
+        /// <summary>
+        /// Gets or sets the collection of elements in the segment
+        /// </summary>
+        [XmlElement(ElementName = X12Elements.Element)]
         public List<ElementSpecification> Elements { get; set; }
 
         /// <summary>

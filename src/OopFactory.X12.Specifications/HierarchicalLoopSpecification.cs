@@ -7,7 +7,7 @@
     using OopFactory.X12.Specifications.Enumerations;
     using OopFactory.X12.Specifications.Interfaces;
 
-    [DebuggerStepThrough()]
+    [DebuggerStepThrough]
     [XmlType(AnonymousType = true)]
     public class HierarchicalLoopSpecification : IContainerSpecification
     {
@@ -19,17 +19,17 @@
         public string LevelCode { get; set; }
 
         [XmlAttribute]
-        public UsageEnum Usage { get; set; }
+        public Usage Usage { get; set; }
 
         public string Name { get; set; }
 
-        [XmlElement("Segment")]
+        [XmlElement(X12Elements.Segment)]
         public List<SegmentSpecification> SegmentSpecifications { get; set; }
 
-        [XmlElement("Loop")]
+        [XmlElement(X12Elements.Loop)]
         public List<LoopSpecification> LoopSpecifications { get; set; }
 
-        [XmlElement("HierarchicalLoop")]
+        [XmlElement(X12Elements.HierarchicalLoop)]
         public List<HierarchicalLoopSpecification> HierarchicalLoopSpecifications { get; set; }
     }
 }

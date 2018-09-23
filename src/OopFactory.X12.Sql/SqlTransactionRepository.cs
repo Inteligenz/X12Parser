@@ -207,7 +207,7 @@
 
                     foreach (var element in spec.Elements)
                     {
-                        if (element.Type == ElementDataTypeEnum.Identifier
+                        if (element.Type == ElementDataType.Identifier
                             && !string.IsNullOrEmpty(element.QualifierSetId)
                             && element.AllowedIdentifiers.Count > 0)
                         {
@@ -217,7 +217,7 @@
                                 {
                                     this.CommonDb.AddToX12CodeListTable(
                                         element.QualifierSetId,
-                                        identifier.ID,
+                                        identifier.Id,
                                         identifier.Description);
                                 }
                             }

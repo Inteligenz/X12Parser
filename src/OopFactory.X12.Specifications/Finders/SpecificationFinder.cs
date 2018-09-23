@@ -14,11 +14,29 @@
     public class SpecificationFinder : ISpecificationFinder
     {
         private static readonly object SyncObject = new object();
+
         private static readonly ConcurrentDictionary<string, TransactionSpecification> Specifications;
 
         private static Dictionary<string, SegmentSpecification> _4010Specification;
+
         private static Dictionary<string, SegmentSpecification> _5010Specification;
 
+        /// <summary>
+        /// Initializes static members of the <see cref="SpecificationFinder"/> class
+        /// </summary>
+        static SpecificationFinder()
+        {
+            Specifications = new ConcurrentDictionary<string, TransactionSpecification>();
+        }
+
+        /// <summary>
+        /// Gets the transaction specification for the provided codes
+        /// </summary>
+        /// <param name="functionalCode">Function code</param>
+        /// <param name="versionCode">Specification version code</param>
+        /// <param name="transactionSetCode">Transaction set code</param>
+        /// <returns>Transaction specification which matches the codes provided</returns>
+        /// <exception cref="System.NotSupportedException">Thrown if the codes provided do not map to a known specification</exception>
         public virtual TransactionSpecification FindTransactionSpec(string functionalCode, string versionCode, string transactionSetCode)
         {
             switch (transactionSetCode)
@@ -61,22 +79,28 @@
                 case "999":
                     return GetSpecification("999-5010");
                 default:
-                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}-4010Specification.xml", transactionSetCode));
+                    Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"OopFactory.X12.Specifications.Resource.Ansi-{transactionSetCode}-4010Specification.xml");
                     if (specStream != null)
                     {
                         return GetSpecification(transactionSetCode + "-4010");
                     }
 
-                    specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}-Specification.xml", transactionSetCode));
+                    specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"OopFactory.X12.Specifications.Resource.Ansi-{transactionSetCode}-Specification.xml");
                     if (specStream != null)
                     {
                         return GetSpecification(transactionSetCode + "-");
                     }
 
-                    throw new NotSupportedException(string.Format("Transaction Set {0} is not supported.", transactionSetCode));
+                    throw new NotSupportedException(string.Format(Properties.Resources.UnsupportedTransactionSet, transactionSetCode));
             }
         }
 
+        /// <summary>
+        /// Gets the segment specification for the version code and ID provided
+        /// </summary>
+        /// <param name="versionCode">Specification version</param>
+        /// <param name="segmentId">Segment ID</param>
+        /// <returns>Segment specification which matches the parameters provided; otherwise, null</returns>
         public virtual SegmentSpecification FindSegmentSpec(string versionCode, string segmentId)
         {
             if (versionCode.Contains("5010"))
@@ -90,6 +114,24 @@
 
             var idMap4010 = Get4010Spec();
             return idMap4010.ContainsKey(segmentId) ? idMap4010[segmentId] : null;
+        }
+
+        /// <summary>
+        /// Gets the transaction specification for the provided key
+        /// </summary>
+        /// <param name="specKey">Specification key to filter</param>
+        /// <returns>Transaction specification found with the key</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the key is invalid, or cannot be found in the collection of specifications</exception>
+        internal static TransactionSpecification GetSpecification(string specKey)
+        {
+            return Specifications.GetOrAdd(
+                specKey,
+                key =>
+                    {
+                        Stream specStream = Assembly.GetExecutingAssembly()
+                            .GetManifestResourceStream($"OopFactory.X12.Specifications.Resource.Ansi-{key}Specification.xml");
+                        return TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd());
+                    });
         }
 
         private static Dictionary<string, SegmentSpecification> Get4010Spec()
@@ -107,7 +149,7 @@
                     {
                         foreach (var element in segment.Elements)
                         {
-                            if (element.Type == ElementDataTypeEnum.Identifier
+                            if (element.Type == ElementDataType.Identifier
                                 && !string.IsNullOrEmpty(element.QualifierSetRef))
                             {
                                 var qualifierSet =
@@ -142,7 +184,7 @@
                     {
                         foreach (var element in segment.Elements)
                         {
-                            if (element.Type == ElementDataTypeEnum.Identifier
+                            if (element.Type == ElementDataType.Identifier
                                 && !string.IsNullOrEmpty(element.QualifierSetRef))
                             {
                                 var qualifierSet =
@@ -161,22 +203,6 @@
             }
 
             return _5010Specification;
-        }
-
-        static SpecificationFinder()
-        {
-            Specifications = new ConcurrentDictionary<string, TransactionSpecification>();
-        }
-
-        internal static TransactionSpecification GetSpecification(string specKey)
-        {
-            return Specifications.GetOrAdd(
-                specKey,
-                key =>
-                    {
-                        Stream specStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Format("OopFactory.X12.Specifications.Resource.Ansi-{0}Specification.xml", key));
-                        return TransactionSpecification.Deserialize(new StreamReader(specStream).ReadToEnd());
-                    });
         }
     }
 }

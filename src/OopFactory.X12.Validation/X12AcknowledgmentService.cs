@@ -302,7 +302,7 @@
         {
             var errors = new List<SegmentError>();
 
-            foreach (var segmentSpec in container.Spec.SegmentSpecifications.Where(ss => ss.Usage == UsageEnum.Required))
+            foreach (var segmentSpec in container.Spec.SegmentSpecifications.Where(ss => ss.Usage == Usage.Required))
             {
                 if (!container.Segments.Exists(s => s.SegmentId == segmentSpec.SegmentId))
                 {
@@ -325,7 +325,7 @@
                 }
             }
 
-            foreach (var loopSpec in container.Spec.LoopSpecifications.Where(ls => ls.Usage == UsageEnum.Required))
+            foreach (var loopSpec in container.Spec.LoopSpecifications.Where(ls => ls.Usage == Usage.Required))
             {
                 if (!container.Containers.Exists(c => c.Spec.LoopId == loopSpec.LoopId))
                 {
