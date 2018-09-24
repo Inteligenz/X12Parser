@@ -24,7 +24,7 @@
             
             foreach (var groupResponse in groupResponses)
             {
-                var trans = group.AddTransaction("999", string.Format("{0:0000}", ++transactionId));
+                var trans = group.AddTransaction("999", $"{++transactionId:0000}");
                 if (group.VersionIdentifierCode.Contains("5010"))
                 {
                     trans.SetElement(3, group.VersionIdentifierCode);
@@ -136,7 +136,7 @@
                 ak9.AK901_FunctionalGroupAcknowledgeCode = groupResponse.AcknowledgmentCode.ToString().Substring(0, 1);
                 ak9.AK902_NumberOfTransactionSetsIncluded = groupResponse.TransactionSetResponses.Count;
                 ak9.AK903_NumberOfReceivedTransactionSets = groupResponse.TransactionSetResponses.Count;
-                ak9.AK904_NumberOfAcceptedTransactionSets = groupResponse.TransactionSetResponses.Count(tsr => tsr.AcknowledgmentCode == AcknowledgmentCodeEnum.A_Accepted || tsr.AcknowledgmentCode == AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted);
+                ak9.AK904_NumberOfAcceptedTransactionSets = groupResponse.TransactionSetResponses.Count(tsr => tsr.AcknowledgmentCode == AcknowledgmentCode.A_Accepted || tsr.AcknowledgmentCode == AcknowledgmentCode.E_Accepted_ButErrorsWereNoted);
 
                 if (groupResponse.SyntaxErrorCodes.Count > 0)
                 {

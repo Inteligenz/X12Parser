@@ -32,7 +32,7 @@
 
         public List<TransactionSetResponse> TransactionSetResponses { get; set; }
 
-        public AcknowledgmentCodeEnum AcknowledgmentCode { get; set; }
+        public AcknowledgmentCode AcknowledgmentCode { get; set; }
 
         public List<string> SyntaxErrorCodes { get; set; }
     }

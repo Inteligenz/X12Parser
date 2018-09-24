@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="ContainerInformation.cs" />
     <Compile Include="InstitutionalClaimAcknowledgmentService.cs" />
-    <Compile Include="Model\AcknowledgmentCodeEnum.cs" />
+    <Compile Include="Model\AcknowledgmentCode.cs" />
     <Compile Include="Model\ContextError.cs" />
     <Compile Include="Model\DataElementNote.cs" />
     <Compile Include="Model\FunctionalGroupResponse.cs" />
@@ -76,7 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="OopFactory.X12.Validation.nuspec" />
+    <None Include="package.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

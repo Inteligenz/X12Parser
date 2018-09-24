@@ -23,16 +23,34 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the segment ID code
+        /// </summary>
         public string SegmentIdCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the segment's position in an interchange
+        /// </summary>
         public int SegmentPosition { get; set; }
 
+        /// <summary>
+        /// Gets or sets the loop identifier for the segment
+        /// </summary>
         public string LoopIdentifierCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the segment syntax error code
+        /// </summary>
         public string ImplementationSegmentSyntaxErrorCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of segment context errors
+        /// </summary>
         public List<ContextError> ContextErrors { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of element notes for issues within the segment
+        /// </summary>
         public List<DataElementNote> ElementNotes { get; set; }
 
         /// <summary>

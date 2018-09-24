@@ -112,17 +112,25 @@
             return responses.Values.ToList();
         }
 
+        /// <summary>
+        /// Builds a <see cref="TransactionSetResponse"/> object from the provided stream
+        /// </summary>
+        /// <param name="reader">Stream to pull transaction set data from</param>
+        /// <param name="functionalCode">Function group code to associate with transaction set</param>
+        /// <param name="versionIdentifierCode">Specification version code</param>
+        /// <param name="transaction">Transaction segment string to be parsed</param>
+        /// <returns>Transaction set response whether the set is valid, and the segment data</returns>
         protected virtual TransactionSetResponse AcknowledgeTransaction(X12StreamReader reader, string functionalCode, string versionIdentifierCode, string transaction)
         {
-            string[] stElements = reader.SplitSegment(transaction);
+            string[] transactionElements = reader.SplitSegment(transaction);
             var response = new TransactionSetResponse
             {
-                TransactionSetIdentifierCode = stElements[1],
-                TransactionSetControlNumber = stElements[2]
+                TransactionSetIdentifierCode = transactionElements[1],
+                TransactionSetControlNumber = transactionElements[2]
             };
-            if (stElements.Length >= 4)
+            if (transactionElements.Length >= 4)
             {
-                response.ImplementationConventionReference = stElements[3];
+                response.ImplementationConventionReference = transactionElements[3];
             }
 
             TransactionSpecification transactionSpec = this.specFinder.FindTransactionSpec(
@@ -133,7 +141,7 @@
             if (transactionSpec == null)
             {
                 response.SyntaxErrorCodes.Add("1");
-                response.AcknowledgmentCode = AcknowledgmentCodeEnum.R_Rejected;
+                response.AcknowledgmentCode = AcknowledgmentCode.R_Rejected;
                 return response;
             }
 
@@ -160,15 +168,15 @@
                         transactionContainer.Segments.Add(segmentInfo);
                         break;
                     case "HL":
-                        string hlNumber = segmentInfo.Elements[1];
-                        string hlParentNumber = segmentInfo.Elements[2];
-                        string hlLevelCode = segmentInfo.Elements[3];
-                        HierarchicalLoopSpecification hlSpec = transactionSpec.HierarchicalLoopSpecifications.FirstOrDefault(hls => hls.LevelCode == hlLevelCode);
-                        if (hlSpec != null)
+                        string hloopNumber = segmentInfo.Elements[1];
+                        string hloopParentNumber = segmentInfo.Elements[2];
+                        string hloopLevelCode = segmentInfo.Elements[3];
+                        HierarchicalLoopSpecification hloopSpec = transactionSpec.HierarchicalLoopSpecifications.FirstOrDefault(hls => hls.LevelCode == hloopLevelCode);
+                        if (hloopSpec != null)
                         {
                             while (!(containers.Peek().Spec is TransactionSpecification))
                             {
-                                if (containers.Peek().HLoopNumber == hlParentNumber)
+                                if (containers.Peek().HLoopNumber == hloopParentNumber)
                                 {
                                     break;
                                 }
@@ -176,16 +184,16 @@
                                 containers.Pop();
                             }
 
-                            segmentInfo.LoopId = hlSpec.LoopId;
-                            var hlContainer = new ContainerInformation { Spec = hlSpec, HLoopNumber = hlNumber };
-                            hlContainer.Segments.Add(segmentInfo);
-                            containers.Peek().Containers.Add(hlContainer);
-                            containers.Push(hlContainer);
+                            segmentInfo.LoopId = hloopSpec.LoopId;
+                            var hloopContainer = new ContainerInformation { Spec = hloopSpec, HLoopNumber = hloopNumber };
+                            hloopContainer.Segments.Add(segmentInfo);
+                            containers.Peek().Containers.Add(hloopContainer);
+                            containers.Push(hloopContainer);
                         }
                         else
                         {
-                            response.SegmentErrors.Add(this.CreateDataElementError(segmentInfo, 3, "I6", hlLevelCode));
-                            response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                            response.SegmentErrors.Add(this.CreateDataElementError(segmentInfo, 3, "I6", hloopLevelCode));
+                            response.AcknowledgmentCode = AcknowledgmentCode.X_Rejected_ContentCouldNotBeAnalyzed;
                         }
 
                         break;
@@ -220,7 +228,7 @@
                                 else
                                 {
                                     response.SegmentErrors.Add(this.CreateSegmentError(segmentInfo, "6"));
-                                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                                    response.AcknowledgmentCode = AcknowledgmentCode.X_Rejected_ContentCouldNotBeAnalyzed;
                                     return response;
                                 }
                             }
@@ -235,14 +243,12 @@
                                 if (currentContainer.Spec is TransactionSpecification)
                                 {
                                     response.SegmentErrors.Add(this.CreateSegmentError(segmentInfo, "2")); 
-                                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.X_Rejected_ContentCouldNotBeAnalyzed;
+                                    response.AcknowledgmentCode = AcknowledgmentCode.X_Rejected_ContentCouldNotBeAnalyzed;
                                     return response; 
                                 }
-                                else
-                                {
-                                    containers.Pop();
-                                    currentContainer = containers.Peek();
-                                }
+
+                                containers.Pop();
+                                currentContainer = containers.Peek();
                             }
                         }
                         while (!matchFound);
@@ -289,15 +295,20 @@
                     response.SyntaxErrorCodes.Add("5");
                 }
 
-                if (response.AcknowledgmentCode == AcknowledgmentCodeEnum.A_Accepted)
+                if (response.AcknowledgmentCode == AcknowledgmentCode.A_Accepted)
                 {
-                    response.AcknowledgmentCode = AcknowledgmentCodeEnum.E_Accepted_ButErrorsWereNoted;
+                    response.AcknowledgmentCode = AcknowledgmentCode.E_Accepted_ButErrorsWereNoted;
                 }
             }
 
             return response;
         }
 
+        /// <summary>
+        /// Attempts to parse a container and validates it againsts its specification. A collection of <see cref="SegmentError"/> objects is returned
+        /// </summary>
+        /// <param name="container">Object to be validated</param>
+        /// <returns>Collection of Segment errors, if found</returns>
         protected virtual IEnumerable<SegmentError> ValidateContainerAgainstSpec(ContainerInformation container)
         {
             var errors = new List<SegmentError>();
@@ -357,6 +368,11 @@
             return errors;
         }
 
+        /// <summary>
+        /// Attempts to parse a segment and validates it againsts its specification. A collection of <see cref="SegmentError"/> objects is returned
+        /// </summary>
+        /// <param name="segmentInfo">Segment metadata to be validated</param>
+        /// <returns>Collection of Segment errors, if found</returns>
         protected virtual IList<SegmentError> ValidateSegmentAgainstSpec(SegmentInformation segmentInfo)
         {
             var errors = new List<SegmentError>();
@@ -402,6 +418,12 @@
             return errors;            
         }
 
+        /// <summary>
+        /// Creates a <see cref="SegmentError"/> object with the segment metadata provided
+        /// </summary>
+        /// <param name="segmentInfo">Segment metadata object</param>
+        /// <param name="syntaxErrorCode">Error code detailing syntax issue</param>
+        /// <returns>Error object created with the metadata</returns>
         protected SegmentError CreateSegmentError(SegmentInformation segmentInfo, string syntaxErrorCode)
         {
             return new SegmentError
@@ -413,6 +435,14 @@
             };
         }
 
+        /// <summary>
+        /// Creates a <see cref="SegmentError"/> object with the segment metadata provided
+        /// </summary>
+        /// <param name="segmentInfo">Segment metadata object</param>
+        /// <param name="elementPositionInSegment">Element index position in segment</param>
+        /// <param name="syntaxErrorCode">Error code detailing syntax issue</param>
+        /// <param name="element">Element data</param>
+        /// <returns>Error object created with the metadata</returns>
         protected SegmentError CreateDataElementError(SegmentInformation segmentInfo, int elementPositionInSegment, string syntaxErrorCode, string element)
         {
             var error = new SegmentError
