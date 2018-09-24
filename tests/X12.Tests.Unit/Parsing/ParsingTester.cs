@@ -23,24 +23,24 @@
     public class ParsingTester
     {
         /// <summary>
-        /// Gets or sets the test context which provides information about and functionality for the current test run.
+        /// Gets or sets the test context which provides information about and
+        /// functionality for the current test run.
         /// </summary>
         public TestContext TestContext { get; set; }
 
+        /// <summary>
+        /// Tests that the X12Parser can parse an EDI file and transform it to XML
+        /// </summary>
         [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseToXml()
         {
             string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
-            Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
 
             var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
-#if DEBUG
-            new FileStream(resourcePath.Replace(".txt", ".xml"), FileMode.Create).PrintToFile(xml);
-#endif
             var doc = new XmlDocument();
             doc.LoadXml(xml);
             int index = 1;
@@ -51,7 +51,6 @@
                 XmlNode node = doc.SelectSingleNode(query);
                 Assert.IsNotNull(node, "Query '{0}' not found in {1}.", query, resourcePath);
                 Assert.AreEqual(expected, node.InnerText, "Value {0} not expected from query {1} in {2}.", node.InnerText, query, resourcePath);
-                Trace.WriteLine(string.Format("Query '{0}' succeeded.", query));
                 query = this.GetXPathQuery(++index);
             }
 
@@ -61,9 +60,6 @@
                 parser = new X12Parser(new DentalClaimSpecificationFinder());
                 interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
-#if DEBUG
-            new FileStream(resourcePath.Replace(".txt", "_837D.xml"), FileMode.Create).PrintToFile(xml);
-#endif
             }
 
             if (resourcePath.Contains("_837I"))
@@ -72,29 +68,23 @@
                 parser = new X12Parser(new InstitutionalClaimSpecificationFinder());
                 interchange = parser.ParseMultiple(stream).First();
                 xml = interchange.Serialize();
-#if DEBUG
-            new FileStream(resourcePath.Replace(".txt", "_837I.xml"), FileMode.Create).PrintToFile(xml);
-#endif
             }
         }
 
+        /// <summary>
+        /// Tests that X12Parser can parse an EDI and write it back to and EDI
+        /// </summary>
         [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseAndUnparse()
         {
             string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
-            Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(resourcePath);
             var parser = new X12Parser();
             parser.ParserWarning += this.Parser_ParserWarning;
             List<Interchange> interchanges = parser.ParseMultiple(stream);
-
-            if (resourcePath.Contains("_811"))
-            {
-                Trace.Write(string.Empty);
-            }
 
             StringBuilder x12 = new StringBuilder();
             foreach (var interchange in interchanges)
@@ -103,24 +93,23 @@
             }
 
             Assert.AreEqual(orignalX12, x12.ToString().Trim());
-            Trace.Write(x12.ToString());
         }
 
-        private void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
-        {
-            Trace.Write(args.Message);
-        }
-
+        /// <summary>
+        /// Tests and X12Parser can parse and EDI file, transform it to XMl and back to
+        /// X12, and then write it back out
+        /// </summary>
         [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseAndTransformToX12()
         {
-            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);  // "INS._837P._4010.Spec_4.1.1_PatientIsSubscriber.txt";
+            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             if (!resourcePath.Contains("_0x1D"))
             {
-                Trace.WriteLine(resourcePath);
+                // arrange
                 Stream stream = GetEdi(resourcePath);
 
+                // act
                 var parser = new X12Parser();
                 Interchange interchange = parser.ParseMultiple(stream).First();
                 string originalX12 = interchange.SerializeToX12(true);
@@ -131,11 +120,15 @@
                 Interchange newInterchange = parser.ParseMultiple(x12).First();
                 string newX12 = newInterchange.SerializeToX12(true);
 
+                // assert
                 Assert.AreEqual(originalX12, newX12);
-                Trace.Write(x12);
             }
         }
 
+        /// <summary>
+        /// Tests that X12Parser can parse an EDI file, a change can be made to the model,
+        /// and it can be transformed back to X12 with the modification
+        /// </summary>
         [TestMethod]
         public void ParseModifyAndTransformBackToX12()
         {
@@ -154,19 +147,10 @@
             XmlElement dmgElement = (XmlElement)doc.GetElementsByTagName("DMG")[0];
             dmgElement.ParentNode.RemoveChild(dmgElement);
             
-            Console.WriteLine(doc.OuterXml);
             string x12 = parser.TransformToX12(doc.OuterXml);
-
-            Console.WriteLine("ISA Segmemt:");
-            Console.WriteLine(x12.Substring(0, 106));
-            Console.WriteLine("Directly from XML:");
-            Console.WriteLine(x12); 
             
             var modifiedInterchange = parser.ParseMultiple(x12).First();
             string newX12 = modifiedInterchange.SerializeToX12(true);
-
-            Console.WriteLine("After passing through interchange object:");
-            Console.WriteLine(newX12);
  
             var seSegment = modifiedInterchange.FunctionGroups.First().Transactions.First().TrailerSegments.FirstOrDefault(ts => ts.SegmentId == "SE");
 
@@ -175,53 +159,28 @@
             Assert.AreEqual("15", seSegment.GetElement(1));
         }
 
+        /// <summary>
+        /// Tests that X12Parser can parse an EDI file and transform it to HTML
+        /// </summary>
         [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
         [TestMethod]
         public void ParseToHtml()
         {
+            // arrange
             string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
-            Trace.WriteLine(resourcePath);
             Stream stream = GetEdi(resourcePath);
             if (!resourcePath.Contains("MultipleInterchanges"))
             {
                 var service = new X12HtmlTransformationService(new X12EdiParsingService(false));
-                string html = service.Transform(new StreamReader(stream).ReadToEnd());
 
-                Trace.Write(html);
-#if DEBUG
-                new FileStream(resourcePath.Replace(".txt", ".htm"), FileMode.Create).PrintHtmlToFile(html);
-#endif
+                // act - assert
+                string html = service.Transform(new StreamReader(stream).ReadToEnd());
             }
         }
 
-        [TestMethod]
-        public void CreateTestFile()
-        {
-            string filename = @"..\..\..\tests\X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_270\_5010\Example1_IG_0x1D.txt";
-            string edi = File.ReadAllText(filename);
-            edi = edi.Replace('~', '\x1D');
-
-            // act - assert
-            File.WriteAllText(filename, edi);
-        }
-
-        [TestMethod]
-        public void CreateTestFileWithTrailingBlanks()
-        {
-            // arrange
-            string filename = @"..\..\..\tests\X12.Tests.Unit\Parsing\_SampleEdiFiles\INS\_837P\_5010\MedicaidExample_WithTrailingBlanks.txt";
-            var edi = new StringBuilder(File.ReadAllText(filename));
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-            edi.Append((char)0);
-
-            // act - assert
-            File.WriteAllText(filename, edi.ToString());
-        }
-
+        /// <summary>
+        /// Tests that X12Parser can parse a unicode encoded file
+        /// </summary>
         [TestMethod]
         public void ParseUnicodeFile()
         {
@@ -231,12 +190,22 @@
 
             // act - assert
             var interchange = parser.ParseMultiple(fs, Encoding.Unicode);
-            Trace.Write(interchange.First().Serialize());
         }
 
         private static Stream GetEdi(string resourcePath)
         {
             return Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Tests.Unit.Parsing._SampleEdiFiles." + resourcePath);
+        }
+
+        /// <summary>
+        /// Event handler hook for X12Parser.ParserWarning, if this is tripped, then we'll fail the test
+        /// </summary>
+        /// <param name="sender">Object calling handler</param>
+        /// <param name="args">Additional arguments, such as error message</param>
+        /// <exception cref="AssertFailedException">Thrown if method is executed</exception>
+        private void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        {
+            throw new AssertFailedException($"ParserWarning executed by {sender}: '{args.Message}'");
         }
 
         private string GetXPathQuery(int index)
