@@ -1,0 +1,52 @@
+﻿ISA*00*          *00*          *30*943274043      *01*175315246      *990104*1521*U*00401*000000002*1*T*>~
+  GS*IN*943274043*175315246*19990104*1521*1*X*004010~
+    ST*810*0001~
+      BIG*19981231*10429*****FB~
+      N1*BT*The Scheduling Coordinator, Inc~
+        N3*53241 Hamilton Dr~
+        N4*Palo Alto*CA*95622*US~
+      N1*RE*Bank of America- (Mkt and GMC)~
+        N3*1850 Gateway Boulevard~
+        N4*Concord*CA*94520*US~
+        REF*11*1233626208~
+        REF*01*026009593~
+      ITD*03*****19990107~
+      DTM*150*19980930~
+      DTM*151*19981031~
+      IT1*1*1*EA*19406.14**TP*0101~
+        PID*X****Day-Ahead Spinning Reserve due ISO~
+      IT1*2*1*EA*1764.26**TP*0102~
+        PID*X****Day-Ahead Non-Spinning Reserve due ISO~
+      IT1*3*1*EA*9774.42**TP*0103~
+        PID*X****Day-Ahead AGC/Regulation due ISO~
+      IT1*4*1*EA*70.64**TP*0151~
+        PID*X****Hour-Ahead Spinning Reserve due ISO~
+      IT1*5*1*EA*-497.1**TP*0152~
+        PID*X****Hour-Ahead Non-Spinning Reserve due ISO~
+      IT1*6*1*EA*-2907.82**TP*0153~
+        PID*X****Hour-Ahead AGC/Regulation due ISO~
+      IT1*7*1*EA*-1608.96**TP*0203~
+        PID*X****Day-Ahead Inter-Zonal Congestion Settlement~
+      IT1*8*1*EA*-62.5**TP*0253~
+        PID*X****Hour-Ahead Inter-Zonal Congestion Settlement~
+      IT1*9*1*EA*0.93**TP*0303~
+        PID*X****Ex-Post Replacement Reserve due ISO (Dispatched)~
+      IT1*10*1*EA*625.62**TP*0304~
+        PID*X****Ex-Post Replacement Reserve due ISO (Undispatched)~
+      IT1*11*1*EA*-457863.84**TP*0402~
+        PID*X****Generation Deviation Settlement~
+      IT1*12*1*EA*353932.35**TP*0403~
+        PID*X****Load Deviation Settlement~
+      IT1*13*1*EA*45610.38**TP*0406~
+        PID*X****UFE Settlement~
+      IT1*14*1*EA*216024.05**TP*1010~
+        PID*X****Neutrality Adjustment Charge/Refund~
+      IT1*15*1*EA*27270.74**TP*1013~
+        PID*X****REPA Cash Neutrality Charge~
+      IT1*16*1*EA*1977.32**TP*1302~
+        PID*X****Supplemental Reactive Energy due ISO~
+      TDS*21351663~
+      CTT*16~
+    SE*48*0001~
+  GE*1*1~
+IEA*1*000000002~

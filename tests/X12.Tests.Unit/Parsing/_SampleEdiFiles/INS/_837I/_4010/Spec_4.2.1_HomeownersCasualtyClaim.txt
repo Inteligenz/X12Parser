@@ -1,0 +1,45 @@
+﻿ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+    ST*837*987183~
+      BHT*0019*00*0123*970327*1410*CH~
+      REF*87*004010X096~
+      NM1*40*2*CBO*****46*1234~
+      NM1*41*2*INSURANCE CARRIER*****46*3214~
+      HL*1**20*1~
+        PRV*BI*ZZ*203BA0200N~
+        NM1*85*2*DUFFER’S MEMORIAL HOSPITAL*****XX*111DM222~
+          N3*541 DOGLEG DRIVE~
+          N4*GOLFERS HAVEN*FL*91919~
+          REF*TJ*444661111~
+        HL*2*1*22*1~
+          SBR*P********LI~
+          NM1*IL*1*NORTON*GRAIG****MI*970925824~
+            N3*72 FAIRWAY DRIVE~
+            N4*GOLFERS HAVEN*FL*91919~
+          NM1*PR*2*LAST CHANCE INSURANCE COMPANY*****XV*123456789~
+          HL*3*2*23*0~
+            PAT*41~
+            NM1*QC*1*CLIFTON*WILLIAM****34*686868686~
+              N3*1600 RAZORBACK AVENUE~
+              N4*LITTLE ROCK*AR*54321~
+              DMG*D8*19491013*M~
+              REF*D9*88N522371~
+            CLM*67129*450***13:A:1***Y*Y~
+              DTP*434*D8*19970318~
+              CL1*3*7*1~
+              HI*BK:922.3*BF:847.2~
+              NM1*71*1*ZEUSS*THEODORE****XX*999DS427~
+                PRV*AT*ZZ*363LP0200N~
+              NM1*73*1*FLOOD*RAY****XX*671RF535~
+              LX*1~
+                SV2*450*HC:98765*75*UN*1~
+                DTP*472*D8*19970318~
+              LX*2~
+                SV2*320*HC:72110*150*UN*1~
+                DTP*472*D8*19970318~
+              LX*3~
+                SV2*360*HC:99282*225*UN*1~
+                DTP*472*D8*19970318~
+    SE*41*987183~
+  GE*1*31~
+IEA*1*000000031~

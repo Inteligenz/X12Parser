@@ -1,0 +1,58 @@
+﻿ISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *930602*1253*^*00401*000000905*1*T*:~
+  GS*HC*SENDER CODE*RECEIVER CODE*1994033*0802*1*X*004010X098A1~
+    ST*837*872391~
+      BHT*0019*00*0123*19970410*1339*CH~
+      REF*87*004010X098~
+      NM1*41*2*PRESIDENTIAL CHIROPRACTIC*****46*777BH666~
+        PER*IC*LARRY*TE*3215556677~
+      NM1*40*2*LAST CHANCE INSURANCE COMPANY*****46*123456789~
+      HL*1**20*1~
+        NM1*85*2*PRESIDENTIAL CHIROPRACTIC*****XX*777BH666~
+          N3*5 LUMBAR LANE~
+          N4*GOLFERS HAVEN*FL*91919~
+          REF*EI*222559999~
+          PER*IC*SUSAN*TE*3215557777~
+        HL*2*1*22*1~
+          SBR*P********LM~
+          NM1*IL*1*NORTON*GRAIG****MI*970925824~
+          NM1*PR*2*LAST CHANCE INSURANCE COMPANY*****XV*123456789~
+            N3*1 DESERT LINE ROAD~
+            N4*RENO*NV*44544~
+          HL*3*2*23*0~
+            PAT*41~
+            NM1*QC*1*CLIFTON*WILLIAM****34*234557329~
+              N3*1600 RAZORBACK AVENUE~
+              N4*LITTLE ROCK*AR*54321~
+              DMG*D8*19491013*M~
+              REF*Y4*88N522371~
+            CLM*686868686*245***11::1*Y*A*Y*Y*B*OA~
+              DTP*454*D8*19970318~
+              DTP*439*D8*19970317~
+              CR2*1*1***DA*1*1*A*Y***Y~
+              HI*BK:8472~
+              NM1*DN*1*ZEUSS*THEODORE****XX*999DS427~
+                PRV*RF*ZZ*203BF0100Y~
+              NM1*82*1*DONALD*MACK****XX*999OU812~
+                PRV*PE*ZZ*111NS0005N~
+                REF*EI*311235689~
+              LX*1~
+                SV1*HC:99204*60*UN*1***1**N~
+                DTP*472*D8*19970318~
+              LX*2~
+                SV1*HC:72100*75*UN*1***1**N~
+                DTP*472*D8*19970318~
+              LX*3~
+                SV1*HC:97010*25*UN*1***1**N~
+                DTP*472*D8*19970318~
+              LX*4~
+                SV1*HC:97014*25*UN*1***1**N~
+                DTP*472*D8*19970318~
+              LX*5~
+                SV1*HC:97124*35*UN*1***1**N~
+                DTP*472*D8*19970318~
+              LX*6~
+                SV1*HC:97035*25*UN*1***1**N~
+                DTP*472*D8*19970318~
+    SE*54*872391~
+  GE*1*1~
+IEA*1*000000905~

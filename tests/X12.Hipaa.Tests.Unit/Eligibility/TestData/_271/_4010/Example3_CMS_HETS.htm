@@ -1,0 +1,738 @@
+﻿<html>
+    <head>
+        <title>Eligibility Response</title>
+    <style type="text/css">
+        h1
+        {
+            color: #003B64;
+            margin: 4px 0 4px 0;
+            font-size: 16px;
+            font-style: italic;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 600px;
+        }
+        /*START Eligibility Table Layout*/div.eligibilityTable table
+        {
+            width: 600px;
+            margin-bottom: 16px;
+            border: none;
+        }
+        div.eligibilityTable th, div.eligibilityTable td
+        {
+            font-size: 10px;
+            font-family: Verdana, "Lucida Grande" , Geneva, Tahoma, Sans-Serif;
+            font-weight: bold;
+            padding: 4px 2px 2px 2px;
+            vertical-align: top;
+            border: none;
+        }
+        div.eligibilityTable th
+        {
+            font-weight: normal;
+            color: #5a5b51;
+            text-align: left;
+        }
+        div.eligibilityTable th.col1
+        {
+            width: 120px;
+        }
+        div.eligibilityTable td.col2
+        {
+            width: 180px;
+        }
+        div.eligibilityTable th.col3
+        {
+            width: 110px;
+        }
+        div.eligibilityTable td.col4
+        {
+            width: 190px;
+        }
+        /*END Eligibility Table Layout*//*START Eligibility Grid Layout*/div.eligibilityGrid th, div.eligibilityGrid td
+        {
+            font-size: 10px;
+            font-family: Verdana, "Lucida Grande" , Geneva, Tahoma, Sans-Serif;
+            padding: 4px 2px 2px 2px;
+            border: none;
+        }
+        div.eligibilityGrid table
+        {
+            border-collapse: collapse;
+            width: 600px;
+            margin-bottom: 16px;
+            border: solid 1px #003b64;
+        }
+        div.eligibilityGrid td, div.eligibilityGrid th
+        {
+            border: solid 1px #003b64;
+            padding-bottom: 4px;
+        }
+        div.eligibilityGrid td
+        {
+            font-weight: normal;
+            vertical-align: top;
+        }
+        div.eligibilityGrid th
+        {
+            background-color: #003b64;
+            color: White !important;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: bold;
+            border-right: solid 1px white;
+        }
+        div.eligibilityGrid th.end
+        {
+            border-right: solid 1px #003b64;
+        }
+        div.eligibilityGrid td.right, div.eligibilityGrid th.right
+        {
+            text-align: right;
+        }
+        /*END Eligibility Grid Layout*//*START One column table layout*/div.oneColumnTable table
+        {
+            width: 600px;
+            margin-bottom: 16px;
+            border: none;
+        }
+        div.oneColumnTable td, div.oneColumnTable th
+        {
+            font-size: 10px;
+            font-family: Verdana, "Lucida Grande" , Geneva, Tahoma, Sans-Serif;
+            font-weight: normal;
+            padding: 4px 2px 2px 2px;
+            vertical-align: top;
+            border: none;
+        }
+        div.oneColumnTable th
+        {
+            text-align: left;
+            font-weight: bold;
+        }
+        /*END One column table layout*/div.disclaimer
+        {
+            width: 600px;
+            font-family: Verdana, "Lucida Grande" , Geneva, Tahoma, Sans-Serif;
+            font-size: 10px;
+            color: #5a5b51;
+            line-height: 1.7em;
+        }
+    </style>
+    </head>
+    <body><div xmlns:hip="http://www.oopfactory.com/2011/XSL/Hipaa">
+  <div class="eligibilityTable">
+    <h1>
+            Payer
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="payerTable">
+      <tr>
+        <th class="col1">Payer Name</th>
+        <td class="col2">CMS</td>
+        <th class="col3">Transaction ID</th>
+        <td class="col4">333333333</td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityTable">
+    <h1>
+            Provider
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="providerTable">
+      <tr>
+        <th class="col1">Provider</th>
+        <td colspan="3">IRNAME</td>
+      </tr>
+      <tr>
+        <th class="col1">Address</th>
+        <td colspan="3">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>,  </div>
+        </td>
+      </tr>
+      <tr>
+        <th class="col1">Provider ID</th>
+        <td class="col2">NPI</td>
+        <th class="col3">Tax ID</th>
+        <td class="col4">
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityTable">
+    <h1>
+            Subscriber
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="subscriberTable">
+      <tr>
+        <th class="col1">Insured Name</th>
+        <td colspan="3">LNAME, FNAME MNAME</td>
+      </tr>
+      <tr>
+        <th class="col1">Member ID</th>
+        <td class="col2">HICN</td>
+        <th class="col3">SSN</th>
+        <td class="col4">
+        </td>
+      </tr>
+      <tr>
+        <th class="col1">Group Number</th>
+        <td class="col2">
+        </td>
+        <th class="col3">Group Name</th>
+        <td class="col4">&nbsp;</td>
+      </tr>
+      <tr>
+        <th class="col1">Date of Birth</th>
+        <td class="col2">1920-04-01</td>
+        <th class="col3">Gender</th>
+        <td class="col4">Female</td>
+      </tr>
+      <tr>
+        <th class="col1">Address</th>
+        <td colspan="3">ADDRESS LINE1ADDRESS LINE2</td>
+      </tr>
+      <tr>
+        <th class="col1"></th>
+        <td colspan="3">CITY, SC ZIPCODE</td>
+      </tr>
+      <tr>
+        <th class="col1">Dependent Sequence Number</th>
+        <td colspan="3">
+                1
+              </td>
+      </tr>
+      <tr>
+        <th class="col1">Branch</th>
+        <td colspan="3">0002</td>
+      </tr>
+      <tr>
+        <th class="col1">Subdivision</th>
+        <td colspan="3">0001</td>
+      </tr>
+      <tr>
+        <th class="col1">Employee ID Number</th>
+        <td colspan="3">&nbsp;</td>
+      </tr>
+      <tr>
+        <th class="col1">Plan Code</th>
+        <td colspan="3">
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="oneColumnTable">
+    <h1>
+            Coverage Type
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="coveragesTable">
+      <tr>
+        <td>: , </td>
+      </tr>
+    </table>
+  </div>
+  <div class="oneColumnTable">
+    <h1>
+            Coverage Dates
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="coverageDatesTable">
+      <tr>
+        <th><strong>Dependent Coverage Dates</strong></th>
+      </tr>
+      <tr>
+        <td>
+                Eligibility Begin </td>
+      </tr>
+    </table>
+  </div>
+  <h1>
+          Deductibles &amp; Maximums
+        </h1>
+  <div class="eligibilityGrid">
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="deductiblesTable">
+      <tr>
+        <th class="description" colspan="3">
+                Deductible
+              </th>
+        <th class="unkNetwork right end">&nbsp;
+              </th>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+        </td>
+        <td class="unkNetwork right">992</td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+                  Family
+                </td>
+        <td class="unkNetwork right">
+                  $150.00
+                </td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+        </td>
+        <td class="unkNetwork right">0</td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+                  Family
+                </td>
+        <td class="unkNetwork right">
+                  $150.00
+                </td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+        </td>
+        <td class="unkNetwork right">0</td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+                  Family
+                </td>
+        <td class="unkNetwork right">
+                  $150.00
+                </td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">Individual</td>
+        <td class="unkNetwork right">
+        </td>
+      </tr>
+      <tr>
+        <td class="description" colspan="3">
+                  Family
+                </td>
+        <td class="unkNetwork right">
+                  $150.00
+                </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityGrid">
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="maximumsTable">
+      <tr>
+        <th class="description" colspan="2">
+                Maximum
+              </th>
+        <th class="unkNetwork right end">&nbsp;
+              </th>
+      </tr>
+      <tr>
+        <td>
+                Individual
+              </td>
+        <td>&nbsp;
+              </td>
+        <td class="unkNetwork right">
+                $2,000.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Used
+              </td>
+        <td class="unkNetwork right">
+                $103.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Remaining
+              </td>
+        <td class="unkNetwork right">
+                $1,897.00
+              </td>
+      </tr>
+      <tr>
+        <td>
+                Individual, Dental Care
+              </td>
+        <td>&nbsp;
+              </td>
+        <td class="unkNetwork right">
+                $2,000.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Used
+              </td>
+        <td class="unkNetwork right">
+                $103.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Remaining
+              </td>
+        <td class="unkNetwork right">
+                $1,897.00
+              </td>
+      </tr>
+      <tr>
+        <td>
+                Individual, Periodontics
+              </td>
+        <td>&nbsp;
+              </td>
+        <td class="unkNetwork right">
+                $2,000.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Used
+              </td>
+        <td class="unkNetwork right">
+                $103.00
+              </td>
+      </tr>
+      <tr>
+        <td>&nbsp;
+              </td>
+        <td>
+                Amount Remaining
+              </td>
+        <td class="unkNetwork right">
+                $1,897.00
+              </td>
+      </tr>
+      <tr>
+        <td>
+                Individual, Orthodontics
+              </td>
+        <td>
+                Lifetime
+              </td>
+        <td class="unkNetwork right">
+                $2,500.00
+              </td>
+      </tr>
+    </table>
+  </div>
+  <div class="oneColumnTable">
+    <h1>
+            Plan Provisions
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="planProvisionsTable">
+      <tr>
+        <td>
+                This plan Coordinates Benefits
+              </td>
+      </tr>
+      <tr>
+        <td>
+                This plan uses Birthday Rule to Coordinate Benefits
+              </td>
+      </tr>
+      <tr>
+        <td>
+                COB Type - Non-duplication of benefits applies.
+              </td>
+      </tr>
+      <tr>
+        <td>
+                This plan covers teeth lost prior to the effective date
+              </td>
+      </tr>
+      <tr>
+        <td>
+                Total ortho charge to be considered as the placement charges 20%
+              </td>
+      </tr>
+      <tr>
+        <td>
+                Repetitive ortho payments are made QUARTERLY
+              </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityGrid">
+    <h1>
+            Coverage
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="coInsuranceTable">
+      <tr>
+        <th class="description">
+                Description
+              </th>
+        <th class="unkNetwork right">&nbsp;
+              </th>
+        <th class="messages end">&nbsp;
+              </th>
+        <th class="deductible end">
+                Deductible Applies
+              </th>
+      </tr>
+      <tr>
+        <td class="description">Medicare Part A</td>
+        <td class="unkNetwork right"></td>
+        <td class="messages"></td>
+        <td class="deductible">
+                  NO
+                </td>
+      </tr>
+      <tr>
+        <td class="description">Medicare Part B</td>
+        <td class="unkNetwork right"></td>
+        <td class="messages"></td>
+        <td class="deductible">
+                  NO
+                </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityGrid">
+    <h1>
+            Frequency Limitations
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="frequencyRestrictionsTable">
+      <tr>
+        <th class="description">
+                Procedure
+              </th>
+        <th class="restriction">
+                Restriction
+              </th>
+        <th class="lastVisit end">
+                Last Visit
+              </th>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">60 Days Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">20 Days Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">43 Days Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">20 Days Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">8 Number of Services or Procedures Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">
+        </td>
+        <td class="restriction">  Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+      <tr>
+        <td class="procedure">Physical and Speech Therapy</td>
+        <td class="restriction">  Remaining</td>
+        <td class="lastVisit">
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityGrid">
+    <h1>
+            Age Limitations
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="ageLimitationTable">
+      <tr>
+        <th class="deltaPlan">
+                Plan
+              </th>
+        <th class="description">
+                Procedure
+              </th>
+        <th class="restriction end">
+                Restriction
+              </th>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">&nbsp;
+              </td>
+        <td class="restriction">
+                Student To Age 25
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">&nbsp;
+              </td>
+        <td class="restriction">
+                Dependent To Age 19
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                Orthodontics
+              </td>
+        <td class="restriction">
+                Child To Age 19
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                Orthodontics
+              </td>
+        <td class="restriction">
+                Student To Age 25
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                Orthodontics
+              </td>
+        <td class="restriction">
+                Employee To Age 99
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                D1204
+              </td>
+        <td class="restriction">
+                To Age 19
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                D1510
+              </td>
+        <td class="restriction">
+                To Age 19
+              </td>
+      </tr>
+      <tr>
+        <td class="deltaPlan">&nbsp;
+              </td>
+        <td class="procedure">
+                D1351
+              </td>
+        <td class="restriction">
+                To Age 19
+              </td>
+      </tr>
+    </table>
+  </div>
+  <div class="eligibilityTable">
+    <h1>
+            Other
+          </h1>
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" id="otherDataTable">
+      <tr>
+        <th class="col1">
+                Employer
+              </th>
+        <td colspan="3">&nbsp;
+              </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                Name
+              </th>
+        <td colspan="3">
+                MY EMPLOYER
+              </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                Address
+              </th>
+        <td colspan="3">&nbsp;
+              </td>
+      </tr>
+      <tr>
+        <td colspan="4">&nbsp;
+              </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                  Payer
+                </th>
+        <td colspan="3">&nbsp;
+                </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                  Name
+                </th>
+        <td colspan="3">
+                  MetLife
+                </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                  Address
+                </th>
+        <td colspan="3">
+                  PO BOX 981282<br>
+                  EL PASO, TX&nbsp;&nbsp;79998
+                </td>
+      </tr>
+      <tr>
+        <th class="col1">
+                  Contact
+                </th>
+        <td class="col2">&nbsp;
+                </td>
+        <th class="col3">
+                  Telephone
+                </th>
+        <td class="col4">
+                  (888) 660-1046
+                </td>
+      </tr>
+    </table>
+  </div>
+  <div class="disclaimer"><strong>Disclaimer</strong>: This eligibility report is for informational purposes
+          only. The information is derived directly from the payer indicated on the report
+          and is not to be construed as a guarantee of payment.
+        </div>
+</div></body>
+</html>
