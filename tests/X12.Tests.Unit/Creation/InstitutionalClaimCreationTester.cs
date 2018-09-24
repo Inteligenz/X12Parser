@@ -1,32 +1,22 @@
 ﻿namespace X12.Tests.Unit.Creation
 {
     using System;
-    using System.Diagnostics;
-    using System.Linq;
     using System.IO;
+    using System.Linq;
+
+    using NUnit.Framework;
 
     using X12.Shared.Models;
     using X12.Specifications;
     using X12.Specifications.Enumerations;
     using X12.Specifications.Sets;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class InstitutionalClaimCreationTester
     {
         private const string InterchangeSample1 =
 @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
 IEA*0*000000031~";
-
-        private Interchange CreateSample1InterChange(DateTime date)
-        {
-            Interchange interchange = new Interchange(date, 31, false);
-            interchange.InterchangeSenderId = "9012345720000";
-            interchange.InterchangeReceiverId = "9088877320000";
-
-            return interchange;
-        }
 
         private const string FunctionGroupSample1 =
 @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
@@ -41,21 +31,12 @@ IEA*1*000000031~";
     SE*2*0034~
   GE*1*31~
 IEA*1*000000031~";
-
-        private Interchange CreateSample1WithFunctionGroup()
-        {
-            Interchange interchange = CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
-            FunctionGroup fg = interchange.AddFunctionGroup("HC", DateTime.Parse("2007-08-16 4:15PM"), 31);
-            fg.ApplicationSendersCode = "901234572000";
-            fg.ApplicationReceiversCode = "908887732000";
-            return interchange;
-        }
         
-        [TestMethod]
+        [Test]
         public void SerializeSegmentSet()
         {
-            SegmentSet set = new SegmentSet { Name = "4010" };
-            SegmentSpecification isa = new SegmentSpecification { SegmentId = "ISA" };
+            var set = new SegmentSet { Name = "4010" };
+            var isa = new SegmentSpecification { SegmentId = "ISA" };
             set.Segments.Add(isa);
             isa.Elements.Add(new ElementSpecification
             {
@@ -66,21 +47,21 @@ IEA*1*000000031~";
                 Type = ElementDataType.Identifier
             });
             string xml = set.Serialize();
-            Trace.Write(xml);
+
             SegmentSet copy = SegmentSet.Deserialize(xml);
             SegmentSpecification isaCopy = copy.Segments.FirstOrDefault(s => s.SegmentId == "ISA");
+
             Assert.IsNotNull(isaCopy);
             Assert.AreEqual("ISA", isaCopy.SegmentId);
             Assert.AreEqual("Author Info Qualifier", isaCopy.Elements[0].Name);
             Assert.AreEqual(2, isaCopy.Elements[0].MinLength);
-                
         }
 
-        [TestMethod]
+        [Test]
         public void InterchangeCreationTest()
         {
             DateTime date = DateTime.Parse("2002-08-16 11:44AM");
-            Interchange interchange = CreateSample1InterChange(date);
+            Interchange interchange = this.CreateSample1InterChange(date);
             
             string actualX12 = interchange.SerializeToX12(true);
             Assert.AreEqual(InterchangeSample1, actualX12);
@@ -91,51 +72,54 @@ IEA*1*000000031~";
             Assert.AreEqual(date, interchange.InterchangeDate);
         }
 
-        [TestMethod]
+        [Test]
         public void InterchangeSenderIdQualifierValidationTest()
         {
             try
             {
-                Interchange interchange = CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
+                Interchange interchange = this.CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
                 interchange.InterchangeSenderIdQualifier = "ER";
                 Assert.Fail("An ElementValidationException was expected.");
             }
-            catch (ElementValidationException exc) {
+            catch (ElementValidationException exc)
+            {
                 if (exc.ElementId != "ISA05")
-                    Assert.Fail(string.Format("Exception expected on ISA05, but got exception on {0} instead.", exc.ElementId));
+                {
+                    Assert.Fail("Exception expected on ISA05, but got exception on {0} instead.", exc.ElementId);
+                }
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FunctionGroupCreationTest()
         {
-            Interchange interchange = CreateSample1WithFunctionGroup();
+            Interchange interchange = this.CreateSample1WithFunctionGroup();
 
             Assert.AreEqual(FunctionGroupSample1, interchange.SerializeToX12(true));
         }
 
-        [TestMethod]
+        [Test]
         public void TransactionCreationTest()
         {
-            Interchange interchange = CreateSample1WithFunctionGroup();
+            Interchange interchange = this.CreateSample1WithFunctionGroup();
             interchange.FunctionGroups.First().AddTransaction("837", "0034");
 
             Assert.AreEqual(TransactionSample1, interchange.SerializeToX12(true));
         }
 
-        [TestMethod]
+        [Test]
         public void TransactionCreationWithSegmentFromStringTest()
         {
-            Interchange interchange = CreateSample1WithFunctionGroup();
+            Interchange interchange = this.CreateSample1WithFunctionGroup();
             Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
             Segment bht = transaction.AddSegment("BHT*0019*00*3920394930203*20070816*1615*CH");
             Assert.AreEqual("0019", bht.GetElement(1));
-            Trace.Write(interchange.SerializeToX12(true));
         }
-        [TestMethod]
+
+        [Test]
         public void TransactionCreationWithSegmentToStringTest()
         {
-            Interchange interchange = CreateSample1WithFunctionGroup();
+            Interchange interchange = this.CreateSample1WithFunctionGroup();
             Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
             Segment bht = transaction.AddSegment("BHT");
             bht.SetElement(1, "0019");
@@ -145,22 +129,21 @@ IEA*1*000000031~";
             bht.SetElement(5, "1615");
             bht.SetElement(6, "CH");
             Assert.AreEqual("BHT*0019*00*3920394930203*20070816*1615*CH", bht.SegmentString);
-            Trace.Write(interchange.SerializeToX12(false));
         }
 
-        [TestMethod]
+        [Test]
         public void ClaimCreationTest()
         {
             // arrange
-            Interchange interchange = CreateSample1WithFunctionGroup();
+            Interchange interchange = this.CreateSample1WithFunctionGroup();
             Transaction transaction = interchange.FunctionGroups.First().AddTransaction("837", "0034");
-            Segment bhtSegment = transaction.AddSegment("BHT*0019*00*3920394930203*20070816*1615*CH");
-            Segment refSegment = transaction.AddSegment("REF*87*004010X096A1");
+            transaction.AddSegment("BHT*0019*00*3920394930203*20070816*1615*CH");
+            transaction.AddSegment("REF*87*004010X096A1");
 
             Loop senderLoop = transaction.AddLoop("NM1*41*2*HOWDEE HOSPITAL*****XX*0123456789");
             senderLoop.AddSegment("PER*IC*BETTY RUBBLE*TE*9195551111");
 
-            Loop receiverLoop = transaction.AddLoop("NM1*40*2*BLUE CROSS BLUE SHIELD OF NC*****46*987654321");
+            transaction.AddLoop("NM1*40*2*BLUE CROSS BLUE SHIELD OF NC*****46*987654321");
 
             HierarchicalLoop providerLoop = transaction.AddHLoop("1", "20", true);
             providerLoop.AddSegment("PRV*BI*ZZ*203BA0200N");
@@ -213,7 +196,7 @@ IEA*1*000000031~";
             Assert.AreEqual(reader.ReadToEnd(), interchange.SerializeToX12(true));
         }
 
-        [TestMethod]
+        [Test]
         public void ElementValidationTwoArgsTester()
         {
             try
@@ -226,7 +209,7 @@ IEA*1*000000031~";
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ElementValidationThreeArgsTester()
         {
             try
@@ -239,7 +222,7 @@ IEA*1*000000031~";
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ElementValidationFiveArgsTester()
         {
             try
@@ -250,6 +233,26 @@ IEA*1*000000031~";
             {
                 Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~. Use a value without delimiters ~ * or :.\r\nParameter name: NM1", exc.Message);
             }
+        }
+
+        private Interchange CreateSample1InterChange(DateTime date)
+        {
+            Interchange interchange = new Interchange(date, 31, false)
+                                          {
+                                              InterchangeSenderId = "9012345720000",
+                                              InterchangeReceiverId = "9088877320000"
+                                          };
+
+            return interchange;
+        }
+
+        private Interchange CreateSample1WithFunctionGroup()
+        {
+            Interchange interchange = this.CreateSample1InterChange(DateTime.Parse("2002-08-16 11:44AM"));
+            FunctionGroup fg = interchange.AddFunctionGroup("HC", DateTime.Parse("2007-08-16 4:15PM"), 31);
+            fg.ApplicationSendersCode = "901234572000";
+            fg.ApplicationReceiversCode = "908887732000";
+            return interchange;
         }
     }
 }

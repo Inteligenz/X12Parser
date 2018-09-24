@@ -5,11 +5,11 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     
     using X12.Sql;
 
-    [TestClass]
+    [TestFixture]
     public class SqlReadOnlyTransactionRepoTester
     {
         private const string Dsn = "Data Source=localhost;Initial Catalog={0};Integrated Security=True";
@@ -18,8 +18,8 @@
         /// <summary>
         /// Performs test initialization (creates database, test directory, etc)
         /// </summary>
-        [TestInitialize]
-        public void TestInitialize()
+        [SetUp]
+        public void SetUp()
         {
             if (!System.IO.Directory.Exists(TestDirectory))
             {
@@ -55,8 +55,8 @@
         /// <summary>
         /// Performs test cleanup (deletes database, test directory, etc)
         /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
+        [TearDown]
+        public void TearDown()
         {
             string deleteDbQuery = "DROP DATABASE Test";
 
@@ -79,7 +79,7 @@
         /// Tests that entities can be read from the database
         /// </summary>
         /// <remarks>Being ignored due to database population issue</remarks>
-        [TestMethod, Ignore]
+        [Test, Ignore("Authentication and database SetUp/TearDown issues")]
         public void GetEntity()
         {
             var repo = new SqlReadOnlyTransactionRepository(string.Format(Dsn, "Test"), typeof(Guid));

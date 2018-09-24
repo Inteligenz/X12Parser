@@ -6,20 +6,20 @@
     using System.Xml;
     using System.Xml.Xsl;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using X12.Parsing;
     using X12.Shared.Models;
 
-    [TestClass]
+    [TestFixture]
     public class Flatten837Tester
     {
-        [TestMethod]
+        [Test]
         public void FlattenUsingXslt()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Tests.Unit.Parsing._SampleEdiFiles.INS._837P._4010.FromNth.837_DeIdent_01.dat");
 
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 
@@ -28,8 +28,6 @@
             var writer = new StringWriter();
 
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
-            System.Diagnostics.Trace.WriteLine(writer.GetStringBuilder().ToString());
-
         }
     }
 }

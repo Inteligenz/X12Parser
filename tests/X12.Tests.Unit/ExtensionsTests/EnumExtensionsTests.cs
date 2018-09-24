@@ -2,12 +2,12 @@
 {
     using System;
 
+    using NUnit.Framework;
+
     using X12.Shared.Attributes;
     using X12.Shared.Extensions;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class EnumExtensionsTests
     {
         private enum TestEDIField
@@ -20,17 +20,15 @@
 
             Value3
         }
-
-        #region EDIFieldValue Tests
-
-        [TestMethod]
+        
+        [Test]
         public void EDIFieldValue_WhenAttributeExists_ShouldReturnAttributeValue()
         {
             Assert.AreEqual("101", TestEDIField.Value1.EdiFieldValue());
             Assert.AreEqual("102", TestEDIField.Value2.EdiFieldValue());
         }
 
-        [TestMethod]
+        [Test]
         public void EDIFieldValue_WhenNoAttributeExists_ShouldThrowInvalidException()
         {
             // Arrange
@@ -49,20 +47,13 @@
             // Assert
             Assert.IsNotNull(exceptionThrown);
         }
-
-        #endregion
-
-        #region ToEnumFromEDIFieldValue Tests
-
-        [TestMethod]
+        
+        [Test]
         public void ToEnumFromEDIFieldValue_WhenValidEnumEDIFieldValues_ShouldReturnEnum()
         {
             Assert.AreEqual(TestEDIField.Value1 , "101".ToEnumFromEdiFieldValue<TestEDIField>());
             Assert.AreEqual(TestEDIField.Value2, "102".ToEnumFromEdiFieldValue<TestEDIField>());
 
         }
-
-        #endregion
-
     }
 }

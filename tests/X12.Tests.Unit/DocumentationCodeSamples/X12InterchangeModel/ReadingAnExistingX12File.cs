@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Text;
 
+    using NUnit.Framework;
+
     using X12.Parsing;
     using X12.Shared.Enumerations;
     using X12.Shared.Models;
@@ -14,9 +16,7 @@
     using X12.Shared.Models.TypedSegments;
     using X12.Transformations;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class ReadingAnExistingX12File
     {
         private string inquiry = @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*0*T*:~GS*HS*901234572000*908887732000*20070816*1615*31*X*00501X092A1~ST*270*1234~BHT*0022*13*10001234*20070816*1319*00~HL*1**20*1~NM1*PR*2*ABC BILLING SERVICE*****PI*842610001~HL*2*1*21*1~NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~HL*3*2*22*0~TRN*1*93175-012547*9877281234~NM1*IL*1*SMITH*ROBERT*MI****11122333301~DMG*D8*19430519~DTP*291*D8*20060501~EQ*30~SE*13*1234~GE*1*31~IEA*1*000000031~";
@@ -39,22 +39,21 @@
   GE*1*31~
 IEA*1*000000031~
 ";
-        [TestMethod]        
+
+        [Test]        
         public void OutlineIsSameAsOriginal()
         {
-            X12Parser parser = new X12Parser();
-            Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(inquiry))).First();
+            var parser = new X12Parser();
+            Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(this.inquiry))).First();
 
-            Interchange interchangeFromOutline = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(inquiryOutline))).First();
-            Debug.WriteLine(interchange.Serialize());
+            Interchange interchangeFromOutline = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(this.inquiryOutline))).First();
             Assert.AreEqual(interchange.SerializeToX12(false), interchangeFromOutline.SerializeToX12(false));
         }
-
-
-        [TestMethod]        
+        
+        [Test]        
         public void Read270Test()
         {
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(new MemoryStream(Encoding.ASCII.GetBytes(this.inquiry))).First();
 
             Assert.AreEqual("9088877320000  ", interchange.InterchangeReceiverId);
@@ -65,15 +64,13 @@ IEA*1*000000031~
             Assert.AreEqual("10001234", bht.GetElement(3));
 
             HierarchicalLoop subscriberLoop = transaction.FindHLoop("3");
-
             Loop subscriberNameLoop = subscriberLoop.Loops.First();
 
             Assert.AreEqual("SMITH", subscriberNameLoop.GetElement(3), "Subscriber last name not expected.");
             Assert.AreEqual("11122333301", subscriberNameLoop.GetElement(9), "Subscriber member id not expected.");
-
         }
 
-        [TestMethod]        
+        [Test]        
         public void Create270Test()
         {
             /*Good documentation sources for understanding X12
@@ -230,26 +227,11 @@ IEA*1*000000031~
             
             member.AddLoop("EQ*30");
 
-            Debug.WriteLine("HL3 Test:");
-            Debug.WriteLine(hL3Info.SerializeToX12(false));
-            Debug.WriteLine("HL*3*2*22*0~TRN*1*93175-012547*9877281234~NM1*IL*1*SMITH*ROBERT*MI****11122333301~DMG*D8*19430519~DTP*291*D8*20060501~EQ*30~");
             Assert.AreEqual("HL*3*2*22*0~TRN*1*93175-012547*9877281234~NM1*IL*1*SMITH*ROBERT*MI****11122333301~DMG*D8*19430519~DTP*291*D8*20060501~EQ*30~", hL3Info.SerializeToX12(false));
-            
-            Debug.WriteLine(string.Empty);
-            Debug.WriteLine("Overall Whole:");
-            Debug.WriteLine(message.SerializeToX12(false));
-            Debug.WriteLine(this.inquiry);
-            Debug.WriteLine("Outlined Result:");
-            Debug.WriteLine(message.SerializeToX12(true));
-            Debug.WriteLine("XML version of the above to help in understanding layout.");
-            Debug.WriteLine(message.Serialize());
-
-
             Assert.AreEqual(this.inquiry, message.SerializeToX12(false));
         }
-
-
-        [TestMethod]
+        
+        [Test]
         public void Transform270ToHtml()
         {
             // arrange

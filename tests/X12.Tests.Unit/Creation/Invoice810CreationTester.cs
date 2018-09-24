@@ -3,17 +3,17 @@
     using System;
     using System.Diagnostics;
 
+    using NUnit.Framework;
+
     using X12.Shared.Enumerations;
     using X12.Shared.Models;
     using X12.Shared.Models.TypedLoops;
     using X12.Shared.Models.TypedSegments;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class Invoice810CreationTester
     {
-        private string expectedX12 = @"ISA*00*          *00*          *30*943274043      *16*0069088189999  *990104*1532*U*00401*000000035*1*T*>~
+        private const string ExpectedX12 = @"ISA*00*          *00*          *30*943274043      *16*0069088189999  *990104*1532*U*00401*000000035*1*T*>~
   GS*IN*943274043TO*0069088189999*19990104*1532*1*X*004010~
     ST*810*0001~
       BIG*19981014*3662*****N6~
@@ -34,7 +34,7 @@
   GE*1*1~
 IEA*1*000000035~";
 
-        [TestMethod]
+        [Test]
         public void Create810_4010Version()
         {
             var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~','*','>')
@@ -117,7 +117,7 @@ IEA*1*000000035~";
 
             Trace.Write(x12);
 
-            Assert.AreEqual(expectedX12, x12);
+            Assert.AreEqual(ExpectedX12, x12);
         }
     }
 }

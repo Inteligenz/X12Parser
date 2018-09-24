@@ -1,12 +1,11 @@
 ﻿namespace X12.Hipaa.Tests.Unit.Claims
 {
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Xml;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using X12.Hipaa.Claims;
     using X12.Hipaa.Claims.Services;
@@ -14,7 +13,7 @@
     /// <summary>
     /// Collection of tests for Claim Documents
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class ClaimFormTester
     {
         private static readonly string TestDirectory = @"C:\Temp\Pdfs";
@@ -24,8 +23,8 @@
         /// <summary>
         /// Initializes the test being performed by ensuring the testing directory has been created and is empty.
         /// </summary>
-        [TestInitialize]
-        public void TestInitialize()
+        [SetUp]
+        public void SetUp()
         {
             // C:\Temp is a standard folder for Windows. However, we'll
             // want to verify that the \Pdfs folder exists and is empty
@@ -40,7 +39,7 @@
         /// <summary>
         /// Tests that X12 that's read in and transformed to a claim document has correct structure
         /// </summary>
-        [TestMethod]
+        [Test]
         public void X12ToClaimModelTest()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Hipaa.Tests.Unit.Claims.TestData.ProfessionalClaim1.txt");              
@@ -59,13 +58,12 @@
             Assert.AreEqual("87070", hcfaclaim.Field24_ServiceLines[1].ProcedureCode);
             Assert.AreEqual("99214", hcfaclaim.Field24_ServiceLines[2].ProcedureCode);
             Assert.AreEqual("86663", hcfaclaim.Field24_ServiceLines[3].ProcedureCode);
-            Trace.Write(hcfaclaim.Serialize());
         }
 
         /// <summary>
         /// Tests that 3 different documents can be properly transformed and combined into a Claim PDF document
         /// </summary>
-        [TestMethod]
+        [Test]
         public void X12ToHcfaPdfTest()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Hipaa.Tests.Unit.Claims.TestData.ProfessionalClaim1.txt");
@@ -81,19 +79,12 @@
             var fonetDocument = new XmlDocument();
             string fonetXml = service.TransformClaimDocumentToFoXml(document);
             fonetDocument.LoadXml(fonetXml);
-
-#if DEBUG
-            var driver = Fonet.FonetDriver.Make();
-
-            FileStream outputFile = new FileStream($"{TestDirectory}\\ProfessionalClaim1.pdf", FileMode.Create, FileAccess.Write);
-            driver.Render(fonetDocument, outputFile);            
-#endif
         }
 
         /// <summary>
         /// Tests that a UB04 document has correct PDF layout
         /// </summary>
-        [TestMethod]
+        [Test]
         public void X12ToUbPdfLayoutTest()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
@@ -108,19 +99,12 @@
             var fonetDocument = new XmlDocument();
             string fonetXml = service.TransformClaimDocumentToFoXml(document);
             fonetDocument.LoadXml(fonetXml);
-
-#if DEBUG
-            var driver = Fonet.FonetDriver.Make();
-
-            var outputFile = new FileStream($"{TestDirectory}\\InstitutionalClaimPlaceholders.pdf", FileMode.Create, FileAccess.Write);
-            driver.Render(fonetDocument, outputFile);
-#endif
         }
 
         /// <summary>
         /// Tests that an X12 837 document can be properly transformed to a claim, then a UB04 PDF document
         /// </summary>
-        [TestMethod]
+        [Test]
         public void X12ToUbPdfTest()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Hipaa.Tests.Unit.Claims.TestData.InstitutionalClaim5010.txt");
@@ -133,18 +117,10 @@
             ClaimDocument document = service.Transform837ToClaimDocument(stream);
 
             var ub04 = transformation.TransformClaimToUB04(document.Claims.First());
-            Trace.WriteLine(ub04.Serialize());
 
             var fonetDocument = new XmlDocument();
             string fonetXml = service.TransformClaimDocumentToFoXml(document);
             fonetDocument.LoadXml(fonetXml);
-
-#if DEBUG
-            var driver = Fonet.FonetDriver.Make();
-
-            FileStream outputFile = new FileStream($"{TestDirectory}\\InstitutionalClaim5010.pdf", FileMode.Create, FileAccess.Write);
-            driver.Render(fonetDocument, outputFile);
-#endif
         }
     }
 }

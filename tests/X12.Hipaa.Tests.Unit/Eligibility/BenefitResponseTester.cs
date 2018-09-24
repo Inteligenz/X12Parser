@@ -1,28 +1,26 @@
 ﻿namespace X12.Hipaa.Tests.Unit.Eligibility
 {
     using System;
-    using System.Diagnostics;
-    using System.Linq;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
+
+    using NUnit.Framework;
 
     using X12.Hipaa.Common;
     using X12.Hipaa.Eligibility;
     using X12.Hipaa.Eligibility.Services;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using X12.Hipaa.Enums;
 
-    [TestClass]
+    [TestFixture]
     public class BenefitResponseTester
     {
-        [TestMethod]
+        [Test]
         public void SerializationTest()
         {
-            EligibilityBenefitDocument document = new EligibilityBenefitDocument();
+            var document = new EligibilityBenefitDocument();
 
-            EligibilityBenefitResponse response = new EligibilityBenefitResponse
+            var response = new EligibilityBenefitResponse
             {
                 Source = new Entity
                 {
@@ -91,68 +89,49 @@
 
 
             string xml = document.Serialize();
-
-            System.Diagnostics.Trace.WriteLine(xml);
         }
 
-        private EligibilityBenefitDocument TransformToModel(string resourcePath)
-        {
-            var service = new EligibilityTransformationService();
-
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
-
-            return service.Transform271ToBenefitResponse(stream);
-
-        }
-
-        [TestMethod]
+        [Test]
         public void Transform4010ToModel1Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example1_DHHS.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example1_DHHS.txt");
         }
 
-        [TestMethod]
+        [Test]
         public void Transform4010ToModel2Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example2_TMHP.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example2_TMHP.txt");
         }
 
-        [TestMethod]
+        [Test]
         public void Transform4010ToModel3Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
         }
         
-        [TestMethod]
+        [Test]
         public void Transform5010ToModel1Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_2.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_2.txt");
         }
 
-        [TestMethod]
+        [Test]
         public void Transform5010ToModel2Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
         }
 
-        [TestMethod]
+        [Test]
         public void Transform5010ToModel3Test()
         {
-            var responses = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_3.txt");
-            Trace.Write(responses.Serialize());
+            var responses = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_1_3.txt");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationOnAll_WhenTransform5010ToModelTest_ShouldHaveAllRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationOnAll.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationOnAll.txt");
+            
             Assert.AreEqual(response.RequestValidations.Count, 2);
             Assert.AreEqual(response.EligibilityBenefitResponses[0].Dependent.RequestValidations.Count, 1);
             Assert.AreEqual(response.EligibilityBenefitResponses[0].Receiver.RequestValidations.Count, 2);
@@ -161,58 +140,72 @@
             Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForDependentBenefitInfo_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentBenefitInfo.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentBenefitInfo.txt");
+            
             Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForDependentName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentName.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForDependentName.txt");
+            
             Assert.AreEqual(response.EligibilityBenefitResponses[0].Dependent.RequestValidations.Count, 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForSource_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSource.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSource.txt");
+            
             Assert.AreEqual(response.RequestValidations.Count, 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForSourceName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSourceName.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSourceName.txt");
+            
             Assert.AreEqual(response.EligibilityBenefitResponses[0].Source.RequestValidations.Count, 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForSubscriberBenefitInfo_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberBenefitInfo.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberBenefitInfo.txt");
+            
             Assert.AreEqual(response.EligibilityBenefitResponses[0].BenefitInfos[0].RequestValidations.Count, 2);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidationForSubscriberName_WhenTransform5010ToModelTest_ShouldHaveRequestValidations()
         {
-            var response = TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberName.txt");
-            Trace.Write(response.Serialize());
-
+            var response = this.TransformToModel("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.ValidationForSubscriberName.txt");
+            
             Assert.AreEqual(response.EligibilityBenefitResponses[0].Subscriber.RequestValidations.Count, 2);
+        }
+
+        [Test]
+        public void Transform4010Model3ToHtmlTest()
+        {
+            string html = this.TransformModelToHtml("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
+        }
+
+        [Test]
+        public void Transform5010Model2ToHtmlTest()
+        {
+            string html = this.TransformModelToHtml("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
+        }
+
+        private EligibilityBenefitDocument TransformToModel(string resourcePath)
+        {
+            var service = new EligibilityTransformationService();
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
+
+            return service.Transform271ToBenefitResponse(stream);
         }
 
         private string TransformModelToHtml(string resourcePath)
@@ -226,7 +219,7 @@
 
             string html = service.TransformBenefitResponseToHtml(responses.EligibilityBenefitResponses.First());
 
-            return String.Format(
+            return string.Format(
             #region HTML Constant
 @"<html>
     <head>
@@ -354,22 +347,6 @@
 </html>"
             #endregion
                 , html);
-        }
-
-        [TestMethod]
-        public void Transform4010Model3ToHtmlTest()
-        {
-            string html = TransformModelToHtml("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._4010.Example3_CMS_HETS.txt");
-
-            Trace.Write(html);
-        }
-
-        [TestMethod]
-        public void Transform5010Model2ToHtmlTest()
-        {
-            string html = TransformModelToHtml("X12.Hipaa.Tests.Unit.Eligibility.TestData._271._5010.Example_3_2_2.txt");
-
-            Trace.Write(html);
         }
     }
 }

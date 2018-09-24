@@ -3,18 +3,18 @@
     using System;
     using System.IO;
 
+    using NUnit.Framework;
+
+    using X12.Shared.Enumerations;
     using X12.Shared.Models;
     using X12.Shared.Models.Typed;
     using X12.Shared.Models.TypedLoops;
     using X12.Shared.Models.TypedSegments;
-    using X12.Shared.Enumerations;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class ProfessionalClaimCreationTester
     {
-        [TestMethod]
+        [Test]
         public void Create837_5010Version()
         {
             var message = new Interchange(Convert.ToDateTime("01/01/03"), 000905, false)
@@ -50,15 +50,15 @@
             bhtSegment.BHT05_Time = "1023";
             bhtSegment.BHT06_TransactionTypeCode = "CH";
 
-            var submitterLoop = transaction.AddLoop(new TypedLoopNM1("41")); //submitter identifier code
+            var submitterLoop = transaction.AddLoop(new TypedLoopNM1("41"));
             submitterLoop.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
             submitterLoop.NM103_NameLastOrOrganizationName = "PREMIER BILLING SERVICE";
-            submitterLoop.NM104_NameFirst = "";
+            submitterLoop.NM104_NameFirst = string.Empty;
             submitterLoop.NM109_IdCode = "TGJ23";
             submitterLoop.NM108_IdCodeQualifier = "46";
 
             var perSegment = submitterLoop.AddSegment(new TypedSegmentPER());
-            perSegment.PER01_ContactFunctionCode = "IC"; //information contact function code
+            perSegment.PER01_ContactFunctionCode = "IC";
             perSegment.PER02_Name = "JERRY";
             perSegment.PER03_CommunicationNumberQualifier = CommunicationNumberQualifer.Telephone;
             perSegment.PER04_CommunicationNumber = "3055552222";
@@ -68,12 +68,12 @@
             var submitterLoop2 = transaction.AddLoop(new TypedLoopNM1("40"));
             submitterLoop2.NM102_EntityTypeQualifier = EntityTypeQualifier.NonPersonEntity;
             submitterLoop2.NM103_NameLastOrOrganizationName = "KEY INSURANCE COMPANY";
-            submitterLoop2.NM104_NameFirst = "";
+            submitterLoop2.NM104_NameFirst = string.Empty;
             submitterLoop2.NM109_IdCode = "66783JJT";
             submitterLoop2.NM108_IdCodeQualifier = "46";
 
-            var provider2000AHLoop = transaction.AddHLoop("1", "20", true); //*********HL 1 ******
-            var prvSegment = provider2000AHLoop.AddSegment(new TypedSegmentPRV()); //Specialty Segment
+            var provider2000AHLoop = transaction.AddHLoop("1", "20", true); 
+            var prvSegment = provider2000AHLoop.AddSegment(new TypedSegmentPRV()); 
             prvSegment.PRV01_ProviderCode = "BI";
             prvSegment.PRV02_ReferenceIdQualifier = "PXC";
             prvSegment.PRV03_ProviderTaxonomyCode = "203BF0100Y";
@@ -103,11 +103,11 @@
             provider2010AC_N3Segment2.N301_AddressInformation = "2345 OCEAN BLVD";
 
             var provider2010AC_N4Segment2 = provider2010ACLoop2.AddSegment(new TypedSegmentN4());
-            provider2010AC_N4Segment2.N401_CityName = "MAIMI";  // MISSPELLED IN COMPARETO DOC
+            provider2010AC_N4Segment2.N401_CityName = "MAIMI";
             provider2010AC_N4Segment2.N402_StateOrProvinceCode = "FL";
             provider2010AC_N4Segment2.N403_PostalCode = "33111";
 
-            var subscriber2000BHLoop = provider2000AHLoop.AddHLoop("2", "22", true);  // **** HL 2  ******
+            var subscriber2000BHLoop = provider2000AHLoop.AddHLoop("2", "22", true); 
 
             var segmentSBR = subscriber2000BHLoop.AddSegment(new TypedSegmentSBR());
             segmentSBR.SBR01_PayerResponsibilitySequenceNumberCode = "P";
@@ -136,7 +136,7 @@
             refSegment2.REF01_ReferenceIdQualifier = "G2";
             refSegment2.REF02_ReferenceId = "KA6663";
 
-            var HL3Loop = subscriber2000BHLoop.AddHLoop("3", "23", false);   // **** HL 3  ******
+            var HL3Loop = subscriber2000BHLoop.AddHLoop("3", "23", false);
 
             var HL3PATSegment = HL3Loop.AddSegment(new TypedSegmentPAT());
             HL3PATSegment.PAT01_IndividualRelationshipCode = "19";
@@ -145,9 +145,6 @@
             HL3NM1Segment.NM102_EntityTypeQualifier = EntityTypeQualifier.Person;
             HL3NM1Segment.NM104_NameFirst = "TED";
             HL3NM1Segment.NM103_NameLastOrOrganizationName = "SMITH";
-
-
-            // add N3 and N4 segments under the above NM1 loop
 
             var HL3NM1_N3_Segment = HL3NM1Segment.AddSegment(new TypedSegmentN3());
             HL3NM1_N3_Segment.N301_AddressInformation = "236 N MAIN ST";
@@ -246,9 +243,6 @@
             dtpSegment4.DTP03_Date = new DateTimePeriod(theDate4, DateTime.ParseExact("20061025", "yyyyMMdd", null));
             var x12 = message.SerializeToX12(true);
             Assert.AreEqual(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd(), message.SerializeToX12(true));
-
-            //Trace.Write(new StreamReader(Extensions.GetEdi("INS._837P._5010.Example1_HealthInsurance.txt")).ReadToEnd());
-            //Trace.Write(x12);
         }
     }
 }

@@ -4,17 +4,17 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using X12.Specifications.Finders;
     using X12.Sql;
 
-    [TestClass]
+    [TestFixture]
     public class SaveRevisionTester
     {
         private static readonly string Dsn = "Data Source=localhost;Initial Catalog=Test;Integrated Security=True";
 
-        [TestMethod, Ignore]
+        [Test, Ignore("Database tests have issues with authentication, SetUp, and TearDown")]
         public void SaveRevisionTest()
         {
             var repo = new SqlTransactionRepository(
@@ -42,7 +42,7 @@
             Assert.IsTrue(revId > 0);
         }
 
-        [TestMethod]
+        [Test, Ignore("Database tests have issues with authentication, SetUp, and TearDown")]
         public void SaveRevisionGuidTest()
         {
             var repo = new SqlTransactionRepository(

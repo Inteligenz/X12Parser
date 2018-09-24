@@ -6,15 +6,15 @@
     using System.Xml;
     using System.Xml.Xsl;
 
+    using NUnit.Framework;
+
     using X12.Parsing;
     using X12.Shared.Models;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
+    [TestFixture]
     public class Flatten820Tester
     {
-        [TestMethod]
+        [Test]
         public void FlattenUsingXmlDocument()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
@@ -36,7 +36,8 @@
                 {
                     foreach (XmlElement remit in entity.SelectNodes("Loop[@LoopId='RMR']"))
                     {
-                        writer.WriteLine("{0},{1},{2},{3},{4}",
+                        writer.WriteLine(
+                            "{0},{1},{2},{3},{4}",
                             transaction.SelectSingleNode("ST/ST02").InnerText,
                             transaction.SelectSingleNode("DTM[DTM01='097']/DTM02").InnerText,
                             transaction.SelectSingleNode("Loop[@LoopId='N1']/N1[N101='41']/N102").InnerText,
@@ -48,15 +49,14 @@
             
             writer.Close();
             fstream.Close();
-            
         }
 
-        [TestMethod]
+        [Test]
         public void FlattenUsingXslt()
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
 
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 
@@ -65,8 +65,6 @@
             var writer = new StringWriter();
 
             transform.Transform(XmlReader.Create(new StringReader(xml)), new XsltArgumentList(), writer);
-            System.Diagnostics.Trace.WriteLine(writer.GetStringBuilder().ToString());
-
         }
     }
 }

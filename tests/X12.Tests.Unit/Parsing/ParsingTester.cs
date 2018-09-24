@@ -1,15 +1,13 @@
 ﻿namespace X12.Tests.Unit.Parsing
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Xml;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    
+    using NUnit.Framework;
 
     using X12.Parsing;
     using X12.Shared.Models;
@@ -19,23 +17,18 @@
     /// <summary>
     /// Summary description for ParsingTester
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class ParsingTester
     {
         /// <summary>
-        /// Gets or sets the test context which provides information about and
-        /// functionality for the current test run.
-        /// </summary>
-        public TestContext TestContext { get; set; }
-
-        /// <summary>
         /// Tests that the X12Parser can parse an EDI file and transform it to XML
         /// </summary>
-        [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
-        public void ParseToXml()
+        /// <param name="resourcePath">File path for a sample EDI file to test</param>
+        [Test]
+        public void ParseToXml(
+            [ValueSource(typeof(ResourcePathManager), nameof(ResourcePathManager.ResourcePaths))]
+            string resourcePath)
         {
-            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Stream stream = GetEdi(resourcePath);
 
             var parser = new X12Parser();
@@ -44,14 +37,14 @@
             var doc = new XmlDocument();
             doc.LoadXml(xml);
             int index = 1;
-            string query = this.GetXPathQuery(index);
+            string query = this.GetXPathQuery(resourcePath, index);
             while (!string.IsNullOrWhiteSpace(query))
             {
-                string expected = this.GetExpectedValue(index);
+                string expected = this.GetExpectedValue(resourcePath, index);
                 XmlNode node = doc.SelectSingleNode(query);
                 Assert.IsNotNull(node, "Query '{0}' not found in {1}.", query, resourcePath);
                 Assert.AreEqual(expected, node.InnerText, "Value {0} not expected from query {1} in {2}.", node.InnerText, query, resourcePath);
-                query = this.GetXPathQuery(++index);
+                query = this.GetXPathQuery(resourcePath, ++index);
             }
 
             if (resourcePath.Contains("_837D"))
@@ -74,11 +67,12 @@
         /// <summary>
         /// Tests that X12Parser can parse an EDI and write it back to and EDI
         /// </summary>
-        [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
-        public void ParseAndUnparse()
+        /// <param name="resourcePath">File path for a sample EDI file to test</param>
+        [Test]
+        public void ParseAndUnparse(
+            [ValueSource(typeof(ResourcePathManager), nameof(ResourcePathManager))]
+            string resourcePath)
         {
-            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Stream stream = GetEdi(resourcePath);
             string orignalX12 = new StreamReader(stream).ReadToEnd();
             stream = GetEdi(resourcePath);
@@ -99,11 +93,12 @@
         /// Tests and X12Parser can parse and EDI file, transform it to XMl and back to
         /// X12, and then write it back out
         /// </summary>
-        [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
-        public void ParseAndTransformToX12()
+        /// <param name="resourcePath">File path for a sample EDI file to test</param>
+        [Test]
+        public void ParseAndTransformToX12(
+            [ValueSource(typeof(ResourcePathManager), nameof(ResourcePathManager))]
+            string resourcePath)
         {
-            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             if (!resourcePath.Contains("_0x1D"))
             {
                 // arrange
@@ -129,8 +124,11 @@
         /// Tests that X12Parser can parse an EDI file, a change can be made to the model,
         /// and it can be transformed back to X12 with the modification
         /// </summary>
-        [TestMethod]
-        public void ParseModifyAndTransformBackToX12()
+        /// <param name="resourcePath">File path for a sample EDI file to test</param>
+        [Test]
+        public void ParseModifyAndTransformBackToX12(
+            [ValueSource(typeof(ResourcePathManager), nameof(ResourcePathManager))]
+            string resourcePath)
         {
             var stream = GetEdi("INS._270._4010.Example1_DHHS.txt");
 
@@ -162,12 +160,13 @@
         /// <summary>
         /// Tests that X12Parser can parse an EDI file and transform it to HTML
         /// </summary>
-        [DeploymentItem("tests\\X12.Tests.Unit\\Parsing\\_SampleEdiFiles\\SampleEdiFileInventory.xml"), DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\SampleEdiFileInventory.xml", "EdiFile", DataAccessMethod.Sequential)]
-        [TestMethod]
-        public void ParseToHtml()
+        /// <param name="resourcePath">File path for a sample EDI file to test</param>
+        [Test]
+        public void ParseToHtml(
+            [ValueSource(typeof(ResourcePathManager), nameof(ResourcePathManager))]
+            string resourcePath)
         {
             // arrange
-            string resourcePath = Convert.ToString(this.TestContext.DataRow["ResourcePath"]);
             Stream stream = GetEdi(resourcePath);
             if (!resourcePath.Contains("MultipleInterchanges"))
             {
@@ -181,7 +180,7 @@
         /// <summary>
         /// Tests that X12Parser can parse a unicode encoded file
         /// </summary>
-        [TestMethod]
+        [Test]
         public void ParseUnicodeFile()
         {
             // arrange
@@ -202,30 +201,24 @@
         /// </summary>
         /// <param name="sender">Object calling handler</param>
         /// <param name="args">Additional arguments, such as error message</param>
-        /// <exception cref="AssertFailedException">Thrown if method is executed</exception>
+        /// <exception cref="AssertionException">Thrown if method is executed</exception>
         private void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
         {
-            throw new AssertFailedException($"ParserWarning executed by {sender}: '{args.Message}'");
+            throw new AssertionException($"ParserWarning executed by {sender}: '{args.Message}'");
         }
 
-        private string GetXPathQuery(int index)
+        private string GetXPathQuery(string resourcePath, int index)
         {
-            if (this.TestContext.DataRow.Table.Columns.Contains($"Query{index}"))
-            {
-                return Convert.ToString(this.TestContext.DataRow[$"Query{index}"]);
-            }
-
-            return null;
+            return ResourcePathManager.QueryMap[resourcePath].Any(q => q.Key.Contains($"Query{index}"))
+                       ? ResourcePathManager.QueryMap[resourcePath][$"Query{index}"]
+                       : null;
         }
 
-        private string GetExpectedValue(int index)
+        private string GetExpectedValue(string resourcePath, int index)
         {
-            if (this.TestContext.DataRow.Table.Columns.Contains($"Expected{index}"))
-            {
-                return Convert.ToString(this.TestContext.DataRow[$"Expected{index}"]);
-            }
-
-            return null;
+            return ResourcePathManager.ExpectedValuesMap[resourcePath].Any(e => e.Key.Contains($"Expected{index}"))
+                       ? ResourcePathManager.ExpectedValuesMap[resourcePath][$"Expected{index}"]
+                       : null;
         }
     }
 }
