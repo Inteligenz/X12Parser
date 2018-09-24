@@ -1,18 +1,20 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>X12.Validation</id>
+    <version>5.0.0</version>
+    <title>X12.Validation</title>
+    <authors>Brad Van Fleet</authors>
+    <owners>Brad Van Fleet</owners>
     <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes></releaseNotes>
-    <copyright>$copyright$</copyright>
+    <description>Open Source .NET C# X12 Parser</description>
+    <releaseNotes>* Documented all externally available code
+* Segregated Validation library from original "OopFactory.X12"
+* Minor code refactoring and bug fixes</releaseNotes>
+    <copyright>Copyright © Brad Van Fleet 2018</copyright>
     <tags>X12 Parser</tags>
     <dependencies>
       <dependency id="X12.Parsing" version="$version$" />
