@@ -4,4 +4,10 @@ mono:
   - latest
 env:
   - PACKAGE_VERSION="5.0.*"
+install:
+  - nuget restore X12.sln
+  - nuget install NUnit.Runners -Version 3.10.1 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release X12.sln
+  - mono ./testrunner/NUnit.Runners.3.10.1/tools/nunit-console.exe ./X12.Tests.Unit/bin/Release/X12.Tests.Unit.dll
   

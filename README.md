@@ -4,6 +4,8 @@
 
 --------
 
+![](https://travis-ci.com/bvanfleet/X12.NET.svg?branch=master)
+
 X12.NET
 -------
 
