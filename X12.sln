@@ -262,7 +262,4 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82406A0F-880D-4913-8252-9A64EC0C4A3B}
 	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = X12.vsmdi
-	EndGlobalSection
 EndGlobal
