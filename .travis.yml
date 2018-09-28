@@ -9,5 +9,5 @@ install:
   - nuget install NUnit.Runners -Version 3.9.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release X12.sln
-  - mono ./testrunner/NUnit.Runners.3.9.0/tools/nunit-console.exe ./tests/X12.Tests.Unit/bin/Release/X12.Tests.Unit.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit-console.exe ./tests/X12.Tests.Unit/bin/Release/X12.Tests.Unit.dll
   
