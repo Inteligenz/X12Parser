@@ -4,7 +4,7 @@
 
 --------
 
-![](https://travis-ci.com/bvanfleet/X12.NET.svg?branch=master)
+[![](https://travis-ci.com/bvanfleet/X12.NET.svg?branch=master)](https://travis-ci.org/bvanfleet/X12.NET)
 
 X12.NET
 -------
