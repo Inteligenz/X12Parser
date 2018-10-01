@@ -20,13 +20,13 @@ IEA*0*000000031~";
 
         private const string FunctionGroupSample1 =
 @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
-  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
   GE*0*31~
 IEA*1*000000031~";
 
         private const string TransactionSample1 =
 @"ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
-  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
     ST*837*0034~
     SE*2*0034~
   GE*1*31~
@@ -205,7 +205,7 @@ IEA*1*000000031~";
             }
             catch (ElementValidationException exc)
             {
-                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator.\r\nParameter name: NM1", exc.Message);
+                Assert.AreEqual($"Element NM1 cannot contain the value 'AB~CD' with the segment terminator.\nParameter name: NM1", exc.Message);
             }
         }
 
@@ -218,7 +218,7 @@ IEA*1*000000031~";
             }
             catch (ElementValidationException exc)
             {
-                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~.\r\nParameter name: NM1", exc.Message);
+                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~.\nParameter name: NM1", exc.Message);
             }
         }
 
@@ -231,7 +231,7 @@ IEA*1*000000031~";
             }
             catch (ElementValidationException exc)
             {
-                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~. Use a value without delimiters ~ * or :.\r\nParameter name: NM1", exc.Message);
+                Assert.AreEqual("Element NM1 cannot contain the value 'AB~CD' with the segment terminator ~. Use a value without delimiters ~ * or :.\nParameter name: NM1", exc.Message);
             }
         }
 
