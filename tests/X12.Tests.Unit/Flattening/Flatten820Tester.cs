@@ -19,15 +19,15 @@
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("X12.Tests.Unit.Parsing._SampleEdiFiles.ORD._820.Example1_MortgageBankers.txt");
 
-            X12Parser parser = new X12Parser();
+            var parser = new X12Parser();
             Interchange interchange = parser.ParseMultiple(stream).First();
             string xml = interchange.Serialize();
 
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            FileStream fstream = new FileStream("ORD._820.Example1.txt", FileMode.Create);
-            StreamWriter writer = new StreamWriter(fstream);
+            var fstream = new FileStream("ORD._820.Example1.txt", FileMode.Create);
+            var writer = new StreamWriter(fstream);
 
             writer.WriteLine("Transaction,Creation Date,Submitter Name, Borrower Last Name, Remittance ID");
             foreach (XmlElement transaction in doc.SelectNodes("/Interchange/FunctionGroup/Transaction"))

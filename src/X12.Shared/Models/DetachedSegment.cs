@@ -145,7 +145,7 @@
 
         public void SetDate8Element(int elementNumber, DateTime? value)
         {
-            this.SetElement(elementNumber, string.Format("{0:yyyyMMdd}", value));
+            this.SetElement(elementNumber, $"{value:yyyyMMdd}");
         }
 
         internal virtual void Initialize(string segment)

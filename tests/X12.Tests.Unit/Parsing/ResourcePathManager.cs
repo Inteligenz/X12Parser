@@ -10,7 +10,7 @@
     /// </summary>
     public static class ResourcePathManager
     {
-        private static readonly string sampleFilesIndex = @"tests\X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml";
+        private static readonly string SampleFilesIndex = @"SampleEdiFileInventory.xml";
 
         /// <summary>
         /// Initializes static members of the <see cref="ResourcePathManager"/> class
@@ -21,7 +21,7 @@
             QueryMap = new Dictionary<string, IDictionary<string, string>>();
             ExpectedValuesMap = new Dictionary<string, IDictionary<string, string>>();
 
-            Stream stream = File.OpenRead(sampleFilesIndex);
+            Stream stream = Extensions.GetEdi(SampleFilesIndex);
             using (XmlReader reader = XmlReader.Create(stream, new XmlReaderSettings()))
             {
                 var document = new XPathDocument(reader);
