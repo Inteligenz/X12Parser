@@ -74,10 +74,11 @@
       <SourceUrl></SourceUrl>
       <ResourcePath>INS._270._5010.Example1_IG.txt</ResourcePath>
     </EdiFile>
-    <EdiFile>
+    <!-- Commented out due to line ending not testable on Linux environments
+	<EdiFile>
       <SourceUrl></SourceUrl>
       <ResourcePath>INS._270._5010.Example1_IG_0x1D.txt</ResourcePath>
-    </EdiFile>
+    </EdiFile> -->
     <EdiFile>
       <SourceUrl></SourceUrl>
       <ResourcePath>INS._270._5010.From_georgiosd.txt</ResourcePath>
