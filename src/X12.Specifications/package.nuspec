@@ -18,5 +18,10 @@
     </releaseNotes>
     <copyright>Copyright © Brad Van Fleet 2018</copyright>
     <tags>X12 Parser</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net461" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="net461" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="net461" />
+    </frameworkAssemblies>
   </metadata>
 </package>
