@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57B7B5ED-5C3D-464D-B67C-7623BBBA8AC0}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
+		deploy.sh = deploy.sh
 		Local.testsettings = Local.testsettings
 		README.md = README.md
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings

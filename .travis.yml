@@ -10,3 +10,9 @@ install:
 script:
   - xbuild /p:Configuration=Release X12.sln
   - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./tests/X12.Tests.Unit/bin/Release/X12.Tests.Unit.dll
+deploy:
+  skip-cleanup: true
+  provider: script
+  script: chmod +x ./deploy.sh && ./deploy.sh $NUGET_API_KEY $NUGET_SOURCE
+  on:
+    branch: master
