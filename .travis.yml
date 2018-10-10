@@ -2,8 +2,6 @@ language: csharp
 solution: X12.sln
 mono:
   - latest
-env:
-  - PACKAGE_VERSION="5.0.*"
 install:
   - nuget restore X12.sln
   - nuget install NUnit.Runners -Version 3.9.0 -OutputDirectory testrunner
@@ -13,6 +11,6 @@ script:
 deploy:
   skip-cleanup: true
   provider: script
-  script: chmod +x ./deploy.sh && ./deploy.sh $NUGET_API_KEY $NUGET_SOURCE $PACKAGE_VERSION
+  script: chmod +x ./deploy.sh && ./deploy.sh $NUGET_API_KEY $NUGET_SOURCE $TRAVIS_BUILD_NUMBER
   on:
     branch: master

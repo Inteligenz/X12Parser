@@ -1,6 +1,6 @@
 ApiKey=$1
 Source=$2
-Version=$3
+Version="5.0.${3}"
 
 # List all packages with nuspecs to be packed and pushed
 nuget pack ./src/X12.Hipaa/package.nuspec -Version $Version -Verbosity detailed
