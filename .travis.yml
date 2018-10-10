@@ -13,6 +13,6 @@ script:
 deploy:
   skip-cleanup: true
   provider: script
-  script: chmod +x ./deploy.sh && ./deploy.sh $NUGET_API_KEY $NUGET_SOURCE
+  script: chmod +x ./deploy.sh && ./deploy.sh $NUGET_API_KEY $NUGET_SOURCE $PACKAGE_VERSION
   on:
     branch: master
