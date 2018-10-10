@@ -15,6 +15,12 @@ nuget pack ./src/X12.Validation/package.nuspec -Version $Version -Verbosity deta
 nuget pack ./src/X12.Sql/package.nuspec -Version $Version -Verbosity detailed
 nuget pack ./src/X12.Hipaa/package.nuspec -Version $Version -Verbosity detailed
 
-# Publish the packages
+# Publish the packages - breaking list down to sub-packages due to a deployment issue
 nuget setApiKey $ApiKey -Source $Source -Verbosity detailed
-nuget push X12.*.nupkg -Source $Source
+nuget push X12.Hipaa.*.nupkg -Source $Source
+nuget push X12.Parsing.*.nupkg -Source $Source
+nuget push X12.Shared.*.nupkg -Source $Source
+nuget push X12.Specifications.*.nupkg -Source $Source
+nuget push X12.Sql.*.nupkg -Source $Source
+nuget push X12.Transformations.*.nupkg -Source $Source
+nuget push X12.Validation.*.nupkg -Source $Source
