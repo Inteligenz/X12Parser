@@ -9,9 +9,17 @@
 
     using X12.Parsing;
     using X12.Shared.Models;
+    using X12.X12Parser.Properties;
 
+    /// <summary>
+    /// Defines the application's primary driver
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Main entry point for the application
+        /// </summary>
+        /// <param name="args">Additional command line arguments to parse</param>
         public static void Main(string[] args)
         {
             int maxBatchSize = 10 * 1024 * 1024;
@@ -23,12 +31,19 @@
             bool throwException = Convert.ToBoolean(ConfigurationManager.AppSettings["ThrowExceptionOnSyntaxErrors"]);
             
             string x12Filename = args[0];
+            if (!File.Exists(x12Filename))
+            {
+                Console.WriteLine(Resources.FileNotFoundError, x12Filename);
+                return;
+            }
+
             string outputFilename = args.Length > 1 ? args[1] : x12Filename + ".xml";
 
             var parser = new X12Parser(throwException);
-            parser.ParserWarning += Parser_ParserWarning;
+            parser.ParserWarning += HandleParserWarning;
             
             var header = new byte[6];
+            
             using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
             {
                 // peak at first 6 characters to determine if this is a unicode file
@@ -42,12 +57,31 @@
             {
                 using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
                 {
-                    IList<Interchange> interchanges = parser.ParseMultiple(fs, encoding);
+                    IList<Interchange> interchanges;
+
+                    try
+                    {
+                        interchanges = parser.ParseMultiple(fs, encoding);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(Resources.ParsingError, exception.Message);
+                        return;
+                    }
+                    
                     if (interchanges.Count >= 1)
                     {
                         using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                         {
-                            interchanges.First().Serialize(outputFs);
+                            try
+                            {
+                                interchanges.First().Serialize(outputFs);
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(Resources.SerializationError, exception.Message);
+                                return;
+                            }
                         }
                     }
 
@@ -58,7 +92,15 @@
                             outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i + 1}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
-                                interchanges[i].Serialize(outputFs);
+                                try
+                                {
+                                    interchanges[i].Serialize(outputFs);
+                                }
+                                catch (Exception exception)
+                                {
+                                    Console.WriteLine(Resources.SerializationError, exception.Message);
+                                    return;
+                                }
                             }
                         }
                     }
@@ -86,7 +128,15 @@
                             outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
-                                parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
+                                try
+                                {
+                                    parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
+                                }
+                                catch (Exception exception)
+                                {
+                                    Console.WriteLine(Resources.ParsingError, exception.Message);
+                                    return;
+                                }
                             }
 
                             currentTransactions = nextTransaction;
@@ -98,13 +148,20 @@
                     outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
                     using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                     {
-                        parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
+                        try
+                        {
+                            parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(Resources.ParsingError, exception.Message);
+                        }
                     }
                 }
             }
         }
 
-        static void Parser_ParserWarning(object sender, X12ParserWarningEventArgs args)
+        private static void HandleParserWarning(object sender, X12ParserWarningEventArgs args)
         {
             Console.WriteLine(args.Message);
         }

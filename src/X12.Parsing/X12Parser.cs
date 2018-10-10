@@ -105,6 +105,7 @@
         /// </summary>
         /// <param name="stream">Stream pointing to source X12 data</param>
         /// <returns>First interchange parsed from X12</returns>
+        /// <exception cref="ApplicationException">Thrown if there are more than 1 interchanges in the stream</exception>
         [Obsolete("Use ParseMultiple instead.  Parse will only return the first interchange in the file.")]
         public Interchange Parse(Stream stream)
         {
@@ -122,6 +123,7 @@
         /// </summary>
         /// <param name="x12">X12 data to be parsed</param>
         /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
+        /// <exception cref="InvalidOperationException">Thrown on any missing segments or parent IDs</exception>
         public List<Interchange> ParseMultiple(string x12)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(x12);
@@ -136,6 +138,7 @@
         /// </summary>
         /// <param name="stream">Stream pointing to source X12 data</param>
         /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
+        /// <exception cref="InvalidOperationException">Thrown on any missing segments or parent IDs</exception>
         public List<Interchange> ParseMultiple(Stream stream)
         {
             return this.ParseMultiple(stream, Encoding.UTF8);
@@ -147,6 +150,7 @@
         /// <param name="stream">Stream pointing to source X12 data</param>
         /// <param name="encoding">Stream encoding for reading data</param>
         /// <returns><see cref="Interchange"/> collection parsed from X12</returns>
+        /// <exception cref="InvalidOperationException">Thrown on any missing segments or parent IDs</exception>
         public List<Interchange> ParseMultiple(Stream stream, Encoding encoding)
         {
             var envelopes = new List<Interchange>();
