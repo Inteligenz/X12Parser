@@ -52,5 +52,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\X12-XML-to-X12.xslt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="package.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

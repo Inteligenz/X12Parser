@@ -1,25 +1,21 @@
 ﻿<?xml version="1.0"?>
 <package>
   <metadata>
-    <id>X12.Shared</id>
+    <id>X12.Transformations</id>
     <version>$version$</version>
-    <title>X12.Shared</title>
+    <title>X12.Transformations</title>
     <authors>Bradley Van Fleet</authors>
     <owners>Bradley Van Fleet</owners>
     <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Open source models for X12 files which can conform to given specifications</description>
+    <description>Open source transformation services for X12 files</description>
     <releaseNotes>
       * Segregated package from other X12 assemblies
       * Added documentation to several code files
-      * Split several files with nested types and enumerations
     </releaseNotes>
-    <copyright>Copyright © Brad Van Fleet 2018</copyright>
+    <copyright>$copyright$</copyright>
     <tags>X12 Parser</tags>
-    <dependencies>
-      <dependency id="X12.Specifications" version="$version$" />
-    </dependencies>
   </metadata>
 </package>
