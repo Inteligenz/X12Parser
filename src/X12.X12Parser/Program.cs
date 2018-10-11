@@ -33,7 +33,7 @@
             string x12Filename = args[0];
             if (!File.Exists(x12Filename))
             {
-                Console.WriteLine(Resources.FileNotFoundError, x12Filename);
+                Console.WriteLine(Resources.FileNotFoundError, DateTime.Now.ToLongTimeString(), x12Filename);
                 return;
             }
 
@@ -41,7 +41,16 @@
 
             var parser = new X12Parser(throwException);
             parser.ParserWarning += HandleParserWarning;
-            
+
+            Console.WriteLine(Resources.ParserInitializingMessage);
+            Console.WriteLine(Resources.ConfigurationUnderlineString);
+            Console.WriteLine($"Max Batch Size: {maxBatchSize}");
+            Console.WriteLine($"Throw Exception on Syntax Error: {throwException}");
+            Console.WriteLine($"Input Filename: '{x12Filename}'");
+            Console.WriteLine($"Output Filename: '{outputFilename}'");
+            Console.WriteLine();
+            Console.WriteLine(Resources.ConfigurationUnderlineString);
+
             var header = new byte[6];
             
             using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
@@ -58,6 +67,7 @@
                 using (var fs = new FileStream(x12Filename, FileMode.Open, FileAccess.Read))
                 {
                     IList<Interchange> interchanges;
+                    Console.WriteLine(Resources.ParserParsingFileMessage);
 
                     try
                     {
@@ -65,7 +75,7 @@
                     }
                     catch (Exception exception)
                     {
-                        Console.WriteLine(Resources.ParsingError, exception.Message);
+                        Console.WriteLine(Resources.ParsingError, DateTime.Now.ToLongTimeString(), exception.Message);
                         return;
                     }
                     
@@ -73,13 +83,15 @@
                     {
                         using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                         {
+                            Console.WriteLine(Resources.ParserSerializingFileMessage);
+
                             try
                             {
                                 interchanges.First().Serialize(outputFs);
                             }
                             catch (Exception exception)
                             {
-                                Console.WriteLine(Resources.SerializationError, exception.Message);
+                                Console.WriteLine(Resources.SerializationError, DateTime.Now.ToLongTimeString(), exception.Message);
                                 return;
                             }
                         }
@@ -92,13 +104,15 @@
                             outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i + 1}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
+                                Console.WriteLine(Resources.ParserSerializingFileMessage);
+
                                 try
                                 {
                                     interchanges[i].Serialize(outputFs);
                                 }
                                 catch (Exception exception)
                                 {
-                                    Console.WriteLine(Resources.SerializationError, exception.Message);
+                                    Console.WriteLine(Resources.SerializationError, DateTime.Now.ToLongTimeString(), exception.Message);
                                     return;
                                 }
                             }
@@ -112,9 +126,12 @@
                 {
                     // Break up output files by batch size
                     var reader = new X12StreamReader(fs, encoding);
+                    Console.WriteLine(Resources.ParserReadingTransactionsMessage);
+
                     X12FlatTransaction currentTransactions = reader.ReadNextTransaction();
                     X12FlatTransaction nextTransaction = reader.ReadNextTransaction();
                     int i = 1;
+
                     while (!string.IsNullOrEmpty(nextTransaction.Transactions.First()))
                     {
                         if (currentTransactions.GetSize() + nextTransaction.GetSize() < maxBatchSize
@@ -128,13 +145,15 @@
                             outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
                             using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                             {
+                                Console.WriteLine(Resources.ParserParsingSerialzingTransactionMessage);
+
                                 try
                                 {
                                     parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
                                 }
                                 catch (Exception exception)
                                 {
-                                    Console.WriteLine(Resources.ParsingError, exception.Message);
+                                    Console.WriteLine(Resources.ParsingError, DateTime.Now.ToLongTimeString(), exception.Message);
                                     return;
                                 }
                             }
@@ -148,22 +167,27 @@
                     outputFilename = $"{(args.Length > 1 ? args[1] : x12Filename)}_{i++}.xml";
                     using (var outputFs = new FileStream(outputFilename, FileMode.Create))
                     {
+                        Console.WriteLine(Resources.ParserParsingSerialzingTransactionMessage);
+
                         try
                         {
                             parser.ParseMultiple(currentTransactions.ToString()).First().Serialize(outputFs);
                         }
                         catch (Exception exception)
                         {
-                            Console.WriteLine(Resources.ParsingError, exception.Message);
+                            Console.WriteLine(Resources.ParsingError, DateTime.Now.ToLongTimeString(), exception.Message);
+                            return;
                         }
                     }
                 }
             }
+
+            Console.WriteLine(Resources.ParserCompleteMessage);
         }
 
         private static void HandleParserWarning(object sender, X12ParserWarningEventArgs args)
         {
-            Console.WriteLine(args.Message);
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} {args.Message}");
         }
     }
 }

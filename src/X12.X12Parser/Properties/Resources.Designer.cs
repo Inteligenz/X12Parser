@@ -61,7 +61,16 @@ namespace X12.X12Parser.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filename &apos;{0}&apos; does not exist.
+        ///   Looks up a localized string similar to =======================\n.
+        /// </summary>
+        internal static string ConfigurationUnderlineString {
+            get {
+                return ResourceManager.GetString("ConfigurationUnderlineString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}  Filename &apos;{1}&apos; does not exist.
         /// </summary>
         internal static string FileNotFoundError {
             get {
@@ -70,7 +79,61 @@ namespace X12.X12Parser.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error during parsing: &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Complete!.
+        /// </summary>
+        internal static string ParserCompleteMessage {
+            get {
+                return ResourceManager.GetString("ParserCompleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing X12 Parser.
+        /// </summary>
+        internal static string ParserInitializingMessage {
+            get {
+                return ResourceManager.GetString("ParserInitializingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing File....
+        /// </summary>
+        internal static string ParserParsingFileMessage {
+            get {
+                return ResourceManager.GetString("ParserParsingFileMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing and Serializing Transaction....
+        /// </summary>
+        internal static string ParserParsingSerialzingTransactionMessage {
+            get {
+                return ResourceManager.GetString("ParserParsingSerialzingTransactionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading transactions from file....
+        /// </summary>
+        internal static string ParserReadingTransactionsMessage {
+            get {
+                return ResourceManager.GetString("ParserReadingTransactionsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serializing File....
+        /// </summary>
+        internal static string ParserSerializingFileMessage {
+            get {
+                return ResourceManager.GetString("ParserSerializingFileMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}  Error during parsing: &apos;{1}&apos;.
         /// </summary>
         internal static string ParsingError {
             get {
@@ -79,7 +142,7 @@ namespace X12.X12Parser.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error during serialization: &apos;{0}&apos;.
+        ///   Looks up a localized string similar to {0}  Error during serialization: &apos;{1}&apos;.
         /// </summary>
         internal static string SerializationError {
             get {
