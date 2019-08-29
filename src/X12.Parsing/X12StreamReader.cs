@@ -163,9 +163,9 @@
         }
 
         /// <summary>
-        /// Reads the next transaction in the stream
+        /// Returns the next transaction read from the stream. If no transaction is read, then null is returned
         /// </summary>
-        /// <returns>Transaction read from the stream</returns>
+        /// <returns>Transaction read from the stream, if found; otherwise, null</returns>
         public X12FlatTransaction ReadNextTransaction()
         {
             var segments = new StringBuilder();
@@ -201,10 +201,9 @@
             }
             while (!string.IsNullOrEmpty(segmentString) && segmentId != "SE");
 
-            return new X12FlatTransaction(
-                this.CurrentIsaSegment,
-                this.CurrentGsSegment,
-                segments.ToString());
+            return segments.Length > 0
+                       ? new X12FlatTransaction(this.CurrentIsaSegment, this.CurrentGsSegment, segments.ToString())
+                       : null;
         }
 
         /// <summary>
@@ -219,7 +218,7 @@
         /// <summary>
         /// Releases unmanaged resources if disposing is true
         /// </summary>
-        /// <param name="disposing">Flag indicating is object is being disposed</param>
+        /// <param name="disposing">Flag indicating if object is being disposed</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
