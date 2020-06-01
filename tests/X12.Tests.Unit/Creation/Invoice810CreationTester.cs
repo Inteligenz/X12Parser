@@ -37,7 +37,7 @@ IEA*1*000000035~";
         [Test]
         public void Create810_4010Version()
         {
-            var message = new Interchange(Convert.ToDateTime("1/4/99 15:32"), 35, false, '~','*','>')
+            var message = new Interchange(new DateTime(1999, 1, 4, 15, 32, 0), 35, false, '~','*','>')
             {
                 SecurityInfoQualifier = "00",
                 InterchangeSenderIdQualifier = "30",
@@ -46,7 +46,7 @@ IEA*1*000000035~";
                 InterchangeReceiverId = "0069088189999"
             };
 
-            var fg = message.AddFunctionGroup("IN", Convert.ToDateTime("1/4/1999 15:32"), 1);
+            var fg = message.AddFunctionGroup("IN", new DateTime(1999, 1, 4, 15, 32, 0), 1);
             fg.ApplicationSendersCode = "943274043TO";
             fg.ApplicationReceiversCode = "0069088189999";
             fg.ResponsibleAgencyCode = "X";
@@ -55,7 +55,7 @@ IEA*1*000000035~";
             var trans = fg.AddTransaction("810", "0001");
 
             var big = trans.AddSegment(new TypedSegmentBIG());
-            big.BIG01_InvoiceDate = Convert.ToDateTime("10/14/1998");
+            big.BIG01_InvoiceDate = new DateTime(1998, 10, 14);
             big.BIG02_InvoiceNumber = "3662";
             big.BIG07_TransactionTypeCode = "N6";
 
@@ -95,7 +95,7 @@ IEA*1*000000035~";
 
             var itd = trans.AddSegment(new TypedSegmentITD());
             itd.ITD01_TermsTypeCode = "03";
-            itd.ITD06_TermsNetDueDate = Convert.ToDateTime("10/20/1998");
+            itd.ITD06_TermsNetDueDate = new DateTime(1998, 10, 20);
 
             var it1 = trans.AddLoop(new TypedLoopIT1());
             it1.IT101_AssignedIdentification = "1";

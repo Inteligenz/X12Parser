@@ -17,7 +17,7 @@
         [Test]
         public void Create837_5010Version()
         {
-            var message = new Interchange(Convert.ToDateTime("01/01/03"), 000905, false)
+            var message = new Interchange(new DateTime(2003, 1, 1), 000905, false)
                               {
                                   InterchangeSenderIdQualifier = "ZZ",
                                   InterchangeSenderId = "SUBMITTERS.ID",
@@ -33,7 +33,7 @@
             var group = message.AddFunctionGroup("HC", DateTime.Now, 1, "005010X222");
             group.ApplicationSendersCode = "SENDER CODE";
             group.ApplicationReceiversCode = "RECEIVER CODE";
-            group.Date = Convert.ToDateTime("12/31/1999");
+            group.Date = new DateTime(1999, 12, 31);
             group.ControlNumber = 1;
             group.SetElement(5, "0802");
 
@@ -123,7 +123,7 @@
 
             var subscriber_DMGSegment = subscriberName2010BALoop.AddSegment(new TypedSegmentDMG());
             subscriber_DMGSegment.DMG01_DateTimePeriodFormatQualifier = "D8";
-            subscriber_DMGSegment.DMG02_DateOfBirth = DateTime.Parse("5/1/1943");
+            subscriber_DMGSegment.DMG02_DateOfBirth = new DateTime(1943, 5, 1);
             subscriber_DMGSegment.DMG03_Gender = Gender.Female;
 
             var subscriberName2010BALoop2 = subscriber2000BHLoop.AddLoop(new TypedLoopNM1("PR"));
@@ -156,7 +156,7 @@
 
             var HL3NM1_DMG_Segment = HL3NM1Segment.AddSegment(new TypedSegmentDMG());
             HL3NM1_DMG_Segment.DMG01_DateTimePeriodFormatQualifier = "D8";
-            HL3NM1_DMG_Segment.DMG02_DateOfBirth = Convert.ToDateTime("5/1/1973");
+            HL3NM1_DMG_Segment.DMG02_DateOfBirth = new DateTime(1973, 5, 1);
             HL3NM1_DMG_Segment.DMG03_Gender = Gender.Male;
 
             var claim2300Loop = HL3Loop.AddLoop(new TypedLoopCLM());
