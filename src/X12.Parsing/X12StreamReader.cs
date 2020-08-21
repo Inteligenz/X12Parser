@@ -170,10 +170,12 @@
         {
             var segments = new StringBuilder();
 
-            string segmentString = this.ReadNextSegment();
-            string segmentId = this.ReadSegmentId(segmentString);
+            string segmentString;
+            string segmentId;
             do
             {
+                segmentString = this.ReadNextSegment();
+                segmentId = this.ReadSegmentId(segmentString);
                 switch (segmentId)
                 {
                     case "ISA":
@@ -195,9 +197,6 @@
                         segments.Append(this.Delimiters.SegmentTerminator);
                         break;
                 }
-
-                segmentString = this.ReadNextSegment();
-                segmentId = this.ReadSegmentId(segmentString);
             }
             while (!string.IsNullOrEmpty(segmentString) && segmentId != "SE");
 
