@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--273 Insurance/Annuity Application Status-->
+<TransactionSpecification TransactionSetIdentifierCode="273" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="UD" Repeat="1" />
+  <Loop LoopId="NM1" LoopRepeat="">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N3" Repeat="3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="ACT">
+    <Name>Account Identification</Name>
+    <StartingSegment SegmentId="ACT" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="UD" Repeat="1" />
+    <Segment SegmentId="DTP" Repeat="19" />
+    <Segment SegmentId="BLI" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="9" />
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="K3" Repeat="3" />
+    <Loop LoopId="LX" LoopRepeat="">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="BLI" Repeat="1" />
+      <Segment SegmentId="INV" Repeat="9" />
+      <Segment SegmentId="UD" Repeat="1" />
+      <Segment SegmentId="M1" Repeat="1" />
+      <Segment SegmentId="DTP" Repeat="9" />
+      <Segment SegmentId="RPA" Repeat="1" />
+      <Segment SegmentId="K3" Repeat="3" />
+      <Loop LoopId="BEN">
+        <Name>Beneficiary or Owner Information</Name>
+        <StartingSegment SegmentId="BEN" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="1" />
+        <Segment SegmentId="N3" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="1" />
+      </Loop>
+      <Loop LoopId="ENT">
+        <Name>Entity</Name>
+        <StartingSegment SegmentId="ENT" />
+        <Segment SegmentId="NM1" Repeat="1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="REF" Repeat="9" />
+        <Segment SegmentId="N3" Repeat="3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="3" />
+        <Segment SegmentId="DMG" Repeat="1" />
+        <Segment SegmentId="DMA" Repeat="1" />
+        <Segment SegmentId="REL" Repeat="1" />
+        <Segment SegmentId="UD" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="9" />
+        <Segment SegmentId="QTY" Repeat="9" />
+        <Segment SegmentId="K3" Repeat="3" />
+        <Loop LoopId="LQ" LoopRepeat="">
+          <Name>Industry Code</Name>
+          <StartingSegment SegmentId="LQ" />
+          <Segment SegmentId="V9" Repeat="1" />
+          <Segment SegmentId="DTP" Repeat="9" />
+          <Segment SegmentId="K3" Repeat="3" />
+          <Loop LoopId="NM1">
+            <Name>Individual or Organizational Name</Name>
+            <StartingSegment SegmentId="NM1" />
+            <Segment SegmentId="N3" Repeat="3" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="G61" Repeat="9" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="BEN">
+          <Name>Beneficiary or Owner Information</Name>
+          <StartingSegment SegmentId="BEN" />
+          <Segment SegmentId="NM1" Repeat="1" />
+          <Segment SegmentId="N2" Repeat="1" />
+          <Segment SegmentId="N3" Repeat="1" />
+          <Segment SegmentId="N4" Repeat="1" />
+          <Segment SegmentId="DTP" Repeat="1" />
+        </Loop>
+        <Loop LoopId="BLI">
+          <Name>Baseline Item Data</Name>
+          <StartingSegment SegmentId="BLI" />
+          <Segment SegmentId="INV" Repeat="9" />
+          <Segment SegmentId="UD" Repeat="1" />
+          <Segment SegmentId="UDA" />
+          <Segment SegmentId="M1" Repeat="1" />
+          <Segment SegmentId="DTP" Repeat="9" />
+          <Segment SegmentId="QTY" />
+          <Segment SegmentId="RPA" />
+          <Segment SegmentId="K3" Repeat="3" />
+          <Loop LoopId="BEN">
+            <Name>Beneficiary or Owner Information</Name>
+            <StartingSegment SegmentId="BEN" />
+            <Segment SegmentId="NM1" Repeat="1" />
+            <Segment SegmentId="N2" Repeat="1" />
+            <Segment SegmentId="N3" Repeat="1" />
+            <Segment SegmentId="N4" Repeat="1" />
+            <Segment SegmentId="DTP" Repeat="1" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="MSG">
+      <Name>Message Text</Name>
+      <StartingSegment SegmentId="MSG" />
+      <Segment SegmentId="DTP" Repeat="1" />
+      <Segment SegmentId="NM1" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--940 Warehouse Shipping Order-->
+<TransactionSpecification TransactionSetIdentifierCode="940" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="W05" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="5" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="3" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="W09" Repeat="1" />
+  <Segment SegmentId="W66" Repeat="1" />
+  <Segment SegmentId="W6" Repeat="1" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="BNX" Repeat="1" />
+  <Loop LoopId="0150">
+    <Name></Name>
+    <StartingSegment SegmentId="TD3"/>
+    <Segment SegmentId="AT9"/>
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="MAN" />
+    <Segment SegmentId="SDQ" />
+    <Segment SegmentId="N1" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="10" />
+    <Segment SegmentId="N9"/>
+    <Loop LoopId="0310">
+      <Name>Line Item Detail - Warehouse</Name>
+      <StartingSegment SegmentId="W01" />
+      <Segment SegmentId="G69" Repeat="5" />
+      <Segment SegmentId="N9" Repeat="200" />
+      <Segment SegmentId="NTE" />
+      <Segment SegmentId="W20" Repeat="3" />
+      <Segment SegmentId="QTY" Repeat="10" />
+      <Segment SegmentId="AMT" Repeat="1" />
+      <Segment SegmentId="G62" Repeat="10" />
+      <Segment SegmentId="G66" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="LH2" Repeat="6" />
+      <Segment SegmentId="LHR" Repeat="1" />
+      <Segment SegmentId="LH6" Repeat="5" />
+      <Loop LoopId="N1">
+        <Name></Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+
+      <Loop LoopId="0320" LoopRepeat="10">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="0330">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+        </Loop>
+        <Segment SegmentId="LX" Repeat="1" />
+        <Segment SegmentId="N9" />
+        <Segment SegmentId="G62" Repeat="10" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="SDQ" />
+        <Loop LoopId="0331" LoopRepeat="10">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+        </Loop>
+        <Loop LoopId="0332">
+          <Name>Hazardous Identification Information</Name>
+          <StartingSegment SegmentId="LH1" />
+          <Segment SegmentId="LH2" Repeat="4" />
+          <Segment SegmentId="LH3" Repeat="10" />
+          <Segment SegmentId="LFH" Repeat="20" />
+          <Segment SegmentId="LEP" Repeat="3" />
+          <Segment SegmentId="LH4" Repeat="1" />
+          <Segment SegmentId="LHT" Repeat="3" />
+          <Segment SegmentId="LHR" Repeat="5" />
+          <Segment SegmentId="PER" Repeat="5" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="0340">
+        <Name>Type of Financial Accounting Data</Name>
+        <StartingSegment SegmentId="FA1" />
+        <Segment SegmentId="FA2" Usage="Required" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Segment SegmentId="W76" Repeat="1" />
+</TransactionSpecification>

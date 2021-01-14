@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--175 Court and Law Enforcement Notice-->
+<TransactionSpecification TransactionSetIdentifierCode="175" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="REF" />
+  <Loop LoopId="CDS">
+    <Name>Case Description</Name>
+    <StartingSegment SegmentId="CDS" />
+    <Segment SegmentId="SPI" />
+    <Segment SegmentId="MSG" />
+    <Segment SegmentId="LS" />
+    <Loop LoopId="LS">
+      <Name>Loop Header</Name>
+      <StartingSegment SegmentId="LS"/>
+      <Segment SegmentId="LE" Trailer="true"/>
+      <Loop LoopId="CED">
+        <Name>Administration of Justice Event Descrip</Name>
+        <StartingSegment SegmentId="CED" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="SPI" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="AMT" />
+        <Segment SegmentId="PAM" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="CRC" />
+        <Segment SegmentId="CDS" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" />
+        </Loop>
+        <Loop LoopId="NM1">
+          <Name>Individual or Organizational Name</Name>
+          <StartingSegment SegmentId="NM1" />
+          <Segment SegmentId="SPI" />
+          <Segment SegmentId="N2" />
+          <Segment SegmentId="N3" />
+          <Segment SegmentId="N4" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="DTM" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="DMG" />
+          <Segment SegmentId="MEA" />
+          <Loop LoopId="LX">
+            <Name>Assigned Number</Name>
+            <StartingSegment SegmentId="LX" />
+            <Segment SegmentId="REF" />
+            <Segment SegmentId="III" />
+            <Loop LoopId="LM">
+              <Name>Code Source Information</Name>
+              <StartingSegment SegmentId="LM" />
+              <Segment SegmentId="LQ" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

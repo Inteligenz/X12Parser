@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--830 Planning Schedule with Release Capability-->
+<TransactionSpecification TransactionSetIdentifierCode="830" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BFR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="XPO" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="12" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="TAX" Repeat="3" />
+  <Segment SegmentId="FOB" Repeat="1" />
+  <Segment SegmentId="CTP" Repeat="25" />
+  <Segment SegmentId="SAC" Repeat="25" />
+  <Segment SegmentId="CSH" Repeat="1" />
+  <Segment SegmentId="ITD" Repeat="2" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="PID" Repeat="200" />
+  <Segment SegmentId="MEA" Repeat="40" />
+  <Segment SegmentId="PWK" Repeat="25" />
+  <Segment SegmentId="PKG" Repeat="25" />
+  <Segment SegmentId="TD1" Repeat="2" />
+  <Segment SegmentId="TD5" Repeat="12" />
+  <Segment SegmentId="TD3" Repeat="12" />
+  <Segment SegmentId="TD4" Repeat="5" />
+  <Segment SegmentId="MAN" Repeat="10" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="FOB" Repeat="1" />
+  </Loop>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="LIN">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="UIT" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="CUR" Repeat="1" />
+    <Segment SegmentId="PO3" Repeat="25" />
+    <Segment SegmentId="CTP" Repeat="25" />
+    <Segment SegmentId="PID" Repeat="1000" />
+    <Segment SegmentId="MEA" Repeat="40" />
+    <Segment SegmentId="PWK" Repeat="25" />
+    <Segment SegmentId="PKG" Repeat="25" />
+    <Segment SegmentId="PO4" Repeat="1" />
+    <Segment SegmentId="PRS" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="SAC" Repeat="25" />
+    <Segment SegmentId="ITD" Repeat="2" />
+    <Segment SegmentId="TAX" Repeat="3" />
+    <Segment SegmentId="FOB" Repeat="1" />
+    <Segment SegmentId="LDT" Repeat="12" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="ATH" Repeat="20" />
+    <Segment SegmentId="TD1" Repeat="1" />
+    <Segment SegmentId="TD5" Repeat="12" />
+    <Segment SegmentId="TD3" Repeat="12" />
+    <Segment SegmentId="TD4" Repeat="5" />
+    <Segment SegmentId="MAN" Repeat="10" />
+    <Segment SegmentId="DD" Repeat="10" />
+    <Loop LoopId="SLN" LoopRepeat="100">
+      <Name>Subline Item Detail</Name>
+      <StartingSegment SegmentId="SLN" />
+      <Segment SegmentId="PID" Repeat="1000" />
+      <Segment SegmentId="NM1" Repeat="10" />
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="200">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="FOB" Repeat="1" />
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="FST">
+      <Name>Forecast Schedule</Name>
+      <StartingSegment SegmentId="FST" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="SDQ" Repeat="50" />
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="SDP" LoopRepeat="260">
+      <Name>Ship/Delivery Pattern</Name>
+      <StartingSegment SegmentId="SDP" />
+      <Segment SegmentId="FST" Repeat="260" />
+    </Loop>
+    <Loop LoopId="SHP" LoopRepeat="25">
+      <Name>Shipped/Received Information</Name>
+      <StartingSegment SegmentId="SHP" />
+      <Segment SegmentId="REF" Repeat="5" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

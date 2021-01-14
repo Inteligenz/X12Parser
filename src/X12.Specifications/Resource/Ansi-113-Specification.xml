@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 113 Election Campaign and Lobbyist Reporting -->
+<TransactionSpecification TransactionSetIdentifierCode="113" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="LQ"/>
+  <Segment SegmentId="MTX"/>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="N9"/>
+  </Loop>
+  <Loop LoopId="AWD">
+    <Name>Amount with Description</Name>
+    <StartingSegment SegmentId="AWD"/>
+    <Segment SegmentId="LQ"/>
+    <Segment SegmentId="MTX"/>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="N9">
+      <Name>Extended Reference Information</Name>
+      <StartingSegment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="NX2"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="MTX"/>
+    </Loop>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="NX2"/>
+      <Segment SegmentId="EMS"/>
+      <Segment SegmentId="TPB"/>
+      <Segment SegmentId="PWK"/>
+      <Segment SegmentId="PAM"/>
+      <Segment SegmentId="G86"/>
+      <Segment SegmentId="MTX"/>
+      <Loop LoopId="LQ">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="N9"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="PCT"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="MTX"/>
+      </Loop>
+      <Loop LoopId="AWD">
+        <Name>Amount with Description</Name>
+        <StartingSegment SegmentId="AWD"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="PCT"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="N9"/>
+        <Segment SegmentId="PDL"/>
+        <Segment SegmentId="LQ"/>
+        <Segment SegmentId="N1"/>
+        <Segment SegmentId="MTX"/>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

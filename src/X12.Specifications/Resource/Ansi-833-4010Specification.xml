@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--833 Mortgage Credit Report Order-->
+<TransactionSpecification TransactionSetIdentifierCode="833" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Loop LoopId="N4" LoopRepeat="5">
+      <Name>Geographic Location</Name>
+      <StartingSegment SegmentId="N4" />
+      <Segment SegmentId="N3" Repeat="2" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="CRO" LoopRepeat="200">
+    <Name>Credit Report Order Details</Name>
+    <StartingSegment SegmentId="CRO" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="K2" Repeat="10" />
+    <Segment SegmentId="LRQ" Repeat="1" />
+    <Segment SegmentId="DTP" Repeat="1" />
+    <Loop LoopId="N1" LoopRepeat="20">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="PWK" Repeat="1" />
+    </Loop>
+    <Loop LoopId="NX1" LoopRepeat="20">
+      <Name>Property or Entity Identification</Name>
+      <StartingSegment SegmentId="NX1" />
+      <Segment SegmentId="NX2" Repeat="10" />
+      <Segment SegmentId="DTP" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="1" />
+    </Loop>
+    <Loop LoopId="LX" LoopRepeat="2">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="AIN" Repeat="10" />
+      <Segment SegmentId="PPY" Repeat="10" />
+      <Segment SegmentId="CAI" Repeat="20" />
+      <Segment SegmentId="CIV" Repeat="20" />
+      <Segment SegmentId="YNQ" Repeat="12" />
+      <Segment SegmentId="DTP" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="20" />
+      <Loop LoopId="AMT" LoopRepeat="10">
+        <Name>Monetary Amount</Name>
+        <StartingSegment SegmentId="AMT" />
+        <Segment SegmentId="MSG" Repeat="1" />
+      </Loop>
+      <Loop LoopId="REA" LoopRepeat="20">
+        <Name>Real Estate Property Information</Name>
+        <StartingSegment SegmentId="REA" />
+        <Segment SegmentId="FPT" Repeat="1" />
+        <Segment SegmentId="AMT" Repeat="6" />
+        <Segment SegmentId="NX1" Repeat="1" />
+        <Segment SegmentId="NX2" Repeat="30" />
+      </Loop>
+      <Loop LoopId="IN1" LoopRepeat="30">
+        <Name>Individual Identification</Name>
+        <StartingSegment SegmentId="IN1" />
+        <Segment SegmentId="IN2" Repeat="10" />
+        <Segment SegmentId="DMG" Repeat="1" />
+        <Segment SegmentId="N10" Repeat="1" />
+        <Segment SegmentId="ACT" Repeat="1" />
+      </Loop>
+      <Loop LoopId="NX1" LoopRepeat="10">
+        <Name>Property or Entity Identification</Name>
+        <StartingSegment SegmentId="NX1" />
+        <Segment SegmentId="NX2" Usage="Required" Repeat="30" />
+        <Segment SegmentId="ARS" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="1" />
+        <Segment SegmentId="N10" Repeat="1" />
+      </Loop>
+      <Loop LoopId="N1" LoopRepeat="500">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="12" />
+        <Segment SegmentId="PER" Repeat="3" />
+        <Loop LoopId="EMP" LoopRepeat="20">
+          <Name>Employer</Name>
+          <StartingSegment SegmentId="EMP" />
+          <Segment SegmentId="DTP" Repeat="2" />
+          <Segment SegmentId="QTY" Repeat="2" />
+          <Loop LoopId="EMS" LoopRepeat="10">
+            <Name>Employment Position</Name>
+            <StartingSegment SegmentId="EMS" />
+            <Segment SegmentId="DTP" Repeat="1" />
+            <Segment SegmentId="QTY" Repeat="1" />
+            <Segment SegmentId="AIN" Repeat="10" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="FAA" LoopRepeat="100">
+          <Name>Financial Asset Account</Name>
+          <StartingSegment SegmentId="FAA" />
+          <Segment SegmentId="DTP" Repeat="1" />
+          <Segment SegmentId="AIN" Repeat="5" />
+          <Loop LoopId="IN1" LoopRepeat="10">
+            <Name>Individual Identification</Name>
+            <StartingSegment SegmentId="IN1" />
+            <Segment SegmentId="IN2" Repeat="10" />
+            <Segment SegmentId="FPT" Repeat="1" />
+          </Loop>
+        </Loop>
+        <Loop LoopId="CDA" LoopRepeat="100">
+          <Name>Consumer Credit Account</Name>
+          <StartingSegment SegmentId="CDA" />
+          <Segment SegmentId="DTP" Repeat="1" />
+          <Segment SegmentId="PPY" Repeat="5" />
+          <Loop LoopId="IN1" LoopRepeat="10">
+            <Name>Individual Identification</Name>
+            <StartingSegment SegmentId="IN1" />
+            <Segment SegmentId="IN2" Repeat="10" />
+            <Segment SegmentId="FPT" Repeat="1" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>X12.Hipaa</id>
+    <version>$version$</version>
+    <title>X12.Hipaa</title>
+    <authors>Bradley Van Fleet</authors>
+    <owners>Bradley Van Fleet</owners>
+    <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open source HIPAA claims processing models and utilities</description>
+    <releaseNotes>
+      * Segregated package from other X12 assemblies
+      * Added documentation to several code files
+      * Segregated some of the code into separate namespaces
+    </releaseNotes>
+    <copyright>Copyright © Brad Van Fleet 2018</copyright>
+    <tags>X12 parser</tags>
+    <dependencies>
+      <dependency id="X12.Parsing" version="$version$" />
+      <dependency id="X12.Shared" version="$version$" />
+      <dependency id="X12.Specification" version="$version$" />
+      <dependency id="X12.Sql" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>

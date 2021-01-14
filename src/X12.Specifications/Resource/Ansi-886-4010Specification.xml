@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--886 Customer Call Reporting-->
+<TransactionSpecification TransactionSetIdentifierCode="886" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="N1" Usage="Required" Repeat="2" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Loop LoopId="0100" LoopRepeat="5000">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="ENT" Usage="Required" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="2" />
+    <Loop LoopId="0110" LoopRepeat="150">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="G32" Repeat="25" />
+      <Segment SegmentId="G37" Repeat="10" />
+      <Loop LoopId="0111" LoopRepeat="1000">
+        <Name>Line Item Numbers</Name>
+        <StartingSegment SegmentId="G28" />
+        <Segment SegmentId="QTY" Repeat="10" />
+        <Segment SegmentId="G29" Repeat="10" />
+        <Segment SegmentId="CTP" Repeat="4" />
+        <Segment SegmentId="G35" Repeat="10" />
+        <Segment SegmentId="CRC" Repeat="5" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

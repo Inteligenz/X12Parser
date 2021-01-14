@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 140 Product Registration -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="140">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="N9"/>
+  <Loop LoopId="N1">
+    <Name/>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="PER"/>
+  </Loop>
+  <Loop LoopId="LX">
+    <Name/>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="REF"/>
+    <Loop LoopId="N1">
+      <Name/>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="REF"/>
+    </Loop>
+    <Loop LoopId="LM">
+      <Name/>
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
+    </Loop>
+    <Loop LoopId="LIN">
+      <Name/>
+      <StartingSegment SegmentId="LIN"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="DTM"/>
+      <Segment SegmentId="REF"/>
+      <Loop LoopId="N1">
+        <Name/>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+      <Loop LoopId="PSC">
+        <Name/>
+        <StartingSegment SegmentId="PSC"/>
+        <Segment SegmentId="SSS"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="CUR"/>
+        <Segment SegmentId="ITA"/>
+        <Segment SegmentId="TXI"/>
+        <Segment SegmentId="ITD"/>
+        <Segment SegmentId="N9"/>
+      </Loop>
+      <Loop LoopId="SLN">
+        <Name/>
+        <StartingSegment SegmentId="SLN"/>
+        <Segment SegmentId="PID"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="REF"/>
+        <Loop LoopId="N1">
+          <Name/>
+          <StartingSegment SegmentId="N1"/>
+          <Segment SegmentId="N2"/>
+          <Segment SegmentId="N3"/>
+          <Segment SegmentId="N4"/>
+          <Segment SegmentId="PER"/>
+        </Loop>
+        <Loop LoopId="PSC">
+          <Name/>
+          <StartingSegment SegmentId="PSC"/>
+          <Segment SegmentId="SSS"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="CUR"/>
+          <Segment SegmentId="ITA"/>
+          <Segment SegmentId="TXI"/>
+          <Segment SegmentId="ITD"/>
+          <Segment SegmentId="N9"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="LM">
+        <Name/>
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

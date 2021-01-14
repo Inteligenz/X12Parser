@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--848 Material Safety Data Sheet-->
+<TransactionSpecification TransactionSetIdentifierCode="848" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BMS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="LIN" LoopRepeat="999999">
+    <Name>Item Identification</Name>
+    <StartingSegment SegmentId="LIN" />
+    <Segment SegmentId="PID" />
+    <Loop LoopId="MSS">
+      <Name>Material Safety Data Sheet Section Info</Name>
+      <StartingSegment SegmentId="MSS" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="SD1">
+        <Name>Safety Data</Name>
+        <StartingSegment SegmentId="SD1" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="PKG" />
+        <Segment SegmentId="TD4" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="CID">
+          <Name>Characteristic/Class ID</Name>
+          <StartingSegment SegmentId="CID" />
+          <Segment SegmentId="MEA" Usage="Required" />
+        </Loop>
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="CID" Repeat="1" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="STA" Repeat="1" />
+        <Segment SegmentId="TMD" Repeat="1" />
+        <Segment SegmentId="MSG" />
+        <Loop LoopId="SD1">
+          <Name>Safety Data</Name>
+          <StartingSegment SegmentId="SD1" />
+          <Segment SegmentId="MEA" />
+          <Segment SegmentId="PKG" />
+          <Segment SegmentId="TD4" />
+          <Segment SegmentId="MSG" />
+          <Loop LoopId="CID">
+            <Name>Characteristic/Class ID</Name>
+            <StartingSegment SegmentId="CID" />
+            <Segment SegmentId="MEA" Usage="Required" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

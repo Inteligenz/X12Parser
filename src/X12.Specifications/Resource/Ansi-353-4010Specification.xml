@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--353 U.S. Customs Events Advisory Details-->
+<TransactionSpecification TransactionSetIdentifierCode="353" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="M10" Usage="Required" Repeat="1" />
+  <Segment SegmentId="P4" Usage="Required" Repeat="1" />
+  <Segment SegmentId="M15" Usage="Required" Repeat="9999" />
+</TransactionSpecification>

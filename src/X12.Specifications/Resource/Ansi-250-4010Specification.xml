@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--250 Purchase Order Shipment Management Document-->
+<TransactionSpecification TransactionSetIdentifierCode="250" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Segment SegmentId="SSD" Repeat="999999" />
+  <Loop LoopId="0100">
+    <Name>Purchase Order Reference</Name>
+    <StartingSegment SegmentId="PRF" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="FOB" Repeat="1" />
+    <Segment SegmentId="G05" Repeat="1" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="H3" Repeat="6" />
+    <Loop LoopId="0110">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="G05" Repeat="1" />
+      <Segment SegmentId="DTM" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

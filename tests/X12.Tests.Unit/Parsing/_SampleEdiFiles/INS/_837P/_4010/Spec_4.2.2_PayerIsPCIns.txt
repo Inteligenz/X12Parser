@@ -1,0 +1,55 @@
+﻿ISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *930602*1253*^*00401*000000905*1*T*:~
+  GS*HC*SENDER CODE*RECEIVER CODE*1994033*0802*1*X*004010X098A1~
+    ST*837*872401~
+      BHT*0019*00*0124*19970411*0724*CH~
+      REF*87*004010X098~
+      NM1*41*2*SPEEDY BILLING SERVICE*****46*333119999~
+        PER*IC*SAM SPEEDY*TE*8154445555~
+      NM1*40*2*BASKET & ROBERTS INSURANCE COMPANY*****46*345345345~
+      HL*1**20*1~
+        NM1*85*2*SPEEDY BILLING SERVICE*****24*333119999~
+          N3*1 EDI WAY~
+          N4*WALNUT*VT*55333~
+        NM1*87*1*SWEETTOOTH*SAM****XX*777ST123~
+          N3*837 PROFESSIONAL DRIVE~
+          N4*PISTACHIO*VT*55557~
+          REF*EI*331330001~
+          REF*G2*331330001~
+        HL*2*1*22*1~
+          SBR*P********WC~
+          NM1*IL*2*JEN & BARRY’S ICE CREAM SHOPPE*****MI*WC962222L~
+          NM1*PR*2*BASKET & ROBERTS INSURANCE COMPANY*****XV*345345345~
+            N3*31 FLAVOR STREET~
+            N4*MAPLE*VT*55222~
+          HL*3*2*23*0~
+            PAT*20~
+            NM1*QC*1*PLUMP*PENNY****34*115683870~
+              N3*265 DOUBLE DIP LANE~
+              N4*SUGAR CONE*VT*55544~
+              DMG*D8*19770211*F~
+              REF*Y4*W9123499~
+            CLM*888228888*405***11::1*Y*A*Y*Y*B*EM:OA~
+              DTP*439*D8*19970212~
+              DTP*454*D8*19970212~
+              HI*BK:81602*BF:354~
+              NM1*82*1*SWEETTOOTH*SAM****XX*777ST123~
+                PRV*PE*ZZ*203BE004Y~
+                REF*EI*331330001~
+              NM1*77*1*PISTACHIO EMERGENCY SERVICES*****XX*ERP66655~
+                N3*123 EMERGENCY WAY~
+                N4*PISTACHIO*VT*55556~
+              LX*1~
+                SV1*HC:99242*120*UN*1***1**Y~
+                DTP*472*D8*19970226~
+              LX*2~
+                SV1*HC:A4570*25*UN*1***1**Y~
+                DTP*472*D8*19970226~
+              LX*3~
+                SV1*HC:73140*50*UN*1***1**Y~
+                DTP*472*D8*19970226~
+              LX*4~
+                SV1*HC:99283*210*UN*1*23**1:2**Y~
+                DTP*472*D8*19970212~
+    SE*51*872401~
+  GE*1*1~
+IEA*1*000000905~

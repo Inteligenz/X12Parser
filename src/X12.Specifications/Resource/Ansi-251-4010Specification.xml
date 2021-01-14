@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--251 Pricing Support-->
+<TransactionSpecification TransactionSetIdentifierCode="251" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="SPI" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="CUR" />
+  <Segment SegmentId="MSG" />
+  <Loop LoopId="REF">
+    <Name>Reference Identification</Name>
+    <StartingSegment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="G61" Repeat="5" />
+  </Loop>
+  <Loop LoopId="PPL">
+    <Name>Price Support Data</Name>
+    <StartingSegment SegmentId="PPL" />
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="PD" LoopRepeat="">
+      <Name>Pricing Data</Name>
+      <StartingSegment SegmentId="PD" />
+      <Segment SegmentId="PDD" />
+    </Loop>
+    <Loop LoopId="PL" LoopRepeat="">
+      <Name>Proposal Cost Logic</Name>
+      <StartingSegment SegmentId="PL" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="AMT" Repeat="1" />
+      <Segment SegmentId="PCT" Repeat="1" />
+      <Segment SegmentId="QTY" Repeat="1" />
+      <Segment SegmentId="NTE" />
+      <Loop LoopId="PD" LoopRepeat="">
+        <Name>Pricing Data</Name>
+        <StartingSegment SegmentId="PD" />
+        <Segment SegmentId="SPI" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PDD" />
+        <Segment SegmentId="MSG" />
+        <Segment SegmentId="DTM" Repeat="10" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="PO1">
+      <Name>Baseline Item Data</Name>
+      <StartingSegment SegmentId="PO1" />
+      <Segment SegmentId="PID" Repeat="1" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="AMT">
+        <Name>Monetary Amount</Name>
+        <StartingSegment SegmentId="AMT" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="MSG" />
+      </Loop>
+      <Loop LoopId="LX" LoopRepeat="">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="QTY" Usage="Required" Repeat="1" />
+        <Segment SegmentId="AMT" Repeat="2" />
+        <Segment SegmentId="NTE" Repeat="5" />
+        <Segment SegmentId="REF" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="1" />
+      </Loop>
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

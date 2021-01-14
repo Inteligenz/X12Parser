@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--277 Health Care Claim Status Notification-->
+<TransactionSpecification TransactionSetIdentifierCode="277" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="10" />
+  <Loop LoopId="1000">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="2" />
+    <Segment SegmentId="PER" Repeat="1" />
+  </Loop>
+  <HierarchicalLoop LoopId="2000">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="SBR" Repeat="1" />
+    <Segment SegmentId="PAT" Repeat="1" />
+    <Segment SegmentId="DMG" Repeat="1" />
+    <Loop LoopId="2100">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="1" />
+    </Loop>
+    <Loop LoopId="2200">
+      <Name>Trace</Name>
+      <StartingSegment SegmentId="TRN" />
+      <Segment SegmentId="STC" Usage="Required" />
+      <Segment SegmentId="REF" Repeat="3" />
+      <Segment SegmentId="DTP" Repeat="2" />
+      <Loop LoopId="2210">
+        <Name>Paperwork</Name>
+        <StartingSegment SegmentId="PWK" />
+        <Segment SegmentId="PER" Repeat="1" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="N3" Repeat="1" />
+        <Segment SegmentId="N4" Repeat="1" />
+      </Loop>
+      <Loop LoopId="2220">
+        <Name>Service Information</Name>
+        <StartingSegment SegmentId="SVC" />
+        <Segment SegmentId="STC" Usage="Required" />
+        <Segment SegmentId="REF" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="1" />
+        <Loop LoopId="2225">
+          <Name>Paperwork</Name>
+          <StartingSegment SegmentId="PWK" />
+          <Segment SegmentId="PER" Repeat="1" />
+          <Segment SegmentId="N1" Repeat="1" />
+          <Segment SegmentId="N3" Repeat="1" />
+          <Segment SegmentId="N4" Repeat="1" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

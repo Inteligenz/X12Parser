@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--885 Retail Account Characteristics-->
+<TransactionSpecification TransactionSetIdentifierCode="885" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="N1" Usage="Required" Repeat="3" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Loop LoopId="0100">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="G53" Usage="Required" Repeat="1" />
+    <Segment SegmentId="DTM" Usage="Required" Repeat="1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="N1" Repeat="100" />
+    <Segment SegmentId="N9" Repeat="1" />
+    <Segment SegmentId="G13" Repeat="1" />
+    <Segment SegmentId="G18" Repeat="30" />
+    <Segment SegmentId="G29" Repeat="10" />
+    <Segment SegmentId="G30" Repeat="10" />
+    <Segment SegmentId="SPR" Repeat="1" />
+    <Segment SegmentId="RDI" />
+    <Loop LoopId="0110">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

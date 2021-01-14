@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--536 Logistics Reassignment-->
+<TransactionSpecification TransactionSetIdentifierCode="536" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BR" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="20" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Loop LoopId="LM" LoopRepeat="20">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="20">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="10" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="CS" Repeat="1" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="RCD" Repeat="1" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="CON" />
+    <Segment SegmentId="G62" Repeat="50" />
+    <Segment SegmentId="CTP" Repeat="10" />
+    <Segment SegmentId="G69" Repeat="30" />
+    <Segment SegmentId="DD" Repeat="100" />
+    <Segment SegmentId="LDT" Repeat="3" />
+    <Segment SegmentId="MEA" Repeat="5" />
+    <Segment SegmentId="PKG" Repeat="5" />
+    <Segment SegmentId="PWK" Repeat="1" />
+    <Segment SegmentId="MSG" Repeat="10" />
+    <Loop LoopId="LM" LoopRepeat="20">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="50">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="G61" Repeat="10" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

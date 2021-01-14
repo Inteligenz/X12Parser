@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--891 Deduction Research Report-->
+<TransactionSpecification TransactionSetIdentifierCode="891" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N1" Usage="Required" Repeat="2" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Loop LoopId="0100" LoopRepeat="100">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Loop LoopId="0110" LoopRepeat="100">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="N9" />
+      <Segment SegmentId="AMT" Repeat="1" />
+      <Loop LoopId="0111" LoopRepeat="1000">
+        <Name>Adjustment</Name>
+        <StartingSegment SegmentId="ADX" />
+        <Segment SegmentId="AMT" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="10" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

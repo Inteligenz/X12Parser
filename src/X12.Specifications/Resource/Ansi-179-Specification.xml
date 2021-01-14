@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 179 Environmental Compliance Reporting -->
+<TransactionSpecification TransactionSetIdentifierCode="179" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="MTX"/>
+  <Loop LoopId="LM">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="TPB"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="G86"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="DTM"/>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM"/>
+      <Loop LoopId="LQ">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="LOC"/>
+        <Segment SegmentId="MEA"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="QTY">
+      <Name>Quantity Information</Name>
+      <StartingSegment SegmentId="QTY"/>
+      <Segment SegmentId="SPI"/>
+    </Loop>
+    <Loop LoopId="OOI">
+      <Name>Associated Object Type Identification</Name>
+      <StartingSegment SegmentId="OOI"/>
+      <Segment SegmentId="BDS"/>
+    </Loop>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="SPI"/>
+    <Segment SegmentId="REF"/>
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="PWK"/>
+    <Segment SegmentId="MTX"/>
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="MTX"/>
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code SOurce Information</Name>
+      <StartingSegment SegmentId="LM"/>
+      <Loop LoopId="LQ">
+        <Name>Industry Code Identification</Name>
+        <StartingSegment SegmentId="LQ"/>
+        <Segment SegmentId="MEA"/>
+        <Segment SegmentId="QTY"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="DTM"/>
+        <Segment SegmentId="NTE"/>
+        <Loop LoopId="III">
+          <Name>Information</Name>
+          <StartingSegment SegmentId="III"/>
+          <Segment SegmentId="LOC"/>
+          <Segment SegmentId="MEA"/>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="N9">
+      <Name>Extended Reference Information</Name>
+      <StartingSegment SegmentId="N9"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="YNQ"/>
+      <Segment SegmentId="NTE"/>
+      <Loop LoopId="QTY">
+        <Name>Quantity Information</Name>
+        <StartingSegment SegmentId="QTY"/>
+        <Segment SegmentId="III"/>
+        <Segment SegmentId="SPI"/>
+      </Loop>
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM"/>
+        <Loop LoopId="LQ">
+          <Name>Industry Code Identification</Name>
+          <StartingSegment SegmentId="LQ"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="PCT"/>
+          <Segment SegmentId="N1"/>
+          <Segment SegmentId="III"/>
+          <Segment SegmentId="YNQ"/>
+          <Segment SegmentId="SPI"/>
+          <Segment SegmentId="MEA"/>
+          <Segment SegmentId="NTE"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organization Name</Name>
+        <StartingSegment SegmentId="NM1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PER"/>
+        <Segment SegmentId="YNQ"/>
+        <Loop LoopId="QTY">
+          <Name>Quantity Information</Name>
+          <StartingSegment SegmentId="QTY"/>
+          <Segment SegmentId="III"/>
+        </Loop>
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM"/>
+          <Segment SegmentId="LQ"/>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="OOI">
+      <Name>Associated Object Type Identification</Name>
+      <StartingSegment SegmentId="OOI"/>
+      <Segment SegmentId="BDS"/>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

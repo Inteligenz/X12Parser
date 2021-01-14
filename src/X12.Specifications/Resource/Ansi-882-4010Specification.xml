@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--882 Direct Store Delivery Summary Information-->
+<TransactionSpecification TransactionSetIdentifierCode="882" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="G47" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="N9" Repeat="10" />
+  <Segment SegmentId="G61" Repeat="8" />
+  <Segment SegmentId="G23" Repeat="20" />
+  <Loop LoopId="0200" LoopRepeat="9999">
+    <Name>Statement/Invoice Identification</Name>
+    <StartingSegment SegmentId="G48" />
+    <Loop LoopId="0210" LoopRepeat="99">
+      <Name>Allowance or Charge</Name>
+      <StartingSegment SegmentId="G72" />
+      <Segment SegmentId="G73" Repeat="10" />
+    </Loop>
+    <Segment SegmentId="G23" Repeat="20" />
+    <Segment SegmentId="G25" Repeat="1" />
+    <Segment SegmentId="G31" Repeat="1" />
+    <Segment SegmentId="G33" Usage="Required" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="G49" Usage="Required" Repeat="1" />
+</TransactionSpecification>

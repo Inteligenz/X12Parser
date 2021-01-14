@@ -2,8 +2,8 @@
 <TestSettings name="Local" id="26abe35c-8a16-48bc-9471-6e9e1069b36c" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
   <Deployment>
-    <DeploymentItem filename="tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
-    <DeploymentItem filename="src\OopFactory.X12.Rendering\Images\HCFA1500_Red.gif" />
+    <DeploymentItem filename="tests\X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
+    <DeploymentItem filename="src\X12.Rendering\Images\HCFA1500_Red.gif" />
   </Deployment>
   <Execution>
     <TestTypeSpecific>

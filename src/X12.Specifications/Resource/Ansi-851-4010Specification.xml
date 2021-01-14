@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--851 Asset Schedule-->
+<TransactionSpecification TransactionSetIdentifierCode="851" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BLS" Usage="Required" Repeat="1" />
+  <Segment SegmentId="MSG" Repeat="100" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="TXI" Repeat="7" />
+  <Segment SegmentId="TAX" Repeat="5" />
+  <Segment SegmentId="PAM" Repeat="100" />
+  <Segment SegmentId="ITA" Repeat="35" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+  <Segment SegmentId="AMT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="100000">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="LS1">
+    <Name>Asset Item Identification</Name>
+    <StartingSegment SegmentId="LS1" />
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="PO3" Repeat="25" />
+    <Segment SegmentId="PID" Repeat="1000" />
+    <Segment SegmentId="CUR" Repeat="1" />
+    <Segment SegmentId="CTP" Repeat="5" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="TXI" Repeat="7" />
+    <Segment SegmentId="TAX" Repeat="5" />
+    <Segment SegmentId="PAM" Repeat="25" />
+    <Segment SegmentId="ITA" Repeat="35" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="AMT" Repeat="5" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="N9" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="TXI" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,50 @@
+﻿ISA*00*          *00*          *12*3109992367T    *ZZ*IAISNOKIST     *070103*0839*^*00307*000024398*0*P*>~
+  GS*GP*3109992367*IAISNOKIST*20070103*0839*24398*T*004010UCS~
+    ST*880*000024479~
+      G01*20110315*52768927*20110308*1453715~
+      G61*OD*CUSTOMER SERVICE*TE*800-575-8910~
+      G62*11*20110314~
+      NTE*INV*The perishable agricultural commodities listed on this invoice are sol~
+      NTE*INV*d subject to the statutory trust authorized by Section 5(C) of the Per~
+      NTE*INV*ishable Agricultural Commodities Act, 1930 (7U.S.C.499E(C)). The Selle~
+      NTE*INV*r of these commodities retains a trust claim over these commodities, a~
+      NTE*INV*ll inventories of food or other products derived from these commoditie~
+      NTE*INV*s and any receivables or proceeds from the sales of these commodities~
+      NTE*INV*until full payment is received. In the event collection action becomes~
+      NTE*INV* necessary, Buyer agrees to pay all costs of collection, including att~
+      NTE*INV*orneys fees. Failure to pay when due will result in the addition of an~
+      NTE*INV* interest charge at the rate of 1.5% per month. This invoice may not r~
+      NTE*INV*eflect actual customer delivered cost. Compliance with US Law for Comm~
+      NTE*INV*odities, technology or software that are sold domestically: Compliance~
+      NTE*INV* with the U.S. Export Administration Regulations (EAR) must be adhered~
+      NTE*INV* to if the U.S. buyer intends to re-sell products. The buyer must not~
+      NTE*INV*violate any U.S. Export Law, Regulation, Act, or Executive Order. If t~
+      NTE*INV*he buyer in the U.S. is uncertain about any practice that may violate~
+      NTE*INV*US Law regarding our product(s), the U.S. buyer must request guidance~
+      NTE*INV*from our export compliance staff.~
+      G27*H***CUST*Customer Truck~
+      G23*08*3*20110315**2*20110325*10*20110330*15*54202*2655855~
+      G25*CC*04*708002~
+      N1*BT*XYZ*9*0462753010001~
+        N3*PO Box 2140~
+        N4*San Antonio*TX*78297-2140*US~
+      N1*ST*XYZ*9*035703586~
+        N3*221 Airport Dr NW~
+        N4*Albuquerque*NM*87121-2056*US~
+      N1*RE*J. R. SIMPLOT COMPANY*9*0377912820000~
+        N3*91935 Collections Center Dr~
+        N4*Chicago*IL*60693~
+      G72*562*06******76064~
+        G73*Freight To DC~
+      G17*180*CA*xx.xx*007117923104*UK*10071179231042~
+        G69*IHOP Skin-on Fries 3/8" SC 6/5#~
+      G17*45*CA*xx.xx*007117923108*UK*10071179231080~
+        G69*Select Recipe Fries 3/8" SC 6/5#-Skn~
+      G17*30*CA*xx.xx*007117918855*UK*10071179188551~
+        G69*Simplot Classic Blend Peas&DicesCarrot 12/2.5~
+      G17*54*CA*x.xxx*007117936458*UK*10071179364580~
+        G69*Traditional HB Shred IQF 6/3#~
+      G31*1485*CA*40627*LB~
+    SE*46*000024479~
+  GE*1*24398~
+IEA*1*000024398~

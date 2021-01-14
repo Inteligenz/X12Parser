@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--858 Shipment Information-->
+<TransactionSpecification TransactionSetIdentifierCode="858" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="ZC1" Repeat="1" />
+  <Segment SegmentId="BX" Usage="Required" Repeat="1" />
+  <Segment SegmentId="BNX" Repeat="1" />
+  <Segment SegmentId="M3" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="30" />
+  <Segment SegmentId="CM" Repeat="3" />
+  <Segment SegmentId="Y6" Repeat="4" />
+  <Segment SegmentId="Y7" Repeat="1" />
+  <Segment SegmentId="C3" Repeat="1" />
+  <Segment SegmentId="ITD" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="NA" Repeat="999" />
+  <Segment SegmentId="F9" Repeat="1" />
+  <Segment SegmentId="D9" Repeat="1" />
+  <Segment SegmentId="R1" Repeat="1" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="R3" Repeat="13" />
+  <Segment SegmentId="R4" Repeat="5" />
+  <Segment SegmentId="MEA" Repeat="10" />
+  <Segment SegmentId="H3" Repeat="20" />
+  <Segment SegmentId="PS" Repeat="5" />
+  <Segment SegmentId="H6" Repeat="6" />
+  <Segment SegmentId="V4" Repeat="1" />
+  <Segment SegmentId="V5" Repeat="1" />
+  <Loop LoopId="E1" LoopRepeat="2">
+    <Name>Empty Car Disposition - Pended Destinat</Name>
+    <StartingSegment SegmentId="E1" />
+    <Segment SegmentId="E4" Repeat="1" />
+    <Segment SegmentId="E5" Repeat="13" />
+    <Segment SegmentId="PI" Repeat="1" />
+  </Loop>
+  <Segment SegmentId="M1" Repeat="1" />
+  <Segment SegmentId="M2" Repeat="1" />
+  <Segment SegmentId="L7" Repeat="30" />
+  <Segment SegmentId="NTE" Repeat="50" />
+  <Segment SegmentId="XH" Repeat="1" />
+  <Loop LoopId="N7" LoopRepeat="600">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="EM" Repeat="1" />
+    <Segment SegmentId="NA" Repeat="30" />
+    <Segment SegmentId="M7" Repeat="5" />
+    <Segment SegmentId="N5" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="IC" Repeat="1" />
+    <Segment SegmentId="VC" Repeat="21" />
+    <Segment SegmentId="GA" Repeat="15" />
+    <Loop LoopId="E1" LoopRepeat="2">
+      <Name>Empty Car Disposition - Pended Destinat</Name>
+      <StartingSegment SegmentId="E1" />
+      <Segment SegmentId="E4" Repeat="1" />
+      <Segment SegmentId="E5" Repeat="13" />
+      <Segment SegmentId="PI" Repeat="1" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="12">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="H3" Repeat="5" />
+  </Loop>
+  <Loop LoopId="S5" LoopRepeat="999">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="G62" Repeat="6" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="H6" Repeat="6" />
+    <Loop LoopId="N1" LoopRepeat="5">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="FA1">
+    <Name>Type of Financial Accounting Data</Name>
+    <StartingSegment SegmentId="FA1" />
+    <Segment SegmentId="FA2" Usage="Required" />
+    <Segment SegmentId="L10" Repeat="1" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="N7" Repeat="1" />
+    <Segment SegmentId="NA" Repeat="1" />
+    <Segment SegmentId="M7" Repeat="5" />
+    <Segment SegmentId="N5" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="IC" Repeat="1" />
+    <Segment SegmentId="VC" Repeat="24" />
+    <Segment SegmentId="L7" Repeat="10" />
+    <Segment SegmentId="SL1" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="H3" Repeat="1" />
+    <Segment SegmentId="X1" Repeat="6" />
+    <Segment SegmentId="X2" Repeat="1" />
+    <Segment SegmentId="L5" Repeat="10" />
+    <Segment SegmentId="PER" Repeat="5" />
+    <Segment SegmentId="LH2" Repeat="6" />
+    <Segment SegmentId="LHR" Repeat="1" />
+    <Segment SegmentId="LH6" Repeat="5" />
+    <Segment SegmentId="Y7" Repeat="2" />
+    <Segment SegmentId="G62" Repeat="10" />
+    <Segment SegmentId="NTE" Repeat="100" />
+    <Segment SegmentId="LP" Repeat="1" />
+    <Segment SegmentId="AXL" Repeat="12" />
+    <Loop LoopId="L0" LoopRepeat="20">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0" />
+      <Segment SegmentId="L1" Repeat="20" />
+      <Segment SegmentId="MEA" Repeat="10" />
+    </Loop>
+    <Loop LoopId="LH1" LoopRepeat="100">
+      <Name>Hazardous Identification Information</Name>
+      <StartingSegment SegmentId="LH1" />
+      <Segment SegmentId="LH2" Repeat="4" />
+      <Segment SegmentId="LH3" Repeat="12" />
+      <Segment SegmentId="LFH" Repeat="20" />
+      <Segment SegmentId="LEP" Repeat="3" />
+      <Segment SegmentId="LH4" Repeat="1" />
+      <Segment SegmentId="LHT" Repeat="3" />
+      <Segment SegmentId="LHR" Repeat="10" />
+      <Segment SegmentId="PER" Repeat="5" />
+      <Segment SegmentId="LHE" Repeat="1" />
+    </Loop>
+    <Loop LoopId="FA1">
+      <Name>Type of Financial Accounting Data</Name>
+      <StartingSegment SegmentId="FA1" />
+      <Segment SegmentId="FA2" Usage="Required" />
+      <Segment SegmentId="L10" Repeat="1" />
+    </Loop>
+    <Loop LoopId="NM1" LoopRepeat="4">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+    </Loop>
+    <Loop LoopId="N1" LoopRepeat="4">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+    </Loop>
+  </HierarchicalLoop>
+  <Segment SegmentId="L3" Repeat="1" />
+</TransactionSpecification>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd" TransactionSetIdentifierCode="874">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="III"/>
+  <Loop LoopId="N1">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1" />
+  </Loop>
+  <Loop LoopId="N9">
+    <StartingSegment SegmentId="N9" />
+    <Segment SegmentId="DTM"/>
+    <Segment SegmentId="LCD"/>
+    <Segment SegmentId="CS"/>
+    <Segment SegmentId="N1"/>
+    <Segment SegmentId="III"/>
+    <Loop LoopId="SLN">
+      <StartingSegment SegmentId="SLN"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="III"/>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--325 Consolidation of Goods In Container-->
+<TransactionSpecification TransactionSetIdentifierCode="325" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B12" Usage="Required" Repeat="1" />
+  <Segment SegmentId="M7" Repeat="5" />
+  <Segment SegmentId="W09" Repeat="1" />
+  <Segment SegmentId="H3" Repeat="6" />
+  <Segment SegmentId="V1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="V9" Repeat="2" />
+  <Segment SegmentId="L3" Repeat="1" />
+  <Segment SegmentId="C3" Repeat="1" />
+  <Segment SegmentId="R4" Usage="Required" Repeat="4" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Loop LoopId="MBL" LoopRepeat="999">
+    <Name>Bill of Lading</Name>
+    <StartingSegment SegmentId="MBL" />
+    <Segment SegmentId="L3" Repeat="1" />
+    <Segment SegmentId="C3" Repeat="1" />
+    <Segment SegmentId="R4" Repeat="4" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Loop LoopId="N1" LoopRepeat="6">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+    </Loop>
+    <Loop LoopId="LIN" LoopRepeat="999">
+      <Name>Item Identification</Name>
+      <StartingSegment SegmentId="LIN" />
+      <Segment SegmentId="SN1" Usage="Required" Repeat="1" />
+      <Segment SegmentId="PRF" Repeat="1" />
+      <Segment SegmentId="TD1" Usage="Required" Repeat="1" />
+      <Loop LoopId="H1" LoopRepeat="10">
+        <Name>Hazardous Material</Name>
+        <StartingSegment SegmentId="H1" />
+        <Segment SegmentId="H2" Repeat="10" />
+      </Loop>
+      <Segment SegmentId="G20" Repeat="1" />
+      <Segment SegmentId="MAN" Repeat="10" />
+      <Segment SegmentId="UIT" Repeat="1" />
+      <Segment SegmentId="N1" Repeat="1" />
+      <Segment SegmentId="L8" Repeat="1" />
+      <Segment SegmentId="C3" Repeat="1" />
+      <Segment SegmentId="R4" Repeat="4" />
+      <Segment SegmentId="N9" Repeat="10" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

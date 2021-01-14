@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Vehicle Baying Order -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="127">
+  <Segment SegmentId="BVB" Usage="Required"/>
+  <Segment SegmentId="G62" Usage="Required"/>
+  <Segment SegmentId="VC" Repeat="99"/>
+  <Segment SegmentId="SFC" Repeat="20"/>
+</TransactionSpecification>

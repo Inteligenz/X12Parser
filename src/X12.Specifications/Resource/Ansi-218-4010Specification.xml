@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--218 Motor Carrier Tariff Information-->
+<TransactionSpecification TransactionSetIdentifierCode="218" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="TF" Usage="Required" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="5" />
+  <Segment SegmentId="N9" Repeat="10" />
+  <Loop LoopId="0100" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="G61" Repeat="5" />
+    <Segment SegmentId="N9" Repeat="10" />
+  </Loop>
+  <Loop LoopId="2000" LoopRepeat="1">
+    <Name>Tariff Section</Name>
+    <StartingSegment SegmentId="TS" />
+    <Segment SegmentId="G62" Repeat="5" />
+    <Segment SegmentId="CL" Repeat="1" />
+    <Segment SegmentId="WGP" Repeat="1" />
+    <Segment SegmentId="TFR" Repeat="10" />
+    <Segment SegmentId="TFM" Repeat="10" />
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2100" LoopRepeat="9999">
+      <Name>Rate Basis/Scales</Name>
+      <StartingSegment SegmentId="SCL" />
+      <Segment SegmentId="TFM" Repeat="10" />
+      <Segment SegmentId="RTS" Repeat="1" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2200" LoopRepeat="9999">
+      <Name>Rate Basis/Scales</Name>
+      <StartingSegment SegmentId="SCL" />
+      <Segment SegmentId="TFM" Repeat="10" />
+      <Loop LoopId="2210" LoopRepeat="25">
+        <Name>Class</Name>
+        <StartingSegment SegmentId="CL" />
+        <Segment SegmentId="RTS" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2300" LoopRepeat="99999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="GY" Repeat="99" />
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="2310" LoopRepeat="99999">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="GY" Repeat="99" />
+          <Segment SegmentId="SCL" Repeat="1" />
+          <Segment SegmentId="TFR" Repeat="10" />
+          <Segment SegmentId="TFM" Repeat="10" />
+          <Segment SegmentId="RTS" Repeat="1" />
+          <Loop LoopId="LS">
+            <Name>Loop Header</Name>
+            <StartingSegment SegmentId="LS" />
+            <Segment SegmentId="LE" Trailer="true" />
+            <Loop LoopId="2320" LoopRepeat="9999">
+              <Name>Rate Basis/Scales</Name>
+              <StartingSegment SegmentId="SCL" />
+              <Segment SegmentId="RTS" Repeat="1" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2400" LoopRepeat="99999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="GY" Repeat="99" />
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="2410" LoopRepeat="99999">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="GY" Repeat="99" />
+          <Loop LoopId="2420" LoopRepeat="9999">
+            <Name>Rate Basis/Scales</Name>
+            <StartingSegment SegmentId="SCL" />
+            <Segment SegmentId="TFR" Repeat="10" />
+            <Segment SegmentId="TFM" Repeat="10" />
+            <Loop LoopId="2430" LoopRepeat="999">
+              <Name>Class</Name>
+              <StartingSegment SegmentId="CL" />
+              <Segment SegmentId="RTS" Repeat="1" />
+            </Loop>
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2500" LoopRepeat="99999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="GY" Repeat="99" />
+      <Segment SegmentId="SCL" Repeat="1" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2600" LoopRepeat="99999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="GY" Repeat="99" />
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="2610" LoopRepeat="99999">
+          <Name>Assigned Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="GY" Repeat="99" />
+          <Segment SegmentId="TFA" Repeat="1" />
+          <Segment SegmentId="TFD" Repeat="10" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2700" LoopRepeat="9999">
+      <Name>Rate Basis/Scales</Name>
+      <StartingSegment SegmentId="SCL" />
+      <Loop LoopId="LS">
+        <Name>Loop Header</Name>
+        <StartingSegment SegmentId="LS" />
+        <Segment SegmentId="LE" Trailer="true" />
+        <Loop LoopId="2710" LoopRepeat="9999">
+          <Name>Class</Name>
+          <StartingSegment SegmentId="CL" />
+          <Segment SegmentId="TFA" Repeat="1" />
+          <Segment SegmentId="TFD" Repeat="10" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="LS">
+    <Name>Loop Header</Name>
+    <StartingSegment SegmentId="LS" />
+    <Segment SegmentId="LE" Trailer="true" />
+    <Loop LoopId="2800" LoopRepeat="999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="MCT" Repeat="99" />
+      <Segment SegmentId="GY" Repeat="99" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

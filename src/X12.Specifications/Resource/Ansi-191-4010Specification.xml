@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--191 Student Loan Pre-Claims and Claims-->
+<TransactionSpecification TransactionSetIdentifierCode="191" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="DMA" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="YNQ" />
+    <Segment SegmentId="ENR" />
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1" />
+      <Segment SegmentId="IN2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="YNQ" />
+    </Loop>
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="SLI" />
+      <Segment SegmentId="GR" />
+      <Segment SegmentId="DEF" />
+      <Segment SegmentId="YNQ" />
+      <Segment SegmentId="DB" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="AMT" />
+      <Loop LoopId="IN1">
+        <Name>Individual Identification</Name>
+        <StartingSegment SegmentId="IN1" />
+        <Segment SegmentId="IN2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="YNQ" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

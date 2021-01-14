@@ -1,0 +1,39 @@
+﻿ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+    ST*837*873501~
+      BHT*0019*00*0125*19970411*1524*CH~
+      REF*87*004010X097~
+      NM1*41*2*DENTAL ASSOCIATES*****46*579999999~
+        PER*IC*SYDNEY SNOW*TE*2125557987~
+      NM1*40*2*HEISMAN INSURANCE COMPANY*****46*555667777~
+      HL*1**20*1~
+        NM1*85*2*DENTAL ASSOCIATES*****XX*591PD123~
+          N3*10 1/2 SHOEMAKER STREET~
+          N4*COBBLER*CA*99997~
+          REF*TJ*579999999~
+        HL*2*1*22*1~
+          SBR*P*****6***LM~
+          NM1*IL*1*HOWLING*HAL****MI*B99977791G~
+          NM1*PR*2*HEISMAN INSURANCE COMPANY*****PI*999888777~
+          HL*3*2*23*0~
+            PAT*41~
+            NM1*QC*1*DIMPSON*D*J***34*567324788~
+              N3*32 BUFFALO RUN~
+              N4*ROCKING HORSE*CA*99666~
+              DMG*D8*19480601*M~
+              REF*Y4*32323232~
+            CLM*900000032*390***11::1*Y**Y*Y**AA:::CA~
+              DTP*439*D8*19970201~
+              DTP*472*D8*19970202~
+              NM1*82*1*MOGLIE*BRUNO****34*224873702~
+                PRV*PE*ZZ*122300000N~
+              LX*1~
+                SV3*AD:D0330*40****1~
+              LX*2~
+                SV3*AD:D5820*350***I*1~
+                TOO*JP*8~
+                TOO*JP*9~
+                TOO*JP*13~
+    SE*35*873501~
+  GE*1*31~
+IEA*1*000000031~

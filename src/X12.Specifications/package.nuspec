@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>X12.Specifications</id>
+    <version>$version$</version>
+    <title>X12.Specifications</title>
+    <authors>Bradley Van Fleet</authors>
+    <owners>Bradley Van Fleet</owners>
+    <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open source specifications for X12 documents</description>
+    <releaseNotes>
+      * Segregated package from other X12 assemblies
+      * Added documentation to several code files
+      * Migrated spec stylesheets to Resource folder
+    </releaseNotes>
+    <copyright>Copyright © Brad Van Fleet 2018</copyright>
+    <tags>X12 Parser</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net461" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="net461" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="net461" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

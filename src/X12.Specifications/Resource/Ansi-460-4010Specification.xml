@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--460 Railroad Price Distribution Request or Response-->
+<TransactionSpecification TransactionSetIdentifierCode="460" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="REN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PI" Repeat="8" />
+  <Segment SegmentId="PR" Repeat="200" />
+  <Segment SegmentId="SS" Repeat="1" />
+  <Segment SegmentId="SA" Repeat="1" />
+  <Segment SegmentId="CD" Repeat="150" />
+  <Segment SegmentId="RAB" Repeat="48" />
+  <Loop LoopId="PT" LoopRepeat="50">
+    <Name>Patron</Name>
+    <StartingSegment SegmentId="PT" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+  <Loop LoopId="SB" LoopRepeat="50">
+    <Name>Docket Level</Name>
+    <StartingSegment SegmentId="SB" />
+    <Segment SegmentId="GY" Repeat="150" />
+    <Loop LoopId="SC" LoopRepeat="300">
+      <Name>Docket Sub-level</Name>
+      <StartingSegment SegmentId="SC" />
+      <Segment SegmentId="GY" Repeat="150" />
+      <Segment SegmentId="CD" Repeat="150" />
+      <Segment SegmentId="RAB" Repeat="48" />
+      <Loop LoopId="LX" LoopRepeat="60">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="RS" Usage="Required" Repeat="2" />
+        <Segment SegmentId="RD" Repeat="25" />
+        <Loop LoopId="R9" LoopRepeat="2">
+          <Name>Route Code</Name>
+          <StartingSegment SegmentId="R9" />
+          <Segment SegmentId="FK" Repeat="13" />
+          <Loop LoopId="R2B" LoopRepeat="13">
+            <Name>Junctions and Proportions</Name>
+            <StartingSegment SegmentId="R2B" />
+            <Segment SegmentId="R2C" Repeat="25" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

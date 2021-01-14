@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--841 Specifications/Technical Information-->
+<TransactionSpecification TransactionSetIdentifierCode="841" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Loop LoopId="SPI">
+    <Name>Specification Identifier</Name>
+    <StartingSegment SegmentId="SPI" />
+    <Segment SegmentId="RDT" />
+    <Segment SegmentId="NTE" />
+    <Segment SegmentId="X1" Repeat="1" />
+    <Segment SegmentId="X2" Repeat="1" />
+    <Segment SegmentId="X7" Repeat="1" />
+    <Segment SegmentId="AMT" />
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PER" />
+    </Loop>
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Loop LoopId="SPI">
+      <Name>Specification Identifier</Name>
+      <StartingSegment SegmentId="SPI" />
+      <Segment SegmentId="RDT" />
+      <Segment SegmentId="PRR" />
+      <Segment SegmentId="PRT" />
+      <Segment SegmentId="PRS" Repeat="1" />
+      <Segment SegmentId="LIN" Repeat="1" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="N9" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="PID">
+      <Name>Product/Item Description</Name>
+      <StartingSegment SegmentId="PID" />
+      <Segment SegmentId="PKD" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="MEA" />
+      <Segment SegmentId="UIT" />
+      <Segment SegmentId="LOC" Repeat="1" />
+      <Segment SegmentId="PWK" />
+      <Loop LoopId="PKG">
+        <Name>Marking, Packaging, Loading</Name>
+        <StartingSegment SegmentId="PKG" />
+        <Segment SegmentId="MEA" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="REF">
+      <Name>Reference Identification</Name>
+      <StartingSegment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="PER" />
+    </Loop>
+    <Loop LoopId="LX">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="LIN" Repeat="1" />
+      <Segment SegmentId="TMD" Repeat="1" />
+      <Segment SegmentId="MEA" Usage="Required" />
+      <Segment SegmentId="PSD" />
+      <Segment SegmentId="SPS" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="REF" />
+    </Loop>
+    <Loop LoopId="EFI">
+      <Name>Electronic Format Identification</Name>
+      <StartingSegment SegmentId="EFI" />
+      <Segment SegmentId="BIN" Repeat="1" />
+    </Loop>
+    <Loop LoopId="CID">
+      <Name>Characteristic/Class ID</Name>
+      <StartingSegment SegmentId="CID" />
+      <Segment SegmentId="UIT" Repeat="1" />
+      <Segment SegmentId="TMD" />
+      <Segment SegmentId="PSD" Repeat="1" />
+      <Segment SegmentId="CSS" Repeat="1" />
+      <Segment SegmentId="SPS" Repeat="1" />
+      <Segment SegmentId="MSG" />
+      <Loop LoopId="MEA">
+        <Name>Measurements</Name>
+        <StartingSegment SegmentId="MEA" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+      </Loop>
+      <Loop LoopId="STA">
+        <Name>Statistics</Name>
+        <StartingSegment SegmentId="STA" />
+        <Segment SegmentId="DTM" />
+        <Segment SegmentId="REF" />
+      </Loop>
+      <Loop LoopId="CSF">
+        <Name>Conditional Sampling Frequency</Name>
+        <StartingSegment SegmentId="CSF" />
+        <Loop LoopId="LS">
+          <Name>Loop Header</Name>
+          <StartingSegment SegmentId="LS" />
+          <Segment SegmentId="LE" Trailer="true" />
+          <Loop LoopId="CID">
+            <Name>Characteristic/Class ID</Name>
+            <StartingSegment SegmentId="CID" />
+            <Segment SegmentId="MEA" Repeat="1" />
+            <Segment SegmentId="STA" Repeat="1" />
+          </Loop>
+        </Loop>
+      </Loop>
+      <Loop LoopId="EFI">
+        <Name>Electronic Format Identification</Name>
+        <StartingSegment SegmentId="EFI" />
+        <Segment SegmentId="BIN" Repeat="1" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

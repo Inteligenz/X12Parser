@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--859 Freight Invoice-->
+<TransactionSpecification TransactionSetIdentifierCode="859" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B3" Usage="Required" Repeat="1" />
+  <Segment SegmentId="B3A" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="30" />
+  <Segment SegmentId="CM" Repeat="1" />
+  <Segment SegmentId="Y6" Repeat="4" />
+  <Segment SegmentId="Y7" Repeat="1" />
+  <Segment SegmentId="C3" Repeat="1" />
+  <Segment SegmentId="ITD" Repeat="1" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="NA" Repeat="30" />
+  <Segment SegmentId="F9" Repeat="1" />
+  <Segment SegmentId="D9" Repeat="1" />
+  <Segment SegmentId="R1" Repeat="1" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="H3" Repeat="6" />
+  <Segment SegmentId="PS" Repeat="5" />
+  <Segment SegmentId="H6" Repeat="6" />
+  <Segment SegmentId="M1" Repeat="1" />
+  <Segment SegmentId="M2" Repeat="1" />
+  <Segment SegmentId="L7" Repeat="30" />
+  <Segment SegmentId="NTE" Repeat="30" />
+  <Segment SegmentId="XH" Repeat="1" />
+  <Segment SegmentId="P1" Repeat="1" />
+  <Segment SegmentId="ITA" Repeat="1" />
+  <Segment SegmentId="N8" Repeat="499" />
+  <Segment SegmentId="R9" Repeat="1" />
+  <Loop LoopId="H1" LoopRepeat="3">
+    <Name>Hazardous Material</Name>
+    <StartingSegment SegmentId="H1" />
+    <Segment SegmentId="H2" Repeat="2" />
+  </Loop>
+  <Loop LoopId="N7" LoopRepeat="600">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="M7" Repeat="5" />
+    <Segment SegmentId="N5" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="IC" Repeat="1" />
+    <Segment SegmentId="VC" Repeat="21" />
+    <Segment SegmentId="G4" Repeat="1" />
+    <Segment SegmentId="GA" Repeat="15" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="S5" LoopRepeat="50">
+    <Name>Stop Off Details</Name>
+    <StartingSegment SegmentId="S5" />
+    <Segment SegmentId="G62" Repeat="6" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="H6" Repeat="6" />
+    <Loop LoopId="N1" LoopRepeat="5">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N1" Repeat="1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="LX" LoopRepeat="999">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Loop LoopId="N1" LoopRepeat="10">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="L5" Repeat="10" />
+    </Loop>
+    <Loop LoopId="L0" LoopRepeat="10">
+      <Name>Line Item - Quantity and Weight</Name>
+      <StartingSegment SegmentId="L0" />
+      <Segment SegmentId="L1" Repeat="20" />
+      <Segment SegmentId="MEA" Repeat="5" />
+    </Loop>
+    <Segment SegmentId="L7" Repeat="10" />
+    <Segment SegmentId="SL1" Repeat="1" />
+    <Segment SegmentId="R1" Repeat="1" />
+    <Segment SegmentId="LH" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="10" />
+    <Segment SegmentId="X1" Repeat="6" />
+    <Segment SegmentId="X2" Repeat="1" />
+    <Segment SegmentId="P1" Repeat="1" />
+    <Segment SegmentId="POD" Repeat="1" />
+    <Segment SegmentId="FOB" Repeat="1" />
+    <Segment SegmentId="ITA" Repeat="20" />
+    <Segment SegmentId="L8" Repeat="1" />
+    <Segment SegmentId="V9" Repeat="1" />
+    <Segment SegmentId="P2" Repeat="1" />
+    <Segment SegmentId="N7" Repeat="5" />
+    <Loop LoopId="H1" LoopRepeat="3">
+      <Name>Hazardous Material</Name>
+      <StartingSegment SegmentId="H1" />
+      <Segment SegmentId="H2" Repeat="2" />
+    </Loop>
+  </Loop>
+  <Segment SegmentId="L3" Repeat="1" Trailer="true" />
+</TransactionSpecification>

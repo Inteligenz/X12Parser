@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--521 Income or Asset Offset-->
+<TransactionSpecification TransactionSetIdentifierCode="521" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="BPR" Repeat="1" />
+  <Segment SegmentId="NTE" />
+  <Segment SegmentId="TRN" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="PER" />
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="IN2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DTM" />
+    <Segment SegmentId="AD1" />
+    <Segment SegmentId="MSG" />
+    <Loop LoopId="PAM">
+      <Name>Period Amount</Name>
+      <StartingSegment SegmentId="PAM" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+    </Loop>
+    <Loop LoopId="CDS">
+      <Name>Case Description</Name>
+      <StartingSegment SegmentId="CDS" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="PAM" />
+      <Segment SegmentId="DTM" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="IN2" />
+        <Segment SegmentId="N3" Repeat="2" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="AMT" Repeat="1" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

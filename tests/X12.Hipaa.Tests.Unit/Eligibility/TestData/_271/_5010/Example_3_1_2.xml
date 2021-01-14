@@ -1,0 +1,494 @@
+﻿<?xml version="1.0"?>
+<Interchange segment-terminator="~" element-separator="*" sub-element-separator="^">
+  <ISA>
+    <!--Author Information Qualifier-->
+    <ISA01>
+      00<!--No Authorization Information Present-->
+    </ISA01>
+    <!--Author Information-->
+    <ISA02>..........</ISA02>
+    <!--Security Information Qualifer-->
+    <ISA03>
+      01<!--Password-->
+    </ISA03>
+    <!--Security Information-->
+    <ISA04>SECRET....</ISA04>
+    <!--Interchange ID Qualifier-->
+    <ISA05>
+      ZZ<!--Mutually Defined-->
+    </ISA05>
+    <!--Interchange Sender ID-->
+    <ISA06>SUBMITTERS.ID..</ISA06>
+    <!--Interchange ID Qualifier-->
+    <ISA07>
+      ZZ<!--Mutually Defined-->
+    </ISA07>
+    <!--Interchange Receiver ID-->
+    <ISA08>RECEIVERS.ID...</ISA08>
+    <!--Interchange Date-->
+    <ISA09>030101</ISA09>
+    <!--Interchange Time-->
+    <ISA10>1253</ISA10>
+    <!--Inter Control Standards Identifier-->
+    <ISA11>
+      <ISA1101 />
+      <ISA1102 />
+    </ISA11>
+    <!--Inter Control Version Number-->
+    <ISA12>00501</ISA12>
+    <!--Inter Control Number-->
+    <ISA13>000000905</ISA13>
+    <!--Acknowlegment Requested-->
+    <ISA14>
+      1<!--Interchange Acknowledgment Requested-->
+    </ISA14>
+    <!--Usage Indicator-->
+    <ISA15>
+      T<!--Test Data-->
+    </ISA15>
+    <!--Component Element Separator-->
+    <ISA16>
+      <ISA1601 />
+      <ISA1602 />
+    </ISA16>
+  </ISA>
+  <FunctionGroup>
+    <GS>
+      <!--Functional Identifier Code-->
+      <GS01>XX</GS01>
+      <!--Application Sender's Code-->
+      <GS02>SENDER CODE</GS02>
+      <!--Application Receiver's Code-->
+      <GS03>RECEIVER CODE</GS03>
+      <!--Date-->
+      <GS04>19991231</GS04>
+      <!--Time-->
+      <GS05>0802</GS05>
+      <!--Group Control Number-->
+      <GS06>1</GS06>
+      <!--Responsible Agency Code-->
+      <GS07>
+        X<!--Accredited Standards Committee X12-->
+      </GS07>
+      <!--Version/Release/Industry Identifier Code-->
+      <GS08>005010X279</GS08>
+    </GS>
+    <Transaction ControlNumber="4321">
+      <ST>
+        <!--Transaction Set Identifier Code-->
+        <ST01>271</ST01>
+        <!--Transaction Set Control Number-->
+        <ST02>4321</ST02>
+        <!--Implementation Convention Reference-->
+        <ST03>005010X279</ST03>
+      </ST>
+      <BHT>
+        <!--Hierarchical Structure Code-->
+        <BHT01>
+          0022<!--Information Source, Information Receiver, Subscriber, Dependent-->
+        </BHT01>
+        <!--Transaction Set Purpose Code-->
+        <BHT02>11</BHT02>
+        <!--Reference Identification-->
+        <BHT03>10001234</BHT03>
+        <!--Date-->
+        <BHT04>20060501</BHT04>
+        <!--Time-->
+        <BHT05>1319</BHT05>
+      </BHT>
+      <HierarchicalLoop LoopId="2000A" LoopName="Information Source Level" Id="1" ParentId="">
+        <HL>
+          <!--Hierarchical ID Number-->
+          <HL01>1</HL01>
+          <HL02 />
+          <!--Level Code-->
+          <HL03>
+            20<!--Information Source-->
+          </HL03>
+          <!--Hierarchical Child Code-->
+          <HL04>
+            1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure-->
+          </HL04>
+        </HL>
+        <Loop LoopId="2100A" Name="Information Source Name">
+          <NM1>
+            <!--Entity Identifier Code-->
+            <NM101>PR</NM101>
+            <!--Entity Type Qualifier-->
+            <NM102>
+              2<!--Non-Person Entity-->
+            </NM102>
+            <!--Name Last or Organization Name-->
+            <NM103>ABC COMPANY</NM103>
+            <NM104 />
+            <NM105 />
+            <NM106 />
+            <NM107 />
+            <!--Identification Code Qualifier-->
+            <NM108>
+              PI<!--Payor Identification-->
+            </NM108>
+            <!--Identification Code-->
+            <NM109>842610001</NM109>
+          </NM1>
+        </Loop>
+        <HierarchicalLoop LoopId="2100B" LoopName="Information Receiver Level" Id="2" ParentId="1">
+          <HL>
+            <!--Hierarchical ID Number-->
+            <HL01>2</HL01>
+            <!--Hierarchical Parent ID Number-->
+            <HL02>1</HL02>
+            <!--Level Code-->
+            <HL03>
+              21<!--Information Receiver-->
+            </HL03>
+            <!--Hierarchical Child Code-->
+            <HL04>
+              1<!--Additional Subordinate HL Data Segment in This Hierarchical Structure-->
+            </HL04>
+          </HL>
+          <Loop LoopId="2100B" Name="Information Receiver Name">
+            <NM1>
+              <!--Entity Identifier Code-->
+              <NM101>1P</NM101>
+              <!--Entity Type Qualifier-->
+              <NM102>
+                2<!--Non-Person Entity-->
+              </NM102>
+              <!--Name Last or Organization Name-->
+              <NM103>BONE AND JOINT CLINIC</NM103>
+              <NM104 />
+              <NM105 />
+              <NM106 />
+              <NM107 />
+              <!--Identification Code Qualifier-->
+              <NM108>
+                SV<!--Service Provider Number-->
+              </NM108>
+              <!--Identification Code-->
+              <NM109>2000035</NM109>
+            </NM1>
+          </Loop>
+          <HierarchicalLoop LoopId="2000C" LoopName="Subscriber Level" Id="3" ParentId="2">
+            <HL>
+              <!--Hierarchical ID Number-->
+              <HL01>3</HL01>
+              <!--Hierarchical Parent ID Number-->
+              <HL02>2</HL02>
+              <!--Level Code-->
+              <HL03>
+                22<!--Subscriber-->
+              </HL03>
+              <!--Hierarchical Child Code-->
+              <HL04>
+                0<!--No Subordinate HL Segment in This Hiearchical Structure-->
+              </HL04>
+            </HL>
+            <TRN>
+              <!--Trace Type Code-->
+              <TRN01>2</TRN01>
+              <!--Reference Identification-->
+              <TRN02>93175-012547</TRN02>
+              <!--Originating Company Identifier-->
+              <TRN03>9877281234</TRN03>
+            </TRN>
+            <Loop LoopId="2100C" Name="Subscriber Name">
+              <NM1>
+                <!--Entity Identifier Code-->
+                <NM101>IL</NM101>
+                <!--Entity Type Qualifier-->
+                <NM102>
+                  1<!--Person-->
+                </NM102>
+                <!--Name Last or Organization Name-->
+                <NM103>SMITH</NM103>
+                <!--Name First-->
+                <NM104>JOHN</NM104>
+                <NM105 />
+                <NM106 />
+                <NM107 />
+                <!--Identification Code Qualifier-->
+                <NM108>
+                  MI<!--Member Identification Number-->
+                </NM108>
+                <!--Identification Code-->
+                <NM109>123456789</NM109>
+              </NM1>
+              <N3>
+                <!--Address Information-->
+                <N301>15197 BROADWAY AVENUE</N301>
+                <!--Address Information-->
+                <N302>APT 215</N302>
+              </N3>
+              <N4>
+                <!--City Name-->
+                <N401>KANSAS CITY</N401>
+                <!--State or Provice Code-->
+                <N402>MO</N402>
+                <!--Postal Code-->
+                <N403>64108</N403>
+              </N4>
+              <DMG>
+                <!--Date Time Period Format Qualifier-->
+                <DMG01>
+                  D8<!--Date Expressed in Format CCYYMMDD-->
+                </DMG01>
+                <!--Date Time Period-->
+                <DMG02>19630519</DMG02>
+                <!--Gender Code-->
+                <DMG03>
+                  M<!--Male-->
+                </DMG03>
+              </DMG>
+              <DTP>
+                <!--Data/Time Qualifier-->
+                <DTP01>346</DTP01>
+                <!--Date Time Period Format Qualifier-->
+                <DTP02>
+                  D8<!--Date Expression in Format CCYYMMDD-->
+                </DTP02>
+                <!--Date Time Period-->
+                <DTP03>20060101</DTP03>
+              </DTP>
+              <Loop LoopId="2110C" Name="Subscriber Eligibility or Benefit Information">
+                <EB>
+                  <!--Eligibility or Benefit Information-->
+                  <EB01>
+                    1<!--Active Coverage-->
+                  </EB01>
+                  <EB02 />
+                  <!--Service Type Code-->
+                  <EB03>
+                    30<!--Health Benefit Plan Coverage-->
+                  </EB03>
+                  <EB04 />
+                  <!--Plan Coverage Description-->
+                  <EB05>GOLD 123 PLAN</EB05>
+                </EB>
+              </Loop>
+              <Loop LoopId="2110C" Name="Subscriber Eligibility or Benefit Information">
+                <EB>
+                  <!--Eligibility or Benefit Information-->
+                  <EB01>
+                    L<!--Primary Care Provider-->
+                  </EB01>
+                </EB>
+                <Loop LoopId="LS" Name="Loop">
+                  <LS>
+                    <LS01>2120</LS01>
+                  </LS>
+                  <Loop LoopId="2120C" Name="Subscriber Benefit Related Entity Name">
+                    <NM1>
+                      <!--Entity Identifier Code-->
+                      <NM101>P3</NM101>
+                      <!--Entity Type Qualifier-->
+                      <NM102>
+                        1<!--Person-->
+                      </NM102>
+                      <!--Name Last or Organization Name-->
+                      <NM103>JONES</NM103>
+                      <!--Name First-->
+                      <NM104>MARCUS</NM104>
+                      <NM105 />
+                      <NM106 />
+                      <NM107 />
+                      <!--Identification Code Qualifier-->
+                      <NM108>
+                        SV<!--Service Provider Number-->
+                      </NM108>
+                      <!--Identification Code-->
+                      <NM109>0202034</NM109>
+                    </NM1>
+                  </Loop>
+                  <LE>
+                    <LE01>2120</LE01>
+                  </LE>
+                </Loop>
+              </Loop>
+              <Loop LoopId="2110C" Name="Subscriber Eligibility or Benefit Information">
+                <EB>
+                  <!--Eligibility or Benefit Information-->
+                  <EB01>
+                    1<!--Active Coverage-->
+                  </EB01>
+                  <EB02 />
+                  <!--Service Type Code-->
+                  <EB03>
+                    <EB0301>
+                      1<!--Medical Care-->
+                    </EB0301>
+                    <EB0302>
+                      33<!--Chiropractic-->
+                    </EB0302>
+                    <EB0303>
+                      35<!--Dental Care-->
+                    </EB0303>
+                    <EB0304>
+                      47<!--Hospital-->
+                    </EB0304>
+                    <EB0305>
+                      86<!--Emergency Services-->
+                    </EB0305>
+                    <EB0306>
+                      88<!--Pharmacy-->
+                    </EB0306>
+                    <EB0307>
+                      98<!--Professional (Physician) Visit - Office-->
+                    </EB0307>
+                    <EB0308>
+                      AL<!--Vision (Optometry)-->
+                    </EB0308>
+                    <EB0309>
+                      MH<!--Mental Health-->
+                    </EB0309>
+                    <EB0310>
+                      UC<!--Urgent Care-->
+                    </EB0310>
+                  </EB03>
+                </EB>
+              </Loop>
+              <Loop LoopId="2110C" Name="Subscriber Eligibility or Benefit Information">
+                <EB>
+                  <!--Eligibility or Benefit Information-->
+                  <EB01>
+                    B<!--Co-Payment-->
+                  </EB01>
+                  <EB02 />
+                  <!--Service Type Code-->
+                  <EB03>
+                    <EB0301>
+                      1<!--Medical Care-->
+                    </EB0301>
+                    <EB0302>
+                      33<!--Chiropractic-->
+                    </EB0302>
+                    <EB0303>
+                      35<!--Dental Care-->
+                    </EB0303>
+                    <EB0304>
+                      47<!--Hospital-->
+                    </EB0304>
+                    <EB0305>
+                      86<!--Emergency Services-->
+                    </EB0305>
+                    <EB0306>
+                      88<!--Pharmacy-->
+                    </EB0306>
+                    <EB0307>
+                      98<!--Professional (Physician) Visit - Office-->
+                    </EB0307>
+                    <EB0308>
+                      AL<!--Vision (Optometry)-->
+                    </EB0308>
+                    <EB0309>
+                      MH<!--Mental Health-->
+                    </EB0309>
+                    <EB0310>
+                      UC<!--Urgent Care-->
+                    </EB0310>
+                  </EB03>
+                  <!--Insurance Type Code-->
+                  <EB04>
+                    HM<!--Health Maintenance Organization (HMO)-->
+                  </EB04>
+                  <!--Plan Coverage Description-->
+                  <EB05>GOLD 123 PLAN</EB05>
+                  <!--Time Period Qualifier-->
+                  <EB06>
+                    27<!--Visit-->
+                  </EB06>
+                  <!--Monetary Amount-->
+                  <EB07>10</EB07>
+                  <EB08 />
+                  <EB09 />
+                  <EB10 />
+                  <EB11 />
+                  <!--In Plan Network Indicator-->
+                  <EB12>Y</EB12>
+                </EB>
+              </Loop>
+              <Loop LoopId="2110C" Name="Subscriber Eligibility or Benefit Information">
+                <EB>
+                  <!--Eligibility or Benefit Information-->
+                  <EB01>
+                    B<!--Co-Payment-->
+                  </EB01>
+                  <EB02 />
+                  <!--Service Type Code-->
+                  <EB03>
+                    <EB0301>
+                      1<!--Medical Care-->
+                    </EB0301>
+                    <EB0302>
+                      33<!--Chiropractic-->
+                    </EB0302>
+                    <EB0303>
+                      35<!--Dental Care-->
+                    </EB0303>
+                    <EB0304>
+                      47<!--Hospital-->
+                    </EB0304>
+                    <EB0305>
+                      86<!--Emergency Services-->
+                    </EB0305>
+                    <EB0306>
+                      88<!--Pharmacy-->
+                    </EB0306>
+                    <EB0307>
+                      98<!--Professional (Physician) Visit - Office-->
+                    </EB0307>
+                    <EB0308>
+                      AL<!--Vision (Optometry)-->
+                    </EB0308>
+                    <EB0309>
+                      MH<!--Mental Health-->
+                    </EB0309>
+                    <EB0310>
+                      UC<!--Urgent Care-->
+                    </EB0310>
+                  </EB03>
+                  <!--Insurance Type Code-->
+                  <EB04>
+                    HM<!--Health Maintenance Organization (HMO)-->
+                  </EB04>
+                  <!--Plan Coverage Description-->
+                  <EB05>GOLD 123 PLAN</EB05>
+                  <!--Time Period Qualifier-->
+                  <EB06>
+                    27<!--Visit-->
+                  </EB06>
+                  <!--Monetary Amount-->
+                  <EB07>30</EB07>
+                  <EB08 />
+                  <EB09 />
+                  <EB10 />
+                  <EB11 />
+                  <!--In Plan Network Indicator-->
+                  <EB12>N</EB12>
+                </EB>
+              </Loop>
+            </Loop>
+          </HierarchicalLoop>
+        </HierarchicalLoop>
+      </HierarchicalLoop>
+      <SE>
+        <!--Number of Included Segments-->
+        <SE01>22</SE01>
+        <!--Transaction Set Control Number-->
+        <SE02>4321</SE02>
+      </SE>
+    </Transaction>
+    <GE>
+      <!--Number of Transaction Sets Included-->
+      <GE01>1</GE01>
+      <!--Group Control Number-->
+      <GE02>1</GE02>
+    </GE>
+  </FunctionGroup>
+  <IEA>
+    <!--Number of Included Functional Groups-->
+    <IEA01>1</IEA01>
+    <!--Interchange Control Number-->
+    <IEA02>000000905</IEA02>
+  </IEA>
+</Interchange>

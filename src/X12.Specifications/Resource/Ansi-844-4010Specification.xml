@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--844 Product Transfer Account Adjustment-->
+<TransactionSpecification TransactionSetIdentifierCode="844" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BAA" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="10" />
+  <Segment SegmentId="REF" Repeat="12" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+  <Segment SegmentId="AMT" Repeat="5" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="50">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="CON" LoopRepeat="10000">
+    <Name>Contract Number Detail</Name>
+    <StartingSegment SegmentId="CON" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Loop LoopId="N1" LoopRepeat="50">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Loop LoopId="SII">
+        <Name>Sales Item Information</Name>
+        <StartingSegment SegmentId="SII" />
+        <Segment SegmentId="N9" Repeat="1" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="PAD" LoopRepeat="1000">
+      <Name>Product Adjustment Detail</Name>
+      <StartingSegment SegmentId="PAD" />
+      <Segment SegmentId="LIN" Repeat="1" />
+      <Segment SegmentId="PID" Repeat="200" />
+      <Segment SegmentId="MEA" Repeat="40" />
+      <Segment SegmentId="UIT" Repeat="5" />
+      <Segment SegmentId="QTY" Repeat="5" />
+      <Segment SegmentId="AMT" Repeat="2" />
+      <Segment SegmentId="RCD" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="DTM" Repeat="10" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="SSS" Repeat="1" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

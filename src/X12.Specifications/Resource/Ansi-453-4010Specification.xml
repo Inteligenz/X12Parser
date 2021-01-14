@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--453 Railroad Service Commitment Advice-->
+<TransactionSpecification TransactionSetIdentifierCode="453" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="SSC" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTP" Usage="Required" Repeat="2" />
+  <Segment SegmentId="N1" Repeat="999999" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Segment SegmentId="OD" Repeat="1" />
+  <Segment SegmentId="PI" Repeat="10" />
+  <Segment SegmentId="PR" Repeat="99" />
+  <Segment SegmentId="CT" Repeat="99" />
+  <Segment SegmentId="APR" Repeat="99" />
+  <Segment SegmentId="SHR" Repeat="99" />
+  <Loop LoopId="SR" LoopRepeat="7">
+    <Name>Requested Service Schedule</Name>
+    <StartingSegment SegmentId="SR" />
+    <Loop LoopId="LX" LoopRepeat="999999">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="ISD" Repeat="15" />
+      <Segment SegmentId="ISC" Repeat="999999" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

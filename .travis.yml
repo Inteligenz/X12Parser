@@ -1,0 +1,10 @@
+language: csharp
+solution: X12.sln
+mono:
+  - latest
+install:
+  - nuget restore X12.sln
+  - nuget install NUnit.Runners -Version 3.9.0 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release X12.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./tests/X12.Tests.Unit/bin/Release/X12.Tests.Unit.dll

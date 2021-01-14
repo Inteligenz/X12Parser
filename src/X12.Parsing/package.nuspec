@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>X12.Parsing</id>
+    <version>$version$</version>
+    <title>X12.Parsing</title>
+    <authors>Bradley Van Fleet</authors>
+    <owners>Bradley Van Fleet</owners>
+    <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open source parsing utilities for X12 document handling</description>
+    <releaseNotes>
+      * Segregated package from other X12 assemblies
+      * Added documentation to several code files
+      * Corrected several bugs and updated code to latest style and best coding practices
+    </releaseNotes>
+    <copyright>Copyright © Brad Van Fleet 2018</copyright>
+    <tags>X12 Parser</tags>
+    <dependencies>
+      <dependency id="X12.Shared" version="$version$" />
+      <dependency id="X12.Specifications" version="$version$" />
+      <dependency id="X12.Transformations" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--319 Terminal Information-->
+<TransactionSpecification TransactionSetIdentifierCode="319" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BA2" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CD1" Usage="Required" Repeat="999" />
+</TransactionSpecification>

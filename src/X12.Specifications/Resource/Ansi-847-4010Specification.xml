@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--847 Material Claim-->
+<TransactionSpecification TransactionSetIdentifierCode="847" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BHT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="AMT" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="100" />
+  <Segment SegmentId="DTM" Repeat="10" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="CTT" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="10">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <HierarchicalLoop LoopId="HL">
+    <Name>Hierarchical Level</Name>
+    <Segment SegmentId="LIN" Usage="Required" Repeat="1" />
+    <Segment SegmentId="NTE" Repeat="100" />
+    <Segment SegmentId="PID" Repeat="5" />
+    <Segment SegmentId="QTY" Repeat="10" />
+    <Segment SegmentId="MEA" Repeat="10" />
+    <Segment SegmentId="SHP" Repeat="5" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="DTM" Repeat="10" />
+    <Segment SegmentId="PKG" Repeat="5" />
+    <Segment SegmentId="CTP" Repeat="10" />
+    <Segment SegmentId="SAC" Repeat="10" />
+    <Loop LoopId="N1" LoopRepeat="10">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+      <Segment SegmentId="DTM" Repeat="10" />
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

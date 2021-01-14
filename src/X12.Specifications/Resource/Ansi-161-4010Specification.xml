@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--161 Train Sheet-->
+<TransactionSpecification TransactionSetIdentifierCode="161" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BTS" />
+  <Segment SegmentId="V9" />
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="H3" />
+  <Segment SegmentId="FAC"/>
+  <Segment SegmentId="PWK" />
+  <Segment SegmentId="PER" />
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+</TransactionSpecification>

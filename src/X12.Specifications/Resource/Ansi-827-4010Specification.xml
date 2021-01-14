@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--827 Financial Return Notice-->
+<TransactionSpecification TransactionSetIdentifierCode="827" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="RIC" Usage="Required" Repeat="1" />
+  <Segment SegmentId="TRN" Repeat="2" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="DTM" />
+  <Loop LoopId="NM1" LoopRepeat="10">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+</TransactionSpecification>

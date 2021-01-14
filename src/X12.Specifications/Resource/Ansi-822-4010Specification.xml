@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--822 Account Analysis-->
+<TransactionSpecification TransactionSetIdentifierCode="822" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="3" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="RTE">
+    <Name>Rate Information</Name>
+    <StartingSegment SegmentId="RTE" />
+    <Segment SegmentId="DTM" Repeat="1" />
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+    <Loop LoopId="ACT">
+      <Name>Account Identification</Name>
+      <StartingSegment SegmentId="ACT" />
+      <Segment SegmentId="CUR" Repeat="1" />
+      <Segment SegmentId="ADJ" Repeat="1000" />
+      <Loop LoopId="RTE">
+        <Name>Rate Information</Name>
+        <StartingSegment SegmentId="RTE" />
+        <Segment SegmentId="DTM" Repeat="1" />
+      </Loop>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="BLN" Usage="Required" />
+        <Segment SegmentId="DTM" Repeat="5" />
+      </Loop>
+      <Loop LoopId="SER">
+        <Name>Service Charges</Name>
+        <StartingSegment SegmentId="SER" />
+        <Segment SegmentId="CTP" Repeat="99" />
+        <Segment SegmentId="DTM" Repeat="5" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

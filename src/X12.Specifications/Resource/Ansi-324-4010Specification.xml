@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--324 Vessel Stow Plan (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="324" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="V1" Usage="Required" Repeat="1" />
+  <Loop LoopId="R4" LoopRepeat="20">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4" />
+    <Segment SegmentId="DTM" Repeat="15" />
+  </Loop>
+  <Loop LoopId="N7" LoopRepeat="9999">
+    <Name>Equipment Details</Name>
+    <StartingSegment SegmentId="N7" />
+    <Segment SegmentId="M7" Repeat="5" />
+    <Segment SegmentId="ED" Repeat="1" />
+    <Segment SegmentId="NA" Repeat="2" />
+    <Segment SegmentId="V4" Usage="Required" Repeat="1" />
+    <Segment SegmentId="R4" Repeat="9" />
+    <Segment SegmentId="W09" Repeat="1" />
+    <Segment SegmentId="H3" Repeat="6" />
+    <Segment SegmentId="H1" Repeat="4" />
+    <Segment SegmentId="N9" Repeat="10" />
+  </Loop>
+</TransactionSpecification>

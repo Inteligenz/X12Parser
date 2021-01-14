@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Student Loan Application -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="135">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="SLI"/>
+  <Segment SegmentId="DB"/>
+  <Segment SegmentId="DEF"/>
+  <Segment SegmentId="DTP"/>
+  <Segment SegmentId="GR"/>
+  <Loop LoopId="LX">
+    <Name/>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="LQ"/>
+    <Segment SegmentId="SAD"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="QTY"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <Loop LoopId="ENT">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT"/>
+    <Segment SegmentId="NTE"/>
+    <Segment SegmentId="ENR"/>
+    <Segment SegmentId="FNA"/>
+    <Segment SegmentId="AMT"/>
+    <Segment SegmentId="MEA"/>
+    <Segment SegmentId="SCT"/>
+    <Segment SegmentId="DTP"/>
+    <Segment SegmentId="Y6"/>
+    <Segment SegmentId="IDB"/>
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="PER"/>
+    </Loop>
+    <Loop LoopId="PLI">
+      <Name>Previous Loan Information</Name>
+      <StartingSegment SegmentId="PLI"/>
+      <Segment SegmentId="N1"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+    </Loop>
+    <Loop LoopId="IN1">
+      <Name>Individual Identification</Name>
+      <StartingSegment SegmentId="IN1"/>
+      <Segment SegmentId="IN2"/>
+      <Segment SegmentId="DMG"/>
+      <Segment SegmentId="DMA"/>
+      <Loop LoopId="LX">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="DTP"/>
+        <Segment SegmentId="PER"/>
+      </Loop>
+    </Loop>
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
+    </Loop>
+  </Loop>  
+</TransactionSpecification>

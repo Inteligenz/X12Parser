@@ -2,7 +2,7 @@
 <TestSettings name="Trace and Test Impact" id="2a2938fc-a2c2-44fa-97d8-f9d5fc741b40" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are test settings for Trace and Test Impact.</Description>
   <Deployment>
-    <DeploymentItem filename="tests\OopFactory.X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
+    <DeploymentItem filename="tests\X12.Tests.Unit\Parsing\_SampleEdiFiles\SampleEdiFileInventory.xml" />
   </Deployment>
   <Execution>
     <TestTypeSpecific>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>X12.Sql</id>
+    <version>$version$</version>
+    <title>X12.Sql</title>
+    <authors>Bradley Van Fleet</authors>
+    <owners>Bradley Van Fleet</owners>
+    <licenseUrl>https://github.com/bvanfleet/X12.NET/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bvanfleet/X12.NET</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/wiki/bvanfleet/X12.NET/X12Icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open Source SQL repository utilities for X12 data</description>
+    <releaseNotes>
+      * Segregated package from other X12 assemblies
+      * Added documentation to several code files
+      * Split DbCreation into smaller classes and new interfaces for improved cohesion and coupling
+    </releaseNotes>
+    <copyright>Copyright © Brad Van Fleet 2018</copyright>
+    <tags>X12 parser</tags>
+    <dependencies>
+      <dependency id="X12.Parsing" version="$version$" />
+      <dependency id="X12.Shared" version="$version$" />
+      <dependency id="X12.Specifications" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>

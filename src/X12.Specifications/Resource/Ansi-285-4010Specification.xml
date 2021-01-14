@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--285 Commercial Vehicle Safety and Credentials Information Exchange-->
+<TransactionSpecification TransactionSetIdentifierCode="285" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NM1" />
+  <Loop LoopId="NX1">
+    <Name>Property or Entity Identification</Name>
+    <StartingSegment SegmentId="NX1" />
+    <Segment SegmentId="N9" Usage="Required" />
+    <Loop LoopId="LM">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="1" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTM" />
+      <Segment SegmentId="DMG" Repeat="1" />
+      <Segment SegmentId="DMA" Repeat="1" />
+      <Segment SegmentId="DVI" Repeat="1" />
+      <Segment SegmentId="VC1" Repeat="1" />
+      <Segment SegmentId="VEH" Repeat="1" />
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="PER" Repeat="1" />
+        <Segment SegmentId="REF" />
+        <Segment SegmentId="MEA" />
+        <Segment SegmentId="QTY" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="LS">
+      <Name>Loop Header</Name>
+      <StartingSegment SegmentId="LS" />
+      <Segment SegmentId="LE" Trailer="true" />
+      <Loop LoopId="LM" LoopRepeat="">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" Usage="Required" Repeat="1" />
+        <Segment SegmentId="YNQ" />
+        <Segment SegmentId="REF" Repeat="1" />
+        <Segment SegmentId="QTY" Repeat="1" />
+        <Segment SegmentId="PCT" Repeat="1" />
+        <Segment SegmentId="AMT" Repeat="1" />
+        <Segment SegmentId="SPR" Repeat="1" />
+        <Segment SegmentId="SRE" Repeat="1" />
+        <Segment SegmentId="STA" />
+        <Segment SegmentId="MEA" Repeat="1" />
+        <Segment SegmentId="DTM" Repeat="1" />
+        <Segment SegmentId="NTE" />
+        <Loop LoopId="TC2">
+          <Name>Commodity</Name>
+          <StartingSegment SegmentId="TC2" />
+          <Segment SegmentId="H1" Repeat="1" />
+          <Segment SegmentId="PER" Repeat="1" />
+          <Loop LoopId="N4" LoopRepeat="">
+            <Name>Geographic Location</Name>
+            <StartingSegment SegmentId="N4" />
+            <Segment SegmentId="REF" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

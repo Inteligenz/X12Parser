@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--437 Railroad Junctions and Interchanges Activity-->
+<TransactionSpecification TransactionSetIdentifierCode="437" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BJF" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+  <Segment SegmentId="JCT" Repeat="1" />
+  <Loop LoopId="JS" LoopRepeat="2">
+    <Name>Rail Junction Settlement Role Informati</Name>
+    <StartingSegment SegmentId="JS" />
+    <Segment SegmentId="DTM" Repeat="2" />
+    <Segment SegmentId="SID" Repeat="20" />
+  </Loop>
+</TransactionSpecification>

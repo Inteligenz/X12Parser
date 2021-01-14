@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--715 Intermodal Group Loading Plan-->
+<TransactionSpecification TransactionSetIdentifierCode="715" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="GR2" Usage="Required" Repeat="1" />
+  <Segment SegmentId="V1" Repeat="1" />
+  <Segment SegmentId="N4" Repeat="1" />
+  <Loop LoopId="GR4" LoopRepeat="100">
+    <Name>Loading Cluster</Name>
+    <StartingSegment SegmentId="GR4" />
+    <Segment SegmentId="REF" Repeat="5" />
+    <Loop LoopId="N7" LoopRepeat="9999">
+      <Name>Equipment Details</Name>
+      <StartingSegment SegmentId="N7" />
+      <Segment SegmentId="GR5" Repeat="10" />
+      <Segment SegmentId="V1" Repeat="1" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="R4" Repeat="10" />
+      <Segment SegmentId="REF" Repeat="5" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

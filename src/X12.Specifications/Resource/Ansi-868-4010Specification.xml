@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--868 Electronic Form Structure-->
+<TransactionSpecification TransactionSetIdentifierCode="868" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="E01" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DMI" Repeat="100" />
+  <Segment SegmentId="E03" Repeat="100" />
+  <Segment SegmentId="MSG" Repeat="1000" />
+  <Loop LoopId="E10" LoopRepeat="1000">
+    <Name>Transaction Set Grouping</Name>
+    <StartingSegment SegmentId="E10" />
+    <Segment SegmentId="E13" Repeat="1000" />
+  </Loop>
+  <Loop LoopId="E20" LoopRepeat="1000">
+    <Name>Segment Header Information</Name>
+    <StartingSegment SegmentId="E20" />
+    <Segment SegmentId="E22" Repeat="100" />
+    <Loop LoopId="E24" LoopRepeat="100">
+      <Name>Data Element Sequence in a Segment</Name>
+      <StartingSegment SegmentId="E24" />
+      <Segment SegmentId="E26" Repeat="100" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="E30" LoopRepeat="2000">
+    <Name>Data Element Attributes</Name>
+    <StartingSegment SegmentId="E30" />
+    <Segment SegmentId="DAI" Repeat="10" />
+    <Segment SegmentId="QTY" Repeat="1" />
+    <Loop LoopId="E34" LoopRepeat="100000">
+      <Name>Code List Values for a Data Element</Name>
+      <StartingSegment SegmentId="E34" />
+      <Segment SegmentId="DDI" Repeat="20" />
+      <Segment SegmentId="DAI" Repeat="5" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="E40" LoopRepeat="10000">
+    <Name>EDI Standards Note Reference</Name>
+    <StartingSegment SegmentId="E40" />
+    <Segment SegmentId="DMI" Repeat="100" />
+    <Segment SegmentId="DDI" Repeat="1000" />
+  </Loop>
+</TransactionSpecification>

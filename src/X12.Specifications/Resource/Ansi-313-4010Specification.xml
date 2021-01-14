@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--313 Shipment Status Inquiry (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="313" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="B4" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="25" />
+  <Segment SegmentId="N1" Repeat="2" />
+</TransactionSpecification>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--881 Manufacturer Coupon Redemption Detail-->
+<TransactionSpecification TransactionSetIdentifierCode="881" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="REF" Repeat="5" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Loop LoopId="0100" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Invoice Identification</Name>
+    <StartingSegment SegmentId="G01" />
+    <Segment SegmentId="QTY" Usage="Required" Repeat="4" />
+    <Segment SegmentId="AMT" Usage="Required" Repeat="2" />
+    <Loop LoopId="0210" LoopRepeat="10">
+      <Name>Allowance or Charge</Name>
+      <StartingSegment SegmentId="G72" />
+      <Segment SegmentId="G73" Repeat="1" />
+    </Loop>
+    <Loop LoopId="0220">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="1" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="N9" Repeat="1" />
+      <Loop LoopId="0221">
+        <Name>Reference Identification</Name>
+        <StartingSegment SegmentId="REF" />
+        <Segment SegmentId="QTY" Repeat="2" />
+        <Segment SegmentId="AMT" Repeat="1" />
+        <Segment SegmentId="G72" Repeat="1" />
+        <Loop LoopId="0222">
+          <Name>Industry Code</Name>
+          <StartingSegment SegmentId="LQ" />
+          <Segment SegmentId="AMT" Repeat="1" />
+          <Segment SegmentId="LIN" Repeat="1" />
+          <Segment SegmentId="QTY" Repeat="1" />
+          <Segment SegmentId="G72" Repeat="1" />
+          <Segment SegmentId="G73" Repeat="5" />
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+  <Loop LoopId="0300" LoopRepeat="1">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="QTY" Usage="Required" Repeat="1" />
+    <Segment SegmentId="AMT" Usage="Required" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

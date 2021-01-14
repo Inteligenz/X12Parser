@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--485 Ratemaking Action-->
+<TransactionSpecification TransactionSetIdentifierCode="485" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PRI" Repeat="1" />
+  <Segment SegmentId="SA" Usage="Required" Repeat="1" />
+  <Loop LoopId="0100" LoopRepeat="8">
+    <Name>Docket Sub-level</Name>
+    <StartingSegment SegmentId="SC" />
+    <Loop LoopId="0110" LoopRepeat="10">
+      <Name>Rate Header</Name>
+      <StartingSegment SegmentId="RA" />
+      <Segment SegmentId="FK" Repeat="5" />
+      <Loop LoopId="0111" LoopRepeat="64">
+        <Name>Miscellaneous and Accessorial Charges</Name>
+        <StartingSegment SegmentId="MC" />
+        <Segment SegmentId="FK" Repeat="5" />
+      </Loop>
+      <Segment SegmentId="SW" Repeat="3" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

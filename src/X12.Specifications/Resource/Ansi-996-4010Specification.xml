@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--996 File Transfer-->
+<TransactionSpecification TransactionSetIdentifierCode="996" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGF" Usage="Required" Repeat="1" />
+  <Segment SegmentId="K3" Usage="Required" />
+</TransactionSpecification>

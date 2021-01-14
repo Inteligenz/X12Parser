@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--812 Credit/Debit Adjustment-->
+<TransactionSpecification TransactionSetIdentifierCode="812" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BCD" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="N9" />
+  <Segment SegmentId="PER" />
+  <Segment SegmentId="ITD" />
+  <Segment SegmentId="DTM" />
+  <Segment SegmentId="FOB" Repeat="1" />
+  <Segment SegmentId="SHD" />
+  <Segment SegmentId="SAC" Repeat="25" />
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+    <Segment SegmentId="AMT" Repeat="10" />
+  </Loop>
+  <Loop LoopId="LM" LoopRepeat="10">
+    <Name>Code Source Information</Name>
+    <StartingSegment SegmentId="LM" />
+    <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+  </Loop>
+  <Loop LoopId="FA1">
+    <Name>Type of Financial Accounting Data</Name>
+    <StartingSegment SegmentId="FA1" />
+    <Segment SegmentId="FA2" Usage="Required" />
+  </Loop>
+  <Loop LoopId="CDD">
+    <Name>Credit/Debit Adjustment Detail</Name>
+    <StartingSegment SegmentId="CDD" />
+    <Segment SegmentId="LIN" Repeat="1" />
+    <Segment SegmentId="PO4" Repeat="1" />
+    <Segment SegmentId="SAC" Repeat="25" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="DTM" Repeat="5" />
+    <Loop LoopId="LM" LoopRepeat="10">
+      <Name>Code Source Information</Name>
+      <StartingSegment SegmentId="LM" />
+      <Segment SegmentId="LQ" Usage="Required" Repeat="100" />
+    </Loop>
+    <Loop LoopId="N11">
+      <Name>Store Number</Name>
+      <StartingSegment SegmentId="N11" />
+      <Segment SegmentId="AMT" Repeat="10" />
+      <Segment SegmentId="PCT" Repeat="2" />
+      <Loop LoopId="N1">
+        <Name>Name</Name>
+        <StartingSegment SegmentId="N1" />
+        <Segment SegmentId="AMT" Repeat="10" />
+        <Segment SegmentId="PCT" Repeat="2" />
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

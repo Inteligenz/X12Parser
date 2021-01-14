@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--980 Functional Group Totals-->
+<TransactionSpecification TransactionSetIdentifierCode="980" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BT1" Usage="Required" Repeat="10" />
+</TransactionSpecification>

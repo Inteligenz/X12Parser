@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--470 Railroad Clearance-->
+<TransactionSpecification TransactionSetIdentifierCode="470" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="N9" Usage="Required" Repeat="10" />
+  <Segment SegmentId="F9" Usage="Required" Repeat="1" />
+  <Segment SegmentId="D9" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PER" Repeat="3" />
+  <Segment SegmentId="H3" Repeat="20" />
+  <Segment SegmentId="R2" Repeat="13" />
+  <Loop LoopId="LET" LoopRepeat="150">
+    <Name>Load and Equipment Type</Name>
+    <StartingSegment SegmentId="LET" />
+    <Segment SegmentId="MEA" Usage="Required" Repeat="4" />
+    <Segment SegmentId="L4" Usage="Required" Repeat="75" />
+    <Segment SegmentId="N7" Repeat="1" />
+    <Segment SegmentId="L10" Repeat="1" />
+    <Segment SegmentId="AMT" Repeat="1" />
+    <Loop LoopId="LX" LoopRepeat="5">
+      <Name>Assigned Number</Name>
+      <StartingSegment SegmentId="LX" />
+      <Segment SegmentId="NTE" Repeat="10" />
+      <Segment SegmentId="L5" Repeat="15" />
+    </Loop>
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="1" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="PER" Repeat="1" />
+  </Loop>
+</TransactionSpecification>

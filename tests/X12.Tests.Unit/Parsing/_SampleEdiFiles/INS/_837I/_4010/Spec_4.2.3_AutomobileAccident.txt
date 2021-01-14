@@ -1,0 +1,47 @@
+﻿ISA*00*          *00*          *01*9012345720000  *01*9088877320000  *020816*1144*U*00401*000000031*1*T*:~
+  GS*HC*901234572000*908887732000*20070816*1615*31*X*004010X096A1~
+    ST*837*987185~
+      BHT*0019*00*0324*19970331*1800*CH~
+      REF*87*004010X096~
+      NM1*41*2*INSURANCE CARRIER*****46*3214~
+        PER*IC*JANE DOE*TE*9005555555~
+      NM1*40*2*CBO*****46*1234~
+      HL*1**20*1~
+        PRV*BI*ZZ*203BA0200N~
+        NM1*85*2*HALL OF FAME MEMORIAL HOSPITAL*****XX*888HF444~
+          N3*1 CANTON ROAD~
+          N4*BROKEN FIELD*CA*99998~
+          REF*TJ*737373737~
+        HL*2*1*22*1~
+          SBR*P********AM~
+          NM1*IL*1*HOWLING*HAL*****MI*B999777791G~
+            N3*327 BRONCO DRIVE~
+            N4*GETAWAY*CA*99999~
+          NM1*PR*2*HEISMAN INSURANCE COMPANY*****XV*999888777~
+          HL*3*2*23*0~
+            PAT*41~
+            NM1*QC*1*DIMPSON*DJ****34*000000032~
+              N3*32 BUFFALO RUN~
+              N4*ROCKING HORSE*CA*99666~
+              DMG*D8*19480601*M~
+              REF*D9*32323232~
+            CLM*6721*545***13:A:1***Y*Y~
+              DTP*434*D8*19970318~
+              CL1*3*7*1~
+              HI*BK:884.2**BN:E986.0~
+              NM1*71*1*LOMBARDO*VINCENT****XX*777TD777~
+              LX*1~
+                SV2*450*HC:98765*150*UN*1~
+                DTP*472*D8*19940617~
+              LX*2~
+                SV2*360*HC:26591*75*UN*1~
+                DTP*472*D8*19970318~
+              LX*3~
+                SV2*312*HC:86225*100*UN*2~
+                DTP*472*D8*19940318~
+              LX*4~
+                SV2*360*HC:99283*220*UN*1~
+                DTP*472*D8*19940318~
+    SE*43*987185~
+  GE*1*31~
+IEA*1*000000031~

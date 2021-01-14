@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!-- used http://www.mpxml.org/_Documents/EDI_880MP%20UCS%20v5050.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="880">
+  <Segment SegmentId="G01"/>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G61"/>
+  <Segment SegmentId="G62"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="CAD"/>
+  <Segment SegmentId="G27"/>
+  <Segment SegmentId="G23"/>
+  <Segment SegmentId="G25"/>
+  <Segment SegmentId="G31" Trailer="true"/>
+  <Segment SegmentId="G33" Trailer="true"/>
+  <Loop LoopId="0100">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Loop LoopId="0200">
+    <Name>Allowance or Charge</Name>
+    <StartingSegment SegmentId="G72"/>
+    <Segment SegmentId="G73"/>
+  </Loop>
+  <Loop LoopId="0300">
+    <Name>Item Detail</Name>
+    <StartingSegment SegmentId="G17"/>
+    <Segment SegmentId="G69"/>
+    <Segment SegmentId="G19"/>
+    <Segment SegmentId="G20"/>
+    <Segment SegmentId="N9"/>
+    <Segment SegmentId="G23"/>
+    <Segment SegmentId="G25"/>
+    <Loop LoopId="0310">
+      <Name>Allowance or Charge</Name>
+      <StartingSegment SegmentId="G72"/>
+      <Segment SegmentId="G73"/>
+    </Loop>
+  </Loop>
+  <Loop LoopId="0400">
+    <Name>Entity</Name>
+    <StartingSegment SegmentId="ENT"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N5"/>
+    <Segment SegmentId="N9"/>
+    <Loop LoopId="0410">
+      <Name>Reference Information</Name>
+      <StartingSegment SegmentId="REF"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="G72"/>
+      <Loop LoopId="0411">
+        <Name>Item Detail - Invoice</Name>
+        <StartingSegment SegmentId="G17"/>
+        <Segment SegmentId="G19"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--148 Report of Injury, Illness or Incident-->
+<TransactionSpecification TransactionSetIdentifierCode="148" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="CUR" />
+  <Segment SegmentId="QTY" />
+  <Segment SegmentId="REF" />
+  <Segment SegmentId="GRI" Trailer="true"/>
+  <Loop LoopId="LX">
+    <Name>Assigned Number</Name>
+    <StartingSegment SegmentId="LX" />
+    <Segment SegmentId="QTY" />
+  </Loop>
+  <Loop LoopId="NM1">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="ACT" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="CRC" />
+  </Loop>
+  <!-- LevelCode left empty since multiple allowed values -->
+  <HierarchicalLoop LoopId="HL">
+    <!-- HL identifies the appropriate hierarchical level: Reporting Agency (RA), 
+        Primary Administrator (PA), Secondary Administrator (SA), Contractholder (CH), 
+        Contractholder Branch Office (CB), Claimant (CL), Cause of Injury (CI), Source 
+        of Injury (SI), Body Part (BP), Nature of Injury (NI), and Payment Detail (PY). 
+        All levels are optional.-->
+    <Name/>
+    <Segment SegmentId="CRI" />
+    <Segment SegmentId="ACT" />
+    <Segment SegmentId="DTP" />
+    <Segment SegmentId="CUR" />
+    <Segment SegmentId="AMT" />
+    <Segment SegmentId="FC" />
+    <Segment SegmentId="REF" />
+    <Segment SegmentId="DMG" />
+    <Segment SegmentId="QTY" />
+    <Segment SegmentId="CRC" />
+    <Segment SegmentId="EMT" />
+    <Segment SegmentId="VEH" />
+    <Loop LoopId="NM1">
+      <Name>Individual or Organizational Name</Name>
+      <StartingSegment SegmentId="NM1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="ACT" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="DMG" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="CRC" />
+    </Loop>
+    <Loop LoopId="ESI">
+      <Name>Employment Status Information</Name>
+      <StartingSegment SegmentId="ESI" />
+      <Segment SegmentId="EMT"/>
+      <Segment SegmentId="TPB"/>
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="NM1" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="CRC" />
+      <!-- From 4010 -->
+      <Loop LoopId="AIN">
+        <Name>Income</Name>
+        <StartingSegment SegmentId="AIN" />
+        <Segment SegmentId="CUR" />
+        <Segment SegmentId="TXI" />
+        <Segment SegmentId="WS" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+      </Loop>
+      <!-- From Current -->
+      <Loop LoopId="LX">
+        <Name/>
+        <StartingSegment SegmentId="LX"/>
+        <Segment SegmentId="AIN"/>
+        <Segment SegmentId="CUR" />
+        <Segment SegmentId="TXI" />
+        <Segment SegmentId="WS" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="REF" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="LN">
+      <Name>Loan Information</Name>
+      <StartingSegment SegmentId="LN" />
+      <Segment SegmentId="REF" />
+      <Loop LoopId="VEH">
+        <Name>Vehicle Information</Name>
+        <StartingSegment SegmentId="VEH" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PID" />
+      </Loop>
+      <Loop LoopId="AMT">
+        <Name>Monetary Amount</Name>
+        <StartingSegment SegmentId="AMT" />
+        <Segment SegmentId="PCT" />
+        <Segment SegmentId="DTP" />
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="DMG" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="REF" />
+      </Loop>
+    </Loop>
+    <!-- From 4010 -->
+    <Loop LoopId="III">
+      <Name>Information</Name>
+      <StartingSegment SegmentId="III" />
+      <Segment SegmentId="IMP" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="CRC" />
+      <Loop LoopId="LM">
+        <Name>Code Source Information</Name>
+        <StartingSegment SegmentId="LM" />
+        <Segment SegmentId="LQ" />
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="ACT" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="DMG" />
+        <Segment SegmentId="REF" />
+      </Loop>
+      <Loop LoopId="AD1">
+        <Name>Adjustment Amount</Name>
+        <StartingSegment SegmentId="AD1" />
+        <Segment SegmentId="CUR" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="REL" />
+        <Loop LoopId="NM1">
+          <Name>Individual or Organizational Name</Name>
+          <StartingSegment SegmentId="NM1" />
+          <Segment SegmentId="N2" />
+          <Segment SegmentId="N3" />
+          <Segment SegmentId="N4" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="ACT" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="DMG" />
+          <Segment SegmentId="REF" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <!-- From Current -->
+    <Loop LoopId="LS">
+      <Name></Name>
+      <StartingSegment SegmentId="LS"/>
+      <Segment SegmentId="LE" Trailer="true"/>
+      <Loop LoopId="III">
+        <Name>Information</Name>
+        <StartingSegment SegmentId="III" />
+        <Segment SegmentId="IMP" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="CRC" />
+        <Segment SegmentId="QTY" />
+        <Segment SegmentId="REF" />
+        <Loop LoopId="LM">
+          <Name>Code Source Information</Name>
+          <StartingSegment SegmentId="LM" />
+          <Segment SegmentId="LQ" />
+        </Loop>
+        <Loop LoopId="NM1">
+          <Name>Individual or Organizational Name</Name>
+          <StartingSegment SegmentId="NM1" />
+          <Segment SegmentId="N2" />
+          <Segment SegmentId="N3" />
+          <Segment SegmentId="N4" />
+          <Segment SegmentId="PER" />
+          <Segment SegmentId="ACT" />
+          <Segment SegmentId="DTP" />
+          <Segment SegmentId="DMG" />
+          <Segment SegmentId="REF" />
+          <Segment SegmentId="CRC" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="CFI">
+      <Name/>
+      <StartingSegment SegmentId="CFI"/>
+      <Segment SegmentId="CUR"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="DTP"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="REL"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="CRC"/>
+      <Loop LoopId="AD1">
+        <Name>Adjustment Amount</Name>
+        <StartingSegment SegmentId="AD1" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="REL" />
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2" />
+        <Segment SegmentId="N3" />
+        <Segment SegmentId="N4" />
+        <Segment SegmentId="PER" />
+        <Segment SegmentId="ACT" />
+        <Segment SegmentId="DTP" />
+        <Segment SegmentId="DMG" />
+        <Segment SegmentId="REF" />
+      </Loop>
+    </Loop>
+  </HierarchicalLoop>
+</TransactionSpecification>

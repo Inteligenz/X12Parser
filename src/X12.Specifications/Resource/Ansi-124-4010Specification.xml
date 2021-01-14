@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 124 Vehicle Damage -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="124">
+  <Segment SegmentId="BGN"/>
+  <Segment SegmentId="DTM"/>
+  <Segment SegmentId="C3"/>
+  <Loop LoopId="1000">
+    <Name></Name>
+    <StartingSegment SegmentId="SUP"/>
+    <Segment SegmentId="MSG"/>
+  </Loop>
+  <Loop LoopId="2000">
+    <Name></Name>
+    <StartingSegment SegmentId="NM1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+    <Segment SegmentId="PER"/>
+    <Segment SegmentId="REF"/>
+  </Loop>
+  <Loop LoopId="3000">
+    <Name></Name>
+    <StartingSegment SegmentId="LX"/>
+    <Segment SegmentId="TXI"/>
+    <Segment SegmentId="YNQ"/>
+    <Segment SegmentId="AP1"/>
+    <Loop LoopId="3100">
+      <Name></Name>
+      <StartingSegment SegmentId="SUP"/>
+      <Segment SegmentId="MSG"/>
+    </Loop>
+    <Loop LoopId="3200">
+      <Name></Name>
+      <StartingSegment SegmentId="LM"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="CTP"/>
+      <Segment SegmentId="TXI"/>
+      <Segment SegmentId="SAC"/>
+    </Loop>
+    <Loop LoopId="3300">
+      <Name></Name>
+      <StartingSegment SegmentId="VEH"/>
+      <Segment SegmentId="PID"/>
+      <Segment SegmentId="REF"/>
+      <Segment SegmentId="BCI"/>
+      <Segment SegmentId="AMT"/>
+      <Segment SegmentId="LID"/>
+      <Segment SegmentId="LQ"/>
+      <Segment SegmentId="DAM"/>
+      <Segment SegmentId="CRC"/>
+      <Segment SegmentId="DVI"/>
+      <Segment SegmentId="VAT"/>
+      <Segment SegmentId="NM1"/>
+      <Segment SegmentId="N2"/>
+      <Segment SegmentId="N3"/>
+      <Segment SegmentId="N4"/>
+      <Segment SegmentId="PER"/>
+      <Segment SegmentId="III"/>
+      <Segment SegmentId="DTP"/>
+      <Loop LoopId="3305">
+        <Name></Name>
+        <StartingSegment SegmentId="VAT"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="REF"/>
+      </Loop>
+      <Loop LoopId="LS">
+        <Name></Name>
+        <StartingSegment SegmentId="LS"/>
+        <Segment SegmentId="LE" Trailer="true"/>
+        <Loop LoopId="3310">
+          <Name></Name>
+          <StartingSegment SegmentId="NM1"/>
+          <Segment SegmentId="N2"/>
+          <Segment SegmentId="N3"/>
+          <Segment SegmentId="N4"/>
+          <Segment SegmentId="PER"/>
+          <Segment SegmentId="REF"/>
+          <Segment SegmentId="F13"/>
+          <Segment SegmentId="AMT"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="3320">
+        <Name></Name>
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+        <Loop LoopId="3325">
+          <Name></Name>
+          <StartingSegment SegmentId="AMT"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="TXI"/>
+          <Segment SegmentId="REF"/>
+        </Loop>
+      </Loop>
+      <Loop LoopId="3330">
+        <Name></Name>
+        <StartingSegment SegmentId="N9"/>
+        <Segment SegmentId="LQ"/>
+        <Segment SegmentId="REF"/>
+        <Segment SegmentId="ID"/>
+        <Segment SegmentId="DP"/>
+        <Segment SegmentId="DL"/>
+        <Segment SegmentId="MSG"/>
+        <Segment SegmentId="AMT"/>
+        <Segment SegmentId="PCT"/>
+        <Loop LoopId="3335">
+          <Name></Name>
+          <StartingSegment SegmentId="DL"/>
+          <Segment SegmentId="AMT"/>
+          <Segment SegmentId="QTY"/>
+          <Segment SegmentId="PCT"/>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

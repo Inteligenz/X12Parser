@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--602 Transportation Services Tender-->
+<TransactionSpecification TransactionSetIdentifierCode="602" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="DK" Usage="Required" Repeat="1" />
+  <Segment SegmentId="PRI" Repeat="12" />
+  <Segment SegmentId="SS" Repeat="1" />
+  <Segment SegmentId="SA" Repeat="5" />
+  <Segment SegmentId="NTE" Repeat="5" />
+  <Segment SegmentId="CD" Repeat="20" />
+  <Loop LoopId="0100" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="N9" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="200" />
+  </Loop>
+  <Loop LoopId="0200" LoopRepeat="100">
+    <Name>Product (Commodity)</Name>
+    <StartingSegment SegmentId="PR" />
+    <Segment SegmentId="NTE" Repeat="10" />
+    <Segment SegmentId="CD" Repeat="10" />
+  </Loop>
+  <Loop LoopId="0300" LoopRepeat="99">
+    <Name>Docket Level</Name>
+    <StartingSegment SegmentId="SB" />
+    <Segment SegmentId="GY" Repeat="999" />
+    <Loop LoopId="0310" LoopRepeat="400">
+      <Name>Docket Sub-level</Name>
+      <StartingSegment SegmentId="SC" />
+      <Segment SegmentId="GY" Repeat="9999" />
+      <Segment SegmentId="CD" Repeat="100" />
+      <Loop LoopId="0311" LoopRepeat="10">
+        <Name>Rate Header</Name>
+        <StartingSegment SegmentId="RA" />
+        <Segment SegmentId="RB" Repeat="8" />
+        <Segment SegmentId="FK" Repeat="15" />
+      </Loop>
+      <Loop LoopId="0312" LoopRepeat="20">
+        <Name>Personal Property Rate</Name>
+        <StartingSegment SegmentId="RH" />
+        <Segment SegmentId="N9" Repeat="30" />
+      </Loop>
+    </Loop>
+    <Loop LoopId="0320" LoopRepeat="999">
+      <Name>Scale Rate Header</Name>
+      <StartingSegment SegmentId="SRT" />
+      <Segment SegmentId="MIN" Repeat="100" />
+      <Segment SegmentId="SRD" Repeat="200" />
+      <Segment SegmentId="SRM" Repeat="999" />
+      <Segment SegmentId="N9" Repeat="10" />
+      <Loop LoopId="0321" LoopRepeat="200">
+        <Name>Assigned Number</Name>
+        <StartingSegment SegmentId="LX" />
+        <Segment SegmentId="SRD" Repeat="1" />
+        <Loop LoopId="0322" LoopRepeat="100">
+          <Name>Scale Rates</Name>
+          <StartingSegment SegmentId="SRM" />
+          <Segment SegmentId="SRA" Repeat="5" />
+        </Loop>
+      </Loop>
+    </Loop>
+    <Segment SegmentId="MS" Repeat="200" Trailer="true" />
+    <Segment SegmentId="DM" Repeat="5" Trailer="true" />
+  </Loop>
+</TransactionSpecification>

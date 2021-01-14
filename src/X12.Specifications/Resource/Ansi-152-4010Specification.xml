@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--152 Statistical Government Information-->
+<TransactionSpecification TransactionSetIdentifierCode="152" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" />
+  <Segment SegmentId="PAM" />
+  <Segment SegmentId="NTE" />
+  <Loop LoopId="N1">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" />
+    <Segment SegmentId="N3" />
+    <Segment SegmentId="N4" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="PER" />
+    <Segment SegmentId="DTM" />
+  </Loop>
+  <Loop LoopId="GRI">
+    <Name>Statistical Government Information</Name>
+    <StartingSegment SegmentId="GRI" />
+    <Segment SegmentId="PAM" />
+    <Segment SegmentId="N9" />
+    <Segment SegmentId="QTY" />
+    <Loop LoopId="N1">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" />
+      <Segment SegmentId="N3" />
+      <Segment SegmentId="N4" />
+      <Segment SegmentId="PER" />
+      <Segment SegmentId="ICH" />
+      <Segment SegmentId="QTY" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

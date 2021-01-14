@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--853 Routing and Carrier Instruction-->
+<TransactionSpecification TransactionSetIdentifierCode="853" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="NTE" Repeat="100" />
+  <Segment SegmentId="G62" Repeat="10" />
+  <Segment SegmentId="CTT" Usage="Required" Repeat="1" Trailer="true" />
+  <Loop LoopId="N1" LoopRepeat="200">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="12" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="TD5" LoopRepeat="200000">
+    <Name>Carrier Details (Routing Sequence/Trans</Name>
+    <StartingSegment SegmentId="TD5" />
+    <Segment SegmentId="TD3" Repeat="12" />
+    <Segment SegmentId="TD4" Repeat="5" />
+    <Segment SegmentId="NTE" Repeat="100" />
+    <Segment SegmentId="REF" Repeat="200" />
+    <Segment SegmentId="MEA" Repeat="40" />
+    <Segment SegmentId="FK" Repeat="1" />
+    <Segment SegmentId="G62" Repeat="10" />
+    <Loop LoopId="N1" LoopRepeat="200">
+      <Name>Name</Name>
+      <StartingSegment SegmentId="N1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="2" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="REF" Repeat="12" />
+      <Segment SegmentId="PER" Repeat="3" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

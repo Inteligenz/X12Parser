@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Used http://www2.dla.mil/j-6/dlmso/elibrary/Transformats/ICs/4010/41f888ia.pdf -->
+<TransactionSpecification xmlns="http://tempuri.org/X12ParserSpecification.xsd"  TransactionSetIdentifierCode="888">
+  <Segment SegmentId="BGN"/>
+  <Loop LoopId="0100">
+    <StartingSegment SegmentId="N1"/>
+    <Segment SegmentId="N2"/>
+    <Segment SegmentId="N3"/>
+    <Segment SegmentId="N4"/>
+  </Loop>
+  <Segment SegmentId="N9"/>
+  <Segment SegmentId="G61"/>
+  <Segment SegmentId="NTE"/>
+  <Segment SegmentId="G93"/>
+  <Segment SegmentId="G62"/>
+  <Loop LoopId="0200">
+    <StartingSegment SegmentId="LM"/>
+    <Segment SegmentId="LQ"/>
+  </Loop>
+  <Loop LoopId="0300">
+    <StartingSegment SegmentId="G53"/>
+    <Segment SegmentId="G62"/>
+    <Segment SegmentId="NTE"/>
+    <Loop LoopId="0310">
+      <StartingSegment SegmentId="G39"/>
+      <Segment SegmentId="G69"/>
+      <Segment SegmentId="QTY"/>
+      <Segment SegmentId="G23"/>
+      <Segment SegmentId="G62"/>
+      <Segment SegmentId="G36"/>
+      <Segment SegmentId="G26"/>
+      <Segment SegmentId="G43"/>
+      <Segment SegmentId="G24"/>
+      <Segment SegmentId="G40"/>
+      <Segment SegmentId="G93"/>
+      <Segment SegmentId="G22"/>
+      <Segment SegmentId="G46"/>
+      <Segment SegmentId="H1"/>
+      <Segment SegmentId="G54"/>
+      <Segment SegmentId="N9"/>
+      <Segment SegmentId="UIT"/>
+      <Segment SegmentId="MEA"/>
+      <Segment SegmentId="TD1"/>
+      <Loop LoopId="0311">
+        <StartingSegment SegmentId="N1"/>
+        <Segment SegmentId="N2"/>
+        <Segment SegmentId="N3"/>
+        <Segment SegmentId="N4"/>
+        <Segment SegmentId="PAL"/>
+      </Loop>
+      <Loop LoopId="0312">
+        <StartingSegment SegmentId="G55"/>
+        <Segment SegmentId="G69"/>
+        <Segment SegmentId="QTY"/>
+      </Loop>
+      <Loop LoopId="0313">
+        <StartingSegment SegmentId="LM"/>
+        <Segment SegmentId="LQ"/>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--256 Periodic Compensation-->
+<TransactionSpecification TransactionSetIdentifierCode="256" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BSC" Usage="Required" Repeat="1" />
+  <Segment SegmentId="CUR" Repeat="1" />
+  <Segment SegmentId="N9" Repeat="9" />
+  <Segment SegmentId="DTP" Repeat="9" />
+  <Loop LoopId="NM1" LoopRepeat="">
+    <Name>Individual or Organizational Name</Name>
+    <StartingSegment SegmentId="NM1" />
+    <Segment SegmentId="N3" Repeat="3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="PER" Repeat="3" />
+  </Loop>
+  <Loop LoopId="N1" LoopRepeat="">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="2" />
+    <Segment SegmentId="REF" Repeat="9" />
+    <Segment SegmentId="N3" Repeat="3" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="DTP" />
+    <Loop LoopId="BLI">
+      <Name>Baseline Item Data</Name>
+      <StartingSegment SegmentId="BLI" />
+      <Segment SegmentId="REF" />
+      <Segment SegmentId="DTP" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="BLN" Repeat="9" />
+      <Segment SegmentId="RPA" />
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Segment SegmentId="N2" Repeat="2" />
+        <Segment SegmentId="REF" Repeat="9" />
+        <Segment SegmentId="N3" Repeat="3" />
+        <Segment SegmentId="N4" Repeat="1" />
+        <Segment SegmentId="DMG" Repeat="1" />
+        <Segment SegmentId="DTP" Repeat="9" />
+      </Loop>
+      <Loop LoopId="AM1">
+        <Name>Informational Values</Name>
+        <StartingSegment SegmentId="AM1" />
+        <Segment SegmentId="REF" Repeat="9" />
+        <Segment SegmentId="III" Repeat="9" />
+        <Segment SegmentId="DTP" Repeat="9" />
+        <Loop LoopId="AMT">
+          <Name>Monetary Amount</Name>
+          <StartingSegment SegmentId="AMT" />
+          <Segment SegmentId="REF" Repeat="1" />
+          <Segment SegmentId="MSG" Repeat="9" />
+          <Loop LoopId="RPA">
+            <Name>Rate Amounts or Percents</Name>
+            <StartingSegment SegmentId="RPA" />
+            <Segment SegmentId="III" Repeat="9" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+    <Loop LoopId="ENT">
+      <Name>Entity</Name>
+      <StartingSegment SegmentId="ENT" />
+      <Segment SegmentId="REF" Repeat="9" />
+      <Segment SegmentId="NM1" Repeat="1" />
+      <Segment SegmentId="N2" Repeat="2" />
+      <Segment SegmentId="N3" Repeat="3" />
+      <Segment SegmentId="N4" Repeat="1" />
+      <Segment SegmentId="ADX" Repeat="9" />
+      <Segment SegmentId="QTY" />
+      <Segment SegmentId="AMT" />
+      <Segment SegmentId="BLN" />
+      <Segment SegmentId="MSG" />
+    </Loop>
+  </Loop>
+</TransactionSpecification>

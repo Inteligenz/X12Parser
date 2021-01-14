@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--433 Railroad Reciprocal Switch File-->
+<TransactionSpecification TransactionSetIdentifierCode="433" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="BGN" Usage="Required" Repeat="1" />
+  <Segment SegmentId="DTM" Usage="Required" Repeat="10" />
+  <Segment SegmentId="SMS" Usage="Required" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="2">
+    <Name>Name</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="PI" Repeat="1" />
+    <Segment SegmentId="CD" Repeat="50" />
+  </Loop>
+</TransactionSpecification>

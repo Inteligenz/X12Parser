@@ -1,0 +1,113 @@
+﻿<?xml version="1.0"?>
+<TransactionSpecification TransactionSetIdentifierCode="202" FunctionalGroupCode="MJ" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Name>Secondary Mortgage Market Loan Delivery</Name>
+  <Segment SegmentId="BGN" Repeat="1" />
+  <Segment SegmentId="TRN" Repeat="1" />
+  <Segment SegmentId="DTP" Repeat="1" />
+  <Segment SegmentId="CTT" Repeat="1" />
+  <Loop LoopId="N1" LoopRepeat="5">
+    <Name>Party Identification</Name>
+    <StartingSegment SegmentId="N1" />
+    <Segment SegmentId="N2" Repeat="1" />
+    <Segment SegmentId="N3" Repeat="2" />
+    <Segment SegmentId="N4" Repeat="1" />
+    <Segment SegmentId="REF" Repeat="3" />
+    <Segment SegmentId="PER" Repeat="2" />
+  </Loop>
+  <Loop LoopId="N9">
+    <Name>Extended Reference Information</Name>
+    <StartingSegment SegmentId="N9" />
+    <Loop LoopId="DEX">
+      <Name>Delivery Execution Information</Name>
+      <StartingSegment SegmentId="DEX" />
+      <Segment SegmentId="REF" Repeat="15" />
+      <Segment SegmentId="CN1" Repeat="1" />
+      <Segment SegmentId="PCT" Repeat="10" />
+      <Segment SegmentId="INT" Repeat="10" />
+      <Segment SegmentId="AMT" Repeat="4" />
+      <Segment SegmentId="QTY" Repeat="5" />
+      <Segment SegmentId="MPP" Repeat="1" />
+      <Segment SegmentId="DTP" Repeat="10" />
+      <Segment SegmentId="III" Repeat="15" />
+      <Loop LoopId="ASM">
+        <Name>Amount and Settlement Method</Name>
+        <StartingSegment SegmentId="ASM" />
+        <Segment SegmentId="N1" Repeat="1" />
+        <Segment SegmentId="REF" Repeat="5" />
+      </Loop>
+      <Loop LoopId="NM1">
+        <Name>Individual or Organizational Name</Name>
+        <StartingSegment SegmentId="NM1" />
+        <Loop LoopId="LX">
+          <Name>Transaction Set Line Number</Name>
+          <StartingSegment SegmentId="LX" />
+          <Segment SegmentId="REF" Repeat="15" />
+          <Segment SegmentId="AMT" Repeat="20" />
+          <Segment SegmentId="DTP" Repeat="5" />
+          <Segment SegmentId="YNQ" Repeat="10" />
+          <Segment SegmentId="QTY" Repeat="5" />
+          <Segment SegmentId="N1" Repeat="6" />
+          <Segment SegmentId="III" Repeat="50" />
+          <Segment SegmentId="LUC" Repeat="1" />
+          <Segment SegmentId="RLD" Repeat="50" />
+          <Segment SegmentId="INT" Repeat="6" />
+          <Segment SegmentId="PPD" Repeat="1" />
+          <Segment SegmentId="PWK" Repeat="2" />
+          <Segment SegmentId="BUY" Repeat="1" />
+          <Segment SegmentId="PEX" Repeat="10" />
+          <Segment SegmentId="BEP" Repeat="2" />
+          <Loop LoopId="IGI">
+            <Name>Insurer or Guarantor Information</Name>
+            <StartingSegment SegmentId="IGI" />
+            <Segment SegmentId="REF" Repeat="1" />
+            <Segment SegmentId="PCT" Repeat="10" />
+          </Loop>
+          <Loop LoopId="NX1">
+            <Name>Property or Entity Identification</Name>
+            <StartingSegment SegmentId="NX1" />
+            <Segment SegmentId="NX2" Repeat="15" />
+            <Segment SegmentId="REA" Repeat="1" />
+            <Segment SegmentId="PDS" Repeat="2" />
+          </Loop>
+          <Loop LoopId="LN1" LoopRepeat="5">
+            <Name>Loan Specific Data</Name>
+            <StartingSegment SegmentId="LN1" />
+            <Segment SegmentId="YNQ" Repeat="1" />
+            <Segment SegmentId="DTP" Repeat="5" />
+            <Segment SegmentId="REF" Repeat="10" />
+          </Loop>
+          <Loop LoopId="CRC">
+            <Name>Conditions Indicator</Name>
+            <StartingSegment SegmentId="CRC" />
+            <Segment SegmentId="IN1" Repeat="1" />
+            <Segment SegmentId="IN2" Repeat="30" />
+            <Segment SegmentId="DMG" Repeat="1" />
+            <Segment SegmentId="QTY" Repeat="10" />
+            <Segment SegmentId="N1" Repeat="1" />
+            <Segment SegmentId="YNQ" Repeat="5" />
+            <Segment SegmentId="AIN" Repeat="10" />
+            <Segment SegmentId="AMT" Repeat="15" />
+            <Loop LoopId="SCM">
+              <Name>Credit Score Model</Name>
+              <StartingSegment SegmentId="SCM" />
+              <Segment SegmentId="SCS" Repeat="5" />
+            </Loop>
+          </Loop>
+          <Loop LoopId="PAM" LoopRepeat="4">
+            <Name>Period Amount</Name>
+            <StartingSegment SegmentId="PAM" />
+            <Segment SegmentId="YNQ" Repeat="1" />
+            <Segment SegmentId="REF" Repeat="1" />
+          </Loop>
+          <Loop LoopId="UWI" LoopRepeat="5">
+            <Name>Underwriting Information</Name>
+            <StartingSegment SegmentId="UWI" />
+            <Segment SegmentId="III" Repeat="10" />
+            <Segment SegmentId="REF" Repeat="1" />
+            <Segment SegmentId="MSG" />
+          </Loop>
+        </Loop>
+      </Loop>
+    </Loop>
+  </Loop>
+</TransactionSpecification>

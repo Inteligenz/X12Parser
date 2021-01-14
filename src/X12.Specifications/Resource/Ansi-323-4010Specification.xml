@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--323 Vessel Schedule and Itinerary (Ocean)-->
+<TransactionSpecification TransactionSetIdentifierCode="323" xmlns="http://tempuri.org/X12ParserSpecification.xsd">
+  <Segment SegmentId="V1" Usage="Required" Repeat="1" />
+  <Segment SegmentId="K1" Repeat="2" />
+  <Loop LoopId="R4" LoopRepeat="999">
+    <Name>Port or Terminal</Name>
+    <StartingSegment SegmentId="R4" />
+    <Segment SegmentId="DTM" Repeat="15" />
+    <Segment SegmentId="V9" Usage="Required" Repeat="5" />
+  </Loop>
+</TransactionSpecification>
